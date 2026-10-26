@@ -26,3 +26,12 @@ test('local files, invalid JSON, sanitized Markdown and sandbox',async({page})=>
  await expect(page.frameLocator('iframe').locator('body')).toHaveText('JS works');
  expect(await page.locator('body').getAttribute('data-attacked')).toBeNull();
 });
+test('schema design diagrams and independently stored DRI clauses',async({page})=>{
+ await page.goto('/#schemas');
+ await expect(page.locator('article h1')).toContainText('schema design');
+ await expect(page.locator('.diagram svg')).toHaveCount(3);
+ await expect(page.getByRole('status')).toBeEmpty();
+ await page.getByRole('link',{name:'DRI — six proposed clauses'}).click();
+ await expect(page.locator('#content')).toContainText('clause.dri_employee_reserve');
+ await expect(page.locator('#content')).toContainText('unallocated_reserve');
+});

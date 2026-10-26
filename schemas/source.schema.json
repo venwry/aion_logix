@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/source.schema.json",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    },
+    "metadata": {
+      "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/metadata"
+    }
+  },
+  "required": [
+    "source",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^source\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending confirmation",
+            "confirmed",
+            "speculation"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/source_ref"
+          },
+          "minItems": 1
+        },
+        "confirmation": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/confirmation"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "repository_snapshot",
+            "historical_document",
+            "author_decision",
+            "analysis"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "citation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "kind",
+        "title",
+        "citation"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "confirmed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "confirmation"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "repository_snapshot"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "url",
+              "commit"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

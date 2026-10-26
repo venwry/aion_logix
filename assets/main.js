@@ -3,6 +3,11 @@ import DOMPurify from 'dompurify';
 import mermaid from 'mermaid';
 mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral', flowchart: { htmlLabels: false } });
 const entries = [
+  { id: 'schemas', title: 'Phase 1 — schema design', path: 'docs/data-model/SCHEMA_DESIGN.md', type: 'md' },
+  { id: 'fields', title: 'Schema field reference', path: 'docs/data-model/FIELD_REFERENCE.md', type: 'md' },
+  { id: 'clauses', title: 'DRI — six proposed clauses', path: 'examples/phase-1/clause.json', type: 'json' },
+  { id: 'phase-1', title: 'Phase 1 — proposed model', path: 'docs/data-model/PHASE_1_PROPOSAL.md', type: 'md' },
+  { id: 'inventory', title: 'Legacy data inventory', path: 'docs/data-model/SOURCE_INVENTORY.md', type: 'md' },
   { id: 'principles', title: 'Zasady modelu danych', path: 'DATA_MODEL_PRINCIPLES.md', type: 'md' },
   { id: 'guide', title: 'Jak korzystać z pracowni', path: 'README.md', type: 'md' },
   { id: 'prototype', title: 'Interaktywny przykład', path: 'examples/interactive.html', type: 'html' },
@@ -50,7 +55,7 @@ async function render() {
   } catch (error) { $('status').textContent = `Błąd podglądu: ${error.message}`; host.append(code(current.text)); }
 }
 async function select() {
-  const entry = entries.find(item => item.id === location.hash.slice(1)) || entries[0]; const version = ++request;
+  const entry = entries.find(item => item.id === location.hash.slice(1)) || entries.find(item => item.id === 'principles'); const version = ++request;
   current = null; ++renderId; $('content').replaceChildren(); $('title').textContent = entry.title; $('status').textContent = 'Ładowanie…';
   for (const link of $('navigation').children) { if (link.hash === '#' + entry.id) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); }
   try {

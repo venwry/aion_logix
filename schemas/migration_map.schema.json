@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/migration_map.schema.json",
+  "type": "object",
+  "properties": {
+    "migration_map": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    },
+    "metadata": {
+      "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/metadata"
+    }
+  },
+  "required": [
+    "migration_map",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^migration_map\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending confirmation",
+            "confirmed",
+            "speculation"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/source_ref"
+          },
+          "minItems": 1
+        },
+        "confirmation": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/confirmation"
+        },
+        "legacy_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(assumption|actor|actor_relationship|event|campaign|agreement|clause|process|programme|location|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "assumption",
+              "actor",
+              "actor_relationship",
+              "event",
+              "campaign",
+              "agreement",
+              "clause",
+              "process",
+              "programme",
+              "location",
+              "narrative_period"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "mapped",
+            "split",
+            "merged",
+            "deferred",
+            "excluded"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "source_refs",
+        "target_ids",
+        "disposition",
+        "rationale"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "confirmed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "confirmation"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

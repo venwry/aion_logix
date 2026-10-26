@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/clause.schema.json",
+  "type": "object",
+  "properties": {
+    "clause": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    },
+    "metadata": {
+      "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/metadata"
+    }
+  },
+  "required": [
+    "clause",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^clause\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending confirmation",
+            "confirmed",
+            "speculation"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/source_ref"
+          },
+          "minItems": 1
+        },
+        "confirmation": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/confirmation"
+        },
+        "agreement_id": {
+          "type": "string",
+          "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "agreement"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "equity",
+            "funding",
+            "rights",
+            "responsibility",
+            "qualification",
+            "term",
+            "other"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assertion_mode": {
+          "type": "string",
+          "enum": [
+            "commitment",
+            "proposal",
+            "target",
+            "established_fact"
+          ]
+        },
+        "actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "effective_time": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
+        },
+        "supersedes_clause_id": {
+          "type": "string",
+          "pattern": "^(clause)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "clause"
+          ]
+        },
+        "equity": {
+          "type": "object",
+          "properties": {
+            "company_actor_id": {
+              "type": "string",
+              "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "actor"
+              ]
+            },
+            "beneficiary_actor_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "actor"
+                ]
+              },
+              "minItems": 0,
+              "uniqueItems": true
+            },
+            "percentage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "basis": {
+              "type": "string",
+              "enum": [
+                "fully_diluted",
+                "issued",
+                "voting"
+              ]
+            },
+            "allocation": {
+              "type": "string",
+              "enum": [
+                "individual",
+                "joint_unsplit",
+                "unallocated_reserve"
+              ]
+            }
+          },
+          "required": [
+            "company_actor_id",
+            "beneficiary_actor_ids",
+            "percentage",
+            "basis",
+            "allocation"
+          ],
+          "additionalProperties": false
+        },
+        "commitment_amount": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/money"
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "source_refs",
+        "agreement_id",
+        "kind",
+        "statement",
+        "assertion_mode"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "confirmed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "confirmation"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "equity"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "equity"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "equity"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/reconciliation_issue.schema.json",
+  "type": "object",
+  "properties": {
+    "reconciliation_issue": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    },
+    "metadata": {
+      "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/metadata"
+    }
+  },
+  "required": [
+    "reconciliation_issue",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^reconciliation_issue\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending confirmation",
+            "confirmed",
+            "speculation"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/source_ref"
+          },
+          "minItems": 1
+        },
+        "confirmation": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/confirmation"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "conflict",
+            "indirect_mention",
+            "missing_source",
+            "missing_target",
+            "classification"
+          ]
+        },
+        "affected_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(assumption|actor|actor_relationship|event|campaign|agreement|clause|process|programme|location|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "assumption",
+              "actor",
+              "actor_relationship",
+              "event",
+              "campaign",
+              "agreement",
+              "clause",
+              "process",
+              "programme",
+              "location",
+              "narrative_period"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "open",
+            "resolved"
+          ]
+        },
+        "resolution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolution_decision_id": {
+          "type": "string",
+          "pattern": "^(review_decision)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "review_decision"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidate": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "statement": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/source_ref"
+                }
+              }
+            },
+            "required": [
+              "statement",
+              "source_refs"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "source_refs",
+        "title",
+        "kind",
+        "affected_ids",
+        "state",
+        "description"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "confirmed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "confirmation"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "resolved"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "required": [
+              "resolution",
+              "resolution_decision_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "conflict"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "candidate"
+            ],
+            "properties": {
+              "candidate": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

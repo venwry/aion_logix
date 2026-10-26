@@ -2,6 +2,16 @@
 
 This document records the agreed starting principles and proposes refinements for review. Proposed conventions below are not yet approved. The domain model, dataset inventory, schemas, and migration will be designed separately before building the HTML/JS application.
 
+## Author clarifications adopted for schema version 0.1.0
+
+- Pending confirmation is a temporary review state. A completed baseline scope has no pending or speculative records and no unresolved reconciliation issues. Structural validity alone does not establish completeness.
+- Agreement identity and clauses live in separate datasets, each independently confirmable. The earlier illustrative nested-clause proposal is superseded.
+- Phase 1 confirms historical ownership shares and commitments. Cost/economic decisions remain for their later phases; legacy financial wording is preserved as evidence, not silently approved.
+- The world story runs linearly from 1 January 1972. Time travel explains the protagonist’s advantage; no jump log or personal experience timeline is modelled. Earlier/future background can remain in premise descriptions.
+- Migration must recover indirectly mentioned entities and reconcile scattered or conflicting statements with source-level provenance.
+
+See `docs/data-model/SCHEMA_DESIGN.md` for the current schemas and explicit limits.
+
 ## Assessment
 
 The hierarchical–relational approach fits a JSON-based narrative knowledge base: nested objects describe an entity's internal details, while references connect independently identifiable entities. Separate datasets support incremental migration and validation without requiring a database server.

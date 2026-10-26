@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/programme.schema.json",
+  "type": "object",
+  "properties": {
+    "programme": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    },
+    "metadata": {
+      "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/metadata"
+    }
+  },
+  "required": [
+    "programme",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^programme\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending confirmation",
+            "confirmed",
+            "speculation"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/source_ref"
+          },
+          "minItems": 1
+        },
+        "confirmation": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/confirmation"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sponsor_actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "agreement_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "agreement"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "deliverable": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subject_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(assumption|actor|actor_relationship|event|campaign|agreement|clause|process|programme|location|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "assumption",
+                    "actor",
+                    "actor_relationship",
+                    "event",
+                    "campaign",
+                    "agreement",
+                    "clause",
+                    "process",
+                    "programme",
+                    "location",
+                    "narrative_period"
+                  ]
+                },
+                "minItems": 0,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "description"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "acceptance_gate": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_event_id": {
+                "type": "string",
+                "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "event"
+                ]
+              }
+            },
+            "required": [
+              "description"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "source_refs",
+        "title",
+        "objective",
+        "sponsor_actor_ids"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "confirmed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "confirmation"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

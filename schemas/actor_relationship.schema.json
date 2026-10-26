@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/actor_relationship.schema.json",
+  "type": "object",
+  "properties": {
+    "actor_relationship": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    },
+    "metadata": {
+      "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/metadata"
+    }
+  },
+  "required": [
+    "actor_relationship",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^actor_relationship\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending confirmation",
+            "confirmed",
+            "speculation"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/source_ref"
+          },
+          "minItems": 1
+        },
+        "confirmation": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/confirmation"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "employment",
+            "operating_role",
+            "affiliation",
+            "control",
+            "identity_assumption"
+          ]
+        },
+        "subject_actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "object_actor_id": {
+          "type": "string",
+          "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "actor"
+          ]
+        },
+        "period": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/period"
+        },
+        "established_by_event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "source_refs",
+        "kind",
+        "subject_actor_ids",
+        "object_actor_id",
+        "description"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "confirmed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "confirmation"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

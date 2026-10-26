@@ -42,4 +42,8 @@ Testy uruchamiają własny serwer HTTP i sprawdzają Markdown, Mermaid, interakc
 
 ## Publikacja
 
-Po `npm ci` i `npm run build` witrynę można opublikować na hostingu statycznym, np. GitHub Pages. Artefakt publikacji powinien zawierać `index.html`, `assets/app.js`, `assets/chunks/`, `assets/style.css`, `examples/`, `README.md` oraz `DATA_MODEL_PRINCIPLES.md`. Ścieżki względne wspierają publikację w podkatalogu repozytorium. Publikacja nie została jeszcze skonfigurowana ani wykonana.
+Po `npm ci` i `npm run build` witrynę można opublikować na hostingu statycznym, np. GitHub Pages. Artefakt publikacji powinien zawierać `index.html`, `assets/app.js`, `assets/chunks/`, `assets/style.css`, `examples/`, `docs/`, `README.md` oraz `DATA_MODEL_PRINCIPLES.md`. Ścieżki względne wspierają publikację w podkatalogu repozytorium. Publikacja nie została jeszcze skonfigurowana ani wykonana.
+
+## Phase-1 data schemas
+
+The current design is documented in [SCHEMA_DESIGN.md](docs/data-model/SCHEMA_DESIGN.md), with a [field reference](docs/data-model/FIELD_REFERENCE.md). Run `npm run validate:model` and `npm run test:model`. The linked DRI fixture under `examples/phase-1/` is pending author confirmation and is not live migrated data. `node tools/validate-model.js examples/phase-1 --complete` intentionally fails until review is complete.
