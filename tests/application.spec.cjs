@@ -1,5 +1,5 @@
 const {test,expect}=require('@playwright/test');
-async function ready(page,path){await page.goto('/application/'+path);await expect(page.locator('body')).toHaveAttribute('data-ready','true');}
+async function ready(page,path){await page.goto('/docs/'+path);await expect(page.locator('body')).toHaveAttribute('data-ready','true');}
 test('timeline preserves deep links, spans, variable years and filters',async({page})=>{
  await ready(page,'timeline.html#process.economics_studies');
  await expect(page.locator('#details h2')).toHaveText('Economics studies');
@@ -35,5 +35,5 @@ test('application index redirects and navigation switches pages',async({page})=>
  await ready(page,'index.html');await expect(page).toHaveURL(/timeline.html/);await page.getByRole('navigation').getByRole('link',{name:'Data browser'}).click();await expect(page.locator('body')).toHaveAttribute('data-ready','true');await expect(page).toHaveURL(/browser.html/);
 });
 test('failed dataset request shows a useful error',async({page})=>{
- await page.route('**/data/event.json',route=>route.fulfill({status:503,body:'Unavailable'}));await page.goto('/application/timeline.html');await expect(page.getByRole('button',{name:'Try again'})).toBeVisible();
+ await page.route('**/data/event.json',route=>route.fulfill({status:503,body:'Unavailable'}));await page.goto('/docs/timeline.html');await expect(page.getByRole('button',{name:'Try again'})).toBeVisible();
 });

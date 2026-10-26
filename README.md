@@ -60,12 +60,12 @@ When publishing the viewer, include `data/` as well as the documentation and exi
 
 ## Story application
 
-Open [`application/index.html`](application/index.html) through the repository HTTP server to enter the new light-theme application. The root page remains the documentation viewer. `application/index.hml` is also supplied as a redirect alias.
+Open [`docs/index.html`](docs/index.html) through the repository HTTP server to enter the new light-theme application. The root page remains the documentation viewer. `docs/index.hml` is also supplied as a redirect alias.
 
 - **Timeline:** events, processes and campaigns on one shared axis, with content-sized years and horizontal year boundaries across duration spans. Filter by text, record type, confirmation status, actor and year range. Undated records appear separately. Campaign ranges inferred from linked activities are labelled; they do not change the source records. Expand a year's ongoing list to select overlapping spans.
 - **Data browser:** all 15 datasets, sortable record/dataset/status/date columns, 75-row pagination, and text/dataset/kind/status/actor filters. Select a row to inspect every field, raw JSON, provenance and linked records. Reference buttons open the related record.
 - Drag either divider or focus it and use arrow keys (Home/End for limits). Width preferences persist in the browser. Narrow screens stack the panes. Record links preserve selection in the URL.
 
-These pages fetch the current `data/*.json` files and require no build step or external libraries. Serve the repository root, not `application/` alone, so relative data paths resolve. Include both `application/` and `data/` when deploying to static hosting. They are read-only: confirmation and editing workflows remain in the source data.
+These pages fetch the current `data/*.json` files and require no build step or external libraries. Serve the repository root, not `docs/` alone, so relative data paths resolve. Include both `docs/` and `data/` when deploying to static hosting. They are read-only: confirmation and editing workflows remain in the source data.
 
 `npm test` also checks timeline filters and spans, browser sorting and linked records, pagination, adjustable panes, mobile overflow, navigation and failed data requests.
