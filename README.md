@@ -47,3 +47,13 @@ Po `npm ci` i `npm run build` witrynę można opublikować na hostingu statyczny
 ## Phase-1 data schemas
 
 The current design is documented in [SCHEMA_DESIGN.md](docs/data-model/SCHEMA_DESIGN.md), with a [field reference](docs/data-model/FIELD_REFERENCE.md). Run `npm run validate:model` and `npm run test:model`. The linked DRI fixture under `examples/phase-1/` is pending author confirmation and is not live migrated data. `node tools/validate-model.js examples/phase-1 --complete` intentionally fails until review is complete.
+
+## Migrated phase-1 story
+
+The `data/` directory contains the phase-1 migration draft from the pinned `vs_edu1` snapshot. Review [MIGRATION_REPORT.md](docs/data-model/MIGRATION_REPORT.md) for source coverage, extracted entities, deferred later-phase data and unresolved issues. The viewer includes every dataset.
+
+Run `npm run validate:data` and `npm run test:migration`. The stricter command `node tools/validate-model.js data --complete` intentionally fails while author confirmation and reconciliation remain pending. Do not treat this as a broken structural migration.
+
+`migration/migrate_phase1.py` recreates the draft in a **fresh** directory; it must not overwrite author edits. `migration/audit_phase1.py` verifies provenance pointers and documented source dispositions against the pinned legacy checkout. Neither script modifies the source repository or recalculates financial forecasts.
+
+When publishing the viewer, include `data/` as well as the documentation and existing assets.

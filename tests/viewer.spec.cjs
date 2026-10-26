@@ -35,3 +35,13 @@ test('schema design diagrams and independently stored DRI clauses',async({page})
  await expect(page.locator('#content')).toContainText('clause.dri_employee_reserve');
  await expect(page.locator('#content')).toContainText('unallocated_reserve');
 });
+test('migrated phase-one data and review report are accessible',async({page})=>{
+ await page.goto('/#migration-report');
+ await expect(page.locator('article h1')).toHaveText('Phase-1 migration audit');
+ await expect(page.locator('article')).toContainText('Migration draft, not confirmed canon');
+ await page.getByRole('link',{name:'Data · clause',exact:true}).click();
+ await expect(page.locator('#content')).toContainText('clause.autodesk_development_rights');
+ await expect(page.locator('#content')).toContainText('pending confirmation');
+ await page.getByRole('link',{name:'Data · reconciliation issue',exact:true}).click();
+ await expect(page.locator('#content')).toContainText('reconciliation_issue.bpi_investment_wording');
+});
