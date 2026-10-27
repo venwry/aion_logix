@@ -1,5 +1,8 @@
 # Phase 1 schema design — version 0.1.0
 
+Current extension version: **0.2.0**, adopted from the author’s 27 October 2026 approval log. Added optional `campaign.presentation`, `campaign.booth`, `assumption.equipment` and `process.step[].event_id` exactly as approved. Parent-owned value objects inherit the parent status; actor/event references resolve through the existing validator. Metadata version 0.1.0 remains accepted for historical fixtures. Active data uses 0.2.0. The original design discussion below describes the 0.1.0 foundation.
+
+
 This is an implemented **design contract**, not a completed story migration. It incorporates the author's clarifications of 26 October 2026 and supersedes conflicting choices in PHASE_1_PROPOSAL.md. The existing source analysis remains useful evidence.
 
 ## Decisions incorporated

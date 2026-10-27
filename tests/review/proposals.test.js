@@ -12,6 +12,6 @@ test('all proposed story edits have exact before snapshots and pass the existing
  }
  assert.deepEqual(validateDocuments(documents).errors,[]);
 });
-test('schema extensions remain absent from canonical schemas',()=>{
+test('any still-pending schema extensions remain absent from canonical schemas',()=>{
  for(const change of manifest.change.filter(c=>c.category==='schema'))for(const e of change.elements){const schema=JSON.parse(fs.readFileSync(new URL('../../schemas/'+e.record_id+'.schema.json',import.meta.url)));const current=e.path.split('/').slice(1).reduce((v,k)=>v?.[k],schema);assert.equal(current,undefined);assert.equal(e.before,null);assert(e.after.type);}
 });

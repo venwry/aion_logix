@@ -1,8 +1,10 @@
 # Author review round 1
 
-Open `../changes-confirm.html` through the repository HTTP server. This round contains 28 story proposals and four schema proposals. Canonical datasets and schemas are unchanged. Before/after views hide `source_refs`; exports retain complete snapshots so subsequent import can detect changes.
+The first review round has been applied. Its 28 story proposals, four schema extensions and 45 actor confirmations are archived in [the application report](history/2026-10-27/APPLICATION_REPORT.md). The three overlapping actor rewrites were explicitly reconfirmed in chat. Cambridge, SMC scope and the Logix share transfer are also recorded.
 
-The proposal manifest is an application review artifact, not an adopted domain dataset or extension to the phase-one model. Its `change` list uses stable IDs, pending status and a metadata envelope. No proposal or checkbox is itself evidence that an edit has already been applied.
+Open `../changes-confirm.html` to review the remaining John Walker founder-representation proposal. The active manifest contains only pending proposals; archived proposals and original logs remain available under `history/2026-10-27/`. Before/after views hide `source_refs`; exports retain complete snapshots for stale-content checks.
+
+The manifest is an application review artifact, not a domain dataset. Story-edit approval and record-status confirmation remain distinct.
 
 ## Two independent decisions
 
@@ -27,19 +29,19 @@ The pages remove local selections when content changes. Story proposals are bloc
 
 The following require **no extension**: narrative rewrites; existing status/occurrence/completion values; event periods; audience, objective and message corrections; new events; existing structured equity; programme membership; current relationship and clause fields.
 
-Four independent extensions are proposed, without modifying `schemas/`:
+Four independently approved extensions are installed in schema version 0.2.0:
 
 1. `campaign.presentation`: one owned presentation with ordered stage value objects, durations and actor references.
 2. `campaign.booth`: owned booth-area value objects with name, description and call to action.
 3. `assumption.equipment`: owned equipment value objects and component lists for the secret-facility premise.
 4. `process.step[].event_id`: an explicit typed reference to an independently reviewable milestone.
 
-Each new object rejects additional properties. Parent-owned values inherit the parent's status; actors and events retain independent identities and review status. Optional fields preserve existing records. Adopting an extension also requires reference-validation and documentation updates. No catch-all object or unconstrained JSON field is proposed.
+Each new object rejects additional properties. Parent-owned values inherit the parent's status; actors and events retain independent identities and review status. Optional fields preserve existing records. Reference validation and the generated field reference cover the new fields. No catch-all object or unconstrained JSON field is proposed.
 
 ## Remaining work after this round
 
-The current proposals resolve the key BPI contradiction, date windows, several completed-process narratives, optional certification wording, Autodesk delivery language, selected actor/agreement descriptions and campaign objectives. They do not rewrite all 427 story records in a single batch.
+John Walker’s representation of the founders remains proposed, as requested. The SMC scope is no longer limited to four named chip types. The October 1978 transfer fulfils Gary’s earlier promise with one 8% allocation.
 
-Full campaign-stage/booth reconstruction and equipment extraction follow only after their schema extensions are approved. Further review includes duplicated policy identity and incoming references, ownership of the three companies, Gary's equity tranches, specific SMC chip scope, Autodesk founder signatories, and Cambridge. Editorial instructions displaced by approved rewrites should be retained as review history rather than reinserted into story prose.
+The approved schema definitions are installed. Illustrative schema examples were not independently approved as story records; full campaign/equipment restructuring can now be prepared against the adopted model. Other unreviewed story records remain pending. All 37 speculative records are tracked for baseline reassessment without inventing new forecasts.
 
-Run `node --test tests/review/proposals.test.js` for snapshot and schema checks, and `CHROMIUM_PATH=/usr/bin/chromium npx playwright test tests/application.spec.cjs tests/review.spec.cjs` for browser interaction and export tests.
+Run `node --test tests/review/*.test.js` and `CHROMIUM_PATH=/usr/bin/chromium npx playwright test tests/application.spec.cjs tests/review.spec.cjs` for the import and review workflows. The importer validates against the exact pre-import snapshot and rejects replay against an already-updated repository.

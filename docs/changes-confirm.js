@@ -18,6 +18,7 @@ try {
   const data = await loadData();
   const store = decisionStore('aion-change-approvals-v1', text => $('warning').textContent = text);
   const proposals = manifest.change;
+  if (manifest.metadata.applied_summary) { const notice=el('p','',manifest.metadata.applied_summary); const link=el('a','',' View application report');link.href='review/history/2026-10-27/APPLICATION_REPORT.md';notice.append(link);$('questions').before(notice); }
   const hashes = new Map(await Promise.all(proposals.map(async p => [p.id, await digest(p)])));
   const blocked = new Map();
   const schemas = new Map();
@@ -46,7 +47,7 @@ try {
   })), {baseline_commit:manifest.metadata.baseline_commit, hash_algorithm:'SHA-256 of recursively key-sorted JSON, including the full proposal'});
   const questions = el('details','review-questions'); questions.append(el('summary','','Open story questions · '+manifest.metadata.questions.length));
   for (const question of manifest.metadata.questions) {const item=el('p');item.append(el('strong','',question.question),el('span','',' '+question.reason));questions.append(item);}
-  $('questions').append(questions);
+  if (manifest.metadata.questions.length) $('questions').append(questions);
   function render() {
     $('proposals').replaceChildren();
     const query = $('search').value.trim().toLowerCase();

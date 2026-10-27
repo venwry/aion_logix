@@ -12,6 +12,10 @@ This document records the agreed starting principles and proposes refinements fo
 
 See `docs/data-model/SCHEMA_DESIGN.md` for the current schemas and explicit limits.
 
+## Approved extensions — schema version 0.2.0
+
+On 27 October 2026 the author approved optional campaign presentation stages and booth areas, a premise-owned equipment inventory, and an event reference on process steps. These are installed in the strict schemas; nested value objects inherit their owning record’s status. Approval files and import decisions are archived under `docs/review/history/2026-10-27/`.
+
 ## Assessment
 
 The hierarchical–relational approach fits a JSON-based narrative knowledge base: nested objects describe an entity's internal details, while references connect independently identifiable entities. Separate datasets support incremental migration and validation without requiring a database server.

@@ -161,6 +161,80 @@
           },
           "minItems": 0,
           "uniqueItems": true
+        },
+        "presentation": {
+          "type": "object",
+          "properties": {
+            "duration_minutes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "stage": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "duration_minutes": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "actor_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^actor\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "actor"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "label",
+                  "description"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "stage"
+          ],
+          "additionalProperties": false
+        },
+        "booth": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "call_to_action": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "name",
+              "description"
+            ],
+            "additionalProperties": false
+          }
         }
       },
       "required": [

@@ -169,7 +169,7 @@
       ],
       "agreement_id": "agreement.bpi_offer",
       "kind": "funding",
-      "statement": "Cash offered to BPI owners.\nSource value: 150000; unit: USD.",
+      "statement": "Adam offered to subscribe $150,000 of new capital into BPI Systems. The funds would support product development and working capital; the proposal did not provide a payment to the existing owners.",
       "assertion_mode": "proposal",
       "actor_ids": [
         "actor.adam",
@@ -187,12 +187,22 @@
         }
       ],
       "agreement_id": "agreement.bpi_offer",
-      "kind": "other",
-      "statement": "Original proposed founder stake in the separately incorporated BPI venture; not a final cap table or evidence of a completed investment. BPI remains independently operated, even if Adam becomes an investor.\nSource value: 33; unit: percent.",
+      "kind": "equity",
+      "statement": "The proposed subscription would give Adam 33% of BPI Systems on a fully diluted basis. Existing owners would retain the remaining 67%. BPI did not accept or close this equity proposal.",
       "assertion_mode": "proposal",
       "actor_ids": [
+        "actor.adam",
         "actor.bpi"
-      ]
+      ],
+      "equity": {
+        "company_actor_id": "actor.bpi",
+        "beneficiary_actor_ids": [
+          "actor.adam"
+        ],
+        "percentage": 33,
+        "basis": "fully_diluted",
+        "allocation": "individual"
+      }
     },
     {
       "id": "clause.retail_retailer_margin_1",
@@ -214,23 +224,31 @@
     },
     {
       "id": "clause.smc_agreement_reuse_right_1",
-      "status": "pending confirmation",
+      "status": "confirmed",
       "source_refs": [
         {
           "source_id": "source.vs_edu1_dac7337",
           "path": "data/contracts.json",
           "pointer": "/event.smc_agreement/0"
+        },
+        {
+          "source_id": "source.author_story_decisions_20261027",
+          "note": "Explicit user decisions recorded in docs/review/history/2026-10-27/story-decisions.md."
         }
       ],
       "agreement_id": "agreement.smc",
       "kind": "rights",
-      "statement": "Non-exclusive independent manufacturing and sales rights for the four named chip types, including sales to Logix competitors. ERA CPU designs and unrelated chips are excluded.",
+      "statement": "SMC received non-exclusive rights to manufacture and sell custom chips from the Logix/AION portfolio, including monitor controllers and controllers for FlexiBUS peripherals. The licence covered custom-chip designs beyond those priority families and excluded every processor in the ERA family. SMC could sell licensed chips to other manufacturers, including Logix competitors.",
       "assertion_mode": "commitment",
       "actor_ids": [
         "actor.labs",
         "actor.logix",
         "actor.smc"
-      ]
+      ],
+      "confirmation": {
+        "source_id": "source.author_story_decisions_20261027",
+        "record_sha256": "44ddc3fd34e15bf5b4573b99ea000348fddf855949b733a7bb4109a5bcd97bd4"
+      }
     },
     {
       "id": "clause.smc_agreement_responsibility_2",
@@ -347,22 +365,30 @@
     },
     {
       "id": "clause.aionix_agreement_equity_4",
-      "status": "pending confirmation",
+      "status": "confirmed",
       "source_refs": [
         {
           "source_id": "source.vs_edu1_dac7337",
           "path": "data/contracts.json",
           "pointer": "/event.aionix_agreement/3"
+        },
+        {
+          "source_id": "source.author_story_decisions_20261027",
+          "note": "Explicit user decisions recorded in docs/review/history/2026-10-27/story-decisions.md."
         }
       ],
       "agreement_id": "agreement.aionix",
       "kind": "other",
-      "statement": "Gary Kildall receives Logix equity in tranches.\nSource value: 8; unit: percent.",
+      "statement": "Adam promised Gary Kildall an 8% interest in Logix under the AIONix agreement of 12 September 1978. Adam fulfilled that promise in a single transfer on 12 October 1978 as part of the five-person share allocation.",
       "assertion_mode": "commitment",
       "actor_ids": [
         "actor.kildall",
         "actor.logix"
-      ]
+      ],
+      "confirmation": {
+        "source_id": "source.author_story_decisions_20261027",
+        "record_sha256": "5ef1dfb625c14237327e1d39ec6c9b5a2e022b8897f1789aeb35ee81038a522b"
+      }
     },
     {
       "id": "clause.aionix_agreement_porting_right_5",
@@ -1480,7 +1506,7 @@
       ],
       "agreement_id": "agreement.bpi_cooperation",
       "kind": "rights",
-      "statement": "BPI and Adam agree operational cooperation: independent BPI management, brand, application ownership, licences and specialist support; AION engineering assistance and Logix distribution/training. The earlier $150,000 and 33% offer remains a proposal; no final ownership closing is asserted. Date selected for the alternative scenario.",
+      "statement": "BPI retained its management, brand, application ownership, licensing and specialist support. AION Software provided engineering assistance and Logix provided distribution and training. Operational cooperation proceeded independently of Adam’s unaccepted equity offer.",
       "assertion_mode": "commitment",
       "actor_ids": [
         "actor.bpi",
@@ -1501,7 +1527,7 @@
       ],
       "agreement_id": "agreement.bpi_cooperation",
       "kind": "responsibility",
-      "statement": "BPI retains product ownership, independent management, licensing, updates and specialist support; Adam investment and AION engineering cooperation are disclosed. Dealers provide first-line installation support; Logix supports hardware.",
+      "statement": "BPI owned its applications and managed licensing, updates and specialist support. AION Software supplied engineering assistance, while Logix distributed the products and supported the hardware. Dealers handled installation enquiries. Public presentations described this commercial partnership and identified Adam’s investment offer as uncompleted.",
       "assertion_mode": "commitment",
       "actor_ids": [
         "actor.bpi",
@@ -1595,8 +1621,8 @@
       ],
       "agreement_id": "agreement.autodesk_development",
       "kind": "term",
-      "statement": "Deliver AutoCAD 1.0 for Artemis/AIONix for the joint November 1982 COMDEX presentation; November release-quality build is the commitment, with commercial shipment subject to acceptance rather than automatically deferred to December.",
-      "assertion_mode": "target",
+      "statement": "Autodesk undertook to deliver a release-quality Artemis/AIONix build of AutoCAD 1.0 for the joint November 1982 COMDEX presentation. Commercial deliveries followed acceptance of the agreed drawing, exchange, plotting and recovery tests.",
+      "assertion_mode": "commitment",
       "actor_ids": [
         "actor.adam",
         "actor.logix",
@@ -2095,11 +2121,218 @@
       "actor_ids": [
         "actor.academy"
       ]
+    },
+    {
+      "id": "clause.smc_transfer_priority",
+      "status": "confirmed",
+      "source_refs": [
+        {
+          "source_id": "source.author_story_decisions_20261027",
+          "note": "Explicit user decisions recorded in docs/review/history/2026-10-27/story-decisions.md."
+        }
+      ],
+      "agreement_id": "agreement.smc",
+      "kind": "responsibility",
+      "assertion_mode": "commitment",
+      "statement": "AION Labs and SMC prioritised the transfer of monitor controllers and controllers for FlexiBUS peripherals, supporting independent monitor and peripheral manufacturers. The wider licence scope remained available for other custom chips outside the ERA processor family.",
+      "actor_ids": [
+        "actor.labs",
+        "actor.smc"
+      ],
+      "confirmation": {
+        "source_id": "source.author_story_decisions_20261027",
+        "record_sha256": "9e19874c23edc358058ca927002aaeda66b7a337b986c1a2acbfdfef41b106eb"
+      }
+    },
+    {
+      "id": "clause.logix_transfer_kildall",
+      "status": "confirmed",
+      "source_refs": [
+        {
+          "source_id": "source.author_story_decisions_20261027",
+          "note": "Explicit user decisions recorded in docs/review/history/2026-10-27/story-decisions.md."
+        }
+      ],
+      "agreement_id": "agreement.logix_share_transfer_1978",
+      "kind": "equity",
+      "statement": "Gary Kildall received 8% of the issued shares of Logix from Adam on 12 October 1978. This transfer fulfilled the 8% promised under the AIONix agreement and did not create an additional 8% interest.",
+      "assertion_mode": "established_fact",
+      "actor_ids": [
+        "actor.adam",
+        "actor.kildall",
+        "actor.logix"
+      ],
+      "effective_time": {
+        "value": "1978-10-12",
+        "precision": "day",
+        "basis": "author_selected"
+      },
+      "equity": {
+        "company_actor_id": "actor.logix",
+        "beneficiary_actor_ids": [
+          "actor.kildall"
+        ],
+        "percentage": 8,
+        "basis": "issued",
+        "allocation": "individual"
+      },
+      "confirmation": {
+        "source_id": "source.author_story_decisions_20261027",
+        "record_sha256": "bf4d45067d92ce55ac85ef71d6ae3cd6da5c4f44a92175073149a40d9114691a"
+      }
+    },
+    {
+      "id": "clause.logix_transfer_logix_ceo",
+      "status": "confirmed",
+      "source_refs": [
+        {
+          "source_id": "source.author_story_decisions_20261027",
+          "note": "Explicit user decisions recorded in docs/review/history/2026-10-27/story-decisions.md."
+        }
+      ],
+      "agreement_id": "agreement.logix_share_transfer_1978",
+      "kind": "equity",
+      "statement": "Logix CEO (name unspecified) received 8% of the issued shares of Logix from Adam on 12 October 1978.",
+      "assertion_mode": "established_fact",
+      "actor_ids": [
+        "actor.adam",
+        "actor.logix_ceo",
+        "actor.logix"
+      ],
+      "effective_time": {
+        "value": "1978-10-12",
+        "precision": "day",
+        "basis": "author_selected"
+      },
+      "equity": {
+        "company_actor_id": "actor.logix",
+        "beneficiary_actor_ids": [
+          "actor.logix_ceo"
+        ],
+        "percentage": 8,
+        "basis": "issued",
+        "allocation": "individual"
+      },
+      "confirmation": {
+        "source_id": "source.author_story_decisions_20261027",
+        "record_sha256": "e5d39604ca0cdae5945a1e706a98005ad2a6b4e49cc7bd1101b9832109451a7b"
+      }
+    },
+    {
+      "id": "clause.logix_transfer_logix_cfo",
+      "status": "confirmed",
+      "source_refs": [
+        {
+          "source_id": "source.author_story_decisions_20261027",
+          "note": "Explicit user decisions recorded in docs/review/history/2026-10-27/story-decisions.md."
+        }
+      ],
+      "agreement_id": "agreement.logix_share_transfer_1978",
+      "kind": "equity",
+      "statement": "Logix CFO (name unspecified) received 8% of the issued shares of Logix from Adam on 12 October 1978.",
+      "assertion_mode": "established_fact",
+      "actor_ids": [
+        "actor.adam",
+        "actor.logix_cfo",
+        "actor.logix"
+      ],
+      "effective_time": {
+        "value": "1978-10-12",
+        "precision": "day",
+        "basis": "author_selected"
+      },
+      "equity": {
+        "company_actor_id": "actor.logix",
+        "beneficiary_actor_ids": [
+          "actor.logix_cfo"
+        ],
+        "percentage": 8,
+        "basis": "issued",
+        "allocation": "individual"
+      },
+      "confirmation": {
+        "source_id": "source.author_story_decisions_20261027",
+        "record_sha256": "2c8d5bb802cebc824a783861b8d528888f2b68138e7329b34551df697d9c0612"
+      }
+    },
+    {
+      "id": "clause.logix_transfer_paterson",
+      "status": "confirmed",
+      "source_refs": [
+        {
+          "source_id": "source.author_story_decisions_20261027",
+          "note": "Explicit user decisions recorded in docs/review/history/2026-10-27/story-decisions.md."
+        }
+      ],
+      "agreement_id": "agreement.logix_share_transfer_1978",
+      "kind": "equity",
+      "statement": "Tim Paterson received 8% of the issued shares of Logix from Adam on 12 October 1978.",
+      "assertion_mode": "established_fact",
+      "actor_ids": [
+        "actor.adam",
+        "actor.paterson",
+        "actor.logix"
+      ],
+      "effective_time": {
+        "value": "1978-10-12",
+        "precision": "day",
+        "basis": "author_selected"
+      },
+      "equity": {
+        "company_actor_id": "actor.logix",
+        "beneficiary_actor_ids": [
+          "actor.paterson"
+        ],
+        "percentage": 8,
+        "basis": "issued",
+        "allocation": "individual"
+      },
+      "confirmation": {
+        "source_id": "source.author_story_decisions_20261027",
+        "record_sha256": "f29723704c0fd429b143954a95307ab27638fe5f53acd5a7dab37ad5d3465866"
+      }
+    },
+    {
+      "id": "clause.logix_transfer_letwin",
+      "status": "confirmed",
+      "source_refs": [
+        {
+          "source_id": "source.author_story_decisions_20261027",
+          "note": "Explicit user decisions recorded in docs/review/history/2026-10-27/story-decisions.md."
+        }
+      ],
+      "agreement_id": "agreement.logix_share_transfer_1978",
+      "kind": "equity",
+      "statement": "Gordon Letwin received 8% of the issued shares of Logix from Adam on 12 October 1978.",
+      "assertion_mode": "established_fact",
+      "actor_ids": [
+        "actor.adam",
+        "actor.letwin",
+        "actor.logix"
+      ],
+      "effective_time": {
+        "value": "1978-10-12",
+        "precision": "day",
+        "basis": "author_selected"
+      },
+      "equity": {
+        "company_actor_id": "actor.logix",
+        "beneficiary_actor_ids": [
+          "actor.letwin"
+        ],
+        "percentage": 8,
+        "basis": "issued",
+        "allocation": "individual"
+      },
+      "confirmation": {
+        "source_id": "source.author_story_decisions_20261027",
+        "record_sha256": "b7e4e66763186a102876c8aff420fefbfbe89f0fca9eeec80be4a1e9e20901be"
+      }
     }
   ],
   "metadata": {
     "description": "Phase-1 migrated clause records from vs_edu1 at dac733770d8e622d5619bd84bc9d21db6c7ec7ab. Pending author review; speculation is not canon. Source coverage is documented in migration_map.",
-    "schema_version": "0.1.0",
+    "schema_version": "0.2.0",
     "used_by_pages": [
       "migration_clause"
     ],
