@@ -69,3 +69,9 @@ Open [`docs/index.html`](docs/index.html) through the repository HTTP server to 
 These pages fetch the current `data/*.json` files and require no build step or external libraries. Serve the repository root, not `docs/` alone, so relative data paths resolve. Include both `docs/` and `data/` when deploying to static hosting. They are read-only: confirmation and editing workflows remain in the source data.
 
 `npm test` also checks timeline filters and spans, browser sorting and linked records, pagination, adjustable panes, mobile overflow, navigation and failed data requests.
+
+## Author confirmations and proposed changes
+
+The [Changes confirm page](docs/changes-confirm.html) contains before/after story proposals and separately approvable schema extensions. Select proposals, download an approval log and return it in chat. The data browser's right-hand details panel also lets you approve changing the current record to `confirmed` and download a separate confirmation log. Selections persist in the browser; content changes invalidate stale selections. These pages collect decisions for review and do not write to GitHub directly.
+
+See [the review workflow](docs/review/README.md) for approval semantics, schema proposals, remaining questions and import checks. Include `schemas/` when publishing the application: the review page checks proposed extensions against the current schema files.
