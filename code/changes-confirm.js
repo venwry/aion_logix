@@ -12,13 +12,13 @@ function changedFields(before, after) {
   return [before, after].map(record => Object.fromEntries(keys.map(k => [k, Object.hasOwn(record,k) ? visible(record[k]) : '(not present)'])));
 }
 try {
-  const response = await fetch('review/proposals.json');
+  const response = await fetch('../docs/review/proposals.json');
   if (!response.ok) throw new Error('Could not load the review proposals.');
   const manifest = await response.json();
   const data = await loadData();
   const store = decisionStore('aion-change-approvals-v1', text => $('warning').textContent = text);
   const proposals = manifest.change;
-  if (manifest.metadata.applied_summary) { const notice=el('p','',manifest.metadata.applied_summary); const link=el('a','',' View application report');link.href='review/history/2026-10-27/APPLICATION_REPORT.md';notice.append(link);$('questions').before(notice); }
+  if (manifest.metadata.applied_summary) { const notice=el('p','',manifest.metadata.applied_summary); const link=el('a','',' View application report');link.href='../docs/review/history/2026-10-27/APPLICATION_REPORT.md';notice.append(link);$('questions').before(notice); }
   const hashes = new Map(await Promise.all(proposals.map(async p => [p.id, await digest(p)])));
   const blocked = new Map();
   const schemas = new Map();

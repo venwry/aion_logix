@@ -6,7 +6,7 @@ export const titleOf = record => record.title || record.name || record.statement
 export function el(tag, className='', text) { const node=document.createElement(tag); if(className)node.className=className; if(text!==undefined)node.textContent=text; return node; }
 export function statusBadge(status) { return el('span','badge '+(status==='confirmed'?'confirmed':status==='speculation'?'speculation':'pending'),status==='pending confirmation'?'Pending confirmation':human(status)); }
 export async function loadData() {
-  const documents=await Promise.all(datasets.map(async name=>{const response=await fetch('../data/'+name+'.json');if(!response.ok)throw new Error(`Could not load ${name}.json (HTTP ${response.status}).`);const doc=await response.json();if(!Array.isArray(doc[name]))throw new Error(`Invalid ${name} dataset.`);return [name,doc[name]];}));
+  const documents=await Promise.all(datasets.map(async name=>{const response=await fetch('../data_foundation/'+name+'.json');if(!response.ok)throw new Error(`Could not load ${name}.json (HTTP ${response.status}).`);const doc=await response.json();if(!Array.isArray(doc[name]))throw new Error(`Invalid ${name} dataset.`);return [name,doc[name]];}));
   const collections=Object.fromEntries(documents), records=documents.flatMap(([,rows])=>rows), index=new Map(records.map(record=>[record.id,record]));
   return {collections,records,index};
 }
@@ -51,7 +51,7 @@ export function details(record,data,select){
   host.append(top,el('h2','',titleOf(record)),el('p','record-id',record.id));
   const date=timing(record,data.index);if(date){host.append(el('p','record-date',date.label));if(date.derived)host.append(el('p','detail-caption','Display range inferred from linked activities, not an independently confirmed campaign duration.'));}
   if(record.description||record.statement||record.objective)host.append(el('p','description',record.description||record.statement||record.objective));
-  const links=el('div','detail-links');const raw=el('a','','Open dataset ↗');raw.href='../data/'+typeOf(record)+'.json';raw.target='_blank';raw.rel='noopener';links.append(raw);
+  const links=el('div','detail-links');const raw=el('a','','Open dataset ↗');raw.href='../data_foundation/'+typeOf(record)+'.json';raw.target='_blank';raw.rel='noopener';links.append(raw);
   const counterpart=el('a','','Open in '+(document.body.dataset.page==='timeline'?'data browser':'timeline')+' →');
   if(document.body.dataset.page==='timeline'||['event','campaign','process'].includes(typeOf(record))){counterpart.href=(document.body.dataset.page==='timeline'?'browser.html':'timeline.html')+'#'+encodeURIComponent(record.id);links.append(counterpart);}host.append(links);
   function valueNode(value,depth=0){

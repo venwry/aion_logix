@@ -59,9 +59,9 @@ export function applyLogs(documents, schemas, manifest, confirmations, approvals
 if(process.argv[1]===fileURLToPath(import.meta.url)){
  const dir=process.argv[2];if(!dir)throw Error('Usage: node tools/apply-review-logs.js HISTORY_DIRECTORY [--confirm-revised]');
  const read=name=>JSON.parse(fs.readFileSync(path.join(dir,name),'utf8'));
- const result=applyLogs(readDocuments('data'),Object.fromEntries(Object.entries(readDocuments('schemas')).map(([name,s])=>[name.replace('.schema',''),s])),read('proposals.json'),read('record-confirmations.json'),read('change-approvals.json'),{confirmRevised:process.argv.includes('--confirm-revised')});
+ const result=applyLogs(readDocuments('data_foundation'),Object.fromEntries(Object.entries(readDocuments('schemas')).map(([name,s])=>[name.replace('.schema',''),s])),read('proposals.json'),read('record-confirmations.json'),read('change-approvals.json'),{confirmRevised:process.argv.includes('--confirm-revised')});
  // All approval preconditions have been checked before any writes.
- for(const [name,doc] of Object.entries(result.documents))fs.writeFileSync('data/'+name+'.json',JSON.stringify(doc,null,2)+'\n');
+ for(const [name,doc] of Object.entries(result.documents))fs.writeFileSync('data_foundation/'+name+'.json',JSON.stringify(doc,null,2)+'\n');
  for(const [name,schema] of Object.entries(result.schemas))fs.writeFileSync('schemas/'+name+'.schema.json',JSON.stringify(schema,null,2)+'\n');
  console.log(JSON.stringify({overlap:result.overlap,deferred_confirmations:result.deferred_confirmations}));
 }

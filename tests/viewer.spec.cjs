@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');
 test('documentation, diagrams, JSON and active prototype',async({page})=>{
- await page.goto('/');
+ await page.goto('/docs/viewer.html');
  await expect(page.locator('article h1')).toContainText('data model principles');
  await expect(page.locator('.diagram svg')).toBeVisible();
  await page.getByRole('button',{name:'Kod źródłowy'}).click();
@@ -15,7 +15,7 @@ test('documentation, diagrams, JSON and active prototype',async({page})=>{
  await expect(page.locator('#content details').first()).toBeVisible();
 });
 test('local files, invalid JSON, sanitized Markdown and sandbox',async({page})=>{
- await page.goto('/');
+ await page.goto('/docs/viewer.html');
  await expect(page.locator('article h1')).toBeVisible();
  await page.locator('#file').setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{bad')});
  await expect(page.getByRole('status')).toContainText('Błąd podglądu');
@@ -27,7 +27,7 @@ test('local files, invalid JSON, sanitized Markdown and sandbox',async({page})=>
  expect(await page.locator('body').getAttribute('data-attacked')).toBeNull();
 });
 test('schema design diagrams and independently stored DRI clauses',async({page})=>{
- await page.goto('/#schemas');
+ await page.goto('/docs/viewer.html#schemas');
  await expect(page.locator('article h1')).toContainText('schema design');
  await expect(page.locator('.diagram svg')).toHaveCount(3);
  await expect(page.getByRole('status')).toBeEmpty();
@@ -36,7 +36,7 @@ test('schema design diagrams and independently stored DRI clauses',async({page})
  await expect(page.locator('#content')).toContainText('unallocated_reserve');
 });
 test('migrated phase-one data and review report are accessible',async({page})=>{
- await page.goto('/#migration-report');
+ await page.goto('/docs/viewer.html#migration-report');
  await expect(page.locator('article h1')).toHaveText('Phase-1 migration audit');
  await expect(page.locator('article')).toContainText('Migration draft, not confirmed canon');
  await page.getByRole('link',{name:'Data · clause',exact:true}).click();
