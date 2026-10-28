@@ -1,42 +1,12 @@
-import {el, typeOf} from './shared.js';
-import {decisionStore, digest, downloadLog} from './review-log.js';
-export async function recordConfirmations(data) {
-  const bar = el('div', 'review-toolbar');
-  const message = el('span', '', 'Select a record to confirm its current content.');
-  const warning = el('span', 'review-warning'); warning.setAttribute('role', 'status');
-  const download = el('button', 'quiet-button', 'Download confirmation log');
-  bar.append(message, download, warning);
-  document.querySelector('#workspace').before(bar);
-  const store = decisionStore('aion-record-confirmations-v1', text => warning.textContent = text);
-  const eligible = data.records.filter(r => !['source', 'migration_map', 'reconciliation_issue', 'review_decision'].includes(typeOf(r)));
-  const hashes = new Map(await Promise.all(eligible.map(async r => [r.id, await digest(r)])));
-  let stale = 0;
-  for (const [id, entry] of store.entries()) {
-    if (!entry || entry.record_sha256 !== hashes.get(id) || data.index.get(id)?.status === 'confirmed') {
-      store.set(id, null); stale++;
-    }
-  }
-  if (stale) warning.textContent = `${stale} outdated selection(s) removed. Review the current record before confirming again.`;
-  function selections() {
-    return store.entries().filter(([id, e]) => hashes.get(id) === e.record_sha256).map(([id, e]) => ({
-      action: 'confirm_record', record_id: id, record_type: typeOf(data.index.get(id)),
-      previous_status: data.index.get(id).status, requested_status: 'confirmed',
-      approved_at: e.approved_at, record_sha256: hashes.get(id), record: data.index.get(id)
-    }));
-  }
-  function update() { const count = selections().length; message.textContent = `${count} record confirmation(s) selected · download and return the log in chat`; download.disabled = count === 0; }
-  download.onclick = () => downloadLog('record-confirmations', selections(), {hash_algorithm:'SHA-256 of recursively key-sorted JSON, including the full current record'});
-  update();
-  return record => {
-    if (!hashes.has(record.id)) return;
-    const panel = el('div', 'confirmation-control');
-    const label = el('label', 'review-check'); const box = el('input'); box.type = 'checkbox';
-    box.checked = record.status === 'confirmed' || !!store.get(record.id);
-    box.disabled = record.status === 'confirmed';
-    label.append(box, document.createTextNode(record.status === 'confirmed' ? 'Already confirmed in the story' : 'I agree to set this record to confirmed'));
-    panel.append(label, el('p', 'detail-caption', 'This confirms the current record, including its recorded occurrence or completion state. Download the log and return it in chat to update the repository.'));
-    if (record.status === 'speculation') panel.append(el('p', 'detail-caption', 'Confirming this prediction adopts it as a baseline story fact.'));
-    box.onchange = () => { store.set(record.id, box.checked ? {record_sha256:hashes.get(record.id), approved_at:new Date().toISOString()} : null); update(); };
-    document.querySelector('#details .record-id').after(panel);
-  };
+import {el} from './shared.js';import {digest} from './review-log.js';import {saveAuthorization} from './api-client.js';
+export async function recordConfirmations(data){
+ return record=>{
+  const panel=el('div','confirmation-control'),label=el('label','review-check'),check=el('input');check.type='checkbox';check.checked=record.status==='authorized';check.disabled=check.checked;
+  label.append(check,document.createTextNode(check.checked?'Authorized':'I authorize this record'));
+  const button=el('button','quiet-button','Authorize and save');button.disabled=true;button.hidden=check.checked;
+  const message=el('p','detail-caption',check.checked?'Authorization matches this version of the story record.':'Saving records your decision in GitHub.');message.setAttribute('role','status');panel.append(label,button,message);
+  check.onchange=()=>button.disabled=!check.checked;
+  button.onclick=async()=>{button.disabled=true;check.disabled=true;message.textContent='Saving to GitHub…';try{const state=await saveAuthorization({action:'authorize_record',record_id:record.id,content_sha256:await digest(data.originals.get(record.id))});record.status='authorized';button.hidden=true;label.lastChild.textContent='Authorized';const badge=document.querySelector('#details .record-topline .badge');if(badge){badge.textContent='Authorized';badge.className='badge confirmed';}message.textContent='Saved to GitHub · '+state.revision.slice(0,7);document.querySelectorAll('#rows tr').forEach(row=>{if(row.dataset.recordId===record.id){const b=row.querySelector('.badge');b.textContent='Authorized';b.className='badge confirmed';}});}catch(error){check.disabled=false;button.disabled=false;message.textContent=error.message;}};
+  document.querySelector('#details .record-id').after(panel);
+ };
 }

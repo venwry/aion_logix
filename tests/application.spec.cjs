@@ -9,7 +9,7 @@ test('timeline preserves deep links, spans, variable years and filters',async({p
  expect(await span.evaluate(n=>Number(n.getAttribute('y2'))-Number(n.getAttribute('y1')))).toBeGreaterThan(400);
  await page.locator('#type').selectOption('campaign');
  await expect(page.locator('#timeline .timeline-card').first()).toContainText('linked activity range');
- await page.locator('#status').selectOption('confirmed');await expect(page.locator('#timeline')).toContainText('No dated records match');
+ await page.locator('#status').selectOption('authorized');await expect(page.locator('#timeline')).toContainText('No dated records match');
  await page.getByRole('button',{name:'Reset filters'}).click();
  await page.locator('#search').fill('public command of economics');await expect(page.locator('#timeline .timeline-card')).toHaveCount(1);
 });
@@ -19,9 +19,9 @@ test('browser supports sorting, pagination, empty datasets and related records',
  await page.locator('#details').getByRole('button',{name:'Adam Pleskot',exact:true}).click();
  await expect(page.locator('#dataset')).toHaveValue('actor');await expect(page.locator('#details h2')).toHaveText('Adam Pleskot');
  await page.locator('[data-sort="title"]').click();await expect(page.locator('th').first()).toHaveAttribute('aria-sort','descending');
- await page.locator('#dataset').selectOption('migration_map');await expect(page.locator('#rows tr')).toHaveCount(75);
+ await page.locator('#dataset').selectOption('event');await expect(page.locator('#rows tr')).toHaveCount(75);
  await page.locator('#next').click();await expect(page.locator('#page-number')).toContainText('Page 2');
- await page.locator('#dataset').selectOption('review_decision');await page.locator('#status').selectOption('speculation');await expect(page.locator('#no-results')).toBeVisible();await page.locator('#status').selectOption('');
+ await page.locator('#dataset').selectOption('campaign');await page.locator('#status').selectOption('authorized');await expect(page.locator('#no-results')).toBeVisible();await page.locator('#status').selectOption('');
  await page.locator('#dataset').selectOption('event');await page.locator('#search').fill('unfindable-record-xyz');await expect(page.locator('#rows tr')).toHaveCount(0);
 });
 for(const name of ['timeline','browser'])test(name+' split supports keyboard, drag, persistence and mobile',async({page})=>{

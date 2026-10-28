@@ -6,13 +6,8 @@ test('documentation, diagrams, JSON and active prototype',async({page})=>{
  await page.getByRole('button',{name:'Kod źródłowy'}).click();
  await expect(page.locator('#content pre')).toContainText('```mermaid');
  await page.getByRole('button',{name:'Podgląd',exact:true}).click();
- await page.getByRole('link',{name:'Interaktywny przykład'}).click();
- const frame=page.frameLocator('iframe');
- await frame.getByRole('button',{name:'Następny rok'}).click();
- await expect(frame.locator('#year')).toHaveText('1971');
- await page.getByRole('link',{name:'Przykładowy zbiór danych'}).click();
- await expect(page.locator('#content')).toContainText('actor.example_person');
- await expect(page.locator('#content details').first()).toBeVisible();
+ await page.getByRole('link',{name:'Data · actor',exact:true}).click();
+ await expect(page.locator('#content')).toContainText('actor.adam');
 });
 test('local files, invalid JSON, sanitized Markdown and sandbox',async({page})=>{
  await page.goto('/docs/viewer.html');
@@ -31,7 +26,7 @@ test('schema design diagrams and independently stored DRI clauses',async({page})
  await expect(page.locator('article h1')).toContainText('schema design');
  await expect(page.locator('.diagram svg')).toHaveCount(3);
  await expect(page.getByRole('status')).toBeEmpty();
- await page.getByRole('link',{name:'DRI — six proposed clauses'}).click();
+ await page.getByRole('link',{name:'Data · clause',exact:true}).click();
  await expect(page.locator('#content')).toContainText('clause.dri_employee_reserve');
  await expect(page.locator('#content')).toContainText('unallocated_reserve');
 });
@@ -41,7 +36,7 @@ test('migrated phase-one data and review report are accessible',async({page})=>{
  await expect(page.locator('article')).toContainText('Migration draft, not confirmed canon');
  await page.getByRole('link',{name:'Data · clause',exact:true}).click();
  await expect(page.locator('#content')).toContainText('clause.autodesk_development_rights');
- await expect(page.locator('#content')).toContainText('pending confirmation');
+ await expect(page.locator('#content')).not.toContainText('pending confirmation');
  await page.getByRole('link',{name:'Data · reconciliation issue',exact:true}).click();
  await expect(page.locator('#content')).toContainText('reconciliation_issue.bpi_investment_wording');
 });

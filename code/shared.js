@@ -1,14 +1,22 @@
-export const datasets = ['actor','assumption','event','agreement','clause','campaign','process','programme','actor_relationship','location','narrative_period','reconciliation_issue','source','migration_map','review_decision'];
+import {remoteState} from './api-client.js';
+import {digest} from './review-log.js';
+export const datasets = ['actor','assumption','event','agreement','clause','campaign','process','programme','actor_relationship','location','narrative_period'];
 export const $ = id => document.getElementById(id);
 export const human = value => String(value).replaceAll('_',' ').replace(/\b\w/g, c=>c.toUpperCase());
 export const typeOf = record => record.id.split('.')[0];
 export const titleOf = record => record.title || record.name || record.statement?.split('\n')[0] || record.description?.split('\n')[0] || record.id;
 export function el(tag, className='', text) { const node=document.createElement(tag); if(className)node.className=className; if(text!==undefined)node.textContent=text; return node; }
-export function statusBadge(status) { return el('span','badge '+(status==='confirmed'?'confirmed':status==='speculation'?'speculation':'pending'),status==='pending confirmation'?'Pending confirmation':human(status)); }
+export function statusBadge(status) {return el('span','badge '+(status==='authorized'?'confirmed':'pending'),status==='authorized'?'Authorized':'Unauthorized');}
 export async function loadData() {
-  const documents=await Promise.all(datasets.map(async name=>{const response=await fetch('../data_foundation/'+name+'.json');if(!response.ok)throw new Error(`Could not load ${name}.json (HTTP ${response.status}).`);const doc=await response.json();if(!Array.isArray(doc[name]))throw new Error(`Invalid ${name} dataset.`);return [name,doc[name]];}));
-  const collections=Object.fromEntries(documents), records=documents.flatMap(([,rows])=>rows), index=new Map(records.map(record=>[record.id,record]));
-  return {collections,records,index};
+  const remote=await remoteState();let rawCollections,authorization;
+  if(remote){rawCollections=remote.collections;authorization=remote.authorization;}
+  else{
+    const results=await Promise.all(datasets.map(async name=>{const response=await fetch('../data_foundation/'+name+'.json',{cache:'no-store'});if(!response.ok)throw Error(`Could not load ${name}.json (HTTP ${response.status}).`);const d=await response.json();return [name,d[name]];}));rawCollections=Object.fromEntries(results);
+    const response=await fetch('../data_storytelling/authorization.json',{cache:'no-store'});if(!response.ok)throw Error('Could not load authorization information.');authorization=(await response.json()).authorization;
+  }
+  const authorizations=new Map(authorization.map(a=>[a.record_id,a]));const collections={};const originals=new Map();
+  for(const [name,rows] of Object.entries(rawCollections))collections[name]=await Promise.all(rows.map(async record=>{originals.set(record.id,record);const a=authorizations.get(record.id),fingerprint=await digest(record);return {...record,status:a?.state==='authorized'&&a.content_sha256===fingerprint?'authorized':'unauthorized'};}));
+  const records=Object.values(collections).flat(),index=new Map(records.map(r=>[r.id,r]));return {collections,records,index,originals,remote};
 }
 export function bounds(point) {
   if(!point?.value)return null;
@@ -76,11 +84,11 @@ export function details(record,data,select){
     let built=false;const build=()=>{if(built)return;built=true;const content=el('div');content.append(valueNode(value));
       if(key==='source_refs')for(const ref of value){const source=data.index.get(ref.source_id);if(source?.kind==='repository_snapshot'&&source.url?.startsWith('https://github.com/')&&source.commit&&ref.path){const a=el('a','source-note','View source: '+ref.path+(ref.pointer||''));a.href=source.url.replace(/\/$/,'')+'/blob/'+source.commit+'/'+ref.path.split('/').map(encodeURIComponent).join('/');a.target='_blank';a.rel='noopener noreferrer';const p=el('p');p.append(a);content.append(p);}}
       group.append(content);};group.addEventListener('toggle',()=>{if(group.open)build();});
-    if(['action','participant','equity','party','conditions'].includes(key)){group.open=true;build();}host.append(group);
+    group.open=true;build();host.append(group);
   }
   const incoming=data.records.filter(r=>r.id!==record.id&&typeOf(r)!=='migration_map'&&references(r,data.index).has(record.id));
-  if(incoming.length){const group=el('details','detail-group');group.append(el('summary','','Referenced by · '+incoming.length));let built=false;group.ontoggle=()=>{if(group.open&&!built){built=true;group.append(valueNode(incoming.map(r=>r.id)));}};host.append(group);}
-  const sourceGroup=el('details','detail-group');sourceGroup.append(el('summary','','Raw record JSON'));sourceGroup.ontoggle=()=>{if(sourceGroup.open&&!sourceGroup.querySelector('pre')){const pre=el('pre','',JSON.stringify(record,null,2));pre.style.cssText='white-space:pre-wrap;overflow-wrap:anywhere;font-size:10px;line-height:1.6';sourceGroup.append(pre);}};host.append(sourceGroup);
+  if(incoming.length){const group=el('details','detail-group');group.append(el('summary','','Referenced by · '+incoming.length));let built=false;group.open=true;built=true;group.append(valueNode(incoming.map(r=>r.id)));host.append(group);}
+
 }
 export function splitter(key,initial){
   const root=$('workspace'),bar=root.querySelector('.splitter');let width=initial,drag=false;

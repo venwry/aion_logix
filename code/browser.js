@@ -1,7 +1,7 @@
 import {recordConfirmations} from './confirmations.js';
 import {$,el,human,typeOf,titleOf,loadData,timing,actorSet,fillActors,stats,details,splitter,showError,debounce,statusBadge,datasets} from './shared.js';
 try {
- const data=await loadData();const confirmRecord=await recordConfirmations(data);const PAGE_SIZE=75;const items=data.records.map(record=>{const date=timing(record,data.index);return {record,id:record.id,title:titleOf(record),type:typeOf(record),kind:record.kind||'',status:record.status,date:date?.startLabel||record.effective_time?.value||'',actors:actorSet(record,data.index),search:JSON.stringify(record).toLowerCase()};});
+ const data=await loadData();const confirmRecord=await recordConfirmations(data);const PAGE_SIZE=75;const items=data.records.map(record=>{const date=timing(record,data.index);return {record,id:record.id,title:titleOf(record),type:typeOf(record),kind:record.kind||'',get status(){return record.status;},date:date?.startLabel||record.effective_time?.value||'',actors:actorSet(record,data.index),search:JSON.stringify(record).toLowerCase()};});
  for(const name of datasets){const option=el('option','',human(name)+' · '+data.collections[name].length);option.value=name;$('dataset').append(option);}fillActors($('actor'),data);stats($('stats'),[[items.length,'records'],[datasets.length,'datasets']]);splitter('aion-browser-width',Math.round($('workspace').clientWidth*.58));
  let key='title',direction=1,page=0,selected='',filtered=[];
  const collator=new Intl.Collator(undefined,{numeric:true,sensitivity:'base'});

@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: aion-review
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    buildFilter:
+      paths:
+        - server/**
+        - schemas/**
+        - tools/validate-model.js
+        - package.json
+        - package-lock.json
+        - Dockerfile
+        - render.yaml
+    envVars:
+      - key: AION_GITHUB_TOKEN
+        sync: false
+      - key: AION_REVIEW_TOKEN
+        generateValue: true
+      - key: AION_ALLOWED_ORIGINS
+        value: https://venwry.github.io
+      - key: AION_REPOSITORY
+        value: venwry/aion_logix
+      - key: AION_BRANCH
+        value: main

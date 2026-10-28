@@ -4,16 +4,13 @@ import mermaid from 'mermaid';
 mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral', flowchart: { htmlLabels: false } });
 const entries = [
   { id: 'migration-report', title: 'Phase 1 — migration report', path: 'docs/data-model/MIGRATION_REPORT.md', type: 'md' },
-  ...['actor', 'assumption', 'event', 'agreement', 'clause', 'campaign', 'process', 'programme', 'actor_relationship', 'location', 'narrative_period', 'reconciliation_issue', 'source', 'migration_map', 'review_decision'].map(name => ({ id: 'migration_' + name, title: 'Data · ' + name.replaceAll('_', ' '), path: 'data_foundation/' + name + '.json', type: 'json' })),
+  ...['actor', 'assumption', 'event', 'agreement', 'clause', 'campaign', 'process', 'programme', 'actor_relationship', 'location', 'narrative_period', 'reconciliation_issue', 'source', 'migration_map', 'review_decision'].map(name => ({ id: 'migration_' + name, title: 'Data · ' + name.replaceAll('_', ' '), path: (['source','migration_map','reconciliation_issue','review_decision'].includes(name)?'data_storytelling/':'data_foundation/') + name + '.json', type: 'json' })),
   { id: 'schemas', title: 'Phase 1 — schema design', path: 'docs/data-model/SCHEMA_DESIGN.md', type: 'md' },
   { id: 'fields', title: 'Schema field reference', path: 'docs/data-model/FIELD_REFERENCE.md', type: 'md' },
-  { id: 'clauses', title: 'DRI — six proposed clauses', path: 'examples/phase-1/clause.json', type: 'json' },
   { id: 'phase-1', title: 'Phase 1 — proposed model', path: 'docs/data-model/PHASE_1_PROPOSAL.md', type: 'md' },
   { id: 'inventory', title: 'Legacy data inventory', path: 'docs/data-model/SOURCE_INVENTORY.md', type: 'md' },
   { id: 'principles', title: 'Zasady modelu danych', path: 'DATA_MODEL_PRINCIPLES.md', type: 'md' },
   { id: 'guide', title: 'Jak korzystać z pracowni', path: 'README.md', type: 'md' },
-  { id: 'prototype', title: 'Interaktywny przykład', path: 'examples/interactive.html', type: 'html' },
-  { id: 'data', title: 'Przykładowy zbiór danych', path: 'examples/actor.json', type: 'json' },
 ];
 const $ = id => document.getElementById(id);
 let current, mode = 'preview', request = 0, renderId = 0;
@@ -38,6 +35,7 @@ async function render() {
     if (current.type === 'md') {
       const article = document.createElement('article');
       article.innerHTML = DOMPurify.sanitize(marked.parse(current.text)); host.append(article);
+      if(current.path) for(const node of article.querySelectorAll('[href],[src]')){const attr=node.hasAttribute('href')?'href':'src';const value=node.getAttribute(attr);if(value&&!/^(?:[a-z]+:|#|\/)/i.test(value))node.setAttribute(attr,new URL(value,new URL('../'+current.path,location.href)).href);}
       for (const block of article.querySelectorAll('code.language-mermaid')) {
         try {
           const { svg } = await mermaid.render(`diagram-${version}-${Math.random().toString(36).slice(2)}`, block.textContent);

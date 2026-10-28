@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 const names=fs.readdirSync('schemas').filter(n=>n.endsWith('.schema.json')&&n!=='common.schema.json').sort();
-const lines=['# Schema field reference','','Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for historical fixtures. Objects reject undeclared fields; consult schemas for exact constraints.',''];
+const lines=['# Schema field reference','','Generated from foundation schema version 0.3.0. Authorization and provenance are external; historical schemas are archived separately. Objects reject undeclared fields; consult schemas for exact constraints.',''];
 function type(p){return p.enum?.join(', ')||p.$ref?.split('/').at(-1)||p.type||'composite';}
 function table(properties,required=[],prefix=''){
  for(const [key,p] of Object.entries(properties||{})){

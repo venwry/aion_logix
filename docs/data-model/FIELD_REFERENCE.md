@@ -1,15 +1,12 @@
 # Schema field reference
 
-Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for historical fixtures. Objects reject undeclared fields; consult schemas for exact constraints.
+Generated from foundation schema version 0.3.0. Authorization and provenance are external; historical schemas are archived separately. Objects reject undeclared fields; consult schemas for exact constraints.
 
 ## actor
 
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `kind` | yes | person, organisation, group |
 | `name` | yes | string |
 | `aliases` | no | array |
@@ -20,9 +17,6 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `kind` | yes | employment, operating_role, affiliation, control, identity_assumption |
 | `subject_actor_ids` | yes | array |
 | `object_actor_id` | yes | string → actor |
@@ -35,9 +29,6 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `title` | yes | string |
 | `kind` | yes | founding, employment, licence, supply, distribution, development, cooperation, other |
 | `party` | yes | array |
@@ -53,9 +44,6 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `kind` | yes | world_premise, policy, constraint, target, baseline_condition |
 | `statement` | yes | string |
 | `scope_ids` | no | array |
@@ -70,9 +58,6 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `title` | yes | string |
 | `objective` | yes | string |
 | `lead_actor_ids` | yes | array |
@@ -103,9 +88,6 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `agreement_id` | yes | string → agreement |
 | `kind` | yes | equity, funding, rights, responsibility, qualification, term, other |
 | `statement` | yes | string |
@@ -127,9 +109,6 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `kind` | yes | founding, agreement_milestone, recruitment, launch, qualification, decision, arrival, activity, other |
 | `title` | yes | string |
 | `occurrence` | yes | planned, occurred, cancelled, unknown |
@@ -153,35 +132,16 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `name` | yes | string |
 | `kind` | yes | country, region, city, venue, facility |
 | `parent_location_id` | no | string → location |
 | `description` | no | string |
-
-## migration_map
-
-| Field | Required | Type / allowed values |
-| --- | --- | --- |
-| `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
-| `legacy_id` | no | string |
-| `target_ids` | yes | array |
-| `disposition` | yes | mapped, split, merged, deferred, excluded |
-| `rationale` | yes | string |
 
 ## narrative_period
 
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `title` | yes | string |
 | `period` | yes | period |
 | `display_order` | yes | integer |
@@ -191,9 +151,6 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `title` | yes | string |
 | `kind` | yes | study, development, recruitment, transfer, qualification, preparation, other |
 | `period` | no | period |
@@ -214,9 +171,6 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | Field | Required | Type / allowed values |
 | --- | --- | --- |
 | `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
 | `title` | yes | string |
 | `objective` | yes | string |
 | `sponsor_actor_ids` | yes | array |
@@ -227,51 +181,3 @@ Generated from schema version 0.2.0. Version 0.1.0 metadata remains accepted for
 | `acceptance_gate` | no | array |
 | `acceptance_gate[].description` | yes | string |
 | `acceptance_gate[].evidence_event_id` | no | string → event |
-
-## reconciliation_issue
-
-| Field | Required | Type / allowed values |
-| --- | --- | --- |
-| `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
-| `title` | yes | string |
-| `kind` | yes | conflict, indirect_mention, missing_source, missing_target, classification |
-| `affected_ids` | yes | array |
-| `state` | yes | open, resolved |
-| `resolution` | no | string |
-| `resolution_decision_id` | no | string → review_decision |
-| `description` | yes | string |
-| `candidate` | no | array |
-| `candidate[].statement` | yes | string |
-| `candidate[].source_refs` | yes | array |
-
-## review_decision
-
-| Field | Required | Type / allowed values |
-| --- | --- | --- |
-| `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | yes | array |
-| `confirmation` | conditional | confirmation |
-| `source_id` | yes | string → source |
-| `decision` | yes | confirm, revise, reject |
-| `target` | yes | array |
-| `target[].record_id` | yes | string → assumption, actor, actor_relationship, event, campaign, agreement, clause, process, programme, location, narrative_period |
-| `target[].record_sha256` | yes | string |
-| `rationale` | yes | string |
-
-## source
-
-| Field | Required | Type / allowed values |
-| --- | --- | --- |
-| `id` | yes | string |
-| `status` | yes | pending confirmation, confirmed, speculation |
-| `source_refs` | no | array |
-| `confirmation` | conditional | confirmation |
-| `kind` | yes | repository_snapshot, historical_document, author_decision, analysis |
-| `title` | yes | string |
-| `url` | no | string |
-| `commit` | no | string |
-| `citation` | yes | string |

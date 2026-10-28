@@ -1,90 +1,48 @@
-# Aion Logix — pracownia dokumentacji
+# Aion Logix
 
-## Repository directories
+A static story browser and timeline, with an authenticated review service that commits authorized changes to GitHub.
 
-- `code/` — timeline, data browser and review pages, with their JavaScript and CSS.
-- `data_foundation/` — current phase-1 story records and their provenance.
-- `data_calculation/` — reserved for calculation data; currently empty.
-- `data_storytelling/` — reserved for storytelling data; currently empty.
-- `assets/` and `assets/chunks/` — source and generated bundles for the documentation viewer.
-- `docs/` — documentation viewer and project documentation; `data-model/` describes the model and migration, while `review/` holds proposals and `review/history/2026-10-27/` archives decisions and reports.
-- `migration/` — scripts to reproduce and audit the phase-1 migration from the pinned legacy source.
-- `schemas/` — JSON schemas for the foundation records.
-- `tests/` — browser tests; `model/`, `migration/`, and `review/` contain focused automated tests.
-- `tools/` — model validation, field-reference generation and review-log import utilities.
+## Directories
 
-Statyczna witryna do przeglądania modelu danych i prototypów. Stroną startową są zasady modelu. Aplikacja nie zmienia danych i nie zapisuje otwartych plików na serwerze.
+- `code/`: timeline, data browser and Changes confirm UI.
+- `data_foundation/`: story-only records with stable IDs and no editorial status or provenance.
+- `data_storytelling/`: authorization, proposed changes, decisions, sources and migration history.
+- `data_calculation/`: reserved for calculation data.
+- `schemas/`: current strict foundation schemas; `storytelling/` contains editorial schemas and `archive/` preserves the old contract.
+- `server/`: authenticated GitHub writer, intended for Render Docker hosting.
+- `docs/`: documentation viewer, model reference, deployment guide and historical review evidence.
 
-## Uruchomienie
-
-W katalogu repozytorium, przy użyciu Node.js 24 i Pythona 3:
+## Read-only preview
 
 ```sh
 npm ci
 npm run build
-npm run start
+npm run preview
 ```
 
-Otwórz port 8000 w swojej przeglądarce. Witryna wymaga HTTP: otwieranie `index.html` bezpośrednio z dysku nie obsługuje pobierania dokumentów. Zależności są dołączane podczas budowania; działająca witryna nie wymaga CDN.
+Open `/` for the timeline, `/code/browser.html` for records, `/code/changes-confirm.html` for proposals, or `/docs/viewer.html` for documentation. Serve the repository root over HTTP.
 
-## Dostępne widoki
+## Authorize and save
 
-- **Markdown:** formatowany tekst, tabele i diagramy w blokach `mermaid`.
-- **HTML/JS:** działający, samodzielny prototyp w ramce.
-- **JSON:** rozwijane drzewo obiektów i list.
-- **Kod źródłowy:** pełna treść wybranego pliku.
+See [Render setup](docs/RENDER_SETUP.md). The app uses a server-only GitHub credential and a separate backend access key. Saving updates the respective JSON files in one Git commit; no downloadable report is required. The GitHub credential never enters the browser.
 
-Przycisk wyboru pliku pozwala otworzyć lokalne pliki MD, HTML, JS i JSON bez wysyłania ich na serwer. Samodzielny plik JS może tworzyć elementy przez `document`; sam `console.log` nie tworzy widocznego podglądu.
+Review comparisons are visible Subject / Before / After tables. Authorization and pending changes are joined to the story at display time. Missing or stale authorizations display **Unauthorized**.
 
-Markdown jest oczyszczany z aktywnego HTML. Prototypy działają w `iframe` z `sandbox="allow-scripts"`, bez uprawnień do originu witryny. Polityka CSP blokuje połączenia sieciowe, formularze i zewnętrzne zasoby: CSS i JS muszą znajdować się wewnątrz pliku HTML, a obrazy mogą korzystać z adresów `data:`. Otwarcie pojedynczego lokalnego pliku nie udostępnia plików z jego sąsiedniego katalogu. Ramka nie chroni przed skryptem zużywającym nadmiernie CPU — uruchamiaj znane prototypy.
+## Model and review history
 
-## Rozbudowa
+See [model principles](DATA_MODEL_PRINCIPLES.md), [the separation contract](docs/data-model/SEPARATION.md) and [the generated field reference](docs/data-model/FIELD_REFERENCE.md). The original October approval files and decisions remain in [review history](docs/review/history/2026-10-27/APPLICATION_REPORT.md).
 
-Lista dokumentów znajduje się w `assets/main.js` w tablicy `entries`. Dodaj plik i wpis z unikalnym `id`, tytułem, względną ścieżką oraz typem `md`, `json` lub `html`, następnie przebuduj witrynę. Linki nawigacji zachowują wybór w adresie strony.
+Run `npm run validate:data` for foundation and external authorization validation. `node tools/validate-foundation.js --complete` additionally requires every current record to be authorized. Historical migration scripts describe the former contract and must not overwrite the separated datasets.
 
-## Testy
+## Tests
 
 ```sh
-npx playwright install chromium
-npm test
+node --test tests/model/*.test.js tests/migration/*.test.js tests/review/*.test.js tests/server/*.test.js
+CHROMIUM_PATH=/usr/bin/chromium npm test
 ```
 
-W tym środowisku Chromium jest już dostępne: uruchom `CHROMIUM_PATH=/usr/bin/chromium npm test`, bez pobierania przeglądarki. Jeśli domyślny katalog cache npm jest niezapisywalny, użyj `npm ci --cache /tmp/aion-npm-cache`.
+Browser tests start their own HTTP server. Backend tests check authentication, origin checks, stale content, reference validity, grouped changes, idempotent saves and concurrent GitHub updates without writing to the live repository.
 
-Testy uruchamiają własny serwer HTTP i sprawdzają Markdown, Mermaid, interakcje prototypu, JSON oraz lokalne pliki.
+## GitHub Pages
 
-## Publikacja
-
-Po `npm ci` i `npm run build` witrynę można opublikować na hostingu statycznym, np. GitHub Pages. Artefakt publikacji powinien zawierać `index.html`, `assets/app.js`, `assets/chunks/`, `assets/style.css`, `code/`, `data_foundation/`, `schemas/`, `docs/`, `README.md` oraz `DATA_MODEL_PRINCIPLES.md`. Ścieżki względne wspierają publikację w podkatalogu repozytorium. Publikacja nie została jeszcze skonfigurowana ani wykonana.
-
-## Phase-1 data schemas
-
-The current design is documented in [SCHEMA_DESIGN.md](docs/data-model/SCHEMA_DESIGN.md), with a [field reference](docs/data-model/FIELD_REFERENCE.md). Run `npm run validate:model` and `npm run test:model`. The linked DRI fixture under `examples/phase-1/` is pending author confirmation and is not live migrated data. `node tools/validate-model.js examples/phase-1 --complete` intentionally fails until review is complete.
-
-## Migrated phase-1 story
-
-The `data_foundation/` directory contains the phase-1 migration draft from the pinned `vs_edu1` snapshot. Review [MIGRATION_REPORT.md](docs/data-model/MIGRATION_REPORT.md) for source coverage, extracted entities, deferred later-phase data and unresolved issues. The viewer includes every dataset.
-
-Run `npm run validate:data` and `npm run test:migration`. The stricter command `node tools/validate-model.js data_foundation --complete` intentionally fails while author confirmation and reconciliation remain pending. Do not treat this as a broken structural migration.
-
-`migration/migrate_phase1.py` recreates the draft in a **fresh** directory; it must not overwrite author edits. `migration/audit_phase1.py` verifies provenance pointers and documented source dispositions against the pinned legacy checkout. Neither script modifies the source repository or recalculates financial forecasts.
-
-When publishing the viewer, include `data_foundation/` as well as the documentation and existing assets.
-
-## Story application
-
-Open [`code/index.html`](code/index.html) through the repository HTTP server to enter the new light-theme application. The root redirects to the timeline; the documentation viewer is at `docs/viewer.html`. `code/index.hml` is also supplied as a redirect alias.
-
-- **Timeline:** events, processes and campaigns on one shared axis, with content-sized years and horizontal year boundaries across duration spans. Filter by text, record type, confirmation status, actor and year range. Undated records appear separately. Campaign ranges inferred from linked activities are labelled; they do not change the source records. Expand a year's ongoing list to select overlapping spans.
-- **Data browser:** all 15 datasets, sortable record/dataset/status/date columns, 75-row pagination, and text/dataset/kind/status/actor filters. Select a row to inspect every field, raw JSON, provenance and linked records. Reference buttons open the related record.
-- Drag either divider or focus it and use arrow keys (Home/End for limits). Width preferences persist in the browser. Narrow screens stack the panes. Record links preserve selection in the URL.
-
-These pages fetch the current `data_foundation/*.json` files and require no build step or external libraries. Serve the repository root, not `code/` alone, so relative data paths resolve. Include both `docs/` and `data_foundation/` when deploying to static hosting. They are read-only: confirmation and editing workflows remain in the source data.
-
-`npm test` also checks timeline filters and spans, browser sorting and linked records, pagination, adjustable panes, mobile overflow, navigation and failed data requests.
-
-## Author confirmations and proposed changes
-
-The [Changes confirm page](code/changes-confirm.html) contains before/after story proposals and separately approvable schema extensions. Select proposals, download an approval log and return it in chat. The data browser's right-hand details panel also lets you approve changing the current record to `confirmed` and download a separate confirmation log. Selections persist in the browser; content changes invalidate stale selections. These pages collect decisions for review and do not write to GitHub directly.
-
-See [the review workflow](docs/review/README.md) for approval semantics, schema proposals, remaining questions and import checks. Include `schemas/` when publishing the application: the review page checks proposed extensions against the current schema files.
+Publish the repository root, including `code/`, `data_foundation/`, `data_storytelling/`, `schemas/`, `docs/`, root Markdown files and the built `assets/`. Only the documentation viewer requires `npm run build`; the story app uses native JavaScript modules. The Render backend is deployed separately. Static hosting alone cannot save JSON changes.

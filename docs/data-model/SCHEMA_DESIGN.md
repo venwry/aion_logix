@@ -1,5 +1,8 @@
 # Phase 1 schema design — version 0.1.0
 
+**Current model: 0.3.0.** Story and editorial data are separated. See [SEPARATION.md](SEPARATION.md) and [FIELD_REFERENCE.md](FIELD_REFERENCE.md). The discussion below is historical design context for versions 0.1/0.2 and does not prescribe embedded statuses or current foundation envelopes.
+
+
 Current extension version: **0.2.0**, adopted from the author’s 27 October 2026 approval log. Added optional `campaign.presentation`, `campaign.booth`, `assumption.equipment` and `process.step[].event_id` exactly as approved. Parent-owned value objects inherit the parent status; actor/event references resolve through the existing validator. Metadata version 0.1.0 remains accepted for historical fixtures. Active data uses 0.2.0. The original design discussion below describes the 0.1.0 foundation.
 
 

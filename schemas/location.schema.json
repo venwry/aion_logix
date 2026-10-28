@@ -9,14 +9,10 @@
         "$ref": "#/$defs/record"
       },
       "minItems": 0
-    },
-    "metadata": {
-      "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/metadata"
     }
   },
   "required": [
-    "location",
-    "metadata"
+    "location"
   ],
   "additionalProperties": false,
   "$defs": {
@@ -26,24 +22,6 @@
         "id": {
           "type": "string",
           "pattern": "^location\\.[a-z0-9][a-z0-9_.-]*$"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "pending confirmation",
-            "confirmed",
-            "speculation"
-          ]
-        },
-        "source_refs": {
-          "type": "array",
-          "items": {
-            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/source_ref"
-          },
-          "minItems": 1
-        },
-        "confirmation": {
-          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/confirmation"
         },
         "name": {
           "type": "string",
@@ -73,31 +51,10 @@
       },
       "required": [
         "id",
-        "status",
-        "source_refs",
         "name",
         "kind"
       ],
-      "additionalProperties": false,
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "status": {
-                "const": "confirmed"
-              }
-            },
-            "required": [
-              "status"
-            ]
-          },
-          "then": {
-            "required": [
-              "confirmation"
-            ]
-          }
-        }
-      ]
+      "additionalProperties": false
     }
   }
 }

@@ -90,7 +90,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if (record.disposition==='split'&&record.target_ids.length<2) report(`${record.id}: split needs at least two targets`);
     }
     if (complete) {
-      if (record.status!=='confirmed') report(`${record.id}: ${record.status}; review incomplete`);
+      report(`${record.id}: use tools/validate-foundation.js --complete to check external authorization`);
       if (record.id.startsWith('reconciliation_issue.')&&record.state!=='resolved') report(`${record.id}: unresolved reconciliation issue`);
       if (record.id.startsWith('migration_map.')&&record.disposition==='deferred') report(`${record.id}: deferred migration item`);
       if (record.occurrence==='unknown'||record.state==='unknown'||record.completion_state==='unknown') report(`${record.id}: unresolved story state`);
@@ -101,7 +101,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    const dir=process.argv.slice(2).find(a=>!a.startsWith('--')) || 'examples/phase-1';
+    const dir=process.argv.slice(2).find(a=>!a.startsWith('--')) || 'data_foundation';
     const result=validateDocuments(readDocuments(dir),{complete:process.argv.includes('--complete')});
     if (result.errors.length) {console.error(result.errors.join('\n'));process.exitCode=1;}
     else console.log(`Validated ${result.count} records in ${dir}. ${process.argv.includes('--complete')?'Scoped review completeness passed; source coverage still requires migration audit.':'Structural validity does not imply confirmation or migration completeness.'}`);
