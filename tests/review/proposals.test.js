@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {readDocuments, validateDocuments} from '../../tools/validate-model.js';
 const manifest=JSON.parse(fs.readFileSync(new URL('../../docs/review/proposals.json',import.meta.url)));
 test('all proposed story edits have exact before snapshots and pass the existing model together',()=>{
- const documents=readDocuments(new URL('../../data/',import.meta.url));
+ const documents=readDocuments(new URL('../../data_foundation/',import.meta.url));
  const ids=new Set();const targets=new Set();
  for(const change of manifest.change){assert(!ids.has(change.id));ids.add(change.id);assert.equal(change.status,'pending confirmation');
   if(change.category==='schema')continue;

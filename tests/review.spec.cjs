@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises');
-async function ready(page,path){await page.goto('/docs/'+path);await expect(page.locator('body')).toHaveAttribute('data-ready','true');}
+async function ready(page,path){await page.goto('/code/'+path);await expect(page.locator('body')).toHaveAttribute('data-ready','true');}
 async function download(page,button){const pending=page.waitForEvent('download');await button.click();const file=await pending;return JSON.parse(await fs.readFile(await file.path(),'utf8'));}
 test('record confirmations survive reload, revoke and export exact snapshots',async({page})=>{
  await ready(page,'browser.html#event.identity');
@@ -30,13 +30,13 @@ test('remaining founder proposal shows before/after and exports approvals',async
 });
 test('changed story snapshots invalidate stored record confirmations',async({page})=>{
  await ready(page,'browser.html#event.identity');await page.getByRole('checkbox').check();
- await page.route('**/data/event.json',async route=>{const response=await route.fetch();const doc=await response.json();doc.event.find(r=>r.id==='event.identity').title='Changed arrival';await route.fulfill({json:doc});});
+ await page.route('**/data_foundation/event.json',async route=>{const response=await route.fetch();const doc=await response.json();doc.event.find(r=>r.id==='event.identity').title='Changed arrival';await route.fulfill({json:doc});});
  await page.reload();await expect(page.locator('body')).toHaveAttribute('data-ready','true');
  await expect(page.getByRole('checkbox')).not.toBeChecked();await expect(page.locator('.review-warning')).toContainText('outdated');
 });
 test('stale proposals cannot be approved or exported',async({page})=>{
  await ready(page,'changes-confirm.html');await page.locator('[data-change-id="change.autodesk_founder_representation"]').getByRole('checkbox').check();
- await page.route('**/data/event.json',async route=>{const response=await route.fetch();const doc=await response.json();doc.event.find(r=>r.id==='event.autodesk_agreement').title='Changed offer';await route.fulfill({json:doc});});
+ await page.route('**/data_foundation/event.json',async route=>{const response=await route.fetch();const doc=await response.json();doc.event.find(r=>r.id==='event.autodesk_agreement').title='Changed offer';await route.fulfill({json:doc});});
  await page.reload();await expect(page.locator('body')).toHaveAttribute('data-ready','true');
  const check=page.locator('[data-change-id="change.autodesk_founder_representation"]').getByRole('checkbox');await expect(check).toBeDisabled();await expect(check).not.toBeChecked();await expect(page.locator('#download')).toBeDisabled();
 });

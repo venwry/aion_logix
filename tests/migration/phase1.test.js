@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readDocuments,validateDocuments} from '../../tools/validate-model.js';
-const docs=readDocuments(new URL('../../data/',import.meta.url));
+const docs=readDocuments(new URL('../../data_foundation/',import.meta.url));
 const rows=name=>docs[name][name];
 const find=(name,id)=>rows(name).find(r=>r.id===id);
 test('all migrated datasets validate together with no dangling typed references',()=>{const result=validateDocuments(docs);assert.deepEqual(result.errors,[]);assert.ok(result.count>400);});
