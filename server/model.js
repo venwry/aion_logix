@@ -22,10 +22,17 @@ export function snapshot(files,revision){return {revision,collections:Object.fro
 export function transact(original,request,actor='author'){
  const files=structuredClone(original);const index=new Map(records(files).map(r=>[r.id,r]));const auth=get(files,'authorization');const decisions=get(files,'authorization_decision');const targets=[];let proposal=null;
  const fail=message=>{const e=new Error(message);e.status=409;throw e;};
- if(request.action==='authorize_record'){
-  const record=index.get(request.record_id);if(!record||hash(record)!==request.content_sha256)fail('This record has changed. Reload and review the current content.');
-  if(auth.some(a=>a.record_id===record.id&&a.state==='authorized'&&a.content_sha256===hash(record)))return {files,changed:false};
-  targets.push({record_id:record.id,before:record,after:record});
+ if(request.action==='authorize_record'||request.action==='authorize_records'){
+  const entries=request.action==='authorize_record'?[request]:request.records;
+  if(!Array.isArray(entries)||!entries.length||entries.length>1000){const e=new Error('Select between 1 and 1000 records.');e.status=400;throw e;}
+  const seen=new Set();
+  for(const entry of entries){
+   if(!entry||typeof entry.record_id!=='string'||seen.has(entry.record_id))fail('Invalid or duplicate record selection.');
+   seen.add(entry.record_id);
+   const record=index.get(entry.record_id);if(!record||hash(record)!==entry.content_sha256)fail('A selected record has changed. Reload and review the current content.');
+   if(!auth.some(a=>a.record_id===record.id&&a.state==='authorized'&&a.content_sha256===hash(record)))targets.push({record_id:record.id,before:record,after:record});
+  }
+  if(!targets.length)return {files,changed:false};
  }else if(request.action==='approve_change'){
   const list=get(files,'change');proposal=list.find(p=>p.id===request.change_id);
   if(!proposal){if(decisions.some(d=>d.change_id===request.change_id&&d.proposal_sha256===request.proposal_sha256))return {files,changed:false};fail('This proposal is no longer pending.');}

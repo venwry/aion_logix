@@ -37,7 +37,7 @@ export function timing(record,index) {
   }
   return null;
 }
-function references(value,index,result=new Set()) {
+export function references(value,index,result=new Set()) {
   if(typeof value==='string'&&index.has(value))result.add(value);
   else if(Array.isArray(value))value.forEach(v=>references(v,index,result));
   else if(value&&typeof value==='object')for(const [key,v] of Object.entries(value))if(!['id','source_refs','confirmation'].includes(key))references(v,index,result);
