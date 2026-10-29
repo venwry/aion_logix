@@ -2,6 +2,8 @@
 
 A static story browser and timeline, with an authenticated review service that commits authorized changes to GitHub.
 
+See the [five-phase development process](docs/MULTI_PHASE_PROCESS.md) for the agreed scope, iterative review cycle and recurring sales/ROI assessment.
+
 ## Directories
 
 - `code/`: timeline, data browser and Changes confirm UI.
