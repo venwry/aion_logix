@@ -75,9 +75,6 @@
             "unknown"
           ]
         },
-        "valid_time": {
-          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/period"
-        },
         "supersedes_agreement_id": {
           "type": "string",
           "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
@@ -88,6 +85,27 @@
         "description": {
           "type": "string",
           "minLength": 1
+        },
+        "effective_event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "termination_event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "process_id": {
+          "type": "string",
+          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "process"
+          ]
         }
       },
       "required": [

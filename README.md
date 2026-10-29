@@ -30,7 +30,7 @@ See [Render setup](docs/RENDER_SETUP.md). The app uses a server-only GitHub cred
 
 Review comparisons are visible Subject / Before / After tables. Authorization and pending changes are joined to the story at display time. Missing or stale authorizations display **Unauthorized**.
 
-See the [phase-1B design review](docs/data-model/PHASE_1B_DESIGN_REVIEW.md) for the proposed product/technology subjects, temporal discipline and foundation migration. These schema changes are not installed yet.
+Model **0.4.0** implements phase 1B: products, technologies, manufacturing capabilities and market responses, with events/processes carrying dates and campaigns linked to execution processes. See the [implementation and migration report](docs/data-model/PHASE_1B_IMPLEMENTATION.md).
 
 ## Foundation specification
 

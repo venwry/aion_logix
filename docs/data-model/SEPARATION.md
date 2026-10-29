@@ -1,5 +1,7 @@
 # Foundation and storytelling separation — version 0.3.0
 
+> Historical design/snapshot: the current model is **0.4.0**. See [implementation, migration and current inventory](PHASE_1B_IMPLEMENTATION.md) and [current schemas](FOUNDATION_SPECIFICATION.md). Counts and proposed alternatives below describe the earlier snapshot.
+
 The author approved separating fictional-world content from authorization and editorial history, merging pending confirmation/speculation into Unauthorized, and saving authorizations directly through an authenticated service.
 
 ## Foundation

@@ -5,6 +5,7 @@ import path from 'node:path';
 const names = fs.readdirSync('data_foundation').filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)).sort();
 const schemas = Object.fromEntries([...names, 'common'].map(n => [n, JSON.parse(fs.readFileSync(`schemas/${n}.schema.json`))]));
 function resolve(value, owner) {
+  if(value['x-boundary'])return [{type:'object',properties:{value:{type:'string | null','x-ref':['event']},precision:{type:'string',enum:['year','month','day','event','unknown']}},required:['value','precision']},owner];
   if (!value.$ref) return [value, owner];
   const [file, pointer] = value.$ref.split('#');
   const target = file ? path.basename(file).replace('.schema.json', '') : owner;
@@ -36,13 +37,14 @@ const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAl
 const tree = (name, diagram = false) => entities[name].map(f => `${'│  '.repeat(f.depth)}${f.depth ? '└─ ' : ''}${f.key}${f.required ? '*' : '?'}: ${f.type}${f.targets.length ? ' → ' + (f.targets.length === names.length ? 'any foundation ID' : f.targets.join(' / ')) : ''}`).map(s => diagram ? escape(s) : s);
 const lines = [
   '# Foundation dataset specification', '',
-  'This document describes the current foundation schema contract (version 0.3.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Authorization, sourcing, migration and proposed changes belong to `data_storytelling/` and are deliberately outside this diagram.', '',
+  'This document describes the current foundation schema contract (version 0.4.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Authorization, sourcing, migration and proposed changes belong to `data_storytelling/` and are deliberately outside this diagram.', '',
   '## Reading the diagram', '',
   '- Each entity represents one dataset file, whose envelope is `{ "dataset_name": [record, ...] }`. The entity contains the hierarchical structure of one record, not a sample record.',
   '- `*` means required within its immediate parent object; `?` means optional there. A required child does not make its optional parent required. Conditional requirements are specified below.',
   '- Indentation shows owned objects and array items. `array<T>` contains zero or more values unless the schema says otherwise. Nested objects are not independent datasets.',
   '- A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.',
   '- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the 11 target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.',
+  '- Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',
@@ -76,7 +78,11 @@ const purpose = {
  location: 'Named places, including hierarchical containment through a parent location.',
  narrative_period: 'Named intervals used to organize the story.',
  process: 'An activity extending through time, with participants and milestones.',
- programme: 'An umbrella programme connecting related story activities.'
+ programme: 'Historical coordinating activity.',
+ product: 'Named product, service or software subject without composition.',
+ technology: 'Technical concept or fabrication technology; dated changes belong to events/processes.',
+ manufacturing_capability: 'Manufacturer- and recipe-scoped capability; maturity transitions are event outcomes.',
+ market_response: 'Qualitative market reaction with timing supplied by its event/process carrier.'
 };
 function constraints(f) {
   const parts = [];
@@ -88,7 +94,7 @@ function constraints(f) {
 for (const name of names) {
   lines.push(`### ${name}`, '', purpose[name], '', `File: [${name}.json](../../data_foundation/${name}.json) · Schema: [${name}.schema.json](../../schemas/${name}.schema.json)`, '', '```text', `${name}[]`, ...tree(name), '```', '', '| Field path | Required in parent | Type | Constraints / allowed values |', '| --- | --- | --- | --- |');
   for (const f of entities[name]) lines.push(`| \`${f.path}\` | ${f.required ? 'yes' : 'no'} | \`${f.type}\` | ${constraints(f).replaceAll('|', '\\|')} |`);
-  if (name === 'event') lines.push('', '**Conditional rule:** exactly one of `time` or `period` must be present.');
+  if (name === 'process') lines.push('', '**Boundary union:** calendar value with year/month/day precision, event ID with `precision: event`, or null with `precision: unknown`. The diagram/catalogue value reference applies only to event anchors.');
   if (name === 'clause') lines.push('', '**Conditional rule:** `equity` is required exactly when `kind` is `equity`; it is forbidden for every other kind.');
   lines.push('');
 }

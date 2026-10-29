@@ -75,9 +75,6 @@
           },
           "minItems": 0
         },
-        "effective_time": {
-          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
-        },
         "supersedes_clause_id": {
           "type": "string",
           "pattern": "^(clause)\\.[a-z0-9][a-z0-9_.-]*$",
@@ -140,6 +137,13 @@
         },
         "commitment_amount": {
           "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/money"
+        },
+        "effective_event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
         }
       },
       "required": [

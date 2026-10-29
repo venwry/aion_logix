@@ -29,10 +29,10 @@
       "type": "object",
       "properties": {
         "start": {
-          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/boundary"
         },
         "end": {
-          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/boundary"
         }
       },
       "required": [
@@ -94,6 +94,156 @@
         "basis"
       ],
       "additionalProperties": false
+    },
+    "boundary": {
+      "oneOf": [
+        {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "event"
+              ]
+            },
+            "precision": {
+              "const": "event"
+            }
+          },
+          "required": [
+            "value",
+            "precision"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "null"
+            },
+            "precision": {
+              "const": "unknown"
+            }
+          },
+          "required": [
+            "value",
+            "precision"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "x-boundary": true
+    },
+    "item": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "action",
+            "milestone",
+            "resource",
+            "requirement",
+            "acceptance_criterion",
+            "deliverable",
+            "result",
+            "decision",
+            "qualification",
+            "maturity_transition",
+            "market_response",
+            "agreement_basis"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|clause|event|location|manufacturing_capability|market_response|process|product|technology)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "clause",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "process_id": {
+          "type": "string",
+          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "process"
+          ]
+        },
+        "maturity": {
+          "type": "object",
+          "properties": {
+            "capability_id": {
+              "type": "string",
+              "pattern": "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "manufacturing_capability"
+              ]
+            },
+            "stage": {
+              "enum": [
+                "pilot",
+                "qualified",
+                "production_released",
+                "repeatable_production",
+                "suspended"
+              ]
+            }
+          },
+          "required": [
+            "capability_id",
+            "stage"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "number",
+        "type",
+        "description"
+      ],
+      "additionalProperties": false,
+      "not": {
+        "required": [
+          "event_id",
+          "process_id"
+        ]
+      }
     }
   }
 }

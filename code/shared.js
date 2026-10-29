@@ -1,6 +1,8 @@
 import {remoteState} from './api-client.js';
 import {digest} from './review-log.js';
-export const datasets = ['actor','assumption','event','agreement','clause','campaign','process','programme','actor_relationship','location','narrative_period'];
+export {datasets} from './model-contract.js';
+import {datasets} from './model-contract.js';
+import {resolvePoint, pointBounds} from './temporal.js';
 export const $ = id => document.getElementById(id);
 export const human = value => String(value).replaceAll('_',' ').replace(/\b\w/g, c=>c.toUpperCase());
 export const typeOf = record => record.id.split('.')[0];
@@ -18,22 +20,20 @@ export async function loadData() {
   for(const [name,rows] of Object.entries(rawCollections))collections[name]=await Promise.all(rows.map(async record=>{originals.set(record.id,record);const a=authorizations.get(record.id),fingerprint=await digest(record);return {...record,status:a?.state==='authorized'&&a.content_sha256===fingerprint?'authorized':'unauthorized'};}));
   const records=Object.values(collections).flat(),index=new Map(records.map(r=>[r.id,r]));return {collections,records,index,originals,remote};
 }
-export function bounds(point) {
-  if(!point?.value)return null;
-  const [year,month,day]=point.value.split('-').map(Number);const start=Date.UTC(year,(month||1)-1,day||1);
-  const end=day?Date.UTC(year,month-1,day+1)-1:month?Date.UTC(year,month,1)-1:Date.UTC(year+1,0,1)-1;
-  return {start,end,startLabel:point.value,endLabel:point.value};
-}
-export function timing(record,index) {
-  if(record.time)return {...bounds(record.time),span:false,derived:false,label:record.time.value,precision:record.time.precision};
-  const period=record.period||record.valid_time;
-  if(period){const first=bounds(period.start),last=bounds(period.end);return {start:first.start,end:last.end,startLabel:period.start.value,endLabel:period.end.value,span:true,derived:false,label:period.start.value+' – '+period.end.value};}
-  if(typeOf(record)==='campaign') {
-    const ids=[record.launch_event_id,...(record.activity||[]).flatMap(a=>[a.event_id,a.process_id])].filter(Boolean);
-    const dates=[...new Set(ids)].map(id=>index.get(id)).filter(Boolean).filter(r=>['event','process'].includes(typeOf(r))).map(r=>timing(r,index)).filter(Boolean);
-    if(!dates.length)return null;
-    const first=dates.reduce((a,b)=>a.start<=b.start?a:b),last=dates.reduce((a,b)=>a.end>=b.end?a:b);
-    return {start:first.start,end:last.end,startLabel:first.startLabel,endLabel:last.endLabel,span:true,derived:true,label:first.startLabel===last.endLabel?first.startLabel:first.startLabel+' – '+last.endLabel};
+export function bounds(point) {return pointBounds(point);}
+export function timing(record,index,seen=new Set()) {
+  if(!record||seen.has(record.id))return null;
+  seen.add(record.id);
+  if(typeOf(record)==='event'&&record.time){const date=pointBounds(record.time,index);return date?{...date,span:false,derived:false,label:record.time.value}:null;}
+  if(typeOf(record)==='process'){
+    const first=pointBounds(record.period?.start,index),last=pointBounds(record.period?.end,index);
+    // An unknown end is not silently replaced with the start or the latest child event.
+    if(!first||!last)return null;
+    return {start:first.start,end:last.end,startLabel:first.startLabel,endLabel:last.endLabel,span:true,derived:false,label:first.startLabel+' – '+last.endLabel};
+  }
+  if(typeOf(record)==='campaign'){
+    const range=timing(index.get(record.process_id),index,seen);
+    return range?{...range,derived:true}:null;
   }
   return null;
 }
@@ -57,7 +57,7 @@ export function details(record,data,select){
   if(!record){const empty=el('div','empty-state');empty.append(el('span','empty-mark','↗'),el('h2','','Select a record'),el('p','','Choose an item to read its details and follow its connections.'));host.append(empty);return;}
   const top=el('div','record-topline');top.append(el('span','type-tag',human(typeOf(record))),statusBadge(record.status));
   host.append(top,el('h2','',titleOf(record)),el('p','record-id',record.id));
-  const date=timing(record,data.index);if(date){host.append(el('p','record-date',date.label));if(date.derived)host.append(el('p','detail-caption','Display range inferred from linked activities, not an independently confirmed campaign duration.'));}
+  const date=timing(record,data.index);if(date){host.append(el('p','record-date',date.label));if(date.derived)host.append(el('p','detail-caption','Display range comes from the campaign execution process.'));}
   if(record.description||record.statement||record.objective)host.append(el('p','description',record.description||record.statement||record.objective));
   const links=el('div','detail-links');const raw=el('a','','Open dataset ↗');raw.href='../data_foundation/'+typeOf(record)+'.json';raw.target='_blank';raw.rel='noopener';links.append(raw);
   const counterpart=el('a','','Open in '+(document.body.dataset.page==='timeline'?'data browser':'timeline')+' →');

@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/campaign.schema.json",
+  "type": "object",
+  "properties": {
+    "campaign": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "campaign"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^campaign\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lead_actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "audience": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "message": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "activity": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "event_id": {
+                "type": "string",
+                "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "event"
+                ]
+              },
+              "process_id": {
+                "type": "string",
+                "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "process"
+                ]
+              }
+            },
+            "required": [
+              "description"
+            ],
+            "additionalProperties": false,
+            "not": {
+              "required": [
+                "event_id",
+                "process_id"
+              ]
+            }
+          },
+          "minItems": 0
+        },
+        "claim_policy": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "launch_event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "programme_id": {
+          "type": "string",
+          "pattern": "^(programme)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "programme"
+          ]
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(assumption|actor|actor_relationship|event|campaign|agreement|clause|process|programme|location|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "assumption",
+              "actor",
+              "actor_relationship",
+              "event",
+              "campaign",
+              "agreement",
+              "clause",
+              "process",
+              "programme",
+              "location",
+              "narrative_period"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "presentation": {
+          "type": "object",
+          "properties": {
+            "duration_minutes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "stage": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "duration_minutes": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "actor_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^actor\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "actor"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "label",
+                  "description"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "stage"
+          ],
+          "additionalProperties": false
+        },
+        "booth": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "call_to_action": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "name",
+              "description"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "objective",
+        "lead_actor_ids"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/agreement.schema.json",
+  "type": "object",
+  "properties": {
+    "agreement": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "agreement"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^agreement\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "founding",
+            "employment",
+            "licence",
+            "supply",
+            "distribution",
+            "development",
+            "cooperation",
+            "other"
+          ]
+        },
+        "party": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "actor_id": {
+                "type": "string",
+                "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "actor"
+                ]
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "actor_id",
+              "role"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "negotiating",
+            "executed",
+            "terminated",
+            "unknown"
+          ]
+        },
+        "valid_time": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/period"
+        },
+        "supersedes_agreement_id": {
+          "type": "string",
+          "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "agreement"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "party",
+        "state"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
