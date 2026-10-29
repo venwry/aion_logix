@@ -28,6 +28,10 @@ See [Render setup](docs/RENDER_SETUP.md). The app uses a server-only GitHub cred
 
 Review comparisons are visible Subject / Before / After tables. Authorization and pending changes are joined to the story at display time. Missing or stale authorizations display **Unauthorized**.
 
+## Foundation specification
+
+See the [foundation dataset specification](docs/data-model/FOUNDATION_SPECIFICATION.md) for the complete hierarchical entity diagram, field constraints and cross-dataset reference catalogue. It is also available in the documentation viewer as **Foundation — entities and references**.
+
 ## Model and review history
 
 See [model principles](DATA_MODEL_PRINCIPLES.md), [the separation contract](docs/data-model/SEPARATION.md) and [the generated field reference](docs/data-model/FIELD_REFERENCE.md). The original October approval files and decisions remain in [review history](docs/review/history/2026-10-27/APPLICATION_REPORT.md).
