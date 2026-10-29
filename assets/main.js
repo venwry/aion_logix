@@ -42,7 +42,7 @@ async function render() {
           const { svg } = await mermaid.render(`diagram-${version}-${Math.random().toString(36).slice(2)}`, block.textContent);
           if (version !== renderId) return;
           const diagram = document.createElement('div'); diagram.className = 'diagram';
-          diagram.innerHTML = DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true, svgFilters: true } }); block.parentElement.replaceWith(diagram);
+          diagram.innerHTML = DOMPurify.sanitize(svg, { USE_PROFILES: { html: true, svg: true, svgFilters: true }, ADD_TAGS: ['foreignObject'], HTML_INTEGRATION_POINTS: { foreignobject: true } }); block.parentElement.replaceWith(diagram);
         } catch { if (version === renderId) $('status').textContent = 'Nie udało się narysować diagramu. Zachowano jego kod.'; }
       }
     } else if (current.type === 'json') host.append(tree(JSON.parse(current.text)));

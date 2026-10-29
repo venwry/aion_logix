@@ -46,9 +46,9 @@ const lines = [
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',
-  '```mermaid', 'flowchart LR'
+  '```mermaid', '%%{init: {"flowchart": {"htmlLabels": true, "wrappingWidth": 1200}}}%%', 'flowchart LR', '  classDef schemaEntity font-family:monospace,text-align:left,white-space:pre;'
 ];
-for (const name of names) lines.push(`  ${name}["${name}.json<br/>${tree(name, true).join('<br/>')}"]`);
+for (const name of names) lines.push(`  ${name}["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>${name}.json<br/>${tree(name, true).join('<br/>')}</pre>"]:::schemaEntity`);
 const grouped = new Map();
 for (const ref of refs) {
   const targets = ref.targets.length === names.length ? ['any_foundation'] : ref.targets;
