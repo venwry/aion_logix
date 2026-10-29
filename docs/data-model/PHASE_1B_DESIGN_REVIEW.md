@@ -236,11 +236,11 @@ Validate interval ordering using precision-aware bounds. Overlapping month/year 
 
 Remove `completion_state` as requested. The author subsequently clarified that pending authorization is the sole distinction for proposed results: **do not add `mode`, intended/achieved flags or a replacement process-status enum**.
 
-There are currently **24 planned and 8 completed processes**. Preserve these old labels in migration evidence while reviewing their proposed results; do not use them to grant or remove authorization automatically. A candidate delivery belongs in `outcomes` and remains pending until accepted. An approved outcome asserts that result as part of the story. A process may have several outcomes, some accepted and others pending.
+There are currently **24 planned and 8 completed processes**. Preserve these old labels in migration evidence while reviewing their proposed results; do not use them to grant or remove authorization automatically. A candidate delivery can belong in `outcomes`; it shares the authorization of the entire owning record. The record remains pending until the author agrees with every included field, input and outcome. An authorized record cannot contain independently pending nested outcomes.
 
-An elapsed end date does not authorize delivery. An accepted process definition, its inputs or its parent coordinating process must not implicitly authorize all its results. If the story says a project stopped or a result was abandoned, record that as a proposed cancellation/termination event or outcome for review. Rejecting a proposal editorially does not create a cancellation in the fictional world.
+An elapsed end date does not authorize delivery. Explicitly authorizing a process accepts all results contained in that record. It does not authorize other records reached through references, including child processes or independently stored results. If the story says a project stopped or a result was abandoned, record that as a proposed cancellation/termination event or outcome for review. Rejecting a proposal editorially does not create a cancellation in the fictional world.
 
-The distinction between a promise and its fulfilment is expressed by **separate assertions**, not result statuses: an authorized clause can establish the promise, while the proposed delivery outcome remains pending.
+The distinction between a promise and its fulfilment is expressed by **separate assertions**, not result statuses: an authorized clause record can establish the promise, while a separate event/process record containing the delivery outcome remains pending. If the promise and delivery are contained in one record, they must be accepted together or decomposed before authorization.
 
 ### 4.4 Only events/processes own story dates
 
@@ -291,19 +291,19 @@ This is sound **when an input means a requirement to be satisfied**. Autodesk's 
 
 Authorizing that criterion establishes the requirement, not that it has passed. It would be misleading to translate it into a resource already provided or a prerequisite already satisfied before development began. Also, a gate can depend on a result produced by the same work: model it as a criterion, not a circular resource dependency.
 
-### Authorization granularity required by the clarification
+### Whole-record authorization and decomposition
 
-The existing application authorizes whole records. It cannot yet authorize the process definition while leaving particular outcomes pending, or authorize one numbered outcome without accepting the others.
+**Author decision: authorization always covers the entire record.** The author must agree with everything included before authorizing it. All nested inputs, outcomes, specifications and other owned values share that authorization. Their `number` fields identify items for structure and references, not independent review targets.
 
-**Recommended extension, for schema/UI review:** identify each review target externally by its owner record ID, target scope (`record`, `input` or `outcome`) and, for an item, its stable `number`. Store authorization and content hashes in `data_storytelling` only. The generic `record` scope for these new event/process records covers their core fields; inputs/outcomes have their own authorization targets. Use explicit batch selection if the author wants to approve them together.
+Keep the existing full-record content hash, external authorization entries and record-level browser checkboxes. Do not introduce core-only hashes, item authorization states or per-input/outcome approval controls. Adding or editing an input/outcome changes the record hash and requires renewed authorization of the whole record.
 
-An outcome fingerprint must bind its owner, list identity, item number and full item content. The process/event core fingerprint excludes independently reviewed input/outcome lists; this must be a **versioned change** from today's whole-record hash contract, not a silent reinterpretation of old approvals. Non-event/process records can retain whole-record authorization. Current evidence hashes and original snapshots remain intact.
+If the author finds a record too complex for one review decision, **decompose it**: extract a coherent part into an independently identified record in the appropriate dataset file and reference it from the original record. Reuse an existing entity type where it fits; obtain approval before adding a new dataset/schema. This does not mean one physical file per record: each dataset file still contains its named list of records.
 
-The browser should show the core's authorization plus counts of pending inputs/outcomes, and offer item checkboxes. A parent checkbox must not silently authorize all its children. The accepted baseline includes the authorized core and authorized assertions whose required entity/core dependencies are also accepted. It must not include pending results merely because their owner was approved.
+For example, the Autodesk agreement and its resource commitments can be accepted as their own records while an AutoCAD release event containing its delivery outcome remains pending. If development work itself is too broad, split it into coherent child processes or milestone events. Do not accept a process record while leaving some of its embedded outcomes pending.
 
-For example: the Autodesk development process and its resource commitments can be accepted, while its proposed AutoCAD release outcome remains pending. Authorizing that release outcome establishes it as story content. No `intended` or `achieved` field is needed.
+Authorization does not cascade through references. Accepting a record accepts the relationship it states, not every assertion in the referenced record. Decomposition must not leave a parent description asserting an unaccepted result as already established. Reference validity and authorization of the referenced content remain separate checks.
 
-This additional granularity is a proposal needed to support the requested semantics, **not functionality already implemented**. An alternative is to promote each independently reviewable result into a separate record; that is less consistent with the requested owned input/outcome lists. Avoid approving an entire mixed record while representing its outcomes as independently pending without an explicit contract.
+This replaces the earlier suggestion of independent item authorization. No authorization-schema or UI granularity extension is needed. Phase-1B domain and temporal schema changes still require their own review; original content and prior authorization hashes remain preserved as evidence.
 
 ### Existing actions and terms still need homes
 
@@ -378,7 +378,7 @@ flowchart LR
   RESP -->|trigger context| CAM
 ```
 
-Only event/process nodes own structured story dates. Inputs/outcomes keep numbered descriptions and typed links; arrows do not imply that a linked outcome is authorized.
+Only event/process nodes own structured story dates. Inputs/outcomes keep numbered descriptions and typed links; authorization covers all contained input/outcome values, but does not cascade to referenced records.
 
 ## 9. Risks, challenges and required safeguards
 
@@ -387,14 +387,14 @@ Only event/process nodes own structured story dates. Inputs/outcomes keep number
 | Phase 1B expands into full engineering | Importing 452 components and quarterly yield curves blocks campaign completion again | Start with referenced narrative subjects; explicitly exclude composition and quantitative costing. |
 | Duplicate product identities | Commercial offer, software edition and platform counted as separate unrelated products | Identity reconciliation table before migration; preserve family/edition distinctions and legacy mappings. |
 | Dates lose semantics | Signing, demonstration, production release and shipment collapse into one date | Typed lifecycle/milestone assertions and external authorization; preserve partial dates and unknown boundaries. |
-| Removing completion loses truth | A planned process appears accomplished merely because its end date is in the past | Separately authorized outcomes and evidence events; never infer acceptance from elapsed time. |
+| Removing completion loses truth | A planned process appears accomplished merely because its end date is in the past | Whole-record authorization, with decomposition into separate event/process records when needed; never infer acceptance from elapsed time. |
 | Acceptance gates become circular prerequisites | Development requires its own already-finished deliverable | Distinguish an acceptance criterion from an available input resource and from evidence that it passed. |
 | Programme merge copies dirty prose | Equipment, dates and editorial notes become false deliverables | Semantic redistribution of all 63 deliverable and 24 gate fragments. |
 | Technology maturity is overgeneralized | A qualified memory process implies qualified CPUs or partner production | Capability scoped by actor, site where known, recipe and product; date the specific maturity transition. |
 | Market responses imply unjustified causation | An agreement “causes” adoption or competitor action without evidence | Keep proposed response outcomes pending until authorized; allow multiple triggers and independent actors' motives. |
 | Forecast quantities become canon accidentally | OEM prospect volumes or compatibility pool estimates enter story facts | Keep numerical prediction inputs in the later assessment scope; proposals require explicit authorization. |
 | ID conversion breaks the graph | Programme and duration-event references no longer resolve | Complete mapping across all datasets, nested outcomes, frontend links and editorial issue targets. |
-| Authorization hashes become stale | Changing field structures invalidates accepted records even when meaning is unchanged | Versioned target/hash contract, old/new snapshots and explicit review of authorization preservation; no blanket reauthorization. |
+| Authorization hashes become stale | Changing field structures invalidates accepted records even when meaning is unchanged | Keep full-record hashing; preserve old/new snapshots and review changed records explicitly; no blanket reauthorization. |
 | Application assumes old temporal structure | Timeline sorting, derived campaign ranges and browser detail/filter behavior fail | Update resolver, API registries, schema validators, browser/timeline and tests as one migration. |
 | Unknown timing creates false precision | Five undated processes or broad programmes acquire invented boundaries | Explicit unknown representation and targeted author decisions; do not substitute trade-show boundaries. |
 | Future schemas duplicate phase 1B facts | Phases 2–4 create fresh product/technology/response identities | Extend the same identities with approved domain structures; keep one owner for each fact. |
@@ -405,7 +405,7 @@ The present manifest/schema version is 0.3.0. These are breaking changes: stage 
 
 1. Approve the phase-1B boundaries and settle the model decisions below. Update the process roadmap while labelling these schemas as proposed.
 2. Build a reference inventory and legacy-to-current identity mapping, starting with subjects of the 11 campaigns and the Autodesk, SMC, SGS, Tandy and Athena work streams.
-3. Review linked examples before mass migration: **Autodesk/AutoCAD**, **SMC custom-chip transfer**, and **2 µm logic versus DRAM maturity**. These expose product identity, independently authorized requirements/results, partner scope and distinct milestone dates.
+3. Review linked examples before mass migration: **Autodesk/AutoCAD**, **SMC custom-chip transfer**, and **2 µm logic versus DRAM maturity**. These expose product identity, record boundaries for requirements/results, partner scope and distinct milestone dates.
 4. Design strict schemas and validators for the chosen subjects, input/outcome types and temporal union. Approve each extension before installation.
 5. Stage new datasets and converted records in an isolated migration output. Resolve programmes, the three duration events, the five clause dates and narrative-period removal together.
 6. Produce explicit before/after proposals and an authorization impact report. Preserve prior evidence; obtain decisions for new inferred facts and changed meanings.
@@ -416,8 +416,7 @@ The present manifest/schema version is 0.3.0. These are breaking changes: stage 
 
 - Adopt the four proposed datasets, or keep market responses as inline outcomes only?
 - Permit explicit unknown process boundaries while timing is unresolved?
-- Approve authorization targets for each event/process core and numbered input/outcome, with a versioned hash contract and item-level UI, so authorization remains the only result distinguisher?
 - Use acceptance criteria as required inputs and passing results as outcomes, rather than treating all gates as already-available prerequisites?
 - Choose canonical event-owned lifecycle facts with derived reverse views, or enforce synchronized product-to-event lifecycle references?
 
-My recommendation is **yes to phase 1B and the event/process discipline**, with the scoped capability model, explicit unknown boundaries and independently authorized numbered results. Per the author's clarification, no intended/achieved modes are proposed. Remove programme and narrative-period datasets through reviewed semantic mappings, not bulk renaming. This makes phase 1 more coherent without pretending the engineering, commercial outcomes or later quantitative models are already complete.
+My recommendation is **yes to phase 1B and the event/process discipline**, with the scoped capability model, explicit unknown boundaries and whole-record authorization of numbered inputs/outcomes. Decompose records when the author needs separate review decisions. Per the author's clarification, no intended/achieved modes are proposed. Remove programme and narrative-period datasets through reviewed semantic mappings, not bulk renaming. This makes phase 1 more coherent without pretending the engineering, commercial outcomes or later quantitative models are already complete.

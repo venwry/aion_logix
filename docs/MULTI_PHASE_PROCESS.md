@@ -53,7 +53,7 @@ Introduce product and technology identities without product composition, manufac
 
 The author also requests temporal discipline and restructuring: only events/processes own story dates; events have one date object; processes have start/end boundaries that can reference events; remove process completion state; give events/processes numbered typed inputs/outcomes; merge programmes into processes and retire narrative periods after examining their themes. The linked design review evaluates actual data and proposes safe migrations. None of these breaking schema changes has been installed yet.
 
-**Authorization is the only distinction for proposed results.** Candidate outcomes remain pending until accepted. No additional intended/achieved flag is to be added. Independent review of a process and its numbered outcomes requires an explicit extension of the present whole-record authorization contract, as proposed in the design review.
+**Authorization is the only distinction for proposed results.** Candidate outcomes remain pending until accepted. No additional intended/achieved flag is to be added. Authorization covers the whole record, including every nested input and outcome. If the author finds a record too complex to accept in one step, decompose coherent parts into independently identified records in appropriate dataset files and connect them through references. No item-level authorization is introduced.
 
 ### Phase 2 — product offerings, BOMs and underlying parts
 
@@ -117,9 +117,9 @@ The author treats the old labels **pending confirmation** and **speculation** as
 
 This simplification does not erase the difference between story content and a calculated forecast. An authorized foundation record belongs to the accepted story. A derived sales forecast remains an assessment of that story; running a calculation does not authorize it or insert it into the foundation.
 
-Under the phase-1B clarification, authorization is the only distinguisher for proposed results. An accepted commitment or requirement is a separate assertion from its delivery outcome; accepting the former does not authorize the latter. Do not introduce intended/achieved flags. Story-facing prose describes the candidate historical account clearly; editorial uncertainty and review instructions belong in authoring data.
+Under the phase-1B clarification, authorization is the only distinguisher for proposed results. A commitment and its delivery can be authorized separately only when stored in separate records. When both are included in one record, authorization accepts both; otherwise the author can request decomposition before approval. Do not introduce intended/achieved flags. Story-facing prose describes the candidate historical account clearly; editorial uncertainty and review instructions belong in authoring data.
 
-Authorization covers the exact current content hash. Editing an authorized record invalidates that authorization until the revised content is accepted. A pending edit or a new candidate does not silently inherit authorization from related records.
+Authorization covers the exact current content hash of the **entire record**, including all nested values. References do not propagate authorization to other records. Editing an authorized record invalidates that authorization until the revised content is accepted. A pending edit or a new candidate does not silently inherit authorization from related records.
 
 ## 5. Sales, market coverage and ROI assessment
 
