@@ -2,7 +2,7 @@
 
 A static story browser and timeline, with an authenticated review service that commits authorized changes to GitHub.
 
-See the [five-phase development process](docs/MULTI_PHASE_PROCESS.md) for the agreed scope, iterative review cycle and recurring sales/ROI assessment.
+See the [development process with phase 1B](docs/MULTI_PHASE_PROCESS.md) for the agreed scope, iterative review cycle and recurring sales/ROI assessment.
 
 ## Directories
 
@@ -29,6 +29,8 @@ Open `/` for the timeline, `/code/browser.html` for records, `/code/changes-conf
 See [Render setup](docs/RENDER_SETUP.md). The app uses a server-only GitHub credential and a separate backend access key. Saving updates the respective JSON files in one Git commit; no downloadable report is required. The GitHub credential never enters the browser.
 
 Review comparisons are visible Subject / Before / After tables. Authorization and pending changes are joined to the story at display time. Missing or stale authorizations display **Unauthorized**.
+
+See the [phase-1B design review](docs/data-model/PHASE_1B_DESIGN_REVIEW.md) for the proposed product/technology subjects, temporal discipline and foundation migration. These schema changes are not installed yet.
 
 ## Foundation specification
 

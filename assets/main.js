@@ -3,7 +3,8 @@ import DOMPurify from 'dompurify';
 import mermaid from 'mermaid';
 mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral', flowchart: { htmlLabels: false } });
 const entries = [
-  { id: 'multi-phase-process', title: 'Five-phase development process', path: 'docs/MULTI_PHASE_PROCESS.md', type: 'md' },
+  { id: 'phase-1b', title: 'Phase 1B — proposed model and migration', path: 'docs/data-model/PHASE_1B_DESIGN_REVIEW.md', type: 'md' },
+  { id: 'multi-phase-process', title: 'Development process — including phase 1B', path: 'docs/MULTI_PHASE_PROCESS.md', type: 'md' },
   { id: 'storytelling-files', title: 'Storytelling — file reference', path: 'docs/data-model/STORYTELLING_FILE_REFERENCE.md', type: 'md' },
   { id: 'foundation-spec', title: 'Foundation — entities and references', path: 'docs/data-model/FOUNDATION_SPECIFICATION.md', type: 'md' },
   { id: 'migration-report', title: 'Phase 1 — migration report', path: 'docs/data-model/MIGRATION_REPORT.md', type: 'md' },

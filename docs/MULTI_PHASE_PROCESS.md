@@ -1,6 +1,6 @@
-# Aion Logix — five-phase story development process
+# Aion Logix — five foundational phases with phase 1B
 
-Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**.
+Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its detailed schema and migration design remains proposed for review in [PHASE_1B_DESIGN_REVIEW.md](data-model/PHASE_1B_DESIGN_REVIEW.md).
 
 This document consolidates the agreed process. It describes the intended workflow separately from functionality already implemented. It does not authorize additional story records, introduce new dataset schemas, or claim that the later phases are complete.
 
@@ -8,7 +8,7 @@ This document consolidates the agreed process. It describes the intended workflo
 
 Build a consistent alternative history in which a time traveller, starting on **1 January 1972**, develops a computer-industry empire. Follow the affected world's linear history through the end of the 1980s. The protagonist's future knowledge explains his advantage; tracking individual time jumps is outside the model.
 
-The work has **five foundational phases**, followed by a separate, repeatedly reassessed **sales, market coverage and ROI assessment**. All five phases contribute to the story accepted by the author. Forecasts are derived assessments of that story and do not automatically become story facts.
+The work has **five foundational phases and an intermediate phase 1B**, followed by a separate, repeatedly reassessed **sales, market coverage and ROI assessment**. All five phases contribute to the story accepted by the author. Forecasts are derived assessments of that story and do not automatically become story facts.
 
 These are phases of our design and review work, not chronological periods in the fictional world. `narrative_period` records have a different purpose.
 
@@ -17,9 +17,10 @@ These are phases of our design and review work, not chronological periods in the
 | Phase | Agreed scope | Expected result | Boundary |
 | --- | --- | --- | --- |
 | **1. History and its participants** | Overall assumptions; actors; events; campaigns; contracts/agreements; processes; supporting entities where needed | A consistent account of who acted, when, under what agreement, with what responsibilities and outcomes | Ownership percentages and commercial commitments belong here. Detailed product engineering and cost modelling are developed in later phases. |
+| **1B / 1.5. Narrative subjects and connections** | Product and technology identities without composition; chip manufacturing technology, lithography advancement and maturity; qualitative market responses | Referenced subjects and results that make campaigns, agreements and development processes coherent | Bring identity and narrative meaning forward; retain BOMs, quantitative yields/costs and sales forecasts for their later work. Detailed schema changes await review. |
 | **2. Product offerings and composition** | Product offering specifications, BOMs and underlying parts | Defined offerings and their technical composition, with references to their constituent parts | Establish what is offered and how it is composed. Do not silently establish sales volumes or financial success. |
 | **3. Chip manufacturing** | Manufacturing capabilities, yields and cost | Accepted fabrication capability and chip-production assumptions, constraints and cost basis | Chip-level fabrication economics belong here; complete-system economics and investment plans are consolidated in phase 5. |
-| **4. Third-party ecosystem and responses** | Third-party software and hardware products, ecosystem participation and market responses | An accepted account of compatibility, participation, adoption and competitor/market reactions that form part of the story | Specific author-approved responses can become story facts. General estimates of achievable sales and market coverage remain in the assessment layer. |
+| **4. Third-party ecosystem and responses** | Deepen third-party products, participation and market responses begun in phase 1B | An accepted account of compatibility, participation, adoption and competitor/market reactions that form part of the story | Specific author-approved responses can become story facts. General estimates of achievable sales and market coverage remain in the assessment layer. |
 | **5. Overall economics** | Overall manufacturing cost, investments and retail prices | An accepted cost, investment and pricing foundation for the businesses and offerings | A cost or price assumption is not proof of sales, profit or realized ROI. Those consequences must be assessed separately. |
 
 ### Phase 1 — history and its participants
@@ -43,6 +44,16 @@ Migration must recover information mentioned indirectly, assemble scattered desc
 Agreements and clauses have separate identities. Authorization of an agreement does not implicitly authorize its clauses. Ownership percentages, beneficiaries, responsibilities, agreement scope and milestone outcomes are phase-one story decisions.
 
 Commercial reasoning matters: proposed actions and terms should make sense for each party and remain compatible with other accepted story elements. Where a missing detail is reasonably inferable, propose it for review; where the choice needs the author's input, ask. Neither inference nor importing legacy wording constitutes authorization.
+
+### Phase 1B (1.5) — complete phase-one narrative connections
+
+Phase 1 cannot be completed coherently while campaigns name products only in prose, development work has no technology/product targets, and agreement consequences lack identifiable market responses. Phase 1B therefore proceeds iteratively alongside unfinished phase-one review.
+
+Introduce product and technology identities without product composition, manufacturing technology/capability and scoped maturity milestones, and qualitative market-response assertions. Later phases extend these same identities instead of creating duplicates. Detailed yield/cost curves, BOM quantities and forecast sales effects remain deferred.
+
+The author also requests temporal discipline and restructuring: only events/processes own story dates; events have one date object; processes have start/end boundaries that can reference events; remove process completion state; give events/processes numbered typed inputs/outcomes; merge programmes into processes and retire narrative periods after examining their themes. The linked design review evaluates actual data and proposes safe migrations. None of these breaking schema changes has been installed yet.
+
+**Authorization is the only distinction for proposed results.** Candidate outcomes remain pending until accepted. No additional intended/achieved flag is to be added. Independent review of a process and its numbered outcomes requires an explicit extension of the present whole-record authorization contract, as proposed in the design review.
 
 ### Phase 2 — product offerings, BOMs and underlying parts
 
@@ -78,7 +89,7 @@ Sales-dependent totals and realized returns require assessed demand and explicit
 
 ## 3. Iteration within and across phases
 
-The numbered phases establish scope and a preferred working order, not a one-way migration that prevents revisions. We work iteratively within each phase and revisit earlier decisions when later work exposes a conflict.
+The numbered phases, including phase 1B, establish scope and a preferred working order, not a one-way migration that prevents revisions. We work iteratively within each phase and revisit earlier decisions when later work exposes a conflict.
 
 For each manageable subject or batch:
 
@@ -106,7 +117,7 @@ The author treats the old labels **pending confirmation** and **speculation** as
 
 This simplification does not erase the difference between story content and a calculated forecast. An authorized foundation record belongs to the accepted story. A derived sales forecast remains an assessment of that story; running a calculation does not authorize it or insert it into the foundation.
 
-Authorization is separate from occurrence and completion. The author can authorize that a development target existed without authorizing that development succeeded. Story-facing prose should describe the intended historical account clearly; editorial uncertainty and review instructions belong in authoring data.
+Under the phase-1B clarification, authorization is the only distinguisher for proposed results. An accepted commitment or requirement is a separate assertion from its delivery outcome; accepting the former does not authorize the latter. Do not introduce intended/achieved flags. Story-facing prose describes the candidate historical account clearly; editorial uncertainty and review instructions belong in authoring data.
 
 Authorization covers the exact current content hash. Editing an authorized record invalidates that authorization until the revised content is accepted. A pending edit or a new candidate does not silently inherit authorization from related records.
 
@@ -140,7 +151,9 @@ flowchart TD
   P3["3. Chip capabilities, yields and cost"]
   P4["4. Third-party ecosystem and market responses"]
   P5["5. Overall manufacturing costs, investments and retail prices"]
-  P1 --> P2 --> P3 --> P4 --> P5
+  P1 --> PB["1B. Products, technologies, manufacturing maturity and responses"]
+  PB --> P2 --> P3 --> P4 --> P5
+  PB --> R
   P1 --> R["Iterative modelling, validation and author review"]
   P2 --> R
   P3 --> R
