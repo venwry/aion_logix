@@ -32,6 +32,8 @@ Review comparisons are visible Subject / Before / After tables. Authorization an
 
 See the [foundation dataset specification](docs/data-model/FOUNDATION_SPECIFICATION.md) for the complete hierarchical entity diagram, field constraints and cross-dataset reference catalogue. It is also available in the documentation viewer as **Foundation — entities and references**.
 
+See also the [storytelling file reference](docs/data-model/STORYTELLING_FILE_REFERENCE.md) for authorization, proposals, sources and migration history.
+
 ## Model and review history
 
 See [model principles](DATA_MODEL_PRINCIPLES.md), [the separation contract](docs/data-model/SEPARATION.md) and [the generated field reference](docs/data-model/FIELD_REFERENCE.md). The original October approval files and decisions remain in [review history](docs/review/history/2026-10-27/APPLICATION_REPORT.md).

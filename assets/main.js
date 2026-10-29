@@ -3,6 +3,7 @@ import DOMPurify from 'dompurify';
 import mermaid from 'mermaid';
 mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral', flowchart: { htmlLabels: false } });
 const entries = [
+  { id: 'storytelling-files', title: 'Storytelling — file reference', path: 'docs/data-model/STORYTELLING_FILE_REFERENCE.md', type: 'md' },
   { id: 'foundation-spec', title: 'Foundation — entities and references', path: 'docs/data-model/FOUNDATION_SPECIFICATION.md', type: 'md' },
   { id: 'migration-report', title: 'Phase 1 — migration report', path: 'docs/data-model/MIGRATION_REPORT.md', type: 'md' },
   ...['actor', 'assumption', 'event', 'agreement', 'clause', 'campaign', 'process', 'programme', 'actor_relationship', 'location', 'narrative_period', 'reconciliation_issue', 'source', 'migration_map', 'review_decision'].map(name => ({ id: 'migration_' + name, title: 'Data · ' + name.replaceAll('_', ' '), path: (['source','migration_map','reconciliation_issue','review_decision'].includes(name)?'data_storytelling/':'data_foundation/') + name + '.json', type: 'json' })),
