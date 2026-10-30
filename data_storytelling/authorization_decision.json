@@ -1116,6 +1116,175 @@
           "content_sha256": "281ca48889634faa8511daabd61ec750457c3edf0ef48ba4f10f31804a399668"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.9d3e5e19-2d6f-42c0-974d-c8dc2cd16009",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:05:12.163Z",
+      "change_id": "change.opening_1972_process_birmingham_estate",
+      "proposal_sha256": "369bfe84360a7f114db0e3b31354df226ce8ef1fa969d950c685260ae1bff957",
+      "proposal": {
+        "id": "change.opening_1972_process_birmingham_estate",
+        "category": "story",
+        "title": "14/21 · Add process.birmingham_estate",
+        "reason": "Single-record authorization: process.birmingham_estate. The car to be sold is unspecified and is not identified as the wrecked accident vehicle. No estate values are invented. Review prerequisites first: event.identity, location.birmingham, actor.original_adam. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_event_identity",
+          "change.opening_1972_location_birmingham",
+          "change.opening_1972_actor_original_adam"
+        ],
+        "elements": [
+          {
+            "record_type": "process",
+            "record_id": "process.birmingham_estate",
+            "before": null,
+            "after": {
+              "id": "process.birmingham_estate",
+              "title": "Birmingham funerals, inheritance and disposal of family assets",
+              "kind": "personal_affairs",
+              "description": "Operating as Adam Pleskot, Vincent spends the month in Birmingham arranging the parents’ funeral, handling inheritance formalities and selling family assets before leaving permanently.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "1972-01-02",
+                  "precision": "day"
+                },
+                "end": {
+                  "value": "1972-02-02",
+                  "precision": "day"
+                }
+              },
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "The parents’ deaths and Vincent’s assumption of Adam’s identity create the need and opportunity to settle family affairs.",
+                  "event_id": "event.identity"
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "The parents’ estate includes their house, a car and other valuable possessions to be disposed of."
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "action",
+                  "description": "Arrange the parents’ funeral."
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "Handle the formalities connected with inheriting the parents’ wealth."
+                },
+                {
+                  "number": 3,
+                  "type": "action",
+                  "description": "Sell the parents’ house, car and other valuable possessions; retain the money and remaining belongings for departure."
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "The parents’ funeral has been arranged and inheritance formalities handled."
+                },
+                {
+                  "number": 2,
+                  "type": "result",
+                  "description": "The house, car and other saleable valuables have been sold; Adam holds the resulting money and remaining belongings for his move."
+                }
+              ],
+              "subject_ids": [
+                "location.birmingham",
+                "actor.original_adam"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "process.birmingham_estate",
+          "before": null,
+          "after": {
+            "id": "process.birmingham_estate",
+            "title": "Birmingham funerals, inheritance and disposal of family assets",
+            "kind": "personal_affairs",
+            "description": "Operating as Adam Pleskot, Vincent spends the month in Birmingham arranging the parents’ funeral, handling inheritance formalities and selling family assets before leaving permanently.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1972-01-02",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1972-02-02",
+                "precision": "day"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The parents’ deaths and Vincent’s assumption of Adam’s identity create the need and opportunity to settle family affairs.",
+                "event_id": "event.identity"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "The parents’ estate includes their house, a car and other valuable possessions to be disposed of."
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "Arrange the parents’ funeral."
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Handle the formalities connected with inheriting the parents’ wealth."
+              },
+              {
+                "number": 3,
+                "type": "action",
+                "description": "Sell the parents’ house, car and other valuable possessions; retain the money and remaining belongings for departure."
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "The parents’ funeral has been arranged and inheritance formalities handled."
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "The house, car and other saleable valuables have been sold; Adam holds the resulting money and remaining belongings for his move."
+              }
+            ],
+            "subject_ids": [
+              "location.birmingham",
+              "actor.original_adam"
+            ]
+          },
+          "content_sha256": "48d520ed25d5e23bed44bb0e12c45545a0f1c62b3f50e0a2b2614a4b6e7ec79a"
+        }
+      ]
     }
   ]
 }
