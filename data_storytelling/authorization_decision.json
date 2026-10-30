@@ -720,6 +720,57 @@
           "content_sha256": "46eb1cdeeedecd95e52a38520feb0ca4ade351c6cb7e8df6bbd2a722ae135182"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.e73d831e-4a72-4c4a-9fb2-66c301592d6f",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:01:11.153Z",
+      "change_id": "change.opening_1972_assumption_adam_identity",
+      "proposal_sha256": "cd16cfc99aa1a7d46fc58821e399467ddd7725fb52e065b6185f460c868e9e2b",
+      "proposal": {
+        "id": "change.opening_1972_assumption_adam_identity",
+        "category": "story",
+        "title": "11/21 · Add assumption.adam_identity",
+        "reason": "Single-record authorization: assumption.adam_identity. Preserves this record’s content from the opening-sequence proposal. Review prerequisites first: actor.original_adam. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_actor_original_adam"
+        ],
+        "elements": [
+          {
+            "record_type": "assumption",
+            "record_id": "assumption.adam_identity",
+            "before": null,
+            "after": {
+              "id": "assumption.adam_identity",
+              "kind": "world_premise",
+              "statement": "Vincent resembles the original Adam Pleskot closely enough to take his place after Adam and his parents die. Vincent replaces Adam’s body and assumes his identity before the death of the original identity holder is noticed. He subsequently operates as Adam Pleskot.",
+              "scope_ids": [
+                "actor.adam",
+                "actor.original_adam",
+                "event.identity"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "assumption.adam_identity",
+          "before": null,
+          "after": {
+            "id": "assumption.adam_identity",
+            "kind": "world_premise",
+            "statement": "Vincent resembles the original Adam Pleskot closely enough to take his place after Adam and his parents die. Vincent replaces Adam’s body and assumes his identity before the death of the original identity holder is noticed. He subsequently operates as Adam Pleskot.",
+            "scope_ids": [
+              "actor.adam",
+              "actor.original_adam",
+              "event.identity"
+            ]
+          },
+          "content_sha256": "fedb27d9750734a66864360f05549e22343747ec4f15f332ddc1f396d763c865"
+        }
+      ]
     }
   ]
 }
