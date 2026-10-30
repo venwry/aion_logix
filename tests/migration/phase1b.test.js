@@ -3,8 +3,8 @@ import {hash} from '../../server/model.js';
 const read=p=>JSON.parse(fs.readFileSync(p));
 const all=dir=>fs.readdirSync(dir).filter(n=>n.endsWith('.json')).flatMap(n=>Object.values(read(dir+'/'+n))[0]);
 const current=new Map(all('data_foundation').map(r=>[r.id,r]));
-const archived=new Map(all('data_storytelling/history/phase1b-0.3.0/foundation').map(r=>[r.id,r]));
-const report=read('data_storytelling/phase1b_migration.json').migration[0];
+const archived=new Map(all('archived_no_longer_valid/data_storytelling/history/phase1b-0.3.0/foundation').map(r=>[r.id,r]));
+const report=read('archived_no_longer_valid/data_storytelling/phase1b_migration.json').migration[0];
 test('every retired identity has an explicit migration disposition',()=>{
  const mappings=new Map(report.id_mapping.map(m=>[m.old_id,m.new_ids]));
  for(const id of archived.keys())if(!current.has(id)){

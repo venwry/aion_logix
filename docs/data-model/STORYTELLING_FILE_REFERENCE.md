@@ -1,354 +1,73 @@
-# Storytelling data — file reference
+# Storytelling data — current file reference
 
-> Historical design/snapshot: the current model is **0.4.0**. See [implementation, migration and current inventory](PHASE_1B_IMPLEMENTATION.md) and [current schemas](FOUNDATION_SPECIFICATION.md). Counts and proposed alternatives below describe the earlier snapshot.
+Updated for the 30 October 2026 handover, model **0.4.0**. `data_storytelling/` contains six active JSON files. Historical material is inventoried in [the archive](../../archived_no_longer_valid/README.md); unresolved work is indexed in [the backlog](../REVIEW_BACKLOG.md). The former reference is retained as a historical snapshot.
 
-Snapshot: **29 October 2026**, repository baseline `b3a9abe`. This reference covers all **10 JSON files**, including the `history/` subdirectory, in `data_storytelling/`. Counts describe this snapshot and will change as the author reviews records.
+Foundation records describe the fictional world. Storytelling files describe author authorization, proposals, sources and editorial questions. Only the first four files below are loaded by the GitHub saving backend. The documentation viewer also exposes sources and open issues; they do not control authorization badges.
 
-## Overall purpose
+| File | Purpose | Handover contents |
+| --- | --- | --- |
+| [authorization.json](../../data_storytelling/authorization.json) | Exact-content, whole-record authorization state | 653 entries: 54 authorized, 599 unauthorized |
+| [authorization_decision.json](../../data_storytelling/authorization_decision.json) | Append-only direct-save audit evidence | One applied change decision; grows with subsequent saves |
+| [change.json](../../data_storytelling/change.json) | Active proposals awaiting review | Empty queue; not evidence that the story is complete |
+| [manifest.json](../../data_storytelling/manifest.json) | Current model version and dataset inventory | Version 0.4.0; 13 foundation datasets |
+| [source.json](../../data_storytelling/source.json) | Source bibliography and author-evidence catalogue | 36 sources; inherited provenance format |
+| [reconciliation_issue.json](../../data_storytelling/reconciliation_issue.json) | Unresolved editorial questions | 17 open issues; references rebased to current identities |
 
-`data_foundation/` describes the alternative world. `data_storytelling/` describes how that world was researched, migrated, reviewed and authorized. It contains both **active application state** and **preserved historical evidence**. These should not be interpreted interchangeably.
+## Authorization
 
-The browser and timeline join foundation records with `authorization.json` by record ID and verify their content hashes. They do not derive current authorization from legacy `status` fields. The browser calls unauthorized records **Pending authorization**. Approval of a proposed change updates the foundation and authoring files in one GitHub commit; authorizing existing content updates the authoring files without changing the story.
+`authorization.json` has envelope `{ authorization: [...] }`. Each entry contains `id`, `record_id`, `state` (`authorized` or `unauthorized`), `content_sha256`, and optional `decision_id`. `record_id` references a foundation record; `decision_id` references a direct-save decision where present. Older authorizations can lack a direct-save decision ID; their evidence remains in archived review decisions and context snapshots.
 
-## File inventory
+The hash covers the complete foundation record using recursively sorted object keys and preserved array order. The application compares that hash with current content. A missing or mismatched authorization is pending; references never propagate authorization. See [authorization schema](../../schemas/storytelling/authorization.schema.json). Runtime validation checks shape and identity; content matching is also enforced by the UI and authorization transaction.
 
-| File | Records | Overall purpose | Role today |
-| --- | ---: | --- | --- |
-| [authorization.json](../../data_storytelling/authorization.json) | 440 | Content-specific authorization state for foundation records | Active; 61 authorized, 379 unauthorized |
-| [authorization_decision.json](../../data_storytelling/authorization_decision.json) | 1 | Audit history of direct application saves | Active history; one applied change involving three records |
-| [change.json](../../data_storytelling/change.json) | 0 | Proposed changes awaiting approval | Active queue; currently empty |
-| [manifest.json](../../data_storytelling/manifest.json) | 1 | Model version, foundation dataset inventory and former metadata | Active version contract plus historical metadata |
-| [record_context.json](../../data_storytelling/record_context.json) | 439 | Original records from before editorial/story separation | Historical snapshots, not live copies |
-| [source.json](../../data_storytelling/source.json) | 36 | Bibliography and author-decision evidence | Preserved source catalogue |
-| [migration_map.json](../../data_storytelling/migration_map.json) | 2,273 | Mapping of legacy material to migrated records or explicit exclusions | Preserved migration coverage |
-| [reconciliation_issue.json](../../data_storytelling/reconciliation_issue.json) | 23 | Conflicts, missing information and reconciliation outcomes | Editorial issue register; 18 open, 5 resolved |
-| [review_decision.json](../../data_storytelling/review_decision.json) | 93 | Decisions imported through the earlier review-log workflow | Historical decisions: 35 revisions, 58 confirmations |
-| [history/pre-separation-proposals.json](../../data_storytelling/history/pre-separation-proposals.json) | 1 | Original proposal with its old statuses and sourcing | Immutable historical snapshot, not a pending queue |
+## Authorization decisions
 
-## Reference map
+`authorization_decision.json` has envelope `{ authorization_decision: [...] }`. Entries contain `id`, `action`, `actor`, `decided_at`, and `target[]`. Actions are `authorize_record`, `authorize_records` and `approve_change`. Targets contain `record_id`, complete `before`/`after` snapshots and `content_sha256`; nullable snapshots represent creation/removal. Change decisions also preserve `change_id`, `proposal_sha256` and the embedded `proposal`.
 
-Arrows indicate logical references or lookups, not automatic cascading updates. A historical snapshot may contain references to the world as it existed at that time.
+`actor` is the reviewer label, not a fictional actor ID. Targets identify story records; their snapshots preserve the exact version reviewed. An applied proposal is removed from the active queue, so its historical `change_id` need not resolve there. The embedded proposal is the evidence. New decisions must not rewrite old snapshots to follow later model changes. See [decision schema](../../schemas/storytelling/authorization_decision.schema.json).
+
+## Proposed changes
+
+`change.json` contains `change[]` and `metadata`. A proposal has `id`, `category`, `title`, `reason`, optional `depends_on_ids[]`, and `elements[]`. Each element identifies `record_type`, `record_id`, `before` and `after`. References within the resulting story snapshots must resolve in the complete resulting foundation graph. New elements have `before: null`.
+
+The backend verifies proposal hash and before snapshots, validates the resulting graph, and applies the group atomically. It rejects schema-category proposals: schema deployment is a separate reviewed change. Dependency IDs describe related proposals but are not an automatically executed dependency graph. There is no dedicated current schema for the complete proposal envelope; runtime validation is supplemented by proposal tests.
+
+Current metadata holds description, transport format version, page/calculation consumers, repository and questions. Historical baseline date/commit and retrospective summary were archived; they do not describe a future proposal. The empty queue does not mean all records or issues are authorized/resolved.
+
+## Manifest
+
+`manifest.json` contains one `manifest` entry with `id: "manifest.foundation"`, `schema_version: "0.4.0"` and `foundation_datasets[]`. Dataset names resolve to foundation files and corresponding schemas. The saving backend rejects an unsupported version. Keep this list consistent with `code/model-contract.js` and the schemas; editing the manifest alone cannot install a new model.
+
+`previous_metadata` was moved into the preserved pre-cleanup manifest because it described earlier foundation envelopes rather than the current contract.
+
+## Sources
+
+`source.json` retains `source[]` and legacy `metadata`. Source entries contain `id`, `kind`, `title`, `citation`, optional `url`, `commit`, `source_refs[]`, `confirmation`, and inherited `status`. There are one pinned repository snapshot, 33 historical documents and two author-decision sources.
+
+`source_refs[].source_id` and `confirmation.source_id` reference this catalogue. Source paths and JSON pointers identify material in the cited repository at its pinned commit. Citations referring to former `docs/review/history/` locations resolve through the [archive inventory](../../archived_no_longer_valid/inventory.json). Phase 1B source references now live in its archived migration report and continue to use this catalogue.
+
+Legacy source status/confirmation fields are historical evidence, **not current foundation authorization**. They are retained unchanged to preserve original hashes. The historical [source schema](../../archived_no_longer_valid/schemas/archive/0.2.0/source.schema.json) describes the inherited format; the save transaction does not validate or modify this catalogue. A future source-format migration requires an explicit model review.
+
+## Open reconciliation issues
+
+`reconciliation_issue.json` retains `reconciliation_issue[]` and legacy `metadata`. Entries contain `id`, `title`, `kind`, `description`, `affected_ids[]`, `state`, `source_refs[]`, inherited `status`, and optional `candidate[]` with statements/source references. The original format also supports `resolution` and `resolution_decision_id`.
+
+`affected_ids[]` references current foundation identities; source references resolve to `source.json`. In historical resolved entries, `resolution_decision_id` references the archived `review_decision.json`, not the direct-save decision log. Legacy pending status is distinct from issue lifecycle and does not alter story authorization.
+
+The full original 23-entry register is preserved in the archive. Five already-resolved entries and the settled Autodesk signatory question were removed from the active register. The other 17 remain open. This cleanup does not settle their wording or authorize any story records. See [backlog and rationale](../REVIEW_BACKLOG.md). The inherited [issue schema](../../archived_no_longer_valid/schemas/archive/0.2.0/reconciliation_issue.schema.json) is historical; current tests check active issue references. These files are not part of the live save transaction.
+
+## Historical lineage
+
+The archive preserves record contexts, old review decisions, source mappings, complete 0.3 foundation snapshots, approval logs and the phase 1B report. Its inventory provides exact original paths and checksums. Historical IDs resolve against their snapshot; use phase 1B `id_mapping` and `product_mapping` to connect retired identities to current records. Historical hashes must never replace current authorization hashes.
 
 ```mermaid
 flowchart LR
-  foundation["data_foundation records"]
-  auth["authorization.json"] -->|record_id| foundation
-  auth -->|decision_id| decisions["authorization_decision.json"]
-  decisions -->|target record_id| foundation
-  decisions -.->|change_id and embedded proposal| changes["change.json: pending only"]
-  changes -->|elements record_id and snapshot references| foundation
-  changes -->|depends_on_ids| changes
-  context["record_context.json"] -->|record_id| foundation
-  context -->|original_record source_refs| sources["source.json"]
-  context -->|original_record confirmation| sources
-  migration["migration_map.json"] -->|target_ids| foundation
-  migration -->|source_refs| sources
-  issues["reconciliation_issue.json"] -->|affected_ids| foundation
-  issues -->|source_refs and candidate sources| sources
-  issues -->|resolution_decision_id| reviews["review_decision.json"]
-  reviews -->|target record_id| foundation
-  reviews -->|source_id and confirmation| sources
-  sources -->|source_refs and confirmation| sources
-  manifest["manifest.json"] -->|foundation_datasets: file names| foundation
-  archive["history/pre-separation-proposals.json"] -->|snapshot record IDs| foundation
-  archive -->|snapshot source_refs| sources
+  Authorization -->|record_id and hash| Foundation
+  Authorization -->|decision_id| Decisions
+  Proposals -->|before and after| Foundation
+  Manifest -->|dataset names| Foundation
+  Issues -->|affected_ids| Foundation
+  Issues --> Sources
+  Archive -->|provenance references| Sources
+  Backlog --> Issues
+  Backlog --> Archive
 ```
-
-An applied proposal disappears from the active queue. Therefore a decision's `change_id` is a historical identifier: the preserved `proposal` inside that decision supplies the evidence even when no matching record remains in `change.json`.
-
-## Structure notation and shared references
-
-The structures below describe observed fields and, where stated, supported runtime fields. `[]` denotes an array; `?` marks a field absent from some records or conditional on the action. These outlines summarize the files rather than replace JSON Schema. Embedded foundation snapshots retain their dataset-specific nested structures.
-
-The four legacy editorial datasets (`source`, `migration_map`, `reconciliation_issue`, `review_decision`) retain envelope `metadata` containing:
-
-```text
-metadata
-  description: string
-  schema_version: string
-  used_by_pages[]: string
-  used_by_calculations[]: string
-```
-
-Page/calculation identifiers are consumer metadata, not foreign keys to story records. Their values describe the earlier model and do not necessarily identify current application pages.
-
-Repeated historical evidence structures are:
-
-```text
-source_refs[]
-  source_id: string → source.id
-  path?: string
-  pointer?: string
-  note?: string
-confirmation?
-  source_id: string → source.id
-  record_sha256: string
-```
-
-`path` locates a file within the cited source repository; `pointer` identifies a JSON location within that file. An empty pointer denotes the document root. Neither is a reference to a current foundation record. A hash is a fingerprint, not an ID or a link. Citation text may also mention document paths without constituting a machine-validated relation.
-
-## authorization.json
-
-**Purpose:** record whether the author authorized the exact current content of each foundation record.
-
-```text
-{ authorization: [
-  id: string
-  record_id: string
-  state: "authorized" | "unauthorized"
-  content_sha256: string
-  decision_id?: string
-] }
-```
-
-**References:** `record_id` resolves to `data_foundation/<ID prefix>.json`, matching the record's `id`. `decision_id`, when present in current data, identifies an entry in `authorization_decision.json`. Three entries currently reference the one direct-save decision; older authorizations do not have this field. Their supporting history remains in `review_decision.json` and pre-separation context.
-
-**Behavior:** the content hash covers the pure foundation record using stable JSON serialization. Authorized state alone is insufficient: a missing entry or mismatching hash displays as pending authorization. This file stores both states; it is not only a list of unresolved items. A grouped approval can update several entries with the same decision ID.
-
-Current schema: [authorization.schema.json](../../schemas/storytelling/authorization.schema.json).
-
-## authorization_decision.json
-
-**Purpose:** preserve what the author authorized through the authenticated application, including exact before/after content.
-
-```text
-{ authorization_decision: [
-  id: string
-  action: "authorize_record" | "authorize_records" | "approve_change"
-  actor: string
-  decided_at: date-time string
-  change_id?: string
-  proposal_sha256?: string
-  proposal?: object
-  target[]
-    record_id: string
-    before: object | null
-    after: object | null
-    content_sha256: string | null
-] }
-```
-
-**References:** `target[].record_id` identifies the affected foundation record. `before` and `after` contain complete snapshots, whose internal actor, agreement, event and other references retain the meanings of their foundation schemas. `change_id` identifies the approved proposal; `proposal` embeds that proposal, including its elements and dependency IDs. `proposal_sha256` fingerprints the proposal reviewed by the author. `actor` is the reviewer label (currently `author`), **not** a reference to a fictional `actor` record.
-
-**Behavior:** authorizing existing content uses equal before/after snapshots. Additions have `before: null`; removals can have `after: null` and a null hash. One batch authorization creates one decision with multiple targets and one GitHub commit. The current single stored decision is `approve_change`; the two authorization action types are supported by the schema/runtime but are not yet represented in this snapshot.
-
-Current schema: [authorization_decision.schema.json](../../schemas/storytelling/authorization_decision.schema.json).
-
-## change.json
-
-**Purpose:** hold proposals awaiting review on Changes confirm. The current `change` array is empty.
-
-Supported proposal shape, established by the backend and preserved proposals:
-
-```text
-change[]
-  id: string
-  category: string (story or schema review)
-  title: string
-  reason: string
-  depends_on_ids[]: string
-  elements[]
-    record_type: string
-    record_id: string
-    before: object | null
-    after: object | null
-metadata
-  description: string
-  schema_version: string
-  used_by_pages[]: string
-  used_by_calculations[]: string
-  repository: string
-  baseline_commit: string
-  created_at: date string
-  questions[]: empty in current file
-  applied_summary: string
-```
-
-**References:** `elements[].record_id` selects a foundation record; `record_type` selects its dataset. Snapshot fields can reference other foundation records. `depends_on_ids[]` identifies related change proposals; the preserved example has no dependencies. `repository` and `baseline_commit` identify historical GitHub context, not a story entity. The current application checks before snapshots and resulting graph validity; it does not separately enforce `depends_on_ids` as a dependency graph. Schema proposals require a separately reviewed schema deployment.
-
-**Behavior:** an applied proposal is removed from this queue and retained inside its new authorization decision. Proposal snapshots in this active workflow are story-only; legacy statuses and sourcing remain outside them.
-
-**Observed stale metadata:** `description` and `applied_summary` still say John Walker remains proposed. That wording contradicts the empty queue and the applied authorization decision. Treat the queue and decision history as current state; these metadata strings need a separate cleanup. The historical `baseline_commit` is not the current repository head.
-
-There is no dedicated current JSON Schema for this complete proposal envelope. The backend validates proposal identity/hash, before snapshots, dataset identities and the resulting foundation graph.
-
-## manifest.json
-
-**Purpose:** identify the current foundation contract while preserving metadata removed from foundation envelopes.
-
-```text
-{ manifest: [
-  id: "manifest.foundation"
-  schema_version: "0.3.0"
-  foundation_datasets[]: dataset name
-  previous_metadata
-    <dataset name>
-      description: string
-      schema_version: string
-      used_by_pages[]: string
-      used_by_calculations[]: string
-] }
-```
-
-**References:** the 11 `foundation_datasets` values map to `data_foundation/<name>.json` and the corresponding schema files. Keys under `previous_metadata` use the same dataset names. Consumer identifiers inside that metadata are historical application/calculation labels, not story references.
-
-**Behavior:** the GitHub backend rejects an unsupported manifest schema version. The application/backend also have dataset registries in code; editing this manifest alone does not dynamically install a new dataset. `previous_metadata` is archival and retains old version `0.2.0` wording intentionally.
-
-## record_context.json
-
-**Purpose:** preserve complete original records as they stood before the foundation/editorial split, including sources, statuses, date annotations and earlier confirmation evidence.
-
-```text
-{ record_context: [
-  id: string
-  record_id: string
-  original_record
-    id: string
-    status: legacy status
-    source_refs[]: source reference
-    confirmation?: confirmation evidence
-    <original dataset fields and nested structures>
-  note: string
-] }
-```
-
-**References:** `record_id` associates the snapshot with its foundation identity. `original_record.id` repeats that historical identity. Source and confirmation IDs resolve to `source.json`; dataset-specific references inside the original record point to story identities. Date `basis` and `qualifier` fields are preserved editorial annotations, not current foundation date fields.
-
-**Behavior:** this file is not refreshed whenever a story record changes. Its 439 entries describe the separation snapshot, whereas the foundation now contains 440 records. John Walker was added afterward; his addition is documented in `authorization_decision.json`, so the differing counts do not by themselves indicate lost provenance.
-
-Current schema: [record_context.schema.json](../../schemas/storytelling/record_context.schema.json). The embedded original record is historical payload, not a record to validate against the current foundation schema.
-
-## source.json
-
-**Purpose:** catalogue where information came from: 1 repository snapshot, 33 historical documents and 2 author-decision sources.
-
-```text
-source[]
-  id: string
-  status: legacy status
-  kind: string
-  title: string
-  url?: string
-  commit?: Git commit hash
-  citation: string
-  source_refs[]?: source reference
-  confirmation?: confirmation evidence
-metadata: legacy dataset metadata
-```
-
-**References:** `source_refs[].source_id` and `confirmation.source_id` link to other source entries or source evidence within this catalogue. `url` points outside the dataset, usually to a repository or historical document. For a repository snapshot, `url` plus `commit` fixes the historical version against which citation paths and JSON pointers should be read. Author-decision citations mention review documents under `docs/review/history/`.
-
-**Interpretation:** being listed as a source does not make a claim authorized canon. Its legacy `status` (34 pending, 2 confirmed) is preserved provenance information and does not control the browser's foundation authorization badges.
-
-Historical schema: [source.schema.json](../../schemas/archive/0.2.0/source.schema.json).
-
-## migration_map.json
-
-**Purpose:** account for how legacy input material was handled during migration, including material deliberately left out or deferred.
-
-```text
-migration_map[]
-  id: string
-  status: legacy status
-  source_refs[]: source reference
-  legacy_id?: string
-  target_ids[]: foundation record ID
-  disposition: string
-  rationale: string
-metadata: legacy dataset metadata
-```
-
-**References:** `source_refs` identifies the source catalogue entry and its legacy file/JSON location. `legacy_id` is an identifier in that original system, not necessarily a valid current ID. `target_ids[]` identifies resulting foundation records. Empty target lists are meaningful for excluded or deferred material.
-
-Current dispositions: **1,287 mapped**, **646 merged**, **29 split**, **241 deferred**, **70 excluded**. These are mapping-record counts, not counts of distinct source files or foundation records. Several mappings can lead to the same target. All mapping entries retain the old pending-confirmation status; that does not revoke authorization of their target records.
-
-Historical schema: [migration_map.schema.json](../../schemas/archive/0.2.0/migration_map.schema.json).
-
-## reconciliation_issue.json
-
-**Purpose:** track uncertainty or contradictions discovered during migration and subsequent editorial review, with recorded resolutions where available.
-
-```text
-reconciliation_issue[]
-  id: string
-  status: legacy status
-  source_refs[]: source reference
-  title: string
-  kind: string
-  description: string
-  affected_ids[]: foundation record ID
-  state: string
-  candidate[]?
-    statement: string
-    source_refs[]: source reference
-  resolution?: string
-  resolution_decision_id?: string
-metadata: legacy dataset metadata
-```
-
-**References:** `affected_ids[]` locates the story elements involved. Issue-level and candidate-level `source_refs` point to the source catalogue and original evidence locations. `resolution_decision_id` links to `review_decision.json` in current records; it is not a pointer to the newer authorization-decision log.
-
-Current states: **18 open, 5 resolved**. Kinds: **13 classification**, **5 indirect mention**, **4 conflict**, **1 missing source**. The archived schema requires a resolution and decision ID when resolved, and at least two candidates for a conflict. All 23 records retain the old pending-confirmation `status`, including resolved issues: issue lifecycle and the old authorization label are separate concepts.
-
-Historical schema: [reconciliation_issue.schema.json](../../schemas/archive/0.2.0/reconciliation_issue.schema.json).
-
-## review_decision.json
-
-**Purpose:** preserve decisions applied from the earlier uploaded approval/confirmation logs, before direct backend saving was introduced.
-
-```text
-review_decision[]
-  id: string
-  status: legacy status
-  source_refs[]: source reference
-  source_id: string
-  decision: string
-  target[]
-    record_id: string
-    record_sha256: string
-  rationale: string
-  confirmation
-    source_id: string
-    record_sha256: string
-metadata: legacy dataset metadata
-```
-
-**References:** top-level `source_id`, `source_refs[].source_id` and `confirmation.source_id` identify author-decision evidence in `source.json`. `target[].record_id` identifies the historical target story record. Its `record_sha256` fingerprints the reviewed target version; the confirmation hash covers the review record's own historical evidence representation. Neither should be substituted for today's clean-foundation `content_sha256`.
-
-**Interpretation:** the file contains **35 revise** and **58 confirm** decisions, all with legacy status `confirmed`. A confirmed decision to revise is not automatically a confirmation of the resulting story record. Current authorization is determined by `authorization.json`. New direct-save and batch decisions go into `authorization_decision.json`, not this older log.
-
-Historical schema: [review_decision.schema.json](../../schemas/archive/0.2.0/review_decision.schema.json).
-
-## history/pre-separation-proposals.json
-
-**Purpose:** preserve the original John Walker founder-representation proposal exactly as it existed before the split, including evidence removed from active story snapshots.
-
-```text
-change[]
-  id: string
-  status: legacy status
-  category: string
-  title: string
-  reason: string
-  depends_on_ids[]: change ID
-  elements[]
-    record_type: string
-    record_id: string
-    before: original record | null
-    after: proposed original-format record | null
-metadata: original proposal-envelope metadata
-```
-
-**References:** proposal `elements[].record_id` values identify the actor, event and agreement under review. Before/after snapshots contain both normal foundation references and old `source_refs`/confirmation evidence. Those source IDs refer to `source.json`. `depends_on_ids` has the same proposal-identity meaning as in the active queue. Metadata preserves the old repository, baseline commit and consumer identifiers.
-
-**Interpretation:** the stored pending label and “John Walker remains proposed” text describe the archive date. They are not current pending work. The applied version is preserved by `authorization_decision.json`; this historical file should not be rewritten merely to make its wording match today's queue.
-
-## Maintenance and validation boundaries
-
-- Keep current foundation authorization in `authorization.json`; do not infer it from any archived `status`, migration mapping or issue state.
-- Preserve historical snapshots and their hashes. A changed foundation record can legitimately differ from its `record_context` or earlier review target.
-- The backend currently validates foundation content/references and the current authorization/authorization-decision schemas. `record_context` has its own schema, but the save transaction does not load or validate that archive. The remaining historical datasets have archived schemas; they are not all revalidated by each save.
-- Some links are conventions rather than enforced foreign keys. For example, the current authorization schema types `decision_id` as a string; proposal dependency IDs are not an enforced execution order. A structurally valid file does not prove that every editorial reference resolves.
-- The stale metadata in the active `change.json` can be corrected separately. Leave matching historical text in the archived proposal unchanged.
-
-This documentation summarizes the existing files and behavior. No story records, authorization states, source evidence or proposal contents were changed to produce it.

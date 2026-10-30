@@ -1,20 +1,38 @@
-# Aion Logix
+# Aion Logix — an alternative history
 
-A static story browser and timeline, with an authenticated review service that commits authorized changes to GitHub.
+This repository develops a coherent alternative history of a time traveller who arrives on **1 January 1972** and progressively builds a computer-industry empire. His knowledge of future demand helps him introduce ideas, products and standards years ahead of their historical dates. We follow the affected world's linear history through the end of the 1980s, rather than tracking time-travel jumps.
 
-See the [development process with phase 1B](docs/MULTI_PHASE_PROCESS.md) for the agreed scope, iterative review cycle and recurring sales/ROI assessment.
+The story is modelled in interconnected JSON datasets. A timeline and data browser let the author explore and authorize that account. Author-approved story facts take precedence over real-world history within this fictional setting. Imported or inferred content remains pending until the author accepts the entire record.
 
-## Directories
+## Start here
 
-- `code/`: timeline, data browser and Changes confirm UI.
-- `data_foundation/`: story-only records with stable IDs and no editorial status or provenance.
-- `data_storytelling/`: authorization, proposed changes, decisions, sources and migration history.
-- `data_calculation/`: reserved for calculation data.
-- `schemas/`: current strict foundation schemas; `storytelling/` contains editorial schemas and `archive/` preserves the old contract.
-- `server/`: authenticated GitHub writer, intended for Render Docker hosting.
-- `docs/`: documentation viewer, model reference, deployment guide and historical review evidence.
+1. Read the [modeling principles](DATA_MODEL_PRINCIPLES.md) and [model guide](docs/data-model/MODEL_GUIDE.md).
+2. Follow the [editing guide](docs/EDITING_GUIDE.md), including whole-record authorization, schema approval and validation.
+3. Consult the [complete schema specification and diagram](docs/data-model/FOUNDATION_SPECIFICATION.md) for fields and relationships.
+4. Use the [multi-phase process](docs/MULTI_PHASE_PROCESS.md) and [current review backlog](docs/REVIEW_BACKLOG.md) to continue the work.
 
-## Read-only preview
+The current contract is **0.4.0**. The handover baseline contains 13 foundation datasets and 653 records (54 authorized, 599 pending). These are dated inventory counts, not a completed story. Product composition, quantitative fabrication economics, later ecosystem work and overall economics remain for phases 2–5. Sales, market coverage and ROI will be separately reassessed whenever the foundational story changes.
+
+## Repository contents
+
+| Directory or file | Purpose |
+| --- | --- |
+| `data_foundation/` | Story-only entities: people, agreements, events, processes, marketing, products, technologies and responses. |
+| `data_storytelling/` | Current authorization, proposals, source catalogue and unresolved editorial issues. See the [file reference](docs/data-model/STORYTELLING_FILE_REFERENCE.md). |
+| `data_calculation/` | Reserved for future derived assessments; currently empty. |
+| `schemas/` | Strict current JSON Schemas for story data and authorization. |
+| `code/` | Timeline, browser and Changes confirm application. |
+| `assets/` | Documentation viewer source, stylesheet and locally generated bundles. |
+| `server/` | Authenticated service that validates and commits author decisions to GitHub. |
+| `docs/` | Current model, editing, process, deployment and handover documentation. |
+| `tools/` | Current validation and schema-documentation generation. |
+| `tests/` | Model, migration-evidence, authorization and browser regression checks. |
+| `archived_no_longer_valid/` | Earlier models, migrations and review evidence; not current instructions. See its [archive index](archived_no_longer_valid/README.md). |
+| Root configuration | Entry page, package/build/test configuration, Docker and Render deployment. |
+
+The [repository map](docs/REPOSITORY_MAP.md) documents **every maintained file**, including root configuration, and links to the archive's complete file inventory.
+
+## Run and review
 
 ```sh
 npm ci
@@ -22,37 +40,14 @@ npm run build
 npm run preview
 ```
 
-Open `/` for the timeline, `/code/browser.html` for records, `/code/changes-confirm.html` for proposals, or `/docs/viewer.html` for documentation. Serve the repository root over HTTP.
+Open `/` for the timeline, `/code/browser.html` for data, `/code/changes-confirm.html` for proposed changes, or `/docs/viewer.html` for documentation. Serve the repository root over HTTP. The documentation viewer needs generated assets; the story pages use native JavaScript modules.
 
-## Authorize and save
-
-See [Render setup](docs/RENDER_SETUP.md). The app uses a server-only GitHub credential and a separate backend access key. Saving updates the respective JSON files in one Git commit; no downloadable report is required. The GitHub credential never enters the browser.
-
-Review comparisons are visible Subject / Before / After tables. Authorization and pending changes are joined to the story at display time. Missing or stale authorizations display **Unauthorized**.
-
-Model **0.4.0** implements phase 1B: products, technologies, manufacturing capabilities and market responses, with events/processes carrying dates and campaigns linked to execution processes. See the [implementation and migration report](docs/data-model/PHASE_1B_IMPLEMENTATION.md).
-
-## Foundation specification
-
-See the [foundation dataset specification](docs/data-model/FOUNDATION_SPECIFICATION.md) for the complete hierarchical entity diagram, field constraints and cross-dataset reference catalogue. It is also available in the documentation viewer as **Foundation — entities and references**.
-
-See also the [storytelling file reference](docs/data-model/STORYTELLING_FILE_REFERENCE.md) for authorization, proposals, sources and migration history.
-
-## Model and review history
-
-See [model principles](DATA_MODEL_PRINCIPLES.md), [the separation contract](docs/data-model/SEPARATION.md) and [the generated field reference](docs/data-model/FIELD_REFERENCE.md). The original October approval files and decisions remain in [review history](docs/review/history/2026-10-27/APPLICATION_REPORT.md).
-
-Run `npm run validate:data` for foundation and external authorization validation. `node tools/validate-foundation.js --complete` additionally requires every current record to be authorized. Historical migration scripts describe the former contract and must not overwrite the separated datasets.
-
-## Tests
+For direct saving, follow [GitHub Pages and Render setup](docs/RENDER_SETUP.md). The backend holds the GitHub credential. The browser uses a separate backend access key. Selecting records and pressing **Authorize and save** writes one Git commit; downloading approval logs is a retired workflow.
 
 ```sh
+npm run validate:data
 node --test tests/model/*.test.js tests/migration/*.test.js tests/review/*.test.js tests/server/*.test.js
 CHROMIUM_PATH=/usr/bin/chromium npm test
 ```
 
-Browser tests start their own HTTP server. Backend tests check authentication, origin checks, stale content, reference validity, grouped changes, idempotent saves and concurrent GitHub updates without writing to the live repository.
-
-## GitHub Pages
-
-Publish the repository root, including `code/`, `data_foundation/`, `data_storytelling/`, `schemas/`, `docs/`, root Markdown files and the built `assets/`. Only the documentation viewer requires `npm run build`; the story app uses native JavaScript modules. The Render backend is deployed separately. Static hosting alone cannot save JSON changes.
+Set `CHROMIUM_PATH` to an installed Chromium executable, or install Playwright's browser. Browser tests start a local HTTP server. Tests do not authorize live story records. See the editing guide for documentation checks and completeness validation.

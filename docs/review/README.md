@@ -1,9 +1,9 @@
 # Current authorization workflow
 
-Open `../../code/changes-confirm.html` or the data browser. Connect to the Render saving service, review the displayed content and choose **Authorize and save**. Decisions update the repository directly; exporting logs is no longer the current workflow.
+Open the [data browser](../../code/browser.html) or [Changes confirm](../../code/changes-confirm.html), connect to the authenticated Render saving service and review the complete record or proposed group.
 
-Story content is in `data_foundation/`; authorizations, current proposals and evidence are in `data_storytelling/`. The current proposal file is `data_storytelling/change.json`. See [the separation contract](../data-model/SEPARATION.md) and [Render setup](../RENDER_SETUP.md).
+In the browser, select pending records in the left list, then press **Authorize and save** above Reset filters. All selected records are authorized in one Git commit. Changes confirm applies the reviewed before/after group and authorizes its resulting records. Stale content rejects the whole request. No downloaded report is required.
 
-The first review round was applied on 27 October 2026. Its 28 story proposals, four schema extensions and 45 original actor confirmations are preserved in [the application report](history/2026-10-27/APPLICATION_REPORT.md). Old instructions and original payloads in that historical folder describe the old workflow and are not the current schema or saving protocol.
+Authorization covers the entire record, including nested structures; references do not authorize their targets. Decompose a complex record if it cannot be reviewed as a whole. See [editing instructions](../EDITING_GUIDE.md), [the model guide](../data-model/MODEL_GUIDE.md) and [Render setup](../RENDER_SETUP.md).
 
-John Walker's founder representation remains pending until the author saves it. Application tests do not authorize it in the real repository.
+John Walker is already authorized. His earlier pending proposal and the original approval files remain [historical evidence](../../archived_no_longer_valid/docs/review/history/2026-10-27/APPLICATION_REPORT.md). Their labels describe the earlier snapshot.

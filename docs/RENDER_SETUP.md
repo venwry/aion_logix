@@ -24,4 +24,10 @@ No Render account or credentials are bundled with the repository. Deployment and
 
 `npm run preview` serves the static site locally for read-only inspection. To run the backend, supply `AION_GITHUB_TOKEN`, `AION_REVIEW_TOKEN` (at least 24 characters) and `AION_ALLOWED_ORIGINS` through the process environment, then `npm start`. The default local bind is 127.0.0.1; the Docker image binds to 0.0.0.0 on Render's PORT.
 
-Run `npm run validate:data`, `npm run test:server` and `CHROMIUM_PATH=/usr/bin/chromium npm test`. Tests use an in-memory store or mocked GitHub calls and do not authorize the live John Walker proposal.
+Run `npm run validate:data`, `npm run test:server` and `CHROMIUM_PATH=/usr/bin/chromium npm test`. Tests use an in-memory store or mocked GitHub calls and never authorize live story records.
+
+## Static documentation and archive publication
+
+Run `npm ci` and `npm run build` before publishing the documentation viewer; `assets/app.js` and `assets/chunks/` are generated and ignored by Git. The current Dockerfile installs production dependencies and does not build this bundle, so a fresh Render build supports the story application but requires separately built assets for the documentation viewer. GitHub Pages publishing must include generated assets.
+
+The Render static preview allows the archive directory for reading preserved evidence. The archive is excluded from live dataset discovery and authorization writes. Both deployed code and `AION_BRANCH` should target the current model on `main`. A branch name in an archived migration report is historical.

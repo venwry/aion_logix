@@ -26,7 +26,7 @@ export function createServer({store,accessToken,origins=[],root=process.cwd()}){
   if(req.method!=='GET')return send(405,{error:'Method not allowed'});
   // Optional static preview, never expose credentials, Git internals or arbitrary directories.
   let name;try{name=decodeURIComponent(pathname).replace(/^\//,'')||'index.html';}catch{return send(400,{error:'Invalid path'});}
-  if(name.split('/').some(p=>p==='..'||p.startsWith('.'))||!['code','docs','assets','data_foundation','data_storytelling','schemas','index.html','README.md','DATA_MODEL_PRINCIPLES.md'].includes(name.split('/')[0]))return send(404,{error:'Not found'});
+  if(name.split('/').some(p=>p==='..'||p.startsWith('.'))||!['archived_no_longer_valid','code','docs','assets','data_foundation','data_storytelling','schemas','index.html','README.md','DATA_MODEL_PRINCIPLES.md'].includes(name.split('/')[0]))return send(404,{error:'Not found'});
   const file=path.join(root,name);if(!fs.existsSync(file)||!fs.statSync(file).isFile())return send(404,{error:'Not found'});
   const mime={'.html':'text/html','.hml':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.md':'text/plain'};res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream'});fs.createReadStream(file).pipe(res);
  });

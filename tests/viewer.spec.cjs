@@ -37,8 +37,8 @@ test('migrated phase-one data and review report are accessible',async({page})=>{
  await page.getByRole('link',{name:'Data · clause',exact:true}).click();
  await expect(page.locator('#content')).toContainText('clause.autodesk_development_rights');
  await expect(page.locator('#content')).not.toContainText('pending confirmation');
- await page.getByRole('link',{name:'Historical evidence · reconciliation issue',exact:true}).click();
- await expect(page.locator('#content')).toContainText('reconciliation_issue.bpi_investment_wording');
+ await page.getByRole('link',{name:'Storytelling · reconciliation issue',exact:true}).click();
+ await expect(page.locator('#content')).toContainText('reconciliation_issue.apple_compatibility_timing');
 });
 
 test('phase 1B implementation diagram and new datasets are accessible',async({page})=>{
@@ -48,4 +48,17 @@ test('phase 1B implementation diagram and new datasets are accessible',async({pa
  await expect(page.getByRole('status')).toBeEmpty();
  await page.getByRole('link',{name:'Data · manufacturing capability',exact:true}).click();
  await expect(page.locator('#content')).toContainText('manufacturing_capability.');
+});
+
+test('handover navigation exposes current guides and distinguishes archives',async({page})=>{
+ await page.goto('/docs/viewer.html#model-guide');
+ await expect(page.locator('article h1')).toContainText('Current model guide');
+ await expect(page.locator('.diagram svg')).toBeVisible();
+ await expect(page.getByRole('status')).toBeEmpty();
+ await page.getByRole('link',{name:'Repository map',exact:true}).click();
+ await expect(page.locator('article')).toContainText('code/review-log.js');
+ await page.getByRole('link',{name:'Storytelling — file reference',exact:true}).click();
+ await expect(page.locator('article')).toContainText('six active JSON files');
+ await page.getByRole('link',{name:'Archive — historical evidence only',exact:true}).click();
+ await expect(page.locator('article h1')).toContainText('Historical archive');
 });

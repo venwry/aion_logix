@@ -19,7 +19,7 @@ Version 0.4.0 retains the author's October 2026 instruction to separate modelled
 13. The application joins foundation records and external authorization by ID and verifies content hashes before showing Authorized. It does not write computed UI status back into the foundation.
 14. The authenticated backend validates current content and references before saving to GitHub. Multi-file changes use one Git commit and a non-forced branch update. Stale edits never silently overwrite newer content.
 
-The original phase-one schema versions are archived under `schemas/archive/0.2.0/`; original logs are retained under `docs/review/history/`. See [SEPARATION.md](docs/data-model/SEPARATION.md) for the current file mapping and [RENDER_SETUP.md](docs/RENDER_SETUP.md) for direct saving.
+The original phase-one schema versions are archived under `archived_no_longer_valid/schemas/archive/0.2.0/`; original logs are retained under `archived_no_longer_valid/docs/review/history/`. See [MODEL_GUIDE.md](docs/data-model/MODEL_GUIDE.md) for the current file mapping and [RENDER_SETUP.md](docs/RENDER_SETUP.md) for direct saving.
 
 ```mermaid
 flowchart LR
@@ -39,4 +39,4 @@ flowchart LR
 
 Events and processes have numbered, typed inputs and outcomes. Team actions are process `steps`; a step may reference an event milestone or a sub-process. Programmes are processes; narrative-period groupings are retired. Campaigns own marketing objectives, audiences, messages, presentation and booth content, and reference an execution process. They do not duplicate activities or dates.
 
-Product and technology identities, manufacturing capabilities and qualitative market responses connect the story. Product composition, quantitative yields, costs and ROI remain for later phases. Maturity transitions are outcomes on dated carriers. See the [0.4.0 implementation](docs/data-model/PHASE_1B_IMPLEMENTATION.md) and [generated schema reference](docs/data-model/FOUNDATION_SPECIFICATION.md).
+Product and technology identities, manufacturing capabilities and qualitative market responses connect the story. Product composition, quantitative yields, costs and ROI remain for later phases. Maturity transitions are outcomes on dated carriers. See the [current model guide](docs/data-model/MODEL_GUIDE.md) and [generated schema reference](docs/data-model/FOUNDATION_SPECIFICATION.md).

@@ -4,19 +4,20 @@ import mermaid from 'mermaid';
 import {datasets} from '../code/model-contract.js';
 mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral', flowchart: { htmlLabels: false } });
 const entries = [
-  { id: 'phase-1b-migration', title: 'Phase 1B — implementation and review', path: 'docs/data-model/PHASE_1B_IMPLEMENTATION.md', type: 'md' },
-  { id: 'phase-1b', title: 'Phase 1B — design rationale', path: 'docs/data-model/PHASE_1B_DESIGN_REVIEW.md', type: 'md' },
-  { id: 'multi-phase-process', title: 'Development process — including phase 1B', path: 'docs/MULTI_PHASE_PROCESS.md', type: 'md' },
-  { id: 'storytelling-files', title: 'Storytelling — file reference', path: 'docs/data-model/STORYTELLING_FILE_REFERENCE.md', type: 'md' },
-  { id: 'foundation-spec', title: 'Foundation — entities and references', path: 'docs/data-model/FOUNDATION_SPECIFICATION.md', type: 'md' },
-  { id: 'migration-report', title: 'Phase 1 — migration report', path: 'docs/data-model/MIGRATION_REPORT.md', type: 'md' },
-  ...[...datasets, 'reconciliation_issue', 'source', 'migration_map', 'review_decision'].map(name => ({ id: 'migration_' + name, title: (datasets.includes(name)?'Data · ':'Historical evidence · ') + name.replaceAll('_', ' '), path: (datasets.includes(name)?'data_foundation/':'data_storytelling/') + name + '.json', type: 'json' })),
-  { id: 'schemas', title: 'Phase 1 — schema design', path: 'docs/data-model/SCHEMA_DESIGN.md', type: 'md' },
-  { id: 'fields', title: 'Schema field reference', path: 'docs/data-model/FIELD_REFERENCE.md', type: 'md' },
-  { id: 'phase-1', title: 'Phase 1 — proposed model', path: 'docs/data-model/PHASE_1_PROPOSAL.md', type: 'md' },
-  { id: 'inventory', title: 'Legacy data inventory', path: 'docs/data-model/SOURCE_INVENTORY.md', type: 'md' },
-  { id: 'principles', title: 'Zasady modelu danych', path: 'DATA_MODEL_PRINCIPLES.md', type: 'md' },
-  { id: 'guide', title: 'Jak korzystać z pracowni', path: 'README.md', type: 'md' },
+  {id:'guide',title:'Repository objective and start here',path:'README.md',type:'md'},
+  {id:'principles',title:'Data model principles',path:'DATA_MODEL_PRINCIPLES.md',type:'md'},
+  {id:'model-guide',title:'Current model guide',path:'docs/data-model/MODEL_GUIDE.md',type:'md'},
+  {id:'editing',title:'Editing guide',path:'docs/EDITING_GUIDE.md',type:'md'},
+  {id:'repository-map',title:'Repository map',path:'docs/REPOSITORY_MAP.md',type:'md'},
+  {id:'multi-phase-process',title:'Development process — including phase 1B',path:'docs/MULTI_PHASE_PROCESS.md',type:'md'},
+  {id:'storytelling-files',title:'Storytelling — file reference',path:'docs/data-model/STORYTELLING_FILE_REFERENCE.md',type:'md'},
+  {id:'foundation-spec',title:'Foundation — entities and references',path:'docs/data-model/FOUNDATION_SPECIFICATION.md',type:'md'},
+  {id:'backlog',title:'Current review backlog',path:'docs/REVIEW_BACKLOG.md',type:'md'},
+  {id:'render',title:'Render setup',path:'docs/RENDER_SETUP.md',type:'md'},
+  ...datasets.map(name=>({id:'migration_'+name,title:'Data · '+name.replaceAll('_',' '),path:'data_foundation/'+name+'.json',type:'json'})),
+  ...['authorization','authorization_decision','change','manifest','source','reconciliation_issue'].map(name=>({id:'migration_'+name,title:'Storytelling · '+name.replaceAll('_',' '),path:'data_storytelling/'+name+'.json',type:'json'})),
+  {id:'archive',title:'Archive — historical evidence only',path:'archived_no_longer_valid/README.md',type:'md'},
+  ...[['schemas','SCHEMA_DESIGN'],['phase-1','PHASE_1_PROPOSAL'],['phase-1b','PHASE_1B_DESIGN_REVIEW'],['phase-1b-migration','PHASE_1B_IMPLEMENTATION'],['migration-report','MIGRATION_REPORT'],['inventory','SOURCE_INVENTORY']].map(([id,name])=>({id,title:'Archive · '+name.replaceAll('_',' '),path:'archived_no_longer_valid/docs/data-model/'+name+'.md',type:'md'})),
 ];
 const $ = id => document.getElementById(id);
 let current, mode = 'preview', request = 0, renderId = 0;

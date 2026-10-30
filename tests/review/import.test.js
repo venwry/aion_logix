@@ -1,3 +1,3 @@
-import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {transportHash} from '../../tools/apply-review-logs.js';
-const read=n=>JSON.parse(fs.readFileSync('docs/review/history/2026-10-27/'+n));
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {transportHash} from '../../archived_no_longer_valid/tools/apply-review-logs.js';
+const read=n=>JSON.parse(fs.readFileSync('archived_no_longer_valid/docs/review/history/2026-10-27/'+n));
 test('archived author approval logs retain their original verified fingerprints',()=>{const manifest=read('proposals.json');for(const d of read('change-approvals.json').decisions){assert.equal(transportHash(d.proposal),d.proposal_sha256);assert.deepEqual(manifest.change.find(p=>p.id===d.change_id),d.proposal);}for(const d of read('record-confirmations.json').decisions)assert.equal(transportHash(d.record),d.record_sha256);});

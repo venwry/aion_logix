@@ -1,0 +1,45 @@
+# Current model guide — version 0.4.0
+
+This guide explains the accepted model. [Principles](../../DATA_MODEL_PRINCIPLES.md) govern editing; [JSON Schemas](../../schemas/) and the [generated specification](FOUNDATION_SPECIFICATION.md) define exact fields, allowed values and references. Earlier proposals in the archive are historical rationale, not additional requirements.
+
+## Story and editorial state
+
+Each foundation file has a named list, such as `{ "actor": [...] }`. Records have stable IDs prefixed by dataset name. Owned structures stay nested; independently identified or independently authorized content belongs in a separate record connected by a typed reference.
+
+Foundation data describes the fictional world. It contains no authorization status, provenance or migration metadata. Storytelling data holds those concerns. Authorization covers the exact hash of the **entire record**, including nested values. References never propagate authorization. If a record is too complex to approve in one step, decompose it. Pending confirmation and speculation have one current meaning: pending authorization. Do not introduce separate intended/achieved flags.
+
+## Time and activity
+
+Only events and processes carry structured story dates. An event has a single year/month/day date. A process has start and end boundaries; each is a calendar date, an event reference (`value: "event.id", precision: "event"`), or explicitly unknown (`value: null, precision: "unknown"`). Preserve precision; never invent a day to fill a missing date. The timeline cannot infer a duration from unknown boundaries.
+
+Events and processes have numbered typed inputs and outcomes. Team actions belong in process `steps`; a step can reference a dated event or sub-process. Inputs can describe resources, requirements or acceptance criteria. Outcomes describe the candidate historical account, including deliverables and results. Authorization is the only acceptance distinction. An elapsed date does not establish that an outcome has been accepted.
+
+Programmes have become processes. Coordinating relationships do not automatically imply parent/child ownership. Narrative periods were retired because the former groups mixed simultaneous activity without a sufficient common theme.
+
+## Campaigns and subjects
+
+Campaigns describe marketing objectives, audiences, messages, presentations and booths. Each references an execution process; its activities and timing live there. Campaign subjects reference products or technologies instead of duplicating their definitions.
+
+Products include offerings, devices, software, services and families, without BOM/composition. Technology records describe interfaces, architectures, software methods and fabrication technology. Manufacturing capabilities describe scoped production capability and qualification requirements; maturity transitions are outcomes on dated carriers. A licence alone does not prove qualified production capability.
+
+Qualitative market responses have their own records and reference subjects and triggers. They do not establish quantitative sales forecasts. Agreements and clauses remain separately identified so that each can be authorized independently. Financial commitments and ownership retain their meaning; a budget is not actual expenditure.
+
+```mermaid
+flowchart LR
+  Campaign[Campaign marketing content] --> Process[Execution process and steps]
+  Process --> Event[Event milestone or boundary]
+  Campaign --> Product[Product]
+  Campaign --> Technology[Technology]
+  Process --> Product
+  Process --> Technology
+  Event --> Capability[Manufacturing capability maturity]
+  Capability --> Technology
+  Event --> Response[Market response]
+  Response --> Product
+```
+
+## Application and validation
+
+The application joins story records to external authorization by ID and content hash. The shared dataset registry is `code/model-contract.js`; the backend checks it against the manifest. Schema validation also checks references, calendar values, process ranges and numbered items. The current application does not manage a complete dependency workflow for proposals: prepare coherent groups and review their dependencies explicitly.
+
+The backend authorizes exact current content or applies an explicitly reviewed before/after group. It validates the resulting graph, writes all affected files in one commit and rejects stale or concurrent updates. Schema changes require a separate reviewed deployment. See [editing](../EDITING_GUIDE.md), [review](../review/README.md) and [deployment](../RENDER_SETUP.md).

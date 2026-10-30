@@ -1,6 +1,6 @@
 # Aion Logix — five foundational phases with phase 1B
 
-Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its model is implemented as version 0.4.0; see [implementation and migration](data-model/PHASE_1B_IMPLEMENTATION.md).
+Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its model is implemented as version 0.4.0; see [current model guide](data-model/MODEL_GUIDE.md).
 
 This document consolidates the agreed process. It describes the intended workflow separately from functionality already implemented. It does not authorize additional story records, introduce new dataset schemas, or claim that the later phases are complete.
 
@@ -175,13 +175,13 @@ Sequential arrows show the preferred scope order. The shared review loop permits
 
 ## 7. What is implemented now
 
-At this document's baseline (`29dcf5b`):
+At the 30 October 2026 handover, following merged baseline `828a4f4`:
 
 - Phase-one foundation schemas and migration exist: **13 datasets and 653 story records**. The authorization file contains **54 authorized and 599 pending authorization** entries. These are dated inventory figures, not a claim that phase 1 is complete.
 - Story content and authoring evidence are separated. Existing historical snapshots preserve the earlier status and source representation.
 - Timeline and browser pages display the story. The browser supports selecting pending records and saving their authorizations in one GitHub commit through the authenticated Render service.
 - Changes confirm displays before/after comparisons and supports applying an authorized proposal. The active proposal queue is currently empty; that does **not** mean all story records are authorized or all issues resolved.
-- The issue register currently contains 18 open entries and 5 resolved entries. It needs reconciliation: for example, the Autodesk signatory issue still appears open after the John Walker approval.
+- The active issue register retains 17 open questions. Five previously resolved issues and the completed Autodesk signatory question remain in the archive; no story authorization was changed by this cleanup.
 - Phases 2–5 have agreed scope, but their dedicated schemas, systematic migrations and completed author reviews have not been implemented in the current project.
 - Sales/coverage/ROI calculations, versioned assessment storage and automatic reassessment are future work.
 
@@ -204,6 +204,6 @@ This consolidation preserves the original five-phase scope and applies the autho
 - [Data model principles](../DATA_MODEL_PRINCIPLES.md)
 - [Current foundation specification](data-model/FOUNDATION_SPECIFICATION.md)
 - [Storytelling file reference](data-model/STORYTELLING_FILE_REFERENCE.md)
-- [Foundation/authoring separation](data-model/SEPARATION.md) — original migration counts are historical
-- [Original phase-one proposal](data-model/PHASE_1_PROPOSAL.md) — source-analysis rationale, with superseded details
+- [Current model guide](data-model/MODEL_GUIDE.md)
+- [Original phase-one proposal](../archived_no_longer_valid/docs/data-model/PHASE_1_PROPOSAL.md) — source-analysis rationale, with superseded details
 - [Render saving setup](RENDER_SETUP.md)
