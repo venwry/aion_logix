@@ -131,8 +131,8 @@
           "precision": "day"
         },
         "end": {
-          "value": "1976-06-17",
-          "precision": "day"
+          "value": "event.harvard_graduation",
+          "precision": "event"
         }
       },
       "inputs": [],
@@ -3568,6 +3568,215 @@
       "subject_ids": [
         "location.frankfurt",
         "location.leonardo_royal_frankfurt"
+      ]
+    },
+    {
+      "id": "process.stock_market_investment",
+      "title": "Stock market investment",
+      "kind": "investment",
+      "description": "Adam invests and speculates using his knowledge of the original future, beginning with the lottery capital held at First National City Bank. He develops a supporting investment-data office and spreads his assets across New York, London, Frankfurt and Hong Kong while maintaining a low public profile.",
+      "participant": [
+        {
+          "actor_id": "actor.adam",
+          "role": "investor and investment organiser"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "event.us_nyse_start",
+          "precision": "event"
+        },
+        "end": {
+          "value": "1977-12-31",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The lottery payout supplies starting capital of DM 800,000, equivalent to USD 248,000, deposited at First National City Bank in New York.",
+          "event_id": "event.lottery_payout",
+          "subject_ids": [
+            "actor.first_national_city_bank"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Adam uses secret foreknowledge to identify investment opportunities, combining it with contemporary research as his actions change markets.",
+          "subject_ids": [
+            "assumption.finance"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Invest in stocks, futures and commodities."
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Speculate on rapid market changes to generate substantial profits."
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Establish the investment-data office to gather market information and support analysis.",
+          "event_id": "event.office"
+        },
+        {
+          "number": 4,
+          "type": "action",
+          "description": "Expand investment activity to the London Stock Exchange and markets in Frankfurt and Hong Kong, spreading assets across markets and keeping a low public profile."
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "By 31 December 1977, Adam’s investment assets are valued at USD 251,600,000.",
+          "subject_ids": [
+            "actor.adam"
+          ]
+        }
+      ],
+      "subject_ids": [
+        "assumption.finance",
+        "actor.first_national_city_bank"
+      ]
+    },
+    {
+      "id": "process.computer_business_incorporation",
+      "title": "Incorporation of Computer business",
+      "kind": "business_formation",
+      "description": "Adam establishes the computer-business organisation and its initial engineering and software partnerships across Logix Tech, AION Labs and AION Software, in cooperation with Digital Research, BPI and other participants. This formation phase begins with the DRI founding and funding milestone and ends with Tim Paterson’s recruitment.",
+      "participant": [
+        {
+          "actor_id": "actor.adam",
+          "role": "founder, financier and organiser"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "computer-business participant after its formation"
+        },
+        {
+          "actor_id": "actor.labs",
+          "role": "semiconductor research and development participant after its formation"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "software development participant after its formation"
+        },
+        {
+          "actor_id": "actor.dri",
+          "role": "operating-system cooperation partner"
+        },
+        {
+          "actor_id": "actor.bpi",
+          "role": "independent application cooperation partner"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "event.dri_founding",
+          "precision": "event"
+        },
+        "end": {
+          "value": "event.paterson",
+          "precision": "event"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Adam’s established investment activity provides a financial basis for forming and supporting the computer businesses.",
+          "event_id": "event.us_nyse_start",
+          "subject_ids": [
+            "actor.adam"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Adam contributes knowledge of future demand and technology while keeping its origin private.",
+          "subject_ids": [
+            "assumption.identity",
+            "assumption.finance"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "milestone",
+          "description": "Establish Logix Tech, AION Labs and AION Software.",
+          "event_id": "event.companies"
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Establish the separate secret future-equipped facility supporting chip design.",
+          "event_id": "event.facility"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Agree the Aurelia CP/M implementation with Digital Research.",
+          "event_id": "event.dri_cpm"
+        },
+        {
+          "number": 4,
+          "type": "milestone",
+          "description": "Agree development and distribution cooperation with independent BPI Systems.",
+          "event_id": "event.bpi_cooperation"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Recruit Gordon Letwin.",
+          "event_id": "event.letwin"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Logix Tech, AION Labs and AION Software are established, with initial engineering infrastructure and supporting access to the separate future-equipped facility.",
+          "subject_ids": [
+            "actor.logix",
+            "actor.labs",
+            "actor.aion",
+            "location.secret_facility"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "Cooperation with DRI and BPI is established under the existing agreements. DRI and BPI retain the independence and rights specified in those agreements.",
+          "subject_ids": [
+            "agreement.dri_founding",
+            "agreement.dri_cpm",
+            "agreement.bpi_cooperation"
+          ]
+        },
+        {
+          "number": 3,
+          "type": "result",
+          "description": "Gordon Letwin and Tim Paterson have been recruited for the developing computer business.",
+          "subject_ids": [
+            "actor.letwin",
+            "actor.paterson"
+          ]
+        }
+      ],
+      "agreement_ids": [
+        "agreement.dri_founding",
+        "agreement.dri_cpm",
+        "agreement.bpi_cooperation"
       ]
     }
   ]
