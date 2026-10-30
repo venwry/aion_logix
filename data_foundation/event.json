@@ -64,24 +64,49 @@
     },
     {
       "id": "event.lottery",
-      "title": "Lottery win and US relocation preparations",
+      "title": "Adam matches six LOTTO 6aus49 winning numbers",
       "kind": "activity",
-      "description": "Leaves the UK, wins Germany’s LOTTO 6aus49 using foreknowledge, exchanges the winnings and prepares to move to the US.",
+      "description": "During his Frankfurt stay, Adam takes part in Germany’s LOTTO 6aus49 and uses foreknowledge to match all six winning numbers.",
       "participant": [
         {
           "actor_id": "actor.adam",
-          "role": "protagonist"
+          "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
         }
       ],
-      "subject_ids": [
-        "event.identity"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Adam’s move to Frankfurt places him in Germany to enter the lottery.",
+          "event_id": "event.frankfurt_move"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Knowledge of the winning numbers from the original timeline.",
+          "subject_ids": [
+            "assumption.identity"
+          ]
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Adam holds a lottery entry matching six winning numbers; the prize is collected separately on 20 February.",
+          "event_id": "event.lottery_payout"
+        }
+      ],
       "time": {
         "value": "1972-02-06",
         "precision": "day"
-      }
+      },
+      "location_ids": [
+        "location.frankfurt"
+      ],
+      "process_ids": [
+        "process.frankfurt_stay"
+      ]
     },
     {
       "id": "event.us_nyse_start",
