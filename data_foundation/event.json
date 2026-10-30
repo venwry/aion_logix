@@ -4935,6 +4935,49 @@
         "location.frankfurt",
         "location.leonardo_royal_frankfurt"
       ]
+    },
+    {
+      "id": "event.lottery_payout",
+      "title": "Adam collects the lottery prize and transfers it to New York",
+      "kind": "activity",
+      "description": "Adam cashes his lottery win and sends the proceeds to his banking account at First National City Bank in New York.",
+      "participant": [
+        {
+          "actor_id": "actor.adam",
+          "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+        }
+      ],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The six-number LOTTO 6aus49 win creates the prize Adam collects.",
+          "event_id": "event.lottery"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The lottery prize has been collected and the proceeds sent to Adam’s First National City Bank account in New York.",
+          "subject_ids": [
+            "actor.first_national_city_bank"
+          ]
+        }
+      ],
+      "time": {
+        "value": "1972-02-20",
+        "precision": "day"
+      },
+      "subject_ids": [
+        "actor.first_national_city_bank"
+      ],
+      "location_ids": [
+        "location.frankfurt"
+      ],
+      "process_ids": [
+        "process.frankfurt_stay"
+      ]
     }
   ]
 }

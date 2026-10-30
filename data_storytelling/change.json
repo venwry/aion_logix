@@ -34,67 +34,6 @@
       ]
     },
     {
-      "id": "change.opening_1972_event_lottery_payout",
-      "category": "story",
-      "title": "17/21 · Add event.lottery_payout",
-      "reason": "Single-record authorization: event.lottery_payout. The payout date and banking services follow the supplied story. No amount or date for opening the receiving bank account is invented. This record can be created before revising the existing lottery event, which will then link to it. Review prerequisites first: actor.first_national_city_bank, location.frankfurt, process.frankfurt_stay. Each card authorizes only this record; references do not authorize their targets.",
-      "depends_on_ids": [
-        "change.opening_1972_actor_first_national_city_bank",
-        "change.opening_1972_location_frankfurt",
-        "change.opening_1972_process_frankfurt_stay"
-      ],
-      "elements": [
-        {
-          "record_type": "event",
-          "record_id": "event.lottery_payout",
-          "before": null,
-          "after": {
-            "id": "event.lottery_payout",
-            "title": "Adam collects the lottery prize and transfers it to New York",
-            "kind": "activity",
-            "description": "Adam cashes his lottery win and sends the proceeds to his banking account at First National City Bank in New York.",
-            "participant": [
-              {
-                "actor_id": "actor.adam",
-                "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
-              }
-            ],
-            "inputs": [
-              {
-                "number": 1,
-                "type": "resource",
-                "description": "The six-number LOTTO 6aus49 win creates the prize Adam collects.",
-                "event_id": "event.lottery"
-              }
-            ],
-            "outcomes": [
-              {
-                "number": 1,
-                "type": "result",
-                "description": "The lottery prize has been collected and the proceeds sent to Adam’s First National City Bank account in New York.",
-                "subject_ids": [
-                  "actor.first_national_city_bank"
-                ]
-              }
-            ],
-            "time": {
-              "value": "1972-02-20",
-              "precision": "day"
-            },
-            "subject_ids": [
-              "actor.first_national_city_bank"
-            ],
-            "location_ids": [
-              "location.frankfurt"
-            ],
-            "process_ids": [
-              "process.frankfurt_stay"
-            ]
-          }
-        }
-      ]
-    },
-    {
       "id": "change.opening_1972_event_lottery",
       "category": "story",
       "title": "18/21 · Update event.lottery",
