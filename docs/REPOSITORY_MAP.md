@@ -20,7 +20,7 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [code/browser.html](../code/browser.html) | Data browser page structure. |
 | [code/browser.js](../code/browser.js) | Dataset selection, filters, sorting, detail view and batch authorization. |
 | [code/changes-confirm.html](../code/changes-confirm.html) | Proposal review page structure. |
-| [code/changes-confirm.js](../code/changes-confirm.js) | Before/after proposal tables and grouped save actions. |
+| [code/changes-confirm.js](../code/changes-confirm.js) | Before/after proposal tables, persistent checkbox selection and one-commit batch save. |
 | [code/compact-details.js](../code/compact-details.js) | Shared compact details, content-weighted autofit, resizable tables, 1–3 column reference grids and cross-page record links. |
 | [code/index.html](../code/index.html) | Application-directory redirect to timeline. |
 | [code/model-contract.js](../code/model-contract.js) | Current schema version and shared dataset registry. |
@@ -100,6 +100,7 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [tests/review/proposals.test.js](../tests/review/proposals.test.js) | Pending proposal before/after consistency and resulting foundation validity. |
 | [tests/server/authorization.test.js](../tests/server/authorization.test.js) | Authorization, group changes, HTTP authentication and GitHub concurrency. |
 | [tests/server/batch.test.js](../tests/server/batch.test.js) | Atomic multi-record authorization, stale requests and idempotency. |
+| [tests/server/proposal-batch.test.js](../tests/server/proposal-batch.test.js) | Atomic selected-proposal saves, combined graph validation, overlapping edits, replay and single-commit persistence. |
 | [tests/timeline-layout.spec.cjs](../tests/timeline-layout.spec.cjs) | Nested campaign/process rendering, date-rail pinning, year-line layering, full-screen controls and cross-page details. |
 | [tests/viewer.spec.cjs](../tests/viewer.spec.cjs) | Documentation, archives, diagrams, local-file sanitization and sandbox tests. |
 | [tools/generate-foundation-spec.js](../tools/generate-foundation-spec.js) | Generates the current foundation Markdown specification from schemas. |
