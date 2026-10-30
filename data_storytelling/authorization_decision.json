@@ -1337,6 +1337,120 @@
           "content_sha256": null
         }
       ]
+    },
+    {
+      "id": "authorization_decision.369669bc-6a1a-4f42-8c7c-028517307261",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:07:33.960Z",
+      "change_id": "change.opening_1972_event_frankfurt_move",
+      "proposal_sha256": "acba3eaa2727d3e28f59f226057fc014964f5f2daea16461c82badfb5f9db642",
+      "proposal": {
+        "id": "change.opening_1972_event_frankfurt_move",
+        "category": "story",
+        "title": "15/21 · Add event.frankfurt_move",
+        "reason": "Single-record authorization: event.frankfurt_move. February 2 is inferred from the end of the requested Birmingham stay. Review prerequisites first: process.birmingham_estate, location.frankfurt, location.leonardo_royal_frankfurt, location.birmingham. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_process_birmingham_estate",
+          "change.opening_1972_location_frankfurt",
+          "change.opening_1972_location_leonardo_royal_frankfurt",
+          "change.opening_1972_location_birmingham"
+        ],
+        "elements": [
+          {
+            "record_type": "event",
+            "record_id": "event.frankfurt_move",
+            "before": null,
+            "after": {
+              "id": "event.frankfurt_move",
+              "title": "Adam leaves Birmingham permanently for Frankfurt",
+              "kind": "activity",
+              "description": "Adam moves to Frankfurt with his money and remaining belongings, without intending to return to Birmingham, and takes an apartment in the Leonardo Royal Hotel Frankfurt.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+                }
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Completion of the Birmingham estate affairs leaves Adam ready to depart with money and remaining belongings.",
+                  "process_id": "process.birmingham_estate"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Adam has left Birmingham permanently and established temporary accommodation in Frankfurt.",
+                  "subject_ids": [
+                    "location.frankfurt",
+                    "location.leonardo_royal_frankfurt"
+                  ]
+                }
+              ],
+              "time": {
+                "value": "1972-02-02",
+                "precision": "day"
+              },
+              "location_ids": [
+                "location.birmingham",
+                "location.frankfurt",
+                "location.leonardo_royal_frankfurt"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "event.frankfurt_move",
+          "before": null,
+          "after": {
+            "id": "event.frankfurt_move",
+            "title": "Adam leaves Birmingham permanently for Frankfurt",
+            "kind": "activity",
+            "description": "Adam moves to Frankfurt with his money and remaining belongings, without intending to return to Birmingham, and takes an apartment in the Leonardo Royal Hotel Frankfurt.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Completion of the Birmingham estate affairs leaves Adam ready to depart with money and remaining belongings.",
+                "process_id": "process.birmingham_estate"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Adam has left Birmingham permanently and established temporary accommodation in Frankfurt.",
+                "subject_ids": [
+                  "location.frankfurt",
+                  "location.leonardo_royal_frankfurt"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1972-02-02",
+              "precision": "day"
+            },
+            "location_ids": [
+              "location.birmingham",
+              "location.frankfurt",
+              "location.leonardo_royal_frankfurt"
+            ]
+          },
+          "content_sha256": "7b6a8cdbc269ae8319f344fffd371feffad10f631522e7ef58b7245ef738e12e"
+        }
+      ]
     }
   ]
 }
