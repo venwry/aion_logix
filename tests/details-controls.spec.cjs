@@ -8,15 +8,19 @@ for(const pageName of ['browser','timeline']){
   const grip=await handle.boundingBox();await page.mouse.move(grip.x+grip.width/2,grip.y+grip.height/2);await page.mouse.down();await page.mouse.move(grip.x+grip.width/2+60,grip.y+grip.height/2);await page.mouse.up();expect((await header.boundingBox()).width).toBeGreaterThan(title.width+60);
   await table.getByRole('button',{name:'Autofit all columns'}).click();await expect(table).toHaveAttribute('data-sizing','auto');expect(Math.abs((await header.boundingBox()).width-original)).toBeLessThan(3);
  });
- test(pageName+' reference grids use plain IDs, linked names and one to three columns',async({page})=>{
+ test(pageName+' reference grids use plain IDs, linked names and a fixed single column',async({page})=>{
   await page.goto('/code/'+pageName+'.html#campaign.ncc1978');await expect(page.locator('body')).toHaveAttribute('data-ready','true');
   const list=page.locator('#details .reference-list').filter({has:page.locator('.reference-grid .reference-entry:nth-child(3)')}).first();
-  const input=list.getByRole('spinbutton'),more=list.getByRole('button',{name:/More columns/}),less=list.getByRole('button',{name:/Fewer columns/});
-  await expect(input).toHaveValue('1');await expect(less).toBeDisabled();await more.click();await more.click();await expect(input).toHaveValue('3');await expect(more).toBeDisabled();
-  expect(await list.locator('.reference-grid').evaluate(n=>getComputedStyle(n).gridTemplateColumns.split(' ').length)).toBe(3);
+  await expect(page.locator('#details .reference-controls')).toHaveCount(0);
+  await expect(list.getByRole('spinbutton')).toHaveCount(0);
+  await expect(list.getByRole('button')).toHaveCount(0);
+  for(const width of [1440,390]){
+   await page.setViewportSize({width,height:1000});
+   expect(await list.locator('.reference-grid').evaluate(n=>getComputedStyle(n).gridTemplateColumns.split(' ').length)).toBe(1);
+  }
   const entry=list.locator('.reference-entry').first();expect(await entry.locator('.reference-id').evaluate(n=>n.tagName)).toBe('SPAN');expect(await entry.locator('.reference-name').evaluate(n=>getComputedStyle(n).textOverflow)).toBe('ellipsis');
   const id=await entry.locator('.reference-id').textContent();expect(await entry.locator('a').textContent()).not.toContain(id);
-  await less.click();await expect(input).toHaveValue('2');await entry.locator('a').click();await expect(page.locator('#details .record-id')).toHaveText(id);
+  await entry.locator('a').click();await expect(page.locator('#details .record-id')).toHaveText(id);
  });
 }
 for(const pageName of ['browser','timeline'])test(pageName+' autofit prioritizes long descriptions over numeric columns',async({page})=>{

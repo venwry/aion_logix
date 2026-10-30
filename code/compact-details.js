@@ -23,13 +23,9 @@ export function compactDetails(record,data,select){
   row.append(id,el('span','reference-divider',' - '),link);return row;
  }
  function referenceList(values,label){
-  const group=el('div','reference-list'),header=el('div','reference-header'),controls=el('span','reference-controls'),grid=el('div','reference-grid');
+  const group=el('div','reference-list'),header=el('div','reference-header'),grid=el('div','reference-grid');
   header.append(el('strong','compact-key',label+': '));
-  const minus=el('button','','−'),count=el('input'),plus=el('button','','+');minus.type=plus.type='button';minus.setAttribute('aria-label','Fewer columns for '+label);plus.setAttribute('aria-label','More columns for '+label);
-  count.type='number';count.min='1';count.max='3';count.value='1';count.setAttribute('aria-label',label+' columns');
-  function update(value){const n=Math.max(1,Math.min(3,Math.trunc(Number(value)||1)));count.value=Math.trunc(n);grid.style.setProperty('--reference-columns',count.value);minus.disabled=n<=1;plus.disabled=n>=3;}
-  minus.onclick=()=>update(+count.value-1);plus.onclick=()=>update(+count.value+1);count.onchange=()=>update(count.value);controls.append(minus,count,plus);header.append(controls);
-  for(const id of values)grid.append(reference(id));group.append(header,grid);update(1);return group;
+  for(const id of values)grid.append(reference(id));group.append(header,grid);return group;
  }
  const isReferences=value=>Array.isArray(value)&&value.length>0&&value.every(v=>typeof v==='string'&&data.index.has(v));
  function valueNode(value,label='References'){

@@ -62,7 +62,7 @@ Nested fields appear as dotted names and values; lists of objects appear as comp
 
 Reference entries show `id - Name`: the ID is plain text and only the name is a hyperlink. Following the name selects that record in the current page's details.
 
-Each list of recognized reference IDs, including “Referenced by,” has a **[−] [1] [+]** control beside its heading. The default is one column; each list independently supports up to three columns. Entries fill the grid in row order. Long names use ellipsis; hover exposes the full name. These presentation settings reset when details are rendered again, such as when another record is opened; they are not saved to JSON.
+Each list of recognized reference IDs, including “Referenced by” and lists inside detail tables, always displays in one column. There are no column selectors. Long names use ellipsis; hover exposes the full name.
 
 Timeline details offer **Open in Data browser** for the same record. Browser details offer **Open in timeline** for events, processes and campaigns. **Open dataset** opens the underlying foundation JSON file. These links do not authorize anything.
 
