@@ -2,32 +2,65 @@
   "event": [
     {
       "id": "event.identity",
-      "title": "Arrival and assumption of Adam’s identity",
-      "kind": "arrival",
-      "description": "Travels to January 1972 and assumes the identity of a similar-looking nineteen-year-old in the UK before the death is noticed.",
+      "title": "Fatal family accident and Vincent’s assumption of Adam’s identity",
+      "kind": "identity_assumption",
+      "description": "The original Adam Pleskot and his parents die when their car falls off a cliff during their trip to Great Orme; no one in the car survives. Vincent takes advantage of his resemblance to Adam, replaces Adam’s body and assumes his identity.",
       "participant": [
         {
           "actor_id": "actor.adam",
-          "role": "protagonist"
+          "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
         },
         {
           "actor_id": "actor.original_adam",
-          "role": "identity_holder"
+          "role": "original identity holder; fatal accident victim"
         }
       ],
-      "subject_ids": [],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Vincent’s arrival in 1972 makes him present to take advantage of the accident.",
+          "event_id": "event.time_travel_arrival"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Vincent closely resembles the original Adam Pleskot.",
+          "subject_ids": [
+            "assumption.adam_identity",
+            "actor.original_adam"
+          ]
+        }
+      ],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
-          "description": "The original Adam had graduated from high school and died with his parents in a car accident. Vincent is subsequently called Adam."
+          "description": "The original Adam and both parents are dead; there are no survivors of the car accident.",
+          "subject_ids": [
+            "actor.original_adam"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "Vincent operates under Adam Pleskot’s identity.",
+          "subject_ids": [
+            "assumption.adam_identity",
+            "actor.adam"
+          ]
         }
       ],
       "time": {
-        "value": "1972-01-01",
+        "value": "1972-01-02",
         "precision": "day"
-      }
+      },
+      "subject_ids": [
+        "assumption.adam_identity"
+      ],
+      "location_ids": [
+        "location.great_orme"
+      ]
     },
     {
       "id": "event.lottery",
