@@ -106,6 +106,12 @@
           "x-ref": [
             "process"
           ]
+        },
+        "clauses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/clause"
+          }
         }
       },
       "required": [
@@ -113,9 +119,167 @@
         "title",
         "kind",
         "party",
-        "state"
+        "state",
+        "clauses"
       ],
       "additionalProperties": false
+    },
+    "clause": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^clause\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "equity",
+            "funding",
+            "rights",
+            "responsibility",
+            "qualification",
+            "term",
+            "other"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assertion_mode": {
+          "type": "string",
+          "enum": [
+            "commitment",
+            "proposal",
+            "target",
+            "established_fact"
+          ]
+        },
+        "actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "supersedes_clause_id": {
+          "type": "string",
+          "pattern": "^(clause)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "clause"
+          ]
+        },
+        "equity": {
+          "type": "object",
+          "properties": {
+            "company_actor_id": {
+              "type": "string",
+              "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "actor"
+              ]
+            },
+            "beneficiary_actor_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "actor"
+                ]
+              },
+              "minItems": 0,
+              "uniqueItems": true
+            },
+            "percentage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "basis": {
+              "type": "string",
+              "enum": [
+                "fully_diluted",
+                "issued",
+                "voting"
+              ]
+            },
+            "allocation": {
+              "type": "string",
+              "enum": [
+                "individual",
+                "joint_unsplit",
+                "unallocated_reserve"
+              ]
+            }
+          },
+          "required": [
+            "company_actor_id",
+            "beneficiary_actor_ids",
+            "percentage",
+            "basis",
+            "allocation"
+          ],
+          "additionalProperties": false
+        },
+        "commitment_amount": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/money"
+        },
+        "effective_event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "statement",
+        "assertion_mode"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "equity"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "equity"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "equity"
+              ]
+            }
+          }
+        }
+      ]
     }
   }
 }

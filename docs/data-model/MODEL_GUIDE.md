@@ -1,4 +1,4 @@
-# Current model guide — version 0.4.0
+# Current model guide — version 0.5.0
 
 This guide explains the accepted model. [Principles](../../DATA_MODEL_PRINCIPLES.md) govern editing; [JSON Schemas](../../schemas/) and the [generated specification](FOUNDATION_SPECIFICATION.md) define exact fields, allowed values and references. Earlier proposals in the archive are historical rationale, not additional requirements.
 
@@ -22,7 +22,7 @@ Campaigns describe marketing objectives, audiences, messages, presentations and 
 
 Products include offerings, devices, software, services and families, without BOM/composition. Technology records describe interfaces, architectures, software methods and fabrication technology. Manufacturing capabilities describe scoped production capability and qualification requirements; maturity transitions are outcomes on dated carriers. A licence alone does not prove qualified production capability.
 
-Qualitative market responses have their own records and reference subjects and triggers. They do not establish quantitative sales forecasts. Agreements and clauses remain separately identified so that each can be authorized independently. Financial commitments and ownership retain their meaning; a budget is not actual expenditure.
+Qualitative market responses have their own records and reference subjects and triggers. They do not establish quantitative sales forecasts. Agreements own a required `clauses[]` array (empty when no terms are recorded). Each clause retains its stable identifier and all substantive fields; the containing agreement supplies ownership, so clauses do not repeat `agreement_id`. Clauses are reviewed and authorized with the whole agreement, not independently. Events and processes use an optional singular `agreement_id`; the plural field is invalid. Generic references resolve to whole foundation records, not embedded clauses. `supersedes_clause_id` can reference an embedded clause and is checked for existence and cycles. Financial commitments and ownership retain their meaning; a budget is not actual expenditure.
 
 ```mermaid
 flowchart LR
@@ -50,4 +50,4 @@ The timeline may display a campaign and its execution process in one box, but th
 
 Visual nesting selects from existing parent/step/event references; it does not create ownership or change relationships. Work that cannot fit a stated date range remains separate, and details retain the underlying references. Non-proportional calendar spacing and clipped display ranges do not alter stored dates or their precision.
 
-Table widths, autofit weights, reference-grid column counts, pane sizes and full-screen mode are presentation choices. Do not add them to foundation or storytelling JSON. Reference labels combine an existing ID and name for display; they are not a new compound key. See the [application guide](../APPLICATION_GUIDE.md) for behaviour and controls. The data contract remains version 0.4.0.
+Table widths, autofit weights, reference-grid column counts, pane sizes and full-screen mode are presentation choices. Do not add them to foundation or storytelling JSON. Reference labels combine an existing ID and name for display; they are not a new compound key. See the [application guide](../APPLICATION_GUIDE.md) for behaviour and controls. The data contract remains version 0.5.0.

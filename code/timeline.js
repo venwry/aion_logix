@@ -15,7 +15,10 @@ try{
   if(n.boundary){box.dataset.boundary=n.boundary;meta.append(el('span','timeline-kind',human(n.boundary)));}
   const states=n.members.map(x=>x.record.status);const status=states.every(s=>s==='authorized')?'Authorized':states.every(s=>s!=='authorized')?'Pending authorization':'Mixed authorization';
   const date=n.date?(n.date.startLabel):'Unknown dates';
-  meta.append(el('span','timeline-state',status),el('span','timeline-date',date));meta.title=(n.context?'Context for matching records · ':'')+status+' · '+date;
+  meta.append(el('span','timeline-state',status));
+  const agreementOwner=n.members.find(x=>['event','process'].includes(x.type)),agreementId=agreementOwner?.record.agreement_id||agreementOwner?.record.agreement_ids?.[0];
+  if(agreementId&&data.index.has(agreementId)){const agreement=el('button','timeline-agreement','Agreement');agreement.type='button';agreement.title=titleOf(data.index.get(agreementId));agreement.onclick=()=>choose(agreementId);meta.append(agreement);}
+  meta.append(el('span','timeline-date',date));meta.title=(n.context?'Context for matching records · ':'')+status+' · '+date;
   box.append(heading,meta);if(n.date?.span){const end=el('div','timeline-end-date',n.date.endLabel);end.title='End: '+n.date.endLabel;box.append(end);}return box;
  }
  function render(){

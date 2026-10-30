@@ -44,3 +44,9 @@ CHROMIUM_PATH=/usr/bin/chromium npm test
 ## Deploy
 
 The maintained branch is `main`; Render's code deployment and `AION_BRANCH` must agree with the dataset model version. Follow [Render setup](RENDER_SETUP.md). GitHub Pages needs the repository's static files plus built viewer assets. Data-only authorization commits do not trigger Render rebuilds under the current build filter: connected browsing reads GitHub, whereas disconnected browsing uses the deployed snapshot. Deployment access and the backend key must be handed over outside Git.
+
+## Agreement terms and timeline ownership
+
+Edit terms inside the owning agreement’s `clauses[]`; a clause cannot be authorized separately. Keep its stable ID for traceability. For events/processes, set one `agreement_id` or omit the field; never use an empty string or `agreement_ids`. Contextual links to other agreements can stay in generic subject references.
+
+Single-parent cleanup is proposed through Changes confirm, one affected record per proposal. Where an event would otherwise anchor two processes, the non-owning process can retain the same calendar date and precision as a literal boundary. Removing an extra `steps[].event_id` leaves its descriptive step intact. Do not change dates merely to force nesting.

@@ -1,6 +1,6 @@
 # Storytelling data — current file reference
 
-Updated for the 30 October 2026 handover, model **0.4.0**. `data_storytelling/` contains six active JSON files. Historical material is inventoried in [the archive](../../archived_no_longer_valid/README.md); unresolved work is indexed in [the backlog](../REVIEW_BACKLOG.md). The former reference is retained as a historical snapshot.
+Updated for the 30 October 2026 handover, model **0.5.0**. `data_storytelling/` contains six active JSON files. Historical material is inventoried in [the archive](../../archived_no_longer_valid/README.md); unresolved work is indexed in [the backlog](../REVIEW_BACKLOG.md). The former reference is retained as a historical snapshot.
 
 Foundation records describe the fictional world. Storytelling files describe author authorization, proposals, sources and editorial questions. Only the first four files below are loaded by the GitHub saving backend. The documentation viewer also exposes sources and open issues; they do not control authorization badges.
 
@@ -9,7 +9,7 @@ Foundation records describe the fictional world. Storytelling files describe aut
 | [authorization.json](../../data_storytelling/authorization.json) | Exact-content, whole-record authorization state | 653 entries: 54 authorized, 599 unauthorized |
 | [authorization_decision.json](../../data_storytelling/authorization_decision.json) | Append-only direct-save audit evidence | One applied change decision; grows with subsequent saves |
 | [change.json](../../data_storytelling/change.json) | Active proposals awaiting review | Empty queue; not evidence that the story is complete |
-| [manifest.json](../../data_storytelling/manifest.json) | Current model version and dataset inventory | Version 0.4.0; 13 foundation datasets |
+| [manifest.json](../../data_storytelling/manifest.json) | Current model version and dataset inventory | Version 0.5.0; 12 foundation datasets |
 | [source.json](../../data_storytelling/source.json) | Source bibliography and author-evidence catalogue | 36 sources; inherited provenance format |
 | [reconciliation_issue.json](../../data_storytelling/reconciliation_issue.json) | Unresolved editorial questions | 17 open issues; references rebased to current identities |
 
@@ -35,7 +35,7 @@ Current metadata holds description, transport format version, page/calculation c
 
 ## Manifest
 
-`manifest.json` contains one `manifest` entry with `id: "manifest.foundation"`, `schema_version: "0.4.0"` and `foundation_datasets[]`. Dataset names resolve to foundation files and corresponding schemas. The saving backend rejects an unsupported version. Keep this list consistent with `code/model-contract.js` and the schemas; editing the manifest alone cannot install a new model.
+`manifest.json` contains one `manifest` entry with `id: "manifest.foundation"`, `schema_version: "0.5.0"` and `foundation_datasets[]`. Dataset names resolve to foundation files and corresponding schemas. The saving backend rejects an unsupported version. Keep this list consistent with `code/model-contract.js` and the schemas; editing the manifest alone cannot install a new model.
 
 `previous_metadata` was moved into the preserved pre-cleanup manifest because it described earlier foundation envelopes rather than the current contract.
 
@@ -71,3 +71,5 @@ flowchart LR
   Backlog --> Issues
   Backlog --> Archive
 ```
+
+The 0.5.0 migration removes current clause authorization entries because clauses are now owned by agreements. The removed entries and pre-migration clause data/schema are preserved under `archived_no_longer_valid/model_0.4.0_agreement_migration/`. Historical decision snapshots remain unchanged. Changed whole records are pending renewed authorization.

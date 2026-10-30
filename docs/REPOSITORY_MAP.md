@@ -36,7 +36,6 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [data_foundation/agreement.json](../data_foundation/agreement.json) | Identified arrangements and parties. |
 | [data_foundation/assumption.json](../data_foundation/assumption.json) | Premises, policies and constraints. |
 | [data_foundation/campaign.json](../data_foundation/campaign.json) | Marketing content linked to execution processes. |
-| [data_foundation/clause.json](../data_foundation/clause.json) | Independently reviewable agreement terms. |
 | [data_foundation/event.json](../data_foundation/event.json) | Single-date occurrences and milestones. |
 | [data_foundation/location.json](../data_foundation/location.json) | Places and geographic hierarchy. |
 | [data_foundation/manufacturing_capability.json](../data_foundation/manufacturing_capability.json) | Scoped fabrication capability and qualification. |
@@ -72,7 +71,6 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [schemas/agreement.schema.json](../schemas/agreement.schema.json) | Strict agreement dataset contract; see the generated foundation specification. |
 | [schemas/assumption.schema.json](../schemas/assumption.schema.json) | Strict assumption dataset contract; see the generated foundation specification. |
 | [schemas/campaign.schema.json](../schemas/campaign.schema.json) | Strict campaign dataset contract; see the generated foundation specification. |
-| [schemas/clause.schema.json](../schemas/clause.schema.json) | Strict clause dataset contract; see the generated foundation specification. |
 | [schemas/common.schema.json](../schemas/common.schema.json) | Shared nested value objects, references, dates and process boundaries. |
 | [schemas/event.schema.json](../schemas/event.schema.json) | Strict event dataset contract; see the generated foundation specification. |
 | [schemas/location.schema.json](../schemas/location.schema.json) | Strict location dataset contract; see the generated foundation specification. |
@@ -108,3 +106,5 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [tools/validate-model.js](../tools/validate-model.js) | Foundation schema compilation and semantic/reference/date validation. |
 
 There are 99 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.
+
+Agreement clauses now live in `data_foundation/agreement.json`, validated by `schemas/agreement.schema.json#/$defs/clause`. The [agreement migration and timeline ownership report](AGREEMENT_MIGRATION_AND_TIMELINE_OWNERSHIP.md) lists the conversion policy and seven independent parent-cleanup proposals. Pre-migration clause data, schemas and authorization entries are preserved in `archived_no_longer_valid/model_0.4.0_agreement_migration/`.

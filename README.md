@@ -11,7 +11,7 @@ The story is modelled in interconnected JSON datasets. A timeline and data brows
 3. Consult the [complete schema specification and diagram](docs/data-model/FOUNDATION_SPECIFICATION.md) for fields and relationships.
 4. Use the [multi-phase process](docs/MULTI_PHASE_PROCESS.md) and [current review backlog](docs/REVIEW_BACKLOG.md) to continue the work.
 
-The current contract is **0.4.0**. The handover baseline contains 13 foundation datasets and 653 records (54 authorized, 599 pending). These are dated inventory counts, not a completed story. Product composition, quantitative fabrication economics, later ecosystem work and overall economics remain for phases 2–5. Sales, market coverage and ROI will be separately reassessed whenever the foundational story changes.
+The current contract is **0.5.0**. The current foundation has 12 datasets and 559 whole records, including 109 clauses embedded in 20 agreements. The 0.5.0 migration changes 98 record hashes, which require renewed authorization; it does not mark story content accepted. See the [migration and timeline ownership report](docs/AGREEMENT_MIGRATION_AND_TIMELINE_OWNERSHIP.md). Product composition, quantitative fabrication economics, later ecosystem work and overall economics remain for phases 2–5. Sales, market coverage and ROI will be separately reassessed whenever the foundational story changes.
 
 ## Repository contents
 

@@ -56,3 +56,16 @@ test('boundary events are grey, bracket steps, and shared occurrences select the
  await page.locator('#search').fill('event.frankfurt_move');await expect(page.locator('[data-record-id="event.frankfurt_move"]')).toHaveCount(2);
  await page.locator('#search').fill('process.frankfurt_stay');await expect(flight).toHaveCount(1);await expect(arrival).toHaveCount(1);
 });
+test('Agreement buttons precede dates and open agreement-owned clauses',async({page})=>{
+ await ready(page);
+ for(const id of ['event.dri_founding','process.computer_business_incorporation']){
+  const card=page.locator('#timeline [data-record-id="'+id+'"]'),button=card.locator(':scope > .timeline-meta > .timeline-agreement');
+  await expect(button).toHaveText('Agreement');expect(await button.evaluate(n=>n.nextElementSibling.classList.contains('timeline-date'))).toBe(true);
+  await button.click();await expect(page.locator('#details .record-id')).toHaveText('agreement.dri_founding');await expect(page.locator('#details')).toContainText('clause.dri_employee_reserve');
+ }
+ await expect(page.locator('[data-record-id="event.identity"] > .timeline-meta > .timeline-agreement')).toHaveCount(0);
+});
+test('older agreement lists open only the first agreement',async({page})=>{
+ await page.route('**/data_foundation/event.json',async route=>{const response=await route.fetch(),body=await response.json(),event=body.event.find(e=>e.id==='event.logix_share_transfer_1978');delete event.agreement_id;event.agreement_ids=['agreement.logix_share_transfer_1978','agreement.aionix'];await route.fulfill({json:body});});
+ await ready(page);const button=page.locator('[data-record-id="event.logix_share_transfer_1978"] > .timeline-meta > .timeline-agreement');await expect(button).toHaveCount(1);await button.click();await expect(page.locator('#details .record-id')).toHaveText('agreement.logix_share_transfer_1978');
+});

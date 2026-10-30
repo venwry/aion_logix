@@ -16,7 +16,7 @@ test('timeline preserves deep links, spans, variable years and filters',async({p
 test('browser supports sorting, pagination, empty datasets and related records',async({page})=>{
  await ready(page,'browser.html#agreement.autodesk_development');
  await expect(page.locator('#details h2')).toContainText('Autodesk');
- await page.locator('#details').getByRole('link',{name:'Adam Pleskot',exact:true}).click();
+ await page.locator('#details').getByRole('link',{name:'Adam Pleskot',exact:true}).first().click();
  await expect(page.locator('#dataset')).toHaveValue('actor');await expect(page.locator('#details h2')).toHaveText('Adam Pleskot');
  await page.locator('[data-sort="title"]').click();await expect(page.locator('th').first()).toHaveAttribute('aria-sort','descending');
  await page.locator('#dataset').selectOption('event');await expect(page.locator('#rows tr')).toHaveCount(75);

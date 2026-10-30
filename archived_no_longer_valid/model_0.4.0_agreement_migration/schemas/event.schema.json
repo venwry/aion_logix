@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/event.schema.json",
+  "type": "object",
+  "properties": {
+    "event": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "event"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^event\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "participant": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/participant"
+          },
+          "minItems": 0
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|clause|event|location|manufacturing_capability|market_response|process|product|technology)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "clause",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/item"
+          },
+          "minItems": 0
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/item"
+          },
+          "minItems": 0
+        },
+        "agreement_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "agreement"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "time": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
+        },
+        "process_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "process"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "location_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(location)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "location"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "description",
+        "participant",
+        "time",
+        "inputs",
+        "outcomes"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 ## Current agreement: separation of story and authoring data
 
-Version 0.4.0 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
+Version 0.5.0 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
 
 1. The model combines hierarchical value objects and relational entity references. Each entity has a stable `id` beginning with its dataset name.
 2. `data_foundation/` contains only story records, in envelopes such as `{ "actor": [...] }`. It has no status, confirmation, provenance or application metadata fields.
@@ -13,7 +13,7 @@ Version 0.4.0 retains the author's October 2026 instruction to separate modelled
 7. The world timeline is linear from 1 January 1972. Only events and processes own structured story dates. An event has one year/month/day date; a process has start/end boundaries, each a calendar date, event reference (`precision: "event"`) or explicitly unknown boundary. Other records reference these carriers. Preserve source precision and store editorial qualifications externally.
 8. Pending confirmation and speculation have one current review meaning: **Unauthorized**. Their old labels survive only in historical evidence.
 9. **Authorized** means the author agrees with the **entire record**, including every nested input, outcome and other owned value, and the decision covers its exact current foundation content hash. There is no partial or item-level authorization. If a record is too complex to authorize in one step, decompose coherent parts into independently identified records in appropriate dataset files and reference them. References do not propagate authorization. Missing or mismatched authorization is always Unauthorized; an absent queue entry never implies approval.
-10. Approval of a proposed revision applies and authorizes its explicitly listed resulting records as one transaction. Related clauses are not implicitly authorized. Independent records require independent or explicitly grouped decisions.
+10. Approval of a proposed revision applies and authorizes its explicitly listed resulting records as one transaction. An agreement owns its clauses; whole-agreement authorization covers every embedded clause. Independent records require independent or explicitly grouped decisions.
 11. New authorization decisions preserve before/after snapshots and content hashes. Sources and historical decisions remain outside the story. Structural validity alone does not establish authorization.
 12. JSON Schemas reject undeclared foundation fields. Schema extensions require author approval; this separation was authorized in the conversation. Foundation fields and editorial schemas are documented separately.
 13. The application joins foundation records and external authorization by ID and verifies content hashes before showing Authorized. It does not write computed UI status back into the foundation.
@@ -40,3 +40,7 @@ flowchart LR
 Events and processes have numbered, typed inputs and outcomes. Team actions are process `steps`; a step may reference an event milestone or a sub-process. Programmes are processes; narrative-period groupings are retired. Campaigns own marketing objectives, audiences, messages, presentation and booth content, and reference an execution process. They do not duplicate activities or dates.
 
 Product and technology identities, manufacturing capabilities and qualitative market responses connect the story. Product composition, quantitative yields, costs and ROI remain for later phases. Maturity transitions are outcomes on dated carriers. See the [current model guide](docs/data-model/MODEL_GUIDE.md) and [generated schema reference](docs/data-model/FOUNDATION_SPECIFICATION.md).
+
+## Agreement ownership (0.5.0)
+
+Agreements own `clauses[]`. Embedded clauses retain stable `clause.*` identifiers for traceability and supersession, but are not standalone records or independent authorization targets. Events and processes have an optional `agreement_id` string; omit it when there is no associated agreement. Additional contextual agreement references may remain in `subject_ids` or inputs/outcomes, without becoming a second direct agreement association.

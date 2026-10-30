@@ -46,14 +46,13 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|clause|event|location|manufacturing_capability|market_response|process|product|technology)\\.[a-z0-9][a-z0-9_.-]*$",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology)\\.[a-z0-9][a-z0-9_.-]*$",
             "x-ref": [
               "actor",
               "actor_relationship",
               "agreement",
               "assumption",
               "campaign",
-              "clause",
               "event",
               "location",
               "manufacturing_capability",
@@ -79,18 +78,6 @@
             "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/item"
           },
           "minItems": 0
-        },
-        "agreement_ids": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
-            "x-ref": [
-              "agreement"
-            ]
-          },
-          "minItems": 0,
-          "uniqueItems": true
         },
         "period": {
           "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/period"
@@ -120,6 +107,13 @@
           },
           "minItems": 0,
           "uniqueItems": true
+        },
+        "agreement_id": {
+          "type": "string",
+          "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "agreement"
+          ]
         }
       },
       "required": [

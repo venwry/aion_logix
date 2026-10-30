@@ -512,3 +512,5 @@ Each entry below is located by its stable ID in that archive. The source path/po
 | `migration_map.source_2ceaaa82387489de` | `data/world.json#/principles/8/context/phase_refs` |
 | `migration_map.source_21088f8f65331afc` | `data/world.json#/principles/8/context/product_refs` |
 | `migration_map.source_3a1c63afe528b8e9` | `data/world.json#/principles/8/context/related_event_refs` |
+
+Since contract 0.5.0, clause IDs in this historical backlog refer to embedded entries in their owning agreement. Current issue affected_ids point to the agreement, and descriptions retain the specific clause IDs. See the [migration report](AGREEMENT_MIGRATION_AND_TIMELINE_OWNERSHIP.md).

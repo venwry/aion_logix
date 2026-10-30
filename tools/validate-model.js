@@ -32,6 +32,12 @@ export function validateDocuments(documents, { complete = false } = {}) {
       count++;
       if (records.has(record.id)) report(`Duplicate ID ${record.id}`);
       else records.set(record.id,record);
+      // Embedded clauses have stable identifiers for supersession, but are not
+      // independent datasets or authorization targets. Count only whole records.
+      for (const clause of record.clauses || []) {
+        if (records.has(clause.id)) report(`Duplicate ID ${clause.id}`);
+        else records.set(clause.id,clause);
+      }
     }
   }
   if (errors.length) return {errors,count};

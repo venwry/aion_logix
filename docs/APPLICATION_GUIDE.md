@@ -23,6 +23,8 @@ The narrow date rail remains at the left edge during horizontal scrolling. Dates
 
 Year/month/day precision is retained in details and date labels. A year-only fact is not silently given a known day. Event-referenced process boundaries resolve through the referenced event. Unknown boundaries are not invented; undated work appears in a separate section. Selecting a year range can clip the visible duration of a process, while its label retains the underlying start/end values.
 
+Events and processes with an associated agreement show a small **Agreement** button immediately before their start date. Clicking it opens the agreement, including its embedded clauses, in the details pane. Combined campaign/process boxes use the execution process’s agreement. Current data uses `agreement_id`; when viewing older data with `agreement_ids`, the first entry is used.
+
 ### Nested work and campaign boxes
 
 Events referenced by `period.start` and `period.end` appear inside the process as light grey **Start** and **End** cards, respectively before and after step events and sub-processes. Same-day boundaries reserve room for the steps between them. A shared boundary appears in each owning process; selecting any occurrence opens the same event record and highlights its other visible occurrences. An event used for both boundaries appears once in each role. These visual occurrences do not duplicate foundation records or increase the matching-record count.

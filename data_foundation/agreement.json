@@ -23,7 +23,94 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Adam, Gary Kildall and Dorothy McEwen established Digital Research as an independent operating-system business. Adam contributed capital and OEM strategy, Gary led engineering, and Dorothy led operations. DRI retained CP/M ownership and licensed competing manufacturers."
+      "description": "Adam, Gary Kildall and Dorothy McEwen established Digital Research as an independent operating-system business. Adam contributed capital and OEM strategy, Gary led engineering, and Dorothy led operations. DRI retained CP/M ownership and licensed competing manufacturers.",
+      "clauses": [
+        {
+          "id": "clause.dri_ip_rights",
+          "kind": "rights",
+          "statement": "DRI owns CP/M and DRI-funded improvements; licenses competing OEMs on predictable non-exclusive terms. Logix later pays OEM license and platform-engineering charges.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri"
+          ]
+        },
+        {
+          "id": "clause.dri_joint_equity",
+          "kind": "equity",
+          "statement": "Gary and Dorothy together retain 60% on a fully diluted basis; their internal allocation is unspecified.\nSource value: 60; unit: percent.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.kildall",
+            "actor.dorothy"
+          ],
+          "equity": {
+            "company_actor_id": "actor.dri",
+            "beneficiary_actor_ids": [
+              "actor.kildall",
+              "actor.dorothy"
+            ],
+            "percentage": 60,
+            "basis": "fully_diluted",
+            "allocation": "joint_unsplit"
+          }
+        },
+        {
+          "id": "clause.dri_adam_equity",
+          "kind": "equity",
+          "statement": "Adam receives 30% for his capital commitment and founding contribution.\nSource value: 30; unit: percent.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam"
+          ],
+          "equity": {
+            "company_actor_id": "actor.dri",
+            "beneficiary_actor_ids": [
+              "actor.adam"
+            ],
+            "percentage": 30,
+            "basis": "fully_diluted",
+            "allocation": "individual"
+          }
+        },
+        {
+          "id": "clause.dri_employee_reserve",
+          "kind": "equity",
+          "statement": "Reserve for future employees; not an issued voting block.\nSource value: 10; unit: percent.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri"
+          ],
+          "equity": {
+            "company_actor_id": "actor.dri",
+            "beneficiary_actor_ids": [],
+            "percentage": 10,
+            "basis": "fully_diluted",
+            "allocation": "unallocated_reserve"
+          }
+        },
+        {
+          "id": "clause.dri_capital",
+          "kind": "funding",
+          "statement": "Adam commits $250,000 nominal 1974 USD over two years: $150,000 at formation and $100,000 in scheduled installments. Company capital, not a CP/M purchase price or per-copy manufacturing cost.\nSource value: 250000; unit: USD.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.dri"
+          ]
+        },
+        {
+          "id": "clause.dri_responsibilities",
+          "kind": "responsibility",
+          "statement": "Technical leadership and neutral licensing protected; Logix-related transactions independently reviewed. Expansion cards and chip licensing remain Logix/AION work, not DRI deliverables.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.kildall",
+            "actor.dorothy",
+            "actor.dri"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.dri_cpm",
@@ -40,7 +127,18 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.dri_cpm_reuse_right_1",
+          "kind": "rights",
+          "statement": "DRI retains the right to implement the TUI libraries and FlexiBUS support in CP/M versions for non-Logix computers.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.bpi_offer",
@@ -57,7 +155,38 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.bpi_offer_cash_offer_1",
+          "kind": "funding",
+          "statement": "Adam offered to subscribe $150,000 of new capital into BPI Systems. The funds would support product development and working capital; the proposal did not provide a payment to the existing owners.",
+          "assertion_mode": "proposal",
+          "actor_ids": [
+            "actor.adam",
+            "actor.bpi"
+          ]
+        },
+        {
+          "id": "clause.bpi_offer_equity_offer_2",
+          "kind": "equity",
+          "statement": "The proposed subscription would give Adam 33% of BPI Systems on a fully diluted basis. Existing owners would retain the remaining 67%. BPI did not accept or close this equity proposal.",
+          "assertion_mode": "proposal",
+          "actor_ids": [
+            "actor.adam",
+            "actor.bpi"
+          ],
+          "equity": {
+            "company_actor_id": "actor.bpi",
+            "beneficiary_actor_ids": [
+              "actor.adam"
+            ],
+            "percentage": 33,
+            "basis": "fully_diluted",
+            "allocation": "individual"
+          }
+        }
+      ]
     },
     {
       "id": "agreement.retail",
@@ -74,7 +203,18 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Adam and ComputerLand arranged a primary retail channel for Logix computers. The partnership connected Logix’s hardware and software offering with an established specialist dealer network."
+      "description": "Adam and ComputerLand arranged a primary retail channel for Logix computers. The partnership connected Logix’s hardware and software offering with an established specialist dealer network.",
+      "clauses": [
+        {
+          "id": "clause.retail_retailer_margin_1",
+          "kind": "other",
+          "statement": "Retailer margin of 20–30%.\nSource value: minimum: 20, maximum: 30; unit: percent.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.computerland"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.smc",
@@ -95,7 +235,60 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "AION Labs and Logix enabled SMC to manufacture licensed support chips and sell them independently. SMC supplied fabrication capacity and a second commercial source; AION supplied design and process-transfer engineering."
+      "description": "AION Labs and Logix enabled SMC to manufacture licensed support chips and sell them independently. SMC supplied fabrication capacity and a second commercial source; AION supplied design and process-transfer engineering.",
+      "clauses": [
+        {
+          "id": "clause.smc_agreement_reuse_right_1",
+          "kind": "rights",
+          "statement": "SMC received non-exclusive rights to manufacture and sell custom chips from the Logix/AION portfolio, including monitor controllers and controllers for FlexiBUS peripherals. The licence covered custom-chip designs beyond those priority families and excluded every processor in the ERA family. SMC could sell licensed chips to other manufacturers, including Logix competitors.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.logix",
+            "actor.smc"
+          ]
+        },
+        {
+          "id": "clause.smc_agreement_responsibility_2",
+          "kind": "responsibility",
+          "statement": "AION adapts mask sets to SMC’s agreed process and lithography equipment, supplies revisions/test structures and sends engineers to assist DRAM retention, sensing, refresh and buffered-controller timing qualification. Masks alone do not transfer a process.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.smc"
+          ]
+        },
+        {
+          "id": "clause.smc_agreement_funding_3",
+          "kind": "funding",
+          "statement": "AION/Logix funds transfer engineering, mask revisions and qualification; SMC earns manufacturing margin and pays negotiated royalties on external sales. Amounts and minimum purchase volumes remain unspecified.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.logix",
+            "actor.smc"
+          ]
+        },
+        {
+          "id": "clause.smc_agreement_target_launch_4",
+          "kind": "term",
+          "statement": "First qualified independent chip sales targeted for October 1979; family-wide timing depends on per-part qualification, especially video RAM. Volume/yield ramp continues into 1980.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.smc"
+          ]
+        },
+        {
+          "id": "clause.smc_transfer_priority",
+          "kind": "responsibility",
+          "assertion_mode": "commitment",
+          "statement": "AION Labs and SMC prioritised the transfer of monitor controllers and controllers for FlexiBUS peripherals, supporting independent monitor and peripheral manufacturers. The wider licence scope remained available for other custom chips outside the ERA processor family.",
+          "actor_ids": [
+            "actor.labs",
+            "actor.smc"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.aionix",
@@ -124,7 +317,86 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.aionix_agreement_staffing_1",
+          "kind": "other",
+          "statement": "DRI dedicates staff and operating-system expertise alongside AION Software.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri",
+            "actor.aion"
+          ]
+        },
+        {
+          "id": "clause.aionix_agreement_funding_2",
+          "kind": "funding",
+          "statement": "AION Software covers DRI costs and expenses.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.aion",
+            "actor.dri"
+          ]
+        },
+        {
+          "id": "clause.aionix_agreement_ownership_3",
+          "kind": "rights",
+          "statement": "AION Software owns and controls the AIONix roadmap.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.aion"
+          ]
+        },
+        {
+          "id": "clause.aionix_agreement_equity_4",
+          "kind": "other",
+          "statement": "Adam promised Gary Kildall an 8% interest in Logix under the AIONix agreement of 12 September 1978. Adam fulfilled that promise in a single transfer on 12 October 1978 as part of the five-person share allocation.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.kildall",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.aionix_agreement_porting_right_5",
+          "kind": "rights",
+          "statement": "DRI obtains rights to port AIONix to non-ERA processors in 1982.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri"
+          ]
+        },
+        {
+          "id": "clause.aionix_agreement_reuse_right_6",
+          "kind": "rights",
+          "statement": "DRI may reuse key AIONix components, but not Logix computer architecture or bus/I/O standards.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri"
+          ]
+        },
+        {
+          "id": "clause.aionix_agreement_relocation_7",
+          "kind": "other",
+          "statement": "AIONix department moves from Copenhagen to Logix offices near DRI headquarters.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.aion"
+          ]
+        },
+        {
+          "id": "clause.aionix_agreement_responsibility_8",
+          "kind": "responsibility",
+          "statement": "This separate AIONix agreement does not transfer CP/M ownership or restrict DRI’s independent CP/M OEM business. Existing AION ownership, Gary’s 8% Logix grant and the 1982 AIONix non-ERA porting right remain; replacing those specific terms requires a separate decision.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri",
+            "actor.aion",
+            "actor.logix"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.tandy",
@@ -153,7 +425,70 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.tandy_agreement_responsibility_1",
+          "kind": "responsibility",
+          "statement": "Non-exclusive software and interface licenses; Tandy can manufacture or source compatible peripherals. Exact royalties, engineering payments and minimum software purchases remain unspecified.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.tandy",
+            "actor.logix",
+            "actor.dri",
+            "actor.aion"
+          ]
+        },
+        {
+          "id": "clause.tandy_agreement_responsibility_2",
+          "kind": "responsibility",
+          "statement": "Abacus acceptance covers native display/keyboard, documented editing behaviour, CP/M services, printing, shared document format, save/reopen and measured RAM/worksheet/performance limits on a 64 KB configuration. No automatic Aurelia binary or identical-capacity claim.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.tandy",
+            "actor.logix",
+            "actor.dri",
+            "actor.aion"
+          ]
+        },
+        {
+          "id": "clause.tandy_agreement_responsibility_3",
+          "kind": "responsibility",
+          "statement": "Use a Model II-specific internal FlexiBUS option board, provisionally two ports, rather than force a mainboard or video redesign. Preserve existing Tandy interfaces. Slot, power, timing and quiescent-attachment qualification are required.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.tandy",
+            "actor.logix",
+            "actor.dri",
+            "actor.aion"
+          ]
+        },
+        {
+          "id": "clause.tandy_agreement_responsibility_4",
+          "kind": "responsibility",
+          "statement": "Radio Shack owns the customer relationship and delivers demonstrations/training; AION handles software defects and updates. No Academy attendance or Logix-branded peripherals required. Initial AION silicon supply must not depend on unqualified October 1979 SMC parts.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.tandy",
+            "actor.logix",
+            "actor.dri",
+            "actor.aion"
+          ]
+        },
+        {
+          "id": "clause.tandy_delivery_scope",
+          "kind": "responsibility",
+          "statement": "Tandy commits to officially selling/supporting CP/M and a qualified FlexiBUS option for Model II, supplies engineering access and distributes Abacus. DRI supplies CP/M and required platform services. Logix supplies interface documentation, reference engineering and initial chips. AION funds the port, corrects incompatibilities, qualifies and maintains the Model II edition. Tandy keeps native video, keyboard, disk architecture, legacy ports, branding, sales and first-line support. No Logix video or CP/M-6502 commitment.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.tandy",
+            "actor.logix",
+            "actor.dri",
+            "actor.aion"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.apple_cooperation",
@@ -170,7 +505,57 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.apple_cooperation_technical_access_1",
+          "kind": "other",
+          "statement": "Access to relevant Apple II documentation and machines.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.apple",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.apple_cooperation_testing_2",
+          "kind": "qualification",
+          "statement": "Assistance with compatibility testing.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.apple",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.apple_cooperation_consultation_3",
+          "kind": "other",
+          "statement": "Engineering consultation on Apple II peripherals and Disk II compatibility.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.apple",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.apple_cooperation_responsibility_4",
+          "kind": "responsibility",
+          "statement": "Logix retains hardware and software design/development responsibility.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.apple_extensions_responsibility_1",
+          "kind": "responsibility",
+          "statement": "Logix owns design, firmware, drivers, integration and sales. DRI’s optional CP/M interfaces support eligible S-100 systems but the card program is not a DRI obligation. No Apple CP/M execution is included.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.clone_agreement_northstar",
@@ -191,7 +576,97 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.clone_agreement_northstar_reuse_right_1",
+          "kind": "rights",
+          "statement": "Non-exclusive own-brand manufacturing; no substantial architecture entry fee and no additional whole-computer hardware royalty when licensed AION/SGS chips are purchased.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.northstar"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_northstar_technical_access_2",
+          "kind": "other",
+          "statement": "Reference designs, documentation, conformance tests, a named liaison and bounded engineering assistance; own boards and qualified third-party RAM/monitors permitted.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.northstar"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_northstar_responsibility_3",
+          "kind": "responsibility",
+          "statement": "AION funds shared platform localisation and reference-platform corrections. Partners fund their own tooling, product variants and sales operations; reusable co-development is shared by agreement. Other publishers require separate contracts.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.northstar"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_northstar_target_price_4",
+          "kind": "term",
+          "statement": "Published OEM software/component volume bands; initial agreed price-stability period, advance revision notice and equivalent terms for equivalent volumes and obligations. No unspecified absolute prices are treated as costed facts.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.northstar"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_northstar_ownership_5",
+          "kind": "rights",
+          "statement": "Partners retain customer accounts and brands. Support escalation does not authorise Logix prospecting. Five-year initial term, renewal, sell-off and service-parts provisions; objective certification with appeal.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.northstar"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_northstar_funding_6",
+          "kind": "funding",
+          "statement": "Milestone-based component credit and capped matching launch funds against documented spending; pilot acceptance precedes substantial purchase commitments. Country founding-partner recognition is time-limited, not permanent exclusivity.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.northstar"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_northstar_responsibility_7",
+          "kind": "responsibility",
+          "statement": "Logix or third parties can supply any products beyond the partner initial range. Specify integration, support and warranty ownership without forcing the partner to manufacture the entire catalogue.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.northstar"
+          ]
+        },
+        {
+          "id": "clause.clone_northstar_initial_scope",
+          "kind": "term",
+          "statement": "Preserve existing customers and applications; standardise interchange and provide disk/data migration rather than forcing an abrupt replacement. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.northstar"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.clone_agreement_vector",
@@ -212,7 +687,97 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.clone_agreement_vector_reuse_right_1",
+          "kind": "rights",
+          "statement": "Non-exclusive own-brand manufacturing; no substantial architecture entry fee and no additional whole-computer hardware royalty when licensed AION/SGS chips are purchased.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.vector"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_vector_technical_access_2",
+          "kind": "other",
+          "statement": "Reference designs, documentation, conformance tests, a named liaison and bounded engineering assistance; own boards and qualified third-party RAM/monitors permitted.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.vector"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_vector_responsibility_3",
+          "kind": "responsibility",
+          "statement": "AION funds shared platform localisation and reference-platform corrections. Partners fund their own tooling, product variants and sales operations; reusable co-development is shared by agreement. Other publishers require separate contracts.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.vector"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_vector_target_price_4",
+          "kind": "term",
+          "statement": "Published OEM software/component volume bands; initial agreed price-stability period, advance revision notice and equivalent terms for equivalent volumes and obligations. No unspecified absolute prices are treated as costed facts.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.vector"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_vector_ownership_5",
+          "kind": "rights",
+          "statement": "Partners retain customer accounts and brands. Support escalation does not authorise Logix prospecting. Five-year initial term, renewal, sell-off and service-parts provisions; objective certification with appeal.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.vector"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_vector_funding_6",
+          "kind": "funding",
+          "statement": "Milestone-based component credit and capped matching launch funds against documented spending; pilot acceptance precedes substantial purchase commitments. Country founding-partner recognition is time-limited, not permanent exclusivity.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.vector"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_vector_responsibility_7",
+          "kind": "responsibility",
+          "statement": "Logix or third parties can supply any products beyond the partner initial range. Specify integration, support and warranty ownership without forcing the partner to manufacture the entire catalogue.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.vector"
+          ]
+        },
+        {
+          "id": "clause.clone_vector_initial_scope",
+          "kind": "term",
+          "statement": "Protect roadmap confidentiality and predictable margins; equal access to qualified silicon revisions. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.vector"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.clone_agreement_sks",
@@ -233,7 +798,97 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.clone_agreement_sks_reuse_right_1",
+          "kind": "rights",
+          "statement": "Non-exclusive own-brand manufacturing; no substantial architecture entry fee and no additional whole-computer hardware royalty when licensed AION/SGS chips are purchased.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.sks"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_sks_technical_access_2",
+          "kind": "other",
+          "statement": "Reference designs, documentation, conformance tests, a named liaison and bounded engineering assistance; own boards and qualified third-party RAM/monitors permitted.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.sks"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_sks_responsibility_3",
+          "kind": "responsibility",
+          "statement": "AION funds shared platform localisation and reference-platform corrections. Partners fund their own tooling, product variants and sales operations; reusable co-development is shared by agreement. Other publishers require separate contracts.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.sks"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_sks_target_price_4",
+          "kind": "term",
+          "statement": "Published OEM software/component volume bands; initial agreed price-stability period, advance revision notice and equivalent terms for equivalent volumes and obligations. No unspecified absolute prices are treated as costed facts.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.sks"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_sks_ownership_5",
+          "kind": "rights",
+          "statement": "Partners retain customer accounts and brands. Support escalation does not authorise Logix prospecting. Five-year initial term, renewal, sell-off and service-parts provisions; objective certification with appeal.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.sks"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_sks_funding_6",
+          "kind": "funding",
+          "statement": "Milestone-based component credit and capped matching launch funds against documented spending; pilot acceptance precedes substantial purchase commitments. Country founding-partner recognition is time-limited, not permanent exclusivity.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.sks"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_sks_responsibility_7",
+          "kind": "responsibility",
+          "statement": "Logix or third parties can supply any products beyond the partner initial range. Specify integration, support and warranty ownership without forcing the partner to manufacture the entire catalogue.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.sks"
+          ]
+        },
+        {
+          "id": "clause.clone_sks_initial_scope",
+          "kind": "term",
+          "statement": "Secure contracted assembly capacity and respect existing OEM commitments; do not equate engineering headcount with factory throughput. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.sks"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.clone_agreement_goupil",
@@ -254,7 +909,97 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.clone_agreement_goupil_reuse_right_1",
+          "kind": "rights",
+          "statement": "Non-exclusive own-brand manufacturing; no substantial architecture entry fee and no additional whole-computer hardware royalty when licensed AION/SGS chips are purchased.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.goupil"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_goupil_technical_access_2",
+          "kind": "other",
+          "statement": "Reference designs, documentation, conformance tests, a named liaison and bounded engineering assistance; own boards and qualified third-party RAM/monitors permitted.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.goupil"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_goupil_responsibility_3",
+          "kind": "responsibility",
+          "statement": "AION funds shared platform localisation and reference-platform corrections. Partners fund their own tooling, product variants and sales operations; reusable co-development is shared by agreement. Other publishers require separate contracts.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.goupil"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_goupil_target_price_4",
+          "kind": "term",
+          "statement": "Published OEM software/component volume bands; initial agreed price-stability period, advance revision notice and equivalent terms for equivalent volumes and obligations. No unspecified absolute prices are treated as costed facts.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.goupil"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_goupil_ownership_5",
+          "kind": "rights",
+          "statement": "Partners retain customer accounts and brands. Support escalation does not authorise Logix prospecting. Five-year initial term, renewal, sell-off and service-parts provisions; objective certification with appeal.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.goupil"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_goupil_funding_6",
+          "kind": "funding",
+          "statement": "Milestone-based component credit and capped matching launch funds against documented spending; pilot acceptance precedes substantial purchase commitments. Country founding-partner recognition is time-limited, not permanent exclusivity.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.goupil"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_goupil_responsibility_7",
+          "kind": "responsibility",
+          "statement": "Logix or third parties can supply any products beyond the partner initial range. Specify integration, support and warranty ownership without forcing the partner to manufacture the entire catalogue.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.goupil"
+          ]
+        },
+        {
+          "id": "clause.clone_goupil_initial_scope",
+          "kind": "term",
+          "statement": "Retain French identity and local applications; phase product introduction and inventory finance. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.goupil"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.clone_agreement_eina",
@@ -275,7 +1020,97 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.clone_agreement_eina_reuse_right_1",
+          "kind": "rights",
+          "statement": "Non-exclusive own-brand manufacturing; no substantial architecture entry fee and no additional whole-computer hardware royalty when licensed AION/SGS chips are purchased.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.eina"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_eina_technical_access_2",
+          "kind": "other",
+          "statement": "Reference designs, documentation, conformance tests, a named liaison and bounded engineering assistance; own boards and qualified third-party RAM/monitors permitted.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.eina"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_eina_responsibility_3",
+          "kind": "responsibility",
+          "statement": "AION funds shared platform localisation and reference-platform corrections. Partners fund their own tooling, product variants and sales operations; reusable co-development is shared by agreement. Other publishers require separate contracts.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.eina"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_eina_target_price_4",
+          "kind": "term",
+          "statement": "Published OEM software/component volume bands; initial agreed price-stability period, advance revision notice and equivalent terms for equivalent volumes and obligations. No unspecified absolute prices are treated as costed facts.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.eina"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_eina_ownership_5",
+          "kind": "rights",
+          "statement": "Partners retain customer accounts and brands. Support escalation does not authorise Logix prospecting. Five-year initial term, renewal, sell-off and service-parts provisions; objective certification with appeal.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.eina"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_eina_funding_6",
+          "kind": "funding",
+          "statement": "Milestone-based component credit and capped matching launch funds against documented spending; pilot acceptance precedes substantial purchase commitments. Country founding-partner recognition is time-limited, not permanent exclusivity.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.eina"
+          ]
+        },
+        {
+          "id": "clause.clone_agreement_eina_responsibility_7",
+          "kind": "responsibility",
+          "statement": "Logix or third parties can supply any products beyond the partner initial range. Specify integration, support and warranty ownership without forcing the partner to manufacture the entire catalogue.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.eina"
+          ]
+        },
+        {
+          "id": "clause.clone_eina_initial_scope",
+          "kind": "term",
+          "statement": "Start with limited batches and board kits; audit factory capability and provide bounded working-capital and service training support. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.aion",
+            "actor.eina"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.sgs_transfer",
@@ -300,7 +1135,90 @@
           "role": "participant in source; exact legal capacity to review"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events."
+      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "clauses": [
+        {
+          "id": "clause.sgs_transfer_agreement_reuse_right_1",
+          "kind": "rights",
+          "statement": "Non-exclusive worldwide manufacture, packaging, testing and direct sales; named European wafer fab and approved assembly/test sites. Preserve SMC licences.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.sgs"
+          ]
+        },
+        {
+          "id": "clause.sgs_transfer_agreement_ownership_2",
+          "kind": "rights",
+          "statement": "Each party retains background IP. Define improvement ownership by contribution and reciprocal rights necessary to maintain licensed chips; common specifications, errata and change control.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.sgs"
+          ]
+        },
+        {
+          "id": "clause.sgs_transfer_agreement_funding_3",
+          "kind": "funding",
+          "statement": "AION funds its own transfer team and documentation plus 60% of the agreed product-specific transfer budget; SGS funds 40%. Absolute budget requires a process audit and costed schedule. General reusable infrastructure is SGS-funded; dedicated equipment negotiated separately.\nSource value: 60; unit: percent of agreed product-specific transfer budget paid by AION.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.sgs"
+          ]
+        },
+        {
+          "id": "clause.sgs_transfer_agreement_funding_4",
+          "kind": "funding",
+          "statement": "AION contribution released 15/25/25/25/10 percent at accepted feasibility, process/test readiness, functional pilot, qualification and repeatable delivery milestones. Allocate overruns by cause; no unlimited reimbursement.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.sgs"
+          ]
+        },
+        {
+          "id": "clause.sgs_transfer_agreement_responsibility_5",
+          "kind": "responsibility",
+          "statement": "Post-qualification minimum purchases or capacity reservation supported by Logix demand. Target 25–35% of qualified external requirements from SGS subject to price, quality and delivery; this is not a fabricated shipment forecast.\nSource value: minimum: 25, maximum: 35; unit: percent target sourcing share.",
+          "assertion_mode": "target",
+          "actor_ids": [
+            "actor.logix",
+            "actor.labs",
+            "actor.sgs"
+          ]
+        },
+        {
+          "id": "clause.sgs_transfer_agreement_funding_6",
+          "kind": "funding",
+          "statement": "Independent SGS chip sales carry an opening royalty range of 3–5% of net chip revenue; final rate subject to economics. Waive or credit royalties on AION purchases. No duplicate whole-computer royalty.\nSource value: minimum: 3, maximum: 5; unit: percent proposed royalty.",
+          "assertion_mode": "proposal",
+          "actor_ids": [
+            "actor.labs",
+            "actor.sgs"
+          ]
+        },
+        {
+          "id": "clause.sgs_transfer_agreement_testing_7",
+          "kind": "qualification",
+          "statement": "Independent wafer production, functional/electrical equivalence and repeated acceptable lots. Qualify 6 and 8 MHz ERA separately; failed parts do not become available by calendar declaration.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.sgs"
+          ]
+        },
+        {
+          "id": "clause.sgs_transfer_agreement_technical_access_8",
+          "kind": "other",
+          "statement": "AION supplies design/process documentation, layouts, masks or mask data, reference silicon, models, test vectors and known errata; resident AION engineers assist critical transfer stages.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.labs",
+            "actor.sgs"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.bpi_cooperation",
@@ -325,7 +1243,42 @@
           "role": "distribution and training"
         }
       ],
-      "description": "BPI partnered with AION Software for engineering and with Logix for distribution and training. BPI continued to own its applications and control its brand, licensing and specialist support."
+      "description": "BPI partnered with AION Software for engineering and with Logix for distribution and training. BPI continued to own its applications and control its brand, licensing and specialist support.",
+      "clauses": [
+        {
+          "id": "clause.bpi_cooperation_operating_independence",
+          "kind": "rights",
+          "statement": "BPI retained its management, brand, application ownership, licensing and specialist support. AION Software provided engineering assistance and Logix provided distribution and training. Operational cooperation proceeded independently of Adam’s unaccepted equity offer.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.bpi",
+            "actor.adam",
+            "actor.aion",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.bpi_cooperation_support",
+          "kind": "responsibility",
+          "statement": "BPI owned its applications and managed licensing, updates and specialist support. AION Software supplied engineering assistance, while Logix distributed the products and supported the hardware. Dealers handled installation enquiries. Public presentations described this commercial partnership and identified Adam’s investment offer as uncompleted.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.bpi",
+            "actor.adam",
+            "actor.aion",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.bpi_training_responsibilities",
+          "kind": "responsibility",
+          "statement": "Academy begins BPI-authorised practical courses and direct distribution under a cooperation agreement. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Tuition, setup services and software licences remain separate.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.academy"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.mpi_oem",
@@ -342,7 +1295,19 @@
           "role": "mechanism supplier"
         }
       ],
-      "description": "Reconstructed from narrative mentions; source-specific terms and legal capacity remain subject to review."
+      "description": "Reconstructed from narrative mentions; source-specific terms and legal capacity remain subject to review.",
+      "clauses": [
+        {
+          "id": "clause.mpi_oem_supply",
+          "kind": "responsibility",
+          "statement": "Agree OEM purchasing/manufacturing arrangements for bare MP-40 mechanisms to receive FlexiBUS controllers.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.mpi"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.autodesk_development",
@@ -375,7 +1340,230 @@
           "role": "January representative of the organising founders"
         }
       ],
-      "description": "Adam signed the January development agreement for Logix, with John Walker representing Autodesk’s organising founders. Autodesk adopted the arrangement after incorporation in April. Logix sponsored development and supplied hardware, distribution and joint marketing; Autodesk retained ownership of its software and its cross-platform business."
+      "description": "Adam signed the January development agreement for Logix, with John Walker representing Autodesk’s organising founders. Autodesk adopted the arrangement after incorporation in April. Logix sponsored development and supplied hardware, distribution and joint marketing; Autodesk retained ownership of its software and its cross-platform business.",
+      "clauses": [
+        {
+          "id": "clause.autodesk_development_rights",
+          "kind": "rights",
+          "statement": "Non-exclusive funded development. Autodesk retains its software ownership and cross-platform business; clear the underlying Interact contribution/porting rights with the founders, including Mike Riddle. Logix supplies distribution and joint marketing, without a source buyout or forced platform exclusivity.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_funding",
+          "kind": "funding",
+          "statement": "Adam commits to supplying the staffing, equipment, licences and integration resources required by the agreed delivery plan. No arbitrary dollar ceiling or fabricated cost estimate; procurement and staffing are reviewed against the November objective.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_delivery",
+          "kind": "term",
+          "statement": "Autodesk undertook to deliver a release-quality Artemis/AIONix build of AutoCAD 1.0 for the joint November 1982 COMDEX presentation. Commercial deliveries followed acceptance of the agreed drawing, exchange, plotting and recovery tests.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_deployment_workstations",
+          "kind": "responsibility",
+          "statement": "Supply an Artemis PRO with 1 MiB RAM, local storage and available display to each assigned developer, plus shared build/test and spare machines as the agreed staffing plan requires. No invented fixed team size.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_deployment_software",
+          "kind": "responsibility",
+          "statement": "Install the entire AION Development System — Team Edition: C Development Environment 2, ERA compiler/linker/debugger and validated floating-point math library; source repository, branches/reviews, tasks, collaboration, reproducible builds, release labels and target testing.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_deployment_network",
+          "kind": "responsibility",
+          "statement": "Supply network adapters, hub, cabling, configured accounts and project permissions, and dedicated Artemis PRO server capacity. Scale sponsored server/license deployments to the whole team within qualified concurrency; the retail four-session entitlement is not silently unlimited.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_deployment_storage",
+          "kind": "responsibility",
+          "statement": "The standard 5 MB disk is inadequate as a presumed whole-team repository/build archive. Fund and qualify larger storage, additional volumes/servers, independent backup media, restore tests and off-machine source archives; capacities follow measured source/build/history budgets.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_deployment_support",
+          "kind": "responsibility",
+          "statement": "Fund dedicated Autodesk engineering time, AION compiler/runtime and integration specialists, installation, training, documentation, replacement hardware, plotter access and on-site support through release. Retail onboarding/support-hour caps do not limit this separately sponsored agreement.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_deployment_early_graphics",
+          "kind": "responsibility",
+          "statement": "January work uses available Artemis PRO displays and a stable software implementation of the graphics API. Supply 64 KiB/Color Pro engineering samples and mouse prototypes when qualified; do not make January work depend on the June professional hardware.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_deployment_professional_handover",
+          "kind": "responsibility",
+          "statement": "Around June 1982 deliver the 128 KiB professional card and Logix Mono Pro 17 to the development and QA team, alongside the 64 KiB colour card/Color Pro 14 and mouse. This supersedes the earlier proposed January 17-inch prototype handover.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_acceptance_1",
+          "kind": "qualification",
+          "statement": "Native AIONix/ERA build with reliable floating-point geometry and typed coordinate entry",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_acceptance_2",
+          "kind": "qualification",
+          "statement": "Dual-display driver with colour command/status screen and 800x600 drawing canvas; independent palettes and explicit input focus",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_acceptance_3",
+          "kind": "qualification",
+          "statement": "Explicit CAD mouse integration; standard TUI mouse support alone is insufficient",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_acceptance_4",
+          "kind": "qualification",
+          "statement": "Drawing load/save and DXF exchange tests against the other supported AutoCAD builds",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_acceptance_5",
+          "kind": "qualification",
+          "statement": "Supported pen-plotter output and physical drawing verification",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_acceptance_6",
+          "kind": "qualification",
+          "statement": "Measured RAM, storage, redraw and stability requirements on the qualified configuration; backup/restore and reproducible release build",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        },
+        {
+          "id": "clause.autodesk_development_acceptance_7",
+          "kind": "qualification",
+          "statement": "Feature baseline agreed with Autodesk; no automatic import of later AutoCAD dimensioning, object-snap or 3D features",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix",
+            "actor.aion",
+            "actor.labs",
+            "actor.autodesk"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.aurelia_casting_proposal",
@@ -392,7 +1580,19 @@
           "role": "proposed performer"
         }
       ],
-      "description": "Reconstructed from narrative mentions; source-specific terms and legal capacity remain subject to review."
+      "description": "Reconstructed from narrative mentions; source-specific terms and legal capacity remain subject to review.",
+      "clauses": [
+        {
+          "id": "clause.aurelia_casting_proposal_casting",
+          "kind": "term",
+          "statement": "Fictional casting proposal; availability, fee and contract not established.",
+          "assertion_mode": "proposal",
+          "actor_ids": [
+            "actor.logix",
+            "actor.michael_douglas"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.apple_peachtree",
@@ -409,7 +1609,19 @@
           "role": "software partner"
         }
       ],
-      "description": "Reconstructed from narrative mentions; source-specific terms and legal capacity remain subject to review."
+      "description": "Reconstructed from narrative mentions; source-specific terms and legal capacity remain subject to review.",
+      "clauses": [
+        {
+          "id": "clause.apple_peachtree_scope",
+          "kind": "responsibility",
+          "statement": "Develop an Apple II accounting offering with Peachtree while separately pursuing spreadsheet and database suppliers. Peachtree is not treated as a substitute for Abacus by itself. Start a partnership for an Apple II business offering.",
+          "assertion_mode": "proposal",
+          "actor_ids": [
+            "actor.apple",
+            "actor.peachtree"
+          ]
+        }
+      ]
     },
     {
       "id": "agreement.logix_share_transfer_1978",
@@ -442,7 +1654,114 @@
           "role": "share recipient"
         }
       ],
-      "description": "Adam transferred a total of 40% of Logix shares in equal 8% allocations to Gary Kildall, the Logix CEO, the Logix CFO, Tim Paterson and Gordon Letwin on 12 October 1978. Gary’s allocation fulfilled the 8% interest promised in the September AIONix agreement."
+      "description": "Adam transferred a total of 40% of Logix shares in equal 8% allocations to Gary Kildall, the Logix CEO, the Logix CFO, Tim Paterson and Gordon Letwin on 12 October 1978. Gary’s allocation fulfilled the 8% interest promised in the September AIONix agreement.",
+      "clauses": [
+        {
+          "id": "clause.logix_transfer_kildall",
+          "kind": "equity",
+          "statement": "Gary Kildall received 8% of the issued shares of Logix from Adam on 12 October 1978. This transfer fulfilled the 8% promised under the AIONix agreement and did not create an additional 8% interest.",
+          "assertion_mode": "established_fact",
+          "actor_ids": [
+            "actor.adam",
+            "actor.kildall",
+            "actor.logix"
+          ],
+          "equity": {
+            "company_actor_id": "actor.logix",
+            "beneficiary_actor_ids": [
+              "actor.kildall"
+            ],
+            "percentage": 8,
+            "basis": "issued",
+            "allocation": "individual"
+          },
+          "effective_event_id": "event.logix_share_transfer_1978"
+        },
+        {
+          "id": "clause.logix_transfer_logix_ceo",
+          "kind": "equity",
+          "statement": "Logix CEO (name unspecified) received 8% of the issued shares of Logix from Adam on 12 October 1978.",
+          "assertion_mode": "established_fact",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix_ceo",
+            "actor.logix"
+          ],
+          "equity": {
+            "company_actor_id": "actor.logix",
+            "beneficiary_actor_ids": [
+              "actor.logix_ceo"
+            ],
+            "percentage": 8,
+            "basis": "issued",
+            "allocation": "individual"
+          },
+          "effective_event_id": "event.logix_share_transfer_1978"
+        },
+        {
+          "id": "clause.logix_transfer_logix_cfo",
+          "kind": "equity",
+          "statement": "Logix CFO (name unspecified) received 8% of the issued shares of Logix from Adam on 12 October 1978.",
+          "assertion_mode": "established_fact",
+          "actor_ids": [
+            "actor.adam",
+            "actor.logix_cfo",
+            "actor.logix"
+          ],
+          "equity": {
+            "company_actor_id": "actor.logix",
+            "beneficiary_actor_ids": [
+              "actor.logix_cfo"
+            ],
+            "percentage": 8,
+            "basis": "issued",
+            "allocation": "individual"
+          },
+          "effective_event_id": "event.logix_share_transfer_1978"
+        },
+        {
+          "id": "clause.logix_transfer_paterson",
+          "kind": "equity",
+          "statement": "Tim Paterson received 8% of the issued shares of Logix from Adam on 12 October 1978.",
+          "assertion_mode": "established_fact",
+          "actor_ids": [
+            "actor.adam",
+            "actor.paterson",
+            "actor.logix"
+          ],
+          "equity": {
+            "company_actor_id": "actor.logix",
+            "beneficiary_actor_ids": [
+              "actor.paterson"
+            ],
+            "percentage": 8,
+            "basis": "issued",
+            "allocation": "individual"
+          },
+          "effective_event_id": "event.logix_share_transfer_1978"
+        },
+        {
+          "id": "clause.logix_transfer_letwin",
+          "kind": "equity",
+          "statement": "Gordon Letwin received 8% of the issued shares of Logix from Adam on 12 October 1978.",
+          "assertion_mode": "established_fact",
+          "actor_ids": [
+            "actor.adam",
+            "actor.letwin",
+            "actor.logix"
+          ],
+          "equity": {
+            "company_actor_id": "actor.logix",
+            "beneficiary_actor_ids": [
+              "actor.letwin"
+            ],
+            "percentage": 8,
+            "basis": "issued",
+            "allocation": "individual"
+          },
+          "effective_event_id": "event.logix_share_transfer_1978"
+        }
+      ]
     }
   ]
 }

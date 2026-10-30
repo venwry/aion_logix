@@ -1,6 +1,6 @@
 # Aion Logix — five foundational phases with phase 1B
 
-Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its model is implemented as version 0.4.0; see [current model guide](data-model/MODEL_GUIDE.md).
+Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its scope was implemented as version 0.4.0 and updated to contract 0.5.0; see [current model guide](data-model/MODEL_GUIDE.md).
 
 This document consolidates the agreed process. It describes the intended workflow separately from functionality already implemented. It does not authorize additional story records, introduce new dataset schemas, or claim that the later phases are complete.
 
@@ -25,7 +25,7 @@ These are phases of our design and review work, not chronological periods in the
 
 ### Phase 1 — history and its participants
 
-The six originally listed subjects remain central. The implemented foundation also provides supporting identities and relationships through these **13 datasets**:
+The six originally listed subjects remain central. The implemented foundation also provides supporting identities and relationships through these **12 datasets**:
 
 - `assumption`: premises, policies, constraints and targets.
 - `actor`: people, organizations and groups.
@@ -33,7 +33,6 @@ The six originally listed subjects remain central. The implemented foundation al
 - `event`: dated occurrences, decisions and milestones.
 - `campaign`: marketing objectives, audiences, messages and presentation; references an execution process.
 - `agreement`: arrangements, parties and agreement lifecycle.
-- `clause`: independently reviewable terms and commitments.
 - `process`: work extending over time, steps and acceptance gates.
 - `location`: places and their hierarchy.
 - `product`: offerings, devices, software, services and product families, without composition.
@@ -43,7 +42,7 @@ The six originally listed subjects remain central. The implemented foundation al
 
 Migration must recover information mentioned indirectly, assemble scattered descriptions, preserve useful identities and identify inconsistencies. Moving a source JSON record verbatim is insufficient when its content mixes different entities or contradicts other material.
 
-Agreements and clauses have separate identities. Authorization of an agreement does not implicitly authorize its clauses. Ownership percentages, beneficiaries, responsibilities, agreement scope and milestone outcomes are phase-one story decisions.
+Since contract 0.5.0, agreements own `clauses[]`; their terms and commitments are authorized as part of the whole agreement. Ownership percentages, beneficiaries, responsibilities, agreement scope and milestone outcomes are phase-one story decisions.
 
 Commercial reasoning matters: proposed actions and terms should make sense for each party and remain compatible with other accepted story elements. Where a missing detail is reasonably inferable, propose it for review; where the choice needs the author's input, ask. Neither inference nor importing legacy wording constitutes authorization.
 
@@ -207,3 +206,5 @@ This consolidation preserves the original five-phase scope and applies the autho
 - [Current model guide](data-model/MODEL_GUIDE.md)
 - [Original phase-one proposal](../archived_no_longer_valid/docs/data-model/PHASE_1_PROPOSAL.md) — source-analysis rationale, with superseded details
 - [Render saving setup](RENDER_SETUP.md)
+
+The 653-record figures above describe the earlier handover only. Contract 0.5.0 has 559 whole records in 12 datasets; 109 former clause records are embedded in their agreements.
