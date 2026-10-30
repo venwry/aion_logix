@@ -1285,6 +1285,58 @@
           "content_sha256": "48d520ed25d5e23bed44bb0e12c45545a0f1c62b3f50e0a2b2614a4b6e7ec79a"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.4f053aa0-4c1e-428d-8b84-52982111fe85",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:07:21.756Z",
+      "change_id": "change.opening_1972_actor_relationship_adam_identity",
+      "proposal_sha256": "da10260324085333e06c38e27be549bda268dada8968fa27d1b275077664ce4a",
+      "proposal": {
+        "id": "change.opening_1972_actor_relationship_adam_identity",
+        "category": "story",
+        "title": "13/21 · Remove actor_relationship.adam_identity",
+        "reason": "Single-record authorization: actor_relationship.adam_identity. Deletes the former relationship only after the replacement assumption and revised identity event have been reviewed. Review prerequisites first: assumption.adam_identity, event.identity. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_assumption_adam_identity",
+          "change.opening_1972_event_identity"
+        ],
+        "elements": [
+          {
+            "record_type": "actor_relationship",
+            "record_id": "actor_relationship.adam_identity",
+            "before": {
+              "id": "actor_relationship.adam_identity",
+              "kind": "identity_assumption",
+              "subject_actor_ids": [
+                "actor.adam"
+              ],
+              "object_actor_id": "actor.original_adam",
+              "description": "Vincent operates under the original Adam Pleskot identity.",
+              "established_by_event_id": "event.identity"
+            },
+            "after": null
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "actor_relationship.adam_identity",
+          "before": {
+            "id": "actor_relationship.adam_identity",
+            "kind": "identity_assumption",
+            "subject_actor_ids": [
+              "actor.adam"
+            ],
+            "object_actor_id": "actor.original_adam",
+            "description": "Vincent operates under the original Adam Pleskot identity.",
+            "established_by_event_id": "event.identity"
+          },
+          "after": null,
+          "content_sha256": null
+        }
+      ]
     }
   ]
 }
