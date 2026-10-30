@@ -1934,6 +1934,128 @@
           "content_sha256": "bbe689e1b56046869b858f08ab23dae9e090f86191fff5abb01a478d3d68a6e3"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.7a2489dd-2ac4-4991-8841-b73a417054e7",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:11:23.066Z",
+      "change_id": "change.opening_1972_event_new_york_flight",
+      "proposal_sha256": "11f5129c0f5f6ec346356ae8d0a317efea2f4399725d05a2f625171f83559598",
+      "proposal": {
+        "id": "change.opening_1972_event_new_york_flight",
+        "category": "story",
+        "title": "19/21 · Add event.new_york_flight",
+        "reason": "Single-record authorization: event.new_york_flight. Preserves this record’s content from the opening-sequence proposal. Review prerequisites first: event.lottery_payout, process.frankfurt_stay, location.frankfurt, location.new_york. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_event_lottery_payout",
+          "change.opening_1972_process_frankfurt_stay",
+          "change.opening_1972_location_frankfurt",
+          "change.opening_1972_location_new_york"
+        ],
+        "elements": [
+          {
+            "record_type": "event",
+            "record_id": "event.new_york_flight",
+            "before": null,
+            "after": {
+              "id": "event.new_york_flight",
+              "title": "Adam flies from Frankfurt to New York",
+              "kind": "activity",
+              "description": "Adam ends his Frankfurt stay and flies to New York with his remaining belongings after sending the lottery proceeds to his New York bank account.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+                }
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Collection and transfer of the lottery proceeds provide the financial basis for Adam’s move to New York.",
+                  "event_id": "event.lottery_payout"
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "Adam has completed his temporary stay and is departing Frankfurt.",
+                  "process_id": "process.frankfurt_stay"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Adam has relocated to New York, ready to arrange securities accounts and begin investing."
+                }
+              ],
+              "time": {
+                "value": "1972-02-26",
+                "precision": "day"
+              },
+              "location_ids": [
+                "location.frankfurt",
+                "location.new_york"
+              ],
+              "process_ids": [
+                "process.frankfurt_stay"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "event.new_york_flight",
+          "before": null,
+          "after": {
+            "id": "event.new_york_flight",
+            "title": "Adam flies from Frankfurt to New York",
+            "kind": "activity",
+            "description": "Adam ends his Frankfurt stay and flies to New York with his remaining belongings after sending the lottery proceeds to his New York bank account.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Collection and transfer of the lottery proceeds provide the financial basis for Adam’s move to New York.",
+                "event_id": "event.lottery_payout"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Adam has completed his temporary stay and is departing Frankfurt.",
+                "process_id": "process.frankfurt_stay"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Adam has relocated to New York, ready to arrange securities accounts and begin investing."
+              }
+            ],
+            "time": {
+              "value": "1972-02-26",
+              "precision": "day"
+            },
+            "location_ids": [
+              "location.frankfurt",
+              "location.new_york"
+            ],
+            "process_ids": [
+              "process.frankfurt_stay"
+            ]
+          },
+          "content_sha256": "527f9fabb44b65be4ce1438c28c20bfb7674819f890109053327f43f43a770f7"
+        }
+      ]
     }
   ]
 }
