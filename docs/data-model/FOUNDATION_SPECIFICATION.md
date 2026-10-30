@@ -1,6 +1,6 @@
 # Foundation dataset specification
 
-This document describes the current foundation schema contract (version 0.4.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Authorization, sourcing, migration and proposed changes belong to `data_storytelling/` and are deliberately outside this diagram.
+This document describes the current foundation schema contract (version 0.4.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
 
 ## Reading the diagram
 
@@ -8,7 +8,7 @@ This document describes the current foundation schema contract (version 0.4.0). 
 - `*` means required within its immediate parent object; `?` means optional there. A required child does not make its optional parent required. Conditional requirements are specified below.
 - Indentation shows owned objects and array items. `array<T>` contains zero or more values unless the schema says otherwise. Nested objects are not independent datasets.
 - A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.
-- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the 11 target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.
+- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the 13 target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.
 - Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.
 - These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.
 

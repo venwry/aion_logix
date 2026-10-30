@@ -6,7 +6,7 @@ Version 0.4.0 retains the author's October 2026 instruction to separate modelled
 
 1. The model combines hierarchical value objects and relational entity references. Each entity has a stable `id` beginning with its dataset name.
 2. `data_foundation/` contains only story records, in envelopes such as `{ "actor": [...] }`. It has no status, confirmation, provenance or application metadata fields.
-3. `data_storytelling/` contains authorization, decisions, proposals, provenance, migration mappings, editorial issues and the model manifest. Previous review evidence remains immutable in its original form.
+3. `data_storytelling/` contains current authorization, direct-save decisions, proposals, the source catalogue, unresolved editorial issues and the model manifest. Completed migration mappings, former models and historical review snapshots are preserved unchanged in `archived_no_longer_valid/`.
 4. `data_calculation/` is reserved for calculation inputs/results. Its domain schemas will be designed with the relevant phases.
 5. Foundation records use explicit typed references. Owned value objects remain nested; independently maintained entities have their own IDs.
 6. Authorization of the entire record is the sole distinction for candidate results. Do not add occurrence, completion-state or intended/achieved flags. Independently reviewed commitments and outcomes require separate records.
@@ -19,7 +19,7 @@ Version 0.4.0 retains the author's October 2026 instruction to separate modelled
 13. The application joins foundation records and external authorization by ID and verifies content hashes before showing Authorized. It does not write computed UI status back into the foundation.
 14. The authenticated backend validates current content and references before saving to GitHub. Multi-file changes use one Git commit and a non-forced branch update. Stale edits never silently overwrite newer content.
 
-The original phase-one schema versions are archived under `archived_no_longer_valid/schemas/archive/0.2.0/`; original logs are retained under `archived_no_longer_valid/docs/review/history/`. See [MODEL_GUIDE.md](docs/data-model/MODEL_GUIDE.md) for the current file mapping and [RENDER_SETUP.md](docs/RENDER_SETUP.md) for direct saving.
+The original phase-one schema versions are archived under `archived_no_longer_valid/schemas/archive/0.2.0/`; original logs are retained under `archived_no_longer_valid/docs/review/history/`. See [the repository map](docs/REPOSITORY_MAP.md) for the current file mapping and [RENDER_SETUP.md](docs/RENDER_SETUP.md) for direct saving.
 
 ```mermaid
 flowchart LR

@@ -10,6 +10,8 @@ Start with the [repository objective](../README.md), [principles](../DATA_MODEL_
 4. Keep each record manageable for whole-record authorization. Decompose independently reviewable content into linked records when necessary.
 5. Obtain author approval for schema extensions before adding them. Update schemas, manifest/registry, consumers, documentation and tests together for a breaking model change.
 
+For the current page controls, see the [application guide](APPLICATION_GUIDE.md). Display layout changes do not require a story-schema revision or renewed record authorization.
+
 ## Propose and authorize
 
 Create story proposals in `data_storytelling/change.json` with stable ID, category, title, reason and explicit `elements` containing dataset type, record ID, and complete `before`/`after` snapshots. Use `before: null` for additions. Review overlapping proposals and dependencies explicitly; the application does not schedule a dependency graph. Schema proposals cannot be applied by the saving API.

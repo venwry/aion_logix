@@ -21,7 +21,7 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [code/browser.js](../code/browser.js) | Dataset selection, filters, sorting, detail view and batch authorization. |
 | [code/changes-confirm.html](../code/changes-confirm.html) | Proposal review page structure. |
 | [code/changes-confirm.js](../code/changes-confirm.js) | Before/after proposal tables and grouped save actions. |
-| [code/compact-details.js](../code/compact-details.js) | Compact nested data formatting and list tables. |
+| [code/compact-details.js](../code/compact-details.js) | Shared compact details, content-weighted autofit, resizable tables, 1–3 column reference grids and cross-page record links. |
 | [code/index.html](../code/index.html) | Application-directory redirect to timeline. |
 | [code/model-contract.js](../code/model-contract.js) | Current schema version and shared dataset registry. |
 | [code/review-log.js](../code/review-log.js) | Active stable serialization and browser hashing; no longer a report-export module. |
@@ -29,7 +29,7 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [code/temporal.js](../code/temporal.js) | Event-based process boundary resolution and precision-preserving date bounds. |
 | [code/timeline.html](../code/timeline.html) | Timeline page structure. |
 | [code/timeline-layout.js](../code/timeline-layout.js) | Explicit membership, campaign/execution merging, shared calendar coordinates and overlap packing. |
-| [code/timeline.js](../code/timeline.js) | Single-lane event/process/campaign rendering, filtering and detail interaction. |
+| [code/timeline.js](../code/timeline.js) | Nested parallel event/process/campaign rendering, fixed date rail, full-screen mode, filtering and shared details. |
 | [data_calculation/.gitkeep](../data_calculation/.gitkeep) | Placeholder for future assessment data; no calculation model implemented. |
 | [data_foundation/actor.json](../data_foundation/actor.json) | People, organizations and groups. |
 | [data_foundation/actor_relationship.json](../data_foundation/actor_relationship.json) | Roles and affiliations. |
@@ -51,6 +51,7 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [data_storytelling/manifest.json](../data_storytelling/manifest.json) | Model version and dataset inventory. See the storytelling file reference. |
 | [data_storytelling/reconciliation_issue.json](../data_storytelling/reconciliation_issue.json) | Unresolved editorial questions referencing current records. See the storytelling file reference. |
 | [data_storytelling/source.json](../data_storytelling/source.json) | Source bibliography; inherited historical evidence fields. See the storytelling file reference. |
+| [docs/APPLICATION_GUIDE.md](../docs/APPLICATION_GUIDE.md) | Current page navigation, timeline and shared detail controls, filtering, keyboard access and saving. |
 | [docs/EDITING_GUIDE.md](../docs/EDITING_GUIDE.md) | Editing, schema approval, authorization, validation and handover workflow. |
 | [docs/MULTI_PHASE_PROCESS.md](../docs/MULTI_PHASE_PROCESS.md) | Agreed phase 1, 1B, 2–5 and recurring assessment process. |
 | [docs/RENDER_SETUP.md](../docs/RENDER_SETUP.md) | Authentication, Render deployment, direct saving and static publication. |
@@ -99,10 +100,10 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [tests/review/proposals.test.js](../tests/review/proposals.test.js) | Pending proposal before/after consistency and resulting foundation validity. |
 | [tests/server/authorization.test.js](../tests/server/authorization.test.js) | Authorization, group changes, HTTP authentication and GitHub concurrency. |
 | [tests/server/batch.test.js](../tests/server/batch.test.js) | Atomic multi-record authorization, stale requests and idempotency. |
-| [tests/timeline-layout.spec.cjs](../tests/timeline-layout.spec.cjs) | Nested campaign/process rendering, year-line layering and shared compact details. |
+| [tests/timeline-layout.spec.cjs](../tests/timeline-layout.spec.cjs) | Nested campaign/process rendering, date-rail pinning, year-line layering, full-screen controls and cross-page details. |
 | [tests/viewer.spec.cjs](../tests/viewer.spec.cjs) | Documentation, archives, diagrams, local-file sanitization and sandbox tests. |
 | [tools/generate-foundation-spec.js](../tools/generate-foundation-spec.js) | Generates the current foundation Markdown specification from schemas. |
 | [tools/validate-foundation.js](../tools/validate-foundation.js) | Validates foundation and current authorization; optional complete-authorization check. |
 | [tools/validate-model.js](../tools/validate-model.js) | Foundation schema compilation and semantic/reference/date validation. |
 
-There are 98 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.
+There are 99 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.

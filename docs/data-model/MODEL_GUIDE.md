@@ -43,3 +43,11 @@ flowchart LR
 The application joins story records to external authorization by ID and content hash. The shared dataset registry is `code/model-contract.js`; the backend checks it against the manifest. Schema validation also checks references, calendar values, process ranges and numbered items. The current application does not manage a complete dependency workflow for proposals: prepare coherent groups and review their dependencies explicitly.
 
 The backend authorizes exact current content or applies an explicitly reviewed before/after group. It validates the resulting graph, writes all affected files in one commit and rejects stale or concurrent updates. Schema changes require a separate reviewed deployment. See [editing](../EDITING_GUIDE.md), [review](../review/README.md) and [deployment](../RENDER_SETUP.md).
+
+## Model versus presentation
+
+The timeline may display a campaign and its execution process in one box, but they remain two independently identified and authorized records. “Mixed authorization” summarizes their different acceptance states; it is not a new stored status.
+
+Visual nesting selects from existing parent/step/event references; it does not create ownership or change relationships. Work that cannot fit a stated date range remains separate, and details retain the underlying references. Non-proportional calendar spacing and clipped display ranges do not alter stored dates or their precision.
+
+Table widths, autofit weights, reference-grid column counts, pane sizes and full-screen mode are presentation choices. Do not add them to foundation or storytelling JSON. Reference labels combine an existing ID and name for display; they are not a new compound key. See the [application guide](../APPLICATION_GUIDE.md) for behaviour and controls. The data contract remains version 0.4.0.

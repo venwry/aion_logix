@@ -15,10 +15,7 @@ No Render account or credentials are bundled with the repository. Deployment and
 
 ## Use the app
 
-- The browser shows Authorized / Unauthorized by combining foundation content with external authorization. In the browser list, check the records marked **Pending authorization**, then use **Authorize and save** above **Reset filters**. Selections survive filtering and pagination; all selected records are saved in one commit. If any selected version is stale, the entire batch is rejected.
-- Changes confirm shows a visible **Subject / Before / After** table. Check the proposal and choose **Authorize and save**. This applies the group and authorizes its resulting records in one commit.
-- A successful save displays the GitHub commit. A failed or stale save displays an error and does not report authorization as saved.
-- While connected, the app reads current repository data through the backend, avoiding GitHub Pages publication lag. Disconnected browsing uses the latest published static data and cannot save.
+Follow the [application guide](APPLICATION_GUIDE.md) for timeline, browser, details and review controls. Authorization uses the authenticated service described above. While connected, the app reads current repository data through the backend, avoiding GitHub Pages publication lag. Disconnected browsing uses the published static data and cannot save. Hiding the saving-service bar in the timeline's full-screen mode does not disconnect the session.
 
 ## Development and checks
 

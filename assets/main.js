@@ -7,6 +7,7 @@ const entries = [
   {id:'guide',title:'Repository objective and start here',path:'README.md',type:'md'},
   {id:'principles',title:'Data model principles',path:'DATA_MODEL_PRINCIPLES.md',type:'md'},
   {id:'model-guide',title:'Current model guide',path:'docs/data-model/MODEL_GUIDE.md',type:'md'},
+  {id:'application-guide',title:'Application guide',path:'docs/APPLICATION_GUIDE.md',type:'md'},
   {id:'editing',title:'Editing guide',path:'docs/EDITING_GUIDE.md',type:'md'},
   {id:'repository-map',title:'Repository map',path:'docs/REPOSITORY_MAP.md',type:'md'},
   {id:'multi-phase-process',title:'Development process — including phase 1B',path:'docs/MULTI_PHASE_PROCESS.md',type:'md'},
