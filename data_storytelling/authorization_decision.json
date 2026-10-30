@@ -2345,6 +2345,69 @@
           "content_sha256": "c75886f347cb87c9d670f694ad15a73c4346a98762c3bf2101e626b86acb4726"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.d58f3c95-97e0-45ac-9c56-9f7061bcd568",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:13:00.568Z",
+      "change_id": "change.opening_1972_assumption_finance",
+      "proposal_sha256": "5228af7c87a15b75b90052e550b5d4deb0bf52f18972b2da81143f4f09fac028",
+      "proposal": {
+        "id": "change.opening_1972_assumption_finance",
+        "category": "story",
+        "title": "21/21 · Update assumption.finance",
+        "reason": "Single-record authorization: assumption.finance. Preserves this record’s content from the opening-sequence proposal. Review prerequisites first: event.us_nyse_start. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_event_us_nyse_start"
+        ],
+        "elements": [
+          {
+            "record_type": "assumption",
+            "record_id": "assumption.finance",
+            "before": {
+              "id": "assumption.finance",
+              "kind": "world_premise",
+              "statement": "Adam used knowledge of the original timeline to identify investment opportunities and anticipate emerging demand. As his companies changed markets, he combined that knowledge with contemporary research, customer evidence and production planning. His public explanation was disciplined data analysis; the origin of his advantage remained secret.",
+              "scope_ids": [
+                "actor.adam"
+              ]
+            },
+            "after": {
+              "id": "assumption.finance",
+              "kind": "world_premise",
+              "statement": "Adam used knowledge of the original timeline to identify investment opportunities and anticipate emerging demand. As his companies changed markets, he combined that knowledge with contemporary research, customer evidence and production planning. His public explanation was disciplined data analysis; the origin of his advantage remained secret.",
+              "scope_ids": [
+                "actor.adam",
+                "event.us_nyse_start"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "assumption.finance",
+          "before": {
+            "id": "assumption.finance",
+            "kind": "world_premise",
+            "statement": "Adam used knowledge of the original timeline to identify investment opportunities and anticipate emerging demand. As his companies changed markets, he combined that knowledge with contemporary research, customer evidence and production planning. His public explanation was disciplined data analysis; the origin of his advantage remained secret.",
+            "scope_ids": [
+              "actor.adam"
+            ]
+          },
+          "after": {
+            "id": "assumption.finance",
+            "kind": "world_premise",
+            "statement": "Adam used knowledge of the original timeline to identify investment opportunities and anticipate emerging demand. As his companies changed markets, he combined that knowledge with contemporary research, customer evidence and production planning. His public explanation was disciplined data analysis; the origin of his advantage remained secret.",
+            "scope_ids": [
+              "actor.adam",
+              "event.us_nyse_start"
+            ]
+          },
+          "content_sha256": "488c15055c2605c63b02f0fae0bd8b0f394ee6571ff944dbe1cbafceb49a82d8"
+        }
+      ]
     }
   ]
 }
