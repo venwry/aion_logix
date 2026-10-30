@@ -43,7 +43,7 @@ thead,.compact-details .compact-value-table th{background:#e7eff6}.change-table 
 .timeline{position:relative;padding:0;min-width:100%;margin-top:12px}
 .timeline .year-section{position:absolute;left:0;right:0;padding:0;min-height:0;pointer-events:none;z-index:0}
 .timeline .year-line{top:0;background:#b5bfca;z-index:0}
-.year-label{position:sticky;left:0;display:inline-block;margin:0;background:#f5f2eb;color:#657181;padding:5px 6px 5px 0;font:20px Georgia,serif}
+.axis-year{position:absolute;left:62px;margin:0;transform:translateY(-50%);font:700 9px/12px Inter,ui-sans-serif,system-ui,sans-serif;color:#852d35;background:#f5f2eb;font-variant-numeric:tabular-nums}
 .timeline-card{position:absolute;display:block;margin:0;padding:0;text-align:left;border:1px solid #bbcad8;border-radius:6px;color:#183451;background:#fffdf8;box-shadow:0 2px 5px #1834510a;z-index:1;overflow:visible;min-width:0}
 .timeline-card:before{display:none}
 .timeline-card.duration-box{background:#e4edf7;border:1px solid #8faac6;border-top:3px solid #183c68}
@@ -73,11 +73,11 @@ body.timeline-fullscreen>.app-header,body.timeline-fullscreen>.page-intro,body.t
 body.timeline-fullscreen>.workspace-message{margin:6px 10px;flex-shrink:0}
 body.timeline-fullscreen>#workspace{margin:0 6px 6px;flex:1;min-height:0}
 .timeline-end-date{position:absolute;bottom:4px;right:9px;font-size:9px;line-height:12px;color:#526173;pointer-events:none}
-.date-axis{position:sticky;left:0;top:auto;width:136px;height:100%;pointer-events:none;z-index:3;background:linear-gradient(to right,transparent 55px,#f5f2eb 55px)}
-.date-spine{position:absolute;left:125px;width:4px;background:#b5bfca}
-.date-tick{position:absolute;left:58px;width:73px;display:flex;align-items:center;justify-content:flex-end;gap:6px;transform:translateY(-50%);min-height:16px}
-.date-tick-label{font-size:9px;line-height:12px;color:#657181;text-align:right;max-width:61px;background:#f5f2eb;font-variant-numeric:tabular-nums}
-.date-dot{width:9px;height:9px;flex-shrink:0;border-radius:50%;background:#7b8590;box-shadow:0 0 0 4px #f5f2eb}
+.date-axis{position:sticky;left:0;top:auto;width:92px;height:100%;pointer-events:none;z-index:3;background:#f5f2eb}
+.date-spine{position:absolute;left:49px;width:3px;background:#b5bfca}
+.date-tick{position:absolute;left:0;width:55px;display:flex;align-items:center;justify-content:flex-end;gap:5px;transform:translateY(-50%);min-height:16px}
+.date-tick-label{font-size:9px;line-height:12px;color:#657181;text-align:right;max-width:41px;background:#f5f2eb;font-variant-numeric:tabular-nums}
+.date-dot{width:8px;height:8px;flex-shrink:0;border-radius:50%;background:#7b8590;box-shadow:0 0 0 3px #f5f2eb}
 @media(max-width:760px){.timeline-tools{gap:8px}.workspace-message{flex-wrap:wrap}.timeline-fullscreen .timeline-split{display:grid;grid-template-columns:minmax(140px,35%) 6px minmax(0,1fr);gap:0}.timeline-fullscreen .timeline-split .inspector{max-height:none;min-height:0}.timeline-fullscreen .timeline-pane{min-height:0;overflow:auto}.timeline-fullscreen .timeline-split .splitter{display:block}.timeline-fullscreen .view-note{display:none}}
 /* Shared detail tables and independently configurable reference grids. */
 .compact-details .compact-value-table{table-layout:auto;width:100%}
@@ -99,3 +99,5 @@ body.timeline-fullscreen>#workspace{margin:0 6px 6px;flex:1;min-height:0}
 .reference-divider{flex-shrink:0;color:#8793a0}
 .compact-details .reference-name{display:block;flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .reference-list{min-width:0;width:100%}
+
+.timeline-pane{padding-left:6px}

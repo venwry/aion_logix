@@ -60,7 +60,7 @@ export function layoutTimeline(nodes,lo,hi){
    for(const p of overlapping){if(left+n.width+gap<=p.left)break;left=Math.max(left,p.left+p.width+gap);}n.left=left;width=Math.max(width,left+n.width);placed.push(n);
   }return width;
  }
- const width=pack(roots)+160;
+ const width=pack(roots)+116;
  const years=[];for(let year=lo;year<=hi;year++)years.push({year,top:yAt(Date.UTC(year,0,1)),height:yAt(Date.UTC(year+1,0,1))-yAt(Date.UTC(year,0,1))});
  return {nodes:active,roots,width,height,years,ticks};
 }

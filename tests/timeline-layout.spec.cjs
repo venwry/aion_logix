@@ -36,3 +36,10 @@ test('process dates occupy top and bottom and the date axis is chronological',as
  const ticks=await page.locator('.date-tick').evaluateAll(ns=>ns.map(n=>({date:n.dataset.date,top:parseFloat(n.style.top)})));expect(ticks.length).toBeGreaterThan(100);for(let i=1;i<ticks.length;i++){expect(ticks[i].date>ticks[i-1].date).toBe(true);expect(ticks[i].top-ticks[i-1].top).toBeGreaterThanOrEqual(24);}
  const icon=page.locator('link[rel="icon"]');expect(await icon.getAttribute('href')).toBe('../assets/aion-favicon.png');const response=await page.request.get('/assets/aion-favicon.png');expect(response.ok()).toBe(true);
 });
+test('compact date rail pins dates and bold red years while timeline cards scroll',async({page})=>{
+ await ready(page);const rail=page.locator('.date-axis'),year=rail.locator('.axis-year').first(),spine=rail.locator('.date-spine'),card=page.locator('#timeline > .timeline-card').first();
+ const before={rail:await rail.boundingBox(),year:await year.boundingBox(),card:await card.boundingBox()};expect(before.rail.width).toBe(92);expect(before.year.x).toBeGreaterThan((await spine.boundingBox()).x);
+ const style=await year.evaluate(n=>({size:getComputedStyle(n).fontSize,weight:getComputedStyle(n).fontWeight,color:getComputedStyle(n).color}));expect(style).toEqual({size:'9px',weight:'700',color:'rgb(133, 45, 53)'});
+ await page.locator('#timeline-pane').evaluate(n=>n.scrollLeft=200);
+ expect((await rail.boundingBox()).x).toBe(before.rail.x);expect((await year.boundingBox()).x).toBe(before.year.x);expect((await card.boundingBox()).x).toBeLessThan(before.card.x-100);
+});
