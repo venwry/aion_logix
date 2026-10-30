@@ -28369,6 +28369,338 @@
           "content_sha256": "7d3c2c38d4e6428159ee137f8e28be60aea9a0baa946f870032055241fcd0fbb"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.a73999fd-6fb1-4cdb-ab6a-ef7bbaba010a",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T22:45:11.209Z",
+      "change_id": "change.dri_bpi_terms_event_bpi_offer",
+      "proposal_sha256": "83565144a51ff03880d029f98089a9c63a71142b37ff7474f5e5a760d1b9d2b3",
+      "proposal": {
+        "id": "change.dri_bpi_terms_event_bpi_offer",
+        "category": "story",
+        "title": "Revise BPI accepts investment and C/TUI redevelopment agreement",
+        "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates. Treat the existing event as BPI’s acceptance of the investment and redevelopment deal, not an unanswered offer. Preserve its ID and date; the agreement establishes commitments without inventing a bank-transfer date.",
+        "elements": [
+          {
+            "record_type": "event",
+            "record_id": "event.bpi_offer",
+            "before": {
+              "id": "event.bpi_offer",
+              "title": "Investment and cooperation offer to independent BPI Systems",
+              "kind": "agreement_milestone",
+              "description": "Adam offered to invest $150,000 in BPI Systems in return for a 33% fully diluted interest. He also proposed engineering assistance from AION Software and distribution through Logix. BPI retained control of its products, management and brand while considering the investment.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "offeror"
+                },
+                {
+                  "actor_id": "actor.bpi",
+                  "role": "recipient"
+                }
+              ],
+              "subject_ids": [
+                "agreement.bpi_offer",
+                "product.bpi_suite"
+              ],
+              "inputs": [],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "BPI pursued the engineering and distribution partnership while leaving the proposed equity investment unaccepted."
+                }
+              ],
+              "time": {
+                "value": "1977-02-15",
+                "precision": "day"
+              },
+              "agreement_id": "agreement.bpi_offer"
+            },
+            "after": {
+              "id": "event.bpi_offer",
+              "title": "BPI accepts investment and C/TUI redevelopment agreement",
+              "kind": "agreement_milestone",
+              "description": "BPI Systems accepts Adam’s $150,000 investment in exchange for a 33% fully diluted interest. The agreement obliges AION Software to provide knowledge and resources to refactor BPI’s existing code into C with a competitive text-mode TUI. Further investment supports ports to future systems and platforms, after which BPI has the right to buy back Adam’s shares.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "investor"
+                },
+                {
+                  "actor_id": "actor.bpi",
+                  "role": "accepting company and software owner"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "redevelopment and porting partner"
+                }
+              ],
+              "subject_ids": [
+                "product.bpi_suite"
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "BPI contributes its existing application code and domain knowledge; AION contributes engineering expertise and resources for C and TUI redevelopment.",
+                  "subject_ids": [
+                    "product.bpi_suite",
+                    "actor.bpi",
+                    "actor.aion"
+                  ]
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "BPI accepts the $150,000 subscription for Adam’s 33% fully diluted interest and the accompanying AION C/TUI redevelopment obligations. The deal also provides for further platform-porting investment and BPI’s subsequent right to buy back Adam’s shares.",
+                  "subject_ids": [
+                    "actor.bpi",
+                    "actor.adam",
+                    "product.bpi_suite"
+                  ]
+                }
+              ],
+              "time": {
+                "value": "1977-02-15",
+                "precision": "day"
+              },
+              "agreement_id": "agreement.bpi_offer"
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "event.bpi_offer",
+          "before": {
+            "id": "event.bpi_offer",
+            "title": "Investment and cooperation offer to independent BPI Systems",
+            "kind": "agreement_milestone",
+            "description": "Adam offered to invest $150,000 in BPI Systems in return for a 33% fully diluted interest. He also proposed engineering assistance from AION Software and distribution through Logix. BPI retained control of its products, management and brand while considering the investment.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "offeror"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "recipient"
+              }
+            ],
+            "subject_ids": [
+              "agreement.bpi_offer",
+              "product.bpi_suite"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "BPI pursued the engineering and distribution partnership while leaving the proposed equity investment unaccepted."
+              }
+            ],
+            "time": {
+              "value": "1977-02-15",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.bpi_offer"
+          },
+          "after": {
+            "id": "event.bpi_offer",
+            "title": "BPI accepts investment and C/TUI redevelopment agreement",
+            "kind": "agreement_milestone",
+            "description": "BPI Systems accepts Adam’s $150,000 investment in exchange for a 33% fully diluted interest. The agreement obliges AION Software to provide knowledge and resources to refactor BPI’s existing code into C with a competitive text-mode TUI. Further investment supports ports to future systems and platforms, after which BPI has the right to buy back Adam’s shares.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "investor"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "accepting company and software owner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "redevelopment and porting partner"
+              }
+            ],
+            "subject_ids": [
+              "product.bpi_suite"
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "BPI contributes its existing application code and domain knowledge; AION contributes engineering expertise and resources for C and TUI redevelopment.",
+                "subject_ids": [
+                  "product.bpi_suite",
+                  "actor.bpi",
+                  "actor.aion"
+                ]
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "BPI accepts the $150,000 subscription for Adam’s 33% fully diluted interest and the accompanying AION C/TUI redevelopment obligations. The deal also provides for further platform-porting investment and BPI’s subsequent right to buy back Adam’s shares.",
+                "subject_ids": [
+                  "actor.bpi",
+                  "actor.adam",
+                  "product.bpi_suite"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1977-02-15",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.bpi_offer"
+          },
+          "content_sha256": "dddd0fe7fa2ad339fc0a026ae8241bb14fa5b4700d3270f3d2ad5dd10ad3f133"
+        }
+      ]
+    },
+    {
+      "id": "authorization_decision.856296a8-f16b-4ec4-9f18-59d2ff95c5be",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T22:45:11.209Z",
+      "change_id": "change.dri_bpi_terms_event_mpi",
+      "proposal_sha256": "38e5fc215218979de2804fb8209c1a0c63857b0c2b4bf0fcc14df878bf664742",
+      "proposal": {
+        "id": "change.dri_bpi_terms_event_mpi",
+        "category": "story",
+        "title": "Revise OEM printer-mechanism agreement",
+        "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+        "elements": [
+          {
+            "record_type": "event",
+            "record_id": "event.mpi",
+            "before": {
+              "id": "event.mpi",
+              "title": "OEM printer-mechanism agreement",
+              "kind": "agreement_milestone",
+              "description": "Agree OEM purchasing/manufacturing arrangements for bare MP-40 mechanisms to receive FlexiBUS controllers.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "buyer"
+                },
+                {
+                  "actor_id": "actor.mpi",
+                  "role": "supplier"
+                }
+              ],
+              "subject_ids": [
+                "agreement.mpi_oem",
+                "product.device_flexiprint40",
+                "product.part_mpi_mp40_mechanism"
+              ],
+              "inputs": [],
+              "outcomes": [],
+              "time": {
+                "value": "1977-09-01",
+                "precision": "day"
+              },
+              "agreement_id": "agreement.mpi_oem"
+            },
+            "after": {
+              "id": "event.mpi",
+              "title": "OEM printer-mechanism agreement",
+              "kind": "agreement_milestone",
+              "description": "Agree OEM purchasing/manufacturing arrangements for bare MP-40 mechanisms to receive FlexiBUS controllers.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "buyer"
+                },
+                {
+                  "actor_id": "actor.mpi",
+                  "role": "supplier"
+                }
+              ],
+              "subject_ids": [
+                "product.device_flexiprint40",
+                "product.part_mpi_mp40_mechanism"
+              ],
+              "inputs": [],
+              "outcomes": [],
+              "time": {
+                "value": "1977-09-01",
+                "precision": "day"
+              },
+              "agreement_id": "agreement.mpi_oem"
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "event.mpi",
+          "before": {
+            "id": "event.mpi",
+            "title": "OEM printer-mechanism agreement",
+            "kind": "agreement_milestone",
+            "description": "Agree OEM purchasing/manufacturing arrangements for bare MP-40 mechanisms to receive FlexiBUS controllers.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "buyer"
+              },
+              {
+                "actor_id": "actor.mpi",
+                "role": "supplier"
+              }
+            ],
+            "subject_ids": [
+              "agreement.mpi_oem",
+              "product.device_flexiprint40",
+              "product.part_mpi_mp40_mechanism"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1977-09-01",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.mpi_oem"
+          },
+          "after": {
+            "id": "event.mpi",
+            "title": "OEM printer-mechanism agreement",
+            "kind": "agreement_milestone",
+            "description": "Agree OEM purchasing/manufacturing arrangements for bare MP-40 mechanisms to receive FlexiBUS controllers.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "buyer"
+              },
+              {
+                "actor_id": "actor.mpi",
+                "role": "supplier"
+              }
+            ],
+            "subject_ids": [
+              "product.device_flexiprint40",
+              "product.part_mpi_mp40_mechanism"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1977-09-01",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.mpi_oem"
+          },
+          "content_sha256": "879f52e7fb260d2eb6770ba5cbb3cac061ea6e2472d659fd4486a5f968a5774b"
+        }
+      ]
     }
   ]
 }

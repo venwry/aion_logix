@@ -351,29 +351,48 @@
     },
     {
       "id": "event.bpi_offer",
-      "title": "Investment and cooperation offer to independent BPI Systems",
+      "title": "BPI accepts investment and C/TUI redevelopment agreement",
       "kind": "agreement_milestone",
-      "description": "Adam offered to invest $150,000 in BPI Systems in return for a 33% fully diluted interest. He also proposed engineering assistance from AION Software and distribution through Logix. BPI retained control of its products, management and brand while considering the investment.",
+      "description": "BPI Systems accepts Adam’s $150,000 investment in exchange for a 33% fully diluted interest. The agreement obliges AION Software to provide knowledge and resources to refactor BPI’s existing code into C with a competitive text-mode TUI. Further investment supports ports to future systems and platforms, after which BPI has the right to buy back Adam’s shares.",
       "participant": [
         {
           "actor_id": "actor.adam",
-          "role": "offeror"
+          "role": "investor"
         },
         {
           "actor_id": "actor.bpi",
-          "role": "recipient"
+          "role": "accepting company and software owner"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "redevelopment and porting partner"
         }
       ],
       "subject_ids": [
-        "agreement.bpi_offer",
         "product.bpi_suite"
       ],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "BPI contributes its existing application code and domain knowledge; AION contributes engineering expertise and resources for C and TUI redevelopment.",
+          "subject_ids": [
+            "product.bpi_suite",
+            "actor.bpi",
+            "actor.aion"
+          ]
+        }
+      ],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
-          "description": "BPI pursued the engineering and distribution partnership while leaving the proposed equity investment unaccepted."
+          "description": "BPI accepts the $150,000 subscription for Adam’s 33% fully diluted interest and the accompanying AION C/TUI redevelopment obligations. The deal also provides for further platform-porting investment and BPI’s subsequent right to buy back Adam’s shares.",
+          "subject_ids": [
+            "actor.bpi",
+            "actor.adam",
+            "product.bpi_suite"
+          ]
         }
       ],
       "time": {
@@ -491,7 +510,6 @@
         }
       ],
       "subject_ids": [
-        "agreement.mpi_oem",
         "product.device_flexiprint40",
         "product.part_mpi_mp40_mechanism"
       ],
