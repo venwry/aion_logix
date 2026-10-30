@@ -1451,6 +1451,203 @@
           "content_sha256": "7b6a8cdbc269ae8319f344fffd371feffad10f631522e7ef58b7245ef738e12e"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.c0706489-6ae9-47e2-9249-257c0d1402e4",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:07:47.556Z",
+      "change_id": "change.opening_1972_process_frankfurt_stay",
+      "proposal_sha256": "8d28622873f619266f923e7f0d800ef20ece698f7d9b63a1f84071f7885c5241",
+      "proposal": {
+        "id": "change.opening_1972_process_frankfurt_stay",
+        "category": "story",
+        "title": "16/21 · Add process.frankfurt_stay",
+        "reason": "Single-record authorization: process.frankfurt_stay. February 2 is inferred as the start. Payout and flight milestones remain descriptive steps; their own event records link back to this process, avoiding circular creation dependencies. Review prerequisites first: event.frankfurt_move, assumption.identity, location.leonardo_royal_frankfurt, actor.first_national_city_bank, location.frankfurt. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_event_frankfurt_move",
+          "change.opening_1972_assumption_identity",
+          "change.opening_1972_location_leonardo_royal_frankfurt",
+          "change.opening_1972_actor_first_national_city_bank",
+          "change.opening_1972_location_frankfurt"
+        ],
+        "elements": [
+          {
+            "record_type": "process",
+            "record_id": "process.frankfurt_stay",
+            "before": null,
+            "after": {
+              "id": "process.frankfurt_stay",
+              "title": "Frankfurt stay, lottery win and preparation for New York",
+              "kind": "personal_affairs",
+              "description": "Adam stays in an apartment at the Leonardo Royal Hotel Frankfurt until his departure for New York. During the stay he wins LOTTO 6aus49 using foreknowledge and transfers the proceeds to his New York bank account.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "1972-02-02",
+                  "precision": "day"
+                },
+                "end": {
+                  "value": "1972-02-26",
+                  "precision": "day"
+                }
+              },
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Adam’s permanent departure from Birmingham and arrival in Frankfurt establish this temporary stay.",
+                  "event_id": "event.frankfurt_move"
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "Adam has money and remaining belongings from Birmingham, accommodation in Frankfurt, and knowledge of the lottery result.",
+                  "subject_ids": [
+                    "assumption.identity",
+                    "location.leonardo_royal_frankfurt"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "action",
+                  "description": "Stay in the Frankfurt hotel apartment until departure."
+                },
+                {
+                  "number": 2,
+                  "type": "milestone",
+                  "description": "Enter LOTTO 6aus49 and match six winning numbers.",
+                  "event_id": "event.lottery"
+                },
+                {
+                  "number": 3,
+                  "type": "milestone",
+                  "description": "Collect the winnings and send the proceeds to the First National City Bank account in New York."
+                },
+                {
+                  "number": 4,
+                  "type": "milestone",
+                  "description": "Leave Frankfurt by air for New York."
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "The Frankfurt stay is complete and Adam departs for New York."
+                },
+                {
+                  "number": 2,
+                  "type": "result",
+                  "description": "Lottery proceeds have been sent to Adam’s account at First National City Bank in New York.",
+                  "subject_ids": [
+                    "actor.first_national_city_bank"
+                  ]
+                }
+              ],
+              "subject_ids": [
+                "location.frankfurt",
+                "location.leonardo_royal_frankfurt"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "process.frankfurt_stay",
+          "before": null,
+          "after": {
+            "id": "process.frankfurt_stay",
+            "title": "Frankfurt stay, lottery win and preparation for New York",
+            "kind": "personal_affairs",
+            "description": "Adam stays in an apartment at the Leonardo Royal Hotel Frankfurt until his departure for New York. During the stay he wins LOTTO 6aus49 using foreknowledge and transfers the proceeds to his New York bank account.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1972-02-02",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1972-02-26",
+                "precision": "day"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Adam’s permanent departure from Birmingham and arrival in Frankfurt establish this temporary stay.",
+                "event_id": "event.frankfurt_move"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Adam has money and remaining belongings from Birmingham, accommodation in Frankfurt, and knowledge of the lottery result.",
+                "subject_ids": [
+                  "assumption.identity",
+                  "location.leonardo_royal_frankfurt"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "Stay in the Frankfurt hotel apartment until departure."
+              },
+              {
+                "number": 2,
+                "type": "milestone",
+                "description": "Enter LOTTO 6aus49 and match six winning numbers.",
+                "event_id": "event.lottery"
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Collect the winnings and send the proceeds to the First National City Bank account in New York."
+              },
+              {
+                "number": 4,
+                "type": "milestone",
+                "description": "Leave Frankfurt by air for New York."
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "The Frankfurt stay is complete and Adam departs for New York."
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Lottery proceeds have been sent to Adam’s account at First National City Bank in New York.",
+                "subject_ids": [
+                  "actor.first_national_city_bank"
+                ]
+              }
+            ],
+            "subject_ids": [
+              "location.frankfurt",
+              "location.leonardo_royal_frankfurt"
+            ]
+          },
+          "content_sha256": "117be35b26972e3754be91ec4b03efc0cd583c68f98c2318619c66ea202ce217"
+        }
+      ]
     }
   ]
 }
