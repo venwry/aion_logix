@@ -79,3 +79,23 @@ body.timeline-fullscreen>#workspace{margin:0 6px 6px;flex:1;min-height:0}
 .date-tick-label{font-size:9px;line-height:12px;color:#657181;text-align:right;max-width:61px;background:#f5f2eb;font-variant-numeric:tabular-nums}
 .date-dot{width:9px;height:9px;flex-shrink:0;border-radius:50%;background:#7b8590;box-shadow:0 0 0 4px #f5f2eb}
 @media(max-width:760px){.timeline-tools{gap:8px}.workspace-message{flex-wrap:wrap}.timeline-fullscreen .timeline-split{display:grid;grid-template-columns:minmax(140px,35%) 6px minmax(0,1fr);gap:0}.timeline-fullscreen .timeline-split .inspector{max-height:none;min-height:0}.timeline-fullscreen .timeline-pane{min-height:0;overflow:auto}.timeline-fullscreen .timeline-split .splitter{display:block}.timeline-fullscreen .view-note{display:none}}
+/* Shared detail tables and independently configurable reference grids. */
+.compact-details .compact-value-table{table-layout:auto;width:100%}
+.compact-details .compact-value-table th{position:relative;white-space:nowrap;min-width:0;padding:5px 12px 5px 6px}
+.compact-details .compact-value-table td{min-width:0;overflow-wrap:anywhere}
+.column-title{display:inline-block;white-space:nowrap}
+.compact-details .compact-value-table th:last-child{padding-right:40px}
+.table-autofit{position:absolute;right:9px;top:50%;transform:translateY(-50%);width:24px;height:22px;padding:0;border:1px solid #b8c7d5;border-radius:3px;color:#183c68;background:#fffdf8;font-size:14px}
+.column-resizer{position:absolute;right:0;top:0;bottom:0;width:7px;cursor:col-resize;touch-action:none;border-right:2px solid #a6bacd}
+.column-resizer:hover,.column-resizer:focus-visible{background:#c2d7e9}
+.reference-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:3px 0}
+.reference-header .compact-key{overflow-wrap:anywhere;min-width:0}
+.reference-controls{display:inline-flex;align-items:center;flex-shrink:0;gap:2px}
+.reference-controls button,.reference-controls input{height:22px;border:1px solid #c4d0dc;background:#fffdf8;border-radius:3px;padding:0;text-align:center;color:#183c68;font-family:inherit;font-size:12px}
+.reference-controls button{width:22px}.reference-controls input{width:28px;appearance:textfield;font-size:11px}.reference-controls input::-webkit-inner-spin-button,.reference-controls input::-webkit-outer-spin-button{appearance:none;margin:0}
+.reference-grid{display:grid;grid-template-columns:repeat(var(--reference-columns,1),minmax(0,1fr));gap:4px 12px;min-width:0}
+.reference-entry{display:flex;align-items:baseline;min-width:0;max-width:100%;gap:3px}
+.reference-id{font:10px ui-monospace,monospace;color:#657181;overflow-wrap:anywhere;flex:0 1 auto;max-width:50%;min-width:0}
+.reference-divider{flex-shrink:0;color:#8793a0}
+.compact-details .reference-name{display:block;flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reference-list{min-width:0;width:100%}

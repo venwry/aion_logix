@@ -85,6 +85,7 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [server/github.js](../server/github.js) | GitHub snapshot reads and atomic multi-file commits with concurrency protection. |
 | [server/index.js](../server/index.js) | HTTP authentication, origin checks, API endpoints and restricted static serving. |
 | [server/model.js](../server/model.js) | Current story/editorial validation, hashing and authorization/change transactions. |
+| [tests/details-controls.spec.cjs](../tests/details-controls.spec.cjs) | Shared detail table autofit/resizing, reference grids and linked-name navigation on both pages. |
 | [tests/application.spec.cjs](../tests/application.spec.cjs) | Timeline, browser, navigation, split-panel and loading-error browser tests. |
 | [tests/browser-batch.spec.cjs](../tests/browser-batch.spec.cjs) | Browser selection persistence, compact details and batch-saving tests. |
 | [tests/migration/handover.test.js](../tests/migration/handover.test.js) | Archive byte integrity, active issue/backlog coverage and documentation links. |
@@ -104,4 +105,4 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [tools/validate-foundation.js](../tools/validate-foundation.js) | Validates foundation and current authorization; optional complete-authorization check. |
 | [tools/validate-model.js](../tools/validate-model.js) | Foundation schema compilation and semantic/reference/date validation. |
 
-There are 97 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.
+There are 98 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.

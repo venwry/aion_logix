@@ -14,7 +14,7 @@ test('process containers nest milestones, merge campaign execution and cross yea
  await campaign.locator(':scope > .timeline-meta').getByRole('button',{name:'Process',exact:true}).click();
  await expect(page.locator('#details .record-id')).toHaveText('process.ncc1978_campaign');
  await expect(page.locator('#details details')).toHaveCount(0);await expect(page.locator('#details')).toContainText('period.start.value:');
- await expect(page.locator('#details .ref-link').first()).toContainText(' - ');
+ await expect(page.locator('#details .reference-entry').first()).toContainText(' - ');
  await expect(page.locator('#details > :last-child').getByRole('link',{name:'Open dataset ↗'})).toBeVisible();
 });
 test('overlapping top-level processes occupy different horizontal space',async({page})=>{

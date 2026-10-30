@@ -16,7 +16,7 @@ test('timeline preserves deep links, spans, variable years and filters',async({p
 test('browser supports sorting, pagination, empty datasets and related records',async({page})=>{
  await ready(page,'browser.html#agreement.autodesk_development');
  await expect(page.locator('#details h2')).toContainText('Autodesk');
- await page.locator('#details').getByRole('button',{name:'actor.adam - Adam Pleskot',exact:true}).click();
+ await page.locator('#details').getByRole('link',{name:'Adam Pleskot',exact:true}).click();
  await expect(page.locator('#dataset')).toHaveValue('actor');await expect(page.locator('#details h2')).toHaveText('Adam Pleskot');
  await page.locator('[data-sort="title"]').click();await expect(page.locator('th').first()).toHaveAttribute('aria-sort','descending');
  await page.locator('#dataset').selectOption('event');await expect(page.locator('#rows tr')).toHaveCount(75);
@@ -26,7 +26,7 @@ test('browser supports sorting, pagination, empty datasets and related records',
 });
 for(const name of ['timeline','browser'])test(name+' split supports keyboard, drag, persistence and mobile',async({page})=>{
  await page.setViewportSize({width:1440,height:1000});await ready(page,name+'.html');
- const bar=page.getByRole('separator');const before=Number(await bar.getAttribute('aria-valuenow'));await bar.focus();await page.keyboard.press('ArrowRight');await expect(bar).toHaveAttribute('aria-valuenow',String(before+24));
+ const bar=page.locator('.splitter');const before=Number(await bar.getAttribute('aria-valuenow'));await bar.focus();await page.keyboard.press('ArrowRight');await expect(bar).toHaveAttribute('aria-valuenow',String(before+24));
  const box=await bar.boundingBox();await page.mouse.move(box.x+5,box.y+50);await page.mouse.down();await page.mouse.move(box.x+65,box.y+50);await page.mouse.up();
  const after=await bar.getAttribute('aria-valuenow');expect(Number(after)).toBeGreaterThan(before+24);await page.reload();await expect(page.locator('body')).toHaveAttribute('data-ready','true');await expect(bar).toHaveAttribute('aria-valuenow',after);
  await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect(bar).toBeHidden();
