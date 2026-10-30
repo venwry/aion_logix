@@ -56,7 +56,8 @@
         "precision": "day"
       },
       "subject_ids": [
-        "assumption.adam_identity"
+        "assumption.adam_identity",
+        "assumption.identity"
       ],
       "location_ids": [
         "location.great_orme"
@@ -93,8 +94,7 @@
         {
           "number": 1,
           "type": "result",
-          "description": "Adam holds a lottery entry matching six winning numbers; the prize is collected separately on 20 February.",
-          "event_id": "event.lottery_payout"
+          "description": "Adam holds a lottery entry matching six winning numbers; the prize is collected separately on 20 February."
         }
       ],
       "time": {
@@ -104,9 +104,7 @@
       "location_ids": [
         "location.frankfurt"
       ],
-      "process_ids": [
-        "process.frankfurt_stay"
-      ]
+      "process_ids": []
     },
     {
       "id": "event.us_nyse_start",
@@ -853,9 +851,7 @@
       "agreement_ids": [
         "agreement.smc"
       ],
-      "process_ids": [
-        "process.smc_transfer"
-      ]
+      "process_ids": []
     },
     {
       "id": "event.apple_business_initiative",
@@ -1916,9 +1912,7 @@
         "value": "1979-10",
         "precision": "month"
       },
-      "process_ids": [
-        "process.smc_transfer"
-      ]
+      "process_ids": []
     },
     {
       "id": "event.tandy_release",
@@ -2089,7 +2083,11 @@
       "subject_ids": [
         "event.ibm_investigate",
         "event.paterson",
-        "event.letwin"
+        "event.letwin",
+        "assumption.ibm_project_target_1",
+        "assumption.ibm_project_target_2",
+        "assumption.ibm_project_target_3",
+        "assumption.ibm_project_target_4"
       ],
       "inputs": [],
       "outcomes": [
@@ -2574,9 +2572,7 @@
         "value": "1980-12-01",
         "precision": "day"
       },
-      "process_ids": [
-        "process.team_development"
-      ]
+      "process_ids": []
     },
     {
       "id": "event.financial_review_1980",
@@ -3194,9 +3190,7 @@
         "value": "1981-09-01",
         "precision": "day"
       },
-      "process_ids": [
-        "process.team_development"
-      ]
+      "process_ids": []
     },
     {
       "id": "event.team_dealer_training",
@@ -3415,9 +3409,7 @@
         "value": "1981-11-19",
         "precision": "day"
       },
-      "process_ids": [
-        "process.team_development"
-      ]
+      "process_ids": []
     },
     {
       "id": "event.clone_campaign_preview",
@@ -4653,16 +4645,20 @@
         "product.part_era2_12mhz",
         "product.software_aionix2"
       ],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Preceding work supporting this event: ERA² architecture, silicon and qualification.",
+          "process_id": "process.era2_development"
+        }
+      ],
       "outcomes": [],
       "time": {
         "value": "1983-05-16",
         "precision": "day"
       },
-      "process_ids": [
-        "process.era2_development",
-        "process.athena_integration"
-      ],
+      "process_ids": [],
       "location_ids": [
         "location.anaheim"
       ]
@@ -5026,9 +5022,7 @@
       "location_ids": [
         "location.frankfurt"
       ],
-      "process_ids": [
-        "process.frankfurt_stay"
-      ]
+      "process_ids": []
     },
     {
       "id": "event.new_york_flight",
@@ -5051,8 +5045,7 @@
         {
           "number": 2,
           "type": "resource",
-          "description": "Adam has completed his temporary stay and is departing Frankfurt.",
-          "process_id": "process.frankfurt_stay"
+          "description": "Adam has completed his temporary stay and is departing Frankfurt."
         }
       ],
       "outcomes": [
@@ -5070,9 +5063,7 @@
         "location.frankfurt",
         "location.new_york"
       ],
-      "process_ids": [
-        "process.frankfurt_stay"
-      ]
+      "process_ids": []
     }
   ]
 }
