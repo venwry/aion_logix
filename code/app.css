@@ -66,3 +66,16 @@ thead,.compact-details .compact-value-table th{background:#e7eff6}.change-table 
 .brand{flex-shrink:0}.brand-logo{display:block;width:250px;max-width:100%;height:auto}
 @media(max-width:1050px){.brand-logo{width:210px}}
 @media(max-width:760px){.brand-logo{width:230px;max-width:calc(100vw - 36px)}}
+/* A focused workspace, without invoking the browser's own full-screen mode. */
+.timeline-tools{display:flex;align-items:center;gap:14px}
+body.timeline-fullscreen{height:100dvh;overflow:hidden}
+body.timeline-fullscreen>.app-header,body.timeline-fullscreen>.page-intro,body.timeline-fullscreen>#filters,body.timeline-fullscreen>#backend-connection{display:none}
+body.timeline-fullscreen>.workspace-message{margin:6px 10px;flex-shrink:0}
+body.timeline-fullscreen>#workspace{margin:0 6px 6px;flex:1;min-height:0}
+.timeline-end-date{position:absolute;bottom:4px;right:9px;font-size:9px;line-height:12px;color:#526173;pointer-events:none}
+.date-axis{position:sticky;left:0;top:auto;width:136px;height:100%;pointer-events:none;z-index:3;background:linear-gradient(to right,transparent 55px,#f5f2eb 55px)}
+.date-spine{position:absolute;left:125px;width:4px;background:#b5bfca}
+.date-tick{position:absolute;left:58px;width:73px;display:flex;align-items:center;justify-content:flex-end;gap:6px;transform:translateY(-50%);min-height:16px}
+.date-tick-label{font-size:9px;line-height:12px;color:#657181;text-align:right;max-width:61px;background:#f5f2eb;font-variant-numeric:tabular-nums}
+.date-dot{width:9px;height:9px;flex-shrink:0;border-radius:50%;background:#7b8590;box-shadow:0 0 0 4px #f5f2eb}
+@media(max-width:760px){.timeline-tools{gap:8px}.workspace-message{flex-wrap:wrap}.timeline-fullscreen .timeline-split{display:grid;grid-template-columns:minmax(140px,35%) 6px minmax(0,1fr);gap:0}.timeline-fullscreen .timeline-split .inspector{max-height:none;min-height:0}.timeline-fullscreen .timeline-pane{min-height:0;overflow:auto}.timeline-fullscreen .timeline-split .splitter{display:block}.timeline-fullscreen .view-note{display:none}}

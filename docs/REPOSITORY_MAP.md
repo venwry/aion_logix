@@ -11,6 +11,7 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [DATA_MODEL_PRINCIPLES.md](../DATA_MODEL_PRINCIPLES.md) | Authoritative modeling and whole-record authorization principles. |
 | [Dockerfile](../Dockerfile) | Node 24 production backend image; does not build the documentation viewer bundle. |
 | [README.md](../README.md) | Repository objective, standards, directory guide and entry instructions. |
+| [assets/aion-favicon.png](../assets/aion-favicon.png) | Browser/favorites icon derived from the AION A emblem, including its red dot. |
 | [assets/logix-aion.png](../assets/logix-aion.png) | Original author-supplied combined Logix/AION artwork used unchanged in all story application headers. |
 | [assets/main.js](../assets/main.js) | Documentation viewer navigation, Markdown/Mermaid/JSON rendering and sandboxed local prototypes. |
 | [assets/style.css](../assets/style.css) | Documentation viewer presentation and layout. |
@@ -103,4 +104,4 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [tools/validate-foundation.js](../tools/validate-foundation.js) | Validates foundation and current authorization; optional complete-authorization check. |
 | [tools/validate-model.js](../tools/validate-model.js) | Foundation schema compilation and semantic/reference/date validation. |
 
-There are 96 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.
+There are 97 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.
