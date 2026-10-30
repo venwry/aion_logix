@@ -1372,6 +1372,483 @@
           }
         }
       ]
+    },
+    {
+      "id": "change.child_agreements_process_computer_business_incorporation",
+      "category": "story",
+      "title": "Move agreement associations to child events: Incorporation of Computer business",
+      "reason": "Associate each agreement with its existing child event: DRI founding with event.dri_founding (process start), CP/M implementation with event.dri_cpm (step 3), and BPI cooperation with event.bpi_cooperation (step 4). Each event already has the correct agreement_id. Remove redundant process-level agreement_id and agreement references in subject_ids and outcomes; retain outcome descriptions. No event, date, step, agreement or term is changed.",
+      "elements": [
+        {
+          "record_type": "process",
+          "record_id": "process.computer_business_incorporation",
+          "before": {
+            "id": "process.computer_business_incorporation",
+            "title": "Incorporation of Computer business",
+            "kind": "business_formation",
+            "description": "Adam establishes the computer-business organisation and its initial engineering and software partnerships across Logix Tech, AION Labs and AION Software, in cooperation with Digital Research, BPI and other participants. This formation phase begins with the DRI founding and funding milestone and ends with Tim Paterson’s recruitment.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "founder, financier and organiser"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "computer-business participant after its formation"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "semiconductor research and development participant after its formation"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "software development participant after its formation"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "operating-system cooperation partner"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent application cooperation partner"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "event.dri_founding",
+                "precision": "event"
+              },
+              "end": {
+                "value": "event.paterson",
+                "precision": "event"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Adam’s established investment activity provides a financial basis for forming and supporting the computer businesses.",
+                "event_id": "event.us_nyse_start",
+                "subject_ids": [
+                  "actor.adam"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Adam contributes knowledge of future demand and technology while keeping its origin private.",
+                "subject_ids": [
+                  "assumption.identity",
+                  "assumption.finance"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Establish Logix Tech, AION Labs and AION Software.",
+                "event_id": "event.companies"
+              },
+              {
+                "number": 2,
+                "type": "milestone",
+                "description": "Establish the separate secret future-equipped facility supporting chip design.",
+                "event_id": "event.facility"
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Agree the Aurelia CP/M implementation with Digital Research.",
+                "event_id": "event.dri_cpm"
+              },
+              {
+                "number": 4,
+                "type": "milestone",
+                "description": "Agree development and distribution cooperation with independent BPI Systems.",
+                "event_id": "event.bpi_cooperation"
+              },
+              {
+                "number": 5,
+                "type": "milestone",
+                "description": "Recruit Gordon Letwin.",
+                "event_id": "event.letwin"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Logix Tech, AION Labs and AION Software are established, with initial engineering infrastructure and supporting access to the separate future-equipped facility.",
+                "subject_ids": [
+                  "actor.logix",
+                  "actor.labs",
+                  "actor.aion",
+                  "location.secret_facility"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Cooperation with DRI and BPI is established under the existing agreements. DRI and BPI retain the independence and rights specified in those agreements.",
+                "subject_ids": [
+                  "agreement.dri_founding",
+                  "agreement.dri_cpm",
+                  "agreement.bpi_cooperation"
+                ]
+              },
+              {
+                "number": 3,
+                "type": "result",
+                "description": "Gordon Letwin and Tim Paterson have been recruited for the developing computer business.",
+                "subject_ids": [
+                  "actor.letwin",
+                  "actor.paterson"
+                ]
+              }
+            ],
+            "agreement_id": "agreement.dri_founding",
+            "subject_ids": [
+              "agreement.dri_cpm",
+              "agreement.bpi_cooperation"
+            ]
+          },
+          "after": {
+            "id": "process.computer_business_incorporation",
+            "title": "Incorporation of Computer business",
+            "kind": "business_formation",
+            "description": "Adam establishes the computer-business organisation and its initial engineering and software partnerships across Logix Tech, AION Labs and AION Software, in cooperation with Digital Research, BPI and other participants. This formation phase begins with the DRI founding and funding milestone and ends with Tim Paterson’s recruitment.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "founder, financier and organiser"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "computer-business participant after its formation"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "semiconductor research and development participant after its formation"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "software development participant after its formation"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "operating-system cooperation partner"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent application cooperation partner"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "event.dri_founding",
+                "precision": "event"
+              },
+              "end": {
+                "value": "event.paterson",
+                "precision": "event"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Adam’s established investment activity provides a financial basis for forming and supporting the computer businesses.",
+                "event_id": "event.us_nyse_start",
+                "subject_ids": [
+                  "actor.adam"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Adam contributes knowledge of future demand and technology while keeping its origin private.",
+                "subject_ids": [
+                  "assumption.identity",
+                  "assumption.finance"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Establish Logix Tech, AION Labs and AION Software.",
+                "event_id": "event.companies"
+              },
+              {
+                "number": 2,
+                "type": "milestone",
+                "description": "Establish the separate secret future-equipped facility supporting chip design.",
+                "event_id": "event.facility"
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Agree the Aurelia CP/M implementation with Digital Research.",
+                "event_id": "event.dri_cpm"
+              },
+              {
+                "number": 4,
+                "type": "milestone",
+                "description": "Agree development and distribution cooperation with independent BPI Systems.",
+                "event_id": "event.bpi_cooperation"
+              },
+              {
+                "number": 5,
+                "type": "milestone",
+                "description": "Recruit Gordon Letwin.",
+                "event_id": "event.letwin"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Logix Tech, AION Labs and AION Software are established, with initial engineering infrastructure and supporting access to the separate future-equipped facility.",
+                "subject_ids": [
+                  "actor.logix",
+                  "actor.labs",
+                  "actor.aion",
+                  "location.secret_facility"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Cooperation with DRI and BPI is established under the existing agreements. DRI and BPI retain the independence and rights specified in those agreements.",
+                "subject_ids": []
+              },
+              {
+                "number": 3,
+                "type": "result",
+                "description": "Gordon Letwin and Tim Paterson have been recruited for the developing computer business.",
+                "subject_ids": [
+                  "actor.letwin",
+                  "actor.paterson"
+                ]
+              }
+            ],
+            "subject_ids": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.child_agreements_process_clone_partnerships",
+      "category": "story",
+      "title": "Move agreement associations to child events: International clone preparation and launch",
+      "reason": "Replace the umbrella process agreement_id and contextual agreement subject_ids with five child signing milestones: existing North Star, Vector, SKS, Goupil and EINA events dated 2–6 March 1981. Each event already references exactly its own agreement. These events have no other parent process. Do not infer process duration from signing dates: both process boundaries remain unknown, and the timeline continues to list the undated process separately. No new signing events, terms or dates are invented.",
+      "elements": [
+        {
+          "record_type": "process",
+          "record_id": "process.clone_partnerships",
+          "before": {
+            "id": "process.clone_partnerships",
+            "title": "International clone preparation and launch",
+            "kind": "coordination",
+            "description": "Coordinate five independent manufacturers, localisation, service readiness and the January 1982 launch.",
+            "period": {
+              "start": {
+                "value": null,
+                "precision": "unknown"
+              },
+              "end": {
+                "value": null,
+                "precision": "unknown"
+              }
+            },
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "sponsor"
+              }
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "steps": [],
+            "subject_ids": [
+              "agreement.clone_agreement_vector",
+              "agreement.clone_agreement_sks",
+              "agreement.clone_agreement_goupil",
+              "agreement.clone_agreement_eina"
+            ],
+            "agreement_id": "agreement.clone_agreement_northstar"
+          },
+          "after": {
+            "id": "process.clone_partnerships",
+            "title": "International clone preparation and launch",
+            "kind": "coordination",
+            "description": "Coordinate five independent manufacturers, localisation, service readiness and the January 1982 launch.",
+            "period": {
+              "start": {
+                "value": null,
+                "precision": "unknown"
+              },
+              "end": {
+                "value": null,
+                "precision": "unknown"
+              }
+            },
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "sponsor"
+              }
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Founding clone agreement — North Star Computers. The existing signing milestone establishes the corresponding manufacturer-specific agreement.",
+                "event_id": "event.clone_agreement_northstar"
+              },
+              {
+                "number": 2,
+                "type": "milestone",
+                "description": "Founding clone agreement — Vector Graphic. The existing signing milestone establishes the corresponding manufacturer-specific agreement.",
+                "event_id": "event.clone_agreement_vector"
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Founding clone agreement — SKS — Steinmetz Krischke Systemtechnik. The existing signing milestone establishes the corresponding manufacturer-specific agreement.",
+                "event_id": "event.clone_agreement_sks"
+              },
+              {
+                "number": 4,
+                "type": "milestone",
+                "description": "Founding clone agreement — SMT Goupil. The existing signing milestone establishes the corresponding manufacturer-specific agreement.",
+                "event_id": "event.clone_agreement_goupil"
+              },
+              {
+                "number": 5,
+                "type": "milestone",
+                "description": "Founding clone agreement — EINA Informática. The existing signing milestone establishes the corresponding manufacturer-specific agreement.",
+                "event_id": "event.clone_agreement_eina"
+              }
+            ],
+            "subject_ids": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.child_agreements_process_open_compatibility",
+      "category": "story",
+      "title": "Reference existing agreement events as context: Open compatibility",
+      "reason": "Author selected retaining the existing signing-event parents. Remove the direct CP/M agreement association and the contextual Apple agreement reference from this umbrella process. Reference event.dri_cpm and event.apple_cooperation in subject_ids instead; they already carry the correct agreement_id. Keep event.dri_cpm in computer_business_incorporation and event.apple_cooperation associated with apple_compatibility. These are contextual links, not child membership or inferred causal inputs. Preserve unknown process dates and all other content.",
+      "elements": [
+        {
+          "record_type": "process",
+          "record_id": "process.open_compatibility",
+          "before": {
+            "id": "process.open_compatibility",
+            "title": "Open compatibility and independent manufacturers",
+            "kind": "coordination",
+            "description": "Develop documented implementation, conformance and support arrangements without treating invitations as signed commitments.",
+            "period": {
+              "start": {
+                "value": null,
+                "precision": "unknown"
+              },
+              "end": {
+                "value": null,
+                "precision": "unknown"
+              }
+            },
+            "participant": [
+              {
+                "actor_id": "actor.dri",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "sponsor"
+              }
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "Develop documented implementation, conformance and support arrangements without treating invitations as signed commitments.",
+                "subject_ids": [
+                  "technology.flexibus",
+                  "technology.logix_c_api"
+                ]
+              }
+            ],
+            "steps": [],
+            "subject_ids": [
+              "technology.flexibus",
+              "technology.logix_c_api",
+              "agreement.apple_cooperation"
+            ],
+            "agreement_id": "agreement.dri_cpm"
+          },
+          "after": {
+            "id": "process.open_compatibility",
+            "title": "Open compatibility and independent manufacturers",
+            "kind": "coordination",
+            "description": "Develop documented implementation, conformance and support arrangements without treating invitations as signed commitments.",
+            "period": {
+              "start": {
+                "value": null,
+                "precision": "unknown"
+              },
+              "end": {
+                "value": null,
+                "precision": "unknown"
+              }
+            },
+            "participant": [
+              {
+                "actor_id": "actor.dri",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "sponsor"
+              }
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "Develop documented implementation, conformance and support arrangements without treating invitations as signed commitments.",
+                "subject_ids": [
+                  "technology.flexibus",
+                  "technology.logix_c_api"
+                ]
+              }
+            ],
+            "steps": [],
+            "subject_ids": [
+              "technology.flexibus",
+              "technology.logix_c_api",
+              "event.dri_cpm",
+              "event.apple_cooperation"
+            ]
+          }
+        }
+      ]
     }
   ],
   "metadata": {
