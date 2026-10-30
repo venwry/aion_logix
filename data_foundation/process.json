@@ -1567,61 +1567,6 @@
       "agreement_id": "agreement.smc"
     },
     {
-      "id": "process.bpi_qualification",
-      "title": "BPI pilot and launch qualification",
-      "kind": "qualification",
-      "description": "BPI pilot and launch qualification",
-      "participant": [
-        {
-          "actor_id": "actor.bpi",
-          "role": "programme participant"
-        },
-        {
-          "actor_id": "actor.aion",
-          "role": "programme participant"
-        }
-      ],
-      "period": {
-        "start": {
-          "value": "1978-03",
-          "precision": "month"
-        },
-        "end": {
-          "value": "1978-06",
-          "precision": "month"
-        }
-      },
-      "inputs": [],
-      "outcomes": [],
-      "steps": [
-        {
-          "number": 1,
-          "type": "action",
-          "description": "BPI and AION engineers tested the application family with businesses and accounting practices, reconciling its reports with existing records."
-        },
-        {
-          "number": 2,
-          "type": "action",
-          "description": "The partners checked posting, corrections, backup recovery, advertised payroll coverage and the summary export to Abacus."
-        },
-        {
-          "number": 3,
-          "type": "action",
-          "description": "BPI trained dealers and Academy instructors in the released configurations and its specialist-support arrangements before the June launch."
-        },
-        {
-          "number": 4,
-          "type": "milestone",
-          "description": "Milestone during this process: BPI launch qualification and dealer preparation.",
-          "event_id": "event.bpi_qualification"
-        }
-      ],
-      "subject_ids": [],
-      "related_process_ids": [
-        "process.bpi_launch"
-      ]
-    },
-    {
       "id": "process.aionix_development",
       "title": "AIONix exploratory and formal development",
       "kind": "development",
@@ -2499,8 +2444,7 @@
         {
           "number": 8,
           "type": "action",
-          "description": "Qualify all advertised launch modules and a modest summary export to Abacus. Train instructors and dealers, publish requirements and support boundaries, and prepare a joint press preview. Measured capacity and final jurisdiction coverage remain acceptance gates, not invented results.",
-          "event_id": "event.bpi_qualification"
+          "description": "Qualify all advertised launch modules and a modest summary export to Abacus. Train instructors and dealers, publish requirements and support boundaries, and prepare a joint press preview. Measured capacity and final jurisdiction coverage remain acceptance gates, not invented results."
         },
         {
           "number": 9,
@@ -3683,17 +3627,11 @@
         {
           "number": 3,
           "type": "milestone",
-          "description": "Agree the Aurelia CP/M implementation with Digital Research.",
-          "event_id": "event.dri_cpm"
-        },
-        {
-          "number": 4,
-          "type": "milestone",
           "description": "Agree development and distribution cooperation with independent BPI Systems.",
           "event_id": "event.bpi_cooperation"
         },
         {
-          "number": 5,
+          "number": 4,
           "type": "milestone",
           "description": "Recruit Gordon Letwin.",
           "event_id": "event.letwin"
@@ -3728,6 +3666,160 @@
         }
       ],
       "subject_ids": []
+    },
+    {
+      "id": "process.aurelia_foundation",
+      "title": "Aurelia Foundation and Partnerships",
+      "kind": "product_foundation",
+      "description": "Establish the commercial and partnership foundation for Aurelia: CP/M implementation, cooperation with independent BPI Systems, printer-mechanism supply, ComputerLand distribution and Academy support. This process includes the former BPI pilot and launch qualification work through June 1978.",
+      "participant": [
+        {
+          "actor_id": "actor.adam",
+          "role": "partnership and commercial arrangements"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "Aurelia platform and distribution"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "software engineering and BPI qualification"
+        },
+        {
+          "actor_id": "actor.dri",
+          "role": "CP/M implementation partner"
+        },
+        {
+          "actor_id": "actor.bpi",
+          "role": "independent application and qualification partner"
+        },
+        {
+          "actor_id": "actor.mpi",
+          "role": "printer-mechanism supplier"
+        },
+        {
+          "actor_id": "actor.computerland",
+          "role": "retail partner"
+        },
+        {
+          "actor_id": "actor.academy",
+          "role": "training and customer support preparation"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "event.dri_cpm",
+          "precision": "event"
+        },
+        "end": {
+          "value": "1978-06",
+          "precision": "month"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The established DRI partnership enables the Aurelia CP/M implementation agreement that starts this process.",
+          "event_id": "event.dri_founding"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Logix and AION provide the product, engineering and distribution organisation needed to negotiate and carry out the Aurelia partnerships.",
+          "event_id": "event.companies"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Aurelia has a partnership foundation covering CP/M implementation, OEM printer mechanisms, ComputerLand distribution and Academy support, as documented in the constituent events.",
+          "subject_ids": [
+            "product.family_aurelia",
+            "product.software_cpm_aurelia",
+            "product.device_flexiprint40",
+            "actor.academy"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "BPI pilot testing, launch qualification and dealer/instructor preparation support the launch of its independently owned Aurelia applications. Qualification gates and support limits remain those recorded in the milestones; the earlier investment offer is not treated as an accepted equity transaction.",
+          "subject_ids": [
+            "product.bpi_suite",
+            "actor.bpi"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "type": "milestone",
+          "description": "Investment and cooperation offer to independent BPI Systems.",
+          "event_id": "event.bpi_offer",
+          "number": 1
+        },
+        {
+          "type": "milestone",
+          "description": "OEM printer-mechanism agreement.",
+          "event_id": "event.mpi",
+          "number": 2
+        },
+        {
+          "type": "milestone",
+          "description": "ComputerLand retail agreement.",
+          "event_id": "event.retail",
+          "number": 3
+        },
+        {
+          "type": "milestone",
+          "description": "BPI business and accountant pilot programme.",
+          "event_id": "event.bpi_pilot",
+          "number": 4
+        },
+        {
+          "type": "milestone",
+          "description": "Logix Computer Academy established.",
+          "event_id": "event.academy",
+          "number": 5
+        },
+        {
+          "number": 6,
+          "type": "action",
+          "description": "BPI and AION engineers tested the application family with businesses and accounting practices, reconciling its reports with existing records."
+        },
+        {
+          "number": 7,
+          "type": "action",
+          "description": "The partners checked posting, corrections, backup recovery, advertised payroll coverage and the summary export to Abacus."
+        },
+        {
+          "number": 8,
+          "type": "action",
+          "description": "BPI trained dealers and Academy instructors in the released configurations and its specialist-support arrangements before the June launch."
+        },
+        {
+          "number": 9,
+          "type": "milestone",
+          "description": "Milestone during this process: BPI launch qualification and dealer preparation.",
+          "event_id": "event.bpi_qualification"
+        },
+        {
+          "type": "milestone",
+          "description": "Independent BPI Systems launches Aurelia applications.",
+          "event_id": "event.bpi_launch",
+          "number": 10
+        }
+      ],
+      "subject_ids": [
+        "product.family_aurelia",
+        "product.software_cpm_aurelia",
+        "product.device_flexiprint40",
+        "product.bpi_suite"
+      ],
+      "related_process_ids": [
+        "process.bpi_launch"
+      ]
     }
   ]
 }
