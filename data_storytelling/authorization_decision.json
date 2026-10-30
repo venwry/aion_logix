@@ -2056,6 +2056,230 @@
           "content_sha256": "527f9fabb44b65be4ce1438c28c20bfb7674819f890109053327f43f43a770f7"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.296f57bc-4068-4a0b-8873-2c7ee5cdc7d5",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:12:37.863Z",
+      "change_id": "change.opening_1972_event_us_nyse_start",
+      "proposal_sha256": "5f1a02c823ca13450cd084d2f4db5a5509973e1ded8f6f3c3501a74083fb63cc",
+      "proposal": {
+        "id": "change.opening_1972_event_us_nyse_start",
+        "category": "story",
+        "title": "20/21 · Update event.us_nyse_start",
+        "reason": "Single-record authorization: event.us_nyse_start. Replaces the immediate wealth-multiplication claim with accounts opened and investing begun, linked to assumption.finance. Review prerequisites first: event.new_york_flight, event.lottery_payout, actor.first_national_city_bank, location.new_york. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_event_new_york_flight",
+          "change.opening_1972_event_lottery_payout",
+          "change.opening_1972_actor_first_national_city_bank",
+          "change.opening_1972_location_new_york"
+        ],
+        "elements": [
+          {
+            "record_type": "event",
+            "record_id": "event.us_nyse_start",
+            "before": {
+              "id": "event.us_nyse_start",
+              "title": "Move to the US and start of NYSE investing",
+              "kind": "activity",
+              "description": "Moves to the US and begins investing and speculating on the NYSE using secret foreknowledge.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "protagonist"
+                }
+              ],
+              "subject_ids": [
+                "event.lottery"
+              ],
+              "inputs": [],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Rapid multiplication of Adam’s wealth through NYSE investing and speculation."
+                }
+              ],
+              "time": {
+                "value": "1972-03-01",
+                "precision": "day"
+              },
+              "process_ids": [
+                "process.economics_studies",
+                "process.harvard_year_1",
+                "process.harvard_year_2",
+                "process.harvard_year_3",
+                "process.harvard_year_4"
+              ]
+            },
+            "after": {
+              "id": "event.us_nyse_start",
+              "title": "Adam opens securities accounts and begins NYSE investing",
+              "kind": "activity",
+              "description": "Adam opens securities accounts at First National City Bank in New York and starts investing on the NYSE, using his knowledge of the original future in accordance with his financial strategy.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+                }
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Adam’s relocation to New York places him there to open securities accounts and begin investing.",
+                  "event_id": "event.new_york_flight"
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "The lottery proceeds have been sent to Adam’s New York bank account.",
+                  "event_id": "event.lottery_payout",
+                  "subject_ids": [
+                    "actor.first_national_city_bank"
+                  ]
+                },
+                {
+                  "number": 3,
+                  "type": "resource",
+                  "description": "Adam’s investment strategy uses secret foreknowledge, with contemporary evidence becoming more important as his actions change markets.",
+                  "subject_ids": [
+                    "assumption.finance"
+                  ]
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Adam has opened securities accounts at First National City Bank and begun NYSE investment activity. Subsequent wealth growth is not treated as an immediate result of opening the accounts."
+                }
+              ],
+              "time": {
+                "value": "1972-03-01",
+                "precision": "day"
+              },
+              "subject_ids": [
+                "assumption.finance",
+                "actor.first_national_city_bank"
+              ],
+              "location_ids": [
+                "location.new_york"
+              ],
+              "process_ids": [
+                "process.economics_studies",
+                "process.harvard_year_1",
+                "process.harvard_year_2",
+                "process.harvard_year_3",
+                "process.harvard_year_4"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "event.us_nyse_start",
+          "before": {
+            "id": "event.us_nyse_start",
+            "title": "Move to the US and start of NYSE investing",
+            "kind": "activity",
+            "description": "Moves to the US and begins investing and speculating on the NYSE using secret foreknowledge.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "protagonist"
+              }
+            ],
+            "subject_ids": [
+              "event.lottery"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Rapid multiplication of Adam’s wealth through NYSE investing and speculation."
+              }
+            ],
+            "time": {
+              "value": "1972-03-01",
+              "precision": "day"
+            },
+            "process_ids": [
+              "process.economics_studies",
+              "process.harvard_year_1",
+              "process.harvard_year_2",
+              "process.harvard_year_3",
+              "process.harvard_year_4"
+            ]
+          },
+          "after": {
+            "id": "event.us_nyse_start",
+            "title": "Adam opens securities accounts and begins NYSE investing",
+            "kind": "activity",
+            "description": "Adam opens securities accounts at First National City Bank in New York and starts investing on the NYSE, using his knowledge of the original future in accordance with his financial strategy.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "protagonist; Vincent operating as Adam Pleskot after the identity takeover"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Adam’s relocation to New York places him there to open securities accounts and begin investing.",
+                "event_id": "event.new_york_flight"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "The lottery proceeds have been sent to Adam’s New York bank account.",
+                "event_id": "event.lottery_payout",
+                "subject_ids": [
+                  "actor.first_national_city_bank"
+                ]
+              },
+              {
+                "number": 3,
+                "type": "resource",
+                "description": "Adam’s investment strategy uses secret foreknowledge, with contemporary evidence becoming more important as his actions change markets.",
+                "subject_ids": [
+                  "assumption.finance"
+                ]
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Adam has opened securities accounts at First National City Bank and begun NYSE investment activity. Subsequent wealth growth is not treated as an immediate result of opening the accounts."
+              }
+            ],
+            "time": {
+              "value": "1972-03-01",
+              "precision": "day"
+            },
+            "subject_ids": [
+              "assumption.finance",
+              "actor.first_national_city_bank"
+            ],
+            "location_ids": [
+              "location.new_york"
+            ],
+            "process_ids": [
+              "process.economics_studies",
+              "process.harvard_year_1",
+              "process.harvard_year_2",
+              "process.harvard_year_3",
+              "process.harvard_year_4"
+            ]
+          },
+          "content_sha256": "d4b45731b29459a4529e0d73d50d84291183e4f52423529c4e5ace2a0b82af15"
+        }
+      ]
     }
   ]
 }
