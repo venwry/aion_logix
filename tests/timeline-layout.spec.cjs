@@ -6,7 +6,7 @@ test('process containers nest milestones, merge campaign execution and cross yea
  await expect(campaign).toHaveCount(1);
  await expect(page.locator('#timeline [data-record-id="process.ncc1978_campaign"]')).toHaveCount(0);
  await expect(campaign.locator(':scope > .timeline-meta')).toContainText('Campaign / Process');
- await expect(campaign.locator('[data-record-id="event.aurelia_launch"]')).toHaveCount(1);
+ await expect(campaign.locator(':scope > [data-record-id="event.aurelia_launch"]')).toHaveCount(1);
  const parent=page.locator('[data-record-id="process.economics_studies"]'),child=parent.locator('[data-record-id="process.harvard_year_1"]');
  const p=await parent.boundingBox(),c=await child.boundingBox();expect(c.x).toBeGreaterThan(p.x);expect(c.y).toBeGreaterThan(p.y);expect(c.x+c.width).toBeLessThan(p.x+p.width);expect(c.y+c.height).toBeLessThan(p.y+p.height);
  const line=await page.locator('[data-year="1973"] .year-line').boundingBox();expect(p.y).toBeLessThan(line.y);expect(p.y+p.height).toBeGreaterThan(line.y);
@@ -42,4 +42,17 @@ test('compact date rail pins dates and bold red years while timeline cards scrol
  const style=await year.evaluate(n=>({size:getComputedStyle(n).fontSize,weight:getComputedStyle(n).fontWeight,color:getComputedStyle(n).color}));expect(style).toEqual({size:'9px',weight:'700',color:'rgb(133, 45, 53)'});
  await page.locator('#timeline-pane').evaluate(n=>n.scrollLeft=200);
  expect((await rail.boundingBox()).x).toBe(before.rail.x);expect((await year.boundingBox()).x).toBe(before.year.x);expect((await card.boundingBox()).x).toBeLessThan(before.card.x-100);
+});
+
+test('boundary events are grey, bracket steps, and shared occurrences select the same record',async({page})=>{
+ await ready(page);
+ const birmingham=page.locator('[data-record-id="process.birmingham_estate"]'),frankfurt=page.locator('[data-record-id="process.frankfurt_stay"]');
+ const identity=birmingham.locator(':scope > [data-boundary="start"]'),departure=birmingham.locator(':scope > [data-boundary="end"]'),arrival=frankfurt.locator(':scope > [data-boundary="start"]'),flight=frankfurt.locator(':scope > [data-boundary="end"]');
+ await expect(identity).toHaveAttribute('data-record-id','event.identity');await expect(departure).toHaveAttribute('data-record-id','event.frankfurt_move');await expect(arrival).toHaveAttribute('data-record-id','event.frankfurt_move');await expect(flight).toHaveAttribute('data-record-id','event.new_york_flight');
+ expect(await identity.evaluate(n=>getComputedStyle(n).backgroundColor)).toBe('rgb(240, 240, 240)');
+ const start=await arrival.boundingBox(),end=await flight.boundingBox();
+ for(const step of await frankfurt.locator(':scope > .timeline-card:not([data-boundary])').all()){const box=await step.boundingBox();expect(box.y).toBeGreaterThan(start.y+start.height);expect(box.y+box.height).toBeLessThan(end.y);}
+ await arrival.locator(':scope > .timeline-heading').click();await expect(page.locator('#details .record-id')).toHaveText('event.frankfurt_move');await expect(departure).toHaveAttribute('data-selected','true');
+ await page.locator('#search').fill('event.frankfurt_move');await expect(page.locator('[data-record-id="event.frankfurt_move"]')).toHaveCount(2);
+ await page.locator('#search').fill('process.frankfurt_stay');await expect(flight).toHaveCount(1);await expect(arrival).toHaveCount(1);
 });

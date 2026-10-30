@@ -18,12 +18,35 @@ export function timelineTree(items){
    node.parent=parent.id;parent.children.push(id);break;
   }
  }
- return {nodes,aliases};
+ // Boundary occurrences belong to each owning process. They share the event
+ // record, but not its visual identity: a handoff can end one process and start another.
+ const boundaryOwners=new Map();
+ for(const item of items.filter(x=>x.type==='process'))for(const role of ['start','end']){
+  const point=item.record.period?.[role],event=point?.precision==='event'?byId.get(point.value):null;
+  if(event?.type!=='event')continue;
+  const parent=nodes.get(canonical(item.record.id)),id=`${item.record.id}::${role}::${event.record.id}`;
+  nodes.set(id,{...event,id,members:[event],children:[],parent:parent.id,boundary:role});parent.children.push(id);
+  if(!boundaryOwners.has(event.record.id))boundaryOwners.set(event.record.id,new Set());
+  boundaryOwners.get(event.record.id).add(parent.id);
+ }
+ for(const [id,owners] of boundaryOwners){const original=nodes.get(id);
+  // Retain a separate step occurrence only when it belongs to another process.
+  if(!original.parent||owners.has(original.parent)){
+   if(original.parent){const parent=nodes.get(original.parent);parent.children=parent.children.filter(child=>child!==id);}
+   nodes.delete(id);
+  }
+ }
+ const order=id=>nodes.get(id).boundary==='start'?-1:nodes.get(id).boundary==='end'?1:0;
+ for(const node of nodes.values())node.children.sort((a,b)=>order(a)-order(b));
+ const occurrences=new Map();
+ for(const node of nodes.values())for(const member of node.members){const id=member.record.id;if(!occurrences.has(id))occurrences.set(id,[]);occurrences.get(id).push(node.id);}
+ return {nodes,aliases,occurrences};
 }
 export function layoutTimeline(nodes,lo,hi){
  const start=Date.UTC(lo,0,1),end=Date.UTC(hi+1,0,1)-1;
  const active=new Map([...nodes].filter(([,n])=>n.date&&n.date.end>=start&&n.date.start<=end).map(([id,n])=>[id,{...n,children:[],parent:null}]));
  for(const n of active.values()){let p=nodes.get(n.id).parent;while(p&&!active.has(p))p=nodes.get(p)?.parent;if(p){n.parent=p;active.get(p).children.push(n.id);}}
+ for(const n of active.values())n.children.sort((a,b)=>nodes.get(n.id).children.indexOf(a)-nodes.get(n.id).children.indexOf(b));
  // Calendar anchors are non-linear. Minimum spacing protects labels; additional
  // constraints reserve only the header/footer space actually needed by nested boxes.
  const day=t=>Math.floor(t/86400000)*86400000;
@@ -31,11 +54,15 @@ export function layoutTimeline(nodes,lo,hi){
  function label(t,value){if(!labels.has(t))labels.set(t,new Set());labels.get(t).add(value);}
  for(let y=lo;y<=hi+1;y++)knots.add(Date.UTC(y,0,1));
  for(const n of active.values()){
-  n.begin=day(Math.max(start,n.date.start));n.finish=day(Math.min(end,n.date.span?n.date.end:n.date.start));knots.add(n.begin);knots.add(n.finish);starts.add(n.begin);
+  n.begin=day(Math.max(start,n.boundary==='end'?n.date.end:n.date.start));n.finish=day(Math.min(end,n.date.span||n.boundary==='end'?n.date.end:n.date.start));knots.add(n.begin);knots.add(n.finish);starts.add(n.begin);
   if(n.date.start>=start)label(n.begin,n.date.startLabel||new Date(n.begin).toISOString().slice(0,10));
   if(n.date.span&&n.date.end<=end)label(n.finish,n.date.endLabel||new Date(n.finish).toISOString().slice(0,10));
  }
- function offsets(n){const p=active.get(n.parent);n.startOffset=p&&p.begin===n.begin?p.startOffset+56:0;for(const id of n.children)offsets(active.get(id));
+ function offsets(n,floor=0){const p=active.get(n.parent);n.startOffset=Math.max(floor,p&&p.begin===n.begin?p.startOffset+56:0);
+  const children=n.children.map(id=>active.get(id)),first=children.find(c=>c.boundary==='start'),last=children.find(c=>c.boundary==='end'),steps=children.filter(c=>!c.boundary);
+  if(first)offsets(first);
+  for(const child of steps)offsets(child,first&&first.finish===child.begin?first.endOffset+8:0);
+  if(last)offsets(last,Math.max(0,...children.filter(c=>c!==last&&c.finish===last.begin).map(c=>c.endOffset+8)));
   n.endOffset=n.date.span?Math.max(20,n.begin===n.finish?n.startOffset+80:20):n.startOffset+58;
   if(n.date.span)for(const id of n.children){const child=active.get(id);if(child.finish===n.finish)n.endOffset=Math.max(n.endOffset,child.endOffset+20);}
  }
@@ -46,6 +73,11 @@ export function layoutTimeline(nodes,lo,hi){
  for(const n of active.values()){
   if(n.date.span)requireGap(n.begin,n.finish,n.startOffset+80-n.endOffset);
   if(n.parent){const p=active.get(n.parent);requireGap(p.begin,n.begin,p.startOffset+56-n.startOffset);requireGap(n.finish,p.finish,n.endOffset+20-p.endOffset);}
+  const children=n.children.map(id=>active.get(id)),first=children.find(c=>c.boundary==='start'),last=children.find(c=>c.boundary==='end');
+  for(const child of children){
+   if(first&&child!==first)requireGap(first.finish,child.begin,first.endOffset+8-child.startOffset);
+   if(last&&child!==last)requireGap(child.finish,last.begin,child.endOffset+8-last.startOffset);
+  }
  }
  const positions=new Map();for(const t of points)positions.set(t,Math.max(28,...edges.get(t).map(([a,g])=>positions.get(a)+g)));
  const yAt=t=>positions.get(day(t));

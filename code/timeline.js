@@ -7,11 +7,12 @@ try{
  for(let y=first;y<=last;y++)for(const id of ['from','to']){const option=el('option','',y);option.value=y;$(id).append(option);}
  $('from').value=first;$('to').value=last;fillActors($('actor'),data);splitter('aion-timeline-width',360);let selected='';
  function choose(id){const r=data.index.get(id);if(!r)return;selected=id;history.replaceState(null,'','#'+encodeURIComponent(id));compactDetails(r,data,choose);for(const node of document.querySelectorAll('.timeline-card')){const selected=node.dataset.recordId===id||node.dataset.executionId===id;node.dataset.selected=String(selected);node.querySelector(':scope > .timeline-heading')?.setAttribute('aria-pressed',String(selected));}}
- function card(n){const box=el('article','timeline-card '+(n.date?.span?'duration-box':'event-box'));box.dataset.recordId=n.id;box.dataset.type=n.type;box.dataset.context=String(n.context||false);if(n.date?.span)box.dataset.spanId=n.id;
-  const heading=el('button','timeline-heading');heading.append(el('strong','',titleOf(n.record)));heading.title=titleOf(n.record);heading.onclick=()=>choose(n.id);heading.setAttribute('aria-label',titleOf(n.record));
+ function card(n){const box=el('article','timeline-card '+(n.date?.span?'duration-box':'event-box'));box.dataset.recordId=n.record.id;box.dataset.type=n.type;box.dataset.context=String(n.context||false);if(n.date?.span)box.dataset.spanId=n.id;
+  const heading=el('button','timeline-heading');heading.append(el('strong','',titleOf(n.record)));heading.title=titleOf(n.record);heading.onclick=()=>choose(n.record.id);heading.setAttribute('aria-label',titleOf(n.record));
   const meta=el('div','timeline-meta');const execution=n.members.find(x=>x.type==='process'&&x.record.id!==n.id);
   if(execution){box.dataset.executionId=execution.record.id;const c=el('button','timeline-kind','Campaign'),p=el('button','timeline-kind','Process');c.onclick=()=>choose(n.id);p.onclick=()=>choose(execution.record.id);p.title=execution.record.id+' — '+titleOf(execution.record);meta.append(c,document.createTextNode(' / '),p);}
   else meta.append(el('span','',human(n.type)));
+  if(n.boundary){box.dataset.boundary=n.boundary;meta.append(el('span','timeline-kind',human(n.boundary)));}
   const states=n.members.map(x=>x.record.status);const status=states.every(s=>s==='authorized')?'Authorized':states.every(s=>s!=='authorized')?'Pending authorization':'Mixed authorization';
   const date=n.date?(n.date.startLabel):'Unknown dates';
   meta.append(el('span','timeline-state',status),el('span','timeline-date',date));meta.title=(n.context?'Context for matching records · ':'')+status+' · '+date;
@@ -20,7 +21,7 @@ try{
  function render(){
   if(+$('from').value>+$('to').value)$('to').value=$('from').value;const lo=+$('from').value,hi=+$('to').value,start=Date.UTC(lo,0,1),end=Date.UTC(hi+1,0,1)-1,q=$('search').value.trim().toLowerCase();
   const matches=i=>(!$('type').value||i.type===$('type').value)&&(!$('status').value||i.record.status===$('status').value)&&(!$('actor').value||i.actors.has($('actor').value))&&(!q||i.search.includes(q))&&(!i.date||i.date.end>=start&&i.date.start<=end);
-  const matching=items.filter(matches),direct=new Set(matching.map(i=>tree.aliases.get(i.record.id)||i.record.id)),included=new Set(direct);
+  const matching=items.filter(matches),direct=new Set(matching.flatMap(i=>tree.occurrences.get(i.record.id)||[])),included=new Set(direct);
   for(const id of direct){let p=tree.nodes.get(id).parent;while(p){included.add(p);p=tree.nodes.get(p).parent;}}
   // Campaign/process filters retain their contents as context, without counting them as matches.
   function descendants(id){for(const child of tree.nodes.get(id).children){included.add(child);descendants(child);}}

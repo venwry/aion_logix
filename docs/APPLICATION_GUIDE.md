@@ -25,6 +25,8 @@ Year/month/day precision is retained in details and date labels. A year-only fac
 
 ### Nested work and campaign boxes
 
+Events referenced by `period.start` and `period.end` appear inside the process as light grey **Start** and **End** cards, respectively before and after step events and sub-processes. Same-day boundaries reserve room for the steps between them. A shared boundary appears in each owning process; selecting any occurrence opens the same event record and highlights its other visible occurrences. An event used for both boundaries appears once in each role. These visual occurrences do not duplicate foundation records or increase the matching-record count.
+
 Explicit parent-process links and process-step references place events and sub-processes inside their owner where their dates fit. Membership selection prioritizes explicit parent links, then campaign execution steps, other process steps, and event process references; equal-priority ties use stable IDs. Other relationships remain available in details. A child outside its parent's stated dates stays separate; rendering does not change either record's dates. Undated children remain in the undated section.
 
 A campaign shares one visual box with its execution process. **Campaign** and **Process** labels select the respective records. These remain two distinct records with separate content hashes and authorizations. “Mixed authorization” means only one of the pair is authorized; it is a display summary, not a stored status or group approval.
