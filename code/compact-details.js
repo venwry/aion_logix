@@ -23,13 +23,13 @@ export function compactDetails(record,data,select){
   row.append(id,el('span','reference-divider',' - '),link);return row;
  }
  function referenceList(values,label){
-  const group=el('div','reference-list'),header=el('div','reference-header'),grid=el('div','reference-grid');
-  header.append(el('strong','compact-key',label+': '));
-  for(const id of values)grid.append(reference(id));group.append(header,grid);return group;
+  const group=el('div','reference-list'),grid=el('div','reference-grid');
+  if(label){const header=el('div','reference-header');header.append(el('strong','compact-key',label+': '));group.append(header);}
+  for(const id of values)grid.append(reference(id));group.append(grid);return group;
  }
  const isReferences=value=>Array.isArray(value)&&value.length>0&&value.every(v=>typeof v==='string'&&data.index.has(v));
- function valueNode(value,label='References'){
-  if(isReferences(value))return referenceList(value,label);
+ function valueNode(value,label='References',inTable=false){
+  if(isReferences(value))return referenceList(value,inTable?null:label);
   if(Array.isArray(value)){
    if(!value.length)return el('span','','[]');
    if(value.every(v=>v&&typeof v==='object'&&!Array.isArray(v))){
@@ -37,7 +37,7 @@ export function compactDetails(record,data,select){
     const wrap=el('div','compact-table-scroll'),table=el('table','compact-value-table'),head=el('thead'),headRow=el('tr'),body=el('tbody'),colgroup=el('colgroup');
     for(const name of columns)colgroup.append(el('col'));
     for(const name of columns){const th=el('th');th.append(el('span','column-title',name));th.scope='col';headRow.append(th);}head.append(headRow);
-    for(const row of rows){const tr=el('tr');for(const name of columns){const td=el('td');td.append(row.has(name)?valueNode(row.get(name),name):el('span','','—'));tr.append(td);}body.append(tr);}
+    for(const row of rows){const tr=el('tr');for(const name of columns){const td=el('td');td.append(row.has(name)?valueNode(row.get(name),name,true):el('span','','—'));tr.append(td);}body.append(tr);}
     table.append(colgroup,head,body);wrap.append(table);
     const headers=[...headRow.children],cols=[...colgroup.children];let widths=null,automatic=true;
     const contentText=v=>v==null?'':Array.isArray(v)?v.map(contentText).join(' '):typeof v==='object'?Object.values(v).map(contentText).join(' '):typeof v==='string'&&data.index.has(v)?v+' '+titleOf(data.index.get(v)):String(v);
@@ -63,7 +63,7 @@ export function compactDetails(record,data,select){
     });let lastWidth=-1;
     const observer=new ResizeObserver(()=>{const available=wrap.clientWidth;if(available===lastWidth)return;lastWidth=available;if(automatic)autofit();});observer.observe(wrap);detailCleanups.push(()=>observer.disconnect());requestAnimationFrame(autofit);return wrap;
    }
-   const span=el('span');value.forEach((v,i)=>{if(i)span.append(document.createTextNode(', '));span.append(valueNode(v));});return span;
+   const span=el('span');value.forEach((v,i)=>{if(i)span.append(document.createTextNode(', '));span.append(valueNode(v,label,inTable));});return span;
   }
   if(value&&typeof value==='object')return el('span','',JSON.stringify(value));
   if(typeof value==='string'&&data.index.has(value))return reference(value);

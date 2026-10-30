@@ -1,7 +1,10 @@
 const {test,expect}=require('@playwright/test');
 for(const pageName of ['browser','timeline']){
  test(pageName+' detail columns resize, respect headers, and reset to autofit',async({page})=>{
+  await page.route('**/data_foundation/event.json',async route=>{const response=await route.fetch(),doc=await response.json(),record=doc.event.find(r=>r.id==='event.autodesk_agreement');record.subject_ids=['actor.adam'];record.inputs=[{number:1,type:'resource',description:'Reference list display fixture',subject_ids:['actor.adam','actor.dri']}];await route.fulfill({json:doc});});
   await page.goto('/code/'+pageName+'.html#event.autodesk_agreement');await expect(page.locator('body')).toHaveAttribute('data-ready','true');
+  await expect(page.locator('#details .compact-field > .reference-list > .reference-header').filter({hasText:'subject_ids:'})).toHaveCount(1);
+  const cellList=page.locator('#details td .reference-list');await expect(cellList).toHaveCount(1);await expect(cellList.locator('.reference-header')).toHaveCount(0);await expect(cellList.locator('.reference-entry')).toHaveCount(2);await expect(page.locator('#details th .column-title').filter({hasText:/^subject_ids$/})).toHaveCount(1);
   const table=page.locator('#details .compact-value-table').first(),header=table.locator('th').first(),handle=header.getByRole('separator');
   const original=(await header.boundingBox()).width;await handle.focus();await handle.press('ArrowRight');expect((await header.boundingBox()).width).toBeGreaterThan(original+10);
   await handle.press('Home');const title=await header.locator('.column-title').boundingBox();expect((await header.boundingBox()).width).toBeGreaterThan(title.width);

@@ -62,7 +62,7 @@ Nested fields appear as dotted names and values; lists of objects appear as comp
 
 Reference entries show `id - Name`: the ID is plain text and only the name is a hyperlink. Following the name selects that record in the current page's details.
 
-Each list of recognized reference IDs, including “Referenced by” and lists inside detail tables, always displays in one column. There are no column selectors. Long names use ellipsis; hover exposes the full name.
+Each list of recognized reference IDs, including “Referenced by” and lists inside detail tables, always displays in one column. There are no column selectors. Standalone lists keep their field heading (for example, `subject_ids:`); lists inside table cells omit that heading because the column header already names the field. Long names use ellipsis; hover exposes the full name.
 
 Timeline details offer **Open in Data browser** for the same record. Browser details offer **Open in timeline** for events, processes and campaigns. **Open dataset** opens the underlying foundation JSON file. These links do not authorize anything.
 
