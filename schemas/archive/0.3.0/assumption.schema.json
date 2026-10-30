@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/assumption.schema.json",
+  "type": "object",
+  "properties": {
+    "assumption": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "assumption"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^assumption\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "world_premise",
+            "policy",
+            "constraint",
+            "target",
+            "baseline_condition"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(assumption|actor|actor_relationship|event|campaign|agreement|clause|process|programme|location|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "assumption",
+              "actor",
+              "actor_relationship",
+              "event",
+              "campaign",
+              "agreement",
+              "clause",
+              "process",
+              "programme",
+              "location",
+              "narrative_period"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "valid_time": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/period"
+        },
+        "exception_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(assumption)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "assumption"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "equipment": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "components": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "statement"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

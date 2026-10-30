@@ -1,6 +1,6 @@
 # Foundation dataset specification
 
-This document describes the current foundation schema contract (version 0.3.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Authorization, sourcing, migration and proposed changes belong to `data_storytelling/` and are deliberately outside this diagram.
+This document describes the current foundation schema contract (version 0.4.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Authorization, sourcing, migration and proposed changes belong to `data_storytelling/` and are deliberately outside this diagram.
 
 ## Reading the diagram
 
@@ -9,6 +9,7 @@ This document describes the current foundation schema contract (version 0.3.0). 
 - Indentation shows owned objects and array items. `array<T>` contains zero or more values unless the schema says otherwise. Nested objects are not independent datasets.
 - A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.
 - Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the 11 target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.
+- Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.
 - These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.
 
 ## Entity and reference diagram
@@ -20,46 +21,74 @@ The diagram is intentionally comprehensive. Use the per-entity trees and referen
 flowchart LR
   classDef schemaEntity font-family:monospace,text-align:left,white-space:pre;
   actor["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>actor.json<br/>id*: string<br/>kind*: string<br/>name*: string<br/>aliases?: array&lt;string&gt;<br/>description?: string</pre>"]:::schemaEntity
-  actor_relationship["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>actor_relationship.json<br/>id*: string<br/>kind*: string<br/>subject_actor_ids*: array&lt;string&gt; → actor<br/>object_actor_id*: string → actor<br/>period?: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>established_by_event_id?: string → event<br/>description*: string</pre>"]:::schemaEntity
-  agreement["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>agreement.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>party*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>state*: string<br/>valid_time?: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>supersedes_agreement_id?: string → agreement<br/>description?: string</pre>"]:::schemaEntity
-  assumption["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>assumption.json<br/>id*: string<br/>kind*: string<br/>statement*: string<br/>scope_ids?: array&lt;string&gt; → any foundation ID<br/>valid_time?: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>exception_ids?: array&lt;string&gt; → assumption<br/>equipment?: array&lt;object&gt;<br/>│  └─ name*: string<br/>│  └─ components?: array&lt;string&gt;</pre>"]:::schemaEntity
-  campaign["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>campaign.json<br/>id*: string<br/>title*: string<br/>objective*: string<br/>lead_actor_ids*: array&lt;string&gt; → actor<br/>audience?: array&lt;string&gt;<br/>message?: array&lt;string&gt;<br/>activity?: array&lt;object&gt;<br/>│  └─ description*: string<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>claim_policy?: array&lt;string&gt;<br/>launch_event_id?: string → event<br/>programme_id?: string → programme<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>presentation?: object<br/>│  └─ duration_minutes?: integer<br/>│  └─ stage*: array&lt;object&gt;<br/>│  │  └─ label*: string<br/>│  │  └─ duration_minutes?: integer<br/>│  │  └─ description*: string<br/>│  │  └─ actor_ids?: array&lt;string&gt; → actor<br/>booth?: array&lt;object&gt;<br/>│  └─ name*: string<br/>│  └─ description*: string<br/>│  └─ call_to_action?: string</pre>"]:::schemaEntity
-  clause["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>clause.json<br/>id*: string<br/>agreement_id*: string → agreement<br/>kind*: string<br/>statement*: string<br/>assertion_mode*: string<br/>actor_ids?: array&lt;string&gt; → actor<br/>conditions?: array&lt;string&gt;<br/>effective_time?: object<br/>│  └─ value*: string<br/>│  └─ precision*: string<br/>supersedes_clause_id?: string → clause<br/>equity?: object<br/>│  └─ company_actor_id*: string → actor<br/>│  └─ beneficiary_actor_ids*: array&lt;string&gt; → actor<br/>│  └─ percentage*: number<br/>│  └─ basis*: string<br/>│  └─ allocation*: string<br/>commitment_amount?: object<br/>│  └─ value*: number<br/>│  └─ currency*: string<br/>│  └─ reference_year*: integer<br/>│  └─ basis*: string</pre>"]:::schemaEntity
-  event["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>event.json<br/>id*: string<br/>kind*: string<br/>title*: string<br/>occurrence*: string<br/>time?: object<br/>│  └─ value*: string<br/>│  └─ precision*: string<br/>period?: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>action?: array&lt;object&gt;<br/>│  └─ description*: string<br/>│  └─ actor_ids?: array&lt;string&gt; → actor<br/>outcome?: array&lt;object&gt;<br/>│  └─ description*: string<br/>agreement_ids?: array&lt;string&gt; → agreement<br/>process_ids?: array&lt;string&gt; → process<br/>narrative_period_ids?: array&lt;string&gt; → narrative_period<br/>location_ids?: array&lt;string&gt; → location<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>conditions?: array&lt;string&gt;</pre>"]:::schemaEntity
+  actor_relationship["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>actor_relationship.json<br/>id*: string<br/>kind*: string<br/>subject_actor_ids*: array&lt;string&gt; → actor<br/>object_actor_id*: string → actor<br/>established_by_event_id?: string → event<br/>description*: string<br/>process_id?: string → process</pre>"]:::schemaEntity
+  agreement["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>agreement.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>party*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>state*: string<br/>supersedes_agreement_id?: string → agreement<br/>description?: string<br/>effective_event_id?: string → event<br/>termination_event_id?: string → event<br/>process_id?: string → process</pre>"]:::schemaEntity
+  assumption["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>assumption.json<br/>id*: string<br/>kind*: string<br/>statement*: string<br/>scope_ids?: array&lt;string&gt; → any foundation ID<br/>exception_ids?: array&lt;string&gt; → assumption<br/>equipment?: array&lt;object&gt;<br/>│  └─ name*: string<br/>│  └─ components?: array&lt;string&gt;<br/>process_id?: string → process</pre>"]:::schemaEntity
+  campaign["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>campaign.json<br/>id*: string<br/>title*: string<br/>objective*: string<br/>lead_actor_ids*: array&lt;string&gt; → actor<br/>audience?: array&lt;string&gt;<br/>message?: array&lt;string&gt;<br/>claim_policy?: array&lt;string&gt;<br/>launch_event_id?: string → event<br/>subject_ids?: array&lt;string&gt; → product / technology / manufacturing_capability / actor / agreement / market_response<br/>presentation?: object<br/>│  └─ duration_minutes?: integer<br/>│  └─ stage*: array&lt;object&gt;<br/>│  │  └─ label*: string<br/>│  │  └─ duration_minutes?: integer<br/>│  │  └─ description*: string<br/>│  │  └─ actor_ids?: array&lt;string&gt; → actor<br/>booth?: array&lt;object&gt;<br/>│  └─ name*: string<br/>│  └─ description*: string<br/>│  └─ call_to_action?: string<br/>process_id*: string → process<br/>marketing_content?: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string</pre>"]:::schemaEntity
+  clause["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>clause.json<br/>id*: string<br/>agreement_id*: string → agreement<br/>kind*: string<br/>statement*: string<br/>assertion_mode*: string<br/>actor_ids?: array&lt;string&gt; → actor<br/>conditions?: array&lt;string&gt;<br/>supersedes_clause_id?: string → clause<br/>equity?: object<br/>│  └─ company_actor_id*: string → actor<br/>│  └─ beneficiary_actor_ids*: array&lt;string&gt; → actor<br/>│  └─ percentage*: number<br/>│  └─ basis*: string<br/>│  └─ allocation*: string<br/>commitment_amount?: object<br/>│  └─ value*: number<br/>│  └─ currency*: string<br/>│  └─ reference_year*: integer<br/>│  └─ basis*: string<br/>effective_event_id?: string → event</pre>"]:::schemaEntity
+  event["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>event.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>agreement_ids?: array&lt;string&gt; → agreement<br/>time*: object<br/>│  └─ value*: string<br/>│  └─ precision*: string<br/>process_ids?: array&lt;string&gt; → process<br/>location_ids?: array&lt;string&gt; → location</pre>"]:::schemaEntity
   location["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>location.json<br/>id*: string<br/>name*: string<br/>kind*: string<br/>parent_location_id?: string → location<br/>description?: string</pre>"]:::schemaEntity
-  narrative_period["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>narrative_period.json<br/>id*: string<br/>title*: string<br/>period*: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>display_order*: integer</pre>"]:::schemaEntity
-  process["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>process.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>period?: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string<br/>│  │  └─ precision*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>parent_process_id?: string → process<br/>programme_id?: string → programme<br/>step?: array&lt;object&gt;<br/>│  └─ label*: string<br/>│  └─ description*: string<br/>│  └─ event_id?: string → event<br/>completion_state*: string<br/>acceptance_gate?: array&lt;object&gt;<br/>│  └─ description*: string<br/>│  └─ evidence_event_id?: string → event</pre>"]:::schemaEntity
-  programme["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>programme.json<br/>id*: string<br/>title*: string<br/>objective*: string<br/>sponsor_actor_ids*: array&lt;string&gt; → actor<br/>agreement_ids?: array&lt;string&gt; → agreement<br/>deliverable?: array&lt;object&gt;<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>acceptance_gate?: array&lt;object&gt;<br/>│  └─ description*: string<br/>│  └─ evidence_event_id?: string → event</pre>"]:::schemaEntity
+  manufacturing_capability["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>manufacturing_capability.json<br/>id*: string<br/>name*: string<br/>actor_id*: string → actor<br/>location_id?: string → location<br/>technology_id*: string → technology<br/>recipe_kind*: undefined<br/>product_ids*: array&lt;string&gt; → product<br/>description*: string<br/>qualification_requirements*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined</pre>"]:::schemaEntity
+  market_response["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>market_response.json<br/>id*: string<br/>title*: string<br/>kind*: undefined<br/>respondent_actor_ids*: array&lt;string&gt; → actor<br/>subject_ids*: array&lt;string&gt; → any foundation ID<br/>trigger_ids*: array&lt;string&gt; → event / process / campaign / agreement<br/>description*: string</pre>"]:::schemaEntity
+  process["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>process.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>agreement_ids?: array&lt;string&gt; → agreement<br/>period*: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string | null → event<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string | null → event<br/>│  │  └─ precision*: string<br/>steps*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>parent_process_id?: string → process<br/>related_process_ids?: array&lt;string&gt; → process</pre>"]:::schemaEntity
+  product["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>product.json<br/>id*: string<br/>name*: string<br/>kind*: undefined<br/>description*: string<br/>provider_actor_ids*: array&lt;string&gt; → actor<br/>family_product_id?: string → product<br/>version?: string<br/>technology_ids*: array&lt;string&gt; → technology<br/>specification*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ value?: string,number,boolean<br/>│  └─ unit?: string</pre>"]:::schemaEntity
+  technology["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>technology.json<br/>id*: string<br/>name*: string<br/>kind*: undefined<br/>description*: string<br/>owner_actor_ids*: array&lt;string&gt; → actor<br/>related_technology_ids*: array&lt;string&gt; → technology<br/>specification*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ value?: string,number,boolean<br/>│  └─ unit?: string<br/>fabrication?: object<br/>│  └─ feature_size_um*: number<br/>│  └─ wafer_diameter_mm?: number<br/>│  └─ lithography_method*: string</pre>"]:::schemaEntity
   any_foundation{{"Any foundation record<br/>ID prefix selects one target"}}
   actor_relationship -- "subject_actor_ids[]<br/>object_actor_id" --> actor
   actor_relationship -- "established_by_event_id" --> event
+  actor_relationship -- "process_id" --> process
   agreement -- "party[].actor_id" --> actor
   agreement -- "supersedes_agreement_id" --> agreement
+  agreement -- "effective_event_id<br/>termination_event_id" --> event
+  agreement -- "process_id" --> process
   assumption -. "scope_ids[]" .-> any_foundation
   assumption -- "exception_ids[]" --> assumption
-  campaign -- "lead_actor_ids[]<br/>presentation.stage[].actor_ids[]" --> actor
-  campaign -- "activity[].event_id<br/>launch_event_id" --> event
-  campaign -- "activity[].process_id" --> process
-  campaign -- "programme_id" --> programme
-  campaign -. "subject_ids[]" .-> any_foundation
+  assumption -- "process_id" --> process
+  campaign -- "lead_actor_ids[]<br/>subject_ids[]<br/>presentation.stage[].actor_ids[]" --> actor
+  campaign -- "launch_event_id" --> event
+  campaign -- "subject_ids[]" --> product
+  campaign -- "subject_ids[]" --> technology
+  campaign -- "subject_ids[]" --> manufacturing_capability
+  campaign -- "subject_ids[]" --> agreement
+  campaign -- "subject_ids[]" --> market_response
+  campaign -- "process_id" --> process
   clause -- "agreement_id" --> agreement
   clause -- "actor_ids[]<br/>equity.company_actor_id<br/>equity.beneficiary_actor_ids[]" --> actor
   clause -- "supersedes_clause_id" --> clause
-  event -- "participant[].actor_id<br/>action[].actor_ids[]" --> actor
+  clause -- "effective_event_id" --> event
+  event -- "participant[].actor_id" --> actor
+  event -. "subject_ids[]<br/>inputs[].subject_ids[]<br/>outcomes[].subject_ids[]" .-> any_foundation
+  event -- "inputs[].event_id<br/>outcomes[].event_id" --> event
+  event -- "inputs[].process_id<br/>outcomes[].process_id<br/>process_ids[]" --> process
+  event -- "inputs[].maturity.capability_id<br/>outcomes[].maturity.capability_id" --> manufacturing_capability
   event -- "agreement_ids[]" --> agreement
-  event -- "process_ids[]" --> process
-  event -- "narrative_period_ids[]" --> narrative_period
   event -- "location_ids[]" --> location
-  event -. "subject_ids[]" .-> any_foundation
   location -- "parent_location_id" --> location
+  manufacturing_capability -- "actor_id" --> actor
+  manufacturing_capability -- "location_id" --> location
+  manufacturing_capability -- "technology_id" --> technology
+  manufacturing_capability -- "product_ids[]" --> product
+  manufacturing_capability -. "qualification_requirements[].subject_ids[]" .-> any_foundation
+  manufacturing_capability -- "qualification_requirements[].event_id" --> event
+  manufacturing_capability -- "qualification_requirements[].process_id" --> process
+  manufacturing_capability -- "qualification_requirements[].maturity.capability_id" --> manufacturing_capability
+  market_response -- "respondent_actor_ids[]" --> actor
+  market_response -. "subject_ids[]" .-> any_foundation
+  market_response -- "trigger_ids[]" --> event
+  market_response -- "trigger_ids[]" --> process
+  market_response -- "trigger_ids[]" --> campaign
+  market_response -- "trigger_ids[]" --> agreement
   process -- "participant[].actor_id" --> actor
-  process -- "parent_process_id" --> process
-  process -- "programme_id" --> programme
-  process -- "step[].event_id<br/>acceptance_gate[].evidence_event_id" --> event
-  programme -- "sponsor_actor_ids[]" --> actor
-  programme -- "agreement_ids[]" --> agreement
-  programme -. "deliverable[].subject_ids[]" .-> any_foundation
-  programme -- "acceptance_gate[].evidence_event_id" --> event
+  process -. "subject_ids[]<br/>inputs[].subject_ids[]<br/>outcomes[].subject_ids[]<br/>steps[].subject_ids[]" .-> any_foundation
+  process -- "inputs[].event_id<br/>outcomes[].event_id<br/>period.start.value<br/>period.end.value<br/>steps[].event_id" --> event
+  process -- "inputs[].process_id<br/>outcomes[].process_id<br/>steps[].process_id<br/>parent_process_id<br/>related_process_ids[]" --> process
+  process -- "inputs[].maturity.capability_id<br/>outcomes[].maturity.capability_id<br/>steps[].maturity.capability_id" --> manufacturing_capability
+  process -- "agreement_ids[]" --> agreement
+  product -- "provider_actor_ids[]" --> actor
+  product -- "family_product_id" --> product
+  product -- "technology_ids[]" --> technology
+  technology -- "owner_actor_ids[]" --> actor
+  technology -- "related_technology_ids[]" --> technology
   any_foundation -.-> actor
   any_foundation -.-> actor_relationship
   any_foundation -.-> agreement
@@ -68,9 +97,11 @@ flowchart LR
   any_foundation -.-> clause
   any_foundation -.-> event
   any_foundation -.-> location
-  any_foundation -.-> narrative_period
+  any_foundation -.-> manufacturing_capability
+  any_foundation -.-> market_response
   any_foundation -.-> process
-  any_foundation -.-> programme
+  any_foundation -.-> product
+  any_foundation -.-> technology
 ```
 
 ## Dataset specifications
@@ -110,15 +141,9 @@ id*: string
 kind*: string
 subject_actor_ids*: array<string> → actor
 object_actor_id*: string → actor
-period?: object
-│  └─ start*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
-│  └─ end*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
 established_by_event_id?: string → event
 description*: string
+process_id?: string → process
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -127,15 +152,9 @@ description*: string
 | `kind` | yes | `string` | enum: ["employment","operating_role","affiliation","control","identity_assumption"] |
 | `subject_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 1; uniqueItems: true |
 | `object_actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `period` | no | `object` | — |
-| `period.start` | yes | `object` | — |
-| `period.start.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `period.start.precision` | yes | `string` | enum: ["year","month","day"] |
-| `period.end` | yes | `object` | — |
-| `period.end.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `period.end.precision` | yes | `string` | enum: ["year","month","day"] |
 | `established_by_event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `description` | yes | `string` | minLength: 1 |
+| `process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 
 ### agreement
 
@@ -152,15 +171,11 @@ party*: array<object>
 │  └─ actor_id*: string → actor
 │  └─ role*: string
 state*: string
-valid_time?: object
-│  └─ start*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
-│  └─ end*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
 supersedes_agreement_id?: string → agreement
 description?: string
+effective_event_id?: string → event
+termination_event_id?: string → event
+process_id?: string → process
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -172,15 +187,11 @@ description?: string
 | `party[].actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `party[].role` | yes | `string` | minLength: 1 |
 | `state` | yes | `string` | enum: ["offer","negotiating","executed","terminated","unknown"] |
-| `valid_time` | no | `object` | — |
-| `valid_time.start` | yes | `object` | — |
-| `valid_time.start.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `valid_time.start.precision` | yes | `string` | enum: ["year","month","day"] |
-| `valid_time.end` | yes | `object` | — |
-| `valid_time.end.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `valid_time.end.precision` | yes | `string` | enum: ["year","month","day"] |
 | `supersedes_agreement_id` | no | `string` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `description` | no | `string` | minLength: 1 |
+| `effective_event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `termination_event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 
 ### assumption
 
@@ -194,17 +205,11 @@ id*: string
 kind*: string
 statement*: string
 scope_ids?: array<string> → any foundation ID
-valid_time?: object
-│  └─ start*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
-│  └─ end*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
 exception_ids?: array<string> → assumption
 equipment?: array<object>
 │  └─ name*: string
 │  └─ components?: array<string>
+process_id?: string → process
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -212,18 +217,12 @@ equipment?: array<object>
 | `id` | yes | `string` | pattern: "^assumption\\.[a-z0-9][a-z0-9_.-]*$" |
 | `kind` | yes | `string` | enum: ["world_premise","policy","constraint","target","baseline_condition"] |
 | `statement` | yes | `string` | minLength: 1 |
-| `scope_ids[]` | no | `array<string>` | pattern: "^(assumption\|actor\|actor_relationship\|event\|campaign\|agreement\|clause\|process\|programme\|location\|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `valid_time` | no | `object` | — |
-| `valid_time.start` | yes | `object` | — |
-| `valid_time.start.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `valid_time.start.precision` | yes | `string` | enum: ["year","month","day"] |
-| `valid_time.end` | yes | `object` | — |
-| `valid_time.end.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `valid_time.end.precision` | yes | `string` | enum: ["year","month","day"] |
+| `scope_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `exception_ids[]` | no | `array<string>` | pattern: "^(assumption)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `equipment[]` | no | `array<object>` | — |
 | `equipment[].name` | yes | `string` | minLength: 1 |
 | `equipment[].components[]` | no | `array<string>` | minLength: 1 |
+| `process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 
 ### campaign
 
@@ -239,14 +238,9 @@ objective*: string
 lead_actor_ids*: array<string> → actor
 audience?: array<string>
 message?: array<string>
-activity?: array<object>
-│  └─ description*: string
-│  └─ event_id?: string → event
-│  └─ process_id?: string → process
 claim_policy?: array<string>
 launch_event_id?: string → event
-programme_id?: string → programme
-subject_ids?: array<string> → any foundation ID
+subject_ids?: array<string> → product / technology / manufacturing_capability / actor / agreement / market_response
 presentation?: object
 │  └─ duration_minutes?: integer
 │  └─ stage*: array<object>
@@ -258,6 +252,11 @@ booth?: array<object>
 │  └─ name*: string
 │  └─ description*: string
 │  └─ call_to_action?: string
+process_id*: string → process
+marketing_content?: array<object>
+│  └─ number*: integer
+│  └─ type*: string
+│  └─ description*: string
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -268,14 +267,9 @@ booth?: array<object>
 | `lead_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 1; uniqueItems: true |
 | `audience[]` | no | `array<string>` | minLength: 1; minItems: 0 |
 | `message[]` | no | `array<string>` | minLength: 1; minItems: 0 |
-| `activity[]` | no | `array<object>` | minItems: 0 |
-| `activity[].description` | yes | `string` | minLength: 1 |
-| `activity[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `activity[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `claim_policy[]` | no | `array<string>` | minLength: 1; minItems: 0 |
 | `launch_event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `programme_id` | no | `string` | pattern: "^(programme)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `subject_ids[]` | no | `array<string>` | pattern: "^(assumption\|actor\|actor_relationship\|event\|campaign\|agreement\|clause\|process\|programme\|location\|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `subject_ids[]` | no | `array<string>` | pattern: "^(product\|technology\|manufacturing_capability\|actor\|agreement\|market_response)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `presentation` | no | `object` | — |
 | `presentation.duration_minutes` | no | `integer` | minimum: 1 |
 | `presentation.stage[]` | yes | `array<object>` | — |
@@ -287,6 +281,11 @@ booth?: array<object>
 | `booth[].name` | yes | `string` | minLength: 1 |
 | `booth[].description` | yes | `string` | minLength: 1 |
 | `booth[].call_to_action` | no | `string` | minLength: 1 |
+| `process_id` | yes | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `marketing_content[]` | no | `array<object>` | minItems: 0 |
+| `marketing_content[].number` | yes | `integer` | minimum: 1 |
+| `marketing_content[].type` | yes | `string` | minLength: 1 |
+| `marketing_content[].description` | yes | `string` | minLength: 1 |
 
 ### clause
 
@@ -303,9 +302,6 @@ statement*: string
 assertion_mode*: string
 actor_ids?: array<string> → actor
 conditions?: array<string>
-effective_time?: object
-│  └─ value*: string
-│  └─ precision*: string
 supersedes_clause_id?: string → clause
 equity?: object
 │  └─ company_actor_id*: string → actor
@@ -318,6 +314,7 @@ commitment_amount?: object
 │  └─ currency*: string
 │  └─ reference_year*: integer
 │  └─ basis*: string
+effective_event_id?: string → event
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -329,9 +326,6 @@ commitment_amount?: object
 | `assertion_mode` | yes | `string` | enum: ["commitment","proposal","target","established_fact"] |
 | `actor_ids[]` | no | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `conditions[]` | no | `array<string>` | minLength: 1; minItems: 0 |
-| `effective_time` | no | `object` | — |
-| `effective_time.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `effective_time.precision` | yes | `string` | enum: ["year","month","day"] |
 | `supersedes_clause_id` | no | `string` | pattern: "^(clause)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `equity` | no | `object` | — |
 | `equity.company_actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
@@ -344,6 +338,7 @@ commitment_amount?: object
 | `commitment_amount.currency` | yes | `string` | pattern: "^[A-Z]{3}$" |
 | `commitment_amount.reference_year` | yes | `integer` | minimum: 1972 |
 | `commitment_amount.basis` | yes | `string` | enum: ["nominal_commitment","planning_provision","actual_expenditure"] |
+| `effective_event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 
 **Conditional rule:** `equity` is required exactly when `kind` is `equity`; it is forbidden for every other kind.
 
@@ -356,67 +351,77 @@ File: [event.json](../../data_foundation/event.json) · Schema: [event.schema.js
 ```text
 event[]
 id*: string
-kind*: string
 title*: string
-occurrence*: string
-time?: object
-│  └─ value*: string
-│  └─ precision*: string
-period?: object
-│  └─ start*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
-│  └─ end*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
+kind*: string
+description*: string
 participant*: array<object>
 │  └─ actor_id*: string → actor
 │  └─ role*: string
-action?: array<object>
-│  └─ description*: string
-│  └─ actor_ids?: array<string> → actor
-outcome?: array<object>
-│  └─ description*: string
-agreement_ids?: array<string> → agreement
-process_ids?: array<string> → process
-narrative_period_ids?: array<string> → narrative_period
-location_ids?: array<string> → location
 subject_ids?: array<string> → any foundation ID
-conditions?: array<string>
+inputs*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
+│  └─ description*: string
+│  └─ subject_ids?: array<string> → any foundation ID
+│  └─ event_id?: string → event
+│  └─ process_id?: string → process
+│  └─ maturity?: object
+│  │  └─ capability_id*: string → manufacturing_capability
+│  │  └─ stage*: undefined
+outcomes*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
+│  └─ description*: string
+│  └─ subject_ids?: array<string> → any foundation ID
+│  └─ event_id?: string → event
+│  └─ process_id?: string → process
+│  └─ maturity?: object
+│  │  └─ capability_id*: string → manufacturing_capability
+│  │  └─ stage*: undefined
+agreement_ids?: array<string> → agreement
+time*: object
+│  └─ value*: string
+│  └─ precision*: string
+process_ids?: array<string> → process
+location_ids?: array<string> → location
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
 | --- | --- | --- | --- |
 | `id` | yes | `string` | pattern: "^event\\.[a-z0-9][a-z0-9_.-]*$" |
-| `kind` | yes | `string` | enum: ["founding","agreement_milestone","recruitment","launch","qualification","decision","arrival","activity","other"] |
 | `title` | yes | `string` | minLength: 1 |
-| `occurrence` | yes | `string` | enum: ["planned","occurred","cancelled","unknown"] |
-| `time` | no | `object` | — |
-| `time.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `time.precision` | yes | `string` | enum: ["year","month","day"] |
-| `period` | no | `object` | — |
-| `period.start` | yes | `object` | — |
-| `period.start.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `period.start.precision` | yes | `string` | enum: ["year","month","day"] |
-| `period.end` | yes | `object` | — |
-| `period.end.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `period.end.precision` | yes | `string` | enum: ["year","month","day"] |
+| `kind` | yes | `string` | minLength: 1 |
+| `description` | yes | `string` | minLength: 1 |
 | `participant[]` | yes | `array<object>` | minItems: 0 |
 | `participant[].actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `participant[].role` | yes | `string` | minLength: 1 |
-| `action[]` | no | `array<object>` | minItems: 0 |
-| `action[].description` | yes | `string` | minLength: 1 |
-| `action[].actor_ids[]` | no | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `outcome[]` | no | `array<object>` | minItems: 0 |
-| `outcome[].description` | yes | `string` | minLength: 1 |
+| `subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `inputs[]` | yes | `array<object>` | minItems: 0 |
+| `inputs[].number` | yes | `integer` | minimum: 1 |
+| `inputs[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
+| `inputs[].description` | yes | `string` | minLength: 1 |
+| `inputs[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `inputs[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `inputs[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `inputs[].maturity` | no | `object` | — |
+| `inputs[].maturity.capability_id` | yes | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `inputs[].maturity.stage` | yes | `undefined` | enum: ["pilot","qualified","production_released","repeatable_production","suspended"] |
+| `outcomes[]` | yes | `array<object>` | minItems: 0 |
+| `outcomes[].number` | yes | `integer` | minimum: 1 |
+| `outcomes[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
+| `outcomes[].description` | yes | `string` | minLength: 1 |
+| `outcomes[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `outcomes[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `outcomes[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `outcomes[].maturity` | no | `object` | — |
+| `outcomes[].maturity.capability_id` | yes | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `outcomes[].maturity.stage` | yes | `undefined` | enum: ["pilot","qualified","production_released","repeatable_production","suspended"] |
 | `agreement_ids[]` | no | `array<string>` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `time` | yes | `object` | — |
+| `time.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
+| `time.precision` | yes | `string` | enum: ["year","month","day"] |
 | `process_ids[]` | no | `array<string>` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `narrative_period_ids[]` | no | `array<string>` | pattern: "^(narrative_period)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `location_ids[]` | no | `array<string>` | pattern: "^(location)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `subject_ids[]` | no | `array<string>` | pattern: "^(assumption\|actor\|actor_relationship\|event\|campaign\|agreement\|clause\|process\|programme\|location\|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `conditions[]` | no | `array<string>` | minLength: 1; minItems: 0 |
-
-**Conditional rule:** exactly one of `time` or `period` must be present.
 
 ### location
 
@@ -441,38 +446,81 @@ description?: string
 | `parent_location_id` | no | `string` | pattern: "^(location)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `description` | no | `string` | minLength: 1 |
 
-### narrative_period
+### manufacturing_capability
 
-Named intervals used to organize the story.
+Manufacturer- and recipe-scoped capability; maturity transitions are event outcomes.
 
-File: [narrative_period.json](../../data_foundation/narrative_period.json) · Schema: [narrative_period.schema.json](../../schemas/narrative_period.schema.json)
+File: [manufacturing_capability.json](../../data_foundation/manufacturing_capability.json) · Schema: [manufacturing_capability.schema.json](../../schemas/manufacturing_capability.schema.json)
 
 ```text
-narrative_period[]
+manufacturing_capability[]
 id*: string
-title*: string
-period*: object
-│  └─ start*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
-│  └─ end*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
-display_order*: integer
+name*: string
+actor_id*: string → actor
+location_id?: string → location
+technology_id*: string → technology
+recipe_kind*: undefined
+product_ids*: array<string> → product
+description*: string
+qualification_requirements*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
+│  └─ description*: string
+│  └─ subject_ids?: array<string> → any foundation ID
+│  └─ event_id?: string → event
+│  └─ process_id?: string → process
+│  └─ maturity?: object
+│  │  └─ capability_id*: string → manufacturing_capability
+│  │  └─ stage*: undefined
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
 | --- | --- | --- | --- |
-| `id` | yes | `string` | pattern: "^narrative_period\\.[a-z0-9][a-z0-9_.-]*$" |
+| `id` | yes | `string` | pattern: "^manufacturing_capability\\.[a-z0-9][a-z0-9_.-]*$" |
+| `name` | yes | `string` | minLength: 1 |
+| `actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `location_id` | no | `string` | pattern: "^(location)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technology_id` | yes | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `recipe_kind` | yes | `undefined` | enum: ["logic","SRAM","DRAM","analogue"] |
+| `product_ids[]` | yes | `array<string>` | pattern: "^(product)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `description` | yes | `string` | minLength: 1 |
+| `qualification_requirements[]` | yes | `array<object>` | minItems: 0 |
+| `qualification_requirements[].number` | yes | `integer` | minimum: 1 |
+| `qualification_requirements[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
+| `qualification_requirements[].description` | yes | `string` | minLength: 1 |
+| `qualification_requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `qualification_requirements[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `qualification_requirements[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `qualification_requirements[].maturity` | no | `object` | — |
+| `qualification_requirements[].maturity.capability_id` | yes | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `qualification_requirements[].maturity.stage` | yes | `undefined` | enum: ["pilot","qualified","production_released","repeatable_production","suspended"] |
+
+### market_response
+
+Qualitative market reaction with timing supplied by its event/process carrier.
+
+File: [market_response.json](../../data_foundation/market_response.json) · Schema: [market_response.schema.json](../../schemas/market_response.schema.json)
+
+```text
+market_response[]
+id*: string
+title*: string
+kind*: undefined
+respondent_actor_ids*: array<string> → actor
+subject_ids*: array<string> → any foundation ID
+trigger_ids*: array<string> → event / process / campaign / agreement
+description*: string
+```
+
+| Field path | Required in parent | Type | Constraints / allowed values |
+| --- | --- | --- | --- |
+| `id` | yes | `string` | pattern: "^market_response\\.[a-z0-9][a-z0-9_.-]*$" |
 | `title` | yes | `string` | minLength: 1 |
-| `period` | yes | `object` | — |
-| `period.start` | yes | `object` | — |
-| `period.start.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `period.start.precision` | yes | `string` | enum: ["year","month","day"] |
-| `period.end` | yes | `object` | — |
-| `period.end.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `period.end.precision` | yes | `string` | enum: ["year","month","day"] |
-| `display_order` | yes | `integer` | minimum: 0 |
+| `kind` | yes | `undefined` | enum: ["adoption","partnership","competing_offer","compatibility_response","purchasing_response","channel_response","market_response","other"] |
+| `respondent_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `subject_ids[]` | yes | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `trigger_ids[]` | yes | `array<string>` | pattern: "^(event\|process\|campaign\|agreement)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `description` | yes | `string` | minLength: 1 |
 
 ### process
 
@@ -485,88 +533,191 @@ process[]
 id*: string
 title*: string
 kind*: string
-period?: object
-│  └─ start*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
-│  └─ end*: object
-│  │  └─ value*: string
-│  │  └─ precision*: string
+description*: string
 participant*: array<object>
 │  └─ actor_id*: string → actor
 │  └─ role*: string
-parent_process_id?: string → process
-programme_id?: string → programme
-step?: array<object>
-│  └─ label*: string
+subject_ids?: array<string> → any foundation ID
+inputs*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
 │  └─ description*: string
+│  └─ subject_ids?: array<string> → any foundation ID
 │  └─ event_id?: string → event
-completion_state*: string
-acceptance_gate?: array<object>
+│  └─ process_id?: string → process
+│  └─ maturity?: object
+│  │  └─ capability_id*: string → manufacturing_capability
+│  │  └─ stage*: undefined
+outcomes*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
 │  └─ description*: string
-│  └─ evidence_event_id?: string → event
+│  └─ subject_ids?: array<string> → any foundation ID
+│  └─ event_id?: string → event
+│  └─ process_id?: string → process
+│  └─ maturity?: object
+│  │  └─ capability_id*: string → manufacturing_capability
+│  │  └─ stage*: undefined
+agreement_ids?: array<string> → agreement
+period*: object
+│  └─ start*: object
+│  │  └─ value*: string | null → event
+│  │  └─ precision*: string
+│  └─ end*: object
+│  │  └─ value*: string | null → event
+│  │  └─ precision*: string
+steps*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
+│  └─ description*: string
+│  └─ subject_ids?: array<string> → any foundation ID
+│  └─ event_id?: string → event
+│  └─ process_id?: string → process
+│  └─ maturity?: object
+│  │  └─ capability_id*: string → manufacturing_capability
+│  │  └─ stage*: undefined
+parent_process_id?: string → process
+related_process_ids?: array<string> → process
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
 | --- | --- | --- | --- |
 | `id` | yes | `string` | pattern: "^process\\.[a-z0-9][a-z0-9_.-]*$" |
 | `title` | yes | `string` | minLength: 1 |
-| `kind` | yes | `string` | enum: ["study","development","recruitment","transfer","qualification","preparation","other"] |
-| `period` | no | `object` | — |
-| `period.start` | yes | `object` | — |
-| `period.start.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `period.start.precision` | yes | `string` | enum: ["year","month","day"] |
-| `period.end` | yes | `object` | — |
-| `period.end.value` | yes | `string` | pattern: "^(19[7-9][0-9]\|[2-9][0-9]{3})(-(0[1-9]\|1[0-2])(-(0[1-9]\|[12][0-9]\|3[01]))?)?$" |
-| `period.end.precision` | yes | `string` | enum: ["year","month","day"] |
+| `kind` | yes | `string` | minLength: 1 |
+| `description` | yes | `string` | minLength: 1 |
 | `participant[]` | yes | `array<object>` | minItems: 0 |
 | `participant[].actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `participant[].role` | yes | `string` | minLength: 1 |
+| `subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `inputs[]` | yes | `array<object>` | minItems: 0 |
+| `inputs[].number` | yes | `integer` | minimum: 1 |
+| `inputs[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
+| `inputs[].description` | yes | `string` | minLength: 1 |
+| `inputs[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `inputs[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `inputs[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `inputs[].maturity` | no | `object` | — |
+| `inputs[].maturity.capability_id` | yes | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `inputs[].maturity.stage` | yes | `undefined` | enum: ["pilot","qualified","production_released","repeatable_production","suspended"] |
+| `outcomes[]` | yes | `array<object>` | minItems: 0 |
+| `outcomes[].number` | yes | `integer` | minimum: 1 |
+| `outcomes[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
+| `outcomes[].description` | yes | `string` | minLength: 1 |
+| `outcomes[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `outcomes[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `outcomes[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `outcomes[].maturity` | no | `object` | — |
+| `outcomes[].maturity.capability_id` | yes | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `outcomes[].maturity.stage` | yes | `undefined` | enum: ["pilot","qualified","production_released","repeatable_production","suspended"] |
+| `agreement_ids[]` | no | `array<string>` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `period` | yes | `object` | — |
+| `period.start` | yes | `object` | — |
+| `period.start.value` | yes | `string | null` | — |
+| `period.start.precision` | yes | `string` | enum: ["year","month","day","event","unknown"] |
+| `period.end` | yes | `object` | — |
+| `period.end.value` | yes | `string | null` | — |
+| `period.end.precision` | yes | `string` | enum: ["year","month","day","event","unknown"] |
+| `steps[]` | yes | `array<object>` | minItems: 0 |
+| `steps[].number` | yes | `integer` | minimum: 1 |
+| `steps[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
+| `steps[].description` | yes | `string` | minLength: 1 |
+| `steps[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|clause\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `steps[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `steps[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `steps[].maturity` | no | `object` | — |
+| `steps[].maturity.capability_id` | yes | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `steps[].maturity.stage` | yes | `undefined` | enum: ["pilot","qualified","production_released","repeatable_production","suspended"] |
 | `parent_process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `programme_id` | no | `string` | pattern: "^(programme)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `step[]` | no | `array<object>` | minItems: 0 |
-| `step[].label` | yes | `string` | minLength: 1 |
-| `step[].description` | yes | `string` | minLength: 1 |
-| `step[].event_id` | no | `string` | pattern: "^event\\.[a-z0-9][a-z0-9_.-]*$" |
-| `completion_state` | yes | `string` | enum: ["planned","in_progress","completed","cancelled","unknown"] |
-| `acceptance_gate[]` | no | `array<object>` | minItems: 0 |
-| `acceptance_gate[].description` | yes | `string` | minLength: 1 |
-| `acceptance_gate[].evidence_event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `related_process_ids[]` | no | `array<string>` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 
-### programme
+**Boundary union:** calendar value with year/month/day precision, event ID with `precision: event`, or null with `precision: unknown`. The diagram/catalogue value reference applies only to event anchors.
 
-An umbrella programme connecting related story activities.
+### product
 
-File: [programme.json](../../data_foundation/programme.json) · Schema: [programme.schema.json](../../schemas/programme.schema.json)
+Named product, service or software subject without composition.
+
+File: [product.json](../../data_foundation/product.json) · Schema: [product.schema.json](../../schemas/product.schema.json)
 
 ```text
-programme[]
+product[]
 id*: string
-title*: string
-objective*: string
-sponsor_actor_ids*: array<string> → actor
-agreement_ids?: array<string> → agreement
-deliverable?: array<object>
+name*: string
+kind*: undefined
+description*: string
+provider_actor_ids*: array<string> → actor
+family_product_id?: string → product
+version?: string
+technology_ids*: array<string> → technology
+specification*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
 │  └─ description*: string
-│  └─ subject_ids?: array<string> → any foundation ID
-acceptance_gate?: array<object>
-│  └─ description*: string
-│  └─ evidence_event_id?: string → event
+│  └─ value?: string,number,boolean
+│  └─ unit?: string
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
 | --- | --- | --- | --- |
-| `id` | yes | `string` | pattern: "^programme\\.[a-z0-9][a-z0-9_.-]*$" |
-| `title` | yes | `string` | minLength: 1 |
-| `objective` | yes | `string` | minLength: 1 |
-| `sponsor_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 1; uniqueItems: true |
-| `agreement_ids[]` | no | `array<string>` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `deliverable[]` | no | `array<object>` | minItems: 0 |
-| `deliverable[].description` | yes | `string` | minLength: 1 |
-| `deliverable[].subject_ids[]` | no | `array<string>` | pattern: "^(assumption\|actor\|actor_relationship\|event\|campaign\|agreement\|clause\|process\|programme\|location\|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `acceptance_gate[]` | no | `array<object>` | minItems: 0 |
-| `acceptance_gate[].description` | yes | `string` | minLength: 1 |
-| `acceptance_gate[].evidence_event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `id` | yes | `string` | pattern: "^product\\.[a-z0-9][a-z0-9_.-]*$" |
+| `name` | yes | `string` | minLength: 1 |
+| `kind` | yes | `undefined` | enum: ["computer","hardware","software","software_edition","bundle","service","chip","family"] |
+| `description` | yes | `string` | minLength: 1 |
+| `provider_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `family_product_id` | no | `string` | pattern: "^(product)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `version` | no | `string` | minLength: 1 |
+| `technology_ids[]` | yes | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `specification[]` | yes | `array<object>` | minItems: 0 |
+| `specification[].number` | yes | `integer` | minimum: 1 |
+| `specification[].type` | yes | `string` | minLength: 1 |
+| `specification[].description` | yes | `string` | — |
+| `specification[].value` | no | `string,number,boolean` | — |
+| `specification[].unit` | no | `string` | minLength: 1 |
+
+### technology
+
+Technical concept or fabrication technology; dated changes belong to events/processes.
+
+File: [technology.json](../../data_foundation/technology.json) · Schema: [technology.schema.json](../../schemas/technology.schema.json)
+
+```text
+technology[]
+id*: string
+name*: string
+kind*: undefined
+description*: string
+owner_actor_ids*: array<string> → actor
+related_technology_ids*: array<string> → technology
+specification*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
+│  └─ description*: string
+│  └─ value?: string,number,boolean
+│  └─ unit?: string
+fabrication?: object
+│  └─ feature_size_um*: number
+│  └─ wafer_diameter_mm?: number
+│  └─ lithography_method*: string
+```
+
+| Field path | Required in parent | Type | Constraints / allowed values |
+| --- | --- | --- | --- |
+| `id` | yes | `string` | pattern: "^technology\\.[a-z0-9][a-z0-9_.-]*$" |
+| `name` | yes | `string` | minLength: 1 |
+| `kind` | yes | `undefined` | enum: ["protocol","interface","architecture","software_method","fabrication"] |
+| `description` | yes | `string` | minLength: 1 |
+| `owner_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `related_technology_ids[]` | yes | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `specification[]` | yes | `array<object>` | minItems: 0 |
+| `specification[].number` | yes | `integer` | minimum: 1 |
+| `specification[].type` | yes | `string` | minLength: 1 |
+| `specification[].description` | yes | `string` | — |
+| `specification[].value` | no | `string,number,boolean` | — |
+| `specification[].unit` | no | `string` | minLength: 1 |
+| `fabrication` | no | `object` | — |
+| `fabrication.feature_size_um` | yes | `number` | — |
+| `fabrication.wafer_diameter_mm` | no | `number` | — |
+| `fabrication.lithography_method` | yes | `string` | minLength: 1 |
 
 ## Reference catalogue
 
@@ -577,39 +728,75 @@ Every schema attribute marked `x-ref` appears here, including references inside 
 | actor_relationship | `subject_actor_ids[]` | `actor` |
 | actor_relationship | `object_actor_id` | `actor` |
 | actor_relationship | `established_by_event_id` | `event` |
+| actor_relationship | `process_id` | `process` |
 | agreement | `party[].actor_id` | `actor` |
 | agreement | `supersedes_agreement_id` | `agreement` |
-| assumption | `scope_ids[]` | `assumption`, `actor`, `actor_relationship`, `event`, `campaign`, `agreement`, `clause`, `process`, `programme`, `location`, `narrative_period` |
+| agreement | `effective_event_id` | `event` |
+| agreement | `termination_event_id` | `event` |
+| agreement | `process_id` | `process` |
+| assumption | `scope_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
 | assumption | `exception_ids[]` | `assumption` |
+| assumption | `process_id` | `process` |
 | campaign | `lead_actor_ids[]` | `actor` |
-| campaign | `activity[].event_id` | `event` |
-| campaign | `activity[].process_id` | `process` |
 | campaign | `launch_event_id` | `event` |
-| campaign | `programme_id` | `programme` |
-| campaign | `subject_ids[]` | `assumption`, `actor`, `actor_relationship`, `event`, `campaign`, `agreement`, `clause`, `process`, `programme`, `location`, `narrative_period` |
+| campaign | `subject_ids[]` | `product`, `technology`, `manufacturing_capability`, `actor`, `agreement`, `market_response` |
 | campaign | `presentation.stage[].actor_ids[]` | `actor` |
+| campaign | `process_id` | `process` |
 | clause | `agreement_id` | `agreement` |
 | clause | `actor_ids[]` | `actor` |
 | clause | `supersedes_clause_id` | `clause` |
 | clause | `equity.company_actor_id` | `actor` |
 | clause | `equity.beneficiary_actor_ids[]` | `actor` |
+| clause | `effective_event_id` | `event` |
 | event | `participant[].actor_id` | `actor` |
-| event | `action[].actor_ids[]` | `actor` |
+| event | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| event | `inputs[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| event | `inputs[].event_id` | `event` |
+| event | `inputs[].process_id` | `process` |
+| event | `inputs[].maturity.capability_id` | `manufacturing_capability` |
+| event | `outcomes[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| event | `outcomes[].event_id` | `event` |
+| event | `outcomes[].process_id` | `process` |
+| event | `outcomes[].maturity.capability_id` | `manufacturing_capability` |
 | event | `agreement_ids[]` | `agreement` |
 | event | `process_ids[]` | `process` |
-| event | `narrative_period_ids[]` | `narrative_period` |
 | event | `location_ids[]` | `location` |
-| event | `subject_ids[]` | `assumption`, `actor`, `actor_relationship`, `event`, `campaign`, `agreement`, `clause`, `process`, `programme`, `location`, `narrative_period` |
 | location | `parent_location_id` | `location` |
+| manufacturing_capability | `actor_id` | `actor` |
+| manufacturing_capability | `location_id` | `location` |
+| manufacturing_capability | `technology_id` | `technology` |
+| manufacturing_capability | `product_ids[]` | `product` |
+| manufacturing_capability | `qualification_requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| manufacturing_capability | `qualification_requirements[].event_id` | `event` |
+| manufacturing_capability | `qualification_requirements[].process_id` | `process` |
+| manufacturing_capability | `qualification_requirements[].maturity.capability_id` | `manufacturing_capability` |
+| market_response | `respondent_actor_ids[]` | `actor` |
+| market_response | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| market_response | `trigger_ids[]` | `event`, `process`, `campaign`, `agreement` |
 | process | `participant[].actor_id` | `actor` |
+| process | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| process | `inputs[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| process | `inputs[].event_id` | `event` |
+| process | `inputs[].process_id` | `process` |
+| process | `inputs[].maturity.capability_id` | `manufacturing_capability` |
+| process | `outcomes[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| process | `outcomes[].event_id` | `event` |
+| process | `outcomes[].process_id` | `process` |
+| process | `outcomes[].maturity.capability_id` | `manufacturing_capability` |
+| process | `agreement_ids[]` | `agreement` |
+| process | `period.start.value` | `event` |
+| process | `period.end.value` | `event` |
+| process | `steps[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `clause`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| process | `steps[].event_id` | `event` |
+| process | `steps[].process_id` | `process` |
+| process | `steps[].maturity.capability_id` | `manufacturing_capability` |
 | process | `parent_process_id` | `process` |
-| process | `programme_id` | `programme` |
-| process | `step[].event_id` | `event` |
-| process | `acceptance_gate[].evidence_event_id` | `event` |
-| programme | `sponsor_actor_ids[]` | `actor` |
-| programme | `agreement_ids[]` | `agreement` |
-| programme | `deliverable[].subject_ids[]` | `assumption`, `actor`, `actor_relationship`, `event`, `campaign`, `agreement`, `clause`, `process`, `programme`, `location`, `narrative_period` |
-| programme | `acceptance_gate[].evidence_event_id` | `event` |
+| process | `related_process_ids[]` | `process` |
+| product | `provider_actor_ids[]` | `actor` |
+| product | `family_product_id` | `product` |
+| product | `technology_ids[]` | `technology` |
+| technology | `owner_actor_ids[]` | `actor` |
+| technology | `related_technology_ids[]` | `technology` |
 
 ## Contract notes
 

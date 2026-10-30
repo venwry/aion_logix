@@ -1,5 +1,7 @@
 # Phase 1B (1.5) — narrative subjects and temporal discipline
 
+> Historical design/snapshot: the current model is **0.4.0**. See [implementation, migration and current inventory](PHASE_1B_IMPLEMENTATION.md) and [current schemas](FOUNDATION_SPECIFICATION.md). Counts and proposed alternatives below describe the earlier snapshot.
+
 **Design proposal, 29 October 2026.** The author has requested the phase and its direction. The specific fields, migration mappings and safeguards below are recommendations for review, not installed schemas or newly authorized story facts.
 
 Evidence: `venwry/vs_edu1` **main**, fetched and verified at [`dac733770d8e622d5619bd84bc9d21db6c7ec7ab`](https://github.com/venwry/vs_edu1/tree/dac733770d8e622d5619bd84bc9d21db6c7ec7ab); current `aion_logix` baseline `6c33b7b`. Analysis covered the legacy JSON collections and current foundation records. No legacy financial models were rerun, and no external historical verification is claimed.

@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import {pointBounds,resolvePoint} from '../code/temporal.js';
 const schemaDir = fileURLToPath(new URL('../schemas/', import.meta.url));
 const schemas = Object.fromEntries(fs.readdirSync(schemaDir).filter(f => f.endsWith('.schema.json')).map(f => [f.replace('.schema.json',''), JSON.parse(fs.readFileSync(path.join(schemaDir,f)))]));
 const ajv = new Ajv2020({ allErrors: true, strict: false });
@@ -39,6 +40,14 @@ export function validateDocuments(documents, { complete = false } = {}) {
     const target = url ? Object.values(schemas).find(s => s.$id === url) : root;
     return [fragment ? fragment.slice(1).split('/').reduce((v,k)=>v[k],target) : target, target];
   }
+  function checkDate(value,at){
+    const length={year:4,month:7,day:10}[value.precision];
+    if(value.value.length!==length)report(`${at}: precision does not match date`);
+    const full=value.value+(value.precision==='year'?'-01-01':value.precision==='month'?'-01':'');
+    const date=new Date(full+'T00:00:00Z');
+    if(!Number.isFinite(date.getTime())||date.toISOString().slice(0,10)!==full)report(`${at}: invalid calendar date`);
+    if(full<'1972-01-01')report(`${at}: story time precedes 1972-01-01`);
+  }
   function walk(value, schema, root, at) {
     if (schema.$ref) { const [target,newRoot] = resolve(schema.$ref,root); walk(value,target,newRoot,at); return; }
     if (schema['x-ref']) {
@@ -46,25 +55,32 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if (!target) report(`${at}: unresolved reference ${value}`);
       else if (!schema['x-ref'].includes(value.split('.')[0])) report(`${at}: wrong reference type ${value}`);
     }
-    if (schema['x-date']) {
-      const length={year:4,month:7,day:10}[value.precision];
-      if (value.value.length !== length) report(`${at}: precision does not match date`);
-      const full=value.value+(value.precision==='year'?'-01-01':value.precision==='month'?'-01':'');
-      const date = new Date(full+'T00:00:00Z');
-      if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0,10)!==full) report(`${at}: invalid calendar date`);
-      if (full < '1972-01-01') report(`${at}: story time precedes 1972-01-01`);
+    if(schema['x-boundary']){
+      if(value.precision==='event'&&!records.get(value.value)?.id.startsWith('event.'))report(`${at}: unresolved event boundary ${value.value}`);
+      if(value.precision==='unknown')return;
+      const point=resolvePoint(value,records);if(point)checkDate(point,at);
+      return;
     }
-    if (schema['x-period']) {
-      // Compare uncertainty bounds, not fabricated exact dates.
-      const lower = p => p.value+(p.precision==='year'?'-01-01':p.precision==='month'?'-01':'');
-      const upper = p => p.precision==='year'?p.value+'-12-31':p.precision==='month'?p.value+'-31':p.value;
-      if (lower(value.start)>upper(value.end)) report(`${at}: reversed period`);
+    if(schema['x-date'])checkDate(value,at);
+    if(schema['x-period']){
+      const start=pointBounds(value.start,records),end=pointBounds(value.end,records);
+      if(start&&end&&start.start>end.end)report(`${at}: reversed period`);
     }
     if (Array.isArray(value) && schema.items) value.forEach((v,i)=>walk(v,schema.items,root,`${at}/${i}`));
     else if (value && typeof value==='object') for (const [key,v] of Object.entries(value)) if (schema.properties?.[key]) walk(v,schema.properties[key],root,`${at}/${key}`);
   }
   for (const [name,doc] of Object.entries(documents)) walk(doc,schemas[name],schemas[name],name);
   for (const record of records.values()) {
+    for(const key of ['steps','inputs','outcomes','specification','qualification_requirements','marketing_content']){
+      const numbers=(record[key]||[]).map(x=>x.number);
+      if(new Set(numbers).size!==numbers.length)report(`${record.id}: duplicate number in ${key}`);
+    }
+    if(record.id.startsWith('campaign.')&&records.get(record.process_id)?.kind!=='campaign_execution')report(`${record.id}: campaign needs an execution process`);
+    for(const outcome of record.outcomes||[]){
+      if(outcome.type==='maturity_transition'&&!outcome.maturity)report(`${record.id}: maturity transition needs capability and stage`);
+      if(outcome.maturity&&outcome.type!=='maturity_transition')report(`${record.id}: maturity payload requires maturity_transition type`);
+    }
+
     if (record.status === 'confirmed') {
       const source=records.get(record.confirmation.source_id);
       if (source?.kind !== 'author_decision') report(`${record.id}: confirmation requires an author_decision source`);
@@ -77,7 +93,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
         if (item && recordHash(item)!==target.record_sha256) report(`${record.id}: reviewed content hash mismatch for ${item.id}`);
       }
     }
-    for (const key of ['parent_process_id','parent_location_id','supersedes_agreement_id','supersedes_clause_id']) {
+    for (const key of ['parent_process_id','parent_location_id','supersedes_agreement_id','supersedes_clause_id','family_product_id']) {
       let item=record;const seen=new Set();
       while (item?.[key]) { if (seen.has(item.id)) {report(`${record.id}: cycle in ${key}`);break;} seen.add(item.id);item=records.get(item[key]); }
     }

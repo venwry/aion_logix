@@ -3,7 +3,7 @@ import {saveAuthorization} from './api-client.js';
 import {compactDetails as details} from './compact-details.js';
 import {$,el,human,typeOf,titleOf,loadData,timing,actorSet,fillActors,stats,splitter,showError,debounce,statusBadge,datasets} from './shared.js';
 try {
- const data=await loadData();const PAGE_SIZE=75;const items=data.records.map(record=>{const date=timing(record,data.index);return {record,id:record.id,title:titleOf(record),type:typeOf(record),kind:record.kind||'',get status(){return record.status;},date:date?.startLabel||record.effective_time?.value||'',actors:actorSet(record,data.index),search:JSON.stringify(record).toLowerCase()};});
+ const data=await loadData();const PAGE_SIZE=75;const items=data.records.map(record=>{const date=timing(record,data.index);return {record,id:record.id,title:titleOf(record),type:typeOf(record),kind:record.kind||'',get status(){return record.status;},date:date?.startLabel||'',actors:actorSet(record,data.index),search:JSON.stringify(record).toLowerCase()};});
  for(const name of datasets){const option=el('option','',human(name)+' · '+data.collections[name].length);option.value=name;$('dataset').append(option);}fillActors($('actor'),data);stats($('stats'),[[items.length,'records'],[datasets.length,'datasets']]);splitter('aion-browser-width',Math.round($('workspace').clientWidth*.58));
  const pending=new Set();let saving=false;
  function updateSave(){ $('authorize-selected').disabled=saving||!pending.size;$('authorize-selected').textContent=pending.size?'Authorize and save ('+pending.size+')':'Authorize and save';}

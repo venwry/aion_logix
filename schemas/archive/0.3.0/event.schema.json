@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/event.schema.json",
+  "type": "object",
+  "properties": {
+    "event": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "event"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^event\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "founding",
+            "agreement_milestone",
+            "recruitment",
+            "launch",
+            "qualification",
+            "decision",
+            "arrival",
+            "activity",
+            "other"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrence": {
+          "type": "string",
+          "enum": [
+            "planned",
+            "occurred",
+            "cancelled",
+            "unknown"
+          ]
+        },
+        "time": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
+        },
+        "period": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/period"
+        },
+        "participant": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/participant"
+          },
+          "minItems": 0
+        },
+        "action": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actor_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "actor"
+                  ]
+                },
+                "minItems": 0,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "description"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "outcome": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "description"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "agreement_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "agreement"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "process_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "process"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "narrative_period_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(narrative_period)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "narrative_period"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "location_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(location)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "location"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(assumption|actor|actor_relationship|event|campaign|agreement|clause|process|programme|location|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "assumption",
+              "actor",
+              "actor_relationship",
+              "event",
+              "campaign",
+              "agreement",
+              "clause",
+              "process",
+              "programme",
+              "location",
+              "narrative_period"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "occurrence",
+        "participant"
+      ],
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "time"
+          ],
+          "not": {
+            "required": [
+              "period"
+            ]
+          }
+        },
+        {
+          "required": [
+            "period"
+          ],
+          "not": {
+            "required": [
+              "time"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

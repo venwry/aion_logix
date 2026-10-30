@@ -1,6 +1,6 @@
 # Aion Logix — five foundational phases with phase 1B
 
-Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its detailed schema and migration design remains proposed for review in [PHASE_1B_DESIGN_REVIEW.md](data-model/PHASE_1B_DESIGN_REVIEW.md).
+Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its model is implemented as version 0.4.0; see [implementation and migration](data-model/PHASE_1B_IMPLEMENTATION.md).
 
 This document consolidates the agreed process. It describes the intended workflow separately from functionality already implemented. It does not authorize additional story records, introduce new dataset schemas, or claim that the later phases are complete.
 
@@ -10,14 +10,14 @@ Build a consistent alternative history in which a time traveller, starting on **
 
 The work has **five foundational phases and an intermediate phase 1B**, followed by a separate, repeatedly reassessed **sales, market coverage and ROI assessment**. All five phases contribute to the story accepted by the author. Forecasts are derived assessments of that story and do not automatically become story facts.
 
-These are phases of our design and review work, not chronological periods in the fictional world. `narrative_period` records have a different purpose.
+These are phases of our design and review work, not chronological periods in the fictional world. Former `narrative_period` groupings have been archived.
 
 ## 2. The five foundational phases
 
 | Phase | Agreed scope | Expected result | Boundary |
 | --- | --- | --- | --- |
 | **1. History and its participants** | Overall assumptions; actors; events; campaigns; contracts/agreements; processes; supporting entities where needed | A consistent account of who acted, when, under what agreement, with what responsibilities and outcomes | Ownership percentages and commercial commitments belong here. Detailed product engineering and cost modelling are developed in later phases. |
-| **1B / 1.5. Narrative subjects and connections** | Product and technology identities without composition; chip manufacturing technology, lithography advancement and maturity; qualitative market responses | Referenced subjects and results that make campaigns, agreements and development processes coherent | Bring identity and narrative meaning forward; retain BOMs, quantitative yields/costs and sales forecasts for their later work. Detailed schema changes await review. |
+| **1B / 1.5. Narrative subjects and connections** | Product and technology identities without composition; chip manufacturing technology, lithography advancement and maturity; qualitative market responses | Referenced subjects and results that make campaigns, agreements and development processes coherent | Bring identity and narrative meaning forward; retain BOMs, quantitative yields/costs and sales forecasts for their later work. Model 0.4.0 implements this scope; story authorization remains open. |
 | **2. Product offerings and composition** | Product offering specifications, BOMs and underlying parts | Defined offerings and their technical composition, with references to their constituent parts | Establish what is offered and how it is composed. Do not silently establish sales volumes or financial success. |
 | **3. Chip manufacturing** | Manufacturing capabilities, yields and cost | Accepted fabrication capability and chip-production assumptions, constraints and cost basis | Chip-level fabrication economics belong here; complete-system economics and investment plans are consolidated in phase 5. |
 | **4. Third-party ecosystem and responses** | Deepen third-party products, participation and market responses begun in phase 1B | An accepted account of compatibility, participation, adoption and competitor/market reactions that form part of the story | Specific author-approved responses can become story facts. General estimates of achievable sales and market coverage remain in the assessment layer. |
@@ -25,19 +25,21 @@ These are phases of our design and review work, not chronological periods in the
 
 ### Phase 1 — history and its participants
 
-The six originally listed subjects remain central. The implemented foundation also provides supporting identities and relationships through these **11 datasets**:
+The six originally listed subjects remain central. The implemented foundation also provides supporting identities and relationships through these **13 datasets**:
 
 - `assumption`: premises, policies, constraints and targets.
 - `actor`: people, organizations and groups.
 - `actor_relationship`: roles, affiliations and other actor relationships.
 - `event`: dated occurrences, decisions and milestones.
-- `campaign`: marketing objectives, audiences, messages and activities.
+- `campaign`: marketing objectives, audiences, messages and presentation; references an execution process.
 - `agreement`: arrangements, parties and agreement lifecycle.
 - `clause`: independently reviewable terms and commitments.
 - `process`: work extending over time, steps and acceptance gates.
-- `programme`: coordination across related activities.
 - `location`: places and their hierarchy.
-- `narrative_period`: named periods for organizing the story.
+- `product`: offerings, devices, software, services and product families, without composition.
+- `technology`: technical identities and specifications.
+- `manufacturing_capability`: fabrication scope and qualification requirements.
+- `market_response`: qualitative adoption and market reactions.
 
 Migration must recover information mentioned indirectly, assemble scattered descriptions, preserve useful identities and identify inconsistencies. Moving a source JSON record verbatim is insufficient when its content mixes different entities or contradicts other material.
 
@@ -51,7 +53,7 @@ Phase 1 cannot be completed coherently while campaigns name products only in pro
 
 Introduce product and technology identities without product composition, manufacturing technology/capability and scoped maturity milestones, and qualitative market-response assertions. Later phases extend these same identities instead of creating duplicates. Detailed yield/cost curves, BOM quantities and forecast sales effects remain deferred.
 
-The author also requests temporal discipline and restructuring: only events/processes own story dates; events have one date object; processes have start/end boundaries that can reference events; remove process completion state; give events/processes numbered typed inputs/outcomes; merge programmes into processes and retire narrative periods after examining their themes. The linked design review evaluates actual data and proposes safe migrations. None of these breaking schema changes has been installed yet.
+The author also requests temporal discipline and restructuring: only events/processes own story dates; events have one date object; processes have start/end boundaries that can reference events; remove process completion state; give events/processes numbered typed inputs/outcomes; merge programmes into processes and retire narrative periods after examining their themes. These changes are implemented in model 0.4.0. Team actions are process steps; campaign marketing content is distinct from its execution process.
 
 **Authorization is the only distinction for proposed results.** Candidate outcomes remain pending until accepted. No additional intended/achieved flag is to be added. Authorization covers the whole record, including every nested input and outcome. If the author finds a record too complex to accept in one step, decompose coherent parts into independently identified records in appropriate dataset files and connect them through references. No item-level authorization is introduced.
 
@@ -175,7 +177,7 @@ Sequential arrows show the preferred scope order. The shared review loop permits
 
 At this document's baseline (`29dcf5b`):
 
-- Phase-one foundation schemas and migration exist: **11 datasets and 440 story records**. The authorization file contains **61 authorized and 379 unauthorized** entries. These are dated inventory figures, not a claim that phase 1 is complete.
+- Phase-one foundation schemas and migration exist: **13 datasets and 653 story records**. The authorization file contains **54 authorized and 599 pending authorization** entries. These are dated inventory figures, not a claim that phase 1 is complete.
 - Story content and authoring evidence are separated. Existing historical snapshots preserve the earlier status and source representation.
 - Timeline and browser pages display the story. The browser supports selecting pending records and saving their authorizations in one GitHub commit through the authenticated Render service.
 - Changes confirm displays before/after comparisons and supports applying an authorized proposal. The active proposal queue is currently empty; that does **not** mean all story records are authorized or all issues resolved.

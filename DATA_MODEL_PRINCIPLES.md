@@ -2,15 +2,15 @@
 
 ## Current agreement: separation of story and authoring data
 
-Version 0.3.0 implements the author's October 2026 instruction to separate modelled story content from its development and authorization process.
+Version 0.4.0 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
 
 1. The model combines hierarchical value objects and relational entity references. Each entity has a stable `id` beginning with its dataset name.
 2. `data_foundation/` contains only story records, in envelopes such as `{ "actor": [...] }`. It has no status, confirmation, provenance or application metadata fields.
 3. `data_storytelling/` contains authorization, decisions, proposals, provenance, migration mappings, editorial issues and the model manifest. Previous review evidence remains immutable in its original form.
 4. `data_calculation/` is reserved for calculation inputs/results. Its domain schemas will be designed with the relevant phases.
 5. Foundation records use explicit typed references. Owned value objects remain nested; independently maintained entities have their own IDs.
-6. Events' occurrence, projects' completion, agreement lifecycle and clause assertion mode describe the world and remain in the foundation. They are distinct from author authorization.
-7. The world timeline is linear from 1 January 1972. Dates preserve year/month/day precision; editorial date basis and original qualifiers are retained in the external pre-separation context snapshots.
+6. Authorization of the entire record is the sole distinction for candidate results. Do not add occurrence, completion-state or intended/achieved flags. Independently reviewed commitments and outcomes require separate records.
+7. The world timeline is linear from 1 January 1972. Only events and processes own structured story dates. An event has one year/month/day date; a process has start/end boundaries, each a calendar date, event reference (`precision: "event"`) or explicitly unknown boundary. Other records reference these carriers. Preserve source precision and store editorial qualifications externally.
 8. Pending confirmation and speculation have one current review meaning: **Unauthorized**. Their old labels survive only in historical evidence.
 9. **Authorized** means the author agrees with the **entire record**, including every nested input, outcome and other owned value, and the decision covers its exact current foundation content hash. There is no partial or item-level authorization. If a record is too complex to authorize in one step, decompose coherent parts into independently identified records in appropriate dataset files and reference them. References do not propagate authorization. Missing or mismatched authorization is always Unauthorized; an absent queue entry never implies approval.
 10. Approval of a proposed revision applies and authorizes its explicitly listed resulting records as one transaction. Related clauses are not implicitly authorized. Independent records require independent or explicitly grouped decisions.
@@ -34,3 +34,9 @@ flowchart LR
   G --> F
   G --> S
 ```
+
+## Phase 1B structure
+
+Events and processes have numbered, typed inputs and outcomes. Team actions are process `steps`; a step may reference an event milestone or a sub-process. Programmes are processes; narrative-period groupings are retired. Campaigns own marketing objectives, audiences, messages, presentation and booth content, and reference an execution process. They do not duplicate activities or dates.
+
+Product and technology identities, manufacturing capabilities and qualitative market responses connect the story. Product composition, quantitative yields, costs and ROI remain for later phases. Maturity transitions are outcomes on dated carriers. See the [0.4.0 implementation](docs/data-model/PHASE_1B_IMPLEMENTATION.md) and [generated schema reference](docs/data-model/FOUNDATION_SPECIFICATION.md).

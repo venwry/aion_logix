@@ -1,5 +1,7 @@
 # Storytelling data — file reference
 
+> Historical design/snapshot: the current model is **0.4.0**. See [implementation, migration and current inventory](PHASE_1B_IMPLEMENTATION.md) and [current schemas](FOUNDATION_SPECIFICATION.md). Counts and proposed alternatives below describe the earlier snapshot.
+
 Snapshot: **29 October 2026**, repository baseline `b3a9abe`. This reference covers all **10 JSON files**, including the `history/` subdirectory, in `data_storytelling/`. Counts describe this snapshot and will change as the author reviews records.
 
 ## Overall purpose

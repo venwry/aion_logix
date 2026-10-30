@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/manufacturing_capability.schema.json",
+  "type": "object",
+  "properties": {
+    "manufacturing_capability": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "manufacturing_capability"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^manufacturing_capability\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor_id": {
+          "type": "string",
+          "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "actor"
+          ]
+        },
+        "location_id": {
+          "type": "string",
+          "pattern": "^(location)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "location"
+          ]
+        },
+        "technology_id": {
+          "type": "string",
+          "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "technology"
+          ]
+        },
+        "recipe_kind": {
+          "enum": [
+            "logic",
+            "SRAM",
+            "DRAM",
+            "analogue"
+          ]
+        },
+        "product_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "product"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualification_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/item"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "actor_id",
+        "technology_id",
+        "recipe_kind",
+        "product_ids",
+        "description",
+        "qualification_requirements"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

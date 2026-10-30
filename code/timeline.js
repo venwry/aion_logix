@@ -7,7 +7,7 @@ try {
  let selected='',visible=[],yearNodes=[],frame=0;
  function choose(id){const record=data.index.get(id);if(!record)return;if(!['event','process','campaign'].includes(typeOf(record))){location.href='browser.html#'+encodeURIComponent(id);return;}selected=id;history.replaceState(null,'','#'+encodeURIComponent(id));details(record,data,choose);document.querySelectorAll('[data-record-id]').forEach(node=>node.setAttribute('aria-pressed',String(node.dataset.recordId===id)));draw();}
  function card(item,continuation=false){const r=item.record,button=el('button','timeline-card');button.dataset.recordId=r.id;button.dataset.type=item.type;button.setAttribute('aria-pressed',String(selected===r.id));button.title=titleOf(r);button.onclick=()=>choose(r.id);
- const date=el('span','card-date',item.date?(continuation?'From '+item.date.startLabel:item.date.startLabel):'Undated');const body=el('span','card-body');body.append(el('strong','',titleOf(r)));const meta=el('span','card-meta');meta.append(el('span','type-tag',human(item.type)),statusBadge(r.status));if(item.date?.span)meta.append(el('span','card-date','→ '+item.date.endLabel+(item.date.derived?' · linked activity range':'')));body.append(meta);button.append(date,body);return button;}
+ const date=el('span','card-date',item.date?(continuation?'From '+item.date.startLabel:item.date.startLabel):'Undated');const body=el('span','card-body');body.append(el('strong','',titleOf(r)));const meta=el('span','card-meta');meta.append(el('span','type-tag',human(item.type)),statusBadge(r.status));if(item.date?.span)meta.append(el('span','card-date','→ '+item.date.endLabel+(item.date.derived?' · execution process range':'')));body.append(meta);button.append(date,body);return button;}
  function render(){
   if(Number($('from').value)>Number($('to').value))$('to').value=$('from').value;
   const lo=Number($('from').value),hi=Number($('to').value),start=Date.UTC(lo,0,1),end=Date.UTC(hi+1,0,1)-1,q=$('search').value.trim().toLowerCase();
@@ -22,11 +22,11 @@ try {
    const ongoing=dated.filter(i=>i.date.span&&i.date.start<Date.UTC(year,0,1)&&i.date.end>=Date.UTC(year,0,1));
    const heading=el('div','year-heading');heading.append(el('h2','',year),el('span','year-count',`${starts.length} entries${ongoing.length?' · '+ongoing.length+' ongoing':''}`));section.append(el('div','year-line'),heading);
    const anchors=[];for(const item of starts){const node=card(item,item.date.start<start);section.append(node);anchors.push({item,node});}
-   if(ongoing.length){const group=el('details','year-ongoing');group.append(el('summary','',`${ongoing.length} ongoing processes / campaign or event spans`));for(const item of ongoing){const button=el('button','ongoing-button',titleOf(item.record));button.dataset.recordId=item.record.id;button.setAttribute('aria-pressed',String(selected===item.record.id));button.onclick=()=>choose(item.record.id);group.append(button);}section.append(group);}
+   if(ongoing.length){const group=el('details','year-ongoing');group.append(el('summary','',`${ongoing.length} ongoing processes / campaigns`));for(const item of ongoing){const button=el('button','ongoing-button',titleOf(item.record));button.dataset.recordId=item.record.id;button.setAttribute('aria-pressed',String(selected===item.record.id));button.onclick=()=>choose(item.record.id);group.append(button);}section.append(group);}
    $('timeline').append(section);yearNodes.push({year,section,anchors});
   }
   else{const empty=el('div','empty-state');empty.append(el('h2','','No dated records match'),el('p','','Adjust the filters to explore more of the story.'));$('timeline').append(empty);}
-  if(undated.length){$('undated').append(el('h2','','Undated / relative timing'),el('p','','These records have no explicit period. They are not placed at an invented date.'));for(const item of undated)$('undated').append(card(item));}
+  if(undated.length){$('undated').append(el('h2','','Undated / relative timing'),el('p','','These processes or campaigns have unresolved boundaries. They are not placed at invented dates.'));for(const item of undated)$('undated').append(card(item));}
   if(selected&&!visible.some(i=>i.record.id===selected)){selected='';history.replaceState(null,'',location.pathname+location.search);details(null,data,choose);}
   if(!selected&&visible.length)choose((dated[0]||undated[0]).record.id);
   if(!visible.length)details(null,data,choose);

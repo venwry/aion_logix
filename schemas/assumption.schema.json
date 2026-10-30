@@ -41,26 +41,25 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^(assumption|actor|actor_relationship|event|campaign|agreement|clause|process|programme|location|narrative_period)\\.[a-z0-9][a-z0-9_.-]*$",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|clause|event|location|manufacturing_capability|market_response|process|product|technology)\\.[a-z0-9][a-z0-9_.-]*$",
             "x-ref": [
-              "assumption",
               "actor",
               "actor_relationship",
-              "event",
-              "campaign",
               "agreement",
+              "assumption",
+              "campaign",
               "clause",
-              "process",
-              "programme",
+              "event",
               "location",
-              "narrative_period"
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology"
             ]
           },
           "minItems": 0,
           "uniqueItems": true
-        },
-        "valid_time": {
-          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/period"
         },
         "exception_ids": {
           "type": "array",
@@ -96,6 +95,13 @@
             ],
             "additionalProperties": false
           }
+        },
+        "process_id": {
+          "type": "string",
+          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "process"
+          ]
         }
       },
       "required": [

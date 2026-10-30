@@ -8,7 +8,7 @@ test('timeline preserves deep links, spans, variable years and filters',async({p
  const span=page.locator('[data-span-id="process.economics_studies"]');await expect(span).toHaveCount(1);
  expect(await span.evaluate(n=>Number(n.getAttribute('y2'))-Number(n.getAttribute('y1')))).toBeGreaterThan(400);
  await page.locator('#type').selectOption('campaign');
- await expect(page.locator('#timeline .timeline-card').first()).toContainText('linked activity range');
+ await expect(page.locator('#timeline .timeline-card').first()).toContainText('execution process range');
  await page.locator('#status').selectOption('authorized');await expect(page.locator('#timeline')).toContainText('No dated records match');
  await page.getByRole('button',{name:'Reset filters'}).click();
  await page.locator('#search').fill('public command of economics');await expect(page.locator('#timeline .timeline-card')).toHaveCount(1);
