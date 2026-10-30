@@ -1,5 +1,3438 @@
 {
-  "change": [],
+  "change": [
+    {
+      "id": "change.dri_bpi_terms_event_dri_founding",
+      "category": "story",
+      "title": "Revise Joint DRI founding and funding",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates. Remove product.software_cpm_aurelia and technology.logix_c_api from founding subjects as requested. Their later implementation is not part of the founding event.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.dri_founding",
+          "before": {
+            "id": "event.dri_founding",
+            "title": "Joint DRI founding and funding",
+            "kind": "founding",
+            "description": "Formalize and finance DRI before Logix exists. Gary leads CP/M engineering, Dorothy operations, and Adam capital, product strategy and OEM relationships. Begin earlier hardware abstraction and stable documented interfaces; implement optional ROM, memory and TUI services progressively. The founding and funding milestone takes place on 7 December 1974.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.dorothy",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.dri_founding",
+              "product.software_cpm_aurelia",
+              "technology.logix_c_api"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1974-12-07",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.dri_founding"
+          },
+          "after": {
+            "id": "event.dri_founding",
+            "title": "Joint DRI founding and funding",
+            "kind": "founding",
+            "description": "Formalize and finance DRI before Logix exists. Gary leads CP/M engineering, Dorothy operations, and Adam capital, product strategy and OEM relationships. Begin earlier hardware abstraction and stable documented interfaces; implement optional ROM, memory and TUI services progressively. The founding and funding milestone takes place on 7 December 1974.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.dorothy",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1974-12-07",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.dri_founding"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_dri_cpm",
+      "category": "story",
+      "title": "Revise Logix and DRI agree CP/M development for Aurelia",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates. Reclassify the founding event as a causal input and CP/M Aurelia, TUI and FlexiBUS as described outcomes. Outcomes define the agreed development deliverables; signing does not assert that finished software or hardware was released that day. Preserve the current 1976-10-01 date.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.dri_cpm",
+          "before": {
+            "id": "event.dri_cpm",
+            "title": "Aurelia CP/M implementation agreement",
+            "kind": "agreement_milestone",
+            "description": "Within the partnership founded in late 1974, agree the Aurelia OEM implementation and freeze ROM/banking, FlexiBUS, display and optional TUI interface requirements. This is not first contact with DRI.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "negotiator"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [
+              "event.dri_founding",
+              "agreement.dri_cpm",
+              "product.software_cpm_aurelia",
+              "technology.logix_tui_standard",
+              "technology.flexibus"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1976-10-01",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.dri_cpm"
+          },
+          "after": {
+            "id": "event.dri_cpm",
+            "title": "Logix and DRI agree CP/M development for Aurelia",
+            "kind": "agreement_milestone",
+            "description": "Building on the established DRI partnership, Logix and DRI agree a new CP/M version for Aurelia, fully owned by DRI and available to other vendors. Its development scope includes a text-mode TUI, Plug and Execute smart devices/cards over FlexiBUS, XIP cartridges and names for CP/M User Numbers.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "negotiator"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "platform and development partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The earlier DRI founding and funding milestone establishes the independent operating-system partner and relationship on which this CP/M collaboration is based.",
+                "event_id": "event.dri_founding"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "The agreed product is a new CP/M version for Logix Aurelia, fully owned by DRI and available for non-exclusive licensing to other vendors. Its scope includes XIP cartridges and named CP/M user areas; implementation and qualification follow this agreement.",
+                "subject_ids": [
+                  "product.software_cpm_aurelia"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "deliverable",
+                "description": "The agreement establishes integration of the Logix TUI standard into the CP/M development scope: a consistent pseudo-window user interface in text mode for participating applications.",
+                "subject_ids": [
+                  "technology.logix_tui_standard"
+                ]
+              },
+              {
+                "number": 3,
+                "type": "deliverable",
+                "description": "The agreement establishes CP/M integration work for FlexiBUS smart devices and expansion cards using Plug and Execute. This outcome covers agreed software support, not invention or completed manufacture of the underlying bus.",
+                "subject_ids": [
+                  "technology.flexibus"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1976-10-01",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.dri_cpm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_bpi_offer",
+      "category": "story",
+      "title": "Revise BPI accepts investment and C/TUI redevelopment agreement",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates. Treat the existing event as BPI’s acceptance of the investment and redevelopment deal, not an unanswered offer. Preserve its ID and date; the agreement establishes commitments without inventing a bank-transfer date.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.bpi_offer",
+          "before": {
+            "id": "event.bpi_offer",
+            "title": "Investment and cooperation offer to independent BPI Systems",
+            "kind": "agreement_milestone",
+            "description": "Adam offered to invest $150,000 in BPI Systems in return for a 33% fully diluted interest. He also proposed engineering assistance from AION Software and distribution through Logix. BPI retained control of its products, management and brand while considering the investment.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "offeror"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "recipient"
+              }
+            ],
+            "subject_ids": [
+              "agreement.bpi_offer",
+              "product.bpi_suite"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "BPI pursued the engineering and distribution partnership while leaving the proposed equity investment unaccepted."
+              }
+            ],
+            "time": {
+              "value": "1977-02-15",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.bpi_offer"
+          },
+          "after": {
+            "id": "event.bpi_offer",
+            "title": "BPI accepts investment and C/TUI redevelopment agreement",
+            "kind": "agreement_milestone",
+            "description": "BPI Systems accepts Adam’s $150,000 investment in exchange for a 33% fully diluted interest. The agreement obliges AION Software to provide knowledge and resources to refactor BPI’s existing code into C with a competitive text-mode TUI. Further investment supports ports to future systems and platforms, after which BPI has the right to buy back Adam’s shares.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "investor"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "accepting company and software owner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "redevelopment and porting partner"
+              }
+            ],
+            "subject_ids": [
+              "product.bpi_suite"
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "BPI contributes its existing application code and domain knowledge; AION contributes engineering expertise and resources for C and TUI redevelopment.",
+                "subject_ids": [
+                  "product.bpi_suite",
+                  "actor.bpi",
+                  "actor.aion"
+                ]
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "BPI accepts the $150,000 subscription for Adam’s 33% fully diluted interest and the accompanying AION C/TUI redevelopment obligations. The deal also provides for further platform-porting investment and BPI’s subsequent right to buy back Adam’s shares.",
+                "subject_ids": [
+                  "actor.bpi",
+                  "actor.adam",
+                  "product.bpi_suite"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1977-02-15",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.bpi_offer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_bpi_cooperation",
+      "category": "story",
+      "title": "Revise BPI development and distribution cooperation",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates. Remove the contradiction that the earlier BPI investment remained unaccepted; the later event implements the accepted deal while preserving BPI’s independence.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.bpi_cooperation",
+          "before": {
+            "id": "event.bpi_cooperation",
+            "title": "BPI development and distribution cooperation",
+            "kind": "agreement_milestone",
+            "description": "BPI and Adam agree operational cooperation: independent BPI management, brand, application ownership, licences and specialist support; AION engineering assistance and Logix distribution/training. The earlier $150,000 and 33% offer remains a proposal; no final ownership closing is asserted. Date selected for the alternative scenario.",
+            "participant": [
+              {
+                "actor_id": "actor.bpi",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.adam",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "cooperating partner"
+              }
+            ],
+            "subject_ids": [
+              "event.bpi_offer",
+              "agreement.bpi_cooperation",
+              "product.bpi_suite"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1977-03-15",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.bpi_cooperation"
+          },
+          "after": {
+            "id": "event.bpi_cooperation",
+            "title": "BPI development and distribution cooperation",
+            "kind": "agreement_milestone",
+            "description": "BPI and Adam agree operational cooperation: independent BPI management, brand, application ownership, licences and specialist support; AION engineering assistance and Logix distribution/training. This cooperation implements the accepted $150,000 investment agreement for Adam’s 33% fully diluted interest, including AION’s C/TUI redevelopment work and future-platform cooperation. Date selected for the alternative scenario.",
+            "participant": [
+              {
+                "actor_id": "actor.bpi",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.adam",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "cooperating partner"
+              }
+            ],
+            "subject_ids": [
+              "event.bpi_offer",
+              "product.bpi_suite"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1977-03-15",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.bpi_cooperation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_mpi",
+      "category": "story",
+      "title": "Revise OEM printer-mechanism agreement",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.mpi",
+          "before": {
+            "id": "event.mpi",
+            "title": "OEM printer-mechanism agreement",
+            "kind": "agreement_milestone",
+            "description": "Agree OEM purchasing/manufacturing arrangements for bare MP-40 mechanisms to receive FlexiBUS controllers.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "buyer"
+              },
+              {
+                "actor_id": "actor.mpi",
+                "role": "supplier"
+              }
+            ],
+            "subject_ids": [
+              "agreement.mpi_oem",
+              "product.device_flexiprint40",
+              "product.part_mpi_mp40_mechanism"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1977-09-01",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.mpi_oem"
+          },
+          "after": {
+            "id": "event.mpi",
+            "title": "OEM printer-mechanism agreement",
+            "kind": "agreement_milestone",
+            "description": "Agree OEM purchasing/manufacturing arrangements for bare MP-40 mechanisms to receive FlexiBUS controllers.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "buyer"
+              },
+              {
+                "actor_id": "actor.mpi",
+                "role": "supplier"
+              }
+            ],
+            "subject_ids": [
+              "product.device_flexiprint40",
+              "product.part_mpi_mp40_mechanism"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1977-09-01",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.mpi_oem"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_retail",
+      "category": "story",
+      "title": "Revise ComputerLand retail agreement",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.retail",
+          "before": {
+            "id": "event.retail",
+            "title": "ComputerLand retail agreement",
+            "kind": "agreement_milestone",
+            "description": "Arrange computer sales through ComputerLand as the planned primary channel.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "negotiator"
+              },
+              {
+                "actor_id": "actor.computerland",
+                "role": "retailer"
+              }
+            ],
+            "subject_ids": [
+              "agreement.retail"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1978-02-05",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.retail"
+          },
+          "after": {
+            "id": "event.retail",
+            "title": "ComputerLand retail agreement",
+            "kind": "agreement_milestone",
+            "description": "Arrange computer sales through ComputerLand as the planned primary channel.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "negotiator"
+              },
+              {
+                "actor_id": "actor.computerland",
+                "role": "retailer"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1978-02-05",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.retail"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_bpi_training",
+      "category": "story",
+      "title": "Revise BPI training and direct sales begin",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.bpi_training",
+          "before": {
+            "id": "event.bpi_training",
+            "title": "BPI training and direct sales begin",
+            "kind": "launch",
+            "description": "Academy begins BPI-authorised practical courses and direct distribution under a cooperation agreement. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Tuition, setup services and software licences remain separate.",
+            "participant": [
+              {
+                "actor_id": "actor.academy",
+                "role": "provider"
+              }
+            ],
+            "subject_ids": [
+              "event.bpi_launch",
+              "agreement.bpi_cooperation",
+              "product.service_bpi_training",
+              "product.bpi_suite"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1978-06-12",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.bpi_cooperation"
+          },
+          "after": {
+            "id": "event.bpi_training",
+            "title": "BPI training and direct sales begin",
+            "kind": "launch",
+            "description": "Academy begins BPI-authorised practical courses and direct distribution under a cooperation agreement. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Tuition, setup services and software licences remain separate.",
+            "participant": [
+              {
+                "actor_id": "actor.academy",
+                "role": "provider"
+              }
+            ],
+            "subject_ids": [
+              "event.bpi_launch",
+              "product.service_bpi_training",
+              "product.bpi_suite"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1978-06-12",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.bpi_cooperation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_smc_agreement",
+      "category": "story",
+      "title": "Revise SMC second-source and technology-transfer agreement",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.smc_agreement",
+          "before": {
+            "id": "event.smc_agreement",
+            "title": "SMC second-source and technology-transfer agreement",
+            "kind": "agreement_milestone",
+            "description": "Start independent second-source manufacturing and sales cooperation after Aurelia’s premiere. AION transfers working reference silicon, SMC-compatible ready-to-use masks, process know-how and production-test specifications; SMC supplies process/mask requirements and performs its own wafer fabrication. Logix supplies reference boards, system tests and initial purchase commitments.",
+            "participant": [
+              {
+                "actor_id": "actor.labs",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.smc",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [
+              "event.aurelia_launch",
+              "agreement.smc",
+              "product.part_flexibus_host_controller",
+              "product.part_flexibus_device_controller",
+              "product.part_aurelia_video_chip",
+              "product.part_aion_4116"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1978-07",
+              "precision": "month"
+            },
+            "process_ids": [],
+            "agreement_id": "agreement.smc"
+          },
+          "after": {
+            "id": "event.smc_agreement",
+            "title": "SMC second-source and technology-transfer agreement",
+            "kind": "agreement_milestone",
+            "description": "Start independent second-source manufacturing and sales cooperation after Aurelia’s premiere. AION transfers working reference silicon, SMC-compatible ready-to-use masks, process know-how and production-test specifications; SMC supplies process/mask requirements and performs its own wafer fabrication. Logix supplies reference boards, system tests and initial purchase commitments.",
+            "participant": [
+              {
+                "actor_id": "actor.labs",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.smc",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [
+              "event.aurelia_launch",
+              "product.part_flexibus_host_controller",
+              "product.part_flexibus_device_controller",
+              "product.part_aurelia_video_chip",
+              "product.part_aion_4116"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1978-07",
+              "precision": "month"
+            },
+            "process_ids": [],
+            "agreement_id": "agreement.smc"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_aionix_agreement",
+      "category": "story",
+      "title": "Revise AIONix development programme and ownership formalised",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.aionix_agreement",
+          "before": {
+            "id": "event.aionix_agreement",
+            "title": "AIONix development programme and ownership formalised",
+            "kind": "agreement_milestone",
+            "description": "Formalise the AIONix programme begun in February 1978: joint ERA development in assembler and C, funded by AION. Existing ownership, equity and future porting-right terms remain.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "negotiator"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "owner_and_funder"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "development_partner"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "equity_recipient"
+              }
+            ],
+            "subject_ids": [
+              "event.dri_founding",
+              "event.aionix_preliminary",
+              "agreement.aionix",
+              "product.software_aionix"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1978-09-12",
+              "precision": "day"
+            },
+            "process_ids": [
+              "process.aionix_relocation"
+            ],
+            "agreement_id": "agreement.aionix"
+          },
+          "after": {
+            "id": "event.aionix_agreement",
+            "title": "AIONix development programme and ownership formalised",
+            "kind": "agreement_milestone",
+            "description": "Formalise the AIONix programme begun in February 1978: joint ERA development in assembler and C, funded by AION. Existing ownership, equity and future porting-right terms remain.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "negotiator"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "owner_and_funder"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "development_partner"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "equity_recipient"
+              }
+            ],
+            "subject_ids": [
+              "event.dri_founding",
+              "event.aionix_preliminary",
+              "product.software_aionix"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1978-09-12",
+              "precision": "day"
+            },
+            "process_ids": [
+              "process.aionix_relocation"
+            ],
+            "agreement_id": "agreement.aionix"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_tandy_agreement",
+      "category": "story",
+      "title": "Revise Tandy, Logix, DRI and AION sign Model II cooperation agreement",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.tandy_agreement",
+          "before": {
+            "id": "event.tandy_agreement",
+            "title": "Tandy, Logix, DRI and AION sign Model II cooperation agreement",
+            "kind": "agreement_milestone",
+            "description": "Tandy commits to officially selling/supporting CP/M and a qualified FlexiBUS option for Model II, supplies engineering access and distributes Abacus. DRI supplies CP/M and required platform services. Logix supplies interface documentation, reference engineering and initial chips. AION funds the port, corrects incompatibilities, qualifies and maintains the Model II edition. Tandy keeps native video, keyboard, disk architecture, legacy ports, branding, sales and first-line support. No Logix video or CP/M-6502 commitment.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "participant"
+              },
+              {
+                "actor_id": "actor.tandy",
+                "role": "participant"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "participant"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "participant"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "participant"
+              }
+            ],
+            "subject_ids": [
+              "event.tandy_contact",
+              "agreement.tandy",
+              "product.computer_trs80_model_ii",
+              "product.software_cpm_model_ii",
+              "product.device_model_ii_flexibus",
+              "product.abacus_1.model_ii"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "market_response",
+                "description": "Establish the response described in Tandy, Logix, DRI and AION sign Model II cooperation agreement.",
+                "subject_ids": [
+                  "market_response.tandy_agreement"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1978-11-27",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.tandy"
+          },
+          "after": {
+            "id": "event.tandy_agreement",
+            "title": "Tandy, Logix, DRI and AION sign Model II cooperation agreement",
+            "kind": "agreement_milestone",
+            "description": "Tandy commits to officially selling/supporting CP/M and a qualified FlexiBUS option for Model II, supplies engineering access and distributes Abacus. DRI supplies CP/M and required platform services. Logix supplies interface documentation, reference engineering and initial chips. AION funds the port, corrects incompatibilities, qualifies and maintains the Model II edition. Tandy keeps native video, keyboard, disk architecture, legacy ports, branding, sales and first-line support. No Logix video or CP/M-6502 commitment.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "participant"
+              },
+              {
+                "actor_id": "actor.tandy",
+                "role": "participant"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "participant"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "participant"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "participant"
+              }
+            ],
+            "subject_ids": [
+              "event.tandy_contact",
+              "product.computer_trs80_model_ii",
+              "product.software_cpm_model_ii",
+              "product.device_model_ii_flexibus",
+              "product.abacus_1.model_ii"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "market_response",
+                "description": "Establish the response described in Tandy, Logix, DRI and AION sign Model II cooperation agreement.",
+                "subject_ids": [
+                  "market_response.tandy_agreement"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1978-11-27",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.tandy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_apple_peachtree",
+      "category": "story",
+      "title": "Revise Apple partners with Peachtree",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.apple_peachtree",
+          "before": {
+            "id": "event.apple_peachtree",
+            "title": "Apple partners with Peachtree",
+            "kind": "activity",
+            "description": "Develop an Apple II accounting offering with Peachtree while separately pursuing spreadsheet and database suppliers. Peachtree is not treated as a substitute for Abacus by itself. Start a partnership for an Apple II business offering.",
+            "participant": [
+              {
+                "actor_id": "actor.apple",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.peachtree",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.apple_peachtree"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "In the scenario, VisiCalc is less advanced in spreadsheet size and available features."
+              }
+            ],
+            "time": {
+              "value": "1979-01-16",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.apple_peachtree"
+          },
+          "after": {
+            "id": "event.apple_peachtree",
+            "title": "Apple partners with Peachtree",
+            "kind": "activity",
+            "description": "Develop an Apple II accounting offering with Peachtree while separately pursuing spreadsheet and database suppliers. Peachtree is not treated as a substitute for Abacus by itself. Start a partnership for an Apple II business offering.",
+            "participant": [
+              {
+                "actor_id": "actor.apple",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.peachtree",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "In the scenario, VisiCalc is less advanced in spreadsheet size and available features."
+              }
+            ],
+            "time": {
+              "value": "1979-01-16",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.apple_peachtree"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_apple_cooperation",
+      "category": "story",
+      "title": "Revise Logix and Apple agree limited technical cooperation",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.apple_cooperation",
+          "before": {
+            "id": "event.apple_cooperation",
+            "title": "Logix and Apple agree limited technical cooperation",
+            "kind": "agreement_milestone",
+            "description": "Requests documentation, test machines and compatibility assistance for native Apple II FlexiBUS, disk interoperability and Logix video products. Agrees to limited technical cooperation and compatibility assistance.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "requester_and_developer"
+              },
+              {
+                "actor_id": "actor.apple",
+                "role": "technical_partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.apple_cooperation",
+              "product.device_apple2_expansion_card",
+              "product.device_flexidisk_ii",
+              "product.device_apple2_video_card"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Apple accepts Logix-funded native expansion as a way to increase installed Apple II utility, with separate branding/support and no requirement to adopt the full Logix platform; its own peripheral strategy continues."
+              }
+            ],
+            "time": {
+              "value": "1979-02-08",
+              "precision": "day"
+            },
+            "process_ids": [
+              "process.apple_compatibility"
+            ],
+            "agreement_id": "agreement.apple_cooperation"
+          },
+          "after": {
+            "id": "event.apple_cooperation",
+            "title": "Logix and Apple agree limited technical cooperation",
+            "kind": "agreement_milestone",
+            "description": "Requests documentation, test machines and compatibility assistance for native Apple II FlexiBUS, disk interoperability and Logix video products. Agrees to limited technical cooperation and compatibility assistance.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "requester_and_developer"
+              },
+              {
+                "actor_id": "actor.apple",
+                "role": "technical_partner"
+              }
+            ],
+            "subject_ids": [
+              "product.device_apple2_expansion_card",
+              "product.device_flexidisk_ii",
+              "product.device_apple2_video_card"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Apple accepts Logix-funded native expansion as a way to increase installed Apple II utility, with separate branding/support and no requirement to adopt the full Logix platform; its own peripheral strategy continues."
+              }
+            ],
+            "time": {
+              "value": "1979-02-08",
+              "precision": "day"
+            },
+            "process_ids": [
+              "process.apple_compatibility"
+            ],
+            "agreement_id": "agreement.apple_cooperation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_apple_extensions",
+      "category": "story",
+      "title": "Revise Apple II and S-100 expansion products launch",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.apple_extensions",
+          "before": {
+            "id": "event.apple_extensions",
+            "title": "Apple II and S-100 expansion products launch",
+            "kind": "launch",
+            "description": "Logix launches the existing Apple II Expansion Card and FlexiDisk II plus three new products: S-100 FlexiBUS Interface, Apple II Video Card, and S-100 Video Card. Cards initially use AION chips. Native Apple drivers/examples and supported S-100 CP/M adapters accompany the cards; Apple participation does not imply an S-100 endorsement. An Apple representative participates in the demonstration.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "presenter"
+              },
+              {
+                "actor_id": "actor.apple",
+                "role": "demonstration_participant"
+              }
+            ],
+            "subject_ids": [
+              "event.apple_cooperation",
+              "agreement.apple_cooperation",
+              "product.device_apple2_expansion_card",
+              "product.device_flexidisk_ii",
+              "product.device_s100_flexibus_card",
+              "product.device_apple2_video_card",
+              "product.device_s100_video_card"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1979-06-04",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.apple_cooperation"
+          },
+          "after": {
+            "id": "event.apple_extensions",
+            "title": "Apple II and S-100 expansion products launch",
+            "kind": "launch",
+            "description": "Logix launches the existing Apple II Expansion Card and FlexiDisk II plus three new products: S-100 FlexiBUS Interface, Apple II Video Card, and S-100 Video Card. Cards initially use AION chips. Native Apple drivers/examples and supported S-100 CP/M adapters accompany the cards; Apple participation does not imply an S-100 endorsement. An Apple representative participates in the demonstration.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "presenter"
+              },
+              {
+                "actor_id": "actor.apple",
+                "role": "demonstration_participant"
+              }
+            ],
+            "subject_ids": [
+              "event.apple_cooperation",
+              "product.device_apple2_expansion_card",
+              "product.device_flexidisk_ii",
+              "product.device_s100_flexibus_card",
+              "product.device_apple2_video_card",
+              "product.device_s100_video_card"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1979-06-04",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.apple_cooperation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_clone_agreement_northstar",
+      "category": "story",
+      "title": "Revise Founding clone agreement — North Star Computers",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.clone_agreement_northstar",
+          "before": {
+            "id": "event.clone_agreement_northstar",
+            "title": "Founding clone agreement — North Star Computers",
+            "kind": "agreement_milestone",
+            "description": "Preserve existing customers and applications; standardise interchange and provide disk/data migration rather than forcing an abrupt replacement. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.northstar",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.clone_agreement_northstar"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-02",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_northstar"
+          },
+          "after": {
+            "id": "event.clone_agreement_northstar",
+            "title": "Founding clone agreement — North Star Computers",
+            "kind": "agreement_milestone",
+            "description": "Preserve existing customers and applications; standardise interchange and provide disk/data migration rather than forcing an abrupt replacement. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.northstar",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-02",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_northstar"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_clone_agreement_vector",
+      "category": "story",
+      "title": "Revise Founding clone agreement — Vector Graphic",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.clone_agreement_vector",
+          "before": {
+            "id": "event.clone_agreement_vector",
+            "title": "Founding clone agreement — Vector Graphic",
+            "kind": "agreement_milestone",
+            "description": "Protect roadmap confidentiality and predictable margins; equal access to qualified silicon revisions. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.vector",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.clone_agreement_vector"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-03",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_vector"
+          },
+          "after": {
+            "id": "event.clone_agreement_vector",
+            "title": "Founding clone agreement — Vector Graphic",
+            "kind": "agreement_milestone",
+            "description": "Protect roadmap confidentiality and predictable margins; equal access to qualified silicon revisions. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.vector",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-03",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_vector"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_clone_agreement_sks",
+      "category": "story",
+      "title": "Revise Founding clone agreement — SKS — Steinmetz Krischke Systemtechnik",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.clone_agreement_sks",
+          "before": {
+            "id": "event.clone_agreement_sks",
+            "title": "Founding clone agreement — SKS — Steinmetz Krischke Systemtechnik",
+            "kind": "agreement_milestone",
+            "description": "Secure contracted assembly capacity and respect existing OEM commitments; do not equate engineering headcount with factory throughput. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.sks",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.clone_agreement_sks"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-04",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_sks"
+          },
+          "after": {
+            "id": "event.clone_agreement_sks",
+            "title": "Founding clone agreement — SKS — Steinmetz Krischke Systemtechnik",
+            "kind": "agreement_milestone",
+            "description": "Secure contracted assembly capacity and respect existing OEM commitments; do not equate engineering headcount with factory throughput. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.sks",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-04",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_sks"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_clone_agreement_goupil",
+      "category": "story",
+      "title": "Revise Founding clone agreement — SMT Goupil",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.clone_agreement_goupil",
+          "before": {
+            "id": "event.clone_agreement_goupil",
+            "title": "Founding clone agreement — SMT Goupil",
+            "kind": "agreement_milestone",
+            "description": "Retain French identity and local applications; phase product introduction and inventory finance. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.goupil",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.clone_agreement_goupil"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-05",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_goupil"
+          },
+          "after": {
+            "id": "event.clone_agreement_goupil",
+            "title": "Founding clone agreement — SMT Goupil",
+            "kind": "agreement_milestone",
+            "description": "Retain French identity and local applications; phase product introduction and inventory finance. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.goupil",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-05",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_goupil"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_clone_agreement_eina",
+      "category": "story",
+      "title": "Revise Founding clone agreement — EINA Informática",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.clone_agreement_eina",
+          "before": {
+            "id": "event.clone_agreement_eina",
+            "title": "Founding clone agreement — EINA Informática",
+            "kind": "agreement_milestone",
+            "description": "Start with limited batches and board kits; audit factory capability and provide bounded working-capital and service training support. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.eina",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.clone_agreement_eina"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-06",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_eina"
+          },
+          "after": {
+            "id": "event.clone_agreement_eina",
+            "title": "Founding clone agreement — EINA Informática",
+            "kind": "agreement_milestone",
+            "description": "Start with limited batches and board kits; audit factory capability and provide bounded working-capital and service training support. Initial target: one qualified Aurelia-class configuration and one Artemis configuration in January 1982. Existing products may continue.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.eina",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-06",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.clone_agreement_eina"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_sgs_transfer_agreement",
+      "category": "story",
+      "title": "Revise SGS-ATES funded second-source agreement",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.sgs_transfer_agreement",
+          "before": {
+            "id": "event.sgs_transfer_agreement",
+            "title": "SGS-ATES funded second-source agreement",
+            "kind": "agreement_milestone",
+            "description": "Execute the accepted scenario transfer framework. Funding shares are planning commitments against a yet-to-be-costed programme; royalty and dedicated-equipment terms remain negotiable. Target first controller production in 1981 and ERA ramp across late 1981/1982 after qualification.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.sgs",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [
+              "agreement.sgs_transfer"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-16",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.sgs_transfer"
+          },
+          "after": {
+            "id": "event.sgs_transfer_agreement",
+            "title": "SGS-ATES funded second-source agreement",
+            "kind": "agreement_milestone",
+            "description": "Execute the accepted scenario transfer framework. Funding shares are planning commitments against a yet-to-be-costed programme; royalty and dedicated-equipment terms remain negotiable. Target first controller production in 1981 and ERA ramp across late 1981/1982 after qualification.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.sgs",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1981-03-16",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.sgs_transfer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_autodesk_agreement",
+      "category": "story",
+      "title": "Revise Adam funds Autodesk founders and the entire Artemis development environment",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.autodesk_agreement",
+          "before": {
+            "id": "event.autodesk_agreement",
+            "title": "Adam funds Autodesk founders and the entire Artemis development environment",
+            "kind": "agreement_milestone",
+            "description": "On 31 January 1982, Adam signed for Logix and John Walker represented Autodesk’s organising founders in the funded Artemis development agreement. Logix supplied development systems, software, storage, training and engineering support. The team began CAD work with available displays; the professional display hardware followed in June.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.john_walker",
+                "role": "representative of the organising founders"
+              }
+            ],
+            "subject_ids": [
+              "agreement.autodesk_development",
+              "product.software_aion_development_team",
+              "product.autocad_1_artemis",
+              "product.device_artemis_professional_video_128kb",
+              "product.device_mono_pro_17",
+              "product.device_logix_mouse"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1982-01-31",
+              "precision": "day"
+            },
+            "process_ids": [],
+            "agreement_id": "agreement.autodesk_development"
+          },
+          "after": {
+            "id": "event.autodesk_agreement",
+            "title": "Adam funds Autodesk founders and the entire Artemis development environment",
+            "kind": "agreement_milestone",
+            "description": "On 31 January 1982, Adam signed for Logix and John Walker represented Autodesk’s organising founders in the funded Artemis development agreement. Logix supplied development systems, software, storage, training and engineering support. The team began CAD work with available displays; the professional display hardware followed in June.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.john_walker",
+                "role": "representative of the organising founders"
+              }
+            ],
+            "subject_ids": [
+              "product.software_aion_development_team",
+              "product.autocad_1_artemis",
+              "product.device_artemis_professional_video_128kb",
+              "product.device_mono_pro_17",
+              "product.device_logix_mouse"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1982-01-31",
+              "precision": "day"
+            },
+            "process_ids": [],
+            "agreement_id": "agreement.autodesk_development"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_autodesk_incorporation",
+      "category": "story",
+      "title": "Revise Autodesk adopts the funded Artemis development agreement",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.autodesk_incorporation",
+          "before": {
+            "id": "event.autodesk_incorporation",
+            "title": "Autodesk adopts the funded Artemis development agreement",
+            "kind": "agreement_milestone",
+            "description": "After incorporation, Autodesk adopts the January founders agreement, confirms underlying source/porting rights and the non-exclusive licensing arrangement, and reviews compiler/math runtime, source control, backup recovery and graphics-driver milestones. Programme details: team_development_program.json.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.autodesk",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [
+              "event.autodesk_agreement",
+              "agreement.autodesk_development",
+              "product.software_aion_development_team",
+              "product.autocad_1_artemis",
+              "product.device_artemis_professional_video_128kb",
+              "product.device_mono_pro_17",
+              "product.device_logix_mouse"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1982-04-26",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.autodesk_development"
+          },
+          "after": {
+            "id": "event.autodesk_incorporation",
+            "title": "Autodesk adopts the funded Artemis development agreement",
+            "kind": "agreement_milestone",
+            "description": "After incorporation, Autodesk adopts the January founders agreement, confirms underlying source/porting rights and the non-exclusive licensing arrangement, and reviews compiler/math runtime, source control, backup recovery and graphics-driver milestones. Programme details: team_development_program.json.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.autodesk",
+                "role": "programme_partner"
+              }
+            ],
+            "subject_ids": [
+              "event.autodesk_agreement",
+              "product.software_aion_development_team",
+              "product.autocad_1_artemis",
+              "product.device_artemis_professional_video_128kb",
+              "product.device_mono_pro_17",
+              "product.device_logix_mouse"
+            ],
+            "inputs": [],
+            "outcomes": [],
+            "time": {
+              "value": "1982-04-26",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.autodesk_development"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_event_logix_share_transfer_1978",
+      "category": "story",
+      "title": "Revise Adam transfers 40% of Logix to five contributors",
+      "reason": "Move agreement associations out of subject_ids; retain one singular agreement_id and remove duplicates. Preserve the contextual AIONix obligation as an input from its earlier agreement event instead of introducing a second agreement_id or dropping the connection.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.logix_share_transfer_1978",
+          "before": {
+            "id": "event.logix_share_transfer_1978",
+            "title": "Adam transfers 40% of Logix to five contributors",
+            "kind": "agreement_milestone",
+            "description": "Adam transferred 8% of Logix shares to each of Gary Kildall, the chief executive officer, the chief financial officer, Tim Paterson and Gordon Letwin. The five allocations totalled 40% of the company. Gary’s transfer fulfilled his earlier 8% promise.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "transferor"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "share recipient"
+              },
+              {
+                "actor_id": "actor.logix_ceo",
+                "role": "share recipient"
+              },
+              {
+                "actor_id": "actor.logix_cfo",
+                "role": "share recipient"
+              },
+              {
+                "actor_id": "actor.paterson",
+                "role": "share recipient"
+              },
+              {
+                "actor_id": "actor.letwin",
+                "role": "share recipient"
+              }
+            ],
+            "subject_ids": [
+              "agreement.logix_share_transfer_1978",
+              "agreement.aionix"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "The five contributors became shareholders with equal 8% interests."
+              }
+            ],
+            "time": {
+              "value": "1978-10-12",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.logix_share_transfer_1978"
+          },
+          "after": {
+            "id": "event.logix_share_transfer_1978",
+            "title": "Adam transfers 40% of Logix to five contributors",
+            "kind": "agreement_milestone",
+            "description": "Adam transferred 8% of Logix shares to each of Gary Kildall, the chief executive officer, the chief financial officer, Tim Paterson and Gordon Letwin. The five allocations totalled 40% of the company. Gary’s transfer fulfilled his earlier 8% promise.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "transferor"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "share recipient"
+              },
+              {
+                "actor_id": "actor.logix_ceo",
+                "role": "share recipient"
+              },
+              {
+                "actor_id": "actor.logix_cfo",
+                "role": "share recipient"
+              },
+              {
+                "actor_id": "actor.paterson",
+                "role": "share recipient"
+              },
+              {
+                "actor_id": "actor.letwin",
+                "role": "share recipient"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "requirement",
+                "description": "The preceding AIONix agreement milestone establishes Gary Kildall’s earlier 8% Logix equity promise, fulfilled by this share transfer. The agreement remains associated with that earlier event.",
+                "event_id": "event.aionix_agreement"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "The five contributors became shareholders with equal 8% interests."
+              }
+            ],
+            "time": {
+              "value": "1978-10-12",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.logix_share_transfer_1978"
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_agreement_dri_founding",
+      "category": "story",
+      "title": "Revise Joint DRI founding and funding (late 1974)",
+      "reason": "Incorporate the three DRI operating-role relationship records as separate responsibility clauses. Preserve existing equity, capital and independence terms; no split of Gary and Dorothy’s joint 60% is inferred.",
+      "elements": [
+        {
+          "record_type": "agreement",
+          "record_id": "agreement.dri_founding",
+          "before": {
+            "id": "agreement.dri_founding",
+            "title": "Joint DRI founding and funding (late 1974)",
+            "kind": "founding",
+            "state": "executed",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "participant in source; exact legal capacity to review"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "participant in source; exact legal capacity to review"
+              },
+              {
+                "actor_id": "actor.dorothy",
+                "role": "participant in source; exact legal capacity to review"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "participant in source; exact legal capacity to review"
+              }
+            ],
+            "description": "Adam, Gary Kildall and Dorothy McEwen established Digital Research as an independent operating-system business. Adam contributed capital and OEM strategy, Gary led engineering, and Dorothy led operations. DRI retained CP/M ownership and licensed competing manufacturers.",
+            "clauses": [
+              {
+                "id": "clause.dri_ip_rights",
+                "kind": "rights",
+                "statement": "DRI owns CP/M and DRI-funded improvements; licenses competing OEMs on predictable non-exclusive terms. Logix later pays OEM license and platform-engineering charges.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri"
+                ]
+              },
+              {
+                "id": "clause.dri_joint_equity",
+                "kind": "equity",
+                "statement": "Gary and Dorothy together retain 60% on a fully diluted basis; their internal allocation is unspecified.\nSource value: 60; unit: percent.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.kildall",
+                  "actor.dorothy"
+                ],
+                "equity": {
+                  "company_actor_id": "actor.dri",
+                  "beneficiary_actor_ids": [
+                    "actor.kildall",
+                    "actor.dorothy"
+                  ],
+                  "percentage": 60,
+                  "basis": "fully_diluted",
+                  "allocation": "joint_unsplit"
+                }
+              },
+              {
+                "id": "clause.dri_adam_equity",
+                "kind": "equity",
+                "statement": "Adam receives 30% for his capital commitment and founding contribution.\nSource value: 30; unit: percent.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam"
+                ],
+                "equity": {
+                  "company_actor_id": "actor.dri",
+                  "beneficiary_actor_ids": [
+                    "actor.adam"
+                  ],
+                  "percentage": 30,
+                  "basis": "fully_diluted",
+                  "allocation": "individual"
+                }
+              },
+              {
+                "id": "clause.dri_employee_reserve",
+                "kind": "equity",
+                "statement": "Reserve for future employees; not an issued voting block.\nSource value: 10; unit: percent.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri"
+                ],
+                "equity": {
+                  "company_actor_id": "actor.dri",
+                  "beneficiary_actor_ids": [],
+                  "percentage": 10,
+                  "basis": "fully_diluted",
+                  "allocation": "unallocated_reserve"
+                }
+              },
+              {
+                "id": "clause.dri_capital",
+                "kind": "funding",
+                "statement": "Adam commits $250,000 nominal 1974 USD over two years: $150,000 at formation and $100,000 in scheduled installments. Company capital, not a CP/M purchase price or per-copy manufacturing cost.\nSource value: 250000; unit: USD.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.dri"
+                ]
+              },
+              {
+                "id": "clause.dri_responsibilities",
+                "kind": "responsibility",
+                "statement": "Technical leadership and neutral licensing protected; Logix-related transactions independently reviewed. Expansion cards and chip licensing remain Logix/AION work, not DRI deliverables.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.kildall",
+                  "actor.dorothy",
+                  "actor.dri"
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "agreement.dri_founding",
+            "title": "Joint DRI founding and funding (late 1974)",
+            "kind": "founding",
+            "state": "executed",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "participant in source; exact legal capacity to review"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "participant in source; exact legal capacity to review"
+              },
+              {
+                "actor_id": "actor.dorothy",
+                "role": "participant in source; exact legal capacity to review"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "participant in source; exact legal capacity to review"
+              }
+            ],
+            "description": "Adam, Gary Kildall and Dorothy McEwen established Digital Research as an independent operating-system business. Adam contributed capital and OEM strategy, Gary led engineering, and Dorothy led operations. DRI retained CP/M ownership and licensed competing manufacturers.",
+            "clauses": [
+              {
+                "id": "clause.dri_ip_rights",
+                "kind": "rights",
+                "statement": "DRI owns CP/M and DRI-funded improvements; licenses competing OEMs on predictable non-exclusive terms. Logix later pays OEM license and platform-engineering charges.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri"
+                ]
+              },
+              {
+                "id": "clause.dri_joint_equity",
+                "kind": "equity",
+                "statement": "Gary and Dorothy together retain 60% on a fully diluted basis; their internal allocation is unspecified.\nSource value: 60; unit: percent.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.kildall",
+                  "actor.dorothy"
+                ],
+                "equity": {
+                  "company_actor_id": "actor.dri",
+                  "beneficiary_actor_ids": [
+                    "actor.kildall",
+                    "actor.dorothy"
+                  ],
+                  "percentage": 60,
+                  "basis": "fully_diluted",
+                  "allocation": "joint_unsplit"
+                }
+              },
+              {
+                "id": "clause.dri_adam_equity",
+                "kind": "equity",
+                "statement": "Adam receives 30% for his capital commitment and founding contribution.\nSource value: 30; unit: percent.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam"
+                ],
+                "equity": {
+                  "company_actor_id": "actor.dri",
+                  "beneficiary_actor_ids": [
+                    "actor.adam"
+                  ],
+                  "percentage": 30,
+                  "basis": "fully_diluted",
+                  "allocation": "individual"
+                }
+              },
+              {
+                "id": "clause.dri_employee_reserve",
+                "kind": "equity",
+                "statement": "Reserve for future employees; not an issued voting block.\nSource value: 10; unit: percent.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri"
+                ],
+                "equity": {
+                  "company_actor_id": "actor.dri",
+                  "beneficiary_actor_ids": [],
+                  "percentage": 10,
+                  "basis": "fully_diluted",
+                  "allocation": "unallocated_reserve"
+                }
+              },
+              {
+                "id": "clause.dri_capital",
+                "kind": "funding",
+                "statement": "Adam commits $250,000 nominal 1974 USD over two years: $150,000 at formation and $100,000 in scheduled installments. Company capital, not a CP/M purchase price or per-copy manufacturing cost.\nSource value: 250000; unit: USD.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.dri"
+                ]
+              },
+              {
+                "id": "clause.dri_responsibilities",
+                "kind": "responsibility",
+                "statement": "Technical leadership and neutral licensing protected; Logix-related transactions independently reviewed. Expansion cards and chip licensing remain Logix/AION work, not DRI deliverables.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.kildall",
+                  "actor.dorothy",
+                  "actor.dri"
+                ]
+              },
+              {
+                "id": "clause.dri_role_kildall_dri",
+                "kind": "responsibility",
+                "statement": "Gary leads CP/M engineering. Ownership rights remain in the agreement clauses.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.kildall"
+                ],
+                "effective_event_id": "event.dri_founding"
+              },
+              {
+                "id": "clause.dri_role_dorothy_dri",
+                "kind": "responsibility",
+                "statement": "Dorothy leads operations; no individual share of the joint 60% allocation is invented.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dorothy"
+                ],
+                "effective_event_id": "event.dri_founding"
+              },
+              {
+                "id": "clause.dri_role_adam_dri",
+                "kind": "responsibility",
+                "statement": "Adam supplies capital, strategy and OEM relationships; equity remains in the clauses of the DRI founding agreement.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam"
+                ],
+                "effective_event_id": "event.dri_founding"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_actor_relationship_kildall_dri",
+      "category": "story",
+      "title": "Retire incorporated relationship: actor_relationship.kildall_dri",
+      "reason": "Retire the standalone operating-role record after its complete description, actor and establishing event are incorporated into agreement.dri_founding as a separate clause. No incoming foundation references exist. Approve the founding-agreement proposal first or together with this deletion.",
+      "elements": [
+        {
+          "record_type": "actor_relationship",
+          "record_id": "actor_relationship.kildall_dri",
+          "before": {
+            "id": "actor_relationship.kildall_dri",
+            "kind": "operating_role",
+            "subject_actor_ids": [
+              "actor.kildall"
+            ],
+            "object_actor_id": "actor.dri",
+            "description": "Gary leads CP/M engineering. Ownership rights remain in the agreement clauses.",
+            "established_by_event_id": "event.dri_founding"
+          },
+          "after": null
+        }
+      ],
+      "depends_on": [
+        "change.dri_bpi_terms_agreement_dri_founding"
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_actor_relationship_dorothy_dri",
+      "category": "story",
+      "title": "Retire incorporated relationship: actor_relationship.dorothy_dri",
+      "reason": "Retire the standalone operating-role record after its complete description, actor and establishing event are incorporated into agreement.dri_founding as a separate clause. No incoming foundation references exist. Approve the founding-agreement proposal first or together with this deletion.",
+      "elements": [
+        {
+          "record_type": "actor_relationship",
+          "record_id": "actor_relationship.dorothy_dri",
+          "before": {
+            "id": "actor_relationship.dorothy_dri",
+            "kind": "operating_role",
+            "subject_actor_ids": [
+              "actor.dorothy"
+            ],
+            "object_actor_id": "actor.dri",
+            "description": "Dorothy leads operations; no individual share of the joint 60% allocation is invented.",
+            "established_by_event_id": "event.dri_founding"
+          },
+          "after": null
+        }
+      ],
+      "depends_on": [
+        "change.dri_bpi_terms_agreement_dri_founding"
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_actor_relationship_adam_dri",
+      "category": "story",
+      "title": "Retire incorporated relationship: actor_relationship.adam_dri",
+      "reason": "Retire the standalone operating-role record after its complete description, actor and establishing event are incorporated into agreement.dri_founding as a separate clause. No incoming foundation references exist. Approve the founding-agreement proposal first or together with this deletion.",
+      "elements": [
+        {
+          "record_type": "actor_relationship",
+          "record_id": "actor_relationship.adam_dri",
+          "before": {
+            "id": "actor_relationship.adam_dri",
+            "kind": "operating_role",
+            "subject_actor_ids": [
+              "actor.adam"
+            ],
+            "object_actor_id": "actor.dri",
+            "description": "Adam supplies capital, strategy and OEM relationships; equity remains in the clauses of the DRI founding agreement.",
+            "established_by_event_id": "event.dri_founding"
+          },
+          "after": null
+        }
+      ],
+      "depends_on": [
+        "change.dri_bpi_terms_agreement_dri_founding"
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_agreement_dri_cpm",
+      "category": "story",
+      "title": "Revise Logix–DRI CP/M development and Aurelia implementation agreement",
+      "reason": "Expand the executed Logix/DRI development terms: DRI ownership and non-exclusive availability, TUI, smart-device Plug and Execute/FlexiBUS support, XIP cartridges, and named CP/M User Numbers. Preserve the existing DRI reuse-right clause. No invented fees, schedules or completed release date.",
+      "elements": [
+        {
+          "record_type": "agreement",
+          "record_id": "agreement.dri_cpm",
+          "before": {
+            "id": "agreement.dri_cpm",
+            "title": "Aurelia CP/M implementation agreement",
+            "kind": "licence",
+            "state": "executed",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "participant in source; exact legal capacity to review"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "participant in source; exact legal capacity to review"
+              }
+            ],
+            "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+            "clauses": [
+              {
+                "id": "clause.dri_cpm_reuse_right_1",
+                "kind": "rights",
+                "statement": "DRI retains the right to implement the TUI libraries and FlexiBUS support in CP/M versions for non-Logix computers.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri"
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "agreement.dri_cpm",
+            "title": "Logix–DRI CP/M development and Aurelia implementation agreement",
+            "kind": "development",
+            "state": "executed",
+            "party": [
+              {
+                "actor_id": "actor.logix",
+                "role": "Aurelia platform partner and development collaborator"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "CP/M developer, sole software owner and licensor"
+              },
+              {
+                "actor_id": "actor.adam",
+                "role": "negotiator for the Logix collaboration"
+              }
+            ],
+            "description": "Logix and Digital Research agree to develop a new CP/M version for Logix Aurelia. DRI fully owns the resulting CP/M version and makes it available to other vendors through non-exclusive licensing. The collaboration adds a text-mode TUI, smart-device and card integration, XIP cartridge support and named user areas.",
+            "clauses": [
+              {
+                "id": "clause.dri_cpm_reuse_right_1",
+                "kind": "rights",
+                "statement": "DRI retains the right to implement the TUI libraries and FlexiBUS support in CP/M versions for non-Logix computers.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri"
+                ]
+              },
+              {
+                "id": "clause.dri_cpm_collaboration",
+                "kind": "responsibility",
+                "statement": "Logix supplies Aurelia platform requirements, interface knowledge and integration work; DRI develops and integrates the CP/M operating-system changes. They cooperate on interoperability and qualification for Aurelia. Hardware, devices and cards remain platform deliverables rather than DRI hardware-manufacturing obligations.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.logix",
+                  "actor.dri"
+                ]
+              },
+              {
+                "id": "clause.dri_cpm_ownership",
+                "kind": "rights",
+                "statement": "DRI fully owns the new CP/M version and its CP/M software enhancements developed through this collaboration. DRI may offer and license that version to any other vendor on non-exclusive terms. Aurelia compatibility and Logix collaboration confer no exclusive CP/M distribution right on Logix. Hardware and technology ownership are not transferred by this software-ownership term.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri",
+                  "actor.logix"
+                ]
+              },
+              {
+                "id": "clause.dri_cpm_tui",
+                "kind": "responsibility",
+                "statement": "Provide a text-mode TUI: pseudo-window interfaces, menus and shared interaction conventions that make applications usable through a consistent text-screen interface. Integrate the Logix TUI standard with CP/M software services.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri",
+                  "actor.logix"
+                ]
+              },
+              {
+                "id": "clause.dri_cpm_smart_devices",
+                "kind": "responsibility",
+                "statement": "Support smart devices and expansion cards using Plug and Execute and FlexiBUS technologies, with documented CP/M integration so qualified devices and cards can expose their functions to applications.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri",
+                  "actor.logix"
+                ]
+              },
+              {
+                "id": "clause.dri_cpm_xip",
+                "kind": "responsibility",
+                "statement": "Support XIP cartridges and their software interfaces so suitable programs can execute in place from cartridge ROM on compatible hardware.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri",
+                  "actor.logix"
+                ]
+              },
+              {
+                "id": "clause.dri_cpm_named_users",
+                "kind": "responsibility",
+                "statement": "Allow names to be assigned to CP/M file User Numbers, presenting user areas as named directory-like locations. This supplies a named organisation layer over User Numbers without asserting a new hierarchical filesystem.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.dri",
+                  "actor.logix"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_agreement_bpi_offer",
+      "category": "story",
+      "title": "Revise BPI investment, C/TUI redevelopment and future-platform agreement",
+      "reason": "Reword the existing stable-ID record as an executed investment agreement accepted by BPI. Retain $150,000/33% economics, add AION C/TUI redevelopment and future porting obligations, and grant BPI a subsequent share-buyback right. No buyback price, exercise date, extra investment amount or payment schedule is fabricated.",
+      "elements": [
+        {
+          "record_type": "agreement",
+          "record_id": "agreement.bpi_offer",
+          "before": {
+            "id": "agreement.bpi_offer",
+            "title": "Investment and cooperation offer to independent BPI Systems",
+            "kind": "cooperation",
+            "state": "offer",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "participant in source; exact legal capacity to review"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "participant in source; exact legal capacity to review"
+              }
+            ],
+            "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+            "clauses": [
+              {
+                "id": "clause.bpi_offer_cash_offer_1",
+                "kind": "funding",
+                "statement": "Adam offered to subscribe $150,000 of new capital into BPI Systems. The funds would support product development and working capital; the proposal did not provide a payment to the existing owners.",
+                "assertion_mode": "proposal",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.bpi"
+                ]
+              },
+              {
+                "id": "clause.bpi_offer_equity_offer_2",
+                "kind": "equity",
+                "statement": "The proposed subscription would give Adam 33% of BPI Systems on a fully diluted basis. Existing owners would retain the remaining 67%. BPI did not accept or close this equity proposal.",
+                "assertion_mode": "proposal",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.bpi"
+                ],
+                "equity": {
+                  "company_actor_id": "actor.bpi",
+                  "beneficiary_actor_ids": [
+                    "actor.adam"
+                  ],
+                  "percentage": 33,
+                  "basis": "fully_diluted",
+                  "allocation": "individual"
+                }
+              }
+            ]
+          },
+          "after": {
+            "id": "agreement.bpi_offer",
+            "title": "BPI investment, C/TUI redevelopment and future-platform agreement",
+            "kind": "cooperation",
+            "state": "executed",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "investor receiving a 33% fully diluted interest"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "accepting company and software owner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "committed redevelopment and porting partner"
+              }
+            ],
+            "description": "BPI Systems accepts Adam’s $150,000 investment in exchange for a 33% fully diluted interest. The agreement obliges AION Software to provide knowledge and resources to refactor BPI’s existing code into C with a competitive text-mode TUI. Further investment supports ports to future systems and platforms, after which BPI has the right to buy back Adam’s shares.",
+            "clauses": [
+              {
+                "id": "clause.bpi_offer_cash_offer_1",
+                "kind": "funding",
+                "statement": "Adam agrees to subscribe $150,000 of new capital into BPI Systems for development and working capital. BPI accepts the subscription; it is company funding rather than a payment to existing owners.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.bpi"
+                ]
+              },
+              {
+                "id": "clause.bpi_offer_equity_offer_2",
+                "kind": "equity",
+                "statement": "The accepted investment agreement allocates Adam a 33% fully diluted interest in BPI Systems in exchange for his $150,000 subscription. Existing owners retain the remaining 67%, subject to the agreed later buyback right.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.bpi"
+                ],
+                "equity": {
+                  "company_actor_id": "actor.bpi",
+                  "beneficiary_actor_ids": [
+                    "actor.adam"
+                  ],
+                  "percentage": 33,
+                  "basis": "fully_diluted",
+                  "allocation": "individual"
+                }
+              },
+              {
+                "id": "clause.bpi_c_tui_redevelopment",
+                "kind": "responsibility",
+                "statement": "AION Software must provide the knowledge, engineering resources and development assistance needed to refactor BPI’s current code into C and deliver a competitive TUI with pseudo-window interaction in text mode. BPI retains ownership of its applications and its independent brand and management.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.aion",
+                  "actor.bpi"
+                ]
+              },
+              {
+                "id": "clause.bpi_future_platforms",
+                "kind": "funding",
+                "statement": "The cooperation includes further investment and engineering work to port the refactored BPI software to future systems and platforms. AION Software supplies the associated technical knowledge and resources. Additional funding amounts, allocation among contributors, target platforms and schedules remain unspecified.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.adam",
+                  "actor.bpi",
+                  "actor.aion"
+                ]
+              },
+              {
+                "id": "clause.bpi_adam_share_buyback",
+                "kind": "rights",
+                "statement": "Following the agreed redevelopment and subsequent porting work, BPI Systems may buy back Adam’s shares. This is BPI’s right, not an automatic transfer or a mandatory buyback. The agreement does not specify a price, valuation formula, exercise date or payment schedule.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.bpi",
+                  "actor.adam"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_agreement_bpi_cooperation",
+      "category": "story",
+      "title": "Revise BPI operational cooperation",
+      "reason": "Align the later operational cooperation record with the accepted BPI investment; preserve BPI ownership, management, licensing and support independence.",
+      "elements": [
+        {
+          "record_type": "agreement",
+          "record_id": "agreement.bpi_cooperation",
+          "before": {
+            "id": "agreement.bpi_cooperation",
+            "title": "BPI operational cooperation",
+            "kind": "cooperation",
+            "state": "executed",
+            "party": [
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent software partner"
+              },
+              {
+                "actor_id": "actor.adam",
+                "role": "proposing investor"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "engineering support"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "distribution and training"
+              }
+            ],
+            "description": "BPI partnered with AION Software for engineering and with Logix for distribution and training. BPI continued to own its applications and control its brand, licensing and specialist support.",
+            "clauses": [
+              {
+                "id": "clause.bpi_cooperation_operating_independence",
+                "kind": "rights",
+                "statement": "BPI retained its management, brand, application ownership, licensing and specialist support. AION Software provided engineering assistance and Logix provided distribution and training. Operational cooperation proceeded independently of Adam’s unaccepted equity offer.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.bpi",
+                  "actor.adam",
+                  "actor.aion",
+                  "actor.logix"
+                ]
+              },
+              {
+                "id": "clause.bpi_cooperation_support",
+                "kind": "responsibility",
+                "statement": "BPI owned its applications and managed licensing, updates and specialist support. AION Software supplied engineering assistance, while Logix distributed the products and supported the hardware. Dealers handled installation enquiries. Public presentations described this commercial partnership and identified Adam’s investment offer as uncompleted.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.bpi",
+                  "actor.adam",
+                  "actor.aion",
+                  "actor.logix"
+                ]
+              },
+              {
+                "id": "clause.bpi_training_responsibilities",
+                "kind": "responsibility",
+                "statement": "Academy begins BPI-authorised practical courses and direct distribution under a cooperation agreement. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Tuition, setup services and software licences remain separate.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.academy"
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "agreement.bpi_cooperation",
+            "title": "BPI operational cooperation",
+            "kind": "cooperation",
+            "state": "executed",
+            "party": [
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent software partner"
+              },
+              {
+                "actor_id": "actor.adam",
+                "role": "investor with an agreed 33% fully diluted interest"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "engineering support"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "distribution and training"
+              }
+            ],
+            "description": "BPI partnered with AION Software for engineering and with Logix for distribution and training. BPI continued to own its applications and control its brand, licensing and specialist support.",
+            "clauses": [
+              {
+                "id": "clause.bpi_cooperation_operating_independence",
+                "kind": "rights",
+                "statement": "BPI retained its management, brand, application ownership, licensing and specialist support. AION Software provided engineering assistance and Logix provided distribution and training. Operational cooperation implements the accepted investment and C/TUI redevelopment agreement while preserving BPI’s operating independence.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.bpi",
+                  "actor.adam",
+                  "actor.aion",
+                  "actor.logix"
+                ]
+              },
+              {
+                "id": "clause.bpi_cooperation_support",
+                "kind": "responsibility",
+                "statement": "BPI owned its applications and managed licensing, updates and specialist support. AION Software supplied engineering assistance, while Logix distributed the products and supported the hardware. Dealers handled installation enquiries. Public presentations described this commercial partnership and identified Adam’s accepted investment and the C/TUI redevelopment partnership.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.bpi",
+                  "actor.adam",
+                  "actor.aion",
+                  "actor.logix"
+                ]
+              },
+              {
+                "id": "clause.bpi_training_responsibilities",
+                "kind": "responsibility",
+                "statement": "Academy begins BPI-authorised practical courses and direct distribution under a cooperation agreement. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Tuition, setup services and software licences remain separate.",
+                "assertion_mode": "commitment",
+                "actor_ids": [
+                  "actor.academy"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_process_aurelia_foundation",
+      "category": "story",
+      "title": "Revise Aurelia Foundation and Partnerships",
+      "reason": "Align the BPI milestone label and outcome with the now-accepted investment and redevelopment agreement; preserve process dates and membership.",
+      "elements": [
+        {
+          "record_type": "process",
+          "record_id": "process.aurelia_foundation",
+          "before": {
+            "id": "process.aurelia_foundation",
+            "title": "Aurelia Foundation and Partnerships",
+            "kind": "product_foundation",
+            "description": "Establish the commercial and partnership foundation for Aurelia: CP/M implementation, cooperation with independent BPI Systems, printer-mechanism supply, ComputerLand distribution and Academy support. This process includes the former BPI pilot and launch qualification work through June 1978.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "partnership and commercial arrangements"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "Aurelia platform and distribution"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "software engineering and BPI qualification"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "CP/M implementation partner"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent application and qualification partner"
+              },
+              {
+                "actor_id": "actor.mpi",
+                "role": "printer-mechanism supplier"
+              },
+              {
+                "actor_id": "actor.computerland",
+                "role": "retail partner"
+              },
+              {
+                "actor_id": "actor.academy",
+                "role": "training and customer support preparation"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "event.dri_cpm",
+                "precision": "event"
+              },
+              "end": {
+                "value": "1978-06",
+                "precision": "month"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The established DRI partnership enables the Aurelia CP/M implementation agreement that starts this process.",
+                "event_id": "event.dri_founding"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Logix and AION provide the product, engineering and distribution organisation needed to negotiate and carry out the Aurelia partnerships.",
+                "event_id": "event.companies"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Aurelia has a partnership foundation covering CP/M implementation, OEM printer mechanisms, ComputerLand distribution and Academy support, as documented in the constituent events.",
+                "subject_ids": [
+                  "product.family_aurelia",
+                  "product.software_cpm_aurelia",
+                  "product.device_flexiprint40",
+                  "actor.academy"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "BPI pilot testing, launch qualification and dealer/instructor preparation support the launch of its independently owned Aurelia applications. Qualification gates and support limits remain those recorded in the milestones; the earlier investment offer is not treated as an accepted equity transaction.",
+                "subject_ids": [
+                  "product.bpi_suite",
+                  "actor.bpi"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "type": "milestone",
+                "description": "Investment and cooperation offer to independent BPI Systems.",
+                "event_id": "event.bpi_offer",
+                "number": 1
+              },
+              {
+                "type": "milestone",
+                "description": "OEM printer-mechanism agreement.",
+                "event_id": "event.mpi",
+                "number": 2
+              },
+              {
+                "type": "milestone",
+                "description": "ComputerLand retail agreement.",
+                "event_id": "event.retail",
+                "number": 3
+              },
+              {
+                "type": "milestone",
+                "description": "BPI business and accountant pilot programme.",
+                "event_id": "event.bpi_pilot",
+                "number": 4
+              },
+              {
+                "type": "milestone",
+                "description": "Logix Computer Academy established.",
+                "event_id": "event.academy",
+                "number": 5
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "BPI and AION engineers tested the application family with businesses and accounting practices, reconciling its reports with existing records."
+              },
+              {
+                "number": 7,
+                "type": "action",
+                "description": "The partners checked posting, corrections, backup recovery, advertised payroll coverage and the summary export to Abacus."
+              },
+              {
+                "number": 8,
+                "type": "action",
+                "description": "BPI trained dealers and Academy instructors in the released configurations and its specialist-support arrangements before the June launch."
+              },
+              {
+                "number": 9,
+                "type": "milestone",
+                "description": "Milestone during this process: BPI launch qualification and dealer preparation.",
+                "event_id": "event.bpi_qualification"
+              },
+              {
+                "type": "milestone",
+                "description": "Independent BPI Systems launches Aurelia applications.",
+                "event_id": "event.bpi_launch",
+                "number": 10
+              }
+            ],
+            "subject_ids": [
+              "product.family_aurelia",
+              "product.software_cpm_aurelia",
+              "product.device_flexiprint40",
+              "product.bpi_suite"
+            ],
+            "related_process_ids": [
+              "process.bpi_launch"
+            ]
+          },
+          "after": {
+            "id": "process.aurelia_foundation",
+            "title": "Aurelia Foundation and Partnerships",
+            "kind": "product_foundation",
+            "description": "Establish the commercial and partnership foundation for Aurelia: CP/M implementation, cooperation with independent BPI Systems, printer-mechanism supply, ComputerLand distribution and Academy support. This process includes the former BPI pilot and launch qualification work through June 1978.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "partnership and commercial arrangements"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "Aurelia platform and distribution"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "software engineering and BPI qualification"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "CP/M implementation partner"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent application and qualification partner"
+              },
+              {
+                "actor_id": "actor.mpi",
+                "role": "printer-mechanism supplier"
+              },
+              {
+                "actor_id": "actor.computerland",
+                "role": "retail partner"
+              },
+              {
+                "actor_id": "actor.academy",
+                "role": "training and customer support preparation"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "event.dri_cpm",
+                "precision": "event"
+              },
+              "end": {
+                "value": "1978-06",
+                "precision": "month"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The established DRI partnership enables the Aurelia CP/M implementation agreement that starts this process.",
+                "event_id": "event.dri_founding"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Logix and AION provide the product, engineering and distribution organisation needed to negotiate and carry out the Aurelia partnerships.",
+                "event_id": "event.companies"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Aurelia has a partnership foundation covering CP/M implementation, OEM printer mechanisms, ComputerLand distribution and Academy support, as documented in the constituent events.",
+                "subject_ids": [
+                  "product.family_aurelia",
+                  "product.software_cpm_aurelia",
+                  "product.device_flexiprint40",
+                  "actor.academy"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "BPI pilot testing, launch qualification and dealer/instructor preparation support the launch of its independently owned Aurelia applications. Qualification gates and support limits remain those recorded in the milestones; BPI has accepted Adam’s investment and AION’s C/TUI redevelopment obligations, with future-platform work and a subsequent BPI share-buyback right.",
+                "subject_ids": [
+                  "product.bpi_suite",
+                  "actor.bpi"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "type": "milestone",
+                "description": "BPI accepts the investment and C/TUI redevelopment agreement.",
+                "event_id": "event.bpi_offer",
+                "number": 1
+              },
+              {
+                "type": "milestone",
+                "description": "OEM printer-mechanism agreement.",
+                "event_id": "event.mpi",
+                "number": 2
+              },
+              {
+                "type": "milestone",
+                "description": "ComputerLand retail agreement.",
+                "event_id": "event.retail",
+                "number": 3
+              },
+              {
+                "type": "milestone",
+                "description": "BPI business and accountant pilot programme.",
+                "event_id": "event.bpi_pilot",
+                "number": 4
+              },
+              {
+                "type": "milestone",
+                "description": "Logix Computer Academy established.",
+                "event_id": "event.academy",
+                "number": 5
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "BPI and AION engineers tested the application family with businesses and accounting practices, reconciling its reports with existing records."
+              },
+              {
+                "number": 7,
+                "type": "action",
+                "description": "The partners checked posting, corrections, backup recovery, advertised payroll coverage and the summary export to Abacus."
+              },
+              {
+                "number": 8,
+                "type": "action",
+                "description": "BPI trained dealers and Academy instructors in the released configurations and its specialist-support arrangements before the June launch."
+              },
+              {
+                "number": 9,
+                "type": "milestone",
+                "description": "Milestone during this process: BPI launch qualification and dealer preparation.",
+                "event_id": "event.bpi_qualification"
+              },
+              {
+                "type": "milestone",
+                "description": "Independent BPI Systems launches Aurelia applications.",
+                "event_id": "event.bpi_launch",
+                "number": 10
+              }
+            ],
+            "subject_ids": [
+              "product.family_aurelia",
+              "product.software_cpm_aurelia",
+              "product.device_flexiprint40",
+              "product.bpi_suite"
+            ],
+            "related_process_ids": [
+              "process.bpi_launch"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.dri_bpi_terms_campaign_ncc1978",
+      "category": "story",
+      "title": "Revise Aurelia 1978 launch campaign and Logix Computer Academy",
+      "reason": "Correct the launch presentation’s obsolete statement that Adam’s BPI investment offer was uncompleted; retain BPI independence and other presentation constraints.",
+      "elements": [
+        {
+          "record_type": "campaign",
+          "record_id": "campaign.ncc1978",
+          "before": {
+            "id": "campaign.ncc1978",
+            "title": "Aurelia 1978 launch campaign and Logix Computer Academy",
+            "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "audience": [],
+            "message": [
+              "positioning / tagline: Logix Aurelia—a computer like no other. Your personal assistant in business.",
+              "positioning / academy message: Learn before you decide.",
+              "positioning / audience: Nontechnical business owners and managers; secondary audiences are dealers, software developers and peripheral manufacturers.",
+              "positioning / partner message: Business Tools organise office work; Abacus supports planning; independent BPI Systems maintains business records. Logix supplies the computer, not ownership of every application.",
+              "tagline: Logix Aurelia—a computer like no other. Your personal assistant in business."
+            ],
+            "claim_policy": [
+              "Legacy acceptance wording (not new confirmation) / status: Accepted alternative-story plan; vendor contracts, measured demonstration performance and unspecified operating details remain execution gates.",
+              "acceptance gates / 0: Qualify 500-plus-row workload with stated RAM, populated-cell/formula count, IF and fill-down semantics, measured recalculation and disk loading time; sparse storage is not proof of performance.",
+              "acceptance gates / 1: Qualify powered-on attachment at quiescent ports, including electrical sequencing and safe suspension of keyboard polling; no unplugging during printing or disk writes.",
+              "acceptance gates / 2: Demonstrate save/close/reopen without loss; printer, disk and projection paths must pass the complete rehearsal.",
+              "acceptance gates / 3: Confirm celebrity/partner contracts, venue, Academy cities/course dates, tuition, product packages, delivery, warranty and service before publishing definitive claims.",
+              "acceptance gates / 4: Measured 48 KB workspace, disk capacity and supported disk configuration; 64 KB or extra drives only when qualified and separately quoted.",
+              "acceptance gates / 5: Posting consistency, correction history, disk-full handling and tested backup/restore.",
+              "acceptance gates / 6: Readable reports on launch display and supported printers; supported forms and paper documented.",
+              "acceptance gates / 7: Payroll jurisdictions, update process and maintenance responsibility explicitly documented.",
+              "acceptance gates / 8: Qualify BPI summary export and Abacus import; demonstrate actual sequential applications and label prepared data.",
+              "broadcast policy: Every Logix presentation at NCC 1978, including the premiere, both technical sessions, partner appearances, questions and any additional Logix sessions. Offer and supply the material free of charge to any television station wishing to broadcast it; Logix covers normal duplication and dispatch. Supply station-compatible broadcast copies on request."
+            ],
+            "launch_event_id": "event.aurelia_launch",
+            "presentation": {
+              "stage": [
+                {
+                  "label": "opening",
+                  "description": "Adam introduces almost four years of development toward an accessible, dependable business assistant; acknowledges the assembled personal computers popularised in 1977.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "reveal",
+                  "description": "Reveal one Aurelia platform with detachable keyboard and two display choices. Power on colour and 16-shade grayscale systems and show startup; no claim of two different CPU models.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "editing",
+                  "description": "Prepare a customer quotation letter, demonstrate consistent editing and the copy-buffer; explain how learning transfers between applications.",
+                  "duration_minutes": 5
+                },
+                {
+                  "label": "peripherals",
+                  "description": "Attach the self-powered printer at a safely quiescent FlexiBUS port with Aurelia powered on, wait for identification, and print. Once the job finishes, safely interchange printer and keyboard ports and verify both. No removal during traffic or unrestricted hot-plug claim.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "business_tools",
+                  "description": "Use address book, calendar and calculator in the same customer-order workflow.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "abacus",
+                  "description": "Safely attach external FDD, load Abacus from diskette, explain a small worksheet, then open a 500-plus-row business document. Raise supplier costs by 8%, show automatic recalculation, add and fill a column using IF to flag low-margin orders, print a short report, save, close and reopen. Use readable worksheet sections on 320x200 launch displays. Use a labelled prepared worksheet with BPI-exported totals; explain their origin. The following BPI demonstration shows the source records and export. Rehearse the shorter slot; retain the full workload for hands-on sessions.",
+                  "duration_minutes": 8
+                },
+                {
+                  "label": "bpi",
+                  "description": "Independent BPI Systems demonstrates a small wholesaler: existing customer/invoice records, incoming payment and remaining balance, receivables/payables and a concise report, then summary export for Abacus. Prepared history is labelled. No live write-back or simultaneous applications. Software presenter explains the workflow; the BPI head speaks in the subsequent partners section.",
+                  "duration_minutes": 7
+                },
+                {
+                  "label": "partners",
+                  "description": "Gary explains independent CP/M OEM availability, published interfaces and optional extensions; CP/M, hardware and application licenses remain distinct. MPI explains the printer partnership and any separately agreed future FlexiBUS devices. Do not announce the later July SMC agreement. The head of BPI Systems explains its independent brand, management, software ownership and support, with Adam investment and AION/Logix cooperation disclosed. No invented name or claim of unrelated ownership.",
+                  "duration_minutes": 7
+                },
+                {
+                  "label": "academy",
+                  "description": "Announce Logix Computer Academy in five US cities: learn before you decide, hands-on Fundamentals, configuration advice, 50% tuition purchase credit and direct ordering. Show selected locations, first course dates and exact tuition once finalised. BPI-authorised courses start June 12; specialist support is provided by BPI.",
+                  "duration_minutes": 2
+                },
+                {
+                  "label": "packages",
+                  "description": "State complete package contents and prices, delivery dates, warranty, training and service; invite orders, Academy registration and dealer demonstrations; announce the two technical sessions. Show optional dealer-assembled BPI configurations, separate supplier licences and training/setup prices.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "Aurelia architecture and the open peripheral ecosystem",
+                  "description": "FlexiBUS, display interfaces, implementation/licensing, compatibility and third-party peripheral development."
+                },
+                {
+                  "label": "Aurelia C compiler Integrated Development Environment and SDK",
+                  "description": "Build and run an application, common TUI behaviour, published interfaces and C source portability without promising universal binary compatibility."
+                },
+                {
+                  "label": "premiere / venue",
+                  "description": "Booked auditorium or negotiated NCC presentation slot in Anaheim; access to a main stage is not assumed."
+                },
+                {
+                  "label": "premiere / stages / 7 / description",
+                  "description": "Gary explains independent CP/M OEM availability, published interfaces and optional extensions; CP/M, hardware and application licenses remain distinct. MPI explains the printer partnership and any separately agreed future FlexiBUS devices. Do not announce the later July SMC agreement. The head of BPI Systems explains its independent brand, management, software ownership and support, with AION/Logix cooperation and Adam’s uncompleted investment offer disclosed. No invented name or claim of unrelated ownership."
+                },
+                {
+                  "label": "premiere / questions",
+                  "description": "Moderated questions follow the presentation."
+                },
+                {
+                  "label": "premiere / display",
+                  "description": "Colour and grayscale launch monitor options; readable 320x200 worksheet sections, not an implied 80-column or whole-document display."
+                },
+                {
+                  "label": "technical sessions / 0 / topic",
+                  "description": "Aurelia architecture and the open peripheral ecosystem"
+                },
+                {
+                  "label": "technical sessions / 1 / topic",
+                  "description": "Aurelia C compiler Integrated Development Environment and SDK"
+                },
+                {
+                  "label": "business sessions / 0 / provider",
+                  "description": "BPI Systems"
+                },
+                {
+                  "label": "business sessions / 0 / topic",
+                  "description": "Setup, payments, corrections, backups, month-end, inventory and payroll coverage"
+                }
+              ],
+              "duration_minutes": 44
+            },
+            "marketing_content": [
+              {
+                "number": 1,
+                "type": "television_commercial_format",
+                "description": "Proposed 60-second film-trailer-style advertisement; final 10–15 seconds show Aurelia, Abacus, a printed result, logo and June 5 premiere date. Include a recognisable BPI report with its own branding; detailed accounting explanation belongs in print and follow-up films."
+              },
+              {
+                "number": 2,
+                "type": "television_commercial_proposed_lead",
+                "description": "Michael Douglas"
+              },
+              {
+                "number": 3,
+                "type": "television_commercial_story",
+                "description": "Narrator introduces This spring. Douglas discusses a remarkably helpful new assistant during a therapy session. The reveal identifies Aurelia as a computer, and the therapist becomes curious about a demonstration."
+              },
+              {
+                "number": 4,
+                "type": "television_commercial_tone",
+                "description": "Warm humour, concrete business benefits and consistent interaction; avoid unhealthy dependency or claims of speech recognition/artificial intelligence."
+              },
+              {
+                "number": 5,
+                "type": "television_commercial_conversion",
+                "description": "Telephone enquiries, mailed brochures, demo appointments and Academy bookings; trained staff handle responses."
+              },
+              {
+                "number": 6,
+                "type": "academy_established_date",
+                "description": "1978-03-25"
+              },
+              {
+                "number": 7,
+                "type": "academy_public_announcement_date",
+                "description": "1978-06-05"
+              },
+              {
+                "number": 8,
+                "type": "academy_launch_city_count",
+                "description": "5"
+              },
+              {
+                "number": 9,
+                "type": "academy_fundamentals_days",
+                "description": "2"
+              },
+              {
+                "number": 10,
+                "type": "academy_tuition_positioning",
+                "description": "A modest fraction of an Aurelia package price; publish exact tuition and a named package comparison when commercial prices are selected. Generated pricing proposals are not approved tuition."
+              },
+              {
+                "number": 11,
+                "type": "academy_teaching",
+                "description": "Small classes, substantial hands-on time, ideally one machine per participant or pair; business tools, introductory Abacus and advice on appropriate configurations and unnecessary purchases."
+              },
+              {
+                "number": 12,
+                "type": "academy_credit_eligible_course",
+                "description": "Aurelia Fundamentals"
+              },
+              {
+                "number": 13,
+                "type": "academy_credit_tuition_fraction",
+                "description": "0.5"
+              },
+              {
+                "number": 14,
+                "type": "academy_credit_validity_months",
+                "description": "6"
+              },
+              {
+                "number": 15,
+                "type": "academy_credit_systems_per_credit",
+                "description": "1"
+              },
+              {
+                "number": 16,
+                "type": "academy_credit_redemption_channels_0",
+                "description": "Academy direct sales"
+              },
+              {
+                "number": 17,
+                "type": "academy_credit_redemption_channels_1",
+                "description": "participating authorised dealers"
+              },
+              {
+                "number": 18,
+                "type": "academy_credit_dealer_reimbursement",
+                "description": "Logix reimburses participating dealers; do not deduct the credit from their agreed margin."
+              },
+              {
+                "number": 19,
+                "type": "academy_credit_purchase_obligation",
+                "description": "false"
+              },
+              {
+                "number": 20,
+                "type": "academy_credit_scope",
+                "description": "Standalone two-day Fundamentals. Existing $150 vouchers for the other before-you-buy courses remain unchanged; no stacking or extension to other courses is implied."
+              },
+              {
+                "number": 21,
+                "type": "academy_credit_accounting",
+                "description": "Reserve the redeemed credit once as promotional expense across the course and computer sale, outside recurring manufacturing costs."
+              },
+              {
+                "number": 22,
+                "type": "academy_sales",
+                "description": "Order and pay at training centres; immediate collection only where stock is available. No purchase obligation."
+              },
+              {
+                "number": 23,
+                "type": "academy_bpi_training_start",
+                "description": "1978-06-12"
+              },
+              {
+                "number": 24,
+                "type": "academy_bpi_support",
+                "description": "Access to a BPI specialist at each launch centre; authorised curriculum and escalation agreement. Training, setup and software licensing are separate; no automatic Fundamentals credit for BPI courses."
+              }
+            ],
+            "process_id": "process.ncc1978_campaign",
+            "subject_ids": [
+              "product.aurelia_mono",
+              "product.aurelia_color",
+              "product.proposed_aurelia_office",
+              "product.proposed_aurelia_accounts",
+              "product.proposed_aurelia_developer",
+              "product.abacus_1",
+              "product.bpi_suite",
+              "product.business_tools_aurelia",
+              "product.simple_c_z80",
+              "product.aurelia_sdk",
+              "product.software_cpm_aurelia",
+              "product.service_academy_before_you_buy",
+              "product.service_academy_direct_sales",
+              "product.device_flexiprint40",
+              "product.aion_c_ide",
+              "product.family_aurelia"
+            ]
+          },
+          "after": {
+            "id": "campaign.ncc1978",
+            "title": "Aurelia 1978 launch campaign and Logix Computer Academy",
+            "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "audience": [],
+            "message": [
+              "positioning / tagline: Logix Aurelia—a computer like no other. Your personal assistant in business.",
+              "positioning / academy message: Learn before you decide.",
+              "positioning / audience: Nontechnical business owners and managers; secondary audiences are dealers, software developers and peripheral manufacturers.",
+              "positioning / partner message: Business Tools organise office work; Abacus supports planning; independent BPI Systems maintains business records. Logix supplies the computer, not ownership of every application.",
+              "tagline: Logix Aurelia—a computer like no other. Your personal assistant in business."
+            ],
+            "claim_policy": [
+              "Legacy acceptance wording (not new confirmation) / status: Accepted alternative-story plan; vendor contracts, measured demonstration performance and unspecified operating details remain execution gates.",
+              "acceptance gates / 0: Qualify 500-plus-row workload with stated RAM, populated-cell/formula count, IF and fill-down semantics, measured recalculation and disk loading time; sparse storage is not proof of performance.",
+              "acceptance gates / 1: Qualify powered-on attachment at quiescent ports, including electrical sequencing and safe suspension of keyboard polling; no unplugging during printing or disk writes.",
+              "acceptance gates / 2: Demonstrate save/close/reopen without loss; printer, disk and projection paths must pass the complete rehearsal.",
+              "acceptance gates / 3: Confirm celebrity/partner contracts, venue, Academy cities/course dates, tuition, product packages, delivery, warranty and service before publishing definitive claims.",
+              "acceptance gates / 4: Measured 48 KB workspace, disk capacity and supported disk configuration; 64 KB or extra drives only when qualified and separately quoted.",
+              "acceptance gates / 5: Posting consistency, correction history, disk-full handling and tested backup/restore.",
+              "acceptance gates / 6: Readable reports on launch display and supported printers; supported forms and paper documented.",
+              "acceptance gates / 7: Payroll jurisdictions, update process and maintenance responsibility explicitly documented.",
+              "acceptance gates / 8: Qualify BPI summary export and Abacus import; demonstrate actual sequential applications and label prepared data.",
+              "broadcast policy: Every Logix presentation at NCC 1978, including the premiere, both technical sessions, partner appearances, questions and any additional Logix sessions. Offer and supply the material free of charge to any television station wishing to broadcast it; Logix covers normal duplication and dispatch. Supply station-compatible broadcast copies on request."
+            ],
+            "launch_event_id": "event.aurelia_launch",
+            "presentation": {
+              "stage": [
+                {
+                  "label": "opening",
+                  "description": "Adam introduces almost four years of development toward an accessible, dependable business assistant; acknowledges the assembled personal computers popularised in 1977.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "reveal",
+                  "description": "Reveal one Aurelia platform with detachable keyboard and two display choices. Power on colour and 16-shade grayscale systems and show startup; no claim of two different CPU models.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "editing",
+                  "description": "Prepare a customer quotation letter, demonstrate consistent editing and the copy-buffer; explain how learning transfers between applications.",
+                  "duration_minutes": 5
+                },
+                {
+                  "label": "peripherals",
+                  "description": "Attach the self-powered printer at a safely quiescent FlexiBUS port with Aurelia powered on, wait for identification, and print. Once the job finishes, safely interchange printer and keyboard ports and verify both. No removal during traffic or unrestricted hot-plug claim.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "business_tools",
+                  "description": "Use address book, calendar and calculator in the same customer-order workflow.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "abacus",
+                  "description": "Safely attach external FDD, load Abacus from diskette, explain a small worksheet, then open a 500-plus-row business document. Raise supplier costs by 8%, show automatic recalculation, add and fill a column using IF to flag low-margin orders, print a short report, save, close and reopen. Use readable worksheet sections on 320x200 launch displays. Use a labelled prepared worksheet with BPI-exported totals; explain their origin. The following BPI demonstration shows the source records and export. Rehearse the shorter slot; retain the full workload for hands-on sessions.",
+                  "duration_minutes": 8
+                },
+                {
+                  "label": "bpi",
+                  "description": "Independent BPI Systems demonstrates a small wholesaler: existing customer/invoice records, incoming payment and remaining balance, receivables/payables and a concise report, then summary export for Abacus. Prepared history is labelled. No live write-back or simultaneous applications. Software presenter explains the workflow; the BPI head speaks in the subsequent partners section.",
+                  "duration_minutes": 7
+                },
+                {
+                  "label": "partners",
+                  "description": "Gary explains independent CP/M OEM availability, published interfaces and optional extensions; CP/M, hardware and application licenses remain distinct. MPI explains the printer partnership and any separately agreed future FlexiBUS devices. Do not announce the later July SMC agreement. The head of BPI Systems explains its independent brand, management, software ownership and support, with Adam investment and AION/Logix cooperation disclosed. No invented name or claim of unrelated ownership.",
+                  "duration_minutes": 7
+                },
+                {
+                  "label": "academy",
+                  "description": "Announce Logix Computer Academy in five US cities: learn before you decide, hands-on Fundamentals, configuration advice, 50% tuition purchase credit and direct ordering. Show selected locations, first course dates and exact tuition once finalised. BPI-authorised courses start June 12; specialist support is provided by BPI.",
+                  "duration_minutes": 2
+                },
+                {
+                  "label": "packages",
+                  "description": "State complete package contents and prices, delivery dates, warranty, training and service; invite orders, Academy registration and dealer demonstrations; announce the two technical sessions. Show optional dealer-assembled BPI configurations, separate supplier licences and training/setup prices.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "Aurelia architecture and the open peripheral ecosystem",
+                  "description": "FlexiBUS, display interfaces, implementation/licensing, compatibility and third-party peripheral development."
+                },
+                {
+                  "label": "Aurelia C compiler Integrated Development Environment and SDK",
+                  "description": "Build and run an application, common TUI behaviour, published interfaces and C source portability without promising universal binary compatibility."
+                },
+                {
+                  "label": "premiere / venue",
+                  "description": "Booked auditorium or negotiated NCC presentation slot in Anaheim; access to a main stage is not assumed."
+                },
+                {
+                  "label": "premiere / stages / 7 / description",
+                  "description": "Gary explains independent CP/M OEM availability, published interfaces and optional extensions; CP/M, hardware and application licenses remain distinct. MPI explains the printer partnership and any separately agreed future FlexiBUS devices. Do not announce the later July SMC agreement. The head of BPI Systems explains its independent brand, management, software ownership and support, with AION/Logix cooperation and Adam’s accepted investment and AION’s C/TUI redevelopment commitments disclosed. No invented name or claim of unrelated ownership."
+                },
+                {
+                  "label": "premiere / questions",
+                  "description": "Moderated questions follow the presentation."
+                },
+                {
+                  "label": "premiere / display",
+                  "description": "Colour and grayscale launch monitor options; readable 320x200 worksheet sections, not an implied 80-column or whole-document display."
+                },
+                {
+                  "label": "technical sessions / 0 / topic",
+                  "description": "Aurelia architecture and the open peripheral ecosystem"
+                },
+                {
+                  "label": "technical sessions / 1 / topic",
+                  "description": "Aurelia C compiler Integrated Development Environment and SDK"
+                },
+                {
+                  "label": "business sessions / 0 / provider",
+                  "description": "BPI Systems"
+                },
+                {
+                  "label": "business sessions / 0 / topic",
+                  "description": "Setup, payments, corrections, backups, month-end, inventory and payroll coverage"
+                }
+              ],
+              "duration_minutes": 44
+            },
+            "marketing_content": [
+              {
+                "number": 1,
+                "type": "television_commercial_format",
+                "description": "Proposed 60-second film-trailer-style advertisement; final 10–15 seconds show Aurelia, Abacus, a printed result, logo and June 5 premiere date. Include a recognisable BPI report with its own branding; detailed accounting explanation belongs in print and follow-up films."
+              },
+              {
+                "number": 2,
+                "type": "television_commercial_proposed_lead",
+                "description": "Michael Douglas"
+              },
+              {
+                "number": 3,
+                "type": "television_commercial_story",
+                "description": "Narrator introduces This spring. Douglas discusses a remarkably helpful new assistant during a therapy session. The reveal identifies Aurelia as a computer, and the therapist becomes curious about a demonstration."
+              },
+              {
+                "number": 4,
+                "type": "television_commercial_tone",
+                "description": "Warm humour, concrete business benefits and consistent interaction; avoid unhealthy dependency or claims of speech recognition/artificial intelligence."
+              },
+              {
+                "number": 5,
+                "type": "television_commercial_conversion",
+                "description": "Telephone enquiries, mailed brochures, demo appointments and Academy bookings; trained staff handle responses."
+              },
+              {
+                "number": 6,
+                "type": "academy_established_date",
+                "description": "1978-03-25"
+              },
+              {
+                "number": 7,
+                "type": "academy_public_announcement_date",
+                "description": "1978-06-05"
+              },
+              {
+                "number": 8,
+                "type": "academy_launch_city_count",
+                "description": "5"
+              },
+              {
+                "number": 9,
+                "type": "academy_fundamentals_days",
+                "description": "2"
+              },
+              {
+                "number": 10,
+                "type": "academy_tuition_positioning",
+                "description": "A modest fraction of an Aurelia package price; publish exact tuition and a named package comparison when commercial prices are selected. Generated pricing proposals are not approved tuition."
+              },
+              {
+                "number": 11,
+                "type": "academy_teaching",
+                "description": "Small classes, substantial hands-on time, ideally one machine per participant or pair; business tools, introductory Abacus and advice on appropriate configurations and unnecessary purchases."
+              },
+              {
+                "number": 12,
+                "type": "academy_credit_eligible_course",
+                "description": "Aurelia Fundamentals"
+              },
+              {
+                "number": 13,
+                "type": "academy_credit_tuition_fraction",
+                "description": "0.5"
+              },
+              {
+                "number": 14,
+                "type": "academy_credit_validity_months",
+                "description": "6"
+              },
+              {
+                "number": 15,
+                "type": "academy_credit_systems_per_credit",
+                "description": "1"
+              },
+              {
+                "number": 16,
+                "type": "academy_credit_redemption_channels_0",
+                "description": "Academy direct sales"
+              },
+              {
+                "number": 17,
+                "type": "academy_credit_redemption_channels_1",
+                "description": "participating authorised dealers"
+              },
+              {
+                "number": 18,
+                "type": "academy_credit_dealer_reimbursement",
+                "description": "Logix reimburses participating dealers; do not deduct the credit from their agreed margin."
+              },
+              {
+                "number": 19,
+                "type": "academy_credit_purchase_obligation",
+                "description": "false"
+              },
+              {
+                "number": 20,
+                "type": "academy_credit_scope",
+                "description": "Standalone two-day Fundamentals. Existing $150 vouchers for the other before-you-buy courses remain unchanged; no stacking or extension to other courses is implied."
+              },
+              {
+                "number": 21,
+                "type": "academy_credit_accounting",
+                "description": "Reserve the redeemed credit once as promotional expense across the course and computer sale, outside recurring manufacturing costs."
+              },
+              {
+                "number": 22,
+                "type": "academy_sales",
+                "description": "Order and pay at training centres; immediate collection only where stock is available. No purchase obligation."
+              },
+              {
+                "number": 23,
+                "type": "academy_bpi_training_start",
+                "description": "1978-06-12"
+              },
+              {
+                "number": 24,
+                "type": "academy_bpi_support",
+                "description": "Access to a BPI specialist at each launch centre; authorised curriculum and escalation agreement. Training, setup and software licensing are separate; no automatic Fundamentals credit for BPI courses."
+              }
+            ],
+            "process_id": "process.ncc1978_campaign",
+            "subject_ids": [
+              "product.aurelia_mono",
+              "product.aurelia_color",
+              "product.proposed_aurelia_office",
+              "product.proposed_aurelia_accounts",
+              "product.proposed_aurelia_developer",
+              "product.abacus_1",
+              "product.bpi_suite",
+              "product.business_tools_aurelia",
+              "product.simple_c_z80",
+              "product.aurelia_sdk",
+              "product.software_cpm_aurelia",
+              "product.service_academy_before_you_buy",
+              "product.service_academy_direct_sales",
+              "product.device_flexiprint40",
+              "product.aion_c_ide",
+              "product.family_aurelia"
+            ]
+          }
+        }
+      ]
+    }
+  ],
   "metadata": {
     "description": "Pending single-record story changes awaiting whole-record authorization. Reference convention: event -> assumption; matching event/process dates -> period.start/end; strictly interior event -> process.steps; causal event preceding process -> process.inputs; causal process preceding event -> event.inputs. Neither process nor event outcomes reference events. Unknown or overlapping date precision and unproven causal relationships remain for review. Single-parent proposals retain dates and descriptions; a shared event anchor may become a literal calendar boundary to leave the event in one owning process.",
     "schema_version": "review-transport-1",
