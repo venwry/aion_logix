@@ -26,6 +26,7 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [code/shared.js](../code/shared.js) | Data loading, foundation/authorization join, relationship and detail helpers. |
 | [code/temporal.js](../code/temporal.js) | Event-based process boundary resolution and precision-preserving date bounds. |
 | [code/timeline.html](../code/timeline.html) | Timeline page structure. |
+| [code/timeline-layout.js](../code/timeline-layout.js) | Explicit membership, campaign/execution merging, shared calendar coordinates and overlap packing. |
 | [code/timeline.js](../code/timeline.js) | Single-lane event/process/campaign rendering, filtering and detail interaction. |
 | [data_calculation/.gitkeep](../data_calculation/.gitkeep) | Placeholder for future assessment data; no calculation model implemented. |
 | [data_foundation/actor.json](../data_foundation/actor.json) | People, organizations and groups. |
@@ -88,15 +89,17 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 | [tests/migration/phase1.test.js](../tests/migration/phase1.test.js) | Pre-separation identity and evidence preservation checks. |
 | [tests/migration/phase1b.test.js](../tests/migration/phase1b.test.js) | Retired identity mappings and phase 1B migration fingerprint checks. |
 | [tests/model/phase1b.test.js](../tests/model/phase1b.test.js) | Temporal boundaries, retired-field rejection, numbered items and campaign constraints. |
+| [tests/model/timeline-layout.test.js](../tests/model/timeline-layout.test.js) | Timeline membership, interval packing, unknown dates and cycle protection. |
 | [tests/model/schemas.test.js](../tests/model/schemas.test.js) | Current schema validation, editorial-field rejection and broken references. |
 | [tests/review.spec.cjs](../tests/review.spec.cjs) | Visible before/after review and group-save browser tests. |
 | [tests/review/import.test.js](../tests/review/import.test.js) | Original approval payload fingerprints; reads archived importer helpers. |
 | [tests/review/proposals.test.js](../tests/review/proposals.test.js) | Pending proposal before/after consistency and resulting foundation validity. |
 | [tests/server/authorization.test.js](../tests/server/authorization.test.js) | Authorization, group changes, HTTP authentication and GitHub concurrency. |
 | [tests/server/batch.test.js](../tests/server/batch.test.js) | Atomic multi-record authorization, stale requests and idempotency. |
+| [tests/timeline-layout.spec.cjs](../tests/timeline-layout.spec.cjs) | Nested campaign/process rendering, year-line layering and shared compact details. |
 | [tests/viewer.spec.cjs](../tests/viewer.spec.cjs) | Documentation, archives, diagrams, local-file sanitization and sandbox tests. |
 | [tools/generate-foundation-spec.js](../tools/generate-foundation-spec.js) | Generates the current foundation Markdown specification from schemas. |
 | [tools/validate-foundation.js](../tools/validate-foundation.js) | Validates foundation and current authorization; optional complete-authorization check. |
 | [tools/validate-model.js](../tools/validate-model.js) | Foundation schema compilation and semantic/reference/date validation. |
 
-There are 92 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.
+There are 95 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.

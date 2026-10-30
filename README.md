@@ -51,3 +51,9 @@ CHROMIUM_PATH=/usr/bin/chromium npm test
 ```
 
 Set `CHROMIUM_PATH` to an installed Chromium executable, or install Playwright's browser. Browser tests start a local HTTP server. Tests do not authorize live story records. See the editing guide for documentation checks and completeness validation.
+
+## Timeline presentation
+
+Dated processes occupy boxes from their start to end, with parallel work beside them. Explicit parent-process links and step references place events/sub-processes inside their owner; campaigns share one box with their execution process. The Campaign and Process labels select either record independently. Mixed authorization means the two records have different authorization states.
+
+Years expand with content. Horizontal scrolling reveals parallel work; year lines pass behind process boxes. Filters preserve linked context using dashed borders. Undated work remains in a separate section, and a child outside its parent's stated dates stays separate rather than changing either date. When a record has multiple memberships, explicit parent links take precedence, then campaign steps, other process steps, and event process references; equal-priority ties use stable IDs. Details retain all relationships. The timeline and browser share compact details, with reference labels shown as `id - Name`.

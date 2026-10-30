@@ -6,17 +6,17 @@ test('timeline preserves deep links, spans, variable years and filters',async({p
  const heights=await page.locator('.year-section').evaluateAll(nodes=>nodes.map(n=>Math.round(n.getBoundingClientRect().height)));
  expect(new Set(heights).size).toBeGreaterThan(1);
  const span=page.locator('[data-span-id="process.economics_studies"]');await expect(span).toHaveCount(1);
- expect(await span.evaluate(n=>Number(n.getAttribute('y2'))-Number(n.getAttribute('y1')))).toBeGreaterThan(400);
+ expect(await span.evaluate(n=>n.getBoundingClientRect().height)).toBeGreaterThan(400);
  await page.locator('#type').selectOption('campaign');
- await expect(page.locator('#timeline .timeline-card').first()).toContainText('execution process range');
+ await expect(page.locator('#timeline .timeline-card').first()).toContainText('Campaign / Process');
  await page.locator('#status').selectOption('authorized');await expect(page.locator('#timeline')).toContainText('No dated records match');
  await page.getByRole('button',{name:'Reset filters'}).click();
- await page.locator('#search').fill('public command of economics');await expect(page.locator('#timeline .timeline-card')).toHaveCount(1);
+ await page.locator('#search').fill('public command of economics');await expect(page.locator('#timeline .timeline-card[data-context="false"]')).toHaveCount(1);
 });
 test('browser supports sorting, pagination, empty datasets and related records',async({page})=>{
  await ready(page,'browser.html#agreement.autodesk_development');
  await expect(page.locator('#details h2')).toContainText('Autodesk');
- await page.locator('#details').getByRole('button',{name:'Adam Pleskot',exact:true}).click();
+ await page.locator('#details').getByRole('button',{name:'actor.adam - Adam Pleskot',exact:true}).click();
  await expect(page.locator('#dataset')).toHaveValue('actor');await expect(page.locator('#details h2')).toHaveText('Adam Pleskot');
  await page.locator('[data-sort="title"]').click();await expect(page.locator('th').first()).toHaveAttribute('aria-sort','descending');
  await page.locator('#dataset').selectOption('event');await expect(page.locator('#rows tr')).toHaveCount(75);

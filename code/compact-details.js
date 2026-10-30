@@ -27,7 +27,7 @@ export function compactDetails(record,data,select){
    const span=el('span');value.forEach((v,i)=>{if(i)span.append(document.createTextNode(', '));span.append(valueNode(v));});return span;
   }
   if(value&&typeof value==='object')return el('span','',JSON.stringify(value));
-  if(typeof value==='string'&&data.index.has(value)){const button=el('button','ref-link',titleOf(data.index.get(value)));button.title=value;button.onclick=()=>select(value);return button;}
+  if(typeof value==='string'&&data.index.has(value)){const button=el('button','ref-link',value+' - '+titleOf(data.index.get(value)));button.title=value;button.onclick=()=>select(value);return button;}
   if(typeof value==='string'&&/^https?:\/\/\S+$/.test(value)){const link=el('a','',value);link.href=value;link.target='_blank';link.rel='noopener noreferrer';return link;}
   return el('span','',value===null?'null':String(value));
  }
