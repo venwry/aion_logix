@@ -2280,6 +2280,71 @@
           "content_sha256": "d4b45731b29459a4529e0d73d50d84291183e4f52423529c4e5ace2a0b82af15"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.151caf28-cc57-41d9-a53a-f5bfaa7ae5c7",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-10-30T17:12:52.163Z",
+      "change_id": "change.opening_1972_assumption_identity",
+      "proposal_sha256": "3ee3e9e9e2a4ed9ecfe8f61c101e85cdcf68264ece96cc4e1b942355ec6aeb1b",
+      "proposal": {
+        "id": "change.opening_1972_assumption_identity",
+        "category": "story",
+        "title": "10/21 · Update assumption.identity",
+        "reason": "Single-record authorization: assumption.identity. Preserves this record’s content from the opening-sequence proposal. Review prerequisites first: event.time_travel_arrival. Each card authorizes only this record; references do not authorize their targets.",
+        "depends_on_ids": [
+          "change.opening_1972_event_time_travel_arrival"
+        ],
+        "elements": [
+          {
+            "record_type": "assumption",
+            "record_id": "assumption.identity",
+            "before": {
+              "id": "assumption.identity",
+              "kind": "world_premise",
+              "statement": "Vincent gains time-travel powers at age nineteen in 2025 and operates in the past as Adam Pleskot. His foreknowledge remains secret.",
+              "scope_ids": [
+                "actor.adam"
+              ]
+            },
+            "after": {
+              "id": "assumption.identity",
+              "kind": "world_premise",
+              "statement": "Vincent gains time-travel powers at age nineteen in 2025 and operates in the past as Adam Pleskot. His foreknowledge remains secret.",
+              "scope_ids": [
+                "actor.adam",
+                "event.time_travel_arrival",
+                "event.identity"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "assumption.identity",
+          "before": {
+            "id": "assumption.identity",
+            "kind": "world_premise",
+            "statement": "Vincent gains time-travel powers at age nineteen in 2025 and operates in the past as Adam Pleskot. His foreknowledge remains secret.",
+            "scope_ids": [
+              "actor.adam"
+            ]
+          },
+          "after": {
+            "id": "assumption.identity",
+            "kind": "world_premise",
+            "statement": "Vincent gains time-travel powers at age nineteen in 2025 and operates in the past as Adam Pleskot. His foreknowledge remains secret.",
+            "scope_ids": [
+              "actor.adam",
+              "event.time_travel_arrival",
+              "event.identity"
+            ]
+          },
+          "content_sha256": "c75886f347cb87c9d670f694ad15a73c4346a98762c3bf2101e626b86acb4726"
+        }
+      ]
     }
   ]
 }
