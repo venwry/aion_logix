@@ -109,25 +109,59 @@
             "actor.dorothy",
             "actor.dri"
           ]
+        },
+        {
+          "id": "clause.dri_role_kildall_dri",
+          "kind": "responsibility",
+          "statement": "Gary leads CP/M engineering. Ownership rights remain in the agreement clauses.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.kildall"
+          ],
+          "effective_event_id": "event.dri_founding"
+        },
+        {
+          "id": "clause.dri_role_dorothy_dri",
+          "kind": "responsibility",
+          "statement": "Dorothy leads operations; no individual share of the joint 60% allocation is invented.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dorothy"
+          ],
+          "effective_event_id": "event.dri_founding"
+        },
+        {
+          "id": "clause.dri_role_adam_dri",
+          "kind": "responsibility",
+          "statement": "Adam supplies capital, strategy and OEM relationships; equity remains in the clauses of the DRI founding agreement.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam"
+          ],
+          "effective_event_id": "event.dri_founding"
         }
       ]
     },
     {
       "id": "agreement.dri_cpm",
-      "title": "Aurelia CP/M implementation agreement",
-      "kind": "licence",
+      "title": "Logix–DRI CP/M development and Aurelia implementation agreement",
+      "kind": "development",
       "state": "executed",
       "party": [
         {
-          "actor_id": "actor.adam",
-          "role": "participant in source; exact legal capacity to review"
+          "actor_id": "actor.logix",
+          "role": "Aurelia platform partner and development collaborator"
         },
         {
           "actor_id": "actor.dri",
-          "role": "participant in source; exact legal capacity to review"
+          "role": "CP/M developer, sole software owner and licensor"
+        },
+        {
+          "actor_id": "actor.adam",
+          "role": "negotiator for the Logix collaboration"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "description": "Logix and Digital Research agree to develop a new CP/M version for Logix Aurelia. DRI fully owns the resulting CP/M version and makes it available to other vendors through non-exclusive licensing. The collaboration adds a text-mode TUI, smart-device and card integration, XIP cartridge support and named user areas.",
       "clauses": [
         {
           "id": "clause.dri_cpm_reuse_right_1",
@@ -137,31 +171,95 @@
           "actor_ids": [
             "actor.dri"
           ]
+        },
+        {
+          "id": "clause.dri_cpm_collaboration",
+          "kind": "responsibility",
+          "statement": "Logix supplies Aurelia platform requirements, interface knowledge and integration work; DRI develops and integrates the CP/M operating-system changes. They cooperate on interoperability and qualification for Aurelia. Hardware, devices and cards remain platform deliverables rather than DRI hardware-manufacturing obligations.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.logix",
+            "actor.dri"
+          ]
+        },
+        {
+          "id": "clause.dri_cpm_ownership",
+          "kind": "rights",
+          "statement": "DRI fully owns the new CP/M version and its CP/M software enhancements developed through this collaboration. DRI may offer and license that version to any other vendor on non-exclusive terms. Aurelia compatibility and Logix collaboration confer no exclusive CP/M distribution right on Logix. Hardware and technology ownership are not transferred by this software-ownership term.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.dri_cpm_tui",
+          "kind": "responsibility",
+          "statement": "Provide a text-mode TUI: pseudo-window interfaces, menus and shared interaction conventions that make applications usable through a consistent text-screen interface. Integrate the Logix TUI standard with CP/M software services.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.dri_cpm_smart_devices",
+          "kind": "responsibility",
+          "statement": "Support smart devices and expansion cards using Plug and Execute and FlexiBUS technologies, with documented CP/M integration so qualified devices and cards can expose their functions to applications.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.dri_cpm_xip",
+          "kind": "responsibility",
+          "statement": "Support XIP cartridges and their software interfaces so suitable programs can execute in place from cartridge ROM on compatible hardware.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri",
+            "actor.logix"
+          ]
+        },
+        {
+          "id": "clause.dri_cpm_named_users",
+          "kind": "responsibility",
+          "statement": "Allow names to be assigned to CP/M file User Numbers, presenting user areas as named directory-like locations. This supplies a named organisation layer over User Numbers without asserting a new hierarchical filesystem.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.dri",
+            "actor.logix"
+          ]
         }
       ]
     },
     {
       "id": "agreement.bpi_offer",
-      "title": "Investment and cooperation offer to independent BPI Systems",
+      "title": "BPI investment, C/TUI redevelopment and future-platform agreement",
       "kind": "cooperation",
-      "state": "offer",
+      "state": "executed",
       "party": [
         {
           "actor_id": "actor.adam",
-          "role": "participant in source; exact legal capacity to review"
+          "role": "investor receiving a 33% fully diluted interest"
         },
         {
           "actor_id": "actor.bpi",
-          "role": "participant in source; exact legal capacity to review"
+          "role": "accepting company and software owner"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "committed redevelopment and porting partner"
         }
       ],
-      "description": "Agreement identity reconstructed from the event and terms. Signing/other milestones remain separate events.",
+      "description": "BPI Systems accepts Adam’s $150,000 investment in exchange for a 33% fully diluted interest. The agreement obliges AION Software to provide knowledge and resources to refactor BPI’s existing code into C with a competitive text-mode TUI. Further investment supports ports to future systems and platforms, after which BPI has the right to buy back Adam’s shares.",
       "clauses": [
         {
           "id": "clause.bpi_offer_cash_offer_1",
           "kind": "funding",
-          "statement": "Adam offered to subscribe $150,000 of new capital into BPI Systems. The funds would support product development and working capital; the proposal did not provide a payment to the existing owners.",
-          "assertion_mode": "proposal",
+          "statement": "Adam agrees to subscribe $150,000 of new capital into BPI Systems for development and working capital. BPI accepts the subscription; it is company funding rather than a payment to existing owners.",
+          "assertion_mode": "commitment",
           "actor_ids": [
             "actor.adam",
             "actor.bpi"
@@ -170,8 +268,8 @@
         {
           "id": "clause.bpi_offer_equity_offer_2",
           "kind": "equity",
-          "statement": "The proposed subscription would give Adam 33% of BPI Systems on a fully diluted basis. Existing owners would retain the remaining 67%. BPI did not accept or close this equity proposal.",
-          "assertion_mode": "proposal",
+          "statement": "The accepted investment agreement allocates Adam a 33% fully diluted interest in BPI Systems in exchange for his $150,000 subscription. Existing owners retain the remaining 67%, subject to the agreed later buyback right.",
+          "assertion_mode": "commitment",
           "actor_ids": [
             "actor.adam",
             "actor.bpi"
@@ -185,6 +283,37 @@
             "basis": "fully_diluted",
             "allocation": "individual"
           }
+        },
+        {
+          "id": "clause.bpi_c_tui_redevelopment",
+          "kind": "responsibility",
+          "statement": "AION Software must provide the knowledge, engineering resources and development assistance needed to refactor BPI’s current code into C and deliver a competitive TUI with pseudo-window interaction in text mode. BPI retains ownership of its applications and its independent brand and management.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.aion",
+            "actor.bpi"
+          ]
+        },
+        {
+          "id": "clause.bpi_future_platforms",
+          "kind": "funding",
+          "statement": "The cooperation includes further investment and engineering work to port the refactored BPI software to future systems and platforms. AION Software supplies the associated technical knowledge and resources. Additional funding amounts, allocation among contributors, target platforms and schedules remain unspecified.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.adam",
+            "actor.bpi",
+            "actor.aion"
+          ]
+        },
+        {
+          "id": "clause.bpi_adam_share_buyback",
+          "kind": "rights",
+          "statement": "Following the agreed redevelopment and subsequent porting work, BPI Systems may buy back Adam’s shares. This is BPI’s right, not an automatic transfer or a mandatory buyback. The agreement does not specify a price, valuation formula, exercise date or payment schedule.",
+          "assertion_mode": "commitment",
+          "actor_ids": [
+            "actor.bpi",
+            "actor.adam"
+          ]
         }
       ]
     },
@@ -1232,7 +1361,7 @@
         },
         {
           "actor_id": "actor.adam",
-          "role": "proposing investor"
+          "role": "investor with an agreed 33% fully diluted interest"
         },
         {
           "actor_id": "actor.aion",
@@ -1248,7 +1377,7 @@
         {
           "id": "clause.bpi_cooperation_operating_independence",
           "kind": "rights",
-          "statement": "BPI retained its management, brand, application ownership, licensing and specialist support. AION Software provided engineering assistance and Logix provided distribution and training. Operational cooperation proceeded independently of Adam’s unaccepted equity offer.",
+          "statement": "BPI retained its management, brand, application ownership, licensing and specialist support. AION Software provided engineering assistance and Logix provided distribution and training. Operational cooperation implements the accepted investment and C/TUI redevelopment agreement while preserving BPI’s operating independence.",
           "assertion_mode": "commitment",
           "actor_ids": [
             "actor.bpi",
@@ -1260,7 +1389,7 @@
         {
           "id": "clause.bpi_cooperation_support",
           "kind": "responsibility",
-          "statement": "BPI owned its applications and managed licensing, updates and specialist support. AION Software supplied engineering assistance, while Logix distributed the products and supported the hardware. Dealers handled installation enquiries. Public presentations described this commercial partnership and identified Adam’s investment offer as uncompleted.",
+          "statement": "BPI owned its applications and managed licensing, updates and specialist support. AION Software supplied engineering assistance, while Logix distributed the products and supported the hardware. Dealers handled installation enquiries. Public presentations described this commercial partnership and identified Adam’s accepted investment and the C/TUI redevelopment partnership.",
           "assertion_mode": "commitment",
           "actor_ids": [
             "actor.bpi",
