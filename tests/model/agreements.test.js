@@ -5,11 +5,9 @@ import {readDocuments,validateDocuments} from '../../tools/validate-model.js';
 import {hash,transact} from '../../server/model.js';
 const read=p=>JSON.parse(fs.readFileSync(p));
 const docs=()=>readDocuments('data_foundation');
-test('embedded clauses preserve all 109 original terms and ownership',()=>{
- const current=docs(),old=read('archived_no_longer_valid/model_0.4.0_agreement_migration/data_foundation/clause.json').clause;
- assert.equal(current.clause,undefined);assert.equal(old.length,109);
- const actual=current.agreement.agreement.flatMap(a=>a.clauses.map(c=>({...c,agreement_id:a.id})));
- assert.equal(actual.length,old.length);for(const c of old)assert.deepEqual(actual.find(x=>x.id===c.id),c);
+test('embedded clauses belong to agreements and current foundation validates',()=>{
+ const current=docs();assert.equal(current.clause,undefined);
+ for(const a of current.agreement.agreement)for(const c of a.clauses){assert(c.id.startsWith('clause.'));assert.equal(c.agreement_id,undefined);}
  assert.deepEqual(validateDocuments(current).errors,[]);
 });
 test('agreement_id is optional and singular; arrays and empty strings are rejected',()=>{
@@ -18,6 +16,11 @@ test('agreement_id is optional and singular; arrays and empty strings are reject
  }
  const d=docs();delete d.event.event[0].agreement_id;delete d.process.process[0].agreement_id;assert.deepEqual(validateDocuments(d).errors,[]);
 });
+const legacyDocs=()=>{
+ const d=docs();const old=read('archived_no_longer_valid/model_0.4.0_agreement_migration/data_foundation/clause.json').clause;
+ for(const a of d.agreement.agreement){a.clauses=old.filter(c=>c.agreement_id===a.id).map(({agreement_id,...c})=>c);}
+ return d;
+};
 test('nested clauses validate duplicates, references, equity allocations and supersession cycles',()=>{
  for(const mutate of [
   a=>a.clauses.push(structuredClone(a.clauses[0])),
@@ -26,8 +29,8 @@ test('nested clauses validate duplicates, references, equity allocations and sup
   a=>{a.clauses[0].supersedes_clause_id=a.clauses[0].id;},
   a=>{const c=a.clauses.find(c=>c.equity);c.equity.allocation='individual';c.equity.beneficiary_actor_ids=[];},
   a=>{a.clauses[0].agreement_id=a.id;}
- ]){const d=docs(),a=d.agreement.agreement.find(a=>a.id==='agreement.dri_founding');mutate(a);assert(validateDocuments(d).errors.length);}
- const d=docs(),clauses=d.agreement.agreement[0].clauses;clauses[0].supersedes_clause_id=clauses[1].id;assert.deepEqual(validateDocuments(d).errors,[]);
+ ]){const d=legacyDocs(),a=d.agreement.agreement.find(a=>a.id==='agreement.dri_founding');mutate(a);assert(validateDocuments(d).errors.length);}
+ const d=legacyDocs(),clauses=d.agreement.agreement[0].clauses;clauses[0].supersedes_clause_id=clauses[1].id;assert.deepEqual(validateDocuments(d).errors,[]);
 });
 test('whole-agreement authorization covers nested terms and clause edits invalidate its hash',()=>{
  const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(dir=>fs.readdirSync(dir).filter(p=>p.endsWith('.json')).map(p=>[dir+'/'+p,read(dir+'/'+p)])));

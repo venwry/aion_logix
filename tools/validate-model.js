@@ -56,6 +56,12 @@ export function validateDocuments(documents, { complete = false } = {}) {
   }
   function walk(value, schema, root, at) {
     if (schema.$ref) { const [target,newRoot] = resolve(schema.$ref,root); walk(value,target,newRoot,at); return; }
+    if (schema.oneOf?.every(branch=>branch.$ref)) {
+      // Transitional clause schemas: validate and walk the matching representation.
+      const branch=schema.oneOf.find(branch=>ajv.getSchema(branch.$ref.startsWith('#')?root.$id+branch.$ref:branch.$ref)(value));
+      if(branch)walk(value,branch,root,at);
+      return;
+    }
     if (schema['x-ref']) {
       const target = records.get(value);
       if (!target) report(`${at}: unresolved reference ${value}`);

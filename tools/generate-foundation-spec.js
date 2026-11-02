@@ -6,6 +6,7 @@ const names = fs.readdirSync('data_foundation').filter(f => f.endsWith('.json'))
 const schemas = Object.fromEntries([...names, 'common'].map(n => [n, JSON.parse(fs.readFileSync(`schemas/${n}.schema.json`))]));
 function resolve(value, owner) {
   if(value['x-boundary'])return [{type:'object',properties:{value:{type:'string | null','x-ref':['event']},precision:{type:'string',enum:['year','month','day','event','unknown']}},required:['value','precision']},owner];
+  if(value.oneOf?.[0]?.$ref)return resolve(value.oneOf[0],owner);
   if (!value.$ref) return [value, owner];
   const [file, pointer] = value.$ref.split('#');
   const target = file ? path.basename(file).replace('.schema.json', '') : owner;
@@ -37,7 +38,7 @@ const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAl
 const tree = (name, diagram = false) => entities[name].map(f => `${'│  '.repeat(f.depth)}${f.depth ? '└─ ' : ''}${f.key}${f.required ? '*' : '?'}: ${f.type}${f.targets.length ? ' → ' + (f.targets.length === names.length ? 'any foundation ID' : f.targets.join(' / ')) : ''}`).map(s => diagram ? escape(s) : s);
 const lines = [
   '# Foundation dataset specification', '',
-  'This document describes the current foundation schema contract (version 0.5.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
+  'This document describes the current foundation schema contract (version 0.6.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
   '## Reading the diagram', '',
   '- Each entity represents one dataset file, whose envelope is `{ "dataset_name": [record, ...] }`. The entity contains the hierarchical structure of one record, not a sample record.',
   '- `*` means required within its immediate parent object; `?` means optional there. A required child does not make its optional parent required. Conditional requirements are specified below.',
@@ -45,7 +46,7 @@ const lines = [
   '- A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.',
   '- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the ' + names.length + ' target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.',
   '- Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.',
-  '- Embedded clause IDs resolve within agreement.clauses[]; supersedes_clause_id therefore points to an agreement-owned term, not a clause dataset.',
+  '- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. Existing legacy clauses remain accepted during approval-driven migration; the diagram shows the new shape.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',
@@ -95,7 +96,7 @@ for (const name of names) {
   lines.push(`### ${name}`, '', purpose[name], '', `File: [${name}.json](../../data_foundation/${name}.json) · Schema: [${name}.schema.json](../../schemas/${name}.schema.json)`, '', '```text', `${name}[]`, ...tree(name), '```', '', '| Field path | Required in parent | Type | Constraints / allowed values |', '| --- | --- | --- | --- |');
   for (const f of entities[name]) lines.push(`| \`${f.path}\` | ${f.required ? 'yes' : 'no'} | \`${f.type}\` | ${constraints(f).replaceAll('|', '\\|')} |`);
   if (name === 'process') lines.push('', '**Boundary union:** calendar value with year/month/day precision, event ID with `precision: event`, or null with `precision: unknown`. The diagram/catalogue value reference applies only to event anchors.');
-  if (name === 'agreement') lines.push('', '**Embedded clause conditional rule:** `equity` is required exactly when `kind` is `equity`; it is forbidden for every other kind.');
+  if (name === 'agreement') lines.push('', '**Transition:** clauses accept either the exact five-field shape shown here or the unchanged legacy shape. Hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.');
   lines.push('');
 }
 lines.push('## Reference catalogue', '', 'Every schema attribute marked `x-ref` appears here, including references inside shared and nested objects. Each target resolves to the target record’s `id`. Polymorphic alternatives are allowed targets, not simultaneous requirements.', '', '| Source dataset | Attribute path | Permitted target datasets |', '| --- | --- | --- |');

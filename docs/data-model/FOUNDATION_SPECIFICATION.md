@@ -1,6 +1,6 @@
 # Foundation dataset specification
 
-This document describes the current foundation schema contract (version 0.5.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
+This document describes the current foundation schema contract (version 0.6.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
 
 ## Reading the diagram
 
@@ -10,7 +10,7 @@ This document describes the current foundation schema contract (version 0.5.0). 
 - A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.
 - Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the 12 target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.
 - Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.
-- Embedded clause IDs resolve within agreement.clauses[]; supersedes_clause_id therefore points to an agreement-owned term, not a clause dataset.
+- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. Existing legacy clauses remain accepted during approval-driven migration; the diagram shows the new shape.
 - These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.
 
 ## Entity and reference diagram
@@ -23,7 +23,7 @@ flowchart LR
   classDef schemaEntity font-family:monospace,text-align:left,white-space:pre;
   actor["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>actor.json<br/>id*: string<br/>kind*: string<br/>name*: string<br/>aliases?: array&lt;string&gt;<br/>description?: string</pre>"]:::schemaEntity
   actor_relationship["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>actor_relationship.json<br/>id*: string<br/>kind*: string<br/>subject_actor_ids*: array&lt;string&gt; → actor<br/>object_actor_id*: string → actor<br/>established_by_event_id?: string → event<br/>description*: string<br/>process_id?: string → process</pre>"]:::schemaEntity
-  agreement["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>agreement.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>party*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>state*: string<br/>supersedes_agreement_id?: string → agreement<br/>description?: string<br/>effective_event_id?: string → event<br/>termination_event_id?: string → event<br/>process_id?: string → process<br/>clauses*: array&lt;object&gt;<br/>│  └─ id*: string<br/>│  └─ kind*: string<br/>│  └─ statement*: string<br/>│  └─ assertion_mode*: string<br/>│  └─ actor_ids?: array&lt;string&gt; → actor<br/>│  └─ conditions?: array&lt;string&gt;<br/>│  └─ supersedes_clause_id?: string → clause<br/>│  └─ equity?: object<br/>│  │  └─ company_actor_id*: string → actor<br/>│  │  └─ beneficiary_actor_ids*: array&lt;string&gt; → actor<br/>│  │  └─ percentage*: number<br/>│  │  └─ basis*: string<br/>│  │  └─ allocation*: string<br/>│  └─ commitment_amount?: object<br/>│  │  └─ value*: number<br/>│  │  └─ currency*: string<br/>│  │  └─ reference_year*: integer<br/>│  │  └─ basis*: string<br/>│  └─ effective_event_id?: string → event</pre>"]:::schemaEntity
+  agreement["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>agreement.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>party*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>state*: string<br/>supersedes_agreement_id?: string → agreement<br/>description?: string<br/>effective_event_id?: string → event<br/>termination_event_id?: string → event<br/>process_id?: string → process<br/>clauses*: array&lt;object&gt;<br/>│  └─ id*: string<br/>│  └─ kind*: string<br/>│  └─ statement*: string<br/>│  └─ value*: number,string,null<br/>│  └─ unit*: string,null</pre>"]:::schemaEntity
   assumption["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>assumption.json<br/>id*: string<br/>kind*: string<br/>statement*: string<br/>scope_ids?: array&lt;string&gt; → any foundation ID<br/>exception_ids?: array&lt;string&gt; → assumption<br/>equipment?: array&lt;object&gt;<br/>│  └─ name*: string<br/>│  └─ components?: array&lt;string&gt;<br/>process_id?: string → process</pre>"]:::schemaEntity
   campaign["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>campaign.json<br/>id*: string<br/>title*: string<br/>objective*: string<br/>lead_actor_ids*: array&lt;string&gt; → actor<br/>audience?: array&lt;string&gt;<br/>message?: array&lt;string&gt;<br/>claim_policy?: array&lt;string&gt;<br/>launch_event_id?: string → event<br/>subject_ids?: array&lt;string&gt; → product / technology / manufacturing_capability / actor / agreement / market_response<br/>presentation?: object<br/>│  └─ duration_minutes?: integer<br/>│  └─ stage*: array&lt;object&gt;<br/>│  │  └─ label*: string<br/>│  │  └─ duration_minutes?: integer<br/>│  │  └─ description*: string<br/>│  │  └─ actor_ids?: array&lt;string&gt; → actor<br/>booth?: array&lt;object&gt;<br/>│  └─ name*: string<br/>│  └─ description*: string<br/>│  └─ call_to_action?: string<br/>process_id*: string → process<br/>marketing_content?: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string</pre>"]:::schemaEntity
   event["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>event.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>time*: object<br/>│  └─ value*: string<br/>│  └─ precision*: string<br/>process_ids?: array&lt;string&gt; → process<br/>location_ids?: array&lt;string&gt; → location<br/>agreement_id?: string → agreement</pre>"]:::schemaEntity
@@ -37,9 +37,9 @@ flowchart LR
   actor_relationship -- "subject_actor_ids[]<br/>object_actor_id" --> actor
   actor_relationship -- "established_by_event_id" --> event
   actor_relationship -- "process_id" --> process
-  agreement -- "party[].actor_id<br/>clauses[].actor_ids[]<br/>clauses[].equity.company_actor_id<br/>clauses[].equity.beneficiary_actor_ids[]" --> actor
-  agreement -- "supersedes_agreement_id<br/>clauses[].supersedes_clause_id" --> agreement
-  agreement -- "effective_event_id<br/>termination_event_id<br/>clauses[].effective_event_id" --> event
+  agreement -- "party[].actor_id" --> actor
+  agreement -- "supersedes_agreement_id" --> agreement
+  agreement -- "effective_event_id<br/>termination_event_id" --> event
   agreement -- "process_id" --> process
   assumption -. "scope_ids[]" .-> any_foundation
   assumption -- "exception_ids[]" --> assumption
@@ -175,22 +175,8 @@ clauses*: array<object>
 │  └─ id*: string
 │  └─ kind*: string
 │  └─ statement*: string
-│  └─ assertion_mode*: string
-│  └─ actor_ids?: array<string> → actor
-│  └─ conditions?: array<string>
-│  └─ supersedes_clause_id?: string → clause
-│  └─ equity?: object
-│  │  └─ company_actor_id*: string → actor
-│  │  └─ beneficiary_actor_ids*: array<string> → actor
-│  │  └─ percentage*: number
-│  │  └─ basis*: string
-│  │  └─ allocation*: string
-│  └─ commitment_amount?: object
-│  │  └─ value*: number
-│  │  └─ currency*: string
-│  │  └─ reference_year*: integer
-│  │  └─ basis*: string
-│  └─ effective_event_id?: string → event
+│  └─ value*: number,string,null
+│  └─ unit*: string,null
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -209,26 +195,12 @@ clauses*: array<object>
 | `process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `clauses[]` | yes | `array<object>` | — |
 | `clauses[].id` | yes | `string` | pattern: "^clause\\.[a-z0-9][a-z0-9_.-]*$" |
-| `clauses[].kind` | yes | `string` | enum: ["equity","funding","rights","responsibility","qualification","term","other"] |
+| `clauses[].kind` | yes | `string` | enum: ["equity","funding","rights","responsibility","qualification","term","other","target_equity","target_funding","target_rights","target_responsibility","target_qualification","target_term","target_other"] |
 | `clauses[].statement` | yes | `string` | minLength: 1 |
-| `clauses[].assertion_mode` | yes | `string` | enum: ["commitment","proposal","target","established_fact"] |
-| `clauses[].actor_ids[]` | no | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `clauses[].conditions[]` | no | `array<string>` | minLength: 1; minItems: 0 |
-| `clauses[].supersedes_clause_id` | no | `string` | pattern: "^(clause)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `clauses[].equity` | no | `object` | — |
-| `clauses[].equity.company_actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `clauses[].equity.beneficiary_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `clauses[].equity.percentage` | yes | `number` | minimum: 0; maximum: 100 |
-| `clauses[].equity.basis` | yes | `string` | enum: ["fully_diluted","issued","voting"] |
-| `clauses[].equity.allocation` | yes | `string` | enum: ["individual","joint_unsplit","unallocated_reserve"] |
-| `clauses[].commitment_amount` | no | `object` | — |
-| `clauses[].commitment_amount.value` | yes | `number` | minimum: 0 |
-| `clauses[].commitment_amount.currency` | yes | `string` | pattern: "^[A-Z]{3}$" |
-| `clauses[].commitment_amount.reference_year` | yes | `integer` | minimum: 1972 |
-| `clauses[].commitment_amount.basis` | yes | `string` | enum: ["nominal_commitment","planning_provision","actual_expenditure"] |
-| `clauses[].effective_event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `clauses[].value` | yes | `number,string,null` | — |
+| `clauses[].unit` | yes | `string,null` | minLength: 1 |
 
-**Embedded clause conditional rule:** `equity` is required exactly when `kind` is `equity`; it is forbidden for every other kind.
+**Transition:** clauses accept either the exact five-field shape shown here or the unchanged legacy shape. Hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.
 
 ### assumption
 
@@ -716,11 +688,6 @@ Every schema attribute marked `x-ref` appears here, including references inside 
 | agreement | `effective_event_id` | `event` |
 | agreement | `termination_event_id` | `event` |
 | agreement | `process_id` | `process` |
-| agreement | `clauses[].actor_ids[]` | `actor` |
-| agreement | `clauses[].supersedes_clause_id` | `clause` |
-| agreement | `clauses[].equity.company_actor_id` | `actor` |
-| agreement | `clauses[].equity.beneficiary_actor_ids[]` | `actor` |
-| agreement | `clauses[].effective_event_id` | `event` |
 | assumption | `scope_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
 | assumption | `exception_ids[]` | `assumption` |
 | assumption | `process_id` | `process` |

@@ -110,7 +110,14 @@
         "clauses": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/clause"
+            "oneOf": [
+              {
+                "$ref": "#/$defs/clause"
+              },
+              {
+                "$ref": "#/$defs/legacy_clause"
+              }
+            ]
           }
         }
       },
@@ -125,6 +132,86 @@
       "additionalProperties": false
     },
     "clause": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^clause\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "equity",
+            "funding",
+            "rights",
+            "responsibility",
+            "qualification",
+            "term",
+            "other",
+            "target_equity",
+            "target_funding",
+            "target_rights",
+            "target_responsibility",
+            "target_qualification",
+            "target_term",
+            "target_other"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "statement",
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "unit": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "unit": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "legacy_clause": {
       "type": "object",
       "properties": {
         "id": {

@@ -2,7 +2,7 @@
 
 ## Current agreement: separation of story and authoring data
 
-Version 0.5.0 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
+Version 0.6.0 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
 
 1. The model combines hierarchical value objects and relational entity references. Each entity has a stable `id` beginning with its dataset name.
 2. `data_foundation/` contains only story records, in envelopes such as `{ "actor": [...] }`. It has no status, confirmation, provenance or application metadata fields.
@@ -41,6 +41,6 @@ Events and processes have numbered, typed inputs and outcomes. Team actions are 
 
 Product and technology identities, manufacturing capabilities and qualitative market responses connect the story. Product composition, quantitative yields, costs and ROI remain for later phases. Maturity transitions are outcomes on dated carriers. See the [current model guide](docs/data-model/MODEL_GUIDE.md) and [generated schema reference](docs/data-model/FOUNDATION_SPECIFICATION.md).
 
-## Agreement ownership (0.5.0)
+## Agreement ownership (0.6.0)
 
-Agreements own `clauses[]`. Embedded clauses retain stable `clause.*` identifiers for traceability and supersession, but are not standalone records or independent authorization targets. Events and processes have an optional `agreement_id` string; omit it when there is no associated agreement. Additional contextual agreement references may remain in `subject_ids` or inputs/outcomes, without becoming a second direct agreement association.
+Agreements own `clauses[]`; clauses are reviewed with the whole agreement. New clauses contain exactly `id`, `kind`, `statement`, `value`, and `unit`. Stable clause IDs preserve traceability. Statements carry the parties, rights, equity basis, conditions and timing in plain English; parties have meaningful roles. Numeric summaries use value/unit, or null/null when no quantity is specified. Targets use a `target_` kind; unaccepted proposals must not silently become commitments. The legacy clause schema remains accepted during independent agreement approvals. Events and processes use one optional `agreement_id`; event links point to agreements rather than redundant clause-to-event backlinks.
