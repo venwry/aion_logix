@@ -442,7 +442,7 @@
       "id": "event.bpi_cooperation",
       "title": "BPI development and distribution cooperation",
       "kind": "agreement_milestone",
-      "description": "BPI and Adam agree operational cooperation: independent BPI management, brand, application ownership, licences and specialist support; AION engineering assistance and Logix distribution/training. This cooperation implements the accepted $150,000 investment agreement for Adam’s 33% fully diluted interest, including AION’s C/TUI redevelopment work and future-platform cooperation. Date selected for the alternative scenario.",
+      "description": "BPI and Adam implement operational cooperation under the consolidated BPI agreement: independent BPI management, brand, application ownership, licences and specialist support; AION engineering assistance and Logix distribution/training. This cooperation implements the accepted $150,000 investment agreement for Adam’s 33% fully diluted interest, including AION’s C/TUI redevelopment work and future-platform cooperation. Date selected for the alternative scenario.",
       "participant": [
         {
           "actor_id": "actor.bpi",
@@ -471,7 +471,7 @@
         "value": "1977-03-15",
         "precision": "day"
       },
-      "agreement_id": "agreement.bpi_cooperation"
+      "agreement_id": "agreement.bpi_offer"
     },
     {
       "id": "event.letwin",
@@ -719,7 +719,7 @@
       "id": "event.aurelia_launch",
       "title": "Aurelia platform launches",
       "kind": "launch",
-      "description": "Premieres Aurelia: startup, common editing, safe peripheral attachment, Business Tools, eight-minute Abacus demonstration, then seven-minute BPI partner demonstration. DRI, MPI and the head of BPI speak in the seven-minute partners section. Academy and dealer configurations follow. Total 44 minutes before questions; see aurelia_1978_campaign.json.",
+      "description": "Aurelia premieres on 5 June 1978 with startup, common editing, safe peripheral attachment, Business Tools and the eight-minute Abacus demonstration. DRI, MPI and BPI introduce their partnerships; Academy and dealer configurations follow. BPI’s dedicated application launch session takes place the following day at NCC. Questions follow the premiere presentation.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -783,7 +783,7 @@
       "id": "event.bpi_launch",
       "title": "Independent BPI Systems launches Aurelia applications",
       "kind": "launch",
-      "description": "BPI presents its separately licensed five-module application family immediately after Abacus. Its head then joins Gary Kildall and MPI in the partners section, explaining BPI ownership of products, independent management and cooperation with Adam, AION and Logix. No personal identity for the head is invented.",
+      "description": "On 6 June 1978, the day after the Aurelia premiere, BPI presents its separately licensed five-module application family in a dedicated NCC session. The demonstration covers source records and summary export for Abacus. The head of BPI explains independent management, ownership and support and cooperation with Adam, AION and Logix. No personal identity for the head is specified.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -810,34 +810,10 @@
         }
       ],
       "time": {
-        "value": "1978-06-05",
+        "value": "1978-06-06",
         "precision": "day"
       },
       "process_ids": []
-    },
-    {
-      "id": "event.bpi_training",
-      "title": "BPI training and direct sales begin",
-      "kind": "launch",
-      "description": "Academy begins BPI-authorised practical courses and direct distribution under a cooperation agreement. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Tuition, setup services and software licences remain separate.",
-      "participant": [
-        {
-          "actor_id": "actor.academy",
-          "role": "provider"
-        }
-      ],
-      "subject_ids": [
-        "event.bpi_launch",
-        "product.service_bpi_training",
-        "product.bpi_suite"
-      ],
-      "inputs": [],
-      "outcomes": [],
-      "time": {
-        "value": "1978-06-12",
-        "precision": "day"
-      },
-      "agreement_id": "agreement.bpi_cooperation"
     },
     {
       "id": "event.smc_agreement",
@@ -906,9 +882,9 @@
     },
     {
       "id": "event.bpi_dealer_program",
-      "title": "BPI-qualified dealers and accountant referrals",
+      "title": "BPI training, direct sales and qualified dealer programme begin",
       "kind": "activity",
-      "description": "Begin BPI dealer qualification and accountant demonstration access, permission-based case studies and defined paid setup assistance. Each initial Academy centre has access to a BPI specialist; recruit or train ahead of demand. Date selected for the alternative scenario.",
+      "description": "On 17 July 1978, Academy begins BPI-authorised practical courses and direct distribution alongside BPI dealer qualification, accountant demonstration access, permission-based case studies and defined paid setup assistance. Each initial Academy centre has access to a BPI specialist. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Tuition, setup services and software licences remain separate.",
       "participant": [
         {
           "actor_id": "actor.bpi",
@@ -925,18 +901,40 @@
         {
           "actor_id": "actor.logix",
           "role": "cooperating partner"
+        },
+        {
+          "actor_id": "actor.academy",
+          "role": "authorised training and direct distribution provider"
         }
       ],
       "subject_ids": [
-        "event.bpi_launch",
-        "product.bpi_suite"
+        "product.bpi_suite",
+        "product.service_bpi_training"
       ],
-      "inputs": [],
-      "outcomes": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The BPI application launch establishes the product offering for subsequent authorised training, direct distribution and dealer demonstrations.",
+          "event_id": "event.bpi_launch"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Authorised BPI training, direct sales and the qualified dealer programme are operating with defined support responsibilities and access to BPI specialists.",
+          "subject_ids": [
+            "product.service_bpi_training",
+            "product.bpi_suite"
+          ]
+        }
+      ],
       "time": {
         "value": "1978-07-17",
         "precision": "day"
-      }
+      },
+      "agreement_id": "agreement.bpi_offer"
     },
     {
       "id": "event.aionix_agreement",
@@ -1029,40 +1027,6 @@
       "outcomes": [],
       "time": {
         "value": "1978-10-15",
-        "precision": "day"
-      }
-    },
-    {
-      "id": "event.bpi_year_end",
-      "title": "BPI year-end preparation campaign",
-      "kind": "activity",
-      "description": "Run year-end preparation workshops and module-upgrade demonstrations. Specify payroll update coverage and maintenance terms. Customer data remains under customer control; referrals do not imply an accountant endorsement without consent. Date selected for the alternative scenario.",
-      "participant": [
-        {
-          "actor_id": "actor.bpi",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.adam",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.aion",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.logix",
-          "role": "cooperating partner"
-        }
-      ],
-      "subject_ids": [
-        "event.bpi_launch",
-        "product.bpi_suite"
-      ],
-      "inputs": [],
-      "outcomes": [],
-      "time": {
-        "value": "1978-10-16",
         "precision": "day"
       }
     },
@@ -1242,41 +1206,7 @@
       "inputs": [],
       "outcomes": [],
       "time": {
-        "value": "1979-01",
-        "precision": "month"
-      }
-    },
-    {
-      "id": "event.bpi_expansion",
-      "title": "BPI customer results and dealer expansion",
-      "kind": "activity",
-      "description": "Expand demonstrations and qualified support using verified customer results. Promote module-to-suite upgrade credit. BPI Model II support is a separate future negotiation; the existing Tandy agreement covers Abacus only. Date selected for the alternative scenario.",
-      "participant": [
-        {
-          "actor_id": "actor.bpi",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.adam",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.aion",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.logix",
-          "role": "cooperating partner"
-        }
-      ],
-      "subject_ids": [
-        "event.bpi_launch",
-        "product.bpi_suite"
-      ],
-      "inputs": [],
-      "outcomes": [],
-      "time": {
-        "value": "1979-01-15",
+        "value": "1979-01-12",
         "precision": "day"
       }
     },
