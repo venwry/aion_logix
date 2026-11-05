@@ -2686,11 +2686,19 @@
       "id": "process.ncc1979_campaign",
       "title": "NCC 1979 open architecture and migration campaign — execution",
       "kind": "campaign_execution",
-      "description": "Recruit independent computer, software and peripheral manufacturers to the published compatibility programmes, and help existing customers carry their applications and documents across supported systems.",
+      "description": "Prepare the compatibility programme and partner demonstrations, deliver the NCC 1979 presentation and expansion-product launch, then run recruitment, dealer activity and qualification follow-up through the January 1980 review. Campaign.ncc1979 supplies the messages, presentation and marketing materials.",
       "participant": [
         {
           "actor_id": "actor.logix",
-          "role": "marketing_lead"
+          "role": "programme coordination and marketing execution"
+        },
+        {
+          "actor_id": "actor.dri",
+          "role": "CP/M compatibility and software qualification"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "application integration and developer support"
         }
       ],
       "period": {
@@ -2703,64 +2711,127 @@
           "precision": "event"
         }
       },
-      "inputs": [],
-      "outcomes": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The Aurelia launch provides the working platform and business applications used to prepare cross-vendor demonstrations.",
+          "event_id": "event.aurelia_launch"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The Tandy cooperation agreement provides the basis for the Model II prototype and application-interchange work.",
+          "event_id": "event.tandy_agreement"
+        },
+        {
+          "number": 3,
+          "type": "resource",
+          "description": "The limited Apple cooperation agreement provides documentation, test machines and compatibility assistance for native Apple II products.",
+          "event_id": "event.apple_cooperation"
+        },
+        {
+          "number": 4,
+          "type": "requirement",
+          "description": "Prepare named configurations, host-specific drivers, documented transfer paths and measured resource limits. Protect future architecture information and clear partner participation before public demonstrations."
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Published compatibility profiles, implementation guidance and records of unresolved access and support terms.",
+          "subject_ids": [
+            "technology.flexibus",
+            "technology.logix_tui_standard",
+            "technology.logix_c_api",
+            "technology.logix_display_api"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "Rehearsed demonstration configurations, interoperability test records and an issue register distinguishing verified behaviour from limitations."
+        },
+        {
+          "number": 3,
+          "type": "result",
+          "description": "The NCC presentation and expansion-product launch have been delivered, with native Apple and S-100 support described separately and partner responsibilities retained.",
+          "subject_ids": [
+            "product.device_apple2_expansion_card",
+            "product.device_flexidisk_ii",
+            "product.device_s100_flexibus_card",
+            "product.device_apple2_video_card",
+            "product.device_s100_video_card"
+          ]
+        },
+        {
+          "number": 4,
+          "type": "deliverable",
+          "description": "An updated compatibility directory, recruitment and qualification records, dealer and developer materials, and an evidence-based closing review. Adoption and sales targets are not treated as achieved outcomes."
+        }
+      ],
       "steps": [
         {
           "number": 1,
           "type": "action",
-          "description": "Begin confidential briefings and engineering-kit evaluations. Prioritise North Star and Vector Graphic as prospects; approach Cromemco, Altos, Intertec and Heath selectively. Invitations are not signed agreements or qualified products."
+          "description": "Evaluate recruitment prospects and engineering kits. Prioritise North Star, with Lifeboat as a possible integration or distribution partner, then Vector Graphic. Preserve existing applications and display investment; interest does not constitute an agreement."
         },
         {
           "number": 2,
           "type": "action",
-          "description": "Alongside the existing DRI portable-extension release, publish separate CP/M application, FlexiBUS peripheral and optional Logix display compatibility profiles, reference-driver and test access, non-exclusive implementation principles and support-roadmap requirements. Exact fees and support duration remain to be settled.",
-          "event_id": "event.open79_profiles"
+          "description": "Treat North Star and Vector as strong CP/M prospects with moderately strong FlexiBUS prospects; optional Logix video is a moderate fit for North Star and a lower fit for Vector. Cromemco is a moderate CP/M and FlexiBUS prospect but a weak Logix-video prospect because of its own OS and graphics strategy. Altos is a moderately strong CP/M prospect with moderate FlexiBUS and limited Logix-video potential; no platform redesign is assumed. Intertec has moderately strong CP/M and moderate host-specific FlexiBUS potential, with limited Logix-video interest; plan late-1979 evaluation and possible 1980 qualification, not June availability. Heath/Heathkit has moderate CP/M and host-specific FlexiBUS potential but limited Logix-video interest; treat it as later feasibility work, not a promised 1979 release. These assessments guide outreach and do not establish commitments."
         },
         {
           "number": 3,
-          "type": "action",
-          "description": "Invite computer, software and peripheral suppliers to test named configurations and document failures before public demonstrations. Supplier attendance and passing results must be verified; no announcement of an unsigned OEM.",
-          "event_id": "event.open79_workshop"
+          "type": "milestone",
+          "description": "Publish compatibility profiles and provide reference-driver and test access alongside the separate DRI extension release. Record unresolved commercial and support terms.",
+          "event_id": "event.open79_profiles"
         },
         {
           "number": 4,
           "type": "action",
-          "description": "Present a 50-minute cross-vendor campaign before questions. Demonstrate applications/documents, then independent BPI, FlexiBUS, Apple native drivers and optional video. BPI management speaks with partners. State that the next generation breaks native Z80 binary compatibility; C source/API portability reduces migration work and a planned optional Z80 compatibility coprocessor supports qualified legacy software. Reveal neither processor word size nor architecture before NCC 1980. See ncc_1979_campaign.json.",
-          "event_id": "event.ncc79_campaign"
+          "description": "Prepare the presentation space, audiovisual equipment and qualified demonstration systems. Test document round trips, disk formats, memory limits, loading, recalculation and device behaviour. Review all public material for the embargo and secure partner clearance."
         },
         {
           "number": 5,
-          "type": "action",
-          "description": "Run dealer demonstrations, joint trade-press activity and developer clinics. Teach documented APIs, file interchange, C portability boundaries and device-class drivers. Publish a directory distinguishing shipping, qualified and prototype configurations.",
-          "event_id": "event.open79_roadshows"
+          "type": "milestone",
+          "description": "Run supplier workshops, test named configurations and record failures and required corrections before public demonstrations.",
+          "event_id": "event.open79_workshop"
         },
         {
           "number": 6,
-          "type": "action",
-          "description": "Promote the separately recorded Tandy customer release and only individually qualified SMC or peripheral products. Update directory evidence; do not imply all licensed chips, every peripheral class or new independent OEM systems are shipping.",
-          "event_id": "event.open79_delivery"
+          "type": "milestone",
+          "description": "Deliver the NCC presentation and the combined Apple II/S-100 expansion-product launch using the approved campaign materials and qualified systems.",
+          "event_id": "event.ncc79_campaign"
         },
         {
           "number": 7,
-          "type": "action",
-          "description": "Target Tandy shipping, one additional named OEM selling a supported CP/M-extension/FlexiBUS option, another OEM in qualification, dealer/integrator configurations and third-party devices in several categories. These are adoption targets, not recorded achievements or contracted orders.",
-          "event_id": "event.open79_targets"
+          "type": "milestone",
+          "description": "Run dealer demonstrations, joint trade-press activity and developer clinics. Maintain a directory that distinguishes shipping, qualified and prototype configurations.",
+          "event_id": "event.open79_roadshows"
         },
         {
           "number": 8,
-          "type": "action",
-          "description": "Publish verified customer examples, compatibility results and partner configurations. Target three to five non-Logix manufacturers with supported configurations by NCC 1980, counting Tandy once and excluding duplicate dealer builds. Do not disclose the new processor architecture early."
+          "type": "milestone",
+          "description": "Update availability evidence for the separately recorded Tandy release and individually qualified SMC and peripheral products. Keep future products out of shipping claims.",
+          "event_id": "event.open79_delivery"
         },
         {
           "number": 9,
-          "type": "action",
-          "description": "existing anchors / Tandy: Existing agreement: CP/M, native display adapter, FlexiBUS option and Abacus; no video requirement or BPI port."
+          "type": "milestone",
+          "description": "Review progress against the campaign’s adoption targets using verified OEM configurations, qualifications and third-party device availability.",
+          "event_id": "event.open79_targets"
         },
         {
           "number": 10,
           "type": "action",
-          "description": "existing anchors / Apple: Existing native expansion cooperation and peripheral/display demonstrations; no Z80 or CP/M execution provided."
+          "description": "Track compatible-computer sell-through across vendors, qualified application editions, peripheral shipments and supported device classes, document-interchange results, support incidents, supplier concentration and component availability. Count distinct manufacturers rather than duplicate dealer builds or SKUs."
+        },
+        {
+          "number": 11,
+          "type": "action",
+          "description": "Prepare the closing review with verified customer examples, compatibility results and partner configurations. Report progress toward NCC 1980 goals without claiming unverified results or disclosing future architecture."
         }
       ],
       "subject_ids": [
@@ -4153,7 +4224,7 @@
       "id": "process.ncc1979_development",
       "title": "NCC 1979 development and open-architecture programme",
       "kind": "development",
-      "description": "From 26 July 1978, prepare the products, technical cooperation and open-architecture programme associated with NCC 1979. Include limited Apple cooperation, the Apple II and S-100 expansion launch, and the existing NCC 1979 campaign execution with its recorded follow-up through 14 January 1980.",
+      "description": "From 26 July 1978, prepare the products, technical cooperation and open-architecture programme associated with NCC 1979. Include limited Apple cooperation, the combined NCC presentation and Apple II/S-100 expansion launch through the existing NCC 1979 campaign execution with its recorded follow-up through 14 January 1980.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -4202,12 +4273,6 @@
           "type": "action",
           "description": "Execute campaign.ncc1979 through its existing campaign execution process, including preparation, NCC presentations and recorded follow-up.",
           "process_id": "process.ncc1979_campaign"
-        },
-        {
-          "number": 3,
-          "type": "milestone",
-          "description": "Launch the Apple II and S-100 expansion products at NCC on 4 June 1979.",
-          "event_id": "event.apple_extensions"
         }
       ],
       "outcomes": [

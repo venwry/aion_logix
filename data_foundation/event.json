@@ -1521,37 +1521,6 @@
       }
     },
     {
-      "id": "event.apple_extensions",
-      "title": "Apple II and S-100 expansion products launch",
-      "kind": "launch",
-      "description": "Logix launches the existing Apple II Expansion Card and FlexiDisk II plus three new products: S-100 FlexiBUS Interface, Apple II Video Card, and S-100 Video Card. Cards initially use AION chips. Native Apple drivers/examples and supported S-100 CP/M adapters accompany the cards; Apple participation does not imply an S-100 endorsement. An Apple representative participates in the demonstration.",
-      "participant": [
-        {
-          "actor_id": "actor.logix",
-          "role": "presenter"
-        },
-        {
-          "actor_id": "actor.apple",
-          "role": "demonstration_participant"
-        }
-      ],
-      "subject_ids": [
-        "event.apple_cooperation",
-        "product.device_apple2_expansion_card",
-        "product.device_flexidisk_ii",
-        "product.device_s100_flexibus_card",
-        "product.device_apple2_video_card",
-        "product.device_s100_video_card"
-      ],
-      "inputs": [],
-      "outcomes": [],
-      "time": {
-        "value": "1979-06-04",
-        "precision": "day"
-      },
-      "agreement_id": "agreement.apple_cooperation"
-    },
-    {
       "id": "event.basic_launch",
       "title": "Microsoft BASIC presented",
       "kind": "launch",
@@ -1620,9 +1589,9 @@
     },
     {
       "id": "event.ncc79_campaign",
-      "title": "NCC 1979 open architecture and migration presentation",
-      "kind": "decision",
-      "description": "Present a 50-minute cross-vendor campaign before questions. Demonstrate applications/documents, then independent BPI, FlexiBUS, Apple native drivers and optional video. BPI management speaks with partners. State that the next generation breaks native Z80 binary compatibility; C source/API portability reduces migration work and a planned optional Z80 compatibility coprocessor supports qualified legacy software. Reveal neither processor word size nor architecture before NCC 1980. See ncc_1979_campaign.json. This day is a selected scenario milestone.",
+      "title": "NCC 1979 presentation and Apple II/S-100 expansion launch",
+      "kind": "launch",
+      "description": "On 4 June 1979, Logix holds its NCC open-architecture and migration presentation and launches the Apple II Expansion Card, FlexiDisk II, S-100 FlexiBUS Interface, Apple II Video Card and S-100 Video Card. An Apple representative participates in the native Apple demonstration. The cards initially use AION chips and ship with the applicable native Apple drivers/examples or supported S-100 CP/M adapters. The associated Apple agreement applies to the limited Apple cooperation component; Apple does not endorse S-100 systems.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -1639,20 +1608,60 @@
         {
           "actor_id": "actor.dri",
           "role": "programme organiser"
+        },
+        {
+          "actor_id": "actor.apple",
+          "role": "demonstration_participant"
         }
       ],
       "subject_ids": [
-        "event.dri_release",
         "technology.flexibus",
         "technology.logix_tui_standard",
-        "product.aurelia_sdk"
+        "product.aurelia_sdk",
+        "product.device_apple2_expansion_card",
+        "product.device_flexidisk_ii",
+        "product.device_s100_flexibus_card",
+        "product.device_apple2_video_card",
+        "product.device_s100_video_card"
       ],
-      "inputs": [],
-      "outcomes": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The Apple technical cooperation agreement provides the documentation, test machines and compatibility assistance used for the native Apple expansion products.",
+          "event_id": "event.apple_cooperation"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The portable DRI extension release provides documented software services used in supported compatibility demonstrations and S-100 CP/M integration.",
+          "event_id": "event.dri_release"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The open-architecture and migration programme is presented to NCC participants; product availability and development plans remain distinguished."
+        },
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "The five Apple II and S-100 expansion products have a recorded launch, with initial AION chip supply and host-appropriate drivers and adapters.",
+          "subject_ids": [
+            "product.device_apple2_expansion_card",
+            "product.device_flexidisk_ii",
+            "product.device_s100_flexibus_card",
+            "product.device_apple2_video_card",
+            "product.device_s100_video_card"
+          ]
+        }
+      ],
       "time": {
         "value": "1979-06-04",
         "precision": "day"
-      }
+      },
+      "agreement_id": "agreement.apple_cooperation"
     },
     {
       "id": "event.cpm_bridge",
@@ -1785,7 +1794,7 @@
       ],
       "subject_ids": [
         "event.apple_business_promotions",
-        "event.apple_extensions"
+        "event.ncc79_campaign"
       ],
       "inputs": [],
       "outcomes": [
