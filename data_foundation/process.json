@@ -436,27 +436,15 @@
         },
         {
           "number": 6,
-          "type": "milestone",
-          "description": "Record the selected 2.75 µm process release review in June 1980, subject to its existing measured qualification requirements.",
-          "event_id": "event.production_275"
-        },
-        {
-          "number": 7,
           "type": "action",
           "description": "Develop the 2.0 µm process and RAM shrinks from January 1981 through December 1982.",
           "process_id": "process.process_2"
         },
         {
-          "number": 8,
+          "number": 7,
           "type": "milestone",
           "description": "Record the first complete 2.0 µm pilot lots in September 1981.",
           "event_id": "event.pilot_2"
-        },
-        {
-          "number": 9,
-          "type": "milestone",
-          "description": "Record the selected 2.0 µm production release review in June 1982.",
-          "event_id": "event.production_2"
         }
       ],
       "subject_ids": []
@@ -498,6 +486,12 @@
           "number": 1,
           "type": "action",
           "description": "Develop and qualify the dated manufacturing scenario; ERA1 remains on 3 µm. Budgets, yields and release gates are in memory_manufacturing.json."
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Selected 2.75 µm process release review. Retain the milestone’s existing measured qualification requirements and production-release capability transition.",
+          "event_id": "event.production_275"
         }
       ],
       "subject_ids": [
@@ -573,6 +567,12 @@
           "number": 1,
           "type": "action",
           "description": "Develop and qualify the dated manufacturing scenario; ERA1 remains on 3 µm. Budgets, yields and release gates are in memory_manufacturing.json."
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Selected 2.0 µm process release review. Retain the milestone’s existing measured qualification requirements and production-release capability transition.",
+          "event_id": "event.production_2"
         }
       ],
       "subject_ids": [
@@ -1706,77 +1706,6 @@
         "technology.aionix_os_model"
       ],
       "agreement_id": "agreement.aionix"
-    },
-    {
-      "id": "process.team_development",
-      "title": "Team Edition implementation and qualification",
-      "kind": "development",
-      "description": "Team Edition implementation and qualification Develop and qualify the team environment; retail deployment and Autodesk sponsorship remain separate.",
-      "participant": [
-        {
-          "actor_id": "actor.aion",
-          "role": "programme participant"
-        },
-        {
-          "actor_id": "actor.logix",
-          "role": "programme participant"
-        },
-        {
-          "actor_id": "actor.aion",
-          "role": "sponsor"
-        },
-        {
-          "actor_id": "actor.logix",
-          "role": "sponsor"
-        }
-      ],
-      "period": {
-        "start": {
-          "value": "event.team_engineering",
-          "precision": "event"
-        },
-        "end": {
-          "value": "event.team_launch",
-          "precision": "event"
-        }
-      },
-      "inputs": [],
-      "outcomes": [
-        {
-          "number": 1,
-          "type": "deliverable",
-          "description": "AION Development System — Team Edition",
-          "subject_ids": [
-            "product.aion_development_team"
-          ]
-        }
-      ],
-      "steps": [
-        {
-          "number": 1,
-          "type": "action",
-          "description": "AION Software developed shared projects, source history, branches, reviews and reproducible builds for development teams."
-        },
-        {
-          "number": 2,
-          "type": "action",
-          "description": "The team tested permissions, interrupted saves, backup recovery and separate CP/M and AIONix builds at reference sites."
-        },
-        {
-          "number": 3,
-          "type": "action",
-          "description": "The team prepared dealers and delivered Team Edition for its November 1981 premiere."
-        },
-        {
-          "number": 4,
-          "type": "milestone",
-          "description": "Milestone during this process: Team Edition reference-site pilots.",
-          "event_id": "event.team_pilots"
-        }
-      ],
-      "subject_ids": [
-        "product.aion_development_team"
-      ]
     },
     {
       "id": "process.ncc1978_broadcast",
@@ -2915,18 +2844,24 @@
         },
         {
           "number": 12,
+          "type": "milestone",
+          "description": "Introduce the Artemis 128 budget colour and optional 5 MB office configurations at the 19 May 1980 launch.",
+          "event_id": "event.artemis_budget_range"
+        },
+        {
+          "number": 13,
           "type": "action",
           "description": "NCC 1980 partner qualification and launch preparation",
           "process_id": "process.ncc1980_preparation"
         },
         {
-          "number": 13,
+          "number": 14,
           "type": "action",
           "description": "NCC 1980 dealer and Academy follow-up",
           "process_id": "process.ncc1980_followup"
         },
         {
-          "number": 14,
+          "number": 15,
           "type": "action",
           "description": "1980 regional roadshows and certification workshops",
           "process_id": "process.ncc1980_roadshows"
@@ -3289,19 +3224,23 @@
     },
     {
       "id": "process.comdex1981_campaign",
-      "title": "Team Edition: whole-team development — execution",
+      "title": "Team Edition development, qualification and COMDEX 1981 campaign",
       "kind": "campaign_execution",
-      "description": "Recruit development teams to Team Edition by demonstrating shared projects, review, reproducible builds and separate CP/M and AIONix targets.",
+      "description": "Develop and qualify Team Edition, prepare dealers and demonstrate shared projects, review, reproducible builds and separate CP/M and AIONix targets at COMDEX 1981. The process starts with engineering on 1 December 1980, includes the November 1981 premiere and ends at the existing 1 December 1981 follow-up milestone. Retail deployment and Autodesk sponsorship remain separate.",
       "participant": [
         {
           "actor_id": "actor.logix",
-          "role": "marketing_lead"
+          "role": "programme sponsor, dealer preparation and campaign lead"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "development, qualification and programme sponsor"
         }
       ],
       "period": {
         "start": {
-          "value": "1980-12-01",
-          "precision": "day"
+          "value": "event.team_engineering",
+          "precision": "event"
         },
         "end": {
           "value": "event.team_followup",
@@ -3309,17 +3248,26 @@
         }
       },
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "AION Development System — Team Edition",
+          "subject_ids": [
+            "product.aion_development_team"
+          ]
+        }
+      ],
       "steps": [
         {
           "number": 1,
           "type": "action",
-          "description": "AION Development System — Team Edition premiere"
+          "description": "AION Software developed shared projects, source history, branches, reviews and reproducible builds for development teams."
         },
         {
           "number": 2,
           "type": "action",
-          "description": "Team Edition implementation and qualification begins"
+          "description": "The team tested permissions, interrupted saves, backup recovery and separate CP/M and AIONix builds at reference sites."
         },
         {
           "number": 3,
@@ -3330,13 +3278,24 @@
         {
           "number": 4,
           "type": "action",
-          "description": "Team Edition dealer training and press briefings",
-          "event_id": "event.team_dealer_training"
+          "description": "The team prepared dealers and delivered Team Edition for its November 1981 premiere."
         },
         {
           "number": 5,
           "type": "action",
-          "description": "Team Edition 90-day workshops and trade campaign"
+          "description": "Team Edition dealer training and press briefings",
+          "event_id": "event.team_dealer_training"
+        },
+        {
+          "number": 6,
+          "type": "milestone",
+          "description": "Premiere AION Development System — Team Edition at COMDEX on 19 November 1981.",
+          "event_id": "event.team_launch"
+        },
+        {
+          "number": 7,
+          "type": "action",
+          "description": "Launch the Team Edition workshop and trade-campaign follow-up. The existing 1 December milestone starts the 90-day programme; it does not assert that all 90 days have elapsed."
         }
       ],
       "subject_ids": [
@@ -4440,7 +4399,7 @@
       "id": "process.ibm_project_chess",
       "title": "IBM Project Chess and competitive response to Logix",
       "kind": "competitive_response",
-      "description": "Starting with the confidential personal-computer market investigation on 5 July 1979, IBM responds to the business-computing market developed by Logix, Tandy, Apple and independent software suppliers. Project authorisation leads to software sourcing review, funding of an alternative OS programme and business-software qualification. The recorded qualification delays do not establish a completed IBM release.",
+      "description": "From the confidential market investigation on 5 July 1979, IBM develops Project Chess in response to Logix, Tandy, Apple and independent software suppliers. Project authorisation, OS sourcing review, substitute OS funding and qualification delays lead to the independently commissioned disk-OS platform launch on the scenario date of 15 March 1982, conditional on qualification.",
       "participant": [
         {
           "actor_id": "actor.ibm",
@@ -4453,8 +4412,8 @@
           "precision": "event"
         },
         "end": {
-          "value": null,
-          "precision": "unknown"
+          "value": "event.ibm_alternative_launch",
+          "precision": "event"
         }
       },
       "inputs": [
@@ -4500,7 +4459,7 @@
         {
           "number": 1,
           "type": "result",
-          "description": "IBM has authorised its PC project, identified a software sourcing gap and funded substitute OS work. Software integration, applications and service qualification determine commercial timing; supplier identity, OS name and a confirmed release remain unresolved.",
+          "description": "The process culminates in the recorded alternative IBM business-PC launch with an independently commissioned disk OS and an initially narrower application portfolio. The 15 March 1982 date remains the central scenario conditional on qualification; the supplier and OS name remain unspecified.",
           "subject_ids": [
             "actor.ibm"
           ]
