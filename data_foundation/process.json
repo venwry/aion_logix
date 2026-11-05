@@ -366,9 +366,9 @@
     },
     {
       "id": "process.stepper_install",
-      "title": "Stepper line procurement and installation",
+      "title": "Stepper procurement, installation and process development",
       "kind": "development",
-      "description": "Stepper line procurement and installation",
+      "description": "From the January 1979 stepper order, procure and install the lithography equipment, record installation acceptance in September 1979, and coordinate 2.75 µm and 2.0 µm process and memory qualification through December 1982. Installation acceptance does not by itself qualify every process or product; existing processors retain their specified process until separately qualified.",
       "participant": [
         {
           "actor_id": "actor.labs",
@@ -381,17 +381,51 @@
           "precision": "event"
         },
         "end": {
-          "value": "1979-09-30",
+          "value": "1982-12-31",
           "precision": "day"
         }
       },
-      "inputs": [],
-      "outcomes": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "The starting order authorises procurement; process development must meet measured tool-matching, retention, speed, yield and release gates rather than treating installation as production qualification."
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The programme records stepper installation acceptance and encompasses the two process-development and memory-qualification workstreams through their stated endpoints. Capability and part availability remain governed by their individual qualification records.",
+          "subject_ids": [
+            "manufacturing_capability.aion_nmos_275um_logic",
+            "manufacturing_capability.aion_nmos_2um_logic"
+          ]
+        }
+      ],
       "steps": [
         {
           "number": 1,
           "type": "action",
           "description": "Develop and qualify the dated manufacturing scenario; ERA1 remains on 3 µm. Budgets, yields and release gates are in memory_manufacturing.json."
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Develop and qualify the 2.75 µm process and memory capabilities from July 1979 through June 1981.",
+          "process_id": "process.process_275"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Record stepper installation and lithography acceptance in September 1979, retaining month precision.",
+          "event_id": "event.stepper_accept"
+        },
+        {
+          "number": 4,
+          "type": "action",
+          "description": "Develop the 2.0 µm process and RAM shrinks from January 1981 through December 1982.",
+          "process_id": "process.process_2"
         }
       ],
       "subject_ids": []
@@ -696,8 +730,8 @@
       ],
       "period": {
         "start": {
-          "value": "1981-01-19",
-          "precision": "day"
+          "value": "event.sgs_contacts",
+          "precision": "event"
         },
         "end": {
           "value": "1982-06-30",
@@ -2070,6 +2104,14 @@
             "product.software_cpm_model_ii",
             "product.device_model_ii_flexibus"
           ]
+        },
+        {
+          "number": 3,
+          "type": "result",
+          "description": "Microsoft BASIC has a recorded Aurelia release as independently licensed third-party software.",
+          "subject_ids": [
+            "product.software_microsoft_basic_aurelia"
+          ]
         }
       ],
       "steps": [
@@ -2109,6 +2151,12 @@
           "type": "milestone",
           "description": "Release documented optional TUI, capability-discovery and FlexiBUS extensions for non-Logix manufacturers.",
           "event_id": "event.dri_release"
+        },
+        {
+          "number": 6,
+          "type": "milestone",
+          "description": "Microsoft releases licensed Microsoft BASIC for Aurelia at NCC 1979, contributing third-party language software to the ecosystem.",
+          "event_id": "event.basic_launch"
         }
       ],
       "subject_ids": [
@@ -2458,8 +2506,20 @@
         {
           "number": 3,
           "type": "milestone",
+          "description": "Review prototype CP/M boot, native TUI, Abacus interchange, memory limits and the Model-II-specific FlexiBUS interface.",
+          "event_id": "event.tandy_port_review"
+        },
+        {
+          "number": 4,
+          "type": "milestone",
           "description": "Announce the planned supported Model II CP/M, FlexiBUS and Abacus offering, distinguishing planned availability from completed sales.",
           "event_id": "event.tandy_announcement"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Demonstrate the qualified Model II prototype at NCC while distinguishing demonstration from autumn customer release.",
+          "event_id": "event.tandy_ncc_demo"
         }
       ],
       "subject_ids": [
@@ -4139,6 +4199,170 @@
       "subject_ids": [
         "campaign.ncc1979"
       ]
+    },
+    {
+      "id": "process.artemis_development",
+      "title": "Artemis line development and launch programme",
+      "kind": "development",
+      "description": "Coordinate Artemis-line development from the beginning of AIONix exploratory work in February 1978, through confidential CP/M-80 bridge implementation and the NCC 1980 launch campaign and its recorded follow-up. Existing child programmes retain their technical scope, licensing and disclosure limits.",
+      "participant": [
+        {
+          "actor_id": "actor.logix",
+          "role": "computer platform and programme coordination"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "operating-system, applications and development tools"
+        },
+        {
+          "actor_id": "actor.dri",
+          "role": "AIONix and CP/M compatibility engineering partner"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "1978-02",
+          "precision": "month"
+        },
+        "end": {
+          "value": "1980-10",
+          "precision": "month"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The established computer companies provide the organisation and engineering resources for next-generation platform development.",
+          "event_id": "event.companies"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Build on existing software interfaces and retain a defined migration path while keeping future architecture confidential until NCC 1980."
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Begin with AIONix exploratory and formal operating-system development.",
+          "process_id": "process.aionix_development"
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Begin confidential detailed implementation of the optional CP/M-80 compatibility module, distinguishing engineering work from shipment.",
+          "event_id": "event.cpm_bridge"
+        },
+        {
+          "number": 3,
+          "type": "action",
+          "description": "Execute campaign.ncc1980 through its existing launch and follow-up process, including the Artemis commercial launch.",
+          "process_id": "process.ncc1980_campaign"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Artemis has a recorded commercial launch supported by AIONix development, compatibility engineering and campaign follow-up. The start of bridge implementation alone does not establish a shipped or universally compatible module.",
+          "subject_ids": [
+            "product.family_artemis",
+            "product.software_aionix"
+          ]
+        }
+      ],
+      "subject_ids": [
+        "campaign.ncc1980"
+      ]
+    },
+    {
+      "id": "process.clone_second_source_development",
+      "title": "Clone partnerships and second-source development",
+      "kind": "development",
+      "description": "Coordinate the five founding clone partnerships, independent chip sourcing and common-core localisation from the first partner contacts on 12 January 1981 through the existing SGS transfer programme ending 30 June 1982. Preserve independent brands, manufacturer-specific agreements, qualification gates and fallback AION supply.",
+      "participant": [
+        {
+          "actor_id": "actor.adam",
+          "role": "partner recruitment and programme sponsorship"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "compatible platform and manufacturer coordination"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "common software core and localisation"
+        },
+        {
+          "actor_id": "actor.labs",
+          "role": "silicon and manufacturing transfer"
+        },
+        {
+          "actor_id": "actor.sgs",
+          "role": "independent licensed chip manufacturer"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "event.clone_contacts",
+          "precision": "event"
+        },
+        "end": {
+          "value": "1982-06-30",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The commercial Artemis launch establishes the next-generation platform offered alongside Aurelia-compatible products to prospective manufacturing partners.",
+          "event_id": "event.artemis_launch"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Assess partner finances, manufacturing and support resources, licensing obligations and process-transfer feasibility before treating prospects or target schedules as qualified deliveries."
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Begin with SGS process-transfer contacts and carry out audit, transfer and per-part qualification while preserving fallback AION supply.",
+          "process_id": "process.sgs_transfer"
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Coordinate the five manufacturer-specific agreements, including Vector Graphic, and independent clone preparation and launch.",
+          "process_id": "process.clone_partnerships"
+        },
+        {
+          "number": 3,
+          "type": "action",
+          "description": "Prepare common-core language editions, shared document formats and local tests; partners license third-party applications independently.",
+          "process_id": "process.clone_localisation"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "A coordinated programme links clone agreements, common-core localisation and independent chip-source qualification. Existing agreement terms, the recorded January 1982 launch and per-part availability limits remain unchanged.",
+          "subject_ids": [
+            "actor.northstar",
+            "actor.vector",
+            "actor.sks",
+            "actor.goupil",
+            "actor.eina",
+            "actor.sgs"
+          ]
+        }
+      ],
+      "subject_ids": []
     }
   ]
 }
