@@ -368,7 +368,7 @@
       "id": "process.stepper_install",
       "title": "Stepper procurement, installation and process development",
       "kind": "development",
-      "description": "From the January 1979 stepper order, procure and install the lithography equipment, record installation acceptance in September 1979, and coordinate 2.75 µm and 2.0 µm process and memory qualification through December 1982. Installation acceptance does not by itself qualify every process or product; existing processors retain their specified process until separately qualified.",
+      "description": "From the January 1979 stepper order, procure and install the lithography equipment, record installation acceptance in September 1979, and coordinate DRAM yield-control and repair work plus 2.75 µm and 2.0 µm process and memory qualification through December 1982. Installation acceptance does not by itself qualify every process or product; existing processors retain their specified process until separately qualified.",
       "participant": [
         {
           "actor_id": "actor.labs",
@@ -396,10 +396,11 @@
         {
           "number": 1,
           "type": "result",
-          "description": "The programme records stepper installation acceptance and encompasses the two process-development and memory-qualification workstreams through their stated endpoints. Capability and part availability remain governed by their individual qualification records.",
+          "description": "The programme records stepper acceptance, DRAM control and repair development, and the 2.75 µm and 2.0 µm qualification workstreams and release milestones. Individual capability transitions and part availability remain governed by their qualification records.",
           "subject_ids": [
             "manufacturing_capability.aion_nmos_275um_logic",
-            "manufacturing_capability.aion_nmos_2um_logic"
+            "manufacturing_capability.aion_nmos_2um_logic",
+            "manufacturing_capability.dram64_3um_control"
           ]
         }
       ],
@@ -424,8 +425,38 @@
         {
           "number": 4,
           "type": "action",
+          "description": "Develop DRAM yield control and repair during the recorded 1980 workstream.",
+          "process_id": "process.dram_repair"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Record the improved 3 µm DRAM process-control release in June 1980, retaining its existing capability transition.",
+          "event_id": "event.dram_control_release"
+        },
+        {
+          "number": 6,
+          "type": "milestone",
+          "description": "Record the selected 2.75 µm process release review in June 1980, subject to its existing measured qualification requirements.",
+          "event_id": "event.production_275"
+        },
+        {
+          "number": 7,
+          "type": "action",
           "description": "Develop the 2.0 µm process and RAM shrinks from January 1981 through December 1982.",
           "process_id": "process.process_2"
+        },
+        {
+          "number": 8,
+          "type": "milestone",
+          "description": "Record the first complete 2.0 µm pilot lots in September 1981.",
+          "event_id": "event.pilot_2"
+        },
+        {
+          "number": 9,
+          "type": "milestone",
+          "description": "Record the selected 2.0 µm production release review in June 1982.",
+          "event_id": "event.production_2"
         }
       ],
       "subject_ids": []
@@ -2023,15 +2054,15 @@
       "id": "process.open_compatibility",
       "title": "Aurelia standards and third-party ecosystem development",
       "kind": "coordination",
-      "description": "Build the initial ecosystem of independent manufacturers, software developers and peripheral contributors around Aurelia’s CP/M with TUI, FlexiBUS, C development interfaces, graphics subsystem and digital monitor connectivity. Coordinate documented implementation and qualification, SMC second-source transfer, portable DRI extensions and Tandy cooperation. The envelope covers the recorded July 1978 to October 1979 work; it does not imply universal adoption or completion of all later ecosystem targets.",
+      "description": "Build the initial ecosystem of independent manufacturers, software developers and peripheral contributors around Aurelia’s CP/M with TUI, FlexiBUS, C development interfaces, graphics subsystem and digital monitor connectivity. Coordinate documented implementation and qualification, SMC second-source transfer, portable DRI extensions and Tandy cooperation. The envelope covers the recorded July 1978 to March 1980 work; it does not imply universal adoption or completion of all later ecosystem targets.",
       "period": {
         "start": {
           "value": "1978-07",
           "precision": "month"
         },
         "end": {
-          "value": "1979-10",
-          "precision": "month"
+          "value": "1980-03-31",
+          "precision": "day"
         }
       },
       "participant": [
@@ -2448,15 +2479,15 @@
       "id": "process.tandy_cooperation",
       "title": "Model II software and interface cooperation",
       "kind": "coordination",
-      "description": "Prepare native-display CP/M, Abacus and a qualified Model-II-specific FlexiBUS option.",
+      "description": "Develop and release the native-display Model II CP/M, Abacus and qualified FlexiBUS offering, then reinforce dealer training and integrated business bundles through 31 March 1980. Tandy retains its hardware platform and sales; its hardware revenue is not Logix revenue.",
       "period": {
         "start": {
           "value": "event.tandy_contact",
           "precision": "event"
         },
         "end": {
-          "value": "event.tandy_release",
-          "precision": "event"
+          "value": "1980-03-31",
+          "precision": "day"
         }
       },
       "participant": [
@@ -2487,6 +2518,14 @@
             "product.computer_trs80_model_ii",
             "product.device_model_ii_flexibus",
             "technology.flexibus"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "The released cooperation continues with reinforced business bundles and dealer training. Tandy’s independent hardware sales remain outside Logix revenue.",
+          "subject_ids": [
+            "actor.tandy"
           ]
         }
       ],
@@ -2520,6 +2559,18 @@
           "type": "milestone",
           "description": "Demonstrate the qualified Model II prototype at NCC while distinguishing demonstration from autumn customer release.",
           "event_id": "event.tandy_ncc_demo"
+        },
+        {
+          "number": 6,
+          "type": "milestone",
+          "description": "Release the supported Model II CP/M and Abacus configuration and separately qualified FlexiBUS option.",
+          "event_id": "event.tandy_release"
+        },
+        {
+          "number": 7,
+          "type": "milestone",
+          "description": "Reinforce native-video CP/M business bundles, dealer training and the existing cooperation after the customer release.",
+          "event_id": "event.tandy_response"
         }
       ],
       "subject_ids": [
@@ -3983,7 +4034,7 @@
       "id": "process.apple_business_response",
       "title": "Apple business-market response to Logix and AION",
       "kind": "competitive_response",
-      "description": "Apple responds to Aurelia and AION business software through software recruitment, selective dealer demonstrations, partner searches, Peachtree cooperation and complete-system promotions. The recorded response runs from July 1978 through the September 1979 review of successor-product compatibility requirements; it does not imply a guaranteed technical fix or an accelerated Lisa/GUI release.",
+      "description": "Apple responds to Logix and AION through software recruitment, selective dealer demonstrations, partner searches, Peachtree cooperation and business-system promotions. The recorded response runs from July 1978 through compatibility review and the Apple–Peachtree package opening on 15 March 1980. It does not imply an accelerated Lisa/GUI release or a nationwide training network.",
       "participant": [
         {
           "actor_id": "actor.apple",
@@ -3996,8 +4047,8 @@
           "precision": "event"
         },
         "end": {
-          "value": "event.apple_compatibility_review",
-          "precision": "event"
+          "value": "1980-03-15",
+          "precision": "day"
         }
       },
       "inputs": [
@@ -4032,6 +4083,18 @@
           "type": "milestone",
           "description": "Promote complete Apple II business configurations, demonstrations and introductory lessons.",
           "event_id": "event.apple_business_promotions"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Review successor-product compatibility requirements while retaining Apple’s independent roadmap.",
+          "event_id": "event.apple_compatibility_review"
+        },
+        {
+          "number": 6,
+          "type": "milestone",
+          "description": "Start the Apple–Peachtree small-business package with simplified setup, Apple II-oriented interaction, documentation and support.",
+          "event_id": "event.apple_business"
         }
       ],
       "outcomes": [
@@ -4050,6 +4113,15 @@
           "description": "Apple has reviewed compatibility requirements for successor products, prioritising protection of existing software, peripherals and customer data while retaining its independent hardware roadmap.",
           "subject_ids": [
             "actor.apple"
+          ]
+        },
+        {
+          "number": 3,
+          "type": "result",
+          "description": "The Apple–Peachtree small-business package has a recorded start with simplified setup, documentation and support. The event’s possible accounting-module coverage remains qualified rather than a guarantee of every module.",
+          "subject_ids": [
+            "actor.apple",
+            "actor.peachtree"
           ]
         }
       ],
@@ -4359,6 +4431,78 @@
             "actor.goupil",
             "actor.eina",
             "actor.sgs"
+          ]
+        }
+      ],
+      "subject_ids": []
+    },
+    {
+      "id": "process.ibm_project_chess",
+      "title": "IBM Project Chess and competitive response to Logix",
+      "kind": "competitive_response",
+      "description": "Starting with the confidential personal-computer market investigation on 5 July 1979, IBM responds to the business-computing market developed by Logix, Tandy, Apple and independent software suppliers. Project authorisation leads to software sourcing review, funding of an alternative OS programme and business-software qualification. The recorded qualification delays do not establish a completed IBM release.",
+      "participant": [
+        {
+          "actor_id": "actor.ibm",
+          "role": "market investigation, PC project sponsor and software qualification lead"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "event.ibm_investigate",
+          "precision": "event"
+        },
+        "end": {
+          "value": null,
+          "precision": "unknown"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The Aurelia launch establishes the competing business-computing platform and workflows IBM subsequently benchmarks.",
+          "event_id": "event.aurelia_launch"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Assess competing applications, interfaces, distribution, training, service and independent OS suppliers before committing the project’s delivery approach."
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "milestone",
+          "description": "Authorise IBM’s personal-computer project in response to independent suppliers’ business applications and channels.",
+          "event_id": "event.ibm_project"
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Review software sourcing and identify the gap between available OS options and the required schedule.",
+          "event_id": "event.ibm_os_review"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Fund an alternative OS delivery programme and stabilise application interfaces while hardware development continues.",
+          "event_id": "event.ibm_os_program"
+        },
+        {
+          "number": 4,
+          "type": "milestone",
+          "description": "Record OS integration, application qualification and support delays; keep the projected commercial release distinct from a confirmed launch.",
+          "event_id": "event.ibm_qualification"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "IBM has authorised its PC project, identified a software sourcing gap and funded substitute OS work. Software integration, applications and service qualification determine commercial timing; supplier identity, OS name and a confirmed release remain unresolved.",
+          "subject_ids": [
+            "actor.ibm"
           ]
         }
       ],
