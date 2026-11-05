@@ -1109,51 +1109,10 @@
       "subject_ids": []
     },
     {
-      "id": "process.ncc1980_followup",
-      "title": "NCC 1980 dealer and Academy follow-up",
-      "kind": "preparation",
-      "description": "NCC 1980 dealer and Academy follow-up",
-      "participant": [
-        {
-          "actor_id": "actor.logix",
-          "role": "programme participant"
-        },
-        {
-          "actor_id": "actor.academy",
-          "role": "programme participant"
-        }
-      ],
-      "period": {
-        "start": {
-          "value": "1980-05",
-          "precision": "month"
-        },
-        "end": {
-          "value": "1980-06",
-          "precision": "month"
-        }
-      },
-      "inputs": [],
-      "outcomes": [],
-      "steps": [
-        {
-          "number": 1,
-          "type": "action",
-          "description": "window: May–June 1980 after launch"
-        },
-        {
-          "number": 2,
-          "type": "action",
-          "description": "action: Dealer demonstrations and customer workflow trials; press technical briefing; Academy transition classes and developer migration clinics; maintain issue/qualification register."
-        }
-      ],
-      "subject_ids": []
-    },
-    {
       "id": "process.ncc1980_roadshows",
       "title": "1980 regional roadshows and certification workshops",
       "kind": "preparation",
-      "description": "1980 regional roadshows and certification workshops",
+      "description": "From the Academy and regional-sales rollout on 17 July 1980 through October, run regional roadshows and certification workshops supported by Artemis training and direct institutional-sales capacity.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -1166,8 +1125,8 @@
       ],
       "period": {
         "start": {
-          "value": "1980-07",
-          "precision": "month"
+          "value": "event.ncc1980_followup",
+          "precision": "event"
         },
         "end": {
           "value": "1980-10",
@@ -1175,12 +1134,18 @@
         }
       },
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Regional demonstrations and certification workshops support institutional sales discussions, Academy transition training and documented compatibility follow-up. Negotiated contracts and customer case studies are recorded on their actual merits rather than assumed from attendance."
+        }
+      ],
       "steps": [
         {
           "number": 1,
           "type": "action",
-          "description": "window: July–October 1980"
+          "description": "window: 17 July–October 1980"
         },
         {
           "number": 2,
@@ -1637,7 +1602,7 @@
       "id": "process.aionix_development",
       "title": "AIONix exploratory and formal development",
       "kind": "development",
-      "description": "AIONix exploratory and formal development Develop AIONix under the separately agreed ownership and later non-ERA porting rights.",
+      "description": "Develop AIONix from the exploratory architecture and portability milestone on 1 February 1978 through completion of this development phase on 20 February 1980, under the separately agreed ownership and later non-ERA porting rights. Commercial release with Artemis follows on 19 May 1980.",
       "participant": [
         {
           "actor_id": "actor.aion",
@@ -1658,12 +1623,12 @@
       ],
       "period": {
         "start": {
-          "value": "1978-02",
-          "precision": "month"
+          "value": "event.aionix_preliminary",
+          "precision": "event"
         },
         "end": {
-          "value": "1980-05",
-          "precision": "month"
+          "value": "1980-02-20",
+          "precision": "day"
         }
       },
       "inputs": [],
@@ -1671,7 +1636,7 @@
         {
           "number": 1,
           "type": "deliverable",
-          "description": "AIONix exploratory and formal development Develop AIONix under the separately agreed ownership and later non-ERA porting rights.",
+          "description": "The AIONix development phase is complete for handover to later Artemis integration and launch preparation; this outcome does not move commercial availability before 19 May 1980.",
           "subject_ids": [
             "product.software_aionix",
             "technology.aionix_os_model"
@@ -1710,7 +1675,7 @@
         {
           "number": 6,
           "type": "action",
-          "description": "The team delivered AIONix with the commercial Artemis platform in May 1980; subsequent maintenance continued as ongoing product work."
+          "description": "Complete this phase of AIONix development by 20 February 1980 and hand the work over for subsequent platform integration and commercial launch preparation. Ongoing maintenance continues separately."
         }
       ],
       "subject_ids": [
@@ -2821,7 +2786,7 @@
         {
           "number": 5,
           "type": "action",
-          "description": "activities / 2 / window: May–June 1980 after launch"
+          "description": "activities / 2 / window: Post-launch preparation leading to the 17 July 1980 Academy and regional-sales rollout"
         },
         {
           "number": 6,
@@ -2831,7 +2796,7 @@
         {
           "number": 7,
           "type": "action",
-          "description": "activities / 3 / window: July–October 1980"
+          "description": "activities / 3 / window: 17 July–October 1980"
         },
         {
           "number": 8,
@@ -2851,31 +2816,19 @@
         {
           "number": 11,
           "type": "action",
-          "description": "Artemis platform launches commercially",
+          "description": "Launch the Artemis platform, including the 128 KiB budget colour and 5 MB office configurations.",
           "event_id": "event.artemis_launch"
         },
         {
           "number": 12,
-          "type": "milestone",
-          "description": "Introduce the Artemis 128 budget colour and optional 5 MB office configurations at the 19 May 1980 launch.",
-          "event_id": "event.artemis_budget_range"
-        },
-        {
-          "number": 13,
           "type": "action",
           "description": "NCC 1980 partner qualification and launch preparation",
           "process_id": "process.ncc1980_preparation"
         },
         {
-          "number": 14,
+          "number": 13,
           "type": "action",
-          "description": "NCC 1980 dealer and Academy follow-up",
-          "process_id": "process.ncc1980_followup"
-        },
-        {
-          "number": 15,
-          "type": "action",
-          "description": "1980 regional roadshows and certification workshops",
+          "description": "Begin with the 17 July Artemis Academy and regional-sales rollout, then run regional roadshows and certification workshops.",
           "process_id": "process.ncc1980_roadshows"
         }
       ],
@@ -4264,8 +4217,8 @@
       ],
       "period": {
         "start": {
-          "value": "1978-02",
-          "precision": "month"
+          "value": "1978-02-01",
+          "precision": "day"
         },
         "end": {
           "value": "1980-10",
