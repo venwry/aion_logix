@@ -368,7 +368,7 @@
       "id": "process.stepper_install",
       "title": "Stepper procurement, installation and process development",
       "kind": "development",
-      "description": "From the January 1979 stepper order, procure and install the lithography equipment, record installation acceptance in September 1979, and coordinate DRAM yield-control and repair work plus 2.75 µm and 2.0 µm process and memory qualification through December 1982. Installation acceptance does not by itself qualify every process or product; existing processors retain their specified process until separately qualified.",
+      "description": "From the January 1979 stepper order, procure and install the lithography equipment, record installation acceptance in September 1979, and coordinate DRAM yield-control and repair work plus 2.75 µm, 2.0 µm and 1.5 µm process and memory qualification through December 1983. Installation acceptance does not by itself qualify every process or product; existing processors retain their specified process until separately qualified.",
       "participant": [
         {
           "actor_id": "actor.labs",
@@ -381,7 +381,7 @@
           "precision": "event"
         },
         "end": {
-          "value": "1982-12-31",
+          "value": "1983-12-31",
           "precision": "day"
         }
       },
@@ -396,11 +396,13 @@
         {
           "number": 1,
           "type": "result",
-          "description": "The programme records stepper acceptance, DRAM control and repair development, and the 2.75 µm and 2.0 µm qualification workstreams and release milestones. Individual capability transitions and part availability remain governed by their qualification records.",
+          "description": "The programme records stepper acceptance, DRAM control and repair development, and the 2.75 µm, 2.0 µm and 1.5 µm qualification workstreams and release milestones. Individual capability transitions and part availability remain governed by their qualification records.",
           "subject_ids": [
             "manufacturing_capability.aion_nmos_275um_logic",
             "manufacturing_capability.aion_nmos_2um_logic",
-            "manufacturing_capability.dram64_3um_control"
+            "manufacturing_capability.dram64_3um_control",
+            "manufacturing_capability.aion_nmos_15um_logic",
+            "manufacturing_capability.dram64_15um_repair"
           ]
         }
       ],
@@ -418,33 +420,33 @@
         },
         {
           "number": 3,
-          "type": "milestone",
-          "description": "Record stepper installation and lithography acceptance in September 1979, retaining month precision.",
-          "event_id": "event.stepper_accept"
-        },
-        {
-          "number": 4,
           "type": "action",
           "description": "Develop DRAM yield control and repair during the recorded 1980 workstream.",
           "process_id": "process.dram_repair"
         },
         {
-          "number": 5,
+          "number": 4,
           "type": "milestone",
           "description": "Record the improved 3 µm DRAM process-control release in June 1980, retaining its existing capability transition.",
           "event_id": "event.dram_control_release"
         },
         {
-          "number": 6,
+          "number": 5,
           "type": "action",
           "description": "Develop the 2.0 µm process and RAM shrinks from January 1981 through December 1982.",
           "process_id": "process.process_2"
         },
         {
-          "number": 7,
+          "number": 6,
           "type": "milestone",
           "description": "Record the first complete 2.0 µm pilot lots in September 1981.",
           "event_id": "event.pilot_2"
+        },
+        {
+          "number": 7,
+          "type": "action",
+          "description": "Develop and qualify the 1.5 µm process and RAM shrink from April 1982 through December 1983, including the recorded pilot and release milestones.",
+          "process_id": "process.process_15"
         }
       ],
       "subject_ids": []
@@ -490,11 +492,17 @@
         {
           "number": 2,
           "type": "milestone",
+          "description": "Record stepper installation and lithography acceptance in September 1979 as a milestone within the 2.75 µm development workstream.",
+          "event_id": "event.stepper_accept"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
           "description": "Complete the first 2.75 µm pilot lots in December 1979, retaining the recorded pilot-stage qualification milestone.",
           "event_id": "event.pilot_275"
         },
         {
-          "number": 3,
+          "number": 4,
           "type": "milestone",
           "description": "Selected 2.75 µm process release review. Retain the milestone’s existing measured qualification requirements and production-release capability transition.",
           "event_id": "event.production_275"
@@ -622,6 +630,24 @@
           "number": 1,
           "type": "action",
           "description": "Develop and qualify the dated manufacturing scenario; ERA1 remains on 3 µm. Budgets, yields and release gates are in memory_manufacturing.json."
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Record the first complete 1.5 µm pilot lots in March 1983.",
+          "event_id": "event.pilot_15"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Record the selected 1.5 µm process release review in September 1983, retaining the existing qualification requirements.",
+          "event_id": "event.production_15"
+        },
+        {
+          "number": 4,
+          "type": "milestone",
+          "description": "Record the selected 1.5 µm 64K RAM release milestone in October 1983, retaining its existing capability transition.",
+          "event_id": "event.dram_15_release"
         }
       ],
       "subject_ids": [
@@ -1332,76 +1358,82 @@
       "inputs": [
         {
           "number": 1,
-          "type": "acceptance_criterion",
-          "description": "Native AIONix/ERA build with reliable floating-point geometry and typed coordinate entry"
+          "type": "resource",
+          "description": "The founders organising meeting on 30 January 1982 precedes the agreement that starts the funded development programme on 31 January. Attendees remain unspecified.",
+          "event_id": "event.autodesk_organising_meeting"
         },
         {
           "number": 2,
           "type": "acceptance_criterion",
-          "description": "Dual-display driver with colour command/status screen and 800x600 drawing canvas; independent palettes and explicit input focus"
+          "description": "Native AIONix/ERA build with reliable floating-point geometry and typed coordinate entry"
         },
         {
           "number": 3,
           "type": "acceptance_criterion",
-          "description": "Explicit CAD mouse integration; standard TUI mouse support alone is insufficient"
+          "description": "Dual-display driver with colour command/status screen and 800x600 drawing canvas; independent palettes and explicit input focus"
         },
         {
           "number": 4,
           "type": "acceptance_criterion",
-          "description": "Drawing load/save and DXF exchange tests against the other supported AutoCAD builds"
+          "description": "Explicit CAD mouse integration; standard TUI mouse support alone is insufficient"
         },
         {
           "number": 5,
           "type": "acceptance_criterion",
-          "description": "Supported pen-plotter output and physical drawing verification"
+          "description": "Drawing load/save and DXF exchange tests against the other supported AutoCAD builds"
         },
         {
           "number": 6,
           "type": "acceptance_criterion",
-          "description": "Measured RAM, storage, redraw and stability requirements on the qualified configuration; backup/restore and reproducible release build"
+          "description": "Supported pen-plotter output and physical drawing verification"
         },
         {
           "number": 7,
           "type": "acceptance_criterion",
-          "description": "Feature baseline agreed with Autodesk; no automatic import of later AutoCAD dimensioning, object-snap or 3D features"
+          "description": "Measured RAM, storage, redraw and stability requirements on the qualified configuration; backup/restore and reproducible release build"
         },
         {
           "number": 8,
-          "type": "resource",
-          "description": "team environment / workstations: Supply an Artemis PRO with 1 MiB RAM, local storage and available display to each assigned developer, plus shared build/test and spare machines as the agreed staffing plan requires. No invented fixed team size."
+          "type": "acceptance_criterion",
+          "description": "Feature baseline agreed with Autodesk; no automatic import of later AutoCAD dimensioning, object-snap or 3D features"
         },
         {
           "number": 9,
           "type": "resource",
-          "description": "team environment / software: Install the entire AION Development System — Team Edition: C Development Environment 2, ERA compiler/linker/debugger and validated floating-point math library; source repository, branches/reviews, tasks, collaboration, reproducible builds, release labels and target testing."
+          "description": "team environment / workstations: Supply an Artemis PRO with 1 MiB RAM, local storage and available display to each assigned developer, plus shared build/test and spare machines as the agreed staffing plan requires. No invented fixed team size."
         },
         {
           "number": 10,
           "type": "resource",
-          "description": "team environment / network: Supply network adapters, hub, cabling, configured accounts and project permissions, and dedicated Artemis PRO server capacity. Scale sponsored server/license deployments to the whole team within qualified concurrency; the retail four-session entitlement is not silently unlimited."
+          "description": "team environment / software: Install the entire AION Development System — Team Edition: C Development Environment 2, ERA compiler/linker/debugger and validated floating-point math library; source repository, branches/reviews, tasks, collaboration, reproducible builds, release labels and target testing."
         },
         {
           "number": 11,
           "type": "resource",
-          "description": "team environment / storage: The standard 5 MB disk is inadequate as a presumed whole-team repository/build archive. Fund and qualify larger storage, additional volumes/servers, independent backup media, restore tests and off-machine source archives; capacities follow measured source/build/history budgets."
+          "description": "team environment / network: Supply network adapters, hub, cabling, configured accounts and project permissions, and dedicated Artemis PRO server capacity. Scale sponsored server/license deployments to the whole team within qualified concurrency; the retail four-session entitlement is not silently unlimited."
         },
         {
           "number": 12,
           "type": "resource",
-          "description": "team environment / support: Fund dedicated Autodesk engineering time, AION compiler/runtime and integration specialists, installation, training, documentation, replacement hardware, plotter access and on-site support through release. Retail onboarding/support-hour caps do not limit this separately sponsored agreement."
+          "description": "team environment / storage: The standard 5 MB disk is inadequate as a presumed whole-team repository/build archive. Fund and qualify larger storage, additional volumes/servers, independent backup media, restore tests and off-machine source archives; capacities follow measured source/build/history budgets."
         },
         {
           "number": 13,
           "type": "resource",
-          "description": "team environment / early graphics: January work uses available Artemis PRO displays and a stable software implementation of the graphics API. Supply 64 KiB/Color Pro engineering samples and mouse prototypes when qualified; do not make January work depend on the June professional hardware."
+          "description": "team environment / support: Fund dedicated Autodesk engineering time, AION compiler/runtime and integration specialists, installation, training, documentation, replacement hardware, plotter access and on-site support through release. Retail onboarding/support-hour caps do not limit this separately sponsored agreement."
         },
         {
           "number": 14,
           "type": "resource",
-          "description": "team environment / professional handover: Around June 1982 deliver the 128 KiB professional card and Logix Mono Pro 17 to the development and QA team, alongside the 64 KiB colour card/Color Pro 14 and mouse. This supersedes the earlier proposed January 17-inch prototype handover."
+          "description": "team environment / early graphics: January work uses available Artemis PRO displays and a stable software implementation of the graphics API. Supply 64 KiB/Color Pro engineering samples and mouse prototypes when qualified; do not make January work depend on the June professional hardware."
         },
         {
           "number": 15,
+          "type": "resource",
+          "description": "team environment / professional handover: Around June 1982 deliver the 128 KiB professional card and Logix Mono Pro 17 to the development and QA team, alongside the 64 KiB colour card/Color Pro 14 and mouse. This supersedes the earlier proposed January 17-inch prototype handover."
+        },
+        {
+          "number": 16,
           "type": "resource",
           "description": "funding: Adam commits to supplying the staffing, equipment, licences and integration resources required by the agreed delivery plan. No arbitrary dollar ceiling or fabricated cost estimate; procurement and staffing are reviewed against the November objective."
         }
@@ -1958,9 +1990,9 @@
     },
     {
       "id": "process.open_compatibility",
-      "title": "Aurelia standards and third-party ecosystem development",
+      "title": "Ecosystem growth and market response — CP/M / 8-bit era",
       "kind": "coordination",
-      "description": "Build the initial ecosystem of independent manufacturers, software developers and peripheral contributors around Aurelia’s CP/M with TUI, FlexiBUS, C development interfaces, graphics subsystem and digital monitor connectivity. Coordinate documented implementation and qualification, SMC second-source transfer, portable DRI extensions and Tandy cooperation. The envelope covers the recorded July 1978 to March 1980 work; it does not imply universal adoption or completion of all later ecosystem targets.",
+      "description": "CP/M / 8-bit phase, July 1978 to 31 March 1980. Build the initial ecosystem of independent manufacturers, software developers and peripheral contributors around Aurelia’s CP/M with TUI, FlexiBUS, C development interfaces, graphics subsystem and digital monitor connectivity. Coordinate documented implementation and qualification, SMC second-source transfer, portable DRI extensions and Tandy cooperation. The envelope covers the recorded July 1978 to March 1980 work; it does not imply universal adoption or completion of all later ecosystem targets.",
       "period": {
         "start": {
           "value": "1978-07",
@@ -4418,6 +4450,12 @@
           "type": "milestone",
           "description": "Record OS integration, application qualification and support delays; keep the projected commercial release distinct from a confirmed launch.",
           "event_id": "event.ibm_qualification"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Consider the protected-x86 feasibility context recorded by DRI after 80286 availability. Segmentation, tools, hardware and validation remain unresolved; this does not establish IBM adoption of AIONix or an immediate 286 release.",
+          "event_id": "event.x86_protection_review"
         }
       ],
       "outcomes": [
@@ -4431,6 +4469,78 @@
         }
       ],
       "subject_ids": []
+    },
+    {
+      "id": "process.artemis_ecosystem",
+      "title": "Ecosystem growth and market response — AIONix / 32-bit Artemis era",
+      "kind": "coordination",
+      "description": "Coordinate ecosystem growth and market response for the AIONix and 32-bit Artemis phase from 1 May 1980 to 28 March 1982. Continue the independent implementation and supplier approach established in the CP/M phase, covering documented software interfaces, compatible products and non-ERA port feasibility. DRI’s 68k effort remains development and validation work rather than a released port or licence income.",
+      "participant": [
+        {
+          "actor_id": "actor.logix",
+          "role": "Artemis platform and ecosystem coordination"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "AIONix ownership, software interfaces and development platform"
+        },
+        {
+          "actor_id": "actor.dri",
+          "role": "independently licensed non-ERA port feasibility and implementation"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "1980-05-01",
+          "precision": "day"
+        },
+        "end": {
+          "value": "1982-03-28",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The preceding CP/M / 8-bit ecosystem phase establishes supplier cooperation, documented interfaces and independent implementation practices for the next phase.",
+          "process_id": "process.open_compatibility"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The completed AIONix development phase provides the operating-system foundation for Artemis-era integration and ecosystem work.",
+          "process_id": "process.aionix_development"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Coordinate documented AIONix interfaces, developer access and compatible-product qualification while distinguishing supplier commitments, prototypes and released configurations."
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Begin DRI’s independently licensed 68k AIONix port programme, including funded feasibility work, suitable external-MMU hardware assessment and restartable-fault investigation.",
+          "event_id": "event.dri_68k_program"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The phase provides a framework for AIONix/Artemis ecosystem cooperation and records the start of DRI’s non-ERA port work. A completed 68k port, licence receipts and universal compatibility are not established by these activities.",
+          "subject_ids": [
+            "product.family_artemis",
+            "product.software_aionix"
+          ]
+        }
+      ],
+      "subject_ids": [
+        "product.family_artemis",
+        "product.software_aionix"
+      ]
     }
   ]
 }
