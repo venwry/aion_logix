@@ -299,7 +299,9 @@
           "description": "Continues technical cooperation and testing support; permits independent compatible products."
         }
       ],
-      "subject_ids": [],
+      "subject_ids": [
+        "event.apple_cooperation"
+      ],
       "related_process_ids": [
         "process.open_compatibility"
       ]
@@ -1985,47 +1987,139 @@
     },
     {
       "id": "process.open_compatibility",
-      "title": "Open compatibility and independent manufacturers",
+      "title": "Aurelia standards and third-party ecosystem development",
       "kind": "coordination",
-      "description": "Develop documented implementation, conformance and support arrangements without treating invitations as signed commitments.",
+      "description": "Build the initial ecosystem of independent manufacturers, software developers and peripheral contributors around Aurelia’s CP/M with TUI, FlexiBUS, C development interfaces, graphics subsystem and digital monitor connectivity. Coordinate documented implementation and qualification, SMC second-source transfer, portable DRI extensions and Tandy cooperation. The envelope covers the recorded July 1978 to October 1979 work; it does not imply universal adoption or completion of all later ecosystem targets.",
       "period": {
         "start": {
-          "value": null,
-          "precision": "unknown"
+          "value": "1978-07",
+          "precision": "month"
         },
         "end": {
-          "value": null,
-          "precision": "unknown"
+          "value": "1979-10",
+          "precision": "month"
         }
       },
       "participant": [
         {
           "actor_id": "actor.dri",
-          "role": "sponsor"
+          "role": "CP/M and portable software-extension lead"
         },
         {
           "actor_id": "actor.logix",
-          "role": "sponsor"
+          "role": "hardware standards and ecosystem coordination"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "C development platform and application integration"
+        },
+        {
+          "actor_id": "actor.labs",
+          "role": "silicon designs and second-source transfer"
+        },
+        {
+          "actor_id": "actor.smc",
+          "role": "independent licensed chip manufacturer"
+        },
+        {
+          "actor_id": "actor.tandy",
+          "role": "independent host-platform implementation partner"
         }
       ],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Aurelia’s launch provides the working software, peripheral and display platform for independent implementations and supplier cooperation.",
+          "event_id": "event.aurelia_launch"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Use documented software APIs, bus rules, graphics profiles and monitor-link specifications, with explicit licensing and host-specific qualification.",
+          "subject_ids": [
+            "technology.logix_tui_standard",
+            "technology.flexibus",
+            "technology.logix_c_api",
+            "technology.logix_display_api",
+            "technology.logix_digital_video",
+            "technology.aurelia_video_profile"
+          ]
+        }
+      ],
       "outcomes": [
         {
           "number": 1,
           "type": "deliverable",
-          "description": "Develop documented implementation, conformance and support arrangements without treating invitations as signed commitments.",
+          "description": "Independent contributors have a documented implementation and qualification programme covering CP/M/TUI, FlexiBUS, C development, graphics APIs and monitor connectivity. Final access terms and unverified participation remain subject to the existing agreements and qualification requirements.",
           "subject_ids": [
+            "technology.logix_tui_standard",
             "technology.flexibus",
-            "technology.logix_c_api"
+            "technology.logix_c_api",
+            "technology.logix_display_api",
+            "technology.logix_digital_video",
+            "technology.aurelia_video_profile"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "The recorded milestones include portable DRI extension release, the supported Tandy configuration and initial qualified SMC chip sales. They do not establish release of every licensed chip or universal compatibility.",
+          "subject_ids": [
+            "product.software_cpm_aurelia",
+            "product.software_cpm_model_ii",
+            "product.device_model_ii_flexibus"
           ]
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Transfer engineering knowledge and qualify independently manufactured SMC chips.",
+          "process_id": "process.smc_transfer"
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Document CP/M/TUI services, FlexiBUS device interfaces, the C development platform and graphics/display APIs. Provide reference integrations and conformance guidance; distinguish software API support from optional display hardware and qualified monitor connectivity.",
+          "subject_ids": [
+            "technology.logix_tui_standard",
+            "technology.flexibus",
+            "technology.logix_c_api",
+            "technology.logix_display_api",
+            "technology.logix_digital_video",
+            "technology.aurelia_video_profile"
+          ]
+        },
+        {
+          "number": 3,
+          "type": "action",
+          "description": "Implement and qualify Tandy’s supported Model II CP/M, Abacus and FlexiBUS option without requiring Logix video hardware.",
+          "process_id": "process.tandy_cooperation"
+        },
+        {
+          "number": 4,
+          "type": "milestone",
+          "description": "Begin external OEM implementations, documentation and qualification of portable CP/M extensions.",
+          "event_id": "event.dri_portable"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Release documented optional TUI, capability-discovery and FlexiBUS extensions for non-Logix manufacturers.",
+          "event_id": "event.dri_release"
+        }
+      ],
       "subject_ids": [
         "technology.flexibus",
         "technology.logix_c_api",
         "event.dri_cpm",
-        "event.apple_cooperation"
+        "event.apple_cooperation",
+        "technology.logix_tui_standard",
+        "technology.logix_display_api",
+        "technology.logix_digital_video",
+        "technology.aurelia_video_profile"
       ]
     },
     {
@@ -2348,7 +2442,26 @@
           ]
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "number": 1,
+          "type": "milestone",
+          "description": "Sign the Model II CP/M, FlexiBUS and Abacus cooperation agreement.",
+          "event_id": "event.tandy_agreement"
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Agree the Model II compatibility design baseline and responsibilities.",
+          "event_id": "event.tandy_design_review"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Announce the planned supported Model II CP/M, FlexiBUS and Abacus offering, distinguishing planned availability from completed sales.",
+          "event_id": "event.tandy_announcement"
+        }
+      ],
       "subject_ids": [
         "product.computer_trs80_model_ii",
         "product.device_model_ii_flexibus",
@@ -3810,7 +3923,7 @@
       "id": "process.apple_business_response",
       "title": "Apple business-market response to Logix and AION",
       "kind": "competitive_response",
-      "description": "Apple responds to the Aurelia launch and AION business software by organising business-software recruitment, selective dealer demonstrations, partner searches, Peachtree cooperation and promotion of complete Apple II business configurations. This process covers the recorded response from July 1978 to April 1979 without assuming a finished software package or nationwide dealer rollout.",
+      "description": "Apple responds to Aurelia and AION business software through software recruitment, selective dealer demonstrations, partner searches, Peachtree cooperation and complete-system promotions. The recorded response runs from July 1978 through the September 1979 review of successor-product compatibility requirements; it does not imply a guaranteed technical fix or an accelerated Lisa/GUI release.",
       "participant": [
         {
           "actor_id": "actor.apple",
@@ -3823,7 +3936,7 @@
           "precision": "event"
         },
         "end": {
-          "value": "event.apple_business_promotions",
+          "value": "event.apple_compatibility_review",
           "precision": "event"
         }
       },
@@ -3853,6 +3966,12 @@
           "type": "milestone",
           "description": "Pursue the recorded Apple–Peachtree accounting cooperation while continuing separate spreadsheet and database efforts; retain the agreement’s existing negotiation status.",
           "event_id": "event.apple_peachtree"
+        },
+        {
+          "number": 4,
+          "type": "milestone",
+          "description": "Promote complete Apple II business configurations, demonstrations and introductory lessons.",
+          "event_id": "event.apple_business_promotions"
         }
       ],
       "outcomes": [
@@ -3864,9 +3983,162 @@
             "actor.apple",
             "actor.peachtree"
           ]
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "Apple has reviewed compatibility requirements for successor products, prioritising protection of existing software, peripherals and customer data while retaining its independent hardware roadmap.",
+          "subject_ids": [
+            "actor.apple"
+          ]
         }
       ],
       "subject_ids": []
+    },
+    {
+      "id": "process.harvard_education",
+      "title": "Harvard undergraduate economics education",
+      "kind": "study",
+      "description": "Adam completes four academic years of undergraduate economics education at Harvard from September 1972 to June 1976. The programme groups his coursework and graduation; it does not supply the foreknowledge used for investment decisions.",
+      "participant": [
+        {
+          "actor_id": "actor.adam",
+          "role": "student"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "1972-09-25",
+          "precision": "day"
+        },
+        "end": {
+          "value": "1976-06-17",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "Admission and enrolment in Harvard’s undergraduate economics programme allow Adam to begin the first academic year; no separate admission-event date is established."
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Complete academic year 1 of the undergraduate economics programme.",
+          "process_id": "process.harvard_year_1"
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Complete academic year 2 of the undergraduate economics programme.",
+          "process_id": "process.harvard_year_2"
+        },
+        {
+          "number": 3,
+          "type": "action",
+          "description": "Complete academic year 3 of the undergraduate economics programme.",
+          "process_id": "process.harvard_year_3"
+        },
+        {
+          "number": 4,
+          "type": "action",
+          "description": "Complete academic year 4 of the undergraduate economics programme.",
+          "process_id": "process.harvard_year_4"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Adam has completed the four academic years and his undergraduate economics degree. Graduation remains the closing event of Year 4.",
+          "subject_ids": [
+            "actor.adam"
+          ]
+        }
+      ],
+      "subject_ids": []
+    },
+    {
+      "id": "process.ncc1979_development",
+      "title": "NCC 1979 development and open-architecture programme",
+      "kind": "development",
+      "description": "From 26 July 1978, prepare the products, technical cooperation and open-architecture programme associated with NCC 1979. Include limited Apple cooperation, the Apple II and S-100 expansion launch, and the existing NCC 1979 campaign execution with its recorded follow-up through 14 January 1980.",
+      "participant": [
+        {
+          "actor_id": "actor.logix",
+          "role": "product development and programme organiser"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "C platform, software and migration contributor"
+        },
+        {
+          "actor_id": "actor.dri",
+          "role": "CP/M compatibility contributor"
+        },
+        {
+          "actor_id": "actor.apple",
+          "role": "limited documentation and compatibility assistance partner"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "1978-07-26",
+          "precision": "day"
+        },
+        "end": {
+          "value": "1980-01-14",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The Aurelia launch establishes the working platform, peripherals and software on which wider compatibility products and the next NCC programme build.",
+          "event_id": "event.aurelia_launch"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "milestone",
+          "description": "Agree limited Apple technical cooperation, documentation, test equipment and compatibility assistance.",
+          "event_id": "event.apple_cooperation"
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Execute campaign.ncc1979 through its existing campaign execution process, including preparation, NCC presentations and recorded follow-up.",
+          "process_id": "process.ncc1979_campaign"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Launch the Apple II and S-100 expansion products at NCC on 4 June 1979.",
+          "event_id": "event.apple_extensions"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Apple II and S-100 expansion products have a recorded launch, and the campaign has presented documented compatibility and migration options with follow-up. Partner invitations and adoption targets remain distinct from signed commitments and measured results.",
+          "subject_ids": [
+            "product.device_apple2_expansion_card",
+            "product.device_flexidisk_ii",
+            "product.device_s100_flexibus_card",
+            "product.device_apple2_video_card",
+            "product.device_s100_video_card"
+          ]
+        }
+      ],
+      "subject_ids": [
+        "campaign.ncc1979"
+      ]
     }
   ]
 }
