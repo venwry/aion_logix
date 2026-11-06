@@ -79,3 +79,18 @@ Changes confirm displays a visible **Subject / Before / After** table. Check eac
 For exact authorization file structures see the [storytelling reference](data-model/STORYTELLING_FILE_REFERENCE.md). For pending issues and later migration work see the [review backlog](REVIEW_BACKLOG.md).
 
 Agreement details show simplified clause columns: id, kind, statement, value and unit. Non-quantitative clauses use null values; quantities and ranges summarize the full statement. During migration, agreements awaiting approval can still show the legacy columns. Review each whole agreement independently in Changes confirm. Model 0.6.0 requires the matching backend deployment before simplified proposals can be saved.
+
+
+## Timeline categories and swim lanes
+
+Events and processes support an optional `category` string. The permitted non-empty values are `Adam's personal`, `Logix/AION investment`, `Product dev & launch`, `Ecosystem & Partners`, and `Competition`. An omitted field or `""` is empty; `null` and other spellings are invalid.
+
+Assign a category only to a top-level event or process. Children must leave it empty and inherit their root's category. Ownership comes from process steps, event-based period boundaries, `parent_process_id`, or event `process_ids`. Inputs, outcomes, subjects and related-process references do not establish ownership. The model validator rejects a non-empty category on an owned child. When reparenting a root, clear its category in the same approval batch. Campaigns use their execution process's category; they have no separate category field.
+
+The timeline displays five lightly colored vertical lanes, with an additional grey Uncategorised lane when matching records have no category. Each lane has a labeled collapse/expand button above the workspace. Collapse hides the lane and its cards, including undated entries, while leaving its button available. Controls work by keyboard and remain available in full screen. Lane visibility lasts until page reload; filter reset does not change it.
+
+All lanes share the global calendar. Collapsing a lane does not move date anchors. Overlapping root groups occupy parallel columns within their lane; nested work retains compact duration tracks. Horizontal scrolling accommodates wider lanes. Filtering retains inherited categories from the complete ownership tree even when an ancestor falls outside the selected date range. Unknown dates remain in the separate undated section and follow the same lane visibility controls.
+
+Categories describe the root programme's primary purpose. Semiconductor work under stepper installation remains Investment, and competitor events inside ecosystem programmes remain Ecosystem & Partners. Moving individual children into a different lane requires changing ownership, not assigning an override.
+
+Category assignments are story changes: submit one Changes confirm proposal per affected record. The UI and schema can be deployed before those proposals are approved; records remain Uncategorised until their root assignment is authorized.

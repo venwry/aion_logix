@@ -82,6 +82,17 @@ export function validateDocuments(documents, { complete = false } = {}) {
     else if (value && typeof value==='object') for (const [key,v] of Object.entries(value)) if (schema.properties?.[key]) walk(v,schema.properties[key],root,`${at}/${key}`);
   }
   for (const [name,doc] of Object.entries(documents)) walk(doc,schemas[name],schemas[name],name);
+  // Only ownership creates category inheritance; causal and context links do not.
+  const timelineChildren=new Set();
+  for(const record of records.values()){
+    if(record.id.startsWith('process.')){
+      if(record.parent_process_id)timelineChildren.add(record.id);
+      for(const step of record.steps||[])if(step.event_id||step.process_id)timelineChildren.add(step.event_id||step.process_id);
+      for(const point of [record.period?.start,record.period?.end])if(point?.precision==='event')timelineChildren.add(point.value);
+    }
+    if(record.id.startsWith('event.')&&record.process_ids?.length)timelineChildren.add(record.id);
+  }
+  for(const id of timelineChildren)if(records.get(id)?.category)report(`${id}: child timeline records must leave category empty and inherit from their parent`);
   for (const record of records.values()) {
     for(const key of ['steps','inputs','outcomes','specification','qualification_requirements','marketing_content']){
       const numbers=(record[key]||[]).map(x=>x.number);

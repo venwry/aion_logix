@@ -40,6 +40,13 @@ export function timelineTree(items){
  for(const node of nodes.values())node.children.sort((a,b)=>order(a)-order(b));
  const occurrences=new Map();
  for(const node of nodes.values())for(const member of node.members){const id=member.record.id;if(!occurrences.has(id))occurrences.set(id,[]);occurrences.get(id).push(node.id);}
+ // Resolve on the complete ownership tree, before filters can hide ancestors.
+ function category(node){
+  if(node.category!==undefined)return node.category;
+  const owner=node.members.find(m=>m.type==='process')||node.members.find(m=>m.type==='event');
+  return node.category=node.parent?category(nodes.get(node.parent)):(owner?.record.category||'');
+ }
+ for(const node of nodes.values())category(node);
  return {nodes,aliases,occurrences};
 }
 // Header cards and duration tracks have separate geometry. Every group uses the
@@ -80,7 +87,7 @@ export function layoutTimeline(nodes,lo,hi){
   for(const [time,count] of counts)reservations.set(time,Math.max(reservations.get(time)||0,count*(cardHeight+rowGap)));
  }
  const rootStarts=new Set(roots.map(n=>n.begin));
- const points=[...knots].sort((a,b)=>a-b),positions=new Map();let y=32;
+ const points=[...knots].sort((a,b)=>a-b),positions=new Map();let y=72;
  for(let i=0;i<points.length;i++){
   if(i)y+=Math.max(rootStarts.has(points[i])?50:24,reservations.get(points[i-1])||0,(labels.get(points[i-1])?.size||0)*24+4);
   positions.set(points[i],y);

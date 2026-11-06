@@ -1,6 +1,8 @@
 import {$,el,human,typeOf,titleOf,loadData,timing,actorSet,fillActors,stats,splitter,showError,debounce} from './shared.js';
 import {compactDetails} from './compact-details.js';
 import {timelineTree,layoutTimeline} from './timeline-layout.js';
+import {arrangeSwimlanes,laneFor} from './timeline-lanes.js';
+const collapsedLanes=new Set();
 try{
  const data=await loadData(),items=data.records.filter(r=>['event','process','campaign'].includes(typeOf(r))).map(record=>({record,type:typeOf(record),date:timing(record,data.index),actors:actorSet(record,data.index),search:JSON.stringify(record).toLowerCase()}));
  const tree=timelineTree(items),dated=items.filter(x=>x.date),first=Math.min(...dated.map(x=>new Date(x.date.start).getUTCFullYear())),last=Math.max(...dated.map(x=>new Date(x.date.end).getUTCFullYear()));
@@ -35,7 +37,7 @@ try{
   return value.slice(0,4)+(value.length>4?'\n'+date.toLocaleDateString('en-GB',{month:'short',...(value.length>7?{day:'2-digit'}:{}),timeZone:'UTC'}):'');
  }
  function placeGroup(group,layout,host){
-  const wrap=el('section','timeline-group');wrap.dataset.groupId=group.id;wrap.setAttribute('aria-label',titleOf(group.record));
+  const wrap=el('section','timeline-group');wrap.dataset.groupId=group.id;wrap.dataset.lane=group.laneId;wrap.setAttribute('aria-label',titleOf(group.record));
   Object.assign(wrap.style,{left:group.left+104+'px',top:group.groupTop+'px',width:group.width+'px',height:group.groupBottom-group.groupTop+'px'});
   host.append(wrap);
   const panel=el('div','timeline-track-panel');panel.style.width=group.gutter+'px';if(group.trackCount)wrap.append(panel);
@@ -79,10 +81,13 @@ try{
   function descendants(id){for(const child of tree.nodes.get(id).children){included.add(child);descendants(child);}}
   for(const id of direct)if(tree.nodes.get(id).date?.span)descendants(id);
   const nodes=new Map([...tree.nodes].filter(([id])=>included.has(id)).map(([id,n])=>[id,{...n,context:!direct.has(id)}]));
-  const layout=layoutTimeline(nodes,lo,hi);$('timeline').replaceChildren();$('undated').replaceChildren();
+  const layout=arrangeSwimlanes(layoutTimeline(nodes,lo,hi),collapsedLanes,[...nodes.values()].some(n=>laneFor(n.category).id==='uncategorised'));$('timeline').replaceChildren();$('undated').replaceChildren();
+  const controls=$('lane-controls');controls.replaceChildren();
+  for(const lane of layout.lanes){const button=el('button','lane-toggle',(lane.hidden?'＋ ':'− ')+lane.label);button.type='button';button.dataset.lane=lane.id;button.style.backgroundColor=lane.color;button.setAttribute('aria-expanded',String(!lane.hidden));button.setAttribute('aria-controls','timeline undated');button.title=(lane.hidden?'Expand ':'Collapse ')+lane.label;button.onclick=()=>{if(lane.hidden)collapsedLanes.delete(lane.id);else collapsedLanes.add(lane.id);render();controls.querySelector('[data-lane="'+lane.id+'"]')?.focus();};controls.append(button);}
   stats($('stats'),['event','process','campaign'].map(t=>[matching.filter(i=>i.type===t).length,t==='process'?'processes':t+'s']));
-  $('result-count').textContent=`${matching.length} of ${items.length} records match · ${lo}–${hi} · shared calendar · child tracks grouped by process`;
-  const root=$('timeline');root.style.width=layout.roots.length?layout.width+'px':'100%';root.style.height=layout.roots.length?layout.height+'px':'auto';
+  $('result-count').textContent=`${matching.length} of ${items.length} records match · ${lo}–${hi} · shared calendar · ${layout.lanes.filter(l=>!l.hidden).length} lanes shown`;
+  const root=$('timeline');root.style.width=layout.width+'px';root.style.height=layout.height+'px';
+  for(const lane of layout.lanes.filter(l=>!l.hidden)){const band=el('section','timeline-lane');band.dataset.lane=lane.id;band.setAttribute('aria-label',lane.label);Object.assign(band.style,{left:lane.left+104+'px',width:lane.width+'px',height:layout.height+'px',backgroundColor:lane.color});band.append(el('h2','timeline-lane-title',lane.label));root.append(band);}
   if(layout.roots.length){for(const year of layout.years){const section=el('section','year-section');section.dataset.year=year.year;section.style.top=year.top+'px';section.style.height=year.height+'px';section.append(el('div','year-line'));root.append(section);}
    for(const n of layout.roots)placeGroup(n,layout,root);
    const axis=el('div','date-axis');axis.setAttribute('aria-label','Timeline dates and years');
@@ -90,9 +95,9 @@ try{
    const spine=el('div','date-spine');spine.style.top=layout.years[0].top+'px';spine.style.height=(layout.height-layout.years[0].top-30)+'px';axis.append(spine);
    for(const tick of layout.ticks){const row=el('div','date-tick');row.style.top=tick.top+'px';row.dataset.date=new Date(tick.time).toISOString().slice(0,10);row.title=tick.labels.join(' / ');const labels=tick.labels.map(value=>{if(value.length===4)return layout.years.some(year=>String(year.year)===value&&year.top===tick.top)?'':value;const date=new Date(value+(value.length===7?'-01':'')+'T00:00:00Z');return date.toLocaleDateString('en-GB',{month:'short',...(value.length>7?{day:'2-digit'}:{}),timeZone:'UTC'});});row.append(el('span','date-tick-label',[...new Set(labels.filter(Boolean))].join(' / ')),el('span','date-dot'));axis.append(row);}
    root.append(axis);
-  }else{const empty=el('div','empty-state');empty.append(el('h2','','No dated records match'),el('p','','Adjust the filters to explore more of the story.'));root.append(empty);}
-  const undated=[...nodes.values()].filter(n=>!n.date);$('undated').hidden=!undated.length;
-  if(undated.length){$('undated').append(el('h2','','Undated / relative timing'),el('p','','Unknown boundaries are not invented. Linked undated work is listed here until dates are supplied.'));for(const n of undated){const node=card(n);if(n.parent)node.title='Belongs to '+titleOf(tree.nodes.get(n.parent).record);$('undated').append(node);}}
+  }else{const empty=el('div','empty-state');empty.append(el('h2','',layout.lanes.some(l=>l.hidden&&l.groups.length)?'Matching lanes are collapsed':'No dated records match'),el('p','','Expand a lane or adjust the filters to explore more of the story.'));root.append(empty);}
+  const undated=[...nodes.values()].filter(n=>!n.date&&!collapsedLanes.has(laneFor(n.category).id));$('undated').hidden=!undated.length;
+  if(undated.length){$('undated').append(el('h2','','Undated / relative timing'),el('p','','Unknown boundaries are not invented. Linked undated work is listed here until dates are supplied.'));for(const n of undated){const node=card(n);node.dataset.lane=laneFor(n.category).id;if(n.parent)node.title='Belongs to '+titleOf(tree.nodes.get(n.parent).record);$('undated').append(node);}}
   if(!selected&&matching.length)selected=matching[0].record.id;if(selected)choose(selected);else compactDetails(null,data,choose);
  }
  $('filters').onsubmit=e=>e.preventDefault();for(const id of ['type','status','actor','from','to'])$(id).onchange=render;$('search').oninput=debounce(render);$('filters').onreset=()=>setTimeout(()=>{$('from').value=first;$('to').value=last;render();},0);

@@ -15,7 +15,7 @@ test('investment uses a start event, milestone and literal end marker without in
  await ready(page);await page.locator('#search').fill('process.stock_market_investment');const group=page.locator('[data-group-id="process.stock_market_investment"]');
  await expect(group.locator('.timeline-card')).toHaveCount(3);await expect(group.locator('[data-boundary="start"]')).toHaveAttribute('data-record-id','event.us_nyse_start');await expect(group.locator('[data-boundary="end"]')).toHaveCount(0);
  await expect(group.locator('.track-marker.end')).toHaveAttribute('title','End: 1977-12-31');await expect(group.locator('.track-marker.milestone')).toHaveAttribute('data-record-id','event.office');
- expect(await card(page,'event.office').evaluate(n=>getComputedStyle(n).backgroundColor)).toBe('rgb(240, 240, 240)');
+ await expect(card(page,'event.office')).toHaveCSS('background-color','rgb(240, 240, 240)');
 });
 test('overlapping children use distinct tracks but a common card edge',async({page})=>{
  await ready(page);const group=page.locator('[data-group-id="process.stepper_install"]');const a=group.locator('[data-track-id="process.process_275"]'),b=group.locator('[data-track-id="process.dram_repair"]');
@@ -35,7 +35,8 @@ test('all cards in a group are disjoint, and equal-date anchors match the global
  for(const id of ['event.basic_launch','event.tandy_ncc_demo','event.ncc79_campaign'])expect(Number(await card(page,id).getAttribute('data-anchor'))).toBe(await page.locator('.date-tick[data-date="1979-06-04"]').evaluate(n=>parseFloat(n.style.top)));
 });
 test('undated work stays separate and clipped tracks show continuation arrows',async({page})=>{
- await ready(page);await expect(page.locator('#undated [data-record-id="process.clone_partnerships"]')).toHaveCount(1);await expect(card(page,'process.clone_partnerships')).toHaveCount(0);expect(await page.locator('#undated [data-record-id="process.clone_partnerships"]').evaluate(n=>getComputedStyle(n).backgroundColor)).toBe('rgb(225, 235, 244)');
+ await page.route('**/data_foundation/process.json',async route=>{const doc=await (await route.fetch()).json();doc.process.push({id:'process.test_unknown',title:'Undated test work',kind:'development',period:{start:{precision:'unknown'},end:{precision:'unknown'}},steps:[]});await route.fulfill({json:doc});});
+ await ready(page);await expect(page.locator('#undated [data-record-id="process.test_unknown"]')).toHaveCount(1);await expect(card(page,'process.test_unknown')).toHaveCount(0);expect(await page.locator('#undated [data-record-id="process.test_unknown"]').evaluate(n=>getComputedStyle(n).backgroundColor)).toBe('rgb(225, 235, 244)');
  await page.locator('#from').selectOption('1974');await page.locator('#to').selectOption('1975');const group=page.locator('[data-group-id="process.stock_market_investment"]');await expect(group.locator('.continued-start')).toHaveCount(1);await expect(group.locator('.continued-end')).toHaveCount(1);await expect(group.locator('.track-marker.start,.track-marker.end')).toHaveCount(0);
 });
 test('filter context, URL selection, keyboard badges and fullscreen work on narrow screens',async({page})=>{

@@ -50,3 +50,18 @@ The maintained branch is `main`; Render's code deployment and `AION_BRANCH` must
 Edit terms inside the owning agreement’s `clauses[]`; a clause cannot be authorized separately. Keep its stable ID for traceability. For events/processes, set one `agreement_id` or omit the field; never use an empty string or `agreement_ids`. Contextual links to other agreements can stay in generic subject references.
 
 Single-parent cleanup is proposed through Changes confirm, one affected record per proposal. Where an event would otherwise anchor two processes, the non-owning process can retain the same calendar date and precision as a literal boundary. Removing an extra `steps[].event_id` leaves its descriptive step intact. Do not change dates merely to force nesting.
+
+
+## Timeline categories and swim lanes
+
+Events and processes support an optional `category` string. The permitted non-empty values are `Adam's personal`, `Logix/AION investment`, `Product dev & launch`, `Ecosystem & Partners`, and `Competition`. An omitted field or `""` is empty; `null` and other spellings are invalid.
+
+Assign a category only to a top-level event or process. Children must leave it empty and inherit their root's category. Ownership comes from process steps, event-based period boundaries, `parent_process_id`, or event `process_ids`. Inputs, outcomes, subjects and related-process references do not establish ownership. The model validator rejects a non-empty category on an owned child. When reparenting a root, clear its category in the same approval batch. Campaigns use their execution process's category; they have no separate category field.
+
+The timeline displays five lightly colored vertical lanes, with an additional grey Uncategorised lane when matching records have no category. Each lane has a labeled collapse/expand button above the workspace. Collapse hides the lane and its cards, including undated entries, while leaving its button available. Controls work by keyboard and remain available in full screen. Lane visibility lasts until page reload; filter reset does not change it.
+
+All lanes share the global calendar. Collapsing a lane does not move date anchors. Overlapping root groups occupy parallel columns within their lane; nested work retains compact duration tracks. Horizontal scrolling accommodates wider lanes. Filtering retains inherited categories from the complete ownership tree even when an ancestor falls outside the selected date range. Unknown dates remain in the separate undated section and follow the same lane visibility controls.
+
+Categories describe the root programme's primary purpose. Semiconductor work under stepper installation remains Investment, and competitor events inside ecosystem programmes remain Ecosystem & Partners. Moving individual children into a different lane requires changing ownership, not assigning an override.
+
+Category assignments are story changes: submit one Changes confirm proposal per affected record. The UI and schema can be deployed before those proposals are approved; records remain Uncategorised until their root assignment is authorized.
