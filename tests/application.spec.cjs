@@ -1,19 +1,21 @@
 const {test,expect}=require('@playwright/test');
 async function ready(page,path){await page.goto('/code/'+path);await expect(page.locator('body')).toHaveAttribute('data-ready','true');}
 test('timeline preserves deep links, spans, variable years and filters',async({page})=>{
- await ready(page,'timeline.html#process.economics_studies');
- await expect(page.locator('#details h2')).toHaveText('Economics studies');
+ await page.route('**/data_storytelling/authorization.json',route=>route.fulfill({json:{authorization:[]}}));
+ await ready(page,'timeline.html#process.harvard_education');
+ await expect(page.locator('#details h2')).toHaveText('Harvard undergraduate economics education');
  const heights=await page.locator('.year-section').evaluateAll(nodes=>nodes.map(n=>Math.round(n.getBoundingClientRect().height)));
  expect(new Set(heights).size).toBeGreaterThan(1);
- const span=page.locator('[data-span-id="process.economics_studies"]');await expect(span).toHaveCount(1);
+ const span=page.locator('[data-track-id="process.harvard_education"]');await expect(span).toHaveCount(1);
  expect(await span.evaluate(n=>n.getBoundingClientRect().height)).toBeGreaterThan(400);
  await page.locator('#type').selectOption('campaign');
- await expect(page.locator('#timeline .timeline-card').first()).toContainText('Campaign / Process');
+ expect(await page.locator('#timeline .timeline-campaign').count()).toBeGreaterThan(0);
  await page.locator('#status').selectOption('authorized');await expect(page.locator('#timeline')).toContainText('No dated records match');
  await page.getByRole('button',{name:'Reset filters'}).click();
- await page.locator('#search').fill('public command of economics');await expect(page.locator('#timeline .timeline-card[data-context="false"]')).toHaveCount(1);
+ await page.locator('#type').selectOption('event');await page.locator('#search').fill('event.harvard_graduation');await expect(page.locator('#timeline .timeline-card[data-context="false"]')).toHaveCount(1);
 });
 test('browser supports sorting, pagination, empty datasets and related records',async({page})=>{
+ await page.route('**/data_storytelling/authorization.json',route=>route.fulfill({json:{authorization:[]}}));
  await ready(page,'browser.html#agreement.autodesk_development');
  await expect(page.locator('#details h2')).toContainText('Autodesk');
  await page.locator('#details').getByRole('link',{name:'Adam Pleskot',exact:true}).first().click();

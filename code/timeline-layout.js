@@ -42,57 +42,67 @@ export function timelineTree(items){
  for(const node of nodes.values())for(const member of node.members){const id=member.record.id;if(!occurrences.has(id))occurrences.set(id,[]);occurrences.get(id).push(node.id);}
  return {nodes,aliases,occurrences};
 }
+// Header cards and duration tracks have separate geometry. Every group uses the
+// same content-spaced date anchors; nested levels share one narrow track panel.
 export function layoutTimeline(nodes,lo,hi){
- const start=Date.UTC(lo,0,1),end=Date.UTC(hi+1,0,1)-1;
+ const start=Date.UTC(lo,0,1),end=Date.UTC(hi+1,0,1)-1,day=t=>Math.floor(t/86400000)*86400000;
  const active=new Map([...nodes].filter(([,n])=>n.date&&n.date.end>=start&&n.date.start<=end).map(([id,n])=>[id,{...n,children:[],parent:null}]));
  for(const n of active.values()){let p=nodes.get(n.id).parent;while(p&&!active.has(p))p=nodes.get(p)?.parent;if(p){n.parent=p;active.get(p).children.push(n.id);}}
- for(const n of active.values())n.children.sort((a,b)=>nodes.get(n.id).children.indexOf(a)-nodes.get(n.id).children.indexOf(b));
- // Calendar anchors are non-linear. Minimum spacing protects labels; additional
- // constraints reserve only the header/footer space actually needed by nested boxes.
- const day=t=>Math.floor(t/86400000)*86400000;
- const knots=new Set(),labels=new Map(),starts=new Set();
- function label(t,value){if(!labels.has(t))labels.set(t,new Set());labels.get(t).add(value);}
- for(let y=lo;y<=hi+1;y++)knots.add(Date.UTC(y,0,1));
+ const roots=[...active.values()].filter(n=>!n.parent),knots=new Set(),labels=new Map();
+ const cardHeight=54,rowGap=8,trackGap=16,cardWidth=340;
+ const label=(t,value)=>{if(!labels.has(t))labels.set(t,new Set());labels.get(t).add(value);};
+ for(let year=lo;year<=hi+1;year++)knots.add(Date.UTC(year,0,1));
  for(const n of active.values()){
-  n.begin=day(Math.max(start,n.boundary==='end'?n.date.end:n.date.start));n.finish=day(Math.min(end,n.date.span||n.boundary==='end'?n.date.end:n.date.start));knots.add(n.begin);knots.add(n.finish);starts.add(n.begin);
-  if(n.date.start>=start)label(n.begin,n.date.startLabel||new Date(n.begin).toISOString().slice(0,10));
-  if(n.date.span&&n.date.end<=end)label(n.finish,n.date.endLabel||new Date(n.finish).toISOString().slice(0,10));
+  n.begin=day(Math.max(start,n.boundary==='end'?n.date.end:n.date.start));
+  n.finish=day(Math.min(end,n.date.span||n.boundary==='end'?n.date.end:n.date.start));
+  n.clippedStart=n.date.start<start;n.clippedEnd=n.date.end>end;
+  knots.add(n.begin);knots.add(n.finish);
+  if(!n.clippedStart)label(n.begin,n.boundary==='end'?n.date.endLabel||n.date.startLabel:n.date.startLabel||new Date(n.begin).toISOString().slice(0,10));
+  if(n.date.span&&!n.clippedEnd)label(n.finish,n.date.endLabel||new Date(n.finish).toISOString().slice(0,10));
  }
- function offsets(n,floor=0){const p=active.get(n.parent);n.startOffset=Math.max(floor,p&&p.begin===n.begin?p.startOffset+56:0);
-  const children=n.children.map(id=>active.get(id)),first=children.find(c=>c.boundary==='start'),last=children.find(c=>c.boundary==='end'),steps=children.filter(c=>!c.boundary);
-  if(first)offsets(first);
-  for(const child of steps)offsets(child,first&&first.finish===child.begin?first.endOffset+8:0);
-  if(last)offsets(last,Math.max(0,...children.filter(c=>c!==last&&c.finish===last.begin).map(c=>c.endOffset+8)));
-  n.endOffset=n.date.span?Math.max(20,n.begin===n.finish?n.startOffset+80:20):n.startOffset+58;
-  if(n.date.span)for(const id of n.children){const child=active.get(id);if(child.finish===n.finish)n.endOffset=Math.max(n.endOffset,child.endOffset+20);}
+ // Preorder puts a parent's header before its same-date descendants; end
+ // occurrences follow the entire subtree. Original step order breaks ties.
+ function visit(n,list){list.push(n);const children=n.children.map(id=>active.get(id));
+  for(const child of children.filter(c=>c.boundary==='start'))visit(child,list);
+  for(const child of children.filter(c=>!c.boundary))visit(child,list);
+  for(const child of children.filter(c=>c.boundary==='end'))visit(child,list);
  }
- const roots=[...active.values()].filter(n=>!n.parent);for(const n of roots)offsets(n);
- const points=[...knots].sort((a,b)=>a-b),edges=new Map(points.map(t=>[t,[]]));
- function requireGap(a,b,gap){if(a<b)edges.get(b).push([a,gap]);}
- for(let i=1;i<points.length;i++)requireGap(points[i-1],points[i],Math.max(starts.has(points[i-1])?64:24,(labels.get(points[i-1])?.size||0)*14+4));
- for(const n of active.values()){
-  if(n.date.span)requireGap(n.begin,n.finish,n.startOffset+80-n.endOffset);
-  if(n.parent){const p=active.get(n.parent);requireGap(p.begin,n.begin,p.startOffset+56-n.startOffset);requireGap(n.finish,p.finish,n.endOffset+20-p.endOffset);}
-  const children=n.children.map(id=>active.get(id)),first=children.find(c=>c.boundary==='start'),last=children.find(c=>c.boundary==='end');
-  for(const child of children){
-   if(first&&child!==first)requireGap(first.finish,child.begin,first.endOffset+8-child.startOffset);
-   if(last&&child!==last)requireGap(child.finish,last.begin,child.endOffset+8-last.startOffset);
+ const reservations=new Map();
+ for(const root of roots){
+  const list=[];visit(root,list);const rank=new Map(list.map((n,i)=>[n.id,i]));
+  root.entries=list.sort((a,b)=>a.begin-b.begin||rank.get(a.id)-rank.get(b.id));
+  const counts=new Map(),slots=[];
+  for(const n of root.entries){
+   n.group=root.id;n.row=counts.get(n.begin)||0;counts.set(n.begin,n.row+1);
+   if(n.date.span){let slot=slots.findIndex(finish=>finish<n.begin);if(slot<0)slot=slots.length;slots[slot]=n.finish;n.track=slot;}
   }
+  root.trackCount=slots.length;root.gutter=slots.length?56+slots.length*trackGap:0;root.width=root.gutter+cardWidth+8;
+  for(const [time,count] of counts)reservations.set(time,Math.max(reservations.get(time)||0,count*(cardHeight+rowGap)));
  }
- const positions=new Map();for(const t of points)positions.set(t,Math.max(28,...edges.get(t).map(([a,g])=>positions.get(a)+g)));
+ const rootStarts=new Set(roots.map(n=>n.begin));
+ const points=[...knots].sort((a,b)=>a-b),positions=new Map();let y=32;
+ for(let i=0;i<points.length;i++){
+  if(i)y+=Math.max(rootStarts.has(points[i])?50:24,reservations.get(points[i-1])||0,(labels.get(points[i-1])?.size||0)*24+4);
+  positions.set(points[i],y);
+ }
  const yAt=t=>positions.get(day(t));
- for(const n of active.values()){n.top=yAt(n.begin)+n.startOffset;n.bottom=yAt(n.finish)+n.endOffset;}
- const ticks=[...labels].sort((a,b)=>a[0]-b[0]).map(([time,values])=>({time,top:yAt(time),labels:[...values]}));
- const height=Math.max(...positions.values(),...[...active.values()].map(n=>n.bottom))+30;
- const gap=12,unit=310;
- function pack(list){const placed=[];let width=0;
-  for(const n of list.sort((a,b)=>a.top-b.top||b.bottom-a.bottom||a.id.localeCompare(b.id))){
-   const children=n.children.map(id=>active.get(id));const childWidth=pack(children);n.width=Math.max(unit,childWidth+24);
-   let left=0;const overlapping=placed.filter(p=>p.bottom+4>n.top&&p.top<n.bottom+4).sort((a,b)=>a.left-b.left);
-   for(const p of overlapping){if(left+n.width+gap<=p.left)break;left=Math.max(left,p.left+p.width+gap);}n.left=left;width=Math.max(width,left+n.width);placed.push(n);
-  }return width;
+ for(const n of active.values()){
+  n.anchor=yAt(n.begin);n.endAnchor=yAt(n.finish);
+  n.top=n.anchor-20+n.row*(cardHeight+rowGap);n.bottom=n.top+cardHeight;
+  n.cardWidth=cardWidth;
  }
- const width=pack(roots)+116;
+ // Pack whole groups, not nested boxes. Sequential roots can reuse a lane.
+ const placed=[];let width=0;
+ for(const root of roots.sort((a,b)=>a.top-b.top||b.endAnchor-a.endAnchor||a.id.localeCompare(b.id))){
+  root.groupTop=Math.min(...root.entries.map(n=>n.top))-4;
+  root.groupBottom=Math.max(...root.entries.map(n=>Math.max(n.bottom,n.endAnchor+12)))+4;
+  let left=0;const overlaps=placed.filter(p=>p.groupBottom+12>root.groupTop&&p.groupTop<root.groupBottom+12).sort((a,b)=>a.left-b.left);
+  for(const p of overlaps){if(left+root.width+16<=p.left)break;left=Math.max(left,p.left+p.width+16);}
+  root.left=left;for(const n of root.entries)n.cardLeft=left+root.gutter;
+  placed.push(root);width=Math.max(width,left+root.width);
+ }
+ const ticks=[...labels].sort((a,b)=>a[0]-b[0]).map(([time,values])=>({time,top:yAt(time),labels:[...values]}));
  const years=[];for(let year=lo;year<=hi;year++)years.push({year,top:yAt(Date.UTC(year,0,1)),height:yAt(Date.UTC(year+1,0,1))-yAt(Date.UTC(year,0,1))});
- return {nodes:active,roots,width,height,years,ticks};
+ const height=Math.max(...positions.values(),...roots.map(n=>n.groupBottom))+30;
+ return {nodes:active,roots,width:width+116,height,years,ticks,trackGap};
 }

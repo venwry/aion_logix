@@ -17,21 +17,23 @@ The header switches between pages. The original Logix/AION logo links to the tim
 
 ### Dates and the fixed rail
 
-Events appear as point-in-time boxes. Processes occupy boxes from their start to end, with parallel work beside them. Start dates appear near the top of process boxes and end dates at the bottom. Year lines pass behind boxes that cross year boundaries.
+Events appear as compact light-grey cards and processes as compact pale-blue headings. Grey duration tracks in a shared vertical panel carry process start/end dates; filled cards no longer stretch over their entire duration. All groups align with the global timeline on the left. Green dots mark starts, red dots ends, and black dots milestones. Marker tooltips also state their roles.
 
-The narrow date rail remains at the left edge during horizontal scrolling. Dates are left of the vertical line; small bold dark-red years are immediately to its right. Spacing is chronological but **not proportional to elapsed time**: it expands only enough to fit labels, headings and nested boxes. Box height therefore is not a quantitative duration scale.
+The narrow date rail remains at the left edge during horizontal scrolling. Dates are left of the vertical line; small bold dark-red years are immediately to its right. Spacing is chronological but **not proportional to elapsed time**: it expands only enough to fit labels, headings and cards. Track height therefore is not a quantitative duration scale. Same-date cards may be offset to remain readable, with connectors to their unchanged date anchor.
 
-Year/month/day precision is retained in details and date labels. A year-only fact is not silently given a known day. Event-referenced process boundaries resolve through the referenced event. Unknown boundaries are not invented; undated work appears in a separate section. Selecting a year range can clip the visible duration of a process, while its label retains the underlying start/end values.
+Year/month/day precision is retained in details and date labels. A year-only fact is not silently given a known day. Event-referenced process boundaries resolve through the referenced event. Unknown boundaries are not invented; undated work appears in a separate section. Selecting a year range can clip the visible duration of a process; arrow markers distinguish continuation from a true start/end, and tooltips retain the underlying dates.
 
-Events and processes with an associated agreement show a small **Agreement** button immediately before their start date. Clicking it opens the agreement, including its embedded clauses, in the details pane. Combined campaign/process boxes use the execution process’s agreement. Current data uses `agreement_id`; when viewing older data with `agreement_ids`, the first entry is used.
+Events and processes with an associated agreement show a small white **Agreement** button immediately to the right of their authorization flag. Clicking it opens the agreement, including its embedded clauses, in the details pane. Combined campaign/process boxes use the execution process’s agreement. Current data uses `agreement_id`; when viewing older data with `agreement_ids`, the first entry is used.
 
-### Nested work and campaign boxes
+### Nested work and campaign cards
 
-Events referenced by `period.start` and `period.end` appear inside the process as light grey **Start** and **End** cards, respectively before and after step events and sub-processes. Same-day boundaries reserve room for the steps between them. A shared boundary appears in each owning process; selecting any occurrence opens the same event record and highlights its other visible occurrences. An event used for both boundaries appears once in each role. These visual occurrences do not duplicate foundation records or increase the matching-record count.
+Events referenced by `period.start` and `period.end` appear inside the process as light grey **Start** and **End** cards, respectively before and after step events and sub-processes. Same-day boundaries reserve room for the steps between them. A shared boundary appears in each owning process; selecting any occurrence opens the same event record and highlights its other visible occurrences. Legacy records using one event for both boundaries retain explicit roles until corrected through review. These visual occurrences do not duplicate foundation records or increase the matching-record count.
 
 Explicit parent-process links and process-step references place events and sub-processes inside their owner where their dates fit. Membership selection prioritizes explicit parent links, then campaign execution steps, other process steps, and event process references; equal-priority ties use stable IDs. Other relationships remain available in details. A child outside its parent's stated dates stays separate; rendering does not change either record's dates. Undated children remain in the undated section.
 
-A campaign shares one visual box with its execution process. **Campaign** and **Process** labels select the respective records. These remain two distinct records with separate content hashes and authorizations. “Mixed authorization” means only one of the pair is authorized; it is a display summary, not a stored status or group approval.
+All child levels share a compact track panel. Overlapping children use adjacent tracks; a slot is reused after its previous process ends. Child cards share a common left edge. Parentage remains available in card descriptions and details. Undated processes stay in their separate section.
+
+A campaign shares one visual card with its execution process. Its light-red **Campaign** badge opens campaign details; the heading and **Process** label open execution-process details. These remain two distinct records with separate content hashes and authorizations. “Mixed authorization” means only one of the pair is authorized; it is a display summary, not a stored status or group approval.
 
 ### Filters and space
 

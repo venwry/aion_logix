@@ -1,6 +1,6 @@
 # Timeline display proposal
 
-Status: design proposal updated with user decisions; no application or foundation-data changes applied. Both supplied sketches and the user's answers are incorporated below. Three separate data proposals remove duplicate start/end event associations.
+Status: implemented in the application. The approved design decisions and original audit are retained below; the three separate end-association proposals were authorized before implementation.
 
 ## Scope and evidence
 
@@ -130,13 +130,13 @@ Also cover these regression cases even where the snapshot does not contain an ex
 
 The second sketch illustrates geometry, not revised Harvard dates. In particular, its altered Year 2/Year 3 overlap does not authorize changing the education records. All tracks remain aligned to the global calendar despite the two original examples having independent illustration coordinates.
 
-## Implementation after review
+## Implementation
 
 Update the layout model in `code/timeline-layout.js`, rendering in `code/timeline.js`, and timeline styles in `code/app.css`. Adjust `code/timeline.html` if the shared track panel or legend requires it. Preserve the timing-resolution and data-loading contracts. The display design does not require a schema change. Separately, the user's correction to duplicate start/end associations is proposed in `data_storytelling/change.json`, one process per approval; foundation records remain unchanged until approval.
 
 Validate the new model and browser rendering against both supplied examples and each material edge case above. Replace tests that assume full-height filled process boxes; retain hierarchy, selection, filtering and boundary-order tests. Check campaign/process paired status, Agreement links, deep links, narrow screens, fullscreen, keyboard access, clipping and card/label collisions. Confirm that displayed date precision and record counts remain correct.
 
-Acceptance requires every date anchor to align with the global timeline, all child levels to use a compact shared track panel, every displayed child to retain its proper membership, start and end events to remain ordered around steps, Agreement/campaign blocks to remain accessible, and all cards and tracks to remain readable. The design decisions are now recorded. No UI implementation is included in this documentation update.
+Acceptance requires every date anchor to align with the global timeline, all child levels to use a compact shared track panel, every displayed child to retain its proper membership, start and end events to remain ordered around steps, Agreement/campaign blocks to remain accessible, and all cards and tracks to remain readable. The design decisions are now recorded. The application now implements this display contract. Same-date cards use vertical offsets and connectors to shared global date anchors; all nesting levels share the root track panel.
 
 ## Separate data proposals
 
