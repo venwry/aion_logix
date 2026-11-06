@@ -506,6 +506,12 @@
           "type": "milestone",
           "description": "Selected 2.75 µm process release review. Retain the milestone’s existing measured qualification requirements and production-release capability transition.",
           "event_id": "event.production_275"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Review 2.75 µm RAM qualification and cost selection in June 1981, retaining the measured qualification requirements and the recorded qualified-capability transition.",
+          "event_id": "event.dram_275_review"
         }
       ],
       "subject_ids": [
@@ -529,8 +535,8 @@
           "precision": "day"
         },
         "end": {
-          "value": "1980-12-31",
-          "precision": "day"
+          "value": "event.dram_repair_release",
+          "precision": "event"
         }
       },
       "inputs": [],
@@ -648,65 +654,16 @@
           "type": "milestone",
           "description": "Record the selected 1.5 µm 64K RAM release milestone in October 1983, retaining its existing capability transition.",
           "event_id": "event.dram_15_release"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Review repeatable 1.5 µm production in December 1983, retaining the recorded process, reliability and cost requirements and capability transition.",
+          "event_id": "event.mature_15"
         }
       ],
       "subject_ids": [
         "manufacturing_capability.aion_nmos_15um_logic"
-      ]
-    },
-    {
-      "id": "process.clone_product_preparation",
-      "title": "Five manufacturer product and production preparation",
-      "kind": "development",
-      "description": "Five manufacturer product and production preparation",
-      "participant": [
-        {
-          "actor_id": "actor.northstar",
-          "role": "programme_partner"
-        },
-        {
-          "actor_id": "actor.vector",
-          "role": "programme_partner"
-        },
-        {
-          "actor_id": "actor.sks",
-          "role": "programme_partner"
-        },
-        {
-          "actor_id": "actor.goupil",
-          "role": "programme_partner"
-        },
-        {
-          "actor_id": "actor.eina",
-          "role": "programme_partner"
-        },
-        {
-          "actor_id": "actor.logix",
-          "role": "programme_partner"
-        }
-      ],
-      "period": {
-        "start": {
-          "value": "1981-01-12",
-          "precision": "day"
-        },
-        "end": {
-          "value": "1981-12-31",
-          "precision": "day"
-        }
-      },
-      "inputs": [],
-      "outcomes": [],
-      "steps": [
-        {
-          "number": 1,
-          "type": "action",
-          "description": "Audit partners, agree terms, prototype and qualify local products, arrange contracted manufacturing and build launch stock. Initial ranges remain narrow; Logix and third-party complements are always allowed."
-        }
-      ],
-      "subject_ids": [],
-      "related_process_ids": [
-        "process.clone_partnerships"
       ]
     },
     {
@@ -827,6 +784,12 @@
         },
         {
           "number": 3,
+          "type": "milestone",
+          "description": "Review controller pilots on 14 September 1981 for electrical equivalence, yield, reliability and test coverage; release only passing parts and retain AION supply for unqualified parts.",
+          "event_id": "event.sgs_controller_gate"
+        },
+        {
+          "number": 4,
           "type": "milestone",
           "description": "Milestone during this process: International Logix-compatible launch — five manufacturers and Aion Tech UK.",
           "event_id": "event.clone_january_launch"
@@ -4374,7 +4337,7 @@
       "id": "process.clone_second_source_development",
       "title": "Clone partnerships and second-source development",
       "kind": "development",
-      "description": "Coordinate the five founding clone partnerships, independent chip sourcing and common-core localisation from the first partner contacts on 12 January 1981 through the existing SGS transfer programme ending 30 June 1982. Preserve independent brands, manufacturer-specific agreements, qualification gates and fallback AION supply.",
+      "description": "Coordinate the five founding clone partnerships, manufacturer product and production preparation, common-core localisation, channel readiness and independent chip sourcing from the first contacts on 12 January 1981 through the SGS transfer programme ending 30 June 1982. Preserve independent brands, manufacturer-specific agreements, qualification gates, narrow initial product ranges and fallback AION supply.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -4395,6 +4358,26 @@
         {
           "actor_id": "actor.sgs",
           "role": "independent licensed chip manufacturer"
+        },
+        {
+          "actor_id": "actor.northstar",
+          "role": "independent manufacturer responsible for its product and production preparation"
+        },
+        {
+          "actor_id": "actor.vector",
+          "role": "independent manufacturer responsible for its product and production preparation"
+        },
+        {
+          "actor_id": "actor.sks",
+          "role": "independent manufacturer responsible for its product and production preparation"
+        },
+        {
+          "actor_id": "actor.goupil",
+          "role": "independent manufacturer responsible for its product and production preparation"
+        },
+        {
+          "actor_id": "actor.eina",
+          "role": "independent manufacturer responsible for its product and production preparation"
         }
       ],
       "period": {
@@ -4436,15 +4419,44 @@
         {
           "number": 3,
           "type": "action",
+          "description": "From 12 January to 31 December 1981, audit the five manufacturers, agree terms, prototype and qualify their local products, arrange contracted manufacturing and build launch stock. Keep initial ranges narrow and allow Logix and third-party complements."
+        },
+        {
+          "number": 4,
+          "type": "action",
           "description": "Prepare common-core language editions, shared document formats and local tests; partners license third-party applications independently.",
           "process_id": "process.clone_localisation"
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Prepare Aion Tech UK's sales and service operation on 1 June 1981, including distribution, sterling pricing, keyboards, spares, support and Academy delivery; ownership, financing and later assembly remain separate decisions.",
+          "event_id": "event.aion_tech_uk_setup"
+        },
+        {
+          "number": 6,
+          "type": "action",
+          "description": "Prepare dealers, service staff and Academy delivery from June 1981 through March 1982, including training, spares and escalation; reuse existing capacity and cost any incremental country facilities.",
+          "process_id": "process.clone_channel_readiness"
+        },
+        {
+          "number": 7,
+          "type": "milestone",
+          "description": "Run engineering pilots and local software acceptance on 13 July 1981, testing hardware, document exchange and service readiness while arranging SKS contractor capacity and staged EINA pilot lots.",
+          "event_id": "event.clone_engineering_pilots"
+        },
+        {
+          "number": 8,
+          "type": "milestone",
+          "description": "Run country customer and dealer-readiness pilots on 5 October 1981, covering representative workflows, backup and restore, installation and support; offer local accounting or payroll only where independently qualified.",
+          "event_id": "event.clone_customer_pilots"
         }
       ],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
-          "description": "A coordinated programme links clone agreements, common-core localisation and independent chip-source qualification. Existing agreement terms, the recorded January 1982 launch and per-part availability limits remain unchanged.",
+          "description": "The programme coordinates qualified manufacturer product preparation, launch stock, common-core localisation, dealer and service readiness, and independent chip-source qualification. Existing agreement terms, the January 1982 launch and configuration-specific availability limits remain unchanged; the SGS transfer work continues through June 1982.",
           "subject_ids": [
             "actor.northstar",
             "actor.vector",
@@ -4586,6 +4598,24 @@
         },
         {
           "number": 2,
+          "type": "milestone",
+          "description": "Review selective native C/TUI application ports on 30 June 1980, testing files and arithmetic while retaining CP/M editions; source compatibility does not imply native execution of Z80 binaries.",
+          "event_id": "event.native_validation"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Record independent vendors' interface-adapter qualification on 30 September 1980, including electrical and protocol conformance, supported configurations and optional AION certification.",
+          "event_id": "event.adapter_response"
+        },
+        {
+          "number": 4,
+          "type": "milestone",
+          "description": "Review 1980 sales, production capacity and investment on 31 December 1980, preserving the scenario's costed-production assumptions and 5% commercial capacity headroom.",
+          "event_id": "event.financial_review_1980"
+        },
+        {
+          "number": 5,
           "type": "milestone",
           "description": "Begin DRI’s independently licensed 68k AIONix port programme, including funded feasibility work, suitable external-MMU hardware assessment and restartable-fault investigation.",
           "event_id": "event.dri_68k_program"
