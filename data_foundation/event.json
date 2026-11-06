@@ -965,15 +965,19 @@
         "event.aionix_preliminary",
         "product.software_aionix"
       ],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The AIONix department's February move to Logix offices near DRI supplies the working arrangement for the programme formalised in September.",
+          "event_id": "event.aionix_relocation"
+        }
+      ],
       "outcomes": [],
       "time": {
         "value": "1978-09-12",
         "precision": "day"
       },
-      "process_ids": [
-        "process.aionix_relocation"
-      ],
       "agreement_id": "agreement.aionix"
     },
     {
@@ -4377,25 +4381,6 @@
       }
     },
     {
-      "id": "event.financial_review_1982",
-      "title": "Close the revised 1982 sales, capacity and ROI scenario",
-      "kind": "activity",
-      "description": "Reconcile monthly sales with BOM demand, dated balanced prices, Team expenses, 1982 manufacturing and port-development provisions, capex, depreciation and inventory. Report pre-tax five-entity project ROI; no shareholder ROI, terminal asset liquidation or 1983 revenue.",
-      "participant": [
-        {
-          "actor_id": "actor.logix",
-          "role": "participant"
-        }
-      ],
-      "subject_ids": [],
-      "inputs": [],
-      "outcomes": [],
-      "time": {
-        "value": "1982-12-31",
-        "precision": "day"
-      }
-    },
-    {
       "id": "event.comdex82_reference_cases",
       "title": "Professional CAD reference cases and campaign review",
       "kind": "activity",
@@ -4948,6 +4933,38 @@
       "subject_ids": [
         "product.family_artemis"
       ]
+    },
+    {
+      "id": "event.aionix_relocation",
+      "title": "AIONix department relocates near DRI",
+      "kind": "relocation",
+      "description": "On 24 February 1978, the AIONix department moves from Copenhagen to Logix offices near DRI headquarters.",
+      "participant": [
+        {
+          "actor_id": "actor.aion",
+          "role": "programme participant"
+        }
+      ],
+      "time": {
+        "value": "1978-02-24",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The AIONix exploratory architecture and portability work begun on 1 February provides the programme context for relocating its department closer to DRI.",
+          "event_id": "event.aionix_preliminary"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The AIONix department is based at Logix offices near DRI headquarters to support the continuing development programme."
+        }
+      ],
+      "subject_ids": []
     }
   ]
 }
