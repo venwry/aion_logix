@@ -718,6 +718,18 @@
           "number": 1,
           "type": "action",
           "description": "Prepare German/French/Spanish platform editions, shared document formats and local acceptance tests. Partners license third-party applications independently. UK delivery uses qualified English editions. Country accounting adaptation is separate."
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Freeze initial clone ranges and localisation contracts on 6 April 1981, including reference configurations, compatible document and ABI behaviour, local keyboards, translated releases, third-party licences and launch-supply reservations.",
+          "event_id": "event.clone_design_freeze"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Review January-launch readiness on 14 December 1981: approve qualified country configurations and platform editions, confirm warranty/support ownership, stock allocation, dealer and instructor readiness and price sheets, and retain AION fallback supply for unqualified SGS parts.",
+          "event_id": "event.clone_release_gate"
         }
       ],
       "subject_ids": [],
@@ -1955,15 +1967,15 @@
       "id": "process.open_compatibility",
       "title": "Ecosystem growth and market response — CP/M / 8-bit era",
       "kind": "coordination",
-      "description": "CP/M / 8-bit phase, July 1978 to 31 March 1980. Build the initial ecosystem of independent manufacturers, software developers and peripheral contributors around Aurelia’s CP/M with TUI, FlexiBUS, C development interfaces, graphics subsystem and digital monitor connectivity. Coordinate documented implementation and qualification, SMC second-source transfer, portable DRI extensions and Tandy cooperation. The envelope covers the recorded July 1978 to March 1980 work; it does not imply universal adoption or completion of all later ecosystem targets.",
+      "description": "CP/M / 8-bit ecosystem development from July 1978 through the portable-system competition milestone on 1 April 1981. Build the ecosystem of independent manufacturers, software developers and peripheral contributors around Aurelia’s CP/M with TUI, FlexiBUS, C development interfaces, graphics subsystem and digital monitor connectivity. Coordinate documented implementation and qualification, SMC second-source transfer, portable DRI extensions and Tandy cooperation. CP/M activity continues alongside the Artemis ecosystem phase; the envelope does not imply universal adoption or completion of all later targets.",
       "period": {
         "start": {
           "value": "1978-07",
           "precision": "month"
         },
         "end": {
-          "value": "1980-03-31",
-          "precision": "day"
+          "value": "event.portable_cpm_pressure",
+          "precision": "event"
         }
       },
       "participant": [
@@ -2044,6 +2056,11 @@
           "subject_ids": [
             "product.software_microsoft_basic_aurelia"
           ]
+        },
+        {
+          "number": 4,
+          "type": "result",
+          "description": "The closing market-response milestone records competition from bundled portable CP/M systems, making existing software libraries and total package cost important to business buyers without asserting alternative-world sales volumes or component supply."
         }
       ],
       "steps": [
@@ -3255,22 +3272,22 @@
     },
     {
       "id": "process.comdex1981_campaign",
-      "title": "Team Edition development, qualification and COMDEX 1981 campaign",
+      "title": "Team Edition dealer preparation and COMDEX 1981 campaign",
       "kind": "campaign_execution",
-      "description": "Develop and qualify Team Edition, prepare dealers and demonstrate shared projects, review, reproducible builds and separate CP/M and AIONix targets at COMDEX 1981. The process starts with engineering on 1 December 1980, includes the November 1981 premiere and ends at the existing 1 December 1981 follow-up milestone. Retail deployment and Autodesk sponsorship remain separate.",
+      "description": "Prepare dealers and press from 1 October 1981, demonstrate Team Edition at COMDEX on 19 November and begin the existing workshop and trade-campaign follow-up on 1 December. Engineering and reference-site qualification belong to the enclosing Team Edition server development and launch process; retail deployment and Autodesk sponsorship remain separate.",
       "participant": [
         {
           "actor_id": "actor.logix",
-          "role": "programme sponsor, dealer preparation and campaign lead"
+          "role": "dealer preparation and campaign coordination"
         },
         {
           "actor_id": "actor.aion",
-          "role": "development, qualification and programme sponsor"
+          "role": "technical demonstrations, dealer training and press briefings"
         }
       ],
       "period": {
         "start": {
-          "value": "event.team_engineering",
+          "value": "event.team_dealer_training",
           "precision": "event"
         },
         "end": {
@@ -3278,14 +3295,22 @@
           "precision": "event"
         }
       },
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Reference-site pilots validate shared projects, permissions, interrupted saves, backup/recovery and distinct CP/M and AIONix builds before dealer demonstrations.",
+          "event_id": "event.team_pilots"
+        }
+      ],
       "outcomes": [
         {
           "number": 1,
-          "type": "deliverable",
-          "description": "AION Development System — Team Edition",
+          "type": "result",
+          "description": "Dealers and press receive qualified Team Edition demonstrations, the product is presented at COMDEX, and the workshop/trade follow-up begins. Attendance is not counted as paid customer deployment.",
           "subject_ids": [
-            "product.aion_development_team"
+            "product.aion_development_team",
+            "product.software_aion_development_team"
           ]
         }
       ],
@@ -3293,40 +3318,18 @@
         {
           "number": 1,
           "type": "action",
-          "description": "AION Software developed shared projects, source history, branches, reviews and reproducible builds for development teams."
+          "description": "Prepare campaign demonstrations, dealer materials and press briefings that explain whole-team development, hardware/storage requirements, C source portability and separate target binaries."
         },
         {
           "number": 2,
-          "type": "action",
-          "description": "The team tested permissions, interrupted saves, backup recovery and separate CP/M and AIONix builds at reference sites."
-        },
-        {
-          "number": 3,
-          "type": "action",
-          "description": "Team Edition reference-site pilots",
-          "event_id": "event.team_pilots"
-        },
-        {
-          "number": 4,
-          "type": "action",
-          "description": "The team prepared dealers and delivered Team Edition for its November 1981 premiere."
-        },
-        {
-          "number": 5,
-          "type": "action",
-          "description": "Team Edition dealer training and press briefings",
-          "event_id": "event.team_dealer_training"
-        },
-        {
-          "number": 6,
           "type": "milestone",
           "description": "Premiere AION Development System — Team Edition at COMDEX on 19 November 1981.",
           "event_id": "event.team_launch"
         },
         {
-          "number": 7,
+          "number": 3,
           "type": "action",
-          "description": "Launch the Team Edition workshop and trade-campaign follow-up. The existing 1 December milestone starts the 90-day programme; it does not assert that all 90 days have elapsed."
+          "description": "Prepare the workshop, case-study and trade-advertising follow-up launched by the 1 December end milestone; the 90-day programme is not claimed to have finished on that date."
         }
       ],
       "subject_ids": [
@@ -4580,7 +4583,7 @@
         {
           "number": 1,
           "type": "resource",
-          "description": "The preceding CP/M / 8-bit ecosystem phase establishes supplier cooperation, documented interfaces and independent implementation practices for the next phase.",
+          "description": "Supplier cooperation, documented interfaces and independent implementation practices established in the CP/M / 8-bit programme provide a foundation for the Artemis phase. CP/M ecosystem work continues alongside Artemis until April 1981; completion of the whole CP/M programme is not a prerequisite for Artemis work.",
           "process_id": "process.open_compatibility"
         },
         {
@@ -4635,6 +4638,274 @@
       "subject_ids": [
         "product.family_artemis",
         "product.software_aionix"
+      ]
+    },
+    {
+      "id": "process.native_abacus_pulse_development",
+      "title": "32-bit Native Abacus/Pulse development",
+      "kind": "development",
+      "description": "Develop and qualify native Abacus 3.0 and Pulse 3.0 for 32-bit Artemis from 14 February to 21 December 1980. Present the resulting applications through the COMDEX 1980 campaign while maintaining the existing Aurelia/Aurelia+ software line.",
+      "participant": [
+        {
+          "actor_id": "actor.aion",
+          "role": "native application engineering and qualification"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "Artemis platform and launch coordination"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "1980-02-14",
+          "precision": "day"
+        },
+        "end": {
+          "value": "1980-12-21",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The earlier AIONix architecture and portability work establishes the operating-system direction for native Artemis software.",
+          "event_id": "event.aionix_preliminary"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Existing Abacus and Pulse products provide the application lineage for the native editions.",
+          "subject_ids": [
+            "product.abacus_2",
+            "product.pulse_1"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Implement native Abacus 3.0 and Pulse 3.0 for Artemis, including formatted tables, bounded columnar storage, calculated columns and lookups, read-only SQL queries, graphical reporting, embedded Pulse and supported logical-record imports.",
+          "subject_ids": [
+            "product.abacus_3",
+            "product.pulse_3",
+            "technology.abacus_formatted_tables",
+            "technology.abacus_embedded_pulse"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Qualify RAM and disk use, arithmetic and query correctness, recovery and execution times using repeatable business workflows; do not promise unlimited datasets or guaranteed compression."
+        },
+        {
+          "number": 3,
+          "type": "action",
+          "description": "Present the native products and demonstrated business workflows through the COMDEX 1980 campaign, retaining the existing launch milestone.",
+          "process_id": "process.comdex1980_campaign"
+        },
+        {
+          "number": 4,
+          "type": "action",
+          "description": "Complete the development period with documented supported configurations and reviewed demonstration feedback while preserving maintenance and simplified refreshes for Aurelia/Aurelia+."
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Native Abacus 3.0 and Pulse 3.0 form the Artemis-focused application generation presented at COMDEX, with documented resource limits and qualified business workflows.",
+          "subject_ids": [
+            "product.abacus_3",
+            "product.pulse_3"
+          ]
+        }
+      ],
+      "subject_ids": [
+        "product.family_artemis",
+        "product.software_aionix"
+      ]
+    },
+    {
+      "id": "process.team_edition_server_development",
+      "title": "Team Edition server development and launch",
+      "kind": "development",
+      "description": "Develop and qualify Team Edition shared development services, validate reference-site use and coordinate its COMDEX 1981 launch. Begin with engineering on 1 December 1980 and end with the launch campaign on 1 December 1981, when the existing workshop and trade follow-up begins. Retail deployment, the later 90-day follow-up work and Autodesk sponsorship are not treated as completed development activities.",
+      "participant": [
+        {
+          "actor_id": "actor.aion",
+          "role": "Team Edition engineering and reference-site qualification"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "platform support, programme sponsorship and launch coordination"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "event.team_engineering",
+          "precision": "event"
+        },
+        "end": {
+          "value": "1981-12-01",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The Artemis commercial launch establishes the platform for the Team Edition development system.",
+          "event_id": "event.artemis_launch"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Existing AIONix and Artemis development facilities provide the operating-system and hardware basis for shared development services.",
+          "subject_ids": [
+            "product.software_aionix",
+            "product.family_artemis"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "AION Software developed shared projects, source history, branches, reviews and reproducible builds for development teams."
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "The team tested permissions, interrupted saves, backup recovery and separate CP/M and AIONix builds at reference sites."
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Run the 1 September 1981 reference-site pilots for shared projects, permissions, interrupted saves, recovery and separate CP/M/AIONix builds; participants are not assumed paying customers.",
+          "event_id": "event.team_pilots"
+        },
+        {
+          "number": 4,
+          "type": "action",
+          "description": "Prepare dealers, present Team Edition at COMDEX and begin the existing workshop/trade follow-up through the dedicated launch campaign.",
+          "process_id": "process.comdex1981_campaign"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "AION Development System — Team Edition",
+          "subject_ids": [
+            "product.aion_development_team"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "Team Edition shared services and distinct CP/M/AIONix target builds undergo reference-site qualification and are presented through the launch campaign, with documented deployment and recovery requirements. Retail installations and sponsored Autodesk work remain separately accounted for.",
+          "subject_ids": [
+            "product.software_aion_development_team",
+            "product.family_team_edition"
+          ]
+        }
+      ],
+      "subject_ids": [
+        "product.aion_development_team",
+        "product.software_aion_development_team",
+        "product.family_team_edition"
+      ]
+    },
+    {
+      "id": "process.artemis_networking_development",
+      "title": "Artemis Networking development and launch",
+      "kind": "development",
+      "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign ending on 4 May 1981. Recovery pilots and conditional commercial shipments follow the launch and remain separate qualification activities.",
+      "participant": [
+        {
+          "actor_id": "actor.logix",
+          "role": "network-capable systems and platform coordination"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "networking and AIONix server software"
+        },
+        {
+          "actor_id": "actor.bpi",
+          "role": "client-server application integration"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "1980-07-12",
+          "precision": "day"
+        },
+        "end": {
+          "value": "1981-05-04",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The Artemis commercial launch provides the platform to extend with networked business and server configurations.",
+          "event_id": "event.artemis_launch"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The existing Artemis and AIONix platform supplies the hardware and operating-system foundation for network development.",
+          "subject_ids": [
+            "product.family_artemis",
+            "product.software_aionix"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Develop and integrate TCP/IP networking, AIONix server services and supported Aurelia/Artemis network upgrades.",
+          "subject_ids": [
+            "technology.logix_tcpip_lan",
+            "product.software_aionix_server",
+            "product.software_cpm_aurelia_networking",
+            "product.aurelia_network_upgrade",
+            "product.artemis_network_upgrade"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Integrate the client-server application generation and prepare configuration-specific authentication, locking, backup and crash-recovery tests.",
+          "subject_ids": [
+            "product.software_bpi_client_server"
+          ]
+        },
+        {
+          "number": 3,
+          "type": "action",
+          "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades through the NCC 1981 launch campaign.",
+          "process_id": "process.ncc1981_campaign"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The networking and server platform is presented at NCC. Subsequent multi-client recovery pilots and configuration-specific qualification gate server sales and shipments; the launch does not establish unrestricted availability or forecast revenue from unpriced larger storage.",
+          "subject_ids": [
+            "technology.logix_tcpip_lan",
+            "product.software_aionix_server",
+            "product.software_bpi_client_server"
+          ]
+        }
+      ],
+      "subject_ids": [
+        "product.family_artemis"
       ]
     }
   ]
