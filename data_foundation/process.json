@@ -267,7 +267,7 @@
       "id": "process.apple_compatibility",
       "title": "Apple compatibility cooperation",
       "kind": "development",
-      "description": "Apple compatibility cooperation",
+      "description": "Carry out the limited Apple technical cooperation begun on 8 February 1979, including documentation, test equipment and compatibility assistance for Logix's native Apple expansion products. Apple retains its own peripheral strategy and does not adopt FlexiBUS as an official standard. The cooperation end date is unspecified.",
       "participant": [
         {
           "actor_id": "actor.apple",
@@ -276,8 +276,8 @@
       ],
       "period": {
         "start": {
-          "value": null,
-          "precision": "unknown"
+          "value": "event.apple_cooperation",
+          "precision": "event"
         },
         "end": {
           "value": null,
@@ -299,9 +299,7 @@
           "description": "Continues technical cooperation and testing support; permits independent compatible products."
         }
       ],
-      "subject_ids": [
-        "event.apple_cooperation"
-      ],
+      "subject_ids": [],
       "related_process_ids": [
         "process.open_compatibility"
       ]
@@ -310,7 +308,7 @@
       "id": "process.artemis_engineering",
       "title": "Confidential next-generation engineering",
       "kind": "development",
-      "description": "Confidential next-generation engineering",
+      "description": "Conduct confidential Artemis hardware, component and system engineering from 8 September 1978 to 28 April 1980. Coordinate hardware and software validation internally while withholding architectural details from 1979 communications and reserving the public reveal for NCC 1980.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -327,12 +325,12 @@
       ],
       "period": {
         "start": {
-          "value": null,
-          "precision": "unknown"
+          "value": "1978-09-08",
+          "precision": "day"
         },
         "end": {
-          "value": null,
-          "precision": "unknown"
+          "value": "1980-04-28",
+          "precision": "day"
         }
       },
       "inputs": [],
@@ -593,6 +591,12 @@
           "type": "milestone",
           "description": "Selected 2.0 µm process release review. Retain the milestone’s existing measured qualification requirements and production-release capability transition.",
           "event_id": "event.production_2"
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "Review the selected 2.0 µm 64K RAM release target in July 1982, preserving measured process, retention/speed, tool-matching and cost qualification and the recorded capability transition.",
+          "event_id": "event.dram_2_release"
         }
       ],
       "subject_ids": [
@@ -1334,8 +1338,7 @@
         {
           "number": 1,
           "type": "resource",
-          "description": "The founders organising meeting on 30 January 1982 precedes the agreement that starts the funded development programme on 31 January. Attendees remain unspecified.",
-          "event_id": "event.autodesk_organising_meeting"
+          "description": "The founders held an organising meeting on 30 January 1982. It provides the date basis and preparatory context for the agreement signed on 31 January, which starts this funded development programme. The source does not identify the meeting attendees."
         },
         {
           "number": 2,
@@ -1447,11 +1450,17 @@
         {
           "number": 3,
           "type": "milestone",
+          "description": "After incorporation on 26 April 1982, Autodesk adopts the founders' development arrangement, confirms source/porting rights and non-exclusive licensing, and reviews the compiler, recovery and graphics-driver milestones.",
+          "event_id": "event.autodesk_incorporation"
+        },
+        {
+          "number": 4,
+          "type": "milestone",
           "description": "Milestone during this process: Professional 800x600 hardware becomes available to Autodesk.",
           "event_id": "event.autodesk_professional_handover"
         },
         {
-          "number": 4,
+          "number": 5,
           "type": "milestone",
           "description": "Milestone during this process: AutoCAD Artemis beta and professional workflow qualification.",
           "event_id": "event.autodesk_beta"
@@ -3381,7 +3390,7 @@
       "id": "process.ncc1981_campaign",
       "title": "Networked business-computing platform presented — execution",
       "kind": "campaign_execution",
-      "description": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+      "description": "Present the networked business-computing platform at NCC on 4 May 1981, then coordinate dealer and BPI follow-up through the multi-client recovery pilots on 30 June. Sales and July shipments remain conditional on configuration-specific qualification.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -3394,17 +3403,28 @@
           "precision": "event"
         },
         "end": {
-          "value": "1981-05-04",
-          "precision": "day"
+          "value": "event.network_pilots",
+          "precision": "event"
         }
       },
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The networked platform is presented and its launch follow-up reaches recovery pilots. Qualified configurations and recovery results gate server sales; unrestricted shipment readiness is not implied."
+        }
+      ],
       "steps": [
         {
           "number": 1,
           "type": "action",
           "description": "Networked business-computing platform presented"
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Coordinate post-presentation dealer and BPI pilot preparation, including authentication, locking, backup and crash-recovery checks, without treating launch attendance as qualified sales."
         }
       ],
       "subject_ids": [
@@ -4230,9 +4250,9 @@
       "steps": [
         {
           "number": 1,
-          "type": "milestone",
-          "description": "Agree limited Apple technical cooperation, documentation, test equipment and compatibility assistance.",
-          "event_id": "event.apple_cooperation"
+          "type": "action",
+          "description": "Carry out limited Apple documentation, test-equipment and compatibility cooperation through its dedicated subprocess, beginning with the Apple cooperation event.",
+          "process_id": "process.apple_compatibility"
         },
         {
           "number": 2,
@@ -4310,12 +4330,18 @@
         },
         {
           "number": 2,
+          "type": "action",
+          "description": "Develop and validate confidential Artemis components and systems from September 1978 through April 1980, preserving the NCC 1980 architecture-disclosure boundary.",
+          "process_id": "process.artemis_engineering"
+        },
+        {
+          "number": 3,
           "type": "milestone",
           "description": "Begin confidential detailed implementation of the optional CP/M-80 compatibility module, distinguishing engineering work from shipment.",
           "event_id": "event.cpm_bridge"
         },
         {
-          "number": 3,
+          "number": 4,
           "type": "action",
           "description": "Execute campaign.ncc1980 through its existing launch and follow-up process, including the Artemis commercial launch.",
           "process_id": "process.ncc1980_campaign"
@@ -4620,6 +4646,18 @@
         {
           "number": 5,
           "type": "milestone",
+          "description": "Record the 31 July 1981 recession response: staged network purchases, leaner dealer stock and revised quarterly demand in place of uninterrupted monthly growth.",
+          "event_id": "event.recession_response"
+        },
+        {
+          "number": 6,
+          "type": "milestone",
+          "description": "Record Unix suppliers' response on 15 October 1981, including mature tools, storage, support and software without assuming an instantly equivalent collaboration product.",
+          "event_id": "event.unix_competition"
+        },
+        {
+          "number": 7,
+          "type": "milestone",
           "description": "Begin DRI’s independently licensed 68k AIONix port programme, including funded feasibility work, suitable external-MMU hardware assessment and restartable-fault investigation.",
           "event_id": "event.dri_68k_program"
         }
@@ -4822,7 +4860,7 @@
       "id": "process.artemis_networking_development",
       "title": "Artemis Networking development and launch",
       "kind": "development",
-      "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign ending on 4 May 1981. Recovery pilots and conditional commercial shipments follow the launch and remain separate qualification activities.",
+      "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign and its recovery pilots ending on 30 June 1981. The campaign presents the platform in May and coordinates dealer/BPI qualification follow-up; commercial shipments remain conditional.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -4843,7 +4881,7 @@
           "precision": "day"
         },
         "end": {
-          "value": "1981-05-04",
+          "value": "1981-06-30",
           "precision": "day"
         }
       },
@@ -4888,7 +4926,7 @@
         {
           "number": 3,
           "type": "action",
-          "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades through the NCC 1981 launch campaign.",
+          "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades at NCC, and carry the campaign through its dealer/BPI recovery pilots.",
           "process_id": "process.ncc1981_campaign"
         }
       ],
@@ -4896,7 +4934,7 @@
         {
           "number": 1,
           "type": "result",
-          "description": "The networking and server platform is presented at NCC. Subsequent multi-client recovery pilots and configuration-specific qualification gate server sales and shipments; the launch does not establish unrestricted availability or forecast revenue from unpriced larger storage.",
+          "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability or forecast revenue from unpriced larger storage.",
           "subject_ids": [
             "technology.logix_tcpip_lan",
             "product.software_aionix_server",
@@ -4906,6 +4944,85 @@
       ],
       "subject_ids": [
         "product.family_artemis"
+      ]
+    },
+    {
+      "id": "process.athena_ecosystem",
+      "title": "Ecosystem growth and market response — AIONix2 / 32-bit Athena era",
+      "kind": "coordination",
+      "description": "Group the next ecosystem phase's preparatory market and compatibility responses from the 68k OEM review on 17 May 1982 through the independent compatibility review on 15 December 1982. Track independent operating-system options, application competition and developer-support evidence without treating assessments as shipped AIONix2/Athena products or signed sales commitments.",
+      "participant": [
+        {
+          "actor_id": "actor.logix",
+          "role": "platform and ecosystem coordination"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "software interfaces and developer support"
+        },
+        {
+          "actor_id": "actor.dri",
+          "role": "independent operating-system licensing context"
+        },
+        {
+          "actor_id": "actor.tandy",
+          "role": "68k platform assessment"
+        },
+        {
+          "actor_id": "actor.microsoft",
+          "role": "competing software supplier"
+        },
+        {
+          "actor_id": "actor.others",
+          "role": "independent compatibility contributors"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "event.tandy_68k_review",
+          "precision": "event"
+        },
+        "end": {
+          "value": "event.compatibility_review",
+          "precision": "event"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The preceding Artemis ecosystem phase supplies the established interfaces, supplier relationships and non-ERA port investigations for the next phase's assessments.",
+          "process_id": "process.artemis_ecosystem"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "action",
+          "description": "Assess independent operating-system options, licensing, memory protection, restartable faults, drivers and commercial support as qualification gates rather than release commitments."
+        },
+        {
+          "number": 2,
+          "type": "milestone",
+          "description": "Review intensifying spreadsheet and business-software competition on 16 August 1982, preserving the distinction between possible ports, agreed commercial terms and tested target configurations.",
+          "event_id": "event.application_competition"
+        },
+        {
+          "number": 3,
+          "type": "action",
+          "description": "Gather adapter and C/TUI conformance evidence, compatibility fixes and small-team references for the closing review; larger repositories still require separately qualified storage."
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The phase records independent platform assessment, application competition and compatibility/support evidence. Market estimates remain forecast ranges; no shipping 68k/AIONix2 platform or volume commitment is inferred."
+        }
+      ],
+      "subject_ids": [
+        "product.family_athena",
+        "product.software_aionix2"
       ]
     }
   ]
