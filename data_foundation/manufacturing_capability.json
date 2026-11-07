@@ -88,17 +88,17 @@
         {
           "number": 3,
           "type": "acceptance_criterion",
-          "description": "Defect-map coverage and fuse programming with full post-repair retest"
+          "description": "Speed bins and all-bank board power/timing qualification"
         },
         {
           "number": 4,
           "type": "acceptance_criterion",
-          "description": "Speed bins and all-bank board power/timing qualification"
+          "description": "At least two matched steppers and recipe-specific one-down capacity before volume stepper manufacture"
         },
         {
           "number": 5,
           "type": "acceptance_criterion",
-          "description": "At least two matched steppers and recipe-specific one-down capacity before volume stepper manufacture"
+          "description": "Map failures and retest the complete launch device without redundancy repair; repair applies only to separately released repairable revisions."
         }
       ]
     },
@@ -289,6 +289,124 @@
           "number": 5,
           "type": "acceptance_criterion",
           "description": "At least two matched steppers and recipe-specific one-down capacity before volume stepper manufacture"
+        }
+      ]
+    },
+    {
+      "id": "manufacturing_capability.aion_mask_rom_3um",
+      "name": "AION 3 µm customer-specific mask-ROM manufacture",
+      "actor_id": "actor.labs",
+      "location_id": "location.cambridge",
+      "technology_id": "technology.nmos_3um",
+      "recipe_kind": "logic",
+      "product_ids": [],
+      "description": "Mask-ROM product recipe within the silicon-gate NMOS logic family; ROM-specific qualification does not qualify arbitrary logic or CPUs.",
+      "qualification_requirements": [
+        {
+          "number": 1,
+          "type": "acceptance_criterion",
+          "description": "Customer-approved image, organisation, mask revision, package, timing and supply contract."
+        },
+        {
+          "number": 2,
+          "type": "acceptance_criterion",
+          "description": "Repeatable wafer probe, full image verification, packaged test and reliability across independent lots."
+        },
+        {
+          "number": 3,
+          "type": "acceptance_criterion",
+          "description": "Released order-specific masks and acceptance before customer shipments."
+        }
+      ]
+    },
+    {
+      "id": "manufacturing_capability.aion_sram_3um",
+      "name": "AION 3 µm SRAM manufacture",
+      "actor_id": "actor.labs",
+      "location_id": "location.cambridge",
+      "technology_id": "technology.nmos_3um",
+      "recipe_kind": "SRAM",
+      "product_ids": [],
+      "description": "Small SRAM product-family capability, beginning with a 1 Kbit design and evaluating a separately qualified 4 Kbit extension.",
+      "qualification_requirements": [
+        {
+          "number": 1,
+          "type": "acceptance_criterion",
+          "description": "Release each density, pinout, package and speed grade separately."
+        },
+        {
+          "number": 2,
+          "type": "acceptance_criterion",
+          "description": "Read/write, standby leakage, data-pattern and voltage/temperature margins verified on multiple lots."
+        },
+        {
+          "number": 3,
+          "type": "acceptance_criterion",
+          "description": "Production test coverage, package reliability and recurring cost per accepted chip."
+        }
+      ]
+    },
+    {
+      "id": "manufacturing_capability.aion_dram16_3um",
+      "name": "AION 3 µm 16 Kbit DRAM manufacture",
+      "actor_id": "actor.labs",
+      "location_id": "location.cambridge",
+      "technology_id": "technology.nmos_3um",
+      "recipe_kind": "DRAM",
+      "product_ids": [
+        "product.part_aion_4116"
+      ],
+      "description": "Cambridge recipe for the AION 4116-equivalent; production release precedes the June 1978 Aurelia launch.",
+      "qualification_requirements": [
+        {
+          "number": 1,
+          "type": "acceptance_criterion",
+          "description": "Qualify capacitor, sense amplifiers, retention, disturb patterns and refresh across temperature and voltage."
+        },
+        {
+          "number": 2,
+          "type": "acceptance_criterion",
+          "description": "Release 16-pin package, +12/+5/-5 V supplies, sequencing and measured speed grades against the product contract."
+        },
+        {
+          "number": 3,
+          "type": "acceptance_criterion",
+          "description": "Demonstrate repeatable results across independent wafer lots, packaged final test and reliability screening."
+        }
+      ]
+    },
+    {
+      "id": "manufacturing_capability.aion_erav1_3um",
+      "name": "AION 3 µm ERAv1 manufacture",
+      "actor_id": "actor.labs",
+      "location_id": "location.cambridge",
+      "technology_id": "technology.nmos_3um",
+      "recipe_kind": "logic",
+      "product_ids": [
+        "product.part_erav1_6mhz",
+        "product.part_erav1_8mhz"
+      ],
+      "description": "Processor-specific fabrication, test and packaging capability. Initial release covers the 6 MHz part; 8 MHz requires separate measured qualification.",
+      "qualification_requirements": [
+        {
+          "number": 1,
+          "type": "acceptance_criterion",
+          "description": "Frozen design rules, die and mask revisions, package/pinout, rails and power contract."
+        },
+        {
+          "number": 2,
+          "type": "acceptance_criterion",
+          "description": "Functional vectors, timing across voltage/temperature, reliability and repeatable independent lots."
+        },
+        {
+          "number": 3,
+          "type": "acceptance_criterion",
+          "description": "Record whether 6/8 MHz are speed bins or separate revisions; release only demonstrated grades."
+        },
+        {
+          "number": 4,
+          "type": "acceptance_criterion",
+          "description": "Qualified launch inventory and production capacity before 19 May 1980; no dependence on later DRAM-control or sub-3 µm releases."
         }
       ]
     }

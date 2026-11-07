@@ -7778,6 +7778,69 @@
           "value": "80 bytes of live two-bank descriptors within a 128-byte reserved area; 48 bytes padding. 640 pattern + 128 descriptor + 256 scratch bytes = 1024."
         }
       ]
+    },
+    {
+      "id": "technology.aion_fab_process_control",
+      "name": "AION wafer traceability, process control and yield engineering",
+      "kind": "fabrication",
+      "description": "Control of the Cambridge fabrication line through traceable lots, measured process windows, failure analysis and controlled recipe changes.",
+      "owner_actor_ids": [
+        "actor.labs"
+      ],
+      "related_technology_ids": [
+        "technology.nmos_3um"
+      ],
+      "specification": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "Trace each wafer to material batch, tool, operator, recipe revision and electrical results; map defects and distinguish random from systematic failures."
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Monitor particles, film thickness, sheet resistance, transistor thresholds, contacts and tool drift; use control charts and documented corrective action."
+        },
+        {
+          "number": 3,
+          "type": "requirement",
+          "description": "Separate engineering lots from released production; qualify maintenance and tool substitutions before customer manufacture."
+        },
+        {
+          "number": 4,
+          "type": "requirement",
+          "description": "Report wafer completion, electrical die yield, accepted speed/retention bins, package yield and good saleable chips per wafer separately."
+        }
+      ]
+    },
+    {
+      "id": "technology.aion_memory_test",
+      "name": "AION memory characterisation and production testing",
+      "kind": "fabrication",
+      "description": "Wafer-probe, packaged-device and reliability tests supporting separate ROM, SRAM and DRAM release decisions.",
+      "owner_actor_ids": [
+        "actor.labs"
+      ],
+      "related_technology_ids": [
+        "technology.nmos_3um"
+      ],
+      "specification": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "Qualify ROM image verification and SRAM read/write margins separately from DRAM retention, sensing, refresh and disturb behaviour."
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Test across specified voltage and temperature limits; retain lot histories, wafer maps and failure-analysis evidence."
+        },
+        {
+          "number": 3,
+          "type": "requirement",
+          "description": "For repairable DRAM revisions, map defects, programme only supported redundancy and retest the complete device; unrepairable launch revisions receive no assumed repair benefit."
+        }
+      ]
     }
   ]
 }

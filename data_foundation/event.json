@@ -1219,7 +1219,7 @@
       "id": "event.stepper_order",
       "title": "Stepper programme approved and equipment ordered",
       "kind": "activity",
-      "description": "Selected alternative-history milestone; qualify measured process, retention/speed, tool matching and cost before release. Existing processors retain their current process. See memory_manufacturing.json.",
+      "description": "AION approves the existing January 1979 stepper programme and orders a compatible pair of GCA reduction steppers with reticle metrology, spares, supplier training and service support. Procurement begins the development programme; installation, tool matching and product qualification remain separate gates.",
       "participant": [
         {
           "actor_id": "actor.labs",
@@ -1229,8 +1229,24 @@
       "subject_ids": [
         "technology.nmos_275um"
       ],
-      "inputs": [],
-      "outcomes": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "A stable existing production route and its measured limitations support the next lithography investment.",
+          "event_id": "event.aion_3um_repeatable"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Funded lithography procurement and supplier support enable development of the 2.75 µm route.",
+          "subject_ids": [
+            "technology.nmos_275um"
+          ]
+        }
+      ],
       "time": {
         "value": "1979-01-12",
         "precision": "day"
@@ -1802,8 +1818,24 @@
       "subject_ids": [
         "technology.nmos_275um"
       ],
-      "inputs": [],
-      "outcomes": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The procurement order provides the equipment and installation support.",
+          "event_id": "event.stepper_order"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Installation and optical acceptance measurements enable process-development lots; matched-pair volume capacity and recipe releases remain separate gates.",
+          "subject_ids": [
+            "technology.nmos_275um"
+          ]
+        }
+      ],
       "time": {
         "value": "1979-09",
         "precision": "month"
@@ -4977,6 +5009,619 @@
         }
       ],
       "subject_ids": []
+    },
+    {
+      "id": "event.aion_fab_team_hired",
+      "title": "AION appoints its Cambridge manufacturing team",
+      "kind": "activity",
+      "description": "AION appoints a fab director, silicon-gate NMOS integration lead, lithography lead, facilities lead and test/reliability lead with production-ramp experience. Recruitment draws on established British, European and US semiconductor operations; individual names and former employers are unspecified. Supplier engineers train the new staff.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1975-03-31",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The founding authorises recruitment and investment.",
+          "event_id": "event.companies"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "The appointed team takes responsibility for defining and qualifying the Cambridge process and its controls.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "technology.aion_fab_process_control",
+            "manufacturing_capability.aion_nmos_3um_logic"
+          ]
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_pilot_line_acceptance",
+      "title": "Cambridge 75 mm NMOS pilot line accepted",
+      "kind": "activity",
+      "description": "The team accepts the installed line and repeatable test-structure operation. Pilot acceptance establishes engineering capability, not commercial product release.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1975-12-15",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The appointed team commissions equipment, trains operators and verifies the pilot route.",
+          "event_id": "event.aion_fab_team_hired"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Pilot recipes, wafer traceability and tool-acceptance evidence are available.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "technology.aion_fab_process_control"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "maturity_transition",
+          "description": "Cambridge 75 mm NMOS pilot line accepted — pilot",
+          "subject_ids": [
+            "manufacturing_capability.aion_nmos_3um_logic"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_nmos_3um_logic",
+            "stage": "pilot"
+          }
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_rom_sram_release",
+      "title": "AION releases initial mask-ROM and SRAM manufacture",
+      "kind": "activity",
+      "description": "Independent lots meet the selected ROM and 1 Kbit SRAM contracts. AION releases qualified order-specific ROMs and the initial SRAM grade for customer supply; the 4 Kbit extension and second-source licences require separate acceptance.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1976-12-15",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Product lots build on the accepted Cambridge pilot process.",
+          "event_id": "event.aion_pilot_line_acceptance"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "ROM/SRAM electrical, package and test evidence supports the released scope.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "technology.aion_memory_test"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "maturity_transition",
+          "description": "AION releases initial mask-ROM and SRAM manufacture — production released",
+          "subject_ids": [
+            "manufacturing_capability.aion_mask_rom_3um"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_mask_rom_3um",
+            "stage": "production_released"
+          }
+        },
+        {
+          "number": 3,
+          "type": "maturity_transition",
+          "description": "AION releases initial mask-ROM and SRAM manufacture — production released",
+          "subject_ids": [
+            "manufacturing_capability.aion_sram_3um"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_sram_3um",
+            "stage": "production_released"
+          }
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_dram_team_hired",
+      "title": "AION recruits DRAM process and test specialists",
+      "kind": "activity",
+      "description": "AION recruits a DRAM integration lead, capacitor/device engineer, sense-amplifier designer and memory-test lead with production experience. Offers include relocation, equipment budgets and long-term incentives. No named employee, former employer or proprietary transfer is presumed.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1976-06-30",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The operating pilot line gives the recruited specialists an executable development platform.",
+          "event_id": "event.aion_pilot_line_acceptance"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Specialists establish the DRAM recipe and its retention, refresh and test requirements.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "technology.aion_memory_test",
+            "manufacturing_capability.aion_dram16_3um"
+          ]
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_dram16_release",
+      "title": "AION 16 Kbit DRAM production qualified",
+      "kind": "activity",
+      "description": "Independent lots of the AION 4116-equivalent meet released retention, refresh, timing, supply, package and reliability limits. The release supports manufacturing and inventory preparation for June 1978; no numeric yield is asserted.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1978-04-28",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The specialist team develops the DRAM recipe and verifies the production qualification lots.",
+          "event_id": "event.aion_dram_team_hired"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "The released 16 Kbit DRAM process includes controlled recipes and complete production-test evidence.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "technology.aion_memory_test"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "maturity_transition",
+          "description": "AION 16 Kbit DRAM production qualified — production released",
+          "subject_ids": [
+            "manufacturing_capability.aion_dram16_3um"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_dram16_3um",
+            "stage": "production_released"
+          }
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_yield_team_hired",
+      "title": "AION establishes a permanent yield-engineering group",
+      "kind": "activity",
+      "description": "AION appoints a yield manager, failure-analysis engineer, process-control engineers and maintenance specialists with authority to hold suspect lots and reject uncontrolled recipe changes.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1977-03-31",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Commercial lot histories establish the immediate need for systematic yield engineering.",
+          "event_id": "event.aion_rom_sram_release"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "The team owns traceability, defect analysis, process windows and corrective-action methods.",
+          "subject_ids": [
+            "technology.aion_fab_process_control",
+            "technology.aion_memory_test"
+          ]
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_3um_repeatable",
+      "title": "Cambridge demonstrates repeatable 3 µm production",
+      "kind": "activity",
+      "description": "Independent logic test vehicles and released memory lots demonstrate controlled electrical distributions and stable production procedures. Product-specific timing, retention and package qualifications remain separate; no universal yield percentage is assigned.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1978-08-31",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The yield group establishes and verifies the production controls.",
+          "event_id": "event.aion_yield_team_hired"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Released 16 Kbit production supplies the DRAM evidence needed for this cross-recipe review.",
+          "event_id": "event.aion_dram16_release"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Process-control evidence supports the separately scoped Cambridge production recipes.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "technology.aion_fab_process_control",
+            "technology.aion_memory_test"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "maturity_transition",
+          "description": "Cambridge demonstrates repeatable 3 µm production — repeatable production",
+          "subject_ids": [
+            "manufacturing_capability.aion_nmos_3um_logic"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_nmos_3um_logic",
+            "stage": "repeatable_production"
+          }
+        },
+        {
+          "number": 3,
+          "type": "maturity_transition",
+          "description": "Cambridge demonstrates repeatable 3 µm production — repeatable production",
+          "subject_ids": [
+            "manufacturing_capability.aion_mask_rom_3um"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_mask_rom_3um",
+            "stage": "repeatable_production"
+          }
+        },
+        {
+          "number": 4,
+          "type": "maturity_transition",
+          "description": "Cambridge demonstrates repeatable 3 µm production — repeatable production",
+          "subject_ids": [
+            "manufacturing_capability.aion_sram_3um"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_sram_3um",
+            "stage": "repeatable_production"
+          }
+        },
+        {
+          "number": 5,
+          "type": "maturity_transition",
+          "description": "Cambridge demonstrates repeatable 3 µm production — repeatable production",
+          "subject_ids": [
+            "manufacturing_capability.aion_dram16_3um"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_dram16_3um",
+            "stage": "repeatable_production"
+          }
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_dram64_pilot",
+      "title": "AION completes initial 64 Kbit DRAM pilot lots",
+      "kind": "activity",
+      "description": "Engineering lots establish the initial 3 µm 64 Kbit array, sensing and refresh behaviour. Retention, speed, package and reliability work continues before release. This revision has no assumed redundancy repair.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1979-06-29",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The qualified smaller DRAM supplies the device and process starting point.",
+          "event_id": "event.aion_dram16_release"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The demonstrated process controls support larger-die pilot fabrication.",
+          "event_id": "event.aion_3um_repeatable"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Pilot results and defect maps guide the launch-recipe corrections.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "technology.aion_memory_test"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "maturity_transition",
+          "description": "AION completes initial 64 Kbit DRAM pilot lots — pilot",
+          "subject_ids": [
+            "manufacturing_capability.dram64_3um_launch"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.dram64_3um_launch",
+            "stage": "pilot"
+          }
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_dram64_release",
+      "title": "AION releases its initial 3 µm 64 Kbit DRAM",
+      "kind": "activity",
+      "description": "Multiple independent lots meet the launch contract for retention, refresh, timing, rails, package and reliability. Release supports inventory for December 1979 Aurelia+ and reuse in Artemis; later control and repair revisions confer no early yield benefit.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1979-11-01",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Pilot failures and electrical results are resolved and verified in qualification lots.",
+          "event_id": "event.aion_dram64_pilot"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "The initial 64 Kbit production recipe and full test contract are released.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "technology.aion_memory_test"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "maturity_transition",
+          "description": "AION releases its initial 3 µm 64 Kbit DRAM — production released",
+          "subject_ids": [
+            "manufacturing_capability.dram64_3um_launch"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.dram64_3um_launch",
+            "stage": "production_released"
+          }
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_erav1_design_baseline",
+      "title": "ERAv1 design-to-fab baseline accepted",
+      "kind": "activity",
+      "description": "AION and Artemis engineering accept the initial 3 µm CPU design rules, mask revision, package and supply contract, representative logic structures and functional-test plan for pilot fabrication.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1979-03-30",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The demonstrated process windows constrain the CPU design and fabrication baseline.",
+          "event_id": "event.aion_3um_repeatable"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "An agreed processor design-to-fab contract and test plan support CPU pilot manufacture.",
+          "subject_ids": [
+            "technology.nmos_3um",
+            "manufacturing_capability.aion_erav1_3um"
+          ]
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_erav1_pilot",
+      "title": "ERAv1 manufacturing pilot silicon characterised",
+      "kind": "activity",
+      "description": "AION fabricates the initial CPU pilot revision and characterises function, timing, power and package behaviour. Engineering success does not authorise volume production or an 8 MHz grade.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1979-08-31",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The accepted mask, process and test baseline enables the CPU pilot lots.",
+          "event_id": "event.aion_erav1_design_baseline"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Pilot evidence identifies CPU-specific process, layout, packaging and test corrections.",
+          "subject_ids": [
+            "technology.nmos_3um"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "maturity_transition",
+          "description": "ERAv1 manufacturing pilot silicon characterised — pilot",
+          "subject_ids": [
+            "manufacturing_capability.aion_erav1_3um"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_erav1_3um",
+            "stage": "pilot"
+          }
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.aion_erav1_release",
+      "title": "ERAv1 6 MHz manufacturing route released for launch",
+      "kind": "activity",
+      "description": "Independent lots meet the released 6 MHz CPU specification, production-test coverage and package reliability requirements. Qualified launch stock and capacity are available for the May Artemis launch. The 8 MHz variant remains subject to separate silicon and grade qualification.",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer, process developer and employer"
+        }
+      ],
+      "time": {
+        "value": "1980-04-15",
+        "precision": "day"
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "CPU pilot corrections are verified through independent qualification lots.",
+          "event_id": "event.aion_erav1_pilot"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "The launch CPU recipe, test vectors, package contract and production controls are released.",
+          "subject_ids": [
+            "technology.nmos_3um"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "maturity_transition",
+          "description": "ERAv1 6 MHz manufacturing route released for launch — production released",
+          "subject_ids": [
+            "manufacturing_capability.aion_erav1_3um"
+          ],
+          "maturity": {
+            "capability_id": "manufacturing_capability.aion_erav1_3um",
+            "stage": "production_released"
+          }
+        }
+      ],
+      "location_ids": [
+        "location.cambridge"
+      ]
     }
   ]
 }
