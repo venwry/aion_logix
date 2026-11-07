@@ -65,3 +65,7 @@ All lanes share the global calendar. Collapsing a lane does not move date anchor
 Categories describe the root programme's primary purpose. Semiconductor work under stepper installation remains Investment, and competitor events inside ecosystem programmes remain Ecosystem & Partners. Moving individual children into a different lane requires changing ownership, not assigning an override.
 
 Category assignments are story changes: submit one Changes confirm proposal per affected record. The UI and schema can be deployed before those proposals are approved; records remain Uncategorised until their root assignment is authorized.
+
+## Product definitions (0.7.0)
+
+Use `base_part`, `device` and `software_edition` for canonical technical definitions; existing product subjects link through `technical_identity`. Products, devices and editions own complete `composition_history` snapshots with explicit child versions. New imported technical records are externally Unauthorized; product revisions remain Changes confirm proposals. See [definition import and ownership](PRODUCT_DEFINITION_IMPORT.md). Never import old chronology, approvals or financial projections into these definitions. Only events/processes own calendar dates; unknown composition boundaries must remain explicit until reconciled.

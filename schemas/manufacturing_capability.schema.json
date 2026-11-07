@@ -78,6 +78,16 @@
             "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/item"
           },
           "minItems": 0
+        },
+        "base_part_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "base_part"
+            ]
+          }
         }
       },
       "required": [

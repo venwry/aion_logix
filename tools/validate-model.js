@@ -4,6 +4,8 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import {datasets} from '../code/model-contract.js';
+import {validateCompositions} from '../code/composition.js';
 import {pointBounds,resolvePoint} from '../code/temporal.js';
 const schemaDir = fileURLToPath(new URL('../schemas/', import.meta.url));
 const schemas = Object.fromEntries(fs.readdirSync(schemaDir).filter(f => f.endsWith('.schema.json')).map(f => [f.replace('.schema.json',''), JSON.parse(fs.readFileSync(path.join(schemaDir,f)))]));
@@ -11,7 +13,7 @@ const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);
 for (const schema of Object.values(schemas)) ajv.addSchema(schema);
 for (const schema of Object.values(schemas)) ajv.getSchema(schema.$id); // Compile all schemas, including empty datasets.
-export const datasetNames = Object.keys(schemas).filter(n => n !== 'common');
+export const datasetNames = datasets;
 export function recordHash(record) {
   const { confirmation, ...content } = record;
   function stable(value) { return Array.isArray(value) ? value.map(stable) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(k => [k, stable(value[k])])) : value; }
@@ -62,7 +64,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if(branch)walk(value,branch,root,at);
       return;
     }
-    if (schema['x-ref']) {
+    if (schema['x-ref'] && value !== null) {
       const target = records.get(value);
       if (!target) report(`${at}: unresolved reference ${value}`);
       else if (!schema['x-ref'].includes(value.split('.')[0])) report(`${at}: wrong reference type ${value}`);
@@ -135,6 +137,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if (record.occurrence==='unknown'||record.state==='unknown'||record.completion_state==='unknown') report(`${record.id}: unresolved story state`);
     }
   }
+  errors.push(...validateCompositions(records));
   if (complete && count===0) report('No records: an empty graph cannot establish completeness');
   return {errors,count};
 }

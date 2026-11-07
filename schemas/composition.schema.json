@@ -1,0 +1,519 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/composition.schema.json",
+  "$defs": {
+    "boundary": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "event"
+            },
+            "event_id": {
+              "type": "string",
+              "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "event"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "event_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "process_boundary"
+            },
+            "process_id": {
+              "type": "string",
+              "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "process"
+              ]
+            },
+            "boundary": {
+              "enum": [
+                "start",
+                "end"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "process_id",
+            "boundary"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "unknown",
+                "open"
+              ]
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "record_id": {
+              "type": "string",
+              "pattern": "^(base_part|product)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part",
+                "product"
+              ]
+            }
+          },
+          "required": [
+            "record_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "record_id": {
+              "type": "string",
+              "pattern": "^(device|software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "device",
+                "software_edition"
+              ]
+            },
+            "version_number": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "record_id",
+            "version_number"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "record_id": {
+          "type": "string",
+          "pattern": "^(base_part|device|software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "base_part",
+            "device",
+            "software_edition"
+          ]
+        }
+      },
+      "required": [
+        "record_id"
+      ],
+      "additionalProperties": false
+    },
+    "line": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "record_id": {
+                  "type": "string",
+                  "pattern": "^(base_part|product)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "base_part",
+                    "product"
+                  ]
+                }
+              },
+              "required": [
+                "record_id"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "record_id": {
+                  "type": "string",
+                  "pattern": "^(device|software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device",
+                    "software_edition"
+                  ]
+                },
+                "version_number": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "record_id",
+                "version_number"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "quantity": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "enum": [
+            "each",
+            "set",
+            "m",
+            "kg",
+            "g",
+            "litre"
+          ]
+        },
+        "role": {
+          "type": "string"
+        },
+        "supply_condition": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "always"
+                }
+              },
+              "required": [
+                "kind"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "conditional"
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "kind",
+                "description"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "connection": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "host_line_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "host_instance": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "socket_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "host_line_id",
+                "socket_id"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "host_scope": {
+                  "const": "existing_customer_device"
+                },
+                "socket_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "host_scope",
+                "socket_id"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "placements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "host_line_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "host_instance": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "socket_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "quantity": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "host_line_id",
+              "host_instance",
+              "socket_id",
+              "quantity"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "entitlement": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "service",
+                "licence"
+              ]
+            },
+            "count": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "scope": {
+              "type": "string",
+              "minLength": 1
+            },
+            "duration_value": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "duration_unit": {
+              "enum": [
+                "day",
+                "month",
+                "year"
+              ]
+            },
+            "agreement_id": {
+              "type": "string",
+              "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "agreement"
+              ]
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "count",
+            "scope"
+          ],
+          "additionalProperties": false
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        },
+        "element_type": {
+          "enum": [
+            "main_product",
+            "connected_device",
+            "attached_product"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "quantity",
+        "unit",
+        "role",
+        "supply_condition",
+        "requirements"
+      ],
+      "additionalProperties": false
+    },
+    "hardware_version": {
+      "type": "object",
+      "properties": {
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effective_from": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "effective_until": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "technical_definition": {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/hardware"
+        },
+        "composition_definition": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/line"
+          }
+        },
+        "assembly_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        }
+      },
+      "required": [
+        "version_number",
+        "description",
+        "effective_from",
+        "effective_until",
+        "technical_definition",
+        "composition_definition",
+        "assembly_requirements"
+      ],
+      "additionalProperties": false
+    },
+    "software_version": {
+      "type": "object",
+      "properties": {
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effective_from": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "effective_until": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "technical_definition": {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/software"
+        },
+        "composition_definition": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/line"
+          }
+        },
+        "assembly_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        }
+      },
+      "required": [
+        "version_number",
+        "description",
+        "effective_from",
+        "effective_until",
+        "technical_definition",
+        "composition_definition",
+        "assembly_requirements"
+      ],
+      "additionalProperties": false
+    },
+    "product_version": {
+      "type": "object",
+      "properties": {
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effective_from": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "effective_until": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "technical_definition": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "composition_definition": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/line"
+          }
+        },
+        "assembly_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        }
+      },
+      "required": [
+        "version_number",
+        "description",
+        "effective_from",
+        "effective_until",
+        "technical_definition",
+        "composition_definition",
+        "assembly_requirements"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

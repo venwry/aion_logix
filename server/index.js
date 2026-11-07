@@ -1,4 +1,5 @@
 import http from 'node:http';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {fileURLToPath} from 'node:url';
+import {schemaVersion} from '../code/model-contract.js';
 import {GitHubStore} from './github.js';import {snapshot,transact} from './model.js';
 export function createServer({store,accessToken,origins=[],root=process.cwd()}){
  if(!accessToken||accessToken.length<24)throw Error('Set AION_REVIEW_TOKEN to a secret of at least 24 characters.');
@@ -9,7 +10,7 @@ export function createServer({store,accessToken,origins=[],root=process.cwd()}){
   const send=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json'});res.end(JSON.stringify(data));};
   if(req.method==='OPTIONS'){if(!allowed)return send(403,{error:'Origin not allowed'});res.setHeader('Access-Control-Allow-Headers','Authorization, Content-Type');res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTIONS');res.writeHead(204);return res.end();}
   const pathname=new URL(req.url,'http://localhost').pathname;
-  if(pathname==='/health')return send(200,{ready:true});
+  if(pathname==='/health')return send(200,{ready:true,schema_version:schemaVersion});
   if(pathname.startsWith('/api/')){
    if(!allowed)return send(403,{error:'Origin not allowed'});
    if(!equal(req.headers.authorization,'Bearer '+accessToken))return send(401,{error:'Connect with the backend access key to save authorizations.'});

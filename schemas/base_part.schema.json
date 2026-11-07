@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/base_part.schema.json",
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "integrated_circuit",
+            "discrete_semiconductor",
+            "passive",
+            "connector",
+            "cable",
+            "pcb",
+            "mechanical_part",
+            "power_supply",
+            "display_part",
+            "storage_mechanism",
+            "physical_media",
+            "documentation",
+            "packaging",
+            "supplied_assembly",
+            "material"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "supply_form": {
+          "enum": [
+            "individual_part",
+            "supplied_set",
+            "bulk_material"
+          ]
+        },
+        "manufacturer_actor_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "actor"
+          ]
+        },
+        "manufacturer_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "supplier_actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          }
+        },
+        "manufacturer_part_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "drawing_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "drawing_revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "technology_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "technology"
+            ]
+          }
+        },
+        "manufacturing_capability_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "manufacturing_capability"
+            ]
+          }
+        },
+        "technical_definition": {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/hardware"
+        },
+        "specification": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/specification_item"
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "description",
+        "supply_form",
+        "manufacturer_actor_id",
+        "supplier_actor_ids",
+        "manufacturer_part_number",
+        "technology_ids",
+        "manufacturing_capability_ids",
+        "technical_definition",
+        "specification",
+        "requirements"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "base_part": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    }
+  },
+  "required": [
+    "base_part"
+  ],
+  "additionalProperties": false
+}

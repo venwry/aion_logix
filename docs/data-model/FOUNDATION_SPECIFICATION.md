@@ -1,6 +1,6 @@
 # Foundation dataset specification
 
-This document describes the current foundation schema contract (version 0.6.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
+This document describes the current foundation schema contract (version 0.7.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
 
 ## Reading the diagram
 
@@ -8,7 +8,7 @@ This document describes the current foundation schema contract (version 0.6.0). 
 - `*` means required within its immediate parent object; `?` means optional there. A required child does not make its optional parent required. Conditional requirements are specified below.
 - Indentation shows owned objects and array items. `array<T>` contains zero or more values unless the schema says otherwise. Nested objects are not independent datasets.
 - A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.
-- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the 12 target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.
+- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the 15 target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.
 - Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.
 - Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. Existing legacy clauses remain accepted during approval-driven migration; the diagram shows the new shape.
 - These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.
@@ -25,13 +25,16 @@ flowchart LR
   actor_relationship["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>actor_relationship.json<br/>id*: string<br/>kind*: string<br/>subject_actor_ids*: array&lt;string&gt; → actor<br/>object_actor_id*: string → actor<br/>established_by_event_id?: string → event<br/>description*: string<br/>process_id?: string → process</pre>"]:::schemaEntity
   agreement["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>agreement.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>party*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>state*: string<br/>supersedes_agreement_id?: string → agreement<br/>description?: string<br/>effective_event_id?: string → event<br/>termination_event_id?: string → event<br/>process_id?: string → process<br/>clauses*: array&lt;object&gt;<br/>│  └─ id*: string<br/>│  └─ kind*: string<br/>│  └─ statement*: string<br/>│  └─ value*: number,string,null<br/>│  └─ unit*: string,null</pre>"]:::schemaEntity
   assumption["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>assumption.json<br/>id*: string<br/>kind*: string<br/>statement*: string<br/>scope_ids?: array&lt;string&gt; → any foundation ID<br/>exception_ids?: array&lt;string&gt; → assumption<br/>equipment?: array&lt;object&gt;<br/>│  └─ name*: string<br/>│  └─ components?: array&lt;string&gt;<br/>process_id?: string → process</pre>"]:::schemaEntity
+  base_part["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>base_part.json<br/>id*: string<br/>name*: string<br/>kind*: undefined<br/>description*: string<br/>supply_form*: undefined<br/>manufacturer_actor_id*: string,null → actor<br/>manufacturer_name?: string,null<br/>supplier_actor_ids*: array&lt;string&gt; → actor<br/>manufacturer_part_number*: string,null<br/>drawing_reference?: string,null<br/>drawing_revision?: string,null<br/>technology_ids*: array&lt;string&gt; → technology<br/>manufacturing_capability_ids*: array&lt;string&gt; → manufacturing_capability<br/>technical_definition*: object<br/>│  └─ athena_qualification?: string<br/>│  └─ capacity_kb?: number<br/>│  └─ compatibility_note?: string<br/>│  └─ compatible_computers?: array&lt;string&gt; → device<br/>│  └─ compatible_with?: array&lt;string&gt; → device<br/>│  └─ configuration_requirements?: object<br/>│  │  └─ external_application_cartridges_supported?: boolean<br/>│  │  └─ rules?: array&lt;string&gt;<br/>│  │  └─ scope?: string<br/>│  └─ connection?: string<br/>│  └─ expansion_socket_groups?: array&lt;object&gt;<br/>│  │  └─ id?: string<br/>│  │  └─ name?: string<br/>│  │  └─ sockets?: array&lt;object&gt;<br/>│  │  │  └─ capacity?: number,null<br/>│  │  │  └─ compatible_device_ids?: array&lt;string&gt; → device<br/>│  │  │  └─ connection?: string<br/>│  │  │  └─ device_quantity_limits?: object<br/>│  │  │  │  └─ device.aurelia_ram_16kb_card?: number<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ installation_multiple?: number<br/>│  │  │  └─ matched_modules?: boolean<br/>│  │  │  └─ name?: string<br/>│  │  │  └─ population_order?: string<br/>│  │  │  └─ requirements?: array&lt;string&gt;<br/>│  └─ firmware_contents?: array&lt;string&gt;<br/>│  └─ form_factor?: string<br/>│  └─ host_qualification?: object<br/>│  │  └─ device.base_computer.artemis?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ device.base_computer.artemis_pro?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ server_role?: boolean<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ device.base_computer.athena?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  └─ device.base_computer.athena_server?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  └─ device.base_computer.aurelia?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ device.base_computer.aurelia_plus?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  └─ integration_requirements?: object<br/>│  │  └─ sourcing_policy?: string<br/>│  │  └─ video_ram_policy?: string<br/>│  └─ io_and_expansion?: object<br/>│  │  └─ application_rom_cards_supported?: boolean<br/>│  │  └─ dedicated_video_slot?: object<br/>│  │  │  └─ general_purpose_slots_consumed?: number<br/>│  │  │  └─ hot_swap?: boolean<br/>│  │  │  └─ interface?: string<br/>│  │  │  └─ replaceable?: boolean<br/>│  │  └─ eeprom_bios?: object<br/>│  │  │  └─ capacity_kb?: number,null<br/>│  │  │  └─ included?: boolean<br/>│  │  │  └─ purpose?: string<br/>│  │  └─ expansion_slots?: object<br/>│  │  │  └─ future_pin_area_reserved_for_bits?: number<br/>│  │  │  └─ plug_and_execute?: boolean<br/>│  │  │  └─ width_bits?: number<br/>│  │  └─ rom_eeprom_cartridge_slots?: object<br/>│  │  │  └─ front?: string<br/>│  │  │  └─ rear?: string<br/>│  └─ manufacturing_planning?: object<br/>│  │  └─ die_area_mm2?: number<br/>│  │  └─ die_area_mm2_target?: number<br/>│  │  └─ initial_manufacturer?: string<br/>│  │  └─ node_um?: number<br/>│  │  └─ policy?: string<br/>│  │  └─ transistor_budget_target?: number<br/>│  │  └─ wafer_diameter_mm?: number<br/>│  └─ memory_constraints?: object<br/>│  │  └─ max_ram_kib?: number,null<br/>│  │  └─ mixed_module_types_allowed?: boolean<br/>│  └─ memory_interface?: object<br/>│  │  └─ expansion_id?: string → device<br/>│  │  └─ organization_id?: string → technology<br/>│  │  └─ system_controller_id?: string → base_part<br/>│  └─ memory_mapping?: object<br/>│  │  └─ application_memory?: string<br/>│  │  └─ configuration?: string<br/>│  │  └─ installation?: string<br/>│  │  └─ normal_cpu_range?: string<br/>│  │  └─ page_count?: number<br/>│  │  └─ page_size_kb?: number<br/>│  │  └─ service_calls?: string<br/>│  │  └─ slot_count?: number<br/>│  │  └─ system_workspace?: string<br/>│  └─ packaging?: string<br/>│  └─ physical_population?: object<br/>│  │  └─ capacity_kb?: number<br/>│  │  └─ chip_id?: string → base_part<br/>│  │  └─ data_chip_count?: number<br/>│  │  └─ data_width_bits?: number<br/>│  │  └─ refresh_owner?: string<br/>│  └─ planned_compatible_with?: array&lt;string&gt; → device<br/>│  └─ processor?: object<br/>│  │  └─ part_id?: string → base_part<br/>│  └─ recommended_software_id?: string → software_edition<br/>│  └─ role?: string<br/>│  └─ slot_count?: number<br/>│  └─ specification?: object<br/>│  │  └─ acceleration?: array&lt;string&gt;<br/>│  │  └─ adaptation?: string<br/>│  │  └─ adapter_requirements?: object<br/>│  │  │  └─ buffer_policy?: string<br/>│  │  │  └─ flow_control?: string<br/>│  │  │  └─ hardware_services?: array&lt;string&gt;<br/>│  │  │  └─ host_service?: string<br/>│  │  │  └─ local_packet_ram_target_bytes?: number<br/>│  │  └─ additions?: array&lt;string&gt;<br/>│  │  └─ analog_chain?: string<br/>│  │  └─ api_id?: string → technology<br/>│  │  └─ arbitration?: string<br/>│  │  └─ array_columns?: number<br/>│  │  └─ array_rows?: number<br/>│  │  └─ bandwidth?: string<br/>│  │  └─ bank_capacity_kb?: number<br/>│  │  └─ bank_control?: string<br/>│  │  └─ bank_data_width_bits?: number<br/>│  │  └─ bank_organization?: string<br/>│  │  └─ base_controller_id?: string → base_part<br/>│  │  └─ base_product_id?: string → base_part<br/>│  │  └─ beam_voltage_levels?: number<br/>│  │  └─ bitmap_modes?: array&lt;object&gt;<br/>│  │  │  └─ bits_per_pixel?: number<br/>│  │  │  └─ bytes_per_framebuffer?: number<br/>│  │  │  └─ compatibility_mode?: boolean<br/>│  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  │  └─ framebuffer_count?: number<br/>│  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  └─ sprite_count?: number<br/>│  │  │  └─ double_buffering?: boolean<br/>│  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  └─ framebuffer_count?: number<br/>│  │  │  └─ height?: number<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ palette_grayscale_levels?: number<br/>│  │  │  └─ palette_list_bytes?: number<br/>│  │  │  └─ remaining_bytes?: number<br/>│  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  └─ simultaneous_shades?: number<br/>│  │  │  └─ simultaneous_values?: number<br/>│  │  │  └─ sprites_available?: number<br/>│  │  │  └─ stride_bytes?: number<br/>│  │  │  └─ width?: number<br/>│  │  └─ boot?: string<br/>│  │  └─ bridge_design_id?: string → technology<br/>│  │  └─ buttons?: number<br/>│  │  └─ capabilities?: object<br/>│  │  │  └─ color_model?: string<br/>│  │  │  └─ maximum_pixel_clock_mhz?: number<br/>│  │  │  └─ palette_precision_bits?: number<br/>│  │  │  └─ preferred_raster_id?: string<br/>│  │  │  └─ programmable_palette?: boolean<br/>│  │  │  └─ protocol_version?: number<br/>│  │  │  └─ raster_ids?: array&lt;string&gt;<br/>│  │  └─ capacity_bytes?: number<br/>│  │  └─ capacity_kb?: number,null<br/>│  │  └─ capacity_kbit?: number<br/>│  │  └─ capacity_mb?: number<br/>│  │  └─ card_id?: string → device<br/>│  │  └─ character_row_cache?: object<br/>│  │  │  └─ banks?: number<br/>│  │  │  └─ bytes_per_bank?: number<br/>│  │  │  └─ purpose?: string<br/>│  │  │  └─ total_bytes?: number<br/>│  │  └─ chip_organization?: string<br/>│  │  └─ chip_type_id?: string → base_part<br/>│  │  └─ chips?: number<br/>│  │  └─ chips_per_rank?: number<br/>│  │  └─ class_protocol_id?: string → technology<br/>│  │  └─ clock_mhz?: number<br/>│  │  └─ compatibility?: string<br/>│  │  └─ connection?: string<br/>│  │  └─ continuity?: string<br/>│  │  └─ controller_die_count?: number,null<br/>│  │  └─ controller_id?: string → base_part<br/>│  │  └─ conversion?: string<br/>│  │  └─ cpu_address_bits?: number<br/>│  │  └─ cpu_id?: string → base_part<br/>│  │  └─ crt_id?: string → base_part<br/>│  │  └─ cursor_keys?: string<br/>│  │  └─ data_width_bits?: number<br/>│  │  └─ density?: string<br/>│  │  └─ diagonal_inch?: number<br/>│  │  └─ diagonal_inches?: number<br/>│  │  └─ die_area_mm2?: number<br/>│  │  └─ die_area_planning_mm2?: number<br/>│  │  └─ digital_output_bits?: number<br/>│  │  └─ disk_formats?: array&lt;string&gt;<br/>│  │  └─ disk_ii_interface?: boolean<br/>│  │  └─ disk_interface?: string<br/>│  │  └─ display_controller_id?: string → base_part<br/>│  │  └─ display_memory?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ capacity_bytes?: number<br/>│  │  │  └─ chip_count?: number<br/>│  │  │  └─ chip_id?: string → base_part<br/>│  │  │  └─ organization?: string<br/>│  │  └─ display_modes?: string<br/>│  │  └─ display_subassembly_id?: string → base_part<br/>│  │  └─ displayed_color_registers?: number<br/>│  │  └─ displayed_registers?: number<br/>│  │  └─ dma?: object<br/>│  │  │  └─ active_transfer_engines?: number<br/>│  │  │  └─ address_steps?: array&lt;string&gt;<br/>│  │  │  └─ arbitration?: string<br/>│  │  │  └─ bank_selection?: string<br/>│  │  │  └─ completion?: string<br/>│  │  │  └─ destination_address_bits?: number<br/>│  │  │  └─ length_bits?: number<br/>│  │  │  └─ operations?: array&lt;string&gt;<br/>│  │  │  └─ peripheral_scope?: string<br/>│  │  │  └─ transfer_contexts?: number<br/>│  │  │  └─ video_endpoint?: string<br/>│  │  └─ dot_pitch_mm?: number<br/>│  │  └─ electrical_contract?: string<br/>│  │  └─ electrical_interface?: string<br/>│  │  └─ ergonomics?: string<br/>│  │  └─ execution?: string<br/>│  │  └─ expansion_role?: string<br/>│  │  └─ fdd_density?: string<br/>│  │  └─ fdd_size_inch?: number<br/>│  │  └─ feature_continuity_id?: string → device<br/>│  │  └─ flexibus_ports?: number<br/>│  │  └─ format?: string<br/>│  │  └─ formatted_capacity_kb?: number,null<br/>│  │  └─ function_keys?: string<br/>│  │  └─ grayscale_levels?: number<br/>│  │  └─ hdd_bundled_with_standard_artemis?: boolean<br/>│  │  └─ hdd_interface_supported?: boolean<br/>│  │  └─ historical_raster?: string<br/>│  │  └─ host?: string<br/>│  │  └─ host_access?: string<br/>│  │  └─ host_clock_mhz?: array&lt;number&gt;<br/>│  │  └─ host_integration?: string<br/>│  │  └─ host_interface?: undefined<br/>│  │  └─ implementation?: string<br/>│  │  └─ implementation_design?: object<br/>│  │  │  └─ arbitration?: string<br/>│  │  │  └─ clock_targets?: object<br/>│  │  │  │  └─ high_resolution_pixel_mhz?: number<br/>│  │  │  │  └─ low_resolution_pixel_mhz?: number<br/>│  │  │  │  └─ master_mhz?: number<br/>│  │  │  │  └─ maximum_pixel_fifo_output_mbytes_per_second?: number<br/>│  │  │  │  └─ scope?: string<br/>│  │  │  └─ engines?: object<br/>│  │  │  │  └─ fifo?: string<br/>│  │  │  │  └─ renderer?: string<br/>│  │  │  │  └─ scanout?: string<br/>│  │  │  │  └─ underrun?: string<br/>│  │  │  └─ internal_buffers?: object<br/>│  │  │  │  └─ character_attribute_row_cache_bytes?: number<br/>│  │  │  │  └─ included_in_die_estimates?: boolean<br/>│  │  │  │  └─ next_character_attribute_row_cache_bytes?: number<br/>│  │  │  │  └─ pixel_bits?: number<br/>│  │  │  │  └─ pixel_fifo_bytes?: number<br/>│  │  │  │  └─ pixel_fifo_page_bytes?: number<br/>│  │  │  │  └─ pixel_fifo_page_count?: number<br/>│  │  │  │  └─ sprite_row_shifters_bytes?: number<br/>│  │  │  │  └─ sprite_staging_bytes?: number<br/>│  │  │  │  └─ total_storage_bytes?: number<br/>│  │  │  └─ line_repeat?: string<br/>│  │  │  └─ manufacturing_planning?: object<br/>│  │  │  │  └─ die_area_mm2_at_3_5um_range?: array&lt;number&gt;<br/>│  │  │  │  └─ die_area_mm2_at_3um_range?: array&lt;number&gt;<br/>│  │  │  │  └─ die_area_mm2_central_at_3_5um?: number<br/>│  │  │  │  └─ die_area_mm2_central_at_3um?: number<br/>│  │  │  │  └─ external_functions?: array&lt;string&gt;<br/>│  │  │  │  └─ process?: string<br/>│  │  │  │  └─ transistors_central?: number<br/>│  │  │  │  └─ transistors_range?: array&lt;number&gt;<br/>│  │  │  └─ sprite_access?: string<br/>│  │  │  └─ text_fetch?: string<br/>│  │  │  └─ timing_budget?: object<br/>│  │  │  │  └─ dram_random_cycle_target_ns?: number<br/>│  │  │  │  └─ fifo_total_drain_time_us_at_high_resolution?: number<br/>│  │  │  │  └─ fifo_total_pixels?: number<br/>│  │  │  │  └─ illustrative_read_time_us?: number<br/>│  │  │  │  └─ illustrative_total_reads_per_scanline?: number<br/>│  │  │  │  └─ maximum_sprite_row_bytes_per_scanline?: number<br/>│  │  │  │  └─ next_row_prefetch_average_bytes_per_scanline?: number<br/>│  │  │  │  └─ qualification?: string<br/>│  │  │  │  └─ sprite_pattern_fetch_time_us?: number<br/>│  │  │  │  └─ sprite_sram_cycle_target_ns?: number<br/>│  │  │  │  └─ text_glyph_reads_per_scanline?: number<br/>│  │  │  │  └─ two_ready_pages_drain_time_us?: number<br/>│  │  └─ included_monitor?: boolean<br/>│  │  └─ input?: string<br/>│  │  └─ input_bits?: number<br/>│  │  └─ installation?: string<br/>│  │  └─ intensity_levels?: number<br/>│  │  └─ interface?: string<br/>│  │  └─ interface_id?: string → technology<br/>│  │  └─ key_count?: number<br/>│  │  └─ keyboard_standard_id?: string → technology<br/>│  │  └─ legacy_card_id?: string → device<br/>│  │  └─ link_layer_id?: string → technology<br/>│  │  └─ local_packet_ram_target_bytes?: number<br/>│  │  └─ local_ram_kb?: number<br/>│  │  └─ manufacturer?: string<br/>│  │  └─ manufacturing_planning?: object<br/>│  │  │  └─ die_area_mm2?: number<br/>│  │  │  └─ die_area_mm2_central?: number<br/>│  │  │  └─ die_area_mm2_range?: array&lt;number&gt;<br/>│  │  │  └─ package_allowance_usd?: number<br/>│  │  │  └─ recipe_variants?: array&lt;object&gt;<br/>│  │  │  │  └─ defect_density_cm2?: number<br/>│  │  │  │  └─ die_area_mm2?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ manufacturing_capability_id?: string → manufacturing_capability<br/>│  │  │  │  └─ node_um?: string<br/>│  │  │  │  └─ processed_wafer_usd?: number<br/>│  │  │  └─ revision_policy?: string<br/>│  │  │  └─ wafer_mm?: number<br/>│  │  └─ manufacturing_recipe?: string<br/>│  │  └─ maximum_shared_raw_rate_kbps?: number<br/>│  │  └─ mechanism_id?: string → base_part<br/>│  │  └─ media?: string<br/>│  │  └─ media_access_control?: string<br/>│  │  └─ memory_addressing_bytes?: number<br/>│  │  └─ memory_layout?: object<br/>│  │  │  └─ font_policy?: string<br/>│  │  │  └─ mode_exclusivity?: string<br/>│  │  │  └─ page_flip?: string<br/>│  │  │  └─ policy_id?: string → technology<br/>│  │  └─ memory_policy?: string<br/>│  │  └─ mode_discovery?: string<br/>│  │  └─ mode_limit?: string<br/>│  │  └─ mode_policy?: string<br/>│  │  └─ model?: string<br/>│  │  └─ modules_per_bank?: number<br/>│  │  └─ monitor_id?: string → device<br/>│  │  └─ monitor_modes?: string<br/>│  │  └─ monitor_policy?: string<br/>│  │  └─ native_raster?: object<br/>│  │  │  └─ height?: number<br/>│  │  │  └─ horizontal_khz?: number<br/>│  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  └─ progressive?: boolean<br/>│  │  │  └─ refresh_hz_target?: number<br/>│  │  │  └─ total_lines?: number<br/>│  │  │  └─ total_pixels?: number<br/>│  │  │  └─ width?: number<br/>│  │  └─ navigation_section?: array&lt;string&gt;<br/>│  │  └─ negotiation_id?: string → technology<br/>│  │  └─ node_um?: number<br/>│  │  └─ numeric_keypad?: boolean<br/>│  │  └─ oem?: string<br/>│  │  └─ oem_basis?: string<br/>│  │  └─ organization?: string<br/>│  │  └─ organization_words?: number<br/>│  │  └─ output?: string<br/>│  │  └─ package?: string,null<br/>│  │  └─ page_size_kb?: number<br/>│  │  └─ palette?: string<br/>│  │  └─ palette_entries?: number<br/>│  │  └─ palette_entry_bits?: number<br/>│  │  └─ palette_grayscale_levels?: number<br/>│  │  └─ palette_list?: object<br/>│  │  │  └─ base_address?: string<br/>│  │  │  └─ cad_policy?: string<br/>│  │  │  └─ command_bytes?: number<br/>│  │  │  └─ encoding?: string<br/>│  │  │  └─ end_address?: string<br/>│  │  │  └─ execution?: string<br/>│  │  │  └─ frame_state?: string<br/>│  │  │  └─ long_gaps?: string<br/>│  │  │  └─ maximum_commands?: number<br/>│  │  │  └─ register_count?: number<br/>│  │  │  └─ reserved_bytes?: number<br/>│  │  │  └─ write_limit?: string<br/>│  │  └─ palette_list_id?: string → technology<br/>│  │  └─ palette_registers?: number<br/>│  │  └─ parity_bits?: number<br/>│  │  └─ physical_arrangement?: string<br/>│  │  └─ physical_population?: object<br/>│  │  │  └─ bank_count?: number<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ common_ram_included?: boolean<br/>│  │  │  └─ mapping_note?: string<br/>│  │  │  └─ parity_bits?: number<br/>│  │  │  └─ video_ram_separate?: boolean<br/>│  │  └─ pixel_buffer?: object<br/>│  │  │  └─ bits_per_pixel?: number<br/>│  │  │  └─ bytes_per_page?: number<br/>│  │  │  └─ location?: string<br/>│  │  │  └─ page_states?: array&lt;string&gt;<br/>│  │  │  └─ pages?: number<br/>│  │  │  └─ physical_organization?: string<br/>│  │  │  └─ pixels_per_page?: number<br/>│  │  │  └─ policy?: string<br/>│  │  │  └─ total_bytes?: number<br/>│  │  └─ pixel_clock_mhz?: number<br/>│  │  └─ platform_rate_profiles?: array&lt;object&gt;<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ server_role?: boolean<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ port_count?: number<br/>│  │  └─ ports?: array&lt;string&gt;<br/>│  │  └─ power?: string<br/>│  │  └─ purchase_boundary?: string<br/>│  │  └─ qualification?: string<br/>│  │  └─ random_cycle_target_ns?: number<br/>│  │  └─ rank_capacity_kb?: number<br/>│  │  └─ ranks?: number<br/>│  │  └─ rate_scope?: string<br/>│  │  └─ redraw?: string<br/>│  │  └─ refresh?: undefined<br/>│  │  └─ refresh_required?: boolean<br/>│  │  └─ register_width_bits?: number<br/>│  │  └─ reused_elements?: array&lt;string&gt;<br/>│  │  └─ rgb_palette_mapping?: string<br/>│  │  └─ role?: string<br/>│  │  └─ rollers?: array&lt;object&gt;<br/>│  │  │  └─ default_action?: string<br/>│  │  │  └─ position?: string<br/>│  │  └─ scan?: string<br/>│  │  └─ separate_sprite_sram_bytes?: number<br/>│  │  └─ serial_register_bits?: number<br/>│  │  └─ sides?: number<br/>│  │  └─ signal_path?: string<br/>│  │  └─ simultaneous_shades_at_640_200_4bpp?: number<br/>│  │  └─ simultaneous_shades_at_800_600_2bpp?: number<br/>│  │  └─ simultaneous_shades_with_128kb_card?: number<br/>│  │  └─ size_inch?: number<br/>│  │  └─ slot?: string<br/>│  │  └─ software?: string<br/>│  │  └─ speed_qualification_targets?: object<br/>│  │  │  └─ basis?: string<br/>│  │  │  └─ conditions?: string<br/>│  │  │  └─ fallback_random_cycle_ns_range?: array&lt;number&gt;<br/>│  │  │  └─ fallback_row_access_ns?: number<br/>│  │  │  └─ preferred_random_cycle_ns?: number<br/>│  │  │  └─ preferred_row_access_ns?: number<br/>│  │  │  └─ stretch_row_access_ns?: number<br/>│  │  └─ sprite_memory?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ capacity_bytes?: number<br/>│  │  │  └─ chip_count?: number<br/>│  │  │  └─ chip_id?: string → base_part<br/>│  │  │  └─ separate_bus?: boolean<br/>│  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  └─ sprite_physical_population?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ separate_bus?: boolean<br/>│  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  └─ sprite_policy?: string<br/>│  │  └─ sprite_profile_ref?: object<br/>│  │  │  └─ profile?: string<br/>│  │  │  └─ technology_id?: string → technology<br/>│  │  └─ sprites?: undefined<br/>│  │  └─ startup_rate_kbps?: number<br/>│  │  └─ supply_rails_v?: array,null<br/>│  │  └─ supported_fdd_count?: number<br/>│  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  └─ technology_id?: string → technology<br/>│  │  └─ text_modes?: array&lt;object&gt;<br/>│  │  │  └─ attribute_format?: string<br/>│  │  │  └─ attribute_map_bytes_per_buffer?: number<br/>│  │  │  └─ character_count?: number<br/>│  │  │  └─ character_map_bytes_per_buffer?: number<br/>│  │  │  └─ columns?: number<br/>│  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  └─ text_buffer_count?: number<br/>│  │  │  └─ double_buffering?: boolean<br/>│  │  │  └─ font_bytes?: number<br/>│  │  │  └─ glyph_height?: number<br/>│  │  │  └─ glyph_width?: number<br/>│  │  │  └─ height?: number<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ ram_bytes_per_page?: number<br/>│  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  └─ rows?: number<br/>│  │  │  └─ sprites_available?: number<br/>│  │  │  └─ width?: number<br/>│  │  └─ timing_budget?: object<br/>│  │  │  └─ page_drain_microseconds?: number<br/>│  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  └─ qualification?: string<br/>│  │  │  └─ renderer_pixels_per_step?: number<br/>│  │  │  └─ renderer_step_mhz?: number<br/>│  │  └─ timing_target?: object<br/>│  │  │  └─ horizontal_khz?: number<br/>│  │  │  └─ horizontal_total_pixels?: number<br/>│  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  └─ refresh_hz?: number<br/>│  │  │  └─ vertical_total_lines?: number<br/>│  │  └─ tracking?: string<br/>│  │  └─ transport_id?: string → technology<br/>│  │  └─ usable_from?: array&lt;string&gt;<br/>│  │  └─ video_link_id?: string → technology<br/>│  │  └─ video_physical_population?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  └─ video_ram_bytes?: number<br/>│  │  └─ video_ram_chip_count?: number<br/>│  │  └─ video_ram_chip_id?: string → base_part<br/>│  │  └─ video_ram_kb?: number<br/>│  └─ specification_id?: string → technology<br/>│  └─ technical_profile?: object<br/>│  │  └─ memory?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ capacity_policy?: string<br/>│  │  │  └─ expanded_organization?: object<br/>│  │  │  │  └─ application_memory_profile?: string<br/>│  │  │  │  └─ common_system_ram_kb?: number<br/>│  │  │  │  └─ contiguous_lower_ram_kb?: number<br/>│  │  │  │  └─ controller_id?: string → base_part<br/>│  │  │  │  └─ dma_addressing?: string<br/>│  │  │  │  └─ normal_view?: array&lt;object&gt;<br/>│  │  │  │  │  └─ description?: string<br/>│  │  │  │  │  └─ end?: string<br/>│  │  │  │  │  └─ role?: string<br/>│  │  │  │  │  └─ start?: string<br/>│  │  │  │  └─ note?: string<br/>│  │  │  │  └─ ram_kb?: number<br/>│  │  │  │  └─ refresh?: string<br/>│  │  │  └─ expansion_ref?: string → device<br/>│  │  │  └─ organization?: object<br/>│  │  │  │  └─ application_memory_profile?: string<br/>│  │  │  │  └─ common_system_ram_kb?: number<br/>│  │  │  │  └─ contiguous_lower_ram_kb?: number<br/>│  │  │  │  └─ controller_id?: string → base_part<br/>│  │  │  │  └─ dma_addressing?: string<br/>│  │  │  │  └─ normal_view?: array&lt;object&gt;<br/>│  │  │  │  │  └─ description?: string<br/>│  │  │  │  │  └─ end?: string<br/>│  │  │  │  │  └─ role?: string<br/>│  │  │  │  │  └─ start?: string<br/>│  │  │  │  └─ note?: string<br/>│  │  │  │  └─ refresh?: string<br/>│  │  │  └─ organization_ref?: string → technology<br/>│  │  │  └─ os_rom?: object<br/>│  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  └─ execution?: string<br/>│  │  │  │  └─ implementation?: string<br/>│  │  │  └─ parity_bits?: number<br/>│  │  │  └─ physical_population?: object<br/>│  │  │  │  └─ bank_count?: number<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ common_ram_included?: boolean<br/>│  │  │  │  └─ mapping_note?: string<br/>│  │  │  │  └─ parity_bits?: number<br/>│  │  │  │  └─ video_ram_separate?: boolean<br/>│  │  │  └─ population_policy?: string<br/>│  │  │  └─ reliability_policy?: string<br/>│  │  │  └─ sourcing_policy?: string<br/>│  │  │  └─ sprite_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  └─ system_controller_ref?: string → base_part<br/>│  │  │  └─ upgrade_policy?: string<br/>│  │  │  └─ video_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  │  └─ video_ram_policy?: string<br/>│  │  └─ network?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  └─ networking?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ server_role?: boolean<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ rom_and_cartridges?: object<br/>│  │  │  └─ mainboard_rom?: array&lt;string&gt;<br/>│  │  └─ software_compatibility?: object<br/>│  │  │  └─ adaptive_text?: string<br/>│  │  │  └─ api_id?: string → technology<br/>│  │  │  └─ native_40_column_mode?: string<br/>│  │  │  └─ native_target?: string<br/>│  │  └─ software_policy?: string<br/>│  │  └─ video?: object<br/>│  │  │  └─ api_id?: string → technology<br/>│  │  │  └─ arbitration?: string<br/>│  │  │  └─ bitmap_modes?: array&lt;object&gt;<br/>│  │  │  │  └─ bits_per_pixel?: number<br/>│  │  │  │  └─ bytes_per_framebuffer?: number<br/>│  │  │  │  └─ compatibility_mode?: boolean<br/>│  │  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  │  │  └─ framebuffer_count?: number<br/>│  │  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  └─ double_buffering?: boolean<br/>│  │  │  │  └─ height?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  │  └─ sprites_available?: number<br/>│  │  │  │  └─ stride_bytes?: number<br/>│  │  │  │  └─ width?: number<br/>│  │  │  └─ character_row_cache?: object<br/>│  │  │  │  └─ banks?: number<br/>│  │  │  │  └─ bytes_per_bank?: number<br/>│  │  │  │  └─ purpose?: string<br/>│  │  │  │  └─ total_bytes?: number<br/>│  │  │  └─ controller_id?: string → base_part<br/>│  │  │  └─ display_memory?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  └─ chip_count?: number<br/>│  │  │  │  └─ chip_id?: string → base_part<br/>│  │  │  │  └─ organization?: string<br/>│  │  │  └─ feature_continuity_id?: string → device<br/>│  │  │  └─ host_interface?: object<br/>│  │  │  │  └─ host_width_bits?: number<br/>│  │  │  │  └─ hot_swap?: boolean<br/>│  │  │  │  └─ implementation?: string<br/>│  │  │  │  └─ local_display_width_bits?: number<br/>│  │  │  └─ memory_layout?: object<br/>│  │  │  │  └─ font_policy?: string<br/>│  │  │  │  └─ mode_exclusivity?: string<br/>│  │  │  │  └─ page_flip?: string<br/>│  │  │  │  └─ policy_id?: string → technology<br/>│  │  │  └─ mode_discovery?: string<br/>│  │  │  └─ monitor_policy?: string<br/>│  │  │  └─ palette_list_id?: string → technology<br/>│  │  │  └─ pixel_buffer?: object<br/>│  │  │  │  └─ bits_per_pixel?: number<br/>│  │  │  │  └─ bytes_per_page?: number<br/>│  │  │  │  └─ location?: string<br/>│  │  │  │  └─ page_states?: array&lt;string&gt;<br/>│  │  │  │  └─ pages?: number<br/>│  │  │  │  └─ physical_organization?: string<br/>│  │  │  │  └─ pixels_per_page?: number<br/>│  │  │  │  └─ policy?: string<br/>│  │  │  │  └─ total_bytes?: number<br/>│  │  │  └─ sprite_memory?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  └─ chip_count?: number<br/>│  │  │  │  └─ chip_id?: string → base_part<br/>│  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  └─ sprite_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  └─ sprite_profile_ref?: object<br/>│  │  │  │  └─ profile?: string<br/>│  │  │  │  └─ technology_id?: string → technology<br/>│  │  │  └─ technology_id?: string → technology<br/>│  │  │  └─ text_modes?: array&lt;object&gt;<br/>│  │  │  │  └─ attribute_format?: string<br/>│  │  │  │  └─ attribute_map_bytes_per_buffer?: number<br/>│  │  │  │  └─ character_count?: number<br/>│  │  │  │  └─ character_map_bytes_per_buffer?: number<br/>│  │  │  │  └─ columns?: number<br/>│  │  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  │  └─ text_buffer_count?: number<br/>│  │  │  │  └─ double_buffering?: boolean<br/>│  │  │  │  └─ font_bytes?: number<br/>│  │  │  │  └─ glyph_height?: number<br/>│  │  │  │  └─ glyph_width?: number<br/>│  │  │  │  └─ height?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ ram_bytes_per_page?: number<br/>│  │  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  │  └─ rows?: number<br/>│  │  │  │  └─ sprites_available?: number<br/>│  │  │  │  └─ width?: number<br/>│  │  │  └─ timing_budget?: object<br/>│  │  │  │  └─ page_drain_microseconds?: number<br/>│  │  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  │  └─ qualification?: string<br/>│  │  │  │  └─ renderer_pixels_per_step?: number<br/>│  │  │  │  └─ renderer_step_mhz?: number<br/>│  │  │  └─ video_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  │  └─ video_ram_kb?: number<br/>specification*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ value?: string,number,boolean,null<br/>│  └─ unit?: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>requirements*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ kind*: undefined<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID</pre>"]:::schemaEntity
   campaign["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>campaign.json<br/>id*: string<br/>title*: string<br/>objective*: string<br/>lead_actor_ids*: array&lt;string&gt; → actor<br/>audience?: array&lt;string&gt;<br/>message?: array&lt;string&gt;<br/>claim_policy?: array&lt;string&gt;<br/>launch_event_id?: string → event<br/>subject_ids?: array&lt;string&gt; → product / technology / manufacturing_capability / actor / agreement / market_response<br/>presentation?: object<br/>│  └─ duration_minutes?: integer<br/>│  └─ stage*: array&lt;object&gt;<br/>│  │  └─ label*: string<br/>│  │  └─ duration_minutes?: integer<br/>│  │  └─ description*: string<br/>│  │  └─ actor_ids?: array&lt;string&gt; → actor<br/>booth?: array&lt;object&gt;<br/>│  └─ name*: string<br/>│  └─ description*: string<br/>│  └─ call_to_action?: string<br/>process_id*: string → process<br/>marketing_content?: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string</pre>"]:::schemaEntity
-  event["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>event.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>time*: object<br/>│  └─ value*: string<br/>│  └─ precision*: string<br/>process_ids?: array&lt;string&gt; → process<br/>location_ids?: array&lt;string&gt; → location<br/>agreement_id?: string → agreement</pre>"]:::schemaEntity
+  device["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>device.json<br/>id*: string<br/>name*: string<br/>description*: string<br/>provider_actor_ids*: array&lt;string&gt; → actor<br/>technology_ids*: array&lt;string&gt; → technology<br/>kind*: undefined<br/>composition_history*: array&lt;object&gt;<br/>│  └─ version_number*: integer<br/>│  └─ description*: string<br/>│  └─ effective_from*: undefined<br/>│  └─ effective_until*: undefined<br/>│  └─ technical_definition*: object<br/>│  │  └─ athena_qualification?: string<br/>│  │  └─ capacity_kb?: number<br/>│  │  └─ compatibility_note?: string<br/>│  │  └─ compatible_computers?: array&lt;string&gt; → device<br/>│  │  └─ compatible_with?: array&lt;string&gt; → device<br/>│  │  └─ configuration_requirements?: object<br/>│  │  │  └─ external_application_cartridges_supported?: boolean<br/>│  │  │  └─ rules?: array&lt;string&gt;<br/>│  │  │  └─ scope?: string<br/>│  │  └─ connection?: string<br/>│  │  └─ expansion_socket_groups?: array&lt;object&gt;<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ name?: string<br/>│  │  │  └─ sockets?: array&lt;object&gt;<br/>│  │  │  │  └─ capacity?: number,null<br/>│  │  │  │  └─ compatible_device_ids?: array&lt;string&gt; → device<br/>│  │  │  │  └─ connection?: string<br/>│  │  │  │  └─ device_quantity_limits?: object<br/>│  │  │  │  │  └─ device.aurelia_ram_16kb_card?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ installation_multiple?: number<br/>│  │  │  │  └─ matched_modules?: boolean<br/>│  │  │  │  └─ name?: string<br/>│  │  │  │  └─ population_order?: string<br/>│  │  │  │  └─ requirements?: array&lt;string&gt;<br/>│  │  └─ firmware_contents?: array&lt;string&gt;<br/>│  │  └─ form_factor?: string<br/>│  │  └─ host_qualification?: object<br/>│  │  │  └─ device.base_computer.artemis?: object<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  │  └─ implementation?: string<br/>│  │  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  │  └─ rate_policy?: string<br/>│  │  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  │  └─ device.base_computer.artemis_pro?: object<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  │  └─ implementation?: string<br/>│  │  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  │  └─ rate_policy?: string<br/>│  │  │  │  └─ server_role?: boolean<br/>│  │  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  │  └─ device.base_computer.athena?: object<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ device.base_computer.athena_server?: object<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ device.base_computer.aurelia?: object<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  │  └─ rate_policy?: string<br/>│  │  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  │  └─ device.base_computer.aurelia_plus?: object<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  │  └─ rate_policy?: string<br/>│  │  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ integration_requirements?: object<br/>│  │  │  └─ sourcing_policy?: string<br/>│  │  │  └─ video_ram_policy?: string<br/>│  │  └─ io_and_expansion?: object<br/>│  │  │  └─ application_rom_cards_supported?: boolean<br/>│  │  │  └─ dedicated_video_slot?: object<br/>│  │  │  │  └─ general_purpose_slots_consumed?: number<br/>│  │  │  │  └─ hot_swap?: boolean<br/>│  │  │  │  └─ interface?: string<br/>│  │  │  │  └─ replaceable?: boolean<br/>│  │  │  └─ eeprom_bios?: object<br/>│  │  │  │  └─ capacity_kb?: number,null<br/>│  │  │  │  └─ included?: boolean<br/>│  │  │  │  └─ purpose?: string<br/>│  │  │  └─ expansion_slots?: object<br/>│  │  │  │  └─ future_pin_area_reserved_for_bits?: number<br/>│  │  │  │  └─ plug_and_execute?: boolean<br/>│  │  │  │  └─ width_bits?: number<br/>│  │  │  └─ rom_eeprom_cartridge_slots?: object<br/>│  │  │  │  └─ front?: string<br/>│  │  │  │  └─ rear?: string<br/>│  │  └─ manufacturing_planning?: object<br/>│  │  │  └─ die_area_mm2?: number<br/>│  │  │  └─ die_area_mm2_target?: number<br/>│  │  │  └─ initial_manufacturer?: string<br/>│  │  │  └─ node_um?: number<br/>│  │  │  └─ policy?: string<br/>│  │  │  └─ transistor_budget_target?: number<br/>│  │  │  └─ wafer_diameter_mm?: number<br/>│  │  └─ memory_constraints?: object<br/>│  │  │  └─ max_ram_kib?: number,null<br/>│  │  │  └─ mixed_module_types_allowed?: boolean<br/>│  │  └─ memory_interface?: object<br/>│  │  │  └─ expansion_id?: string → device<br/>│  │  │  └─ organization_id?: string → technology<br/>│  │  │  └─ system_controller_id?: string → base_part<br/>│  │  └─ memory_mapping?: object<br/>│  │  │  └─ application_memory?: string<br/>│  │  │  └─ configuration?: string<br/>│  │  │  └─ installation?: string<br/>│  │  │  └─ normal_cpu_range?: string<br/>│  │  │  └─ page_count?: number<br/>│  │  │  └─ page_size_kb?: number<br/>│  │  │  └─ service_calls?: string<br/>│  │  │  └─ slot_count?: number<br/>│  │  │  └─ system_workspace?: string<br/>│  │  └─ packaging?: string<br/>│  │  └─ physical_population?: object<br/>│  │  │  └─ capacity_kb?: number<br/>│  │  │  └─ chip_id?: string → base_part<br/>│  │  │  └─ data_chip_count?: number<br/>│  │  │  └─ data_width_bits?: number<br/>│  │  │  └─ refresh_owner?: string<br/>│  │  └─ planned_compatible_with?: array&lt;string&gt; → device<br/>│  │  └─ processor?: object<br/>│  │  │  └─ part_id?: string → base_part<br/>│  │  └─ recommended_software_id?: string → software_edition<br/>│  │  └─ role?: string<br/>│  │  └─ slot_count?: number<br/>│  │  └─ specification?: object<br/>│  │  │  └─ acceleration?: array&lt;string&gt;<br/>│  │  │  └─ adaptation?: string<br/>│  │  │  └─ adapter_requirements?: object<br/>│  │  │  │  └─ buffer_policy?: string<br/>│  │  │  │  └─ flow_control?: string<br/>│  │  │  │  └─ hardware_services?: array&lt;string&gt;<br/>│  │  │  │  └─ host_service?: string<br/>│  │  │  │  └─ local_packet_ram_target_bytes?: number<br/>│  │  │  └─ additions?: array&lt;string&gt;<br/>│  │  │  └─ analog_chain?: string<br/>│  │  │  └─ api_id?: string → technology<br/>│  │  │  └─ arbitration?: string<br/>│  │  │  └─ array_columns?: number<br/>│  │  │  └─ array_rows?: number<br/>│  │  │  └─ bandwidth?: string<br/>│  │  │  └─ bank_capacity_kb?: number<br/>│  │  │  └─ bank_control?: string<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ bank_organization?: string<br/>│  │  │  └─ base_controller_id?: string → base_part<br/>│  │  │  └─ base_product_id?: string → base_part<br/>│  │  │  └─ beam_voltage_levels?: number<br/>│  │  │  └─ bitmap_modes?: array&lt;object&gt;<br/>│  │  │  │  └─ bits_per_pixel?: number<br/>│  │  │  │  └─ bytes_per_framebuffer?: number<br/>│  │  │  │  └─ compatibility_mode?: boolean<br/>│  │  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  │  │  └─ framebuffer_count?: number<br/>│  │  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  └─ double_buffering?: boolean<br/>│  │  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  │  └─ framebuffer_count?: number<br/>│  │  │  │  └─ height?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ palette_grayscale_levels?: number<br/>│  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  └─ remaining_bytes?: number<br/>│  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  │  └─ simultaneous_shades?: number<br/>│  │  │  │  └─ simultaneous_values?: number<br/>│  │  │  │  └─ sprites_available?: number<br/>│  │  │  │  └─ stride_bytes?: number<br/>│  │  │  │  └─ width?: number<br/>│  │  │  └─ boot?: string<br/>│  │  │  └─ bridge_design_id?: string → technology<br/>│  │  │  └─ buttons?: number<br/>│  │  │  └─ capabilities?: object<br/>│  │  │  │  └─ color_model?: string<br/>│  │  │  │  └─ maximum_pixel_clock_mhz?: number<br/>│  │  │  │  └─ palette_precision_bits?: number<br/>│  │  │  │  └─ preferred_raster_id?: string<br/>│  │  │  │  └─ programmable_palette?: boolean<br/>│  │  │  │  └─ protocol_version?: number<br/>│  │  │  │  └─ raster_ids?: array&lt;string&gt;<br/>│  │  │  └─ capacity_bytes?: number<br/>│  │  │  └─ capacity_kb?: number,null<br/>│  │  │  └─ capacity_kbit?: number<br/>│  │  │  └─ capacity_mb?: number<br/>│  │  │  └─ card_id?: string → device<br/>│  │  │  └─ character_row_cache?: object<br/>│  │  │  │  └─ banks?: number<br/>│  │  │  │  └─ bytes_per_bank?: number<br/>│  │  │  │  └─ purpose?: string<br/>│  │  │  │  └─ total_bytes?: number<br/>│  │  │  └─ chip_organization?: string<br/>│  │  │  └─ chip_type_id?: string → base_part<br/>│  │  │  └─ chips?: number<br/>│  │  │  └─ chips_per_rank?: number<br/>│  │  │  └─ class_protocol_id?: string → technology<br/>│  │  │  └─ clock_mhz?: number<br/>│  │  │  └─ compatibility?: string<br/>│  │  │  └─ connection?: string<br/>│  │  │  └─ continuity?: string<br/>│  │  │  └─ controller_die_count?: number,null<br/>│  │  │  └─ controller_id?: string → base_part<br/>│  │  │  └─ conversion?: string<br/>│  │  │  └─ cpu_address_bits?: number<br/>│  │  │  └─ cpu_id?: string → base_part<br/>│  │  │  └─ crt_id?: string → base_part<br/>│  │  │  └─ cursor_keys?: string<br/>│  │  │  └─ data_width_bits?: number<br/>│  │  │  └─ density?: string<br/>│  │  │  └─ diagonal_inch?: number<br/>│  │  │  └─ diagonal_inches?: number<br/>│  │  │  └─ die_area_mm2?: number<br/>│  │  │  └─ die_area_planning_mm2?: number<br/>│  │  │  └─ digital_output_bits?: number<br/>│  │  │  └─ disk_formats?: array&lt;string&gt;<br/>│  │  │  └─ disk_ii_interface?: boolean<br/>│  │  │  └─ disk_interface?: string<br/>│  │  │  └─ display_controller_id?: string → base_part<br/>│  │  │  └─ display_memory?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  └─ chip_count?: number<br/>│  │  │  │  └─ chip_id?: string → base_part<br/>│  │  │  │  └─ organization?: string<br/>│  │  │  └─ display_modes?: string<br/>│  │  │  └─ display_subassembly_id?: string → base_part<br/>│  │  │  └─ displayed_color_registers?: number<br/>│  │  │  └─ displayed_registers?: number<br/>│  │  │  └─ dma?: object<br/>│  │  │  │  └─ active_transfer_engines?: number<br/>│  │  │  │  └─ address_steps?: array&lt;string&gt;<br/>│  │  │  │  └─ arbitration?: string<br/>│  │  │  │  └─ bank_selection?: string<br/>│  │  │  │  └─ completion?: string<br/>│  │  │  │  └─ destination_address_bits?: number<br/>│  │  │  │  └─ length_bits?: number<br/>│  │  │  │  └─ operations?: array&lt;string&gt;<br/>│  │  │  │  └─ peripheral_scope?: string<br/>│  │  │  │  └─ transfer_contexts?: number<br/>│  │  │  │  └─ video_endpoint?: string<br/>│  │  │  └─ dot_pitch_mm?: number<br/>│  │  │  └─ electrical_contract?: string<br/>│  │  │  └─ electrical_interface?: string<br/>│  │  │  └─ ergonomics?: string<br/>│  │  │  └─ execution?: string<br/>│  │  │  └─ expansion_role?: string<br/>│  │  │  └─ fdd_density?: string<br/>│  │  │  └─ fdd_size_inch?: number<br/>│  │  │  └─ feature_continuity_id?: string → device<br/>│  │  │  └─ flexibus_ports?: number<br/>│  │  │  └─ format?: string<br/>│  │  │  └─ formatted_capacity_kb?: number,null<br/>│  │  │  └─ function_keys?: string<br/>│  │  │  └─ grayscale_levels?: number<br/>│  │  │  └─ hdd_bundled_with_standard_artemis?: boolean<br/>│  │  │  └─ hdd_interface_supported?: boolean<br/>│  │  │  └─ historical_raster?: string<br/>│  │  │  └─ host?: string<br/>│  │  │  └─ host_access?: string<br/>│  │  │  └─ host_clock_mhz?: array&lt;number&gt;<br/>│  │  │  └─ host_integration?: string<br/>│  │  │  └─ host_interface?: undefined<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ implementation_design?: object<br/>│  │  │  │  └─ arbitration?: string<br/>│  │  │  │  └─ clock_targets?: object<br/>│  │  │  │  │  └─ high_resolution_pixel_mhz?: number<br/>│  │  │  │  │  └─ low_resolution_pixel_mhz?: number<br/>│  │  │  │  │  └─ master_mhz?: number<br/>│  │  │  │  │  └─ maximum_pixel_fifo_output_mbytes_per_second?: number<br/>│  │  │  │  │  └─ scope?: string<br/>│  │  │  │  └─ engines?: object<br/>│  │  │  │  │  └─ fifo?: string<br/>│  │  │  │  │  └─ renderer?: string<br/>│  │  │  │  │  └─ scanout?: string<br/>│  │  │  │  │  └─ underrun?: string<br/>│  │  │  │  └─ internal_buffers?: object<br/>│  │  │  │  │  └─ character_attribute_row_cache_bytes?: number<br/>│  │  │  │  │  └─ included_in_die_estimates?: boolean<br/>│  │  │  │  │  └─ next_character_attribute_row_cache_bytes?: number<br/>│  │  │  │  │  └─ pixel_bits?: number<br/>│  │  │  │  │  └─ pixel_fifo_bytes?: number<br/>│  │  │  │  │  └─ pixel_fifo_page_bytes?: number<br/>│  │  │  │  │  └─ pixel_fifo_page_count?: number<br/>│  │  │  │  │  └─ sprite_row_shifters_bytes?: number<br/>│  │  │  │  │  └─ sprite_staging_bytes?: number<br/>│  │  │  │  │  └─ total_storage_bytes?: number<br/>│  │  │  │  └─ line_repeat?: string<br/>│  │  │  │  └─ manufacturing_planning?: object<br/>│  │  │  │  │  └─ die_area_mm2_at_3_5um_range?: array&lt;number&gt;<br/>│  │  │  │  │  └─ die_area_mm2_at_3um_range?: array&lt;number&gt;<br/>│  │  │  │  │  └─ die_area_mm2_central_at_3_5um?: number<br/>│  │  │  │  │  └─ die_area_mm2_central_at_3um?: number<br/>│  │  │  │  │  └─ external_functions?: array&lt;string&gt;<br/>│  │  │  │  │  └─ process?: string<br/>│  │  │  │  │  └─ transistors_central?: number<br/>│  │  │  │  │  └─ transistors_range?: array&lt;number&gt;<br/>│  │  │  │  └─ sprite_access?: string<br/>│  │  │  │  └─ text_fetch?: string<br/>│  │  │  │  └─ timing_budget?: object<br/>│  │  │  │  │  └─ dram_random_cycle_target_ns?: number<br/>│  │  │  │  │  └─ fifo_total_drain_time_us_at_high_resolution?: number<br/>│  │  │  │  │  └─ fifo_total_pixels?: number<br/>│  │  │  │  │  └─ illustrative_read_time_us?: number<br/>│  │  │  │  │  └─ illustrative_total_reads_per_scanline?: number<br/>│  │  │  │  │  └─ maximum_sprite_row_bytes_per_scanline?: number<br/>│  │  │  │  │  └─ next_row_prefetch_average_bytes_per_scanline?: number<br/>│  │  │  │  │  └─ qualification?: string<br/>│  │  │  │  │  └─ sprite_pattern_fetch_time_us?: number<br/>│  │  │  │  │  └─ sprite_sram_cycle_target_ns?: number<br/>│  │  │  │  │  └─ text_glyph_reads_per_scanline?: number<br/>│  │  │  │  │  └─ two_ready_pages_drain_time_us?: number<br/>│  │  │  └─ included_monitor?: boolean<br/>│  │  │  └─ input?: string<br/>│  │  │  └─ input_bits?: number<br/>│  │  │  └─ installation?: string<br/>│  │  │  └─ intensity_levels?: number<br/>│  │  │  └─ interface?: string<br/>│  │  │  └─ interface_id?: string → technology<br/>│  │  │  └─ key_count?: number<br/>│  │  │  └─ keyboard_standard_id?: string → technology<br/>│  │  │  └─ legacy_card_id?: string → device<br/>│  │  │  └─ link_layer_id?: string → technology<br/>│  │  │  └─ local_packet_ram_target_bytes?: number<br/>│  │  │  └─ local_ram_kb?: number<br/>│  │  │  └─ manufacturer?: string<br/>│  │  │  └─ manufacturing_planning?: object<br/>│  │  │  │  └─ die_area_mm2?: number<br/>│  │  │  │  └─ die_area_mm2_central?: number<br/>│  │  │  │  └─ die_area_mm2_range?: array&lt;number&gt;<br/>│  │  │  │  └─ package_allowance_usd?: number<br/>│  │  │  │  └─ recipe_variants?: array&lt;object&gt;<br/>│  │  │  │  │  └─ defect_density_cm2?: number<br/>│  │  │  │  │  └─ die_area_mm2?: number<br/>│  │  │  │  │  └─ id?: string<br/>│  │  │  │  │  └─ manufacturing_capability_id?: string → manufacturing_capability<br/>│  │  │  │  │  └─ node_um?: string<br/>│  │  │  │  │  └─ processed_wafer_usd?: number<br/>│  │  │  │  └─ revision_policy?: string<br/>│  │  │  │  └─ wafer_mm?: number<br/>│  │  │  └─ manufacturing_recipe?: string<br/>│  │  │  └─ maximum_shared_raw_rate_kbps?: number<br/>│  │  │  └─ mechanism_id?: string → base_part<br/>│  │  │  └─ media?: string<br/>│  │  │  └─ media_access_control?: string<br/>│  │  │  └─ memory_addressing_bytes?: number<br/>│  │  │  └─ memory_layout?: object<br/>│  │  │  │  └─ font_policy?: string<br/>│  │  │  │  └─ mode_exclusivity?: string<br/>│  │  │  │  └─ page_flip?: string<br/>│  │  │  │  └─ policy_id?: string → technology<br/>│  │  │  └─ memory_policy?: string<br/>│  │  │  └─ mode_discovery?: string<br/>│  │  │  └─ mode_limit?: string<br/>│  │  │  └─ mode_policy?: string<br/>│  │  │  └─ model?: string<br/>│  │  │  └─ modules_per_bank?: number<br/>│  │  │  └─ monitor_id?: string → device<br/>│  │  │  └─ monitor_modes?: string<br/>│  │  │  └─ monitor_policy?: string<br/>│  │  │  └─ native_raster?: object<br/>│  │  │  │  └─ height?: number<br/>│  │  │  │  └─ horizontal_khz?: number<br/>│  │  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  │  └─ progressive?: boolean<br/>│  │  │  │  └─ refresh_hz_target?: number<br/>│  │  │  │  └─ total_lines?: number<br/>│  │  │  │  └─ total_pixels?: number<br/>│  │  │  │  └─ width?: number<br/>│  │  │  └─ navigation_section?: array&lt;string&gt;<br/>│  │  │  └─ negotiation_id?: string → technology<br/>│  │  │  └─ node_um?: number<br/>│  │  │  └─ numeric_keypad?: boolean<br/>│  │  │  └─ oem?: string<br/>│  │  │  └─ oem_basis?: string<br/>│  │  │  └─ organization?: string<br/>│  │  │  └─ organization_words?: number<br/>│  │  │  └─ output?: string<br/>│  │  │  └─ package?: string,null<br/>│  │  │  └─ page_size_kb?: number<br/>│  │  │  └─ palette?: string<br/>│  │  │  └─ palette_entries?: number<br/>│  │  │  └─ palette_entry_bits?: number<br/>│  │  │  └─ palette_grayscale_levels?: number<br/>│  │  │  └─ palette_list?: object<br/>│  │  │  │  └─ base_address?: string<br/>│  │  │  │  └─ cad_policy?: string<br/>│  │  │  │  └─ command_bytes?: number<br/>│  │  │  │  └─ encoding?: string<br/>│  │  │  │  └─ end_address?: string<br/>│  │  │  │  └─ execution?: string<br/>│  │  │  │  └─ frame_state?: string<br/>│  │  │  │  └─ long_gaps?: string<br/>│  │  │  │  └─ maximum_commands?: number<br/>│  │  │  │  └─ register_count?: number<br/>│  │  │  │  └─ reserved_bytes?: number<br/>│  │  │  │  └─ write_limit?: string<br/>│  │  │  └─ palette_list_id?: string → technology<br/>│  │  │  └─ palette_registers?: number<br/>│  │  │  └─ parity_bits?: number<br/>│  │  │  └─ physical_arrangement?: string<br/>│  │  │  └─ physical_population?: object<br/>│  │  │  │  └─ bank_count?: number<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ common_ram_included?: boolean<br/>│  │  │  │  └─ mapping_note?: string<br/>│  │  │  │  └─ parity_bits?: number<br/>│  │  │  │  └─ video_ram_separate?: boolean<br/>│  │  │  └─ pixel_buffer?: object<br/>│  │  │  │  └─ bits_per_pixel?: number<br/>│  │  │  │  └─ bytes_per_page?: number<br/>│  │  │  │  └─ location?: string<br/>│  │  │  │  └─ page_states?: array&lt;string&gt;<br/>│  │  │  │  └─ pages?: number<br/>│  │  │  │  └─ physical_organization?: string<br/>│  │  │  │  └─ pixels_per_page?: number<br/>│  │  │  │  └─ policy?: string<br/>│  │  │  │  └─ total_bytes?: number<br/>│  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  └─ platform_rate_profiles?: array&lt;object&gt;<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  │  └─ implementation?: string<br/>│  │  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  │  └─ rate_policy?: string<br/>│  │  │  │  └─ server_role?: boolean<br/>│  │  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  │  └─ port_count?: number<br/>│  │  │  └─ ports?: array&lt;string&gt;<br/>│  │  │  └─ power?: string<br/>│  │  │  └─ purchase_boundary?: string<br/>│  │  │  └─ qualification?: string<br/>│  │  │  └─ random_cycle_target_ns?: number<br/>│  │  │  └─ rank_capacity_kb?: number<br/>│  │  │  └─ ranks?: number<br/>│  │  │  └─ rate_scope?: string<br/>│  │  │  └─ redraw?: string<br/>│  │  │  └─ refresh?: undefined<br/>│  │  │  └─ refresh_required?: boolean<br/>│  │  │  └─ register_width_bits?: number<br/>│  │  │  └─ reused_elements?: array&lt;string&gt;<br/>│  │  │  └─ rgb_palette_mapping?: string<br/>│  │  │  └─ role?: string<br/>│  │  │  └─ rollers?: array&lt;object&gt;<br/>│  │  │  │  └─ default_action?: string<br/>│  │  │  │  └─ position?: string<br/>│  │  │  └─ scan?: string<br/>│  │  │  └─ separate_sprite_sram_bytes?: number<br/>│  │  │  └─ serial_register_bits?: number<br/>│  │  │  └─ sides?: number<br/>│  │  │  └─ signal_path?: string<br/>│  │  │  └─ simultaneous_shades_at_640_200_4bpp?: number<br/>│  │  │  └─ simultaneous_shades_at_800_600_2bpp?: number<br/>│  │  │  └─ simultaneous_shades_with_128kb_card?: number<br/>│  │  │  └─ size_inch?: number<br/>│  │  │  └─ slot?: string<br/>│  │  │  └─ software?: string<br/>│  │  │  └─ speed_qualification_targets?: object<br/>│  │  │  │  └─ basis?: string<br/>│  │  │  │  └─ conditions?: string<br/>│  │  │  │  └─ fallback_random_cycle_ns_range?: array&lt;number&gt;<br/>│  │  │  │  └─ fallback_row_access_ns?: number<br/>│  │  │  │  └─ preferred_random_cycle_ns?: number<br/>│  │  │  │  └─ preferred_row_access_ns?: number<br/>│  │  │  │  └─ stretch_row_access_ns?: number<br/>│  │  │  └─ sprite_memory?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  └─ chip_count?: number<br/>│  │  │  │  └─ chip_id?: string → base_part<br/>│  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  └─ sprite_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  └─ sprite_policy?: string<br/>│  │  │  └─ sprite_profile_ref?: object<br/>│  │  │  │  └─ profile?: string<br/>│  │  │  │  └─ technology_id?: string → technology<br/>│  │  │  └─ sprites?: undefined<br/>│  │  │  └─ startup_rate_kbps?: number<br/>│  │  │  └─ supply_rails_v?: array,null<br/>│  │  │  └─ supported_fdd_count?: number<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_id?: string → technology<br/>│  │  │  └─ text_modes?: array&lt;object&gt;<br/>│  │  │  │  └─ attribute_format?: string<br/>│  │  │  │  └─ attribute_map_bytes_per_buffer?: number<br/>│  │  │  │  └─ character_count?: number<br/>│  │  │  │  └─ character_map_bytes_per_buffer?: number<br/>│  │  │  │  └─ columns?: number<br/>│  │  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  │  └─ text_buffer_count?: number<br/>│  │  │  │  └─ double_buffering?: boolean<br/>│  │  │  │  └─ font_bytes?: number<br/>│  │  │  │  └─ glyph_height?: number<br/>│  │  │  │  └─ glyph_width?: number<br/>│  │  │  │  └─ height?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ ram_bytes_per_page?: number<br/>│  │  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  │  └─ rows?: number<br/>│  │  │  │  └─ sprites_available?: number<br/>│  │  │  │  └─ width?: number<br/>│  │  │  └─ timing_budget?: object<br/>│  │  │  │  └─ page_drain_microseconds?: number<br/>│  │  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  │  └─ qualification?: string<br/>│  │  │  │  └─ renderer_pixels_per_step?: number<br/>│  │  │  │  └─ renderer_step_mhz?: number<br/>│  │  │  └─ timing_target?: object<br/>│  │  │  │  └─ horizontal_khz?: number<br/>│  │  │  │  └─ horizontal_total_pixels?: number<br/>│  │  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  │  └─ refresh_hz?: number<br/>│  │  │  │  └─ vertical_total_lines?: number<br/>│  │  │  └─ tracking?: string<br/>│  │  │  └─ transport_id?: string → technology<br/>│  │  │  └─ usable_from?: array&lt;string&gt;<br/>│  │  │  └─ video_link_id?: string → technology<br/>│  │  │  └─ video_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  │  └─ video_ram_bytes?: number<br/>│  │  │  └─ video_ram_chip_count?: number<br/>│  │  │  └─ video_ram_chip_id?: string → base_part<br/>│  │  │  └─ video_ram_kb?: number<br/>│  │  └─ specification_id?: string → technology<br/>│  │  └─ technical_profile?: object<br/>│  │  │  └─ memory?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ capacity_policy?: string<br/>│  │  │  │  └─ expanded_organization?: object<br/>│  │  │  │  │  └─ application_memory_profile?: string<br/>│  │  │  │  │  └─ common_system_ram_kb?: number<br/>│  │  │  │  │  └─ contiguous_lower_ram_kb?: number<br/>│  │  │  │  │  └─ controller_id?: string → base_part<br/>│  │  │  │  │  └─ dma_addressing?: string<br/>│  │  │  │  │  └─ normal_view?: array&lt;object&gt;<br/>│  │  │  │  │  │  └─ description?: string<br/>│  │  │  │  │  │  └─ end?: string<br/>│  │  │  │  │  │  └─ role?: string<br/>│  │  │  │  │  │  └─ start?: string<br/>│  │  │  │  │  └─ note?: string<br/>│  │  │  │  │  └─ ram_kb?: number<br/>│  │  │  │  │  └─ refresh?: string<br/>│  │  │  │  └─ expansion_ref?: string → device<br/>│  │  │  │  └─ organization?: object<br/>│  │  │  │  │  └─ application_memory_profile?: string<br/>│  │  │  │  │  └─ common_system_ram_kb?: number<br/>│  │  │  │  │  └─ contiguous_lower_ram_kb?: number<br/>│  │  │  │  │  └─ controller_id?: string → base_part<br/>│  │  │  │  │  └─ dma_addressing?: string<br/>│  │  │  │  │  └─ normal_view?: array&lt;object&gt;<br/>│  │  │  │  │  │  └─ description?: string<br/>│  │  │  │  │  │  └─ end?: string<br/>│  │  │  │  │  │  └─ role?: string<br/>│  │  │  │  │  │  └─ start?: string<br/>│  │  │  │  │  └─ note?: string<br/>│  │  │  │  │  └─ refresh?: string<br/>│  │  │  │  └─ organization_ref?: string → technology<br/>│  │  │  │  └─ os_rom?: object<br/>│  │  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  │  └─ execution?: string<br/>│  │  │  │  │  └─ implementation?: string<br/>│  │  │  │  └─ parity_bits?: number<br/>│  │  │  │  └─ physical_population?: object<br/>│  │  │  │  │  └─ bank_count?: number<br/>│  │  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  │  └─ common_ram_included?: boolean<br/>│  │  │  │  │  └─ mapping_note?: string<br/>│  │  │  │  │  └─ parity_bits?: number<br/>│  │  │  │  │  └─ video_ram_separate?: boolean<br/>│  │  │  │  └─ population_policy?: string<br/>│  │  │  │  └─ reliability_policy?: string<br/>│  │  │  │  └─ sourcing_policy?: string<br/>│  │  │  │  └─ sprite_physical_population?: object<br/>│  │  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  │  └─ system_controller_ref?: string → base_part<br/>│  │  │  │  └─ upgrade_policy?: string<br/>│  │  │  │  └─ video_physical_population?: object<br/>│  │  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  │  │  └─ video_ram_policy?: string<br/>│  │  │  └─ network?: object<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ networking?: object<br/>│  │  │  │  └─ computer_id?: string → device<br/>│  │  │  │  └─ implementation?: string<br/>│  │  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  │  └─ rate_policy?: string<br/>│  │  │  │  └─ server_role?: boolean<br/>│  │  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  │  └─ rom_and_cartridges?: object<br/>│  │  │  │  └─ mainboard_rom?: array&lt;string&gt;<br/>│  │  │  └─ software_compatibility?: object<br/>│  │  │  │  └─ adaptive_text?: string<br/>│  │  │  │  └─ api_id?: string → technology<br/>│  │  │  │  └─ native_40_column_mode?: string<br/>│  │  │  │  └─ native_target?: string<br/>│  │  │  └─ software_policy?: string<br/>│  │  │  └─ video?: object<br/>│  │  │  │  └─ api_id?: string → technology<br/>│  │  │  │  └─ arbitration?: string<br/>│  │  │  │  └─ bitmap_modes?: array&lt;object&gt;<br/>│  │  │  │  │  └─ bits_per_pixel?: number<br/>│  │  │  │  │  └─ bytes_per_framebuffer?: number<br/>│  │  │  │  │  └─ compatibility_mode?: boolean<br/>│  │  │  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  │  │  │  └─ framebuffer_count?: number<br/>│  │  │  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  │  └─ double_buffering?: boolean<br/>│  │  │  │  │  └─ height?: number<br/>│  │  │  │  │  └─ id?: string<br/>│  │  │  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  │  │  └─ sprites_available?: number<br/>│  │  │  │  │  └─ stride_bytes?: number<br/>│  │  │  │  │  └─ width?: number<br/>│  │  │  │  └─ character_row_cache?: object<br/>│  │  │  │  │  └─ banks?: number<br/>│  │  │  │  │  └─ bytes_per_bank?: number<br/>│  │  │  │  │  └─ purpose?: string<br/>│  │  │  │  │  └─ total_bytes?: number<br/>│  │  │  │  └─ controller_id?: string → base_part<br/>│  │  │  │  └─ display_memory?: object<br/>│  │  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  │  └─ chip_count?: number<br/>│  │  │  │  │  └─ chip_id?: string → base_part<br/>│  │  │  │  │  └─ organization?: string<br/>│  │  │  │  └─ feature_continuity_id?: string → device<br/>│  │  │  │  └─ host_interface?: object<br/>│  │  │  │  │  └─ host_width_bits?: number<br/>│  │  │  │  │  └─ hot_swap?: boolean<br/>│  │  │  │  │  └─ implementation?: string<br/>│  │  │  │  │  └─ local_display_width_bits?: number<br/>│  │  │  │  └─ memory_layout?: object<br/>│  │  │  │  │  └─ font_policy?: string<br/>│  │  │  │  │  └─ mode_exclusivity?: string<br/>│  │  │  │  │  └─ page_flip?: string<br/>│  │  │  │  │  └─ policy_id?: string → technology<br/>│  │  │  │  └─ mode_discovery?: string<br/>│  │  │  │  └─ monitor_policy?: string<br/>│  │  │  │  └─ palette_list_id?: string → technology<br/>│  │  │  │  └─ pixel_buffer?: object<br/>│  │  │  │  │  └─ bits_per_pixel?: number<br/>│  │  │  │  │  └─ bytes_per_page?: number<br/>│  │  │  │  │  └─ location?: string<br/>│  │  │  │  │  └─ page_states?: array&lt;string&gt;<br/>│  │  │  │  │  └─ pages?: number<br/>│  │  │  │  │  └─ physical_organization?: string<br/>│  │  │  │  │  └─ pixels_per_page?: number<br/>│  │  │  │  │  └─ policy?: string<br/>│  │  │  │  │  └─ total_bytes?: number<br/>│  │  │  │  └─ sprite_memory?: object<br/>│  │  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  │  └─ chip_count?: number<br/>│  │  │  │  │  └─ chip_id?: string → base_part<br/>│  │  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  │  └─ sprite_physical_population?: object<br/>│  │  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  │  └─ sprite_profile_ref?: object<br/>│  │  │  │  │  └─ profile?: string<br/>│  │  │  │  │  └─ technology_id?: string → technology<br/>│  │  │  │  └─ technology_id?: string → technology<br/>│  │  │  │  └─ text_modes?: array&lt;object&gt;<br/>│  │  │  │  │  └─ attribute_format?: string<br/>│  │  │  │  │  └─ attribute_map_bytes_per_buffer?: number<br/>│  │  │  │  │  └─ character_count?: number<br/>│  │  │  │  │  └─ character_map_bytes_per_buffer?: number<br/>│  │  │  │  │  └─ columns?: number<br/>│  │  │  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  │  │  └─ text_buffer_count?: number<br/>│  │  │  │  │  └─ double_buffering?: boolean<br/>│  │  │  │  │  └─ font_bytes?: number<br/>│  │  │  │  │  └─ glyph_height?: number<br/>│  │  │  │  │  └─ glyph_width?: number<br/>│  │  │  │  │  └─ height?: number<br/>│  │  │  │  │  └─ id?: string<br/>│  │  │  │  │  └─ ram_bytes_per_page?: number<br/>│  │  │  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  │  │  └─ rows?: number<br/>│  │  │  │  │  └─ sprites_available?: number<br/>│  │  │  │  │  └─ width?: number<br/>│  │  │  │  └─ timing_budget?: object<br/>│  │  │  │  │  └─ page_drain_microseconds?: number<br/>│  │  │  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  │  │  └─ qualification?: string<br/>│  │  │  │  │  └─ renderer_pixels_per_step?: number<br/>│  │  │  │  │  └─ renderer_step_mhz?: number<br/>│  │  │  │  └─ video_physical_population?: object<br/>│  │  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  │  │  └─ video_ram_kb?: number<br/>│  └─ composition_definition*: array&lt;object&gt;<br/>│  │  └─ id*: string<br/>│  │  └─ target*: undefined<br/>│  │  └─ quantity*: number,null<br/>│  │  └─ unit*: undefined<br/>│  │  └─ role*: string<br/>│  │  └─ supply_condition*: undefined<br/>│  │  └─ connection?: undefined<br/>│  │  └─ placements?: array&lt;object&gt;<br/>│  │  │  └─ host_line_id*: string<br/>│  │  │  └─ host_instance*: integer<br/>│  │  │  └─ socket_id*: string<br/>│  │  │  └─ quantity*: number<br/>│  │  └─ entitlement?: object<br/>│  │  │  └─ kind*: undefined<br/>│  │  │  └─ count*: number,null<br/>│  │  │  └─ scope*: string<br/>│  │  │  └─ duration_value?: number<br/>│  │  │  └─ duration_unit?: undefined<br/>│  │  │  └─ agreement_id?: string → agreement<br/>│  │  │  └─ description?: string<br/>│  │  └─ requirements*: array&lt;object&gt;<br/>│  │  │  └─ number*: integer<br/>│  │  │  └─ kind*: undefined<br/>│  │  │  └─ description*: string<br/>│  │  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  │  └─ element_type?: undefined<br/>│  └─ assembly_requirements*: array&lt;object&gt;<br/>│  │  └─ number*: integer<br/>│  │  └─ kind*: undefined<br/>│  │  └─ description*: string<br/>│  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>technical_definition?: object<br/>│  └─ athena_qualification?: string<br/>│  └─ capacity_kb?: number<br/>│  └─ compatibility_note?: string<br/>│  └─ compatible_computers?: array&lt;string&gt; → device<br/>│  └─ compatible_with?: array&lt;string&gt; → device<br/>│  └─ configuration_requirements?: object<br/>│  │  └─ external_application_cartridges_supported?: boolean<br/>│  │  └─ rules?: array&lt;string&gt;<br/>│  │  └─ scope?: string<br/>│  └─ connection?: string<br/>│  └─ expansion_socket_groups?: array&lt;object&gt;<br/>│  │  └─ id?: string<br/>│  │  └─ name?: string<br/>│  │  └─ sockets?: array&lt;object&gt;<br/>│  │  │  └─ capacity?: number,null<br/>│  │  │  └─ compatible_device_ids?: array&lt;string&gt; → device<br/>│  │  │  └─ connection?: string<br/>│  │  │  └─ device_quantity_limits?: object<br/>│  │  │  │  └─ device.aurelia_ram_16kb_card?: number<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ installation_multiple?: number<br/>│  │  │  └─ matched_modules?: boolean<br/>│  │  │  └─ name?: string<br/>│  │  │  └─ population_order?: string<br/>│  │  │  └─ requirements?: array&lt;string&gt;<br/>│  └─ firmware_contents?: array&lt;string&gt;<br/>│  └─ form_factor?: string<br/>│  └─ host_qualification?: object<br/>│  │  └─ device.base_computer.artemis?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ device.base_computer.artemis_pro?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ server_role?: boolean<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ device.base_computer.athena?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  └─ device.base_computer.athena_server?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  └─ device.base_computer.aurelia?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ device.base_computer.aurelia_plus?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  └─ integration_requirements?: object<br/>│  │  └─ sourcing_policy?: string<br/>│  │  └─ video_ram_policy?: string<br/>│  └─ io_and_expansion?: object<br/>│  │  └─ application_rom_cards_supported?: boolean<br/>│  │  └─ dedicated_video_slot?: object<br/>│  │  │  └─ general_purpose_slots_consumed?: number<br/>│  │  │  └─ hot_swap?: boolean<br/>│  │  │  └─ interface?: string<br/>│  │  │  └─ replaceable?: boolean<br/>│  │  └─ eeprom_bios?: object<br/>│  │  │  └─ capacity_kb?: number,null<br/>│  │  │  └─ included?: boolean<br/>│  │  │  └─ purpose?: string<br/>│  │  └─ expansion_slots?: object<br/>│  │  │  └─ future_pin_area_reserved_for_bits?: number<br/>│  │  │  └─ plug_and_execute?: boolean<br/>│  │  │  └─ width_bits?: number<br/>│  │  └─ rom_eeprom_cartridge_slots?: object<br/>│  │  │  └─ front?: string<br/>│  │  │  └─ rear?: string<br/>│  └─ manufacturing_planning?: object<br/>│  │  └─ die_area_mm2?: number<br/>│  │  └─ die_area_mm2_target?: number<br/>│  │  └─ initial_manufacturer?: string<br/>│  │  └─ node_um?: number<br/>│  │  └─ policy?: string<br/>│  │  └─ transistor_budget_target?: number<br/>│  │  └─ wafer_diameter_mm?: number<br/>│  └─ memory_constraints?: object<br/>│  │  └─ max_ram_kib?: number,null<br/>│  │  └─ mixed_module_types_allowed?: boolean<br/>│  └─ memory_interface?: object<br/>│  │  └─ expansion_id?: string → device<br/>│  │  └─ organization_id?: string → technology<br/>│  │  └─ system_controller_id?: string → base_part<br/>│  └─ memory_mapping?: object<br/>│  │  └─ application_memory?: string<br/>│  │  └─ configuration?: string<br/>│  │  └─ installation?: string<br/>│  │  └─ normal_cpu_range?: string<br/>│  │  └─ page_count?: number<br/>│  │  └─ page_size_kb?: number<br/>│  │  └─ service_calls?: string<br/>│  │  └─ slot_count?: number<br/>│  │  └─ system_workspace?: string<br/>│  └─ packaging?: string<br/>│  └─ physical_population?: object<br/>│  │  └─ capacity_kb?: number<br/>│  │  └─ chip_id?: string → base_part<br/>│  │  └─ data_chip_count?: number<br/>│  │  └─ data_width_bits?: number<br/>│  │  └─ refresh_owner?: string<br/>│  └─ planned_compatible_with?: array&lt;string&gt; → device<br/>│  └─ processor?: object<br/>│  │  └─ part_id?: string → base_part<br/>│  └─ recommended_software_id?: string → software_edition<br/>│  └─ role?: string<br/>│  └─ slot_count?: number<br/>│  └─ specification?: object<br/>│  │  └─ acceleration?: array&lt;string&gt;<br/>│  │  └─ adaptation?: string<br/>│  │  └─ adapter_requirements?: object<br/>│  │  │  └─ buffer_policy?: string<br/>│  │  │  └─ flow_control?: string<br/>│  │  │  └─ hardware_services?: array&lt;string&gt;<br/>│  │  │  └─ host_service?: string<br/>│  │  │  └─ local_packet_ram_target_bytes?: number<br/>│  │  └─ additions?: array&lt;string&gt;<br/>│  │  └─ analog_chain?: string<br/>│  │  └─ api_id?: string → technology<br/>│  │  └─ arbitration?: string<br/>│  │  └─ array_columns?: number<br/>│  │  └─ array_rows?: number<br/>│  │  └─ bandwidth?: string<br/>│  │  └─ bank_capacity_kb?: number<br/>│  │  └─ bank_control?: string<br/>│  │  └─ bank_data_width_bits?: number<br/>│  │  └─ bank_organization?: string<br/>│  │  └─ base_controller_id?: string → base_part<br/>│  │  └─ base_product_id?: string → base_part<br/>│  │  └─ beam_voltage_levels?: number<br/>│  │  └─ bitmap_modes?: array&lt;object&gt;<br/>│  │  │  └─ bits_per_pixel?: number<br/>│  │  │  └─ bytes_per_framebuffer?: number<br/>│  │  │  └─ compatibility_mode?: boolean<br/>│  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  │  └─ framebuffer_count?: number<br/>│  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  └─ sprite_count?: number<br/>│  │  │  └─ double_buffering?: boolean<br/>│  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  └─ framebuffer_count?: number<br/>│  │  │  └─ height?: number<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ palette_grayscale_levels?: number<br/>│  │  │  └─ palette_list_bytes?: number<br/>│  │  │  └─ remaining_bytes?: number<br/>│  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  └─ simultaneous_shades?: number<br/>│  │  │  └─ simultaneous_values?: number<br/>│  │  │  └─ sprites_available?: number<br/>│  │  │  └─ stride_bytes?: number<br/>│  │  │  └─ width?: number<br/>│  │  └─ boot?: string<br/>│  │  └─ bridge_design_id?: string → technology<br/>│  │  └─ buttons?: number<br/>│  │  └─ capabilities?: object<br/>│  │  │  └─ color_model?: string<br/>│  │  │  └─ maximum_pixel_clock_mhz?: number<br/>│  │  │  └─ palette_precision_bits?: number<br/>│  │  │  └─ preferred_raster_id?: string<br/>│  │  │  └─ programmable_palette?: boolean<br/>│  │  │  └─ protocol_version?: number<br/>│  │  │  └─ raster_ids?: array&lt;string&gt;<br/>│  │  └─ capacity_bytes?: number<br/>│  │  └─ capacity_kb?: number,null<br/>│  │  └─ capacity_kbit?: number<br/>│  │  └─ capacity_mb?: number<br/>│  │  └─ card_id?: string → device<br/>│  │  └─ character_row_cache?: object<br/>│  │  │  └─ banks?: number<br/>│  │  │  └─ bytes_per_bank?: number<br/>│  │  │  └─ purpose?: string<br/>│  │  │  └─ total_bytes?: number<br/>│  │  └─ chip_organization?: string<br/>│  │  └─ chip_type_id?: string → base_part<br/>│  │  └─ chips?: number<br/>│  │  └─ chips_per_rank?: number<br/>│  │  └─ class_protocol_id?: string → technology<br/>│  │  └─ clock_mhz?: number<br/>│  │  └─ compatibility?: string<br/>│  │  └─ connection?: string<br/>│  │  └─ continuity?: string<br/>│  │  └─ controller_die_count?: number,null<br/>│  │  └─ controller_id?: string → base_part<br/>│  │  └─ conversion?: string<br/>│  │  └─ cpu_address_bits?: number<br/>│  │  └─ cpu_id?: string → base_part<br/>│  │  └─ crt_id?: string → base_part<br/>│  │  └─ cursor_keys?: string<br/>│  │  └─ data_width_bits?: number<br/>│  │  └─ density?: string<br/>│  │  └─ diagonal_inch?: number<br/>│  │  └─ diagonal_inches?: number<br/>│  │  └─ die_area_mm2?: number<br/>│  │  └─ die_area_planning_mm2?: number<br/>│  │  └─ digital_output_bits?: number<br/>│  │  └─ disk_formats?: array&lt;string&gt;<br/>│  │  └─ disk_ii_interface?: boolean<br/>│  │  └─ disk_interface?: string<br/>│  │  └─ display_controller_id?: string → base_part<br/>│  │  └─ display_memory?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ capacity_bytes?: number<br/>│  │  │  └─ chip_count?: number<br/>│  │  │  └─ chip_id?: string → base_part<br/>│  │  │  └─ organization?: string<br/>│  │  └─ display_modes?: string<br/>│  │  └─ display_subassembly_id?: string → base_part<br/>│  │  └─ displayed_color_registers?: number<br/>│  │  └─ displayed_registers?: number<br/>│  │  └─ dma?: object<br/>│  │  │  └─ active_transfer_engines?: number<br/>│  │  │  └─ address_steps?: array&lt;string&gt;<br/>│  │  │  └─ arbitration?: string<br/>│  │  │  └─ bank_selection?: string<br/>│  │  │  └─ completion?: string<br/>│  │  │  └─ destination_address_bits?: number<br/>│  │  │  └─ length_bits?: number<br/>│  │  │  └─ operations?: array&lt;string&gt;<br/>│  │  │  └─ peripheral_scope?: string<br/>│  │  │  └─ transfer_contexts?: number<br/>│  │  │  └─ video_endpoint?: string<br/>│  │  └─ dot_pitch_mm?: number<br/>│  │  └─ electrical_contract?: string<br/>│  │  └─ electrical_interface?: string<br/>│  │  └─ ergonomics?: string<br/>│  │  └─ execution?: string<br/>│  │  └─ expansion_role?: string<br/>│  │  └─ fdd_density?: string<br/>│  │  └─ fdd_size_inch?: number<br/>│  │  └─ feature_continuity_id?: string → device<br/>│  │  └─ flexibus_ports?: number<br/>│  │  └─ format?: string<br/>│  │  └─ formatted_capacity_kb?: number,null<br/>│  │  └─ function_keys?: string<br/>│  │  └─ grayscale_levels?: number<br/>│  │  └─ hdd_bundled_with_standard_artemis?: boolean<br/>│  │  └─ hdd_interface_supported?: boolean<br/>│  │  └─ historical_raster?: string<br/>│  │  └─ host?: string<br/>│  │  └─ host_access?: string<br/>│  │  └─ host_clock_mhz?: array&lt;number&gt;<br/>│  │  └─ host_integration?: string<br/>│  │  └─ host_interface?: undefined<br/>│  │  └─ implementation?: string<br/>│  │  └─ implementation_design?: object<br/>│  │  │  └─ arbitration?: string<br/>│  │  │  └─ clock_targets?: object<br/>│  │  │  │  └─ high_resolution_pixel_mhz?: number<br/>│  │  │  │  └─ low_resolution_pixel_mhz?: number<br/>│  │  │  │  └─ master_mhz?: number<br/>│  │  │  │  └─ maximum_pixel_fifo_output_mbytes_per_second?: number<br/>│  │  │  │  └─ scope?: string<br/>│  │  │  └─ engines?: object<br/>│  │  │  │  └─ fifo?: string<br/>│  │  │  │  └─ renderer?: string<br/>│  │  │  │  └─ scanout?: string<br/>│  │  │  │  └─ underrun?: string<br/>│  │  │  └─ internal_buffers?: object<br/>│  │  │  │  └─ character_attribute_row_cache_bytes?: number<br/>│  │  │  │  └─ included_in_die_estimates?: boolean<br/>│  │  │  │  └─ next_character_attribute_row_cache_bytes?: number<br/>│  │  │  │  └─ pixel_bits?: number<br/>│  │  │  │  └─ pixel_fifo_bytes?: number<br/>│  │  │  │  └─ pixel_fifo_page_bytes?: number<br/>│  │  │  │  └─ pixel_fifo_page_count?: number<br/>│  │  │  │  └─ sprite_row_shifters_bytes?: number<br/>│  │  │  │  └─ sprite_staging_bytes?: number<br/>│  │  │  │  └─ total_storage_bytes?: number<br/>│  │  │  └─ line_repeat?: string<br/>│  │  │  └─ manufacturing_planning?: object<br/>│  │  │  │  └─ die_area_mm2_at_3_5um_range?: array&lt;number&gt;<br/>│  │  │  │  └─ die_area_mm2_at_3um_range?: array&lt;number&gt;<br/>│  │  │  │  └─ die_area_mm2_central_at_3_5um?: number<br/>│  │  │  │  └─ die_area_mm2_central_at_3um?: number<br/>│  │  │  │  └─ external_functions?: array&lt;string&gt;<br/>│  │  │  │  └─ process?: string<br/>│  │  │  │  └─ transistors_central?: number<br/>│  │  │  │  └─ transistors_range?: array&lt;number&gt;<br/>│  │  │  └─ sprite_access?: string<br/>│  │  │  └─ text_fetch?: string<br/>│  │  │  └─ timing_budget?: object<br/>│  │  │  │  └─ dram_random_cycle_target_ns?: number<br/>│  │  │  │  └─ fifo_total_drain_time_us_at_high_resolution?: number<br/>│  │  │  │  └─ fifo_total_pixels?: number<br/>│  │  │  │  └─ illustrative_read_time_us?: number<br/>│  │  │  │  └─ illustrative_total_reads_per_scanline?: number<br/>│  │  │  │  └─ maximum_sprite_row_bytes_per_scanline?: number<br/>│  │  │  │  └─ next_row_prefetch_average_bytes_per_scanline?: number<br/>│  │  │  │  └─ qualification?: string<br/>│  │  │  │  └─ sprite_pattern_fetch_time_us?: number<br/>│  │  │  │  └─ sprite_sram_cycle_target_ns?: number<br/>│  │  │  │  └─ text_glyph_reads_per_scanline?: number<br/>│  │  │  │  └─ two_ready_pages_drain_time_us?: number<br/>│  │  └─ included_monitor?: boolean<br/>│  │  └─ input?: string<br/>│  │  └─ input_bits?: number<br/>│  │  └─ installation?: string<br/>│  │  └─ intensity_levels?: number<br/>│  │  └─ interface?: string<br/>│  │  └─ interface_id?: string → technology<br/>│  │  └─ key_count?: number<br/>│  │  └─ keyboard_standard_id?: string → technology<br/>│  │  └─ legacy_card_id?: string → device<br/>│  │  └─ link_layer_id?: string → technology<br/>│  │  └─ local_packet_ram_target_bytes?: number<br/>│  │  └─ local_ram_kb?: number<br/>│  │  └─ manufacturer?: string<br/>│  │  └─ manufacturing_planning?: object<br/>│  │  │  └─ die_area_mm2?: number<br/>│  │  │  └─ die_area_mm2_central?: number<br/>│  │  │  └─ die_area_mm2_range?: array&lt;number&gt;<br/>│  │  │  └─ package_allowance_usd?: number<br/>│  │  │  └─ recipe_variants?: array&lt;object&gt;<br/>│  │  │  │  └─ defect_density_cm2?: number<br/>│  │  │  │  └─ die_area_mm2?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ manufacturing_capability_id?: string → manufacturing_capability<br/>│  │  │  │  └─ node_um?: string<br/>│  │  │  │  └─ processed_wafer_usd?: number<br/>│  │  │  └─ revision_policy?: string<br/>│  │  │  └─ wafer_mm?: number<br/>│  │  └─ manufacturing_recipe?: string<br/>│  │  └─ maximum_shared_raw_rate_kbps?: number<br/>│  │  └─ mechanism_id?: string → base_part<br/>│  │  └─ media?: string<br/>│  │  └─ media_access_control?: string<br/>│  │  └─ memory_addressing_bytes?: number<br/>│  │  └─ memory_layout?: object<br/>│  │  │  └─ font_policy?: string<br/>│  │  │  └─ mode_exclusivity?: string<br/>│  │  │  └─ page_flip?: string<br/>│  │  │  └─ policy_id?: string → technology<br/>│  │  └─ memory_policy?: string<br/>│  │  └─ mode_discovery?: string<br/>│  │  └─ mode_limit?: string<br/>│  │  └─ mode_policy?: string<br/>│  │  └─ model?: string<br/>│  │  └─ modules_per_bank?: number<br/>│  │  └─ monitor_id?: string → device<br/>│  │  └─ monitor_modes?: string<br/>│  │  └─ monitor_policy?: string<br/>│  │  └─ native_raster?: object<br/>│  │  │  └─ height?: number<br/>│  │  │  └─ horizontal_khz?: number<br/>│  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  └─ progressive?: boolean<br/>│  │  │  └─ refresh_hz_target?: number<br/>│  │  │  └─ total_lines?: number<br/>│  │  │  └─ total_pixels?: number<br/>│  │  │  └─ width?: number<br/>│  │  └─ navigation_section?: array&lt;string&gt;<br/>│  │  └─ negotiation_id?: string → technology<br/>│  │  └─ node_um?: number<br/>│  │  └─ numeric_keypad?: boolean<br/>│  │  └─ oem?: string<br/>│  │  └─ oem_basis?: string<br/>│  │  └─ organization?: string<br/>│  │  └─ organization_words?: number<br/>│  │  └─ output?: string<br/>│  │  └─ package?: string,null<br/>│  │  └─ page_size_kb?: number<br/>│  │  └─ palette?: string<br/>│  │  └─ palette_entries?: number<br/>│  │  └─ palette_entry_bits?: number<br/>│  │  └─ palette_grayscale_levels?: number<br/>│  │  └─ palette_list?: object<br/>│  │  │  └─ base_address?: string<br/>│  │  │  └─ cad_policy?: string<br/>│  │  │  └─ command_bytes?: number<br/>│  │  │  └─ encoding?: string<br/>│  │  │  └─ end_address?: string<br/>│  │  │  └─ execution?: string<br/>│  │  │  └─ frame_state?: string<br/>│  │  │  └─ long_gaps?: string<br/>│  │  │  └─ maximum_commands?: number<br/>│  │  │  └─ register_count?: number<br/>│  │  │  └─ reserved_bytes?: number<br/>│  │  │  └─ write_limit?: string<br/>│  │  └─ palette_list_id?: string → technology<br/>│  │  └─ palette_registers?: number<br/>│  │  └─ parity_bits?: number<br/>│  │  └─ physical_arrangement?: string<br/>│  │  └─ physical_population?: object<br/>│  │  │  └─ bank_count?: number<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ common_ram_included?: boolean<br/>│  │  │  └─ mapping_note?: string<br/>│  │  │  └─ parity_bits?: number<br/>│  │  │  └─ video_ram_separate?: boolean<br/>│  │  └─ pixel_buffer?: object<br/>│  │  │  └─ bits_per_pixel?: number<br/>│  │  │  └─ bytes_per_page?: number<br/>│  │  │  └─ location?: string<br/>│  │  │  └─ page_states?: array&lt;string&gt;<br/>│  │  │  └─ pages?: number<br/>│  │  │  └─ physical_organization?: string<br/>│  │  │  └─ pixels_per_page?: number<br/>│  │  │  └─ policy?: string<br/>│  │  │  └─ total_bytes?: number<br/>│  │  └─ pixel_clock_mhz?: number<br/>│  │  └─ platform_rate_profiles?: array&lt;object&gt;<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ server_role?: boolean<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ port_count?: number<br/>│  │  └─ ports?: array&lt;string&gt;<br/>│  │  └─ power?: string<br/>│  │  └─ purchase_boundary?: string<br/>│  │  └─ qualification?: string<br/>│  │  └─ random_cycle_target_ns?: number<br/>│  │  └─ rank_capacity_kb?: number<br/>│  │  └─ ranks?: number<br/>│  │  └─ rate_scope?: string<br/>│  │  └─ redraw?: string<br/>│  │  └─ refresh?: undefined<br/>│  │  └─ refresh_required?: boolean<br/>│  │  └─ register_width_bits?: number<br/>│  │  └─ reused_elements?: array&lt;string&gt;<br/>│  │  └─ rgb_palette_mapping?: string<br/>│  │  └─ role?: string<br/>│  │  └─ rollers?: array&lt;object&gt;<br/>│  │  │  └─ default_action?: string<br/>│  │  │  └─ position?: string<br/>│  │  └─ scan?: string<br/>│  │  └─ separate_sprite_sram_bytes?: number<br/>│  │  └─ serial_register_bits?: number<br/>│  │  └─ sides?: number<br/>│  │  └─ signal_path?: string<br/>│  │  └─ simultaneous_shades_at_640_200_4bpp?: number<br/>│  │  └─ simultaneous_shades_at_800_600_2bpp?: number<br/>│  │  └─ simultaneous_shades_with_128kb_card?: number<br/>│  │  └─ size_inch?: number<br/>│  │  └─ slot?: string<br/>│  │  └─ software?: string<br/>│  │  └─ speed_qualification_targets?: object<br/>│  │  │  └─ basis?: string<br/>│  │  │  └─ conditions?: string<br/>│  │  │  └─ fallback_random_cycle_ns_range?: array&lt;number&gt;<br/>│  │  │  └─ fallback_row_access_ns?: number<br/>│  │  │  └─ preferred_random_cycle_ns?: number<br/>│  │  │  └─ preferred_row_access_ns?: number<br/>│  │  │  └─ stretch_row_access_ns?: number<br/>│  │  └─ sprite_memory?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ capacity_bytes?: number<br/>│  │  │  └─ chip_count?: number<br/>│  │  │  └─ chip_id?: string → base_part<br/>│  │  │  └─ separate_bus?: boolean<br/>│  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  └─ sprite_physical_population?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ separate_bus?: boolean<br/>│  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  └─ sprite_policy?: string<br/>│  │  └─ sprite_profile_ref?: object<br/>│  │  │  └─ profile?: string<br/>│  │  │  └─ technology_id?: string → technology<br/>│  │  └─ sprites?: undefined<br/>│  │  └─ startup_rate_kbps?: number<br/>│  │  └─ supply_rails_v?: array,null<br/>│  │  └─ supported_fdd_count?: number<br/>│  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  └─ technology_id?: string → technology<br/>│  │  └─ text_modes?: array&lt;object&gt;<br/>│  │  │  └─ attribute_format?: string<br/>│  │  │  └─ attribute_map_bytes_per_buffer?: number<br/>│  │  │  └─ character_count?: number<br/>│  │  │  └─ character_map_bytes_per_buffer?: number<br/>│  │  │  └─ columns?: number<br/>│  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  └─ text_buffer_count?: number<br/>│  │  │  └─ double_buffering?: boolean<br/>│  │  │  └─ font_bytes?: number<br/>│  │  │  └─ glyph_height?: number<br/>│  │  │  └─ glyph_width?: number<br/>│  │  │  └─ height?: number<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ ram_bytes_per_page?: number<br/>│  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  └─ rows?: number<br/>│  │  │  └─ sprites_available?: number<br/>│  │  │  └─ width?: number<br/>│  │  └─ timing_budget?: object<br/>│  │  │  └─ page_drain_microseconds?: number<br/>│  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  └─ qualification?: string<br/>│  │  │  └─ renderer_pixels_per_step?: number<br/>│  │  │  └─ renderer_step_mhz?: number<br/>│  │  └─ timing_target?: object<br/>│  │  │  └─ horizontal_khz?: number<br/>│  │  │  └─ horizontal_total_pixels?: number<br/>│  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  └─ refresh_hz?: number<br/>│  │  │  └─ vertical_total_lines?: number<br/>│  │  └─ tracking?: string<br/>│  │  └─ transport_id?: string → technology<br/>│  │  └─ usable_from?: array&lt;string&gt;<br/>│  │  └─ video_link_id?: string → technology<br/>│  │  └─ video_physical_population?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  └─ video_ram_bytes?: number<br/>│  │  └─ video_ram_chip_count?: number<br/>│  │  └─ video_ram_chip_id?: string → base_part<br/>│  │  └─ video_ram_kb?: number<br/>│  └─ specification_id?: string → technology<br/>│  └─ technical_profile?: object<br/>│  │  └─ memory?: object<br/>│  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  └─ capacity_policy?: string<br/>│  │  │  └─ expanded_organization?: object<br/>│  │  │  │  └─ application_memory_profile?: string<br/>│  │  │  │  └─ common_system_ram_kb?: number<br/>│  │  │  │  └─ contiguous_lower_ram_kb?: number<br/>│  │  │  │  └─ controller_id?: string → base_part<br/>│  │  │  │  └─ dma_addressing?: string<br/>│  │  │  │  └─ normal_view?: array&lt;object&gt;<br/>│  │  │  │  │  └─ description?: string<br/>│  │  │  │  │  └─ end?: string<br/>│  │  │  │  │  └─ role?: string<br/>│  │  │  │  │  └─ start?: string<br/>│  │  │  │  └─ note?: string<br/>│  │  │  │  └─ ram_kb?: number<br/>│  │  │  │  └─ refresh?: string<br/>│  │  │  └─ expansion_ref?: string → device<br/>│  │  │  └─ organization?: object<br/>│  │  │  │  └─ application_memory_profile?: string<br/>│  │  │  │  └─ common_system_ram_kb?: number<br/>│  │  │  │  └─ contiguous_lower_ram_kb?: number<br/>│  │  │  │  └─ controller_id?: string → base_part<br/>│  │  │  │  └─ dma_addressing?: string<br/>│  │  │  │  └─ normal_view?: array&lt;object&gt;<br/>│  │  │  │  │  └─ description?: string<br/>│  │  │  │  │  └─ end?: string<br/>│  │  │  │  │  └─ role?: string<br/>│  │  │  │  │  └─ start?: string<br/>│  │  │  │  └─ note?: string<br/>│  │  │  │  └─ refresh?: string<br/>│  │  │  └─ organization_ref?: string → technology<br/>│  │  │  └─ os_rom?: object<br/>│  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  └─ execution?: string<br/>│  │  │  │  └─ implementation?: string<br/>│  │  │  └─ parity_bits?: number<br/>│  │  │  └─ physical_population?: object<br/>│  │  │  │  └─ bank_count?: number<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ common_ram_included?: boolean<br/>│  │  │  │  └─ mapping_note?: string<br/>│  │  │  │  └─ parity_bits?: number<br/>│  │  │  │  └─ video_ram_separate?: boolean<br/>│  │  │  └─ population_policy?: string<br/>│  │  │  └─ reliability_policy?: string<br/>│  │  │  └─ sourcing_policy?: string<br/>│  │  │  └─ sprite_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  └─ system_controller_ref?: string → base_part<br/>│  │  │  └─ upgrade_policy?: string<br/>│  │  │  └─ video_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  │  └─ video_ram_policy?: string<br/>│  │  └─ network?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  └─ networking?: object<br/>│  │  │  └─ computer_id?: string → device<br/>│  │  │  └─ implementation?: string<br/>│  │  │  └─ qualified_max_rate_kbps?: number<br/>│  │  │  └─ rate_policy?: string<br/>│  │  │  └─ server_role?: boolean<br/>│  │  │  └─ supported_rates_kbps?: array&lt;number&gt;<br/>│  │  │  └─ technology_ids?: array&lt;string&gt; → technology<br/>│  │  └─ rom_and_cartridges?: object<br/>│  │  │  └─ mainboard_rom?: array&lt;string&gt;<br/>│  │  └─ software_compatibility?: object<br/>│  │  │  └─ adaptive_text?: string<br/>│  │  │  └─ api_id?: string → technology<br/>│  │  │  └─ native_40_column_mode?: string<br/>│  │  │  └─ native_target?: string<br/>│  │  └─ software_policy?: string<br/>│  │  └─ video?: object<br/>│  │  │  └─ api_id?: string → technology<br/>│  │  │  └─ arbitration?: string<br/>│  │  │  └─ bitmap_modes?: array&lt;object&gt;<br/>│  │  │  │  └─ bits_per_pixel?: number<br/>│  │  │  │  └─ bytes_per_framebuffer?: number<br/>│  │  │  │  └─ compatibility_mode?: boolean<br/>│  │  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  │  └─ framebuffer_bytes?: number<br/>│  │  │  │  │  └─ framebuffer_count?: number<br/>│  │  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  └─ double_buffering?: boolean<br/>│  │  │  │  └─ height?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  │  └─ sprites_available?: number<br/>│  │  │  │  └─ stride_bytes?: number<br/>│  │  │  │  └─ width?: number<br/>│  │  │  └─ character_row_cache?: object<br/>│  │  │  │  └─ banks?: number<br/>│  │  │  │  └─ bytes_per_bank?: number<br/>│  │  │  │  └─ purpose?: string<br/>│  │  │  │  └─ total_bytes?: number<br/>│  │  │  └─ controller_id?: string → base_part<br/>│  │  │  └─ display_memory?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  └─ chip_count?: number<br/>│  │  │  │  └─ chip_id?: string → base_part<br/>│  │  │  │  └─ organization?: string<br/>│  │  │  └─ feature_continuity_id?: string → device<br/>│  │  │  └─ host_interface?: object<br/>│  │  │  │  └─ host_width_bits?: number<br/>│  │  │  │  └─ hot_swap?: boolean<br/>│  │  │  │  └─ implementation?: string<br/>│  │  │  │  └─ local_display_width_bits?: number<br/>│  │  │  └─ memory_layout?: object<br/>│  │  │  │  └─ font_policy?: string<br/>│  │  │  │  └─ mode_exclusivity?: string<br/>│  │  │  │  └─ page_flip?: string<br/>│  │  │  │  └─ policy_id?: string → technology<br/>│  │  │  └─ mode_discovery?: string<br/>│  │  │  └─ monitor_policy?: string<br/>│  │  │  └─ palette_list_id?: string → technology<br/>│  │  │  └─ pixel_buffer?: object<br/>│  │  │  │  └─ bits_per_pixel?: number<br/>│  │  │  │  └─ bytes_per_page?: number<br/>│  │  │  │  └─ location?: string<br/>│  │  │  │  └─ page_states?: array&lt;string&gt;<br/>│  │  │  │  └─ pages?: number<br/>│  │  │  │  └─ physical_organization?: string<br/>│  │  │  │  └─ pixels_per_page?: number<br/>│  │  │  │  └─ policy?: string<br/>│  │  │  │  └─ total_bytes?: number<br/>│  │  │  └─ sprite_memory?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ capacity_bytes?: number<br/>│  │  │  │  └─ chip_count?: number<br/>│  │  │  │  └─ chip_id?: string → base_part<br/>│  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  └─ sprite_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_bus?: boolean<br/>│  │  │  │  └─ separate_from_system_and_display_ram?: boolean<br/>│  │  │  └─ sprite_profile_ref?: object<br/>│  │  │  │  └─ profile?: string<br/>│  │  │  │  └─ technology_id?: string → technology<br/>│  │  │  └─ technology_id?: string → technology<br/>│  │  │  └─ text_modes?: array&lt;object&gt;<br/>│  │  │  │  └─ attribute_format?: string<br/>│  │  │  │  └─ attribute_map_bytes_per_buffer?: number<br/>│  │  │  │  └─ character_count?: number<br/>│  │  │  │  └─ character_map_bytes_per_buffer?: number<br/>│  │  │  │  └─ columns?: number<br/>│  │  │  │  └─ configurations?: array&lt;object&gt;<br/>│  │  │  │  │  └─ allocated_bytes?: number<br/>│  │  │  │  │  └─ palette_list_bytes?: number<br/>│  │  │  │  │  └─ remaining_video_ram_bytes?: number<br/>│  │  │  │  │  └─ sprite_count?: number<br/>│  │  │  │  │  └─ text_buffer_count?: number<br/>│  │  │  │  └─ double_buffering?: boolean<br/>│  │  │  │  └─ font_bytes?: number<br/>│  │  │  │  └─ glyph_height?: number<br/>│  │  │  │  └─ glyph_width?: number<br/>│  │  │  │  └─ height?: number<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ ram_bytes_per_page?: number<br/>│  │  │  │  └─ required_raster_ids?: array&lt;string&gt;<br/>│  │  │  │  └─ rows?: number<br/>│  │  │  │  └─ sprites_available?: number<br/>│  │  │  │  └─ width?: number<br/>│  │  │  └─ timing_budget?: object<br/>│  │  │  │  └─ page_drain_microseconds?: number<br/>│  │  │  │  └─ pixel_clock_mhz?: number<br/>│  │  │  │  └─ qualification?: string<br/>│  │  │  │  └─ renderer_pixels_per_step?: number<br/>│  │  │  │  └─ renderer_step_mhz?: number<br/>│  │  │  └─ video_physical_population?: object<br/>│  │  │  │  └─ bank_data_width_bits?: number<br/>│  │  │  │  └─ separate_from_system_ram?: boolean<br/>│  │  │  └─ video_ram_kb?: number<br/>requirements*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ kind*: undefined<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID</pre>"]:::schemaEntity
+  event["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>event.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>time*: object<br/>│  └─ value*: string<br/>│  └─ precision*: string<br/>process_ids?: array&lt;string&gt; → process<br/>location_ids?: array&lt;string&gt; → location<br/>agreement_id?: string → agreement<br/>category?: string</pre>"]:::schemaEntity
   location["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>location.json<br/>id*: string<br/>name*: string<br/>kind*: string<br/>parent_location_id?: string → location<br/>description?: string</pre>"]:::schemaEntity
-  manufacturing_capability["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>manufacturing_capability.json<br/>id*: string<br/>name*: string<br/>actor_id*: string → actor<br/>location_id?: string → location<br/>technology_id*: string → technology<br/>recipe_kind*: undefined<br/>product_ids*: array&lt;string&gt; → product<br/>description*: string<br/>qualification_requirements*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined</pre>"]:::schemaEntity
+  manufacturing_capability["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>manufacturing_capability.json<br/>id*: string<br/>name*: string<br/>actor_id*: string → actor<br/>location_id?: string → location<br/>technology_id*: string → technology<br/>recipe_kind*: undefined<br/>product_ids*: array&lt;string&gt; → product<br/>description*: string<br/>qualification_requirements*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>base_part_ids?: array&lt;string&gt; → base_part</pre>"]:::schemaEntity
   market_response["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>market_response.json<br/>id*: string<br/>title*: string<br/>kind*: undefined<br/>respondent_actor_ids*: array&lt;string&gt; → actor<br/>subject_ids*: array&lt;string&gt; → any foundation ID<br/>trigger_ids*: array&lt;string&gt; → event / process / campaign / agreement<br/>description*: string</pre>"]:::schemaEntity
-  process["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>process.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>period*: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string | null → event<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string | null → event<br/>│  │  └─ precision*: string<br/>steps*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>parent_process_id?: string → process<br/>related_process_ids?: array&lt;string&gt; → process<br/>agreement_id?: string → agreement</pre>"]:::schemaEntity
-  product["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>product.json<br/>id*: string<br/>name*: string<br/>kind*: undefined<br/>description*: string<br/>provider_actor_ids*: array&lt;string&gt; → actor<br/>family_product_id?: string → product<br/>version?: string<br/>technology_ids*: array&lt;string&gt; → technology<br/>specification*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ value?: string,number,boolean<br/>│  └─ unit?: string</pre>"]:::schemaEntity
+  process["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>process.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>period*: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string | null → event<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string | null → event<br/>│  │  └─ precision*: string<br/>steps*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ maturity?: object<br/>│  │  └─ capability_id*: string → manufacturing_capability<br/>│  │  └─ stage*: undefined<br/>parent_process_id?: string → process<br/>related_process_ids?: array&lt;string&gt; → process<br/>agreement_id?: string → agreement<br/>category?: string</pre>"]:::schemaEntity
+  product["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>product.json<br/>id*: string<br/>name*: string<br/>kind*: undefined<br/>description*: string<br/>provider_actor_ids*: array&lt;string&gt; → actor<br/>family_product_id?: string → product<br/>version?: string<br/>technology_ids*: array&lt;string&gt; → technology<br/>specification*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ value?: string,number,boolean<br/>│  └─ unit?: string<br/>offering_category?: undefined<br/>technical_identity?: object<br/>│  └─ record_id*: string → base_part / device / software_edition<br/>launch_campaign_id?: string → campaign<br/>composition_history?: array&lt;object&gt;<br/>│  └─ version_number*: integer<br/>│  └─ description*: string<br/>│  └─ effective_from*: undefined<br/>│  └─ effective_until*: undefined<br/>│  └─ technical_definition*: object<br/>│  └─ composition_definition*: array&lt;object&gt;<br/>│  │  └─ id*: string<br/>│  │  └─ target*: undefined<br/>│  │  └─ quantity*: number,null<br/>│  │  └─ unit*: undefined<br/>│  │  └─ role*: string<br/>│  │  └─ supply_condition*: undefined<br/>│  │  └─ connection?: undefined<br/>│  │  └─ placements?: array&lt;object&gt;<br/>│  │  │  └─ host_line_id*: string<br/>│  │  │  └─ host_instance*: integer<br/>│  │  │  └─ socket_id*: string<br/>│  │  │  └─ quantity*: number<br/>│  │  └─ entitlement?: object<br/>│  │  │  └─ kind*: undefined<br/>│  │  │  └─ count*: number,null<br/>│  │  │  └─ scope*: string<br/>│  │  │  └─ duration_value?: number<br/>│  │  │  └─ duration_unit?: undefined<br/>│  │  │  └─ agreement_id?: string → agreement<br/>│  │  │  └─ description?: string<br/>│  │  └─ requirements*: array&lt;object&gt;<br/>│  │  │  └─ number*: integer<br/>│  │  │  └─ kind*: undefined<br/>│  │  │  └─ description*: string<br/>│  │  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  │  └─ element_type?: undefined<br/>│  └─ assembly_requirements*: array&lt;object&gt;<br/>│  │  └─ number*: integer<br/>│  │  └─ kind*: undefined<br/>│  │  └─ description*: string<br/>│  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>requirements?: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ kind*: undefined<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>service_definition?: object<br/>│  └─ description*: string<br/>│  └─ entitlements*: array&lt;object&gt;<br/>│  │  └─ kind*: undefined<br/>│  │  └─ count*: number,null<br/>│  │  └─ scope*: string<br/>│  │  └─ duration_value?: number<br/>│  │  └─ duration_unit?: undefined<br/>│  │  └─ agreement_id?: string → agreement<br/>│  │  └─ description?: string<br/>│  └─ requirements*: array&lt;object&gt;<br/>│  │  └─ number*: integer<br/>│  │  └─ kind*: undefined<br/>│  │  └─ description*: string<br/>│  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID</pre>"]:::schemaEntity
+  software_edition["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>software_edition.json<br/>id*: string<br/>name*: string<br/>description*: string<br/>provider_actor_ids*: array&lt;string&gt; → actor<br/>technology_ids*: array&lt;string&gt; → technology<br/>family_product_id?: string → product<br/>family_name*: string<br/>version*: string<br/>edition*: string<br/>composition_history*: array&lt;object&gt;<br/>│  └─ version_number*: integer<br/>│  └─ description*: string<br/>│  └─ effective_from*: undefined<br/>│  └─ effective_until*: undefined<br/>│  └─ technical_definition*: object<br/>│  │  └─ abacus_file_integration?: object<br/>│  │  │  └─ concurrency?: string<br/>│  │  │  └─ cross_version_policy?: string<br/>│  │  │  └─ format_policy?: string<br/>│  │  │  └─ formula_policy?: string<br/>│  │  │  └─ memory_policy?: string<br/>│  │  │  └─ model?: string<br/>│  │  │  └─ save_policy?: string<br/>│  │  └─ adds?: array&lt;string&gt;<br/>│  │  └─ api_compatibility?: string<br/>│  │  └─ architecture?: object<br/>│  │  │  └─ client_server?: boolean<br/>│  │  │  └─ database?: string<br/>│  │  │  └─ network_id?: string → technology<br/>│  │  │  └─ resource_planning?: object<br/>│  │  │  │  └─ basis?: string<br/>│  │  │  │  └─ illustrative_dram_budget_bytes?: object<br/>│  │  │  │  │  └─ applications?: number<br/>│  │  │  │  │  └─ filesystem_buffers?: number<br/>│  │  │  │  │  └─ kernel_state_tables_stacks?: number<br/>│  │  │  │  │  └─ process_translation_metadata?: number<br/>│  │  │  │  │  └─ services_patches_reserve?: number<br/>│  │  │  │  │  └─ terminal_ui_input?: number<br/>│  │  │  │  └─ minimum_dram_bytes?: number<br/>│  │  │  │  └─ minimum_os_rom_bytes?: number<br/>│  │  │  │  └─ preferred_dram_bytes?: number<br/>│  │  │  └─ server?: string → device<br/>│  │  │  └─ server_edition_id?: string → software_edition<br/>│  │  └─ artemis_native_extensions?: array&lt;string&gt;<br/>│  │  └─ base_version?: string<br/>│  │  └─ compatibility_notes?: array&lt;string&gt;<br/>│  │  └─ compatibility_policy?: object<br/>│  │  │  └─ applications?: string<br/>│  │  │  └─ binary?: string<br/>│  │  │  └─ certification?: string<br/>│  │  │  └─ delivery?: string<br/>│  │  │  └─ eligibility?: string<br/>│  │  │  └─ hardware?: string<br/>│  │  │  └─ scope?: string<br/>│  │  └─ components?: object<br/>│  │  │  └─ mainboard_rom?: array&lt;string&gt;<br/>│  │  │  └─ system_cartridge?: array&lt;string&gt;<br/>│  │  └─ contents?: array&lt;string&gt;<br/>│  │  └─ data_interchange?: object<br/>│  │  │  └─ bpi_continuity?: string<br/>│  │  │  └─ contract?: string<br/>│  │  │  └─ csv?: string<br/>│  │  │  └─ export_definition_id?: string → software_edition<br/>│  │  │  └─ migration?: string<br/>│  │  │  └─ partner?: string<br/>│  │  │  └─ vsam?: string<br/>│  │  │  └─ vsam_conversion?: string<br/>│  │  └─ dependency_ids?: array&lt;string&gt; → device / software_edition / technology<br/>│  │  └─ distribution?: object<br/>│  │  │  └─ channel?: string<br/>│  │  │  └─ data_access?: string<br/>│  │  │  └─ disk_format?: string<br/>│  │  │  └─ execution?: undefined<br/>│  │  │  └─ fulfillment?: string<br/>│  │  │  └─ installation?: string<br/>│  │  │  └─ medium?: string<br/>│  │  │  └─ network_operation?: string<br/>│  │  │  └─ toolchain?: string<br/>│  │  └─ embedded_abacus_integration_id?: string → technology<br/>│  │  └─ execution_target?: string<br/>│  │  └─ explicitly_not_assumed?: array&lt;string&gt;<br/>│  │  └─ extensions?: array&lt;string&gt;<br/>│  │  └─ features?: array&lt;string&gt;<br/>│  │  └─ features_id?: string → technology<br/>│  │  └─ forward_compatibility_commitment?: object<br/>│  │  │  └─ delivery_requirements?: string<br/>│  │  │  └─ exclusions?: string<br/>│  │  │  └─ scope?: string<br/>│  │  └─ implementation?: undefined<br/>│  │  └─ internal_organization?: array&lt;object&gt;<br/>│  │  │  └─ description?: string<br/>│  │  │  └─ diagram_label?: string<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ name?: string<br/>│  │  │  └─ residence?: string<br/>│  │  │  └─ responsibility?: string<br/>│  │  └─ internal_relationships?: array&lt;array&gt;<br/>│  │  └─ logix_requirements?: array&lt;string&gt;<br/>│  │  └─ memory_discovery_id?: string → technology<br/>│  │  └─ minimum_resources?: object<br/>│  │  │  └─ application_ram_bytes?: number,null<br/>│  │  │  └─ installed_ram_kb?: number,null<br/>│  │  │  └─ rom_bytes?: number,null<br/>│  │  └─ modules?: array&lt;object&gt;<br/>│  │  │  └─ features?: array&lt;string&gt;<br/>│  │  │  └─ name?: string<br/>│  │  └─ network_link_policy?: object<br/>│  │  │  └─ driver_contract?: string<br/>│  │  │  └─ link_layer_id?: string → technology<br/>│  │  └─ platform_policy?: string<br/>│  │  └─ platform_support?: array&lt;object&gt;<br/>│  │  │  └─ computer_id?: string → device / product<br/>│  │  └─ portability_contract?: object<br/>│  │  │  └─ api_id?: string → technology<br/>│  │  │  └─ display?: string<br/>│  │  │  └─ memory?: string<br/>│  │  │  └─ migration?: string<br/>│  │  │  └─ shared_logic?: string<br/>│  │  │  └─ storage?: string<br/>│  │  └─ portable_runtime?: object<br/>│  │  │  └─ abi_policy?: string<br/>│  │  │  └─ api_id?: string → technology<br/>│  │  │  └─ capability_discovery?: string<br/>│  │  │  └─ display_id?: string → technology<br/>│  │  │  └─ implementation_target?: string<br/>│  │  │  └─ ownership?: string<br/>│  │  └─ programmatic_file_access?: string<br/>│  │  └─ relationship?: string<br/>│  │  └─ release_scope?: object<br/>│  │  │  └─ acceptance_requirements?: array&lt;string&gt;<br/>│  │  │  └─ acceptance_workflow?: string<br/>│  │  │  └─ initial?: string<br/>│  │  │  └─ later?: string<br/>│  │  │  └─ later_milestones?: array&lt;string&gt;<br/>│  │  │  └─ launch?: string<br/>│  │  │  └─ resource_policy?: string<br/>│  │  └─ reporting?: object<br/>│  │  │  └─ chart_types?: array&lt;string&gt;<br/>│  │  │  └─ continuity?: string<br/>│  │  │  └─ output?: string<br/>│  │  │  └─ presentation?: string<br/>│  │  └─ role?: string<br/>│  │  └─ runtime_notes?: array&lt;string&gt;<br/>│  │  └─ specification?: undefined<br/>│  │  └─ subcomponents?: array&lt;object&gt;<br/>│  │  │  └─ description?: string<br/>│  │  │  └─ id?: string<br/>│  │  │  └─ name?: string<br/>│  │  └─ system_dependencies?: array&lt;object&gt;<br/>│  │  │  └─ component_id?: string<br/>│  │  │  └─ description?: string<br/>│  │  │  └─ name?: string<br/>│  │  │  └─ software_id?: string → software_edition<br/>│  │  └─ technology_id?: string → technology<br/>│  │  └─ toolchain?: object<br/>│  │  │  └─ components?: array&lt;string&gt;<br/>│  │  │  └─ development_workflow?: array&lt;string&gt;<br/>│  │  │  └─ host?: array&lt;string&gt; → device<br/>│  │  │  └─ language_contract_id?: string → technology<br/>│  │  │  └─ layout_tests?: array&lt;string&gt;<br/>│  │  │  └─ optional_development_features?: array&lt;string&gt;<br/>│  │  │  └─ profiles?: array&lt;string&gt;<br/>│  │  │  └─ resource_tests?: array&lt;string&gt;<br/>│  │  │  └─ runtime_contract_id?: string → technology<br/>│  │  │  └─ target_isolation?: string<br/>│  │  │  └─ targets?: array&lt;string&gt;<br/>│  │  └─ tui_features?: array&lt;object&gt;<br/>│  │  │  └─ description?: string<br/>│  │  │  └─ name?: string<br/>│  │  └─ tui_integration?: string<br/>│  │  └─ tui_ownership?: object<br/>│  │  │  └─ boundary?: string<br/>│  │  │  └─ consumers?: array&lt;string&gt; → software_edition<br/>│  │  │  └─ interface_id?: string → technology<br/>│  │  │  └─ owner?: string<br/>│  │  └─ validation?: string<br/>│  │  └─ vanilla_architecture?: object<br/>│  │  │  └─ application_entry?: string<br/>│  │  │  └─ changes_from_1_3?: array&lt;string&gt;<br/>│  │  │  └─ components?: array&lt;object&gt;<br/>│  │  │  │  └─ description?: string<br/>│  │  │  │  └─ id?: string<br/>│  │  │  │  └─ name?: string<br/>│  │  │  └─ execution_model?: string<br/>│  │  │  └─ limits?: array&lt;string&gt;<br/>│  │  │  └─ memory_layout?: array&lt;object&gt;<br/>│  │  │  │  └─ purpose?: string<br/>│  │  │  │  └─ region?: string<br/>│  │  │  └─ program_load_address?: string<br/>│  └─ composition_definition*: array&lt;object&gt;<br/>│  │  └─ id*: string<br/>│  │  └─ target*: undefined<br/>│  │  └─ quantity*: number,null<br/>│  │  └─ unit*: undefined<br/>│  │  └─ role*: string<br/>│  │  └─ supply_condition*: undefined<br/>│  │  └─ connection?: undefined<br/>│  │  └─ placements?: array&lt;object&gt;<br/>│  │  │  └─ host_line_id*: string<br/>│  │  │  └─ host_instance*: integer<br/>│  │  │  └─ socket_id*: string<br/>│  │  │  └─ quantity*: number<br/>│  │  └─ entitlement?: object<br/>│  │  │  └─ kind*: undefined<br/>│  │  │  └─ count*: number,null<br/>│  │  │  └─ scope*: string<br/>│  │  │  └─ duration_value?: number<br/>│  │  │  └─ duration_unit?: undefined<br/>│  │  │  └─ agreement_id?: string → agreement<br/>│  │  │  └─ description?: string<br/>│  │  └─ requirements*: array&lt;object&gt;<br/>│  │  │  └─ number*: integer<br/>│  │  │  └─ kind*: undefined<br/>│  │  │  └─ description*: string<br/>│  │  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  │  └─ element_type?: undefined<br/>│  └─ assembly_requirements*: array&lt;object&gt;<br/>│  │  └─ number*: integer<br/>│  │  └─ kind*: undefined<br/>│  │  └─ description*: string<br/>│  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID</pre>"]:::schemaEntity
   technology["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>technology.json<br/>id*: string<br/>name*: string<br/>kind*: undefined<br/>description*: string<br/>owner_actor_ids*: array&lt;string&gt; → actor<br/>related_technology_ids*: array&lt;string&gt; → technology<br/>specification*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ value?: string,number,boolean<br/>│  └─ unit?: string<br/>fabrication?: object<br/>│  └─ feature_size_um*: number<br/>│  └─ wafer_diameter_mm?: number<br/>│  └─ lithography_method*: string</pre>"]:::schemaEntity
   any_foundation{{"Any foundation record<br/>ID prefix selects one target"}}
   actor_relationship -- "subject_actor_ids[]<br/>object_actor_id" --> actor
@@ -44,6 +47,13 @@ flowchart LR
   assumption -. "scope_ids[]" .-> any_foundation
   assumption -- "exception_ids[]" --> assumption
   assumption -- "process_id" --> process
+  base_part -- "manufacturer_actor_id<br/>supplier_actor_ids[]" --> actor
+  base_part -- "technology_ids[]<br/>technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]<br/>technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]<br/>technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]<br/>technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]<br/>technical_definition.memory_interface.organization_id<br/>technical_definition.specification.api_id<br/>technical_definition.specification.bridge_design_id<br/>technical_definition.specification.class_protocol_id<br/>technical_definition.specification.interface_id<br/>technical_definition.specification.keyboard_standard_id<br/>technical_definition.specification.link_layer_id<br/>technical_definition.specification.memory_layout.policy_id<br/>technical_definition.specification.negotiation_id<br/>technical_definition.specification.palette_list_id<br/>technical_definition.specification.platform_rate_profiles[].technology_ids[]<br/>technical_definition.specification.sprite_profile_ref.technology_id<br/>technical_definition.specification.technology_id<br/>technical_definition.specification.transport_id<br/>technical_definition.specification.video_link_id<br/>technical_definition.specification_id<br/>technical_definition.technical_profile.memory.organization_ref<br/>technical_definition.technical_profile.networking.technology_ids[]<br/>technical_definition.technical_profile.software_compatibility.api_id<br/>technical_definition.technical_profile.video.api_id<br/>technical_definition.technical_profile.video.memory_layout.policy_id<br/>technical_definition.technical_profile.video.palette_list_id<br/>technical_definition.technical_profile.video.sprite_profile_ref.technology_id<br/>technical_definition.technical_profile.video.technology_id" --> technology
+  base_part -- "manufacturing_capability_ids[]<br/>technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id" --> manufacturing_capability
+  base_part -- "technical_definition.compatible_computers[]<br/>technical_definition.compatible_with[]<br/>technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]<br/>technical_definition.host_qualification.device.base_computer.artemis.computer_id<br/>technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id<br/>technical_definition.host_qualification.device.base_computer.athena.computer_id<br/>technical_definition.host_qualification.device.base_computer.athena_server.computer_id<br/>technical_definition.host_qualification.device.base_computer.aurelia.computer_id<br/>technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id<br/>technical_definition.memory_interface.expansion_id<br/>technical_definition.planned_compatible_with[]<br/>technical_definition.specification.card_id<br/>technical_definition.specification.feature_continuity_id<br/>technical_definition.specification.legacy_card_id<br/>technical_definition.specification.monitor_id<br/>technical_definition.specification.platform_rate_profiles[].computer_id<br/>technical_definition.technical_profile.memory.expansion_ref<br/>technical_definition.technical_profile.network.computer_id<br/>technical_definition.technical_profile.networking.computer_id<br/>technical_definition.technical_profile.video.feature_continuity_id" --> device
+  base_part -- "technical_definition.memory_interface.system_controller_id<br/>technical_definition.physical_population.chip_id<br/>technical_definition.processor.part_id<br/>technical_definition.specification.base_controller_id<br/>technical_definition.specification.base_product_id<br/>technical_definition.specification.chip_type_id<br/>technical_definition.specification.controller_id<br/>technical_definition.specification.cpu_id<br/>technical_definition.specification.crt_id<br/>technical_definition.specification.display_controller_id<br/>technical_definition.specification.display_memory.chip_id<br/>technical_definition.specification.display_subassembly_id<br/>technical_definition.specification.mechanism_id<br/>technical_definition.specification.sprite_memory.chip_id<br/>technical_definition.specification.video_ram_chip_id<br/>technical_definition.technical_profile.memory.expanded_organization.controller_id<br/>technical_definition.technical_profile.memory.organization.controller_id<br/>technical_definition.technical_profile.memory.system_controller_ref<br/>technical_definition.technical_profile.video.controller_id<br/>technical_definition.technical_profile.video.display_memory.chip_id<br/>technical_definition.technical_profile.video.sprite_memory.chip_id" --> base_part
+  base_part -- "technical_definition.recommended_software_id" --> software_edition
+  base_part -. "specification[].subject_ids[]<br/>requirements[].subject_ids[]" .-> any_foundation
   campaign -- "lead_actor_ids[]<br/>subject_ids[]<br/>presentation.stage[].actor_ids[]" --> actor
   campaign -- "launch_event_id" --> event
   campaign -- "subject_ids[]" --> product
@@ -52,6 +62,14 @@ flowchart LR
   campaign -- "subject_ids[]" --> agreement
   campaign -- "subject_ids[]" --> market_response
   campaign -- "process_id" --> process
+  device -- "provider_actor_ids[]" --> actor
+  device -- "technology_ids[]<br/>composition_history[].technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]<br/>composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]<br/>composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]<br/>composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]<br/>composition_history[].technical_definition.memory_interface.organization_id<br/>composition_history[].technical_definition.specification.api_id<br/>composition_history[].technical_definition.specification.bridge_design_id<br/>composition_history[].technical_definition.specification.class_protocol_id<br/>composition_history[].technical_definition.specification.interface_id<br/>composition_history[].technical_definition.specification.keyboard_standard_id<br/>composition_history[].technical_definition.specification.link_layer_id<br/>composition_history[].technical_definition.specification.memory_layout.policy_id<br/>composition_history[].technical_definition.specification.negotiation_id<br/>composition_history[].technical_definition.specification.palette_list_id<br/>composition_history[].technical_definition.specification.platform_rate_profiles[].technology_ids[]<br/>composition_history[].technical_definition.specification.sprite_profile_ref.technology_id<br/>composition_history[].technical_definition.specification.technology_id<br/>composition_history[].technical_definition.specification.transport_id<br/>composition_history[].technical_definition.specification.video_link_id<br/>composition_history[].technical_definition.specification_id<br/>composition_history[].technical_definition.technical_profile.memory.organization_ref<br/>composition_history[].technical_definition.technical_profile.networking.technology_ids[]<br/>composition_history[].technical_definition.technical_profile.software_compatibility.api_id<br/>composition_history[].technical_definition.technical_profile.video.api_id<br/>composition_history[].technical_definition.technical_profile.video.memory_layout.policy_id<br/>composition_history[].technical_definition.technical_profile.video.palette_list_id<br/>composition_history[].technical_definition.technical_profile.video.sprite_profile_ref.technology_id<br/>composition_history[].technical_definition.technical_profile.video.technology_id<br/>technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]<br/>technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]<br/>technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]<br/>technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]<br/>technical_definition.memory_interface.organization_id<br/>technical_definition.specification.api_id<br/>technical_definition.specification.bridge_design_id<br/>technical_definition.specification.class_protocol_id<br/>technical_definition.specification.interface_id<br/>technical_definition.specification.keyboard_standard_id<br/>technical_definition.specification.link_layer_id<br/>technical_definition.specification.memory_layout.policy_id<br/>technical_definition.specification.negotiation_id<br/>technical_definition.specification.palette_list_id<br/>technical_definition.specification.platform_rate_profiles[].technology_ids[]<br/>technical_definition.specification.sprite_profile_ref.technology_id<br/>technical_definition.specification.technology_id<br/>technical_definition.specification.transport_id<br/>technical_definition.specification.video_link_id<br/>technical_definition.specification_id<br/>technical_definition.technical_profile.memory.organization_ref<br/>technical_definition.technical_profile.networking.technology_ids[]<br/>technical_definition.technical_profile.software_compatibility.api_id<br/>technical_definition.technical_profile.video.api_id<br/>technical_definition.technical_profile.video.memory_layout.policy_id<br/>technical_definition.technical_profile.video.palette_list_id<br/>technical_definition.technical_profile.video.sprite_profile_ref.technology_id<br/>technical_definition.technical_profile.video.technology_id" --> technology
+  device -- "composition_history[].technical_definition.compatible_computers[]<br/>composition_history[].technical_definition.compatible_with[]<br/>composition_history[].technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]<br/>composition_history[].technical_definition.host_qualification.device.base_computer.artemis.computer_id<br/>composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id<br/>composition_history[].technical_definition.host_qualification.device.base_computer.athena.computer_id<br/>composition_history[].technical_definition.host_qualification.device.base_computer.athena_server.computer_id<br/>composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.computer_id<br/>composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id<br/>composition_history[].technical_definition.memory_interface.expansion_id<br/>composition_history[].technical_definition.planned_compatible_with[]<br/>composition_history[].technical_definition.specification.card_id<br/>composition_history[].technical_definition.specification.feature_continuity_id<br/>composition_history[].technical_definition.specification.legacy_card_id<br/>composition_history[].technical_definition.specification.monitor_id<br/>composition_history[].technical_definition.specification.platform_rate_profiles[].computer_id<br/>composition_history[].technical_definition.technical_profile.memory.expansion_ref<br/>composition_history[].technical_definition.technical_profile.network.computer_id<br/>composition_history[].technical_definition.technical_profile.networking.computer_id<br/>composition_history[].technical_definition.technical_profile.video.feature_continuity_id<br/>technical_definition.compatible_computers[]<br/>technical_definition.compatible_with[]<br/>technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]<br/>technical_definition.host_qualification.device.base_computer.artemis.computer_id<br/>technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id<br/>technical_definition.host_qualification.device.base_computer.athena.computer_id<br/>technical_definition.host_qualification.device.base_computer.athena_server.computer_id<br/>technical_definition.host_qualification.device.base_computer.aurelia.computer_id<br/>technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id<br/>technical_definition.memory_interface.expansion_id<br/>technical_definition.planned_compatible_with[]<br/>technical_definition.specification.card_id<br/>technical_definition.specification.feature_continuity_id<br/>technical_definition.specification.legacy_card_id<br/>technical_definition.specification.monitor_id<br/>technical_definition.specification.platform_rate_profiles[].computer_id<br/>technical_definition.technical_profile.memory.expansion_ref<br/>technical_definition.technical_profile.network.computer_id<br/>technical_definition.technical_profile.networking.computer_id<br/>technical_definition.technical_profile.video.feature_continuity_id" --> device
+  device -- "composition_history[].technical_definition.memory_interface.system_controller_id<br/>composition_history[].technical_definition.physical_population.chip_id<br/>composition_history[].technical_definition.processor.part_id<br/>composition_history[].technical_definition.specification.base_controller_id<br/>composition_history[].technical_definition.specification.base_product_id<br/>composition_history[].technical_definition.specification.chip_type_id<br/>composition_history[].technical_definition.specification.controller_id<br/>composition_history[].technical_definition.specification.cpu_id<br/>composition_history[].technical_definition.specification.crt_id<br/>composition_history[].technical_definition.specification.display_controller_id<br/>composition_history[].technical_definition.specification.display_memory.chip_id<br/>composition_history[].technical_definition.specification.display_subassembly_id<br/>composition_history[].technical_definition.specification.mechanism_id<br/>composition_history[].technical_definition.specification.sprite_memory.chip_id<br/>composition_history[].technical_definition.specification.video_ram_chip_id<br/>composition_history[].technical_definition.technical_profile.memory.expanded_organization.controller_id<br/>composition_history[].technical_definition.technical_profile.memory.organization.controller_id<br/>composition_history[].technical_definition.technical_profile.memory.system_controller_ref<br/>composition_history[].technical_definition.technical_profile.video.controller_id<br/>composition_history[].technical_definition.technical_profile.video.display_memory.chip_id<br/>composition_history[].technical_definition.technical_profile.video.sprite_memory.chip_id<br/>technical_definition.memory_interface.system_controller_id<br/>technical_definition.physical_population.chip_id<br/>technical_definition.processor.part_id<br/>technical_definition.specification.base_controller_id<br/>technical_definition.specification.base_product_id<br/>technical_definition.specification.chip_type_id<br/>technical_definition.specification.controller_id<br/>technical_definition.specification.cpu_id<br/>technical_definition.specification.crt_id<br/>technical_definition.specification.display_controller_id<br/>technical_definition.specification.display_memory.chip_id<br/>technical_definition.specification.display_subassembly_id<br/>technical_definition.specification.mechanism_id<br/>technical_definition.specification.sprite_memory.chip_id<br/>technical_definition.specification.video_ram_chip_id<br/>technical_definition.technical_profile.memory.expanded_organization.controller_id<br/>technical_definition.technical_profile.memory.organization.controller_id<br/>technical_definition.technical_profile.memory.system_controller_ref<br/>technical_definition.technical_profile.video.controller_id<br/>technical_definition.technical_profile.video.display_memory.chip_id<br/>technical_definition.technical_profile.video.sprite_memory.chip_id" --> base_part
+  device -- "composition_history[].technical_definition.recommended_software_id<br/>technical_definition.recommended_software_id" --> software_edition
+  device -- "composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id<br/>technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id" --> manufacturing_capability
+  device -- "composition_history[].composition_definition[].entitlement.agreement_id" --> agreement
+  device -. "composition_history[].composition_definition[].requirements[].subject_ids[]<br/>composition_history[].assembly_requirements[].subject_ids[]<br/>requirements[].subject_ids[]" .-> any_foundation
   event -- "participant[].actor_id" --> actor
   event -. "subject_ids[]<br/>inputs[].subject_ids[]<br/>outcomes[].subject_ids[]" .-> any_foundation
   event -- "inputs[].event_id<br/>outcomes[].event_id" --> event
@@ -68,6 +86,7 @@ flowchart LR
   manufacturing_capability -- "qualification_requirements[].event_id" --> event
   manufacturing_capability -- "qualification_requirements[].process_id" --> process
   manufacturing_capability -- "qualification_requirements[].maturity.capability_id" --> manufacturing_capability
+  manufacturing_capability -- "base_part_ids[]" --> base_part
   market_response -- "respondent_actor_ids[]" --> actor
   market_response -. "subject_ids[]" .-> any_foundation
   market_response -- "trigger_ids[]" --> event
@@ -83,19 +102,35 @@ flowchart LR
   product -- "provider_actor_ids[]" --> actor
   product -- "family_product_id" --> product
   product -- "technology_ids[]" --> technology
+  product -- "technical_identity.record_id" --> base_part
+  product -- "technical_identity.record_id" --> device
+  product -- "technical_identity.record_id" --> software_edition
+  product -- "launch_campaign_id" --> campaign
+  product -- "composition_history[].composition_definition[].entitlement.agreement_id<br/>service_definition.entitlements[].agreement_id" --> agreement
+  product -. "composition_history[].composition_definition[].requirements[].subject_ids[]<br/>composition_history[].assembly_requirements[].subject_ids[]<br/>requirements[].subject_ids[]<br/>service_definition.requirements[].subject_ids[]" .-> any_foundation
+  software_edition -- "provider_actor_ids[]" --> actor
+  software_edition -- "technology_ids[]<br/>composition_history[].technical_definition.architecture.network_id<br/>composition_history[].technical_definition.dependency_ids[]<br/>composition_history[].technical_definition.embedded_abacus_integration_id<br/>composition_history[].technical_definition.features_id<br/>composition_history[].technical_definition.memory_discovery_id<br/>composition_history[].technical_definition.network_link_policy.link_layer_id<br/>composition_history[].technical_definition.portability_contract.api_id<br/>composition_history[].technical_definition.portable_runtime.api_id<br/>composition_history[].technical_definition.portable_runtime.display_id<br/>composition_history[].technical_definition.technology_id<br/>composition_history[].technical_definition.toolchain.language_contract_id<br/>composition_history[].technical_definition.toolchain.runtime_contract_id<br/>composition_history[].technical_definition.tui_ownership.interface_id" --> technology
+  software_edition -- "family_product_id<br/>composition_history[].technical_definition.platform_support[].computer_id" --> product
+  software_edition -- "composition_history[].technical_definition.architecture.server<br/>composition_history[].technical_definition.dependency_ids[]<br/>composition_history[].technical_definition.platform_support[].computer_id<br/>composition_history[].technical_definition.toolchain.host[]" --> device
+  software_edition -- "composition_history[].technical_definition.architecture.server_edition_id<br/>composition_history[].technical_definition.data_interchange.export_definition_id<br/>composition_history[].technical_definition.dependency_ids[]<br/>composition_history[].technical_definition.system_dependencies[].software_id<br/>composition_history[].technical_definition.tui_ownership.consumers[]" --> software_edition
+  software_edition -- "composition_history[].composition_definition[].entitlement.agreement_id" --> agreement
+  software_edition -. "composition_history[].composition_definition[].requirements[].subject_ids[]<br/>composition_history[].assembly_requirements[].subject_ids[]" .-> any_foundation
   technology -- "owner_actor_ids[]" --> actor
   technology -- "related_technology_ids[]" --> technology
   any_foundation -.-> actor
   any_foundation -.-> actor_relationship
   any_foundation -.-> agreement
   any_foundation -.-> assumption
+  any_foundation -.-> base_part
   any_foundation -.-> campaign
+  any_foundation -.-> device
   any_foundation -.-> event
   any_foundation -.-> location
   any_foundation -.-> manufacturing_capability
   any_foundation -.-> market_response
   any_foundation -.-> process
   any_foundation -.-> product
+  any_foundation -.-> software_edition
   any_foundation -.-> technology
 ```
 
@@ -226,12 +261,1499 @@ process_id?: string → process
 | `id` | yes | `string` | pattern: "^assumption\\.[a-z0-9][a-z0-9_.-]*$" |
 | `kind` | yes | `string` | enum: ["world_premise","policy","constraint","target","baseline_condition"] |
 | `statement` | yes | `string` | minLength: 1 |
-| `scope_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `scope_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `exception_ids[]` | no | `array<string>` | pattern: "^(assumption)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `equipment[]` | no | `array<object>` | — |
 | `equipment[].name` | yes | `string` | minLength: 1 |
 | `equipment[].components[]` | no | `array<string>` | minLength: 1 |
 | `process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
+
+### base_part
+
+
+
+File: [base_part.json](../../data_foundation/base_part.json) · Schema: [base_part.schema.json](../../schemas/base_part.schema.json)
+
+```text
+base_part[]
+id*: string
+name*: string
+kind*: undefined
+description*: string
+supply_form*: undefined
+manufacturer_actor_id*: string,null → actor
+manufacturer_name?: string,null
+supplier_actor_ids*: array<string> → actor
+manufacturer_part_number*: string,null
+drawing_reference?: string,null
+drawing_revision?: string,null
+technology_ids*: array<string> → technology
+manufacturing_capability_ids*: array<string> → manufacturing_capability
+technical_definition*: object
+│  └─ athena_qualification?: string
+│  └─ capacity_kb?: number
+│  └─ compatibility_note?: string
+│  └─ compatible_computers?: array<string> → device
+│  └─ compatible_with?: array<string> → device
+│  └─ configuration_requirements?: object
+│  │  └─ external_application_cartridges_supported?: boolean
+│  │  └─ rules?: array<string>
+│  │  └─ scope?: string
+│  └─ connection?: string
+│  └─ expansion_socket_groups?: array<object>
+│  │  └─ id?: string
+│  │  └─ name?: string
+│  │  └─ sockets?: array<object>
+│  │  │  └─ capacity?: number,null
+│  │  │  └─ compatible_device_ids?: array<string> → device
+│  │  │  └─ connection?: string
+│  │  │  └─ device_quantity_limits?: object
+│  │  │  │  └─ device.aurelia_ram_16kb_card?: number
+│  │  │  └─ id?: string
+│  │  │  └─ installation_multiple?: number
+│  │  │  └─ matched_modules?: boolean
+│  │  │  └─ name?: string
+│  │  │  └─ population_order?: string
+│  │  │  └─ requirements?: array<string>
+│  └─ firmware_contents?: array<string>
+│  └─ form_factor?: string
+│  └─ host_qualification?: object
+│  │  └─ device.base_computer.artemis?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ implementation?: string
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ device.base_computer.artemis_pro?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ implementation?: string
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ server_role?: boolean
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ device.base_computer.athena?: object
+│  │  │  └─ computer_id?: string → device
+│  │  └─ device.base_computer.athena_server?: object
+│  │  │  └─ computer_id?: string → device
+│  │  └─ device.base_computer.aurelia?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ device.base_computer.aurelia_plus?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  └─ integration_requirements?: object
+│  │  └─ sourcing_policy?: string
+│  │  └─ video_ram_policy?: string
+│  └─ io_and_expansion?: object
+│  │  └─ application_rom_cards_supported?: boolean
+│  │  └─ dedicated_video_slot?: object
+│  │  │  └─ general_purpose_slots_consumed?: number
+│  │  │  └─ hot_swap?: boolean
+│  │  │  └─ interface?: string
+│  │  │  └─ replaceable?: boolean
+│  │  └─ eeprom_bios?: object
+│  │  │  └─ capacity_kb?: number,null
+│  │  │  └─ included?: boolean
+│  │  │  └─ purpose?: string
+│  │  └─ expansion_slots?: object
+│  │  │  └─ future_pin_area_reserved_for_bits?: number
+│  │  │  └─ plug_and_execute?: boolean
+│  │  │  └─ width_bits?: number
+│  │  └─ rom_eeprom_cartridge_slots?: object
+│  │  │  └─ front?: string
+│  │  │  └─ rear?: string
+│  └─ manufacturing_planning?: object
+│  │  └─ die_area_mm2?: number
+│  │  └─ die_area_mm2_target?: number
+│  │  └─ initial_manufacturer?: string
+│  │  └─ node_um?: number
+│  │  └─ policy?: string
+│  │  └─ transistor_budget_target?: number
+│  │  └─ wafer_diameter_mm?: number
+│  └─ memory_constraints?: object
+│  │  └─ max_ram_kib?: number,null
+│  │  └─ mixed_module_types_allowed?: boolean
+│  └─ memory_interface?: object
+│  │  └─ expansion_id?: string → device
+│  │  └─ organization_id?: string → technology
+│  │  └─ system_controller_id?: string → base_part
+│  └─ memory_mapping?: object
+│  │  └─ application_memory?: string
+│  │  └─ configuration?: string
+│  │  └─ installation?: string
+│  │  └─ normal_cpu_range?: string
+│  │  └─ page_count?: number
+│  │  └─ page_size_kb?: number
+│  │  └─ service_calls?: string
+│  │  └─ slot_count?: number
+│  │  └─ system_workspace?: string
+│  └─ packaging?: string
+│  └─ physical_population?: object
+│  │  └─ capacity_kb?: number
+│  │  └─ chip_id?: string → base_part
+│  │  └─ data_chip_count?: number
+│  │  └─ data_width_bits?: number
+│  │  └─ refresh_owner?: string
+│  └─ planned_compatible_with?: array<string> → device
+│  └─ processor?: object
+│  │  └─ part_id?: string → base_part
+│  └─ recommended_software_id?: string → software_edition
+│  └─ role?: string
+│  └─ slot_count?: number
+│  └─ specification?: object
+│  │  └─ acceleration?: array<string>
+│  │  └─ adaptation?: string
+│  │  └─ adapter_requirements?: object
+│  │  │  └─ buffer_policy?: string
+│  │  │  └─ flow_control?: string
+│  │  │  └─ hardware_services?: array<string>
+│  │  │  └─ host_service?: string
+│  │  │  └─ local_packet_ram_target_bytes?: number
+│  │  └─ additions?: array<string>
+│  │  └─ analog_chain?: string
+│  │  └─ api_id?: string → technology
+│  │  └─ arbitration?: string
+│  │  └─ array_columns?: number
+│  │  └─ array_rows?: number
+│  │  └─ bandwidth?: string
+│  │  └─ bank_capacity_kb?: number
+│  │  └─ bank_control?: string
+│  │  └─ bank_data_width_bits?: number
+│  │  └─ bank_organization?: string
+│  │  └─ base_controller_id?: string → base_part
+│  │  └─ base_product_id?: string → base_part
+│  │  └─ beam_voltage_levels?: number
+│  │  └─ bitmap_modes?: array<object>
+│  │  │  └─ bits_per_pixel?: number
+│  │  │  └─ bytes_per_framebuffer?: number
+│  │  │  └─ compatibility_mode?: boolean
+│  │  │  └─ configurations?: array<object>
+│  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  └─ framebuffer_bytes?: number
+│  │  │  │  └─ framebuffer_count?: number
+│  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  └─ sprite_count?: number
+│  │  │  └─ double_buffering?: boolean
+│  │  │  └─ framebuffer_bytes?: number
+│  │  │  └─ framebuffer_count?: number
+│  │  │  └─ height?: number
+│  │  │  └─ id?: string
+│  │  │  └─ palette_grayscale_levels?: number
+│  │  │  └─ palette_list_bytes?: number
+│  │  │  └─ remaining_bytes?: number
+│  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  └─ required_raster_ids?: array<string>
+│  │  │  └─ simultaneous_shades?: number
+│  │  │  └─ simultaneous_values?: number
+│  │  │  └─ sprites_available?: number
+│  │  │  └─ stride_bytes?: number
+│  │  │  └─ width?: number
+│  │  └─ boot?: string
+│  │  └─ bridge_design_id?: string → technology
+│  │  └─ buttons?: number
+│  │  └─ capabilities?: object
+│  │  │  └─ color_model?: string
+│  │  │  └─ maximum_pixel_clock_mhz?: number
+│  │  │  └─ palette_precision_bits?: number
+│  │  │  └─ preferred_raster_id?: string
+│  │  │  └─ programmable_palette?: boolean
+│  │  │  └─ protocol_version?: number
+│  │  │  └─ raster_ids?: array<string>
+│  │  └─ capacity_bytes?: number
+│  │  └─ capacity_kb?: number,null
+│  │  └─ capacity_kbit?: number
+│  │  └─ capacity_mb?: number
+│  │  └─ card_id?: string → device
+│  │  └─ character_row_cache?: object
+│  │  │  └─ banks?: number
+│  │  │  └─ bytes_per_bank?: number
+│  │  │  └─ purpose?: string
+│  │  │  └─ total_bytes?: number
+│  │  └─ chip_organization?: string
+│  │  └─ chip_type_id?: string → base_part
+│  │  └─ chips?: number
+│  │  └─ chips_per_rank?: number
+│  │  └─ class_protocol_id?: string → technology
+│  │  └─ clock_mhz?: number
+│  │  └─ compatibility?: string
+│  │  └─ connection?: string
+│  │  └─ continuity?: string
+│  │  └─ controller_die_count?: number,null
+│  │  └─ controller_id?: string → base_part
+│  │  └─ conversion?: string
+│  │  └─ cpu_address_bits?: number
+│  │  └─ cpu_id?: string → base_part
+│  │  └─ crt_id?: string → base_part
+│  │  └─ cursor_keys?: string
+│  │  └─ data_width_bits?: number
+│  │  └─ density?: string
+│  │  └─ diagonal_inch?: number
+│  │  └─ diagonal_inches?: number
+│  │  └─ die_area_mm2?: number
+│  │  └─ die_area_planning_mm2?: number
+│  │  └─ digital_output_bits?: number
+│  │  └─ disk_formats?: array<string>
+│  │  └─ disk_ii_interface?: boolean
+│  │  └─ disk_interface?: string
+│  │  └─ display_controller_id?: string → base_part
+│  │  └─ display_memory?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ capacity_bytes?: number
+│  │  │  └─ chip_count?: number
+│  │  │  └─ chip_id?: string → base_part
+│  │  │  └─ organization?: string
+│  │  └─ display_modes?: string
+│  │  └─ display_subassembly_id?: string → base_part
+│  │  └─ displayed_color_registers?: number
+│  │  └─ displayed_registers?: number
+│  │  └─ dma?: object
+│  │  │  └─ active_transfer_engines?: number
+│  │  │  └─ address_steps?: array<string>
+│  │  │  └─ arbitration?: string
+│  │  │  └─ bank_selection?: string
+│  │  │  └─ completion?: string
+│  │  │  └─ destination_address_bits?: number
+│  │  │  └─ length_bits?: number
+│  │  │  └─ operations?: array<string>
+│  │  │  └─ peripheral_scope?: string
+│  │  │  └─ transfer_contexts?: number
+│  │  │  └─ video_endpoint?: string
+│  │  └─ dot_pitch_mm?: number
+│  │  └─ electrical_contract?: string
+│  │  └─ electrical_interface?: string
+│  │  └─ ergonomics?: string
+│  │  └─ execution?: string
+│  │  └─ expansion_role?: string
+│  │  └─ fdd_density?: string
+│  │  └─ fdd_size_inch?: number
+│  │  └─ feature_continuity_id?: string → device
+│  │  └─ flexibus_ports?: number
+│  │  └─ format?: string
+│  │  └─ formatted_capacity_kb?: number,null
+│  │  └─ function_keys?: string
+│  │  └─ grayscale_levels?: number
+│  │  └─ hdd_bundled_with_standard_artemis?: boolean
+│  │  └─ hdd_interface_supported?: boolean
+│  │  └─ historical_raster?: string
+│  │  └─ host?: string
+│  │  └─ host_access?: string
+│  │  └─ host_clock_mhz?: array<number>
+│  │  └─ host_integration?: string
+│  │  └─ host_interface?: undefined
+│  │  └─ implementation?: string
+│  │  └─ implementation_design?: object
+│  │  │  └─ arbitration?: string
+│  │  │  └─ clock_targets?: object
+│  │  │  │  └─ high_resolution_pixel_mhz?: number
+│  │  │  │  └─ low_resolution_pixel_mhz?: number
+│  │  │  │  └─ master_mhz?: number
+│  │  │  │  └─ maximum_pixel_fifo_output_mbytes_per_second?: number
+│  │  │  │  └─ scope?: string
+│  │  │  └─ engines?: object
+│  │  │  │  └─ fifo?: string
+│  │  │  │  └─ renderer?: string
+│  │  │  │  └─ scanout?: string
+│  │  │  │  └─ underrun?: string
+│  │  │  └─ internal_buffers?: object
+│  │  │  │  └─ character_attribute_row_cache_bytes?: number
+│  │  │  │  └─ included_in_die_estimates?: boolean
+│  │  │  │  └─ next_character_attribute_row_cache_bytes?: number
+│  │  │  │  └─ pixel_bits?: number
+│  │  │  │  └─ pixel_fifo_bytes?: number
+│  │  │  │  └─ pixel_fifo_page_bytes?: number
+│  │  │  │  └─ pixel_fifo_page_count?: number
+│  │  │  │  └─ sprite_row_shifters_bytes?: number
+│  │  │  │  └─ sprite_staging_bytes?: number
+│  │  │  │  └─ total_storage_bytes?: number
+│  │  │  └─ line_repeat?: string
+│  │  │  └─ manufacturing_planning?: object
+│  │  │  │  └─ die_area_mm2_at_3_5um_range?: array<number>
+│  │  │  │  └─ die_area_mm2_at_3um_range?: array<number>
+│  │  │  │  └─ die_area_mm2_central_at_3_5um?: number
+│  │  │  │  └─ die_area_mm2_central_at_3um?: number
+│  │  │  │  └─ external_functions?: array<string>
+│  │  │  │  └─ process?: string
+│  │  │  │  └─ transistors_central?: number
+│  │  │  │  └─ transistors_range?: array<number>
+│  │  │  └─ sprite_access?: string
+│  │  │  └─ text_fetch?: string
+│  │  │  └─ timing_budget?: object
+│  │  │  │  └─ dram_random_cycle_target_ns?: number
+│  │  │  │  └─ fifo_total_drain_time_us_at_high_resolution?: number
+│  │  │  │  └─ fifo_total_pixels?: number
+│  │  │  │  └─ illustrative_read_time_us?: number
+│  │  │  │  └─ illustrative_total_reads_per_scanline?: number
+│  │  │  │  └─ maximum_sprite_row_bytes_per_scanline?: number
+│  │  │  │  └─ next_row_prefetch_average_bytes_per_scanline?: number
+│  │  │  │  └─ qualification?: string
+│  │  │  │  └─ sprite_pattern_fetch_time_us?: number
+│  │  │  │  └─ sprite_sram_cycle_target_ns?: number
+│  │  │  │  └─ text_glyph_reads_per_scanline?: number
+│  │  │  │  └─ two_ready_pages_drain_time_us?: number
+│  │  └─ included_monitor?: boolean
+│  │  └─ input?: string
+│  │  └─ input_bits?: number
+│  │  └─ installation?: string
+│  │  └─ intensity_levels?: number
+│  │  └─ interface?: string
+│  │  └─ interface_id?: string → technology
+│  │  └─ key_count?: number
+│  │  └─ keyboard_standard_id?: string → technology
+│  │  └─ legacy_card_id?: string → device
+│  │  └─ link_layer_id?: string → technology
+│  │  └─ local_packet_ram_target_bytes?: number
+│  │  └─ local_ram_kb?: number
+│  │  └─ manufacturer?: string
+│  │  └─ manufacturing_planning?: object
+│  │  │  └─ die_area_mm2?: number
+│  │  │  └─ die_area_mm2_central?: number
+│  │  │  └─ die_area_mm2_range?: array<number>
+│  │  │  └─ package_allowance_usd?: number
+│  │  │  └─ recipe_variants?: array<object>
+│  │  │  │  └─ defect_density_cm2?: number
+│  │  │  │  └─ die_area_mm2?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ manufacturing_capability_id?: string → manufacturing_capability
+│  │  │  │  └─ node_um?: string
+│  │  │  │  └─ processed_wafer_usd?: number
+│  │  │  └─ revision_policy?: string
+│  │  │  └─ wafer_mm?: number
+│  │  └─ manufacturing_recipe?: string
+│  │  └─ maximum_shared_raw_rate_kbps?: number
+│  │  └─ mechanism_id?: string → base_part
+│  │  └─ media?: string
+│  │  └─ media_access_control?: string
+│  │  └─ memory_addressing_bytes?: number
+│  │  └─ memory_layout?: object
+│  │  │  └─ font_policy?: string
+│  │  │  └─ mode_exclusivity?: string
+│  │  │  └─ page_flip?: string
+│  │  │  └─ policy_id?: string → technology
+│  │  └─ memory_policy?: string
+│  │  └─ mode_discovery?: string
+│  │  └─ mode_limit?: string
+│  │  └─ mode_policy?: string
+│  │  └─ model?: string
+│  │  └─ modules_per_bank?: number
+│  │  └─ monitor_id?: string → device
+│  │  └─ monitor_modes?: string
+│  │  └─ monitor_policy?: string
+│  │  └─ native_raster?: object
+│  │  │  └─ height?: number
+│  │  │  └─ horizontal_khz?: number
+│  │  │  └─ pixel_clock_mhz?: number
+│  │  │  └─ progressive?: boolean
+│  │  │  └─ refresh_hz_target?: number
+│  │  │  └─ total_lines?: number
+│  │  │  └─ total_pixels?: number
+│  │  │  └─ width?: number
+│  │  └─ navigation_section?: array<string>
+│  │  └─ negotiation_id?: string → technology
+│  │  └─ node_um?: number
+│  │  └─ numeric_keypad?: boolean
+│  │  └─ oem?: string
+│  │  └─ oem_basis?: string
+│  │  └─ organization?: string
+│  │  └─ organization_words?: number
+│  │  └─ output?: string
+│  │  └─ package?: string,null
+│  │  └─ page_size_kb?: number
+│  │  └─ palette?: string
+│  │  └─ palette_entries?: number
+│  │  └─ palette_entry_bits?: number
+│  │  └─ palette_grayscale_levels?: number
+│  │  └─ palette_list?: object
+│  │  │  └─ base_address?: string
+│  │  │  └─ cad_policy?: string
+│  │  │  └─ command_bytes?: number
+│  │  │  └─ encoding?: string
+│  │  │  └─ end_address?: string
+│  │  │  └─ execution?: string
+│  │  │  └─ frame_state?: string
+│  │  │  └─ long_gaps?: string
+│  │  │  └─ maximum_commands?: number
+│  │  │  └─ register_count?: number
+│  │  │  └─ reserved_bytes?: number
+│  │  │  └─ write_limit?: string
+│  │  └─ palette_list_id?: string → technology
+│  │  └─ palette_registers?: number
+│  │  └─ parity_bits?: number
+│  │  └─ physical_arrangement?: string
+│  │  └─ physical_population?: object
+│  │  │  └─ bank_count?: number
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ common_ram_included?: boolean
+│  │  │  └─ mapping_note?: string
+│  │  │  └─ parity_bits?: number
+│  │  │  └─ video_ram_separate?: boolean
+│  │  └─ pixel_buffer?: object
+│  │  │  └─ bits_per_pixel?: number
+│  │  │  └─ bytes_per_page?: number
+│  │  │  └─ location?: string
+│  │  │  └─ page_states?: array<string>
+│  │  │  └─ pages?: number
+│  │  │  └─ physical_organization?: string
+│  │  │  └─ pixels_per_page?: number
+│  │  │  └─ policy?: string
+│  │  │  └─ total_bytes?: number
+│  │  └─ pixel_clock_mhz?: number
+│  │  └─ platform_rate_profiles?: array<object>
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ implementation?: string
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ server_role?: boolean
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ port_count?: number
+│  │  └─ ports?: array<string>
+│  │  └─ power?: string
+│  │  └─ purchase_boundary?: string
+│  │  └─ qualification?: string
+│  │  └─ random_cycle_target_ns?: number
+│  │  └─ rank_capacity_kb?: number
+│  │  └─ ranks?: number
+│  │  └─ rate_scope?: string
+│  │  └─ redraw?: string
+│  │  └─ refresh?: undefined
+│  │  └─ refresh_required?: boolean
+│  │  └─ register_width_bits?: number
+│  │  └─ reused_elements?: array<string>
+│  │  └─ rgb_palette_mapping?: string
+│  │  └─ role?: string
+│  │  └─ rollers?: array<object>
+│  │  │  └─ default_action?: string
+│  │  │  └─ position?: string
+│  │  └─ scan?: string
+│  │  └─ separate_sprite_sram_bytes?: number
+│  │  └─ serial_register_bits?: number
+│  │  └─ sides?: number
+│  │  └─ signal_path?: string
+│  │  └─ simultaneous_shades_at_640_200_4bpp?: number
+│  │  └─ simultaneous_shades_at_800_600_2bpp?: number
+│  │  └─ simultaneous_shades_with_128kb_card?: number
+│  │  └─ size_inch?: number
+│  │  └─ slot?: string
+│  │  └─ software?: string
+│  │  └─ speed_qualification_targets?: object
+│  │  │  └─ basis?: string
+│  │  │  └─ conditions?: string
+│  │  │  └─ fallback_random_cycle_ns_range?: array<number>
+│  │  │  └─ fallback_row_access_ns?: number
+│  │  │  └─ preferred_random_cycle_ns?: number
+│  │  │  └─ preferred_row_access_ns?: number
+│  │  │  └─ stretch_row_access_ns?: number
+│  │  └─ sprite_memory?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ capacity_bytes?: number
+│  │  │  └─ chip_count?: number
+│  │  │  └─ chip_id?: string → base_part
+│  │  │  └─ separate_bus?: boolean
+│  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  └─ sprite_physical_population?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ separate_bus?: boolean
+│  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  └─ sprite_policy?: string
+│  │  └─ sprite_profile_ref?: object
+│  │  │  └─ profile?: string
+│  │  │  └─ technology_id?: string → technology
+│  │  └─ sprites?: undefined
+│  │  └─ startup_rate_kbps?: number
+│  │  └─ supply_rails_v?: array,null
+│  │  └─ supported_fdd_count?: number
+│  │  └─ supported_rates_kbps?: array<number>
+│  │  └─ technology_id?: string → technology
+│  │  └─ text_modes?: array<object>
+│  │  │  └─ attribute_format?: string
+│  │  │  └─ attribute_map_bytes_per_buffer?: number
+│  │  │  └─ character_count?: number
+│  │  │  └─ character_map_bytes_per_buffer?: number
+│  │  │  └─ columns?: number
+│  │  │  └─ configurations?: array<object>
+│  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  └─ sprite_count?: number
+│  │  │  │  └─ text_buffer_count?: number
+│  │  │  └─ double_buffering?: boolean
+│  │  │  └─ font_bytes?: number
+│  │  │  └─ glyph_height?: number
+│  │  │  └─ glyph_width?: number
+│  │  │  └─ height?: number
+│  │  │  └─ id?: string
+│  │  │  └─ ram_bytes_per_page?: number
+│  │  │  └─ required_raster_ids?: array<string>
+│  │  │  └─ rows?: number
+│  │  │  └─ sprites_available?: number
+│  │  │  └─ width?: number
+│  │  └─ timing_budget?: object
+│  │  │  └─ page_drain_microseconds?: number
+│  │  │  └─ pixel_clock_mhz?: number
+│  │  │  └─ qualification?: string
+│  │  │  └─ renderer_pixels_per_step?: number
+│  │  │  └─ renderer_step_mhz?: number
+│  │  └─ timing_target?: object
+│  │  │  └─ horizontal_khz?: number
+│  │  │  └─ horizontal_total_pixels?: number
+│  │  │  └─ pixel_clock_mhz?: number
+│  │  │  └─ refresh_hz?: number
+│  │  │  └─ vertical_total_lines?: number
+│  │  └─ tracking?: string
+│  │  └─ transport_id?: string → technology
+│  │  └─ usable_from?: array<string>
+│  │  └─ video_link_id?: string → technology
+│  │  └─ video_physical_population?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ separate_from_system_ram?: boolean
+│  │  └─ video_ram_bytes?: number
+│  │  └─ video_ram_chip_count?: number
+│  │  └─ video_ram_chip_id?: string → base_part
+│  │  └─ video_ram_kb?: number
+│  └─ specification_id?: string → technology
+│  └─ technical_profile?: object
+│  │  └─ memory?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ capacity_policy?: string
+│  │  │  └─ expanded_organization?: object
+│  │  │  │  └─ application_memory_profile?: string
+│  │  │  │  └─ common_system_ram_kb?: number
+│  │  │  │  └─ contiguous_lower_ram_kb?: number
+│  │  │  │  └─ controller_id?: string → base_part
+│  │  │  │  └─ dma_addressing?: string
+│  │  │  │  └─ normal_view?: array<object>
+│  │  │  │  │  └─ description?: string
+│  │  │  │  │  └─ end?: string
+│  │  │  │  │  └─ role?: string
+│  │  │  │  │  └─ start?: string
+│  │  │  │  └─ note?: string
+│  │  │  │  └─ ram_kb?: number
+│  │  │  │  └─ refresh?: string
+│  │  │  └─ expansion_ref?: string → device
+│  │  │  └─ organization?: object
+│  │  │  │  └─ application_memory_profile?: string
+│  │  │  │  └─ common_system_ram_kb?: number
+│  │  │  │  └─ contiguous_lower_ram_kb?: number
+│  │  │  │  └─ controller_id?: string → base_part
+│  │  │  │  └─ dma_addressing?: string
+│  │  │  │  └─ normal_view?: array<object>
+│  │  │  │  │  └─ description?: string
+│  │  │  │  │  └─ end?: string
+│  │  │  │  │  └─ role?: string
+│  │  │  │  │  └─ start?: string
+│  │  │  │  └─ note?: string
+│  │  │  │  └─ refresh?: string
+│  │  │  └─ organization_ref?: string → technology
+│  │  │  └─ os_rom?: object
+│  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  └─ execution?: string
+│  │  │  │  └─ implementation?: string
+│  │  │  └─ parity_bits?: number
+│  │  │  └─ physical_population?: object
+│  │  │  │  └─ bank_count?: number
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ common_ram_included?: boolean
+│  │  │  │  └─ mapping_note?: string
+│  │  │  │  └─ parity_bits?: number
+│  │  │  │  └─ video_ram_separate?: boolean
+│  │  │  └─ population_policy?: string
+│  │  │  └─ reliability_policy?: string
+│  │  │  └─ sourcing_policy?: string
+│  │  │  └─ sprite_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  └─ system_controller_ref?: string → base_part
+│  │  │  └─ upgrade_policy?: string
+│  │  │  └─ video_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_from_system_ram?: boolean
+│  │  │  └─ video_ram_policy?: string
+│  │  └─ network?: object
+│  │  │  └─ computer_id?: string → device
+│  │  └─ networking?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ implementation?: string
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ server_role?: boolean
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ rom_and_cartridges?: object
+│  │  │  └─ mainboard_rom?: array<string>
+│  │  └─ software_compatibility?: object
+│  │  │  └─ adaptive_text?: string
+│  │  │  └─ api_id?: string → technology
+│  │  │  └─ native_40_column_mode?: string
+│  │  │  └─ native_target?: string
+│  │  └─ software_policy?: string
+│  │  └─ video?: object
+│  │  │  └─ api_id?: string → technology
+│  │  │  └─ arbitration?: string
+│  │  │  └─ bitmap_modes?: array<object>
+│  │  │  │  └─ bits_per_pixel?: number
+│  │  │  │  └─ bytes_per_framebuffer?: number
+│  │  │  │  └─ compatibility_mode?: boolean
+│  │  │  │  └─ configurations?: array<object>
+│  │  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  │  └─ framebuffer_bytes?: number
+│  │  │  │  │  └─ framebuffer_count?: number
+│  │  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  │  └─ sprite_count?: number
+│  │  │  │  └─ double_buffering?: boolean
+│  │  │  │  └─ height?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ required_raster_ids?: array<string>
+│  │  │  │  └─ sprites_available?: number
+│  │  │  │  └─ stride_bytes?: number
+│  │  │  │  └─ width?: number
+│  │  │  └─ character_row_cache?: object
+│  │  │  │  └─ banks?: number
+│  │  │  │  └─ bytes_per_bank?: number
+│  │  │  │  └─ purpose?: string
+│  │  │  │  └─ total_bytes?: number
+│  │  │  └─ controller_id?: string → base_part
+│  │  │  └─ display_memory?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  └─ chip_count?: number
+│  │  │  │  └─ chip_id?: string → base_part
+│  │  │  │  └─ organization?: string
+│  │  │  └─ feature_continuity_id?: string → device
+│  │  │  └─ host_interface?: object
+│  │  │  │  └─ host_width_bits?: number
+│  │  │  │  └─ hot_swap?: boolean
+│  │  │  │  └─ implementation?: string
+│  │  │  │  └─ local_display_width_bits?: number
+│  │  │  └─ memory_layout?: object
+│  │  │  │  └─ font_policy?: string
+│  │  │  │  └─ mode_exclusivity?: string
+│  │  │  │  └─ page_flip?: string
+│  │  │  │  └─ policy_id?: string → technology
+│  │  │  └─ mode_discovery?: string
+│  │  │  └─ monitor_policy?: string
+│  │  │  └─ palette_list_id?: string → technology
+│  │  │  └─ pixel_buffer?: object
+│  │  │  │  └─ bits_per_pixel?: number
+│  │  │  │  └─ bytes_per_page?: number
+│  │  │  │  └─ location?: string
+│  │  │  │  └─ page_states?: array<string>
+│  │  │  │  └─ pages?: number
+│  │  │  │  └─ physical_organization?: string
+│  │  │  │  └─ pixels_per_page?: number
+│  │  │  │  └─ policy?: string
+│  │  │  │  └─ total_bytes?: number
+│  │  │  └─ sprite_memory?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  └─ chip_count?: number
+│  │  │  │  └─ chip_id?: string → base_part
+│  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  └─ sprite_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  └─ sprite_profile_ref?: object
+│  │  │  │  └─ profile?: string
+│  │  │  │  └─ technology_id?: string → technology
+│  │  │  └─ technology_id?: string → technology
+│  │  │  └─ text_modes?: array<object>
+│  │  │  │  └─ attribute_format?: string
+│  │  │  │  └─ attribute_map_bytes_per_buffer?: number
+│  │  │  │  └─ character_count?: number
+│  │  │  │  └─ character_map_bytes_per_buffer?: number
+│  │  │  │  └─ columns?: number
+│  │  │  │  └─ configurations?: array<object>
+│  │  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  │  └─ sprite_count?: number
+│  │  │  │  │  └─ text_buffer_count?: number
+│  │  │  │  └─ double_buffering?: boolean
+│  │  │  │  └─ font_bytes?: number
+│  │  │  │  └─ glyph_height?: number
+│  │  │  │  └─ glyph_width?: number
+│  │  │  │  └─ height?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ ram_bytes_per_page?: number
+│  │  │  │  └─ required_raster_ids?: array<string>
+│  │  │  │  └─ rows?: number
+│  │  │  │  └─ sprites_available?: number
+│  │  │  │  └─ width?: number
+│  │  │  └─ timing_budget?: object
+│  │  │  │  └─ page_drain_microseconds?: number
+│  │  │  │  └─ pixel_clock_mhz?: number
+│  │  │  │  └─ qualification?: string
+│  │  │  │  └─ renderer_pixels_per_step?: number
+│  │  │  │  └─ renderer_step_mhz?: number
+│  │  │  └─ video_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_from_system_ram?: boolean
+│  │  │  └─ video_ram_kb?: number
+specification*: array<object>
+│  └─ number*: integer
+│  └─ type*: string
+│  └─ description*: string
+│  └─ value?: string,number,boolean,null
+│  └─ unit?: string
+│  └─ subject_ids?: array<string> → any foundation ID
+requirements*: array<object>
+│  └─ number*: integer
+│  └─ kind*: undefined
+│  └─ description*: string
+│  └─ subject_ids?: array<string> → any foundation ID
+```
+
+| Field path | Required in parent | Type | Constraints / allowed values |
+| --- | --- | --- | --- |
+| `id` | yes | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `name` | yes | `string` | minLength: 1 |
+| `kind` | yes | `undefined` | enum: ["integrated_circuit","discrete_semiconductor","passive","connector","cable","pcb","mechanical_part","power_supply","display_part","storage_mechanism","physical_media","documentation","packaging","supplied_assembly","material"] |
+| `description` | yes | `string` | minLength: 1 |
+| `supply_form` | yes | `undefined` | enum: ["individual_part","supplied_set","bulk_material"] |
+| `manufacturer_actor_id` | yes | `string,null` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `manufacturer_name` | no | `string,null` | — |
+| `supplier_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `manufacturer_part_number` | yes | `string,null` | — |
+| `drawing_reference` | no | `string,null` | — |
+| `drawing_revision` | no | `string,null` | — |
+| `technology_ids[]` | yes | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `manufacturing_capability_ids[]` | yes | `array<string>` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition` | yes | `object` | — |
+| `technical_definition.athena_qualification` | no | `string` | — |
+| `technical_definition.capacity_kb` | no | `number` | — |
+| `technical_definition.compatibility_note` | no | `string` | — |
+| `technical_definition.compatible_computers[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.compatible_with[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.configuration_requirements` | no | `object` | — |
+| `technical_definition.configuration_requirements.external_application_cartridges_supported` | no | `boolean` | — |
+| `technical_definition.configuration_requirements.rules[]` | no | `array<string>` | — |
+| `technical_definition.configuration_requirements.scope` | no | `string` | — |
+| `technical_definition.connection` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[]` | no | `array<object>` | — |
+| `technical_definition.expansion_socket_groups[].id` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].name` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[]` | no | `array<object>` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].capacity` | no | `number,null` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.expansion_socket_groups[].sockets[].connection` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].device_quantity_limits` | no | `object` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].device_quantity_limits.device.aurelia_ram_16kb_card` | no | `number` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].id` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].installation_multiple` | no | `number` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].matched_modules` | no | `boolean` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].name` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].population_order` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].requirements[]` | no | `array<string>` | — |
+| `technical_definition.firmware_contents[]` | no | `array<string>` | — |
+| `technical_definition.form_factor` | no | `string` | — |
+| `technical_definition.host_qualification` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.artemis.implementation` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.rate_policy` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.implementation` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.rate_policy` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.server_role` | no | `boolean` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.athena` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.athena.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.athena_server` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.athena_server.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.aurelia` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.aurelia.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia.rate_policy` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.rate_policy` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.integration_requirements` | no | `object` | — |
+| `technical_definition.integration_requirements.sourcing_policy` | no | `string` | — |
+| `technical_definition.integration_requirements.video_ram_policy` | no | `string` | — |
+| `technical_definition.io_and_expansion` | no | `object` | — |
+| `technical_definition.io_and_expansion.application_rom_cards_supported` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot` | no | `object` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot.general_purpose_slots_consumed` | no | `number` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot.hot_swap` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot.interface` | no | `string` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot.replaceable` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.eeprom_bios` | no | `object` | — |
+| `technical_definition.io_and_expansion.eeprom_bios.capacity_kb` | no | `number,null` | — |
+| `technical_definition.io_and_expansion.eeprom_bios.included` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.eeprom_bios.purpose` | no | `string` | — |
+| `technical_definition.io_and_expansion.expansion_slots` | no | `object` | — |
+| `technical_definition.io_and_expansion.expansion_slots.future_pin_area_reserved_for_bits` | no | `number` | — |
+| `technical_definition.io_and_expansion.expansion_slots.plug_and_execute` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.expansion_slots.width_bits` | no | `number` | — |
+| `technical_definition.io_and_expansion.rom_eeprom_cartridge_slots` | no | `object` | — |
+| `technical_definition.io_and_expansion.rom_eeprom_cartridge_slots.front` | no | `string` | — |
+| `technical_definition.io_and_expansion.rom_eeprom_cartridge_slots.rear` | no | `string` | — |
+| `technical_definition.manufacturing_planning` | no | `object` | — |
+| `technical_definition.manufacturing_planning.die_area_mm2` | no | `number` | — |
+| `technical_definition.manufacturing_planning.die_area_mm2_target` | no | `number` | — |
+| `technical_definition.manufacturing_planning.initial_manufacturer` | no | `string` | — |
+| `technical_definition.manufacturing_planning.node_um` | no | `number` | — |
+| `technical_definition.manufacturing_planning.policy` | no | `string` | — |
+| `technical_definition.manufacturing_planning.transistor_budget_target` | no | `number` | — |
+| `technical_definition.manufacturing_planning.wafer_diameter_mm` | no | `number` | — |
+| `technical_definition.memory_constraints` | no | `object` | — |
+| `technical_definition.memory_constraints.max_ram_kib` | no | `number,null` | — |
+| `technical_definition.memory_constraints.mixed_module_types_allowed` | no | `boolean` | — |
+| `technical_definition.memory_interface` | no | `object` | — |
+| `technical_definition.memory_interface.expansion_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.memory_interface.organization_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.memory_interface.system_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.memory_mapping` | no | `object` | — |
+| `technical_definition.memory_mapping.application_memory` | no | `string` | — |
+| `technical_definition.memory_mapping.configuration` | no | `string` | — |
+| `technical_definition.memory_mapping.installation` | no | `string` | — |
+| `technical_definition.memory_mapping.normal_cpu_range` | no | `string` | — |
+| `technical_definition.memory_mapping.page_count` | no | `number` | — |
+| `technical_definition.memory_mapping.page_size_kb` | no | `number` | — |
+| `technical_definition.memory_mapping.service_calls` | no | `string` | — |
+| `technical_definition.memory_mapping.slot_count` | no | `number` | — |
+| `technical_definition.memory_mapping.system_workspace` | no | `string` | — |
+| `technical_definition.packaging` | no | `string` | — |
+| `technical_definition.physical_population` | no | `object` | — |
+| `technical_definition.physical_population.capacity_kb` | no | `number` | — |
+| `technical_definition.physical_population.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.physical_population.data_chip_count` | no | `number` | — |
+| `technical_definition.physical_population.data_width_bits` | no | `number` | — |
+| `technical_definition.physical_population.refresh_owner` | no | `string` | — |
+| `technical_definition.planned_compatible_with[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.processor` | no | `object` | — |
+| `technical_definition.processor.part_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.recommended_software_id` | no | `string` | pattern: "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.role` | no | `string` | — |
+| `technical_definition.slot_count` | no | `number` | — |
+| `technical_definition.specification` | no | `object` | — |
+| `technical_definition.specification.acceleration[]` | no | `array<string>` | — |
+| `technical_definition.specification.adaptation` | no | `string` | — |
+| `technical_definition.specification.adapter_requirements` | no | `object` | — |
+| `technical_definition.specification.adapter_requirements.buffer_policy` | no | `string` | — |
+| `technical_definition.specification.adapter_requirements.flow_control` | no | `string` | — |
+| `technical_definition.specification.adapter_requirements.hardware_services[]` | no | `array<string>` | — |
+| `technical_definition.specification.adapter_requirements.host_service` | no | `string` | — |
+| `technical_definition.specification.adapter_requirements.local_packet_ram_target_bytes` | no | `number` | — |
+| `technical_definition.specification.additions[]` | no | `array<string>` | — |
+| `technical_definition.specification.analog_chain` | no | `string` | — |
+| `technical_definition.specification.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.arbitration` | no | `string` | — |
+| `technical_definition.specification.array_columns` | no | `number` | — |
+| `technical_definition.specification.array_rows` | no | `number` | — |
+| `technical_definition.specification.bandwidth` | no | `string` | — |
+| `technical_definition.specification.bank_capacity_kb` | no | `number` | — |
+| `technical_definition.specification.bank_control` | no | `string` | — |
+| `technical_definition.specification.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.bank_organization` | no | `string` | — |
+| `technical_definition.specification.base_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.base_product_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.beam_voltage_levels` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[]` | no | `array<object>` | — |
+| `technical_definition.specification.bitmap_modes[].bits_per_pixel` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].bytes_per_framebuffer` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].compatibility_mode` | no | `boolean` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[]` | no | `array<object>` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].framebuffer_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].framebuffer_count` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].sprite_count` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].double_buffering` | no | `boolean` | — |
+| `technical_definition.specification.bitmap_modes[].framebuffer_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].framebuffer_count` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].height` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].id` | no | `string` | — |
+| `technical_definition.specification.bitmap_modes[].palette_grayscale_levels` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].remaining_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.specification.bitmap_modes[].simultaneous_shades` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].simultaneous_values` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].sprites_available` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].stride_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].width` | no | `number` | — |
+| `technical_definition.specification.boot` | no | `string` | — |
+| `technical_definition.specification.bridge_design_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.buttons` | no | `number` | — |
+| `technical_definition.specification.capabilities` | no | `object` | — |
+| `technical_definition.specification.capabilities.color_model` | no | `string` | — |
+| `technical_definition.specification.capabilities.maximum_pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.capabilities.palette_precision_bits` | no | `number` | — |
+| `technical_definition.specification.capabilities.preferred_raster_id` | no | `string` | — |
+| `technical_definition.specification.capabilities.programmable_palette` | no | `boolean` | — |
+| `technical_definition.specification.capabilities.protocol_version` | no | `number` | — |
+| `technical_definition.specification.capabilities.raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.specification.capacity_bytes` | no | `number` | — |
+| `technical_definition.specification.capacity_kb` | no | `number,null` | — |
+| `technical_definition.specification.capacity_kbit` | no | `number` | — |
+| `technical_definition.specification.capacity_mb` | no | `number` | — |
+| `technical_definition.specification.card_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.character_row_cache` | no | `object` | — |
+| `technical_definition.specification.character_row_cache.banks` | no | `number` | — |
+| `technical_definition.specification.character_row_cache.bytes_per_bank` | no | `number` | — |
+| `technical_definition.specification.character_row_cache.purpose` | no | `string` | — |
+| `technical_definition.specification.character_row_cache.total_bytes` | no | `number` | — |
+| `technical_definition.specification.chip_organization` | no | `string` | — |
+| `technical_definition.specification.chip_type_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.chips` | no | `number` | — |
+| `technical_definition.specification.chips_per_rank` | no | `number` | — |
+| `technical_definition.specification.class_protocol_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.clock_mhz` | no | `number` | — |
+| `technical_definition.specification.compatibility` | no | `string` | — |
+| `technical_definition.specification.connection` | no | `string` | — |
+| `technical_definition.specification.continuity` | no | `string` | — |
+| `technical_definition.specification.controller_die_count` | no | `number,null` | — |
+| `technical_definition.specification.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.conversion` | no | `string` | — |
+| `technical_definition.specification.cpu_address_bits` | no | `number` | — |
+| `technical_definition.specification.cpu_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.crt_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.cursor_keys` | no | `string` | — |
+| `technical_definition.specification.data_width_bits` | no | `number` | — |
+| `technical_definition.specification.density` | no | `string` | — |
+| `technical_definition.specification.diagonal_inch` | no | `number` | — |
+| `technical_definition.specification.diagonal_inches` | no | `number` | — |
+| `technical_definition.specification.die_area_mm2` | no | `number` | — |
+| `technical_definition.specification.die_area_planning_mm2` | no | `number` | — |
+| `technical_definition.specification.digital_output_bits` | no | `number` | — |
+| `technical_definition.specification.disk_formats[]` | no | `array<string>` | — |
+| `technical_definition.specification.disk_ii_interface` | no | `boolean` | — |
+| `technical_definition.specification.disk_interface` | no | `string` | — |
+| `technical_definition.specification.display_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.display_memory` | no | `object` | — |
+| `technical_definition.specification.display_memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.display_memory.capacity_bytes` | no | `number` | — |
+| `technical_definition.specification.display_memory.chip_count` | no | `number` | — |
+| `technical_definition.specification.display_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.display_memory.organization` | no | `string` | — |
+| `technical_definition.specification.display_modes` | no | `string` | — |
+| `technical_definition.specification.display_subassembly_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.displayed_color_registers` | no | `number` | — |
+| `technical_definition.specification.displayed_registers` | no | `number` | — |
+| `technical_definition.specification.dma` | no | `object` | — |
+| `technical_definition.specification.dma.active_transfer_engines` | no | `number` | — |
+| `technical_definition.specification.dma.address_steps[]` | no | `array<string>` | — |
+| `technical_definition.specification.dma.arbitration` | no | `string` | — |
+| `technical_definition.specification.dma.bank_selection` | no | `string` | — |
+| `technical_definition.specification.dma.completion` | no | `string` | — |
+| `technical_definition.specification.dma.destination_address_bits` | no | `number` | — |
+| `technical_definition.specification.dma.length_bits` | no | `number` | — |
+| `technical_definition.specification.dma.operations[]` | no | `array<string>` | — |
+| `technical_definition.specification.dma.peripheral_scope` | no | `string` | — |
+| `technical_definition.specification.dma.transfer_contexts` | no | `number` | — |
+| `technical_definition.specification.dma.video_endpoint` | no | `string` | — |
+| `technical_definition.specification.dot_pitch_mm` | no | `number` | — |
+| `technical_definition.specification.electrical_contract` | no | `string` | — |
+| `technical_definition.specification.electrical_interface` | no | `string` | — |
+| `technical_definition.specification.ergonomics` | no | `string` | — |
+| `technical_definition.specification.execution` | no | `string` | — |
+| `technical_definition.specification.expansion_role` | no | `string` | — |
+| `technical_definition.specification.fdd_density` | no | `string` | — |
+| `technical_definition.specification.fdd_size_inch` | no | `number` | — |
+| `technical_definition.specification.feature_continuity_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.flexibus_ports` | no | `number` | — |
+| `technical_definition.specification.format` | no | `string` | — |
+| `technical_definition.specification.formatted_capacity_kb` | no | `number,null` | — |
+| `technical_definition.specification.function_keys` | no | `string` | — |
+| `technical_definition.specification.grayscale_levels` | no | `number` | — |
+| `technical_definition.specification.hdd_bundled_with_standard_artemis` | no | `boolean` | — |
+| `technical_definition.specification.hdd_interface_supported` | no | `boolean` | — |
+| `technical_definition.specification.historical_raster` | no | `string` | — |
+| `technical_definition.specification.host` | no | `string` | — |
+| `technical_definition.specification.host_access` | no | `string` | — |
+| `technical_definition.specification.host_clock_mhz[]` | no | `array<number>` | — |
+| `technical_definition.specification.host_integration` | no | `string` | — |
+| `technical_definition.specification.host_interface` | no | `undefined` | — |
+| `technical_definition.specification.implementation` | no | `string` | — |
+| `technical_definition.specification.implementation_design` | no | `object` | — |
+| `technical_definition.specification.implementation_design.arbitration` | no | `string` | — |
+| `technical_definition.specification.implementation_design.clock_targets` | no | `object` | — |
+| `technical_definition.specification.implementation_design.clock_targets.high_resolution_pixel_mhz` | no | `number` | — |
+| `technical_definition.specification.implementation_design.clock_targets.low_resolution_pixel_mhz` | no | `number` | — |
+| `technical_definition.specification.implementation_design.clock_targets.master_mhz` | no | `number` | — |
+| `technical_definition.specification.implementation_design.clock_targets.maximum_pixel_fifo_output_mbytes_per_second` | no | `number` | — |
+| `technical_definition.specification.implementation_design.clock_targets.scope` | no | `string` | — |
+| `technical_definition.specification.implementation_design.engines` | no | `object` | — |
+| `technical_definition.specification.implementation_design.engines.fifo` | no | `string` | — |
+| `technical_definition.specification.implementation_design.engines.renderer` | no | `string` | — |
+| `technical_definition.specification.implementation_design.engines.scanout` | no | `string` | — |
+| `technical_definition.specification.implementation_design.engines.underrun` | no | `string` | — |
+| `technical_definition.specification.implementation_design.internal_buffers` | no | `object` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.character_attribute_row_cache_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.included_in_die_estimates` | no | `boolean` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.next_character_attribute_row_cache_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.pixel_bits` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_page_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_page_count` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.sprite_row_shifters_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.sprite_staging_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.total_storage_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.line_repeat` | no | `string` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning` | no | `object` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_at_3_5um_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_at_3um_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_central_at_3_5um` | no | `number` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_central_at_3um` | no | `number` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.external_functions[]` | no | `array<string>` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.process` | no | `string` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.transistors_central` | no | `number` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.transistors_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.implementation_design.sprite_access` | no | `string` | — |
+| `technical_definition.specification.implementation_design.text_fetch` | no | `string` | — |
+| `technical_definition.specification.implementation_design.timing_budget` | no | `object` | — |
+| `technical_definition.specification.implementation_design.timing_budget.dram_random_cycle_target_ns` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.fifo_total_drain_time_us_at_high_resolution` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.fifo_total_pixels` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.illustrative_read_time_us` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.illustrative_total_reads_per_scanline` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.maximum_sprite_row_bytes_per_scanline` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.next_row_prefetch_average_bytes_per_scanline` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.qualification` | no | `string` | — |
+| `technical_definition.specification.implementation_design.timing_budget.sprite_pattern_fetch_time_us` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.sprite_sram_cycle_target_ns` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.text_glyph_reads_per_scanline` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.two_ready_pages_drain_time_us` | no | `number` | — |
+| `technical_definition.specification.included_monitor` | no | `boolean` | — |
+| `technical_definition.specification.input` | no | `string` | — |
+| `technical_definition.specification.input_bits` | no | `number` | — |
+| `technical_definition.specification.installation` | no | `string` | — |
+| `technical_definition.specification.intensity_levels` | no | `number` | — |
+| `technical_definition.specification.interface` | no | `string` | — |
+| `technical_definition.specification.interface_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.key_count` | no | `number` | — |
+| `technical_definition.specification.keyboard_standard_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.legacy_card_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.link_layer_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.local_packet_ram_target_bytes` | no | `number` | — |
+| `technical_definition.specification.local_ram_kb` | no | `number` | — |
+| `technical_definition.specification.manufacturer` | no | `string` | — |
+| `technical_definition.specification.manufacturing_planning` | no | `object` | — |
+| `technical_definition.specification.manufacturing_planning.die_area_mm2` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.die_area_mm2_central` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.die_area_mm2_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.manufacturing_planning.package_allowance_usd` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[]` | no | `array<object>` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].defect_density_cm2` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].die_area_mm2` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].id` | no | `string` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id` | no | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].node_um` | no | `string` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].processed_wafer_usd` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.revision_policy` | no | `string` | — |
+| `technical_definition.specification.manufacturing_planning.wafer_mm` | no | `number` | — |
+| `technical_definition.specification.manufacturing_recipe` | no | `string` | — |
+| `technical_definition.specification.maximum_shared_raw_rate_kbps` | no | `number` | — |
+| `technical_definition.specification.mechanism_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.media` | no | `string` | — |
+| `technical_definition.specification.media_access_control` | no | `string` | — |
+| `technical_definition.specification.memory_addressing_bytes` | no | `number` | — |
+| `technical_definition.specification.memory_layout` | no | `object` | — |
+| `technical_definition.specification.memory_layout.font_policy` | no | `string` | — |
+| `technical_definition.specification.memory_layout.mode_exclusivity` | no | `string` | — |
+| `technical_definition.specification.memory_layout.page_flip` | no | `string` | — |
+| `technical_definition.specification.memory_layout.policy_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.memory_policy` | no | `string` | — |
+| `technical_definition.specification.mode_discovery` | no | `string` | — |
+| `technical_definition.specification.mode_limit` | no | `string` | — |
+| `technical_definition.specification.mode_policy` | no | `string` | — |
+| `technical_definition.specification.model` | no | `string` | — |
+| `technical_definition.specification.modules_per_bank` | no | `number` | — |
+| `technical_definition.specification.monitor_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.monitor_modes` | no | `string` | — |
+| `technical_definition.specification.monitor_policy` | no | `string` | — |
+| `technical_definition.specification.native_raster` | no | `object` | — |
+| `technical_definition.specification.native_raster.height` | no | `number` | — |
+| `technical_definition.specification.native_raster.horizontal_khz` | no | `number` | — |
+| `technical_definition.specification.native_raster.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.native_raster.progressive` | no | `boolean` | — |
+| `technical_definition.specification.native_raster.refresh_hz_target` | no | `number` | — |
+| `technical_definition.specification.native_raster.total_lines` | no | `number` | — |
+| `technical_definition.specification.native_raster.total_pixels` | no | `number` | — |
+| `technical_definition.specification.native_raster.width` | no | `number` | — |
+| `technical_definition.specification.navigation_section[]` | no | `array<string>` | — |
+| `technical_definition.specification.negotiation_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.node_um` | no | `number` | — |
+| `technical_definition.specification.numeric_keypad` | no | `boolean` | — |
+| `technical_definition.specification.oem` | no | `string` | — |
+| `technical_definition.specification.oem_basis` | no | `string` | — |
+| `technical_definition.specification.organization` | no | `string` | — |
+| `technical_definition.specification.organization_words` | no | `number` | — |
+| `technical_definition.specification.output` | no | `string` | — |
+| `technical_definition.specification.package` | no | `string,null` | — |
+| `technical_definition.specification.page_size_kb` | no | `number` | — |
+| `technical_definition.specification.palette` | no | `string` | — |
+| `technical_definition.specification.palette_entries` | no | `number` | — |
+| `technical_definition.specification.palette_entry_bits` | no | `number` | — |
+| `technical_definition.specification.palette_grayscale_levels` | no | `number` | — |
+| `technical_definition.specification.palette_list` | no | `object` | — |
+| `technical_definition.specification.palette_list.base_address` | no | `string` | — |
+| `technical_definition.specification.palette_list.cad_policy` | no | `string` | — |
+| `technical_definition.specification.palette_list.command_bytes` | no | `number` | — |
+| `technical_definition.specification.palette_list.encoding` | no | `string` | — |
+| `technical_definition.specification.palette_list.end_address` | no | `string` | — |
+| `technical_definition.specification.palette_list.execution` | no | `string` | — |
+| `technical_definition.specification.palette_list.frame_state` | no | `string` | — |
+| `technical_definition.specification.palette_list.long_gaps` | no | `string` | — |
+| `technical_definition.specification.palette_list.maximum_commands` | no | `number` | — |
+| `technical_definition.specification.palette_list.register_count` | no | `number` | — |
+| `technical_definition.specification.palette_list.reserved_bytes` | no | `number` | — |
+| `technical_definition.specification.palette_list.write_limit` | no | `string` | — |
+| `technical_definition.specification.palette_list_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.palette_registers` | no | `number` | — |
+| `technical_definition.specification.parity_bits` | no | `number` | — |
+| `technical_definition.specification.physical_arrangement` | no | `string` | — |
+| `technical_definition.specification.physical_population` | no | `object` | — |
+| `technical_definition.specification.physical_population.bank_count` | no | `number` | — |
+| `technical_definition.specification.physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.physical_population.common_ram_included` | no | `boolean` | — |
+| `technical_definition.specification.physical_population.mapping_note` | no | `string` | — |
+| `technical_definition.specification.physical_population.parity_bits` | no | `number` | — |
+| `technical_definition.specification.physical_population.video_ram_separate` | no | `boolean` | — |
+| `technical_definition.specification.pixel_buffer` | no | `object` | — |
+| `technical_definition.specification.pixel_buffer.bits_per_pixel` | no | `number` | — |
+| `technical_definition.specification.pixel_buffer.bytes_per_page` | no | `number` | — |
+| `technical_definition.specification.pixel_buffer.location` | no | `string` | — |
+| `technical_definition.specification.pixel_buffer.page_states[]` | no | `array<string>` | — |
+| `technical_definition.specification.pixel_buffer.pages` | no | `number` | — |
+| `technical_definition.specification.pixel_buffer.physical_organization` | no | `string` | — |
+| `technical_definition.specification.pixel_buffer.pixels_per_page` | no | `number` | — |
+| `technical_definition.specification.pixel_buffer.policy` | no | `string` | — |
+| `technical_definition.specification.pixel_buffer.total_bytes` | no | `number` | — |
+| `technical_definition.specification.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.platform_rate_profiles[]` | no | `array<object>` | — |
+| `technical_definition.specification.platform_rate_profiles[].computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.platform_rate_profiles[].implementation` | no | `string` | — |
+| `technical_definition.specification.platform_rate_profiles[].qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.specification.platform_rate_profiles[].rate_policy` | no | `string` | — |
+| `technical_definition.specification.platform_rate_profiles[].server_role` | no | `boolean` | — |
+| `technical_definition.specification.platform_rate_profiles[].supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.specification.platform_rate_profiles[].technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.port_count` | no | `number` | — |
+| `technical_definition.specification.ports[]` | no | `array<string>` | — |
+| `technical_definition.specification.power` | no | `string` | — |
+| `technical_definition.specification.purchase_boundary` | no | `string` | — |
+| `technical_definition.specification.qualification` | no | `string` | — |
+| `technical_definition.specification.random_cycle_target_ns` | no | `number` | — |
+| `technical_definition.specification.rank_capacity_kb` | no | `number` | — |
+| `technical_definition.specification.ranks` | no | `number` | — |
+| `technical_definition.specification.rate_scope` | no | `string` | — |
+| `technical_definition.specification.redraw` | no | `string` | — |
+| `technical_definition.specification.refresh` | no | `undefined` | — |
+| `technical_definition.specification.refresh_required` | no | `boolean` | — |
+| `technical_definition.specification.register_width_bits` | no | `number` | — |
+| `technical_definition.specification.reused_elements[]` | no | `array<string>` | — |
+| `technical_definition.specification.rgb_palette_mapping` | no | `string` | — |
+| `technical_definition.specification.role` | no | `string` | — |
+| `technical_definition.specification.rollers[]` | no | `array<object>` | — |
+| `technical_definition.specification.rollers[].default_action` | no | `string` | — |
+| `technical_definition.specification.rollers[].position` | no | `string` | — |
+| `technical_definition.specification.scan` | no | `string` | — |
+| `technical_definition.specification.separate_sprite_sram_bytes` | no | `number` | — |
+| `technical_definition.specification.serial_register_bits` | no | `number` | — |
+| `technical_definition.specification.sides` | no | `number` | — |
+| `technical_definition.specification.signal_path` | no | `string` | — |
+| `technical_definition.specification.simultaneous_shades_at_640_200_4bpp` | no | `number` | — |
+| `technical_definition.specification.simultaneous_shades_at_800_600_2bpp` | no | `number` | — |
+| `technical_definition.specification.simultaneous_shades_with_128kb_card` | no | `number` | — |
+| `technical_definition.specification.size_inch` | no | `number` | — |
+| `technical_definition.specification.slot` | no | `string` | — |
+| `technical_definition.specification.software` | no | `string` | — |
+| `technical_definition.specification.speed_qualification_targets` | no | `object` | — |
+| `technical_definition.specification.speed_qualification_targets.basis` | no | `string` | — |
+| `technical_definition.specification.speed_qualification_targets.conditions` | no | `string` | — |
+| `technical_definition.specification.speed_qualification_targets.fallback_random_cycle_ns_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.speed_qualification_targets.fallback_row_access_ns` | no | `number` | — |
+| `technical_definition.specification.speed_qualification_targets.preferred_random_cycle_ns` | no | `number` | — |
+| `technical_definition.specification.speed_qualification_targets.preferred_row_access_ns` | no | `number` | — |
+| `technical_definition.specification.speed_qualification_targets.stretch_row_access_ns` | no | `number` | — |
+| `technical_definition.specification.sprite_memory` | no | `object` | — |
+| `technical_definition.specification.sprite_memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.sprite_memory.capacity_bytes` | no | `number` | — |
+| `technical_definition.specification.sprite_memory.chip_count` | no | `number` | — |
+| `technical_definition.specification.sprite_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.sprite_memory.separate_bus` | no | `boolean` | — |
+| `technical_definition.specification.sprite_memory.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.specification.sprite_physical_population` | no | `object` | — |
+| `technical_definition.specification.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `technical_definition.specification.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.specification.sprite_policy` | no | `string` | — |
+| `technical_definition.specification.sprite_profile_ref` | no | `object` | — |
+| `technical_definition.specification.sprite_profile_ref.profile` | no | `string` | — |
+| `technical_definition.specification.sprite_profile_ref.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.sprites` | no | `undefined` | — |
+| `technical_definition.specification.startup_rate_kbps` | no | `number` | — |
+| `technical_definition.specification.supply_rails_v` | no | `array,null` | — |
+| `technical_definition.specification.supported_fdd_count` | no | `number` | — |
+| `technical_definition.specification.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.specification.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.text_modes[]` | no | `array<object>` | — |
+| `technical_definition.specification.text_modes[].attribute_format` | no | `string` | — |
+| `technical_definition.specification.text_modes[].attribute_map_bytes_per_buffer` | no | `number` | — |
+| `technical_definition.specification.text_modes[].character_count` | no | `number` | — |
+| `technical_definition.specification.text_modes[].character_map_bytes_per_buffer` | no | `number` | — |
+| `technical_definition.specification.text_modes[].columns` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[]` | no | `array<object>` | — |
+| `technical_definition.specification.text_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[].sprite_count` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[].text_buffer_count` | no | `number` | — |
+| `technical_definition.specification.text_modes[].double_buffering` | no | `boolean` | — |
+| `technical_definition.specification.text_modes[].font_bytes` | no | `number` | — |
+| `technical_definition.specification.text_modes[].glyph_height` | no | `number` | — |
+| `technical_definition.specification.text_modes[].glyph_width` | no | `number` | — |
+| `technical_definition.specification.text_modes[].height` | no | `number` | — |
+| `technical_definition.specification.text_modes[].id` | no | `string` | — |
+| `technical_definition.specification.text_modes[].ram_bytes_per_page` | no | `number` | — |
+| `technical_definition.specification.text_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.specification.text_modes[].rows` | no | `number` | — |
+| `technical_definition.specification.text_modes[].sprites_available` | no | `number` | — |
+| `technical_definition.specification.text_modes[].width` | no | `number` | — |
+| `technical_definition.specification.timing_budget` | no | `object` | — |
+| `technical_definition.specification.timing_budget.page_drain_microseconds` | no | `number` | — |
+| `technical_definition.specification.timing_budget.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.timing_budget.qualification` | no | `string` | — |
+| `technical_definition.specification.timing_budget.renderer_pixels_per_step` | no | `number` | — |
+| `technical_definition.specification.timing_budget.renderer_step_mhz` | no | `number` | — |
+| `technical_definition.specification.timing_target` | no | `object` | — |
+| `technical_definition.specification.timing_target.horizontal_khz` | no | `number` | — |
+| `technical_definition.specification.timing_target.horizontal_total_pixels` | no | `number` | — |
+| `technical_definition.specification.timing_target.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.timing_target.refresh_hz` | no | `number` | — |
+| `technical_definition.specification.timing_target.vertical_total_lines` | no | `number` | — |
+| `technical_definition.specification.tracking` | no | `string` | — |
+| `technical_definition.specification.transport_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.usable_from[]` | no | `array<string>` | — |
+| `technical_definition.specification.video_link_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.video_physical_population` | no | `object` | — |
+| `technical_definition.specification.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `technical_definition.specification.video_ram_bytes` | no | `number` | — |
+| `technical_definition.specification.video_ram_chip_count` | no | `number` | — |
+| `technical_definition.specification.video_ram_chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.video_ram_kb` | no | `number` | — |
+| `technical_definition.specification_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile` | no | `object` | — |
+| `technical_definition.technical_profile.memory` | no | `object` | — |
+| `technical_definition.technical_profile.memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.capacity_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization` | no | `object` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.application_memory_profile` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.common_system_ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.contiguous_lower_ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.expanded_organization.dma_addressing` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[].description` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[].end` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[].role` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[].start` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.note` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.refresh` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expansion_ref` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.organization` | no | `object` | — |
+| `technical_definition.technical_profile.memory.organization.application_memory_profile` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.common_system_ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.organization.contiguous_lower_ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.organization.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.organization.dma_addressing` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[].description` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[].end` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[].role` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[].start` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.note` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.refresh` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization_ref` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.os_rom` | no | `object` | — |
+| `technical_definition.technical_profile.memory.os_rom.capacity_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.memory.os_rom.execution` | no | `string` | — |
+| `technical_definition.technical_profile.memory.os_rom.implementation` | no | `string` | — |
+| `technical_definition.technical_profile.memory.parity_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.memory.physical_population.bank_count` | no | `number` | — |
+| `technical_definition.technical_profile.memory.physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.physical_population.common_ram_included` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.physical_population.mapping_note` | no | `string` | — |
+| `technical_definition.technical_profile.memory.physical_population.parity_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.physical_population.video_ram_separate` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.population_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.reliability_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.sourcing_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.sprite_physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.memory.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.system_controller_ref` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.upgrade_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.video_physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.memory.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.video_ram_policy` | no | `string` | — |
+| `technical_definition.technical_profile.network` | no | `object` | — |
+| `technical_definition.technical_profile.network.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.networking` | no | `object` | — |
+| `technical_definition.technical_profile.networking.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.networking.implementation` | no | `string` | — |
+| `technical_definition.technical_profile.networking.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.technical_profile.networking.rate_policy` | no | `string` | — |
+| `technical_definition.technical_profile.networking.server_role` | no | `boolean` | — |
+| `technical_definition.technical_profile.networking.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.technical_profile.networking.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.rom_and_cartridges` | no | `object` | — |
+| `technical_definition.technical_profile.rom_and_cartridges.mainboard_rom[]` | no | `array<string>` | — |
+| `technical_definition.technical_profile.software_compatibility` | no | `object` | — |
+| `technical_definition.technical_profile.software_compatibility.adaptive_text` | no | `string` | — |
+| `technical_definition.technical_profile.software_compatibility.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.software_compatibility.native_40_column_mode` | no | `string` | — |
+| `technical_definition.technical_profile.software_compatibility.native_target` | no | `string` | — |
+| `technical_definition.technical_profile.software_policy` | no | `string` | — |
+| `technical_definition.technical_profile.video` | no | `object` | — |
+| `technical_definition.technical_profile.video.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.arbitration` | no | `string` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].bits_per_pixel` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].bytes_per_framebuffer` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].compatibility_mode` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].framebuffer_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].framebuffer_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].sprite_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].double_buffering` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].height` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].id` | no | `string` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].sprites_available` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].stride_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].width` | no | `number` | — |
+| `technical_definition.technical_profile.video.character_row_cache` | no | `object` | — |
+| `technical_definition.technical_profile.video.character_row_cache.banks` | no | `number` | — |
+| `technical_definition.technical_profile.video.character_row_cache.bytes_per_bank` | no | `number` | — |
+| `technical_definition.technical_profile.video.character_row_cache.purpose` | no | `string` | — |
+| `technical_definition.technical_profile.video.character_row_cache.total_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.display_memory` | no | `object` | — |
+| `technical_definition.technical_profile.video.display_memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.display_memory.capacity_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.display_memory.chip_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.display_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.display_memory.organization` | no | `string` | — |
+| `technical_definition.technical_profile.video.feature_continuity_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.host_interface` | no | `object` | — |
+| `technical_definition.technical_profile.video.host_interface.host_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.host_interface.hot_swap` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.host_interface.implementation` | no | `string` | — |
+| `technical_definition.technical_profile.video.host_interface.local_display_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.memory_layout` | no | `object` | — |
+| `technical_definition.technical_profile.video.memory_layout.font_policy` | no | `string` | — |
+| `technical_definition.technical_profile.video.memory_layout.mode_exclusivity` | no | `string` | — |
+| `technical_definition.technical_profile.video.memory_layout.page_flip` | no | `string` | — |
+| `technical_definition.technical_profile.video.memory_layout.policy_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.mode_discovery` | no | `string` | — |
+| `technical_definition.technical_profile.video.monitor_policy` | no | `string` | — |
+| `technical_definition.technical_profile.video.palette_list_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.pixel_buffer` | no | `object` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.bits_per_pixel` | no | `number` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.bytes_per_page` | no | `number` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.location` | no | `string` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.page_states[]` | no | `array<string>` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.pages` | no | `number` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.physical_organization` | no | `string` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.pixels_per_page` | no | `number` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.policy` | no | `string` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.total_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_memory` | no | `object` | — |
+| `technical_definition.technical_profile.video.sprite_memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_memory.capacity_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_memory.chip_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.sprite_memory.separate_bus` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.sprite_memory.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.sprite_physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.video.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.sprite_profile_ref` | no | `object` | — |
+| `technical_definition.technical_profile.video.sprite_profile_ref.profile` | no | `string` | — |
+| `technical_definition.technical_profile.video.sprite_profile_ref.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.text_modes[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.video.text_modes[].attribute_format` | no | `string` | — |
+| `technical_definition.technical_profile.video.text_modes[].attribute_map_bytes_per_buffer` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].character_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].character_map_bytes_per_buffer` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].columns` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].sprite_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].text_buffer_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].double_buffering` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.text_modes[].font_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].glyph_height` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].glyph_width` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].height` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].id` | no | `string` | — |
+| `technical_definition.technical_profile.video.text_modes[].ram_bytes_per_page` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.technical_profile.video.text_modes[].rows` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].sprites_available` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].width` | no | `number` | — |
+| `technical_definition.technical_profile.video.timing_budget` | no | `object` | — |
+| `technical_definition.technical_profile.video.timing_budget.page_drain_microseconds` | no | `number` | — |
+| `technical_definition.technical_profile.video.timing_budget.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.technical_profile.video.timing_budget.qualification` | no | `string` | — |
+| `technical_definition.technical_profile.video.timing_budget.renderer_pixels_per_step` | no | `number` | — |
+| `technical_definition.technical_profile.video.timing_budget.renderer_step_mhz` | no | `number` | — |
+| `technical_definition.technical_profile.video.video_physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.video.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.video_ram_kb` | no | `number` | — |
+| `specification[]` | yes | `array<object>` | — |
+| `specification[].number` | yes | `integer` | minimum: 1 |
+| `specification[].type` | yes | `string` | minLength: 1 |
+| `specification[].description` | yes | `string` | — |
+| `specification[].value` | no | `string,number,boolean,null` | — |
+| `specification[].unit` | no | `string` | minLength: 1 |
+| `specification[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `requirements[]` | yes | `array<object>` | — |
+| `requirements[].number` | yes | `integer` | minimum: 1 |
+| `requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `requirements[].description` | yes | `string` | minLength: 1 |
+| `requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
 
 ### campaign
 
@@ -296,6 +1818,2963 @@ marketing_content?: array<object>
 | `marketing_content[].type` | yes | `string` | minLength: 1 |
 | `marketing_content[].description` | yes | `string` | minLength: 1 |
 
+### device
+
+
+
+File: [device.json](../../data_foundation/device.json) · Schema: [device.schema.json](../../schemas/device.schema.json)
+
+```text
+device[]
+id*: string
+name*: string
+description*: string
+provider_actor_ids*: array<string> → actor
+technology_ids*: array<string> → technology
+kind*: undefined
+composition_history*: array<object>
+│  └─ version_number*: integer
+│  └─ description*: string
+│  └─ effective_from*: undefined
+│  └─ effective_until*: undefined
+│  └─ technical_definition*: object
+│  │  └─ athena_qualification?: string
+│  │  └─ capacity_kb?: number
+│  │  └─ compatibility_note?: string
+│  │  └─ compatible_computers?: array<string> → device
+│  │  └─ compatible_with?: array<string> → device
+│  │  └─ configuration_requirements?: object
+│  │  │  └─ external_application_cartridges_supported?: boolean
+│  │  │  └─ rules?: array<string>
+│  │  │  └─ scope?: string
+│  │  └─ connection?: string
+│  │  └─ expansion_socket_groups?: array<object>
+│  │  │  └─ id?: string
+│  │  │  └─ name?: string
+│  │  │  └─ sockets?: array<object>
+│  │  │  │  └─ capacity?: number,null
+│  │  │  │  └─ compatible_device_ids?: array<string> → device
+│  │  │  │  └─ connection?: string
+│  │  │  │  └─ device_quantity_limits?: object
+│  │  │  │  │  └─ device.aurelia_ram_16kb_card?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ installation_multiple?: number
+│  │  │  │  └─ matched_modules?: boolean
+│  │  │  │  └─ name?: string
+│  │  │  │  └─ population_order?: string
+│  │  │  │  └─ requirements?: array<string>
+│  │  └─ firmware_contents?: array<string>
+│  │  └─ form_factor?: string
+│  │  └─ host_qualification?: object
+│  │  │  └─ device.base_computer.artemis?: object
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  │  └─ implementation?: string
+│  │  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  │  └─ rate_policy?: string
+│  │  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  │  └─ technology_ids?: array<string> → technology
+│  │  │  └─ device.base_computer.artemis_pro?: object
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  │  └─ implementation?: string
+│  │  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  │  └─ rate_policy?: string
+│  │  │  │  └─ server_role?: boolean
+│  │  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  │  └─ technology_ids?: array<string> → technology
+│  │  │  └─ device.base_computer.athena?: object
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  └─ device.base_computer.athena_server?: object
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  └─ device.base_computer.aurelia?: object
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  │  └─ rate_policy?: string
+│  │  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  │  └─ technology_ids?: array<string> → technology
+│  │  │  └─ device.base_computer.aurelia_plus?: object
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  │  └─ rate_policy?: string
+│  │  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ integration_requirements?: object
+│  │  │  └─ sourcing_policy?: string
+│  │  │  └─ video_ram_policy?: string
+│  │  └─ io_and_expansion?: object
+│  │  │  └─ application_rom_cards_supported?: boolean
+│  │  │  └─ dedicated_video_slot?: object
+│  │  │  │  └─ general_purpose_slots_consumed?: number
+│  │  │  │  └─ hot_swap?: boolean
+│  │  │  │  └─ interface?: string
+│  │  │  │  └─ replaceable?: boolean
+│  │  │  └─ eeprom_bios?: object
+│  │  │  │  └─ capacity_kb?: number,null
+│  │  │  │  └─ included?: boolean
+│  │  │  │  └─ purpose?: string
+│  │  │  └─ expansion_slots?: object
+│  │  │  │  └─ future_pin_area_reserved_for_bits?: number
+│  │  │  │  └─ plug_and_execute?: boolean
+│  │  │  │  └─ width_bits?: number
+│  │  │  └─ rom_eeprom_cartridge_slots?: object
+│  │  │  │  └─ front?: string
+│  │  │  │  └─ rear?: string
+│  │  └─ manufacturing_planning?: object
+│  │  │  └─ die_area_mm2?: number
+│  │  │  └─ die_area_mm2_target?: number
+│  │  │  └─ initial_manufacturer?: string
+│  │  │  └─ node_um?: number
+│  │  │  └─ policy?: string
+│  │  │  └─ transistor_budget_target?: number
+│  │  │  └─ wafer_diameter_mm?: number
+│  │  └─ memory_constraints?: object
+│  │  │  └─ max_ram_kib?: number,null
+│  │  │  └─ mixed_module_types_allowed?: boolean
+│  │  └─ memory_interface?: object
+│  │  │  └─ expansion_id?: string → device
+│  │  │  └─ organization_id?: string → technology
+│  │  │  └─ system_controller_id?: string → base_part
+│  │  └─ memory_mapping?: object
+│  │  │  └─ application_memory?: string
+│  │  │  └─ configuration?: string
+│  │  │  └─ installation?: string
+│  │  │  └─ normal_cpu_range?: string
+│  │  │  └─ page_count?: number
+│  │  │  └─ page_size_kb?: number
+│  │  │  └─ service_calls?: string
+│  │  │  └─ slot_count?: number
+│  │  │  └─ system_workspace?: string
+│  │  └─ packaging?: string
+│  │  └─ physical_population?: object
+│  │  │  └─ capacity_kb?: number
+│  │  │  └─ chip_id?: string → base_part
+│  │  │  └─ data_chip_count?: number
+│  │  │  └─ data_width_bits?: number
+│  │  │  └─ refresh_owner?: string
+│  │  └─ planned_compatible_with?: array<string> → device
+│  │  └─ processor?: object
+│  │  │  └─ part_id?: string → base_part
+│  │  └─ recommended_software_id?: string → software_edition
+│  │  └─ role?: string
+│  │  └─ slot_count?: number
+│  │  └─ specification?: object
+│  │  │  └─ acceleration?: array<string>
+│  │  │  └─ adaptation?: string
+│  │  │  └─ adapter_requirements?: object
+│  │  │  │  └─ buffer_policy?: string
+│  │  │  │  └─ flow_control?: string
+│  │  │  │  └─ hardware_services?: array<string>
+│  │  │  │  └─ host_service?: string
+│  │  │  │  └─ local_packet_ram_target_bytes?: number
+│  │  │  └─ additions?: array<string>
+│  │  │  └─ analog_chain?: string
+│  │  │  └─ api_id?: string → technology
+│  │  │  └─ arbitration?: string
+│  │  │  └─ array_columns?: number
+│  │  │  └─ array_rows?: number
+│  │  │  └─ bandwidth?: string
+│  │  │  └─ bank_capacity_kb?: number
+│  │  │  └─ bank_control?: string
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ bank_organization?: string
+│  │  │  └─ base_controller_id?: string → base_part
+│  │  │  └─ base_product_id?: string → base_part
+│  │  │  └─ beam_voltage_levels?: number
+│  │  │  └─ bitmap_modes?: array<object>
+│  │  │  │  └─ bits_per_pixel?: number
+│  │  │  │  └─ bytes_per_framebuffer?: number
+│  │  │  │  └─ compatibility_mode?: boolean
+│  │  │  │  └─ configurations?: array<object>
+│  │  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  │  └─ framebuffer_bytes?: number
+│  │  │  │  │  └─ framebuffer_count?: number
+│  │  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  │  └─ sprite_count?: number
+│  │  │  │  └─ double_buffering?: boolean
+│  │  │  │  └─ framebuffer_bytes?: number
+│  │  │  │  └─ framebuffer_count?: number
+│  │  │  │  └─ height?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ palette_grayscale_levels?: number
+│  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  └─ remaining_bytes?: number
+│  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  └─ required_raster_ids?: array<string>
+│  │  │  │  └─ simultaneous_shades?: number
+│  │  │  │  └─ simultaneous_values?: number
+│  │  │  │  └─ sprites_available?: number
+│  │  │  │  └─ stride_bytes?: number
+│  │  │  │  └─ width?: number
+│  │  │  └─ boot?: string
+│  │  │  └─ bridge_design_id?: string → technology
+│  │  │  └─ buttons?: number
+│  │  │  └─ capabilities?: object
+│  │  │  │  └─ color_model?: string
+│  │  │  │  └─ maximum_pixel_clock_mhz?: number
+│  │  │  │  └─ palette_precision_bits?: number
+│  │  │  │  └─ preferred_raster_id?: string
+│  │  │  │  └─ programmable_palette?: boolean
+│  │  │  │  └─ protocol_version?: number
+│  │  │  │  └─ raster_ids?: array<string>
+│  │  │  └─ capacity_bytes?: number
+│  │  │  └─ capacity_kb?: number,null
+│  │  │  └─ capacity_kbit?: number
+│  │  │  └─ capacity_mb?: number
+│  │  │  └─ card_id?: string → device
+│  │  │  └─ character_row_cache?: object
+│  │  │  │  └─ banks?: number
+│  │  │  │  └─ bytes_per_bank?: number
+│  │  │  │  └─ purpose?: string
+│  │  │  │  └─ total_bytes?: number
+│  │  │  └─ chip_organization?: string
+│  │  │  └─ chip_type_id?: string → base_part
+│  │  │  └─ chips?: number
+│  │  │  └─ chips_per_rank?: number
+│  │  │  └─ class_protocol_id?: string → technology
+│  │  │  └─ clock_mhz?: number
+│  │  │  └─ compatibility?: string
+│  │  │  └─ connection?: string
+│  │  │  └─ continuity?: string
+│  │  │  └─ controller_die_count?: number,null
+│  │  │  └─ controller_id?: string → base_part
+│  │  │  └─ conversion?: string
+│  │  │  └─ cpu_address_bits?: number
+│  │  │  └─ cpu_id?: string → base_part
+│  │  │  └─ crt_id?: string → base_part
+│  │  │  └─ cursor_keys?: string
+│  │  │  └─ data_width_bits?: number
+│  │  │  └─ density?: string
+│  │  │  └─ diagonal_inch?: number
+│  │  │  └─ diagonal_inches?: number
+│  │  │  └─ die_area_mm2?: number
+│  │  │  └─ die_area_planning_mm2?: number
+│  │  │  └─ digital_output_bits?: number
+│  │  │  └─ disk_formats?: array<string>
+│  │  │  └─ disk_ii_interface?: boolean
+│  │  │  └─ disk_interface?: string
+│  │  │  └─ display_controller_id?: string → base_part
+│  │  │  └─ display_memory?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  └─ chip_count?: number
+│  │  │  │  └─ chip_id?: string → base_part
+│  │  │  │  └─ organization?: string
+│  │  │  └─ display_modes?: string
+│  │  │  └─ display_subassembly_id?: string → base_part
+│  │  │  └─ displayed_color_registers?: number
+│  │  │  └─ displayed_registers?: number
+│  │  │  └─ dma?: object
+│  │  │  │  └─ active_transfer_engines?: number
+│  │  │  │  └─ address_steps?: array<string>
+│  │  │  │  └─ arbitration?: string
+│  │  │  │  └─ bank_selection?: string
+│  │  │  │  └─ completion?: string
+│  │  │  │  └─ destination_address_bits?: number
+│  │  │  │  └─ length_bits?: number
+│  │  │  │  └─ operations?: array<string>
+│  │  │  │  └─ peripheral_scope?: string
+│  │  │  │  └─ transfer_contexts?: number
+│  │  │  │  └─ video_endpoint?: string
+│  │  │  └─ dot_pitch_mm?: number
+│  │  │  └─ electrical_contract?: string
+│  │  │  └─ electrical_interface?: string
+│  │  │  └─ ergonomics?: string
+│  │  │  └─ execution?: string
+│  │  │  └─ expansion_role?: string
+│  │  │  └─ fdd_density?: string
+│  │  │  └─ fdd_size_inch?: number
+│  │  │  └─ feature_continuity_id?: string → device
+│  │  │  └─ flexibus_ports?: number
+│  │  │  └─ format?: string
+│  │  │  └─ formatted_capacity_kb?: number,null
+│  │  │  └─ function_keys?: string
+│  │  │  └─ grayscale_levels?: number
+│  │  │  └─ hdd_bundled_with_standard_artemis?: boolean
+│  │  │  └─ hdd_interface_supported?: boolean
+│  │  │  └─ historical_raster?: string
+│  │  │  └─ host?: string
+│  │  │  └─ host_access?: string
+│  │  │  └─ host_clock_mhz?: array<number>
+│  │  │  └─ host_integration?: string
+│  │  │  └─ host_interface?: undefined
+│  │  │  └─ implementation?: string
+│  │  │  └─ implementation_design?: object
+│  │  │  │  └─ arbitration?: string
+│  │  │  │  └─ clock_targets?: object
+│  │  │  │  │  └─ high_resolution_pixel_mhz?: number
+│  │  │  │  │  └─ low_resolution_pixel_mhz?: number
+│  │  │  │  │  └─ master_mhz?: number
+│  │  │  │  │  └─ maximum_pixel_fifo_output_mbytes_per_second?: number
+│  │  │  │  │  └─ scope?: string
+│  │  │  │  └─ engines?: object
+│  │  │  │  │  └─ fifo?: string
+│  │  │  │  │  └─ renderer?: string
+│  │  │  │  │  └─ scanout?: string
+│  │  │  │  │  └─ underrun?: string
+│  │  │  │  └─ internal_buffers?: object
+│  │  │  │  │  └─ character_attribute_row_cache_bytes?: number
+│  │  │  │  │  └─ included_in_die_estimates?: boolean
+│  │  │  │  │  └─ next_character_attribute_row_cache_bytes?: number
+│  │  │  │  │  └─ pixel_bits?: number
+│  │  │  │  │  └─ pixel_fifo_bytes?: number
+│  │  │  │  │  └─ pixel_fifo_page_bytes?: number
+│  │  │  │  │  └─ pixel_fifo_page_count?: number
+│  │  │  │  │  └─ sprite_row_shifters_bytes?: number
+│  │  │  │  │  └─ sprite_staging_bytes?: number
+│  │  │  │  │  └─ total_storage_bytes?: number
+│  │  │  │  └─ line_repeat?: string
+│  │  │  │  └─ manufacturing_planning?: object
+│  │  │  │  │  └─ die_area_mm2_at_3_5um_range?: array<number>
+│  │  │  │  │  └─ die_area_mm2_at_3um_range?: array<number>
+│  │  │  │  │  └─ die_area_mm2_central_at_3_5um?: number
+│  │  │  │  │  └─ die_area_mm2_central_at_3um?: number
+│  │  │  │  │  └─ external_functions?: array<string>
+│  │  │  │  │  └─ process?: string
+│  │  │  │  │  └─ transistors_central?: number
+│  │  │  │  │  └─ transistors_range?: array<number>
+│  │  │  │  └─ sprite_access?: string
+│  │  │  │  └─ text_fetch?: string
+│  │  │  │  └─ timing_budget?: object
+│  │  │  │  │  └─ dram_random_cycle_target_ns?: number
+│  │  │  │  │  └─ fifo_total_drain_time_us_at_high_resolution?: number
+│  │  │  │  │  └─ fifo_total_pixels?: number
+│  │  │  │  │  └─ illustrative_read_time_us?: number
+│  │  │  │  │  └─ illustrative_total_reads_per_scanline?: number
+│  │  │  │  │  └─ maximum_sprite_row_bytes_per_scanline?: number
+│  │  │  │  │  └─ next_row_prefetch_average_bytes_per_scanline?: number
+│  │  │  │  │  └─ qualification?: string
+│  │  │  │  │  └─ sprite_pattern_fetch_time_us?: number
+│  │  │  │  │  └─ sprite_sram_cycle_target_ns?: number
+│  │  │  │  │  └─ text_glyph_reads_per_scanline?: number
+│  │  │  │  │  └─ two_ready_pages_drain_time_us?: number
+│  │  │  └─ included_monitor?: boolean
+│  │  │  └─ input?: string
+│  │  │  └─ input_bits?: number
+│  │  │  └─ installation?: string
+│  │  │  └─ intensity_levels?: number
+│  │  │  └─ interface?: string
+│  │  │  └─ interface_id?: string → technology
+│  │  │  └─ key_count?: number
+│  │  │  └─ keyboard_standard_id?: string → technology
+│  │  │  └─ legacy_card_id?: string → device
+│  │  │  └─ link_layer_id?: string → technology
+│  │  │  └─ local_packet_ram_target_bytes?: number
+│  │  │  └─ local_ram_kb?: number
+│  │  │  └─ manufacturer?: string
+│  │  │  └─ manufacturing_planning?: object
+│  │  │  │  └─ die_area_mm2?: number
+│  │  │  │  └─ die_area_mm2_central?: number
+│  │  │  │  └─ die_area_mm2_range?: array<number>
+│  │  │  │  └─ package_allowance_usd?: number
+│  │  │  │  └─ recipe_variants?: array<object>
+│  │  │  │  │  └─ defect_density_cm2?: number
+│  │  │  │  │  └─ die_area_mm2?: number
+│  │  │  │  │  └─ id?: string
+│  │  │  │  │  └─ manufacturing_capability_id?: string → manufacturing_capability
+│  │  │  │  │  └─ node_um?: string
+│  │  │  │  │  └─ processed_wafer_usd?: number
+│  │  │  │  └─ revision_policy?: string
+│  │  │  │  └─ wafer_mm?: number
+│  │  │  └─ manufacturing_recipe?: string
+│  │  │  └─ maximum_shared_raw_rate_kbps?: number
+│  │  │  └─ mechanism_id?: string → base_part
+│  │  │  └─ media?: string
+│  │  │  └─ media_access_control?: string
+│  │  │  └─ memory_addressing_bytes?: number
+│  │  │  └─ memory_layout?: object
+│  │  │  │  └─ font_policy?: string
+│  │  │  │  └─ mode_exclusivity?: string
+│  │  │  │  └─ page_flip?: string
+│  │  │  │  └─ policy_id?: string → technology
+│  │  │  └─ memory_policy?: string
+│  │  │  └─ mode_discovery?: string
+│  │  │  └─ mode_limit?: string
+│  │  │  └─ mode_policy?: string
+│  │  │  └─ model?: string
+│  │  │  └─ modules_per_bank?: number
+│  │  │  └─ monitor_id?: string → device
+│  │  │  └─ monitor_modes?: string
+│  │  │  └─ monitor_policy?: string
+│  │  │  └─ native_raster?: object
+│  │  │  │  └─ height?: number
+│  │  │  │  └─ horizontal_khz?: number
+│  │  │  │  └─ pixel_clock_mhz?: number
+│  │  │  │  └─ progressive?: boolean
+│  │  │  │  └─ refresh_hz_target?: number
+│  │  │  │  └─ total_lines?: number
+│  │  │  │  └─ total_pixels?: number
+│  │  │  │  └─ width?: number
+│  │  │  └─ navigation_section?: array<string>
+│  │  │  └─ negotiation_id?: string → technology
+│  │  │  └─ node_um?: number
+│  │  │  └─ numeric_keypad?: boolean
+│  │  │  └─ oem?: string
+│  │  │  └─ oem_basis?: string
+│  │  │  └─ organization?: string
+│  │  │  └─ organization_words?: number
+│  │  │  └─ output?: string
+│  │  │  └─ package?: string,null
+│  │  │  └─ page_size_kb?: number
+│  │  │  └─ palette?: string
+│  │  │  └─ palette_entries?: number
+│  │  │  └─ palette_entry_bits?: number
+│  │  │  └─ palette_grayscale_levels?: number
+│  │  │  └─ palette_list?: object
+│  │  │  │  └─ base_address?: string
+│  │  │  │  └─ cad_policy?: string
+│  │  │  │  └─ command_bytes?: number
+│  │  │  │  └─ encoding?: string
+│  │  │  │  └─ end_address?: string
+│  │  │  │  └─ execution?: string
+│  │  │  │  └─ frame_state?: string
+│  │  │  │  └─ long_gaps?: string
+│  │  │  │  └─ maximum_commands?: number
+│  │  │  │  └─ register_count?: number
+│  │  │  │  └─ reserved_bytes?: number
+│  │  │  │  └─ write_limit?: string
+│  │  │  └─ palette_list_id?: string → technology
+│  │  │  └─ palette_registers?: number
+│  │  │  └─ parity_bits?: number
+│  │  │  └─ physical_arrangement?: string
+│  │  │  └─ physical_population?: object
+│  │  │  │  └─ bank_count?: number
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ common_ram_included?: boolean
+│  │  │  │  └─ mapping_note?: string
+│  │  │  │  └─ parity_bits?: number
+│  │  │  │  └─ video_ram_separate?: boolean
+│  │  │  └─ pixel_buffer?: object
+│  │  │  │  └─ bits_per_pixel?: number
+│  │  │  │  └─ bytes_per_page?: number
+│  │  │  │  └─ location?: string
+│  │  │  │  └─ page_states?: array<string>
+│  │  │  │  └─ pages?: number
+│  │  │  │  └─ physical_organization?: string
+│  │  │  │  └─ pixels_per_page?: number
+│  │  │  │  └─ policy?: string
+│  │  │  │  └─ total_bytes?: number
+│  │  │  └─ pixel_clock_mhz?: number
+│  │  │  └─ platform_rate_profiles?: array<object>
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  │  └─ implementation?: string
+│  │  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  │  └─ rate_policy?: string
+│  │  │  │  └─ server_role?: boolean
+│  │  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  │  └─ technology_ids?: array<string> → technology
+│  │  │  └─ port_count?: number
+│  │  │  └─ ports?: array<string>
+│  │  │  └─ power?: string
+│  │  │  └─ purchase_boundary?: string
+│  │  │  └─ qualification?: string
+│  │  │  └─ random_cycle_target_ns?: number
+│  │  │  └─ rank_capacity_kb?: number
+│  │  │  └─ ranks?: number
+│  │  │  └─ rate_scope?: string
+│  │  │  └─ redraw?: string
+│  │  │  └─ refresh?: undefined
+│  │  │  └─ refresh_required?: boolean
+│  │  │  └─ register_width_bits?: number
+│  │  │  └─ reused_elements?: array<string>
+│  │  │  └─ rgb_palette_mapping?: string
+│  │  │  └─ role?: string
+│  │  │  └─ rollers?: array<object>
+│  │  │  │  └─ default_action?: string
+│  │  │  │  └─ position?: string
+│  │  │  └─ scan?: string
+│  │  │  └─ separate_sprite_sram_bytes?: number
+│  │  │  └─ serial_register_bits?: number
+│  │  │  └─ sides?: number
+│  │  │  └─ signal_path?: string
+│  │  │  └─ simultaneous_shades_at_640_200_4bpp?: number
+│  │  │  └─ simultaneous_shades_at_800_600_2bpp?: number
+│  │  │  └─ simultaneous_shades_with_128kb_card?: number
+│  │  │  └─ size_inch?: number
+│  │  │  └─ slot?: string
+│  │  │  └─ software?: string
+│  │  │  └─ speed_qualification_targets?: object
+│  │  │  │  └─ basis?: string
+│  │  │  │  └─ conditions?: string
+│  │  │  │  └─ fallback_random_cycle_ns_range?: array<number>
+│  │  │  │  └─ fallback_row_access_ns?: number
+│  │  │  │  └─ preferred_random_cycle_ns?: number
+│  │  │  │  └─ preferred_row_access_ns?: number
+│  │  │  │  └─ stretch_row_access_ns?: number
+│  │  │  └─ sprite_memory?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  └─ chip_count?: number
+│  │  │  │  └─ chip_id?: string → base_part
+│  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  └─ sprite_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  └─ sprite_policy?: string
+│  │  │  └─ sprite_profile_ref?: object
+│  │  │  │  └─ profile?: string
+│  │  │  │  └─ technology_id?: string → technology
+│  │  │  └─ sprites?: undefined
+│  │  │  └─ startup_rate_kbps?: number
+│  │  │  └─ supply_rails_v?: array,null
+│  │  │  └─ supported_fdd_count?: number
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_id?: string → technology
+│  │  │  └─ text_modes?: array<object>
+│  │  │  │  └─ attribute_format?: string
+│  │  │  │  └─ attribute_map_bytes_per_buffer?: number
+│  │  │  │  └─ character_count?: number
+│  │  │  │  └─ character_map_bytes_per_buffer?: number
+│  │  │  │  └─ columns?: number
+│  │  │  │  └─ configurations?: array<object>
+│  │  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  │  └─ sprite_count?: number
+│  │  │  │  │  └─ text_buffer_count?: number
+│  │  │  │  └─ double_buffering?: boolean
+│  │  │  │  └─ font_bytes?: number
+│  │  │  │  └─ glyph_height?: number
+│  │  │  │  └─ glyph_width?: number
+│  │  │  │  └─ height?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ ram_bytes_per_page?: number
+│  │  │  │  └─ required_raster_ids?: array<string>
+│  │  │  │  └─ rows?: number
+│  │  │  │  └─ sprites_available?: number
+│  │  │  │  └─ width?: number
+│  │  │  └─ timing_budget?: object
+│  │  │  │  └─ page_drain_microseconds?: number
+│  │  │  │  └─ pixel_clock_mhz?: number
+│  │  │  │  └─ qualification?: string
+│  │  │  │  └─ renderer_pixels_per_step?: number
+│  │  │  │  └─ renderer_step_mhz?: number
+│  │  │  └─ timing_target?: object
+│  │  │  │  └─ horizontal_khz?: number
+│  │  │  │  └─ horizontal_total_pixels?: number
+│  │  │  │  └─ pixel_clock_mhz?: number
+│  │  │  │  └─ refresh_hz?: number
+│  │  │  │  └─ vertical_total_lines?: number
+│  │  │  └─ tracking?: string
+│  │  │  └─ transport_id?: string → technology
+│  │  │  └─ usable_from?: array<string>
+│  │  │  └─ video_link_id?: string → technology
+│  │  │  └─ video_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_from_system_ram?: boolean
+│  │  │  └─ video_ram_bytes?: number
+│  │  │  └─ video_ram_chip_count?: number
+│  │  │  └─ video_ram_chip_id?: string → base_part
+│  │  │  └─ video_ram_kb?: number
+│  │  └─ specification_id?: string → technology
+│  │  └─ technical_profile?: object
+│  │  │  └─ memory?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ capacity_policy?: string
+│  │  │  │  └─ expanded_organization?: object
+│  │  │  │  │  └─ application_memory_profile?: string
+│  │  │  │  │  └─ common_system_ram_kb?: number
+│  │  │  │  │  └─ contiguous_lower_ram_kb?: number
+│  │  │  │  │  └─ controller_id?: string → base_part
+│  │  │  │  │  └─ dma_addressing?: string
+│  │  │  │  │  └─ normal_view?: array<object>
+│  │  │  │  │  │  └─ description?: string
+│  │  │  │  │  │  └─ end?: string
+│  │  │  │  │  │  └─ role?: string
+│  │  │  │  │  │  └─ start?: string
+│  │  │  │  │  └─ note?: string
+│  │  │  │  │  └─ ram_kb?: number
+│  │  │  │  │  └─ refresh?: string
+│  │  │  │  └─ expansion_ref?: string → device
+│  │  │  │  └─ organization?: object
+│  │  │  │  │  └─ application_memory_profile?: string
+│  │  │  │  │  └─ common_system_ram_kb?: number
+│  │  │  │  │  └─ contiguous_lower_ram_kb?: number
+│  │  │  │  │  └─ controller_id?: string → base_part
+│  │  │  │  │  └─ dma_addressing?: string
+│  │  │  │  │  └─ normal_view?: array<object>
+│  │  │  │  │  │  └─ description?: string
+│  │  │  │  │  │  └─ end?: string
+│  │  │  │  │  │  └─ role?: string
+│  │  │  │  │  │  └─ start?: string
+│  │  │  │  │  └─ note?: string
+│  │  │  │  │  └─ refresh?: string
+│  │  │  │  └─ organization_ref?: string → technology
+│  │  │  │  └─ os_rom?: object
+│  │  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  │  └─ execution?: string
+│  │  │  │  │  └─ implementation?: string
+│  │  │  │  └─ parity_bits?: number
+│  │  │  │  └─ physical_population?: object
+│  │  │  │  │  └─ bank_count?: number
+│  │  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  │  └─ common_ram_included?: boolean
+│  │  │  │  │  └─ mapping_note?: string
+│  │  │  │  │  └─ parity_bits?: number
+│  │  │  │  │  └─ video_ram_separate?: boolean
+│  │  │  │  └─ population_policy?: string
+│  │  │  │  └─ reliability_policy?: string
+│  │  │  │  └─ sourcing_policy?: string
+│  │  │  │  └─ sprite_physical_population?: object
+│  │  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  │  └─ system_controller_ref?: string → base_part
+│  │  │  │  └─ upgrade_policy?: string
+│  │  │  │  └─ video_physical_population?: object
+│  │  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  │  └─ separate_from_system_ram?: boolean
+│  │  │  │  └─ video_ram_policy?: string
+│  │  │  └─ network?: object
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  └─ networking?: object
+│  │  │  │  └─ computer_id?: string → device
+│  │  │  │  └─ implementation?: string
+│  │  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  │  └─ rate_policy?: string
+│  │  │  │  └─ server_role?: boolean
+│  │  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  │  └─ technology_ids?: array<string> → technology
+│  │  │  └─ rom_and_cartridges?: object
+│  │  │  │  └─ mainboard_rom?: array<string>
+│  │  │  └─ software_compatibility?: object
+│  │  │  │  └─ adaptive_text?: string
+│  │  │  │  └─ api_id?: string → technology
+│  │  │  │  └─ native_40_column_mode?: string
+│  │  │  │  └─ native_target?: string
+│  │  │  └─ software_policy?: string
+│  │  │  └─ video?: object
+│  │  │  │  └─ api_id?: string → technology
+│  │  │  │  └─ arbitration?: string
+│  │  │  │  └─ bitmap_modes?: array<object>
+│  │  │  │  │  └─ bits_per_pixel?: number
+│  │  │  │  │  └─ bytes_per_framebuffer?: number
+│  │  │  │  │  └─ compatibility_mode?: boolean
+│  │  │  │  │  └─ configurations?: array<object>
+│  │  │  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  │  │  └─ framebuffer_bytes?: number
+│  │  │  │  │  │  └─ framebuffer_count?: number
+│  │  │  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  │  │  └─ sprite_count?: number
+│  │  │  │  │  └─ double_buffering?: boolean
+│  │  │  │  │  └─ height?: number
+│  │  │  │  │  └─ id?: string
+│  │  │  │  │  └─ required_raster_ids?: array<string>
+│  │  │  │  │  └─ sprites_available?: number
+│  │  │  │  │  └─ stride_bytes?: number
+│  │  │  │  │  └─ width?: number
+│  │  │  │  └─ character_row_cache?: object
+│  │  │  │  │  └─ banks?: number
+│  │  │  │  │  └─ bytes_per_bank?: number
+│  │  │  │  │  └─ purpose?: string
+│  │  │  │  │  └─ total_bytes?: number
+│  │  │  │  └─ controller_id?: string → base_part
+│  │  │  │  └─ display_memory?: object
+│  │  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  │  └─ chip_count?: number
+│  │  │  │  │  └─ chip_id?: string → base_part
+│  │  │  │  │  └─ organization?: string
+│  │  │  │  └─ feature_continuity_id?: string → device
+│  │  │  │  └─ host_interface?: object
+│  │  │  │  │  └─ host_width_bits?: number
+│  │  │  │  │  └─ hot_swap?: boolean
+│  │  │  │  │  └─ implementation?: string
+│  │  │  │  │  └─ local_display_width_bits?: number
+│  │  │  │  └─ memory_layout?: object
+│  │  │  │  │  └─ font_policy?: string
+│  │  │  │  │  └─ mode_exclusivity?: string
+│  │  │  │  │  └─ page_flip?: string
+│  │  │  │  │  └─ policy_id?: string → technology
+│  │  │  │  └─ mode_discovery?: string
+│  │  │  │  └─ monitor_policy?: string
+│  │  │  │  └─ palette_list_id?: string → technology
+│  │  │  │  └─ pixel_buffer?: object
+│  │  │  │  │  └─ bits_per_pixel?: number
+│  │  │  │  │  └─ bytes_per_page?: number
+│  │  │  │  │  └─ location?: string
+│  │  │  │  │  └─ page_states?: array<string>
+│  │  │  │  │  └─ pages?: number
+│  │  │  │  │  └─ physical_organization?: string
+│  │  │  │  │  └─ pixels_per_page?: number
+│  │  │  │  │  └─ policy?: string
+│  │  │  │  │  └─ total_bytes?: number
+│  │  │  │  └─ sprite_memory?: object
+│  │  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  │  └─ chip_count?: number
+│  │  │  │  │  └─ chip_id?: string → base_part
+│  │  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  │  └─ sprite_physical_population?: object
+│  │  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  │  └─ sprite_profile_ref?: object
+│  │  │  │  │  └─ profile?: string
+│  │  │  │  │  └─ technology_id?: string → technology
+│  │  │  │  └─ technology_id?: string → technology
+│  │  │  │  └─ text_modes?: array<object>
+│  │  │  │  │  └─ attribute_format?: string
+│  │  │  │  │  └─ attribute_map_bytes_per_buffer?: number
+│  │  │  │  │  └─ character_count?: number
+│  │  │  │  │  └─ character_map_bytes_per_buffer?: number
+│  │  │  │  │  └─ columns?: number
+│  │  │  │  │  └─ configurations?: array<object>
+│  │  │  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  │  │  └─ sprite_count?: number
+│  │  │  │  │  │  └─ text_buffer_count?: number
+│  │  │  │  │  └─ double_buffering?: boolean
+│  │  │  │  │  └─ font_bytes?: number
+│  │  │  │  │  └─ glyph_height?: number
+│  │  │  │  │  └─ glyph_width?: number
+│  │  │  │  │  └─ height?: number
+│  │  │  │  │  └─ id?: string
+│  │  │  │  │  └─ ram_bytes_per_page?: number
+│  │  │  │  │  └─ required_raster_ids?: array<string>
+│  │  │  │  │  └─ rows?: number
+│  │  │  │  │  └─ sprites_available?: number
+│  │  │  │  │  └─ width?: number
+│  │  │  │  └─ timing_budget?: object
+│  │  │  │  │  └─ page_drain_microseconds?: number
+│  │  │  │  │  └─ pixel_clock_mhz?: number
+│  │  │  │  │  └─ qualification?: string
+│  │  │  │  │  └─ renderer_pixels_per_step?: number
+│  │  │  │  │  └─ renderer_step_mhz?: number
+│  │  │  │  └─ video_physical_population?: object
+│  │  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  │  └─ separate_from_system_ram?: boolean
+│  │  │  │  └─ video_ram_kb?: number
+│  └─ composition_definition*: array<object>
+│  │  └─ id*: string
+│  │  └─ target*: undefined
+│  │  └─ quantity*: number,null
+│  │  └─ unit*: undefined
+│  │  └─ role*: string
+│  │  └─ supply_condition*: undefined
+│  │  └─ connection?: undefined
+│  │  └─ placements?: array<object>
+│  │  │  └─ host_line_id*: string
+│  │  │  └─ host_instance*: integer
+│  │  │  └─ socket_id*: string
+│  │  │  └─ quantity*: number
+│  │  └─ entitlement?: object
+│  │  │  └─ kind*: undefined
+│  │  │  └─ count*: number,null
+│  │  │  └─ scope*: string
+│  │  │  └─ duration_value?: number
+│  │  │  └─ duration_unit?: undefined
+│  │  │  └─ agreement_id?: string → agreement
+│  │  │  └─ description?: string
+│  │  └─ requirements*: array<object>
+│  │  │  └─ number*: integer
+│  │  │  └─ kind*: undefined
+│  │  │  └─ description*: string
+│  │  │  └─ subject_ids?: array<string> → any foundation ID
+│  │  └─ element_type?: undefined
+│  └─ assembly_requirements*: array<object>
+│  │  └─ number*: integer
+│  │  └─ kind*: undefined
+│  │  └─ description*: string
+│  │  └─ subject_ids?: array<string> → any foundation ID
+technical_definition?: object
+│  └─ athena_qualification?: string
+│  └─ capacity_kb?: number
+│  └─ compatibility_note?: string
+│  └─ compatible_computers?: array<string> → device
+│  └─ compatible_with?: array<string> → device
+│  └─ configuration_requirements?: object
+│  │  └─ external_application_cartridges_supported?: boolean
+│  │  └─ rules?: array<string>
+│  │  └─ scope?: string
+│  └─ connection?: string
+│  └─ expansion_socket_groups?: array<object>
+│  │  └─ id?: string
+│  │  └─ name?: string
+│  │  └─ sockets?: array<object>
+│  │  │  └─ capacity?: number,null
+│  │  │  └─ compatible_device_ids?: array<string> → device
+│  │  │  └─ connection?: string
+│  │  │  └─ device_quantity_limits?: object
+│  │  │  │  └─ device.aurelia_ram_16kb_card?: number
+│  │  │  └─ id?: string
+│  │  │  └─ installation_multiple?: number
+│  │  │  └─ matched_modules?: boolean
+│  │  │  └─ name?: string
+│  │  │  └─ population_order?: string
+│  │  │  └─ requirements?: array<string>
+│  └─ firmware_contents?: array<string>
+│  └─ form_factor?: string
+│  └─ host_qualification?: object
+│  │  └─ device.base_computer.artemis?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ implementation?: string
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ device.base_computer.artemis_pro?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ implementation?: string
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ server_role?: boolean
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ device.base_computer.athena?: object
+│  │  │  └─ computer_id?: string → device
+│  │  └─ device.base_computer.athena_server?: object
+│  │  │  └─ computer_id?: string → device
+│  │  └─ device.base_computer.aurelia?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ device.base_computer.aurelia_plus?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  └─ integration_requirements?: object
+│  │  └─ sourcing_policy?: string
+│  │  └─ video_ram_policy?: string
+│  └─ io_and_expansion?: object
+│  │  └─ application_rom_cards_supported?: boolean
+│  │  └─ dedicated_video_slot?: object
+│  │  │  └─ general_purpose_slots_consumed?: number
+│  │  │  └─ hot_swap?: boolean
+│  │  │  └─ interface?: string
+│  │  │  └─ replaceable?: boolean
+│  │  └─ eeprom_bios?: object
+│  │  │  └─ capacity_kb?: number,null
+│  │  │  └─ included?: boolean
+│  │  │  └─ purpose?: string
+│  │  └─ expansion_slots?: object
+│  │  │  └─ future_pin_area_reserved_for_bits?: number
+│  │  │  └─ plug_and_execute?: boolean
+│  │  │  └─ width_bits?: number
+│  │  └─ rom_eeprom_cartridge_slots?: object
+│  │  │  └─ front?: string
+│  │  │  └─ rear?: string
+│  └─ manufacturing_planning?: object
+│  │  └─ die_area_mm2?: number
+│  │  └─ die_area_mm2_target?: number
+│  │  └─ initial_manufacturer?: string
+│  │  └─ node_um?: number
+│  │  └─ policy?: string
+│  │  └─ transistor_budget_target?: number
+│  │  └─ wafer_diameter_mm?: number
+│  └─ memory_constraints?: object
+│  │  └─ max_ram_kib?: number,null
+│  │  └─ mixed_module_types_allowed?: boolean
+│  └─ memory_interface?: object
+│  │  └─ expansion_id?: string → device
+│  │  └─ organization_id?: string → technology
+│  │  └─ system_controller_id?: string → base_part
+│  └─ memory_mapping?: object
+│  │  └─ application_memory?: string
+│  │  └─ configuration?: string
+│  │  └─ installation?: string
+│  │  └─ normal_cpu_range?: string
+│  │  └─ page_count?: number
+│  │  └─ page_size_kb?: number
+│  │  └─ service_calls?: string
+│  │  └─ slot_count?: number
+│  │  └─ system_workspace?: string
+│  └─ packaging?: string
+│  └─ physical_population?: object
+│  │  └─ capacity_kb?: number
+│  │  └─ chip_id?: string → base_part
+│  │  └─ data_chip_count?: number
+│  │  └─ data_width_bits?: number
+│  │  └─ refresh_owner?: string
+│  └─ planned_compatible_with?: array<string> → device
+│  └─ processor?: object
+│  │  └─ part_id?: string → base_part
+│  └─ recommended_software_id?: string → software_edition
+│  └─ role?: string
+│  └─ slot_count?: number
+│  └─ specification?: object
+│  │  └─ acceleration?: array<string>
+│  │  └─ adaptation?: string
+│  │  └─ adapter_requirements?: object
+│  │  │  └─ buffer_policy?: string
+│  │  │  └─ flow_control?: string
+│  │  │  └─ hardware_services?: array<string>
+│  │  │  └─ host_service?: string
+│  │  │  └─ local_packet_ram_target_bytes?: number
+│  │  └─ additions?: array<string>
+│  │  └─ analog_chain?: string
+│  │  └─ api_id?: string → technology
+│  │  └─ arbitration?: string
+│  │  └─ array_columns?: number
+│  │  └─ array_rows?: number
+│  │  └─ bandwidth?: string
+│  │  └─ bank_capacity_kb?: number
+│  │  └─ bank_control?: string
+│  │  └─ bank_data_width_bits?: number
+│  │  └─ bank_organization?: string
+│  │  └─ base_controller_id?: string → base_part
+│  │  └─ base_product_id?: string → base_part
+│  │  └─ beam_voltage_levels?: number
+│  │  └─ bitmap_modes?: array<object>
+│  │  │  └─ bits_per_pixel?: number
+│  │  │  └─ bytes_per_framebuffer?: number
+│  │  │  └─ compatibility_mode?: boolean
+│  │  │  └─ configurations?: array<object>
+│  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  └─ framebuffer_bytes?: number
+│  │  │  │  └─ framebuffer_count?: number
+│  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  └─ sprite_count?: number
+│  │  │  └─ double_buffering?: boolean
+│  │  │  └─ framebuffer_bytes?: number
+│  │  │  └─ framebuffer_count?: number
+│  │  │  └─ height?: number
+│  │  │  └─ id?: string
+│  │  │  └─ palette_grayscale_levels?: number
+│  │  │  └─ palette_list_bytes?: number
+│  │  │  └─ remaining_bytes?: number
+│  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  └─ required_raster_ids?: array<string>
+│  │  │  └─ simultaneous_shades?: number
+│  │  │  └─ simultaneous_values?: number
+│  │  │  └─ sprites_available?: number
+│  │  │  └─ stride_bytes?: number
+│  │  │  └─ width?: number
+│  │  └─ boot?: string
+│  │  └─ bridge_design_id?: string → technology
+│  │  └─ buttons?: number
+│  │  └─ capabilities?: object
+│  │  │  └─ color_model?: string
+│  │  │  └─ maximum_pixel_clock_mhz?: number
+│  │  │  └─ palette_precision_bits?: number
+│  │  │  └─ preferred_raster_id?: string
+│  │  │  └─ programmable_palette?: boolean
+│  │  │  └─ protocol_version?: number
+│  │  │  └─ raster_ids?: array<string>
+│  │  └─ capacity_bytes?: number
+│  │  └─ capacity_kb?: number,null
+│  │  └─ capacity_kbit?: number
+│  │  └─ capacity_mb?: number
+│  │  └─ card_id?: string → device
+│  │  └─ character_row_cache?: object
+│  │  │  └─ banks?: number
+│  │  │  └─ bytes_per_bank?: number
+│  │  │  └─ purpose?: string
+│  │  │  └─ total_bytes?: number
+│  │  └─ chip_organization?: string
+│  │  └─ chip_type_id?: string → base_part
+│  │  └─ chips?: number
+│  │  └─ chips_per_rank?: number
+│  │  └─ class_protocol_id?: string → technology
+│  │  └─ clock_mhz?: number
+│  │  └─ compatibility?: string
+│  │  └─ connection?: string
+│  │  └─ continuity?: string
+│  │  └─ controller_die_count?: number,null
+│  │  └─ controller_id?: string → base_part
+│  │  └─ conversion?: string
+│  │  └─ cpu_address_bits?: number
+│  │  └─ cpu_id?: string → base_part
+│  │  └─ crt_id?: string → base_part
+│  │  └─ cursor_keys?: string
+│  │  └─ data_width_bits?: number
+│  │  └─ density?: string
+│  │  └─ diagonal_inch?: number
+│  │  └─ diagonal_inches?: number
+│  │  └─ die_area_mm2?: number
+│  │  └─ die_area_planning_mm2?: number
+│  │  └─ digital_output_bits?: number
+│  │  └─ disk_formats?: array<string>
+│  │  └─ disk_ii_interface?: boolean
+│  │  └─ disk_interface?: string
+│  │  └─ display_controller_id?: string → base_part
+│  │  └─ display_memory?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ capacity_bytes?: number
+│  │  │  └─ chip_count?: number
+│  │  │  └─ chip_id?: string → base_part
+│  │  │  └─ organization?: string
+│  │  └─ display_modes?: string
+│  │  └─ display_subassembly_id?: string → base_part
+│  │  └─ displayed_color_registers?: number
+│  │  └─ displayed_registers?: number
+│  │  └─ dma?: object
+│  │  │  └─ active_transfer_engines?: number
+│  │  │  └─ address_steps?: array<string>
+│  │  │  └─ arbitration?: string
+│  │  │  └─ bank_selection?: string
+│  │  │  └─ completion?: string
+│  │  │  └─ destination_address_bits?: number
+│  │  │  └─ length_bits?: number
+│  │  │  └─ operations?: array<string>
+│  │  │  └─ peripheral_scope?: string
+│  │  │  └─ transfer_contexts?: number
+│  │  │  └─ video_endpoint?: string
+│  │  └─ dot_pitch_mm?: number
+│  │  └─ electrical_contract?: string
+│  │  └─ electrical_interface?: string
+│  │  └─ ergonomics?: string
+│  │  └─ execution?: string
+│  │  └─ expansion_role?: string
+│  │  └─ fdd_density?: string
+│  │  └─ fdd_size_inch?: number
+│  │  └─ feature_continuity_id?: string → device
+│  │  └─ flexibus_ports?: number
+│  │  └─ format?: string
+│  │  └─ formatted_capacity_kb?: number,null
+│  │  └─ function_keys?: string
+│  │  └─ grayscale_levels?: number
+│  │  └─ hdd_bundled_with_standard_artemis?: boolean
+│  │  └─ hdd_interface_supported?: boolean
+│  │  └─ historical_raster?: string
+│  │  └─ host?: string
+│  │  └─ host_access?: string
+│  │  └─ host_clock_mhz?: array<number>
+│  │  └─ host_integration?: string
+│  │  └─ host_interface?: undefined
+│  │  └─ implementation?: string
+│  │  └─ implementation_design?: object
+│  │  │  └─ arbitration?: string
+│  │  │  └─ clock_targets?: object
+│  │  │  │  └─ high_resolution_pixel_mhz?: number
+│  │  │  │  └─ low_resolution_pixel_mhz?: number
+│  │  │  │  └─ master_mhz?: number
+│  │  │  │  └─ maximum_pixel_fifo_output_mbytes_per_second?: number
+│  │  │  │  └─ scope?: string
+│  │  │  └─ engines?: object
+│  │  │  │  └─ fifo?: string
+│  │  │  │  └─ renderer?: string
+│  │  │  │  └─ scanout?: string
+│  │  │  │  └─ underrun?: string
+│  │  │  └─ internal_buffers?: object
+│  │  │  │  └─ character_attribute_row_cache_bytes?: number
+│  │  │  │  └─ included_in_die_estimates?: boolean
+│  │  │  │  └─ next_character_attribute_row_cache_bytes?: number
+│  │  │  │  └─ pixel_bits?: number
+│  │  │  │  └─ pixel_fifo_bytes?: number
+│  │  │  │  └─ pixel_fifo_page_bytes?: number
+│  │  │  │  └─ pixel_fifo_page_count?: number
+│  │  │  │  └─ sprite_row_shifters_bytes?: number
+│  │  │  │  └─ sprite_staging_bytes?: number
+│  │  │  │  └─ total_storage_bytes?: number
+│  │  │  └─ line_repeat?: string
+│  │  │  └─ manufacturing_planning?: object
+│  │  │  │  └─ die_area_mm2_at_3_5um_range?: array<number>
+│  │  │  │  └─ die_area_mm2_at_3um_range?: array<number>
+│  │  │  │  └─ die_area_mm2_central_at_3_5um?: number
+│  │  │  │  └─ die_area_mm2_central_at_3um?: number
+│  │  │  │  └─ external_functions?: array<string>
+│  │  │  │  └─ process?: string
+│  │  │  │  └─ transistors_central?: number
+│  │  │  │  └─ transistors_range?: array<number>
+│  │  │  └─ sprite_access?: string
+│  │  │  └─ text_fetch?: string
+│  │  │  └─ timing_budget?: object
+│  │  │  │  └─ dram_random_cycle_target_ns?: number
+│  │  │  │  └─ fifo_total_drain_time_us_at_high_resolution?: number
+│  │  │  │  └─ fifo_total_pixels?: number
+│  │  │  │  └─ illustrative_read_time_us?: number
+│  │  │  │  └─ illustrative_total_reads_per_scanline?: number
+│  │  │  │  └─ maximum_sprite_row_bytes_per_scanline?: number
+│  │  │  │  └─ next_row_prefetch_average_bytes_per_scanline?: number
+│  │  │  │  └─ qualification?: string
+│  │  │  │  └─ sprite_pattern_fetch_time_us?: number
+│  │  │  │  └─ sprite_sram_cycle_target_ns?: number
+│  │  │  │  └─ text_glyph_reads_per_scanline?: number
+│  │  │  │  └─ two_ready_pages_drain_time_us?: number
+│  │  └─ included_monitor?: boolean
+│  │  └─ input?: string
+│  │  └─ input_bits?: number
+│  │  └─ installation?: string
+│  │  └─ intensity_levels?: number
+│  │  └─ interface?: string
+│  │  └─ interface_id?: string → technology
+│  │  └─ key_count?: number
+│  │  └─ keyboard_standard_id?: string → technology
+│  │  └─ legacy_card_id?: string → device
+│  │  └─ link_layer_id?: string → technology
+│  │  └─ local_packet_ram_target_bytes?: number
+│  │  └─ local_ram_kb?: number
+│  │  └─ manufacturer?: string
+│  │  └─ manufacturing_planning?: object
+│  │  │  └─ die_area_mm2?: number
+│  │  │  └─ die_area_mm2_central?: number
+│  │  │  └─ die_area_mm2_range?: array<number>
+│  │  │  └─ package_allowance_usd?: number
+│  │  │  └─ recipe_variants?: array<object>
+│  │  │  │  └─ defect_density_cm2?: number
+│  │  │  │  └─ die_area_mm2?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ manufacturing_capability_id?: string → manufacturing_capability
+│  │  │  │  └─ node_um?: string
+│  │  │  │  └─ processed_wafer_usd?: number
+│  │  │  └─ revision_policy?: string
+│  │  │  └─ wafer_mm?: number
+│  │  └─ manufacturing_recipe?: string
+│  │  └─ maximum_shared_raw_rate_kbps?: number
+│  │  └─ mechanism_id?: string → base_part
+│  │  └─ media?: string
+│  │  └─ media_access_control?: string
+│  │  └─ memory_addressing_bytes?: number
+│  │  └─ memory_layout?: object
+│  │  │  └─ font_policy?: string
+│  │  │  └─ mode_exclusivity?: string
+│  │  │  └─ page_flip?: string
+│  │  │  └─ policy_id?: string → technology
+│  │  └─ memory_policy?: string
+│  │  └─ mode_discovery?: string
+│  │  └─ mode_limit?: string
+│  │  └─ mode_policy?: string
+│  │  └─ model?: string
+│  │  └─ modules_per_bank?: number
+│  │  └─ monitor_id?: string → device
+│  │  └─ monitor_modes?: string
+│  │  └─ monitor_policy?: string
+│  │  └─ native_raster?: object
+│  │  │  └─ height?: number
+│  │  │  └─ horizontal_khz?: number
+│  │  │  └─ pixel_clock_mhz?: number
+│  │  │  └─ progressive?: boolean
+│  │  │  └─ refresh_hz_target?: number
+│  │  │  └─ total_lines?: number
+│  │  │  └─ total_pixels?: number
+│  │  │  └─ width?: number
+│  │  └─ navigation_section?: array<string>
+│  │  └─ negotiation_id?: string → technology
+│  │  └─ node_um?: number
+│  │  └─ numeric_keypad?: boolean
+│  │  └─ oem?: string
+│  │  └─ oem_basis?: string
+│  │  └─ organization?: string
+│  │  └─ organization_words?: number
+│  │  └─ output?: string
+│  │  └─ package?: string,null
+│  │  └─ page_size_kb?: number
+│  │  └─ palette?: string
+│  │  └─ palette_entries?: number
+│  │  └─ palette_entry_bits?: number
+│  │  └─ palette_grayscale_levels?: number
+│  │  └─ palette_list?: object
+│  │  │  └─ base_address?: string
+│  │  │  └─ cad_policy?: string
+│  │  │  └─ command_bytes?: number
+│  │  │  └─ encoding?: string
+│  │  │  └─ end_address?: string
+│  │  │  └─ execution?: string
+│  │  │  └─ frame_state?: string
+│  │  │  └─ long_gaps?: string
+│  │  │  └─ maximum_commands?: number
+│  │  │  └─ register_count?: number
+│  │  │  └─ reserved_bytes?: number
+│  │  │  └─ write_limit?: string
+│  │  └─ palette_list_id?: string → technology
+│  │  └─ palette_registers?: number
+│  │  └─ parity_bits?: number
+│  │  └─ physical_arrangement?: string
+│  │  └─ physical_population?: object
+│  │  │  └─ bank_count?: number
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ common_ram_included?: boolean
+│  │  │  └─ mapping_note?: string
+│  │  │  └─ parity_bits?: number
+│  │  │  └─ video_ram_separate?: boolean
+│  │  └─ pixel_buffer?: object
+│  │  │  └─ bits_per_pixel?: number
+│  │  │  └─ bytes_per_page?: number
+│  │  │  └─ location?: string
+│  │  │  └─ page_states?: array<string>
+│  │  │  └─ pages?: number
+│  │  │  └─ physical_organization?: string
+│  │  │  └─ pixels_per_page?: number
+│  │  │  └─ policy?: string
+│  │  │  └─ total_bytes?: number
+│  │  └─ pixel_clock_mhz?: number
+│  │  └─ platform_rate_profiles?: array<object>
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ implementation?: string
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ server_role?: boolean
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ port_count?: number
+│  │  └─ ports?: array<string>
+│  │  └─ power?: string
+│  │  └─ purchase_boundary?: string
+│  │  └─ qualification?: string
+│  │  └─ random_cycle_target_ns?: number
+│  │  └─ rank_capacity_kb?: number
+│  │  └─ ranks?: number
+│  │  └─ rate_scope?: string
+│  │  └─ redraw?: string
+│  │  └─ refresh?: undefined
+│  │  └─ refresh_required?: boolean
+│  │  └─ register_width_bits?: number
+│  │  └─ reused_elements?: array<string>
+│  │  └─ rgb_palette_mapping?: string
+│  │  └─ role?: string
+│  │  └─ rollers?: array<object>
+│  │  │  └─ default_action?: string
+│  │  │  └─ position?: string
+│  │  └─ scan?: string
+│  │  └─ separate_sprite_sram_bytes?: number
+│  │  └─ serial_register_bits?: number
+│  │  └─ sides?: number
+│  │  └─ signal_path?: string
+│  │  └─ simultaneous_shades_at_640_200_4bpp?: number
+│  │  └─ simultaneous_shades_at_800_600_2bpp?: number
+│  │  └─ simultaneous_shades_with_128kb_card?: number
+│  │  └─ size_inch?: number
+│  │  └─ slot?: string
+│  │  └─ software?: string
+│  │  └─ speed_qualification_targets?: object
+│  │  │  └─ basis?: string
+│  │  │  └─ conditions?: string
+│  │  │  └─ fallback_random_cycle_ns_range?: array<number>
+│  │  │  └─ fallback_row_access_ns?: number
+│  │  │  └─ preferred_random_cycle_ns?: number
+│  │  │  └─ preferred_row_access_ns?: number
+│  │  │  └─ stretch_row_access_ns?: number
+│  │  └─ sprite_memory?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ capacity_bytes?: number
+│  │  │  └─ chip_count?: number
+│  │  │  └─ chip_id?: string → base_part
+│  │  │  └─ separate_bus?: boolean
+│  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  └─ sprite_physical_population?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ separate_bus?: boolean
+│  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  └─ sprite_policy?: string
+│  │  └─ sprite_profile_ref?: object
+│  │  │  └─ profile?: string
+│  │  │  └─ technology_id?: string → technology
+│  │  └─ sprites?: undefined
+│  │  └─ startup_rate_kbps?: number
+│  │  └─ supply_rails_v?: array,null
+│  │  └─ supported_fdd_count?: number
+│  │  └─ supported_rates_kbps?: array<number>
+│  │  └─ technology_id?: string → technology
+│  │  └─ text_modes?: array<object>
+│  │  │  └─ attribute_format?: string
+│  │  │  └─ attribute_map_bytes_per_buffer?: number
+│  │  │  └─ character_count?: number
+│  │  │  └─ character_map_bytes_per_buffer?: number
+│  │  │  └─ columns?: number
+│  │  │  └─ configurations?: array<object>
+│  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  └─ sprite_count?: number
+│  │  │  │  └─ text_buffer_count?: number
+│  │  │  └─ double_buffering?: boolean
+│  │  │  └─ font_bytes?: number
+│  │  │  └─ glyph_height?: number
+│  │  │  └─ glyph_width?: number
+│  │  │  └─ height?: number
+│  │  │  └─ id?: string
+│  │  │  └─ ram_bytes_per_page?: number
+│  │  │  └─ required_raster_ids?: array<string>
+│  │  │  └─ rows?: number
+│  │  │  └─ sprites_available?: number
+│  │  │  └─ width?: number
+│  │  └─ timing_budget?: object
+│  │  │  └─ page_drain_microseconds?: number
+│  │  │  └─ pixel_clock_mhz?: number
+│  │  │  └─ qualification?: string
+│  │  │  └─ renderer_pixels_per_step?: number
+│  │  │  └─ renderer_step_mhz?: number
+│  │  └─ timing_target?: object
+│  │  │  └─ horizontal_khz?: number
+│  │  │  └─ horizontal_total_pixels?: number
+│  │  │  └─ pixel_clock_mhz?: number
+│  │  │  └─ refresh_hz?: number
+│  │  │  └─ vertical_total_lines?: number
+│  │  └─ tracking?: string
+│  │  └─ transport_id?: string → technology
+│  │  └─ usable_from?: array<string>
+│  │  └─ video_link_id?: string → technology
+│  │  └─ video_physical_population?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ separate_from_system_ram?: boolean
+│  │  └─ video_ram_bytes?: number
+│  │  └─ video_ram_chip_count?: number
+│  │  └─ video_ram_chip_id?: string → base_part
+│  │  └─ video_ram_kb?: number
+│  └─ specification_id?: string → technology
+│  └─ technical_profile?: object
+│  │  └─ memory?: object
+│  │  │  └─ bank_data_width_bits?: number
+│  │  │  └─ capacity_policy?: string
+│  │  │  └─ expanded_organization?: object
+│  │  │  │  └─ application_memory_profile?: string
+│  │  │  │  └─ common_system_ram_kb?: number
+│  │  │  │  └─ contiguous_lower_ram_kb?: number
+│  │  │  │  └─ controller_id?: string → base_part
+│  │  │  │  └─ dma_addressing?: string
+│  │  │  │  └─ normal_view?: array<object>
+│  │  │  │  │  └─ description?: string
+│  │  │  │  │  └─ end?: string
+│  │  │  │  │  └─ role?: string
+│  │  │  │  │  └─ start?: string
+│  │  │  │  └─ note?: string
+│  │  │  │  └─ ram_kb?: number
+│  │  │  │  └─ refresh?: string
+│  │  │  └─ expansion_ref?: string → device
+│  │  │  └─ organization?: object
+│  │  │  │  └─ application_memory_profile?: string
+│  │  │  │  └─ common_system_ram_kb?: number
+│  │  │  │  └─ contiguous_lower_ram_kb?: number
+│  │  │  │  └─ controller_id?: string → base_part
+│  │  │  │  └─ dma_addressing?: string
+│  │  │  │  └─ normal_view?: array<object>
+│  │  │  │  │  └─ description?: string
+│  │  │  │  │  └─ end?: string
+│  │  │  │  │  └─ role?: string
+│  │  │  │  │  └─ start?: string
+│  │  │  │  └─ note?: string
+│  │  │  │  └─ refresh?: string
+│  │  │  └─ organization_ref?: string → technology
+│  │  │  └─ os_rom?: object
+│  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  └─ execution?: string
+│  │  │  │  └─ implementation?: string
+│  │  │  └─ parity_bits?: number
+│  │  │  └─ physical_population?: object
+│  │  │  │  └─ bank_count?: number
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ common_ram_included?: boolean
+│  │  │  │  └─ mapping_note?: string
+│  │  │  │  └─ parity_bits?: number
+│  │  │  │  └─ video_ram_separate?: boolean
+│  │  │  └─ population_policy?: string
+│  │  │  └─ reliability_policy?: string
+│  │  │  └─ sourcing_policy?: string
+│  │  │  └─ sprite_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  └─ system_controller_ref?: string → base_part
+│  │  │  └─ upgrade_policy?: string
+│  │  │  └─ video_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_from_system_ram?: boolean
+│  │  │  └─ video_ram_policy?: string
+│  │  └─ network?: object
+│  │  │  └─ computer_id?: string → device
+│  │  └─ networking?: object
+│  │  │  └─ computer_id?: string → device
+│  │  │  └─ implementation?: string
+│  │  │  └─ qualified_max_rate_kbps?: number
+│  │  │  └─ rate_policy?: string
+│  │  │  └─ server_role?: boolean
+│  │  │  └─ supported_rates_kbps?: array<number>
+│  │  │  └─ technology_ids?: array<string> → technology
+│  │  └─ rom_and_cartridges?: object
+│  │  │  └─ mainboard_rom?: array<string>
+│  │  └─ software_compatibility?: object
+│  │  │  └─ adaptive_text?: string
+│  │  │  └─ api_id?: string → technology
+│  │  │  └─ native_40_column_mode?: string
+│  │  │  └─ native_target?: string
+│  │  └─ software_policy?: string
+│  │  └─ video?: object
+│  │  │  └─ api_id?: string → technology
+│  │  │  └─ arbitration?: string
+│  │  │  └─ bitmap_modes?: array<object>
+│  │  │  │  └─ bits_per_pixel?: number
+│  │  │  │  └─ bytes_per_framebuffer?: number
+│  │  │  │  └─ compatibility_mode?: boolean
+│  │  │  │  └─ configurations?: array<object>
+│  │  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  │  └─ framebuffer_bytes?: number
+│  │  │  │  │  └─ framebuffer_count?: number
+│  │  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  │  └─ sprite_count?: number
+│  │  │  │  └─ double_buffering?: boolean
+│  │  │  │  └─ height?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ required_raster_ids?: array<string>
+│  │  │  │  └─ sprites_available?: number
+│  │  │  │  └─ stride_bytes?: number
+│  │  │  │  └─ width?: number
+│  │  │  └─ character_row_cache?: object
+│  │  │  │  └─ banks?: number
+│  │  │  │  └─ bytes_per_bank?: number
+│  │  │  │  └─ purpose?: string
+│  │  │  │  └─ total_bytes?: number
+│  │  │  └─ controller_id?: string → base_part
+│  │  │  └─ display_memory?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  └─ chip_count?: number
+│  │  │  │  └─ chip_id?: string → base_part
+│  │  │  │  └─ organization?: string
+│  │  │  └─ feature_continuity_id?: string → device
+│  │  │  └─ host_interface?: object
+│  │  │  │  └─ host_width_bits?: number
+│  │  │  │  └─ hot_swap?: boolean
+│  │  │  │  └─ implementation?: string
+│  │  │  │  └─ local_display_width_bits?: number
+│  │  │  └─ memory_layout?: object
+│  │  │  │  └─ font_policy?: string
+│  │  │  │  └─ mode_exclusivity?: string
+│  │  │  │  └─ page_flip?: string
+│  │  │  │  └─ policy_id?: string → technology
+│  │  │  └─ mode_discovery?: string
+│  │  │  └─ monitor_policy?: string
+│  │  │  └─ palette_list_id?: string → technology
+│  │  │  └─ pixel_buffer?: object
+│  │  │  │  └─ bits_per_pixel?: number
+│  │  │  │  └─ bytes_per_page?: number
+│  │  │  │  └─ location?: string
+│  │  │  │  └─ page_states?: array<string>
+│  │  │  │  └─ pages?: number
+│  │  │  │  └─ physical_organization?: string
+│  │  │  │  └─ pixels_per_page?: number
+│  │  │  │  └─ policy?: string
+│  │  │  │  └─ total_bytes?: number
+│  │  │  └─ sprite_memory?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ capacity_bytes?: number
+│  │  │  │  └─ chip_count?: number
+│  │  │  │  └─ chip_id?: string → base_part
+│  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  └─ sprite_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_bus?: boolean
+│  │  │  │  └─ separate_from_system_and_display_ram?: boolean
+│  │  │  └─ sprite_profile_ref?: object
+│  │  │  │  └─ profile?: string
+│  │  │  │  └─ technology_id?: string → technology
+│  │  │  └─ technology_id?: string → technology
+│  │  │  └─ text_modes?: array<object>
+│  │  │  │  └─ attribute_format?: string
+│  │  │  │  └─ attribute_map_bytes_per_buffer?: number
+│  │  │  │  └─ character_count?: number
+│  │  │  │  └─ character_map_bytes_per_buffer?: number
+│  │  │  │  └─ columns?: number
+│  │  │  │  └─ configurations?: array<object>
+│  │  │  │  │  └─ allocated_bytes?: number
+│  │  │  │  │  └─ palette_list_bytes?: number
+│  │  │  │  │  └─ remaining_video_ram_bytes?: number
+│  │  │  │  │  └─ sprite_count?: number
+│  │  │  │  │  └─ text_buffer_count?: number
+│  │  │  │  └─ double_buffering?: boolean
+│  │  │  │  └─ font_bytes?: number
+│  │  │  │  └─ glyph_height?: number
+│  │  │  │  └─ glyph_width?: number
+│  │  │  │  └─ height?: number
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ ram_bytes_per_page?: number
+│  │  │  │  └─ required_raster_ids?: array<string>
+│  │  │  │  └─ rows?: number
+│  │  │  │  └─ sprites_available?: number
+│  │  │  │  └─ width?: number
+│  │  │  └─ timing_budget?: object
+│  │  │  │  └─ page_drain_microseconds?: number
+│  │  │  │  └─ pixel_clock_mhz?: number
+│  │  │  │  └─ qualification?: string
+│  │  │  │  └─ renderer_pixels_per_step?: number
+│  │  │  │  └─ renderer_step_mhz?: number
+│  │  │  └─ video_physical_population?: object
+│  │  │  │  └─ bank_data_width_bits?: number
+│  │  │  │  └─ separate_from_system_ram?: boolean
+│  │  │  └─ video_ram_kb?: number
+requirements*: array<object>
+│  └─ number*: integer
+│  └─ kind*: undefined
+│  └─ description*: string
+│  └─ subject_ids?: array<string> → any foundation ID
+```
+
+| Field path | Required in parent | Type | Constraints / allowed values |
+| --- | --- | --- | --- |
+| `id` | yes | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `name` | yes | `string` | minLength: 1 |
+| `description` | yes | `string` | minLength: 1 |
+| `provider_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technology_ids[]` | yes | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `kind` | yes | `undefined` | enum: ["base_computer","memory_module","expansion_card","monitor","keyboard","printer","mouse","storage_device","network_device","rom_cartridge","firmware_bank","internal_subsystem"] |
+| `composition_history[]` | yes | `array<object>` | — |
+| `composition_history[].version_number` | yes | `integer` | minimum: 1 |
+| `composition_history[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].effective_from` | yes | `undefined` | — |
+| `composition_history[].effective_until` | yes | `undefined` | — |
+| `composition_history[].technical_definition` | yes | `object` | — |
+| `composition_history[].technical_definition.athena_qualification` | no | `string` | — |
+| `composition_history[].technical_definition.capacity_kb` | no | `number` | — |
+| `composition_history[].technical_definition.compatibility_note` | no | `string` | — |
+| `composition_history[].technical_definition.compatible_computers[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.compatible_with[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.configuration_requirements` | no | `object` | — |
+| `composition_history[].technical_definition.configuration_requirements.external_application_cartridges_supported` | no | `boolean` | — |
+| `composition_history[].technical_definition.configuration_requirements.rules[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.configuration_requirements.scope` | no | `string` | — |
+| `composition_history[].technical_definition.connection` | no | `string` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].id` | no | `string` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].name` | no | `string` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].capacity` | no | `number,null` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].connection` | no | `string` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].device_quantity_limits` | no | `object` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].device_quantity_limits.device.aurelia_ram_16kb_card` | no | `number` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].id` | no | `string` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].installation_multiple` | no | `number` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].matched_modules` | no | `boolean` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].name` | no | `string` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].population_order` | no | `string` | — |
+| `composition_history[].technical_definition.expansion_socket_groups[].sockets[].requirements[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.firmware_contents[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.form_factor` | no | `string` | — |
+| `composition_history[].technical_definition.host_qualification` | no | `object` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis` | no | `object` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis.implementation` | no | `string` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis.qualified_max_rate_kbps` | no | `number` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis.rate_policy` | no | `string` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis.supported_rates_kbps[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro` | no | `object` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.implementation` | no | `string` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.qualified_max_rate_kbps` | no | `number` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.rate_policy` | no | `string` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.server_role` | no | `boolean` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.supported_rates_kbps[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.athena` | no | `object` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.athena.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.athena_server` | no | `object` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.athena_server.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia` | no | `object` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.qualified_max_rate_kbps` | no | `number` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.rate_policy` | no | `string` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.supported_rates_kbps[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus` | no | `object` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.qualified_max_rate_kbps` | no | `number` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.rate_policy` | no | `string` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.supported_rates_kbps[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.integration_requirements` | no | `object` | — |
+| `composition_history[].technical_definition.integration_requirements.sourcing_policy` | no | `string` | — |
+| `composition_history[].technical_definition.integration_requirements.video_ram_policy` | no | `string` | — |
+| `composition_history[].technical_definition.io_and_expansion` | no | `object` | — |
+| `composition_history[].technical_definition.io_and_expansion.application_rom_cards_supported` | no | `boolean` | — |
+| `composition_history[].technical_definition.io_and_expansion.dedicated_video_slot` | no | `object` | — |
+| `composition_history[].technical_definition.io_and_expansion.dedicated_video_slot.general_purpose_slots_consumed` | no | `number` | — |
+| `composition_history[].technical_definition.io_and_expansion.dedicated_video_slot.hot_swap` | no | `boolean` | — |
+| `composition_history[].technical_definition.io_and_expansion.dedicated_video_slot.interface` | no | `string` | — |
+| `composition_history[].technical_definition.io_and_expansion.dedicated_video_slot.replaceable` | no | `boolean` | — |
+| `composition_history[].technical_definition.io_and_expansion.eeprom_bios` | no | `object` | — |
+| `composition_history[].technical_definition.io_and_expansion.eeprom_bios.capacity_kb` | no | `number,null` | — |
+| `composition_history[].technical_definition.io_and_expansion.eeprom_bios.included` | no | `boolean` | — |
+| `composition_history[].technical_definition.io_and_expansion.eeprom_bios.purpose` | no | `string` | — |
+| `composition_history[].technical_definition.io_and_expansion.expansion_slots` | no | `object` | — |
+| `composition_history[].technical_definition.io_and_expansion.expansion_slots.future_pin_area_reserved_for_bits` | no | `number` | — |
+| `composition_history[].technical_definition.io_and_expansion.expansion_slots.plug_and_execute` | no | `boolean` | — |
+| `composition_history[].technical_definition.io_and_expansion.expansion_slots.width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.io_and_expansion.rom_eeprom_cartridge_slots` | no | `object` | — |
+| `composition_history[].technical_definition.io_and_expansion.rom_eeprom_cartridge_slots.front` | no | `string` | — |
+| `composition_history[].technical_definition.io_and_expansion.rom_eeprom_cartridge_slots.rear` | no | `string` | — |
+| `composition_history[].technical_definition.manufacturing_planning` | no | `object` | — |
+| `composition_history[].technical_definition.manufacturing_planning.die_area_mm2` | no | `number` | — |
+| `composition_history[].technical_definition.manufacturing_planning.die_area_mm2_target` | no | `number` | — |
+| `composition_history[].technical_definition.manufacturing_planning.initial_manufacturer` | no | `string` | — |
+| `composition_history[].technical_definition.manufacturing_planning.node_um` | no | `number` | — |
+| `composition_history[].technical_definition.manufacturing_planning.policy` | no | `string` | — |
+| `composition_history[].technical_definition.manufacturing_planning.transistor_budget_target` | no | `number` | — |
+| `composition_history[].technical_definition.manufacturing_planning.wafer_diameter_mm` | no | `number` | — |
+| `composition_history[].technical_definition.memory_constraints` | no | `object` | — |
+| `composition_history[].technical_definition.memory_constraints.max_ram_kib` | no | `number,null` | — |
+| `composition_history[].technical_definition.memory_constraints.mixed_module_types_allowed` | no | `boolean` | — |
+| `composition_history[].technical_definition.memory_interface` | no | `object` | — |
+| `composition_history[].technical_definition.memory_interface.expansion_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.memory_interface.organization_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.memory_interface.system_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.memory_mapping` | no | `object` | — |
+| `composition_history[].technical_definition.memory_mapping.application_memory` | no | `string` | — |
+| `composition_history[].technical_definition.memory_mapping.configuration` | no | `string` | — |
+| `composition_history[].technical_definition.memory_mapping.installation` | no | `string` | — |
+| `composition_history[].technical_definition.memory_mapping.normal_cpu_range` | no | `string` | — |
+| `composition_history[].technical_definition.memory_mapping.page_count` | no | `number` | — |
+| `composition_history[].technical_definition.memory_mapping.page_size_kb` | no | `number` | — |
+| `composition_history[].technical_definition.memory_mapping.service_calls` | no | `string` | — |
+| `composition_history[].technical_definition.memory_mapping.slot_count` | no | `number` | — |
+| `composition_history[].technical_definition.memory_mapping.system_workspace` | no | `string` | — |
+| `composition_history[].technical_definition.packaging` | no | `string` | — |
+| `composition_history[].technical_definition.physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.physical_population.capacity_kb` | no | `number` | — |
+| `composition_history[].technical_definition.physical_population.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.physical_population.data_chip_count` | no | `number` | — |
+| `composition_history[].technical_definition.physical_population.data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.physical_population.refresh_owner` | no | `string` | — |
+| `composition_history[].technical_definition.planned_compatible_with[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.processor` | no | `object` | — |
+| `composition_history[].technical_definition.processor.part_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.recommended_software_id` | no | `string` | pattern: "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.role` | no | `string` | — |
+| `composition_history[].technical_definition.slot_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification` | no | `object` | — |
+| `composition_history[].technical_definition.specification.acceleration[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.adaptation` | no | `string` | — |
+| `composition_history[].technical_definition.specification.adapter_requirements` | no | `object` | — |
+| `composition_history[].technical_definition.specification.adapter_requirements.buffer_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.adapter_requirements.flow_control` | no | `string` | — |
+| `composition_history[].technical_definition.specification.adapter_requirements.hardware_services[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.adapter_requirements.host_service` | no | `string` | — |
+| `composition_history[].technical_definition.specification.adapter_requirements.local_packet_ram_target_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.additions[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.analog_chain` | no | `string` | — |
+| `composition_history[].technical_definition.specification.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.arbitration` | no | `string` | — |
+| `composition_history[].technical_definition.specification.array_columns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.array_rows` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bandwidth` | no | `string` | — |
+| `composition_history[].technical_definition.specification.bank_capacity_kb` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bank_control` | no | `string` | — |
+| `composition_history[].technical_definition.specification.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bank_organization` | no | `string` | — |
+| `composition_history[].technical_definition.specification.base_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.base_product_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.beam_voltage_levels` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].bits_per_pixel` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].bytes_per_framebuffer` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].compatibility_mode` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].configurations[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].configurations[].framebuffer_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].configurations[].framebuffer_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].configurations[].sprite_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].double_buffering` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].framebuffer_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].framebuffer_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].height` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].id` | no | `string` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].palette_grayscale_levels` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].palette_list_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].remaining_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].remaining_video_ram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].simultaneous_shades` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].simultaneous_values` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].sprites_available` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].stride_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.bitmap_modes[].width` | no | `number` | — |
+| `composition_history[].technical_definition.specification.boot` | no | `string` | — |
+| `composition_history[].technical_definition.specification.bridge_design_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.buttons` | no | `number` | — |
+| `composition_history[].technical_definition.specification.capabilities` | no | `object` | — |
+| `composition_history[].technical_definition.specification.capabilities.color_model` | no | `string` | — |
+| `composition_history[].technical_definition.specification.capabilities.maximum_pixel_clock_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.capabilities.palette_precision_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.capabilities.preferred_raster_id` | no | `string` | — |
+| `composition_history[].technical_definition.specification.capabilities.programmable_palette` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.capabilities.protocol_version` | no | `number` | — |
+| `composition_history[].technical_definition.specification.capabilities.raster_ids[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.capacity_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.capacity_kb` | no | `number,null` | — |
+| `composition_history[].technical_definition.specification.capacity_kbit` | no | `number` | — |
+| `composition_history[].technical_definition.specification.capacity_mb` | no | `number` | — |
+| `composition_history[].technical_definition.specification.card_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.character_row_cache` | no | `object` | — |
+| `composition_history[].technical_definition.specification.character_row_cache.banks` | no | `number` | — |
+| `composition_history[].technical_definition.specification.character_row_cache.bytes_per_bank` | no | `number` | — |
+| `composition_history[].technical_definition.specification.character_row_cache.purpose` | no | `string` | — |
+| `composition_history[].technical_definition.specification.character_row_cache.total_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.chip_organization` | no | `string` | — |
+| `composition_history[].technical_definition.specification.chip_type_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.chips` | no | `number` | — |
+| `composition_history[].technical_definition.specification.chips_per_rank` | no | `number` | — |
+| `composition_history[].technical_definition.specification.class_protocol_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.clock_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.compatibility` | no | `string` | — |
+| `composition_history[].technical_definition.specification.connection` | no | `string` | — |
+| `composition_history[].technical_definition.specification.continuity` | no | `string` | — |
+| `composition_history[].technical_definition.specification.controller_die_count` | no | `number,null` | — |
+| `composition_history[].technical_definition.specification.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.conversion` | no | `string` | — |
+| `composition_history[].technical_definition.specification.cpu_address_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.cpu_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.crt_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.cursor_keys` | no | `string` | — |
+| `composition_history[].technical_definition.specification.data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.density` | no | `string` | — |
+| `composition_history[].technical_definition.specification.diagonal_inch` | no | `number` | — |
+| `composition_history[].technical_definition.specification.diagonal_inches` | no | `number` | — |
+| `composition_history[].technical_definition.specification.die_area_mm2` | no | `number` | — |
+| `composition_history[].technical_definition.specification.die_area_planning_mm2` | no | `number` | — |
+| `composition_history[].technical_definition.specification.digital_output_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.disk_formats[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.disk_ii_interface` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.disk_interface` | no | `string` | — |
+| `composition_history[].technical_definition.specification.display_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.display_memory` | no | `object` | — |
+| `composition_history[].technical_definition.specification.display_memory.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.display_memory.capacity_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.display_memory.chip_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.display_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.display_memory.organization` | no | `string` | — |
+| `composition_history[].technical_definition.specification.display_modes` | no | `string` | — |
+| `composition_history[].technical_definition.specification.display_subassembly_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.displayed_color_registers` | no | `number` | — |
+| `composition_history[].technical_definition.specification.displayed_registers` | no | `number` | — |
+| `composition_history[].technical_definition.specification.dma` | no | `object` | — |
+| `composition_history[].technical_definition.specification.dma.active_transfer_engines` | no | `number` | — |
+| `composition_history[].technical_definition.specification.dma.address_steps[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.dma.arbitration` | no | `string` | — |
+| `composition_history[].technical_definition.specification.dma.bank_selection` | no | `string` | — |
+| `composition_history[].technical_definition.specification.dma.completion` | no | `string` | — |
+| `composition_history[].technical_definition.specification.dma.destination_address_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.dma.length_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.dma.operations[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.dma.peripheral_scope` | no | `string` | — |
+| `composition_history[].technical_definition.specification.dma.transfer_contexts` | no | `number` | — |
+| `composition_history[].technical_definition.specification.dma.video_endpoint` | no | `string` | — |
+| `composition_history[].technical_definition.specification.dot_pitch_mm` | no | `number` | — |
+| `composition_history[].technical_definition.specification.electrical_contract` | no | `string` | — |
+| `composition_history[].technical_definition.specification.electrical_interface` | no | `string` | — |
+| `composition_history[].technical_definition.specification.ergonomics` | no | `string` | — |
+| `composition_history[].technical_definition.specification.execution` | no | `string` | — |
+| `composition_history[].technical_definition.specification.expansion_role` | no | `string` | — |
+| `composition_history[].technical_definition.specification.fdd_density` | no | `string` | — |
+| `composition_history[].technical_definition.specification.fdd_size_inch` | no | `number` | — |
+| `composition_history[].technical_definition.specification.feature_continuity_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.flexibus_ports` | no | `number` | — |
+| `composition_history[].technical_definition.specification.format` | no | `string` | — |
+| `composition_history[].technical_definition.specification.formatted_capacity_kb` | no | `number,null` | — |
+| `composition_history[].technical_definition.specification.function_keys` | no | `string` | — |
+| `composition_history[].technical_definition.specification.grayscale_levels` | no | `number` | — |
+| `composition_history[].technical_definition.specification.hdd_bundled_with_standard_artemis` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.hdd_interface_supported` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.historical_raster` | no | `string` | — |
+| `composition_history[].technical_definition.specification.host` | no | `string` | — |
+| `composition_history[].technical_definition.specification.host_access` | no | `string` | — |
+| `composition_history[].technical_definition.specification.host_clock_mhz[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.specification.host_integration` | no | `string` | — |
+| `composition_history[].technical_definition.specification.host_interface` | no | `undefined` | — |
+| `composition_history[].technical_definition.specification.implementation` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design` | no | `object` | — |
+| `composition_history[].technical_definition.specification.implementation_design.arbitration` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.clock_targets` | no | `object` | — |
+| `composition_history[].technical_definition.specification.implementation_design.clock_targets.high_resolution_pixel_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.clock_targets.low_resolution_pixel_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.clock_targets.master_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.clock_targets.maximum_pixel_fifo_output_mbytes_per_second` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.clock_targets.scope` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.engines` | no | `object` | — |
+| `composition_history[].technical_definition.specification.implementation_design.engines.fifo` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.engines.renderer` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.engines.scanout` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.engines.underrun` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers` | no | `object` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.character_attribute_row_cache_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.included_in_die_estimates` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.next_character_attribute_row_cache_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.pixel_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_page_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_page_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.sprite_row_shifters_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.sprite_staging_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.internal_buffers.total_storage_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.line_repeat` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning` | no | `object` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_at_3_5um_range[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_at_3um_range[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_central_at_3_5um` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_central_at_3um` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning.external_functions[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning.process` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning.transistors_central` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.manufacturing_planning.transistors_range[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.specification.implementation_design.sprite_access` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.text_fetch` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget` | no | `object` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.dram_random_cycle_target_ns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.fifo_total_drain_time_us_at_high_resolution` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.fifo_total_pixels` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.illustrative_read_time_us` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.illustrative_total_reads_per_scanline` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.maximum_sprite_row_bytes_per_scanline` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.next_row_prefetch_average_bytes_per_scanline` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.qualification` | no | `string` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.sprite_pattern_fetch_time_us` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.sprite_sram_cycle_target_ns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.text_glyph_reads_per_scanline` | no | `number` | — |
+| `composition_history[].technical_definition.specification.implementation_design.timing_budget.two_ready_pages_drain_time_us` | no | `number` | — |
+| `composition_history[].technical_definition.specification.included_monitor` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.input` | no | `string` | — |
+| `composition_history[].technical_definition.specification.input_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.installation` | no | `string` | — |
+| `composition_history[].technical_definition.specification.intensity_levels` | no | `number` | — |
+| `composition_history[].technical_definition.specification.interface` | no | `string` | — |
+| `composition_history[].technical_definition.specification.interface_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.key_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.keyboard_standard_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.legacy_card_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.link_layer_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.local_packet_ram_target_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.local_ram_kb` | no | `number` | — |
+| `composition_history[].technical_definition.specification.manufacturer` | no | `string` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning` | no | `object` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.die_area_mm2` | no | `number` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.die_area_mm2_central` | no | `number` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.die_area_mm2_range[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.package_allowance_usd` | no | `number` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[].defect_density_cm2` | no | `number` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[].die_area_mm2` | no | `number` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[].id` | no | `string` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id` | no | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[].node_um` | no | `string` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[].processed_wafer_usd` | no | `number` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.revision_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.manufacturing_planning.wafer_mm` | no | `number` | — |
+| `composition_history[].technical_definition.specification.manufacturing_recipe` | no | `string` | — |
+| `composition_history[].technical_definition.specification.maximum_shared_raw_rate_kbps` | no | `number` | — |
+| `composition_history[].technical_definition.specification.mechanism_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.media` | no | `string` | — |
+| `composition_history[].technical_definition.specification.media_access_control` | no | `string` | — |
+| `composition_history[].technical_definition.specification.memory_addressing_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.memory_layout` | no | `object` | — |
+| `composition_history[].technical_definition.specification.memory_layout.font_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.memory_layout.mode_exclusivity` | no | `string` | — |
+| `composition_history[].technical_definition.specification.memory_layout.page_flip` | no | `string` | — |
+| `composition_history[].technical_definition.specification.memory_layout.policy_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.memory_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.mode_discovery` | no | `string` | — |
+| `composition_history[].technical_definition.specification.mode_limit` | no | `string` | — |
+| `composition_history[].technical_definition.specification.mode_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.model` | no | `string` | — |
+| `composition_history[].technical_definition.specification.modules_per_bank` | no | `number` | — |
+| `composition_history[].technical_definition.specification.monitor_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.monitor_modes` | no | `string` | — |
+| `composition_history[].technical_definition.specification.monitor_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.native_raster` | no | `object` | — |
+| `composition_history[].technical_definition.specification.native_raster.height` | no | `number` | — |
+| `composition_history[].technical_definition.specification.native_raster.horizontal_khz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.native_raster.pixel_clock_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.native_raster.progressive` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.native_raster.refresh_hz_target` | no | `number` | — |
+| `composition_history[].technical_definition.specification.native_raster.total_lines` | no | `number` | — |
+| `composition_history[].technical_definition.specification.native_raster.total_pixels` | no | `number` | — |
+| `composition_history[].technical_definition.specification.native_raster.width` | no | `number` | — |
+| `composition_history[].technical_definition.specification.navigation_section[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.negotiation_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.node_um` | no | `number` | — |
+| `composition_history[].technical_definition.specification.numeric_keypad` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.oem` | no | `string` | — |
+| `composition_history[].technical_definition.specification.oem_basis` | no | `string` | — |
+| `composition_history[].technical_definition.specification.organization` | no | `string` | — |
+| `composition_history[].technical_definition.specification.organization_words` | no | `number` | — |
+| `composition_history[].technical_definition.specification.output` | no | `string` | — |
+| `composition_history[].technical_definition.specification.package` | no | `string,null` | — |
+| `composition_history[].technical_definition.specification.page_size_kb` | no | `number` | — |
+| `composition_history[].technical_definition.specification.palette` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_entries` | no | `number` | — |
+| `composition_history[].technical_definition.specification.palette_entry_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.palette_grayscale_levels` | no | `number` | — |
+| `composition_history[].technical_definition.specification.palette_list` | no | `object` | — |
+| `composition_history[].technical_definition.specification.palette_list.base_address` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_list.cad_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_list.command_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.palette_list.encoding` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_list.end_address` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_list.execution` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_list.frame_state` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_list.long_gaps` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_list.maximum_commands` | no | `number` | — |
+| `composition_history[].technical_definition.specification.palette_list.register_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.palette_list.reserved_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.palette_list.write_limit` | no | `string` | — |
+| `composition_history[].technical_definition.specification.palette_list_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.palette_registers` | no | `number` | — |
+| `composition_history[].technical_definition.specification.parity_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.physical_arrangement` | no | `string` | — |
+| `composition_history[].technical_definition.specification.physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.specification.physical_population.bank_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.physical_population.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.physical_population.common_ram_included` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.physical_population.mapping_note` | no | `string` | — |
+| `composition_history[].technical_definition.specification.physical_population.parity_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.physical_population.video_ram_separate` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer` | no | `object` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.bits_per_pixel` | no | `number` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.bytes_per_page` | no | `number` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.location` | no | `string` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.page_states[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.pages` | no | `number` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.physical_organization` | no | `string` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.pixels_per_page` | no | `number` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.pixel_buffer.total_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.pixel_clock_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.platform_rate_profiles[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.specification.platform_rate_profiles[].computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.platform_rate_profiles[].implementation` | no | `string` | — |
+| `composition_history[].technical_definition.specification.platform_rate_profiles[].qualified_max_rate_kbps` | no | `number` | — |
+| `composition_history[].technical_definition.specification.platform_rate_profiles[].rate_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.platform_rate_profiles[].server_role` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.platform_rate_profiles[].supported_rates_kbps[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.specification.platform_rate_profiles[].technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.port_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.ports[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.power` | no | `string` | — |
+| `composition_history[].technical_definition.specification.purchase_boundary` | no | `string` | — |
+| `composition_history[].technical_definition.specification.qualification` | no | `string` | — |
+| `composition_history[].technical_definition.specification.random_cycle_target_ns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.rank_capacity_kb` | no | `number` | — |
+| `composition_history[].technical_definition.specification.ranks` | no | `number` | — |
+| `composition_history[].technical_definition.specification.rate_scope` | no | `string` | — |
+| `composition_history[].technical_definition.specification.redraw` | no | `string` | — |
+| `composition_history[].technical_definition.specification.refresh` | no | `undefined` | — |
+| `composition_history[].technical_definition.specification.refresh_required` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.register_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.reused_elements[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.rgb_palette_mapping` | no | `string` | — |
+| `composition_history[].technical_definition.specification.role` | no | `string` | — |
+| `composition_history[].technical_definition.specification.rollers[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.specification.rollers[].default_action` | no | `string` | — |
+| `composition_history[].technical_definition.specification.rollers[].position` | no | `string` | — |
+| `composition_history[].technical_definition.specification.scan` | no | `string` | — |
+| `composition_history[].technical_definition.specification.separate_sprite_sram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.serial_register_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.sides` | no | `number` | — |
+| `composition_history[].technical_definition.specification.signal_path` | no | `string` | — |
+| `composition_history[].technical_definition.specification.simultaneous_shades_at_640_200_4bpp` | no | `number` | — |
+| `composition_history[].technical_definition.specification.simultaneous_shades_at_800_600_2bpp` | no | `number` | — |
+| `composition_history[].technical_definition.specification.simultaneous_shades_with_128kb_card` | no | `number` | — |
+| `composition_history[].technical_definition.specification.size_inch` | no | `number` | — |
+| `composition_history[].technical_definition.specification.slot` | no | `string` | — |
+| `composition_history[].technical_definition.specification.software` | no | `string` | — |
+| `composition_history[].technical_definition.specification.speed_qualification_targets` | no | `object` | — |
+| `composition_history[].technical_definition.specification.speed_qualification_targets.basis` | no | `string` | — |
+| `composition_history[].technical_definition.specification.speed_qualification_targets.conditions` | no | `string` | — |
+| `composition_history[].technical_definition.specification.speed_qualification_targets.fallback_random_cycle_ns_range[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.specification.speed_qualification_targets.fallback_row_access_ns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.speed_qualification_targets.preferred_random_cycle_ns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.speed_qualification_targets.preferred_row_access_ns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.speed_qualification_targets.stretch_row_access_ns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.sprite_memory` | no | `object` | — |
+| `composition_history[].technical_definition.specification.sprite_memory.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.sprite_memory.capacity_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.sprite_memory.chip_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.sprite_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.sprite_memory.separate_bus` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.sprite_memory.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.sprite_physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.specification.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.sprite_policy` | no | `string` | — |
+| `composition_history[].technical_definition.specification.sprite_profile_ref` | no | `object` | — |
+| `composition_history[].technical_definition.specification.sprite_profile_ref.profile` | no | `string` | — |
+| `composition_history[].technical_definition.specification.sprite_profile_ref.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.sprites` | no | `undefined` | — |
+| `composition_history[].technical_definition.specification.startup_rate_kbps` | no | `number` | — |
+| `composition_history[].technical_definition.specification.supply_rails_v` | no | `array,null` | — |
+| `composition_history[].technical_definition.specification.supported_fdd_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.supported_rates_kbps[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.specification.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.text_modes[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.specification.text_modes[].attribute_format` | no | `string` | — |
+| `composition_history[].technical_definition.specification.text_modes[].attribute_map_bytes_per_buffer` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].character_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].character_map_bytes_per_buffer` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].columns` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].configurations[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.specification.text_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].configurations[].sprite_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].configurations[].text_buffer_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].double_buffering` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.text_modes[].font_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].glyph_height` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].glyph_width` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].height` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].id` | no | `string` | — |
+| `composition_history[].technical_definition.specification.text_modes[].ram_bytes_per_page` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.text_modes[].rows` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].sprites_available` | no | `number` | — |
+| `composition_history[].technical_definition.specification.text_modes[].width` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_budget` | no | `object` | — |
+| `composition_history[].technical_definition.specification.timing_budget.page_drain_microseconds` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_budget.pixel_clock_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_budget.qualification` | no | `string` | — |
+| `composition_history[].technical_definition.specification.timing_budget.renderer_pixels_per_step` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_budget.renderer_step_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_target` | no | `object` | — |
+| `composition_history[].technical_definition.specification.timing_target.horizontal_khz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_target.horizontal_total_pixels` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_target.pixel_clock_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_target.refresh_hz` | no | `number` | — |
+| `composition_history[].technical_definition.specification.timing_target.vertical_total_lines` | no | `number` | — |
+| `composition_history[].technical_definition.specification.tracking` | no | `string` | — |
+| `composition_history[].technical_definition.specification.transport_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.usable_from[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification.video_link_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.video_physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.specification.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.specification.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `composition_history[].technical_definition.specification.video_ram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.specification.video_ram_chip_count` | no | `number` | — |
+| `composition_history[].technical_definition.specification.video_ram_chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.specification.video_ram_kb` | no | `number` | — |
+| `composition_history[].technical_definition.specification_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.memory` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.memory.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.capacity_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.application_memory_profile` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.common_system_ram_kb` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.contiguous_lower_ram_kb` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.dma_addressing` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.normal_view[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.normal_view[].description` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.normal_view[].end` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.normal_view[].role` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.normal_view[].start` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.note` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.ram_kb` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expanded_organization.refresh` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.expansion_ref` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.memory.organization` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.application_memory_profile` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.common_system_ram_kb` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.contiguous_lower_ram_kb` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.memory.organization.dma_addressing` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.normal_view[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.normal_view[].description` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.normal_view[].end` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.normal_view[].role` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.normal_view[].start` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.note` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization.refresh` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.organization_ref` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.memory.os_rom` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.memory.os_rom.capacity_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.os_rom.execution` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.os_rom.implementation` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.parity_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.memory.physical_population.bank_count` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.physical_population.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.physical_population.common_ram_included` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.memory.physical_population.mapping_note` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.physical_population.parity_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.physical_population.video_ram_separate` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.memory.population_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.reliability_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.sourcing_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.sprite_physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.memory.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.memory.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.memory.system_controller_ref` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.memory.upgrade_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.memory.video_physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.memory.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.memory.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.memory.video_ram_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.network` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.network.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.networking` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.networking.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.networking.implementation` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.networking.qualified_max_rate_kbps` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.networking.rate_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.networking.server_role` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.networking.supported_rates_kbps[]` | no | `array<number>` | — |
+| `composition_history[].technical_definition.technical_profile.networking.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.rom_and_cartridges` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.rom_and_cartridges.mainboard_rom[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.technical_profile.software_compatibility` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.software_compatibility.adaptive_text` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.software_compatibility.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.software_compatibility.native_40_column_mode` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.software_compatibility.native_target` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.software_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.arbitration` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].bits_per_pixel` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].bytes_per_framebuffer` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].compatibility_mode` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].configurations[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].configurations[].framebuffer_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].configurations[].framebuffer_count` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].configurations[].sprite_count` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].double_buffering` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].height` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].id` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].sprites_available` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].stride_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.bitmap_modes[].width` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.character_row_cache` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.character_row_cache.banks` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.character_row_cache.bytes_per_bank` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.character_row_cache.purpose` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.character_row_cache.total_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.display_memory` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.display_memory.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.display_memory.capacity_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.display_memory.chip_count` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.display_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.display_memory.organization` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.feature_continuity_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.host_interface` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.host_interface.host_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.host_interface.hot_swap` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.host_interface.implementation` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.host_interface.local_display_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.memory_layout` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.memory_layout.font_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.memory_layout.mode_exclusivity` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.memory_layout.page_flip` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.memory_layout.policy_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.mode_discovery` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.monitor_policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.palette_list_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.bits_per_pixel` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.bytes_per_page` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.location` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.page_states[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.pages` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.physical_organization` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.pixels_per_page` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.policy` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.pixel_buffer.total_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_memory` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_memory.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_memory.capacity_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_memory.chip_count` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.sprite_memory.separate_bus` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_memory.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_profile_ref` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_profile_ref.profile` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.sprite_profile_ref.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].attribute_format` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].attribute_map_bytes_per_buffer` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].character_count` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].character_map_bytes_per_buffer` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].columns` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].configurations[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].configurations[].sprite_count` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].configurations[].text_buffer_count` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].double_buffering` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].font_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].glyph_height` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].glyph_width` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].height` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].id` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].ram_bytes_per_page` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].rows` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].sprites_available` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.text_modes[].width` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.timing_budget` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.timing_budget.page_drain_microseconds` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.timing_budget.pixel_clock_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.timing_budget.qualification` | no | `string` | — |
+| `composition_history[].technical_definition.technical_profile.video.timing_budget.renderer_pixels_per_step` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.timing_budget.renderer_step_mhz` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.video_physical_population` | no | `object` | — |
+| `composition_history[].technical_definition.technical_profile.video.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `composition_history[].technical_definition.technical_profile.video.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `composition_history[].technical_definition.technical_profile.video.video_ram_kb` | no | `number` | — |
+| `composition_history[].composition_definition[]` | yes | `array<object>` | — |
+| `composition_history[].composition_definition[].id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].target` | yes | `undefined` | — |
+| `composition_history[].composition_definition[].quantity` | yes | `number,null` | — |
+| `composition_history[].composition_definition[].unit` | yes | `undefined` | enum: ["each","set","m","kg","g","litre"] |
+| `composition_history[].composition_definition[].role` | yes | `string` | — |
+| `composition_history[].composition_definition[].supply_condition` | yes | `undefined` | — |
+| `composition_history[].composition_definition[].connection` | no | `undefined` | — |
+| `composition_history[].composition_definition[].placements[]` | no | `array<object>` | — |
+| `composition_history[].composition_definition[].placements[].host_line_id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].placements[].host_instance` | yes | `integer` | minimum: 1 |
+| `composition_history[].composition_definition[].placements[].socket_id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].placements[].quantity` | yes | `number` | — |
+| `composition_history[].composition_definition[].entitlement` | no | `object` | — |
+| `composition_history[].composition_definition[].entitlement.kind` | yes | `undefined` | enum: ["service","licence"] |
+| `composition_history[].composition_definition[].entitlement.count` | yes | `number,null` | minimum: 0 |
+| `composition_history[].composition_definition[].entitlement.scope` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].entitlement.duration_value` | no | `number` | — |
+| `composition_history[].composition_definition[].entitlement.duration_unit` | no | `undefined` | enum: ["day","month","year"] |
+| `composition_history[].composition_definition[].entitlement.agreement_id` | no | `string` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].composition_definition[].entitlement.description` | no | `string` | — |
+| `composition_history[].composition_definition[].requirements[]` | yes | `array<object>` | — |
+| `composition_history[].composition_definition[].requirements[].number` | yes | `integer` | minimum: 1 |
+| `composition_history[].composition_definition[].requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `composition_history[].composition_definition[].requirements[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].composition_definition[].element_type` | no | `undefined` | enum: ["main_product","connected_device","attached_product"] |
+| `composition_history[].assembly_requirements[]` | yes | `array<object>` | — |
+| `composition_history[].assembly_requirements[].number` | yes | `integer` | minimum: 1 |
+| `composition_history[].assembly_requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `composition_history[].assembly_requirements[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].assembly_requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition` | no | `object` | — |
+| `technical_definition.athena_qualification` | no | `string` | — |
+| `technical_definition.capacity_kb` | no | `number` | — |
+| `technical_definition.compatibility_note` | no | `string` | — |
+| `technical_definition.compatible_computers[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.compatible_with[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.configuration_requirements` | no | `object` | — |
+| `technical_definition.configuration_requirements.external_application_cartridges_supported` | no | `boolean` | — |
+| `technical_definition.configuration_requirements.rules[]` | no | `array<string>` | — |
+| `technical_definition.configuration_requirements.scope` | no | `string` | — |
+| `technical_definition.connection` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[]` | no | `array<object>` | — |
+| `technical_definition.expansion_socket_groups[].id` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].name` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[]` | no | `array<object>` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].capacity` | no | `number,null` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.expansion_socket_groups[].sockets[].connection` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].device_quantity_limits` | no | `object` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].device_quantity_limits.device.aurelia_ram_16kb_card` | no | `number` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].id` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].installation_multiple` | no | `number` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].matched_modules` | no | `boolean` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].name` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].population_order` | no | `string` | — |
+| `technical_definition.expansion_socket_groups[].sockets[].requirements[]` | no | `array<string>` | — |
+| `technical_definition.firmware_contents[]` | no | `array<string>` | — |
+| `technical_definition.form_factor` | no | `string` | — |
+| `technical_definition.host_qualification` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.artemis.implementation` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.rate_policy` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.implementation` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.rate_policy` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.server_role` | no | `boolean` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.athena` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.athena.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.athena_server` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.athena_server.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.aurelia` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.aurelia.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia.rate_policy` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus` | no | `object` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.rate_policy` | no | `string` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.integration_requirements` | no | `object` | — |
+| `technical_definition.integration_requirements.sourcing_policy` | no | `string` | — |
+| `technical_definition.integration_requirements.video_ram_policy` | no | `string` | — |
+| `technical_definition.io_and_expansion` | no | `object` | — |
+| `technical_definition.io_and_expansion.application_rom_cards_supported` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot` | no | `object` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot.general_purpose_slots_consumed` | no | `number` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot.hot_swap` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot.interface` | no | `string` | — |
+| `technical_definition.io_and_expansion.dedicated_video_slot.replaceable` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.eeprom_bios` | no | `object` | — |
+| `technical_definition.io_and_expansion.eeprom_bios.capacity_kb` | no | `number,null` | — |
+| `technical_definition.io_and_expansion.eeprom_bios.included` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.eeprom_bios.purpose` | no | `string` | — |
+| `technical_definition.io_and_expansion.expansion_slots` | no | `object` | — |
+| `technical_definition.io_and_expansion.expansion_slots.future_pin_area_reserved_for_bits` | no | `number` | — |
+| `technical_definition.io_and_expansion.expansion_slots.plug_and_execute` | no | `boolean` | — |
+| `technical_definition.io_and_expansion.expansion_slots.width_bits` | no | `number` | — |
+| `technical_definition.io_and_expansion.rom_eeprom_cartridge_slots` | no | `object` | — |
+| `technical_definition.io_and_expansion.rom_eeprom_cartridge_slots.front` | no | `string` | — |
+| `technical_definition.io_and_expansion.rom_eeprom_cartridge_slots.rear` | no | `string` | — |
+| `technical_definition.manufacturing_planning` | no | `object` | — |
+| `technical_definition.manufacturing_planning.die_area_mm2` | no | `number` | — |
+| `technical_definition.manufacturing_planning.die_area_mm2_target` | no | `number` | — |
+| `technical_definition.manufacturing_planning.initial_manufacturer` | no | `string` | — |
+| `technical_definition.manufacturing_planning.node_um` | no | `number` | — |
+| `technical_definition.manufacturing_planning.policy` | no | `string` | — |
+| `technical_definition.manufacturing_planning.transistor_budget_target` | no | `number` | — |
+| `technical_definition.manufacturing_planning.wafer_diameter_mm` | no | `number` | — |
+| `technical_definition.memory_constraints` | no | `object` | — |
+| `technical_definition.memory_constraints.max_ram_kib` | no | `number,null` | — |
+| `technical_definition.memory_constraints.mixed_module_types_allowed` | no | `boolean` | — |
+| `technical_definition.memory_interface` | no | `object` | — |
+| `technical_definition.memory_interface.expansion_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.memory_interface.organization_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.memory_interface.system_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.memory_mapping` | no | `object` | — |
+| `technical_definition.memory_mapping.application_memory` | no | `string` | — |
+| `technical_definition.memory_mapping.configuration` | no | `string` | — |
+| `technical_definition.memory_mapping.installation` | no | `string` | — |
+| `technical_definition.memory_mapping.normal_cpu_range` | no | `string` | — |
+| `technical_definition.memory_mapping.page_count` | no | `number` | — |
+| `technical_definition.memory_mapping.page_size_kb` | no | `number` | — |
+| `technical_definition.memory_mapping.service_calls` | no | `string` | — |
+| `technical_definition.memory_mapping.slot_count` | no | `number` | — |
+| `technical_definition.memory_mapping.system_workspace` | no | `string` | — |
+| `technical_definition.packaging` | no | `string` | — |
+| `technical_definition.physical_population` | no | `object` | — |
+| `technical_definition.physical_population.capacity_kb` | no | `number` | — |
+| `technical_definition.physical_population.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.physical_population.data_chip_count` | no | `number` | — |
+| `technical_definition.physical_population.data_width_bits` | no | `number` | — |
+| `technical_definition.physical_population.refresh_owner` | no | `string` | — |
+| `technical_definition.planned_compatible_with[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.processor` | no | `object` | — |
+| `technical_definition.processor.part_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.recommended_software_id` | no | `string` | pattern: "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.role` | no | `string` | — |
+| `technical_definition.slot_count` | no | `number` | — |
+| `technical_definition.specification` | no | `object` | — |
+| `technical_definition.specification.acceleration[]` | no | `array<string>` | — |
+| `technical_definition.specification.adaptation` | no | `string` | — |
+| `technical_definition.specification.adapter_requirements` | no | `object` | — |
+| `technical_definition.specification.adapter_requirements.buffer_policy` | no | `string` | — |
+| `technical_definition.specification.adapter_requirements.flow_control` | no | `string` | — |
+| `technical_definition.specification.adapter_requirements.hardware_services[]` | no | `array<string>` | — |
+| `technical_definition.specification.adapter_requirements.host_service` | no | `string` | — |
+| `technical_definition.specification.adapter_requirements.local_packet_ram_target_bytes` | no | `number` | — |
+| `technical_definition.specification.additions[]` | no | `array<string>` | — |
+| `technical_definition.specification.analog_chain` | no | `string` | — |
+| `technical_definition.specification.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.arbitration` | no | `string` | — |
+| `technical_definition.specification.array_columns` | no | `number` | — |
+| `technical_definition.specification.array_rows` | no | `number` | — |
+| `technical_definition.specification.bandwidth` | no | `string` | — |
+| `technical_definition.specification.bank_capacity_kb` | no | `number` | — |
+| `technical_definition.specification.bank_control` | no | `string` | — |
+| `technical_definition.specification.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.bank_organization` | no | `string` | — |
+| `technical_definition.specification.base_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.base_product_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.beam_voltage_levels` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[]` | no | `array<object>` | — |
+| `technical_definition.specification.bitmap_modes[].bits_per_pixel` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].bytes_per_framebuffer` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].compatibility_mode` | no | `boolean` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[]` | no | `array<object>` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].framebuffer_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].framebuffer_count` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].configurations[].sprite_count` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].double_buffering` | no | `boolean` | — |
+| `technical_definition.specification.bitmap_modes[].framebuffer_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].framebuffer_count` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].height` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].id` | no | `string` | — |
+| `technical_definition.specification.bitmap_modes[].palette_grayscale_levels` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].remaining_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.specification.bitmap_modes[].simultaneous_shades` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].simultaneous_values` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].sprites_available` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].stride_bytes` | no | `number` | — |
+| `technical_definition.specification.bitmap_modes[].width` | no | `number` | — |
+| `technical_definition.specification.boot` | no | `string` | — |
+| `technical_definition.specification.bridge_design_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.buttons` | no | `number` | — |
+| `technical_definition.specification.capabilities` | no | `object` | — |
+| `technical_definition.specification.capabilities.color_model` | no | `string` | — |
+| `technical_definition.specification.capabilities.maximum_pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.capabilities.palette_precision_bits` | no | `number` | — |
+| `technical_definition.specification.capabilities.preferred_raster_id` | no | `string` | — |
+| `technical_definition.specification.capabilities.programmable_palette` | no | `boolean` | — |
+| `technical_definition.specification.capabilities.protocol_version` | no | `number` | — |
+| `technical_definition.specification.capabilities.raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.specification.capacity_bytes` | no | `number` | — |
+| `technical_definition.specification.capacity_kb` | no | `number,null` | — |
+| `technical_definition.specification.capacity_kbit` | no | `number` | — |
+| `technical_definition.specification.capacity_mb` | no | `number` | — |
+| `technical_definition.specification.card_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.character_row_cache` | no | `object` | — |
+| `technical_definition.specification.character_row_cache.banks` | no | `number` | — |
+| `technical_definition.specification.character_row_cache.bytes_per_bank` | no | `number` | — |
+| `technical_definition.specification.character_row_cache.purpose` | no | `string` | — |
+| `technical_definition.specification.character_row_cache.total_bytes` | no | `number` | — |
+| `technical_definition.specification.chip_organization` | no | `string` | — |
+| `technical_definition.specification.chip_type_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.chips` | no | `number` | — |
+| `technical_definition.specification.chips_per_rank` | no | `number` | — |
+| `technical_definition.specification.class_protocol_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.clock_mhz` | no | `number` | — |
+| `technical_definition.specification.compatibility` | no | `string` | — |
+| `technical_definition.specification.connection` | no | `string` | — |
+| `technical_definition.specification.continuity` | no | `string` | — |
+| `technical_definition.specification.controller_die_count` | no | `number,null` | — |
+| `technical_definition.specification.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.conversion` | no | `string` | — |
+| `technical_definition.specification.cpu_address_bits` | no | `number` | — |
+| `technical_definition.specification.cpu_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.crt_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.cursor_keys` | no | `string` | — |
+| `technical_definition.specification.data_width_bits` | no | `number` | — |
+| `technical_definition.specification.density` | no | `string` | — |
+| `technical_definition.specification.diagonal_inch` | no | `number` | — |
+| `technical_definition.specification.diagonal_inches` | no | `number` | — |
+| `technical_definition.specification.die_area_mm2` | no | `number` | — |
+| `technical_definition.specification.die_area_planning_mm2` | no | `number` | — |
+| `technical_definition.specification.digital_output_bits` | no | `number` | — |
+| `technical_definition.specification.disk_formats[]` | no | `array<string>` | — |
+| `technical_definition.specification.disk_ii_interface` | no | `boolean` | — |
+| `technical_definition.specification.disk_interface` | no | `string` | — |
+| `technical_definition.specification.display_controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.display_memory` | no | `object` | — |
+| `technical_definition.specification.display_memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.display_memory.capacity_bytes` | no | `number` | — |
+| `technical_definition.specification.display_memory.chip_count` | no | `number` | — |
+| `technical_definition.specification.display_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.display_memory.organization` | no | `string` | — |
+| `technical_definition.specification.display_modes` | no | `string` | — |
+| `technical_definition.specification.display_subassembly_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.displayed_color_registers` | no | `number` | — |
+| `technical_definition.specification.displayed_registers` | no | `number` | — |
+| `technical_definition.specification.dma` | no | `object` | — |
+| `technical_definition.specification.dma.active_transfer_engines` | no | `number` | — |
+| `technical_definition.specification.dma.address_steps[]` | no | `array<string>` | — |
+| `technical_definition.specification.dma.arbitration` | no | `string` | — |
+| `technical_definition.specification.dma.bank_selection` | no | `string` | — |
+| `technical_definition.specification.dma.completion` | no | `string` | — |
+| `technical_definition.specification.dma.destination_address_bits` | no | `number` | — |
+| `technical_definition.specification.dma.length_bits` | no | `number` | — |
+| `technical_definition.specification.dma.operations[]` | no | `array<string>` | — |
+| `technical_definition.specification.dma.peripheral_scope` | no | `string` | — |
+| `technical_definition.specification.dma.transfer_contexts` | no | `number` | — |
+| `technical_definition.specification.dma.video_endpoint` | no | `string` | — |
+| `technical_definition.specification.dot_pitch_mm` | no | `number` | — |
+| `technical_definition.specification.electrical_contract` | no | `string` | — |
+| `technical_definition.specification.electrical_interface` | no | `string` | — |
+| `technical_definition.specification.ergonomics` | no | `string` | — |
+| `technical_definition.specification.execution` | no | `string` | — |
+| `technical_definition.specification.expansion_role` | no | `string` | — |
+| `technical_definition.specification.fdd_density` | no | `string` | — |
+| `technical_definition.specification.fdd_size_inch` | no | `number` | — |
+| `technical_definition.specification.feature_continuity_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.flexibus_ports` | no | `number` | — |
+| `technical_definition.specification.format` | no | `string` | — |
+| `technical_definition.specification.formatted_capacity_kb` | no | `number,null` | — |
+| `technical_definition.specification.function_keys` | no | `string` | — |
+| `technical_definition.specification.grayscale_levels` | no | `number` | — |
+| `technical_definition.specification.hdd_bundled_with_standard_artemis` | no | `boolean` | — |
+| `technical_definition.specification.hdd_interface_supported` | no | `boolean` | — |
+| `technical_definition.specification.historical_raster` | no | `string` | — |
+| `technical_definition.specification.host` | no | `string` | — |
+| `technical_definition.specification.host_access` | no | `string` | — |
+| `technical_definition.specification.host_clock_mhz[]` | no | `array<number>` | — |
+| `technical_definition.specification.host_integration` | no | `string` | — |
+| `technical_definition.specification.host_interface` | no | `undefined` | — |
+| `technical_definition.specification.implementation` | no | `string` | — |
+| `technical_definition.specification.implementation_design` | no | `object` | — |
+| `technical_definition.specification.implementation_design.arbitration` | no | `string` | — |
+| `technical_definition.specification.implementation_design.clock_targets` | no | `object` | — |
+| `technical_definition.specification.implementation_design.clock_targets.high_resolution_pixel_mhz` | no | `number` | — |
+| `technical_definition.specification.implementation_design.clock_targets.low_resolution_pixel_mhz` | no | `number` | — |
+| `technical_definition.specification.implementation_design.clock_targets.master_mhz` | no | `number` | — |
+| `technical_definition.specification.implementation_design.clock_targets.maximum_pixel_fifo_output_mbytes_per_second` | no | `number` | — |
+| `technical_definition.specification.implementation_design.clock_targets.scope` | no | `string` | — |
+| `technical_definition.specification.implementation_design.engines` | no | `object` | — |
+| `technical_definition.specification.implementation_design.engines.fifo` | no | `string` | — |
+| `technical_definition.specification.implementation_design.engines.renderer` | no | `string` | — |
+| `technical_definition.specification.implementation_design.engines.scanout` | no | `string` | — |
+| `technical_definition.specification.implementation_design.engines.underrun` | no | `string` | — |
+| `technical_definition.specification.implementation_design.internal_buffers` | no | `object` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.character_attribute_row_cache_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.included_in_die_estimates` | no | `boolean` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.next_character_attribute_row_cache_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.pixel_bits` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_page_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.pixel_fifo_page_count` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.sprite_row_shifters_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.sprite_staging_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.internal_buffers.total_storage_bytes` | no | `number` | — |
+| `technical_definition.specification.implementation_design.line_repeat` | no | `string` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning` | no | `object` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_at_3_5um_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_at_3um_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_central_at_3_5um` | no | `number` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.die_area_mm2_central_at_3um` | no | `number` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.external_functions[]` | no | `array<string>` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.process` | no | `string` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.transistors_central` | no | `number` | — |
+| `technical_definition.specification.implementation_design.manufacturing_planning.transistors_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.implementation_design.sprite_access` | no | `string` | — |
+| `technical_definition.specification.implementation_design.text_fetch` | no | `string` | — |
+| `technical_definition.specification.implementation_design.timing_budget` | no | `object` | — |
+| `technical_definition.specification.implementation_design.timing_budget.dram_random_cycle_target_ns` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.fifo_total_drain_time_us_at_high_resolution` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.fifo_total_pixels` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.illustrative_read_time_us` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.illustrative_total_reads_per_scanline` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.maximum_sprite_row_bytes_per_scanline` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.next_row_prefetch_average_bytes_per_scanline` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.qualification` | no | `string` | — |
+| `technical_definition.specification.implementation_design.timing_budget.sprite_pattern_fetch_time_us` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.sprite_sram_cycle_target_ns` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.text_glyph_reads_per_scanline` | no | `number` | — |
+| `technical_definition.specification.implementation_design.timing_budget.two_ready_pages_drain_time_us` | no | `number` | — |
+| `technical_definition.specification.included_monitor` | no | `boolean` | — |
+| `technical_definition.specification.input` | no | `string` | — |
+| `technical_definition.specification.input_bits` | no | `number` | — |
+| `technical_definition.specification.installation` | no | `string` | — |
+| `technical_definition.specification.intensity_levels` | no | `number` | — |
+| `technical_definition.specification.interface` | no | `string` | — |
+| `technical_definition.specification.interface_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.key_count` | no | `number` | — |
+| `technical_definition.specification.keyboard_standard_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.legacy_card_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.link_layer_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.local_packet_ram_target_bytes` | no | `number` | — |
+| `technical_definition.specification.local_ram_kb` | no | `number` | — |
+| `technical_definition.specification.manufacturer` | no | `string` | — |
+| `technical_definition.specification.manufacturing_planning` | no | `object` | — |
+| `technical_definition.specification.manufacturing_planning.die_area_mm2` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.die_area_mm2_central` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.die_area_mm2_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.manufacturing_planning.package_allowance_usd` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[]` | no | `array<object>` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].defect_density_cm2` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].die_area_mm2` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].id` | no | `string` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id` | no | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].node_um` | no | `string` | — |
+| `technical_definition.specification.manufacturing_planning.recipe_variants[].processed_wafer_usd` | no | `number` | — |
+| `technical_definition.specification.manufacturing_planning.revision_policy` | no | `string` | — |
+| `technical_definition.specification.manufacturing_planning.wafer_mm` | no | `number` | — |
+| `technical_definition.specification.manufacturing_recipe` | no | `string` | — |
+| `technical_definition.specification.maximum_shared_raw_rate_kbps` | no | `number` | — |
+| `technical_definition.specification.mechanism_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.media` | no | `string` | — |
+| `technical_definition.specification.media_access_control` | no | `string` | — |
+| `technical_definition.specification.memory_addressing_bytes` | no | `number` | — |
+| `technical_definition.specification.memory_layout` | no | `object` | — |
+| `technical_definition.specification.memory_layout.font_policy` | no | `string` | — |
+| `technical_definition.specification.memory_layout.mode_exclusivity` | no | `string` | — |
+| `technical_definition.specification.memory_layout.page_flip` | no | `string` | — |
+| `technical_definition.specification.memory_layout.policy_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.memory_policy` | no | `string` | — |
+| `technical_definition.specification.mode_discovery` | no | `string` | — |
+| `technical_definition.specification.mode_limit` | no | `string` | — |
+| `technical_definition.specification.mode_policy` | no | `string` | — |
+| `technical_definition.specification.model` | no | `string` | — |
+| `technical_definition.specification.modules_per_bank` | no | `number` | — |
+| `technical_definition.specification.monitor_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.monitor_modes` | no | `string` | — |
+| `technical_definition.specification.monitor_policy` | no | `string` | — |
+| `technical_definition.specification.native_raster` | no | `object` | — |
+| `technical_definition.specification.native_raster.height` | no | `number` | — |
+| `technical_definition.specification.native_raster.horizontal_khz` | no | `number` | — |
+| `technical_definition.specification.native_raster.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.native_raster.progressive` | no | `boolean` | — |
+| `technical_definition.specification.native_raster.refresh_hz_target` | no | `number` | — |
+| `technical_definition.specification.native_raster.total_lines` | no | `number` | — |
+| `technical_definition.specification.native_raster.total_pixels` | no | `number` | — |
+| `technical_definition.specification.native_raster.width` | no | `number` | — |
+| `technical_definition.specification.navigation_section[]` | no | `array<string>` | — |
+| `technical_definition.specification.negotiation_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.node_um` | no | `number` | — |
+| `technical_definition.specification.numeric_keypad` | no | `boolean` | — |
+| `technical_definition.specification.oem` | no | `string` | — |
+| `technical_definition.specification.oem_basis` | no | `string` | — |
+| `technical_definition.specification.organization` | no | `string` | — |
+| `technical_definition.specification.organization_words` | no | `number` | — |
+| `technical_definition.specification.output` | no | `string` | — |
+| `technical_definition.specification.package` | no | `string,null` | — |
+| `technical_definition.specification.page_size_kb` | no | `number` | — |
+| `technical_definition.specification.palette` | no | `string` | — |
+| `technical_definition.specification.palette_entries` | no | `number` | — |
+| `technical_definition.specification.palette_entry_bits` | no | `number` | — |
+| `technical_definition.specification.palette_grayscale_levels` | no | `number` | — |
+| `technical_definition.specification.palette_list` | no | `object` | — |
+| `technical_definition.specification.palette_list.base_address` | no | `string` | — |
+| `technical_definition.specification.palette_list.cad_policy` | no | `string` | — |
+| `technical_definition.specification.palette_list.command_bytes` | no | `number` | — |
+| `technical_definition.specification.palette_list.encoding` | no | `string` | — |
+| `technical_definition.specification.palette_list.end_address` | no | `string` | — |
+| `technical_definition.specification.palette_list.execution` | no | `string` | — |
+| `technical_definition.specification.palette_list.frame_state` | no | `string` | — |
+| `technical_definition.specification.palette_list.long_gaps` | no | `string` | — |
+| `technical_definition.specification.palette_list.maximum_commands` | no | `number` | — |
+| `technical_definition.specification.palette_list.register_count` | no | `number` | — |
+| `technical_definition.specification.palette_list.reserved_bytes` | no | `number` | — |
+| `technical_definition.specification.palette_list.write_limit` | no | `string` | — |
+| `technical_definition.specification.palette_list_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.palette_registers` | no | `number` | — |
+| `technical_definition.specification.parity_bits` | no | `number` | — |
+| `technical_definition.specification.physical_arrangement` | no | `string` | — |
+| `technical_definition.specification.physical_population` | no | `object` | — |
+| `technical_definition.specification.physical_population.bank_count` | no | `number` | — |
+| `technical_definition.specification.physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.physical_population.common_ram_included` | no | `boolean` | — |
+| `technical_definition.specification.physical_population.mapping_note` | no | `string` | — |
+| `technical_definition.specification.physical_population.parity_bits` | no | `number` | — |
+| `technical_definition.specification.physical_population.video_ram_separate` | no | `boolean` | — |
+| `technical_definition.specification.pixel_buffer` | no | `object` | — |
+| `technical_definition.specification.pixel_buffer.bits_per_pixel` | no | `number` | — |
+| `technical_definition.specification.pixel_buffer.bytes_per_page` | no | `number` | — |
+| `technical_definition.specification.pixel_buffer.location` | no | `string` | — |
+| `technical_definition.specification.pixel_buffer.page_states[]` | no | `array<string>` | — |
+| `technical_definition.specification.pixel_buffer.pages` | no | `number` | — |
+| `technical_definition.specification.pixel_buffer.physical_organization` | no | `string` | — |
+| `technical_definition.specification.pixel_buffer.pixels_per_page` | no | `number` | — |
+| `technical_definition.specification.pixel_buffer.policy` | no | `string` | — |
+| `technical_definition.specification.pixel_buffer.total_bytes` | no | `number` | — |
+| `technical_definition.specification.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.platform_rate_profiles[]` | no | `array<object>` | — |
+| `technical_definition.specification.platform_rate_profiles[].computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.platform_rate_profiles[].implementation` | no | `string` | — |
+| `technical_definition.specification.platform_rate_profiles[].qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.specification.platform_rate_profiles[].rate_policy` | no | `string` | — |
+| `technical_definition.specification.platform_rate_profiles[].server_role` | no | `boolean` | — |
+| `technical_definition.specification.platform_rate_profiles[].supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.specification.platform_rate_profiles[].technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.port_count` | no | `number` | — |
+| `technical_definition.specification.ports[]` | no | `array<string>` | — |
+| `technical_definition.specification.power` | no | `string` | — |
+| `technical_definition.specification.purchase_boundary` | no | `string` | — |
+| `technical_definition.specification.qualification` | no | `string` | — |
+| `technical_definition.specification.random_cycle_target_ns` | no | `number` | — |
+| `technical_definition.specification.rank_capacity_kb` | no | `number` | — |
+| `technical_definition.specification.ranks` | no | `number` | — |
+| `technical_definition.specification.rate_scope` | no | `string` | — |
+| `technical_definition.specification.redraw` | no | `string` | — |
+| `technical_definition.specification.refresh` | no | `undefined` | — |
+| `technical_definition.specification.refresh_required` | no | `boolean` | — |
+| `technical_definition.specification.register_width_bits` | no | `number` | — |
+| `technical_definition.specification.reused_elements[]` | no | `array<string>` | — |
+| `technical_definition.specification.rgb_palette_mapping` | no | `string` | — |
+| `technical_definition.specification.role` | no | `string` | — |
+| `technical_definition.specification.rollers[]` | no | `array<object>` | — |
+| `technical_definition.specification.rollers[].default_action` | no | `string` | — |
+| `technical_definition.specification.rollers[].position` | no | `string` | — |
+| `technical_definition.specification.scan` | no | `string` | — |
+| `technical_definition.specification.separate_sprite_sram_bytes` | no | `number` | — |
+| `technical_definition.specification.serial_register_bits` | no | `number` | — |
+| `technical_definition.specification.sides` | no | `number` | — |
+| `technical_definition.specification.signal_path` | no | `string` | — |
+| `technical_definition.specification.simultaneous_shades_at_640_200_4bpp` | no | `number` | — |
+| `technical_definition.specification.simultaneous_shades_at_800_600_2bpp` | no | `number` | — |
+| `technical_definition.specification.simultaneous_shades_with_128kb_card` | no | `number` | — |
+| `technical_definition.specification.size_inch` | no | `number` | — |
+| `technical_definition.specification.slot` | no | `string` | — |
+| `technical_definition.specification.software` | no | `string` | — |
+| `technical_definition.specification.speed_qualification_targets` | no | `object` | — |
+| `technical_definition.specification.speed_qualification_targets.basis` | no | `string` | — |
+| `technical_definition.specification.speed_qualification_targets.conditions` | no | `string` | — |
+| `technical_definition.specification.speed_qualification_targets.fallback_random_cycle_ns_range[]` | no | `array<number>` | — |
+| `technical_definition.specification.speed_qualification_targets.fallback_row_access_ns` | no | `number` | — |
+| `technical_definition.specification.speed_qualification_targets.preferred_random_cycle_ns` | no | `number` | — |
+| `technical_definition.specification.speed_qualification_targets.preferred_row_access_ns` | no | `number` | — |
+| `technical_definition.specification.speed_qualification_targets.stretch_row_access_ns` | no | `number` | — |
+| `technical_definition.specification.sprite_memory` | no | `object` | — |
+| `technical_definition.specification.sprite_memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.sprite_memory.capacity_bytes` | no | `number` | — |
+| `technical_definition.specification.sprite_memory.chip_count` | no | `number` | — |
+| `technical_definition.specification.sprite_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.sprite_memory.separate_bus` | no | `boolean` | — |
+| `technical_definition.specification.sprite_memory.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.specification.sprite_physical_population` | no | `object` | — |
+| `technical_definition.specification.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `technical_definition.specification.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.specification.sprite_policy` | no | `string` | — |
+| `technical_definition.specification.sprite_profile_ref` | no | `object` | — |
+| `technical_definition.specification.sprite_profile_ref.profile` | no | `string` | — |
+| `technical_definition.specification.sprite_profile_ref.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.sprites` | no | `undefined` | — |
+| `technical_definition.specification.startup_rate_kbps` | no | `number` | — |
+| `technical_definition.specification.supply_rails_v` | no | `array,null` | — |
+| `technical_definition.specification.supported_fdd_count` | no | `number` | — |
+| `technical_definition.specification.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.specification.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.text_modes[]` | no | `array<object>` | — |
+| `technical_definition.specification.text_modes[].attribute_format` | no | `string` | — |
+| `technical_definition.specification.text_modes[].attribute_map_bytes_per_buffer` | no | `number` | — |
+| `technical_definition.specification.text_modes[].character_count` | no | `number` | — |
+| `technical_definition.specification.text_modes[].character_map_bytes_per_buffer` | no | `number` | — |
+| `technical_definition.specification.text_modes[].columns` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[]` | no | `array<object>` | — |
+| `technical_definition.specification.text_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[].sprite_count` | no | `number` | — |
+| `technical_definition.specification.text_modes[].configurations[].text_buffer_count` | no | `number` | — |
+| `technical_definition.specification.text_modes[].double_buffering` | no | `boolean` | — |
+| `technical_definition.specification.text_modes[].font_bytes` | no | `number` | — |
+| `technical_definition.specification.text_modes[].glyph_height` | no | `number` | — |
+| `technical_definition.specification.text_modes[].glyph_width` | no | `number` | — |
+| `technical_definition.specification.text_modes[].height` | no | `number` | — |
+| `technical_definition.specification.text_modes[].id` | no | `string` | — |
+| `technical_definition.specification.text_modes[].ram_bytes_per_page` | no | `number` | — |
+| `technical_definition.specification.text_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.specification.text_modes[].rows` | no | `number` | — |
+| `technical_definition.specification.text_modes[].sprites_available` | no | `number` | — |
+| `technical_definition.specification.text_modes[].width` | no | `number` | — |
+| `technical_definition.specification.timing_budget` | no | `object` | — |
+| `technical_definition.specification.timing_budget.page_drain_microseconds` | no | `number` | — |
+| `technical_definition.specification.timing_budget.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.timing_budget.qualification` | no | `string` | — |
+| `technical_definition.specification.timing_budget.renderer_pixels_per_step` | no | `number` | — |
+| `technical_definition.specification.timing_budget.renderer_step_mhz` | no | `number` | — |
+| `technical_definition.specification.timing_target` | no | `object` | — |
+| `technical_definition.specification.timing_target.horizontal_khz` | no | `number` | — |
+| `technical_definition.specification.timing_target.horizontal_total_pixels` | no | `number` | — |
+| `technical_definition.specification.timing_target.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.specification.timing_target.refresh_hz` | no | `number` | — |
+| `technical_definition.specification.timing_target.vertical_total_lines` | no | `number` | — |
+| `technical_definition.specification.tracking` | no | `string` | — |
+| `technical_definition.specification.transport_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.usable_from[]` | no | `array<string>` | — |
+| `technical_definition.specification.video_link_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.video_physical_population` | no | `object` | — |
+| `technical_definition.specification.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.specification.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `technical_definition.specification.video_ram_bytes` | no | `number` | — |
+| `technical_definition.specification.video_ram_chip_count` | no | `number` | — |
+| `technical_definition.specification.video_ram_chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.specification.video_ram_kb` | no | `number` | — |
+| `technical_definition.specification_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile` | no | `object` | — |
+| `technical_definition.technical_profile.memory` | no | `object` | — |
+| `technical_definition.technical_profile.memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.capacity_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization` | no | `object` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.application_memory_profile` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.common_system_ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.contiguous_lower_ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.expanded_organization.dma_addressing` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[].description` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[].end` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[].role` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.normal_view[].start` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.note` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.expanded_organization.refresh` | no | `string` | — |
+| `technical_definition.technical_profile.memory.expansion_ref` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.organization` | no | `object` | — |
+| `technical_definition.technical_profile.memory.organization.application_memory_profile` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.common_system_ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.organization.contiguous_lower_ram_kb` | no | `number` | — |
+| `technical_definition.technical_profile.memory.organization.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.organization.dma_addressing` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[].description` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[].end` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[].role` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.normal_view[].start` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.note` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization.refresh` | no | `string` | — |
+| `technical_definition.technical_profile.memory.organization_ref` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.os_rom` | no | `object` | — |
+| `technical_definition.technical_profile.memory.os_rom.capacity_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.memory.os_rom.execution` | no | `string` | — |
+| `technical_definition.technical_profile.memory.os_rom.implementation` | no | `string` | — |
+| `technical_definition.technical_profile.memory.parity_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.memory.physical_population.bank_count` | no | `number` | — |
+| `technical_definition.technical_profile.memory.physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.physical_population.common_ram_included` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.physical_population.mapping_note` | no | `string` | — |
+| `technical_definition.technical_profile.memory.physical_population.parity_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.physical_population.video_ram_separate` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.population_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.reliability_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.sourcing_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.sprite_physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.memory.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.system_controller_ref` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.memory.upgrade_policy` | no | `string` | — |
+| `technical_definition.technical_profile.memory.video_physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.memory.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.memory.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.memory.video_ram_policy` | no | `string` | — |
+| `technical_definition.technical_profile.network` | no | `object` | — |
+| `technical_definition.technical_profile.network.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.networking` | no | `object` | — |
+| `technical_definition.technical_profile.networking.computer_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.networking.implementation` | no | `string` | — |
+| `technical_definition.technical_profile.networking.qualified_max_rate_kbps` | no | `number` | — |
+| `technical_definition.technical_profile.networking.rate_policy` | no | `string` | — |
+| `technical_definition.technical_profile.networking.server_role` | no | `boolean` | — |
+| `technical_definition.technical_profile.networking.supported_rates_kbps[]` | no | `array<number>` | — |
+| `technical_definition.technical_profile.networking.technology_ids[]` | no | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.rom_and_cartridges` | no | `object` | — |
+| `technical_definition.technical_profile.rom_and_cartridges.mainboard_rom[]` | no | `array<string>` | — |
+| `technical_definition.technical_profile.software_compatibility` | no | `object` | — |
+| `technical_definition.technical_profile.software_compatibility.adaptive_text` | no | `string` | — |
+| `technical_definition.technical_profile.software_compatibility.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.software_compatibility.native_40_column_mode` | no | `string` | — |
+| `technical_definition.technical_profile.software_compatibility.native_target` | no | `string` | — |
+| `technical_definition.technical_profile.software_policy` | no | `string` | — |
+| `technical_definition.technical_profile.video` | no | `object` | — |
+| `technical_definition.technical_profile.video.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.arbitration` | no | `string` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].bits_per_pixel` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].bytes_per_framebuffer` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].compatibility_mode` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].framebuffer_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].framebuffer_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].configurations[].sprite_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].double_buffering` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].height` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].id` | no | `string` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].sprites_available` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].stride_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.bitmap_modes[].width` | no | `number` | — |
+| `technical_definition.technical_profile.video.character_row_cache` | no | `object` | — |
+| `technical_definition.technical_profile.video.character_row_cache.banks` | no | `number` | — |
+| `technical_definition.technical_profile.video.character_row_cache.bytes_per_bank` | no | `number` | — |
+| `technical_definition.technical_profile.video.character_row_cache.purpose` | no | `string` | — |
+| `technical_definition.technical_profile.video.character_row_cache.total_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.controller_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.display_memory` | no | `object` | — |
+| `technical_definition.technical_profile.video.display_memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.display_memory.capacity_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.display_memory.chip_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.display_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.display_memory.organization` | no | `string` | — |
+| `technical_definition.technical_profile.video.feature_continuity_id` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.host_interface` | no | `object` | — |
+| `technical_definition.technical_profile.video.host_interface.host_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.host_interface.hot_swap` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.host_interface.implementation` | no | `string` | — |
+| `technical_definition.technical_profile.video.host_interface.local_display_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.memory_layout` | no | `object` | — |
+| `technical_definition.technical_profile.video.memory_layout.font_policy` | no | `string` | — |
+| `technical_definition.technical_profile.video.memory_layout.mode_exclusivity` | no | `string` | — |
+| `technical_definition.technical_profile.video.memory_layout.page_flip` | no | `string` | — |
+| `technical_definition.technical_profile.video.memory_layout.policy_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.mode_discovery` | no | `string` | — |
+| `technical_definition.technical_profile.video.monitor_policy` | no | `string` | — |
+| `technical_definition.technical_profile.video.palette_list_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.pixel_buffer` | no | `object` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.bits_per_pixel` | no | `number` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.bytes_per_page` | no | `number` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.location` | no | `string` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.page_states[]` | no | `array<string>` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.pages` | no | `number` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.physical_organization` | no | `string` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.pixels_per_page` | no | `number` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.policy` | no | `string` | — |
+| `technical_definition.technical_profile.video.pixel_buffer.total_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_memory` | no | `object` | — |
+| `technical_definition.technical_profile.video.sprite_memory.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_memory.capacity_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_memory.chip_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_memory.chip_id` | no | `string` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.sprite_memory.separate_bus` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.sprite_memory.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.sprite_physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.video.sprite_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.sprite_physical_population.separate_bus` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.sprite_physical_population.separate_from_system_and_display_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.sprite_profile_ref` | no | `object` | — |
+| `technical_definition.technical_profile.video.sprite_profile_ref.profile` | no | `string` | — |
+| `technical_definition.technical_profile.video.sprite_profile_ref.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technical_definition.technical_profile.video.text_modes[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.video.text_modes[].attribute_format` | no | `string` | — |
+| `technical_definition.technical_profile.video.text_modes[].attribute_map_bytes_per_buffer` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].character_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].character_map_bytes_per_buffer` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].columns` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[]` | no | `array<object>` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].allocated_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].palette_list_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].remaining_video_ram_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].sprite_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].configurations[].text_buffer_count` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].double_buffering` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.text_modes[].font_bytes` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].glyph_height` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].glyph_width` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].height` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].id` | no | `string` | — |
+| `technical_definition.technical_profile.video.text_modes[].ram_bytes_per_page` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].required_raster_ids[]` | no | `array<string>` | — |
+| `technical_definition.technical_profile.video.text_modes[].rows` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].sprites_available` | no | `number` | — |
+| `technical_definition.technical_profile.video.text_modes[].width` | no | `number` | — |
+| `technical_definition.technical_profile.video.timing_budget` | no | `object` | — |
+| `technical_definition.technical_profile.video.timing_budget.page_drain_microseconds` | no | `number` | — |
+| `technical_definition.technical_profile.video.timing_budget.pixel_clock_mhz` | no | `number` | — |
+| `technical_definition.technical_profile.video.timing_budget.qualification` | no | `string` | — |
+| `technical_definition.technical_profile.video.timing_budget.renderer_pixels_per_step` | no | `number` | — |
+| `technical_definition.technical_profile.video.timing_budget.renderer_step_mhz` | no | `number` | — |
+| `technical_definition.technical_profile.video.video_physical_population` | no | `object` | — |
+| `technical_definition.technical_profile.video.video_physical_population.bank_data_width_bits` | no | `number` | — |
+| `technical_definition.technical_profile.video.video_physical_population.separate_from_system_ram` | no | `boolean` | — |
+| `technical_definition.technical_profile.video.video_ram_kb` | no | `number` | — |
+| `requirements[]` | yes | `array<object>` | — |
+| `requirements[].number` | yes | `integer` | minimum: 1 |
+| `requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `requirements[].description` | yes | `string` | minLength: 1 |
+| `requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+
 ### event
 
 An occurrence or planned occurrence at a date or over a period, with participants, actions and outcomes.
@@ -338,6 +4817,7 @@ time*: object
 process_ids?: array<string> → process
 location_ids?: array<string> → location
 agreement_id?: string → agreement
+category?: string
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -349,12 +4829,12 @@ agreement_id?: string → agreement
 | `participant[]` | yes | `array<object>` | minItems: 0 |
 | `participant[].actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `participant[].role` | yes | `string` | minLength: 1 |
-| `subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `inputs[]` | yes | `array<object>` | minItems: 0 |
 | `inputs[].number` | yes | `integer` | minimum: 1 |
 | `inputs[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
 | `inputs[].description` | yes | `string` | minLength: 1 |
-| `inputs[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `inputs[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `inputs[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `inputs[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `inputs[].maturity` | no | `object` | — |
@@ -364,7 +4844,7 @@ agreement_id?: string → agreement
 | `outcomes[].number` | yes | `integer` | minimum: 1 |
 | `outcomes[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
 | `outcomes[].description` | yes | `string` | minLength: 1 |
-| `outcomes[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `outcomes[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `outcomes[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `outcomes[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `outcomes[].maturity` | no | `object` | — |
@@ -376,6 +4856,7 @@ agreement_id?: string → agreement
 | `process_ids[]` | no | `array<string>` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `location_ids[]` | no | `array<string>` | pattern: "^(location)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `agreement_id` | no | `string` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `category` | no | `string` | enum: ["","Adam's personal","Logix/AION investment","Product dev & launch","Ecosystem & Partners","Competition"] |
 
 ### location
 
@@ -426,6 +4907,7 @@ qualification_requirements*: array<object>
 │  └─ maturity?: object
 │  │  └─ capability_id*: string → manufacturing_capability
 │  │  └─ stage*: undefined
+base_part_ids?: array<string> → base_part
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -442,12 +4924,13 @@ qualification_requirements*: array<object>
 | `qualification_requirements[].number` | yes | `integer` | minimum: 1 |
 | `qualification_requirements[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
 | `qualification_requirements[].description` | yes | `string` | minLength: 1 |
-| `qualification_requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `qualification_requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `qualification_requirements[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `qualification_requirements[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `qualification_requirements[].maturity` | no | `object` | — |
 | `qualification_requirements[].maturity.capability_id` | yes | `string` | pattern: "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `qualification_requirements[].maturity.stage` | yes | `undefined` | enum: ["pilot","qualified","production_released","repeatable_production","suspended"] |
+| `base_part_ids[]` | no | `array<string>` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
 
 ### market_response
 
@@ -472,7 +4955,7 @@ description*: string
 | `title` | yes | `string` | minLength: 1 |
 | `kind` | yes | `undefined` | enum: ["adoption","partnership","competing_offer","compatibility_response","purchasing_response","channel_response","market_response","other"] |
 | `respondent_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
-| `subject_ids[]` | yes | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `subject_ids[]` | yes | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `trigger_ids[]` | yes | `array<string>` | pattern: "^(event\|process\|campaign\|agreement)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `description` | yes | `string` | minLength: 1 |
 
@@ -532,6 +5015,7 @@ steps*: array<object>
 parent_process_id?: string → process
 related_process_ids?: array<string> → process
 agreement_id?: string → agreement
+category?: string
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -543,12 +5027,12 @@ agreement_id?: string → agreement
 | `participant[]` | yes | `array<object>` | minItems: 0 |
 | `participant[].actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `participant[].role` | yes | `string` | minLength: 1 |
-| `subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `inputs[]` | yes | `array<object>` | minItems: 0 |
 | `inputs[].number` | yes | `integer` | minimum: 1 |
 | `inputs[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
 | `inputs[].description` | yes | `string` | minLength: 1 |
-| `inputs[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `inputs[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `inputs[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `inputs[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `inputs[].maturity` | no | `object` | — |
@@ -558,7 +5042,7 @@ agreement_id?: string → agreement
 | `outcomes[].number` | yes | `integer` | minimum: 1 |
 | `outcomes[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
 | `outcomes[].description` | yes | `string` | minLength: 1 |
-| `outcomes[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `outcomes[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `outcomes[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `outcomes[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `outcomes[].maturity` | no | `object` | — |
@@ -575,7 +5059,7 @@ agreement_id?: string → agreement
 | `steps[].number` | yes | `integer` | minimum: 1 |
 | `steps[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
 | `steps[].description` | yes | `string` | minLength: 1 |
-| `steps[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `steps[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `steps[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `steps[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `steps[].maturity` | no | `object` | — |
@@ -584,12 +5068,13 @@ agreement_id?: string → agreement
 | `parent_process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `related_process_ids[]` | no | `array<string>` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
 | `agreement_id` | no | `string` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `category` | no | `string` | enum: ["","Adam's personal","Logix/AION investment","Product dev & launch","Ecosystem & Partners","Competition"] |
 
 **Boundary union:** calendar value with year/month/day precision, event ID with `precision: event`, or null with `precision: unknown`. The diagram/catalogue value reference applies only to event anchors.
 
 ### product
 
-Named product, service or software subject without composition.
+Commercial offering or narrative product identity; versioned composition and technical links.
 
 File: [product.json](../../data_foundation/product.json) · Schema: [product.schema.json](../../schemas/product.schema.json)
 
@@ -609,6 +5094,68 @@ specification*: array<object>
 │  └─ description*: string
 │  └─ value?: string,number,boolean
 │  └─ unit?: string
+offering_category?: undefined
+technical_identity?: object
+│  └─ record_id*: string → base_part / device / software_edition
+launch_campaign_id?: string → campaign
+composition_history?: array<object>
+│  └─ version_number*: integer
+│  └─ description*: string
+│  └─ effective_from*: undefined
+│  └─ effective_until*: undefined
+│  └─ technical_definition*: object
+│  └─ composition_definition*: array<object>
+│  │  └─ id*: string
+│  │  └─ target*: undefined
+│  │  └─ quantity*: number,null
+│  │  └─ unit*: undefined
+│  │  └─ role*: string
+│  │  └─ supply_condition*: undefined
+│  │  └─ connection?: undefined
+│  │  └─ placements?: array<object>
+│  │  │  └─ host_line_id*: string
+│  │  │  └─ host_instance*: integer
+│  │  │  └─ socket_id*: string
+│  │  │  └─ quantity*: number
+│  │  └─ entitlement?: object
+│  │  │  └─ kind*: undefined
+│  │  │  └─ count*: number,null
+│  │  │  └─ scope*: string
+│  │  │  └─ duration_value?: number
+│  │  │  └─ duration_unit?: undefined
+│  │  │  └─ agreement_id?: string → agreement
+│  │  │  └─ description?: string
+│  │  └─ requirements*: array<object>
+│  │  │  └─ number*: integer
+│  │  │  └─ kind*: undefined
+│  │  │  └─ description*: string
+│  │  │  └─ subject_ids?: array<string> → any foundation ID
+│  │  └─ element_type?: undefined
+│  └─ assembly_requirements*: array<object>
+│  │  └─ number*: integer
+│  │  └─ kind*: undefined
+│  │  └─ description*: string
+│  │  └─ subject_ids?: array<string> → any foundation ID
+requirements?: array<object>
+│  └─ number*: integer
+│  └─ kind*: undefined
+│  └─ description*: string
+│  └─ subject_ids?: array<string> → any foundation ID
+service_definition?: object
+│  └─ description*: string
+│  └─ entitlements*: array<object>
+│  │  └─ kind*: undefined
+│  │  └─ count*: number,null
+│  │  └─ scope*: string
+│  │  └─ duration_value?: number
+│  │  └─ duration_unit?: undefined
+│  │  └─ agreement_id?: string → agreement
+│  │  └─ description?: string
+│  └─ requirements*: array<object>
+│  │  └─ number*: integer
+│  │  └─ kind*: undefined
+│  │  └─ description*: string
+│  │  └─ subject_ids?: array<string> → any foundation ID
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -627,6 +5174,523 @@ specification*: array<object>
 | `specification[].description` | yes | `string` | — |
 | `specification[].value` | no | `string,number,boolean` | — |
 | `specification[].unit` | no | `string` | minLength: 1 |
+| `offering_category` | no | `undefined` | enum: ["computer","computer_software_bundle","expansion_kit","software","computer_system","service"] |
+| `technical_identity` | no | `object` | — |
+| `technical_identity.record_id` | yes | `string` | pattern: "^(base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `launch_campaign_id` | no | `string` | pattern: "^(campaign)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[]` | no | `array<object>` | — |
+| `composition_history[].version_number` | yes | `integer` | minimum: 1 |
+| `composition_history[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].effective_from` | yes | `undefined` | — |
+| `composition_history[].effective_until` | yes | `undefined` | — |
+| `composition_history[].technical_definition` | yes | `object` | — |
+| `composition_history[].composition_definition[]` | yes | `array<object>` | — |
+| `composition_history[].composition_definition[].id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].target` | yes | `undefined` | — |
+| `composition_history[].composition_definition[].quantity` | yes | `number,null` | — |
+| `composition_history[].composition_definition[].unit` | yes | `undefined` | enum: ["each","set","m","kg","g","litre"] |
+| `composition_history[].composition_definition[].role` | yes | `string` | — |
+| `composition_history[].composition_definition[].supply_condition` | yes | `undefined` | — |
+| `composition_history[].composition_definition[].connection` | no | `undefined` | — |
+| `composition_history[].composition_definition[].placements[]` | no | `array<object>` | — |
+| `composition_history[].composition_definition[].placements[].host_line_id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].placements[].host_instance` | yes | `integer` | minimum: 1 |
+| `composition_history[].composition_definition[].placements[].socket_id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].placements[].quantity` | yes | `number` | — |
+| `composition_history[].composition_definition[].entitlement` | no | `object` | — |
+| `composition_history[].composition_definition[].entitlement.kind` | yes | `undefined` | enum: ["service","licence"] |
+| `composition_history[].composition_definition[].entitlement.count` | yes | `number,null` | minimum: 0 |
+| `composition_history[].composition_definition[].entitlement.scope` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].entitlement.duration_value` | no | `number` | — |
+| `composition_history[].composition_definition[].entitlement.duration_unit` | no | `undefined` | enum: ["day","month","year"] |
+| `composition_history[].composition_definition[].entitlement.agreement_id` | no | `string` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].composition_definition[].entitlement.description` | no | `string` | — |
+| `composition_history[].composition_definition[].requirements[]` | yes | `array<object>` | — |
+| `composition_history[].composition_definition[].requirements[].number` | yes | `integer` | minimum: 1 |
+| `composition_history[].composition_definition[].requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `composition_history[].composition_definition[].requirements[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].composition_definition[].element_type` | no | `undefined` | enum: ["main_product","connected_device","attached_product"] |
+| `composition_history[].assembly_requirements[]` | yes | `array<object>` | — |
+| `composition_history[].assembly_requirements[].number` | yes | `integer` | minimum: 1 |
+| `composition_history[].assembly_requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `composition_history[].assembly_requirements[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].assembly_requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `requirements[]` | no | `array<object>` | — |
+| `requirements[].number` | yes | `integer` | minimum: 1 |
+| `requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `requirements[].description` | yes | `string` | minLength: 1 |
+| `requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `service_definition` | no | `object` | — |
+| `service_definition.description` | yes | `string` | minLength: 1 |
+| `service_definition.entitlements[]` | yes | `array<object>` | — |
+| `service_definition.entitlements[].kind` | yes | `undefined` | enum: ["service","licence"] |
+| `service_definition.entitlements[].count` | yes | `number,null` | minimum: 0 |
+| `service_definition.entitlements[].scope` | yes | `string` | minLength: 1 |
+| `service_definition.entitlements[].duration_value` | no | `number` | — |
+| `service_definition.entitlements[].duration_unit` | no | `undefined` | enum: ["day","month","year"] |
+| `service_definition.entitlements[].agreement_id` | no | `string` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `service_definition.entitlements[].description` | no | `string` | — |
+| `service_definition.requirements[]` | yes | `array<object>` | — |
+| `service_definition.requirements[].number` | yes | `integer` | minimum: 1 |
+| `service_definition.requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `service_definition.requirements[].description` | yes | `string` | minLength: 1 |
+| `service_definition.requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+
+### software_edition
+
+
+
+File: [software_edition.json](../../data_foundation/software_edition.json) · Schema: [software_edition.schema.json](../../schemas/software_edition.schema.json)
+
+```text
+software_edition[]
+id*: string
+name*: string
+description*: string
+provider_actor_ids*: array<string> → actor
+technology_ids*: array<string> → technology
+family_product_id?: string → product
+family_name*: string
+version*: string
+edition*: string
+composition_history*: array<object>
+│  └─ version_number*: integer
+│  └─ description*: string
+│  └─ effective_from*: undefined
+│  └─ effective_until*: undefined
+│  └─ technical_definition*: object
+│  │  └─ abacus_file_integration?: object
+│  │  │  └─ concurrency?: string
+│  │  │  └─ cross_version_policy?: string
+│  │  │  └─ format_policy?: string
+│  │  │  └─ formula_policy?: string
+│  │  │  └─ memory_policy?: string
+│  │  │  └─ model?: string
+│  │  │  └─ save_policy?: string
+│  │  └─ adds?: array<string>
+│  │  └─ api_compatibility?: string
+│  │  └─ architecture?: object
+│  │  │  └─ client_server?: boolean
+│  │  │  └─ database?: string
+│  │  │  └─ network_id?: string → technology
+│  │  │  └─ resource_planning?: object
+│  │  │  │  └─ basis?: string
+│  │  │  │  └─ illustrative_dram_budget_bytes?: object
+│  │  │  │  │  └─ applications?: number
+│  │  │  │  │  └─ filesystem_buffers?: number
+│  │  │  │  │  └─ kernel_state_tables_stacks?: number
+│  │  │  │  │  └─ process_translation_metadata?: number
+│  │  │  │  │  └─ services_patches_reserve?: number
+│  │  │  │  │  └─ terminal_ui_input?: number
+│  │  │  │  └─ minimum_dram_bytes?: number
+│  │  │  │  └─ minimum_os_rom_bytes?: number
+│  │  │  │  └─ preferred_dram_bytes?: number
+│  │  │  └─ server?: string → device
+│  │  │  └─ server_edition_id?: string → software_edition
+│  │  └─ artemis_native_extensions?: array<string>
+│  │  └─ base_version?: string
+│  │  └─ compatibility_notes?: array<string>
+│  │  └─ compatibility_policy?: object
+│  │  │  └─ applications?: string
+│  │  │  └─ binary?: string
+│  │  │  └─ certification?: string
+│  │  │  └─ delivery?: string
+│  │  │  └─ eligibility?: string
+│  │  │  └─ hardware?: string
+│  │  │  └─ scope?: string
+│  │  └─ components?: object
+│  │  │  └─ mainboard_rom?: array<string>
+│  │  │  └─ system_cartridge?: array<string>
+│  │  └─ contents?: array<string>
+│  │  └─ data_interchange?: object
+│  │  │  └─ bpi_continuity?: string
+│  │  │  └─ contract?: string
+│  │  │  └─ csv?: string
+│  │  │  └─ export_definition_id?: string → software_edition
+│  │  │  └─ migration?: string
+│  │  │  └─ partner?: string
+│  │  │  └─ vsam?: string
+│  │  │  └─ vsam_conversion?: string
+│  │  └─ dependency_ids?: array<string> → device / software_edition / technology
+│  │  └─ distribution?: object
+│  │  │  └─ channel?: string
+│  │  │  └─ data_access?: string
+│  │  │  └─ disk_format?: string
+│  │  │  └─ execution?: undefined
+│  │  │  └─ fulfillment?: string
+│  │  │  └─ installation?: string
+│  │  │  └─ medium?: string
+│  │  │  └─ network_operation?: string
+│  │  │  └─ toolchain?: string
+│  │  └─ embedded_abacus_integration_id?: string → technology
+│  │  └─ execution_target?: string
+│  │  └─ explicitly_not_assumed?: array<string>
+│  │  └─ extensions?: array<string>
+│  │  └─ features?: array<string>
+│  │  └─ features_id?: string → technology
+│  │  └─ forward_compatibility_commitment?: object
+│  │  │  └─ delivery_requirements?: string
+│  │  │  └─ exclusions?: string
+│  │  │  └─ scope?: string
+│  │  └─ implementation?: undefined
+│  │  └─ internal_organization?: array<object>
+│  │  │  └─ description?: string
+│  │  │  └─ diagram_label?: string
+│  │  │  └─ id?: string
+│  │  │  └─ name?: string
+│  │  │  └─ residence?: string
+│  │  │  └─ responsibility?: string
+│  │  └─ internal_relationships?: array<array>
+│  │  └─ logix_requirements?: array<string>
+│  │  └─ memory_discovery_id?: string → technology
+│  │  └─ minimum_resources?: object
+│  │  │  └─ application_ram_bytes?: number,null
+│  │  │  └─ installed_ram_kb?: number,null
+│  │  │  └─ rom_bytes?: number,null
+│  │  └─ modules?: array<object>
+│  │  │  └─ features?: array<string>
+│  │  │  └─ name?: string
+│  │  └─ network_link_policy?: object
+│  │  │  └─ driver_contract?: string
+│  │  │  └─ link_layer_id?: string → technology
+│  │  └─ platform_policy?: string
+│  │  └─ platform_support?: array<object>
+│  │  │  └─ computer_id?: string → device / product
+│  │  └─ portability_contract?: object
+│  │  │  └─ api_id?: string → technology
+│  │  │  └─ display?: string
+│  │  │  └─ memory?: string
+│  │  │  └─ migration?: string
+│  │  │  └─ shared_logic?: string
+│  │  │  └─ storage?: string
+│  │  └─ portable_runtime?: object
+│  │  │  └─ abi_policy?: string
+│  │  │  └─ api_id?: string → technology
+│  │  │  └─ capability_discovery?: string
+│  │  │  └─ display_id?: string → technology
+│  │  │  └─ implementation_target?: string
+│  │  │  └─ ownership?: string
+│  │  └─ programmatic_file_access?: string
+│  │  └─ relationship?: string
+│  │  └─ release_scope?: object
+│  │  │  └─ acceptance_requirements?: array<string>
+│  │  │  └─ acceptance_workflow?: string
+│  │  │  └─ initial?: string
+│  │  │  └─ later?: string
+│  │  │  └─ later_milestones?: array<string>
+│  │  │  └─ launch?: string
+│  │  │  └─ resource_policy?: string
+│  │  └─ reporting?: object
+│  │  │  └─ chart_types?: array<string>
+│  │  │  └─ continuity?: string
+│  │  │  └─ output?: string
+│  │  │  └─ presentation?: string
+│  │  └─ role?: string
+│  │  └─ runtime_notes?: array<string>
+│  │  └─ specification?: undefined
+│  │  └─ subcomponents?: array<object>
+│  │  │  └─ description?: string
+│  │  │  └─ id?: string
+│  │  │  └─ name?: string
+│  │  └─ system_dependencies?: array<object>
+│  │  │  └─ component_id?: string
+│  │  │  └─ description?: string
+│  │  │  └─ name?: string
+│  │  │  └─ software_id?: string → software_edition
+│  │  └─ technology_id?: string → technology
+│  │  └─ toolchain?: object
+│  │  │  └─ components?: array<string>
+│  │  │  └─ development_workflow?: array<string>
+│  │  │  └─ host?: array<string> → device
+│  │  │  └─ language_contract_id?: string → technology
+│  │  │  └─ layout_tests?: array<string>
+│  │  │  └─ optional_development_features?: array<string>
+│  │  │  └─ profiles?: array<string>
+│  │  │  └─ resource_tests?: array<string>
+│  │  │  └─ runtime_contract_id?: string → technology
+│  │  │  └─ target_isolation?: string
+│  │  │  └─ targets?: array<string>
+│  │  └─ tui_features?: array<object>
+│  │  │  └─ description?: string
+│  │  │  └─ name?: string
+│  │  └─ tui_integration?: string
+│  │  └─ tui_ownership?: object
+│  │  │  └─ boundary?: string
+│  │  │  └─ consumers?: array<string> → software_edition
+│  │  │  └─ interface_id?: string → technology
+│  │  │  └─ owner?: string
+│  │  └─ validation?: string
+│  │  └─ vanilla_architecture?: object
+│  │  │  └─ application_entry?: string
+│  │  │  └─ changes_from_1_3?: array<string>
+│  │  │  └─ components?: array<object>
+│  │  │  │  └─ description?: string
+│  │  │  │  └─ id?: string
+│  │  │  │  └─ name?: string
+│  │  │  └─ execution_model?: string
+│  │  │  └─ limits?: array<string>
+│  │  │  └─ memory_layout?: array<object>
+│  │  │  │  └─ purpose?: string
+│  │  │  │  └─ region?: string
+│  │  │  └─ program_load_address?: string
+│  └─ composition_definition*: array<object>
+│  │  └─ id*: string
+│  │  └─ target*: undefined
+│  │  └─ quantity*: number,null
+│  │  └─ unit*: undefined
+│  │  └─ role*: string
+│  │  └─ supply_condition*: undefined
+│  │  └─ connection?: undefined
+│  │  └─ placements?: array<object>
+│  │  │  └─ host_line_id*: string
+│  │  │  └─ host_instance*: integer
+│  │  │  └─ socket_id*: string
+│  │  │  └─ quantity*: number
+│  │  └─ entitlement?: object
+│  │  │  └─ kind*: undefined
+│  │  │  └─ count*: number,null
+│  │  │  └─ scope*: string
+│  │  │  └─ duration_value?: number
+│  │  │  └─ duration_unit?: undefined
+│  │  │  └─ agreement_id?: string → agreement
+│  │  │  └─ description?: string
+│  │  └─ requirements*: array<object>
+│  │  │  └─ number*: integer
+│  │  │  └─ kind*: undefined
+│  │  │  └─ description*: string
+│  │  │  └─ subject_ids?: array<string> → any foundation ID
+│  │  └─ element_type?: undefined
+│  └─ assembly_requirements*: array<object>
+│  │  └─ number*: integer
+│  │  └─ kind*: undefined
+│  │  └─ description*: string
+│  │  └─ subject_ids?: array<string> → any foundation ID
+```
+
+| Field path | Required in parent | Type | Constraints / allowed values |
+| --- | --- | --- | --- |
+| `id` | yes | `string` | pattern: "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `name` | yes | `string` | minLength: 1 |
+| `description` | yes | `string` | minLength: 1 |
+| `provider_actor_ids[]` | yes | `array<string>` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `technology_ids[]` | yes | `array<string>` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `family_product_id` | no | `string` | pattern: "^(product)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `family_name` | yes | `string` | minLength: 1 |
+| `version` | yes | `string` | minLength: 1 |
+| `edition` | yes | `string` | minLength: 1 |
+| `composition_history[]` | yes | `array<object>` | — |
+| `composition_history[].version_number` | yes | `integer` | minimum: 1 |
+| `composition_history[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].effective_from` | yes | `undefined` | — |
+| `composition_history[].effective_until` | yes | `undefined` | — |
+| `composition_history[].technical_definition` | yes | `object` | — |
+| `composition_history[].technical_definition.abacus_file_integration` | no | `object` | — |
+| `composition_history[].technical_definition.abacus_file_integration.concurrency` | no | `string` | — |
+| `composition_history[].technical_definition.abacus_file_integration.cross_version_policy` | no | `string` | — |
+| `composition_history[].technical_definition.abacus_file_integration.format_policy` | no | `string` | — |
+| `composition_history[].technical_definition.abacus_file_integration.formula_policy` | no | `string` | — |
+| `composition_history[].technical_definition.abacus_file_integration.memory_policy` | no | `string` | — |
+| `composition_history[].technical_definition.abacus_file_integration.model` | no | `string` | — |
+| `composition_history[].technical_definition.abacus_file_integration.save_policy` | no | `string` | — |
+| `composition_history[].technical_definition.adds[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.api_compatibility` | no | `string` | — |
+| `composition_history[].technical_definition.architecture` | no | `object` | — |
+| `composition_history[].technical_definition.architecture.client_server` | no | `boolean` | — |
+| `composition_history[].technical_definition.architecture.database` | no | `string` | — |
+| `composition_history[].technical_definition.architecture.network_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.architecture.resource_planning` | no | `object` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.basis` | no | `string` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.illustrative_dram_budget_bytes` | no | `object` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.illustrative_dram_budget_bytes.applications` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.illustrative_dram_budget_bytes.filesystem_buffers` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.illustrative_dram_budget_bytes.kernel_state_tables_stacks` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.illustrative_dram_budget_bytes.process_translation_metadata` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.illustrative_dram_budget_bytes.services_patches_reserve` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.illustrative_dram_budget_bytes.terminal_ui_input` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.minimum_dram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.minimum_os_rom_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.resource_planning.preferred_dram_bytes` | no | `number` | — |
+| `composition_history[].technical_definition.architecture.server` | no | `string` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.architecture.server_edition_id` | no | `string` | pattern: "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.artemis_native_extensions[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.base_version` | no | `string` | — |
+| `composition_history[].technical_definition.compatibility_notes[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.compatibility_policy` | no | `object` | — |
+| `composition_history[].technical_definition.compatibility_policy.applications` | no | `string` | — |
+| `composition_history[].technical_definition.compatibility_policy.binary` | no | `string` | — |
+| `composition_history[].technical_definition.compatibility_policy.certification` | no | `string` | — |
+| `composition_history[].technical_definition.compatibility_policy.delivery` | no | `string` | — |
+| `composition_history[].technical_definition.compatibility_policy.eligibility` | no | `string` | — |
+| `composition_history[].technical_definition.compatibility_policy.hardware` | no | `string` | — |
+| `composition_history[].technical_definition.compatibility_policy.scope` | no | `string` | — |
+| `composition_history[].technical_definition.components` | no | `object` | — |
+| `composition_history[].technical_definition.components.mainboard_rom[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.components.system_cartridge[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.contents[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.data_interchange` | no | `object` | — |
+| `composition_history[].technical_definition.data_interchange.bpi_continuity` | no | `string` | — |
+| `composition_history[].technical_definition.data_interchange.contract` | no | `string` | — |
+| `composition_history[].technical_definition.data_interchange.csv` | no | `string` | — |
+| `composition_history[].technical_definition.data_interchange.export_definition_id` | no | `string` | pattern: "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.data_interchange.migration` | no | `string` | — |
+| `composition_history[].technical_definition.data_interchange.partner` | no | `string` | — |
+| `composition_history[].technical_definition.data_interchange.vsam` | no | `string` | — |
+| `composition_history[].technical_definition.data_interchange.vsam_conversion` | no | `string` | — |
+| `composition_history[].technical_definition.dependency_ids[]` | no | `array<string>` | pattern: "^(device\|software_edition\|technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.distribution` | no | `object` | — |
+| `composition_history[].technical_definition.distribution.channel` | no | `string` | — |
+| `composition_history[].technical_definition.distribution.data_access` | no | `string` | — |
+| `composition_history[].technical_definition.distribution.disk_format` | no | `string` | — |
+| `composition_history[].technical_definition.distribution.execution` | no | `undefined` | — |
+| `composition_history[].technical_definition.distribution.fulfillment` | no | `string` | — |
+| `composition_history[].technical_definition.distribution.installation` | no | `string` | — |
+| `composition_history[].technical_definition.distribution.medium` | no | `string` | — |
+| `composition_history[].technical_definition.distribution.network_operation` | no | `string` | — |
+| `composition_history[].technical_definition.distribution.toolchain` | no | `string` | — |
+| `composition_history[].technical_definition.embedded_abacus_integration_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.execution_target` | no | `string` | — |
+| `composition_history[].technical_definition.explicitly_not_assumed[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.extensions[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.features[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.features_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.forward_compatibility_commitment` | no | `object` | — |
+| `composition_history[].technical_definition.forward_compatibility_commitment.delivery_requirements` | no | `string` | — |
+| `composition_history[].technical_definition.forward_compatibility_commitment.exclusions` | no | `string` | — |
+| `composition_history[].technical_definition.forward_compatibility_commitment.scope` | no | `string` | — |
+| `composition_history[].technical_definition.implementation` | no | `undefined` | — |
+| `composition_history[].technical_definition.internal_organization[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.internal_organization[].description` | no | `string` | — |
+| `composition_history[].technical_definition.internal_organization[].diagram_label` | no | `string` | — |
+| `composition_history[].technical_definition.internal_organization[].id` | no | `string` | — |
+| `composition_history[].technical_definition.internal_organization[].name` | no | `string` | — |
+| `composition_history[].technical_definition.internal_organization[].residence` | no | `string` | — |
+| `composition_history[].technical_definition.internal_organization[].responsibility` | no | `string` | — |
+| `composition_history[].technical_definition.internal_relationships[]` | no | `array<array>` | — |
+| `composition_history[].technical_definition.logix_requirements[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.memory_discovery_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.minimum_resources` | no | `object` | — |
+| `composition_history[].technical_definition.minimum_resources.application_ram_bytes` | no | `number,null` | — |
+| `composition_history[].technical_definition.minimum_resources.installed_ram_kb` | no | `number,null` | — |
+| `composition_history[].technical_definition.minimum_resources.rom_bytes` | no | `number,null` | — |
+| `composition_history[].technical_definition.modules[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.modules[].features[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.modules[].name` | no | `string` | — |
+| `composition_history[].technical_definition.network_link_policy` | no | `object` | — |
+| `composition_history[].technical_definition.network_link_policy.driver_contract` | no | `string` | — |
+| `composition_history[].technical_definition.network_link_policy.link_layer_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.platform_policy` | no | `string` | — |
+| `composition_history[].technical_definition.platform_support[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.platform_support[].computer_id` | no | `string` | pattern: "^(device\|product)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.portability_contract` | no | `object` | — |
+| `composition_history[].technical_definition.portability_contract.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.portability_contract.display` | no | `string` | — |
+| `composition_history[].technical_definition.portability_contract.memory` | no | `string` | — |
+| `composition_history[].technical_definition.portability_contract.migration` | no | `string` | — |
+| `composition_history[].technical_definition.portability_contract.shared_logic` | no | `string` | — |
+| `composition_history[].technical_definition.portability_contract.storage` | no | `string` | — |
+| `composition_history[].technical_definition.portable_runtime` | no | `object` | — |
+| `composition_history[].technical_definition.portable_runtime.abi_policy` | no | `string` | — |
+| `composition_history[].technical_definition.portable_runtime.api_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.portable_runtime.capability_discovery` | no | `string` | — |
+| `composition_history[].technical_definition.portable_runtime.display_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.portable_runtime.implementation_target` | no | `string` | — |
+| `composition_history[].technical_definition.portable_runtime.ownership` | no | `string` | — |
+| `composition_history[].technical_definition.programmatic_file_access` | no | `string` | — |
+| `composition_history[].technical_definition.relationship` | no | `string` | — |
+| `composition_history[].technical_definition.release_scope` | no | `object` | — |
+| `composition_history[].technical_definition.release_scope.acceptance_requirements[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.release_scope.acceptance_workflow` | no | `string` | — |
+| `composition_history[].technical_definition.release_scope.initial` | no | `string` | — |
+| `composition_history[].technical_definition.release_scope.later` | no | `string` | — |
+| `composition_history[].technical_definition.release_scope.later_milestones[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.release_scope.launch` | no | `string` | — |
+| `composition_history[].technical_definition.release_scope.resource_policy` | no | `string` | — |
+| `composition_history[].technical_definition.reporting` | no | `object` | — |
+| `composition_history[].technical_definition.reporting.chart_types[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.reporting.continuity` | no | `string` | — |
+| `composition_history[].technical_definition.reporting.output` | no | `string` | — |
+| `composition_history[].technical_definition.reporting.presentation` | no | `string` | — |
+| `composition_history[].technical_definition.role` | no | `string` | — |
+| `composition_history[].technical_definition.runtime_notes[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.specification` | no | `undefined` | — |
+| `composition_history[].technical_definition.subcomponents[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.subcomponents[].description` | no | `string` | — |
+| `composition_history[].technical_definition.subcomponents[].id` | no | `string` | — |
+| `composition_history[].technical_definition.subcomponents[].name` | no | `string` | — |
+| `composition_history[].technical_definition.system_dependencies[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.system_dependencies[].component_id` | no | `string` | — |
+| `composition_history[].technical_definition.system_dependencies[].description` | no | `string` | — |
+| `composition_history[].technical_definition.system_dependencies[].name` | no | `string` | — |
+| `composition_history[].technical_definition.system_dependencies[].software_id` | no | `string` | pattern: "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.technology_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.toolchain` | no | `object` | — |
+| `composition_history[].technical_definition.toolchain.components[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.toolchain.development_workflow[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.toolchain.host[]` | no | `array<string>` | pattern: "^(device)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.toolchain.language_contract_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.toolchain.layout_tests[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.toolchain.optional_development_features[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.toolchain.profiles[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.toolchain.resource_tests[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.toolchain.runtime_contract_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.toolchain.target_isolation` | no | `string` | — |
+| `composition_history[].technical_definition.toolchain.targets[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.tui_features[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.tui_features[].description` | no | `string` | — |
+| `composition_history[].technical_definition.tui_features[].name` | no | `string` | — |
+| `composition_history[].technical_definition.tui_integration` | no | `string` | — |
+| `composition_history[].technical_definition.tui_ownership` | no | `object` | — |
+| `composition_history[].technical_definition.tui_ownership.boundary` | no | `string` | — |
+| `composition_history[].technical_definition.tui_ownership.consumers[]` | no | `array<string>` | pattern: "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.tui_ownership.interface_id` | no | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].technical_definition.tui_ownership.owner` | no | `string` | — |
+| `composition_history[].technical_definition.validation` | no | `string` | — |
+| `composition_history[].technical_definition.vanilla_architecture` | no | `object` | — |
+| `composition_history[].technical_definition.vanilla_architecture.application_entry` | no | `string` | — |
+| `composition_history[].technical_definition.vanilla_architecture.changes_from_1_3[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.vanilla_architecture.components[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.vanilla_architecture.components[].description` | no | `string` | — |
+| `composition_history[].technical_definition.vanilla_architecture.components[].id` | no | `string` | — |
+| `composition_history[].technical_definition.vanilla_architecture.components[].name` | no | `string` | — |
+| `composition_history[].technical_definition.vanilla_architecture.execution_model` | no | `string` | — |
+| `composition_history[].technical_definition.vanilla_architecture.limits[]` | no | `array<string>` | — |
+| `composition_history[].technical_definition.vanilla_architecture.memory_layout[]` | no | `array<object>` | — |
+| `composition_history[].technical_definition.vanilla_architecture.memory_layout[].purpose` | no | `string` | — |
+| `composition_history[].technical_definition.vanilla_architecture.memory_layout[].region` | no | `string` | — |
+| `composition_history[].technical_definition.vanilla_architecture.program_load_address` | no | `string` | — |
+| `composition_history[].composition_definition[]` | yes | `array<object>` | — |
+| `composition_history[].composition_definition[].id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].target` | yes | `undefined` | — |
+| `composition_history[].composition_definition[].quantity` | yes | `number,null` | — |
+| `composition_history[].composition_definition[].unit` | yes | `undefined` | enum: ["each","set","m","kg","g","litre"] |
+| `composition_history[].composition_definition[].role` | yes | `string` | — |
+| `composition_history[].composition_definition[].supply_condition` | yes | `undefined` | — |
+| `composition_history[].composition_definition[].connection` | no | `undefined` | — |
+| `composition_history[].composition_definition[].placements[]` | no | `array<object>` | — |
+| `composition_history[].composition_definition[].placements[].host_line_id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].placements[].host_instance` | yes | `integer` | minimum: 1 |
+| `composition_history[].composition_definition[].placements[].socket_id` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].placements[].quantity` | yes | `number` | — |
+| `composition_history[].composition_definition[].entitlement` | no | `object` | — |
+| `composition_history[].composition_definition[].entitlement.kind` | yes | `undefined` | enum: ["service","licence"] |
+| `composition_history[].composition_definition[].entitlement.count` | yes | `number,null` | minimum: 0 |
+| `composition_history[].composition_definition[].entitlement.scope` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].entitlement.duration_value` | no | `number` | — |
+| `composition_history[].composition_definition[].entitlement.duration_unit` | no | `undefined` | enum: ["day","month","year"] |
+| `composition_history[].composition_definition[].entitlement.agreement_id` | no | `string` | pattern: "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].composition_definition[].entitlement.description` | no | `string` | — |
+| `composition_history[].composition_definition[].requirements[]` | yes | `array<object>` | — |
+| `composition_history[].composition_definition[].requirements[].number` | yes | `integer` | minimum: 1 |
+| `composition_history[].composition_definition[].requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `composition_history[].composition_definition[].requirements[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].composition_definition[].requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `composition_history[].composition_definition[].element_type` | no | `undefined` | enum: ["main_product","connected_device","attached_product"] |
+| `composition_history[].assembly_requirements[]` | yes | `array<object>` | — |
+| `composition_history[].assembly_requirements[].number` | yes | `integer` | minimum: 1 |
+| `composition_history[].assembly_requirements[].kind` | yes | `undefined` | enum: ["selection","interface","electrical","mechanical","software","assembly","testing","reliability"] |
+| `composition_history[].assembly_requirements[].description` | yes | `string` | minLength: 1 |
+| `composition_history[].assembly_requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition)\\.[a-z0-9][a-z0-9_.-]*$" |
 
 ### technology
 
@@ -688,21 +5752,246 @@ Every schema attribute marked `x-ref` appears here, including references inside 
 | agreement | `effective_event_id` | `event` |
 | agreement | `termination_event_id` | `event` |
 | agreement | `process_id` | `process` |
-| assumption | `scope_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| assumption | `scope_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | assumption | `exception_ids[]` | `assumption` |
 | assumption | `process_id` | `process` |
+| base_part | `manufacturer_actor_id` | `actor` |
+| base_part | `supplier_actor_ids[]` | `actor` |
+| base_part | `technology_ids[]` | `technology` |
+| base_part | `manufacturing_capability_ids[]` | `manufacturing_capability` |
+| base_part | `technical_definition.compatible_computers[]` | `device` |
+| base_part | `technical_definition.compatible_with[]` | `device` |
+| base_part | `technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]` | `device` |
+| base_part | `technical_definition.host_qualification.device.base_computer.artemis.computer_id` | `device` |
+| base_part | `technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]` | `technology` |
+| base_part | `technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id` | `device` |
+| base_part | `technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]` | `technology` |
+| base_part | `technical_definition.host_qualification.device.base_computer.athena.computer_id` | `device` |
+| base_part | `technical_definition.host_qualification.device.base_computer.athena_server.computer_id` | `device` |
+| base_part | `technical_definition.host_qualification.device.base_computer.aurelia.computer_id` | `device` |
+| base_part | `technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]` | `technology` |
+| base_part | `technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id` | `device` |
+| base_part | `technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]` | `technology` |
+| base_part | `technical_definition.memory_interface.expansion_id` | `device` |
+| base_part | `technical_definition.memory_interface.organization_id` | `technology` |
+| base_part | `technical_definition.memory_interface.system_controller_id` | `base_part` |
+| base_part | `technical_definition.physical_population.chip_id` | `base_part` |
+| base_part | `technical_definition.planned_compatible_with[]` | `device` |
+| base_part | `technical_definition.processor.part_id` | `base_part` |
+| base_part | `technical_definition.recommended_software_id` | `software_edition` |
+| base_part | `technical_definition.specification.api_id` | `technology` |
+| base_part | `technical_definition.specification.base_controller_id` | `base_part` |
+| base_part | `technical_definition.specification.base_product_id` | `base_part` |
+| base_part | `technical_definition.specification.bridge_design_id` | `technology` |
+| base_part | `technical_definition.specification.card_id` | `device` |
+| base_part | `technical_definition.specification.chip_type_id` | `base_part` |
+| base_part | `technical_definition.specification.class_protocol_id` | `technology` |
+| base_part | `technical_definition.specification.controller_id` | `base_part` |
+| base_part | `technical_definition.specification.cpu_id` | `base_part` |
+| base_part | `technical_definition.specification.crt_id` | `base_part` |
+| base_part | `technical_definition.specification.display_controller_id` | `base_part` |
+| base_part | `technical_definition.specification.display_memory.chip_id` | `base_part` |
+| base_part | `technical_definition.specification.display_subassembly_id` | `base_part` |
+| base_part | `technical_definition.specification.feature_continuity_id` | `device` |
+| base_part | `technical_definition.specification.interface_id` | `technology` |
+| base_part | `technical_definition.specification.keyboard_standard_id` | `technology` |
+| base_part | `technical_definition.specification.legacy_card_id` | `device` |
+| base_part | `technical_definition.specification.link_layer_id` | `technology` |
+| base_part | `technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id` | `manufacturing_capability` |
+| base_part | `technical_definition.specification.mechanism_id` | `base_part` |
+| base_part | `technical_definition.specification.memory_layout.policy_id` | `technology` |
+| base_part | `technical_definition.specification.monitor_id` | `device` |
+| base_part | `technical_definition.specification.negotiation_id` | `technology` |
+| base_part | `technical_definition.specification.palette_list_id` | `technology` |
+| base_part | `technical_definition.specification.platform_rate_profiles[].computer_id` | `device` |
+| base_part | `technical_definition.specification.platform_rate_profiles[].technology_ids[]` | `technology` |
+| base_part | `technical_definition.specification.sprite_memory.chip_id` | `base_part` |
+| base_part | `technical_definition.specification.sprite_profile_ref.technology_id` | `technology` |
+| base_part | `technical_definition.specification.technology_id` | `technology` |
+| base_part | `technical_definition.specification.transport_id` | `technology` |
+| base_part | `technical_definition.specification.video_link_id` | `technology` |
+| base_part | `technical_definition.specification.video_ram_chip_id` | `base_part` |
+| base_part | `technical_definition.specification_id` | `technology` |
+| base_part | `technical_definition.technical_profile.memory.expanded_organization.controller_id` | `base_part` |
+| base_part | `technical_definition.technical_profile.memory.expansion_ref` | `device` |
+| base_part | `technical_definition.technical_profile.memory.organization.controller_id` | `base_part` |
+| base_part | `technical_definition.technical_profile.memory.organization_ref` | `technology` |
+| base_part | `technical_definition.technical_profile.memory.system_controller_ref` | `base_part` |
+| base_part | `technical_definition.technical_profile.network.computer_id` | `device` |
+| base_part | `technical_definition.technical_profile.networking.computer_id` | `device` |
+| base_part | `technical_definition.technical_profile.networking.technology_ids[]` | `technology` |
+| base_part | `technical_definition.technical_profile.software_compatibility.api_id` | `technology` |
+| base_part | `technical_definition.technical_profile.video.api_id` | `technology` |
+| base_part | `technical_definition.technical_profile.video.controller_id` | `base_part` |
+| base_part | `technical_definition.technical_profile.video.display_memory.chip_id` | `base_part` |
+| base_part | `technical_definition.technical_profile.video.feature_continuity_id` | `device` |
+| base_part | `technical_definition.technical_profile.video.memory_layout.policy_id` | `technology` |
+| base_part | `technical_definition.technical_profile.video.palette_list_id` | `technology` |
+| base_part | `technical_definition.technical_profile.video.sprite_memory.chip_id` | `base_part` |
+| base_part | `technical_definition.technical_profile.video.sprite_profile_ref.technology_id` | `technology` |
+| base_part | `technical_definition.technical_profile.video.technology_id` | `technology` |
+| base_part | `specification[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| base_part | `requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | campaign | `lead_actor_ids[]` | `actor` |
 | campaign | `launch_event_id` | `event` |
 | campaign | `subject_ids[]` | `product`, `technology`, `manufacturing_capability`, `actor`, `agreement`, `market_response` |
 | campaign | `presentation.stage[].actor_ids[]` | `actor` |
 | campaign | `process_id` | `process` |
+| device | `provider_actor_ids[]` | `actor` |
+| device | `technology_ids[]` | `technology` |
+| device | `composition_history[].technical_definition.compatible_computers[]` | `device` |
+| device | `composition_history[].technical_definition.compatible_with[]` | `device` |
+| device | `composition_history[].technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]` | `device` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.artemis.computer_id` | `device` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]` | `technology` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id` | `device` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]` | `technology` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.athena.computer_id` | `device` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.athena_server.computer_id` | `device` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.computer_id` | `device` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]` | `technology` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id` | `device` |
+| device | `composition_history[].technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]` | `technology` |
+| device | `composition_history[].technical_definition.memory_interface.expansion_id` | `device` |
+| device | `composition_history[].technical_definition.memory_interface.organization_id` | `technology` |
+| device | `composition_history[].technical_definition.memory_interface.system_controller_id` | `base_part` |
+| device | `composition_history[].technical_definition.physical_population.chip_id` | `base_part` |
+| device | `composition_history[].technical_definition.planned_compatible_with[]` | `device` |
+| device | `composition_history[].technical_definition.processor.part_id` | `base_part` |
+| device | `composition_history[].technical_definition.recommended_software_id` | `software_edition` |
+| device | `composition_history[].technical_definition.specification.api_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.base_controller_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.base_product_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.bridge_design_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.card_id` | `device` |
+| device | `composition_history[].technical_definition.specification.chip_type_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.class_protocol_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.controller_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.cpu_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.crt_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.display_controller_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.display_memory.chip_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.display_subassembly_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.feature_continuity_id` | `device` |
+| device | `composition_history[].technical_definition.specification.interface_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.keyboard_standard_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.legacy_card_id` | `device` |
+| device | `composition_history[].technical_definition.specification.link_layer_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id` | `manufacturing_capability` |
+| device | `composition_history[].technical_definition.specification.mechanism_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.memory_layout.policy_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.monitor_id` | `device` |
+| device | `composition_history[].technical_definition.specification.negotiation_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.palette_list_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.platform_rate_profiles[].computer_id` | `device` |
+| device | `composition_history[].technical_definition.specification.platform_rate_profiles[].technology_ids[]` | `technology` |
+| device | `composition_history[].technical_definition.specification.sprite_memory.chip_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification.sprite_profile_ref.technology_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.technology_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.transport_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.video_link_id` | `technology` |
+| device | `composition_history[].technical_definition.specification.video_ram_chip_id` | `base_part` |
+| device | `composition_history[].technical_definition.specification_id` | `technology` |
+| device | `composition_history[].technical_definition.technical_profile.memory.expanded_organization.controller_id` | `base_part` |
+| device | `composition_history[].technical_definition.technical_profile.memory.expansion_ref` | `device` |
+| device | `composition_history[].technical_definition.technical_profile.memory.organization.controller_id` | `base_part` |
+| device | `composition_history[].technical_definition.technical_profile.memory.organization_ref` | `technology` |
+| device | `composition_history[].technical_definition.technical_profile.memory.system_controller_ref` | `base_part` |
+| device | `composition_history[].technical_definition.technical_profile.network.computer_id` | `device` |
+| device | `composition_history[].technical_definition.technical_profile.networking.computer_id` | `device` |
+| device | `composition_history[].technical_definition.technical_profile.networking.technology_ids[]` | `technology` |
+| device | `composition_history[].technical_definition.technical_profile.software_compatibility.api_id` | `technology` |
+| device | `composition_history[].technical_definition.technical_profile.video.api_id` | `technology` |
+| device | `composition_history[].technical_definition.technical_profile.video.controller_id` | `base_part` |
+| device | `composition_history[].technical_definition.technical_profile.video.display_memory.chip_id` | `base_part` |
+| device | `composition_history[].technical_definition.technical_profile.video.feature_continuity_id` | `device` |
+| device | `composition_history[].technical_definition.technical_profile.video.memory_layout.policy_id` | `technology` |
+| device | `composition_history[].technical_definition.technical_profile.video.palette_list_id` | `technology` |
+| device | `composition_history[].technical_definition.technical_profile.video.sprite_memory.chip_id` | `base_part` |
+| device | `composition_history[].technical_definition.technical_profile.video.sprite_profile_ref.technology_id` | `technology` |
+| device | `composition_history[].technical_definition.technical_profile.video.technology_id` | `technology` |
+| device | `composition_history[].composition_definition[].entitlement.agreement_id` | `agreement` |
+| device | `composition_history[].composition_definition[].requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| device | `composition_history[].assembly_requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| device | `technical_definition.compatible_computers[]` | `device` |
+| device | `technical_definition.compatible_with[]` | `device` |
+| device | `technical_definition.expansion_socket_groups[].sockets[].compatible_device_ids[]` | `device` |
+| device | `technical_definition.host_qualification.device.base_computer.artemis.computer_id` | `device` |
+| device | `technical_definition.host_qualification.device.base_computer.artemis.technology_ids[]` | `technology` |
+| device | `technical_definition.host_qualification.device.base_computer.artemis_pro.computer_id` | `device` |
+| device | `technical_definition.host_qualification.device.base_computer.artemis_pro.technology_ids[]` | `technology` |
+| device | `technical_definition.host_qualification.device.base_computer.athena.computer_id` | `device` |
+| device | `technical_definition.host_qualification.device.base_computer.athena_server.computer_id` | `device` |
+| device | `technical_definition.host_qualification.device.base_computer.aurelia.computer_id` | `device` |
+| device | `technical_definition.host_qualification.device.base_computer.aurelia.technology_ids[]` | `technology` |
+| device | `technical_definition.host_qualification.device.base_computer.aurelia_plus.computer_id` | `device` |
+| device | `technical_definition.host_qualification.device.base_computer.aurelia_plus.technology_ids[]` | `technology` |
+| device | `technical_definition.memory_interface.expansion_id` | `device` |
+| device | `technical_definition.memory_interface.organization_id` | `technology` |
+| device | `technical_definition.memory_interface.system_controller_id` | `base_part` |
+| device | `technical_definition.physical_population.chip_id` | `base_part` |
+| device | `technical_definition.planned_compatible_with[]` | `device` |
+| device | `technical_definition.processor.part_id` | `base_part` |
+| device | `technical_definition.recommended_software_id` | `software_edition` |
+| device | `technical_definition.specification.api_id` | `technology` |
+| device | `technical_definition.specification.base_controller_id` | `base_part` |
+| device | `technical_definition.specification.base_product_id` | `base_part` |
+| device | `technical_definition.specification.bridge_design_id` | `technology` |
+| device | `technical_definition.specification.card_id` | `device` |
+| device | `technical_definition.specification.chip_type_id` | `base_part` |
+| device | `technical_definition.specification.class_protocol_id` | `technology` |
+| device | `technical_definition.specification.controller_id` | `base_part` |
+| device | `technical_definition.specification.cpu_id` | `base_part` |
+| device | `technical_definition.specification.crt_id` | `base_part` |
+| device | `technical_definition.specification.display_controller_id` | `base_part` |
+| device | `technical_definition.specification.display_memory.chip_id` | `base_part` |
+| device | `technical_definition.specification.display_subassembly_id` | `base_part` |
+| device | `technical_definition.specification.feature_continuity_id` | `device` |
+| device | `technical_definition.specification.interface_id` | `technology` |
+| device | `technical_definition.specification.keyboard_standard_id` | `technology` |
+| device | `technical_definition.specification.legacy_card_id` | `device` |
+| device | `technical_definition.specification.link_layer_id` | `technology` |
+| device | `technical_definition.specification.manufacturing_planning.recipe_variants[].manufacturing_capability_id` | `manufacturing_capability` |
+| device | `technical_definition.specification.mechanism_id` | `base_part` |
+| device | `technical_definition.specification.memory_layout.policy_id` | `technology` |
+| device | `technical_definition.specification.monitor_id` | `device` |
+| device | `technical_definition.specification.negotiation_id` | `technology` |
+| device | `technical_definition.specification.palette_list_id` | `technology` |
+| device | `technical_definition.specification.platform_rate_profiles[].computer_id` | `device` |
+| device | `technical_definition.specification.platform_rate_profiles[].technology_ids[]` | `technology` |
+| device | `technical_definition.specification.sprite_memory.chip_id` | `base_part` |
+| device | `technical_definition.specification.sprite_profile_ref.technology_id` | `technology` |
+| device | `technical_definition.specification.technology_id` | `technology` |
+| device | `technical_definition.specification.transport_id` | `technology` |
+| device | `technical_definition.specification.video_link_id` | `technology` |
+| device | `technical_definition.specification.video_ram_chip_id` | `base_part` |
+| device | `technical_definition.specification_id` | `technology` |
+| device | `technical_definition.technical_profile.memory.expanded_organization.controller_id` | `base_part` |
+| device | `technical_definition.technical_profile.memory.expansion_ref` | `device` |
+| device | `technical_definition.technical_profile.memory.organization.controller_id` | `base_part` |
+| device | `technical_definition.technical_profile.memory.organization_ref` | `technology` |
+| device | `technical_definition.technical_profile.memory.system_controller_ref` | `base_part` |
+| device | `technical_definition.technical_profile.network.computer_id` | `device` |
+| device | `technical_definition.technical_profile.networking.computer_id` | `device` |
+| device | `technical_definition.technical_profile.networking.technology_ids[]` | `technology` |
+| device | `technical_definition.technical_profile.software_compatibility.api_id` | `technology` |
+| device | `technical_definition.technical_profile.video.api_id` | `technology` |
+| device | `technical_definition.technical_profile.video.controller_id` | `base_part` |
+| device | `technical_definition.technical_profile.video.display_memory.chip_id` | `base_part` |
+| device | `technical_definition.technical_profile.video.feature_continuity_id` | `device` |
+| device | `technical_definition.technical_profile.video.memory_layout.policy_id` | `technology` |
+| device | `technical_definition.technical_profile.video.palette_list_id` | `technology` |
+| device | `technical_definition.technical_profile.video.sprite_memory.chip_id` | `base_part` |
+| device | `technical_definition.technical_profile.video.sprite_profile_ref.technology_id` | `technology` |
+| device | `technical_definition.technical_profile.video.technology_id` | `technology` |
+| device | `requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | event | `participant[].actor_id` | `actor` |
-| event | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
-| event | `inputs[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| event | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| event | `inputs[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | event | `inputs[].event_id` | `event` |
 | event | `inputs[].process_id` | `process` |
 | event | `inputs[].maturity.capability_id` | `manufacturing_capability` |
-| event | `outcomes[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| event | `outcomes[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | event | `outcomes[].event_id` | `event` |
 | event | `outcomes[].process_id` | `process` |
 | event | `outcomes[].maturity.capability_id` | `manufacturing_capability` |
@@ -714,26 +6003,27 @@ Every schema attribute marked `x-ref` appears here, including references inside 
 | manufacturing_capability | `location_id` | `location` |
 | manufacturing_capability | `technology_id` | `technology` |
 | manufacturing_capability | `product_ids[]` | `product` |
-| manufacturing_capability | `qualification_requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| manufacturing_capability | `qualification_requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | manufacturing_capability | `qualification_requirements[].event_id` | `event` |
 | manufacturing_capability | `qualification_requirements[].process_id` | `process` |
 | manufacturing_capability | `qualification_requirements[].maturity.capability_id` | `manufacturing_capability` |
+| manufacturing_capability | `base_part_ids[]` | `base_part` |
 | market_response | `respondent_actor_ids[]` | `actor` |
-| market_response | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| market_response | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | market_response | `trigger_ids[]` | `event`, `process`, `campaign`, `agreement` |
 | process | `participant[].actor_id` | `actor` |
-| process | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
-| process | `inputs[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| process | `subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| process | `inputs[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | process | `inputs[].event_id` | `event` |
 | process | `inputs[].process_id` | `process` |
 | process | `inputs[].maturity.capability_id` | `manufacturing_capability` |
-| process | `outcomes[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| process | `outcomes[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | process | `outcomes[].event_id` | `event` |
 | process | `outcomes[].process_id` | `process` |
 | process | `outcomes[].maturity.capability_id` | `manufacturing_capability` |
 | process | `period.start.value` | `event` |
 | process | `period.end.value` | `event` |
-| process | `steps[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology` |
+| process | `steps[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | process | `steps[].event_id` | `event` |
 | process | `steps[].process_id` | `process` |
 | process | `steps[].maturity.capability_id` | `manufacturing_capability` |
@@ -743,6 +6033,40 @@ Every schema attribute marked `x-ref` appears here, including references inside 
 | product | `provider_actor_ids[]` | `actor` |
 | product | `family_product_id` | `product` |
 | product | `technology_ids[]` | `technology` |
+| product | `technical_identity.record_id` | `base_part`, `device`, `software_edition` |
+| product | `launch_campaign_id` | `campaign` |
+| product | `composition_history[].composition_definition[].entitlement.agreement_id` | `agreement` |
+| product | `composition_history[].composition_definition[].requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| product | `composition_history[].assembly_requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| product | `requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| product | `service_definition.entitlements[].agreement_id` | `agreement` |
+| product | `service_definition.requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| software_edition | `provider_actor_ids[]` | `actor` |
+| software_edition | `technology_ids[]` | `technology` |
+| software_edition | `family_product_id` | `product` |
+| software_edition | `composition_history[].technical_definition.architecture.network_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.architecture.server` | `device` |
+| software_edition | `composition_history[].technical_definition.architecture.server_edition_id` | `software_edition` |
+| software_edition | `composition_history[].technical_definition.data_interchange.export_definition_id` | `software_edition` |
+| software_edition | `composition_history[].technical_definition.dependency_ids[]` | `device`, `software_edition`, `technology` |
+| software_edition | `composition_history[].technical_definition.embedded_abacus_integration_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.features_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.memory_discovery_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.network_link_policy.link_layer_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.platform_support[].computer_id` | `device`, `product` |
+| software_edition | `composition_history[].technical_definition.portability_contract.api_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.portable_runtime.api_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.portable_runtime.display_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.system_dependencies[].software_id` | `software_edition` |
+| software_edition | `composition_history[].technical_definition.technology_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.toolchain.host[]` | `device` |
+| software_edition | `composition_history[].technical_definition.toolchain.language_contract_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.toolchain.runtime_contract_id` | `technology` |
+| software_edition | `composition_history[].technical_definition.tui_ownership.consumers[]` | `software_edition` |
+| software_edition | `composition_history[].technical_definition.tui_ownership.interface_id` | `technology` |
+| software_edition | `composition_history[].composition_definition[].entitlement.agreement_id` | `agreement` |
+| software_edition | `composition_history[].composition_definition[].requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
+| software_edition | `composition_history[].assembly_requirements[].subject_ids[]` | `actor`, `actor_relationship`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition` |
 | technology | `owner_actor_ids[]` | `actor` |
 | technology | `related_technology_ids[]` | `technology` |
 
@@ -753,18 +6077,3 @@ All foundation envelopes and record/value objects reject undeclared properties. 
 The schema files and `tools/validate-model.js` remain authoritative for machine validation. This specification documents existing structures; it does not introduce new fields, approve records or alter story content.
 
 Regenerate this document after approved schema changes with `node tools/generate-foundation-spec.js` from the repository root.
-
-
-## Timeline categories and swim lanes
-
-Events and processes support an optional `category` string. The permitted non-empty values are `Adam's personal`, `Logix/AION investment`, `Product dev & launch`, `Ecosystem & Partners`, and `Competition`. An omitted field or `""` is empty; `null` and other spellings are invalid.
-
-Assign a category only to a top-level event or process. Children must leave it empty and inherit their root's category. Ownership comes from process steps, event-based period boundaries, `parent_process_id`, or event `process_ids`. Inputs, outcomes, subjects and related-process references do not establish ownership. The model validator rejects a non-empty category on an owned child. When reparenting a root, clear its category in the same approval batch. Campaigns use their execution process's category; they have no separate category field.
-
-The timeline displays five lightly colored vertical lanes, with an additional grey Uncategorised lane when matching records have no category. Each lane has a labeled collapse/expand button above the workspace. Collapse hides the lane and its cards, including undated entries, while leaving its button available. Controls work by keyboard and remain available in full screen. Lane visibility lasts until page reload; filter reset does not change it.
-
-All lanes share the global calendar. Collapsing a lane does not move date anchors. Overlapping root groups occupy parallel columns within their lane; nested work retains compact duration tracks. Horizontal scrolling accommodates wider lanes. Filtering retains inherited categories from the complete ownership tree even when an ancestor falls outside the selected date range. Unknown dates remain in the separate undated section and follow the same lane visibility controls.
-
-Categories describe the root programme's primary purpose. Semiconductor work under stepper installation remains Investment, and competitor events inside ecosystem programmes remain Ecosystem & Partners. Moving individual children into a different lane requires changing ownership, not assigning an override.
-
-Category assignments are story changes: submit one Changes confirm proposal per affected record. The UI and schema can be deployed before those proposals are approved; records remain Uncategorised until their root assignment is authorized.

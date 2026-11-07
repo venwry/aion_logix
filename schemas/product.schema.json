@@ -114,6 +114,111 @@
             "additionalProperties": false
           },
           "minItems": 0
+        },
+        "offering_category": {
+          "enum": [
+            "computer",
+            "computer_software_bundle",
+            "expansion_kit",
+            "software",
+            "computer_system",
+            "service"
+          ]
+        },
+        "technical_identity": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/identity"
+        },
+        "launch_campaign_id": {
+          "type": "string",
+          "pattern": "^(campaign)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "campaign"
+          ]
+        },
+        "composition_history": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/product_version"
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        },
+        "service_definition": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "minLength": 1
+            },
+            "entitlements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "service",
+                      "licence"
+                    ]
+                  },
+                  "count": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "scope": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "duration_value": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "duration_unit": {
+                    "enum": [
+                      "day",
+                      "month",
+                      "year"
+                    ]
+                  },
+                  "agreement_id": {
+                    "type": "string",
+                    "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+                    "x-ref": [
+                      "agreement"
+                    ]
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "count",
+                  "scope"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "requirements": {
+              "type": "array",
+              "items": {
+                "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+              }
+            }
+          },
+          "required": [
+            "description",
+            "entitlements",
+            "requirements"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [

@@ -108,3 +108,13 @@ Generated/untracked files are not source: `node_modules/` contains installed dep
 There are 99 maintained files in this handover inventory. Update this map whenever files are introduced or retired. The JSON specification documents every foundation field; the storytelling reference documents every active editorial file.
 
 Agreement clauses now live in `data_foundation/agreement.json`, validated by `schemas/agreement.schema.json#/$defs/clause`. The [agreement migration and timeline ownership report](AGREEMENT_MIGRATION_AND_TIMELINE_OWNERSHIP.md) lists the conversion policy and seven independent parent-cleanup proposals. Pre-migration clause data, schemas and authorization entries are preserved in `archived_no_longer_valid/model_0.4.0_agreement_migration/`.
+
+## Product-definition extension (0.7.0)
+
+- `data_foundation/base_part.json`, `device.json`, `software_edition.json`: canonical physical and executable definitions with external authorization.
+- `schemas/base_part.schema.json`, `device.schema.json`, `software_edition.schema.json`: strict new dataset contracts.
+- `schemas/composition.schema.json`, `technical.schema.json`: shared composition and nested technical definitions.
+- `code/composition.js`: explicit-version traversal and graph/engineering validation.
+- `tools/import-product-definitions.py`: pinned, definition-only importer.
+- `docs/PRODUCT_DEFINITION_IMPORT.md`, `docs/product-definition-import-audit.json`: import policy and source coverage evidence.
+- `tests/model/product-definitions.test.js`, `tests/fixtures/product-import-inventories.json`, `tests/product-definitions.spec.cjs`: source inventory parity, schema/approval boundaries and browser regression coverage.

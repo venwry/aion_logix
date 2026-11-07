@@ -3,7 +3,7 @@ import path from 'node:path';
 
 // Run from repository root. Only current foundation schemas determine this document.
 const names = fs.readdirSync('data_foundation').filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)).sort();
-const schemas = Object.fromEntries([...names, 'common'].map(n => [n, JSON.parse(fs.readFileSync(`schemas/${n}.schema.json`))]));
+const schemas = Object.fromEntries([...names, 'common', 'technical', 'composition'].map(n => [n, JSON.parse(fs.readFileSync(`schemas/${n}.schema.json`))]));
 function resolve(value, owner) {
   if(value['x-boundary'])return [{type:'object',properties:{value:{type:'string | null','x-ref':['event']},precision:{type:'string',enum:['year','month','day','event','unknown']}},required:['value','precision']},owner];
   if(value.oneOf?.[0]?.$ref)return resolve(value.oneOf[0],owner);
@@ -38,7 +38,7 @@ const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAl
 const tree = (name, diagram = false) => entities[name].map(f => `${'│  '.repeat(f.depth)}${f.depth ? '└─ ' : ''}${f.key}${f.required ? '*' : '?'}: ${f.type}${f.targets.length ? ' → ' + (f.targets.length === names.length ? 'any foundation ID' : f.targets.join(' / ')) : ''}`).map(s => diagram ? escape(s) : s);
 const lines = [
   '# Foundation dataset specification', '',
-  'This document describes the current foundation schema contract (version 0.6.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
+  'This document describes the current foundation schema contract (version 0.7.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
   '## Reading the diagram', '',
   '- Each entity represents one dataset file, whose envelope is `{ "dataset_name": [record, ...] }`. The entity contains the hierarchical structure of one record, not a sample record.',
   '- `*` means required within its immediate parent object; `?` means optional there. A required child does not make its optional parent required. Conditional requirements are specified below.',
@@ -80,7 +80,7 @@ const purpose = {
  narrative_period: 'Named intervals used to organize the story.',
  process: 'An activity extending through time, with participants and milestones.',
  programme: 'Historical coordinating activity.',
- product: 'Named product, service or software subject without composition.',
+ product: 'Commercial offering or narrative product identity; versioned composition and technical links.',
  technology: 'Technical concept or fabrication technology; dated changes belong to events/processes.',
  manufacturing_capability: 'Manufacturer- and recipe-scoped capability; maturity transitions are event outcomes.',
  market_response: 'Qualitative market reaction with timing supplied by its event/process carrier.'

@@ -73,3 +73,7 @@ flowchart LR
 ```
 
 The 0.5.0 migration removes current clause authorization entries because clauses are now owned by agreements. The removed entries and pre-migration clause data/schema are preserved under `archived_no_longer_valid/model_0.4.0_agreement_migration/`. Historical decision snapshots remain unchanged. Changed whole records are pending renewed authorization.
+
+## Product-definition import
+
+Contract 0.7.0 registers 15 datasets. The definition-only import creates fresh external Unauthorized entries for base parts, devices and software editions, with exact content hashes and no inherited decision IDs. Existing product/capability changes are queued for individual whole-record review. Import coverage lives in `docs/product-definition-import-audit.json`, not in foundation records or the append-only authorization decision history.

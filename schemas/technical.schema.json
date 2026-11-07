@@ -1,0 +1,4409 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/technical.schema.json",
+  "$defs": {
+    "requirement": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "kind": {
+          "enum": [
+            "selection",
+            "interface",
+            "electrical",
+            "mechanical",
+            "software",
+            "assembly",
+            "testing",
+            "reliability"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology",
+              "base_part",
+              "device",
+              "software_edition"
+            ]
+          }
+        }
+      },
+      "required": [
+        "number",
+        "kind",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "hardware": {
+      "type": "object",
+      "properties": {
+        "athena_qualification": {
+          "type": "string"
+        },
+        "capacity_kb": {
+          "type": "number"
+        },
+        "compatibility_note": {
+          "type": "string"
+        },
+        "compatible_computers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "device"
+            ]
+          }
+        },
+        "compatible_with": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "device"
+            ]
+          }
+        },
+        "configuration_requirements": {
+          "type": "object",
+          "properties": {
+            "external_application_cartridges_supported": {
+              "type": "boolean"
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "scope": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "connection": {
+          "type": "string"
+        },
+        "expansion_socket_groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "sockets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "capacity": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "compatible_device_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                        "x-ref": [
+                          "device"
+                        ]
+                      }
+                    },
+                    "connection": {
+                      "type": "string"
+                    },
+                    "device_quantity_limits": {
+                      "type": "object",
+                      "properties": {
+                        "device.aurelia_ram_16kb_card": {
+                          "type": "number"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "installation_multiple": {
+                      "type": "number"
+                    },
+                    "matched_modules": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "population_order": {
+                      "type": "string"
+                    },
+                    "requirements": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "firmware_contents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "form_factor": {
+          "type": "string"
+        },
+        "host_qualification": {
+          "type": "object",
+          "properties": {
+            "device.base_computer.artemis": {
+              "type": "object",
+              "properties": {
+                "computer_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                },
+                "implementation": {
+                  "type": "string"
+                },
+                "qualified_max_rate_kbps": {
+                  "type": "number"
+                },
+                "rate_policy": {
+                  "type": "string"
+                },
+                "supported_rates_kbps": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "technology_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                    "x-ref": [
+                      "technology"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "device.base_computer.artemis_pro": {
+              "type": "object",
+              "properties": {
+                "computer_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                },
+                "implementation": {
+                  "type": "string"
+                },
+                "qualified_max_rate_kbps": {
+                  "type": "number"
+                },
+                "rate_policy": {
+                  "type": "string"
+                },
+                "server_role": {
+                  "type": "boolean"
+                },
+                "supported_rates_kbps": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "technology_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                    "x-ref": [
+                      "technology"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "device.base_computer.athena": {
+              "type": "object",
+              "properties": {
+                "computer_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "device.base_computer.athena_server": {
+              "type": "object",
+              "properties": {
+                "computer_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "device.base_computer.aurelia": {
+              "type": "object",
+              "properties": {
+                "computer_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                },
+                "qualified_max_rate_kbps": {
+                  "type": "number"
+                },
+                "rate_policy": {
+                  "type": "string"
+                },
+                "supported_rates_kbps": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "technology_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                    "x-ref": [
+                      "technology"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "device.base_computer.aurelia_plus": {
+              "type": "object",
+              "properties": {
+                "computer_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                },
+                "qualified_max_rate_kbps": {
+                  "type": "number"
+                },
+                "rate_policy": {
+                  "type": "string"
+                },
+                "supported_rates_kbps": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "technology_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                    "x-ref": [
+                      "technology"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "integration_requirements": {
+          "type": "object",
+          "properties": {
+            "sourcing_policy": {
+              "type": "string"
+            },
+            "video_ram_policy": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "io_and_expansion": {
+          "type": "object",
+          "properties": {
+            "application_rom_cards_supported": {
+              "type": "boolean"
+            },
+            "dedicated_video_slot": {
+              "type": "object",
+              "properties": {
+                "general_purpose_slots_consumed": {
+                  "type": "number"
+                },
+                "hot_swap": {
+                  "type": "boolean"
+                },
+                "interface": {
+                  "type": "string"
+                },
+                "replaceable": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "eeprom_bios": {
+              "type": "object",
+              "properties": {
+                "capacity_kb": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "included": {
+                  "type": "boolean"
+                },
+                "purpose": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "expansion_slots": {
+              "type": "object",
+              "properties": {
+                "future_pin_area_reserved_for_bits": {
+                  "type": "number"
+                },
+                "plug_and_execute": {
+                  "type": "boolean"
+                },
+                "width_bits": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "rom_eeprom_cartridge_slots": {
+              "type": "object",
+              "properties": {
+                "front": {
+                  "type": "string"
+                },
+                "rear": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "manufacturing_planning": {
+          "type": "object",
+          "properties": {
+            "die_area_mm2": {
+              "type": "number"
+            },
+            "die_area_mm2_target": {
+              "type": "number"
+            },
+            "initial_manufacturer": {
+              "type": "string"
+            },
+            "node_um": {
+              "type": "number"
+            },
+            "policy": {
+              "type": "string"
+            },
+            "transistor_budget_target": {
+              "type": "number"
+            },
+            "wafer_diameter_mm": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "memory_constraints": {
+          "type": "object",
+          "properties": {
+            "max_ram_kib": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "mixed_module_types_allowed": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "memory_interface": {
+          "type": "object",
+          "properties": {
+            "expansion_id": {
+              "type": "string",
+              "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "device"
+              ]
+            },
+            "organization_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "system_controller_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "memory_mapping": {
+          "type": "object",
+          "properties": {
+            "application_memory": {
+              "type": "string"
+            },
+            "configuration": {
+              "type": "string"
+            },
+            "installation": {
+              "type": "string"
+            },
+            "normal_cpu_range": {
+              "type": "string"
+            },
+            "page_count": {
+              "type": "number"
+            },
+            "page_size_kb": {
+              "type": "number"
+            },
+            "service_calls": {
+              "type": "string"
+            },
+            "slot_count": {
+              "type": "number"
+            },
+            "system_workspace": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "packaging": {
+          "type": "string"
+        },
+        "physical_population": {
+          "type": "object",
+          "properties": {
+            "capacity_kb": {
+              "type": "number"
+            },
+            "chip_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "data_chip_count": {
+              "type": "number"
+            },
+            "data_width_bits": {
+              "type": "number"
+            },
+            "refresh_owner": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "planned_compatible_with": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "device"
+            ]
+          }
+        },
+        "processor": {
+          "type": "object",
+          "properties": {
+            "part_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "recommended_software_id": {
+          "type": "string",
+          "pattern": "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "software_edition"
+          ]
+        },
+        "role": {
+          "type": "string"
+        },
+        "slot_count": {
+          "type": "number"
+        },
+        "specification": {
+          "type": "object",
+          "properties": {
+            "acceleration": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "adaptation": {
+              "type": "string"
+            },
+            "adapter_requirements": {
+              "type": "object",
+              "properties": {
+                "buffer_policy": {
+                  "type": "string"
+                },
+                "flow_control": {
+                  "type": "string"
+                },
+                "hardware_services": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "host_service": {
+                  "type": "string"
+                },
+                "local_packet_ram_target_bytes": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "additions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "analog_chain": {
+              "type": "string"
+            },
+            "api_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "arbitration": {
+              "type": "string"
+            },
+            "array_columns": {
+              "type": "number"
+            },
+            "array_rows": {
+              "type": "number"
+            },
+            "bandwidth": {
+              "type": "string"
+            },
+            "bank_capacity_kb": {
+              "type": "number"
+            },
+            "bank_control": {
+              "type": "string"
+            },
+            "bank_data_width_bits": {
+              "type": "number"
+            },
+            "bank_organization": {
+              "type": "string"
+            },
+            "base_controller_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "base_product_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "beam_voltage_levels": {
+              "type": "number"
+            },
+            "bitmap_modes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "bits_per_pixel": {
+                    "type": "number"
+                  },
+                  "bytes_per_framebuffer": {
+                    "type": "number"
+                  },
+                  "compatibility_mode": {
+                    "type": "boolean"
+                  },
+                  "configurations": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "allocated_bytes": {
+                          "type": "number"
+                        },
+                        "framebuffer_bytes": {
+                          "type": "number"
+                        },
+                        "framebuffer_count": {
+                          "type": "number"
+                        },
+                        "palette_list_bytes": {
+                          "type": "number"
+                        },
+                        "remaining_video_ram_bytes": {
+                          "type": "number"
+                        },
+                        "sprite_count": {
+                          "type": "number"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "double_buffering": {
+                    "type": "boolean"
+                  },
+                  "framebuffer_bytes": {
+                    "type": "number"
+                  },
+                  "framebuffer_count": {
+                    "type": "number"
+                  },
+                  "height": {
+                    "type": "number"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "palette_grayscale_levels": {
+                    "type": "number"
+                  },
+                  "palette_list_bytes": {
+                    "type": "number"
+                  },
+                  "remaining_bytes": {
+                    "type": "number"
+                  },
+                  "remaining_video_ram_bytes": {
+                    "type": "number"
+                  },
+                  "required_raster_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "simultaneous_shades": {
+                    "type": "number"
+                  },
+                  "simultaneous_values": {
+                    "type": "number"
+                  },
+                  "sprites_available": {
+                    "type": "number"
+                  },
+                  "stride_bytes": {
+                    "type": "number"
+                  },
+                  "width": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "boot": {
+              "type": "string"
+            },
+            "bridge_design_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "buttons": {
+              "type": "number"
+            },
+            "capabilities": {
+              "type": "object",
+              "properties": {
+                "color_model": {
+                  "type": "string"
+                },
+                "maximum_pixel_clock_mhz": {
+                  "type": "number"
+                },
+                "palette_precision_bits": {
+                  "type": "number"
+                },
+                "preferred_raster_id": {
+                  "type": "string"
+                },
+                "programmable_palette": {
+                  "type": "boolean"
+                },
+                "protocol_version": {
+                  "type": "number"
+                },
+                "raster_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "capacity_bytes": {
+              "type": "number"
+            },
+            "capacity_kb": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "capacity_kbit": {
+              "type": "number"
+            },
+            "capacity_mb": {
+              "type": "number"
+            },
+            "card_id": {
+              "type": "string",
+              "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "device"
+              ]
+            },
+            "character_row_cache": {
+              "type": "object",
+              "properties": {
+                "banks": {
+                  "type": "number"
+                },
+                "bytes_per_bank": {
+                  "type": "number"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "total_bytes": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "chip_organization": {
+              "type": "string"
+            },
+            "chip_type_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "chips": {
+              "type": "number"
+            },
+            "chips_per_rank": {
+              "type": "number"
+            },
+            "class_protocol_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "clock_mhz": {
+              "type": "number"
+            },
+            "compatibility": {
+              "type": "string"
+            },
+            "connection": {
+              "type": "string"
+            },
+            "continuity": {
+              "type": "string"
+            },
+            "controller_die_count": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "controller_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "conversion": {
+              "type": "string"
+            },
+            "cpu_address_bits": {
+              "type": "number"
+            },
+            "cpu_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "crt_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "cursor_keys": {
+              "type": "string"
+            },
+            "data_width_bits": {
+              "type": "number"
+            },
+            "density": {
+              "type": "string"
+            },
+            "diagonal_inch": {
+              "type": "number"
+            },
+            "diagonal_inches": {
+              "type": "number"
+            },
+            "die_area_mm2": {
+              "type": "number"
+            },
+            "die_area_planning_mm2": {
+              "type": "number"
+            },
+            "digital_output_bits": {
+              "type": "number"
+            },
+            "disk_formats": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "disk_ii_interface": {
+              "type": "boolean"
+            },
+            "disk_interface": {
+              "type": "string"
+            },
+            "display_controller_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "display_memory": {
+              "type": "object",
+              "properties": {
+                "bank_data_width_bits": {
+                  "type": "number"
+                },
+                "capacity_bytes": {
+                  "type": "number"
+                },
+                "chip_count": {
+                  "type": "number"
+                },
+                "chip_id": {
+                  "type": "string",
+                  "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "base_part"
+                  ]
+                },
+                "organization": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "display_modes": {
+              "type": "string"
+            },
+            "display_subassembly_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "displayed_color_registers": {
+              "type": "number"
+            },
+            "displayed_registers": {
+              "type": "number"
+            },
+            "dma": {
+              "type": "object",
+              "properties": {
+                "active_transfer_engines": {
+                  "type": "number"
+                },
+                "address_steps": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "arbitration": {
+                  "type": "string"
+                },
+                "bank_selection": {
+                  "type": "string"
+                },
+                "completion": {
+                  "type": "string"
+                },
+                "destination_address_bits": {
+                  "type": "number"
+                },
+                "length_bits": {
+                  "type": "number"
+                },
+                "operations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "peripheral_scope": {
+                  "type": "string"
+                },
+                "transfer_contexts": {
+                  "type": "number"
+                },
+                "video_endpoint": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "dot_pitch_mm": {
+              "type": "number"
+            },
+            "electrical_contract": {
+              "type": "string"
+            },
+            "electrical_interface": {
+              "type": "string"
+            },
+            "ergonomics": {
+              "type": "string"
+            },
+            "execution": {
+              "type": "string"
+            },
+            "expansion_role": {
+              "type": "string"
+            },
+            "fdd_density": {
+              "type": "string"
+            },
+            "fdd_size_inch": {
+              "type": "number"
+            },
+            "feature_continuity_id": {
+              "type": "string",
+              "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "device"
+              ]
+            },
+            "flexibus_ports": {
+              "type": "number"
+            },
+            "format": {
+              "type": "string"
+            },
+            "formatted_capacity_kb": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "function_keys": {
+              "type": "string"
+            },
+            "grayscale_levels": {
+              "type": "number"
+            },
+            "hdd_bundled_with_standard_artemis": {
+              "type": "boolean"
+            },
+            "hdd_interface_supported": {
+              "type": "boolean"
+            },
+            "historical_raster": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "host_access": {
+              "type": "string"
+            },
+            "host_clock_mhz": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "host_integration": {
+              "type": "string"
+            },
+            "host_interface": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "host_width_bits": {
+                      "type": "number"
+                    },
+                    "hot_swap": {
+                      "type": "boolean"
+                    },
+                    "implementation": {
+                      "type": "string"
+                    },
+                    "local_display_width_bits": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "implementation": {
+              "type": "string"
+            },
+            "implementation_design": {
+              "type": "object",
+              "properties": {
+                "arbitration": {
+                  "type": "string"
+                },
+                "clock_targets": {
+                  "type": "object",
+                  "properties": {
+                    "high_resolution_pixel_mhz": {
+                      "type": "number"
+                    },
+                    "low_resolution_pixel_mhz": {
+                      "type": "number"
+                    },
+                    "master_mhz": {
+                      "type": "number"
+                    },
+                    "maximum_pixel_fifo_output_mbytes_per_second": {
+                      "type": "number"
+                    },
+                    "scope": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "engines": {
+                  "type": "object",
+                  "properties": {
+                    "fifo": {
+                      "type": "string"
+                    },
+                    "renderer": {
+                      "type": "string"
+                    },
+                    "scanout": {
+                      "type": "string"
+                    },
+                    "underrun": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "internal_buffers": {
+                  "type": "object",
+                  "properties": {
+                    "character_attribute_row_cache_bytes": {
+                      "type": "number"
+                    },
+                    "included_in_die_estimates": {
+                      "type": "boolean"
+                    },
+                    "next_character_attribute_row_cache_bytes": {
+                      "type": "number"
+                    },
+                    "pixel_bits": {
+                      "type": "number"
+                    },
+                    "pixel_fifo_bytes": {
+                      "type": "number"
+                    },
+                    "pixel_fifo_page_bytes": {
+                      "type": "number"
+                    },
+                    "pixel_fifo_page_count": {
+                      "type": "number"
+                    },
+                    "sprite_row_shifters_bytes": {
+                      "type": "number"
+                    },
+                    "sprite_staging_bytes": {
+                      "type": "number"
+                    },
+                    "total_storage_bytes": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "line_repeat": {
+                  "type": "string"
+                },
+                "manufacturing_planning": {
+                  "type": "object",
+                  "properties": {
+                    "die_area_mm2_at_3_5um_range": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "die_area_mm2_at_3um_range": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "die_area_mm2_central_at_3_5um": {
+                      "type": "number"
+                    },
+                    "die_area_mm2_central_at_3um": {
+                      "type": "number"
+                    },
+                    "external_functions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "process": {
+                      "type": "string"
+                    },
+                    "transistors_central": {
+                      "type": "number"
+                    },
+                    "transistors_range": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "sprite_access": {
+                  "type": "string"
+                },
+                "text_fetch": {
+                  "type": "string"
+                },
+                "timing_budget": {
+                  "type": "object",
+                  "properties": {
+                    "dram_random_cycle_target_ns": {
+                      "type": "number"
+                    },
+                    "fifo_total_drain_time_us_at_high_resolution": {
+                      "type": "number"
+                    },
+                    "fifo_total_pixels": {
+                      "type": "number"
+                    },
+                    "illustrative_read_time_us": {
+                      "type": "number"
+                    },
+                    "illustrative_total_reads_per_scanline": {
+                      "type": "number"
+                    },
+                    "maximum_sprite_row_bytes_per_scanline": {
+                      "type": "number"
+                    },
+                    "next_row_prefetch_average_bytes_per_scanline": {
+                      "type": "number"
+                    },
+                    "qualification": {
+                      "type": "string"
+                    },
+                    "sprite_pattern_fetch_time_us": {
+                      "type": "number"
+                    },
+                    "sprite_sram_cycle_target_ns": {
+                      "type": "number"
+                    },
+                    "text_glyph_reads_per_scanline": {
+                      "type": "number"
+                    },
+                    "two_ready_pages_drain_time_us": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "included_monitor": {
+              "type": "boolean"
+            },
+            "input": {
+              "type": "string"
+            },
+            "input_bits": {
+              "type": "number"
+            },
+            "installation": {
+              "type": "string"
+            },
+            "intensity_levels": {
+              "type": "number"
+            },
+            "interface": {
+              "type": "string"
+            },
+            "interface_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "key_count": {
+              "type": "number"
+            },
+            "keyboard_standard_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "legacy_card_id": {
+              "type": "string",
+              "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "device"
+              ]
+            },
+            "link_layer_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "local_packet_ram_target_bytes": {
+              "type": "number"
+            },
+            "local_ram_kb": {
+              "type": "number"
+            },
+            "manufacturer": {
+              "type": "string"
+            },
+            "manufacturing_planning": {
+              "type": "object",
+              "properties": {
+                "die_area_mm2": {
+                  "type": "number"
+                },
+                "die_area_mm2_central": {
+                  "type": "number"
+                },
+                "die_area_mm2_range": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "package_allowance_usd": {
+                  "type": "number"
+                },
+                "recipe_variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "defect_density_cm2": {
+                        "type": "number"
+                      },
+                      "die_area_mm2": {
+                        "type": "number"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "manufacturing_capability_id": {
+                        "type": "string",
+                        "pattern": "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$",
+                        "x-ref": [
+                          "manufacturing_capability"
+                        ]
+                      },
+                      "node_um": {
+                        "type": "string"
+                      },
+                      "processed_wafer_usd": {
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "revision_policy": {
+                  "type": "string"
+                },
+                "wafer_mm": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "manufacturing_recipe": {
+              "type": "string"
+            },
+            "maximum_shared_raw_rate_kbps": {
+              "type": "number"
+            },
+            "mechanism_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "media": {
+              "type": "string"
+            },
+            "media_access_control": {
+              "type": "string"
+            },
+            "memory_addressing_bytes": {
+              "type": "number"
+            },
+            "memory_layout": {
+              "type": "object",
+              "properties": {
+                "font_policy": {
+                  "type": "string"
+                },
+                "mode_exclusivity": {
+                  "type": "string"
+                },
+                "page_flip": {
+                  "type": "string"
+                },
+                "policy_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "memory_policy": {
+              "type": "string"
+            },
+            "mode_discovery": {
+              "type": "string"
+            },
+            "mode_limit": {
+              "type": "string"
+            },
+            "mode_policy": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "modules_per_bank": {
+              "type": "number"
+            },
+            "monitor_id": {
+              "type": "string",
+              "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "device"
+              ]
+            },
+            "monitor_modes": {
+              "type": "string"
+            },
+            "monitor_policy": {
+              "type": "string"
+            },
+            "native_raster": {
+              "type": "object",
+              "properties": {
+                "height": {
+                  "type": "number"
+                },
+                "horizontal_khz": {
+                  "type": "number"
+                },
+                "pixel_clock_mhz": {
+                  "type": "number"
+                },
+                "progressive": {
+                  "type": "boolean"
+                },
+                "refresh_hz_target": {
+                  "type": "number"
+                },
+                "total_lines": {
+                  "type": "number"
+                },
+                "total_pixels": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "navigation_section": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "negotiation_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "node_um": {
+              "type": "number"
+            },
+            "numeric_keypad": {
+              "type": "boolean"
+            },
+            "oem": {
+              "type": "string"
+            },
+            "oem_basis": {
+              "type": "string"
+            },
+            "organization": {
+              "type": "string"
+            },
+            "organization_words": {
+              "type": "number"
+            },
+            "output": {
+              "type": "string"
+            },
+            "package": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "page_size_kb": {
+              "type": "number"
+            },
+            "palette": {
+              "type": "string"
+            },
+            "palette_entries": {
+              "type": "number"
+            },
+            "palette_entry_bits": {
+              "type": "number"
+            },
+            "palette_grayscale_levels": {
+              "type": "number"
+            },
+            "palette_list": {
+              "type": "object",
+              "properties": {
+                "base_address": {
+                  "type": "string"
+                },
+                "cad_policy": {
+                  "type": "string"
+                },
+                "command_bytes": {
+                  "type": "number"
+                },
+                "encoding": {
+                  "type": "string"
+                },
+                "end_address": {
+                  "type": "string"
+                },
+                "execution": {
+                  "type": "string"
+                },
+                "frame_state": {
+                  "type": "string"
+                },
+                "long_gaps": {
+                  "type": "string"
+                },
+                "maximum_commands": {
+                  "type": "number"
+                },
+                "register_count": {
+                  "type": "number"
+                },
+                "reserved_bytes": {
+                  "type": "number"
+                },
+                "write_limit": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "palette_list_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "palette_registers": {
+              "type": "number"
+            },
+            "parity_bits": {
+              "type": "number"
+            },
+            "physical_arrangement": {
+              "type": "string"
+            },
+            "physical_population": {
+              "type": "object",
+              "properties": {
+                "bank_count": {
+                  "type": "number"
+                },
+                "bank_data_width_bits": {
+                  "type": "number"
+                },
+                "common_ram_included": {
+                  "type": "boolean"
+                },
+                "mapping_note": {
+                  "type": "string"
+                },
+                "parity_bits": {
+                  "type": "number"
+                },
+                "video_ram_separate": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "pixel_buffer": {
+              "type": "object",
+              "properties": {
+                "bits_per_pixel": {
+                  "type": "number"
+                },
+                "bytes_per_page": {
+                  "type": "number"
+                },
+                "location": {
+                  "type": "string"
+                },
+                "page_states": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "pages": {
+                  "type": "number"
+                },
+                "physical_organization": {
+                  "type": "string"
+                },
+                "pixels_per_page": {
+                  "type": "number"
+                },
+                "policy": {
+                  "type": "string"
+                },
+                "total_bytes": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "pixel_clock_mhz": {
+              "type": "number"
+            },
+            "platform_rate_profiles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "computer_id": {
+                    "type": "string",
+                    "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                    "x-ref": [
+                      "device"
+                    ]
+                  },
+                  "implementation": {
+                    "type": "string"
+                  },
+                  "qualified_max_rate_kbps": {
+                    "type": "number"
+                  },
+                  "rate_policy": {
+                    "type": "string"
+                  },
+                  "server_role": {
+                    "type": "boolean"
+                  },
+                  "supported_rates_kbps": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "technology_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "technology"
+                      ]
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "port_count": {
+              "type": "number"
+            },
+            "ports": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "power": {
+              "type": "string"
+            },
+            "purchase_boundary": {
+              "type": "string"
+            },
+            "qualification": {
+              "type": "string"
+            },
+            "random_cycle_target_ns": {
+              "type": "number"
+            },
+            "rank_capacity_kb": {
+              "type": "number"
+            },
+            "ranks": {
+              "type": "number"
+            },
+            "rate_scope": {
+              "type": "string"
+            },
+            "redraw": {
+              "type": "string"
+            },
+            "refresh": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "all_installed_banks": {
+                      "type": "boolean"
+                    },
+                    "independent_of_cpu": {
+                      "type": "boolean"
+                    },
+                    "scheduler": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string"
+                    },
+                    "supported_populations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "refresh_required": {
+              "type": "boolean"
+            },
+            "register_width_bits": {
+              "type": "number"
+            },
+            "reused_elements": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rgb_palette_mapping": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "rollers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "default_action": {
+                    "type": "string"
+                  },
+                  "position": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "scan": {
+              "type": "string"
+            },
+            "separate_sprite_sram_bytes": {
+              "type": "number"
+            },
+            "serial_register_bits": {
+              "type": "number"
+            },
+            "sides": {
+              "type": "number"
+            },
+            "signal_path": {
+              "type": "string"
+            },
+            "simultaneous_shades_at_640_200_4bpp": {
+              "type": "number"
+            },
+            "simultaneous_shades_at_800_600_2bpp": {
+              "type": "number"
+            },
+            "simultaneous_shades_with_128kb_card": {
+              "type": "number"
+            },
+            "size_inch": {
+              "type": "number"
+            },
+            "slot": {
+              "type": "string"
+            },
+            "software": {
+              "type": "string"
+            },
+            "speed_qualification_targets": {
+              "type": "object",
+              "properties": {
+                "basis": {
+                  "type": "string"
+                },
+                "conditions": {
+                  "type": "string"
+                },
+                "fallback_random_cycle_ns_range": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "fallback_row_access_ns": {
+                  "type": "number"
+                },
+                "preferred_random_cycle_ns": {
+                  "type": "number"
+                },
+                "preferred_row_access_ns": {
+                  "type": "number"
+                },
+                "stretch_row_access_ns": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "sprite_memory": {
+              "type": "object",
+              "properties": {
+                "bank_data_width_bits": {
+                  "type": "number"
+                },
+                "capacity_bytes": {
+                  "type": "number"
+                },
+                "chip_count": {
+                  "type": "number"
+                },
+                "chip_id": {
+                  "type": "string",
+                  "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "base_part"
+                  ]
+                },
+                "separate_bus": {
+                  "type": "boolean"
+                },
+                "separate_from_system_and_display_ram": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "sprite_physical_population": {
+              "type": "object",
+              "properties": {
+                "bank_data_width_bits": {
+                  "type": "number"
+                },
+                "separate_bus": {
+                  "type": "boolean"
+                },
+                "separate_from_system_and_display_ram": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "sprite_policy": {
+              "type": "string"
+            },
+            "sprite_profile_ref": {
+              "type": "object",
+              "properties": {
+                "profile": {
+                  "type": "string"
+                },
+                "technology_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "sprites": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "allocation_policy": {
+                      "type": "string"
+                    },
+                    "available_in_all_modes": {
+                      "type": "boolean"
+                    },
+                    "bits_per_pixel": {
+                      "type": "number"
+                    },
+                    "coordinate_space": {
+                      "type": "string"
+                    },
+                    "count": {
+                      "type": "number"
+                    },
+                    "descriptor_allocation_note": {
+                      "type": "string"
+                    },
+                    "descriptor_bank_count": {
+                      "type": "number"
+                    },
+                    "descriptor_bytes_per_sprite": {
+                      "type": "number"
+                    },
+                    "descriptor_bytes_total": {
+                      "type": "number"
+                    },
+                    "height": {
+                      "type": "number"
+                    },
+                    "maximum_per_scanline": {
+                      "type": "number"
+                    },
+                    "pattern_bytes_per_sprite": {
+                      "type": "number"
+                    },
+                    "pattern_bytes_total": {
+                      "type": "number"
+                    },
+                    "pattern_double_buffered": {
+                      "type": "boolean"
+                    },
+                    "priority": {
+                      "type": "string"
+                    },
+                    "registers": {
+                      "type": "string"
+                    },
+                    "reserved_sprite_sram_bytes": {
+                      "type": "number"
+                    },
+                    "spare_sprite_sram_bytes": {
+                      "type": "number"
+                    },
+                    "transparent_index": {
+                      "type": "number"
+                    },
+                    "width": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "startup_rate_kbps": {
+              "type": "number"
+            },
+            "supply_rails_v": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "number"
+              }
+            },
+            "supported_fdd_count": {
+              "type": "number"
+            },
+            "supported_rates_kbps": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "technology_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "text_modes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "attribute_format": {
+                    "type": "string"
+                  },
+                  "attribute_map_bytes_per_buffer": {
+                    "type": "number"
+                  },
+                  "character_count": {
+                    "type": "number"
+                  },
+                  "character_map_bytes_per_buffer": {
+                    "type": "number"
+                  },
+                  "columns": {
+                    "type": "number"
+                  },
+                  "configurations": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "allocated_bytes": {
+                          "type": "number"
+                        },
+                        "palette_list_bytes": {
+                          "type": "number"
+                        },
+                        "remaining_video_ram_bytes": {
+                          "type": "number"
+                        },
+                        "sprite_count": {
+                          "type": "number"
+                        },
+                        "text_buffer_count": {
+                          "type": "number"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "double_buffering": {
+                    "type": "boolean"
+                  },
+                  "font_bytes": {
+                    "type": "number"
+                  },
+                  "glyph_height": {
+                    "type": "number"
+                  },
+                  "glyph_width": {
+                    "type": "number"
+                  },
+                  "height": {
+                    "type": "number"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "ram_bytes_per_page": {
+                    "type": "number"
+                  },
+                  "required_raster_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "rows": {
+                    "type": "number"
+                  },
+                  "sprites_available": {
+                    "type": "number"
+                  },
+                  "width": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "timing_budget": {
+              "type": "object",
+              "properties": {
+                "page_drain_microseconds": {
+                  "type": "number"
+                },
+                "pixel_clock_mhz": {
+                  "type": "number"
+                },
+                "qualification": {
+                  "type": "string"
+                },
+                "renderer_pixels_per_step": {
+                  "type": "number"
+                },
+                "renderer_step_mhz": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "timing_target": {
+              "type": "object",
+              "properties": {
+                "horizontal_khz": {
+                  "type": "number"
+                },
+                "horizontal_total_pixels": {
+                  "type": "number"
+                },
+                "pixel_clock_mhz": {
+                  "type": "number"
+                },
+                "refresh_hz": {
+                  "type": "number"
+                },
+                "vertical_total_lines": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "tracking": {
+              "type": "string"
+            },
+            "transport_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "usable_from": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "video_link_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "video_physical_population": {
+              "type": "object",
+              "properties": {
+                "bank_data_width_bits": {
+                  "type": "number"
+                },
+                "separate_from_system_ram": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "video_ram_bytes": {
+              "type": "number"
+            },
+            "video_ram_chip_count": {
+              "type": "number"
+            },
+            "video_ram_chip_id": {
+              "type": "string",
+              "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "base_part"
+              ]
+            },
+            "video_ram_kb": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "specification_id": {
+          "type": "string",
+          "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "technology"
+          ]
+        },
+        "technical_profile": {
+          "type": "object",
+          "properties": {
+            "memory": {
+              "type": "object",
+              "properties": {
+                "bank_data_width_bits": {
+                  "type": "number"
+                },
+                "capacity_policy": {
+                  "type": "string"
+                },
+                "expanded_organization": {
+                  "type": "object",
+                  "properties": {
+                    "application_memory_profile": {
+                      "type": "string"
+                    },
+                    "common_system_ram_kb": {
+                      "type": "number"
+                    },
+                    "contiguous_lower_ram_kb": {
+                      "type": "number"
+                    },
+                    "controller_id": {
+                      "type": "string",
+                      "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "base_part"
+                      ]
+                    },
+                    "dma_addressing": {
+                      "type": "string"
+                    },
+                    "normal_view": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "description": {
+                            "type": "string"
+                          },
+                          "end": {
+                            "type": "string"
+                          },
+                          "role": {
+                            "type": "string"
+                          },
+                          "start": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "ram_kb": {
+                      "type": "number"
+                    },
+                    "refresh": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "expansion_ref": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                },
+                "organization": {
+                  "type": "object",
+                  "properties": {
+                    "application_memory_profile": {
+                      "type": "string"
+                    },
+                    "common_system_ram_kb": {
+                      "type": "number"
+                    },
+                    "contiguous_lower_ram_kb": {
+                      "type": "number"
+                    },
+                    "controller_id": {
+                      "type": "string",
+                      "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "base_part"
+                      ]
+                    },
+                    "dma_addressing": {
+                      "type": "string"
+                    },
+                    "normal_view": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "description": {
+                            "type": "string"
+                          },
+                          "end": {
+                            "type": "string"
+                          },
+                          "role": {
+                            "type": "string"
+                          },
+                          "start": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "refresh": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "organization_ref": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                },
+                "os_rom": {
+                  "type": "object",
+                  "properties": {
+                    "capacity_bytes": {
+                      "type": "number"
+                    },
+                    "execution": {
+                      "type": "string"
+                    },
+                    "implementation": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "parity_bits": {
+                  "type": "number"
+                },
+                "physical_population": {
+                  "type": "object",
+                  "properties": {
+                    "bank_count": {
+                      "type": "number"
+                    },
+                    "bank_data_width_bits": {
+                      "type": "number"
+                    },
+                    "common_ram_included": {
+                      "type": "boolean"
+                    },
+                    "mapping_note": {
+                      "type": "string"
+                    },
+                    "parity_bits": {
+                      "type": "number"
+                    },
+                    "video_ram_separate": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "population_policy": {
+                  "type": "string"
+                },
+                "reliability_policy": {
+                  "type": "string"
+                },
+                "sourcing_policy": {
+                  "type": "string"
+                },
+                "sprite_physical_population": {
+                  "type": "object",
+                  "properties": {
+                    "bank_data_width_bits": {
+                      "type": "number"
+                    },
+                    "separate_bus": {
+                      "type": "boolean"
+                    },
+                    "separate_from_system_and_display_ram": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "system_controller_ref": {
+                  "type": "string",
+                  "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "base_part"
+                  ]
+                },
+                "upgrade_policy": {
+                  "type": "string"
+                },
+                "video_physical_population": {
+                  "type": "object",
+                  "properties": {
+                    "bank_data_width_bits": {
+                      "type": "number"
+                    },
+                    "separate_from_system_ram": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "video_ram_policy": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "network": {
+              "type": "object",
+              "properties": {
+                "computer_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "networking": {
+              "type": "object",
+              "properties": {
+                "computer_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                },
+                "implementation": {
+                  "type": "string"
+                },
+                "qualified_max_rate_kbps": {
+                  "type": "number"
+                },
+                "rate_policy": {
+                  "type": "string"
+                },
+                "server_role": {
+                  "type": "boolean"
+                },
+                "supported_rates_kbps": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "technology_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                    "x-ref": [
+                      "technology"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "rom_and_cartridges": {
+              "type": "object",
+              "properties": {
+                "mainboard_rom": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "software_compatibility": {
+              "type": "object",
+              "properties": {
+                "adaptive_text": {
+                  "type": "string"
+                },
+                "api_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                },
+                "native_40_column_mode": {
+                  "type": "string"
+                },
+                "native_target": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "software_policy": {
+              "type": "string"
+            },
+            "video": {
+              "type": "object",
+              "properties": {
+                "api_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                },
+                "arbitration": {
+                  "type": "string"
+                },
+                "bitmap_modes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "bits_per_pixel": {
+                        "type": "number"
+                      },
+                      "bytes_per_framebuffer": {
+                        "type": "number"
+                      },
+                      "compatibility_mode": {
+                        "type": "boolean"
+                      },
+                      "configurations": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "allocated_bytes": {
+                              "type": "number"
+                            },
+                            "framebuffer_bytes": {
+                              "type": "number"
+                            },
+                            "framebuffer_count": {
+                              "type": "number"
+                            },
+                            "palette_list_bytes": {
+                              "type": "number"
+                            },
+                            "remaining_video_ram_bytes": {
+                              "type": "number"
+                            },
+                            "sprite_count": {
+                              "type": "number"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "double_buffering": {
+                        "type": "boolean"
+                      },
+                      "height": {
+                        "type": "number"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "required_raster_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "sprites_available": {
+                        "type": "number"
+                      },
+                      "stride_bytes": {
+                        "type": "number"
+                      },
+                      "width": {
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "character_row_cache": {
+                  "type": "object",
+                  "properties": {
+                    "banks": {
+                      "type": "number"
+                    },
+                    "bytes_per_bank": {
+                      "type": "number"
+                    },
+                    "purpose": {
+                      "type": "string"
+                    },
+                    "total_bytes": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "controller_id": {
+                  "type": "string",
+                  "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "base_part"
+                  ]
+                },
+                "display_memory": {
+                  "type": "object",
+                  "properties": {
+                    "bank_data_width_bits": {
+                      "type": "number"
+                    },
+                    "capacity_bytes": {
+                      "type": "number"
+                    },
+                    "chip_count": {
+                      "type": "number"
+                    },
+                    "chip_id": {
+                      "type": "string",
+                      "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "base_part"
+                      ]
+                    },
+                    "organization": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "feature_continuity_id": {
+                  "type": "string",
+                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device"
+                  ]
+                },
+                "host_interface": {
+                  "type": "object",
+                  "properties": {
+                    "host_width_bits": {
+                      "type": "number"
+                    },
+                    "hot_swap": {
+                      "type": "boolean"
+                    },
+                    "implementation": {
+                      "type": "string"
+                    },
+                    "local_display_width_bits": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "memory_layout": {
+                  "type": "object",
+                  "properties": {
+                    "font_policy": {
+                      "type": "string"
+                    },
+                    "mode_exclusivity": {
+                      "type": "string"
+                    },
+                    "page_flip": {
+                      "type": "string"
+                    },
+                    "policy_id": {
+                      "type": "string",
+                      "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "technology"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "mode_discovery": {
+                  "type": "string"
+                },
+                "monitor_policy": {
+                  "type": "string"
+                },
+                "palette_list_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                },
+                "pixel_buffer": {
+                  "type": "object",
+                  "properties": {
+                    "bits_per_pixel": {
+                      "type": "number"
+                    },
+                    "bytes_per_page": {
+                      "type": "number"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "page_states": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "pages": {
+                      "type": "number"
+                    },
+                    "physical_organization": {
+                      "type": "string"
+                    },
+                    "pixels_per_page": {
+                      "type": "number"
+                    },
+                    "policy": {
+                      "type": "string"
+                    },
+                    "total_bytes": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "sprite_memory": {
+                  "type": "object",
+                  "properties": {
+                    "bank_data_width_bits": {
+                      "type": "number"
+                    },
+                    "capacity_bytes": {
+                      "type": "number"
+                    },
+                    "chip_count": {
+                      "type": "number"
+                    },
+                    "chip_id": {
+                      "type": "string",
+                      "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "base_part"
+                      ]
+                    },
+                    "separate_bus": {
+                      "type": "boolean"
+                    },
+                    "separate_from_system_and_display_ram": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "sprite_physical_population": {
+                  "type": "object",
+                  "properties": {
+                    "bank_data_width_bits": {
+                      "type": "number"
+                    },
+                    "separate_bus": {
+                      "type": "boolean"
+                    },
+                    "separate_from_system_and_display_ram": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "sprite_profile_ref": {
+                  "type": "object",
+                  "properties": {
+                    "profile": {
+                      "type": "string"
+                    },
+                    "technology_id": {
+                      "type": "string",
+                      "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                      "x-ref": [
+                        "technology"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "technology_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                },
+                "text_modes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "attribute_format": {
+                        "type": "string"
+                      },
+                      "attribute_map_bytes_per_buffer": {
+                        "type": "number"
+                      },
+                      "character_count": {
+                        "type": "number"
+                      },
+                      "character_map_bytes_per_buffer": {
+                        "type": "number"
+                      },
+                      "columns": {
+                        "type": "number"
+                      },
+                      "configurations": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "allocated_bytes": {
+                              "type": "number"
+                            },
+                            "palette_list_bytes": {
+                              "type": "number"
+                            },
+                            "remaining_video_ram_bytes": {
+                              "type": "number"
+                            },
+                            "sprite_count": {
+                              "type": "number"
+                            },
+                            "text_buffer_count": {
+                              "type": "number"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "double_buffering": {
+                        "type": "boolean"
+                      },
+                      "font_bytes": {
+                        "type": "number"
+                      },
+                      "glyph_height": {
+                        "type": "number"
+                      },
+                      "glyph_width": {
+                        "type": "number"
+                      },
+                      "height": {
+                        "type": "number"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "ram_bytes_per_page": {
+                        "type": "number"
+                      },
+                      "required_raster_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "rows": {
+                        "type": "number"
+                      },
+                      "sprites_available": {
+                        "type": "number"
+                      },
+                      "width": {
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "timing_budget": {
+                  "type": "object",
+                  "properties": {
+                    "page_drain_microseconds": {
+                      "type": "number"
+                    },
+                    "pixel_clock_mhz": {
+                      "type": "number"
+                    },
+                    "qualification": {
+                      "type": "string"
+                    },
+                    "renderer_pixels_per_step": {
+                      "type": "number"
+                    },
+                    "renderer_step_mhz": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "video_physical_population": {
+                  "type": "object",
+                  "properties": {
+                    "bank_data_width_bits": {
+                      "type": "number"
+                    },
+                    "separate_from_system_ram": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "video_ram_kb": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "software": {
+      "type": "object",
+      "properties": {
+        "abacus_file_integration": {
+          "type": "object",
+          "properties": {
+            "concurrency": {
+              "type": "string"
+            },
+            "cross_version_policy": {
+              "type": "string"
+            },
+            "format_policy": {
+              "type": "string"
+            },
+            "formula_policy": {
+              "type": "string"
+            },
+            "memory_policy": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "save_policy": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "adds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "api_compatibility": {
+          "type": "string"
+        },
+        "architecture": {
+          "type": "object",
+          "properties": {
+            "client_server": {
+              "type": "boolean"
+            },
+            "database": {
+              "type": "string"
+            },
+            "network_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "resource_planning": {
+              "type": "object",
+              "properties": {
+                "basis": {
+                  "type": "string"
+                },
+                "illustrative_dram_budget_bytes": {
+                  "type": "object",
+                  "properties": {
+                    "applications": {
+                      "type": "number"
+                    },
+                    "filesystem_buffers": {
+                      "type": "number"
+                    },
+                    "kernel_state_tables_stacks": {
+                      "type": "number"
+                    },
+                    "process_translation_metadata": {
+                      "type": "number"
+                    },
+                    "services_patches_reserve": {
+                      "type": "number"
+                    },
+                    "terminal_ui_input": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "minimum_dram_bytes": {
+                  "type": "number"
+                },
+                "minimum_os_rom_bytes": {
+                  "type": "number"
+                },
+                "preferred_dram_bytes": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "server": {
+              "type": "string",
+              "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "device"
+              ]
+            },
+            "server_edition_id": {
+              "type": "string",
+              "pattern": "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "software_edition"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "artemis_native_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "base_version": {
+          "type": "string"
+        },
+        "compatibility_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compatibility_policy": {
+          "type": "object",
+          "properties": {
+            "applications": {
+              "type": "string"
+            },
+            "binary": {
+              "type": "string"
+            },
+            "certification": {
+              "type": "string"
+            },
+            "delivery": {
+              "type": "string"
+            },
+            "eligibility": {
+              "type": "string"
+            },
+            "hardware": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "components": {
+          "type": "object",
+          "properties": {
+            "mainboard_rom": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "system_cartridge": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "contents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data_interchange": {
+          "type": "object",
+          "properties": {
+            "bpi_continuity": {
+              "type": "string"
+            },
+            "contract": {
+              "type": "string"
+            },
+            "csv": {
+              "type": "string"
+            },
+            "export_definition_id": {
+              "type": "string",
+              "pattern": "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "software_edition"
+              ]
+            },
+            "migration": {
+              "type": "string"
+            },
+            "partner": {
+              "type": "string"
+            },
+            "vsam": {
+              "type": "string"
+            },
+            "vsam_conversion": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "dependency_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(device|software_edition|technology)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "device",
+              "software_edition",
+              "technology"
+            ]
+          }
+        },
+        "distribution": {
+          "type": "object",
+          "properties": {
+            "channel": {
+              "type": "string"
+            },
+            "data_access": {
+              "type": "string"
+            },
+            "disk_format": {
+              "type": "string"
+            },
+            "execution": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "fulfillment": {
+              "type": "string"
+            },
+            "installation": {
+              "type": "string"
+            },
+            "medium": {
+              "type": "string"
+            },
+            "network_operation": {
+              "type": "string"
+            },
+            "toolchain": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "embedded_abacus_integration_id": {
+          "type": "string",
+          "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "technology"
+          ]
+        },
+        "execution_target": {
+          "type": "string"
+        },
+        "explicitly_not_assumed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "features_id": {
+          "type": "string",
+          "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "technology"
+          ]
+        },
+        "forward_compatibility_commitment": {
+          "type": "object",
+          "properties": {
+            "delivery_requirements": {
+              "type": "string"
+            },
+            "exclusions": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "implementation": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "database": {
+                  "type": "string"
+                },
+                "language": {
+                  "type": "string"
+                },
+                "printing": {
+                  "type": "string"
+                },
+                "ui": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "internal_organization": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "diagram_label": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "residence": {
+                "type": "string"
+              },
+              "responsibility": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "internal_relationships": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "logix_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "memory_discovery_id": {
+          "type": "string",
+          "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "technology"
+          ]
+        },
+        "minimum_resources": {
+          "type": "object",
+          "properties": {
+            "application_ram_bytes": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "installed_ram_kb": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "rom_bytes": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "features": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "network_link_policy": {
+          "type": "object",
+          "properties": {
+            "driver_contract": {
+              "type": "string"
+            },
+            "link_layer_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "platform_policy": {
+          "type": "string"
+        },
+        "platform_support": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "computer_id": {
+                "type": "string",
+                "pattern": "^(device|product)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "device",
+                  "product"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "portability_contract": {
+          "type": "object",
+          "properties": {
+            "api_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "display": {
+              "type": "string"
+            },
+            "memory": {
+              "type": "string"
+            },
+            "migration": {
+              "type": "string"
+            },
+            "shared_logic": {
+              "type": "string"
+            },
+            "storage": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "portable_runtime": {
+          "type": "object",
+          "properties": {
+            "abi_policy": {
+              "type": "string"
+            },
+            "api_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "capability_discovery": {
+              "type": "string"
+            },
+            "display_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "implementation_target": {
+              "type": "string"
+            },
+            "ownership": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "programmatic_file_access": {
+          "type": "string"
+        },
+        "relationship": {
+          "type": "string"
+        },
+        "release_scope": {
+          "type": "object",
+          "properties": {
+            "acceptance_requirements": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "acceptance_workflow": {
+              "type": "string"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "later": {
+              "type": "string"
+            },
+            "later_milestones": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "launch": {
+              "type": "string"
+            },
+            "resource_policy": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "reporting": {
+          "type": "object",
+          "properties": {
+            "chart_types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "continuity": {
+              "type": "string"
+            },
+            "output": {
+              "type": "string"
+            },
+            "presentation": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "role": {
+          "type": "string"
+        },
+        "runtime_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "specification": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "adoption_pricing": {
+                  "type": "object",
+                  "properties": {
+                    "included_services_unchanged": {
+                      "type": "boolean"
+                    },
+                    "loss_treatment": {
+                      "type": "string"
+                    },
+                    "rationale": {
+                      "type": "string"
+                    },
+                    "reduction_pct": {
+                      "type": "number"
+                    },
+                    "reference_basis": {
+                      "type": "string"
+                    },
+                    "reference_retail_usd": {
+                      "type": "number"
+                    },
+                    "retail_usd": {
+                      "type": "number"
+                    },
+                    "rounding": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "baseline_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                },
+                "clients": {
+                  "type": "string"
+                },
+                "comdex_offering_id": {
+                  "type": "string",
+                  "pattern": "^(product)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "product"
+                  ]
+                },
+                "commercial_unit": {
+                  "type": "object",
+                  "properties": {
+                    "expansion": {
+                      "type": "string"
+                    },
+                    "hardware_included": {
+                      "type": "boolean"
+                    },
+                    "renewal": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "compatibility": {
+                  "type": "object",
+                  "properties": {
+                    "limits": {
+                      "type": "string"
+                    },
+                    "mechanism": {
+                      "type": "string"
+                    },
+                    "preserve": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "scope": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "development_host": {
+                  "type": "string"
+                },
+                "filesystem": {
+                  "type": "object",
+                  "properties": {
+                    "allocation_block_bytes": {
+                      "type": "number"
+                    },
+                    "block_identifier_bits": {
+                      "type": "number"
+                    },
+                    "design": {
+                      "type": "string"
+                    },
+                    "initial_qualification_volume_mb": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "later": {
+                      "type": "string"
+                    },
+                    "open_items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "qualification_note": {
+                      "type": "string"
+                    },
+                    "requirements": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "implementation_design": {
+                  "type": "object",
+                  "properties": {
+                    "acceptance_tests": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "architecture": {
+                      "type": "string"
+                    },
+                    "data_integrity": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "initial_limits": {
+                      "type": "object",
+                      "properties": {
+                        "client_policy": {
+                          "type": "string"
+                        },
+                        "concurrent_sessions_target": {
+                          "type": "number"
+                        },
+                        "server_ram_kb": {
+                          "type": "number"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "operations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "protocol": {
+                      "type": "object",
+                      "properties": {
+                        "duplicate_suppression": {
+                          "type": "string"
+                        },
+                        "fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "operations": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "transport": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "transactions": {
+                      "type": "object",
+                      "properties": {
+                        "buffer_policy": {
+                          "type": "string"
+                        },
+                        "checkpoint": {
+                          "type": "string"
+                        },
+                        "commit": {
+                          "type": "string"
+                        },
+                        "concurrency": {
+                          "type": "string"
+                        },
+                        "failure": {
+                          "type": "string"
+                        },
+                        "log_format": {
+                          "type": "string"
+                        },
+                        "recovery": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "memory_management": {
+                  "type": "object",
+                  "properties": {
+                    "initial": {
+                      "type": "string"
+                    },
+                    "later": {
+                      "type": "string"
+                    },
+                    "policy": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "minimum_shipping_configuration": {
+                  "type": "string"
+                },
+                "multitasking": {
+                  "type": "object",
+                  "properties": {
+                    "kernel": {
+                      "type": "string"
+                    },
+                    "limits": {
+                      "type": "string"
+                    },
+                    "requirements": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "ownership": {
+                  "type": "string"
+                },
+                "portable_api_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                },
+                "posix_direction": {
+                  "type": "object",
+                  "properties": {
+                    "conformance": {
+                      "type": "string"
+                    },
+                    "initial_target": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "later": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "priority_assessment": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "area": {
+                        "type": "string"
+                      },
+                      "complexity": {
+                        "type": "string"
+                      },
+                      "feasibility": {
+                        "type": "string"
+                      },
+                      "necessity": {
+                        "type": "string"
+                      },
+                      "priority": {
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "processor_architecture_id": {
+                  "type": "string",
+                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "technology"
+                  ]
+                },
+                "program_key": {
+                  "type": "string"
+                },
+                "qualification": {
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "rom_execution": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "mapping": {
+                      "type": "string"
+                    },
+                    "physical_implementation": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "server": {
+                  "type": "string"
+                },
+                "sponsored_deployment": {
+                  "type": "string"
+                },
+                "summary_export": {
+                  "type": "object",
+                  "properties": {
+                    "acceptance": {
+                      "type": "string"
+                    },
+                    "format": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "ui_contract": {
+                  "type": "object",
+                  "properties": {
+                    "implementation": {
+                      "type": "string"
+                    },
+                    "initial_target": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "memory": {
+                      "type": "string"
+                    },
+                    "next_generation": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "ui_layers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "layer": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "responsibility": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "user_access": {
+                  "type": "object",
+                  "properties": {
+                    "initial_target": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "later": {
+                      "type": "string"
+                    },
+                    "privilege": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "subcomponents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "system_dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "component_id": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "software_id": {
+                "type": "string",
+                "pattern": "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "software_edition"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "technology_id": {
+          "type": "string",
+          "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "technology"
+          ]
+        },
+        "toolchain": {
+          "type": "object",
+          "properties": {
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "development_workflow": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "host": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "device"
+                ]
+              }
+            },
+            "language_contract_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "layout_tests": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "optional_development_features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "profiles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "resource_tests": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "runtime_contract_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "target_isolation": {
+              "type": "string"
+            },
+            "targets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "tui_features": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "tui_integration": {
+          "type": "string"
+        },
+        "tui_ownership": {
+          "type": "object",
+          "properties": {
+            "boundary": {
+              "type": "string"
+            },
+            "consumers": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "software_edition"
+                ]
+              }
+            },
+            "interface_id": {
+              "type": "string",
+              "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "technology"
+              ]
+            },
+            "owner": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "validation": {
+          "type": "string"
+        },
+        "vanilla_architecture": {
+          "type": "object",
+          "properties": {
+            "application_entry": {
+              "type": "string"
+            },
+            "changes_from_1_3": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "execution_model": {
+              "type": "string"
+            },
+            "limits": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "memory_layout": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "purpose": {
+                    "type": "string"
+                  },
+                  "region": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "program_load_address": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "specification_item": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology",
+              "base_part",
+              "device",
+              "software_edition"
+            ]
+          }
+        }
+      },
+      "required": [
+        "number",
+        "type",
+        "description"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
