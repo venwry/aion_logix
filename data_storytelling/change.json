@@ -4,7 +4,7 @@
       "id": "change.birmingham_accident_and_aftermath",
       "category": "story",
       "title": "Birmingham, an accident and its aftermath",
-      "reason": "Rename process.birmingham_estate as requested and anchor its start to event.time_travel_arrival (1 January 1972), replacing event.identity. Approval covers the complete resulting process record.",
+      "reason": "Rename process.birmingham_estate as requested and anchor its start to event.time_travel_arrival (1 January 1972), replacing event.identity. Approval covers the complete resulting process record. Clear the arrival event’s category because it becomes an owned child of the process and inherits its category. Apply both records together.",
       "depends_on_ids": [],
       "elements": [
         {
@@ -145,6 +145,83 @@
               "actor.original_adam"
             ],
             "category": "Adam's personal"
+          }
+        },
+        {
+          "record_type": "event",
+          "record_id": "event.time_travel_arrival",
+          "before": {
+            "id": "event.time_travel_arrival",
+            "title": "Vincent arrives in 1972",
+            "kind": "arrival",
+            "description": "Vincent travels from his own time to 1 January 1972, bringing wide knowledge of the future.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "Vincent, before assuming Adam Pleskot’s identity"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Vincent has time-travel powers and knowledge of the original future.",
+                "subject_ids": [
+                  "assumption.identity"
+                ]
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Vincent can operate in the 1970s with wide knowledge of future events, demand and technology."
+              }
+            ],
+            "time": {
+              "value": "1972-01-01",
+              "precision": "day"
+            },
+            "subject_ids": [
+              "assumption.identity"
+            ],
+            "category": "Adam's personal"
+          },
+          "after": {
+            "id": "event.time_travel_arrival",
+            "title": "Vincent arrives in 1972",
+            "kind": "arrival",
+            "description": "Vincent travels from his own time to 1 January 1972, bringing wide knowledge of the future.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "Vincent, before assuming Adam Pleskot’s identity"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Vincent has time-travel powers and knowledge of the original future.",
+                "subject_ids": [
+                  "assumption.identity"
+                ]
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Vincent can operate in the 1970s with wide knowledge of future events, demand and technology."
+              }
+            ],
+            "time": {
+              "value": "1972-01-01",
+              "precision": "day"
+            },
+            "subject_ids": [
+              "assumption.identity"
+            ]
           }
         }
       ]
