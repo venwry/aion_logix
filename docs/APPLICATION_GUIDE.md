@@ -51,7 +51,7 @@ Authorized records display their state. Pending records have a checkbox in the l
 
 ## Shared details on both pages
 
-Nested fields appear as dotted names and values; lists of objects appear as compact tables. There are no collapsed data sections. The record's dataset link remains at the bottom.
+Nested fields appear as dotted names and values; lists of objects appear as compact tables. Composition histories use a version selector instead of a nested history table. Each option reads `version_number - description (effective_from - effective_until)`. The first stored version is selected initially; unknown boundaries remain `unknown`, open ends remain `open`, and event/process boundaries show their date (at its recorded precision) and referenced name. Below the selector, the chosen version has technical-definition fields, a composition table and an assembly-requirements table. Empty sections state that no entries are specified. Selecting a version changes only the view. The record's dataset link remains at the bottom.
 
 ### Tables
 

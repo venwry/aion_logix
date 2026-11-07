@@ -1,4 +1,5 @@
 import {$,el,human,typeOf,titleOf,references} from './shared.js';
+import {resolvePoint} from './temporal.js';
 
 let detailCleanups=[];
 
@@ -28,7 +29,7 @@ export function compactDetails(record,data,select){
   for(const id of values)grid.append(reference(id));group.append(grid);return group;
  }
  const isReferences=value=>Array.isArray(value)&&value.length>0&&value.every(v=>typeof v==='string'&&data.index.has(v));
- function valueNode(value,label='References',inTable=false){
+ function valueNode(value,label='References',inTable=false,cleanups=detailCleanups){
   if(isReferences(value))return referenceList(value,inTable?null:label);
   if(Array.isArray(value)){
    if(!value.length)return el('span','','[]');
@@ -37,7 +38,7 @@ export function compactDetails(record,data,select){
     const wrap=el('div','compact-table-scroll'),table=el('table','compact-value-table'),head=el('thead'),headRow=el('tr'),body=el('tbody'),colgroup=el('colgroup');
     for(const name of columns)colgroup.append(el('col'));
     for(const name of columns){const th=el('th');th.append(el('span','column-title',name));th.scope='col';headRow.append(th);}head.append(headRow);
-    for(const row of rows){const tr=el('tr');for(const name of columns){const td=el('td');td.append(row.has(name)?valueNode(row.get(name),name,true):el('span','','—'));tr.append(td);}body.append(tr);}
+    for(const row of rows){const tr=el('tr');for(const name of columns){const td=el('td');td.append(row.has(name)?valueNode(row.get(name),name,true,cleanups):el('span','','—'));tr.append(td);}body.append(tr);}
     table.append(colgroup,head,body);wrap.append(table);
     const headers=[...headRow.children],cols=[...colgroup.children];let widths=null,automatic=true;
     const contentText=v=>v==null?'':Array.isArray(v)?v.map(contentText).join(' '):typeof v==='object'?Object.values(v).map(contentText).join(' '):typeof v==='string'&&data.index.has(v)?v+' '+titleOf(data.index.get(v)):String(v);
@@ -61,18 +62,53 @@ export function compactDetails(record,data,select){
      handle.onpointerup=handle.onpointercancel=()=>{handle.onpointermove=null;};handle.onlostpointercapture=()=>{handle.onpointermove=null;};
      handle.onkeydown=event=>{if(!['ArrowLeft','ArrowRight','Home'].includes(event.key))return;event.preventDefault();freeze();change(event.key==='Home'?minimum(i):widths[i]+(event.key==='ArrowRight'?16:-16));};th.append(handle);
     });let lastWidth=-1;
-    const observer=new ResizeObserver(()=>{const available=wrap.clientWidth;if(available===lastWidth)return;lastWidth=available;if(automatic)autofit();});observer.observe(wrap);detailCleanups.push(()=>observer.disconnect());requestAnimationFrame(autofit);return wrap;
+    const observer=new ResizeObserver(()=>{const available=wrap.clientWidth;if(available===lastWidth)return;lastWidth=available;if(automatic)autofit();});observer.observe(wrap);cleanups.push(()=>observer.disconnect());requestAnimationFrame(autofit);return wrap;
    }
-   const span=el('span');value.forEach((v,i)=>{if(i)span.append(document.createTextNode(', '));span.append(valueNode(v,label,inTable));});return span;
+   const span=el('span');value.forEach((v,i)=>{if(i)span.append(document.createTextNode(', '));span.append(valueNode(v,label,inTable,cleanups));});return span;
   }
   if(value&&typeof value==='object')return el('span','',JSON.stringify(value));
   if(typeof value==='string'&&data.index.has(value))return reference(value);
   if(typeof value==='string'&&/^https?:\/\/\S+$/.test(value)){const link=el('a','',value);link.href=value;link.target='_blank';link.rel='noopener noreferrer';return link;}
   return el('span','',value===null?'null':String(value));
  }
+ function boundaryLabel(boundary){
+  if(!boundary||boundary.kind==='unknown')return 'unknown';
+  if(boundary.kind==='open')return 'open';
+  const target=data.index.get(boundary.event_id||boundary.process_id);
+  const point=boundary.kind==='event'?target?.time:resolvePoint(target?.period?.[boundary.boundary],data.index);
+  const name=target?titleOf(target):(boundary.event_id||boundary.process_id);
+  const label=boundary.kind==='process_boundary'?name+' — '+boundary.boundary:name;
+  return (point?.value?point.value:'unknown')+' · '+label;
+ }
+ function compositionHistory(versions){
+  const section=el('section','composition-history'),label=el('label','compact-key','Composition history'),picker=el('select','composition-version-select'),panel=el('div','composition-version-details');
+  picker.id='composition-version';label.htmlFor=picker.id;
+  section.append(label,picker,panel);
+  if(!versions.length){picker.disabled=true;picker.append(el('option','','No composition versions'));return section;}
+  for(const [i,version] of versions.entries()){
+   const option=el('option','',version.version_number+' - '+version.description+' ('+boundaryLabel(version.effective_from)+' - '+boundaryLabel(version.effective_until)+')');
+   option.value=String(i);picker.append(option);
+  }
+  const cleanups=[];
+  const clear=()=>{for(const cleanup of cleanups)cleanup();cleanups.length=0;};detailCleanups.push(clear);
+  function renderVersion(){
+   clear();panel.replaceChildren();const version=versions[Number(picker.value)];
+   for(const [key,title] of [['technical_definition','Technical definition'],['composition_definition','Composition definition'],['assembly_requirements','Assembly requirements']]){
+    const group=el('section','composition-section');group.dataset.field=key;group.append(el('h3','',title));const value=version[key];
+    if(!value||!Object.keys(value).length)group.append(el('p','composition-empty',key==='assembly_requirements'?'No assembly requirements specified.':key==='composition_definition'?'No composition entries specified.':'No technical definition specified.'));
+    else if(key==='technical_definition')for(const [name,item] of fields(value)){
+     const row=el('div','compact-field');row.append(el('strong','compact-key',name+': '),valueNode(item,name,false,cleanups));group.append(row);
+    }
+    else group.append(valueNode(value,title,false,cleanups));
+    panel.append(group);
+   }
+  }
+  picker.onchange=renderVersion;renderVersion();return section;
+ }
  const content=el('div','compact-fields');
  for(const [key,value] of fields(data.originals.get(record.id)||record)){
   if(key==='status')continue;
+  if(key==='composition_history'&&Array.isArray(value)){content.append(compositionHistory(value));continue;}
   const row=el('div','compact-field');if(isReferences(value))row.append(referenceList(value,key));else row.append(el('strong','compact-key',key+': '),key==='id'?el('span','record-id',value):valueNode(value,key));content.append(row);
  }
  host.append(content);
