@@ -40,6 +40,10 @@ Qualification concerns an existing object; it does not claim that the activity i
 
 Do not maintain reverse campaign/launch-event lists merely to repeat the product's authoritative launch links. Do not copy campaign product lists onto its execution process and each subprocess/event. A marketing execution process delivers marketing work; it does not create every product it promotes.
 
+When public introduction is a distinct result of campaign execution, one explained `result` outcome may identify the offerings introduced. It must describe introduction, not design, manufacture or unconditional shipment. Keep this scope at the responsible process; preparation, press, developer and follow-up events describe their own work and immediate dependencies without repeating the catalogue. Product-owned launch links remain authoritative.
+
+Story descriptions describe activities and their consequences. Repository filenames, import paths, authorization commentary and comparisons with the real historical timeline belong in editorial evidence, not event prose. Commercial prices and entitlements belong in product specifications; an event can distribute a price sheet without embedding its prices. Technical detail belongs in the canonical device or software edition, with activity references only where the detail is necessary to explain a dependency or result.
+
 Place deliverables at the process accountable for supplying them. Parent summaries should not repeat each child's product list. A parent may reference a distinct integrated output. A milestone can record a separate qualification, acceptance or decision without claiming the same product was created twice. Product inputs are appropriate only for commercial packages that are actually required; engineering work normally needs the canonical device or software edition instead.
 
 The same ID may legitimately occur in an input and an outcome when the meanings differ: an existing implementation is tested and its qualification result is recorded. Avoid a blanket uniqueness rule that would remove this distinction.
