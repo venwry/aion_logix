@@ -37,7 +37,7 @@ This is the current organisation of the maintained repository. [Current document
 
 `tools/validate-model.js` validates schema references, dates and graph rules. `tools/validate-foundation.js` adds editorial validation and optional complete authorization checks. `tools/generate-foundation-spec.js` generates `docs/data_model/FOUNDATION_SPECIFICATION.md`. Import tools are deliberately scoped and guarded; do not run them to overwrite reviewed data.
 
-`tools/verify-catalogue-phase3.js` is a read-only audit of the pending catalogue proposal set, using evidence under `data_storytelling/review_evidence/catalogue-phase3/`. It simulates approval in memory and requires the recorded source commit. Its pending-state checks are not intended to run unchanged after those proposals are approved.
+`tools/verify-catalogue-phase3.js` and `tools/verify-catalogue-phase4.js` are read-only audits of their respective catalogue proposal sets, using evidence under `data_storytelling/review_evidence/`. They simulate approval in memory against the recorded source baseline. The phase-4 audit also checks independent offering approvals and prerequisite-gated reverse-link cleanup. These tools require their complete proposal sets to remain pending; use the normal validators after those proposals are approved.
 
 `package.json` and `package-lock.json` define dependencies and commands. `playwright.config.cjs` configures browser tests and their local server. `Dockerfile`, `render.yaml` and `.dockerignore` configure deployment; `.gitignore` excludes generated assets, dependencies, test outputs and secrets. See the [editing guide](EDITING_GUIDE.md) for checks and [Render setup](RENDER_SETUP.md) for publication.
 

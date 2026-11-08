@@ -1,0 +1,2819 @@
+{
+  "phase": 4,
+  "status": "pending_changes_confirm",
+  "source_commit": "f4d9fa6d267359c6f7122197ff21d240b53eb738",
+  "scope": "Propose retirement of confirmed technical product aliases, artificial families, duplicate Team Edition/Academy labels and the unmodelled OEM placeholder. Assess all 30 previously uncertain offerings independently, proposing standalone definitions and earliest-availability campaign/event links under the author's instruction. Gate shared reverse-link cleanup on the affected offering approvals. Preserve canonical technical definitions, chronology, process ownership and current authorization; all foundation revisions remain pending Changes confirm.",
+  "source_files_sha256": {
+    "data_foundation/technology.json": "f9540de2493e4a9cad4e20cb7b1c057ad02bcd326bfc2d972292d3265ddf3fdf",
+    "data_foundation/software_edition.json": "6e2314a4a3b66bf9fb831cada738336d1ab9a6285040fe8c9d5bd856bc98bcee",
+    "data_foundation/event.json": "35d77df616a80a0b0570c7e7413f14a91c2e002f30adcdbf4b79a8f16515013d",
+    "data_foundation/location.json": "29f7c7a7d17823a86294c8f00f6670608d83793fd04e13e8fb3f1d86002eb410",
+    "data_foundation/campaign.json": "7f23b2f3c519caee11fb9df6e6cdcd974c74fb8c886e87760cb807124e92b2d5",
+    "data_foundation/process.json": "f159559f5451be3f1383df0e90b114f069a34d60ce2eefd78b3dc1d04dcca351",
+    "data_foundation/agreement.json": "4e4aa072af59e8f9740573e793c3bede795dba8a91a2f4b0621e77e04ca98951",
+    "data_foundation/actor.json": "fc20af964190cbf5469980ddde4b6bbdab6380017b494aece8a1ada5967a03d0",
+    "data_foundation/manufacturing_capability.json": "4b4c4395e828cb33f2f7249143f5be4793ac3606a2ac7fc560b5df58bd025ae9",
+    "data_foundation/assumption.json": "8c2f2348e8b69325a2649fcd1ae27f5dbcffa2303b96bdba223266f4358d5abc",
+    "data_foundation/market_response.json": "f01aeae3419d46f61675f86122e4638ce72eae4c2663e48a92dd51b977fbbf68",
+    "data_foundation/product.json": "5b7afb03bff200e1c5e0eed0f73e0743fc57ba3ab8da8f65df13f91a57f6b303",
+    "data_foundation/base_part.json": "1585101d10c2c30faa091872f821013536937e3bb0c691ea0ac8f63004e14468",
+    "data_foundation/external_products.json": "9e68a151ccfaa022efb7db2a497c87a1b5aa54fc85be015609f1ca2cc7a9ad60",
+    "data_foundation/device.json": "10bfc0f7e4c3eb99e1a89b204470e9dc3f42267bb1d11511eb9969698fc5230c",
+    "data_foundation/actor_relationship.json": "d8f1432265e38000d3eb5dd7271df94e66dc78d470a0bd51849041fc08d0bf0b",
+    "data_storytelling/source.json": "6f4d824a7fafc233463d8de03dee3d1f4d58dfb7c6b4436704057b79e173d9e9",
+    "data_storytelling/change_review.json": "f00c3b6a9ba6021a6bbf1d89d28dd14d63e0bdfa1db3bb8bda086ebbb011e06c",
+    "data_storytelling/reconciliation_issue.json": "8b655f4eca91283269eee2f46b2de250279367bfa6bc3dcc9d421061cd27e29a",
+    "data_storytelling/authorization.json": "83c683a34821da56db5f18975a9d8850f5fc40ed850ac6985114b43c374099a2",
+    "data_storytelling/authorization_decision.json": "54d1c13d648ad519900bd7a54991bc32cb33d5e596c613e42aed10d40ef8dddb",
+    "data_storytelling/manifest.json": "6c7842d1784c8a8a7853bae97143b5b64f3bca76b1fa8b988f52c2db02f2c887",
+    "data_storytelling/annotation.json": "2f403e724b1adfe8d67a0aa67fd47a926bb919bd3663a87f6a026cd3be70bf51"
+  },
+  "retirements": [
+    {
+      "record_id": "product.software_aion_development_team",
+      "action": "consolidate_team_alias",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "reason": "Consolidate the commercial alias into product.aion_development_team; retain the distinct canonical software implementation."
+    },
+    {
+      "record_id": "product.edition_aion_development_team_era_client",
+      "action": "consolidate_team_alias",
+      "canonical_definition_id": "software_edition.aion_development_team.era_client",
+      "reason": "Consolidate the commercial alias into product.aion_development_team; retain the distinct canonical software implementation."
+    },
+    {
+      "record_id": "product.edition_aion_development_team_z80_client",
+      "action": "consolidate_team_alias",
+      "canonical_definition_id": "software_edition.aion_development_team.z80_client",
+      "reason": "Consolidate the commercial alias into product.aion_development_team; retain the distinct canonical software implementation."
+    },
+    {
+      "record_id": "product.service_academy_before_you_buy",
+      "action": "consolidate_service_group",
+      "canonical_definition_id": "product.academy_course_1",
+      "reason": "Consolidate the duplicate Academy label into existing concrete course definitions and process scope."
+    },
+    {
+      "record_id": "product.service_academy_regular_courses",
+      "action": "consolidate_service_group",
+      "canonical_definition_id": null,
+      "reason": "Consolidate the duplicate Academy label into existing concrete course definitions and process scope."
+    },
+    {
+      "record_id": "product.service_academy_direct_sales",
+      "action": "relocate_operational_concept",
+      "canonical_definition_id": "process.academy",
+      "reason": "Ordering at Academy offices is an operating activity already described by process.academy, not a separately offered product."
+    },
+    {
+      "record_id": "product.service_component_licensing",
+      "action": "defer_oem_concept",
+      "canonical_definition_id": null,
+      "reason": "Remove the unreferenced component-licensing placeholder without introducing an OEM sales model."
+    },
+    {
+      "record_id": "product.device_base_computer_artemis",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "device.base_computer.artemis",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.device_base_computer_artemis_pro",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "device.base_computer.artemis_pro",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.device_subsystem_aurelia_video",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "device.subsystem.aurelia.video",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.device_subsystem_aurelia_plus_video",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "device.subsystem.aurelia_plus.video",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_aion_4116",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.aion_4116",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_aion_4164",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.aion_4164",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_artemis_graphics_chip_64kb",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.artemis_graphics_chip_64kb",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_aurelia_system_controller",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.aurelia_system_controller",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_aurelia_video_chip",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.aurelia_video_chip",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_color_pro_monitor_controller",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.color_pro_monitor_controller",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_era2_12mhz",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.era2_12mhz",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_erav1_6mhz",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.erav1_6mhz",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_erav1_8mhz",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.erav1_8mhz",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_flexibus_device_controller",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.flexibus_device_controller",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_flexibus_host_controller",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.flexibus_host_controller",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.part_mpi_mp40_mechanism",
+      "action": "retire_technical_alias",
+      "canonical_definition_id": "base_part.mpi_mp40_mechanism",
+      "reason": "Retire a catalogue alias for an existing canonical technical definition; preserve the base part/device and all technical compositions."
+    },
+    {
+      "record_id": "product.family_aurelia",
+      "action": "remove_artificial_family",
+      "canonical_definition_id": null,
+      "reason": "Remove an artificial catalogue family; preserve scope in owning narrative and direct meaningful relationships."
+    },
+    {
+      "record_id": "product.family_artemis",
+      "action": "remove_artificial_family",
+      "canonical_definition_id": null,
+      "reason": "Remove an artificial catalogue family; preserve scope in owning narrative and direct meaningful relationships."
+    },
+    {
+      "record_id": "product.family_athena",
+      "action": "remove_artificial_family",
+      "canonical_definition_id": null,
+      "reason": "Remove an artificial catalogue family; preserve scope in owning narrative and direct meaningful relationships."
+    },
+    {
+      "record_id": "product.family_team_edition",
+      "action": "remove_artificial_family",
+      "canonical_definition_id": "product.aion_development_team",
+      "reason": "Remove an artificial catalogue family; preserve scope in owning narrative and direct meaningful relationships."
+    }
+  ],
+  "reference_dispositions": [
+    {
+      "record_id": "event.mpi",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.part_mpi_mp40_mechanism",
+      "reason": "Record the purchasing/manufacturing decision against the bare printer mechanism. The agreement does not deliver a finished FlexiPrint40 printer.",
+      "canonical_definition_id": "base_part.mpi_mp40_mechanism",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "base_part.mpi_mp40_mechanism"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.academy",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.service_academy_before_you_buy",
+      "reason": "The founding event creates the Academy organisation and prepares facilities. Course delivery and ordering operations belong to process.academy, not duplicate product placeholders.",
+      "canonical_definition_id": "product.academy_course_1",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.academy",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.service_academy_direct_sales",
+      "reason": "The founding event creates the Academy organisation and prepares facilities. Course delivery and ordering operations belong to process.academy, not duplicate product placeholders.",
+      "canonical_definition_id": "process.academy",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "pointer": "/subject_ids/5",
+      "retired_id": "product.service_academy_before_you_buy",
+      "reason": "Identify the advertised before-you-buy service as the existing Fundamentals course. Preserve ordering and purchase-credit facts in the existing outcome; remove the sales-channel pseudo-product and unexplained prior-event subjects.",
+      "canonical_definition_id": "product.academy_course_1",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/subject_ids/3",
+          "ref_id": "product.academy_course_1"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "pointer": "/subject_ids/6",
+      "retired_id": "product.service_academy_direct_sales",
+      "reason": "Identify the advertised before-you-buy service as the existing Fundamentals course. Preserve ordering and purchase-credit facts in the existing outcome; remove the sales-channel pseudo-product and unexplained prior-event subjects.",
+      "canonical_definition_id": "process.academy",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.smc_agreement",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.part_flexibus_host_controller",
+      "reason": "Represent the agreement scope as a decision about canonical chips; remove the merely earlier Aurelia launch reference. The agreement does not itself qualify or ship every part.",
+      "canonical_definition_id": "base_part.flexibus_host_controller",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "base_part.flexibus_host_controller"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.smc_agreement",
+      "pointer": "/subject_ids/2",
+      "retired_id": "product.part_flexibus_device_controller",
+      "reason": "Represent the agreement scope as a decision about canonical chips; remove the merely earlier Aurelia launch reference. The agreement does not itself qualify or ship every part.",
+      "canonical_definition_id": "base_part.flexibus_device_controller",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/1",
+          "ref_id": "base_part.flexibus_device_controller"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.smc_agreement",
+      "pointer": "/subject_ids/3",
+      "retired_id": "product.part_aurelia_video_chip",
+      "reason": "Represent the agreement scope as a decision about canonical chips; remove the merely earlier Aurelia launch reference. The agreement does not itself qualify or ship every part.",
+      "canonical_definition_id": "base_part.aurelia_video_chip",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/2",
+          "ref_id": "base_part.aurelia_video_chip"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.smc_agreement",
+      "pointer": "/subject_ids/4",
+      "retired_id": "product.part_aion_4116",
+      "reason": "Represent the agreement scope as a decision about canonical chips; remove the merely earlier Aurelia launch reference. The agreement does not itself qualify or ship every part.",
+      "canonical_definition_id": "base_part.aion_4116",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/3",
+          "ref_id": "base_part.aion_4116"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.smc_sales",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.part_flexibus_host_controller",
+      "reason": "Use the enabling agreement milestone as an input and describe staged availability against canonical chip definitions; preserve the existing independent SMC fabrication and qualification limits.",
+      "canonical_definition_id": "base_part.flexibus_host_controller",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "base_part.flexibus_host_controller"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.smc_sales",
+      "pointer": "/subject_ids/2",
+      "retired_id": "product.part_flexibus_device_controller",
+      "reason": "Use the enabling agreement milestone as an input and describe staged availability against canonical chip definitions; preserve the existing independent SMC fabrication and qualification limits.",
+      "canonical_definition_id": "base_part.flexibus_device_controller",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/1",
+          "ref_id": "base_part.flexibus_device_controller"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.smc_sales",
+      "pointer": "/subject_ids/3",
+      "retired_id": "product.part_aurelia_video_chip",
+      "reason": "Use the enabling agreement milestone as an input and describe staged availability against canonical chip definitions; preserve the existing independent SMC fabrication and qualification limits.",
+      "canonical_definition_id": "base_part.aurelia_video_chip",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/2",
+          "ref_id": "base_part.aurelia_video_chip"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.smc_sales",
+      "pointer": "/subject_ids/4",
+      "retired_id": "product.part_aion_4116",
+      "reason": "Use the enabling agreement milestone as an input and describe staged availability against canonical chip definitions; preserve the existing independent SMC fabrication and qualification limits.",
+      "canonical_definition_id": "base_part.aion_4116",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/3",
+          "ref_id": "base_part.aion_4116"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "pointer": "/subject_ids/8",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove the internal 4164 chip from the launch subject list. Its system-memory role remains in the launch description and canonical hardware composition; the event does not market a separate RAM-chip offering.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.dram_control_release",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.dram_repair_release",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.dram_275_review",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.team_pilots",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Replace the Team Edition alias with the direct role of the retained package or its server/client implementations; no new separate offering or qualification success is inferred.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/inputs/0/subject_ids/0",
+          "ref_id": "software_edition.aion_development_team"
+        },
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "software_edition.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.team_dealer_training",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Replace the Team Edition alias with the direct role of the retained package or its server/client implementations; no new separate offering or qualification success is inferred.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/inputs/1/subject_ids/0",
+          "ref_id": "software_edition.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.team_launch",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Consolidate the initial-launch association onto the existing Team Edition package. Retain this explicit temporary exception until product launch links are assigned in the launch phase.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.team_followup",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Replace the Team Edition alias with the direct role of the retained package or its server/client implementations; no new separate offering or qualification success is inferred.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.cost_review_1982",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Describe the actual DRAM cost-review scope as an explained input against its base part, without adding future recipes or asserting a favourable review result.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/inputs/0/subject_ids/0",
+          "ref_id": "base_part.aion_4164"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.dram_2_release",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.ncc83_athena_premiere",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.part_era2_12mhz",
+      "reason": "Remove the internal processor product and general OS subject. Preserve the direct silicon-development input and describe the OS presentation requirement without asserting shipment or qualification.",
+      "canonical_definition_id": "base_part.era2_12mhz",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.athena_production_review",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.part_era2_12mhz",
+      "reason": "Express the directly tested silicon and OS requirements against canonical definitions. The prior conference is chronology, not a technical prerequisite; preserve the existing silicon-development input and qualification gates.",
+      "canonical_definition_id": "base_part.era2_12mhz",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/inputs/1/subject_ids/0",
+          "ref_id": "base_part.era2_12mhz"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "event.dram_15_release",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.ncc1980_followup",
+      "pointer": "/outcomes/0/subject_ids/1",
+      "retired_id": "product.family_artemis",
+      "reason": "Keep the direct Artemis launch prerequisite and the Academy/regional-office results. The narrative defines Artemis-line training scope without a family pseudo-product or a repeated top-level context link.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "event.ncc1980_followup",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.family_artemis",
+      "reason": "Keep the direct Artemis launch prerequisite and the Academy/regional-office results. The narrative defines Artemis-line training scope without a family pseudo-product or a repeated top-level context link.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.ncc1978",
+      "pointer": "/subject_ids/11",
+      "retired_id": "product.service_academy_before_you_buy",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": "product.academy_course_1",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/subject_ids/11",
+          "ref_id": "product.academy_course_1"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "campaign.ncc1978",
+      "pointer": "/subject_ids/12",
+      "retired_id": "product.service_academy_direct_sales",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": "process.academy",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.ncc1978",
+      "pointer": "/subject_ids/15",
+      "retired_id": "product.family_aurelia",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.ncc1979",
+      "pointer": "/subject_ids/4",
+      "retired_id": "product.family_aurelia",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "pointer": "/subject_ids/18",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "pointer": "/subject_ids/19",
+      "retired_id": "product.family_artemis",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.comdex1979",
+      "pointer": "/subject_ids/13",
+      "retired_id": "product.family_aurelia",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.comdex1982",
+      "pointer": "/subject_ids/12",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.comdex1982",
+      "pointer": "/subject_ids/19",
+      "retired_id": "product.family_artemis",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [
+        {
+          "pointer": "/subject_ids/12",
+          "ref_id": "product.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "pointer": "/subject_ids/13",
+      "retired_id": "product.family_artemis",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.comdex1981",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.comdex1981",
+      "pointer": "/subject_ids/2",
+      "retired_id": "product.family_team_edition",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": "product.aion_development_team",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/subject_ids/0",
+          "ref_id": "product.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "campaign.comdex1980",
+      "pointer": "/subject_ids/5",
+      "retired_id": "product.family_artemis",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.ncc1981",
+      "pointer": "/subject_ids/11",
+      "retired_id": "product.family_artemis",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.ncc1983",
+      "pointer": "/subject_ids/2",
+      "retired_id": "product.part_era2_12mhz",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": "base_part.era2_12mhz",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.ncc1983",
+      "pointer": "/subject_ids/4",
+      "retired_id": "product.family_athena",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "campaign.clone_january1982",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.family_artemis",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.era2_development",
+      "pointer": "/outcomes/0/subject_ids/0",
+      "retired_id": "product.part_era2_12mhz",
+      "reason": "Deliver canonical ERA2 silicon and architecture; preserve the parent coordination narrative without duplicating integrated system outputs from the Athena workstream or retaining a family/chip catalogue list.",
+      "canonical_definition_id": "base_part.era2_12mhz",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "base_part.era2_12mhz"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.era2_development",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.part_era2_12mhz",
+      "reason": "Deliver canonical ERA2 silicon and architecture; preserve the parent coordination narrative without duplicating integrated system outputs from the Athena workstream or retaining a family/chip catalogue list.",
+      "canonical_definition_id": "base_part.era2_12mhz",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "base_part.era2_12mhz"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.academy",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.service_academy_before_you_buy",
+      "reason": "The Academy process already owns the concrete course deliverables and stock-conditional ordering policy. Remove duplicate course-group and sales-channel products; avoid claiming later or unresolved services as launch deliverables.",
+      "canonical_definition_id": "product.academy_course_1",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/5/subject_ids/0",
+          "ref_id": "product.academy_course_1"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.academy",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.service_academy_regular_courses",
+      "reason": "The Academy process already owns the concrete course deliverables and stock-conditional ordering policy. Remove duplicate course-group and sales-channel products; avoid claiming later or unresolved services as launch deliverables.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.academy",
+      "pointer": "/subject_ids/3",
+      "retired_id": "product.service_academy_direct_sales",
+      "reason": "The Academy process already owns the concrete course deliverables and stock-conditional ordering policy. Remove duplicate course-group and sales-channel products; avoid claiming later or unresolved services as launch deliverables.",
+      "canonical_definition_id": "process.academy",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/id",
+          "ref_id": "process.academy"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.ncc1979_campaign",
+      "pointer": "/subject_ids/4",
+      "retired_id": "product.family_aurelia",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.comdex1979_campaign",
+      "pointer": "/steps/0/subject_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Qualify the actual Aurelia+ demonstration configuration rather than promote an internal memory-chip alias. The canonical computer composition retains its chip requirements.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.comdex1981_campaign",
+      "pointer": "/outcomes/0/subject_ids/1",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Remove duplicated package lists from the marketing execution process; the delivery process owns the package outcome and the event/campaign retain the unresolved launch association.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.comdex1981_campaign",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Remove duplicated package lists from the marketing execution process; the delivery process owns the package outcome and the event/campaign retain the unresolved launch association.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.comdex1981_campaign",
+      "pointer": "/subject_ids/2",
+      "retired_id": "product.family_team_edition",
+      "reason": "Remove duplicated package lists from the marketing execution process; the delivery process owns the package outcome and the event/campaign retain the unresolved launch association.",
+      "canonical_definition_id": "product.aion_development_team",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.comdex1980_campaign",
+      "pointer": "/subject_ids/5",
+      "retired_id": "product.family_artemis",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.ncc1983_campaign",
+      "pointer": "/subject_ids/2",
+      "retired_id": "product.part_era2_12mhz",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs.",
+      "canonical_definition_id": "base_part.era2_12mhz",
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.ncc1983_campaign",
+      "pointer": "/subject_ids/4",
+      "retired_id": "product.family_athena",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.clone_january1982_campaign",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.family_artemis",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.artemis_development",
+      "pointer": "/outcomes/0/subject_ids/0",
+      "retired_id": "product.family_artemis",
+      "reason": "Preserve the Artemis programme scope in its existing narrative and owned workstreams. Remove the family alias and repeated child software output from the parent summary; campaign ownership is already explicit in its steps.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.artemis_ecosystem",
+      "pointer": "/outcomes/0/subject_ids/0",
+      "retired_id": "product.family_artemis",
+      "reason": "Keep the ecosystem scope in the narrative and direct predecessor inputs. Remove family and OS context lists rather than imply that this coordination process creates the platform or operating system.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.artemis_ecosystem",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.family_artemis",
+      "reason": "Keep the ecosystem scope in the narrative and direct predecessor inputs. Remove family and OS context lists rather than imply that this coordination process creates the platform or operating system.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.native_abacus_pulse_development",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.family_artemis",
+      "reason": "Use canonical application implementations as the direct lineage inputs and explain the staged AIONix/Artemis target constraints. Preserve commercial product outcomes on the responsible delivery process.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "process.team_edition_server_development",
+      "pointer": "/inputs/1/subject_ids/1",
+      "retired_id": "product.family_artemis",
+      "reason": "Keep the delivery process responsible for the one commercial package. Use canonical existing engineering resources and separate server/client qualification outputs; remove family and alias lists.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "product.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.team_edition_server_development",
+      "pointer": "/outcomes/1/subject_ids/0",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Keep the delivery process responsible for the one commercial package. Use canonical existing engineering resources and separate server/client qualification outputs; remove family and alias lists.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/1/subject_ids/0",
+          "ref_id": "software_edition.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.team_edition_server_development",
+      "pointer": "/outcomes/1/subject_ids/1",
+      "retired_id": "product.family_team_edition",
+      "reason": "Keep the delivery process responsible for the one commercial package. Use canonical existing engineering resources and separate server/client qualification outputs; remove family and alias lists.",
+      "canonical_definition_id": "product.aion_development_team",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "product.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.team_edition_server_development",
+      "pointer": "/subject_ids/1",
+      "retired_id": "product.software_aion_development_team",
+      "reason": "Keep the delivery process responsible for the one commercial package. Use canonical existing engineering resources and separate server/client qualification outputs; remove family and alias lists.",
+      "canonical_definition_id": "software_edition.aion_development_team",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/1/subject_ids/0",
+          "ref_id": "software_edition.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.team_edition_server_development",
+      "pointer": "/subject_ids/2",
+      "retired_id": "product.family_team_edition",
+      "reason": "Keep the delivery process responsible for the one commercial package. Use canonical existing engineering resources and separate server/client qualification outputs; remove family and alias lists.",
+      "canonical_definition_id": "product.aion_development_team",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/outcomes/0/subject_ids/0",
+          "ref_id": "product.aion_development_team"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "process.athena_ecosystem",
+      "pointer": "/subject_ids/0",
+      "retired_id": "product.family_athena",
+      "reason": "Preserve the preparatory ecosystem scope in the narrative and direct predecessor input. The future Athena family and AIONix2 are not available input resources or completed outputs of these market assessments.",
+      "canonical_definition_id": null,
+      "after_reference_occurrences": [],
+      "disposition": "remove_context_preserve_scope"
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_3um_launch",
+      "pointer": "/product_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/0",
+          "ref_id": "base_part.aion_4164"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_3um_control",
+      "pointer": "/product_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/0",
+          "ref_id": "base_part.aion_4164"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_3um_repair",
+      "pointer": "/product_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/0",
+          "ref_id": "base_part.aion_4164"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_275um_repair",
+      "pointer": "/product_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/0",
+          "ref_id": "base_part.aion_4164"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_2um_repair",
+      "pointer": "/product_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/0",
+          "ref_id": "base_part.aion_4164"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_15um_repair",
+      "pointer": "/product_ids/0",
+      "retired_id": "product.part_aion_4164",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.aion_4164",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/0",
+          "ref_id": "base_part.aion_4164"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "manufacturing_capability.aion_dram16_3um",
+      "pointer": "/product_ids/0",
+      "retired_id": "product.part_aion_4116",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.aion_4116",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/0",
+          "ref_id": "base_part.aion_4116"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "manufacturing_capability.aion_erav1_3um",
+      "pointer": "/product_ids/0",
+      "retired_id": "product.part_erav1_6mhz",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.erav1_6mhz",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/0",
+          "ref_id": "base_part.erav1_6mhz"
+        }
+      ],
+      "disposition": "canonical_reference"
+    },
+    {
+      "record_id": "manufacturing_capability.aion_erav1_3um",
+      "pointer": "/product_ids/1",
+      "retired_id": "product.part_erav1_8mhz",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions.",
+      "canonical_definition_id": "base_part.erav1_8mhz",
+      "after_reference_occurrences": [
+        {
+          "pointer": "/base_part_ids/1",
+          "ref_id": "base_part.erav1_8mhz"
+        }
+      ],
+      "disposition": "canonical_reference"
+    }
+  ],
+  "top_level_exceptions": [
+    {
+      "record_id": "event.artemis_launch",
+      "ref_id": "product.aion_c_ide",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "ref_id": "product.business_tools_artemis",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "ref_id": "product.artemis_128_mono",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "ref_id": "product.artemis_256_mono_pro",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "ref_id": "product.artemis_budget_128",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "ref_id": "product.artemis_budget_128_hdd",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.team_launch",
+      "ref_id": "product.aion_development_team",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "ref_id": "product.business_tools_aurelia",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "ref_id": "product.abacus_1",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "ref_id": "product.software_cpm_aurelia",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "ref_id": "product.academy_course_1",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "ref_id": "product.device_flexiprint40",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "ref_id": "product.aurelia_sdk",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "ref_id": "product.aion_c_ide",
+      "reason": "Retain the explicit initial-launch association while product launch_campaign_id / launch_event_id remain unpopulated; assigning authoritative launch links is a later phase. The retained association is not a claim that this event creates the implementation."
+    },
+    {
+      "record_id": "event.ncc82_graphics_mouse",
+      "ref_id": "product.device_logix_mouse",
+      "reason": "The mouse is outside these 30 offering decisions and still has no explicit launch links. Preserve its existing initial-launch association until the remaining catalogue launch phase."
+    }
+  ],
+  "proposals": [
+    {
+      "change_id": "change.catalogue_phase4_offer_software_aionix",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_software_aionix_server",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_software_aionix2",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_software_cpm_aurelia_networking",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_software_entertainment_suite",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_edition_entertainment_suite_era",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_service_customer_care",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_service_professional_support",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_service_professional_business_onsite",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_service_academy_customer_site",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_service_aurelia_commercial_developer_license",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_service_artemis_commercial_developer_license",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_artemis_professional_video_128kb",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_artemis_video_card",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_artemis_video_card_16kb",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_artemis_video_card_64kb",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_color_monitor_1",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_color_monitor_2",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_color_pro_14",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_flexibus_keyboard",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_flexidisk",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_mono_monitor_1",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_mono_monitor_2",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_mono_pro",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_mono_pro_17",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_network_card_artemis",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_network_card_aurelia",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_network_hub_16_port",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_network_hub_4_port",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_offer_device_network_hub_8_port",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_artemis_team_memory",
+      "records": 43,
+      "removals": 6,
+      "depends_on_change_ids": [
+        "change.catalogue_phase4_offer_software_aionix",
+        "change.catalogue_phase4_offer_software_aionix_server",
+        "change.catalogue_phase4_offer_software_cpm_aurelia_networking",
+        "change.catalogue_phase4_offer_software_entertainment_suite",
+        "change.catalogue_phase4_offer_device_artemis_professional_video_128kb",
+        "change.catalogue_phase4_offer_device_artemis_video_card",
+        "change.catalogue_phase4_offer_device_artemis_video_card_16kb",
+        "change.catalogue_phase4_offer_device_artemis_video_card_64kb",
+        "change.catalogue_phase4_offer_device_color_pro_14",
+        "change.catalogue_phase4_offer_device_mono_pro",
+        "change.catalogue_phase4_offer_device_mono_pro_17"
+      ]
+    },
+    {
+      "change_id": "change.catalogue_phase4_aurelia_academy",
+      "records": 12,
+      "removals": 4,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_smc_parts",
+      "records": 7,
+      "removals": 4,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_athena_silicon",
+      "records": 8,
+      "removals": 2,
+      "depends_on_change_ids": [
+        "change.catalogue_phase4_offer_software_aionix2"
+      ]
+    },
+    {
+      "change_id": "change.catalogue_phase4_erav1_parts",
+      "records": 3,
+      "removals": 2,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_printer_mechanism",
+      "records": 2,
+      "removals": 1,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_internal_definitions",
+      "records": 7,
+      "removals": 7,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_oem_placeholder",
+      "records": 1,
+      "removals": 1,
+      "depends_on_change_ids": []
+    },
+    {
+      "change_id": "change.catalogue_phase4_launch_reference_cleanup",
+      "records": 5,
+      "removals": 0,
+      "depends_on_change_ids": [
+        "change.catalogue_phase4_offer_software_entertainment_suite",
+        "change.catalogue_phase4_offer_device_artemis_video_card_64kb",
+        "change.catalogue_phase4_offer_device_color_pro_14"
+      ]
+    }
+  ],
+  "remaining_reviews": [
+    "Assign launch links for other retained products in phase 5; reconcile remaining ownership issues in phase 6 before strict enforcement.",
+    "Review independent orderability of COMDEX reference hardware, 64 KB memory module population, AION C IDE launch identity and missing Aurelia 16 KB expansion offering.",
+    "Resolve detailed service/licence terms and the explicitly assumed FlexiDisk/hub variant availability through the individual offering reviews."
+  ],
+  "no_foundation_or_authorization_changes": true,
+  "individual_offering_assessments": [
+    {
+      "product_id": "product.software_aionix",
+      "change_id": "change.catalogue_phase4_offer_software_aionix",
+      "launch_campaign_id": "campaign.ncc1980",
+      "launch_event_id": "event.artemis_launch",
+      "launch_date": {
+        "value": "1980-05-19",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.software_aionix",
+        "event.artemis_launch",
+        "software_edition.aionix"
+      ],
+      "assessment": "AIONix is explicitly introduced with Artemis.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "software_edition.aionix",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.software_aionix_server",
+      "change_id": "change.catalogue_phase4_offer_software_aionix_server",
+      "launch_campaign_id": "campaign.ncc1981",
+      "launch_event_id": "event.network_launch",
+      "launch_date": {
+        "value": "1981-05-04",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.software_aionix_server",
+        "event.network_launch",
+        "software_edition.aionix_server"
+      ],
+      "assessment": "The networked Artemis/Artemis PRO launch supplies the first server-OS offering context.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "software_edition.aionix_server",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.software_aionix2",
+      "change_id": "change.catalogue_phase4_offer_software_aionix2",
+      "launch_campaign_id": "campaign.ncc1983",
+      "launch_event_id": "event.ncc83_athena_premiere",
+      "launch_date": {
+        "value": "1983-05-16",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.software_aionix2",
+        "event.ncc83_athena_premiere",
+        "software_edition.aionix2"
+      ],
+      "assessment": "The Athena premiere is the earliest stated AIONix2 introduction. This is a conditional offer; implementation and production qualification remain gates.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "software_edition.aionix2",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.software_cpm_aurelia_networking",
+      "change_id": "change.catalogue_phase4_offer_software_cpm_aurelia_networking",
+      "launch_campaign_id": "campaign.ncc1981",
+      "launch_event_id": "event.network_launch",
+      "launch_date": {
+        "value": "1981-05-04",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.software_cpm_aurelia_networking",
+        "product.aurelia_network_upgrade",
+        "device.rom_cartridge.cpm_aurelia_networking"
+      ],
+      "assessment": "The Aurelia networking upgrade already supplies the named networking ROM cartridge; propose that same cartridge as a separate offering under DRI licence.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.rom_cartridge.cpm_aurelia_networking",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.software_entertainment_suite",
+      "change_id": "change.catalogue_phase4_offer_software_entertainment_suite",
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse",
+      "launch_date": {
+        "value": "1982-06-07",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.software_entertainment_suite",
+        "event.ncc82_graphics_mouse",
+        "software_edition.entertainment_suite"
+      ],
+      "assessment": "The mouse introduction explicitly releases the Entertainment Suite; propose the CP/M edition separately from the Mouse Learning Pack.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "software_edition.entertainment_suite",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.edition_entertainment_suite_era",
+      "change_id": "change.catalogue_phase4_offer_edition_entertainment_suite_era",
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse",
+      "launch_date": {
+        "value": "1982-06-07",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.edition_entertainment_suite_era",
+        "product.ncc82_mouse_learning",
+        "software_edition.entertainment_suite.era"
+      ],
+      "assessment": "The same released suite has an AIONix implementation already supplied by the Mouse Learning Pack; propose this edition separately.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "software_edition.entertainment_suite.era",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.service_customer_care",
+      "change_id": "change.catalogue_phase4_offer_service_customer_care",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.service_customer_care",
+        "campaign.ncc1978"
+      ],
+      "assessment": "Propose the existing basic assistance definition at the earliest Aurelia customer-offering campaign. The product has no independently dated launch; this is an explicit author-assumption assignment.",
+      "assumptions": [
+        "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
+      ],
+      "technical_target_id": null,
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.service_professional_support",
+      "change_id": "change.catalogue_phase4_offer_service_professional_support",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.service_professional_support",
+        "campaign.ncc1978"
+      ],
+      "assessment": "Propose the existing enhanced-support definition alongside the earliest Aurelia offerings. Do not infer a later date merely from the word Professional. Its launch and standalone status are proposed, not previously established.",
+      "assumptions": [
+        "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
+      ],
+      "technical_target_id": null,
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.service_professional_business_onsite",
+      "change_id": "change.catalogue_phase4_offer_service_professional_business_onsite",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.service_professional_business_onsite",
+        "campaign.ncc1978"
+      ],
+      "assessment": "Propose the named on-site business-support service with Aurelia. Its detailed scope is absent, so retain service terms as unresolved rather than invent response times, geographic coverage or repair entitlements.",
+      "assumptions": [
+        "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
+      ],
+      "technical_target_id": null,
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.service_academy_customer_site",
+      "change_id": "change.catalogue_phase4_offer_service_academy_customer_site",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.service_academy_customer_site",
+        "process.academy"
+      ],
+      "assessment": "The Academy process already prepares customer-site services; propose the customer-site course offering at the public Academy/Aurelia introduction.",
+      "assumptions": [
+        "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
+      ],
+      "technical_target_id": null,
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.service_aurelia_commercial_developer_license",
+      "change_id": "change.catalogue_phase4_offer_service_aurelia_commercial_developer_license",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.service_aurelia_commercial_developer_license",
+        "campaign.ncc1978"
+      ],
+      "assessment": "The earliest Aurelia campaign addresses commercial developers. The licence label exists but its legal grant is unspecified; propose the offering with explicit unresolved rights and without granting DRI or third-party rights.",
+      "assumptions": [
+        "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
+      ],
+      "technical_target_id": null,
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.service_artemis_commercial_developer_license",
+      "change_id": "change.catalogue_phase4_offer_service_artemis_commercial_developer_license",
+      "launch_campaign_id": "campaign.ncc1980",
+      "launch_event_id": "event.artemis_launch",
+      "launch_date": {
+        "value": "1980-05-19",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.service_artemis_commercial_developer_license",
+        "campaign.ncc1980"
+      ],
+      "assessment": "The Artemis campaign introduces native developer tools and programmes. Propose its platform-specific developer licence at that introduction, with legal scope still to be specified.",
+      "assumptions": [
+        "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
+      ],
+      "technical_target_id": null,
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_artemis_professional_video_128kb",
+      "change_id": "change.catalogue_phase4_offer_device_artemis_professional_video_128kb",
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse",
+      "launch_date": {
+        "value": "1982-06-07",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_artemis_professional_video_128kb",
+        "product.ncc82_professional_graphics",
+        "device.artemis_professional_video_128kb"
+      ],
+      "assessment": "The campaign states around-June professional hardware availability and already includes the Professional Graphics extension. Retain OEM/timing qualification gates; do not move November revised features into June.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.artemis_professional_video_128kb",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_artemis_video_card",
+      "change_id": "change.catalogue_phase4_offer_device_artemis_video_card",
+      "launch_campaign_id": "campaign.ncc1980",
+      "launch_event_id": "event.artemis_launch",
+      "launch_date": {
+        "value": "1980-05-19",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_artemis_video_card",
+        "event.artemis_launch",
+        "device.artemis_video_card"
+      ],
+      "assessment": "The launch explicitly ships the 32 KiB card with Artemis 256; propose the same card separately.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.artemis_video_card",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_artemis_video_card_16kb",
+      "change_id": "change.catalogue_phase4_offer_device_artemis_video_card_16kb",
+      "launch_campaign_id": "campaign.ncc1980",
+      "launch_event_id": "event.artemis_launch",
+      "launch_date": {
+        "value": "1980-05-19",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_artemis_video_card_16kb",
+        "event.artemis_launch",
+        "device.artemis_video_card_16kb"
+      ],
+      "assessment": "The launch explicitly ships the replaceable 16 KiB card with Artemis 128; propose the same card separately.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.artemis_video_card_16kb",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_artemis_video_card_64kb",
+      "change_id": "change.catalogue_phase4_offer_device_artemis_video_card_64kb",
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse",
+      "launch_date": {
+        "value": "1982-06-07",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_artemis_video_card_64kb",
+        "event.ncc82_graphics_mouse",
+        "device.artemis_video_card_64kb"
+      ],
+      "assessment": "The event introduces the new 64 KiB card and its colour modes.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.artemis_video_card_64kb",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_color_monitor_1",
+      "change_id": "change.catalogue_phase4_offer_device_color_monitor_1",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_color_monitor_1",
+        "product.aurelia_color",
+        "device.color_monitor_1"
+      ],
+      "assessment": "The Aurelia colour system already supplies Color Monitor I.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.color_monitor_1",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_color_monitor_2",
+      "change_id": "change.catalogue_phase4_offer_device_color_monitor_2",
+      "launch_campaign_id": "campaign.comdex1979",
+      "launch_event_id": "event.plus_launch",
+      "launch_date": {
+        "value": "1979-12-03",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_color_monitor_2",
+        "product.aurelia_plus_color",
+        "device.color_monitor_2"
+      ],
+      "assessment": "The Aurelia+ colour system already supplies Color Monitor II, earlier than the Artemis campaign.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.color_monitor_2",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_color_pro_14",
+      "change_id": "change.catalogue_phase4_offer_device_color_pro_14",
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse",
+      "launch_date": {
+        "value": "1982-06-07",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_color_pro_14",
+        "event.ncc82_graphics_mouse",
+        "device.color_pro_14"
+      ],
+      "assessment": "The event explicitly introduces Color Pro 14.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.color_pro_14",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_flexibus_keyboard",
+      "change_id": "change.catalogue_phase4_offer_device_flexibus_keyboard",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_flexibus_keyboard",
+        "product.aurelia_mono",
+        "device.flexibus_keyboard"
+      ],
+      "assessment": "Aurelia systems and the launch demonstration include the detachable FlexiBUS keyboard.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.flexibus_keyboard",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_flexidisk",
+      "change_id": "change.catalogue_phase4_offer_device_flexidisk",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_flexidisk",
+        "campaign.ncc1978",
+        "device.flexidisk"
+      ],
+      "assessment": "The first Aurelia campaign demonstrates an external FDD; identify the original FlexiDisk as its separately offered storage peripheral under the author's earliest-availability assumption. Exact drive format and qualification remain unresolved.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch.",
+        "Campaign selection is an explicit scenario assumption because this exact variant has no separately dated release in the current foundation."
+      ],
+      "technical_target_id": "device.flexidisk",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_mono_monitor_1",
+      "change_id": "change.catalogue_phase4_offer_device_mono_monitor_1",
+      "launch_campaign_id": "campaign.ncc1978",
+      "launch_event_id": "event.aurelia_launch",
+      "launch_date": {
+        "value": "1978-06-05",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_mono_monitor_1",
+        "product.aurelia_mono",
+        "device.mono_monitor_1"
+      ],
+      "assessment": "The Aurelia monochrome system already supplies Monochrome Monitor I.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.mono_monitor_1",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_mono_monitor_2",
+      "change_id": "change.catalogue_phase4_offer_device_mono_monitor_2",
+      "launch_campaign_id": "campaign.comdex1979",
+      "launch_event_id": "event.plus_launch",
+      "launch_date": {
+        "value": "1979-12-03",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_mono_monitor_2",
+        "product.aurelia_plus_mono",
+        "device.mono_monitor_2"
+      ],
+      "assessment": "The Aurelia+ monochrome system already supplies Mono Monitor II.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.mono_monitor_2",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_mono_pro",
+      "change_id": "change.catalogue_phase4_offer_device_mono_pro",
+      "launch_campaign_id": "campaign.ncc1980",
+      "launch_event_id": "event.artemis_launch",
+      "launch_date": {
+        "value": "1980-05-19",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_mono_pro",
+        "event.artemis_launch",
+        "device.mono_pro"
+      ],
+      "assessment": "The Artemis premiere explicitly supplies Mono Pro with the professional configuration.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.mono_pro",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_mono_pro_17",
+      "change_id": "change.catalogue_phase4_offer_device_mono_pro_17",
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse",
+      "launch_date": {
+        "value": "1982-06-07",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_mono_pro_17",
+        "product.ncc82_professional_graphics",
+        "device.mono_pro_17"
+      ],
+      "assessment": "The campaign includes around-June professional hardware and the extension containing Mono Pro 17. OEM supplier, grayscale amplifier and 60 Hz timing remain qualification gates.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.mono_pro_17",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_network_card_artemis",
+      "change_id": "change.catalogue_phase4_offer_device_network_card_artemis",
+      "launch_campaign_id": "campaign.ncc1981",
+      "launch_event_id": "event.network_launch",
+      "launch_date": {
+        "value": "1981-05-04",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_network_card_artemis",
+        "product.artemis_network_upgrade",
+        "device.network_card_artemis"
+      ],
+      "assessment": "The dated networking launch is stronger evidence than the NIC appearing in undated Artemis composition versions; do not backdate it to NCC 1980.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.network_card_artemis",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_network_card_aurelia",
+      "change_id": "change.catalogue_phase4_offer_device_network_card_aurelia",
+      "launch_campaign_id": "campaign.ncc1981",
+      "launch_event_id": "event.network_launch",
+      "launch_date": {
+        "value": "1981-05-04",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_network_card_aurelia",
+        "product.aurelia_network_upgrade",
+        "device.network_card_aurelia"
+      ],
+      "assessment": "The Aurelia networking upgrade contains this NIC.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.network_card_aurelia",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_network_hub_16_port",
+      "change_id": "change.catalogue_phase4_offer_device_network_hub_16_port",
+      "launch_campaign_id": "campaign.ncc1981",
+      "launch_event_id": "event.network_launch",
+      "launch_date": {
+        "value": "1981-05-04",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_network_hub_16_port",
+        "event.network_launch",
+        "device.network_hub.16_port"
+      ],
+      "assessment": "Propose the 16-port variant with the initial networking campaign under the author's availability assumption. Its technical definition exists but no separately dated variant release is recorded.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch.",
+        "Campaign selection is an explicit scenario assumption because this exact variant has no separately dated release in the current foundation."
+      ],
+      "technical_target_id": "device.network_hub.16_port",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_network_hub_4_port",
+      "change_id": "change.catalogue_phase4_offer_device_network_hub_4_port",
+      "launch_campaign_id": "campaign.ncc1981",
+      "launch_event_id": "event.network_launch",
+      "launch_date": {
+        "value": "1981-05-04",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_network_hub_4_port",
+        "product.computer_system_proposed_artemis_pro_small_office",
+        "device.network_hub.4_port"
+      ],
+      "assessment": "The Small Office networking configuration contains this 4-port hub.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
+      ],
+      "technical_target_id": "device.network_hub.4_port",
+      "independently_reviewable": true
+    },
+    {
+      "product_id": "product.device_network_hub_8_port",
+      "change_id": "change.catalogue_phase4_offer_device_network_hub_8_port",
+      "launch_campaign_id": "campaign.ncc1981",
+      "launch_event_id": "event.network_launch",
+      "launch_date": {
+        "value": "1981-05-04",
+        "precision": "day"
+      },
+      "evidence_ids": [
+        "product.device_network_hub_8_port",
+        "event.network_launch",
+        "device.network_hub.8_port"
+      ],
+      "assessment": "Propose the 8-port variant with the initial networking campaign under the author's availability assumption. A later development-team bundle contains it, but there is no earlier separately dated variant release.",
+      "assumptions": [
+        "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch.",
+        "Campaign selection is an explicit scenario assumption because this exact variant has no separately dated release in the current foundation."
+      ],
+      "technical_target_id": "device.network_hub.8_port",
+      "independently_reviewable": true
+    }
+  ],
+  "dependent_reverse_link_cleanup": [
+    {
+      "record_id": "campaign.ncc1980",
+      "product_id": "product.software_aionix",
+      "depends_on_change_id": "change.catalogue_phase4_offer_software_aionix",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "product_id": "product.software_aionix",
+      "depends_on_change_id": "change.catalogue_phase4_offer_software_aionix",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "campaign.ncc1981",
+      "product_id": "product.software_aionix_server",
+      "depends_on_change_id": "change.catalogue_phase4_offer_software_aionix_server",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "campaign.ncc1983",
+      "product_id": "product.software_aionix2",
+      "depends_on_change_id": "change.catalogue_phase4_offer_software_aionix2",
+      "cleanup_change_id": "change.catalogue_phase4_athena_silicon"
+    },
+    {
+      "record_id": "campaign.ncc1981",
+      "product_id": "product.software_cpm_aurelia_networking",
+      "depends_on_change_id": "change.catalogue_phase4_offer_software_cpm_aurelia_networking",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "product_id": "product.software_entertainment_suite",
+      "depends_on_change_id": "change.catalogue_phase4_offer_software_entertainment_suite",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "event.ncc82_graphics_mouse",
+      "product_id": "product.software_entertainment_suite",
+      "depends_on_change_id": "change.catalogue_phase4_offer_software_entertainment_suite",
+      "cleanup_change_id": "change.catalogue_phase4_launch_reference_cleanup"
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "product_id": "product.device_artemis_professional_video_128kb",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_artemis_professional_video_128kb",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "product_id": "product.device_artemis_video_card",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_artemis_video_card",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "product_id": "product.device_artemis_video_card",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_artemis_video_card",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "product_id": "product.device_artemis_video_card_16kb",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_artemis_video_card_16kb",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "product_id": "product.device_artemis_video_card_16kb",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_artemis_video_card_16kb",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_artemis_video_card_64kb",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "event.ncc82_graphics_mouse",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_artemis_video_card_64kb",
+      "cleanup_change_id": "change.catalogue_phase4_launch_reference_cleanup"
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "product_id": "product.device_color_pro_14",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_color_pro_14",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "event.ncc82_graphics_mouse",
+      "product_id": "product.device_color_pro_14",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_color_pro_14",
+      "cleanup_change_id": "change.catalogue_phase4_launch_reference_cleanup"
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "product_id": "product.device_mono_pro",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_mono_pro",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "product_id": "product.device_mono_pro",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_mono_pro",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "product_id": "product.device_mono_pro_17",
+      "depends_on_change_id": "change.catalogue_phase4_offer_device_mono_pro_17",
+      "cleanup_change_id": "change.catalogue_phase4_artemis_team_memory"
+    }
+  ],
+  "catalogue_cleanup_revised_records": [
+    {
+      "record_id": "campaign.ncc1978",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.ncc1979",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.comdex1979",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.comdex1982",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.comdex1981",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.comdex1980",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.ncc1981",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.ncc1983",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "campaign.clone_january1982",
+      "reason": "Remove artificial-family and chip catalogue subjects; preserve the campaign scope in its existing title, messages and presentation. Consolidate genuine commercial promotion onto the retained offering; initial launch links remain later-phase work."
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_3um_launch",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions."
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_3um_control",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions."
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_3um_repair",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions."
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_275um_repair",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions."
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_2um_repair",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions."
+    },
+    {
+      "record_id": "manufacturing_capability.dram64_15um_repair",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions."
+    },
+    {
+      "record_id": "manufacturing_capability.aion_dram16_3um",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions."
+    },
+    {
+      "record_id": "manufacturing_capability.aion_erav1_3um",
+      "reason": "Remove redundant chip product aliases from product_ids; the existing base_part_ids already identify exactly the manufactured silicon. Preserve recipe, qualification requirements and dated maturity assertions."
+    },
+    {
+      "record_id": "event.smc_agreement",
+      "reason": "Represent the agreement scope as a decision about canonical chips; remove the merely earlier Aurelia launch reference. The agreement does not itself qualify or ship every part."
+    },
+    {
+      "record_id": "event.smc_sales",
+      "reason": "Use the enabling agreement milestone as an input and describe staged availability against canonical chip definitions; preserve the existing independent SMC fabrication and qualification limits."
+    },
+    {
+      "record_id": "event.mpi",
+      "reason": "Record the purchasing/manufacturing decision against the bare printer mechanism. The agreement does not deliver a finished FlexiPrint40 printer."
+    },
+    {
+      "record_id": "event.dram_control_release",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly."
+    },
+    {
+      "record_id": "event.dram_repair_release",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly."
+    },
+    {
+      "record_id": "event.dram_275_review",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly."
+    },
+    {
+      "record_id": "event.dram_2_release",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly."
+    },
+    {
+      "record_id": "event.dram_15_release",
+      "reason": "Remove the redundant chip product subject: the existing maturity outcome identifies the recipe, whose base_part_ids identify the DRAM. Preserve maturity stage, conditions and date exactly."
+    },
+    {
+      "record_id": "event.cost_review_1982",
+      "reason": "Describe the actual DRAM cost-review scope as an explained input against its base part, without adding future recipes or asserting a favourable review result."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "reason": "Remove the internal 4164 chip from the launch subject list. Its system-memory role remains in the launch description and canonical hardware composition; the event does not market a separate RAM-chip offering."
+    },
+    {
+      "record_id": "process.comdex1979_campaign",
+      "reason": "Qualify the actual Aurelia+ demonstration configuration rather than promote an internal memory-chip alias. The canonical computer composition retains its chip requirements."
+    },
+    {
+      "record_id": "product.aion_development_team",
+      "reason": "Preserve the commercial meaning of the consolidated Team Edition aliases on the existing package; keep all composition lines, quantities, implementation versions and existing technical definitions unchanged."
+    },
+    {
+      "record_id": "event.team_pilots",
+      "reason": "Replace the Team Edition alias with the direct role of the retained package or its server/client implementations; no new separate offering or qualification success is inferred."
+    },
+    {
+      "record_id": "event.team_dealer_training",
+      "reason": "Replace the Team Edition alias with the direct role of the retained package or its server/client implementations; no new separate offering or qualification success is inferred."
+    },
+    {
+      "record_id": "event.team_followup",
+      "reason": "Replace the Team Edition alias with the direct role of the retained package or its server/client implementations; no new separate offering or qualification success is inferred."
+    },
+    {
+      "record_id": "event.team_launch",
+      "reason": "Consolidate the initial-launch association onto the existing Team Edition package. Retain this explicit temporary exception until product launch links are assigned in the launch phase."
+    },
+    {
+      "record_id": "process.team_edition_server_development",
+      "reason": "Keep the delivery process responsible for the one commercial package. Use canonical existing engineering resources and separate server/client qualification outputs; remove family and alias lists."
+    },
+    {
+      "record_id": "process.comdex1981_campaign",
+      "reason": "Remove duplicated package lists from the marketing execution process; the delivery process owns the package outcome and the event/campaign retain the unresolved launch association."
+    },
+    {
+      "record_id": "product.academy_course_1",
+      "reason": "Preserve the before-you-buy interpretation on the existing two-day Fundamentals course without duplicating the course or altering its tuition, curriculum or purchase-credit policy."
+    },
+    {
+      "record_id": "event.academy",
+      "reason": "The founding event creates the Academy organisation and prepares facilities. Course delivery and ordering operations belong to process.academy, not duplicate product placeholders."
+    },
+    {
+      "record_id": "event.aurelia_launch",
+      "reason": "Identify the advertised before-you-buy service as the existing Fundamentals course. Preserve ordering and purchase-credit facts in the existing outcome; remove the sales-channel pseudo-product and unexplained prior-event subjects."
+    },
+    {
+      "record_id": "process.academy",
+      "reason": "The Academy process already owns the concrete course deliverables and stock-conditional ordering policy. Remove duplicate course-group and sales-channel products; avoid claiming later or unresolved services as launch deliverables."
+    },
+    {
+      "record_id": "process.ncc1979_campaign",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs."
+    },
+    {
+      "record_id": "process.comdex1980_campaign",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs."
+    },
+    {
+      "record_id": "process.ncc1983_campaign",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs."
+    },
+    {
+      "record_id": "process.clone_january1982_campaign",
+      "reason": "Remove the artificial-family and inherited campaign subject list from marketing execution. Preserve campaign messages, concrete activities and existing chronology; do not copy the catalogue into inputs or outputs."
+    },
+    {
+      "record_id": "process.artemis_development",
+      "reason": "Preserve the Artemis programme scope in its existing narrative and owned workstreams. Remove the family alias and repeated child software output from the parent summary; campaign ownership is already explicit in its steps."
+    },
+    {
+      "record_id": "process.artemis_ecosystem",
+      "reason": "Keep the ecosystem scope in the narrative and direct predecessor inputs. Remove family and OS context lists rather than imply that this coordination process creates the platform or operating system."
+    },
+    {
+      "record_id": "process.athena_ecosystem",
+      "reason": "Preserve the preparatory ecosystem scope in the narrative and direct predecessor input. The future Athena family and AIONix2 are not available input resources or completed outputs of these market assessments."
+    },
+    {
+      "record_id": "process.native_abacus_pulse_development",
+      "reason": "Use canonical application implementations as the direct lineage inputs and explain the staged AIONix/Artemis target constraints. Preserve commercial product outcomes on the responsible delivery process."
+    },
+    {
+      "record_id": "event.ncc1980_followup",
+      "reason": "Keep the direct Artemis launch prerequisite and the Academy/regional-office results. The narrative defines Artemis-line training scope without a family pseudo-product or a repeated top-level context link."
+    },
+    {
+      "record_id": "process.era2_development",
+      "reason": "Deliver canonical ERA2 silicon and architecture; preserve the parent coordination narrative without duplicating integrated system outputs from the Athena workstream or retaining a family/chip catalogue list."
+    },
+    {
+      "record_id": "event.ncc83_athena_premiere",
+      "reason": "Remove the internal processor product and general OS subject. Preserve the direct silicon-development input and describe the OS presentation requirement without asserting shipment or qualification."
+    },
+    {
+      "record_id": "event.athena_production_review",
+      "reason": "Express the directly tested silicon and OS requirements against canonical definitions. The prior conference is chronology, not a technical prerequisite; preserve the existing silicon-development input and qualification gates."
+    }
+  ],
+  "additional_technical_role_reviews": [
+    {
+      "record_id": "event.aionix_preliminary",
+      "reason": "Separate canonical software engineering work from commercial offering identity."
+    },
+    {
+      "record_id": "event.aionix_agreement",
+      "reason": "Separate canonical software engineering work from commercial offering identity."
+    },
+    {
+      "record_id": "process.aionix_development",
+      "reason": "Separate canonical software engineering work from commercial offering identity."
+    },
+    {
+      "record_id": "event.ncc82_dealer_preparation",
+      "reason": "Replace unexplained product/future-event lists with direct demonstration requirements and preserve qualification limits."
+    },
+    {
+      "record_id": "event.ncc82_press_preview",
+      "reason": "Replace unexplained product/future-event lists with direct demonstration requirements and preserve qualification limits."
+    },
+    {
+      "record_id": "event.ncc82_developer_sessions",
+      "reason": "Replace unexplained product/future-event lists with direct demonstration requirements and preserve qualification limits."
+    },
+    {
+      "record_id": "event.ncc82_followup",
+      "reason": "Replace unexplained product/future-event lists with direct demonstration requirements and preserve qualification limits."
+    }
+  ],
+  "offering_incoming_reference_reviews": [
+    {
+      "record_id": "event.aionix_preliminary",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.aionix_agreement",
+      "pointer": "/subject_ids/2",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "pointer": "/subject_ids/0",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "pointer": "/subject_ids/3",
+      "product_id": "product.device_artemis_video_card",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "pointer": "/subject_ids/4",
+      "product_id": "product.device_mono_pro",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.artemis_launch",
+      "pointer": "/subject_ids/7",
+      "product_id": "product.device_artemis_video_card_16kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_dealer_preparation",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_dealer_preparation",
+      "pointer": "/subject_ids/2",
+      "product_id": "product.device_color_pro_14",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_dealer_preparation",
+      "pointer": "/subject_ids/4",
+      "product_id": "product.device_artemis_professional_video_128kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_dealer_preparation",
+      "pointer": "/subject_ids/5",
+      "product_id": "product.device_mono_pro_17",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_dealer_preparation",
+      "pointer": "/subject_ids/6",
+      "product_id": "product.software_entertainment_suite",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_press_preview",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_press_preview",
+      "pointer": "/subject_ids/2",
+      "product_id": "product.device_color_pro_14",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_press_preview",
+      "pointer": "/subject_ids/4",
+      "product_id": "product.device_artemis_professional_video_128kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_press_preview",
+      "pointer": "/subject_ids/5",
+      "product_id": "product.device_mono_pro_17",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_press_preview",
+      "pointer": "/subject_ids/6",
+      "product_id": "product.software_entertainment_suite",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_graphics_mouse",
+      "pointer": "/subject_ids/0",
+      "product_id": "product.device_color_pro_14",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_graphics_mouse",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_graphics_mouse",
+      "pointer": "/subject_ids/3",
+      "product_id": "product.software_entertainment_suite",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_developer_sessions",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_developer_sessions",
+      "pointer": "/subject_ids/2",
+      "product_id": "product.device_color_pro_14",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_developer_sessions",
+      "pointer": "/subject_ids/4",
+      "product_id": "product.device_artemis_professional_video_128kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_developer_sessions",
+      "pointer": "/subject_ids/5",
+      "product_id": "product.device_mono_pro_17",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_developer_sessions",
+      "pointer": "/subject_ids/6",
+      "product_id": "product.software_entertainment_suite",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_followup",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_followup",
+      "pointer": "/subject_ids/2",
+      "product_id": "product.device_color_pro_14",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_followup",
+      "pointer": "/subject_ids/4",
+      "product_id": "product.device_artemis_professional_video_128kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_followup",
+      "pointer": "/subject_ids/5",
+      "product_id": "product.device_mono_pro_17",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc82_followup",
+      "pointer": "/subject_ids/6",
+      "product_id": "product.software_entertainment_suite",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.ncc83_athena_premiere",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.software_aionix2",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "event.athena_production_review",
+      "pointer": "/subject_ids/2",
+      "product_id": "product.software_aionix2",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "pointer": "/subject_ids/14",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "pointer": "/subject_ids/15",
+      "product_id": "product.device_artemis_video_card",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "pointer": "/subject_ids/16",
+      "product_id": "product.device_mono_pro",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1980",
+      "pointer": "/subject_ids/17",
+      "product_id": "product.device_artemis_video_card_16kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.comdex1982",
+      "pointer": "/subject_ids/13",
+      "product_id": "product.device_artemis_professional_video_128kb",
+      "disposition": "retain_later_promotion",
+      "reason": "A later campaign promotes the already introduced offering and is distinct from its initial launch."
+    },
+    {
+      "record_id": "campaign.comdex1982",
+      "pointer": "/subject_ids/14",
+      "product_id": "product.device_mono_pro_17",
+      "disposition": "retain_later_promotion",
+      "reason": "A later campaign promotes the already introduced offering and is distinct from its initial launch."
+    },
+    {
+      "record_id": "campaign.comdex1982",
+      "pointer": "/subject_ids/16",
+      "product_id": "product.software_aionix",
+      "disposition": "retain_later_promotion",
+      "reason": "A later campaign promotes the already introduced offering and is distinct from its initial launch."
+    },
+    {
+      "record_id": "campaign.comdex1982",
+      "pointer": "/subject_ids/17",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "disposition": "retain_later_promotion",
+      "reason": "A later campaign promotes the already introduced offering and is distinct from its initial launch."
+    },
+    {
+      "record_id": "campaign.comdex1982",
+      "pointer": "/subject_ids/18",
+      "product_id": "product.device_color_pro_14",
+      "disposition": "retain_later_promotion",
+      "reason": "A later campaign promotes the already introduced offering and is distinct from its initial launch."
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "pointer": "/subject_ids/0",
+      "product_id": "product.device_artemis_video_card_64kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.device_color_pro_14",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "pointer": "/subject_ids/3",
+      "product_id": "product.device_artemis_professional_video_128kb",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "pointer": "/subject_ids/4",
+      "product_id": "product.device_mono_pro_17",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "pointer": "/subject_ids/5",
+      "product_id": "product.software_entertainment_suite",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1982",
+      "pointer": "/subject_ids/12",
+      "product_id": "product.software_aionix",
+      "disposition": "retain_later_promotion",
+      "reason": "A later campaign promotes the already introduced offering and is distinct from its initial launch."
+    },
+    {
+      "record_id": "campaign.ncc1981",
+      "pointer": "/subject_ids/9",
+      "product_id": "product.software_cpm_aurelia_networking",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1981",
+      "pointer": "/subject_ids/10",
+      "product_id": "product.software_aionix_server",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "campaign.ncc1983",
+      "pointer": "/subject_ids/3",
+      "product_id": "product.software_aionix2",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.aionix_development",
+      "pointer": "/outcomes/0/subject_ids/0",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.aionix_development",
+      "pointer": "/subject_ids/0",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.academy",
+      "pointer": "/subject_ids/2",
+      "product_id": "product.service_academy_customer_site",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.ncc1983_campaign",
+      "pointer": "/subject_ids/3",
+      "product_id": "product.software_aionix2",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.artemis_development",
+      "pointer": "/outcomes/0/subject_ids/1",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.artemis_ecosystem",
+      "pointer": "/outcomes/0/subject_ids/1",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.artemis_ecosystem",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.native_abacus_pulse_development",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.team_edition_server_development",
+      "pointer": "/inputs/1/subject_ids/0",
+      "product_id": "product.software_aionix",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    },
+    {
+      "record_id": "process.athena_ecosystem",
+      "pointer": "/subject_ids/1",
+      "product_id": "product.software_aionix2",
+      "disposition": "replace_with_canonical_role_or_remove_duplicate",
+      "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
+    }
+  ]
+}
