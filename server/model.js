@@ -1,3 +1,4 @@
+import {datasetPath} from '../code/model-contract.js';
 import {editorialRows,latestReview,saveEditorial,resolveAnnotations,validateEditorialHistory} from './editorial.js';
 import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
@@ -10,10 +11,10 @@ export {datasets as names} from '../code/model-contract.js';
 import {datasets as names} from '../code/model-contract.js';
 export const stable=x=>Array.isArray(x)?x.map(stable):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,stable(x[k])])):x;
 export const hash=x=>crypto.createHash('sha256').update(JSON.stringify(stable(x))).digest('hex');
-export const records=files=>names.flatMap(n=>files[`data_foundation/${n}.json`][n]);
+export const records=files=>names.flatMap(n=>files[datasetPath(n)][n]);
 export const get= (files,name)=>files[`data_storytelling/${name}.json`][name];
 export function validate(files){
- const result=validateDocuments(Object.fromEntries(names.map(n=>[n,files[`data_foundation/${n}.json`]])));
+ const result=validateDocuments(Object.fromEntries(names.map(n=>[n,files[datasetPath(n)]])));
  for(const [name,check] of Object.entries(checks))if(!check(files[`data_storytelling/${name}.json`]||{[name]:[]}))result.errors.push(name+': '+editorialValidator.errorsText(check.errors));
  result.errors.push(...validateEditorialHistory(files));
  const index=new Map(records(files).map(r=>[r.id,r]));const seen=new Set();
@@ -21,7 +22,7 @@ export function validate(files){
  for(const record of index.values())if(['status','confirmation','source_refs'].some(k=>k in record))result.errors.push('Editorial information in foundation '+record.id);
  return result;
 }
-export function snapshot(files,revision){return {revision,collections:Object.fromEntries(names.map(n=>[n,files[`data_foundation/${n}.json`][n]])),authorization:get(files,'authorization'),changes:files['data_storytelling/change.json'],annotations:editorialRows(files,'annotation'),change_reviews:editorialRows(files,'change_review')};}
+export function snapshot(files,revision){return {revision,collections:Object.fromEntries(names.map(n=>[n,files[datasetPath(n)][n]])),authorization:get(files,'authorization'),changes:files['data_storytelling/change.json'],annotations:editorialRows(files,'annotation'),change_reviews:editorialRows(files,'change_review')};}
 
 function approveChanges(original, entries, actor) {
  const bad=message=>{const e=new Error(message);e.status=400;throw e;};
@@ -60,7 +61,7 @@ function approveChanges(original, entries, actor) {
  // Apply every selected proposal before validating, allowing references between new records.
  for(const proposal of selected){
   for(const e of proposal.elements){
-   const rows=files[`data_foundation/${e.record_type}.json`][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);
+   const rows=files[datasetPath(e.record_type)][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);
    if(e.after===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=e.after;else rows.push(e.after);
   }
   resolveAnnotations(files,proposal,actor);

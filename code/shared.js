@@ -1,3 +1,4 @@
+import {datasetPath} from './model-contract.js';
 import {remoteState} from './api-client.js';
 import {digest} from './review-log.js';
 export {datasets} from './model-contract.js';
@@ -13,7 +14,7 @@ export async function loadData() {
   const remote=await remoteState();let rawCollections,authorization;
   if(remote){rawCollections=remote.collections;authorization=remote.authorization;}
   else{
-    const results=await Promise.all(datasets.map(async name=>{const response=await fetch('../data_foundation/'+name+'.json',{cache:'no-store'});if(!response.ok)throw Error(`Could not load ${name}.json (HTTP ${response.status}).`);const d=await response.json();return [name,d[name]];}));rawCollections=Object.fromEntries(results);
+    const results=await Promise.all(datasets.map(async name=>{const response=await fetch('../'+datasetPath(name),{cache:'no-store'});if(!response.ok)throw Error(`Could not load ${datasetPath(name)} (HTTP ${response.status}).`);const d=await response.json();return [name,d[name]];}));rawCollections=Object.fromEntries(results);
     const response=await fetch('../data_storytelling/authorization.json',{cache:'no-store'});if(!response.ok)throw Error('Could not load authorization information.');authorization=(await response.json()).authorization;
   }
   const authorizations=new Map(authorization.map(a=>[a.record_id,a]));const collections={};const originals=new Map();
@@ -59,7 +60,7 @@ export function details(record,data,select){
   host.append(top,el('h2','',titleOf(record)),el('p','record-id',record.id));
   const date=timing(record,data.index);if(date){host.append(el('p','record-date',date.label));if(date.derived)host.append(el('p','detail-caption','Display range comes from the campaign execution process.'));}
   if(record.description||record.statement||record.objective)host.append(el('p','description',record.description||record.statement||record.objective));
-  const links=el('div','detail-links');const raw=el('a','','Open dataset ↗');raw.href='../data_foundation/'+typeOf(record)+'.json';raw.target='_blank';raw.rel='noopener';links.append(raw);
+  const links=el('div','detail-links');const raw=el('a','','Open dataset ↗');raw.href='../'+datasetPath(typeOf(record));raw.target='_blank';raw.rel='noopener';links.append(raw);
   const counterpart=el('a','','Open in '+(document.body.dataset.page==='timeline'?'data browser':'timeline')+' →');
   if(document.body.dataset.page==='timeline'||['event','campaign','process'].includes(typeOf(record))){counterpart.href=(document.body.dataset.page==='timeline'?'browser.html':'timeline.html')+'#'+encodeURIComponent(record.id);links.append(counterpart);}host.append(links);
   function valueNode(value,depth=0){

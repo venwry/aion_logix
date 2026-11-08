@@ -122,7 +122,9 @@
             "expansion_kit",
             "software",
             "computer_system",
-            "service"
+            "service",
+            "peripheral",
+            "software_cartridge"
           ]
         },
         "technical_identity": {
@@ -133,7 +135,8 @@
           "pattern": "^(campaign)\\.[a-z0-9][a-z0-9_.-]*$",
           "x-ref": [
             "campaign"
-          ]
+          ],
+          "description": "Launch campaign; multiple products may share this campaign and its launch events."
         },
         "composition_history": {
           "type": "array",
@@ -219,6 +222,14 @@
             "requirements"
           ],
           "additionalProperties": false
+        },
+        "launch_event_id": {
+          "type": "string",
+          "pattern": "^event\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ],
+          "description": "Launch event owned by the campaign execution process directly or through subprocesses; may be shared by products."
         }
       },
       "required": [
@@ -230,7 +241,16 @@
         "technology_ids",
         "specification"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "Logix/AION customer-facing offering. Legacy identities remain accepted during catalogue migration.",
+      "dependentRequired": {
+        "launch_event_id": [
+          "launch_campaign_id"
+        ],
+        "launch_campaign_id": [
+          "launch_event_id"
+        ]
+      }
     }
   }
 }

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/external_product.schema.json",
+  "type": "object",
+  "properties": {
+    "external_product": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    }
+  },
+  "required": [
+    "external_product"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "description": "Descriptive third-party commercial offering; direct role-labelled relationships only. Software rights, technical editions and Logix physical offerings remain separate.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^external_product\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "specification": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "no": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "ref_id": {
+                "type": "string",
+                "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+                "x-ref": [
+                  "actor",
+                  "actor_relationship",
+                  "agreement",
+                  "assumption",
+                  "campaign",
+                  "event",
+                  "location",
+                  "manufacturing_capability",
+                  "market_response",
+                  "process",
+                  "product",
+                  "technology",
+                  "base_part",
+                  "device",
+                  "software_edition",
+                  "external_product"
+                ]
+              },
+              "ref_role": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "no",
+              "description",
+              "ref_id",
+              "ref_role"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "specification"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

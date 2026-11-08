@@ -1,4 +1,4 @@
-# Current model guide — version 0.8.0
+# Current model guide — version 0.9.0
 
 This guide explains the accepted model. [Principles](../../DATA_MODEL_PRINCIPLES.md) govern editing; [JSON Schemas](../../schemas/) and the [generated specification](FOUNDATION_SPECIFICATION.md) define exact fields, allowed values and references. Earlier proposals in the archive are historical rationale, not additional requirements.
 
@@ -50,7 +50,7 @@ The timeline may display a campaign and its execution process in one box, but th
 
 Visual nesting selects from existing parent/step/event references; it does not create ownership or change relationships. Work that cannot fit a stated date range remains separate, and details retain the underlying references. Non-proportional calendar spacing and clipped display ranges do not alter stored dates or their precision.
 
-Table widths, autofit weights, pane sizes and full-screen mode are presentation choices. Do not add them to foundation or storytelling JSON. Reference labels combine an existing ID and name for display; they are not a new compound key. See the [application guide](../APPLICATION_GUIDE.md) for behaviour and controls. The data contract remains version 0.8.0.
+Table widths, autofit weights, pane sizes and full-screen mode are presentation choices. Do not add them to foundation or storytelling JSON. Reference labels combine an existing ID and name for display; they are not a new compound key. See the [application guide](../APPLICATION_GUIDE.md) for behaviour and controls. The data contract remains version 0.9.0.
 
 
 ## Timeline categories and swim lanes
@@ -67,6 +67,10 @@ Categories describe the root programme's primary purpose. Semiconductor work und
 
 Category assignments are story changes: submit one Changes confirm proposal per affected record. The UI and schema can be deployed before those proposals are approved; records remain Uncategorised until their root assignment is authorized.
 
-## Product definitions and composition (0.8.0)
+## Product definitions and composition (0.9.0)
 
 The phase-1B identity-only boundary is superseded for product definitions. Base parts are physical leaves; devices own construction; software editions own executable contracts and delivery; commercial products own supplied configurations. Complete composition versions pin child versions and carry their own technical definitions. Temporal boundaries reference events/processes or remain explicitly unknown; no old calendar dates are copied from a legacy product source. See [import details](../PRODUCT_DEFINITION_IMPORT.md) and the generated specification for the strict attribute contracts.
+
+## Product catalogue transition
+
+Contract 0.9.0 adds `external_product` in `external_products.json`, with `id`, `name`, `description` and `specification` entries containing exactly `no`, `description`, `ref_id`, `ref_role`. Product `launch_campaign_id` and `launch_event_id` are optional together during migration and validated for campaign ownership and temporal containment when supplied. The external registry is initially empty; existing products and their authorizations are unchanged. See the [complete phase-2 contract](../PRODUCT_CATALOGUE_PHASE2.md).

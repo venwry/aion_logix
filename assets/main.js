@@ -1,3 +1,4 @@
+import {datasetPath} from '../code/model-contract.js';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import mermaid from 'mermaid';
@@ -15,7 +16,7 @@ const entries = [
   {id:'foundation-spec',title:'Foundation — entities and references',path:'docs/data-model/FOUNDATION_SPECIFICATION.md',type:'md'},
   {id:'backlog',title:'Current review backlog',path:'docs/REVIEW_BACKLOG.md',type:'md'},
   {id:'render',title:'Render setup',path:'docs/RENDER_SETUP.md',type:'md'},
-  ...datasets.map(name=>({id:'migration_'+name,title:'Data · '+name.replaceAll('_',' '),path:'data_foundation/'+name+'.json',type:'json'})),
+  ...datasets.map(name=>({id:'migration_'+name,title:'Data · '+name.replaceAll('_',' '),path:datasetPath(name),type:'json'})),
   ...['authorization','authorization_decision','change','manifest','source','reconciliation_issue'].map(name=>({id:'migration_'+name,title:'Storytelling · '+name.replaceAll('_',' '),path:'data_storytelling/'+name+'.json',type:'json'})),
   {id:'archive',title:'Archive — historical evidence only',path:'archived_no_longer_valid/README.md',type:'md'},
   ...[['schemas','SCHEMA_DESIGN'],['phase-1','PHASE_1_PROPOSAL'],['phase-1b','PHASE_1B_DESIGN_REVIEW'],['phase-1b-migration','PHASE_1B_IMPLEMENTATION'],['migration-report','MIGRATION_REPORT'],['inventory','SOURCE_INVENTORY']].map(([id,name])=>({id,title:'Archive · '+name.replaceAll('_',' '),path:'archived_no_longer_valid/docs/data-model/'+name+'.md',type:'md'})),

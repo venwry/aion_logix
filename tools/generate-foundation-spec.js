@@ -1,8 +1,9 @@
+import {datasets,datasetFiles,schemaVersion} from '../code/model-contract.js';
 import fs from 'node:fs';
 import path from 'node:path';
 
 // Run from repository root. Only current foundation schemas determine this document.
-const names = fs.readdirSync('data_foundation').filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)).sort();
+const names = [...datasets].sort();
 const schemas = Object.fromEntries([...names, 'common', 'technical', 'composition'].map(n => [n, JSON.parse(fs.readFileSync(`schemas/${n}.schema.json`))]));
 function resolve(value, owner) {
   if(value['x-boundary'])return [{type:'object',properties:{value:{type:'string | null','x-ref':['event']},precision:{type:'string',enum:['year','month','day','event','unknown']}},required:['value','precision']},owner];
@@ -38,7 +39,7 @@ const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAl
 const tree = (name, diagram = false) => entities[name].map(f => `${'│  '.repeat(f.depth)}${f.depth ? '└─ ' : ''}${f.key}${f.required ? '*' : '?'}: ${f.type}${f.targets.length ? ' → ' + (f.targets.length === names.length ? 'any foundation ID' : f.targets.join(' / ')) : ''}`).map(s => diagram ? escape(s) : s);
 const lines = [
   '# Foundation dataset specification', '',
-  'This document describes the current foundation schema contract (version 0.8.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
+  'This document describes the current foundation schema contract (version '+schemaVersion+'). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
   '## Reading the diagram', '',
   '- Each entity represents one dataset file, whose envelope is `{ "dataset_name": [record, ...] }`. The entity contains the hierarchical structure of one record, not a sample record.',
   '- `*` means required within its immediate parent object; `?` means optional there. A required child does not make its optional parent required. Conditional requirements are specified below.',
@@ -52,7 +53,7 @@ const lines = [
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',
   '```mermaid', '%%{init: {"flowchart": {"htmlLabels": true, "wrappingWidth": 1200}}}%%', 'flowchart LR', '  classDef schemaEntity font-family:monospace,text-align:left,white-space:pre;'
 ];
-for (const name of names) lines.push(`  ${name}["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>${name}.json<br/>${tree(name, true).join('<br/>')}</pre>"]:::schemaEntity`);
+for (const name of names) lines.push(`  ${name}["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>${datasetFiles[name]}<br/>${tree(name, true).join('<br/>')}</pre>"]:::schemaEntity`);
 const grouped = new Map();
 for (const ref of refs) {
   const targets = ref.targets.length === names.length ? ['any_foundation'] : ref.targets;
@@ -80,7 +81,11 @@ const purpose = {
  narrative_period: 'Named intervals used to organize the story.',
  process: 'An activity extending through time, with participants and milestones.',
  programme: 'Historical coordinating activity.',
- product: 'Commercial offering or narrative product identity; versioned composition and technical links.',
+ product: 'Logix/AION customer-facing offering; legacy identities remain during migration. Optional paired launch links are checked for campaign ownership and temporal containment.',
+ external_product: 'Descriptive third-party commercial offering with direct role-labelled specification references. Stored in external_products.json.',
+ base_part: 'Canonical physical base part and manufacturing definition.',
+ device: 'Canonical device and versioned physical composition.',
+ software_edition: 'Technical software implementation and versioned definition, separate from commercial rights and physical delivery.',
  technology: 'Technical concept or fabrication technology; dated changes belong to events/processes.',
  manufacturing_capability: 'Manufacturer- and recipe-scoped capability; maturity transitions are event outcomes.',
  market_response: 'Qualitative market reaction with timing supplied by its event/process carrier.'
@@ -93,8 +98,10 @@ function constraints(f) {
   return parts.join('; ') || '—';
 }
 for (const name of names) {
-  lines.push(`### ${name}`, '', purpose[name], '', `File: [${name}.json](../../data_foundation/${name}.json) · Schema: [${name}.schema.json](../../schemas/${name}.schema.json)`, '', '```text', `${name}[]`, ...tree(name), '```', '', '| Field path | Required in parent | Type | Constraints / allowed values |', '| --- | --- | --- | --- |');
+  lines.push(`### ${name}`, '', purpose[name], '', `File: [${datasetFiles[name]}](../../data_foundation/${datasetFiles[name]}) · Schema: [${name}.schema.json](../../schemas/${name}.schema.json)`, '', '```text', `${name}[]`, ...tree(name), '```', '', '| Field path | Required in parent | Type | Constraints / allowed values |', '| --- | --- | --- | --- |');
   for (const f of entities[name]) lines.push(`| \`${f.path}\` | ${f.required ? 'yes' : 'no'} | \`${f.type}\` | ${constraints(f).replaceAll('|', '\\|')} |`);
+  if (name === 'product') lines.push('', '**Transition:** launch campaign and event links are optional as a pair. When supplied, the event must have single-parent ownership through the campaign execution process and fit its period. Legacy product kinds remain accepted until reviewed migrations finish.');
+  if (name === 'external_product') lines.push('', '**Direct relationships:** specification entries contain exactly `no`, `description`, one `ref_id` and `ref_role`; numbering is unique within the record. This descriptive identity does not own technical compositions, structured dates or editorial status.');
   if (name === 'process') lines.push('', '**Boundary union:** calendar value with year/month/day precision, event ID with `precision: event`, or null with `precision: unknown`. The diagram/catalogue value reference applies only to event anchors.');
   if (name === 'agreement') lines.push('', '**Transition:** clauses accept either the exact five-field shape shown here or the unchanged legacy shape. Hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.');
   lines.push('');

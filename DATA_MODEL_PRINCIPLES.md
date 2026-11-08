@@ -2,7 +2,7 @@
 
 ## Current agreement: separation of story and authoring data
 
-Version 0.8.0 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
+Version 0.9.0 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
 
 1. The model combines hierarchical value objects and relational entity references. Each entity has a stable `id` beginning with its dataset name.
 2. `data_foundation/` contains only story records, in envelopes such as `{ "actor": [...] }`. It has no status, confirmation, provenance or application metadata fields.
@@ -39,8 +39,12 @@ flowchart LR
 
 Events and processes have numbered, typed inputs and outcomes. Team actions are process `steps`; a step may reference an event milestone or a sub-process. Programmes are processes; narrative-period groupings are retired. Campaigns own marketing objectives, audiences, messages, presentation and booth content, and reference an execution process. They do not duplicate activities or dates.
 
-Product and technology identities, manufacturing capabilities and qualitative market responses connect the story. Product definitions and composition histories are supported by contract 0.8.0. Quantitative yields, costs and ROI remain separate. Maturity transitions are outcomes on dated carriers. See the [current model guide](docs/data-model/MODEL_GUIDE.md) and [generated schema reference](docs/data-model/FOUNDATION_SPECIFICATION.md).
+Product and technology identities, manufacturing capabilities and qualitative market responses connect the story. Product definitions and composition histories are supported by contract 0.9.0. Quantitative yields, costs and ROI remain separate. Maturity transitions are outcomes on dated carriers. See the [current model guide](docs/data-model/MODEL_GUIDE.md) and [generated schema reference](docs/data-model/FOUNDATION_SPECIFICATION.md).
 
-## Agreement ownership (0.8.0)
+## Agreement ownership (0.9.0)
 
 Agreements own `clauses[]`; clauses are reviewed with the whole agreement. New clauses contain exactly `id`, `kind`, `statement`, `value`, and `unit`. Stable clause IDs preserve traceability. Statements carry the parties, rights, equity basis, conditions and timing in plain English; parties have meaningful roles. Numeric summaries use value/unit, or null/null when no quantity is specified. Targets use a `target_` kind; unaccepted proposals must not silently become commitments. The legacy clause schema remains accepted during independent agreement approvals. Events and processes use one optional `agreement_id`; event links point to agreements rather than redundant clause-to-event backlinks.
+
+## Catalogue transition (0.9.0)
+
+Products denote Logix/AION customer-facing offerings. Legacy identities remain schema-valid during approval-driven migration. External commercial products use descriptive records with direct role-labelled references, separate from technical editions and physical devices. Product launch references are optional as a pair during transition; when present, campaign ownership and temporal containment are validated. See [phase 2](docs/PRODUCT_CATALOGUE_PHASE2.md). The external-product filename is plural while its envelope and ID prefix remain singular.

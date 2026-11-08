@@ -17,7 +17,7 @@ for doc in source.values():
     if isinstance(r,dict) and 'id' in r:old.setdefault(r['id'],r)
 prior_auth=read(ROOT/'data_storytelling/authorization.json')['authorization']
 assert not any(a['state']=='authorized' and a['record_id'].split('.')[0] in ['base_part','device','software_edition'] for a in prior_auth), 'Do not overwrite reviewed technical definitions with a legacy reimport.'
-current={r['id']:r for p in (ROOT/'data_foundation').glob('*.json') if p.stem not in ['base_part','device','software_edition'] for r in read(p)[p.stem]}
+current={r['id']:r for p in (ROOT/'data_foundation').glob('*.json') if p.stem not in ['base_part','device','software_edition'] for rows in read(p).values() for r in rows}
 migration=read(ROOT/'archived_no_longer_valid/data_storytelling/phase1b_migration.json')['migration'][0]
 product_map={m['legacy_id']:m['record_id'] for m in migration['product_mapping']}
 # Canonical technical IDs are separate from preserved product identities.

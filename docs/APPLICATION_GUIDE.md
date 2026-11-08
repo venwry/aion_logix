@@ -104,3 +104,7 @@ All lanes share the global calendar. Collapsing a lane does not move date anchor
 Categories describe the root programme's primary purpose. Semiconductor work under stepper installation remains Investment, and competitor events inside ecosystem programmes remain Ecosystem & Partners. Moving individual children into a different lane requires changing ownership, not assigning an override.
 
 Category assignments are story changes: submit one Changes confirm proposal per affected record. The UI and schema can be deployed before those proposals are approved; records remain Uncategorised until their root assignment is authorized.
+
+## External products and product launches
+
+Data browser includes External Product alongside the existing datasets. Its specification table shows each reference with the description and role supplied by the author. Timeline details and Changes confirm use the same rendering and navigation. Product details show explicit launch campaign and event links when supplied; several products may share them. The external collection starts empty in contract 0.9.0 while its content awaits migration.

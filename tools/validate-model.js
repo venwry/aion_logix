@@ -1,10 +1,11 @@
+import {validateProductLaunches} from '../code/product-launches.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
-import {datasets} from '../code/model-contract.js';
+import {datasets,datasetForFile} from '../code/model-contract.js';
 import {validateCompositions} from '../code/composition.js';
 import {pointBounds,resolvePoint} from '../code/temporal.js';
 const schemaDir = fileURLToPath(new URL('../schemas/', import.meta.url));
@@ -21,7 +22,7 @@ export function recordHash(record) {
 }
 export function readDocuments(dir) {
   if (dir instanceof URL) dir = fileURLToPath(dir);
-  return Object.fromEntries(fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => [f.slice(0,-5), JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))]));
+  return Object.fromEntries(fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => [datasetForFile(f)||f.slice(0,-5), JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))]));
 }
 export function validateDocuments(documents, { complete = false } = {}) {
   const errors = [], records = new Map(); let count = 0;
@@ -97,7 +98,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
   for(const id of timelineChildren)if(records.get(id)?.category)report(`${id}: child timeline records must leave category empty and inherit from their parent`);
   for (const record of records.values()) {
     for(const key of ['steps','inputs','outcomes','specification','qualification_requirements','marketing_content']){
-      const numbers=(record[key]||[]).map(x=>x.number);
+      const numbers=(record[key]||[]).map(x=>record.id.startsWith('external_product.')&&key==='specification'?x.no:x.number);
       if(new Set(numbers).size!==numbers.length)report(`${record.id}: duplicate number in ${key}`);
     }
     if(record.id.startsWith('campaign.')&&records.get(record.process_id)?.kind!=='campaign_execution')report(`${record.id}: campaign needs an execution process`);
@@ -137,7 +138,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if (record.occurrence==='unknown'||record.state==='unknown'||record.completion_state==='unknown') report(`${record.id}: unresolved story state`);
     }
   }
-  errors.push(...validateCompositions(records));
+  errors.push(...validateCompositions(records),...validateProductLaunches(records));
   if (complete && count===0) report('No records: an empty graph cannot establish completeness');
   return {errors,count};
 }

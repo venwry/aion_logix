@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');const fs=require('node:fs');
-const names=JSON.parse(fs.readFileSync('data_storytelling/manifest.json')).manifest[0].foundation_datasets;
-const state=()=>({revision:'base123',collections:Object.fromEntries(names.map(n=>[n,JSON.parse(fs.readFileSync('data_foundation/'+n+'.json'))[n]])),authorization:[],changes:{change:[]}});
+const foundationManifest=JSON.parse(fs.readFileSync('data_storytelling/manifest.json')).manifest[0],names=foundationManifest.foundation_datasets;
+const state=()=>({revision:'base123',collections:Object.fromEntries(names.map(n=>[n,JSON.parse(fs.readFileSync('data_foundation/'+(foundationManifest.foundation_files?.[n]||n+'.json')))[n]])),authorization:[],changes:{change:[]}});
 async function open(page){await page.addInitScript(()=>sessionStorage.setItem('aion-backend',JSON.stringify({url:location.origin,token:'test-key'})));await page.route('**/api/state',r=>r.fulfill({json:state()}));await page.goto('/code/browser.html');await expect(page.locator('body')).toHaveAttribute('data-ready','true');}
 test('list selections survive filters and save in one request',async({page})=>{
  await open(page);const button=page.getByRole('button',{name:'Authorize and save',exact:true});await expect(button).toBeDisabled();

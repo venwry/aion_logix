@@ -1,3 +1,4 @@
+import {datasetPath} from './model-contract.js';
 import {$,el,human,typeOf,titleOf,references} from './shared.js';
 import {resolvePoint} from './temporal.js';
 
@@ -122,5 +123,5 @@ export function compactDetails(record,data,select,options={}){
  const links=el('div','detail-links');
  if(document.body.dataset.page==='timeline'){const a=el('a','','Open in Data browser →');a.href='browser.html#'+encodeURIComponent(record.id);links.append(a);}
  else if(['event','process','campaign'].includes(typeOf(record))){const a=el('a','','Open in timeline →');a.href='timeline.html#'+encodeURIComponent(record.id);links.append(a);}
- const raw=el('a','','Open dataset ↗');raw.href='../data_foundation/'+typeOf(record)+'.json';raw.target='_blank';raw.rel='noopener';links.append(raw);host.append(links);
+ const raw=el('a','','Open dataset ↗');raw.href='../'+datasetPath(typeOf(record));raw.target='_blank';raw.rel='noopener';links.append(raw);host.append(links);
 }

@@ -134,3 +134,11 @@ Agreement clauses now live in `data_foundation/agreement.json`, validated by `sc
 [The phase-1 migration map](product-catalogue-phase1/README.md) classifies all 145 products at commit a0cf5b8, with exact incoming references, provisional destinations, decisions and missing-offering checks. Machine-readable evidence is in `product-catalogue-phase1/migration-map.json`, `decisions-and-gaps.json` and `verification.json`. These are review artifacts, not authorized foundation changes or executable Changes confirm proposals.
 
 The [CP/M cartridge clarification](product-catalogue-phase1/cpm-cartridge-clarification.md) amends phase 1 to retain the Logix physical offering while separating DRI software rights and the technical edition.
+
+### Product catalogue cleanup — phase 2 support
+
+- [Contract and rollout](PRODUCT_CATALOGUE_PHASE2.md): compatible schema/application deployment; data migrations remain later phases.
+- `data_foundation/external_products.json` and `schemas/external_product.schema.json`: descriptive external commercial identities; initially empty.
+- `code/model-contract.js`: version 0.9.0, dataset types and physical filename mapping.
+- `code/product-launches.js`: paired product launch ownership and temporal validation.
+- `tests/model/catalogue-phase2.test.js`, `tests/server/external-products.test.js`, `tests/catalogue-phase2.spec.cjs`: schema, graph, persistence and UI coverage.
