@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "change_review": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^change_review\\.[a-zA-Z0-9_-]+$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20000
+          },
+          "supersedes_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "actor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "change_id": {
+            "type": "string",
+            "pattern": "^change\\."
+          },
+          "proposal_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "state": {
+            "const": "needs_refinement"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "supersedes_id",
+          "actor",
+          "created_at",
+          "change_id",
+          "proposal_sha256",
+          "state"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "change_review"
+  ],
+  "additionalProperties": false
+}

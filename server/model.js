@@ -1,10 +1,11 @@
+import {editorialRows,latestReview,saveEditorial,resolveAnnotations,validateEditorialHistory} from './editorial.js';
 import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import crypto from 'node:crypto';
 import {validateDocuments} from '../tools/validate-model.js';
 const editorialValidator=new Ajv2020({allErrors:true,strict:false});addFormats(editorialValidator);
-const checks=Object.fromEntries(['authorization','authorization_decision'].map(n=>[n,editorialValidator.compile(JSON.parse(fs.readFileSync(new URL('../schemas/storytelling/'+n+'.schema.json',import.meta.url))))]));
+const checks=Object.fromEntries(['authorization','authorization_decision','annotation','change_review'].map(n=>[n,editorialValidator.compile(JSON.parse(fs.readFileSync(new URL('../schemas/storytelling/'+n+'.schema.json',import.meta.url))))]));
 export {datasets as names} from '../code/model-contract.js';
 import {datasets as names} from '../code/model-contract.js';
 export const stable=x=>Array.isArray(x)?x.map(stable):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,stable(x[k])])):x;
@@ -13,13 +14,14 @@ export const records=files=>names.flatMap(n=>files[`data_foundation/${n}.json`][
 export const get= (files,name)=>files[`data_storytelling/${name}.json`][name];
 export function validate(files){
  const result=validateDocuments(Object.fromEntries(names.map(n=>[n,files[`data_foundation/${n}.json`]])));
- for(const [name,check] of Object.entries(checks))if(!check(files[`data_storytelling/${name}.json`]))result.errors.push(name+': '+editorialValidator.errorsText(check.errors));
+ for(const [name,check] of Object.entries(checks))if(!check(files[`data_storytelling/${name}.json`]||{[name]:[]}))result.errors.push(name+': '+editorialValidator.errorsText(check.errors));
+ result.errors.push(...validateEditorialHistory(files));
  const index=new Map(records(files).map(r=>[r.id,r]));const seen=new Set();
  for(const a of get(files,'authorization')){if(seen.has(a.record_id))result.errors.push('Duplicate authorization');seen.add(a.record_id);if(!index.has(a.record_id))result.errors.push('Orphan authorization '+a.record_id);if(!['authorized','unauthorized'].includes(a.state))result.errors.push('Invalid authorization state');if(!/^[a-f0-9]{64}$/.test(a.content_sha256))result.errors.push('Invalid content hash');}
  for(const record of index.values())if(['status','confirmation','source_refs'].some(k=>k in record))result.errors.push('Editorial information in foundation '+record.id);
  return result;
 }
-export function snapshot(files,revision){return {revision,collections:Object.fromEntries(names.map(n=>[n,files[`data_foundation/${n}.json`][n]])),authorization:get(files,'authorization'),changes:files['data_storytelling/change.json']};}
+export function snapshot(files,revision){return {revision,collections:Object.fromEntries(names.map(n=>[n,files[`data_foundation/${n}.json`][n]])),authorization:get(files,'authorization'),changes:files['data_storytelling/change.json'],annotations:editorialRows(files,'annotation'),change_reviews:editorialRows(files,'change_review')};}
 
 function approveChanges(original, entries, actor) {
  const bad=message=>{const e=new Error(message);e.status=400;throw e;};
@@ -37,6 +39,7 @@ function approveChanges(original, entries, actor) {
    fail('A selected proposal is no longer pending. Reload and review the changes.');
   }
   if(hash(proposal)!==entry.proposal_sha256)fail('A selected proposal has changed. Reload and review it again.');
+  if(latestReview(files,proposal.id,hash(proposal))?.state==='needs_refinement')fail('This proposal needs refinement. Prepare a revised proposal before authorization.');
   if(proposal.category==='schema')fail('Schema proposals require a separately reviewed schema deployment.');
   if(!Array.isArray(proposal.elements)||!proposal.elements.length)bad('A selected proposal has no changes.');
   for(const e of proposal.elements){
@@ -49,12 +52,18 @@ function approveChanges(original, entries, actor) {
   selected.push(proposal);
  }
  if(!selected.length)return {files,changed:false};
+ for(const proposal of selected){
+  const dependencies=proposal.depends_on_change_ids||[];
+  if(!Array.isArray(dependencies)||dependencies.some(id=>typeof id!=='string'||id===proposal.id))bad('Invalid proposal dependencies.');
+  for(const id of dependencies)if(!selected.some(p=>p.id===id)&&!decisions.some(d=>d.change_id===id))fail('Select required proposal '+id+' before authorization.');
+ }
  // Apply every selected proposal before validating, allowing references between new records.
  for(const proposal of selected){
   for(const e of proposal.elements){
    const rows=files[`data_foundation/${e.record_type}.json`][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);
    if(e.after===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=e.after;else rows.push(e.after);
   }
+  resolveAnnotations(files,proposal,actor);
   pending.splice(pending.indexOf(proposal),1);
   // Retain the existing audit schema: one complete decision per reviewed proposal.
   const id='authorization_decision.'+crypto.randomUUID();
@@ -70,6 +79,11 @@ function approveChanges(original, entries, actor) {
 }
 
 export function transact(original,request,actor='author'){
+ if(['save_annotations','save_review_feedback'].includes(request.action)){
+  const result=saveEditorial(original,request,actor),validation=validate(result.files);
+  if(validation.errors.length)throw Object.assign(Error('Invalid feedback: '+validation.errors.slice(0,5).join('; ')),{status:400});
+  return result;
+ }
  if(request.action==='approve_changes')return approveChanges(original,request.changes,actor);
  if(request.action==='approve_change')return approveChanges(original,[request],actor);
  const files=structuredClone(original);const index=new Map(records(files).map(r=>[r.id,r]));const auth=get(files,'authorization');const decisions=get(files,'authorization_decision');const targets=[];let proposal=null;

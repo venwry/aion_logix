@@ -118,3 +118,13 @@ Agreement clauses now live in `data_foundation/agreement.json`, validated by `sc
 - `tools/import-product-definitions.py`: pinned, definition-only importer.
 - `docs/PRODUCT_DEFINITION_IMPORT.md`, `docs/product-definition-import-audit.json`: import policy and source coverage evidence.
 - `tests/model/product-definitions.test.js`, `tests/fixtures/product-import-inventories.json`, `tests/product-definitions.spec.cjs`: source inventory parity, schema/approval boundaries and browser regression coverage.
+
+
+### Editorial workflow (0.8.0)
+
+- `code/editorial.js`: editorial loading, feedback saving and local drafts.
+- `code/annotations.js`: timeline annotation controls and save state.
+- `code/changes-confirm.js`: split navigation, comparison modes and whole-proposal decisions.
+- `server/editorial.js`: immutable feedback revisions, conflicts, idempotency and annotation resolution.
+- `data_storytelling/annotation.json`, `change_review.json`: committed feedback, with corresponding schemas under `schemas/storytelling/`.
+- `tests/server/editorial.test.js`, `tests/editorial-workflow.spec.cjs`: feedback transactions and end-to-end review/navigation coverage.

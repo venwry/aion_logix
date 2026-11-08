@@ -1,7 +1,8 @@
 import {$,el,human,typeOf,titleOf,references} from './shared.js';
 import {resolvePoint} from './temporal.js';
 
-let detailCleanups=[];
+const cleanupByHost=new WeakMap();let renderSerial=0;
+export function disposeDetails(host){for(const cleanup of cleanupByHost.get(host)||[])cleanup();cleanupByHost.delete(host);}
 
 // Flatten owned objects into dotted paths; retain arrays as values or tables.
 function fields(value,prefix='',result=[]){
@@ -12,11 +13,11 @@ function fields(value,prefix='',result=[]){
  }
  return result;
 }
-export function compactDetails(record,data,select){
- for(const cleanup of detailCleanups)cleanup();detailCleanups=[];
- const host=$('details');host.replaceChildren();host.scrollTop=0;host.classList.add('compact-details');
+export function compactDetails(record,data,select,options={}){
+ const host=options.host||$('details');disposeDetails(host);const detailCleanups=[];cleanupByHost.set(host,detailCleanups);const serial=++renderSerial;
+ host.replaceChildren();host.scrollTop=0;host.classList.add('compact-details');
  if(!record){host.append(el('h2','','Select a record'));return;}
- const top=el('div','record-topline');top.append(el('span','type-tag',human(typeOf(record))),el('span','badge',record.status==='authorized'?'Authorized':'Pending authorization'));
+ const top=el('div','record-topline');top.append(el('span','type-tag',human(typeOf(record))),el('span','badge',options.statusLabel||(record.status==='authorized'?'Authorized':'Pending authorization')));
  host.append(top,el('h2','',titleOf(record)));
  function reference(value){
   const row=el('span','reference-entry'),id=el('span','reference-id',value),link=el('a','ref-link reference-name',titleOf(data.index.get(value)));
@@ -82,17 +83,18 @@ export function compactDetails(record,data,select){
  }
  function compositionHistory(versions){
   const section=el('section','composition-history'),label=el('label','compact-key','Composition history'),picker=el('select','composition-version-select'),panel=el('div','composition-version-details');
-  picker.id='composition-version';label.htmlFor=picker.id;
+  picker.id='composition-version-'+serial;label.htmlFor=picker.id;
   section.append(label,picker,panel);
   if(!versions.length){picker.disabled=true;picker.append(el('option','','No composition versions'));return section;}
   for(const [i,version] of versions.entries()){
    const option=el('option','',version.version_number+' - '+version.description+' ('+boundaryLabel(version.effective_from)+' - '+boundaryLabel(version.effective_until)+')');
-   option.value=String(i);picker.append(option);
+   option.value=String(i);option.dataset.versionNumber=version.version_number;picker.append(option);
   }
   const cleanups=[];
   const clear=()=>{for(const cleanup of cleanups)cleanup();cleanups.length=0;};detailCleanups.push(clear);
   function renderVersion(){
    clear();panel.replaceChildren();const version=versions[Number(picker.value)];
+   if(!version){panel.append(el('p','composition-empty','Version not present in this record.'));return;}
    for(const [key,title] of [['technical_definition','Technical definition'],['composition_definition','Composition definition'],['assembly_requirements','Assembly requirements']]){
     const group=el('section','composition-section');group.dataset.field=key;group.append(el('h3','',title));const value=version[key];
     if(!value||!Object.keys(value).length)group.append(el('p','composition-empty',key==='assembly_requirements'?'No assembly requirements specified.':key==='composition_definition'?'No composition entries specified.':'No technical definition specified.'));
@@ -103,15 +105,18 @@ export function compactDetails(record,data,select){
     panel.append(group);
    }
   }
-  picker.onchange=renderVersion;renderVersion();return section;
+  picker.onchange=()=>{renderVersion();options.onVersionChange?.(picker.selectedOptions[0]?.dataset.versionNumber);};
+  if(options.versionNumber!==undefined){const match=[...picker.options].find(o=>o.dataset.versionNumber===String(options.versionNumber));if(match)picker.value=match.value;else{const missing=el('option','','Version '+options.versionNumber+' — not present');missing.value='missing';picker.append(missing);picker.value='missing';}}
+  renderVersion();return section;
  }
  const content=el('div','compact-fields');
  for(const [key,value] of fields(data.originals.get(record.id)||record)){
   if(key==='status')continue;
-  if(key==='composition_history'&&Array.isArray(value)){content.append(compositionHistory(value));continue;}
-  const row=el('div','compact-field');if(isReferences(value))row.append(referenceList(value,key));else row.append(el('strong','compact-key',key+': '),key==='id'?el('span','record-id',value):valueNode(value,key));content.append(row);
+  if(key==='composition_history'&&Array.isArray(value)){const history=compositionHistory(value);if(options.changedFields?.has(key))history.classList.add('changed-field');content.append(history);continue;}
+  const row=el('div','compact-field');row.dataset.field=key;if(options.changedFields?.has(key.split('.')[0]))row.classList.add('changed-field');if(isReferences(value))row.append(referenceList(value,key));else row.append(el('strong','compact-key',key+': '),key==='id'?el('span','record-id',value):valueNode(value,key));content.append(row);
  }
  host.append(content);
+ if(options.comparison)return;
  const incoming=data.records.filter(r=>r.id!==record.id&&references(r,data.index).has(record.id));
  if(incoming.length){const row=el('div','compact-field compact-incoming');row.append(referenceList(incoming.map(r=>r.id),'Referenced by'));host.append(row);}
  const links=el('div','detail-links');

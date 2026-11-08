@@ -1,3 +1,4 @@
+import {annotationController} from './annotations.js';
 import {$,el,human,typeOf,titleOf,loadData,timing,actorSet,fillActors,stats,splitter,showError,debounce} from './shared.js';
 import {compactDetails} from './compact-details.js';
 import {timelineTree,layoutTimeline} from './timeline-layout.js';
@@ -8,7 +9,18 @@ try{
  const tree=timelineTree(items),dated=items.filter(x=>x.date),first=Math.min(...dated.map(x=>new Date(x.date.start).getUTCFullYear())),last=Math.max(...dated.map(x=>new Date(x.date.end).getUTCFullYear()));
  for(let y=first;y<=last;y++)for(const id of ['from','to']){const option=el('option','',y);option.value=y;$(id).append(option);}
  $('from').value=first;$('to').value=last;fillActors($('actor'),data);splitter('aion-timeline-width',360);let selected='';
- function choose(id){const r=data.index.get(id);if(!r)return;selected=id;history.replaceState(null,'','#'+encodeURIComponent(id));compactDetails(r,data,choose);for(const node of document.querySelectorAll('.timeline-card')){const selected=node.dataset.recordId===id||node.dataset.executionId===id;node.dataset.selected=String(selected);node.querySelector(':scope > .timeline-heading')?.setAttribute('aria-pressed',String(selected));}}
+ const annotation=await annotationController(data),selectionHistory=[];
+ function rememberView(){const entry=selectionHistory.at(-1);if(entry){entry.scroll=$('details').scrollTop;entry.version=$('details').querySelector('.composition-version-select')?.selectedOptions[0]?.dataset.versionNumber;}}
+ function choose(id,back=false){
+  const r=data.index.get(id);if(!r)return;if(!back)rememberView();
+  if(!back&&selectionHistory.at(-1)?.id!==id)selectionHistory.push({id,scroll:0});
+  const view=selectionHistory.at(-1)||{};selected=id;history.replaceState(null,'','#'+encodeURIComponent(id));
+  compactDetails(r,data,next=>choose(next),{versionNumber:view.version});annotation.render(r);$('details').scrollTop=view.scroll||0;
+  $('timeline-back').disabled=selectionHistory.length<2;
+  for(const node of document.querySelectorAll('.timeline-card')){const active=node.dataset.recordId===id||node.dataset.executionId===id;node.dataset.selected=String(active);node.querySelector(':scope > .timeline-heading')?.setAttribute('aria-pressed',String(active));}
+ }
+ $('timeline-back').onclick=()=>{if(selectionHistory.length<2)return;selectionHistory.pop();while(selectionHistory.length&&!data.index.has(selectionHistory.at(-1).id))selectionHistory.pop();if(selectionHistory.length)choose(selectionHistory.at(-1).id,true);};
+
  function card(n){
   const box=el('article','timeline-card '+(n.type==='event'?'event-box':'duration-box'));box.dataset.recordId=n.record.id;box.dataset.type=n.type;box.dataset.context=String(n.context||false);box.dataset.parentId=n.parent||'';
   const execution=n.members.find(x=>x.type==='process'&&x.record.id!==n.id),primary=execution?.record||n.record;

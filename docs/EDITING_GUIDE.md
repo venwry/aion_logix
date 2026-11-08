@@ -69,3 +69,10 @@ Category assignments are story changes: submit one Changes confirm proposal per 
 ## Product definitions (0.7.0)
 
 Use `base_part`, `device` and `software_edition` for canonical technical definitions; existing product subjects link through `technical_identity`. Products, devices and editions own complete `composition_history` snapshots with explicit child versions. New imported technical records are externally Unauthorized; product revisions remain Changes confirm proposals. See [definition import and ownership](PRODUCT_DEFINITION_IMPORT.md). Never import old chronology, approvals or financial projections into these definitions. Only events/processes own calendar dates; unknown composition boundaries must remain explicit until reconciled.
+
+
+## Process annotations and refinement feedback
+
+Before preparing requested changes, read `data_storytelling/annotation.json` and `change_review.json`. Follow each revision chain and inspect the reviewed record/proposal hash. Use the latest open annotation as feedback, preserving its wording and historical revisions. Link its exact revision ID in the resulting proposal's `annotation_ids`. Do not mark it resolved when proposing changes: approval resolves an unchanged open revision automatically. Preserve feedback if a proposal needs revision; modify its content and review it again rather than bypassing a Needs refinement state. Use `depends_on_change_ids` for separable prerequisites and a single multi-element proposal for inseparable operations such as moving a value between records.
+
+Contract 0.8.0 deploys the two editorial schemas/files, saving backend and UI together. No existing story records or authorization decisions change during this application upgrade.

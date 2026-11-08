@@ -1,15 +1,17 @@
 # Storytelling data — current file reference
 
-Updated for the 30 October 2026 handover, model **0.6.0**. `data_storytelling/` contains six active JSON files. Historical material is inventoried in [the archive](../../archived_no_longer_valid/README.md); unresolved work is indexed in [the backlog](../REVIEW_BACKLOG.md). The former reference is retained as a historical snapshot.
+Current contract **0.8.0**. `data_storytelling/` contains eight active JSON files. The counts in the original handover rows below are historical; consult the files for current counts. Historical material is inventoried in [the archive](../../archived_no_longer_valid/README.md); unresolved work is indexed in [the backlog](../REVIEW_BACKLOG.md). The former reference is retained as a historical snapshot.
 
-Foundation records describe the fictional world. Storytelling files describe author authorization, proposals, sources and editorial questions. Only the first four files below are loaded by the GitHub saving backend. The documentation viewer also exposes sources and open issues; they do not control authorization badges.
+Foundation records describe the fictional world. Storytelling files describe author authorization, proposals, sources and editorial questions. The GitHub saving backend loads authorization, authorization decisions, proposals, the manifest, annotations and change reviews. The documentation viewer also exposes sources and open issues; they do not control authorization badges.
 
 | File | Purpose | Handover contents |
 | --- | --- | --- |
 | [authorization.json](../../data_storytelling/authorization.json) | Exact-content, whole-record authorization state | 653 entries: 54 authorized, 599 unauthorized |
 | [authorization_decision.json](../../data_storytelling/authorization_decision.json) | Append-only direct-save audit evidence | One applied change decision; grows with subsequent saves |
 | [change.json](../../data_storytelling/change.json) | Active proposals awaiting review | Empty queue; not evidence that the story is complete |
-| [manifest.json](../../data_storytelling/manifest.json) | Current model version and dataset inventory | Version 0.6.0; 12 foundation datasets |
+| [manifest.json](../../data_storytelling/manifest.json) | Current model version and dataset inventory | Version 0.8.0; 15 foundation datasets |
+| [annotation.json](../../data_storytelling/annotation.json) | Append-only revisions of record feedback | Initially empty |
+| [change_review.json](../../data_storytelling/change_review.json) | Append-only refinement feedback on exact proposal revisions | Initially empty |
 | [source.json](../../data_storytelling/source.json) | Source bibliography and author-evidence catalogue | 36 sources; inherited provenance format |
 | [reconciliation_issue.json](../../data_storytelling/reconciliation_issue.json) | Unresolved editorial questions | 17 open issues; references rebased to current identities |
 
@@ -77,3 +79,14 @@ The 0.5.0 migration removes current clause authorization entries because clauses
 ## Product-definition import
 
 Contract 0.7.0 registers 15 datasets. The definition-only import creates fresh external Unauthorized entries for base parts, devices and software editions, with exact content hashes and no inherited decision IDs. Existing product/capability changes are queued for individual whole-record review. Import coverage lives in `docs/product-definition-import-audit.json`, not in foundation records or the append-only authorization decision history.
+
+
+## Editorial feedback (0.8.0)
+
+`annotation.json` has envelope `{ "annotation": [] }`, validated by `schemas/storytelling/annotation.schema.json`. A revision contains `id`, `record_id`, `content_sha256` (the reviewed foundation content), `text`, `state` (`open`, `resolved`, `dismissed`), nullable `supersedes_id`, `actor`, `created_at`, and `change_ids`. The first revision has a null predecessor; each later revision names the current tip for that record. Prior text remains immutable. The server derives actor/time; this deployment uses the shared author identity, not individual-user attribution. Deleted foundation records do not invalidate historical annotations.
+
+`change_review.json` has envelope `{ "change_review": [] }`, validated by `schemas/storytelling/change_review.schema.json`. Revisions contain `id`, `change_id`, `proposal_sha256`, `text`, `state: "needs_refinement"`, nullable `supersedes_id`, `actor`, and `created_at`. Chains are scoped to change ID plus exact proposal hash. A changed proposal hash starts a new review context. Old feedback never silently rejects or authorizes a replacement revision.
+
+`POST /api/feedback` accepts `save_annotations` or `save_review_feedback` with `entries[]`. Every entry carries a client-generated immutable revision ID and expected `supersedes_id`; retries are idempotent. Annotation requests additionally carry `record_id`, `content_sha256`, `text`, and `state` (`open` or `dismissed`). Review requests carry `change_id`, `proposal_sha256`, and `text`. Text must be non-empty and at most 20,000 characters. The request body limit is 256,000 bytes. All entries validate and save together or none save. Saving feedback never touches authorization or foundation content.
+
+Proposals may declare `annotation_ids[]`, linking exact committed source revisions, and `depends_on_change_ids[]`. Required pending proposals must be selected together, or their approval must already exist in the decision log. Combine inseparable changes inside one proposal's `elements[]`. On approval, a linked annotation is automatically resolved only if it is still the current open revision. If the author has since edited it, the newer annotation remains open. Merely preparing a proposal does not resolve its annotation.

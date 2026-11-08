@@ -1,8 +1,16 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import crypto from 'node:crypto';
 import {readDocuments,validateDocuments} from '../../tools/validate-model.js';
 import {hash,transact} from '../../server/model.js';import {resolveComposition} from '../../code/composition.js';
-const read=p=>JSON.parse(fs.readFileSync(p));const docs=readDocuments('data_foundation');const proposals=read('data_storytelling/change.json').change.filter(p=>p.id.startsWith('change.product_definition_import_'));
-const files=Object.fromEntries(Object.entries(docs).map(([n,d])=>['data_foundation/'+n+'.json',d]));for(const n of ['authorization','authorization_decision','change','manifest'])files['data_storytelling/'+n+'.json']=read('data_storytelling/'+n+'.json');
+const read=p=>JSON.parse(fs.readFileSync(p));const docs=readDocuments('data_foundation');
+// Reconstruct the original pending-import review fixture from preserved decisions.
+// Author approvals on main must not invalidate a regression test's starting state.
+const pending=read('data_storytelling/change.json').change,decisions=read('data_storytelling/authorization_decision.json').authorization_decision;
+const proposals=[...new Map([...decisions.map(d=>d.proposal).filter(Boolean),...pending].filter(p=>p.id.startsWith('change.product_definition_import_')).map(p=>[p.id,p])).values()];
+for(const p of proposals)for(const e of p.elements){const rows=docs[e.record_type][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(e.before===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=structuredClone(e.before);else rows.push(structuredClone(e.before));}
+const files=Object.fromEntries(Object.entries(docs).map(([n,d])=>['data_foundation/'+n+'.json',d]));for(const n of ['authorization','authorization_decision','change','manifest','annotation','change_review'])files['data_storytelling/'+n+'.json']=read('data_storytelling/'+n+'.json');
+files['data_storytelling/change.json']={change:proposals};
+const fixtureRecords=new Map(Object.values(docs).flatMap(d=>Object.values(d)[0]).map(r=>[r.id,r]));
+files['data_storytelling/authorization.json'].authorization=files['data_storytelling/authorization.json'].authorization.map(a=>{const r=fixtureRecords.get(a.record_id);return r?{id:a.id,record_id:a.record_id,state:'unauthorized',content_sha256:hash(r)}:a;});
 const result=transact(files,{action:'approve_changes',changes:proposals.map(p=>({change_id:p.id,proposal_sha256:hash(p)}))});
 const applied=Object.fromEntries(Object.entries(result.files).filter(([p])=>p.startsWith('data_foundation/')).map(([p,d])=>[p.split('/')[1].split('.')[0],d]));
 const index=new Map(Object.values(applied).flatMap(d=>Object.values(d)[0]).map(r=>[r.id,r]));

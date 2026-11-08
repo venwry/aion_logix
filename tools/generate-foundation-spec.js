@@ -38,7 +38,7 @@ const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAl
 const tree = (name, diagram = false) => entities[name].map(f => `${'│  '.repeat(f.depth)}${f.depth ? '└─ ' : ''}${f.key}${f.required ? '*' : '?'}: ${f.type}${f.targets.length ? ' → ' + (f.targets.length === names.length ? 'any foundation ID' : f.targets.join(' / ')) : ''}`).map(s => diagram ? escape(s) : s);
 const lines = [
   '# Foundation dataset specification', '',
-  'This document describes the current foundation schema contract (version 0.7.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
+  'This document describes the current foundation schema contract (version 0.8.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
   '## Reading the diagram', '',
   '- Each entity represents one dataset file, whose envelope is `{ "dataset_name": [record, ...] }`. The entity contains the hierarchical structure of one record, not a sample record.',
   '- `*` means required within its immediate parent object; `?` means optional there. A required child does not make its optional parent required. Conditional requirements are specified below.',

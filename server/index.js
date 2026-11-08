@@ -16,9 +16,10 @@ export function createServer({store,accessToken,origins=[],root=process.cwd()}){
    if(!equal(req.headers.authorization,'Bearer '+accessToken))return send(401,{error:'Connect with the backend access key to save authorizations.'});
    try{
     if(pathname==='/api/state'&&req.method==='GET'){await queue;const state=await store.read();return send(200,snapshot(state.files,state.revision));}
-    if(pathname==='/api/authorize'&&req.method==='POST'){
+    if(['/api/authorize','/api/feedback'].includes(pathname)&&req.method==='POST'){
      if(!req.headers['content-type']?.startsWith('application/json'))return send(415,{error:'JSON required'});
      let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>256000)return send(413,{error:'Request too large'});}let request;try{request=JSON.parse(body);}catch{return send(400,{error:'Invalid JSON'});}
+     if(pathname==='/api/feedback'&&!['save_annotations','save_review_feedback'].includes(request?.action))return send(400,{error:'Unsupported feedback action'});
      const run=queue.then(async()=>{const previous=await store.read();const result=transact(previous.files,request);const revision=result.changed?await store.save(previous,result.files):previous.revision;return snapshot(result.files,revision);});queue=run.catch(()=>{});return send(200,await run);
     }
     return send(404,{error:'Unknown API route'});

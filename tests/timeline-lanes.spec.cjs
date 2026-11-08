@@ -7,7 +7,7 @@ const categories={
  "process.stock_market_investment": "Adam's personal",
  "process.harvard_education": "Adam's personal",
  "process.computer_business_incorporation": "Logix/AION investment",
- "process.stepper_install": "Logix/AION investment",
+ "process.aion_manufacturing_maturation": "Logix/AION investment",
  "process.aurelia_foundation": "Product dev & launch",
  "process.ncc1979_development": "Product dev & launch",
  "process.comdex1979_campaign": "Product dev & launch",
@@ -44,14 +44,14 @@ test('approved categories create five colored lanes with inherited cards and cam
  await page.locator('#search').fill('event.harvard_graduation');await expect(page.locator('.timeline-group')).toHaveCount(1);await expect(page.locator('.timeline-group')).toHaveAttribute('data-lane','personal');
 });
 test('collapse and keyboard expand preserve shared anchors, details and mobile controls',async({page})=>{
- await ready(page);const anchor=await page.locator('[data-record-id="event.dri_founding"].timeline-card').getAttribute('data-anchor');
+ await ready(page);const personalCount=await page.locator('.timeline-group[data-lane="personal"]').count();expect(personalCount).toBeGreaterThan(0);const anchor=await page.locator('[data-record-id="event.dri_founding"].timeline-card').getAttribute('data-anchor');
  const button=page.locator('.lane-toggle[data-lane="personal"]');await button.click();await expect(button).toHaveAttribute('aria-expanded','false');await expect(page.locator('.timeline-group[data-lane="personal"]')).toHaveCount(0);
  expect(await page.locator('[data-record-id="event.dri_founding"].timeline-card').getAttribute('data-anchor')).toBe(anchor);
- await button.focus();await page.keyboard.press('Enter');await expect(page.locator('.timeline-group[data-lane="personal"]')).toHaveCount(5);
+ await button.focus();await page.keyboard.press('Enter');await expect(page.locator('.timeline-group[data-lane="personal"]')).toHaveCount(personalCount);
  await page.setViewportSize({width:390,height:844});await page.locator('#timeline-fullscreen').click();await expect(button).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  for(const id of ['personal','investment','product','ecosystem','competition'])await page.locator('.lane-toggle[data-lane="'+id+'"]').click();
  await expect(page.locator('#timeline')).toContainText('Matching lanes are collapsed');await expect(page.locator('.timeline-group')).toHaveCount(0);
- await page.locator('.lane-toggle[data-lane="personal"]').click();await expect(page.locator('.timeline-group')).toHaveCount(5);
+ await page.locator('.lane-toggle[data-lane="personal"]').click();await expect(page.locator('.timeline-group')).toHaveCount(personalCount);
 });
 test('unapproved assignments remain in a sixth lane',async({page})=>{
  await ready(page,false);await expect(page.locator('.lane-toggle')).toHaveCount(6);await expect(page.locator('.timeline-group:not([data-lane="uncategorised"])')).toHaveCount(0);

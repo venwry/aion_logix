@@ -18,7 +18,7 @@ test('investment uses a start event, milestone and literal end marker without in
  await expect(card(page,'event.office')).toHaveCSS('background-color','rgb(240, 240, 240)');
 });
 test('overlapping children use distinct tracks but a common card edge',async({page})=>{
- await ready(page);const group=page.locator('[data-group-id="process.stepper_install"]');const a=group.locator('[data-track-id="process.process_275"]'),b=group.locator('[data-track-id="process.dram_repair"]');
+ await ready(page);const group=page.locator('[data-group-id="process.aion_manufacturing_maturation"]');const a=group.locator('[data-track-id="process.process_275"]'),b=group.locator('[data-track-id="process.dram_repair"]');
  expect(await a.evaluate(n=>n.style.left)).not.toBe(await b.evaluate(n=>n.style.left));expect((await card(page,'process.process_275').boundingBox()).x).toBe((await card(page,'process.dram_repair').boundingBox()).x);
  const ra=await a.boundingBox(),rb=await b.boundingBox();expect(ra.y).toBeLessThan(rb.y+rb.height);expect(ra.y+ra.height).toBeGreaterThan(rb.y);
 });
