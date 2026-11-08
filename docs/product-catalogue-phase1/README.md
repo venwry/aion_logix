@@ -15,9 +15,9 @@ Classification distinguishes evidence from inference. An existing composition es
 | Proposed action | Current records |
 | --- | ---: |
 | Retain configured Logix/AION offering | 59 |
-| Retain peripheral/expansion identity; define offering | 8 |
+| Retain peripheral/expansion/cartridge identity; define offering | 9 |
 | Retain concrete service/course; define scope | 9 |
-| Move to descriptive external identity | 12 |
+| Move to descriptive external identity | 11 |
 | Retire product alias; preserve technical definition | 16 |
 | Consolidate Team Edition commercial alias | 3 |
 | Review standalone device offering | 18 |
@@ -30,11 +30,15 @@ Classification distinguishes evidence from inference. An existing composition es
 | Remove artificial family after reference rewrite | 4 |
 | **Total** | **145** |
 
-59 of the 63 existing composed offerings have Logix/AION providers; four have independent BPI/Autodesk providers. Eight more existing peripheral/expansion identities have direct launch or separate-sale evidence but need commercial compositions. Nine concrete services/courses merit retention with service definitions. These 76 retention recommendations are not a final catalogue size: the reference-hardware and RAM-kit qualifications still require review, 30 other records have explicit offering-status questions, and new offerings may be needed.
+59 of the 63 existing composed offerings have Logix/AION providers; four have independent BPI/Autodesk providers. Eight more existing peripheral/expansion identities have direct launch or separate-sale evidence but need commercial compositions. Nine concrete services/courses merit retention with service definitions. The clarified Logix CP/M ROM-cartridge offering adds one retained identity. These 77 retention recommendations are not a final catalogue size: the reference-hardware and RAM-kit qualifications still require review, 30 other records have explicit offering-status questions, and new offerings may be needed.
 
-12 third-party source records map to **nine provisional external identities**, subject to the BPI consolidation decision. 16 product aliases have existing part/internal-device destinations. Four families have **37 exact foundation reference occurrences** to reconcile. Across all products there are **590 exact incoming foundation reference occurrences**; 30 products have none. Lack of an incoming reference is not a deletion criterion.
+11 third-party source records map to **eight provisional external identities**, subject to the BPI consolidation decision. A **ninth external identity** separates DRI’s licensed CP/M software from the retained Logix cartridge offering; that product is not moved or deleted. 16 product aliases have existing part/internal-device destinations. Four families have **37 exact foundation reference occurrences** to reconcile. Across all products there are **590 exact incoming foundation reference occurrences**; 30 products have none. Lack of an incoming reference is not a deletion criterion.
 
 All 63 currently composed offerings occur in campaign subject lists, but none of the 145 products has a dedicated launch_campaign_id or launch_event_id populated. This phase inventories associations; launch assignment is phase 5. All source authorizations, decisions and annotations are preserved. No active annotations, review-feedback entries or pending change proposals exist in the audited snapshot.
+
+## CP/M clarification — 8 November 2026
+
+The [CP/M assessment correction](cpm-cartridge-clarification.md) supersedes the original whole-record external move. Retain `product.software_cpm_aurelia` for the Logix physical cartridge offering, preserve `device.rom_cartridge.cpm_aurelia` and `software_edition.cpm_aurelia`, and create a separate descriptive external identity for DRI’s software. Software ownership/licensing remains governed by `agreement.dri_cpm`. The existing source record still describes software; its proposed commercial definition and all reference rewrites require later Changes confirm approval.
 
 ## Findings requiring attention before migration
 
@@ -116,10 +120,11 @@ The source ID remains the preferred ID for retained offerings, even when its his
 | `product.aurelia_compatibility_kit`<br>Aurelia Software Compatibility Kit (CP/M edition) | `product.aurelia_compatibility_kit` | 3 | — |
 | `product.aion_development_team`<br>AION Development Team | `product.aion_development_team` | 5 | — |
 
-### Retain peripheral/expansion identity; define offering
+### Retain peripheral/expansion/cartridge identity; define offering
 
 | Source product | Proposed destination / action | Incoming foundation references | Decisions |
 | --- | --- | ---: | --- |
+| `product.software_cpm_aurelia`<br>Logix CP/M ROM cartridge (proposed commercial interpretation) | Retain ID; compose around `device.rom_cartridge.cpm_aurelia`; split DRI software identity | 12 | D15 |
 | `product.device_apple2_expansion_card`<br>Logix Apple II Expansion Card | `product.device_apple2_expansion_card` | 6 | — |
 | `product.device_apple2_video_card`<br>Logix Video Card for Apple II | `product.device_apple2_video_card` | 6 | — |
 | `product.device_artemis_cpm80_module`<br>Artemis CP/M-80 backward-compatibility expansion module | `product.device_artemis_cpm80_module` | 0 | — |
@@ -151,7 +156,6 @@ The source ID remains the preferred ID for retained offerings, even when its his
 | `product.bpi_suite.era`<br>BPI (AIONix edition) | `external_product.bpi_suite.era` (provisional) | 2 | — |
 | `product.autocad_1_artemis`<br>Autodesk AutoCAD 1.0 (AIONix edition) | `external_product.autocad_1_artemis` (provisional) | 10 | — |
 | `product.bpi_client_server`<br>BPI client-server package | `external_product.bpi_client_server` (provisional) | 2 | D02 |
-| `product.software_cpm_aurelia`<br>CP/M 1.4-derived / Platform Extensions 1.0 (Aurelia edition) | `external_product.cpm_aurelia` (provisional) | 12 | D03 |
 | `product.software_cpm_model_ii`<br>CP/M (Tandy Model II edition) | `external_product.cpm_model_ii` (provisional) | 15 | — |
 | `product.software_bpi_client_server`<br>BPI client-server (CP/M Client edition) | `external_product.bpi_client_server` (provisional) | 5 | D02 |
 | `product.edition_bpi_client_server_era_client`<br>BPI client-server (AIONix Client edition) | `external_product.bpi_client_server` (provisional) | 0 | D02 |
@@ -277,15 +281,15 @@ product.aion_development_team already supplies the server and both client editio
 
 ### D02 — BPI external identity and package membership
 
-Twelve third-party source records map to nine suggested external identities if the three BPI client/server technical aliases join external_product.bpi_client_server. Preserve the client/server edition distinctions and direct package membership; independent licences/receipts remain independent.
+Eleven third-party source records map to eight suggested external identities if the three BPI client/server technical aliases join external_product.bpi_client_server. Preserve the client/server edition distinctions and direct package membership; independent licences/receipts remain independent. A ninth external identity describes DRI CP/M separately from the retained Logix cartridge offering (D15).
 
 **Recommended next decision:** Confirm consolidation of the BPI client/server commercial identity; retain its three implementation editions.
 
 ### D03 — OS editions versus independent offerings
 
-AIONix, AIONix Server, AIONix2 and the Logix/AION CP/M networking edition have technical definitions and bundled use but no independently specified customer package. CP/M Aurelia combines a DRI base with Logix platform extensions, so provider attribution cannot transfer every layer to DRI or to Logix.
+AIONix, AIONix Server, AIONix2 and the CP/M networking edition have technical definitions and bundled use but no independently specified customer package. The baseline CP/M cartridge is now retained separately under D15. The networking cartridge also exists as device.rom_cartridge.cpm_aurelia_networking and is included in product.aurelia_network_upgrade; this alone does not establish a separately sold cartridge.
 
-**Recommended next decision:** Default to technical definitions unless separate OS/upgrade offerings are confirmed. Keep the underlying third-party CP/M identity distinct from Logix/AION extension work.
+**Recommended next decision:** Review the four remaining OS/package candidates. Apply the same separation of DRI software rights, technical edition and Logix physical medium; do not infer a standalone networking cartridge or transfer software ownership from engineering responsibility labels.
 
 ### D04 — Standalone peripherals versus parts of kits
 
@@ -353,6 +357,12 @@ campaign.ncc1980 and its execution process include product.part_aion_4164; campa
 
 **Recommended next decision:** Do not simply replace marketing subject IDs with base_part IDs and preserve chip promotion. Keep necessary engineering facts in technical context; do not infer OEM campaigns or sales.
 
+### D15 — CP/M software rights versus Logix physical cartridge
+
+**Interpretation resolved by the user; migration pending.** The user identifies the physical CP/M ROM cartridge as a Logix/AION offering produced under DRI licence. device.rom_cartridge.cpm_aurelia already names Logix as provider and contains software_edition.cpm_aurelia plus ROM, PCB/connector and shell/label parts. agreement.dri_cpm assigns ownership of the resulting CP/M and its enhancements to DRI; technical responsibility labels are not ownership grants.
+
+**Migration guidance:** Retain product.software_cpm_aurelia and redefine it as the Logix cartridge offering. Introduce a separate descriptive external DRI software identity, preserve the software edition and existing cartridge BOM, and allocate all 12 incoming product references by meaning. Confirm packaging and replacement/upgrade availability later without inventing separate sale or dates.
+
 ## Missing and incomplete offering checks
 
 ### G01 — Missing commercial identity
@@ -403,9 +413,15 @@ Osborne-class/Multiplan-class observations do not establish exact offered config
 
 Evidence: `event.portable_cpm_pressure`, `event.application_competition`.
 
+### G09 — Retained CP/M cartridge offering needs commercial definition, not a duplicate technical BOM
+
+Define the retained product around one cartridge device at an explicit composition version; retain the existing device-to-software and base-part links. Keep DRI rights in the agreement and external description. Do not count the licensed software a second time as another physical cartridge or invent royalty amounts, licence counts, exact ROM technology/capacity, separate-sale terms or launch dates.
+
+Evidence: `device.rom_cartridge.cpm_aurelia`, `software_edition.cpm_aurelia`, `agreement.dri_cpm`, `product.aurelia_mono`, `product.aurelia_color`.
+
 ## Provisional external identities
 
-Keep commercial product identity separate from technical implementation and Logix bundle identity. The nine candidates below are migration destinations, not newly imported records. New external records must later enter Pending authorization. Example specification entries in decisions-and-gaps.json use your exact requested four fields. References there are direct provider, host or implementation relationships; they do not include arbitrary technology chains.
+Keep commercial product identity separate from technical implementation and Logix bundle identity. The nine candidates below comprise eight move/consolidation destinations and one separate DRI software identity; they are not newly imported records. New external records must later enter Pending authorization. Example specification entries in decisions-and-gaps.json use your exact requested four fields. References there are direct provider, host or implementation relationships; they do not include arbitrary technology chains.
 
 | Proposed external ID | Existing source products | Direct role-labelled references |
 | --- | --- | --- |
@@ -413,7 +429,7 @@ Keep commercial product identity separate from technical implementation and Logi
 | `external_product.bpi_client_server` | `product.bpi_client_server`, `product.software_bpi_client_server`, `product.edition_bpi_client_server_era_client`, `product.edition_bpi_client_server_era_server` | `actor.bpi`: publisher; `software_edition.bpi_client_server`: CP/M client implementation; `software_edition.bpi_client_server.era_client`: AIONix client implementation; `software_edition.bpi_client_server.era_server`: AIONix server implementation |
 | `external_product.bpi_suite` | `product.bpi_suite` | `actor.bpi`: publisher; `software_edition.bpi_suite`: technical implementation edition |
 | `external_product.bpi_suite.era` | `product.bpi_suite.era` | `actor.bpi`: publisher; `software_edition.bpi_suite.era`: technical implementation edition |
-| `external_product.cpm_aurelia` | `product.software_cpm_aurelia` | `actor.dri`: operating-system licensor; `software_edition.cpm_aurelia`: technical implementation edition |
+| `external_product.cpm_aurelia` | Software identity split from `product.software_cpm_aurelia`; retain product as Logix cartridge | `actor.dri`: software owner/licensor; `software_edition.cpm_aurelia`: implementation edition; `agreement.dri_cpm`: development/licensing agreement |
 | `external_product.cpm_model_ii` | `product.software_cpm_model_ii` | `actor.dri`: operating-system licensor; `actor.tandy`: hardware/configuration provider; `software_edition.cpm_model_ii`: technical implementation edition; `external_product.trs80_model_ii`: supported host |
 | `external_product.microsoft_basic_aurelia` | `product.software_microsoft_basic_aurelia` | `actor.microsoft`: publisher; `software_edition.microsoft_basic_aurelia`: technical implementation edition |
 | `external_product.model_ii_flexibus` | `product.device_model_ii_flexibus` | `actor.tandy`: hardware/configuration provider; `external_product.trs80_model_ii`: supported host |
@@ -427,7 +443,7 @@ Apple II has no existing product record to move; its two Logix cards are retaine
 
 1. Read each exact pointer in migration-map.json. Campaign, engineering, compatibility, BOM and provider relationships can require different destinations even when they currently use the same product ID.
 2. For retained products, preserve IDs and enrich their commercial composition/service definition. Shared launch links are assigned later; do not duplicate events per configuration.
-3. For external moves and aliases, update current references in the same inseparable Changes confirm proposal as the move/removal. Keep devices, base parts and software editions used by internal compositions.
+3. For the CP/M split, retain the Logix cartridge product and allocate software/licensing references separately (D15). For external moves and aliases, update current references in the same inseparable Changes confirm proposal as the move/removal. Keep devices, base parts and software editions used by internal compositions.
 4. For manufacturing-capability product_ids that really denote silicon, use existing base_part_ids and deduplicate already present references. Do not create an OEM sales model.
 5. For families, campaign subject lists often already contain specific offerings. Remove redundant family entries where scope survives. Broad ecosystem/compatibility statements need direct technical subjects or preserved wording rather than arbitrary SKU expansion.
 6. For operational concepts, retain ordering and purchase-credit meaning in Academy records; do not invent a customer service product or new sales structure.
@@ -439,10 +455,10 @@ Apple II has no existing product record to move; its two Logix cards are retaine
 | Cohort | Scope | Main dependencies |
 | --- | --- | --- |
 | Technical aliases and chip references | 12 base-part aliases, four internal-device aliases; chip marketing/context cleanup | Generic typed references and manufacturing-capability fields; D14 |
-| External commercial identities | 12 source records to nine proposed external identities | external_products registry/schema; D02/D03; preserve package editions |
+| External commercial identities | 11 moved source records to eight identities, plus separate DRI CP/M software identity | external_products registry/schema; D02/D03; preserve package editions |
 | Team Edition | Three technical-commercial aliases plus its family and overlapping campaign references | D01; keep canonical product.aion_development_team |
 | Academy/services | Nine retained services/courses, six service decisions, two grouping decisions, ordering-channel cleanup | D06/D07 and provider attribution; preserve support entitlements in BOMs |
-| Customer peripherals/software | Eight supported peripheral products, 18 standalone-device decisions, OS/suite decisions and missing RAM expansion | D03/D04/D05/D11; offering categories may need a peripheral category |
+| Customer peripherals/software | Eight supported peripheral products and one retained CP/M cartridge offering, 18 standalone-device decisions, OS/suite decisions and missing RAM expansion | D03/D04/D05/D11/D15; offering categories may need a peripheral category |
 | Remaining family scope | Aurelia/Artemis/Athena references | D12; migrate after the surviving catalogue is known |
 | Launch relationships and ownership | Explicit product campaign/event fields and contained ownership | Phases 5/6; D09/D10/D13; not part of phase 1 |
 

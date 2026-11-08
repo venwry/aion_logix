@@ -16,7 +16,7 @@
     {
       "id": "D02",
       "topic": "BPI external identity and package membership",
-      "finding": "Twelve third-party source records map to nine suggested external identities if the three BPI client/server technical aliases join external_product.bpi_client_server. Preserve the client/server edition distinctions and direct package membership; independent licences/receipts remain independent.",
+      "finding": "Eleven third-party source records map to eight suggested external identities if the three BPI client/server technical aliases join external_product.bpi_client_server. Preserve the client/server edition distinctions and direct package membership; independent licences/receipts remain independent. A ninth external identity describes DRI CP/M separately from the retained Logix cartridge offering (D15).",
       "recommended_next_decision": "Confirm consolidation of the BPI client/server commercial identity; retain its three implementation editions.",
       "affected_product_ids": [
         "product.bpi_client_server",
@@ -28,13 +28,12 @@
     {
       "id": "D03",
       "topic": "OS editions versus independent offerings",
-      "finding": "AIONix, AIONix Server, AIONix2 and the Logix/AION CP/M networking edition have technical definitions and bundled use but no independently specified customer package. CP/M Aurelia combines a DRI base with Logix platform extensions, so provider attribution cannot transfer every layer to DRI or to Logix.",
-      "recommended_next_decision": "Default to technical definitions unless separate OS/upgrade offerings are confirmed. Keep the underlying third-party CP/M identity distinct from Logix/AION extension work.",
+      "finding": "AIONix, AIONix Server, AIONix2 and the CP/M networking edition have technical definitions and bundled use but no independently specified customer package. The baseline CP/M cartridge is now retained separately under D15. The networking cartridge also exists as device.rom_cartridge.cpm_aurelia_networking and is included in product.aurelia_network_upgrade; this alone does not establish a separately sold cartridge.",
+      "recommended_next_decision": "Review the four remaining OS/package candidates. Apply the same separation of DRI software rights, technical edition and Logix physical medium; do not infer a standalone networking cartridge or transfer software ownership from engineering responsibility labels.",
       "affected_product_ids": [
         "product.software_aionix",
         "product.software_aionix_server",
         "product.software_aionix2",
-        "product.software_cpm_aurelia",
         "product.software_cpm_aurelia_networking"
       ]
     },
@@ -164,6 +163,16 @@
       "affected_product_ids": [
         "product.part_aion_4164",
         "product.part_era2_12mhz"
+      ]
+    },
+    {
+      "id": "D15",
+      "topic": "CP/M software rights versus Logix physical cartridge",
+      "status": "interpretation_resolved_by_user; definition_and_reference_migration_pending",
+      "finding": "The user identifies the physical CP/M ROM cartridge as a Logix/AION offering produced under DRI licence. device.rom_cartridge.cpm_aurelia already names Logix as provider and contains software_edition.cpm_aurelia plus ROM, PCB/connector and shell/label parts. agreement.dri_cpm assigns ownership of the resulting CP/M and its enhancements to DRI; technical responsibility labels are not ownership grants.",
+      "recommended_next_decision": "Retain product.software_cpm_aurelia and redefine it as the Logix cartridge offering. Introduce a separate descriptive external DRI software identity, preserve the software edition and existing cartridge BOM, and allocate all 12 incoming product references by meaning. Confirm packaging and replacement/upgrade availability later without inventing separate sale or dates.",
+      "affected_product_ids": [
+        "product.software_cpm_aurelia"
       ]
     }
   ],
@@ -319,6 +328,24 @@
         "event.application_competition"
       ],
       "recommendation": "Osborne-class/Multiplan-class observations do not establish exact offered configurations. A purchased Seagate mechanism does not automatically need a second external commercial record. Add external identities only for directly modelled commercial/partner/competition subjects."
+    },
+    {
+      "id": "G09",
+      "finding": "Retained CP/M cartridge offering needs commercial definition, not a duplicate technical BOM",
+      "candidate_id": null,
+      "technical_ids": [
+        "device.rom_cartridge.cpm_aurelia",
+        "software_edition.cpm_aurelia"
+      ],
+      "existing_product_ids": [
+        "product.software_cpm_aurelia"
+      ],
+      "evidence_ids": [
+        "agreement.dri_cpm",
+        "product.aurelia_mono",
+        "product.aurelia_color"
+      ],
+      "recommendation": "Define the retained product around one cartridge device at an explicit composition version; retain the existing device-to-software and base-part links. Keep DRI rights in the agreement and external description. Do not count the licensed software a second time as another physical cartridge or invent royalty amounts, licence counts, exact ROM technology/capacity, separate-sale terms or launch dates."
     }
   ],
   "provisional_external_identity_map": [
@@ -438,24 +465,32 @@
       "source_product_ids": [
         "product.software_cpm_aurelia"
       ],
-      "name": "CP/M 1.4-derived / Platform Extensions 1.0 (Aurelia edition)",
+      "name": "DRI CP/M — licensed Aurelia software implementation",
       "proposed_file": "data_foundation/external_products.json",
       "status": "planning_only",
       "specification_examples": [
         {
           "no": 1,
-          "description": "Current provider attribution identifies Digital Research.",
+          "description": "DRI owns and licenses the CP/M software version and enhancements covered by the Aurelia collaboration.",
           "ref_id": "actor.dri",
-          "ref_role": "operating-system licensor"
+          "ref_role": "software owner and licensor"
         },
         {
           "no": 2,
-          "description": "CP/M 1.4-derived / Platform Extensions 1.0 (Aurelia edition) is represented by this existing technical edition.",
+          "description": "Technical definition of the Aurelia CP/M implementation; this is distinct from its physical delivery cartridge.",
           "ref_id": "software_edition.cpm_aurelia",
-          "ref_role": "technical implementation edition"
+          "ref_role": "software implementation edition"
+        },
+        {
+          "no": 3,
+          "description": "Defines collaboration, DRI software ownership and non-exclusive licensing scope.",
+          "ref_id": "agreement.dri_cpm",
+          "ref_role": "software development and licensing agreement"
         }
       ],
-      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions.",
+      "migration_mode": "split_software_identity_from_retained_cartridge_offering",
+      "source_product_disposition": "Retain product.software_cpm_aurelia for the Logix physical cartridge; source_product_ids identifies shared source evidence, not a deletion or move."
     },
     {
       "proposed_id": "external_product.cpm_model_ii",

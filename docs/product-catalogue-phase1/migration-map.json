@@ -34,8 +34,9 @@
     "product_count": 145,
     "action_counts": {
       "retain_configured_offering": 59,
-      "move_external": 12,
+      "move_external": 11,
       "review_os_offering": 4,
+      "retain_define_offering": 9,
       "consolidate_team_alias": 3,
       "review_software_offering": 2,
       "review_service_offering": 6,
@@ -43,7 +44,6 @@
       "consolidate_service_group": 2,
       "relocate_operational_concept": 1,
       "defer_oem_concept": 1,
-      "retain_define_offering": 8,
       "review_device_offering": 18,
       "retire_technical_alias": 16,
       "remove_artificial_family": 4
@@ -51,8 +51,10 @@
     "exact_foundation_incoming_occurrences": 590,
     "embedded_foundation_mentions": 0,
     "family_reference_occurrences": 37,
-    "external_source_count": 12,
-    "proposed_external_identity_count": 9
+    "external_source_count": 11,
+    "proposed_external_identity_count": 9,
+    "external_split_source_count": 1,
+    "external_identities_from_moves": 8
   },
   "products": [
     {
@@ -6608,17 +6610,26 @@
         "actor.dri"
       ],
       "technical_definition_id": "software_edition.cpm_aurelia",
-      "proposed_action": "move_external",
-      "proposed_destination_id": "external_product.cpm_aurelia",
-      "destination_is_provisional": true,
-      "rationale": "Third-party commercial identity; simplify the external description and retain direct, role-labelled technical edition/host/provider links.",
+      "proposed_action": "retain_define_offering",
+      "proposed_destination_id": "product.software_cpm_aurelia",
+      "destination_is_provisional": false,
+      "rationale": "Retain the stable product ID for the customer-facing Logix CP/M ROM-cartridge offering, manufactured under DRI licence. Separate the DRI-owned software/licensing identity into an external record; preserve the software edition and physical cartridge device. Current source metadata describes the software layer and must be revised through Changes confirm.",
       "evidence_fields_or_records": [
-        "provider_actor_ids"
+        "user clarification, 2026-11-08",
+        "device.rom_cartridge.cpm_aurelia",
+        "software_edition.cpm_aurelia",
+        "agreement.dri_cpm",
+        "product.aurelia_mono/composition_history",
+        "product.aurelia_color/composition_history"
       ],
       "decision_ids": [
-        "D03"
+        "D15"
       ],
-      "definition_gaps": [],
+      "definition_gaps": [
+        "Define product name, kind, offering category, Logix provider role and composition around one versioned cartridge device.",
+        "Distinguish included system delivery from separately orderable replacement/upgrade packaging; no price or separate launch is inferred.",
+        "Allocate existing references by software licensing, technical implementation or physical offering role."
+      ],
       "campaign_subject_ids": [
         "campaign.ncc1978",
         "campaign.ncc1982"
@@ -6776,9 +6787,109 @@
         }
       ],
       "historical_decision_exact_mentions": 146,
-      "rewrite_policy": "Commercial/context references may move to the proposed external identity; implementation and BOM references must retain the exact technical definition. Audit each pointer, never global string-replace.",
+      "rewrite_policy": "Retain this product ID only for the Logix physical cartridge offering. Route DRI licensing/ownership references to the external software identity or existing agreement, implementation references to the software edition, and manufacturing/BOM references to the cartridge device. Preserve historical snapshots; never globally replace this ID.",
       "original_record_sha256": "17ae9ed240c52b769e8d972f50a835c26e59fc838fa5a5029a6a4b90502b8596",
-      "repository_text_references": []
+      "repository_text_references": [],
+      "proposed_technical_definition_id": "device.rom_cartridge.cpm_aurelia",
+      "companion_external_identity_id": "external_product.cpm_aurelia",
+      "reference_disposition_proposals": [
+        {
+          "file": "data_foundation/event.json",
+          "source_record_id": "event.dri_cpm",
+          "pointer": "/event/7/outcomes/0/subject_ids/0",
+          "proposed_ref_id": "external_product.cpm_aurelia",
+          "ref_role": "DRI-owned licensed CP/M deliverable; rights remain in agreement.dri_cpm.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/event.json",
+          "source_record_id": "event.aurelia_launch",
+          "pointer": "/event/19/subject_ids/4",
+          "proposed_ref_id": "product.software_cpm_aurelia",
+          "ref_role": "Logix cartridge offering delivered with Aurelia; retain commercial subject, qualify delivery scope during launch mapping.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/event.json",
+          "source_record_id": "event.dri_portable",
+          "pointer": "/event/28/subject_ids/3",
+          "proposed_ref_id": "external_product.cpm_aurelia",
+          "ref_role": "DRI software portability/licensing context, not Logix cartridge manufacture. Check external identity scope against portable non-Aurelia editions; do not assert the Aurelia ROM image is their implementation.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/event.json",
+          "source_record_id": "event.dri_release",
+          "pointer": "/event/37/subject_ids/1",
+          "proposed_ref_id": "external_product.cpm_aurelia",
+          "ref_role": "DRI software portability/licensing context, not Logix cartridge manufacture. Check external identity scope against portable non-Aurelia editions; do not assert the Aurelia ROM image is their implementation.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/event.json",
+          "source_record_id": "event.ncc82_graphics_mouse",
+          "pointer": "/event/111/subject_ids/6",
+          "proposed_ref_id": "software_edition.cpm_aurelia",
+          "ref_role": "Software implementation or TUI update context. Review precise edition/version before migration; a new physical cartridge offering or launch is not established by a software update.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/campaign.json",
+          "source_record_id": "campaign.ncc1978",
+          "pointer": "/campaign/0/subject_ids/10",
+          "proposed_ref_id": "product.software_cpm_aurelia",
+          "ref_role": "Logix cartridge offering delivered with Aurelia; retain commercial subject, qualify delivery scope during launch mapping.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/campaign.json",
+          "source_record_id": "campaign.ncc1982",
+          "pointer": "/campaign/5/subject_ids/11",
+          "proposed_ref_id": "software_edition.cpm_aurelia",
+          "ref_role": "Software implementation or TUI update context. Review precise edition/version before migration; a new physical cartridge offering or launch is not established by a software update.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/process.json",
+          "source_record_id": "process.open_compatibility",
+          "pointer": "/process/26/outcomes/1/subject_ids/0",
+          "proposed_ref_id": "external_product.cpm_aurelia",
+          "ref_role": "DRI software portability/licensing context, not Logix cartridge manufacture. Check external identity scope against portable non-Aurelia editions; do not assert the Aurelia ROM image is their implementation.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/process.json",
+          "source_record_id": "process.ncc1978_campaign",
+          "pointer": "/process/28/subject_ids/10",
+          "proposed_ref_id": "product.software_cpm_aurelia",
+          "ref_role": "Logix cartridge offering delivered with Aurelia; retain commercial subject, qualify delivery scope during launch mapping.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/process.json",
+          "source_record_id": "process.ncc1982_campaign",
+          "pointer": "/process/33/subject_ids/11",
+          "proposed_ref_id": "software_edition.cpm_aurelia",
+          "ref_role": "Software implementation or TUI update context. Review precise edition/version before migration; a new physical cartridge offering or launch is not established by a software update.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/process.json",
+          "source_record_id": "process.aurelia_foundation",
+          "pointer": "/process/43/outcomes/0/subject_ids/1",
+          "proposed_ref_id": "software_edition.cpm_aurelia",
+          "ref_role": "Software implementation or TUI update context. Review precise edition/version before migration; a new physical cartridge offering or launch is not established by a software update.",
+          "status": "proposal_requires_context_review"
+        },
+        {
+          "file": "data_foundation/process.json",
+          "source_record_id": "process.aurelia_foundation",
+          "pointer": "/process/43/subject_ids/1",
+          "proposed_ref_id": "software_edition.cpm_aurelia",
+          "ref_role": "Software implementation or TUI update context. Review precise edition/version before migration; a new physical cartridge offering or launch is not established by a software update.",
+          "status": "proposal_requires_context_review"
+        }
+      ]
     },
     {
       "source_id": "product.software_cpm_aurelia_networking",
@@ -14804,6 +14915,16 @@
           "preview": "| `product.family_team_edition` | 1 |"
         }
       ]
+    }
+  ],
+  "assessment_amendments": [
+    {
+      "date": "2026-11-08",
+      "reason": "User distinguishes DRI software licence/edition from Logix-manufactured ROM cartridge.",
+      "affected_product_ids": [
+        "product.software_cpm_aurelia"
+      ],
+      "source_data_changed": false
     }
   ]
 }

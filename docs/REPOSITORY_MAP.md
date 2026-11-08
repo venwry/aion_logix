@@ -132,3 +132,5 @@ Agreement clauses now live in `data_foundation/agreement.json`, validated by `sc
 ### Product catalogue cleanup — phase 1 assessment
 
 [The phase-1 migration map](product-catalogue-phase1/README.md) classifies all 145 products at commit a0cf5b8, with exact incoming references, provisional destinations, decisions and missing-offering checks. Machine-readable evidence is in `product-catalogue-phase1/migration-map.json`, `decisions-and-gaps.json` and `verification.json`. These are review artifacts, not authorized foundation changes or executable Changes confirm proposals.
+
+The [CP/M cartridge clarification](product-catalogue-phase1/cpm-cartridge-clarification.md) amends phase 1 to retain the Logix physical offering while separating DRI software rights and the technical edition.
