@@ -9,10 +9,10 @@ test('external additions and dependent references authorize atomically through C
  const proposal={id:'change.external_test',category:'story',title:'Separate software identity',reason:'Test grouped migration.',elements:[{record_type:'external_product',record_id:external.id,before:null,after:external},{record_type:'event',record_id:before.id,before,after}]};
  f['data_storytelling/change.json'].change=[proposal];
  const request={action:'approve_change',change_id:proposal.id,proposal_sha256:hash(proposal)},result=transact(f,request);
- assert.deepEqual(result.files['data_foundation/external_products.json'].external_product,[external]);assert(!result.files['data_foundation/external_product.json']);
- assert.deepEqual(snapshot(result.files,'test').collections.external_product,[external]);assert.deepEqual(validate(result.files).errors,[]);
+ assert.deepEqual(result.files['data_foundation/external_products.json'].external_product,[...f['data_foundation/external_products.json'].external_product,external]);assert(!result.files['data_foundation/external_product.json']);
+ assert.deepEqual(snapshot(result.files,'test').collections.external_product,result.files['data_foundation/external_products.json'].external_product);assert.deepEqual(validate(result.files).errors,[]);
  assert(result.files['data_storytelling/authorization.json'].authorization.some(a=>a.record_id===external.id&&a.content_sha256===hash(external)&&a.state==='authorized'));
- assert.equal(transact(result.files,request).changed,false);assert.deepEqual(f['data_foundation/external_products.json'].external_product,[]);
+ assert.equal(transact(result.files,request).changed,false);assert(!f['data_foundation/external_products.json'].external_product.some(r=>r.id===external.id));
  const broken=structuredClone(f);broken['data_storytelling/change.json'].change[0].elements[0].after.specification[0].ref_id='actor.missing';
  assert.throws(()=>transact(broken,{...request,proposal_sha256:hash(broken['data_storytelling/change.json'].change[0])}),/unresolved reference/);
 });

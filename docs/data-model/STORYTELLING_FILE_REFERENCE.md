@@ -1,6 +1,6 @@
 # Storytelling data — current file reference
 
-Current contract **0.8.0**. `data_storytelling/` contains eight active JSON files. The counts in the original handover rows below are historical; consult the files for current counts. Historical material is inventoried in [the archive](../../archived_no_longer_valid/README.md); unresolved work is indexed in [the backlog](../REVIEW_BACKLOG.md). The former reference is retained as a historical snapshot.
+Current contract **0.9.1**. `data_storytelling/` contains eight active JSON files. The counts in the original handover rows below are historical; consult the files for current counts. Historical material is inventoried in [the archive](../../archived_no_longer_valid/README.md); unresolved work is indexed in [the backlog](../REVIEW_BACKLOG.md). The former reference is retained as a historical snapshot.
 
 Foundation records describe the fictional world. Storytelling files describe author authorization, proposals, sources and editorial questions. The GitHub saving backend loads authorization, authorization decisions, proposals, the manifest, annotations and change reviews. The documentation viewer also exposes sources and open issues; they do not control authorization badges.
 
@@ -9,7 +9,7 @@ Foundation records describe the fictional world. Storytelling files describe aut
 | [authorization.json](../../data_storytelling/authorization.json) | Exact-content, whole-record authorization state | 653 entries: 54 authorized, 599 unauthorized |
 | [authorization_decision.json](../../data_storytelling/authorization_decision.json) | Append-only direct-save audit evidence | One applied change decision; grows with subsequent saves |
 | [change.json](../../data_storytelling/change.json) | Active proposals awaiting review | Empty queue; not evidence that the story is complete |
-| [manifest.json](../../data_storytelling/manifest.json) | Current model version and dataset inventory | Version 0.8.0; 15 foundation datasets |
+| [manifest.json](../../data_storytelling/manifest.json) | Current model version and dataset inventory | Current manifest: version 0.9.1; 16 foundation datasets |
 | [annotation.json](../../data_storytelling/annotation.json) | Append-only revisions of record feedback | Initially empty |
 | [change_review.json](../../data_storytelling/change_review.json) | Append-only refinement feedback on exact proposal revisions | Initially empty |
 | [source.json](../../data_storytelling/source.json) | Source bibliography and author-evidence catalogue | 36 sources; inherited provenance format |
@@ -37,7 +37,7 @@ Current metadata holds description, transport format version, page/calculation c
 
 ## Manifest
 
-`manifest.json` contains one `manifest` entry with `id: "manifest.foundation"`, `schema_version: "0.6.0"` and `foundation_datasets[]`. Dataset names resolve to foundation files and corresponding schemas. The saving backend rejects an unsupported version. Keep this list consistent with `code/model-contract.js` and the schemas; editing the manifest alone cannot install a new model.
+`manifest.json` contains one `manifest` entry with `id: "manifest.foundation"`, `schema_version: "0.9.1"`, `foundation_datasets[]` and a `foundation_files` filename-exception map. Dataset types resolve to foundation files through `code/model-contract.js`; `external_product` uses `external_products.json`. Schema names and envelope keys use the singular type. The saving backend rejects an unsupported version. Keep this list consistent with `code/model-contract.js` and the schemas; editing the manifest alone cannot install a new model.
 
 `previous_metadata` was moved into the preserved pre-cleanup manifest because it described earlier foundation envelopes rather than the current contract.
 

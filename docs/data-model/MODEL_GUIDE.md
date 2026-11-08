@@ -1,4 +1,4 @@
-# Current model guide — version 0.9.0
+# Current model guide — version 0.9.1
 
 This guide explains the accepted model. [Principles](../../DATA_MODEL_PRINCIPLES.md) govern editing; [JSON Schemas](../../schemas/) and the [generated specification](FOUNDATION_SPECIFICATION.md) define exact fields, allowed values and references. Earlier proposals in the archive are historical rationale, not additional requirements.
 
@@ -73,4 +73,6 @@ The phase-1B identity-only boundary is superseded for product definitions. Base 
 
 ## Product catalogue transition
 
-Contract 0.9.0 adds `external_product` in `external_products.json`, with `id`, `name`, `description` and `specification` entries containing exactly `no`, `description`, `ref_id`, `ref_role`. Product `launch_campaign_id` and `launch_event_id` are optional together during migration and validated for campaign ownership and temporal containment when supplied. The external registry is initially empty; existing products and their authorizations are unchanged. See the [complete phase-2 contract](../PRODUCT_CATALOGUE_PHASE2.md).
+Contract 0.9.0 adds `external_product` in `external_products.json`, with `id`, `name`, `description` and `specification` entries containing exactly `no`, `description`, `ref_id`, `ref_role`. Product `launch_campaign_id` and `launch_event_id` are optional together during migration and validated for campaign ownership and temporal containment when supplied. Phase 2 introduced the external registry empty; phase 3 adds pending records and queues existing-record migrations for review. See the [complete phase-2 contract](../PRODUCT_CATALOGUE_PHASE2.md).
+
+Contract 0.9.1 permits external hosts in software `platform_support[].computer_id`. [Catalogue phase 3](../product-catalogue-phase3/README.md) imports pending external descriptions and proposes existing-record migrations; the earlier empty-registry deployment was phase 2.

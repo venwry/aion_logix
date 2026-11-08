@@ -142,3 +142,7 @@ The [CP/M cartridge clarification](product-catalogue-phase1/cpm-cartridge-clarif
 - `code/model-contract.js`: version 0.9.0, dataset types and physical filename mapping.
 - `code/product-launches.js`: paired product launch ownership and temporal validation.
 - `tests/model/catalogue-phase2.test.js`, `tests/server/external-products.test.js`, `tests/catalogue-phase2.spec.cjs`: schema, graph, persistence and UI coverage.
+
+### Product catalogue cleanup — phase 3 migration
+
+[Phase-3 review guide](product-catalogue-phase3/README.md) documents 11 pending external identities and five grouped Changes confirm proposals. `migration-audit.json` records source evidence and exact reference dispositions; `verification.json` records the read-only audit. `tools/verify-catalogue-phase3.js` validates independent and combined in-memory transactions against the pinned baseline without saving any authorizations. Contract 0.9.1 permits an external computer host in software platform support. `tests/catalogue-phase3.spec.cjs` checks pending records and the grouped proposal comparisons.

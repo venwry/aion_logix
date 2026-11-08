@@ -7,19 +7,19 @@ import {datasetPath,datasetFiles,datasets,schemaVersion} from '../../code/model-
 
 const external=()=>({id:'external_product.test_cpm',name:'DRI licensed CP/M',description:'DRI software, distinct from the Logix physical cartridge.',specification:[{no:1,description:'DRI licenses this software.',ref_id:'actor.dri',ref_role:'software owner and licensor'}]});
 const docs=()=>readDocuments('data_foundation');
-test('manifest and filename registry agree; empty external dataset does not migrate existing products',()=>{
+test('manifest and filename registry agree; empty and populated external datasets validate',()=>{
  const manifest=JSON.parse(fs.readFileSync('data_storytelling/manifest.json')).manifest[0];
  assert.equal(manifest.schema_version,schemaVersion);assert.deepEqual(manifest.foundation_datasets,datasets);
  for(const n of datasets)assert.equal(manifest.foundation_files?.[n]||n+'.json',datasetFiles[n]);
  assert.equal(datasetPath('external_product'),'data_foundation/external_products.json');
- const d=docs();assert.deepEqual(d.external_product,{external_product:[]});assert.deepEqual(validateDocuments(d).errors,[]);
+ const d=docs();assert(Array.isArray(d.external_product.external_product));assert.deepEqual(validateDocuments({external_product:{external_product:[]}}).errors,[]);assert.deepEqual(validateDocuments(d).errors,[]);
 });
 test('external specifications have exactly four fields and resolved, singular role-labelled references',()=>{
  const d=docs();d.external_product.external_product.push(external());
  d.event.event[0].subject_ids.push('external_product.test_cpm');d.campaign.campaign[0].subject_ids.push('external_product.test_cpm');
  assert.deepEqual(validateDocuments(d).errors,[]);
  for(const change of [r=>delete r.specification[0].ref_role,r=>r.specification[0].ref_id=['actor.dri'],r=>r.specification[0].ref_id='actor.missing',r=>r.specification.push({...r.specification[0]}),r=>r.time={value:'1978',precision:'year'},r=>r.composition_history=[],r=>r.status='authorized']){
-  const copy=structuredClone(d);change(copy.external_product.external_product[0]);assert(validateDocuments(copy).errors.length);
+  const copy=structuredClone(d);change(copy.external_product.external_product.find(r=>r.id==='external_product.test_cpm'));assert(validateDocuments(copy).errors.length);
  }
 });
 test('launch links are optional as a pair, typed and reference checked',()=>{
@@ -57,4 +57,14 @@ test('partial date precision is preserved and overlapping uncertain event dates 
  const g=graph();g.get('process.campaign').period={start:{value:'1980-06',precision:'month'},end:{value:'1980-06',precision:'month'}};
  g.get('event.launch').time={value:'1980-06',precision:'month'};assert.deepEqual(validateProductLaunches(g),[]);
  g.get('event.launch').time={value:'1980',precision:'year'};assert.match(validateProductLaunches(g).join(),/outside/);
+});
+
+test('software can reference an external computer host without admitting it as a physical BOM target',()=>{
+ const d=docs(),host={id:'external_product.test_host',name:'External computer',description:'A third-party host.',specification:[]};
+ d.external_product.external_product.push(host);
+ const edition=d.software_edition.software_edition.find(r=>r.id==='software_edition.cpm_model_ii');edition.composition_history[0].technical_definition.platform_support[0].computer_id=host.id;
+ assert.deepEqual(validateDocuments(d).errors,[]);
+ edition.composition_history[0].technical_definition.platform_support[0].computer_id='actor.tandy';assert(validateDocuments(d).errors.length);
+ edition.composition_history[0].technical_definition.platform_support[0].computer_id=host.id;
+ d.device.device[0].composition_history[0].composition_definition[0].target={record_id:host.id};assert(validateDocuments(d).errors.length);
 });

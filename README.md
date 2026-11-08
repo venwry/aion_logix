@@ -11,7 +11,7 @@ The story is modelled in interconnected JSON datasets. A timeline and data brows
 3. Consult the [complete schema specification and diagram](docs/data-model/FOUNDATION_SPECIFICATION.md) for fields and relationships.
 4. Use the [multi-phase process](docs/MULTI_PHASE_PROCESS.md) and [current review backlog](docs/REVIEW_BACKLOG.md) to continue the work.
 
-The current contract is **0.9.0**, with 16 foundation datasets. Agreements own their clauses. New clauses use exactly `id`, `kind`, `statement`, `value`, and `unit`; legacy clauses remain valid while each agreement is independently reviewed. See the [clause simplification proposals and research](docs/CLAUSE_SIMPLIFICATION_PROPOSALS.md). Schema deployment does not authorize story content. Product definitions and versioned compositions are supported in phase 2; fabrication economics and forecasts remain separate. See [product definition import](docs/PRODUCT_DEFINITION_IMPORT.md).
+The current contract is **0.9.1**, with 16 foundation datasets. Agreements own their clauses. New clauses use exactly `id`, `kind`, `statement`, `value`, and `unit`; legacy clauses remain valid while each agreement is independently reviewed. See the [clause simplification proposals and research](docs/CLAUSE_SIMPLIFICATION_PROPOSALS.md). Schema deployment does not authorize story content. Product definitions and versioned compositions are supported in phase 2; fabrication economics and forecasts remain separate. See [product definition import](docs/PRODUCT_DEFINITION_IMPORT.md).
 
 ## Repository contents
 
@@ -58,4 +58,4 @@ The timeline shows nested processes, parallel work and combined campaign/executi
 
 See the [application guide](docs/APPLICATION_GUIDE.md) for navigation, filtering, dates, details, keyboard controls and saving. The [editing guide](docs/EDITING_GUIDE.md) covers record and schema changes.
 
-Catalogue cleanup phase 2 adds compatible external-product definitions and paired product launch links. See [the contract and migration boundary](docs/PRODUCT_CATALOGUE_PHASE2.md). External products use `external_products.json`; its initial collection is empty.
+Catalogue cleanup phase 2 adds compatible external-product definitions and paired product launch links. See [the contract and migration boundary](docs/PRODUCT_CATALOGUE_PHASE2.md). External products use `external_products.json`. [Phase 3](docs/product-catalogue-phase3/README.md) imports 11 pending external records and queues five grouped migrations in Changes confirm.

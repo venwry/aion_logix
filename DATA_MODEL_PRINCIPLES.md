@@ -2,7 +2,7 @@
 
 ## Current agreement: separation of story and authoring data
 
-Version 0.9.0 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
+Version 0.9.1 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
 
 1. The model combines hierarchical value objects and relational entity references. Each entity has a stable `id` beginning with its dataset name.
 2. `data_foundation/` contains only story records, in envelopes such as `{ "actor": [...] }`. It has no status, confirmation, provenance or application metadata fields.
