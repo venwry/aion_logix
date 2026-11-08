@@ -3972,7 +3972,7 @@
       "id": "event.ncc82_dealer_preparation",
       "title": "NCC 1982 dealer and demonstration preparation",
       "kind": "activity",
-      "description": "Train dealers and Academy instructors, prepare supported mouse workflows and qualified displays, and reserve partner demonstration slots. Budget and campaign plan: ncc_1982_campaign.json.",
+      "description": "Train dealers and Academy instructors in the supported demonstration workflows, prepare demonstration scripts and compatibility notes, and reserve partner demonstration slots.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -3987,18 +3987,21 @@
           "role": "organizer"
         }
       ],
-      "subject_ids": [
-        "event.ncc82_graphics_mouse",
-        "product.device_artemis_video_card_64kb",
-        "product.device_color_pro_14",
-        "product.device_logix_mouse",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.software_entertainment_suite",
-        "technology.logix_tui_mouse"
+      "subject_ids": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "Training uses available, tested demonstration configurations and documented application update paths; it does not depend on the future public launch."
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Dealer and instructor briefing materials, demonstration scripts, compatibility notes and a schedule of partner demonstration slots."
+        }
+      ],
       "time": {
         "value": "1982-04",
         "precision": "month"
@@ -4106,7 +4109,7 @@
       "id": "event.ncc82_press_preview",
       "title": "NCC 1982 press and partner previews",
       "kind": "activity",
-      "description": "Embargoed press briefings and partner rehearsals using the headline Pointy ideas with a solid point. Prepare the Abacus workflow, printed price lists and accurate compatibility directory. Budget and campaign plan: ncc_1982_campaign.json.",
+      "description": "Hold embargoed briefings for press and partners, rehearse the public presentation, and prepare the press kit, printed commercial information and compatibility directory.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -4121,18 +4124,22 @@
           "role": "organizer"
         }
       ],
-      "subject_ids": [
-        "event.ncc82_graphics_mouse",
-        "product.device_artemis_video_card_64kb",
-        "product.device_color_pro_14",
-        "product.device_logix_mouse",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.software_entertainment_suite",
-        "technology.logix_tui_mouse"
+      "subject_ids": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The dealer preparation supplies the demonstration scripts and compatibility notes needed for the press rehearsal.",
+          "event_id": "event.ncc82_dealer_preparation"
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Embargoed press and partner briefing materials, a rehearsed presentation and the compatibility directory."
+        }
+      ],
       "time": {
         "value": "1982-05",
         "precision": "month"
@@ -4262,7 +4269,7 @@
       "id": "event.ncc82_graphics_mouse",
       "title": "NCC 1982 — Pointy ideas with a solid point.",
       "kind": "launch",
-      "description": "Introduce Color Pro 14 based on the February 1982 NEC PC-8853/JC-1410P2-class assembly, with AION digital-index/palette-to-RGB electronics and qualified 640x400 progressive Logix timing. New 64 KiB card retains previous features and adds 640x400x2 and 640x200x4; the remaining 1536 bytes hold up to 512 three-byte scanline palette entries. Horizontal and vertical retrace palette writes require explicit monitor capability and bounded timing. Launch the FlexiBUS two-button mouse with middle-finger vertical roller and thumb-side horizontal roller. Update AIONix and CP/M Platform Extensions/TUI to support pointing and standard-control activation without application source edits; statically linked libraries require relinking, and custom interfaces require adaptation. Release AION Entertainment Suite: Sudoku, Klondike Solitaire, Spider and FreeCell, with mouse-learning tutorials, keyboard alternatives and monochrome-compatible presentation. These titles and the dual-roller mouse are deliberate alternate-history offerings. June 7-10 Houston campaign: Pointy ideas with a solid point. Introducing the Logix Mouse. Point, select, and get to work. Colour business reports, hands-on mouse learning, partner compatibility demonstrations and professional graphics; AutoCAD remains a November target. Campaign plan and staged budget: ncc_1982_campaign.json.",
+      "description": "Open the NCC presentation in Houston on 7 June and run demonstrations through 10 June. Introduce the colour upgrade and mouse through business reports, hands-on tutorials and Entertainment Suite demonstrations. Show supported CP/M and AIONix pointing updates, explain the update path for older applications, and invite visitors to dealer demonstrations and developer sessions.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -4281,31 +4288,24 @@
           "role": "partner"
         }
       ],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The press preview supplies the rehearsed public presentation and briefing materials.",
+          "event_id": "event.ncc82_press_preview"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Use qualified demonstration configurations and tested software builds; explain application-specific update requirements and record any remaining delivery conditions."
+        }
+      ],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
-          "description": "Demonstrate raster palette effects, unchanged standard-TUI controls with mouse input, and learning games. Keep later COMDEX high-resolution second-card/monitor plans separate; no unmeasured speed, cost or sales claims."
-        },
-        {
-          "number": 2,
-          "type": "result",
-          "description": "CP/M and AIONix TUI integration adds pointing and standard-control activation; static libraries require relinking and custom interfaces require adaptation. This outcome concerns software integration, not creation of the operating systems.",
-          "subject_ids": [
-            "software_edition.cpm_aurelia",
-            "software_edition.aionix",
-            "technology.logix_tui_mouse"
-          ]
-        },
-        {
-          "number": 3,
-          "type": "result",
-          "description": "Release the Entertainment Suite implementations with the recorded mouse-learning and keyboard/monochrome support.",
-          "subject_ids": [
-            "software_edition.entertainment_suite",
-            "software_edition.entertainment_suite.era"
-          ]
+          "description": "Public demonstrations and visitor enquiries establish the basis for the scheduled developer sessions and dealer follow-up."
         }
       ],
       "time": {
@@ -4315,18 +4315,13 @@
       "location_ids": [
         "location.astrodomain"
       ],
-      "subject_ids": [
-        "product.device_color_pro_14",
-        "product.device_artemis_video_card_64kb",
-        "product.device_logix_mouse",
-        "product.software_entertainment_suite"
-      ]
+      "subject_ids": []
     },
     {
       "id": "event.ncc82_developer_sessions",
       "title": "NCC developer and independent manufacturer sessions",
       "kind": "activity",
-      "description": "Demonstrate Team Edition at its $745.23 adoption price, provide target/API documentation, porting clinics and partner compatibility demonstrations. Funding does not imply exclusive software ownership. Budget and campaign plan: ncc_1982_campaign.json.",
+      "description": "Run scheduled porting clinics and partner compatibility demonstrations. Show the Team Edition development workflow, provide target and API documentation, and discuss application-specific mouse integration with independent software houses and manufacturers. Participation does not require exclusive software ownership.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -4341,18 +4336,22 @@
           "role": "organizer"
         }
       ],
-      "subject_ids": [
-        "event.ncc82_graphics_mouse",
-        "product.device_artemis_video_card_64kb",
-        "product.device_color_pro_14",
-        "product.device_logix_mouse",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.software_entertainment_suite",
-        "technology.logix_tui_mouse"
+      "subject_ids": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The public launch supplies the demonstrated workflows and developer enquiries to address in the clinics.",
+          "event_id": "event.ncc82_graphics_mouse"
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Target and API documentation, clinic findings and recorded partner compatibility results for follow-up; untested configurations remain unqualified."
+        }
+      ],
       "time": {
         "value": "1982-06-08",
         "precision": "day"
@@ -4362,7 +4361,7 @@
       "id": "event.ncc82_followup",
       "title": "NCC dealer and Academy follow-up programme",
       "kind": "activity",
-      "description": "June-July regional demonstrations and upgrade fulfillment. Assign enquiry owners and follow up by telephone/post within five business days; track orders and evaluations separately from booth traffic. Budget and campaign plan: ncc_1982_campaign.json.",
+      "description": "Begin the June and July regional dealer and Academy demonstrations and upgrade fulfilment programme. Assign an owner to each qualified enquiry and contact the prospect by telephone or post within five business days. Record orders and evaluations separately and track subsequent conversion without assuming a sales increase.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -4377,18 +4376,28 @@
           "role": "organizer"
         }
       ],
-      "subject_ids": [
-        "event.ncc82_graphics_mouse",
-        "product.device_artemis_video_card_64kb",
-        "product.device_color_pro_14",
-        "product.device_logix_mouse",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.software_entertainment_suite",
-        "technology.logix_tui_mouse"
+      "subject_ids": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Launch enquiries supply the prospects for regional demonstrations and order follow-up.",
+          "event_id": "event.ncc82_graphics_mouse"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Developer-session findings supply the technical questions and compatibility limitations requiring follow-up.",
+          "event_id": "event.ncc82_developer_sessions"
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Assigned enquiry records, demonstration appointments and separate evaluation and order follow-up records."
+        }
+      ],
       "time": {
         "value": "1982-06-14",
         "precision": "day"
@@ -4603,7 +4612,7 @@
       "id": "event.autodesk_comdex",
       "title": "COMDEX 1982 — Logix professional graphics and Autodesk AutoCAD",
       "kind": "launch",
-      "description": "Jointly present the release-quality AutoCAD 1.0 Artemis/AIONix build on the professional dual-display system with mouse and physical plotted drawings. Target commercial readiness for COMDEX; ship only after acceptance. Historical AutoCAD 1.0 shipped in December; a November Artemis release is an explicit funded alternate-history acceleration, not a historical claim. Programme details: team_development_program.json. Present the accepted Professional CAD offering and November professional-card revision, including legacy modes, five sprites with separate SRAM, 512-entry palette list and qualified Ball HD17H analog configuration. Proposed campaign: A clear view of your next design. Demonstrate the same drawing from entry through saved file to plotted output. Details: comdex_1982_campaign.json; no final price assumed before revised costing and Autodesk terms.",
+      "description": "Logix and Autodesk jointly present AutoCAD for Artemis with the professional dual-display configuration. Demonstrate the same drawing from entry through saving and reopening to plotted output, offer supervised trials and book dealer evaluations. Present the November professional graphics upgrade and explain the support and delivery arrangements. Commercial shipment remains conditional on acceptance.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -4649,7 +4658,13 @@
           ]
         }
       ],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Joint drawing-workflow demonstrations, supervised trials and booked dealer evaluations support the professional offering launch."
+        }
+      ],
       "time": {
         "value": "1982-11-29",
         "precision": "day"

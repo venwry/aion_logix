@@ -6112,7 +6112,9 @@
           ],
           "assembly_requirements": []
         }
-      ]
+      ],
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse"
     },
     {
       "id": "product.comdex82_reference_hardware",
@@ -6367,79 +6369,6 @@
       ]
     },
     {
-      "id": "product.ncc82_professional_graphics",
-      "name": "Artemis Professional Graphics extension",
-      "kind": "hardware",
-      "description": "Dated commercial review; technical specification not separately recorded.",
-      "provider_actor_ids": [
-        "actor.logix"
-      ],
-      "technology_ids": [],
-      "specification": [],
-      "offering_category": "expansion_kit",
-      "composition_history": [
-        {
-          "version_number": 1,
-          "description": "Product definition revision 1",
-          "effective_from": {
-            "kind": "unknown"
-          },
-          "effective_until": {
-            "kind": "unknown"
-          },
-          "technical_definition": {},
-          "composition_definition": [
-            {
-              "id": "line_1",
-              "target": {
-                "record_id": "device.artemis_professional_video_128kb",
-                "version_number": 1
-              },
-              "quantity": 1,
-              "unit": "each",
-              "role": "",
-              "supply_condition": {
-                "kind": "always"
-              },
-              "requirements": [],
-              "element_type": "attached_product"
-            },
-            {
-              "id": "line_2",
-              "target": {
-                "record_id": "device.mono_pro_17",
-                "version_number": 1
-              },
-              "quantity": 1,
-              "unit": "each",
-              "role": "",
-              "supply_condition": {
-                "kind": "always"
-              },
-              "requirements": [],
-              "element_type": "attached_product"
-            },
-            {
-              "id": "line_3",
-              "target": {
-                "record_id": "device.logix_mouse",
-                "version_number": 1
-              },
-              "quantity": 1,
-              "unit": "each",
-              "role": "",
-              "supply_condition": {
-                "kind": "always"
-              },
-              "requirements": [],
-              "element_type": "attached_product"
-            }
-          ],
-          "assembly_requirements": []
-        }
-      ]
-    },
-    {
       "id": "product.ncc82_mouse_learning",
       "name": "Logix Mouse Learning Pack",
       "kind": "hardware",
@@ -6525,18 +6454,27 @@
           ],
           "assembly_requirements": []
         }
-      ]
+      ],
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse"
     },
     {
       "id": "product.comdex82_professional_hardware",
       "name": "November professional graphics upgrade with mouse",
       "kind": "hardware",
-      "description": "Dated commercial review; technical specification not separately recorded.",
+      "description": "Professional graphics upgrade for compatible Artemis computers, supplying the November card and monitor revisions with a mouse.",
       "provider_actor_ids": [
         "actor.logix"
       ],
       "technology_ids": [],
-      "specification": [],
+      "specification": [
+        {
+          "number": 1,
+          "type": "package",
+          "description": "The upgrade supplies the professional display hardware and pointing device; the host computer and application licence are separate.",
+          "value": "1 professional graphics card + 1 Mono Pro 17 monitor + 1 mouse"
+        }
+      ],
       "offering_category": "expansion_kit",
       "composition_history": [
         {
@@ -6598,7 +6536,9 @@
           ],
           "assembly_requirements": []
         }
-      ]
+      ],
+      "launch_campaign_id": "campaign.comdex1982",
+      "launch_event_id": "event.autodesk_comdex"
     },
     {
       "id": "product.comdex82_upgrade_autocad",
@@ -12517,13 +12457,13 @@
       "technical_identity": {
         "record_id": "device.artemis_professional_video_128kb"
       },
-      "launch_campaign_id": "campaign.ncc1982",
-      "launch_event_id": "event.ncc82_graphics_mouse",
+      "launch_campaign_id": "campaign.comdex1982",
+      "launch_event_id": "event.autodesk_comdex",
       "offering_category": "peripheral",
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Separate offering using the existing canonical implementation",
+          "description": "Retail package containing the November device revision",
           "effective_from": {
             "kind": "unknown"
           },
@@ -12536,7 +12476,7 @@
               "id": "line_1",
               "target": {
                 "record_id": "device.artemis_professional_video_128kb",
-                "version_number": 1
+                "version_number": 2
               },
               "quantity": 1,
               "unit": "each",
@@ -13132,81 +13072,48 @@
       "provider_actor_ids": [
         "actor.logix"
       ],
-      "technology_ids": [
-        "technology.flexibus_pointing_device",
-        "technology.logix_tui_mouse"
-      ],
+      "technology_ids": [],
       "specification": [
         {
           "number": 1,
-          "type": "specification.interface_ref",
-          "description": "technology.flexibus",
-          "value": "technology.flexibus"
-        },
-        {
-          "number": 2,
-          "type": "specification.class_protocol_ref",
-          "description": "technology.flexibus_pointing_device",
-          "value": "technology.flexibus_pointing_device"
-        },
-        {
-          "number": 3,
-          "type": "specification.buttons",
-          "description": "2",
-          "value": 2
-        },
-        {
-          "number": 4,
-          "type": "specification.rollers[1].position",
-          "description": "under middle finger",
-          "value": "under middle finger"
-        },
-        {
-          "number": 5,
-          "type": "specification.rollers[1].default_action",
-          "description": "vertical scrolling",
-          "value": "vertical scrolling"
-        },
-        {
-          "number": 6,
-          "type": "specification.rollers[2].position",
-          "description": "thumb side",
-          "value": "thumb side"
-        },
-        {
-          "number": 7,
-          "type": "specification.rollers[2].default_action",
-          "description": "horizontal scrolling",
-          "value": "horizontal scrolling"
-        },
-        {
-          "number": 8,
-          "type": "specification.tracking",
-          "description": "Relative X/Y pointing; mechanical ball with quadrature encoders is the design baseline, subject to resolution and tracking qualification.",
-          "value": "Relative X/Y pointing; mechanical ball with quadrature encoders is the design baseline, subject to resolution and tracking qualification."
-        },
-        {
-          "number": 9,
-          "type": "specification.ergonomics",
-          "description": "Rollers are independent of primary/secondary buttons; qualify accidental actuation, handedness, detent force and reach. Side-wheel placement must be documented.",
-          "value": "Rollers are independent of primary/secondary buttons; qualify accidental actuation, handedness, detent force and reach. Side-wheel placement must be documented."
-        },
-        {
-          "number": 10,
-          "type": "specification.power",
-          "description": "Port-power target; current draw, connector and protection must be qualified.",
-          "value": "Port-power target; current draw, connector and protection must be qualified."
-        },
-        {
-          "number": 11,
-          "type": "specification.history",
-          "description": "Deliberate alternate-history dual-roller mouse design, not a claim of a matching historical 1982 retail product.",
-          "value": "Deliberate alternate-history dual-roller mouse design, not a claim of a matching historical 1982 retail product."
+          "type": "package",
+          "description": "The retail package supplies one complete Logix pointing device.",
+          "value": "1 Logix mouse"
         }
       ],
-      "technical_identity": {
-        "record_id": "device.logix_mouse"
-      }
+      "launch_campaign_id": "campaign.ncc1982",
+      "launch_event_id": "event.ncc82_graphics_mouse",
+      "composition_history": [
+        {
+          "version_number": 1,
+          "description": "Retail package containing one Logix mouse",
+          "effective_from": {
+            "kind": "unknown"
+          },
+          "effective_until": {
+            "kind": "unknown"
+          },
+          "technical_definition": {},
+          "composition_definition": [
+            {
+              "id": "line_1",
+              "target": {
+                "record_id": "device.logix_mouse",
+                "version_number": 1
+              },
+              "quantity": 1,
+              "unit": "each",
+              "role": "Supplied device",
+              "supply_condition": {
+                "kind": "always"
+              },
+              "requirements": [],
+              "element_type": "attached_product"
+            }
+          ],
+          "assembly_requirements": []
+        }
+      ]
     },
     {
       "id": "product.device_mono_monitor_1",
@@ -13417,13 +13324,13 @@
       "technical_identity": {
         "record_id": "device.mono_pro_17"
       },
-      "launch_campaign_id": "campaign.ncc1982",
-      "launch_event_id": "event.ncc82_graphics_mouse",
+      "launch_campaign_id": "campaign.comdex1982",
+      "launch_event_id": "event.autodesk_comdex",
       "offering_category": "peripheral",
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Separate offering using the existing canonical implementation",
+          "description": "Retail package containing the November device revision",
           "effective_from": {
             "kind": "unknown"
           },
@@ -13436,7 +13343,7 @@
               "id": "line_1",
               "target": {
                 "record_id": "device.mono_pro_17",
-                "version_number": 1
+                "version_number": 2
               },
               "quantity": 1,
               "unit": "each",

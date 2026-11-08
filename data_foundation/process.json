@@ -116,9 +116,9 @@
     },
     {
       "id": "process.ncc82_case_studies",
-      "title": "NCC customer results and professional beta preparation",
+      "title": "NCC customer results and campaign review",
       "kind": "activity",
-      "description": "Logix, AION Software and the Academy published customer case studies during August and September. Professional enquiries were directed to Autodesk beta evaluations and the November demonstration programme.",
+      "description": "During August and September, Logix, AION Software and the Academy publish customer case studies from the regional demonstrations and review enquiry conversion and support findings.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -138,11 +138,17 @@
         {
           "number": 1,
           "type": "resource",
-          "description": "Preceding launch establishing the context for customer follow-up and beta preparation: NCC 1982 — Pointy ideas with a solid point..",
-          "event_id": "event.ncc82_graphics_mouse"
+          "description": "Regional demonstration, evaluation and order follow-up records provide the evidence for customer case studies and the campaign review.",
+          "event_id": "event.ncc82_followup"
         }
       ],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Customer case studies and a campaign review distinguishing evaluations, orders and support findings; no automatic sales uplift is inferred."
+        }
+      ],
       "period": {
         "start": {
           "value": "1982-08",
@@ -157,7 +163,7 @@
         {
           "number": 1,
           "type": "action",
-          "description": "Logix, AION Software and the Academy published customer case studies during August and September. Professional enquiries were directed to Autodesk beta evaluations and the November demonstration programme."
+          "description": "During August and September, Logix, AION Software and the Academy publish customer case studies from the regional demonstrations and review enquiry conversion and support findings."
         }
       ]
     },
@@ -1296,8 +1302,8 @@
           "precision": "event"
         },
         "end": {
-          "value": "event.autodesk_comdex",
-          "precision": "event"
+          "value": "1982-11-29",
+          "precision": "day"
         }
       },
       "inputs": [
@@ -2491,7 +2497,18 @@
         }
       },
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Public introduction of the professional graphics peripherals and November upgrade bundle, with dealer evaluations and delivery subject to the recorded acceptance requirements. Campaign execution does not create the underlying hardware.",
+          "subject_ids": [
+            "product.device_mono_pro_17",
+            "product.device_artemis_professional_video_128kb",
+            "product.comdex82_professional_hardware"
+          ]
+        }
+      ],
       "steps": [
         {
           "number": 1,
@@ -2535,8 +2552,9 @@
         },
         {
           "number": 9,
-          "type": "action",
-          "description": "COMDEX 1982 — Logix professional graphics and Autodesk AutoCAD"
+          "type": "milestone",
+          "description": "COMDEX 1982 — Logix professional graphics and Autodesk AutoCAD",
+          "event_id": "event.autodesk_comdex"
         },
         {
           "number": 10,
@@ -2567,7 +2585,7 @@
       "id": "process.ncc1982_campaign",
       "title": "NCC 1982 — Pointy ideas with a solid point. — execution",
       "kind": "campaign_execution",
-      "description": "Introduce mouse-driven business workflows, generate colour-upgrade demonstrations and connect professional customers with the forthcoming Artemis AutoCAD offering.",
+      "description": "Introduce mouse-driven business workflows, colour upgrades and recreational mouse tutorials; support the public presentation with dealer preparation, press briefings, developer clinics and measured follow-up.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -2584,62 +2602,82 @@
           "precision": "month"
         }
       },
-      "inputs": [],
-      "outcomes": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "Demonstrations require tested colour and mouse configurations, compatible software builds and clear application update paths. Availability and qualification must be established before each public demonstration."
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Public introduction of the colour and mouse offerings, with dealer demonstrations and customer follow-up. This is a marketing result; product design and manufacture are established outside campaign execution.",
+          "subject_ids": [
+            "product.device_color_pro_14",
+            "product.device_artemis_video_card_64kb",
+            "product.device_logix_mouse",
+            "product.software_entertainment_suite",
+            "product.edition_entertainment_suite_era",
+            "product.ncc82_colour_upgrade",
+            "product.ncc82_mouse_learning"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "Publication and demonstration of the CP/M and AIONix pointing updates. Standard TUI controls gain mouse activation; static libraries require relinking and custom interfaces require adaptation. This release activity does not create the operating systems.",
+          "subject_ids": [
+            "software_edition.cpm_aurelia",
+            "software_edition.aionix",
+            "technology.logix_tui_mouse"
+          ]
+        },
+        {
+          "number": 3,
+          "type": "result",
+          "description": "Release and public demonstration of the CP/M and AIONix Entertainment Suite implementations with mouse-learning tutorials, keyboard alternatives and monochrome-compatible presentation.",
+          "subject_ids": [
+            "software_edition.entertainment_suite",
+            "software_edition.entertainment_suite.era"
+          ]
+        }
+      ],
       "steps": [
         {
           "number": 1,
           "type": "action",
-          "description": "conference / start: 1982-06-07"
+          "description": "Prepare dealer and Academy demonstrations at the opening milestone."
         },
         {
           "number": 2,
           "type": "action",
-          "description": "conference / end: 1982-06-10"
+          "description": "Brief press and partners and rehearse the public presentation.",
+          "event_id": "event.ncc82_press_preview"
         },
         {
           "number": 3,
-          "type": "action",
-          "description": "conference / venue: Astrodomain, Houston, Texas"
+          "type": "milestone",
+          "description": "Open the public presentation at the Astrodomain in Houston on 7 June; continue conference demonstrations through 10 June.",
+          "event_id": "event.ncc82_graphics_mouse"
         },
         {
           "number": 4,
           "type": "action",
-          "description": "followup: Assign an owner to every qualified enquiry; telephone or postal follow-up within five business days. Measure 30/60/90-day conversion without assuming automatic sales uplift."
+          "description": "Hold developer clinics and partner compatibility sessions.",
+          "event_id": "event.ncc82_developer_sessions"
         },
         {
           "number": 5,
           "type": "action",
-          "description": "NCC 1982 — Pointy ideas with a solid point.",
-          "event_id": "event.ncc82_graphics_mouse"
+          "description": "Conduct regional demonstrations, enquiry handling and upgrade follow-up.",
+          "event_id": "event.ncc82_followup"
         },
         {
           "number": 6,
           "type": "action",
-          "description": "NCC 1982 dealer and demonstration preparation"
-        },
-        {
-          "number": 7,
-          "type": "action",
-          "description": "NCC 1982 press and partner previews",
-          "event_id": "event.ncc82_press_preview"
-        },
-        {
-          "number": 8,
-          "type": "action",
-          "description": "NCC developer and independent manufacturer sessions",
-          "event_id": "event.ncc82_developer_sessions"
-        },
-        {
-          "number": 9,
-          "type": "action",
-          "description": "NCC dealer and Academy follow-up programme",
-          "event_id": "event.ncc82_followup"
-        },
-        {
-          "number": 10,
-          "type": "action",
-          "description": "NCC customer results and professional beta preparation",
+          "description": "Publish customer case studies and review the campaign results.",
           "process_id": "process.ncc82_case_studies"
         }
       ],
