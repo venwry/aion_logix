@@ -16,6 +16,7 @@ These principles describe the current contract, version **0.9.1**, and the accep
 12. Schemas reject undeclared fields and validate structural constraints. Semantic directness and evidence still require author review. Obtain approval for schema extensions not already authorized, and deploy registry, consumers, tests and documentation together. Compatibility is not permission to create new ambiguous references.
 13. Annotations and refinement feedback preserve immutable revision chains. A revised proposal has a new hash and requires fresh review. Preparing a proposal does not resolve its annotation; approval resolves only the unchanged current open revision.
 14. `docs/` and `docs/data_model/` document current organization, behavior, rules and schemas. Historical storytelling activities and superseded guidance belong in `docs/archived/`. The existing legacy evidence archive remains immutable. Archived statuses and instructions are not current authority.
+15. The current model does not support pricing information. Do not put prices, fees, discounts, price histories or pricing placeholders in specifications or any other field of products, events, processes or campaigns. Do not relocate them into another record type as a workaround; pricing requires a separately designed model.
 
 ```mermaid
 flowchart LR

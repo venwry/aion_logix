@@ -37,8 +37,7 @@ test('phase 4 explains assumed service terms and gates shared launch cleanup',as
  await page.getByLabel('Comparison',{exact:true}).selectOption('details');
  await expect(page.locator('.comparison-column').nth(1)).toContainText('1 year');
  await expect(page.locator('.comparison-column').nth(1)).toContainText('campaign.ncc1978');
- await expect(page.locator('.comparison-column').nth(1)).toContainText('449');
- await expect(page.locator('.comparison-column').nth(1)).toContainText('USD/year');
+ await expect(page.locator('.comparison-column').nth(1)).not.toContainText(/\b(?:price|pricing|fees?|discount\w*|USD)\b|\$/i);
  await page.locator('#proposal-nav [data-change-id="change.catalogue_phase4_launch_reference_cleanup"]').click();
  await expect(page.locator('.dependency-note')).toContainText('change.catalogue_phase4_offer_software_entertainment_suite');
  await page.getByLabel('Comparison',{exact:true}).selectOption('json');
@@ -65,15 +64,15 @@ test('OS exchange exposes its cartridge BOM and courses expose location instead 
  await expect(page.locator('.change-table')).toContainText('Record removed');
 });
 
-test('remaining feedback exposes service prices and the corrected conference scope for review',async({page})=>{
+test('service review preserves duration and eligibility without pricing; conference scope remains reviewable',async({page})=>{
  await ready(page);
  await page.getByLabel('Comparison',{exact:true}).selectOption('details');
- for(const [suffix,amounts] of [['service_customer_care',['49']],['service_professional_support',['249','299']]]){
+ for(const suffix of ['service_customer_care','service_professional_support']){
   await page.locator('#proposal-nav [data-change-id="change.catalogue_phase4_offer_'+suffix+'"]').click();
   const after=page.locator('.comparison-column').nth(1);
-  for(const amount of amounts)await expect(after).toContainText(amount);
-  await expect(after).toContainText('USD/year');
-  await expect(after).not.toContainText('Not yet specified');
+  await expect(after).toContainText('1 year');
+  await expect(after).toContainText('After the initial year of support');
+  await expect(after).not.toContainText(/\b(?:price|pricing|fees?|discount\w*|USD)\b|\$/i);
  }
  const p=proposals.find(p=>p.id==='change.catalogue_phase4_launch_reference_cleanup');
  await page.locator('#proposal-nav [data-change-id="'+p.id+'"]').click();

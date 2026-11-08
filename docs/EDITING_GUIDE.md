@@ -12,6 +12,8 @@ Apply saved review feedback to other proposals where the same principle applies.
 
 For events/processes, minimize top-level subjects. Document any exception in editorial evidence. Product launch links are authoritative when present; do not remove the only surviving launch association before its replacement exists. Distinguish later promotion and external participation. Delivery processes own meaningful product/implementation outcomes; marketing execution processes do not create their promoted catalogues.
 
+The current model does not support pricing information. Remove prices, fees, discounts, price histories and pricing placeholders from proposed product, event, process and campaign records; check narrative fields as well as specifications. Do not import legacy pricing or relocate it into other record types. Retain non-price service scope, duration and eligibility. Preserve immutable before snapshots and historical decisions so review remains accurate; changes to existing foundation content still require Changes confirm.
+
 Keep the existing date precision. A later-stage resource can be an input to the relevant work without being available at the whole process's start. Do not turn a commitment, pilot or demo into a completed delivery or successful qualification. Keep child categories empty when changing ownership, and include all affected records in the same coherent proposal.
 
 ## Proposals and authorization
