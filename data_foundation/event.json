@@ -550,12 +550,17 @@
           "role": "supplier"
         }
       ],
-      "subject_ids": [
-        "product.device_flexiprint40",
-        "product.part_mpi_mp40_mechanism"
-      ],
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "decision",
+          "description": "Agree OEM purchasing/manufacturing arrangements for the bare MP-40 printer mechanism to receive FlexiBUS controllers in Logix printer integration. This records procurement scope, not completed printer delivery.",
+          "subject_ids": [
+            "base_part.mpi_mp40_mechanism"
+          ]
+        }
+      ],
       "time": {
         "value": "1977-09-01",
         "precision": "day"
@@ -581,12 +586,17 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.dri_founding",
-        "product.software_aionix"
-      ],
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Begin exploratory architecture, C portability and ERA operating-system work on the AIONix implementation; this is the start of development, not delivery of a customer software offering.",
+          "subject_ids": [
+            "software_edition.aionix"
+          ]
+        }
+      ],
       "time": {
         "value": "1978-02-01",
         "precision": "day"
@@ -676,12 +686,17 @@
           "role": "new_company"
         }
       ],
-      "subject_ids": [
-        "product.service_academy_before_you_buy",
-        "product.service_academy_direct_sales"
-      ],
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Establish the Logix Computer Academy company and prepare rented facilities for the initial five-city programme; city names and first course dates remain unspecified.",
+          "subject_ids": [
+            "actor.academy"
+          ]
+        }
+      ],
       "time": {
         "value": "1978-03-25",
         "precision": "day"
@@ -762,18 +777,22 @@
         }
       ],
       "subject_ids": [
-        "event.academy",
-        "event.aurelia_campaign_advert",
         "product.business_tools_aurelia",
         "product.abacus_1",
         "product.software_cpm_aurelia",
-        "product.service_academy_before_you_buy",
-        "product.service_academy_direct_sales",
+        "product.academy_course_1",
         "product.device_flexiprint40",
         "product.aurelia_sdk",
         "product.aion_c_ide"
       ],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The established Academy company and prepared facilities provide the organisation for the training presentation; first course dates remain unspecified.",
+          "event_id": "event.academy"
+        }
+      ],
       "outcomes": [
         {
           "number": 1,
@@ -858,15 +877,20 @@
           "role": "partner"
         }
       ],
-      "subject_ids": [
-        "event.aurelia_launch",
-        "product.part_flexibus_host_controller",
-        "product.part_flexibus_device_controller",
-        "product.part_aurelia_video_chip",
-        "product.part_aion_4116"
-      ],
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "decision",
+          "description": "Agree independent second-source fabrication and technology-transfer work for the FlexiBUS host/device controllers, Aurelia video controller and 4116-equivalent DRAM. Reference silicon, masks, process know-how and production tests define the transfer scope; availability still requires SMC qualification.",
+          "subject_ids": [
+            "base_part.flexibus_host_controller",
+            "base_part.flexibus_device_controller",
+            "base_part.aurelia_video_chip",
+            "base_part.aion_4116"
+          ]
+        }
+      ],
       "time": {
         "value": "1978-07",
         "precision": "month"
@@ -990,11 +1014,6 @@
           "role": "equity_recipient"
         }
       ],
-      "subject_ids": [
-        "event.dri_founding",
-        "event.aionix_preliminary",
-        "product.software_aionix"
-      ],
       "inputs": [
         {
           "number": 1,
@@ -1003,7 +1022,16 @@
           "event_id": "event.aionix_relocation"
         }
       ],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "decision",
+          "description": "Formalise ownership, staffing and funding for the AIONix implementation under the governing agreement. The decision does not itself deliver released software.",
+          "subject_ids": [
+            "software_edition.aionix"
+          ]
+        }
+      ],
       "time": {
         "value": "1978-09-12",
         "precision": "day"
@@ -2044,19 +2072,25 @@
           "role": "partner"
         }
       ],
-      "subject_ids": [
-        "event.smc_agreement",
-        "product.part_flexibus_host_controller",
-        "product.part_flexibus_device_controller",
-        "product.part_aurelia_video_chip",
-        "product.part_aion_4116"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The second-source agreement enables SMC fabrication, qualification and staged independent sales.",
+          "event_id": "event.smc_agreement"
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
-          "description": "AION remains the launch supplier for June 1979 cards. Qualified SMC parts become independently purchasable alternatives; no automatic procurement switch, price reduction or high-volume yield is asserted."
+          "description": "AION remains the launch supplier for June 1979 cards. Qualified SMC parts become independently purchasable alternatives; no automatic procurement switch, price reduction or high-volume yield is asserted. The referenced chips identify the cooperation scope, not simultaneous release of every part; video RAM retains its separate qualification gate.",
+          "subject_ids": [
+            "base_part.flexibus_host_controller",
+            "base_part.flexibus_device_controller",
+            "base_part.aurelia_video_chip",
+            "base_part.aion_4116"
+          ]
         }
       ],
       "time": {
@@ -2477,15 +2511,10 @@
         }
       ],
       "subject_ids": [
-        "product.software_aionix",
         "product.aion_c_ide",
         "product.business_tools_artemis",
-        "product.device_artemis_video_card",
-        "product.device_mono_pro",
         "product.artemis_128_mono",
         "product.artemis_256_mono_pro",
-        "product.device_artemis_video_card_16kb",
-        "product.part_aion_4164",
         "product.artemis_budget_128",
         "product.artemis_budget_128_hdd"
       ],
@@ -2562,9 +2591,6 @@
           "actor_id": "actor.labs",
           "role": "manufacturer"
         }
-      ],
-      "subject_ids": [
-        "product.part_aion_4164"
       ],
       "inputs": [],
       "outcomes": [
@@ -2758,9 +2784,6 @@
           "actor_id": "actor.labs",
           "role": "manufacturer"
         }
-      ],
-      "subject_ids": [
-        "product.part_aion_4164"
       ],
       "inputs": [],
       "outcomes": [
@@ -3152,9 +3175,6 @@
           "role": "manufacturer"
         }
       ],
-      "subject_ids": [
-        "product.part_aion_4164"
-      ],
       "inputs": [],
       "outcomes": [
         {
@@ -3308,11 +3328,30 @@
           "role": "organizer"
         }
       ],
-      "subject_ids": [
-        "product.software_aion_development_team"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Candidate server and separate ERA/Z80 client implementations provide the software under reference-site pilot evaluation.",
+          "subject_ids": [
+            "software_edition.aion_development_team",
+            "software_edition.aion_development_team.era_client",
+            "software_edition.aion_development_team.z80_client"
+          ]
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "qualification",
+          "description": "Evaluate shared projects, interrupted saves, permissions, backup/restore and separate target builds at reference sites. This records the pilot scope; success and paid customer adoption are not asserted.",
+          "subject_ids": [
+            "software_edition.aion_development_team",
+            "software_edition.aion_development_team.era_client",
+            "software_edition.aion_development_team.z80_client"
+          ]
+        }
+      ],
       "time": {
         "value": "1981-09-01",
         "precision": "day"
@@ -3330,10 +3369,26 @@
           "role": "organizer"
         }
       ],
-      "subject_ids": [
-        "product.software_aion_development_team"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The single Team Edition package supplies the commercial entitlement and hardware/storage disclosures to teach dealers and brief the press.",
+          "subject_ids": [
+            "product.aion_development_team"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Server and target-specific client builds support demonstrations of C source portability and distinct CP/M/AIONix binaries.",
+          "subject_ids": [
+            "software_edition.aion_development_team",
+            "software_edition.aion_development_team.era_client",
+            "software_edition.aion_development_team.z80_client"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [],
       "time": {
         "value": "1981-10-01",
@@ -3528,7 +3583,7 @@
         }
       ],
       "subject_ids": [
-        "product.software_aion_development_team"
+        "product.aion_development_team"
       ],
       "inputs": [],
       "outcomes": [],
@@ -3596,10 +3651,16 @@
           "role": "organizer"
         }
       ],
-      "subject_ids": [
-        "product.software_aion_development_team"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The existing Team Edition commercial package is the offering promoted in the 90-day workshops, case studies and trade advertising; promotion is not evidence of paid adoption.",
+          "subject_ids": [
+            "product.aion_development_team"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [],
       "time": {
         "value": "1981-12-01",
@@ -4344,10 +4405,16 @@
           "role": "organizer"
         }
       ],
-      "subject_ids": [
-        "product.part_aion_4164"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "Compare yield-adjusted recurring packaged-chip costs for the AION 4164-equivalent using only recipes qualified by the June 1982 review cutoff; July 1982 release is excluded.",
+          "subject_ids": [
+            "base_part.aion_4164"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [],
       "time": {
         "value": "1982-06-15",
@@ -4364,9 +4431,6 @@
           "actor_id": "actor.labs",
           "role": "manufacturer"
         }
-      ],
-      "subject_ids": [
-        "product.part_aion_4164"
       ],
       "inputs": [],
       "outcomes": [
@@ -4774,16 +4838,20 @@
           "role": "programme_partner"
         }
       ],
-      "subject_ids": [
-        "product.part_era2_12mhz",
-        "product.software_aionix2"
-      ],
       "inputs": [
         {
           "number": 1,
           "type": "resource",
           "description": "Preceding work supporting this event: ERA² architecture, silicon and qualification.",
           "process_id": "process.era2_development"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Present the AIONix2 design targets and implementation status for Athena, explicitly distinguishing them from qualified production availability.",
+          "subject_ids": [
+            "software_edition.aionix2"
+          ]
         }
       ],
       "outcomes": [],
@@ -4815,17 +4883,21 @@
           "role": "programme_partner"
         }
       ],
-      "subject_ids": [
-        "event.ncc83_athena_premiere",
-        "product.part_era2_12mhz",
-        "product.software_aionix2"
-      ],
       "inputs": [
         {
           "number": 1,
           "type": "resource",
           "description": "Preceding work supporting this event: ERA² architecture, silicon and qualification.",
           "process_id": "process.era2_development"
+        },
+        {
+          "number": 2,
+          "type": "acceptance_criterion",
+          "description": "Review ERA2 silicon and separately specified AIONix2 readiness before authorising gradual Athena shipments; the conference premiere alone proves neither.",
+          "subject_ids": [
+            "base_part.era2_12mhz",
+            "software_edition.aionix2"
+          ]
         }
       ],
       "outcomes": [],
@@ -4879,9 +4951,6 @@
           "actor_id": "actor.labs",
           "role": "manufacturer"
         }
-      ],
-      "subject_ids": [
-        "product.part_aion_4164"
       ],
       "inputs": [],
       "outcomes": [
@@ -5199,8 +5268,7 @@
           "type": "result",
           "description": "Logix Computer Academy expands its offering to Artemis-line products, including transition classes and practical instruction for the new configurations.",
           "subject_ids": [
-            "actor.academy",
-            "product.family_artemis"
+            "actor.academy"
           ]
         },
         {
@@ -5221,9 +5289,6 @@
             "actor.academy"
           ]
         }
-      ],
-      "subject_ids": [
-        "product.family_artemis"
       ]
     },
     {

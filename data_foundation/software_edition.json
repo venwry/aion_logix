@@ -1000,8 +1000,9 @@
             "dependency_ids": [],
             "distribution": {
               "medium": "cartridge",
-              "fulfillment": "edition_delivery",
-              "execution": "System XIP ROM cartridge"
+              "fulfillment": "Software image installed in the physical system cartridge; hardware BOM belongs to the cartridge device.",
+              "execution": "System XIP ROM cartridge",
+              "installation": "Supply the qualified image in its matching system cartridge. Software documentation and licensing remain part of this edition; the cartridge contains the edition, not the reverse."
             }
           },
           "composition_definition": [
@@ -1094,8 +1095,9 @@
             ],
             "distribution": {
               "medium": "cartridge",
-              "fulfillment": "edition_delivery",
-              "execution": "Complete system ROM/EEPROM cartridge image, including the base AIONix services and networking; not an incremental upgrade."
+              "fulfillment": "Software image installed in the physical system cartridge; hardware BOM belongs to the cartridge device.",
+              "execution": "Complete system ROM/EEPROM cartridge image, including the base AIONix services and networking; not an incremental upgrade.",
+              "installation": "Supply the qualified image in its matching system cartridge. Software documentation and licensing remain part of this edition; the cartridge contains the edition, not the reverse."
             }
           },
           "composition_definition": [
@@ -1164,7 +1166,7 @@
                   "Recovery tools"
                 ],
                 "mapping": "Shared read-only executable mappings; private writable data per process. Cacheable ROM with independently qualified timing.",
-                "physical_implementation": "256 KiB minimum system ROM bank; chip organization, package count, board mounting and timing remain qualification decisions."
+                "physical_implementation": "At least 256 KiB of directly executable system ROM in the replaceable Athena system cartridge; physical BOM and host qualification belong to the cartridge device."
               },
               "compatibility": {
                 "scope": "Documented ERA AIONix user binaries, instruction semantics and C ABI; not Z80 binary compatibility.",
@@ -1400,9 +1402,10 @@
             },
             "dependency_ids": [],
             "distribution": {
-              "medium": "system_rom",
-              "fulfillment": "edition_delivery",
-              "execution": "At least 256 KiB directly executable shared OS ROM, alongside at least 256 KiB DRAM. EEPROM BIOS remains boot/diagnostic firmware. Optional services, larger utilities and patches load from disk; do not copy the entire OS ROM into RAM."
+              "medium": "cartridge",
+              "fulfillment": "Software image supplied in the system cartridge fitted to every Athena; the physical cartridge contains this edition.",
+              "execution": "At least 256 KiB directly executable shared OS ROM, alongside at least 256 KiB DRAM. EEPROM BIOS remains boot/diagnostic firmware. Optional services, larger utilities and patches load from disk; do not copy the entire OS ROM into RAM.",
+              "installation": "Versioned dispatch tables and page-sized RAM patch overlays; ROM version/checksum checks and recovery boot bypassing disk patches. Patched pages consume DRAM. A qualified minor revision may be installed by exchanging the host-compatible cartridge; no specific future revision is asserted."
             }
           },
           "composition_definition": [
@@ -1846,8 +1849,9 @@
             ],
             "distribution": {
               "medium": "cartridge",
-              "fulfillment": "edition_delivery",
-              "execution": "system/software upgrade supplied with the Aurelia network-adapter offer"
+              "fulfillment": "Software image installed in the physical system cartridge; hardware BOM belongs to the cartridge device.",
+              "execution": "system/software upgrade supplied with the Aurelia network-adapter offer",
+              "installation": "Supply the qualified image in its matching system cartridge. Software documentation and licensing remain part of this edition; the cartridge contains the edition, not the reverse."
             }
           },
           "composition_definition": [

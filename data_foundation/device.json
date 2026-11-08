@@ -8021,7 +8021,7 @@
       "id": "device.rom_cartridge.aionix",
       "name": "AIONix (ERA edition) — ROM cartridge",
       "kind": "rom_cartridge",
-      "description": "AIONix (ERA edition) — ROM cartridge",
+      "description": "Physical system cartridge containing the operating-system image and its hardware delivery parts for the qualified host. Software features are defined by the included software edition.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -8029,7 +8029,7 @@
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Product definition revision 1",
+          "description": "System cartridge hardware and software composition",
           "effective_from": {
             "kind": "unknown"
           },
@@ -8037,7 +8037,10 @@
             "kind": "unknown"
           },
           "technical_definition": {
-            "connection": "rom_cartridge"
+            "connection": "rom_cartridge",
+            "compatible_with": [
+              "device.base_computer.artemis"
+            ]
           },
           "composition_definition": [
             {
@@ -8047,7 +8050,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "ROM storage set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8060,7 +8063,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "Cartridge carrier PCB and connector set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8073,7 +8076,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "Cartridge shell, label and hardware packaging set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8087,7 +8090,7 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "Operating-system image, software documentation and licence",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8104,6 +8107,11 @@
               "number": 2,
               "kind": "testing",
               "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+            },
+            {
+              "number": 3,
+              "kind": "testing",
+              "description": "Verify the selected image revision, cartridge identification, electrical compatibility and successful boot on the qualified host. The image and physical storage must be qualified together."
             }
           ]
         }
@@ -8114,7 +8122,7 @@
       "id": "device.rom_cartridge.aionix_server",
       "name": "AIONix (Server edition) — ROM cartridge",
       "kind": "rom_cartridge",
-      "description": "AIONix (Server edition) — ROM cartridge",
+      "description": "Physical system cartridge containing the operating-system image and its hardware delivery parts for the qualified host. Software features are defined by the included software edition.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -8122,7 +8130,7 @@
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Product definition revision 1",
+          "description": "System cartridge hardware and software composition",
           "effective_from": {
             "kind": "unknown"
           },
@@ -8130,7 +8138,11 @@
             "kind": "unknown"
           },
           "technical_definition": {
-            "connection": "rom_cartridge"
+            "connection": "rom_cartridge",
+            "compatible_with": [
+              "device.base_computer.artemis",
+              "device.base_computer.artemis_pro"
+            ]
           },
           "composition_definition": [
             {
@@ -8140,7 +8152,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "ROM storage set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8153,7 +8165,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "Cartridge carrier PCB and connector set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8166,7 +8178,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "Cartridge shell, label and hardware packaging set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8180,7 +8192,7 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "Operating-system image, software documentation and licence",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8197,6 +8209,11 @@
               "number": 2,
               "kind": "testing",
               "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+            },
+            {
+              "number": 3,
+              "kind": "testing",
+              "description": "Verify the selected image revision, cartridge identification, electrical compatibility and successful boot on the qualified host. The image and physical storage must be qualified together."
             }
           ]
         }
@@ -8300,7 +8317,7 @@
       "id": "device.rom_cartridge.cpm_aurelia_networking",
       "name": "CP/M (Aurelia networking edition) — ROM cartridge",
       "kind": "rom_cartridge",
-      "description": "CP/M (Aurelia networking edition) — ROM cartridge",
+      "description": "Physical system cartridge containing the operating-system image and its hardware delivery parts for the qualified host. Software features are defined by the included software edition.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -8308,7 +8325,7 @@
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Product definition revision 1",
+          "description": "System cartridge hardware and software composition",
           "effective_from": {
             "kind": "unknown"
           },
@@ -8316,7 +8333,11 @@
             "kind": "unknown"
           },
           "technical_definition": {
-            "connection": "rom_cartridge"
+            "connection": "rom_cartridge",
+            "compatible_with": [
+              "device.base_computer.aurelia",
+              "device.base_computer.aurelia_plus"
+            ]
           },
           "composition_definition": [
             {
@@ -8326,7 +8347,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "ROM storage set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8339,7 +8360,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "Cartridge carrier PCB and connector set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8352,7 +8373,7 @@
               },
               "quantity": 1,
               "unit": "set",
-              "role": "",
+              "role": "Cartridge shell, label and hardware packaging set",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8366,7 +8387,7 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "Operating-system image, software documentation and licence",
               "supply_condition": {
                 "kind": "always"
               },
@@ -8383,6 +8404,11 @@
               "number": 2,
               "kind": "testing",
               "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+            },
+            {
+              "number": 3,
+              "kind": "testing",
+              "description": "Verify the selected image revision, cartridge identification, electrical compatibility and successful boot on the qualified host. The image and physical storage must be qualified together."
             }
           ]
         }
@@ -12107,7 +12133,17 @@
               {
                 "id": "cartridges",
                 "name": "ROM cartridges",
-                "sockets": []
+                "sockets": [
+                  {
+                    "id": "system_cartridge",
+                    "name": "System cartridge slot",
+                    "connection": "rom_cartridge",
+                    "capacity": 1,
+                    "compatible_device_ids": [
+                      "device.athena.system_rom"
+                    ]
+                  }
+                ]
               },
               {
                 "id": "internal_drive",
@@ -12150,7 +12186,7 @@
                 "os_rom": {
                   "capacity_bytes": 262144,
                   "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
-                  "implementation": "System ROM bank; physical mounting, chip organization and access timing pending qualification."
+                  "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
                 }
               },
               "video": {
@@ -12759,7 +12795,7 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "Included AIONix 2 system cartridge",
               "supply_condition": {
                 "kind": "always"
               },
@@ -12952,9 +12988,9 @@
     },
     {
       "id": "device.athena.system_rom",
-      "name": "Logix Athena Directly executable AIONix2 system ROM bank",
-      "kind": "firmware_bank",
-      "description": "Logix Athena Directly executable AIONix2 system ROM bank",
+      "name": "Athena AIONix 2 system cartridge",
+      "kind": "rom_cartridge",
+      "description": "Replaceable AIONix 2 system cartridge supplied with the computer. It carries a 256 KiB executable OS ROM bank; the separate BIOS remains responsible for boot and diagnostics.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -12962,7 +12998,7 @@
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Product definition revision 1",
+          "description": "AIONix 2 system cartridge hardware and image",
           "effective_from": {
             "kind": "unknown"
           },
@@ -12970,12 +13006,15 @@
             "kind": "unknown"
           },
           "technical_definition": {
-            "connection": "on_mainboard",
+            "connection": "rom_cartridge",
             "specification": {
               "capacity_bytes": 262144,
               "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
-              "implementation": "System ROM bank; physical mounting, chip organization and access timing pending qualification."
-            }
+              "implementation": "Replaceable system cartridge; qualify the ROM chip organisation, carrier, connector, enclosure and access timing for this host."
+            },
+            "compatible_with": [
+              "device.base_computer.athena"
+            ]
           },
           "composition_definition": [
             {
@@ -12985,7 +13024,7 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "256 KiB executable operating-system ROM bank",
               "supply_condition": {
                 "kind": "always"
               },
@@ -12999,14 +13038,46 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "AIONix 2 image, software documentation and licence",
+              "supply_condition": {
+                "kind": "always"
+              },
+              "requirements": []
+            },
+            {
+              "id": "line_3",
+              "target": {
+                "record_id": "base_part.software.aionix2.cartridge_pcb_and_connector"
+              },
+              "quantity": 1,
+              "unit": "set",
+              "role": "Host-qualified carrier PCB and connector set",
+              "supply_condition": {
+                "kind": "always"
+              },
+              "requirements": []
+            },
+            {
+              "id": "line_4",
+              "target": {
+                "record_id": "base_part.software.aionix2.cartridge_shell_label_and_packaging"
+              },
+              "quantity": 1,
+              "unit": "set",
+              "role": "Host-qualified shell, label and hardware packaging set",
               "supply_condition": {
                 "kind": "always"
               },
               "requirements": []
             }
           ],
-          "assembly_requirements": []
+          "assembly_requirements": [
+            {
+              "number": 1,
+              "kind": "testing",
+              "description": "Qualify ROM organisation, image capacity/checksum, connector keying and signal timing; verify cartridge exchange, boot and recovery on the matching host."
+            }
+          ]
         }
       ],
       "requirements": []
@@ -13096,7 +13167,17 @@
               {
                 "id": "cartridges",
                 "name": "ROM cartridges",
-                "sockets": []
+                "sockets": [
+                  {
+                    "id": "system_cartridge",
+                    "name": "System cartridge slot",
+                    "connection": "rom_cartridge",
+                    "capacity": 1,
+                    "compatible_device_ids": [
+                      "device.athena_server.system_rom"
+                    ]
+                  }
+                ]
               },
               {
                 "id": "internal_drive",
@@ -13139,7 +13220,7 @@
                 "os_rom": {
                   "capacity_bytes": 262144,
                   "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
-                  "implementation": "System ROM bank; physical mounting, chip organization and access timing pending qualification."
+                  "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
                 }
               },
               "video": {
@@ -13748,7 +13829,7 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "Included AIONix 2 system cartridge",
               "supply_condition": {
                 "kind": "always"
               },
@@ -13915,9 +13996,9 @@
     },
     {
       "id": "device.athena_server.system_rom",
-      "name": "Logix Athena Server Directly executable AIONix2 system ROM bank",
-      "kind": "firmware_bank",
-      "description": "Logix Athena Server Directly executable AIONix2 system ROM bank",
+      "name": "Athena Server AIONix 2 system cartridge",
+      "kind": "rom_cartridge",
+      "description": "Replaceable AIONix 2 system cartridge supplied with the computer. It carries a 256 KiB executable OS ROM bank; the separate BIOS remains responsible for boot and diagnostics.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -13925,7 +14006,7 @@
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Product definition revision 1",
+          "description": "AIONix 2 system cartridge hardware and image",
           "effective_from": {
             "kind": "unknown"
           },
@@ -13933,12 +14014,15 @@
             "kind": "unknown"
           },
           "technical_definition": {
-            "connection": "on_mainboard",
+            "connection": "rom_cartridge",
             "specification": {
               "capacity_bytes": 262144,
               "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
-              "implementation": "System ROM bank; physical mounting, chip organization and access timing pending qualification."
-            }
+              "implementation": "Replaceable system cartridge; qualify the ROM chip organisation, carrier, connector, enclosure and access timing for this host."
+            },
+            "compatible_with": [
+              "device.base_computer.athena_server"
+            ]
           },
           "composition_definition": [
             {
@@ -13948,7 +14032,7 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "256 KiB executable operating-system ROM bank",
               "supply_condition": {
                 "kind": "always"
               },
@@ -13962,14 +14046,46 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "AIONix 2 image, software documentation and licence",
+              "supply_condition": {
+                "kind": "always"
+              },
+              "requirements": []
+            },
+            {
+              "id": "line_3",
+              "target": {
+                "record_id": "base_part.software.aionix2.cartridge_pcb_and_connector"
+              },
+              "quantity": 1,
+              "unit": "set",
+              "role": "Host-qualified carrier PCB and connector set",
+              "supply_condition": {
+                "kind": "always"
+              },
+              "requirements": []
+            },
+            {
+              "id": "line_4",
+              "target": {
+                "record_id": "base_part.software.aionix2.cartridge_shell_label_and_packaging"
+              },
+              "quantity": 1,
+              "unit": "set",
+              "role": "Host-qualified shell, label and hardware packaging set",
               "supply_condition": {
                 "kind": "always"
               },
               "requirements": []
             }
           ],
-          "assembly_requirements": []
+          "assembly_requirements": [
+            {
+              "number": 1,
+              "kind": "testing",
+              "description": "Qualify ROM organisation, image capacity/checksum, connector keying and signal timing; verify cartridge exchange, boot and recovery on the matching host."
+            }
+          ]
         }
       ],
       "requirements": []
