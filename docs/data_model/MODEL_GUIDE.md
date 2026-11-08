@@ -20,6 +20,10 @@ Campaigns own marketing objectives, audiences, messages, presentations and booth
 
 A physical cartridge can be a Logix offering while its software is licensed from another company. Keep the commercial product, cartridge device, software edition and governing rights distinct. Software platform support can reference an external computer host; that does not permit external descriptions as physical composition targets.
 
+Commercial product specifications describe package contents, entitlements, duration, eligibility, fees and delivery terms. Hardware features, implementation limits and technology references belong to the canonical device/computer or software-edition record. Keep the required product `technology_ids` array empty in revised offerings; check that removed technical facts are already represented at their proper destination or move them in the same reviewed change. A cartridge offering points to its device, which owns the physical BOM and includes the software edition. Do not put that cartridge inside the edition it contains.
+
+Specification items use repeatable semantic types such as `feature`, `duration` or `exclusion`. `number` identifies the item; type labels need not be unique. Write a short plain-English explanation in `description` and the substantive term in `value` (for example, `1 year`). Do not expose import paths such as `features[1]` as types or duplicate the entire explanation in the value. Service duration is an entitlement, not a new historical date. A course's delivery location is a feature of the concrete course, not an additional course product.
+
 Legacy chip/device/software aliases and product families remain accepted by the compatibility schema pending individual migrations. Their acceptance by the schema does not redefine the intended product model. No OEM sales structure is inferred from the existence of a base part.
 
 ## Composition and manufacturing

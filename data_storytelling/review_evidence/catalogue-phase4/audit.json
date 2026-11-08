@@ -1,8 +1,8 @@
 {
   "phase": 4,
   "status": "pending_changes_confirm",
-  "source_commit": "f4d9fa6d267359c6f7122197ff21d240b53eb738",
-  "scope": "Propose retirement of confirmed technical product aliases, artificial families, duplicate Team Edition/Academy labels and the unmodelled OEM placeholder. Assess all 30 previously uncertain offerings independently, proposing standalone definitions and earliest-availability campaign/event links under the author's instruction. Gate shared reverse-link cleanup on the affected offering approvals. Preserve canonical technical definitions, chronology, process ownership and current authorization; all foundation revisions remain pending Changes confirm.",
+  "source_commit": "56eee4f13579c474982738144d1bef3dbf907282",
+  "scope": "Revised phase-4 queue after saved Changes confirm feedback: commercial-only product definitions, cartridge exchanges with physical BOMs, annual support continuation, flexible course delivery and host-selectable mouse/software bundle, together with the existing catalogue/reference cleanup.",
   "source_files_sha256": {
     "data_foundation/technology.json": "f9540de2493e4a9cad4e20cb7b1c057ad02bcd326bfc2d972292d3265ddf3fdf",
     "data_foundation/software_edition.json": "6e2314a4a3b66bf9fb831cada738336d1ab9a6285040fe8c9d5bd856bc98bcee",
@@ -21,7 +21,7 @@
     "data_foundation/device.json": "10bfc0f7e4c3eb99e1a89b204470e9dc3f42267bb1d11511eb9969698fc5230c",
     "data_foundation/actor_relationship.json": "d8f1432265e38000d3eb5dd7271df94e66dc78d470a0bd51849041fc08d0bf0b",
     "data_storytelling/source.json": "6f4d824a7fafc233463d8de03dee3d1f4d58dfb7c6b4436704057b79e173d9e9",
-    "data_storytelling/change_review.json": "f00c3b6a9ba6021a6bbf1d89d28dd14d63e0bdfa1db3bb8bda086ebbb011e06c",
+    "data_storytelling/change_review.json": "4e16884f3e5ae5ef1fbfef60aa24eb51e217e1e9ef019d1173c20b39bb79f6bc",
     "data_storytelling/reconciliation_issue.json": "8b655f4eca91283269eee2f46b2de250279367bfa6bc3dcc9d421061cd27e29a",
     "data_storytelling/authorization.json": "83c683a34821da56db5f18975a9d8850f5fc40ed850ac6985114b43c374099a2",
     "data_storytelling/authorization_decision.json": "54d1c13d648ad519900bd7a54991bc32cb33d5e596c613e42aed10d40ef8dddb",
@@ -190,6 +190,12 @@
       "action": "remove_artificial_family",
       "canonical_definition_id": "product.aion_development_team",
       "reason": "Remove an artificial catalogue family; preserve scope in owning narrative and direct meaningful relationships."
+    },
+    {
+      "record_id": "product.service_academy_customer_site",
+      "action": "remove_location_pseudo_product",
+      "canonical_definition_id": null,
+      "reason": "Location flexibility is represented as a feature on the six concrete course/training products, with the Academy process updated atomically."
     }
   ],
   "reference_dispositions": [
@@ -1155,25 +1161,25 @@
   "proposals": [
     {
       "change_id": "change.catalogue_phase4_offer_software_aionix",
-      "records": 1,
+      "records": 3,
       "removals": 0,
       "depends_on_change_ids": []
     },
     {
       "change_id": "change.catalogue_phase4_offer_software_aionix_server",
-      "records": 1,
+      "records": 3,
       "removals": 0,
       "depends_on_change_ids": []
     },
     {
       "change_id": "change.catalogue_phase4_offer_software_aionix2",
-      "records": 1,
+      "records": 8,
       "removals": 0,
       "depends_on_change_ids": []
     },
     {
       "change_id": "change.catalogue_phase4_offer_software_cpm_aurelia_networking",
-      "records": 1,
+      "records": 3,
       "removals": 0,
       "depends_on_change_ids": []
     },
@@ -1181,13 +1187,17 @@
       "change_id": "change.catalogue_phase4_offer_software_entertainment_suite",
       "records": 1,
       "removals": 0,
-      "depends_on_change_ids": []
+      "depends_on_change_ids": [
+        "change.catalogue_phase4_mouse_learning_bundle"
+      ]
     },
     {
       "change_id": "change.catalogue_phase4_offer_edition_entertainment_suite_era",
       "records": 1,
       "removals": 0,
-      "depends_on_change_ids": []
+      "depends_on_change_ids": [
+        "change.catalogue_phase4_mouse_learning_bundle"
+      ]
     },
     {
       "change_id": "change.catalogue_phase4_offer_service_customer_care",
@@ -1209,8 +1219,8 @@
     },
     {
       "change_id": "change.catalogue_phase4_offer_service_academy_customer_site",
-      "records": 1,
-      "removals": 0,
+      "records": 8,
+      "removals": 1,
       "depends_on_change_ids": []
     },
     {
@@ -1353,9 +1363,11 @@
     },
     {
       "change_id": "change.catalogue_phase4_aurelia_academy",
-      "records": 12,
+      "records": 10,
       "removals": 4,
-      "depends_on_change_ids": []
+      "depends_on_change_ids": [
+        "change.catalogue_phase4_offer_service_academy_customer_site"
+      ]
     },
     {
       "change_id": "change.catalogue_phase4_smc_parts",
@@ -1404,12 +1416,18 @@
         "change.catalogue_phase4_offer_device_artemis_video_card_64kb",
         "change.catalogue_phase4_offer_device_color_pro_14"
       ]
+    },
+    {
+      "change_id": "change.catalogue_phase4_mouse_learning_bundle",
+      "records": 1,
+      "removals": 0,
+      "depends_on_change_ids": []
     }
   ],
   "remaining_reviews": [
-    "Assign launch links for other retained products in phase 5; reconcile remaining ownership issues in phase 6 before strict enforcement.",
-    "Review independent orderability of COMDEX reference hardware, 64 KB memory module population, AION C IDE launch identity and missing Aurelia 16 KB expansion offering.",
-    "Resolve detailed service/licence terms and the explicitly assumed FlexiDisk/hub variant availability through the individual offering reviews."
+    "Review exchange/support programme introduction assumptions; no minor software release dates or service prices are invented.",
+    "Resolve the recorded host/cartridge electrical, mechanical and manufacturing qualification requirements.",
+    "Continue launch assignment for the other retained products and resolve the previously recorded catalogue gaps in later phases."
   ],
   "no_foundation_or_authorization_changes": true,
   "individual_offering_assessments": [
@@ -1427,12 +1445,15 @@
         "event.artemis_launch",
         "software_edition.aionix"
       ],
-      "assessment": "AIONix is explicitly introduced with Artemis.",
+      "assessment": "Introduce the exchange programme with the platform; perform an exchange only when a same-edition minor revision is qualified. OEM and cross-edition upgrades are excluded.",
       "assumptions": [
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
-      "technical_target_id": "software_edition.aionix",
-      "independently_reviewable": true
+      "technical_target_id": "device.rom_cartridge.aionix",
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "revised_action": "one_off_cartridge_exchange",
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.software_aionix_server",
@@ -1448,12 +1469,15 @@
         "event.network_launch",
         "software_edition.aionix_server"
       ],
-      "assessment": "The networked Artemis/Artemis PRO launch supplies the first server-OS offering context.",
+      "assessment": "Introduce the exchange programme with the platform; perform an exchange only when a same-edition minor revision is qualified. OEM and cross-edition upgrades are excluded.",
       "assumptions": [
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
-      "technical_target_id": "software_edition.aionix_server",
-      "independently_reviewable": true
+      "technical_target_id": "device.rom_cartridge.aionix_server",
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "revised_action": "one_off_cartridge_exchange",
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.software_aionix2",
@@ -1469,12 +1493,15 @@
         "event.ncc83_athena_premiere",
         "software_edition.aionix2"
       ],
-      "assessment": "The Athena premiere is the earliest stated AIONix2 introduction. This is a conditional offer; implementation and production qualification remain gates.",
+      "assessment": "Introduce the exchange programme with the platform; perform an exchange only when a same-edition minor revision is qualified. OEM and cross-edition upgrades are excluded.",
       "assumptions": [
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
-      "technical_target_id": "software_edition.aionix2",
-      "independently_reviewable": true
+      "technical_target_id": "device.athena.system_rom",
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "revised_action": "one_off_cartridge_exchange",
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.software_cpm_aurelia_networking",
@@ -1495,7 +1522,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.rom_cartridge.cpm_aurelia_networking",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.software_entertainment_suite",
@@ -1516,7 +1545,11 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "software_edition.entertainment_suite",
-      "independently_reviewable": true
+      "independently_reviewable": false,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": [
+        "change.catalogue_phase4_mouse_learning_bundle"
+      ]
     },
     {
       "product_id": "product.edition_entertainment_suite_era",
@@ -1537,7 +1570,11 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "software_edition.entertainment_suite.era",
-      "independently_reviewable": true
+      "independently_reviewable": false,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": [
+        "change.catalogue_phase4_mouse_learning_bundle"
+      ]
     },
     {
       "product_id": "product.service_customer_care",
@@ -1557,7 +1594,9 @@
         "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
       ],
       "technical_target_id": null,
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.service_professional_support",
@@ -1577,7 +1616,9 @@
         "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
       ],
       "technical_target_id": null,
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.service_professional_business_onsite",
@@ -1597,27 +1638,29 @@
         "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
       ],
       "technical_target_id": null,
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.service_academy_customer_site",
       "change_id": "change.catalogue_phase4_offer_service_academy_customer_site",
-      "launch_campaign_id": "campaign.ncc1978",
-      "launch_event_id": "event.aurelia_launch",
-      "launch_date": {
-        "value": "1978-06-05",
-        "precision": "day"
-      },
+      "launch_campaign_id": null,
+      "launch_event_id": null,
+      "launch_date": null,
       "evidence_ids": [
         "product.service_academy_customer_site",
         "process.academy"
       ],
-      "assessment": "The Academy process already prepares customer-site services; propose the customer-site course offering at the public Academy/Aurelia introduction.",
+      "assessment": "Location flexibility belongs to each concrete course; retire this pseudo-product.",
       "assumptions": [
         "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
       ],
       "technical_target_id": null,
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "revised_action": "remove_location_pseudo_product",
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.service_aurelia_commercial_developer_license",
@@ -1637,7 +1680,9 @@
         "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
       ],
       "technical_target_id": null,
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.service_artemis_commercial_developer_license",
@@ -1657,7 +1702,9 @@
         "Standalone service/licence status and campaign assignment are proposed under the author's instruction; missing service/legal terms remain open."
       ],
       "technical_target_id": null,
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_artemis_professional_video_128kb",
@@ -1678,7 +1725,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.artemis_professional_video_128kb",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_artemis_video_card",
@@ -1699,7 +1748,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.artemis_video_card",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_artemis_video_card_16kb",
@@ -1720,7 +1771,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.artemis_video_card_16kb",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_artemis_video_card_64kb",
@@ -1741,7 +1794,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.artemis_video_card_64kb",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_color_monitor_1",
@@ -1762,7 +1817,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.color_monitor_1",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_color_monitor_2",
@@ -1783,7 +1840,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.color_monitor_2",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_color_pro_14",
@@ -1804,7 +1863,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.color_pro_14",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_flexibus_keyboard",
@@ -1825,7 +1886,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.flexibus_keyboard",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_flexidisk",
@@ -1847,7 +1910,9 @@
         "Campaign selection is an explicit scenario assumption because this exact variant has no separately dated release in the current foundation."
       ],
       "technical_target_id": "device.flexidisk",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_mono_monitor_1",
@@ -1868,7 +1933,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.mono_monitor_1",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_mono_monitor_2",
@@ -1889,7 +1956,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.mono_monitor_2",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_mono_pro",
@@ -1910,7 +1979,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.mono_pro",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_mono_pro_17",
@@ -1931,7 +2002,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.mono_pro_17",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_network_card_artemis",
@@ -1952,7 +2025,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.network_card_artemis",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_network_card_aurelia",
@@ -1973,7 +2048,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.network_card_aurelia",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_network_hub_16_port",
@@ -1995,7 +2072,9 @@
         "Campaign selection is an explicit scenario assumption because this exact variant has no separately dated release in the current foundation."
       ],
       "technical_target_id": "device.network_hub.16_port",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_network_hub_4_port",
@@ -2016,7 +2095,9 @@
         "Standalone sale is proposed under the author's instruction; preserve the existing implementation/BOM and its unresolved qualifications. Composition boundaries remain unknown, so the current technical version is not asserted to have existed unchanged at launch."
       ],
       "technical_target_id": "device.network_hub.4_port",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     },
     {
       "product_id": "product.device_network_hub_8_port",
@@ -2038,7 +2119,9 @@
         "Campaign selection is an explicit scenario assumption because this exact variant has no separately dated release in the current foundation."
       ],
       "technical_target_id": "device.network_hub.8_port",
-      "independently_reviewable": true
+      "independently_reviewable": true,
+      "feedback_revision_applies": true,
+      "depends_on_change_ids": []
     }
   ],
   "dependent_reverse_link_cleanup": [
@@ -2665,8 +2748,8 @@
       "record_id": "campaign.comdex1982",
       "pointer": "/subject_ids/16",
       "product_id": "product.software_aionix",
-      "disposition": "retain_later_promotion",
-      "reason": "A later campaign promotes the already introduced offering and is distinct from its initial launch."
+      "disposition": "remove_commercial_service_subject_preserve_technical_demonstration",
+      "reason": "Keep operating-system demonstrations in the campaign messages and their owned technical events; these are not promotion of the cartridge-exchange service."
     },
     {
       "record_id": "campaign.comdex1982",
@@ -2721,8 +2804,8 @@
       "record_id": "campaign.ncc1982",
       "pointer": "/subject_ids/12",
       "product_id": "product.software_aionix",
-      "disposition": "retain_later_promotion",
-      "reason": "A later campaign promotes the already introduced offering and is distinct from its initial launch."
+      "disposition": "remove_commercial_service_subject_preserve_technical_demonstration",
+      "reason": "Keep operating-system demonstrations in the campaign messages and their owned technical events; these are not promotion of the cartridge-exchange service."
     },
     {
       "record_id": "campaign.ncc1981",
@@ -2815,5 +2898,7 @@
       "disposition": "replace_with_canonical_role_or_remove_duplicate",
       "reason": "Inspect the complete after snapshot: typed inputs/outcomes or product-owned launch links preserve the direct relationship without the old context list."
     }
-  ]
+  ],
+  "initial_source_commit": "f4d9fa6d267359c6f7122197ff21d240b53eb738",
+  "feedback_revision": "feedback-revision.json"
 }
