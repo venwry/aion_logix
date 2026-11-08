@@ -128,3 +128,7 @@ Agreement clauses now live in `data_foundation/agreement.json`, validated by `sc
 - `server/editorial.js`: immutable feedback revisions, conflicts, idempotency and annotation resolution.
 - `data_storytelling/annotation.json`, `change_review.json`: committed feedback, with corresponding schemas under `schemas/storytelling/`.
 - `tests/server/editorial.test.js`, `tests/editorial-workflow.spec.cjs`: feedback transactions and end-to-end review/navigation coverage.
+
+### Product catalogue cleanup — phase 1 assessment
+
+[The phase-1 migration map](product-catalogue-phase1/README.md) classifies all 145 products at commit a0cf5b8, with exact incoming references, provisional destinations, decisions and missing-offering checks. Machine-readable evidence is in `product-catalogue-phase1/migration-map.json`, `decisions-and-gaps.json` and `verification.json`. These are review artifacts, not authorized foundation changes or executable Changes confirm proposals.

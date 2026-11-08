@@ -1,0 +1,563 @@
+{
+  "phase": 1,
+  "source_commit": "a0cf5b82238b3919aee4b5802be6913f12ff05c7",
+  "decision_register": [
+    {
+      "id": "D01",
+      "topic": "One Team Edition commercial package",
+      "finding": "product.aion_development_team already supplies the server and both client editions. Consolidate three product aliases into that package for commercial statements; retain separate software_edition references for implementation facts. Do not create three more customer offerings.",
+      "recommended_next_decision": "Accept the package as the canonical commercial identity and review each alias reference by role.",
+      "affected_product_ids": [
+        "product.software_aion_development_team",
+        "product.edition_aion_development_team_era_client",
+        "product.edition_aion_development_team_z80_client"
+      ]
+    },
+    {
+      "id": "D02",
+      "topic": "BPI external identity and package membership",
+      "finding": "Twelve third-party source records map to nine suggested external identities if the three BPI client/server technical aliases join external_product.bpi_client_server. Preserve the client/server edition distinctions and direct package membership; independent licences/receipts remain independent.",
+      "recommended_next_decision": "Confirm consolidation of the BPI client/server commercial identity; retain its three implementation editions.",
+      "affected_product_ids": [
+        "product.bpi_client_server",
+        "product.software_bpi_client_server",
+        "product.edition_bpi_client_server_era_client",
+        "product.edition_bpi_client_server_era_server"
+      ]
+    },
+    {
+      "id": "D03",
+      "topic": "OS editions versus independent offerings",
+      "finding": "AIONix, AIONix Server, AIONix2 and the Logix/AION CP/M networking edition have technical definitions and bundled use but no independently specified customer package. CP/M Aurelia combines a DRI base with Logix platform extensions, so provider attribution cannot transfer every layer to DRI or to Logix.",
+      "recommended_next_decision": "Default to technical definitions unless separate OS/upgrade offerings are confirmed. Keep the underlying third-party CP/M identity distinct from Logix/AION extension work.",
+      "affected_product_ids": [
+        "product.software_aionix",
+        "product.software_aionix_server",
+        "product.software_aionix2",
+        "product.software_cpm_aurelia",
+        "product.software_cpm_aurelia_networking"
+      ]
+    },
+    {
+      "id": "D04",
+      "topic": "Standalone peripherals versus parts of kits",
+      "finding": "Eighteen device-linked product aliases have incomplete standalone-offer evidence. This includes monitor variants, video cards, keyboard, FlexiDisk, network cards and hubs. Inclusion in a computer or upgrade BOM is not itself proof of a separate orderable product.",
+      "recommended_next_decision": "Identify which are separately offered; retain those IDs and specify their contents. Redirect the remaining aliases to their existing devices.",
+      "affected_product_ids": [
+        "product.device_artemis_professional_video_128kb",
+        "product.device_artemis_video_card",
+        "product.device_artemis_video_card_16kb",
+        "product.device_artemis_video_card_64kb",
+        "product.device_color_monitor_1",
+        "product.device_color_monitor_2",
+        "product.device_color_pro_14",
+        "product.device_flexibus_keyboard",
+        "product.device_flexidisk",
+        "product.device_mono_monitor_1",
+        "product.device_mono_monitor_2",
+        "product.device_mono_pro",
+        "product.device_mono_pro_17",
+        "product.device_network_card_artemis",
+        "product.device_network_card_aurelia",
+        "product.device_network_hub_16_port",
+        "product.device_network_hub_4_port",
+        "product.device_network_hub_8_port"
+      ]
+    },
+    {
+      "id": "D05",
+      "topic": "Entertainment Suite packaging",
+      "finding": "CP/M and AIONix editions exist, the suite is released in event.ncc82_graphics_mouse, and Mouse Learning Pack already supplies it. An additional standalone edition/product entitlement is not explicit.",
+      "recommended_next_decision": "Confirm standalone editions, one selectable-edition package, or software included only in the existing Mouse Learning Pack.",
+      "affected_product_ids": [
+        "product.software_entertainment_suite",
+        "product.edition_entertainment_suite_era"
+      ]
+    },
+    {
+      "id": "D06",
+      "topic": "Academy programme labels versus courses",
+      "finding": "service_academy_before_you_buy likely overlaps the concrete two-day academy_course_1. service_academy_regular_courses is a broad label beside four concrete courses. The other courses retain distinct durations and must not inherit Fundamentals purchase credit by accident.",
+      "recommended_next_decision": "Reconcile the before-you-buy service with Fundamentals, and replace the regular-course umbrella with concrete course references or process scope.",
+      "affected_product_ids": [
+        "product.service_academy_before_you_buy",
+        "product.service_academy_regular_courses"
+      ]
+    },
+    {
+      "id": "D07",
+      "topic": "Six service/licence placeholders",
+      "finding": "Customer Care, Professional Support, Professional Business On-site, Academy customer-site courses and two commercial-developer licences lack enough evidence to settle independent offering versus included entitlement or policy.",
+      "recommended_next_decision": "Confirm their offering scope and provider before retaining them as products. No prices, new entitlements or launches are inferred.",
+      "affected_product_ids": [
+        "product.service_customer_care",
+        "product.service_professional_support",
+        "product.service_professional_business_onsite",
+        "product.service_academy_customer_site",
+        "product.service_aurelia_commercial_developer_license",
+        "product.service_artemis_commercial_developer_license"
+      ]
+    },
+    {
+      "id": "D08",
+      "topic": "OEM licensing placeholder is deferred",
+      "finding": "service_component_licensing is an unreferenced name with an empty specification. OEM sales structures are explicitly outside this change.",
+      "recommended_next_decision": "Retire this catalogue placeholder in a later reviewed proposal while preserving its original description in migration evidence; create no replacement OEM model now.",
+      "affected_product_ids": [
+        "product.service_component_licensing"
+      ]
+    },
+    {
+      "id": "D09",
+      "topic": "Reference hardware configuration",
+      "finding": "comdex82_reference_hardware has a full product composition but its description calls it reference hardware and leaves shipment/qualification pending.",
+      "recommended_next_decision": "Confirm whether it is independently offered or only a demonstration/reference configuration before final catalogue enforcement.",
+      "affected_product_ids": [
+        "product.comdex82_reference_hardware"
+      ]
+    },
+    {
+      "id": "D10",
+      "topic": "AION C IDE identity and first launch",
+      "finding": "The current product is AIONix-specific but is referenced by the 1978 Aurelia and 1980 Artemis campaigns/events. Other CP/M developer products already exist.",
+      "recommended_next_decision": "Review the 1978 references against Simple C/SDK evidence; do not mechanically choose the earliest campaign or invent a missing historical edition.",
+      "affected_product_ids": [
+        "product.aion_c_ide"
+      ]
+    },
+    {
+      "id": "D11",
+      "topic": "64 KB module versus installable memory kit",
+      "finding": "product.ram_64kb_module supplies one device.ram_64kb_x32. That device describes matched-pair installation, while product.ram_256kb_bank supplies two 128 KB modules. A single module could be a spare rather than a complete upgrade.",
+      "recommended_next_decision": "Clarify the 64 KB offering role and population. Do not automatically change quantity or confuse it with the old eight-chip device.artemis_ram_module_64kb.",
+      "affected_product_ids": [
+        "product.ram_64kb_module"
+      ]
+    },
+    {
+      "id": "D12",
+      "topic": "Family scope must survive removal",
+      "finding": "Four family products have 37 active foundation reference occurrences. Some references express broad compatibility or ecosystem scope rather than a list of current SKUs.",
+      "recommended_next_decision": "Use concrete offerings only where they express the intended scope; otherwise use direct technical subjects or retain the scope in the owning record text. Never create a replacement artificial family entity.",
+      "affected_product_ids": [
+        "product.family_aurelia",
+        "product.family_artemis",
+        "product.family_athena",
+        "product.family_team_edition"
+      ]
+    },
+    {
+      "id": "D13",
+      "topic": "Launch ownership is later-phase work",
+      "finding": "All ten designated campaign launch events fall inside their process periods, but event.autodesk_comdex is currently owned by process.autodesk_development. NCC 1978 correctly owns two launches through a sessions subprocess.",
+      "recommended_next_decision": "Reconcile public launch ownership in phase 6 without duplicating ownership or inventing dates. No ownership changes belong to phase 1.",
+      "affected_product_ids": [
+        "product.autocad_1_artemis",
+        "product.comdex82_artemis_autocad"
+      ]
+    },
+    {
+      "id": "D14",
+      "topic": "Remove chip promotion from catalogue cleanup",
+      "finding": "campaign.ncc1980 and its execution process include product.part_aion_4164; campaign.ncc1983 includes product.part_era2_12mhz. These are technical parts, not customer offerings.",
+      "recommended_next_decision": "Do not simply replace marketing subject IDs with base_part IDs and preserve chip promotion. Keep necessary engineering facts in technical context; do not infer OEM campaigns or sales.",
+      "affected_product_ids": [
+        "product.part_aion_4164",
+        "product.part_era2_12mhz"
+      ]
+    }
+  ],
+  "missing_or_incomplete_offerings": [
+    {
+      "id": "G01",
+      "finding": "Missing commercial identity",
+      "candidate_id": "product.aurelia_ram_16kb_expansion",
+      "technical_ids": [
+        "device.aurelia_ram_16kb_card"
+      ],
+      "existing_product_ids": [],
+      "evidence_ids": [
+        "device.base_computer.aurelia"
+      ],
+      "recommendation": "Define a customer-facing Aurelia 16 KB expansion if separately offered, preserving the existing board and compatible socket. No current product targets this device. Its launch can share Aurelia campaign/event after review; no new launch is implied."
+    },
+    {
+      "id": "G02",
+      "finding": "Already present; do not duplicate",
+      "candidate_id": null,
+      "technical_ids": [
+        "device.rom_cartridge.business_tools_aurelia",
+        "device.rom_cartridge.business_tools_artemis"
+      ],
+      "existing_product_ids": [
+        "product.business_tools_aurelia",
+        "product.business_tools_artemis"
+      ],
+      "evidence_ids": [
+        "product.business_tools_aurelia",
+        "product.business_tools_artemis"
+      ],
+      "recommendation": "Both existing offering compositions already supply one Business Tools cartridge. Retain and enrich those records; do not create another cartridge SKU just because the device also exists."
+    },
+    {
+      "id": "G03",
+      "finding": "Eight existing commercial identities need compositions",
+      "candidate_id": null,
+      "technical_ids": [
+        "device.apple2_expansion_card",
+        "device.apple2_video_card",
+        "device.artemis_cpm80_module",
+        "device.flexidisk_ii",
+        "device.flexiprint40",
+        "device.logix_mouse",
+        "device.s100_flexibus_card",
+        "device.s100_video_card"
+      ],
+      "existing_product_ids": [
+        "product.device_apple2_expansion_card",
+        "product.device_apple2_video_card",
+        "product.device_artemis_cpm80_module",
+        "product.device_flexidisk_ii",
+        "product.device_flexiprint40",
+        "product.device_logix_mouse",
+        "product.device_s100_flexibus_card",
+        "product.device_s100_video_card"
+      ],
+      "evidence_ids": [
+        "event.ncc79_campaign",
+        "event.artemis_launch",
+        "event.aurelia_launch",
+        "event.ncc82_graphics_mouse"
+      ],
+      "recommendation": "Keep the eight current product IDs, define their supplied contents and direct links, and preserve their device BOMs. For the CP/M-80 module, explicit separate-sale evidence is in event.artemis_launch prose even though the event has no exact reference to its product ID."
+    },
+    {
+      "id": "G04",
+      "finding": "Conditional additional memory upgrades",
+      "candidate_id": null,
+      "technical_ids": [
+        "device.ram_128kb_x32",
+        "device.ram_256kb_x32",
+        "device.ram_256kb_x32_2um"
+      ],
+      "existing_product_ids": [
+        "product.ram_256kb_bank"
+      ],
+      "evidence_ids": [
+        "device.base_computer.artemis",
+        "device.base_computer.artemis_pro",
+        "device.base_computer.athena",
+        "device.base_computer.athena_server"
+      ],
+      "recommendation": "The 128 KB module is already in the two-module 256 KB offering. Larger 256 KB modules occur in complete systems; create additional upgrade/spare offerings only when their customer-facing package is explicitly chosen. Do not manufacture a SKU for every process-node revision."
+    },
+    {
+      "id": "G05",
+      "finding": "Packaging decisions, not automatic new products",
+      "candidate_id": null,
+      "technical_ids": [
+        "software_edition.entertainment_suite",
+        "software_edition.entertainment_suite.era",
+        "software_edition.aionix",
+        "software_edition.aionix_server",
+        "software_edition.aionix2",
+        "software_edition.cpm_aurelia_networking"
+      ],
+      "existing_product_ids": [
+        "product.software_aionix",
+        "product.software_aionix_server",
+        "product.software_aionix2",
+        "product.software_cpm_aurelia_networking",
+        "product.software_entertainment_suite",
+        "product.edition_entertainment_suite_era"
+      ],
+      "evidence_ids": [
+        "product.ncc82_mouse_learning",
+        "product.aurelia_network_upgrade",
+        "product.artemis_network_upgrade"
+      ],
+      "recommendation": "Resolve D03/D05 before creating standalone OS or entertainment packages; included software remains a technical definition even without a separate product."
+    },
+    {
+      "id": "G06",
+      "finding": "Direct external host identity is absent",
+      "candidate_id": "external_product.apple_ii",
+      "technical_ids": [],
+      "existing_product_ids": [],
+      "evidence_ids": [
+        "event.apple_cooperation",
+        "event.apple_business_promotions",
+        "event.ncc79_campaign"
+      ],
+      "recommendation": "Add a simple Apple II external identity when migrating direct host/ecosystem relationships. Logix Apple II cards remain Logix products; do not classify them as external."
+    },
+    {
+      "id": "G07",
+      "finding": "Further external identities may be needed for explicit existing story subjects",
+      "candidate_id": null,
+      "technical_ids": [],
+      "existing_product_ids": [],
+      "evidence_ids": [
+        "event.apple_business_promotions",
+        "event.apple_peachtree",
+        "event.apple_business",
+        "event.ibm_alternative_launch",
+        "market_response.ibm_alternative_launch"
+      ],
+      "recommendation": "Consider Disk II, the Apple–Peachtree business package and the scenario-specific IBM business PC as separate descriptive external subjects where direct references are needed. Keep IBM supplier/OS unspecified as the story does. Do not replace it with historical MS-DOS/5150 assumptions."
+    },
+    {
+      "id": "G08",
+      "finding": "Do not turn vague market classes or every supplier part into products",
+      "candidate_id": null,
+      "technical_ids": [
+        "device.storage.hdd_5mb"
+      ],
+      "existing_product_ids": [],
+      "evidence_ids": [
+        "event.portable_cpm_pressure",
+        "event.application_competition"
+      ],
+      "recommendation": "Osborne-class/Multiplan-class observations do not establish exact offered configurations. A purchased Seagate mechanism does not automatically need a second external commercial record. Add external identities only for directly modelled commercial/partner/competition subjects."
+    }
+  ],
+  "provisional_external_identity_map": [
+    {
+      "proposed_id": "external_product.autocad_1_artemis",
+      "source_product_ids": [
+        "product.autocad_1_artemis"
+      ],
+      "name": "Autodesk AutoCAD 1.0 (AIONix edition)",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies Autodesk.",
+          "ref_id": "actor.autodesk",
+          "ref_role": "publisher"
+        },
+        {
+          "no": 2,
+          "description": "Autodesk AutoCAD 1.0 (AIONix edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.autocad_1_artemis",
+          "ref_role": "technical implementation edition"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    },
+    {
+      "proposed_id": "external_product.bpi_client_server",
+      "source_product_ids": [
+        "product.bpi_client_server",
+        "product.software_bpi_client_server",
+        "product.edition_bpi_client_server_era_client",
+        "product.edition_bpi_client_server_era_server"
+      ],
+      "name": "BPI client-server package",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies BPI Systems.",
+          "ref_id": "actor.bpi",
+          "ref_role": "publisher"
+        },
+        {
+          "no": 2,
+          "description": "BPI client-server (CP/M Client edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.bpi_client_server",
+          "ref_role": "CP/M client implementation"
+        },
+        {
+          "no": 3,
+          "description": "BPI client-server (AIONix Client edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.bpi_client_server.era_client",
+          "ref_role": "AIONix client implementation"
+        },
+        {
+          "no": 4,
+          "description": "BPI client-server (AIONix Server edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.bpi_client_server.era_server",
+          "ref_role": "AIONix server implementation"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    },
+    {
+      "proposed_id": "external_product.bpi_suite",
+      "source_product_ids": [
+        "product.bpi_suite"
+      ],
+      "name": "BPI (CP/M edition)",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies BPI Systems.",
+          "ref_id": "actor.bpi",
+          "ref_role": "publisher"
+        },
+        {
+          "no": 2,
+          "description": "BPI (CP/M edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.bpi_suite",
+          "ref_role": "technical implementation edition"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    },
+    {
+      "proposed_id": "external_product.bpi_suite.era",
+      "source_product_ids": [
+        "product.bpi_suite.era"
+      ],
+      "name": "BPI (AIONix edition)",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies BPI Systems.",
+          "ref_id": "actor.bpi",
+          "ref_role": "publisher"
+        },
+        {
+          "no": 2,
+          "description": "BPI (AIONix edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.bpi_suite.era",
+          "ref_role": "technical implementation edition"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    },
+    {
+      "proposed_id": "external_product.cpm_aurelia",
+      "source_product_ids": [
+        "product.software_cpm_aurelia"
+      ],
+      "name": "CP/M 1.4-derived / Platform Extensions 1.0 (Aurelia edition)",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies Digital Research.",
+          "ref_id": "actor.dri",
+          "ref_role": "operating-system licensor"
+        },
+        {
+          "no": 2,
+          "description": "CP/M 1.4-derived / Platform Extensions 1.0 (Aurelia edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.cpm_aurelia",
+          "ref_role": "technical implementation edition"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    },
+    {
+      "proposed_id": "external_product.cpm_model_ii",
+      "source_product_ids": [
+        "product.software_cpm_model_ii"
+      ],
+      "name": "CP/M (Tandy Model II edition)",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies Digital Research.",
+          "ref_id": "actor.dri",
+          "ref_role": "operating-system licensor"
+        },
+        {
+          "no": 2,
+          "description": "Current provider attribution identifies Tandy / Radio Shack.",
+          "ref_id": "actor.tandy",
+          "ref_role": "hardware/configuration provider"
+        },
+        {
+          "no": 3,
+          "description": "CP/M (Tandy Model II edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.cpm_model_ii",
+          "ref_role": "technical implementation edition"
+        },
+        {
+          "no": 4,
+          "description": "This configuration is specific to the Tandy Model II host.",
+          "ref_id": "external_product.trs80_model_ii",
+          "ref_role": "supported host"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    },
+    {
+      "proposed_id": "external_product.microsoft_basic_aurelia",
+      "source_product_ids": [
+        "product.software_microsoft_basic_aurelia"
+      ],
+      "name": "Microsoft BASIC (CP/M edition)",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies Microsoft.",
+          "ref_id": "actor.microsoft",
+          "ref_role": "publisher"
+        },
+        {
+          "no": 2,
+          "description": "Microsoft BASIC (CP/M edition) is represented by this existing technical edition.",
+          "ref_id": "software_edition.microsoft_basic_aurelia",
+          "ref_role": "technical implementation edition"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    },
+    {
+      "proposed_id": "external_product.model_ii_flexibus",
+      "source_product_ids": [
+        "product.device_model_ii_flexibus"
+      ],
+      "name": "Tandy Model II FlexiBUS option",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies Tandy / Radio Shack.",
+          "ref_id": "actor.tandy",
+          "ref_role": "hardware/configuration provider"
+        },
+        {
+          "no": 2,
+          "description": "This configuration is specific to the Tandy Model II host.",
+          "ref_id": "external_product.trs80_model_ii",
+          "ref_role": "supported host"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    },
+    {
+      "proposed_id": "external_product.trs80_model_ii",
+      "source_product_ids": [
+        "product.computer_trs80_model_ii"
+      ],
+      "name": "Tandy TRS-80 Model II — CP/M partner configuration",
+      "proposed_file": "data_foundation/external_products.json",
+      "status": "planning_only",
+      "specification_examples": [
+        {
+          "no": 1,
+          "description": "Current provider attribution identifies Tandy / Radio Shack.",
+          "ref_id": "actor.tandy",
+          "ref_role": "hardware/configuration provider"
+        }
+      ],
+      "preservation_note": "Keep all referenced technical editions and their BOMs. Preserve historical snapshots. The simplified commercial identity is not a replacement for executable specifications or internal Logix package compositions."
+    }
+  ]
+}
