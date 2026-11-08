@@ -1325,7 +1325,11 @@
         {
           "number": 3,
           "type": "acceptance_criterion",
-          "description": "Dual-display driver with colour command/status screen and 800x600 drawing canvas; independent palettes and explicit input focus"
+          "description": "Dual-display driver with colour command/status screen and 800x600 drawing canvas; independent palettes and explicit input focus",
+          "subject_ids": [
+            "technology.artemis_professional_graphics",
+            "technology.logix_display_api"
+          ]
         },
         {
           "number": 4,
@@ -1360,7 +1364,11 @@
         {
           "number": 10,
           "type": "resource",
-          "description": "team environment / software: Install the entire AION Development System — Team Edition: C Development Environment 2, ERA compiler/linker/debugger and validated floating-point math library; source repository, branches/reviews, tasks, collaboration, reproducible builds, release labels and target testing."
+          "description": "team environment / software: Install the entire AION Development System — Team Edition: C Development Environment 2, ERA compiler/linker/debugger and validated floating-point math library; source repository, branches/reviews, tasks, collaboration, reproducible builds, release labels and target testing.",
+          "subject_ids": [
+            "software_edition.aion_development_team",
+            "software_edition.aion_development_team.era_client"
+          ]
         },
         {
           "number": 11,
@@ -1385,7 +1393,14 @@
         {
           "number": 15,
           "type": "resource",
-          "description": "team environment / professional handover: Around June 1982 deliver the 128 KiB professional card and Logix Mono Pro 17 to the development and QA team, alongside the 64 KiB colour card/Color Pro 14 and mouse. This supersedes the earlier proposed January 17-inch prototype handover."
+          "description": "team environment / professional handover: Around June 1982 deliver the 128 KiB professional card and Logix Mono Pro 17 to the development and QA team, alongside the 64 KiB colour card/Color Pro 14 and mouse. This supersedes the earlier proposed January 17-inch prototype handover.",
+          "subject_ids": [
+            "device.artemis_professional_video_128kb",
+            "device.mono_pro_17",
+            "device.artemis_video_card_64kb",
+            "device.color_pro_14",
+            "device.logix_mouse"
+          ]
         },
         {
           "number": 16,
@@ -1399,16 +1414,14 @@
           "type": "deliverable",
           "description": "Deliver AutoCAD 1.0 for Artemis/AIONix for the joint November 1982 COMDEX presentation; November release-quality build is the commitment, with commercial shipment subject to acceptance rather than automatically deferred to December.",
           "subject_ids": [
-            "product.autocad_1_artemis",
-            "technology.artemis_professional_graphics"
+            "software_edition.autocad_1_artemis"
           ]
         },
         {
           "number": 2,
-          "type": "deliverable",
-          "description": "professional hardware revision: COMDEX November revision adds explicit inherited modes, palette sequencing and five-sprite compatibility; preserve June development handover. See dated revisions in the catalog.",
+          "type": "qualification",
+          "description": "Qualify the professional display interfaces required by the November CAD configuration, including inherited modes, palette sequencing and five-sprite compatibility. Preserve the separate June development handover; CAD development does not create the underlying graphics technology.",
           "subject_ids": [
-            "product.autocad_1_artemis",
             "technology.artemis_professional_graphics"
           ]
         }
@@ -1442,10 +1455,6 @@
           "description": "Milestone during this process: AutoCAD Artemis beta and professional workflow qualification.",
           "event_id": "event.autodesk_beta"
         }
-      ],
-      "subject_ids": [
-        "product.autocad_1_artemis",
-        "technology.artemis_professional_graphics"
       ],
       "agreement_id": "agreement.autodesk_development",
       "category": "Product dev & launch"
@@ -1869,34 +1878,18 @@
       "outcomes": [
         {
           "number": 1,
-          "type": "deliverable",
-          "description": "Independent contributors have a documented implementation and qualification programme covering CP/M/TUI, FlexiBUS, C development, graphics APIs and monitor connectivity. Final access terms and unverified participation remain subject to the existing agreements and qualification requirements.",
-          "subject_ids": [
-            "technology.logix_tui_standard",
-            "technology.flexibus",
-            "technology.logix_c_api",
-            "technology.logix_display_api",
-            "technology.logix_digital_video",
-            "technology.aurelia_video_profile"
-          ]
+          "type": "result",
+          "description": "Independent contributors have a documented implementation and qualification programme covering CP/M/TUI, FlexiBUS, C development, graphics APIs and monitor connectivity. Final access terms and unverified participation remain subject to the existing agreements and qualification requirements."
         },
         {
           "number": 2,
           "type": "result",
-          "description": "The recorded milestones include portable DRI extension release, the supported Tandy configuration and initial qualified SMC chip sales. They do not establish release of every licensed chip or universal compatibility.",
-          "subject_ids": [
-            "product.software_cpm_aurelia",
-            "product.software_cpm_model_ii",
-            "product.device_model_ii_flexibus"
-          ]
+          "description": "The recorded milestones include portable DRI extension release, the supported Tandy configuration and initial qualified SMC chip sales. They do not establish release of every licensed chip or universal compatibility."
         },
         {
           "number": 3,
           "type": "result",
-          "description": "Microsoft BASIC has a recorded Aurelia release as independently licensed third-party software.",
-          "subject_ids": [
-            "product.software_microsoft_basic_aurelia"
-          ]
+          "description": "Microsoft BASIC has a recorded Aurelia release as independently licensed third-party software."
         },
         {
           "number": 4,
@@ -1949,16 +1942,6 @@
           "event_id": "event.basic_launch"
         }
       ],
-      "subject_ids": [
-        "technology.flexibus",
-        "technology.logix_c_api",
-        "event.dri_cpm",
-        "event.apple_cooperation",
-        "technology.logix_tui_standard",
-        "technology.logix_display_api",
-        "technology.logix_digital_video",
-        "technology.aurelia_video_profile"
-      ],
       "category": "Ecosystem & Partners"
     },
     {
@@ -1994,25 +1977,32 @@
           "role": "sponsor"
         }
       ],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "The cooperation must preserve the Model II native hardware architecture and satisfy its internal bus and host-interface constraints.",
+          "subject_ids": [
+            "external_product.trs80_model_ii",
+            "technology.flexibus"
+          ]
+        }
+      ],
       "outcomes": [
         {
           "number": 1,
           "type": "deliverable",
-          "description": "Prepare native-display CP/M, Abacus and a qualified Model-II-specific FlexiBUS option.",
+          "description": "Deliver the Model II CP/M and Abacus implementations and the qualified Model-II-specific FlexiBUS option while retaining Tandy’s existing host architecture. These outputs do not create the Model II computer or the FlexiBUS standard.",
           "subject_ids": [
-            "product.computer_trs80_model_ii",
-            "product.device_model_ii_flexibus",
-            "technology.flexibus"
+            "software_edition.cpm_model_ii",
+            "software_edition.abacus_1.model_ii",
+            "external_product.model_ii_flexibus"
           ]
         },
         {
           "number": 2,
           "type": "result",
-          "description": "The released cooperation continues with reinforced business bundles and dealer training. Tandy’s independent hardware sales remain outside Logix revenue.",
-          "subject_ids": [
-            "actor.tandy"
-          ]
+          "description": "The released cooperation continues with reinforced business bundles and dealer training. Tandy’s independent hardware sales remain outside Logix revenue."
         }
       ],
       "steps": [
@@ -2058,11 +2048,6 @@
           "description": "Reinforce native-video CP/M business bundles, dealer training and the existing cooperation after the customer release.",
           "event_id": "event.tandy_response"
         }
-      ],
-      "subject_ids": [
-        "product.computer_trs80_model_ii",
-        "product.device_model_ii_flexibus",
-        "technology.flexibus"
       ],
       "agreement_id": "agreement.tandy"
     },
@@ -2119,12 +2104,7 @@
         {
           "number": 5,
           "type": "result",
-          "description": "Aurelia and independent BPI applications have been presented at NCC; BPI training, direct sales and dealer qualification have begun. Follow-up plans cover year-end preparation, module upgrades and expansion based on verified customer results.",
-          "subject_ids": [
-            "product.family_aurelia",
-            "product.bpi_suite",
-            "product.service_bpi_training"
-          ]
+          "description": "Aurelia and independent BPI applications have been presented at NCC; BPI training, direct sales and dealer qualification have begun. Follow-up plans cover year-end preparation, module upgrades and expansion based on verified customer results."
         }
       ],
       "steps": [
@@ -2164,24 +2144,6 @@
           "description": "After NCC, edit the recorded material into the broadcast feature, station-ready news/demo excerpts, clean captioned footage and press sheet, and full edited presentations listed in the outcomes. Offer cleared, Logix-identified material free of charge to any willing television station, covering normal duplication, dispatch and station-compatible copies. Distribute as editing and clearances are completed; delivery dates and runtimes remain production decisions. Station participation, scheduling and editorial selection are voluntary: no guaranteed airtime, compulsory advertising purchase or implied endorsement.",
           "number": 7
         }
-      ],
-      "subject_ids": [
-        "product.aurelia_mono",
-        "product.aurelia_color",
-        "product.proposed_aurelia_office",
-        "product.proposed_aurelia_accounts",
-        "product.proposed_aurelia_developer",
-        "product.abacus_1",
-        "product.bpi_suite",
-        "product.business_tools_aurelia",
-        "product.simple_c_z80",
-        "product.aurelia_sdk",
-        "product.software_cpm_aurelia",
-        "product.service_academy_before_you_buy",
-        "product.service_academy_direct_sales",
-        "product.device_flexiprint40",
-        "product.aion_c_ide",
-        "product.family_aurelia"
       ]
     },
     {
@@ -2420,28 +2382,6 @@
           "description": "Begin with the 17 July Artemis Academy and regional-sales rollout, then run regional roadshows and certification workshops.",
           "process_id": "process.ncc1980_roadshows"
         }
-      ],
-      "subject_ids": [
-        "product.artemis_128_mono",
-        "product.artemis_128_color",
-        "product.artemis_256_color",
-        "product.artemis_256_mono_pro",
-        "product.artemis_budget_128",
-        "product.ram_64kb_module",
-        "product.ram_256kb_bank",
-        "product.proposed_artemis_accounts",
-        "product.proposed_artemis_developer",
-        "product.abacus_2.era",
-        "product.bpi_suite.era",
-        "product.business_tools_artemis",
-        "product.aion_c_ide",
-        "product.artemis_sdk",
-        "product.software_aionix",
-        "product.device_artemis_video_card",
-        "product.device_mono_pro",
-        "product.device_artemis_video_card_16kb",
-        "product.part_aion_4164",
-        "product.family_artemis"
       ]
     },
     {
@@ -2473,9 +2413,9 @@
         {
           "number": 1,
           "type": "resource",
-          "description": "The existing 120 person-month shared memory-development programme was completed by the third quarter of 1979, before this campaign begins. The existing 108 person-month Aurelia+ integration programme includes qualification; these are established programme allocations, not additional non-recurring engineering charges.",
+          "description": "Qualified Aurelia+ configurations are required for the campaign demonstrations. The existing 120 person-month shared memory-development programme was completed by the third quarter of 1979, before this campaign begins. The existing 108 person-month Aurelia+ integration programme includes qualification; these are established programme allocations, not additional non-recurring engineering charges.",
           "subject_ids": [
-            "product.part_aion_4164"
+            "device.base_computer.aurelia_plus"
           ]
         }
       ],
@@ -2563,23 +2503,6 @@
           "description": "Manufacturer porting workshops",
           "process_id": "process.compatibility1980_workshops"
         }
-      ],
-      "subject_ids": [
-        "product.abacus_2",
-        "product.pulse_1",
-        "product.bpi_suite",
-        "product.aurelia_compatibility_kit",
-        "product.service_aurelia_compatibility_support",
-        "product.service_aurelia_compatibility_certification",
-        "product.aurelia_plus_mono",
-        "product.aurelia_plus_color",
-        "product.proposed_aurelia_plus_office",
-        "product.proposed_aurelia_plus_accounts",
-        "product.proposed_aurelia_plus_developer",
-        "product.proposed_aurelia_plus_analysis",
-        "product.service_pulse_training",
-        "product.family_aurelia",
-        "product.part_aion_4164"
       ],
       "category": "Product dev & launch"
     },
@@ -2679,28 +2602,6 @@
           "description": "Professional CAD reference cases and campaign review"
         }
       ],
-      "subject_ids": [
-        "product.comdex82_artemis_autocad",
-        "product.comdex82_reference_hardware",
-        "product.comdex82_professional_hardware",
-        "product.comdex82_upgrade_autocad",
-        "product.retail.office_professional",
-        "product.retail.business_accounts",
-        "product.retail.developer_workstation",
-        "product.retail.connect_office",
-        "product.retail.cpm_migration",
-        "product.computer_system_retail_connected_office",
-        "product.computer_system_retail_development_team",
-        "product.autocad_1_artemis",
-        "product.software_aion_development_team",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.device_logix_mouse",
-        "product.software_aionix",
-        "product.device_artemis_video_card_64kb",
-        "product.device_color_pro_14",
-        "product.family_artemis"
-      ],
       "category": "Product dev & launch"
     },
     {
@@ -2782,22 +2683,6 @@
           "description": "NCC customer results and professional beta preparation",
           "process_id": "process.ncc82_case_studies"
         }
-      ],
-      "subject_ids": [
-        "product.device_artemis_video_card_64kb",
-        "product.device_color_pro_14",
-        "product.device_logix_mouse",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.software_entertainment_suite",
-        "technology.logix_tui_mouse",
-        "product.ncc82_colour_upgrade",
-        "product.ncc82_professional_graphics",
-        "product.ncc82_mouse_learning",
-        "technology.scanline_palette_list",
-        "product.software_cpm_aurelia",
-        "product.software_aionix",
-        "product.family_artemis"
       ],
       "category": "Product dev & launch"
     },
@@ -2965,21 +2850,6 @@
           "type": "action",
           "description": "Coordinate post-presentation dealer and BPI pilot preparation, including authentication, locking, backup and crash-recovery checks, without treating launch attendance as qualified sales."
         }
-      ],
-      "subject_ids": [
-        "product.aurelia_network_upgrade",
-        "product.artemis_network_upgrade",
-        "product.artemis_pro_512_server",
-        "product.artemis_pro_1mb_server",
-        "product.artemis_pro_512_mono_pro",
-        "product.artemis_pro_1mb_mono_pro",
-        "product.computer_system_proposed_artemis_pro_small_office",
-        "product.bpi_client_server",
-        "technology.logix_tcpip_lan",
-        "product.software_cpm_aurelia_networking",
-        "product.software_aionix_server",
-        "product.software_bpi_client_server",
-        "product.family_artemis"
       ]
     },
     {
@@ -3539,22 +3409,12 @@
         {
           "number": 1,
           "type": "result",
-          "description": "Aurelia has a partnership foundation covering CP/M implementation, OEM printer mechanisms, ComputerLand distribution and Academy support, as documented in the constituent events.",
-          "subject_ids": [
-            "product.family_aurelia",
-            "product.software_cpm_aurelia",
-            "product.device_flexiprint40",
-            "actor.academy"
-          ]
+          "description": "Aurelia has a partnership foundation covering CP/M implementation, OEM printer mechanisms, ComputerLand distribution and Academy support, as documented in the constituent events."
         },
         {
           "number": 2,
           "type": "result",
-          "description": "BPI pilot testing, launch qualification and dealer/instructor preparation support the launch of its independently owned Aurelia applications. Qualification gates and support limits remain those recorded in the milestones; BPI has accepted Adam’s investment and AION’s C/TUI redevelopment obligations, with future-platform work and a subsequent BPI share-buyback right.",
-          "subject_ids": [
-            "product.bpi_suite",
-            "actor.bpi"
-          ]
+          "description": "BPI pilot testing, launch qualification and dealer/instructor preparation support the launch of its independently owned Aurelia applications. Qualification gates and support limits remain those recorded in the milestones; BPI has accepted Adam’s investment and AION’s C/TUI redevelopment obligations, with future-platform work and a subsequent BPI share-buyback right."
         }
       ],
       "steps": [
@@ -3609,13 +3469,6 @@
           "description": "Run the Aurelia launch and Academy campaign through NCC presentations and the combined BPI training and dealer-programme opening on 17 July 1978. Prepare follow-up plans; completion of this campaign also completes the foundation process.",
           "process_id": "process.ncc1978_campaign"
         }
-      ],
-      "subject_ids": [
-        "product.family_aurelia",
-        "product.software_cpm_aurelia",
-        "product.device_flexiprint40",
-        "product.bpi_suite",
-        "event.bpi_cooperation"
       ],
       "category": "Product dev & launch"
     },
@@ -3690,31 +3543,19 @@
         {
           "number": 1,
           "type": "result",
-          "description": "Apple has organised a coordinated response encompassing business-software recruitment, selective dealer demonstrations, Peachtree accounting cooperation and complete-configuration promotions. These activities establish no guaranteed sales, finished spring-1979 package or nationwide training network.",
-          "subject_ids": [
-            "actor.apple",
-            "actor.peachtree"
-          ]
+          "description": "Apple has organised a coordinated response encompassing business-software recruitment, selective dealer demonstrations, Peachtree accounting cooperation and complete-configuration promotions. These activities establish no guaranteed sales, finished spring-1979 package or nationwide training network."
         },
         {
           "number": 2,
           "type": "result",
-          "description": "Apple has reviewed compatibility requirements for successor products, prioritising protection of existing software, peripherals and customer data while retaining its independent hardware roadmap.",
-          "subject_ids": [
-            "actor.apple"
-          ]
+          "description": "Apple has reviewed compatibility requirements for successor products, prioritising protection of existing software, peripherals and customer data while retaining its independent hardware roadmap."
         },
         {
           "number": 3,
           "type": "result",
-          "description": "The Apple–Peachtree small-business package has a recorded start with simplified setup, documentation and support. The event’s possible accounting-module coverage remains qualified rather than a guarantee of every module.",
-          "subject_ids": [
-            "actor.apple",
-            "actor.peachtree"
-          ]
+          "description": "The Apple–Peachtree small-business package has a recorded start with simplified setup, documentation and support. The event’s possible accounting-module coverage remains qualified rather than a guarantee of every module."
         }
       ],
-      "subject_ids": [],
       "category": "Competition"
     },
     {
@@ -4486,16 +4327,10 @@
         {
           "number": 1,
           "type": "resource",
-          "description": "The Artemis commercial launch provides the platform to extend with networked business and server configurations.",
-          "event_id": "event.artemis_launch"
-        },
-        {
-          "number": 2,
-          "type": "resource",
           "description": "The existing Artemis and AIONix platform supplies the hardware and operating-system foundation for network development.",
           "subject_ids": [
-            "product.family_artemis",
-            "product.software_aionix"
+            "device.base_computer.artemis",
+            "software_edition.aionix"
           ]
         }
       ],
@@ -4506,10 +4341,8 @@
           "description": "Develop and integrate TCP/IP networking, AIONix server services and supported Aurelia/Artemis network upgrades.",
           "subject_ids": [
             "technology.logix_tcpip_lan",
-            "product.software_aionix_server",
-            "product.software_cpm_aurelia_networking",
-            "product.aurelia_network_upgrade",
-            "product.artemis_network_upgrade"
+            "software_edition.aionix_server",
+            "software_edition.cpm_aurelia_networking"
           ]
         },
         {
@@ -4517,7 +4350,9 @@
           "type": "action",
           "description": "Integrate the client-server application generation and prepare configuration-specific authentication, locking, backup and crash-recovery tests.",
           "subject_ids": [
-            "product.software_bpi_client_server"
+            "software_edition.bpi_client_server",
+            "software_edition.bpi_client_server.era_client",
+            "software_edition.bpi_client_server.era_server"
           ]
         },
         {
@@ -4531,16 +4366,20 @@
         {
           "number": 1,
           "type": "result",
-          "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability or forecast revenue from unpriced larger storage.",
+          "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability or forecast revenue from unpriced larger storage."
+        },
+        {
+          "number": 2,
+          "type": "qualification",
+          "description": "The programme reaches configuration-specific multi-client recovery pilots for the networking/server platform and BPI client/server implementations. Their results gate sales and shipments; completion of every qualification is not inferred.",
           "subject_ids": [
             "technology.logix_tcpip_lan",
-            "product.software_aionix_server",
-            "product.software_bpi_client_server"
+            "software_edition.aionix_server",
+            "software_edition.bpi_client_server",
+            "software_edition.bpi_client_server.era_client",
+            "software_edition.bpi_client_server.era_server"
           ]
         }
-      ],
-      "subject_ids": [
-        "product.family_artemis"
       ],
       "category": "Product dev & launch"
     },

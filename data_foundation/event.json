@@ -345,7 +345,6 @@
           "role": "platform and development partner"
         }
       ],
-      "subject_ids": [],
       "inputs": [
         {
           "number": 1,
@@ -357,15 +356,15 @@
       "outcomes": [
         {
           "number": 1,
-          "type": "deliverable",
+          "type": "decision",
           "description": "The agreed product is a new CP/M version for Logix Aurelia, fully owned by DRI and available for non-exclusive licensing to other vendors. Its scope includes XIP cartridges and named CP/M user areas; implementation and qualification follow this agreement.",
           "subject_ids": [
-            "product.software_cpm_aurelia"
+            "external_product.cpm_aurelia"
           ]
         },
         {
           "number": 2,
-          "type": "deliverable",
+          "type": "decision",
           "description": "The agreement establishes integration of the Logix TUI standard into the CP/M development scope: a consistent pseudo-window user interface in text mode for participating applications.",
           "subject_ids": [
             "technology.logix_tui_standard"
@@ -373,7 +372,7 @@
         },
         {
           "number": 3,
-          "type": "deliverable",
+          "type": "decision",
           "description": "The agreement establishes CP/M integration work for FlexiBUS smart devices and expansion cards using Plug and Execute. This outcome covers agreed software support, not invention or completed manufacture of the underlying bus.",
           "subject_ids": [
             "technology.flexibus"
@@ -405,16 +404,12 @@
           "role": "redevelopment and porting partner"
         }
       ],
-      "subject_ids": [
-        "product.bpi_suite"
-      ],
       "inputs": [
         {
           "number": 1,
           "type": "resource",
-          "description": "BPI contributes its existing application code and domain knowledge; AION contributes engineering expertise and resources for C and TUI redevelopment.",
+          "description": "BPI contributes its existing application code and domain knowledge; AION contributes engineering expertise and resources for C and TUI redevelopment. This refers to pre-existing BPI source material, not a completed Aurelia C/TUI edition.",
           "subject_ids": [
-            "product.bpi_suite",
             "actor.bpi",
             "actor.aion"
           ]
@@ -423,13 +418,8 @@
       "outcomes": [
         {
           "number": 1,
-          "type": "result",
-          "description": "BPI accepts the $150,000 subscription for Adam’s 33% fully diluted interest and the accompanying AION C/TUI redevelopment obligations. The deal also provides for further platform-porting investment and BPI’s subsequent right to buy back Adam’s shares.",
-          "subject_ids": [
-            "actor.bpi",
-            "actor.adam",
-            "product.bpi_suite"
-          ]
+          "type": "decision",
+          "description": "BPI accepts the $150,000 subscription for Adam’s 33% fully diluted interest and the accompanying AION C/TUI redevelopment obligations. The deal also provides for further platform-porting investment and BPI’s subsequent right to buy back Adam’s shares."
         }
       ],
       "time": {
@@ -461,9 +451,6 @@
           "role": "cooperating partner"
         }
       ],
-      "subject_ids": [
-        "product.bpi_suite"
-      ],
       "inputs": [
         {
           "number": 1,
@@ -475,21 +462,13 @@
       "outcomes": [
         {
           "number": 1,
-          "type": "result",
-          "description": "The partners establish arrangements for qualifying independently licensed BPI applications and supporting their launch, dealer preparation and BPI-authorised Logix Computer Academy courses. BPI retains application ownership, licences and specialist support.",
-          "subject_ids": [
-            "product.bpi_suite",
-            "actor.bpi",
-            "actor.academy"
-          ]
+          "type": "decision",
+          "description": "The partners establish arrangements for qualifying independently licensed BPI applications and supporting their launch, dealer preparation and BPI-authorised Logix Computer Academy courses. BPI retains application ownership, licences and specialist support."
         },
         {
           "number": 2,
           "type": "result",
-          "description": "The cooperation supports a later programme of BPI-authorised courses and direct sales starting on 17 July 1978, after the NCC premiere. This start is separate from the Academy's March establishment and June 5 five-city public announcement.",
-          "subject_ids": [
-            "actor.academy"
-          ]
+          "description": "The cooperation supports a later programme of BPI-authorised courses and direct sales starting on 17 July 1978, after the NCC premiere. This start is separate from the Academy's March establishment and June 5 five-city public announcement."
         }
       ],
       "time": {
@@ -660,12 +639,26 @@
           "role": "cooperating partner"
         }
       ],
-      "subject_ids": [
-        "event.bpi_offer",
-        "product.bpi_suite"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The candidate CP/M implementation supplies the application under test; representative business records and resource budgets define the pilot, without presuming every jurisdiction or configuration is accepted.",
+          "subject_ids": [
+            "software_edition.bpi_suite"
+          ]
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "qualification",
+          "description": "Reconcile pilot results and test posting, corrections, backup/restore, resource limits and supported payroll jurisdictions before making launch claims. This qualification activity does not guarantee that every pilot or configuration passes.",
+          "subject_ids": [
+            "software_edition.bpi_suite"
+          ]
+        }
+      ],
       "time": {
         "value": "1978-03-20",
         "precision": "day"
@@ -820,10 +813,16 @@
           "role": "presenter"
         }
       ],
-      "subject_ids": [
-        "product.bpi_suite"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The five-module application build and documented summary-export workflow supply the independently licensed BPI demonstration.",
+          "subject_ids": [
+            "software_edition.bpi_suite"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -835,7 +834,10 @@
         "value": "1978-06-06",
         "precision": "day"
       },
-      "process_ids": []
+      "process_ids": [],
+      "subject_ids": [
+        "external_product.bpi_suite"
+      ]
     },
     {
       "id": "event.smc_agreement",
@@ -929,16 +931,20 @@
           "role": "authorised training and direct distribution provider"
         }
       ],
-      "subject_ids": [
-        "product.bpi_suite",
-        "product.service_bpi_training"
-      ],
       "inputs": [
         {
           "number": 1,
           "type": "resource",
           "description": "The BPI application launch establishes the product offering for subsequent authorised training, direct distribution and dealer demonstrations.",
           "event_id": "event.bpi_launch"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Separately licensed BPI applications are the subject of the authorised courses, direct distribution and dealer demonstrations. They remain BPI offerings rather than newly created Academy software.",
+          "subject_ids": [
+            "external_product.bpi_suite"
+          ]
         }
       ],
       "outcomes": [
@@ -947,8 +953,7 @@
           "type": "result",
           "description": "Authorised BPI training, direct sales and the qualified dealer programme are operating with defined support responsibilities and access to BPI specialists.",
           "subject_ids": [
-            "product.service_bpi_training",
-            "product.bpi_suite"
+            "product.service_bpi_training"
           ]
         }
       ],
@@ -1071,14 +1076,24 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.aurelia_launch",
-        "product.computer_trs80_model_ii",
-        "product.software_cpm_model_ii",
-        "product.device_model_ii_flexibus",
-        "product.abacus_1.model_ii"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The existing Aurelia Abacus implementation provides the application demonstrated in the cooperation talks; the Model II port is not yet the supplied implementation.",
+          "subject_ids": [
+            "software_edition.abacus_1"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "The scenario’s Model II design work supplies the prospective native-hardware target for negotiation. This does not assert that the later retail configuration is already released.",
+          "subject_ids": [
+            "external_product.trs80_model_ii"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -1086,6 +1101,16 @@
           "description": "Establish the response described in Adam opens confidential Model II cooperation talks.",
           "subject_ids": [
             "market_response.tandy_contact"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "decision",
+          "description": "Propose a supported Model II CP/M configuration, an AION-funded Abacus adaptation and a qualified FlexiBUS option. These are negotiation targets, not completed deliverables.",
+          "subject_ids": [
+            "external_product.cpm_model_ii",
+            "product.abacus_1.model_ii",
+            "external_product.model_ii_flexibus"
           ]
         }
       ],
@@ -1105,14 +1130,32 @@
           "role": "developer"
         }
       ],
-      "subject_ids": [
-        "event.dri_cpm",
-        "event.dri_founding",
-        "technology.logix_tui_standard",
-        "product.software_cpm_aurelia"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "agreement_basis",
+          "description": "The CP/M collaboration establishes DRI ownership and non-exclusive reuse rights for the operating-system enhancements. This is the direct agreement basis; the earlier founding event is not repeated as a transitive prerequisite.",
+          "event_id": "event.dri_cpm"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Portable implementations must preserve the documented text-interface contract while qualifying host-specific integrations.",
+          "subject_ids": [
+            "technology.logix_tui_standard"
+          ]
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Work begins on host-specific implementations, developer documentation and qualification of the portable extensions. This records the start of implementation work, not a completed portable release.",
+          "subject_ids": [
+            "external_product.cpm_platform_extensions"
+          ]
+        }
+      ],
       "time": {
         "value": "1978-11-10",
         "precision": "day"
@@ -1145,14 +1188,14 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.tandy_contact",
-        "product.computer_trs80_model_ii",
-        "product.software_cpm_model_ii",
-        "product.device_model_ii_flexibus",
-        "product.abacus_1.model_ii"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "agreement_basis",
+          "description": "The cooperation talks establish the proposed porting and interface scope negotiated into this agreement.",
+          "event_id": "event.tandy_contact"
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -1160,6 +1203,16 @@
           "description": "Establish the response described in Tandy, Logix, DRI and AION sign Model II cooperation agreement.",
           "subject_ids": [
             "market_response.tandy_agreement"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "decision",
+          "description": "Commit the parties to supported CP/M, a Model II Abacus port and a qualified internal FlexiBUS option while retaining Tandy’s native hardware and customer support. Implementation and qualification follow the agreement.",
+          "subject_ids": [
+            "external_product.cpm_model_ii",
+            "product.abacus_1.model_ii",
+            "external_product.model_ii_flexibus"
           ]
         }
       ],
@@ -1192,14 +1245,22 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.tandy_agreement",
-        "product.computer_trs80_model_ii",
-        "product.software_cpm_model_ii",
-        "product.device_model_ii_flexibus",
-        "product.abacus_1.model_ii"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "agreement_basis",
+          "description": "The signed cooperation agreement supplies the responsibilities and interface scope to freeze in the design review.",
+          "event_id": "event.tandy_agreement"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "The Model II native bus, slot, power, display, keyboard and storage architecture constrain the compatibility design.",
+          "subject_ids": [
+            "external_product.trs80_model_ii"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -1207,6 +1268,15 @@
           "description": "Establish the response described in Model II compatibility design baseline agreed.",
           "subject_ids": [
             "market_response.tandy_design_review"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "decision",
+          "description": "Set the CP/M BIOS responsibilities, native interface adaptation and qualified internal FlexiBUS connector plan. This is a design baseline, not a completed release.",
+          "subject_ids": [
+            "software_edition.cpm_model_ii",
+            "external_product.model_ii_flexibus"
           ]
         }
       ],
@@ -1267,8 +1337,16 @@
           "role": "partner"
         }
       ],
-      "subject_ids": [],
-      "inputs": [],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "The partnership targets accounting software and setup/support appropriate to Apple II, rather than a replacement Logix computer platform.",
+          "subject_ids": [
+            "external_product.apple_ii"
+          ]
+        }
+      ],
       "outcomes": [
         {
           "number": 1,
@@ -1297,17 +1375,31 @@
           "role": "technical_partner"
         }
       ],
-      "subject_ids": [
-        "product.device_apple2_expansion_card",
-        "product.device_flexidisk_ii",
-        "product.device_apple2_video_card"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "Native expansion and disk/video interoperability must target the existing Apple II host. Access to documentation and test machines is sought through this cooperation, not presumed already delivered.",
+          "subject_ids": [
+            "external_product.apple_ii"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
           "description": "Apple accepts Logix-funded native expansion as a way to increase installed Apple II utility, with separate branding/support and no requirement to adopt the full Logix platform; its own peripheral strategy continues."
+        },
+        {
+          "number": 2,
+          "type": "decision",
+          "description": "The accepted cooperation covers native Apple II expansion, disk interoperability and Logix video products. It establishes compatibility assistance, not completion or sale of the hardware.",
+          "subject_ids": [
+            "device.apple2_expansion_card",
+            "device.flexidisk_ii",
+            "device.apple2_video_card"
+          ]
         }
       ],
       "time": {
@@ -1339,14 +1431,24 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.tandy_design_review",
-        "product.computer_trs80_model_ii",
-        "product.software_cpm_model_ii",
-        "product.device_model_ii_flexibus",
-        "product.abacus_1.model_ii"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "The agreed compatibility baseline provides the interface and responsibility constraints against which prototypes are reviewed.",
+          "event_id": "event.tandy_design_review"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Prototype CP/M and Abacus builds and the Model II-specific FlexiBUS prototype supply the work under review. Their current prototype state does not establish customer availability.",
+          "subject_ids": [
+            "software_edition.cpm_model_ii",
+            "software_edition.abacus_1.model_ii",
+            "external_product.model_ii_flexibus"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -1354,6 +1456,17 @@
           "description": "Establish the response described in Model II CP/M and Abacus prototype review.",
           "subject_ids": [
             "market_response.tandy_port_review"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "qualification",
+          "description": "Review boot, native UI, disk/printer BIOS and document interchange, resolving banking assumptions and measuring available RAM on the 64 KB Model II target. No universal pass or shipment is implied.",
+          "subject_ids": [
+            "external_product.trs80_model_ii",
+            "software_edition.cpm_model_ii",
+            "software_edition.abacus_1.model_ii",
+            "external_product.model_ii_flexibus"
           ]
         }
       ],
@@ -1405,11 +1518,22 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.apple_peachtree",
-        "event.apple_dealer_demos"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The dealer-demonstration programme supplies repeatable workflows and introductory lessons for these participating-dealer promotions.",
+          "event_id": "event.apple_dealer_demos"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The demonstrations use Apple II-based business configurations; a finished Apple–Peachtree package is not a prerequisite for these earlier promotions.",
+          "subject_ids": [
+            "external_product.apple_ii"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -1436,18 +1560,27 @@
           "role": "publisher"
         }
       ],
-      "subject_ids": [
-        "event.dri_portable",
-        "product.software_cpm_aurelia",
-        "technology.logix_tui_standard",
-        "technology.flexibus"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The portable implementation and qualification programme supplies the documented host-specific extensions released here.",
+          "event_id": "event.dri_portable"
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
           "description": "The CP/M ecosystem retains an opportunity to expand."
+        },
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "Release the documented optional CP/M Platform Extensions for non-Logix manufacturers, with TUI, capability discovery and FlexiBUS adapters. Existing host requirements remain; this is not delivery of an Aurelia ROM cartridge.",
+          "subject_ids": [
+            "external_product.cpm_platform_extensions"
+          ]
         }
       ],
       "time": {
@@ -1542,14 +1675,14 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.tandy_port_review",
-        "product.computer_trs80_model_ii",
-        "product.software_cpm_model_ii",
-        "product.device_model_ii_flexibus",
-        "product.abacus_1.model_ii"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "The prototype review provides the engineering basis for bounded planned-compatibility claims; an announcement or order is not a completed sale.",
+          "event_id": "event.tandy_port_review"
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -1563,7 +1696,13 @@
       "time": {
         "value": "1979-05-30",
         "precision": "day"
-      }
+      },
+      "subject_ids": [
+        "external_product.trs80_model_ii",
+        "external_product.cpm_model_ii",
+        "external_product.model_ii_flexibus",
+        "product.abacus_1.model_ii"
+      ]
     },
     {
       "id": "event.basic_launch",
@@ -1576,15 +1715,24 @@
           "role": "presenter"
         }
       ],
-      "subject_ids": [
-        "product.software_microsoft_basic_aurelia"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The licensed Aurelia CP/M BASIC implementation is the software released and demonstrated by Microsoft.",
+          "subject_ids": [
+            "software_edition.microsoft_basic_aurelia"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [],
       "time": {
         "value": "1979-06-04",
         "precision": "day"
-      }
+      },
+      "subject_ids": [
+        "external_product.microsoft_basic_aurelia"
+      ]
     },
     {
       "id": "event.tandy_ncc_demo",
@@ -1609,14 +1757,19 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.tandy_announcement",
-        "product.computer_trs80_model_ii",
-        "product.software_cpm_model_ii",
-        "product.device_model_ii_flexibus",
-        "product.abacus_1.model_ii"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The NCC demonstration uses the native Model II host, a CP/M disk build, Abacus implementation and qualified prototype FlexiBUS peripherals. Demonstration readiness is distinct from the autumn customer release.",
+          "subject_ids": [
+            "external_product.trs80_model_ii",
+            "software_edition.cpm_model_ii",
+            "software_edition.abacus_1.model_ii",
+            "external_product.model_ii_flexibus"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -1935,14 +2088,18 @@
           "role": "participant"
         }
       ],
-      "subject_ids": [
-        "event.tandy_ncc_demo",
-        "product.computer_trs80_model_ii",
-        "product.software_cpm_model_ii",
-        "product.device_model_ii_flexibus",
-        "product.abacus_1.model_ii"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "acceptance_criterion",
+          "description": "Customer release requires disk, printing, save/reopen, native UI and interface qualification with published resource limits. Earlier NCC demonstrations alone do not establish acceptance.",
+          "subject_ids": [
+            "software_edition.cpm_model_ii",
+            "software_edition.abacus_1.model_ii",
+            "external_product.model_ii_flexibus"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -1956,7 +2113,13 @@
       "time": {
         "value": "1979-10-15",
         "precision": "day"
-      }
+      },
+      "subject_ids": [
+        "external_product.trs80_model_ii",
+        "external_product.cpm_model_ii",
+        "external_product.model_ii_flexibus",
+        "product.abacus_1.model_ii"
+      ]
     },
     {
       "id": "event.open79_delivery",
@@ -2051,6 +2214,21 @@
           "role": "independent partner; head of BPI presents"
         }
       ],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The later BPI partner presentation supplies source payroll and reconciled file-exchange data for the Abacus demonstration; this is a repeat promotion and workflow dependency, not BPI’s original launch.",
+          "subject_ids": [
+            "software_edition.bpi_suite"
+          ]
+        }
+      ],
+      "outcomes": [],
+      "time": {
+        "value": "1979-12-03",
+        "precision": "day"
+      },
       "subject_ids": [
         "product.pulse_1",
         "product.abacus_2",
@@ -2058,14 +2236,8 @@
         "product.aurelia_compatibility_kit",
         "product.service_aurelia_compatibility_support",
         "product.service_aurelia_compatibility_certification",
-        "product.bpi_suite"
-      ],
-      "inputs": [],
-      "outcomes": [],
-      "time": {
-        "value": "1979-12-03",
-        "precision": "day"
-      }
+        "external_product.bpi_suite"
+      ]
     },
     {
       "id": "event.ibm_project",
@@ -2217,10 +2389,22 @@
           "role": "partner"
         }
       ],
-      "subject_ids": [
-        "event.apple_peachtree"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "agreement_basis",
+          "description": "The Peachtree partnership establishes the accounting-package work brought into operation by this event.",
+          "event_id": "event.apple_peachtree"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "The package must operate on the Apple II host, with its platform-specific setup, interface and support requirements.",
+          "subject_ids": [
+            "external_product.apple_ii"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -2930,13 +3114,18 @@
           "role": "application_partner"
         }
       ],
-      "subject_ids": [
-        "technology.logix_tcpip_lan",
-        "product.software_cpm_aurelia_networking",
-        "product.software_aionix_server",
-        "product.software_bpi_client_server"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Networked demonstrations require the TCP/IP platform and appropriate server and client operating-system implementations; the presentation does not itself create these technologies.",
+          "subject_ids": [
+            "technology.logix_tcpip_lan",
+            "software_edition.aionix_server",
+            "software_edition.cpm_aurelia_networking"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [
         {
           "number": 1,
@@ -2947,7 +3136,10 @@
       "time": {
         "value": "1981-05-04",
         "precision": "day"
-      }
+      },
+      "subject_ids": [
+        "external_product.bpi_client_server"
+      ]
     },
     {
       "id": "event.dram_275_review",
@@ -3597,15 +3789,14 @@
           "role": "representative of the organising founders"
         }
       ],
-      "subject_ids": [
-        "product.software_aion_development_team",
-        "product.autocad_1_artemis",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.device_logix_mouse"
-      ],
       "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "decision",
+          "description": "Logix commits the development environment, engineering support and staged hardware supply needed for the Autodesk Artemis implementation. Professional hardware is to follow in June; this agreement does not deliver a completed CAD build."
+        }
+      ],
       "time": {
         "value": "1982-01-31",
         "precision": "day"
@@ -3830,13 +4021,6 @@
           "role": "programme_partner"
         }
       ],
-      "subject_ids": [
-        "product.software_aion_development_team",
-        "product.autocad_1_artemis",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.device_logix_mouse"
-      ],
       "inputs": [
         {
           "number": 1,
@@ -3845,7 +4029,13 @@
           "event_id": "event.autodesk_agreement"
         }
       ],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "decision",
+          "description": "Autodesk adopts the funded arrangement and confirms source/porting rights and non-exclusive licensing for its Artemis CAD implementation. This is an agreement decision, not a software release."
+        }
+      ],
       "time": {
         "value": "1982-04-26",
         "precision": "day"
@@ -3942,16 +4132,31 @@
           "role": "programme_partner"
         }
       ],
-      "subject_ids": [
-        "event.autodesk_agreement",
-        "product.software_aion_development_team",
-        "product.autocad_1_artemis",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.device_logix_mouse"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "requirement",
+          "description": "The agreed dual-display and mouse interface requirements define the professional integration work that starts with this handover.",
+          "subject_ids": [
+            "technology.artemis_professional_graphics",
+            "technology.logix_display_api"
+          ]
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The professional card, Mono Pro 17, colour card/display and mouse become available to the Autodesk development and QA team for integration. This records delivery to the team, not invention or general retail release of those devices.",
+          "subject_ids": [
+            "device.artemis_professional_video_128kb",
+            "device.mono_pro_17",
+            "device.artemis_video_card_64kb",
+            "device.color_pro_14",
+            "device.logix_mouse"
+          ]
+        }
+      ],
       "time": {
         "value": "1982-06",
         "precision": "month"
@@ -4015,24 +4220,31 @@
           "role": "partner"
         }
       ],
-      "subject_ids": [
-        "product.device_color_pro_14",
-        "product.device_artemis_video_card_64kb",
-        "product.device_logix_mouse",
-        "product.software_entertainment_suite",
-        "technology.scanline_palette_list",
-        "technology.logix_tui_mouse",
-        "product.software_cpm_aurelia",
-        "product.software_aionix",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17"
-      ],
       "inputs": [],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
           "description": "Demonstrate raster palette effects, unchanged standard-TUI controls with mouse input, and learning games. Keep later COMDEX high-resolution second-card/monitor plans separate; no unmeasured speed, cost or sales claims."
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "CP/M and AIONix TUI integration adds pointing and standard-control activation; static libraries require relinking and custom interfaces require adaptation. This outcome concerns software integration, not creation of the operating systems.",
+          "subject_ids": [
+            "software_edition.cpm_aurelia",
+            "software_edition.aionix",
+            "technology.logix_tui_mouse"
+          ]
+        },
+        {
+          "number": 3,
+          "type": "result",
+          "description": "Release the Entertainment Suite implementations with the recorded mouse-learning and keyboard/monochrome support.",
+          "subject_ids": [
+            "software_edition.entertainment_suite",
+            "software_edition.entertainment_suite.era"
+          ]
         }
       ],
       "time": {
@@ -4041,6 +4253,12 @@
       },
       "location_ids": [
         "location.astrodomain"
+      ],
+      "subject_ids": [
+        "product.device_color_pro_14",
+        "product.device_artemis_video_card_64kb",
+        "product.device_logix_mouse",
+        "product.software_entertainment_suite"
       ]
     },
     {
@@ -4225,16 +4443,32 @@
           "role": "programme_partner"
         }
       ],
-      "subject_ids": [
-        "event.autodesk_agreement",
-        "product.software_aion_development_team",
-        "product.autocad_1_artemis",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.device_logix_mouse"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The professional handover supplies the equipment required for the subsequent dual-display, acceleration and mouse qualification work.",
+          "event_id": "event.autodesk_professional_handover"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The candidate Artemis/AIONix CAD build is the subject of drawing, numerical, exchange, recovery and reproducibility tests. A candidate build does not imply that every acceptance test has passed.",
+          "subject_ids": [
+            "software_edition.autocad_1_artemis"
+          ]
+        }
       ],
-      "inputs": [],
-      "outcomes": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "qualification",
+          "description": "Exercise the CAD build against representative geometry, display, input, exchange, plotter, resource and recovery criteria. Results identify delivery blockers; unrestricted shipment is not asserted.",
+          "subject_ids": [
+            "software_edition.autocad_1_artemis"
+          ]
+        }
+      ],
       "time": {
         "value": "1982-09",
         "precision": "month"
@@ -4328,19 +4562,29 @@
           "role": "programme_partner"
         }
       ],
-      "subject_ids": [
-        "event.autodesk_agreement",
-        "product.software_aion_development_team",
-        "product.autocad_1_artemis",
-        "product.device_artemis_professional_video_128kb",
-        "product.device_mono_pro_17",
-        "product.device_logix_mouse",
-        "product.software_aionix",
-        "product.device_artemis_video_card_64kb",
-        "product.device_color_pro_14",
-        "product.comdex82_artemis_autocad"
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The release-quality Artemis/AIONix build supplies the demonstrated drawing workflow; commercial shipment still depends on acceptance.",
+          "subject_ids": [
+            "software_edition.autocad_1_artemis"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The drawing demonstration requires the professional dual-display hardware, mouse and operating-system environment, rather than the development tools used to build the application.",
+          "subject_ids": [
+            "device.artemis_professional_video_128kb",
+            "device.mono_pro_17",
+            "device.artemis_video_card_64kb",
+            "device.color_pro_14",
+            "device.logix_mouse",
+            "software_edition.aionix"
+          ]
+        }
       ],
-      "inputs": [],
       "outcomes": [],
       "time": {
         "value": "1982-11-29",
@@ -4349,6 +4593,10 @@
       "process_ids": [],
       "location_ids": [
         "location.las_vegas"
+      ],
+      "subject_ids": [
+        "external_product.autocad_1_artemis",
+        "product.comdex82_artemis_autocad"
       ]
     },
     {
