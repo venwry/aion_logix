@@ -1,82 +1,50 @@
-# Editing and handover guide
+# Editing and publication guide
 
-Start with the [repository objective](../README.md), [principles](../DATA_MODEL_PRINCIPLES.md), [model guide](data-model/MODEL_GUIDE.md) and [multi-phase process](MULTI_PHASE_PROCESS.md). Consult the [backlog](REVIEW_BACKLOG.md) before repeating earlier research.
+Read the [principles](../DATA_MODEL_PRINCIPLES.md), [model guide](data_model/MODEL_GUIDE.md) and [reference rules](data_model/REFERENCE_RULES.md). Current application controls are documented in the [application guide](APPLICATION_GUIDE.md). Historical reports in `docs/archived` are not editing instructions.
 
-## Edit story records
+## Inspect and prepare
 
-1. Fetch the latest target branch and use a focused working branch for substantive story edits. Preserve existing stable IDs unless an explicit migration is necessary.
-2. Follow the current schemas. Recover indirectly mentioned facts and reconcile contradictions, but keep source citations and editorial qualifications outside foundation records. Do not silently convert inference into authorized canon.
-3. Write who acted, what happened or was committed, and the outcome. Use events/processes for dates; process steps for team actions; campaigns for marketing. Preserve commercial meaning and date precision.
-4. Keep each record manageable for whole-record authorization. Decompose independently reviewable content into linked records when necessary.
-5. Obtain author approval for schema extensions before adding them. Update schemas, manifest/registry, consumers, documentation and tests together for a breaking model change.
+Fetch the latest target branch and use a focused branch or worktree. Preserve unrelated work. Inspect `data_storytelling/change.json`, `annotation.json` and `change_review.json` before editing proposals. Follow feedback revision chains and compare the reviewed hashes with current content. The issue register is an editorial aid, not an authoritative statement that every reference is still current.
 
-For the current page controls, see the [application guide](APPLICATION_GUIDE.md). Display layout changes do not require a story-schema revision or renewed record authorization.
+Preserve stable IDs unless a migration is necessary. Keep technical definitions separate from commercial identities and software rights. Use only direct, explained references: prerequisites in inputs, deliveries/decisions/qualification in outcomes, and specific ownership/participant/agreement fields for those relationships. Do not mechanically move every subject to an input. Removing loose references must not silently remove meaningful story prose.
 
-## Propose and authorize
+For events/processes, minimize top-level subjects. Document any exception in editorial evidence. Product launch links are authoritative when present; do not remove the only surviving launch association before its replacement exists. Distinguish later promotion and external participation. Delivery processes own meaningful product/implementation outcomes; marketing execution processes do not create their promoted catalogues.
 
-Create story proposals in `data_storytelling/change.json` with stable ID, category, title, reason and explicit `elements` containing dataset type, record ID, and complete `before`/`after` snapshots. Use `before: null` for additions. Review overlapping proposals and dependencies explicitly; the application does not schedule a dependency graph. Schema proposals cannot be applied by the saving API.
+Keep the existing date precision. A later-stage resource can be an input to the relevant work without being available at the whole process's start. Do not turn a commitment, pilot or demo into a completed delivery or successful qualification. Keep child categories empty when changing ownership, and include all affected records in the same coherent proposal.
 
-Use Changes confirm to review and save the resulting group. Use the browser's left-list checkboxes and **Authorize and save** to authorize existing records in one commit. Review the entire record first. Plain authorization changes editorial state only; approving a revision also updates story JSON.
+## Proposals and authorization
 
-Never set `authorized` or refresh an authorized hash merely to make validation pass. Changed content needs renewed authorization. If editing foundation JSON directly, update its editorial entry to `unauthorized` with the hash computed by `hash()` in `server/model.js`; add an entry for a new record and retain previous decision evidence. Remove a deleted record's current authorization entry while preserving historical decisions. Whole-graph validation is required. Prefer the proposal workflow where practical.
+Existing-record revisions belong in `data_storytelling/change.json`. A proposal has stable `id`, `category`, `title`, `reason` and `elements[]`; each element contains `record_type`, `record_id`, complete `before` and complete `after` snapshots. Use `before: null` for additions and `after: null` for removals. Preserve the current before snapshot when refining a pending proposal; change its after snapshot and explanation.
 
-An absent or mismatched authorization means pending. Rejected work must not remain presented as accepted story content; document the editorial decision and remove or revise the candidate through a reviewed change. References do not authorize related records.
+Group inseparable operations, including identity moves and their dependent references, in one proposal. Avoid overlapping whole-record snapshots in separate proposals. Use `depends_on_change_ids` for separable prerequisites; it is not a general scheduling engine. Use exact committed `annotation_ids` where a proposal addresses feedback. Approval resolves only an unchanged current open annotation; preparing a proposal does not resolve it.
 
-## Sources, issues and archives
+Changes confirm selects and saves complete proposals. References do not authorize other records. New records imported directly under an explicit import instruction require `unauthorized` entries with hashes computed by `hash()` in `server/model.js`; existing authorized records and hashes remain untouched until their reviewed changes are applied. Never fabricate approval or update an authorized hash simply to satisfy a validator. Historical decisions are immutable.
 
-Keep the active source catalogue and unresolved issue register in `data_storytelling/`. Their inherited formats are documented in the [storytelling reference](data-model/STORYTELLING_FILE_REFERENCE.md). Do not reinterpret historical status fields as current authorization. Source paths/JSON pointers refer to the pinned source repository, not this repository.
+Schema deployment is separate from story authorization; the saving API cannot apply schema proposals. Obtain approval when a schema extension is not already authorized. Keep schemas, registry/manifest, runtime consumers, tests and documentation consistent in one deployment.
 
-The [archive inventory](../archived_no_longer_valid/inventory.json) records original paths and SHA-256 checksums. Archived records, logs, schemas and scripts are preserved unchanged. Historical references resolve in their original snapshot. Use the inventory to locate relocated evidence. Never run archived migration scripts against the current foundation.
+## Dataset and evidence paths
 
-## Validate and document
+Use `datasetPath()` from `code/model-contract.js`; do not assume every filename equals its type. `external_product` uses `data_foundation/external_products.json`, while its envelope, ID prefix and proposal type remain singular. Its specification entries have exactly `no`, `description`, one `ref_id` and `ref_role`.
+
+Current editorial evidence may live below `data_storytelling/review_evidence/`. These supporting files are not foundation datasets, authorization targets or a substitute for the live queue. Store per-reference rationale and temporary exceptions there. Historical storytelling reports and superseded proposal narratives belong in `docs/archived/` with an explicit historical label. Existing `archived_no_longer_valid/` snapshots and checksum inventories remain unchanged.
+
+Current documentation belongs in `docs/` and `docs/data_model/`. Update navigation and relative links when moving files. Do not leave obsolete phase-status reports in the active guides. Keep a relocation index for archived material and retain the source commit so original content is recoverable. Archived snapshots may contain original paths; interpret them at their recorded baseline.
+
+## Validation and publishing
+
+Run checks appropriate to the change:
 
 ```sh
 npm ci
 npm run validate:data
 node tools/generate-foundation-spec.js
 npm run build
-node --test tests/model/*.test.js tests/migration/*.test.js tests/review/*.test.js tests/server/*.test.js
+node --test tests/model/*.test.js tests/review/*.test.js tests/server/*.test.js
 CHROMIUM_PATH=/usr/bin/chromium npm test
 ```
 
-`node tools/validate-foundation.js --complete` additionally requires every foundation record to be authorized; it is expected to fail while the story remains incomplete. Update the repository map when adding/removing files and the storytelling reference when editorial formats change. Generated assets are ignored by Git; build them for publication.
+Migration-evidence tests live in `tests/migration/`; run them when changing archives, links or migration logic. Investigate failures against the unchanged baseline rather than rewriting historical evidence to make them pass. `node tools/validate-foundation.js --complete` additionally requires every foundation record to be authorized and can legitimately fail while pending records exist.
 
-## Deploy
+Validate grouped proposals through the real transaction code in memory; never use a production authorization endpoint for tests. Verify no unintended foundation or authorization changes occurred. Regenerate `docs/data_model/FOUNDATION_SPECIFICATION.md` after schema changes. Generated viewer assets are ignored by Git and must be included in static publication.
 
-The maintained branch is `main`; Render's code deployment and `AION_BRANCH` must agree with the dataset model version. Follow [Render setup](RENDER_SETUP.md). GitHub Pages needs the repository's static files plus built viewer assets. Data-only authorization commits do not trigger Render rebuilds under the current build filter: connected browsing reads GitHub, whereas disconnected browsing uses the deployed snapshot. Deployment access and the backend key must be handed over outside Git.
-
-## Agreement terms and timeline ownership
-
-Edit terms inside the owning agreement’s `clauses[]`; a clause cannot be authorized separately. Keep its stable ID for traceability. For events/processes, set one `agreement_id` or omit the field; never use an empty string or `agreement_ids`. Contextual links to other agreements can stay in generic subject references.
-
-Single-parent cleanup is proposed through Changes confirm, one affected record per proposal. Where an event would otherwise anchor two processes, the non-owning process can retain the same calendar date and precision as a literal boundary. Removing an extra `steps[].event_id` leaves its descriptive step intact. Do not change dates merely to force nesting.
-
-
-## Timeline categories and swim lanes
-
-Events and processes support an optional `category` string. The permitted non-empty values are `Adam's personal`, `Logix/AION investment`, `Product dev & launch`, `Ecosystem & Partners`, and `Competition`. An omitted field or `""` is empty; `null` and other spellings are invalid.
-
-Assign a category only to a top-level event or process. Children must leave it empty and inherit their root's category. Ownership comes from process steps, event-based period boundaries, `parent_process_id`, or event `process_ids`. Inputs, outcomes, subjects and related-process references do not establish ownership. The model validator rejects a non-empty category on an owned child. When reparenting a root, clear its category in the same approval batch. Campaigns use their execution process's category; they have no separate category field.
-
-The timeline displays five lightly colored vertical lanes, with an additional grey Uncategorised lane when matching records have no category. Each lane has a labeled collapse/expand button above the workspace. Collapse hides the lane and its cards, including undated entries, while leaving its button available. Controls work by keyboard and remain available in full screen. Lane visibility lasts until page reload; filter reset does not change it.
-
-All lanes share the global calendar. Collapsing a lane does not move date anchors. Overlapping root groups occupy parallel columns within their lane; nested work retains compact duration tracks. Horizontal scrolling accommodates wider lanes. Filtering retains inherited categories from the complete ownership tree even when an ancestor falls outside the selected date range. Unknown dates remain in the separate undated section and follow the same lane visibility controls.
-
-Categories describe the root programme's primary purpose. Semiconductor work under stepper installation remains Investment, and competitor events inside ecosystem programmes remain Ecosystem & Partners. Moving individual children into a different lane requires changing ownership, not assigning an override.
-
-Category assignments are story changes: submit one Changes confirm proposal per affected record. The UI and schema can be deployed before those proposals are approved; records remain Uncategorised until their root assignment is authorized.
-
-## Product definitions (0.7.0)
-
-Use `base_part`, `device` and `software_edition` for canonical technical definitions; existing product subjects link through `technical_identity`. Products, devices and editions own complete `composition_history` snapshots with explicit child versions. New imported technical records are externally Unauthorized; product revisions remain Changes confirm proposals. See [definition import and ownership](PRODUCT_DEFINITION_IMPORT.md). Never import old chronology, approvals or financial projections into these definitions. Only events/processes own calendar dates; unknown composition boundaries must remain explicit until reconciled.
-
-
-## Process annotations and refinement feedback
-
-Before preparing requested changes, read `data_storytelling/annotation.json` and `change_review.json`. Follow each revision chain and inspect the reviewed record/proposal hash. Use the latest open annotation as feedback, preserving its wording and historical revisions. Link its exact revision ID in the resulting proposal's `annotation_ids`. Do not mark it resolved when proposing changes: approval resolves an unchanged open revision automatically. Preserve feedback if a proposal needs revision; modify its content and review it again rather than bypassing a Needs refinement state. Use `depends_on_change_ids` for separable prerequisites and a single multi-element proposal for inseparable operations such as moving a value between records.
-
-Contract 0.8.0 deploys the two editorial schemas/files, saving backend and UI together. No existing story records or authorization decisions change during this application upgrade.
-
-## Catalogue cleanup phase 2 (0.9.0)
-
-Use `external_product` as the record type and envelope key, but store it in `data_foundation/external_products.json`. Runtime/tooling should use `datasetPath()` from `code/model-contract.js`, not concatenate a type with `.json`. New external descriptions require direct specification entries with `no`, `description`, one `ref_id`, and `ref_role`. Keep software rights, technical editions and physical cartridges distinct. Supply both product launch fields together; the selected event must be owned by the campaign execution process and fit its period. Do not fill those fields from a campaign subject list alone. See [the transition contract](PRODUCT_CATALOGUE_PHASE2.md).
+The maintained branch is `main`. Publish the authorized implementation and reviewable proposals there, leaving content authorization to the author. Check the resulting remote commit. Frontend, backend and `AION_BRANCH` must agree with the schema version; see [Render setup](RENDER_SETUP.md).

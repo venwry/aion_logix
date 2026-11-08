@@ -15,6 +15,7 @@ function resolve(value, owner) {
   for (const key of pointer.slice(1).split('/')) node = node[key];
   return resolve(node, target);
 }
+const schemaType = s => s.type ? (Array.isArray(s.type) ? s.type.join(' | ') : s.type) : s.enum ? [...new Set(s.enum.map(v=>v===null?'null':typeof v))].join(' | ') : 'schema-defined';
 const entities = {};
 const refs = [];
 for (const name of names) {
@@ -27,7 +28,7 @@ for (const name of names) {
       const [item, itemOwner] = array ? resolve(field.items, fieldOwner) : [field, fieldOwner];
       const fieldPath = prefix + key + (array ? '[]' : '');
       const targets = item['x-ref'] || [];
-      fields.push({key, path: fieldPath, depth, required: (object.required || []).includes(key), type: array ? `array<${item.type}>` : field.type, targets, definition: field, item});
+      fields.push({key, path: fieldPath, depth, required: (object.required || []).includes(key), type: array ? `array<${schemaType(item)}>` : schemaType(field), targets, definition: field, item});
       if (targets.length) refs.push({from: name, path: fieldPath, targets});
       if (item.properties) walk(item, itemOwner, fieldPath + '.', depth + 1);
     }
@@ -39,7 +40,8 @@ const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAl
 const tree = (name, diagram = false) => entities[name].map(f => `${'│  '.repeat(f.depth)}${f.depth ? '└─ ' : ''}${f.key}${f.required ? '*' : '?'}: ${f.type}${f.targets.length ? ' → ' + (f.targets.length === names.length ? 'any foundation ID' : f.targets.join(' / ')) : ''}`).map(s => diagram ? escape(s) : s);
 const lines = [
   '# Foundation dataset specification', '',
-  'This document describes the current foundation schema contract (version '+schemaVersion+'). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; completed migration evidence is preserved in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
+  'This document describes the current foundation schema contract (version '+schemaVersion+'). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; historical documentation is preserved in `docs/archived/` and earlier immutable evidence in `archived_no_longer_valid/`. Both are deliberately outside this diagram.', '',
+  'The [reference rules](REFERENCE_RULES.md) govern semantic directness, inputs/outcomes and launch relationships. Legacy schema compatibility does not authorize new unexplained subject lists.', '',
   '## Reading the diagram', '',
   '- Each entity represents one dataset file, whose envelope is `{ "dataset_name": [record, ...] }`. The entity contains the hierarchical structure of one record, not a sample record.',
   '- `*` means required within its immediate parent object; `?` means optional there. A required child does not make its optional parent required. Conditional requirements are specified below.',
@@ -112,5 +114,5 @@ lines.push('', '## Contract notes', '',
  'All foundation envelopes and record/value objects reject undeclared properties. IDs are prefixed by their dataset name. Shared dates preserve year, month or day precision; the validator also checks real dates, precision consistency, period ordering and reference existence. Money `basis` describes the story’s financial meaning and is not an editorial authorization status.', '',
  'The schema files and `tools/validate-model.js` remain authoritative for machine validation. This specification documents existing structures; it does not introduce new fields, approve records or alter story content.', '',
  'Regenerate this document after approved schema changes with `node tools/generate-foundation-spec.js` from the repository root.', '');
-fs.writeFileSync('docs/data-model/FOUNDATION_SPECIFICATION.md', lines.join('\n'));
+fs.writeFileSync('docs/data_model/FOUNDATION_SPECIFICATION.md', lines.join('\n'));
 console.log(`Documented ${names.length} datasets, ${Object.values(entities).flat().length} fields and ${refs.length} reference attributes.`);

@@ -1,38 +1,22 @@
-# Aion Logix — an alternative history
+# Aion Logix
 
-This repository develops a coherent alternative history of a time traveller who arrives on **1 January 1972** and progressively builds a computer-industry empire. His knowledge of future demand helps him introduce ideas, products and standards years ahead of their historical dates. We follow the affected world's linear history through the end of the 1980s, rather than tracking time-travel jumps.
+A structured alternative-history project with technical product definitions, a timeline, a data browser and author-controlled review. The story is stored in JSON; application displays and documentation do not authorize it.
 
-The story is modelled in interconnected JSON datasets. A timeline and data browser let the author explore and authorize that account. Author-approved story facts take precedence over real-world history within this fictional setting. Imported or inferred content remains pending until the author accepts the entire record.
+Start with the [current documentation](docs/README.md), [model principles](DATA_MODEL_PRINCIPLES.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md).
 
-## Start here
+The current schema contract is **0.9.1**, with sixteen foundation datasets. Existing legacy identities remain compatible while reviewed migrations are pending. Live records, proposals, feedback and exact-content authorizations determine the current state; old phase reports do not.
 
-1. Read the [modeling principles](DATA_MODEL_PRINCIPLES.md) and [model guide](docs/data-model/MODEL_GUIDE.md).
-2. Follow the [editing guide](docs/EDITING_GUIDE.md), including whole-record authorization, schema approval and validation.
-3. Consult the [complete schema specification and diagram](docs/data-model/FOUNDATION_SPECIFICATION.md) for fields and relationships.
-4. Use the [multi-phase process](docs/MULTI_PHASE_PROCESS.md) and [current review backlog](docs/REVIEW_BACKLOG.md) to continue the work.
-
-The current contract is **0.9.1**, with 16 foundation datasets. Agreements own their clauses. New clauses use exactly `id`, `kind`, `statement`, `value`, and `unit`; legacy clauses remain valid while each agreement is independently reviewed. See the [clause simplification proposals and research](docs/CLAUSE_SIMPLIFICATION_PROPOSALS.md). Schema deployment does not authorize story content. Product definitions and versioned compositions are supported in phase 2; fabrication economics and forecasts remain separate. See [product definition import](docs/PRODUCT_DEFINITION_IMPORT.md).
-
-## Repository contents
-
-| Directory or file | Purpose |
+| Layer | Location |
 | --- | --- |
-| `data_foundation/` | Story-only entities: people, agreements, events, processes, marketing, products, technologies and responses. |
-| `data_storytelling/` | Current authorization, proposals, source catalogue and unresolved editorial issues. See the [file reference](docs/data-model/STORYTELLING_FILE_REFERENCE.md). |
-| `data_calculation/` | Reserved for future derived assessments; currently empty. |
-| `schemas/` | Strict current JSON Schemas for story data and authorization. |
-| `code/` | Timeline, browser and Changes confirm application. |
-| `assets/` | Documentation viewer source, stylesheet and locally generated bundles. |
-| `server/` | Authenticated service that validates and commits author decisions to GitHub. |
-| `docs/` | Current model, editing, process, deployment and handover documentation. |
-| `tools/` | Current validation and schema-documentation generation. |
-| `tests/` | Model, migration-evidence, authorization and browser regression checks. |
-| `archived_no_longer_valid/` | Earlier models, migrations and review evidence; not current instructions. See its [archive index](archived_no_longer_valid/README.md). |
-| Root configuration | Entry page, package/build/test configuration, Docker and Render deployment. |
+| World entities and technical definitions | `data_foundation/` |
+| Author review, decisions, sources and evidence | `data_storytelling/` |
+| Separately designed derived assessments | `data_calculation/` |
+| Schemas, application and saving backend | `schemas/`, `code/`, `server/` |
+| Current guides and model documentation | `docs/`, `docs/data_model/` |
+| Historical documentation | [docs/archived](docs/archived/README.md) |
+| Earlier immutable model/source evidence | [archived_no_longer_valid](archived_no_longer_valid/README.md) |
 
-The [repository map](docs/REPOSITORY_MAP.md) documents **every maintained file**, including root configuration, and links to the archive's complete file inventory.
-
-## Run and review
+The [repository map](docs/REPOSITORY_MAP.md) explains runtime entry points and supporting files.
 
 ```sh
 npm ci
@@ -40,22 +24,14 @@ npm run build
 npm run preview
 ```
 
-Open `/` for the timeline, `/code/browser.html` for data, `/code/changes-confirm.html` for proposed changes, or `/docs/viewer.html` for documentation. Serve the repository root over HTTP. The documentation viewer needs generated assets; the story pages use native JavaScript modules.
+Serve the repository root over HTTP. Open `/` for Timeline, `/code/browser.html` for Data browser, `/code/changes-confirm.html` for pending proposals, or `/docs/viewer.html` for documentation. The documentation viewer requires generated assets; story pages use native JavaScript modules.
 
-For direct saving, follow [GitHub Pages and Render setup](docs/RENDER_SETUP.md). The backend holds the GitHub credential. The browser uses a separate backend access key. Selecting records and pressing **Authorize and save** writes one Git commit; downloading approval logs is a retired workflow.
+The [application guide](docs/APPLICATION_GUIDE.md) explains navigation, annotations, comparisons and saving. [Render setup](docs/RENDER_SETUP.md) explains the GitHub saving service and static publication. The backend holds the GitHub credential; the browser uses a separate access key. Tests simulate transactions and never authorize live data.
 
 ```sh
 npm run validate:data
-node --test tests/model/*.test.js tests/migration/*.test.js tests/review/*.test.js tests/server/*.test.js
+node --test tests/model/*.test.js tests/review/*.test.js tests/server/*.test.js
 CHROMIUM_PATH=/usr/bin/chromium npm test
 ```
 
-Set `CHROMIUM_PATH` to an installed Chromium executable, or install Playwright's browser. Browser tests start a local HTTP server. Tests do not authorize live story records. See the editing guide for documentation checks and completeness validation.
-
-## Application controls
-
-The timeline shows nested processes, parallel work and combined campaign/execution boxes beside a compact fixed date rail. Full screen expands the workspace. Both story pages share resizable, content-weighted tables and configurable reference grids; these are presentation controls, not changes to story records or authorization.
-
-See the [application guide](docs/APPLICATION_GUIDE.md) for navigation, filtering, dates, details, keyboard controls and saving. The [editing guide](docs/EDITING_GUIDE.md) covers record and schema changes.
-
-Catalogue cleanup phase 2 adds compatible external-product definitions and paired product launch links. See [the contract and migration boundary](docs/PRODUCT_CATALOGUE_PHASE2.md). External products use `external_products.json`. [Phase 3](docs/product-catalogue-phase3/README.md) imports 11 pending external records and queues five grouped migrations in Changes confirm.
+Run migration-evidence checks when changing archives or migration logic. Follow the editing guide for validation of complete proposal groups and generated schema documentation.

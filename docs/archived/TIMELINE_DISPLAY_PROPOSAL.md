@@ -1,5 +1,7 @@
 # Timeline display proposal
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 Status: implemented in the application. The approved design decisions and original audit are retained below; the three separate end-association proposals were authorized before implementation.
 
 ## Scope and evidence
@@ -8,9 +10,9 @@ Describe a consistent display for every event, process and campaign currently sh
 
 Reviewed GitHub `main` at [6169738ef41a7eba604b1d66941fb3ca582f3714](https://github.com/venwry/aion_logix/tree/6169738ef41a7eba604b1d66941fb3ca582f3714), on 6 November 2026:
 
-- [Timeline renderer](../code/timeline.js), [layout and hierarchy](../code/timeline-layout.js), [page](../code/timeline.html) and [styles](../code/app.css).
-- [Shared data, timing and authorization handling](../code/shared.js), [date precision](../code/temporal.js), and [application guide](APPLICATION_GUIDE.md).
-- Foundation [events](../data_foundation/event.json), [processes](../data_foundation/process.json) and [campaigns](../data_foundation/campaign.json).
+- [Timeline renderer](../../code/timeline.js), [layout and hierarchy](../../code/timeline-layout.js), [page](../../code/timeline.html) and [styles](../../code/app.css).
+- [Shared data, timing and authorization handling](../../code/shared.js), [date precision](../../code/temporal.js), and [application guide](../APPLICATION_GUIDE.md).
+- Foundation [events](../../data_foundation/event.json), [processes](../../data_foundation/process.json) and [campaigns](../../data_foundation/campaign.json).
 - Existing model and browser timeline tests.
 
 The data audit executed the current hierarchy and layout code against that snapshot. Counts below describe repository data, not a live browser session. The application can load backend state instead of repository JSON, so its visible records and authorization statuses may differ.

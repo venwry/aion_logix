@@ -9,7 +9,7 @@ test('relocated historical evidence retains byte-exact checksums',()=>{
 test('open issues reference current records and deferred material stays discoverable',()=>{
  const ids=new Set(fs.readdirSync('data_foundation').flatMap(n=>Object.values(read('data_foundation/'+n))[0]).map(r=>r.id));
  for(const issue of read('data_storytelling/reconciliation_issue.json').reconciliation_issue){assert.equal(issue.state,'open');for(const id of issue.affected_ids)assert(ids.has(id),id);}
- const backlog=fs.readFileSync('docs/REVIEW_BACKLOG.md','utf8');
+ const backlog=fs.readFileSync('docs/archived/REVIEW_BACKLOG.md','utf8');
  for(const item of read('archived_no_longer_valid/data_storytelling/migration_map.json').migration_map.filter(x=>x.disposition==='deferred'))assert(backlog.includes(item.id),item.id);
  for(const item of read('archived_no_longer_valid/data_storytelling/phase1b_migration.json').migration[0].notes)assert(backlog.includes(item.record_id),item.record_id);
 });

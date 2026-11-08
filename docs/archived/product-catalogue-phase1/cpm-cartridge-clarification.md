@@ -1,5 +1,7 @@
 # CP/M: licensed software and Logix cartridge
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../../README.md) and live storytelling JSON.
+
 Phase-1 amendment, 8 November 2026. This updates the assessment at source commit `a0cf5b8`; it does not modify foundation records, schemas or authorizations.
 
 The original recommendation to move `product.software_cpm_aurelia` wholesale into external products conflated software ownership with ownership of the manufactured offering. The user's clarification establishes the intended commercial identity: a Logix/AION physical ROM cartridge produced under DRI licence. Retain the existing product ID and redefine its commercial meaning through Changes confirm later.

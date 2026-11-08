@@ -6,7 +6,10 @@ import json, pathlib, sys, subprocess, re, hashlib, copy, collections
 ROOT=pathlib.Path.cwd(); SRC=pathlib.Path(sys.argv[1]); PIN='dac733770d8e622d5619bd84bc9d21db6c7ec7ab'
 assert subprocess.check_output(['git','-C',str(SRC),'rev-parse','HEAD'],text=True).strip()==PIN
 read=lambda p:json.loads(pathlib.Path(p).read_text())
-def write(p,d):pathlib.Path(p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
+def write(p,d):
+ p=pathlib.Path(p)
+ p.parent.mkdir(parents=True,exist_ok=True)
+ p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
 source={p.name:read(p) for p in (SRC/'data').glob('*.json')}
 sets={n:source[f+'.json'][k] for n,f,k in [('base_part','components','components'),('device','devices','devices'),('software_edition','software-editions','software_editions'),('product','product-catalog','products')]}
 old={r['id']:r for rs in sets.values() for r in rs}
@@ -173,5 +176,5 @@ queue=read(ROOT/'data_storytelling/change.json');queue['change']=[p for p in que
 # Evidence is deliberately outside foundation; the audit contains no old approval decisions.
 coverage=[{'source_id':r['id'],'source_collection':n,'target_id':ids.get(r['id']),'fields':list(r),'composition_versions':len(r.get('composition_history',[]))} for n,rs in sets.items() for r in rs]
 report={'record_coverage':coverage,'source_commit':PIN,'counts':{n:len(v) for n,v in new.items()},'product_proposals':len(proposals),'source_records':sum(map(len,sets.values())),'id_mapping':ids,'excluded_fields':excluded,'unmapped_designations':unmapped,'policy':'Definitions only. Legacy timing is used solely to pin original child versions, then discarded. No old authorization or historical event is imported.'}
-write(ROOT/'docs/product-definition-import-audit.json',report)
+write(ROOT/'data_storytelling/review_evidence/product-definition-import/audit.json',report)
 print(json.dumps({'counts':report['counts'],'proposals':len(proposals),'excluded':len(excluded),'unmapped':len(unmapped)}))

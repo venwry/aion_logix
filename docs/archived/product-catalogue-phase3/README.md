@@ -1,5 +1,7 @@
 # Product catalogue cleanup — phase 3
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../../README.md) and live storytelling JSON.
+
 Prepared against main commit [`2cc577b`](https://github.com/venwry/aion_logix/commit/2cc577be0c8334bf7668fa9a8ee3e38c5f1de884), 8 November 2026. This phase introduces external commercial identities and proposes their dependent migrations. It does not apply or authorize the proposed changes to existing records.
 
 ## What is available for review

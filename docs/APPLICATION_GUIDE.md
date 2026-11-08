@@ -1,6 +1,6 @@
 # Application guide
 
-The application explores and reviews the alternative history stored in JSON. Display settings do not change the story model or authorize records. For editing rules see the [editing guide](EDITING_GUIDE.md); for fields and relationships see the [model guide](data-model/MODEL_GUIDE.md) and [foundation specification](data-model/FOUNDATION_SPECIFICATION.md).
+The application explores and reviews the alternative history stored in JSON. Display settings do not change the story model or authorize records. For editing rules see the [editing guide](EDITING_GUIDE.md); for fields and relationships see the [model guide](data_model/MODEL_GUIDE.md) and [foundation specification](data_model/FOUNDATION_SPECIFICATION.md).
 
 ## Pages and navigation
 
@@ -86,9 +86,9 @@ The uncommitted count counts changed annotations, not keystrokes. **Save annotat
 
 **Go Back**, left of Save annotations, returns to the previous selection, including reference navigation. It restores the composition version and detail scroll position. Repeated selection and filter redraws do not add history entries. Filters do not prevent opening a previous record's details. Selection history lasts for the page session; drafts also survive reloads.
 
-For exact authorization file structures see the [storytelling reference](data-model/STORYTELLING_FILE_REFERENCE.md). For pending issues and later migration work see the [review backlog](REVIEW_BACKLOG.md).
+For exact authorization file structures see the [storytelling reference](data_model/STORYTELLING_FILE_REFERENCE.md). Current pending proposals, feedback and open questions live in the storytelling JSON; archived backlog reports are historical only.
 
-Agreement details show simplified clause columns: id, kind, statement, value and unit. Non-quantitative clauses use null values; quantities and ranges summarize the full statement. During migration, agreements awaiting approval can still show the legacy columns. Review each whole agreement independently in Changes confirm. Model 0.6.0 requires the matching backend deployment before simplified proposals can be saved.
+Agreement details show simplified clause columns: id, kind, statement, value and unit. Non-quantitative clauses use null values; quantities and ranges summarize the full statement. During migration, agreements awaiting approval can still show the legacy columns. Review each whole agreement independently in Changes confirm. Frontend, saving backend and manifest must use the matching current schema contract.
 
 
 ## Timeline categories and swim lanes
@@ -103,8 +103,12 @@ All lanes share the global calendar. Collapsing a lane does not move date anchor
 
 Categories describe the root programme's primary purpose. Semiconductor work under stepper installation remains Investment, and competitor events inside ecosystem programmes remain Ecosystem & Partners. Moving individual children into a different lane requires changing ownership, not assigning an override.
 
-Category assignments are story changes: submit one Changes confirm proposal per affected record. The UI and schema can be deployed before those proposals are approved; records remain Uncategorised until their root assignment is authorized.
+Category assignments are story changes. Group reparenting and category changes when they are inseparable; records inherit their current root assignment.
 
 ## External products and product launches
 
-Data browser includes External Product alongside the existing datasets. Its specification table shows each reference with the description and role supplied by the author. Timeline details and Changes confirm use the same rendering and navigation. Product details show explicit launch campaign and event links when supplied; several products may share them. The external collection starts empty in contract 0.9.0 while its content awaits migration.
+Data browser includes External Product alongside the existing datasets. Its specification table shows each reference with the description and role supplied by the author. Timeline details and Changes confirm use the same rendering and navigation. Product details show explicit launch campaign and event links when supplied; several products may share them. External records appear with their current exact-content authorization status; their relationships do not authorize referenced technical definitions.
+
+## Reference interpretation
+
+Inputs and outcomes explain dependency, delivery, decision or qualification roles. Top-level subjects can include documented compatibility exceptions while reviewed migrations are pending. Read the [reference rules](data_model/REFERENCE_RULES.md); the presence of a link alone does not establish ownership, readiness or an initial launch. The “Referenced by” section derives incoming links without storing a second copy.

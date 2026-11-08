@@ -1,5 +1,7 @@
 # Estate, company formation and clause simplification proposals
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 Prepared 2 November 2026. There are **24 independent whole-record proposals** in Changes confirm: 20 agreements, two events and two processes. Foundation records remain unchanged until authorized. Schema/model 0.6.0 supports the new format and legacy clauses so any agreement can be approved independently.
 
 ## Proposal inventory

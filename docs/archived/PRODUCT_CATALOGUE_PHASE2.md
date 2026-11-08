@@ -1,5 +1,7 @@
 # Product catalogue cleanup — phase 2
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 Contract **0.9.0** implements compatible schema, validation and application support for the [phase-1 migration map](product-catalogue-phase1/README.md), including the [CP/M cartridge clarification](product-catalogue-phase1/cpm-cartridge-clarification.md). This catalogue-cleanup phase is distinct from the wider project phases in `MULTI_PHASE_PROCESS.md`.
 
 ## Scope

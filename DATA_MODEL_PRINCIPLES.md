@@ -1,50 +1,30 @@
 # Aion Logix — data model principles
 
-## Current agreement: separation of story and authoring data
+These principles describe the current contract, version **0.9.1**, and the accepted authoring rules. Consult the [model guide](docs/data_model/MODEL_GUIDE.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md) for details.
 
-Version 0.9.1 retains the author's October 2026 instruction to separate modelled story content from its development and authorization process.
-
-1. The model combines hierarchical value objects and relational entity references. Each entity has a stable `id` beginning with its dataset name.
-2. `data_foundation/` contains only story records, in envelopes such as `{ "actor": [...] }`. It has no status, confirmation, provenance or application metadata fields.
-3. `data_storytelling/` contains current authorization, direct-save decisions, proposals, the source catalogue, unresolved editorial issues and the model manifest. Completed migration mappings, former models and historical review snapshots are preserved unchanged in `archived_no_longer_valid/`.
-4. `data_calculation/` is reserved for calculation inputs/results. Its domain schemas will be designed with the relevant phases.
-5. Foundation records use explicit typed references. Owned value objects remain nested; independently maintained entities have their own IDs.
-6. Authorization of the entire record is the sole distinction for candidate results. Do not add occurrence, completion-state or intended/achieved flags. Independently reviewed commitments and outcomes require separate records.
-7. The world timeline is linear from 1 January 1972. Only events and processes own structured story dates. An event has one year/month/day date; a process has start/end boundaries, each a calendar date, event reference (`precision: "event"`) or explicitly unknown boundary. Other records reference these carriers. Preserve source precision and store editorial qualifications externally.
-8. Pending confirmation and speculation have one current review meaning: **Unauthorized**. Their old labels survive only in historical evidence.
-9. **Authorized** means the author agrees with the **entire record**, including every nested input, outcome and other owned value, and the decision covers its exact current foundation content hash. There is no partial or item-level authorization. If a record is too complex to authorize in one step, decompose coherent parts into independently identified records in appropriate dataset files and reference them. References do not propagate authorization. Missing or mismatched authorization is always Unauthorized; an absent queue entry never implies approval.
-10. Approval of a proposed revision applies and authorizes its explicitly listed resulting records as one transaction. An agreement owns its clauses; whole-agreement authorization covers every embedded clause. Independent records require independent or explicitly grouped decisions.
-11. New authorization decisions preserve before/after snapshots and content hashes. Sources and historical decisions remain outside the story. Structural validity alone does not establish authorization.
-12. JSON Schemas reject undeclared foundation fields. Schema extensions require author approval; this separation was authorized in the conversation. Foundation fields and editorial schemas are documented separately.
-13. The application joins foundation records and external authorization by ID and verifies content hashes before showing Authorized. It does not write computed UI status back into the foundation.
-14. The authenticated backend validates current content and references before saving to GitHub. Multi-file changes use one Git commit and a non-forced branch update. Stale edits never silently overwrite newer content.
-
-The original phase-one schema versions are archived under `archived_no_longer_valid/schemas/archive/0.2.0/`; original logs are retained under `archived_no_longer_valid/docs/review/history/`. See [the repository map](docs/REPOSITORY_MAP.md) for the current file mapping and [RENDER_SETUP.md](docs/RENDER_SETUP.md) for direct saving.
+1. Foundation JSON describes the fictional world and its technical definitions. Storytelling JSON describes author review, evidence and proposals. Calculation data is a separate layer. Never import old statuses, financial projections or storytelling chronology into a technical definition without the appropriate reviewed model.
+2. Entities have stable typed IDs. Owned value objects remain nested; independently maintained or independently authorized entities have their own records. Dataset type and filename are mapped by the shared registry, including singular `external_product` in plural `external_products.json`.
+3. Authorization covers the entire exact-content record, including nested objects. Missing or mismatched authorization is Pending authorization. References, elapsed time and visual nesting never confer authorization. Do not fabricate intended/achieved flags or approval hashes.
+4. Proposed revisions preserve complete before/after snapshots. Inseparable reference changes and removals are one atomic review group. Existing foundation records change only through the authorized review workflow; newly imported records remain pending. Historical decisions and source snapshots are immutable.
+5. Only events and processes own structured story dates. Preserve year/month/day precision and explicit unknowns. Technical version boundaries refer to dated carriers or remain unknown/open as allowed; do not invent dates to make a relationship fit.
+6. References represent direct explained relationships. Use inputs for genuine prerequisites and outcomes for deliveries, decisions, improvement or qualification. Earlier chronology alone is not dependency. Avoid transitive predecessor lists and loose context links. Top-level event/process subjects are justified exceptions.
+7. A promised future implementation is a decision target, not an existing resource or completed deliverable. A later-stage input need not exist at the whole process's start. A pilot, demonstration or qualification activity does not by itself establish a successful result or unrestricted shipment.
+8. Products are Logix/AION customer-facing offerings. Devices, base parts and software editions are canonical technical definitions; external products are descriptive third-party commercial identities. Keep a licensed software implementation separate from the physical cartridge and commercial package that carry it. Do not infer OEM sales structures from parts.
+9. Product launch campaign/event links are authoritative when populated. Remove redundant reverse launch lists only when equivalent replacements exist. Later promotion and external participation are different relationships. Marketing execution does not create every promoted product; delivery outcomes belong to the responsible process and should not be copied through the hierarchy.
+10. Process ownership comes from explicit steps, boundaries and parent/membership fields, never from inputs or subject links. Maintain a single owner. Owned children leave category empty and inherit their root's category; reparenting and category cleanup form one coherent change.
+11. Agreements own their clauses and govern rights and commitments. Financial commitments, budgets, ownership and expenditure remain distinct. An implementation responsibility label does not transfer software or hardware ownership.
+12. Schemas reject undeclared fields and validate structural constraints. Semantic directness and evidence still require author review. Obtain approval for schema extensions not already authorized, and deploy registry, consumers, tests and documentation together. Compatibility is not permission to create new ambiguous references.
+13. Annotations and refinement feedback preserve immutable revision chains. A revised proposal has a new hash and requires fresh review. Preparing a proposal does not resolve its annotation; approval resolves only the unchanged current open revision.
+14. `docs/` and `docs/data_model/` document current organization, behavior, rules and schemas. Historical storytelling activities and superseded guidance belong in `docs/archived/`. The existing legacy evidence archive remains immutable. Archived statuses and instructions are not current authority.
 
 ```mermaid
 flowchart LR
-  F[Foundation JSON: story records] --> J[Join by record ID and content hash]
-  S[Storytelling JSON: authorization and provenance] --> J
-  J --> UI[Timeline and browser]
-  P[Pending change proposals] --> R[Before and after review table]
-  UI --> A[Authenticated authorization service]
-  R --> A
-  A --> V[Validate records and references]
-  V --> G[Atomic GitHub commit]
-  G --> F
-  G --> S
+  Foundation[Foundation records] --> Join[Join by ID and content hash]
+  Review[Storytelling authorization] --> Join
+  Join --> UI[Timeline and browser]
+  Proposal[Pending complete proposals] --> Compare[Changes confirm]
+  Compare --> Validate[Atomic validation]
+  Validate --> Commit[Author-approved GitHub commit]
+  Commit --> Foundation
+  Commit --> Review
 ```
-
-## Phase 1B structure
-
-Events and processes have numbered, typed inputs and outcomes. Team actions are process `steps`; a step may reference an event milestone or a sub-process. Programmes are processes; narrative-period groupings are retired. Campaigns own marketing objectives, audiences, messages, presentation and booth content, and reference an execution process. They do not duplicate activities or dates.
-
-Product and technology identities, manufacturing capabilities and qualitative market responses connect the story. Product definitions and composition histories are supported by contract 0.9.0. Quantitative yields, costs and ROI remain separate. Maturity transitions are outcomes on dated carriers. See the [current model guide](docs/data-model/MODEL_GUIDE.md) and [generated schema reference](docs/data-model/FOUNDATION_SPECIFICATION.md).
-
-## Agreement ownership (0.9.0)
-
-Agreements own `clauses[]`; clauses are reviewed with the whole agreement. New clauses contain exactly `id`, `kind`, `statement`, `value`, and `unit`. Stable clause IDs preserve traceability. Statements carry the parties, rights, equity basis, conditions and timing in plain English; parties have meaningful roles. Numeric summaries use value/unit, or null/null when no quantity is specified. Targets use a `target_` kind; unaccepted proposals must not silently become commitments. The legacy clause schema remains accepted during independent agreement approvals. Events and processes use one optional `agreement_id`; event links point to agreements rather than redundant clause-to-event backlinks.
-
-## Catalogue transition (0.9.0)
-
-Products denote Logix/AION customer-facing offerings. Legacy identities remain schema-valid during approval-driven migration. External commercial products use descriptive records with direct role-labelled references, separate from technical editions and physical devices. Product launch references are optional as a pair during transition; when present, campaign ownership and temporal containment are validated. See [phase 2](docs/PRODUCT_CATALOGUE_PHASE2.md). The external-product filename is plural while its envelope and ID prefix remain singular.

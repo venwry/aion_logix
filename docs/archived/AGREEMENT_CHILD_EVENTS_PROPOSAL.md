@@ -1,5 +1,7 @@
 # Agreement associations through child events
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 Baseline: `438492dc61eea5f20b64eec8ddf0aa8794523eb5`, 30 October 2026. These are proposals, not applied foundation changes.
 
 ## Proposed convention

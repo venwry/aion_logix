@@ -1,6 +1,8 @@
 # Aion Logix — five foundational phases with phase 1B
 
-Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its scope was implemented as version 0.4.0 and updated to contract 0.5.0; see [current model guide](data-model/MODEL_GUIDE.md).
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
+Verified against the author's original five-phase plan and subsequent decisions, **29 October 2026**. Updated with the requested **phase 1B (1.5)**. Its scope was implemented as version 0.4.0 and updated to contract 0.5.0; see [current model guide](../data_model/MODEL_GUIDE.md).
 
 This document consolidates the agreed process. It describes the intended workflow separately from functionality already implemented. It does not authorize additional story records, introduce new dataset schemas, or claim that the later phases are complete.
 
@@ -200,11 +202,11 @@ This consolidation preserves the original five-phase scope and applies the autho
 
 ## Related documents
 
-- [Data model principles](../DATA_MODEL_PRINCIPLES.md)
-- [Current foundation specification](data-model/FOUNDATION_SPECIFICATION.md)
-- [Storytelling file reference](data-model/STORYTELLING_FILE_REFERENCE.md)
-- [Current model guide](data-model/MODEL_GUIDE.md)
-- [Original phase-one proposal](../archived_no_longer_valid/docs/data-model/PHASE_1_PROPOSAL.md) — source-analysis rationale, with superseded details
-- [Render saving setup](RENDER_SETUP.md)
+- [Data model principles](../../DATA_MODEL_PRINCIPLES.md)
+- [Current foundation specification](../data_model/FOUNDATION_SPECIFICATION.md)
+- [Storytelling file reference](../data_model/STORYTELLING_FILE_REFERENCE.md)
+- [Current model guide](../data_model/MODEL_GUIDE.md)
+- [Original phase-one proposal](../../archived_no_longer_valid/docs/data-model/PHASE_1_PROPOSAL.md) — source-analysis rationale, with superseded details
+- [Render saving setup](../RENDER_SETUP.md)
 
 The 653-record figures above describe the earlier handover only. Contract 0.5.0 has 559 whole records in 12 datasets; 109 former clause records are embedded in their agreements.

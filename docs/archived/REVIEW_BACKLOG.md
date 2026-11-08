@@ -1,12 +1,14 @@
 # Current editorial and later-phase backlog
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 Handover baseline: 30 October 2026, model 0.4.0, following `828a4f4`. This backlog preserves unfinished work while migration history moves to the archive. It does not authorize story content or introduce a new editorial schema.
 
 ## Outstanding issues
 
-The active [issue register](../data_storytelling/reconciliation_issue.json) retains 17 open entries. Their candidate descriptions require review; archival relocation does not settle them. References to programmes and duration events have been translated to current process IDs using the preserved migration mapping.
+The active [issue register](../../data_storytelling/reconciliation_issue.json) retains 17 open entries. Their candidate descriptions require review; archival relocation does not settle them. References to programmes and duration events have been translated to current process IDs using the preserved migration mapping.
 
-Five previously resolved entries are now historical only. `reconciliation_issue.autodesk_signatories` is also removed from the active list because John Walker's representation was applied and authorized, as evidenced by [authorization decisions](../data_storytelling/authorization_decision.json) and the current actor/agreement/event records. The [original 23-entry snapshot](../archived_no_longer_valid/data_storytelling/reconciliation_issue.json) remains unchanged. No additional issue has been silently resolved.
+Five previously resolved entries are now historical only. `reconciliation_issue.autodesk_signatories` is also removed from the active list because John Walker's representation was applied and authorized, as evidenced by [authorization decisions](../../data_storytelling/authorization_decision.json) and the current actor/agreement/event records. The [original 23-entry snapshot](../../archived_no_longer_valid/data_storytelling/reconciliation_issue.json) remains unchanged. No additional issue has been silently resolved.
 
 | Issue ID | Question | Current records |
 | --- | --- | --- |
@@ -32,7 +34,7 @@ Five previously resolved entries are now historical only. `reconciliation_issue.
 
 The browser remains the source of current authorization state. At handover 599 records are pending, including new and structurally changed records. Review inferred subjects, qualitative market responses, process boundaries, fabrication scope and course policy. Supply unknown dates only where supported; decompose records that are too large for whole-record authorization.
 
-The [immutable phase 1B report](../archived_no_longer_valid/data_storytelling/phase1b_migration.json) contains 431 migration review entries, 384 notes, 220 source references, 25 identity mappings and 154 product mappings. These are historical audit counts, not a dynamic pending queue. Use `migration[0].review` for old/new hashes, `source_refs` for provenance and `id_mapping`/`product_mapping` for identity lineage. All 384 notes remain accessible; the owner index below prevents their review guidance disappearing during archiving. Some notes merely explain completed migration choices.
+The [immutable phase 1B report](../../archived_no_longer_valid/data_storytelling/phase1b_migration.json) contains 431 migration review entries, 384 notes, 220 source references, 25 identity mappings and 154 product mappings. These are historical audit counts, not a dynamic pending queue. Use `migration[0].review` for old/new hashes, `source_refs` for provenance and `id_mapping`/`product_mapping` for identity lineage. All 384 notes remain accessible; the owner index below prevents their review guidance disappearing during archiving. Some notes merely explain completed migration choices.
 
 | Record owning notes | Note count |
 | --- | ---: |
@@ -265,7 +267,7 @@ The [immutable phase 1B report](../archived_no_longer_valid/data_storytelling/ph
 
 ## Deferred source material
 
-The [original migration map](../archived_no_longer_valid/data_storytelling/migration_map.json) retains all 2,273 dispositions, including 241 deferred entries. This is not proof that all deferred material is still absent: phase 1B subsequently imported some subjects. Before migrating further material, compare its source pointer and legacy identity with the phase 1B mappings and current foundation to avoid duplicates.
+The [original migration map](../../archived_no_longer_valid/data_storytelling/migration_map.json) retains all 2,273 dispositions, including 241 deferred entries. This is not proof that all deferred material is still absent: phase 1B subsequently imported some subjects. Before migrating further material, compare its source pointer and legacy identity with the phase 1B mappings and current foundation to avoid duplicates.
 
 Each entry below is located by its stable ID in that archive. The source path/pointer and rationale there define the exact deferred material. Review these against phases 2 (composition), 3 (fabrication economics), 4 (ecosystem) and 5 (overall economics), or the separate recurring assessment; do not bulk-import numerical forecasts as story facts.
 

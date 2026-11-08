@@ -1,5 +1,7 @@
 # Aurelia Foundation and Partnerships — proposed replacement
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 Baseline: `09a807654db0c4f3dad82ea920f985a2e831a1b9`. Foundation changes await Changes confirm approval.
 
 Replace `process.bpi_qualification` with `process.aurelia_foundation`, titled **Aurelia Foundation and Partnerships**. Start: `event.dri_cpm` (1 September 1976). End: retain **June 1978**, month precision. No exact completion day or new end event is inferred.

@@ -1,5 +1,7 @@
 # Product catalogue cleanup — phase 1 migration map
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../../README.md) and live storytelling JSON.
+
 Assessment against `venwry/aion_logix` main at [`a0cf5b8`](https://github.com/venwry/aion_logix/commit/a0cf5b82238b3919aee4b5802be6913f12ff05c7), 8 November 2026. **Planning evidence only: no schema, foundation, authorization or Changes confirm edits.** Proposed IDs, classifications and examples below are not approved story content.
 
 ## Scope and rules

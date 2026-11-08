@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');const fs=require('node:fs');
 const read=p=>JSON.parse(fs.readFileSync(p));
-const audit=read('docs/product-catalogue-phase3/migration-audit.json');
+const audit=read('data_storytelling/review_evidence/catalogue-phase3/audit.json');
 // Recover the reviewed proposal snapshots after author approvals as well as before.
 const evidence=[...read('data_storytelling/authorization_decision.json').authorization_decision.map(d=>d.proposal).filter(Boolean),...read('data_storytelling/change.json').change];
 const proposals=audit.proposals.map(a=>evidence.findLast(p=>p.id===a.change_id));

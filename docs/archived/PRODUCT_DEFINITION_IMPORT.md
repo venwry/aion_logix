@@ -1,5 +1,7 @@
 # Product definitions and composition — contract 0.7.0
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 The author approved the schema extension and a definition-only import. New technical records are imported with external `unauthorized` entries (the browser's Pending authorization filter). Existing product and manufacturing-capability records change only through individual Changes confirm proposals. Referencing a technical record does not authorize it.
 
 ## Scope and ownership

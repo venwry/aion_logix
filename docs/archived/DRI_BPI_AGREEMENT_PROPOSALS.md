@@ -1,5 +1,7 @@
 # DRI and BPI agreement changes — approval pack
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 Baseline: `ad6b642ce009e1e74460021d66fe54ee15827ee5`. These changes are proposed, not applied to foundation data.
 
 ## DRI founding roles

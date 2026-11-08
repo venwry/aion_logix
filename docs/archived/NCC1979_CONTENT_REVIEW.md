@@ -1,5 +1,7 @@
 # NCC 1979 content review
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 Seven single-record proposals revise the campaign, execution process and launch event, retire the duplicate Apple launch event, and update its three referencing records. These are pending author approval, not edits to approved foundation data.
 
 ## Responsibilities

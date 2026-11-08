@@ -1,5 +1,7 @@
 # Agreement migration and timeline ownership review
 
+> **Historical documentation — not current rules, instructions or queue status.** Preserved from main at `606e3f1`; consult the [current documentation index](../README.md) and live storytelling JSON.
+
 30 October 2026. Baseline: `533d0ff94614977c6f81e85f8c9cdd20d2a29f8f`. Contract: **0.5.0**.
 
 ## Applied structural migration

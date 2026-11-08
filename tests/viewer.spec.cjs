@@ -28,7 +28,7 @@ test('schema design diagrams and agreement-owned DRI clauses',async({page})=>{
  await expect(page.getByRole('status')).toBeEmpty();
  await page.getByRole('link',{name:'Data · agreement',exact:true}).click();
  await expect(page.locator('#content')).toContainText('clause.dri_employee_reserve');
- await expect(page.locator('#content')).toContainText('unallocated_reserve');
+ await expect(page.locator('#content')).toContainText('reserve is unallocated');
 });
 test('migrated phase-one data and review report are accessible',async({page})=>{
  await page.goto('/docs/viewer.html#migration-report');
@@ -58,7 +58,10 @@ test('handover navigation exposes current guides and distinguishes archives',asy
  await page.getByRole('link',{name:'Repository map',exact:true}).click();
  await expect(page.locator('article')).toContainText('code/review-log.js');
  await page.getByRole('link',{name:'Storytelling — file reference',exact:true}).click();
- await expect(page.locator('article')).toContainText('six active JSON files');
+ await expect(page.locator('article')).toContainText('eight active JSON files');
+ await page.getByRole('link',{name:'Reference rules — dependencies and launches',exact:true}).click();
+ await expect(page.locator('article h1')).toHaveText('References: current authoring rules');
+ await expect(page.locator('article')).toContainText('Do not convert every old subject into an input');
  await page.getByRole('link',{name:'Archive — historical evidence only',exact:true}).click();
  await expect(page.locator('article h1')).toContainText('Historical archive');
 });

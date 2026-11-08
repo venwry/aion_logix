@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {hash,records,transact,validate} from '../server/model.js';
 const read=p=>JSON.parse(fs.readFileSync(p));
-const audit=read('docs/product-catalogue-phase3/migration-audit.json');
+const audit=read('data_storytelling/review_evidence/catalogue-phase3/audit.json');
 const baseline=p=>JSON.parse(execFileSync('git',['show',audit.source_commit+':'+p],{encoding:'utf8',maxBuffer:64*1024*1024}));
 const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(dir=>fs.readdirSync(dir).filter(f=>f.endsWith('.json')).map(f=>[dir+'/'+f,read(dir+'/'+f)])));
 const proposals=files['data_storytelling/change.json'].change.filter(p=>p.id.startsWith('change.catalogue_phase3_'));
@@ -29,7 +29,11 @@ const targets=new Set();
 function scrub(v){if(Array.isArray(v))return v.map(scrub);if(v&&typeof v==='object')return Object.fromEntries(Object.entries(v).filter(([k])=>!['subject_ids','computer_id'].includes(k)).map(([k,v])=>[k,scrub(v)]));return v;}
 for(const p of proposals){
  const result=transact(files,request([p]));assert(result.changed);assert.deepEqual(validate(result.files).errors,[]);
- for(const e of p.elements){assert(!targets.has(e.record_id),'Overlapping proposal '+e.record_id);targets.add(e.record_id);if(e.after&&e.record_id!=='product.software_cpm_aurelia')assert.deepEqual(scrub(e.after),scrub(e.before),'Unexpected non-reference change '+e.record_id);}
+ for(const e of p.elements){assert(!targets.has(e.record_id),'Overlapping proposal '+e.record_id);targets.add(e.record_id);if(e.after&&e.record_id!=='product.software_cpm_aurelia'){
+  const a=scrub(e.after),b=scrub(e.before);
+  if(['event','process'].includes(e.record_type)){delete a.inputs;delete a.outcomes;delete b.inputs;delete b.outcomes;}
+  assert.deepEqual(a,b,'Unexpected structural/timing change '+e.record_id);
+ }}
  for(const r of external)assert.deepEqual(result.files['data_storytelling/authorization.json'].authorization.find(a=>a.record_id===r.id),auth.find(a=>a.record_id===r.id));
 }
 const applied=transact(files,request(proposals)).files,reversed=transact(files,request([...proposals].reverse())).files;
@@ -44,12 +48,20 @@ for(const type of ['base_part','device'])assert.deepEqual(applied['data_foundati
 const softwareBefore=new Map(files['data_foundation/software_edition.json'].software_edition.map(r=>[r.id,r]));
 for(const r of applied['data_foundation/software_edition.json'].software_edition)assert.deepEqual(scrub(r),scrub(softwareBefore.get(r.id)));
 function pointer(doc,path){return path.slice(1).split('/').map(k=>k.replaceAll('~1','/').replaceAll('~0','~')).reduce((v,k)=>v[k],doc);}
-for(const ref of audit.reference_dispositions){
- assert.equal(pointer(files[ref.file],ref.pointer),ref.before);
- const original=records(files).find(r=>r.id===ref.source_record_id),record=finalIndex.get(ref.source_record_id);
- const ownerPointer=ref.pointer.split('/').slice(3,-1).join('/');
- const container=ownerPointer?pointer(record,'/'+ownerPointer):record;
- for(const id of [ref.after].flat())assert(strings(container).includes(id),ref.pointer+' missing '+id);
- assert(original);
+// Initial pointers remain provenance, not instructions to keep every old link.
+for(const ref of audit.reference_dispositions_from_initial_migration)assert.equal(pointer(files[ref.file],ref.pointer),ref.before);
+const exceptions=audit.reference_rules_revision.top_level_exceptions;
+let activityCount=0,remainingSubjects=0;
+for(const p of proposals)for(const e of p.elements){
+ if(!e.after||!['event','process'].includes(e.record_type))continue;
+ activityCount++;
+ for(const ref of e.after.subject_ids||[]){remainingSubjects++;assert(exceptions.some(x=>x.record_id===e.record_id&&x.ref_id===ref&&x.reason),'Unexplained top-level subject '+e.record_id+' '+ref);}
+ if(e.after.kind==='campaign_execution')assert.equal((e.after.subject_ids||[]).length,0);
+ for(const key of ['id','time','period','category','parent_process_id','process_ids','agreement_id'])assert.deepEqual(e.after[key],e.before[key],e.record_id+' changed '+key);
+ for(const section of ['inputs','outcomes'])for(const item of e.after[section]||[])assert(item.description.trim()&&item.type);
 }
-console.log(JSON.stringify({result:'passed',source_commit:audit.source_commit,current_foundation_records:records(files).length,external_records_pending:external.length,proposals:proposals.length,modified_existing_records:targets.size-removed.length,proposed_product_removals:removed.length,verified_reference_occurrences:audit.reference_dispositions.length,independent_proposals_validated:proposals.length,batch_and_reverse_batch_valid:true,existing_foundation_and_authorization_unchanged:true,existing_base_part_device_and_software_definitions_preserved:true,technical_host_reference_changes:2,no_authorization_saved:true},null,2));
+assert.equal(remainingSubjects,exceptions.length);
+for(const ref of exceptions)assert(finalIndex.get(ref.record_id).subject_ids.includes(ref.ref_id));
+for(const ref of audit.reference_rules_revision.top_level_subject_dispositions)assert(ref.reason&&ref.disposition);
+assert.equal(activityCount,40);
+console.log(JSON.stringify({result:'passed',source_commit:audit.source_commit,current_foundation_records:records(files).length,external_records_pending:external.length,proposals:proposals.length,modified_existing_records:targets.size-removed.length,proposed_product_removals:removed.length,verified_initial_reference_occurrences:audit.reference_dispositions_from_initial_migration.length,reviewed_activity_records:activityCount,reviewed_top_level_references:audit.reference_rules_revision.top_level_subject_dispositions.length,documented_top_level_exceptions:remainingSubjects,independent_proposals_validated:proposals.length,batch_and_reverse_batch_valid:true,existing_foundation_and_authorization_unchanged:true,existing_base_part_device_and_software_definitions_preserved:true,technical_host_reference_changes:2,no_authorization_saved:true},null,2));
