@@ -26,3 +26,11 @@ test('non-service products require delivery composition; technical identity alon
  p.composition_history=[];assert(validateCatalogueProduct(p).length);
  assert(validateCatalogueProduct({...service(),offering_category:'peripheral'}).length);
 });
+
+test('composition element_type can retain classification and role text while legacy role remains optional',()=>{
+ const p=device(),line=p.composition_history[0].composition_definition[0];
+ delete line.role;line.element_type='main_product — Supplied device';assert.deepEqual(validateCatalogueProduct(p),[]);
+ delete line.element_type;assert.deepEqual(validateCatalogueProduct(p),[]);
+ line.role='Legacy role';assert.deepEqual(validateCatalogueProduct(p),[]);
+ line.element_type='';assert(validateCatalogueProduct(p).length);
+});

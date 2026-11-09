@@ -210,7 +210,9 @@
           ]
         },
         "role": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "Legacy free-text composition role. Retained only for compatibility; revised records merge its useful text into element_type."
         },
         "supply_condition": {
           "oneOf": [
@@ -375,11 +377,9 @@
           }
         },
         "element_type": {
-          "enum": [
-            "main_product",
-            "connected_device",
-            "attached_product"
-          ]
+          "type": "string",
+          "minLength": 1,
+          "description": "Descriptive composition element classification. Retain an existing classification and enrich it with useful former role text; leave absent where neither was populated. This field does not establish connectivity or physical quantities."
         }
       },
       "required": [
@@ -387,7 +387,6 @@
         "target",
         "quantity",
         "unit",
-        "role",
         "supply_condition",
         "requirements"
       ],

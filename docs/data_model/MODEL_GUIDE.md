@@ -1,4 +1,4 @@
-# Current model guide — version 0.10.0
+# Current model guide — version 0.11.0
 
 The model separates fictional-world records, editorial review and later calculations. [Principles](../../DATA_MODEL_PRINCIPLES.md), [reference rules](REFERENCE_RULES.md) and [JSON Schemas](../../schemas/) govern editing. The [generated specification](FOUNDATION_SPECIFICATION.md) describes exact attributes; historical reports do not extend the contract.
 
@@ -30,7 +30,9 @@ The accepted catalogue has no chip/software-edition aliases or artificial famili
 
 ## Composition and manufacturing
 
-Products, devices and software editions support complete `composition_history` versions. Each version owns its technical definition, composition lines and assembly requirements. Versioned child targets are pinned explicitly. Physical quantities, unknown quantities, conditional supply and service/licence entitlements retain their meanings; support services are not physical part leaves.
+Products, devices and software editions support complete `composition_history` versions. Each version owns its technical definition, composition lines and assembly requirements. Versioned child targets are pinned explicitly. Physical quantities, unknown quantities and service/licence entitlements retain their meanings; support services are not physical part leaves. Customer-facing product compositions should describe fixed supplied contents: separate platform alternatives into distinct offerings, and leave independently purchased options outside the package. Existing conditional product lines remain schema-compatible while their proposals await review. Device BOMs still permit conditional OEM assembly sourcing; resolving those conditions requires manufacturing evidence.
+
+Composition lines use optional descriptive `element_type` text. Preserve existing classifications such as `main_product`, `connected_device` and `attached_product`; enrich them with useful former `role` text, separated by an em dash. If only a role exists, use its text as `element_type`. If both were empty or absent, do not invent a classification. The legacy `role` attribute is optional and deprecated for compatibility, and revised records remove it through Changes confirm. Connectivity comes from `connection`/`placements`, never by parsing `element_type`. Roles elsewhere in the model are unaffected.
 
 For new and revised compositions, start the initial product version at the product-owned launch event. Start a device or software edition at its earliest supported use, following explicitly pinned composition versions through containing products/devices; a later product revision contributes its own effective date, not the product's original launch. External editions can use their partner launch. A documented earlier engineering handover takes precedence over commercial release; preserve its date precision. A compatible host alone does not prove use. If no dated use exists, keep the start unknown and open a discussion.
 
