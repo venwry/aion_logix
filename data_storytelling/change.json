@@ -7523,7 +7523,7 @@
       "id": "change.fixed_artemis_budget_hdd",
       "category": "data",
       "title": "Make the Artemis Budget Hard-Disk Office a fixed package",
-      "reason": "Remove Abacus from both versions because it is independently supplied. Apply the same fixed-package rule to the separately selectable network card. Preserve dates, line IDs and the base package; no additional bundled product is invented.",
+      "reason": "Remove Abacus from both versions because it is independently supplied. Apply the same fixed-package rule to the separately selectable network card. Preserve dates, line IDs and the base package; no additional bundled product is invented. Remove duplicate Regular Support entitlement blocks: the referenced service now defines one year per computer, while the existing composition quantity records the number of covered computers. Approve the Regular Support definition first or in the same save.",
       "elements": [
         {
           "record_type": "product",
@@ -8191,14 +8191,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_10",
@@ -8390,14 +8383,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_11",
@@ -8431,6 +8417,9 @@
             "launch_event_id": "event.software32"
           }
         }
+      ],
+      "depends_on_change_ids": [
+        "change.regular_support_annual_definition"
       ]
     },
     {
@@ -9364,8 +9353,8 @@
     {
       "id": "change.merge_composition_roles_product",
       "category": "data",
-      "title": "Consolidate composition roles into element_type: product",
-      "reason": "Retire the composition-line role field. Preserve each existing element_type classification and append any role text to it; where only role was populated, use that text as element_type. Empty role fields are removed without inventing classifications. Apply this only to composition lines, not participant, reference or technical-definition roles.",
+      "title": "Consolidate product composition roles and simplify Regular Support inclusions",
+      "reason": "Retire the composition-line role field. Preserve each existing element_type classification and append any role text to it; where only role was populated, use that text as element_type. Empty role fields are removed without inventing classifications. Apply this only to composition lines, not participant, reference or technical-definition roles. Remove duplicate Regular Support entitlement blocks: the referenced service now defines one year per computer, while the existing composition quantity records the number of covered computers. Approve the Regular Support definition first or in the same save.",
       "elements": [
         {
           "record_type": "product",
@@ -10249,14 +10238,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -10550,14 +10532,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -10851,14 +10826,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -11157,14 +11125,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -11734,14 +11695,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -11915,14 +11869,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -12497,14 +12444,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -12678,14 +12618,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -13265,14 +13198,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -13451,14 +13377,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -15035,14 +14954,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -15221,14 +15133,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -16891,14 +16796,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   }
                 ],
                 "assembly_requirements": [
@@ -17073,14 +16971,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_10",
@@ -17286,14 +17177,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_11",
@@ -17624,14 +17508,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_7",
@@ -17989,14 +17866,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_7",
@@ -18368,14 +18238,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_7",
@@ -18732,14 +18595,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_7",
@@ -19097,14 +18953,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_7",
@@ -19476,14 +19325,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_7",
@@ -19855,14 +19697,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_7",
@@ -21744,14 +21579,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_10",
@@ -22252,14 +22080,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_10",
@@ -22759,14 +22580,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_10",
@@ -23455,14 +23269,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_9",
@@ -23680,14 +23487,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_10",
@@ -24372,14 +24172,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_9",
@@ -24593,14 +24386,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_10",
@@ -25401,14 +25187,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 2,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_15",
@@ -26310,14 +26089,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 4,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_14",
@@ -27154,14 +26926,7 @@
                       "kind": "always"
                     },
                     "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 2,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
+                    "element_type": "attached_product"
                   },
                   {
                     "id": "line_15",
@@ -33092,6 +32857,9 @@
             "offering_category": "expansion_kit"
           }
         }
+      ],
+      "depends_on_change_ids": [
+        "change.regular_support_annual_definition"
       ]
     },
     {
@@ -69993,6 +69761,132 @@
                 "assembly_requirements": []
               }
             ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.regular_support_annual_definition",
+      "category": "data",
+      "title": "Define Regular Support as a one-year bundled or standalone extension service",
+      "reason": "Use meaningful specification types, plain-English descriptions and concise values, following Professional Support. Define one year per service unit and permit both computer-bundled supply and independently purchased extensions. Preserve the existing support scope and the author-retained depot-repair benefit. This definition is the prerequisite for removing duplicate entitlement blocks from composition lines.",
+      "elements": [
+        {
+          "record_type": "product",
+          "record_id": "product.service_regular_support",
+          "before": {
+            "id": "product.service_regular_support",
+            "name": "Logix Regular Support Service",
+            "kind": "service",
+            "description": "Logix Regular Support Service",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "specification": [
+              {
+                "number": 1,
+                "type": "support_entitlement",
+                "description": "toll-free telephone line",
+                "value": "toll-free telephone line"
+              },
+              {
+                "number": 2,
+                "type": "support_entitlement",
+                "description": "unlimited reasonable telephone support",
+                "value": "unlimited reasonable telephone support"
+              },
+              {
+                "number": 3,
+                "type": "support_entitlement",
+                "description": "assistance and troubleshooting",
+                "value": "assistance and troubleshooting"
+              },
+              {
+                "number": 4,
+                "type": "support_entitlement",
+                "description": "software/firmware maintenance releases",
+                "value": "software/firmware maintenance releases"
+              },
+              {
+                "number": 5,
+                "type": "support_entitlement",
+                "description": "10% discount on depot repairs",
+                "value": "10% discount on depot repairs"
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch",
+            "offering_category": "service"
+          },
+          "after": {
+            "id": "product.service_regular_support",
+            "name": "Logix Regular Support Service",
+            "kind": "service",
+            "description": "One year of Regular Support for one computer, supplied with a computer package or purchased independently as an extension. It provides telephone assistance, troubleshooting and software/firmware maintenance releases, with the depot-repair benefit stated below. The service expires after one year unless extended.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "specification": [
+              {
+                "number": 1,
+                "type": "duration",
+                "description": "The service remains in effect for this period, after which it expires unless extended.",
+                "value": "1 year"
+              },
+              {
+                "number": 2,
+                "type": "coverage",
+                "description": "Each supplied service unit covers one computer for the stated term.",
+                "value": "1 computer per service unit"
+              },
+              {
+                "number": 3,
+                "type": "availability",
+                "description": "The service can be included with a computer or purchased independently to extend support.",
+                "value": "Bundled with a computer or sold separately as an extension"
+              },
+              {
+                "number": 4,
+                "type": "renewal",
+                "description": "A further year requires an extension of the Regular Support service.",
+                "value": "Annual extension"
+              },
+              {
+                "number": 5,
+                "type": "feature",
+                "description": "Customers can contact the support team through a toll-free telephone line.",
+                "value": "Toll-free telephone support"
+              },
+              {
+                "number": 6,
+                "type": "feature",
+                "description": "Telephone support is available without a fixed call allowance, subject to reasonable use.",
+                "value": "Unlimited reasonable telephone support"
+              },
+              {
+                "number": 7,
+                "type": "feature",
+                "description": "Support staff assist customers with using their computer and diagnosing problems.",
+                "value": "Assistance and troubleshooting"
+              },
+              {
+                "number": 8,
+                "type": "feature",
+                "description": "Customers receive maintenance releases for supported software and firmware.",
+                "value": "Software and firmware maintenance releases"
+              },
+              {
+                "number": 9,
+                "type": "feature",
+                "description": "Covered customers receive the existing discount on repairs carried out at the depot.",
+                "value": "10% discount on depot repairs"
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch",
+            "offering_category": "service"
           }
         }
       ]

@@ -5,7 +5,11 @@ import {validateCatalogue} from './validate-catalogue.js';
 import {resolveComposition} from '../code/composition.js';
 const root='data_storytelling/review_evidence/fixed-composition-offerings/';
 const read=p=>JSON.parse(fs.readFileSync(p));
-const review=read(root+'review.json'),proposals=read(root+'proposals.json').change;
+const review=read(root+'review.json'),priorProposals=read(root+'proposals.json').change;
+const supportRoot='data_storytelling/review_evidence/regular-support-definition/';
+const amendments=fs.existsSync(supportRoot+'proposals.json')?read(supportRoot+'proposals.json').change:[];
+const proposals=priorProposals.map(p=>amendments.find(a=>a.id===p.id)||p).concat(amendments.filter(a=>!priorProposals.some(p=>p.id===a.id)));
+const supportReview=amendments.length?read(supportRoot+'review.json'):null;
 const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[d+'/'+f,read(d+'/'+f)])));
 const initial=structuredClone(files),queue=files['data_storytelling/change.json'].change,decisions=files['data_storytelling/authorization_decision.json'].authorization_decision;
 const pending=proposals.filter(p=>queue.some(q=>q.id===p.id));
@@ -13,7 +17,11 @@ const request=ps=>({action:'approve_changes',changes:ps.map(p=>({change_id:p.id,
 assert.deepEqual(validate(files).errors,[]);
 for(const p of proposals){
  assert.deepEqual(queue.find(q=>q.id===p.id)||decisions.findLast(d=>d.change_id===p.id)?.proposal,p);
- if(pending.includes(p))assert.deepEqual(validate(transact(files,request([p])).files).errors,[]);
+ if(pending.includes(p)){
+  const prerequisites=(p.depends_on_change_ids||[]).map(id=>pending.find(q=>q.id===id)).filter(Boolean);
+  if(prerequisites.length)assert.throws(()=>transact(files,request([p])),/required proposal/);
+  assert.deepEqual(validate(transact(files,request([...prerequisites,p])).files).errors,[]);
+ }
 }
 const applied=pending.length?transact(files,request(pending)).files:files;
 const reverse=pending.length?transact(files,request([...pending].reverse())).files:files;
@@ -46,13 +54,40 @@ const cpm=lines('product.retail.cpm_migration')[0];assert.equal(cpm.quantity,1);
 // Workstation and network-card contents must not gain another cable or change their supplied part.
 for(const id of ['product.retail.developer_workstation','device.network_card_artemis','device.network_card_aurelia']){
  const p=proposals.find(p=>p.elements.some(e=>e.record_id===id));const e=p.elements.find(e=>e.record_id===id);
- const strip=r=>r.composition_history.map(v=>v.composition_definition.map(({role,element_type,...l})=>l));assert.deepEqual(strip(e.after),strip(e.before));
+ const strip=r=>r.composition_history.map(v=>v.composition_definition.map(({role,element_type,...l})=>{if(supportReview&&l.target.record_id==='product.service_regular_support')delete l.entitlement;return l;}));assert.deepEqual(strip(e.after),strip(e.before));
 }
 const workstation=resolveComposition(index,'product.retail.developer_workstation',1);assert.equal(workstation.leaves.filter(l=>l.record_id==='base_part.logix_network_cable').reduce((n,l)=>n+l.quantity,0),1);
 assert.equal(workstation.leaves.filter(l=>l.record_id==='base_part.logix_network_cable_2m').length,0);
-// Entitlements and all unrelated structures survive the role-only proposals unchanged.
+// Preserve all unrelated structures; the support amendment removes only its duplicate entitlements.
 for(const p of proposals.filter(p=>p.id.startsWith('change.merge_composition_roles_')))for(const e of p.elements){
- const strip=r=>{const copy=structuredClone(r);for(const v of copy.composition_history)for(const l of v.composition_definition){delete l.role;delete l.element_type;}return copy;};assert.deepEqual(strip(e.before),strip(e.after));
+ const strip=r=>{const copy=structuredClone(r);for(const v of copy.composition_history)for(const l of v.composition_definition){delete l.role;delete l.element_type;if(supportReview&&l.target.record_id==='product.service_regular_support')delete l.entitlement;}return copy;};assert.deepEqual(strip(e.before),strip(e.after));
+}
+if(supportReview){
+ const service=index.get('product.service_regular_support');
+ assert.equal(service.specification.find(s=>s.type==='duration').value,'1 year');
+ assert.equal(service.specification.find(s=>s.type==='coverage').value,'1 computer per service unit');
+ assert(service.specification.find(s=>s.type==='availability').value.includes('sold separately as an extension'));
+ assert(service.specification.some(s=>s.value==='10% discount on depot repairs'));
+ assert.equal(supportReview.removed_entitlements.length,34);
+ assert.equal(new Set(supportReview.removed_entitlements.map(x=>x.record_id)).size,25);
+ for(const removed of supportReview.removed_entitlements){
+  const l=versions(removed.record_id).find(v=>v.version_number===removed.version_number).composition_definition.find(l=>l.id===removed.line_id);
+  assert(!Object.hasOwn(l,'entitlement'));assert.equal(l.quantity,removed.quantity);assert.equal(l.quantity,removed.removed_entitlement.count);
+ }
+ for(const r of index.values())for(const v of r.composition_history||[])for(const l of v.composition_definition)if(l.target.record_id===service.id)assert(!Object.hasOwn(l,'entitlement'));
+ // The amendment must not alter prior before snapshots or unrelated proposed content.
+ for(const p of amendments){
+  const prior=priorProposals.find(q=>q.id===p.id);if(!prior)continue;
+  assert.deepEqual(p.elements.map(e=>e.before),prior.elements.map(e=>e.before));
+  const cleaned=structuredClone(prior.elements);for(const e of cleaned)for(const v of e.after?.composition_history||[])for(const l of v.composition_definition)if(l.target.record_id===service.id)delete l.entitlement;
+  assert.deepEqual(p.elements,cleaned);
+ }
+ // Apply the shared definition first, then every remaining change separately.
+ let sequential=files;
+ const serviceProposal=pending.find(p=>p.id===supportReview.service_change_id);
+ if(serviceProposal)sequential=transact(sequential,request([serviceProposal])).files;
+ for(const p of pending.filter(p=>p!==serviceProposal))sequential=transact(sequential,request([p])).files;
+ assert.deepEqual(records(sequential).sort((a,b)=>a.id.localeCompare(b.id)),records(applied).sort((a,b)=>a.id.localeCompare(b.id)));
 }
 assert.deepEqual(files,initial,'Simulation must not mutate source data');
-console.log(JSON.stringify({result:'passed',proposals:proposals.length,pending:pending.length,record_edits_and_additions:proposals.reduce((n,p)=>n+p.elements.length,0),independent_and_batch_approval:'passed',strict_catalogue:'passed',remaining_conditional_product_lines:0,remaining_legacy_composition_roles:0,workstation_cables:1,workstation_new_cables:0},null,2));
+console.log(JSON.stringify({result:'passed',proposals:proposals.length,pending:pending.length,record_edits_and_additions:proposals.reduce((n,p)=>n+p.elements.length,0),independent_and_batch_approval:'passed',strict_catalogue:'passed',remaining_conditional_product_lines:0,remaining_legacy_composition_roles:0,workstation_cables:1,workstation_new_cables:0,support_entitlements_removed:supportReview?34:0},null,2));
