@@ -9,6 +9,22 @@ import {hash, records, transact, validate} from '../server/model.js';
 import {validateProductLaunches} from '../code/product-launches.js';
 const read=path=>JSON.parse(fs.readFileSync(path));
 const audit=read('data_storytelling/review_evidence/catalogue-phase5/audit.json');
+// Preserve the original proposal audit; overlay the separately recorded author-feedback revision.
+const amendmentPath='data_storytelling/review_evidence/catalogue-phase5/feedback-amendment.json';
+const amendment=fs.existsSync(amendmentPath)?read(amendmentPath):null;
+if(amendment){
+ const originalQueue=JSON.parse(execFileSync('git',['show',amendment.source_commit+':data_storytelling/change.json']));
+ const reviewed=originalQueue.change.find(p=>p.id===amendment.change_id);
+ assert.equal(hash(reviewed),amendment.reviewed_proposal_sha256);
+ const review=read('data_storytelling/change_review.json').change_review.find(r=>r.id===amendment.feedback_id);
+ assert.equal(review.proposal_sha256,amendment.reviewed_proposal_sha256);assert.equal(review.text,amendment.feedback_text);
+ const item=audit.proposals.find(p=>p.change_id===amendment.change_id);
+ assert.equal(item.proposal_sha256,amendment.reviewed_proposal_sha256);item.proposal_sha256=amendment.revised_proposal_sha256;
+ for(const a of amendment.assignments){const i=audit.assignments.findIndex(old=>old.product_id===a.product_id);assert(i>=0);audit.assignments[i]=a;}
+ const edited=new Set(amendment.reverse_link_removals.map(r=>r.record_id));
+ audit.reverse_link_removals=[...audit.reverse_link_removals.filter(r=>!edited.has(r.record_id)),...amendment.reverse_link_removals];
+ audit.preserved_later_promotions.push(...amendment.preserved_later_promotions);
+}
 const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(dir=>fs.readdirSync(dir)
  .filter(path=>path.endsWith('.json')).map(path=>[dir+'/'+path,read(dir+'/'+path)])));
 const original=structuredClone(files),index=new Map(records(files).map(r=>[r.id,r]));
@@ -30,28 +46,32 @@ if(pending.length===groups.length)for(const [path,sha] of Object.entries(audit.p
 }
 assert.deepEqual(validate(files).errors,[]);
 const changed=new Set();
-const stripSubjects=x=>Array.isArray(x)?x.map(stripSubjects):x&&typeof x==='object'
- ?Object.fromEntries(Object.entries(x).filter(([k])=>k!=='subject_ids').map(([k,v])=>[k,stripSubjects(v)])):x;
+const at=(record,pointer)=>pointer.split('/').slice(1).reduce((value,key)=>value[key],record);
 for(const p of groups)for(const e of p.elements){
  assert(!changed.has(e.record_id),'Overlapping review groups: '+e.record_id);changed.add(e.record_id);
  assert(e.before&&e.after,'Phase 5 only revises existing records.');
  const isPending=pending.some(x=>x.id===p.id);
  assert.deepEqual(index.get(e.record_id),isPending?e.before:e.after,'Stale or unexpectedly changed '+e.record_id);
+ const expected=structuredClone(e.before);
  if(e.record_type==='product'){
-  const {launch_campaign_id,launch_event_id,...rest}=e.after;
-  assert.deepEqual(rest,e.before,'Product definition changed: '+e.record_id);
-  assert(launch_campaign_id&&launch_event_id);
- }else{
-  assert(['campaign','event'].includes(e.record_type));
-  assert.deepEqual(stripSubjects(e.after),stripSubjects(e.before),'Changed prose, dates, ownership or activity structure: '+e.record_id);
-  const expected=structuredClone(e.before);
-  for(const removal of audit.reverse_link_removals.filter(r=>r.record_id===e.record_id)){
-   const path=removal.pointer.split('/').slice(1),key=path.pop();
-   const parent=path.reduce((value,key)=>value[key],expected);
-   parent[key]=parent[key].filter(id=>!removal.removed_product_ids.includes(id));
-  }
-  assert.deepEqual(e.after,expected,'A reference other than a declared reverse launch link changed: '+e.record_id);
+  const a=audit.assignments.find(a=>a.product_id===e.record_id);assert(a);
+  expected.launch_campaign_id=a.launch_campaign_id;expected.launch_event_id=a.launch_event_id;
+ }else assert(['campaign','event'].includes(e.record_type));
+ for(const removal of audit.reverse_link_removals.filter(r=>r.record_id===e.record_id)){
+  const path=removal.pointer.split('/').slice(1),key=path.pop(),parent=path.reduce((value,key)=>value[key],expected);
+  parent[key]=parent[key].filter(id=>!removal.removed_product_ids.includes(id));
  }
+ if(p.id===amendment?.change_id)for(const edit of amendment.explicit_record_edits.filter(e=>e.record_id===expected.id)){
+  assert.deepEqual(at(expected,edit.pointer),edit.before,'Stale amendment baseline: '+expected.id+edit.pointer);
+  const path=edit.pointer.split('/').slice(1),key=path.pop(),parent=path.reduce((value,key)=>value[key],expected);
+  parent[key]=structuredClone(edit.after);
+ }
+ assert.deepEqual(e.after,expected,'Undeclared change: '+e.record_id);
+}
+if(amendment)for(const a of amendment.assignments){
+ for(const id of a.evidence_ids)assert(index.has(id),'Missing availability evidence '+id);
+ const p=groups.find(p=>p.id===amendment.change_id).elements.find(e=>e.record_id===a.product_id).after;
+ assert.deepEqual(p.composition_history[0].composition_definition.map(l=>l.target),a.direct_composition_targets);
 }
 const request=ps=>({action:'approve_changes',changes:ps.map(p=>({change_id:p.id,proposal_sha256:hash(p)}))});
 for(const p of pending)assert.deepEqual(validate(transact(files,request([p])).files).errors,[],p.id);
@@ -93,4 +113,4 @@ const tandy=structuredClone(finalIndex),abacus=tandy.get('product.abacus_1.model
 abacus.launch_campaign_id='campaign.ncc1979';abacus.launch_event_id='event.tandy_release';
 assert(validateProductLaunches(tandy).some(e=>e.startsWith(abacus.id+':')&&e.includes('belong to its campaign')));
 assert.deepEqual(files,original,'Approval simulation mutated its input.');
-console.log(JSON.stringify({result:'passed',source_commit:audit.source_commit,proposals:groups.length,pending:pending.length,approved:groups.length-pending.length,changed_records:changed.size,new_product_launch_links:67,linked_products_after_approval:100,deferred_products:5,individual_batch_reverse_and_sequential_approvals_valid:true,technical_definitions_dates_ownership_and_prose_unchanged:true,regular_support_discount_preserved:true,existing_launch_links_and_later_promotions_preserved:true,no_authorization_saved:true},null,2));
+console.log(JSON.stringify({result:'passed',source_commit:audit.source_commit,proposals:groups.length,pending:pending.length,approved:groups.length-pending.length,changed_records:changed.size,new_product_launch_links:67,linked_products_after_approval:100,deferred_products:5,individual_batch_reverse_and_sequential_approvals_valid:true,canonical_technical_definitions_dates_and_ownership_unchanged:true,explicit_bom_and_campaign_amendments:amendment?.explicit_record_edits.length||0,regular_support_discount_preserved:true,existing_launch_links_and_later_promotions_preserved:true,no_authorization_saved:true},null,2));
