@@ -165,3 +165,13 @@ body.timeline-fullscreen>#workspace{margin:0 6px 6px;flex:1;min-height:0}
 .review-split .change-table td:first-child{width:auto;min-width:0}
 @media(max-width:760px){.review-split{display:flex;flex-direction:column}.proposal-nav{max-height:220px;flex-shrink:0}.proposal-details{overflow:visible}.comparison-grid{grid-template-columns:minmax(0,1fr)}.editorial-message{margin-left:12px;margin-right:12px}.comparison-record{padding:4px}.review-toolbar>*{max-width:100%}}
 .draft-recovery{margin:4px 26px 8px;font-size:12px;max-height:230px;overflow:auto;flex-shrink:0}.draft-recovery textarea{width:100%;box-sizing:border-box;min-height:70px}.draft-recovery p{overflow-wrap:anywhere}
+/* Keep comparison actions outside the independently scrolling record content. */
+.saving-service-toggle{align-self:center;white-space:nowrap}
+.proposal-details{display:flex;flex-direction:column;overflow:hidden;padding:0}
+.comparison-controls{flex-shrink:0;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--panel,#fff);gap:10px}
+.comparison-controls .proposal-actions{margin:0;display:flex;gap:6px;flex-wrap:wrap}
+#proposals{flex:1;min-height:0;overflow:auto;padding:12px}
+.affected-record-control{display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}
+.affected-record-control select{flex:1;min-width:0;max-width:360px}
+.affected-record-control button{flex-shrink:0}
+@media(max-width:760px){.app-header nav{height:auto;gap:10px;align-items:center}.proposal-details{overflow:hidden;flex:none;height:75dvh;min-height:360px}.comparison-controls{gap:8px}.affected-record-control{width:100%}}

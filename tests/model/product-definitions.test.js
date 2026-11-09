@@ -10,7 +10,7 @@ const pending=read('data_storytelling/change.json').change,decisions=read('data_
 // part of the pinned import inventory. Restore the entire graph to the end of
 // that import before reconstructing its original pending proposals.
 const importEnd=decisions.findLastIndex(d=>d.change_id?.startsWith('change.product_definition_import_'));
-if(importEnd>=0)for(const d of decisions.slice(importEnd+1).reverse())for(const e of d.proposal?.elements||[]){const rows=docs[e.record_type][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(e.before===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=structuredClone(e.before);else rows.push(structuredClone(e.before));}
+if(importEnd>=0)for(const d of decisions.slice(importEnd+1).filter(d=>d.action==='approve_change').reverse())for(const e of d.proposal?.elements||[]){const rows=docs[e.record_type][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(e.before===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=structuredClone(e.before);else rows.push(structuredClone(e.before));}
 const proposals=[...new Map([...decisions.map(d=>d.proposal).filter(Boolean),...pending].filter(p=>p.id.startsWith('change.product_definition_import_')).map(p=>[p.id,p])).values()];
 for(const p of proposals)for(const e of p.elements){const rows=docs[e.record_type][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(e.before===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=structuredClone(e.before);else rows.push(structuredClone(e.before));}
 const files=Object.fromEntries(Object.entries(docs).map(([n,d])=>[datasetPath(n),d]));for(const n of ['authorization','authorization_decision','change','manifest','annotation','change_review'])files['data_storytelling/'+n+'.json']=read('data_storytelling/'+n+'.json');

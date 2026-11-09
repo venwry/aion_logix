@@ -1,6 +1,6 @@
 # Current documentation
 
-These guides describe the repository and application as they work now. The schema contract is **0.9.1**. Live JSON, rather than a historical report, determines current records, pending proposals and authorization state.
+These guides describe the repository and application as they work now. The schema contract is **0.9.2**. Live JSON, rather than a historical report, determines current records, pending proposals and authorization state.
 
 | Guide | Use |
 | --- | --- |

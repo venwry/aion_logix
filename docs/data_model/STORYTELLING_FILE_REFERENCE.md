@@ -1,6 +1,6 @@
 # Storytelling data — current file reference
 
-Contract **0.9.1**. `data_storytelling/` contains eight active JSON files at its root. Consult those files and the application for live counts and review state. Supporting evidence can be stored in subdirectories; it is not another foundation collection or authorization target.
+Contract **0.9.2**. `data_storytelling/` contains eight active JSON files at its root. Consult those files and the application for live counts and review state. Supporting evidence can be stored in subdirectories; it is not another foundation collection or authorization target.
 
 | File | Current responsibility |
 | --- | --- |
@@ -17,7 +17,9 @@ Contract **0.9.1**. `data_storytelling/` contains eight active JSON files at its
 
 Authorization entries contain `id`, `record_id`, `state` (`authorized` or `unauthorized`), `content_sha256` and optional `decision_id`. The hash covers the whole record with recursively sorted object keys and preserved array order. Missing or mismatching authorization is Pending authorization. References never authorize their targets. Older entries can lack a direct-save decision ID; preserved evidence remains historical.
 
-Decisions contain `id`, `action`, reviewer `actor`, `decided_at` and `target[]`. Actions include `authorize_record`, `authorize_records` and `approve_change`. Targets preserve whole before/after snapshots and hashes; null represents creation/removal. Proposal approvals retain `change_id`, `proposal_sha256` and the complete proposal. Removed records lose their current authorization entry only in the approved transaction; their historical decisions remain unchanged.
+Decisions contain `id`, `action`, reviewer `actor`, `decided_at` and `target[]`. Actions include `authorize_record`, `authorize_records`, `approve_change` and `remove_change`. Targets preserve whole before/after snapshots and hashes; null represents creation/removal. Proposal approvals retain `change_id`, `proposal_sha256` and the complete proposal. Removed records lose their current authorization entry only in the approved transaction; their historical decisions remain unchanged.
+
+A `remove_change` decision requires the complete proposal, `change_id` and `proposal_sha256`, with an empty `target` array. It audits withdrawal of a proposal, never authorization or removal of foundation records. Other actions require at least one target. Withdrawal preserves annotations and review history and never satisfies an approval prerequisite.
 
 The review actor is the application reviewer, not a fictional-world actor. Whole-record authorization includes nested values and agreement clauses. Changing one nested value changes the reviewed content hash.
 
@@ -25,7 +27,9 @@ The review actor is the application reviewer, not a fictional-world actor. Whole
 
 `change.json` has `change[]` and `metadata`. A proposal contains `id`, `category`, `title`, `reason`, `elements[]`, and optional `annotation_ids[]` and `depends_on_change_ids[]`. Each element identifies its type/ID and complete before/after snapshots. The server checks the current before snapshot and proposal hash, applies the selected set in memory, validates the final graph, and saves one atomic Git commit. Overlapping whole-record edits are rejected. Additions and removals can share a proposal with all inseparable reference changes.
 
-The API accepts `approve_changes` with `{change_id, proposal_sha256}` selections; the legacy singular action remains supported. Prerequisites must be selected or previously approved. Retry protection uses the exact proposal hash. Schema proposals require separate deployment. A revised proposal has a new hash and needs fresh review; old feedback does not silently reject or approve that revision.
+`POST /api/authorize` accepts `save_review` with `approvals[]`, `removals[]` (both `{change_id, proposal_sha256}`) and `feedback[]` (the same entries as `save_review_feedback`). One proposal can have only one decision in the batch. All checks finish before a single persistence operation; identical retries are idempotent. Removal checks the exact proposal revision even when its foundation before-snapshot is stale. Surviving dependents prevent prerequisite withdrawal.
+
+The API also accepts `approve_changes` with `{change_id, proposal_sha256}` selections; the legacy singular action remains supported. Prerequisites must be selected or previously approved. Retry protection uses the exact proposal hash. Schema proposals require separate deployment. A revised proposal has a new hash and needs fresh review; old feedback does not silently reject or approve that revision.
 
 Metadata and supporting evidence describe the editorial workflow and do not become story facts. There is no dedicated JSON Schema for the complete proposal envelope; runtime checks and proposal tests supplement schema validation of resulting foundation records.
 

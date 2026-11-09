@@ -15,7 +15,8 @@
             "enum": [
               "authorize_record",
               "authorize_records",
-              "approve_change"
+              "approve_change",
+              "remove_change"
             ]
           },
           "actor": {
@@ -39,7 +40,6 @@
           },
           "target": {
             "type": "array",
-            "minItems": 1,
             "items": {
               "type": "object",
               "properties": {
@@ -88,7 +88,37 @@
           "decided_at",
           "target"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "action": {
+                  "const": "remove_change"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "change_id",
+                "proposal_sha256",
+                "proposal"
+              ],
+              "properties": {
+                "target": {
+                  "maxItems": 0
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "target": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ]
       }
     }
   },

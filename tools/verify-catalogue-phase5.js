@@ -2,6 +2,8 @@
 // state. Approval simulations use the production transaction code in memory.
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {schemaVersion} from '../code/model-contract.js';
 import assert from 'node:assert/strict';
 import {hash, records, transact, validate} from '../server/model.js';
 import {validateProductLaunches} from '../code/product-launches.js';
@@ -13,12 +15,19 @@ const original=structuredClone(files),index=new Map(records(files).map(r=>[r.id,
 const pending=files['data_storytelling/change.json'].change.filter(p=>p.id.startsWith('change.catalogue_phase5_'));
 const decisions=files['data_storytelling/authorization_decision.json'].authorization_decision;
 const groups=audit.proposals.map(a=>{
- const p=pending.find(p=>p.id===a.change_id)??decisions.findLast(d=>d.change_id===a.change_id)?.proposal;
+ const p=pending.find(p=>p.id===a.change_id)??decisions.findLast(d=>d.action==='approve_change'&&d.change_id===a.change_id)?.proposal;
  assert(p,'Missing pending/approved proposal '+a.change_id);assert.equal(hash(p),a.proposal_sha256);return p;
 });
 assert.equal(groups.length,9);
-if(pending.length===groups.length)for(const [path,sha] of Object.entries(audit.preserved_files_sha256))
- assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),sha,'Unexpected source change: '+path);
+if(pending.length===groups.length)for(const [path,sha] of Object.entries(audit.preserved_files_sha256)){
+ if(path==='data_storytelling/manifest.json'){
+  // An application deployment may advance the contract without changing phase 5 data.
+  const baseline=execFileSync('git',['show',audit.source_commit+':'+path]);
+  assert.equal(crypto.createHash('sha256').update(baseline).digest('hex'),sha);
+  const expected=JSON.parse(baseline);expected.manifest[0].schema_version=schemaVersion;
+  assert.deepEqual(files[path],expected,'Manifest changed beyond the deployed contract version');
+ }else assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),sha,'Unexpected source change: '+path);
+}
 assert.deepEqual(validate(files).errors,[]);
 const changed=new Set();
 const stripSubjects=x=>Array.isArray(x)?x.map(stripSubjects):x&&typeof x==='object'

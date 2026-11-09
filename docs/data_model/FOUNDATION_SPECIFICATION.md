@@ -1,6 +1,6 @@
 # Foundation dataset specification
 
-This document describes the current foundation schema contract (version 0.9.1). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; historical documentation is preserved in `docs/archived/` and earlier immutable evidence in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
+This document describes the current foundation schema contract (version 0.9.2). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; historical documentation is preserved in `docs/archived/` and earlier immutable evidence in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
 
 The [reference rules](REFERENCE_RULES.md) govern semantic directness, inputs/outcomes and launch relationships. Legacy schema compatibility does not authorize new unexplained subject lists.
 

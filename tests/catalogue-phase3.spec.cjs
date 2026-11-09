@@ -31,5 +31,5 @@ test('all five phase-3 groups display current comparisons, deletions and the CP/
  await expect(page.locator('.comparison-column').nth(1)).toContainText('Logix CP/M ROM cartridge for Aurelia');
  await expect(page.locator('.comparison-column').nth(1)).toContainText('device.rom_cartridge.cpm_aurelia');
  await expect(page.locator('.comparison-column').first()).toContainText('software_edition.cpm_aurelia');
- await expect(page.getByRole('button',{name:'Authorize and save',exact:true})).toBeDisabled();
+ await expect(page.getByRole('button',{name:'Save',exact:true})).toBeDisabled();
 });

@@ -36,7 +36,7 @@ function approveChanges(original, entries, actor) {
   seen.add(entry.change_id);
   const proposal=pending.find(p=>p.id===entry.change_id);
   if(!proposal){
-   if(decisions.some(d=>d.change_id===entry.change_id&&d.proposal_sha256===entry.proposal_sha256))continue;
+   if(decisions.some(d=>d.action==='approve_change'&&d.change_id===entry.change_id&&d.proposal_sha256===entry.proposal_sha256))continue;
    fail('A selected proposal is no longer pending. Reload and review the changes.');
   }
   if(hash(proposal)!==entry.proposal_sha256)fail('A selected proposal has changed. Reload and review it again.');
@@ -56,7 +56,7 @@ function approveChanges(original, entries, actor) {
  for(const proposal of selected){
   const dependencies=proposal.depends_on_change_ids||[];
   if(!Array.isArray(dependencies)||dependencies.some(id=>typeof id!=='string'||id===proposal.id))bad('Invalid proposal dependencies.');
-  for(const id of dependencies)if(!selected.some(p=>p.id===id)&&!decisions.some(d=>d.change_id===id))fail('Select required proposal '+id+' before authorization.');
+  for(const id of dependencies)if(!selected.some(p=>p.id===id)&&!decisions.some(d=>d.action==='approve_change'&&d.change_id===id))fail('Select required proposal '+id+' before authorization.');
  }
  // Apply every selected proposal before validating, allowing references between new records.
  for(const proposal of selected){
@@ -79,7 +79,37 @@ function approveChanges(original, entries, actor) {
  return {files,changed:true};
 }
 
+// Stage the entire review in memory; the HTTP layer persists only the final result.
+function saveReview(original,request,actor){
+ const fail=(message,status=409)=>{throw Object.assign(Error(message),{status});};
+ const {approvals=[],removals=[],feedback=[]}=request,seen=new Set();
+ if(![approvals,removals,feedback].every(Array.isArray)||![approvals,removals,feedback].some(a=>a.length)||approvals.length+removals.length+feedback.length>1000)fail('Select between 1 and 1000 review decisions.',400);
+ for(const entry of [...approvals,...removals,...feedback]){
+  if(!entry||typeof entry.change_id!=='string'||!/^[a-f0-9]{64}$/.test(entry.proposal_sha256)||seen.has(entry.change_id))fail('Invalid or duplicate review decision.',400);
+  seen.add(entry.change_id);
+ }
+ let files=structuredClone(original),changed=false;
+ const pending=get(files,'change'),decisions=get(files,'authorization_decision'),removed=[];
+ for(const entry of removals){
+  const proposal=pending.find(p=>p.id===entry.change_id);
+  if(!proposal){if(decisions.some(d=>d.action==='remove_change'&&d.change_id===entry.change_id&&d.proposal_sha256===entry.proposal_sha256))continue;fail('A proposal selected for removal is no longer pending. Reload and review the changes.');}
+  if(hash(proposal)!==entry.proposal_sha256)fail('A proposal selected for removal has changed. Reload and review it again.');
+  removed.push(proposal);
+ }
+ const removedIds=new Set(removed.map(p=>p.id));
+ for(const p of pending)if(!removedIds.has(p.id)&&p.depends_on_change_ids?.some(id=>removedIds.has(id)))fail('Cannot remove a required proposal while '+p.id+' depends on it. Remove its dependents together or revise them first.');
+ for(const proposal of removed){
+  pending.splice(pending.indexOf(proposal),1);
+  decisions.push({id:'authorization_decision.'+crypto.randomUUID(),action:'remove_change',actor,decided_at:new Date().toISOString(),change_id:proposal.id,proposal_sha256:hash(proposal),proposal,target:[]});changed=true;
+ }
+ if(feedback.length){const result=saveEditorial(files,{action:'save_review_feedback',entries:feedback},actor);files=result.files;changed||=result.changed;}
+ if(approvals.length){const result=approveChanges(files,approvals,actor);files=result.files;changed||=result.changed;}
+ const result=validate(files);if(result.errors.length)fail('The review could not be saved: '+result.errors.slice(0,5).join('; '));
+ return {files,changed};
+}
+
 export function transact(original,request,actor='author'){
+ if(request.action==='save_review')return saveReview(original,request,actor);
  if(['save_annotations','save_review_feedback'].includes(request.action)){
   const result=saveEditorial(original,request,actor),validation=validate(result.files);
   if(validation.errors.length)throw Object.assign(Error('Invalid feedback: '+validation.errors.slice(0,5).join('; ')),{status:400});

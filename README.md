@@ -4,7 +4,7 @@ A structured alternative-history project with technical product definitions, a t
 
 Start with the [current documentation](docs/README.md), [model principles](DATA_MODEL_PRINCIPLES.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md).
 
-The current schema contract is **0.9.1**, with sixteen foundation datasets. Existing legacy identities remain compatible while reviewed migrations are pending. Live records, proposals, feedback and exact-content authorizations determine the current state; old phase reports do not.
+The current schema contract is **0.9.2**, with sixteen foundation datasets. Existing legacy identities remain compatible while reviewed migrations are pending. Live records, proposals, feedback and exact-content authorizations determine the current state; old phase reports do not.
 
 | Layer | Location |
 | --- | --- |
