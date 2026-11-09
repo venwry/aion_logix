@@ -3,8 +3,8 @@
     {
       "id": "change.catalogue_phase7_remaining_launches",
       "category": "foundation",
-      "title": "Phase 7: Resolve Artemis offerings, version chronology and launch references",
-      "reason": "Propose the AIONix C IDE at the existing 19 May 1980 Artemis launch, removing its erroneous 1978 association; the separate Simple C Z80 offering remains the 1978 compiler. Treat the existing one-module RAM BOM as a replacement spare, not a complete expansion bank. Introduce the HDD Office package at the same existing launch: baseline excludes Abacus 3, the November software option is conditional, and the later networking option requires separately selected compatible software. Migrate the previously undated network revision from version 2 to version 3 and insert the November option as version 2; no live record pins the old product version 2, and its snapshot is retained in review evidence. Keep COMDEX 1980 as an explained later demonstration. Shared launch/campaign records make these edits atomic. Also remove obsolete source-file wording and Academy purchase-credit/tuition wording from the affected launch and its process, following the instruction to keep commercial pricing outside this model. No event date, technical BOM target or authorization is invented.",
+      "title": "Phase 7: Resolve Artemis offerings and launch Hard-Disk Office at COMDEX 1980",
+      "reason": "Revised following author feedback: introduce product.artemis_budget_128_hdd at COMDEX on 19 November 1980, not the NCC Artemis launch, because the Seagate ST506 is unavailable for the earlier configuration. Point the product to campaign.comdex1980 and event.software32, remove the pre-COMDEX composition, and retain two revisions: COMDEX launch with optional Abacus 3, then the May 1981 network option with separately selected compatible software. Number these revisions 1 and 2; no live record pins the previously proposed versions. Remove HDD claims from the Artemis launch description, outcome and NCC execution step. Describe the actual introduction in the COMDEX campaign, process and launch event, removing its now-redundant reverse product subject. Preserve the rest of this proposal: AIONix C IDE and the single replacement RAM module launch at NCC 1980, the erroneous 1978 IDE association is removed, technical details remain canonical, and Academy pricing/source-file wording is cleaned up. Shared whole-record edits remain one atomic proposal. Existing event dates, process periods and technical device definitions stay unchanged; release timing does not assert successful engineering qualification.",
       "elements": [
         {
           "record_type": "product",
@@ -827,7 +827,7 @@
             "id": "product.artemis_budget_128_hdd",
             "name": "Artemis 128 — Budget Hard-Disk Office",
             "kind": "bundle",
-            "description": "Artemis Budget Hard-Disk Office package with the defined computer, display, input devices, system and Business Tools cartridges, and one year of Regular Support. Abacus 3 and networking are optional later additions, subject to their own availability and qualification.",
+            "description": "Artemis Budget Hard-Disk Office package, introduced at COMDEX 1980, with the defined computer, display, input devices, system and Business Tools cartridges, and one year of Regular Support. Abacus 3 is separately selectable at launch. Networking becomes an optional later addition, subject to software compatibility and qualification.",
             "provider_actor_ids": [
               "actor.logix"
             ],
@@ -837,217 +837,7 @@
             "composition_history": [
               {
                 "version_number": 1,
-                "description": "Launch package; Abacus 3 is a later optional addition.",
-                "effective_from": {
-                  "kind": "event",
-                  "event_id": "event.artemis_launch"
-                },
-                "effective_until": {
-                  "kind": "event",
-                  "event_id": "event.software32"
-                },
-                "technical_definition": {},
-                "composition_definition": [
-                  {
-                    "id": "line_1",
-                    "target": {
-                      "record_id": "device.base_computer.artemis",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "main_product"
-                  },
-                  {
-                    "id": "line_2",
-                    "target": {
-                      "record_id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "internal_drive"
-                    }
-                  },
-                  {
-                    "id": "line_3",
-                    "target": {
-                      "record_id": "device.ram_64kb_x32",
-                      "version_number": 1
-                    },
-                    "quantity": 2,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "ram"
-                    }
-                  },
-                  {
-                    "id": "line_4",
-                    "target": {
-                      "record_id": "device.artemis_video_card_16kb",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "video_card"
-                    }
-                  },
-                  {
-                    "id": "line_5",
-                    "target": {
-                      "record_id": "device.flexibus_keyboard",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "flexibus"
-                    }
-                  },
-                  {
-                    "id": "line_6",
-                    "target": {
-                      "record_id": "device.color_monitor_2",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_4",
-                      "socket_id": "video_out"
-                    }
-                  },
-                  {
-                    "id": "line_7",
-                    "target": {
-                      "record_id": "device.rom_cartridge.aionix",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "system_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_8",
-                    "target": {
-                      "record_id": "device.rom_cartridge.business_tools_artemis",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "application_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_9",
-                    "target": {
-                      "record_id": "product.service_regular_support"
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "attached_product",
-                    "entitlement": {
-                      "kind": "service",
-                      "count": 1,
-                      "scope": "supplied service",
-                      "duration_value": 1,
-                      "duration_unit": "year"
-                    }
-                  },
-                  {
-                    "id": "line_10",
-                    "target": {
-                      "record_id": "device.storage.hdd_5mb",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "unit": "each",
-                    "role": "",
-                    "supply_condition": {
-                      "kind": "always"
-                    },
-                    "requirements": [],
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "internal_drive"
-                    }
-                  }
-                ],
-                "assembly_requirements": [
-                  {
-                    "number": 1,
-                    "kind": "testing",
-                    "description": "Final product integration and shipment checks; constituent device manufacture, testing and delivery items belong to their device versions."
-                  }
-                ]
-              },
-              {
-                "version_number": 2,
-                "description": "Abacus 3 becomes selectable with the office package; networking is not yet offered.",
+                "description": "COMDEX 1980 launch package; Abacus 3 is separately selectable and networking is not yet offered.",
                 "effective_from": {
                   "kind": "event",
                   "event_id": "event.software32"
@@ -1272,7 +1062,7 @@
                 ]
               },
               {
-                "version_number": 3,
+                "version_number": 2,
                 "description": "Network-capable ordering revision; network hardware and Abacus 3 are separately selected options.",
                 "effective_from": {
                   "kind": "event",
@@ -1517,8 +1307,8 @@
                 ]
               }
             ],
-            "launch_campaign_id": "campaign.ncc1980",
-            "launch_event_id": "event.artemis_launch"
+            "launch_campaign_id": "campaign.comdex1980",
+            "launch_event_id": "event.software32"
           }
         },
         {
@@ -2114,7 +1904,7 @@
             "id": "event.artemis_launch",
             "title": "Artemis platform launches commercially",
             "kind": "launch",
-            "description": "Launch Artemis with AIONix, peripherals, expansions, developer tooling and support. Introduces Artemis training. At NCC 1980 reveal the processor architecture and word size withheld in the NCC 1979 public campaign. The separately sold Z80 compatibility module is an optional qualified legacy path; native applications require an appropriate target build. Released Artemis application binaries using documented, supported ERA/AIONix interfaces retain a supported execution path on subsequent Logix professional platforms through 2000: native execution, a maintained compatibility runtime, or emulation. Source portability is a separate commitment, not a substitute for the binary execution path. Demonstrate familiar multitasking, separate ERA/Z80 C builds and qualified legacy-card execution; compare verified vector calculations on Aurelia+, PDP-11/34 and Artemis before revealing the 32-bit RISC ERA 1 architecture. Publish only measured performance. The head of independent BPI Systems presents after Abacus and joins the partner section; BPI retains separate branding, licences, support and receipts. Ship Artemis 128 with a replaceable 16 KiB video card and Mono II or Color II; ship Artemis 256 with 32 AION 64 Kbit system RAM chips, a 32 KiB video card and Mono Pro or Color II. Both cards include 1 KiB exclusive sprite SRAM. Only the professional card and Mono Pro enable 640×400 modes; Color II keeps legacy timings. High-resolution demonstrations and paid follow-up campaign are separately budgeted; production qualification remains required. Logix introduced an Artemis 128 KiB office configuration with two floppy drives, a Color Monitor II, keyboard, AIONix, Business Tools and one year of support. A second configuration combined one floppy drive with a 5 MB disk subsystem. Customers could add Abacus 3 from November 1980 and networking from May 1981.",
+            "description": "Launch Artemis with AIONix, peripherals, expansions, developer tooling and support. Introduces Artemis training. At NCC 1980 reveal the processor architecture and word size withheld in the NCC 1979 public campaign. The separately sold Z80 compatibility module is an optional qualified legacy path; native applications require an appropriate target build. Released Artemis application binaries using documented, supported ERA/AIONix interfaces retain a supported execution path on subsequent Logix professional platforms through 2000: native execution, a maintained compatibility runtime, or emulation. Source portability is a separate commitment, not a substitute for the binary execution path. Demonstrate familiar multitasking, separate ERA/Z80 C builds and qualified legacy-card execution; compare verified vector calculations on Aurelia+, PDP-11/34 and Artemis before revealing the 32-bit RISC ERA 1 architecture. Publish only measured performance. The head of independent BPI Systems presents after Abacus and joins the partner section; BPI retains separate branding, licences, support and receipts. Ship Artemis 128 with a replaceable 16 KiB video card and Mono II or Color II; ship Artemis 256 with 32 AION 64 Kbit system RAM chips, a 32 KiB video card and Mono Pro or Color II. Both cards include 1 KiB exclusive sprite SRAM. Only the professional card and Mono Pro enable 640×400 modes; Color II keeps legacy timings. High-resolution demonstrations and paid follow-up campaign are separately budgeted; production qualification remains required. Logix introduced an Artemis 128 KiB office configuration with two floppy drives, a Color Monitor II, keyboard, AIONix, Business Tools and one year of support. Customers could add Abacus 3 from November 1980 and networking from May 1981.",
             "participant": [
               {
                 "actor_id": "actor.logix",
@@ -2159,7 +1949,7 @@
               {
                 "number": 2,
                 "type": "result",
-                "description": "The launch includes the Artemis 128 KiB budget office configuration with two floppy drives, Color Monitor II, keyboard, AIONix, Business Tools and one year of support, plus an alternative combining one floppy drive with a 5 MB disk subsystem. Abacus 3 can be added from November 1980 and networking from May 1981."
+                "description": "The launch includes the Artemis 128 KiB budget office configuration with two floppy drives, Color Monitor II, keyboard, AIONix, Business Tools and one year of support. Abacus 3 can be added from November 1980 and networking from May 1981."
               }
             ],
             "time": {
@@ -2543,7 +2333,7 @@
           "after": {
             "id": "campaign.comdex1980",
             "title": "AION shifts major software development to 32-bit Artemis",
-            "objective": "Promote the forthcoming Abacus 3 and Pulse 3 offerings on Artemis through pre-show advertising and qualified business-workflow demonstrations at COMDEX on 19 November 1980.",
+            "objective": "Promote the forthcoming Abacus 3 and Pulse 3 offerings on Artemis through pre-show advertising and qualified business-workflow demonstrations at COMDEX on 19 November 1980, and introduce the Budget Hard-Disk Office package at the same event.",
             "lead_actor_ids": [
               "actor.logix"
             ],
@@ -2567,13 +2357,12 @@
               },
               {
                 "number": 3,
-                "type": "follow_up_demonstration",
-                "description": "Demonstrate the previously introduced Budget Hard-Disk Office configuration with the newly available optional Abacus 3 edition. This is follow-up promotion, not the computer package’s initial launch."
+                "type": "product_launch",
+                "description": "Introduce Artemis Budget Hard-Disk Office at COMDEX on 19 November 1980 with its 5 MB hard disk. Abacus 3 is separately selectable at launch. Demonstrations must use qualified configurations; networking remains a later option."
               }
             ],
             "process_id": "process.comdex1980_campaign",
             "subject_ids": [
-              "product.artemis_budget_128_hdd",
               "technology.abacus_formatted_tables",
               "technology.abacus_embedded_pulse"
             ]
@@ -2792,6 +2581,330 @@
               }
             ],
             "agreement_id": "agreement.bpi_offer"
+          }
+        },
+        {
+          "record_type": "process",
+          "record_id": "process.ncc1980_campaign",
+          "before": {
+            "id": "process.ncc1980_campaign",
+            "title": "Artemis. A new generation. A familiar way to work. — execution",
+            "kind": "campaign_execution",
+            "description": "Present Artemis at NCC on 19 May 1980, then conduct dealer demonstrations, customer trials, transition training and developer clinics. The recorded 17 July Academy and regional-sales rollout begins regional roadshows and certification workshops continuing through October, which is the end of this campaign. The November native-software presentation belongs to the separate COMDEX campaign.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "marketing_lead"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1980-05",
+                "precision": "month"
+              },
+              "end": {
+                "value": "1980-10",
+                "precision": "month"
+              }
+            },
+            "inputs": [],
+            "outcomes": [],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "activities / 1 / window: NCC 1980, May 19"
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "activities / 1 / action: Live 55-minute keynote, independent BPI appearance after Abacus, benchmark method/results if measured, compatibility policy, software/configuration matrix and ordering sheets."
+              },
+              {
+                "number": 3,
+                "type": "action",
+                "description": "activities / 2 / window: Post-launch preparation leading to the 17 July 1980 Academy and regional-sales rollout"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "activities / 2 / action: Dealer demonstrations and customer workflow trials; press technical briefing; Academy transition classes and developer migration clinics; maintain issue/qualification register."
+              },
+              {
+                "number": 5,
+                "type": "action",
+                "description": "activities / 3 / window: 17 July–October 1980"
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "activities / 3 / action: Regional dealer roadshows, independent developer/OEM certification workshops, customer case studies with consent and measured results; review conversion, delivery backlog, porting effort and support capacity monthly."
+              },
+              {
+                "number": 7,
+                "type": "action",
+                "description": "Launch the Artemis platform, including the 128 KiB budget colour and 5 MB office configurations.",
+                "event_id": "event.artemis_launch"
+              },
+              {
+                "number": 8,
+                "type": "action",
+                "description": "Begin with the 17 July Artemis Academy and regional-sales rollout, then run regional roadshows and certification workshops.",
+                "process_id": "process.ncc1980_roadshows"
+              }
+            ]
+          },
+          "after": {
+            "id": "process.ncc1980_campaign",
+            "title": "Artemis. A new generation. A familiar way to work. — execution",
+            "kind": "campaign_execution",
+            "description": "Present Artemis at NCC on 19 May 1980, then conduct dealer demonstrations, customer trials, transition training and developer clinics. The recorded 17 July Academy and regional-sales rollout begins regional roadshows and certification workshops continuing through October, which is the end of this campaign. The November native-software presentation belongs to the separate COMDEX campaign.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "marketing_lead"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1980-05",
+                "precision": "month"
+              },
+              "end": {
+                "value": "1980-10",
+                "precision": "month"
+              }
+            },
+            "inputs": [],
+            "outcomes": [],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "activities / 1 / window: NCC 1980, May 19"
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "activities / 1 / action: Live 55-minute keynote, independent BPI appearance after Abacus, benchmark method/results if measured, compatibility policy, software/configuration matrix and ordering sheets."
+              },
+              {
+                "number": 3,
+                "type": "action",
+                "description": "activities / 2 / window: Post-launch preparation leading to the 17 July 1980 Academy and regional-sales rollout"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "activities / 2 / action: Dealer demonstrations and customer workflow trials; press technical briefing; Academy transition classes and developer migration clinics; maintain issue/qualification register."
+              },
+              {
+                "number": 5,
+                "type": "action",
+                "description": "activities / 3 / window: 17 July–October 1980"
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "activities / 3 / action: Regional dealer roadshows, independent developer/OEM certification workshops, customer case studies with consent and measured results; review conversion, delivery backlog, porting effort and support capacity monthly."
+              },
+              {
+                "number": 7,
+                "type": "action",
+                "description": "Launch the Artemis platform, including the 128 KiB budget colour office configuration with floppy-disk storage.",
+                "event_id": "event.artemis_launch"
+              },
+              {
+                "number": 8,
+                "type": "action",
+                "description": "Begin with the 17 July Artemis Academy and regional-sales rollout, then run regional roadshows and certification workshops.",
+                "process_id": "process.ncc1980_roadshows"
+              }
+            ]
+          }
+        },
+        {
+          "record_type": "process",
+          "record_id": "process.comdex1980_campaign",
+          "before": {
+            "id": "process.comdex1980_campaign",
+            "title": "AION shifts major software development to 32-bit Artemis — execution",
+            "kind": "campaign_execution",
+            "description": "From 19 October 1980, advertise the forthcoming Abacus 3 and Pulse 3 presentation on Artemis and invite customers, dealers and press to COMDEX. Prepare demonstrations and clear qualification limits before the 19 November presentation. Retain Aurelia/Aurelia+ maintenance messaging and distinguish pre-show promotion from released software availability.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "marketing_lead"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1980-10-19",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1980-11-19",
+                "precision": "day"
+              }
+            },
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "The budget hard-disk office bundle is offered alongside the campaign's native Artemis applications."
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "From 19 October, place trade-press advertising and distribute dealer and customer invitations focused on the forthcoming Abacus 3 and Pulse 3 offerings and their COMDEX business-workflow demonstrations. Announce the November presentation without claiming that unfinished builds are already released."
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Prepare press and dealer material and rehearse qualified Artemis workflows: formatted tables, graphical reports and repeatable Pulse automation. Publish measured resource and compatibility limits and preserve the existing Aurelia/Aurelia+ maintenance message."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "On 19 November 1980, present released Abacus 3 and Pulse 3 on Artemis, demonstrate native application workflows and report compatibility progress.",
+                "event_id": "event.software32"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "Offer Artemis 128 — Budget Hard-Disk Office as an accessible hard-disk office configuration alongside the native Abacus/Pulse presentation."
+              }
+            ]
+          },
+          "after": {
+            "id": "process.comdex1980_campaign",
+            "title": "AION shifts major software development to 32-bit Artemis — execution",
+            "kind": "campaign_execution",
+            "description": "From 19 October 1980, advertise the forthcoming Abacus 3 and Pulse 3 presentation on Artemis and invite customers, dealers and press to COMDEX. Prepare demonstrations and clear qualification limits before the 19 November presentation. Retain Aurelia/Aurelia+ maintenance messaging and distinguish pre-show promotion from released software availability. Introduce Artemis Budget Hard-Disk Office at the 19 November COMDEX presentation.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "marketing_lead"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1980-10-19",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1980-11-19",
+                "precision": "day"
+              }
+            },
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Artemis Budget Hard-Disk Office is introduced at COMDEX on 19 November 1980 alongside the native Artemis applications; Abacus 3 is separately selectable with the package."
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "From 19 October, place trade-press advertising and distribute dealer and customer invitations focused on the forthcoming Abacus 3 and Pulse 3 offerings and their COMDEX business-workflow demonstrations. Announce the November presentation without claiming that unfinished builds are already released."
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Prepare press and dealer material and rehearse qualified Artemis workflows: formatted tables, graphical reports and repeatable Pulse automation. Publish measured resource and compatibility limits and preserve the existing Aurelia/Aurelia+ maintenance message."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "On 19 November 1980, present released Abacus 3 and Pulse 3 on Artemis, introduce Budget Hard-Disk Office, demonstrate native application workflows and report compatibility progress.",
+                "event_id": "event.software32"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "Introduce Artemis 128 — Budget Hard-Disk Office at COMDEX as a hard-disk office configuration alongside the native Abacus/Pulse presentation. Keep Abacus 3 optional and networking outside the initial package."
+              }
+            ]
+          }
+        },
+        {
+          "record_type": "event",
+          "record_id": "event.software32",
+          "before": {
+            "id": "event.software32",
+            "title": "AION shifts major software development to 32-bit Artemis",
+            "kind": "launch",
+            "description": "Presents Artemis-exclusive Abacus 3.0 and Pulse 3.0; makes Artemis the main target for major development. Abacus adds schema-defined formatted tables alongside worksheets, bounded columnar storage, calculated columns and lookups, a read-only SQL subset, graphical reports, embedded Pulse and CSV/host-exported VSAM logical-record imports. COMDEX follow-up to the Artemis campaign: publish native software demonstrations and compatibility progress while preserving Aurelia/Aurelia+ maintenance and independent manufacturers’ compatibility programme. Demonstrate imported sales records joined with customer/product data, margin calculations, grouped graphical reporting and repeatable Pulse automation. Qualify RAM, disk use, correctness, recovery and timings; do not advertise guaranteed compression ratios or unlimited datasets.",
+            "participant": [
+              {
+                "actor_id": "actor.aion",
+                "role": "publisher"
+              }
+            ],
+            "subject_ids": [
+              "technology.abacus_formatted_tables",
+              "technology.abacus_embedded_pulse"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Aurelia receives maintenance and simplified refreshes."
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Abacus 3.0 addresses 1980 business workflows. Broader nested-data/query capabilities and direct competition with the historical 1983 Lotus 1-2-3 belong to a later Abacus version; its number and release date remain unspecified."
+              }
+            ],
+            "time": {
+              "value": "1980-11-19",
+              "precision": "day"
+            }
+          },
+          "after": {
+            "id": "event.software32",
+            "title": "AION shifts major software development to 32-bit Artemis",
+            "kind": "launch",
+            "description": "Presents Artemis-exclusive Abacus 3.0 and Pulse 3.0; makes Artemis the main target for major development. Abacus adds schema-defined formatted tables alongside worksheets, bounded columnar storage, calculated columns and lookups, a read-only SQL subset, graphical reports, embedded Pulse and CSV/host-exported VSAM logical-record imports. COMDEX follow-up to the Artemis campaign: publish native software demonstrations and compatibility progress while preserving Aurelia/Aurelia+ maintenance and independent manufacturers’ compatibility programme. Demonstrate imported sales records joined with customer/product data, margin calculations, grouped graphical reporting and repeatable Pulse automation. Qualify RAM, disk use, correctness, recovery and timings; do not advertise guaranteed compression ratios or unlimited datasets. Introduce Artemis 128 — Budget Hard-Disk Office at this COMDEX event, with one floppy drive and the Seagate ST506 5 MB disk subsystem. Abacus 3 is a separately selectable application; networking is a later option. Controller, power and complete-system qualification remain required.",
+            "participant": [
+              {
+                "actor_id": "actor.aion",
+                "role": "publisher"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "hardware_presenter"
+              }
+            ],
+            "subject_ids": [
+              "technology.abacus_formatted_tables",
+              "technology.abacus_embedded_pulse"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Aurelia receives maintenance and simplified refreshes."
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Abacus 3.0 addresses 1980 business workflows. Broader nested-data/query capabilities and direct competition with the historical 1983 Lotus 1-2-3 belong to a later Abacus version; its number and release date remain unspecified."
+              }
+            ],
+            "time": {
+              "value": "1980-11-19",
+              "precision": "day"
+            }
           }
         }
       ]
