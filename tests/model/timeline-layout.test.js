@@ -22,7 +22,7 @@ test('parallel root groups never overlap; sequential roots reuse a lane',()=>{
 });
 test('unknown and outside dates are not invented; cycles cannot recurse',()=>{
  const tree=timelineTree([item('process.a','1978-01-01','1978-12-31',{steps:[{event_id:'event.early'},{process_id:'process.unknown'}]}),item('event.early','1977-01-01'),item('process.unknown')]);assert.equal(tree.nodes.get('event.early').parent,null);assert.equal(tree.nodes.get('process.unknown').parent,'process.a');assert(!layoutTimeline(tree.nodes,1977,1979).nodes.has('process.unknown'));
- const cycle=timelineTree([item('process.a','1978-01-01','1979-01-01',{parent_process_id:'process.b'}),item('process.b','1978-01-01','1979-01-01',{parent_process_id:'process.a'})]);assert.equal(layoutTimeline(cycle.nodes,1978,1979).roots.length,1);
+ const cycle=timelineTree([item('process.a','1978-01-01','1979-01-01',{steps:[{process_id:'process.b'}]}),item('process.b','1978-01-01','1979-01-01',{steps:[{process_id:'process.a'}]})]);assert.equal(layoutTimeline(cycle.nodes,1978,1979).roots.length,1);
 });
 test('start and end occurrences bracket all same-day descendants without changing anchors',()=>{
  const d='1978-01-01',tree=timelineTree([item('process.p',d,d,{period:{start:boundary('event.start'),end:boundary('event.end')},steps:[{process_id:'process.child'}]}),item('process.child',d,d,{steps:[{event_id:'event.step'}]}),...['start','end','step'].map(id=>item('event.'+id,d))]),l=layoutTimeline(tree.nodes,1978,1978),list=l.roots[0].entries;

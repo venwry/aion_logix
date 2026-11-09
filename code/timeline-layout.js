@@ -8,7 +8,7 @@ export function timelineTree(items){
  const canonical=id=>aliases.get(id)||id,candidates=new Map();
  function offer(child,parent,priority){child=canonical(child);parent=canonical(parent);if(child===parent||!nodes.has(child)||!nodes.has(parent))return;const list=candidates.get(child)||[];list.push({parent,priority});candidates.set(child,list);}
  for(const item of items){const r=item.record;
-  if(item.type==='process'){if(r.parent_process_id)offer(r.id,r.parent_process_id,0);for(const step of r.steps||[])if(step.event_id||step.process_id)offer(step.event_id||step.process_id,r.id,aliases.has(r.id)?1:2);}
+  if(item.type==='process'){for(const step of r.steps||[])if(step.event_id||step.process_id)offer(step.event_id||step.process_id,r.id,aliases.has(r.id)?1:2);}
   if(item.type==='event')for(const id of r.process_ids||[])offer(r.id,id,3);
  }
  for(const [id,list] of candidates){const node=nodes.get(id);list.sort((a,b)=>a.priority-b.priority||a.parent.localeCompare(b.parent));

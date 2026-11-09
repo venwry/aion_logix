@@ -55,13 +55,6 @@
           "minItems": 0,
           "uniqueItems": true
         },
-        "family_product_id": {
-          "type": "string",
-          "pattern": "^(product)\\.[a-z0-9][a-z0-9_.-]*$",
-          "x-ref": [
-            "product"
-          ]
-        },
         "version": {
           "type": "string",
           "minLength": 1
@@ -76,7 +69,9 @@
             ]
           },
           "minItems": 0,
-          "uniqueItems": true
+          "uniqueItems": true,
+          "deprecated": true,
+          "description": "Transitional empty container retained until the author approves its removal from existing records. Do not populate in new records."
         },
         "specification": {
           "type": "array",
@@ -100,10 +95,6 @@
                   "number",
                   "boolean"
                 ]
-              },
-              "unit": {
-                "type": "string",
-                "minLength": 1
               }
             },
             "required": [
@@ -150,79 +141,6 @@
             "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
           }
         },
-        "service_definition": {
-          "type": "object",
-          "properties": {
-            "description": {
-              "type": "string",
-              "minLength": 1
-            },
-            "entitlements": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "kind": {
-                    "enum": [
-                      "service",
-                      "licence"
-                    ]
-                  },
-                  "count": {
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "minimum": 0
-                  },
-                  "scope": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "duration_value": {
-                    "type": "number",
-                    "exclusiveMinimum": 0
-                  },
-                  "duration_unit": {
-                    "enum": [
-                      "day",
-                      "month",
-                      "year"
-                    ]
-                  },
-                  "agreement_id": {
-                    "type": "string",
-                    "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
-                    "x-ref": [
-                      "agreement"
-                    ]
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "kind",
-                  "count",
-                  "scope"
-                ],
-                "additionalProperties": false
-              }
-            },
-            "requirements": {
-              "type": "array",
-              "items": {
-                "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
-              }
-            }
-          },
-          "required": [
-            "description",
-            "entitlements",
-            "requirements"
-          ],
-          "additionalProperties": false
-        },
         "launch_event_id": {
           "type": "string",
           "pattern": "^event\\.[a-z0-9][a-z0-9_.-]*$",
@@ -238,7 +156,6 @@
         "kind",
         "description",
         "provider_actor_ids",
-        "technology_ids",
         "specification"
       ],
       "additionalProperties": false,

@@ -1,6 +1,6 @@
 # Storytelling data — current file reference
 
-Contract **0.11.0**. `data_storytelling/` contains eight active JSON files at its root. Consult those files and the application for live counts and review state. Supporting evidence can be stored in subdirectories; it is not another foundation collection or authorization target.
+Contract **0.12.0**. `data_storytelling/` contains eight active JSON files at its root. Consult those files and the application for live counts and review state. Supporting evidence can be stored in subdirectories; it is not another foundation collection or authorization target.
 
 | File | Current responsibility |
 | --- | --- |

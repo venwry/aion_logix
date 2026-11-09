@@ -90,7 +90,6 @@ export function validateDocuments(documents, { complete = false } = {}) {
   const timelineChildren=new Set();
   for(const record of records.values()){
     if(record.id.startsWith('process.')){
-      if(record.parent_process_id)timelineChildren.add(record.id);
       for(const step of record.steps||[])if(step.event_id||step.process_id)timelineChildren.add(step.event_id||step.process_id);
       for(const point of [record.period?.start,record.period?.end])if(point?.precision==='event')timelineChildren.add(point.value);
     }
@@ -120,7 +119,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
         if (item && recordHash(item)!==target.record_sha256) report(`${record.id}: reviewed content hash mismatch for ${item.id}`);
       }
     }
-    for (const key of ['parent_process_id','parent_location_id','supersedes_agreement_id','supersedes_clause_id','family_product_id']) {
+    for (const key of ['parent_location_id','supersedes_agreement_id','supersedes_clause_id']) {
       let item=record;const seen=new Set();
       while (item?.[key]) { if (seen.has(item.id)) {report(`${record.id}: cycle in ${key}`);break;} seen.add(item.id);item=records.get(item[key]); }
     }

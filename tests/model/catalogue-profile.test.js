@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validateCatalogueProduct} from '../../tools/validate-catalogue.js';
 const service=()=>({id:'product.example',name:'Example support',kind:'service',description:'Customer support offering',provider_actor_ids:['actor.logix'],technology_ids:[],specification:[],offering_category:'service',launch_campaign_id:'campaign.example',launch_event_id:'event.example'});
-const device=()=>({...service(),kind:'hardware',offering_category:'peripheral',composition_history:[{version_number:1,description:'Supplied device',effective_from:{kind:'unknown'},effective_until:{kind:'unknown'},technical_definition:{},composition_definition:[{id:'line_1',target:{record_id:'device.example',version_number:1},element_type:'main_product',quantity:1,unit:'each',role:'Supplied device',supply_condition:{kind:'always'},requirements:[]}],assembly_requirements:[]}]});
+const device=()=>({...service(),kind:'hardware',offering_category:'peripheral',composition_history:[{version_number:1,description:'Supplied device',effective_from:{kind:'unknown'},effective_until:{kind:'unknown'},technical_definition:{},composition_definition:[{id:'line_1',target:{record_id:'device.example',version_number:1},element_type:'main_product',quantity:1,unit:'each',supply_condition:{kind:'always'},requirements:[]}],assembly_requirements:[]}]});
 test('catalogue profile accepts a service and a composed device offering',()=>{
  assert.deepEqual(validateCatalogueProduct(service()),[]);
  assert.deepEqual(validateCatalogueProduct(device()),[]);
@@ -27,10 +27,10 @@ test('non-service products require delivery composition; technical identity alon
  assert(validateCatalogueProduct({...service(),offering_category:'peripheral'}).length);
 });
 
-test('composition element_type can retain classification and role text while legacy role remains optional',()=>{
+test('composition element_type retains descriptive text and retired role is rejected',()=>{
  const p=device(),line=p.composition_history[0].composition_definition[0];
  delete line.role;line.element_type='main_product — Supplied device';assert.deepEqual(validateCatalogueProduct(p),[]);
  delete line.element_type;assert.deepEqual(validateCatalogueProduct(p),[]);
- line.role='Legacy role';assert.deepEqual(validateCatalogueProduct(p),[]);
+ line.role='Legacy role';assert(validateCatalogueProduct(p).length);delete line.role;
  line.element_type='';assert(validateCatalogueProduct(p).length);
 });

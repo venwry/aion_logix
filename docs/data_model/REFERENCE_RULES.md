@@ -50,7 +50,7 @@ The same ID may legitimately occur in an input and an outcome when the meanings 
 
 ## Compatibility and migration
 
-All current products have explicit launch pairs. The authoring rule requires them, but the active 0.11.0 schema still permits both fields to be absent for compatibility; the optional catalogue profile requires both. When present, the event must resolve through a single-parent ownership chain to the campaign execution process and fit its known period. A side launch can differ from the campaign's headline event. Current validation preserves source date precision.
+All current products have explicit launch pairs. The authoring rule requires them, but the active 0.12.0 schema still permits both fields to be absent for compatibility; the optional catalogue profile requires both. When present, the event must resolve through a single-parent ownership chain to the campaign execution process and fit its known period. A side launch can differ from the campaign's headline event. Current validation preserves source date precision.
 
 Before removing a launch association, verify that its replacement is present and equivalent. If not, propose the new product links and deletion atomically, or retain a documented temporary exception. Never infer a launch solely from campaign inclusion. An announcement or conference demo may precede the actual release.
 

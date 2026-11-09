@@ -1,6 +1,6 @@
 # Current documentation
 
-These guides describe the repository and application as they work now. The schema contract is **0.11.0**. Live JSON, rather than a historical report, determines current records, pending proposals and authorization state. The catalogue migration is accepted; current authoring rules, runtime compatibility and remaining review discussions are distinguished in these guides.
+These guides describe the repository and application as they work now. The schema contract is **0.12.0**. Live JSON, rather than a historical report, determines current records, pending proposals and authorization state. The catalogue migration is accepted; current authoring rules, runtime compatibility and remaining review discussions are distinguished in these guides.
 
 | Guide | Use |
 | --- | --- |

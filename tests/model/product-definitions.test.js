@@ -17,6 +17,26 @@ for(const p of proposals)for(const e of p.elements){const rows=docs[e.record_typ
 // The inventory fixture predates the author-directed technology format migration.
 // Adapt only that unrelated representation; preserve the pinned BOM inventory.
 for(const r of docs.technology.technology)r.specification=migrateTechnologySpecification(r.specification);
+// The old import fixture predates retirement of unused fields. Adapt only its
+// representation in memory; pinned inventory quantities, targets and source files
+// remain unchanged. Archived decisions must never be rewritten for a new schema.
+function currentShape(r){
+ if(!r)return;
+ if(r.id.startsWith('product.')){delete r.family_product_id;delete r.service_definition;for(const s of r.specification||[])if(s.unit){if(s.value!==undefined)s.value=String(s.value)+' '+s.unit;delete s.unit;}}
+ if(r.id.startsWith('software_edition.'))delete r.family_product_id;
+ if(r.id.startsWith('process.')){
+  delete r.parent_process_id;
+  for(const i of r.inputs||[])delete i.maturity;
+  for(const o of r.outcomes||[]){delete o.event_id;delete o.process_id;delete o.maturity;}
+  for(const s of r.steps||[]){delete s.subject_ids;delete s.maturity;}
+ }
+ for(const v of r.composition_history||[])for(const l of v.composition_definition){
+  if(l.role)l.element_type=l.element_type?l.element_type+' — '+l.role:l.role;
+  delete l.role;delete l.entitlement;
+ }
+}
+for(const d of Object.values(docs))for(const r of Object.values(d)[0])currentShape(r);
+for(const p of proposals)for(const e of p.elements){currentShape(e.before);currentShape(e.after);}
 const files=Object.fromEntries(Object.entries(docs).map(([n,d])=>[datasetPath(n),d]));for(const n of ['authorization','authorization_decision','change','manifest','annotation','change_review'])files['data_storytelling/'+n+'.json']=read('data_storytelling/'+n+'.json');
 files['data_storytelling/change.json']={change:proposals};
 const fixtureRecords=new Map(Object.values(docs).flatMap(d=>Object.values(d)[0]).map(r=>[r.id,r]));

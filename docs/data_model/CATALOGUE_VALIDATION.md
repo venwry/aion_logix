@@ -1,6 +1,6 @@
 # Catalogue validation
 
-The current foundation contract is **0.11.0**. The accepted catalogue consists of customer-facing offerings with explicit launch campaign/event links, commercial categories and providers. Chips, technical aliases and artificial families are not internal products; technical definitions live in base parts, devices and software editions. A commercial launch does not establish shipment readiness or date every technical revision.
+The current foundation contract is **0.12.0**. The accepted catalogue consists of customer-facing offerings with explicit launch campaign/event links, commercial categories and providers. Chips, technical aliases and artificial families are not internal products; technical definitions live in base parts, devices and software editions. A commercial launch does not establish shipment readiness or date every technical revision.
 
 ## Checks and their limits
 
@@ -22,7 +22,9 @@ Technical-fact migration needs a corresponding canonical field, not merely an eq
 
 The live queue is `data_storytelling/change.json`. Concrete proposals contain complete before/after records; Discussion entries contain problems and findings without edits. The latter accept remarks and cannot be authorized. Audit inventories under `data_storytelling/review_evidence/` identify their source commit and check scope; their counts are historical snapshots, not permanent catalogue-size rules.
 
-The fixed-composition offering and role-consolidation proposals are checked by `node tools/verify-fixed-composition-offerings.js`, selected by `verify-closeout-audit.js` when its evidence exists. It validates independent/batch authorization, platform splits, fixed commercial contents, preserved role text and the strict catalogue profile without applying proposals to disk.
+The current unused-field cleanup is checked by `node tools/verify-unused-field-cleanup.js`, selected by `verify-closeout-audit.js` when its audit exists. It verifies exact empty-only deletions, independent and batch authorization, unchanged nonempty data and the strict catalogue profile.
+
+The earlier fixed-composition offering and role-consolidation proposals are checked by `node tools/verify-fixed-composition-offerings.js`, selected by `verify-closeout-audit.js` when its evidence exists. It validates independent/batch authorization, platform splits, fixed commercial contents, preserved role text and the strict catalogue profile without applying proposals to disk.
 
 The earlier technology prose refinement is checked by `node tools/verify-technology-prose.js`; `verify-technology-chapters.js` delegates to it when refinement evidence exists. The original technology chapter proposals are checked by `node tools/verify-technology-chapters.js` when no refinement is present; `verify-closeout-audit.js` selects that verifier when its migration evidence exists. It validates direct conversion, authorization-state preservation, source coverage and independent/batch approval.
 

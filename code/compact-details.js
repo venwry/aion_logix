@@ -100,6 +100,7 @@ export function compactDetails(record,data,select,options={}){
    clear();panel.replaceChildren();const version=versions[Number(picker.value)];
    if(!version){panel.append(el('p','composition-empty','Version not present in this record.'));return;}
    for(const [key,title] of [['technical_definition','Technical definition'],['composition_definition','Composition definition'],['assembly_requirements','Assembly requirements']]){
+    if(!Object.hasOwn(version,key))continue;
     const group=el('section','composition-section');group.dataset.field=key;group.append(el('h3','',title));const value=version[key];
     if(!value||!Object.keys(value).length)group.append(el('p','composition-empty',key==='assembly_requirements'?'No assembly requirements specified.':key==='composition_definition'?'No composition entries specified.':'No technical definition specified.'));
     else if(key==='technical_definition')for(const [name,item] of fields(value)){

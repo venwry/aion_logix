@@ -51,7 +51,7 @@ const lines = [
   '- Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.',
   '- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. All current clauses use this shape; the runtime schema also accepts the legacy representation for compatibility.',
   '- Assumptions require either topic plus non-empty statements[] or the legacy statement; the two forms cannot be mixed. New authoring uses topic/statements.',
-  '- Composition boundaries are event, process_boundary, unknown, open, or simulation_end. The last resolves to 1995-01-01 and is valid only as the final version end. Adjacent resolved revisions share a boundary; authoring defaults and first-use rules are in MODEL_GUIDE.md.',
+  '- Composition boundaries are event, unknown, open, or simulation_end. The last resolves to 1995-01-01 and is valid only as the final version end. Adjacent resolved revisions share a boundary; authoring defaults and first-use rules are in MODEL_GUIDE.md.',
   '- Technology specification chapters contain number, chapter_name, description and parameters[] of key/value text pairs. Numbers and chapter-local keys are unique. Description placeholders {key} resolve locally; model validation rejects missing keys. Other specification schemas are unchanged.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',

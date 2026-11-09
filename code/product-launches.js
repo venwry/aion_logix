@@ -10,7 +10,6 @@ export function validateProductLaunches(records) {
  }
  for(const r of records.values()) {
   if(r.id.startsWith('process.')) {
-   if(r.parent_process_id)own(r.id,r.parent_process_id);
    for(const step of r.steps||[])if(step.event_id||step.process_id)own(step.event_id||step.process_id,r.id);
    for(const point of [r.period?.start,r.period?.end])if(point?.precision==='event')own(point.value,r.id);
   }

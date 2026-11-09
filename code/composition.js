@@ -16,7 +16,7 @@ export function resolveComposition(records, id, versionNumber) {
    const conditionsHere=[...conditions,...(line.supply_condition.kind==='conditional'?[line.supply_condition.description]:[])];
    const item={record_id:target.id,quantity,unit:line.unit,conditions:conditionsHere,path:next,line_id:line.id};
    if(target.id.startsWith('base_part.'))leaves.push(item);
-   else if(target.id.startsWith('product.')&&target.kind==='service')services.push({...item,entitlement:line.entitlement});
+   else if(target.id.startsWith('product.')&&target.kind==='service')services.push(item);
    else walk(target.id,line.target.version_number,quantity,conditionsHere,next);
   }
  }
@@ -27,6 +27,7 @@ export function validateCompositions(records){
  const boundary=b=>{
   if(b?.kind==='simulation_end')return simulationEnd;
   if(b?.kind==='event')return index.get(b.event_id)?.time?.value;
+  // Read preserved historical snapshots; active schemas no longer admit this form.
   if(b?.kind==='process_boundary'){const p=index.get(b.process_id)?.period?.[b.boundary];return p?.precision==='event'?index.get(p.value)?.time?.value:p?.precision==='day'?p.value:undefined;}
  };
  for(const r of index.values()){
@@ -53,7 +54,6 @@ export function validateCompositions(records){
     if(child.id.startsWith('product.')&&child.kind!=='service')fail(r.id+': commercial product nesting is forbidden');
     if(child.kind==='service'&&!r.id.startsWith('product.'))fail(r.id+': service cannot be a device material');
     if(['each','set'].includes(l.unit)&&l.quantity!==null&&!Number.isInteger(l.quantity))fail(r.id+': count quantities must be integers');
-    if(l.entitlement?.kind==='service'&&child.kind!=='service')fail(r.id+': service entitlement needs service target');
     if(l.placements){const qty=l.placements.reduce((s,p)=>s+p.quantity,0);if(l.quantity!==null&&qty!==l.quantity)fail(r.id+': placement quantity differs from supplied quantity');}
     const connections=[...(l.connection?.host_line_id?[{...l.connection,quantity:l.quantity}]:[]),...(l.placements||[])];
     for(const c of connections){const host=lines.get(c.host_line_id);if(!host){fail(r.id+': missing connection host');continue;}

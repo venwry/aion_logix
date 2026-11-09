@@ -72,14 +72,14 @@
         "inputs": {
           "type": "array",
           "items": {
-            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/item"
+            "$ref": "#/$defs/input"
           },
           "minItems": 0
         },
         "outcomes": {
           "type": "array",
           "items": {
-            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/item"
+            "$ref": "#/$defs/outcome"
           },
           "minItems": 0
         },
@@ -89,16 +89,9 @@
         "steps": {
           "type": "array",
           "items": {
-            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/item"
+            "$ref": "#/$defs/step"
           },
           "minItems": 0
-        },
-        "parent_process_id": {
-          "type": "string",
-          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
-          "x-ref": [
-            "process"
-          ]
         },
         "related_process_ids": {
           "type": "array",
@@ -144,6 +137,208 @@
         "outcomes"
       ],
       "additionalProperties": false
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "action",
+            "milestone",
+            "resource",
+            "requirement",
+            "acceptance_criterion",
+            "deliverable",
+            "result",
+            "decision",
+            "qualification",
+            "maturity_transition",
+            "market_response",
+            "agreement_basis"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology",
+              "base_part",
+              "device",
+              "software_edition",
+              "external_product"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "process_id": {
+          "type": "string",
+          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "process"
+          ]
+        }
+      },
+      "required": [
+        "number",
+        "type",
+        "description"
+      ],
+      "additionalProperties": false,
+      "not": {
+        "required": [
+          "event_id",
+          "process_id"
+        ]
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "action",
+            "milestone",
+            "resource",
+            "requirement",
+            "acceptance_criterion",
+            "deliverable",
+            "result",
+            "decision",
+            "qualification",
+            "maturity_transition",
+            "market_response",
+            "agreement_basis"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology",
+              "base_part",
+              "device",
+              "software_edition",
+              "external_product"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "number",
+        "type",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "step": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "action",
+            "milestone",
+            "resource",
+            "requirement",
+            "acceptance_criterion",
+            "deliverable",
+            "result",
+            "decision",
+            "qualification",
+            "maturity_transition",
+            "market_response",
+            "agreement_basis"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "process_id": {
+          "type": "string",
+          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "process"
+          ]
+        }
+      },
+      "required": [
+        "number",
+        "type",
+        "description"
+      ],
+      "additionalProperties": false,
+      "not": {
+        "required": [
+          "event_id",
+          "process_id"
+        ]
+      }
     }
   }
 }

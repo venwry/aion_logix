@@ -28,33 +28,6 @@
           "type": "object",
           "properties": {
             "kind": {
-              "const": "process_boundary"
-            },
-            "process_id": {
-              "type": "string",
-              "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
-              "x-ref": [
-                "process"
-              ]
-            },
-            "boundary": {
-              "enum": [
-                "start",
-                "end"
-              ]
-            }
-          },
-          "required": [
-            "kind",
-            "process_id",
-            "boundary"
-          ],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "kind": {
               "enum": [
                 "unknown",
                 "open"
@@ -78,49 +51,6 @@
           ],
           "additionalProperties": false,
           "description": "Exclusive end at the model simulation horizon, 1995-01-01. Valid only as effective_until; not a withdrawal date."
-        }
-      ]
-    },
-    "target": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "record_id": {
-              "type": "string",
-              "pattern": "^(base_part|product)\\.[a-z0-9][a-z0-9_.-]*$",
-              "x-ref": [
-                "base_part",
-                "product"
-              ]
-            }
-          },
-          "required": [
-            "record_id"
-          ],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "record_id": {
-              "type": "string",
-              "pattern": "^(device|software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
-              "x-ref": [
-                "device",
-                "software_edition"
-              ]
-            },
-            "version_number": {
-              "type": "integer",
-              "minimum": 1
-            }
-          },
-          "required": [
-            "record_id",
-            "version_number"
-          ],
-          "additionalProperties": false
         }
       ]
     },
@@ -209,11 +139,6 @@
             "litre"
           ]
         },
-        "role": {
-          "type": "string",
-          "deprecated": true,
-          "description": "Legacy free-text composition role. Retained only for compatibility; revised records merge its useful text into element_type."
-        },
         "supply_condition": {
           "oneOf": [
             {
@@ -255,10 +180,6 @@
                 "host_line_id": {
                   "type": "string",
                   "minLength": 1
-                },
-                "host_instance": {
-                  "type": "integer",
-                  "minimum": 1
                 },
                 "socket_id": {
                   "type": "string",
@@ -321,60 +242,13 @@
             "additionalProperties": false
           }
         },
-        "entitlement": {
-          "type": "object",
-          "properties": {
-            "kind": {
-              "enum": [
-                "service",
-                "licence"
-              ]
-            },
-            "count": {
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0
-            },
-            "scope": {
-              "type": "string",
-              "minLength": 1
-            },
-            "duration_value": {
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "duration_unit": {
-              "enum": [
-                "day",
-                "month",
-                "year"
-              ]
-            },
-            "agreement_id": {
-              "type": "string",
-              "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
-              "x-ref": [
-                "agreement"
-              ]
-            },
-            "description": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "kind",
-            "count",
-            "scope"
-          ],
-          "additionalProperties": false
-        },
         "requirements": {
           "type": "array",
           "items": {
             "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
-          }
+          },
+          "deprecated": true,
+          "description": "Transitional empty container retained until the author approves its removal from existing records. Do not populate in new records."
         },
         "element_type": {
           "type": "string",
@@ -387,8 +261,7 @@
         "target",
         "quantity",
         "unit",
-        "supply_condition",
-        "requirements"
+        "supply_condition"
       ],
       "additionalProperties": false
     },
@@ -466,7 +339,9 @@
           "type": "array",
           "items": {
             "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
-          }
+          },
+          "deprecated": true,
+          "description": "Transitional empty container retained until the author approves its removal from existing records. Do not populate in new records."
         }
       },
       "required": [
@@ -475,8 +350,7 @@
         "effective_from",
         "effective_until",
         "technical_definition",
-        "composition_definition",
-        "assembly_requirements"
+        "composition_definition"
       ],
       "additionalProperties": false
     },
@@ -501,7 +375,9 @@
           "type": "object",
           "properties": {},
           "required": [],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "deprecated": true,
+          "description": "Transitional empty container retained until the author approves its removal from existing records. Do not populate in new records."
         },
         "composition_definition": {
           "type": "array",
@@ -521,7 +397,6 @@
         "description",
         "effective_from",
         "effective_until",
-        "technical_definition",
         "composition_definition",
         "assembly_requirements"
       ],

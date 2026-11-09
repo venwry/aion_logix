@@ -45,13 +45,14 @@ test('launch validation requires real ownership and temporal containment, not a 
   g=>g.get('process.session').steps=[],
   g=>g.get('event.launch').time.value='1980-06-05',
   g=>g.get('event.launch').process_ids=['process.other'],
-  g=>g.get('process.campaign').parent_process_id='process.session',
+  g=>g.get('process.session').steps.push({process_id:'process.campaign'}),
   g=>g.get('process.campaign').period.end={value:null,precision:'unknown'},
-  g=>{g.get('process.campaign').steps=[];g.get('process.session').parent_process_id='process.session';},
+  g=>{g.get('process.campaign').steps=[];g.get('process.session').steps.push({process_id:'process.session'});},
  ]){const g=graph();mutate(g);assert(validateProductLaunches(g).length);}
  const g=graph();g.get('process.session').steps=[];g.get('process.session').period={start:{value:'event.launch',precision:'event'}};
  assert.deepEqual(validateProductLaunches(g),[]);
- g.get('process.campaign').steps=[];g.get('process.session').parent_process_id='process.campaign';assert.deepEqual(validateProductLaunches(g),[]);
+ g.get('process.campaign').steps=[];assert(validateProductLaunches(g).length);
+ g.get('process.campaign').steps=[{process_id:'process.session'}];assert.deepEqual(validateProductLaunches(g),[]);
 });
 test('partial date precision is preserved and overlapping uncertain event dates do not pass full containment',()=>{
  const g=graph();g.get('process.campaign').period={start:{value:'1980-06',precision:'month'},end:{value:'1980-06',precision:'month'}};
