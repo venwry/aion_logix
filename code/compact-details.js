@@ -1,4 +1,4 @@
-import {datasetPath} from './model-contract.js';
+import {datasetPath,simulationEnd} from './model-contract.js';
 import {$,el,human,typeOf,titleOf,references} from './shared.js';
 import {resolvePoint} from './temporal.js';
 
@@ -35,6 +35,7 @@ export function compactDetails(record,data,select,options={}){
   if(isReferences(value))return referenceList(value,inTable?null:label);
   if(Array.isArray(value)){
    if(!value.length)return el('span','','[]');
+   if(label==='statements'&&value.every(v=>typeof v==='string')){const list=el('ol','assumption-statements');for(const statement of value)list.append(el('li','',statement));return list;}
    if(value.every(v=>v&&typeof v==='object'&&!Array.isArray(v))){
     const rows=value.map(v=>new Map(fields(v)));const columns=[...new Set(rows.flatMap(r=>[...r.keys()]))];
     const wrap=el('div','compact-table-scroll'),table=el('table','compact-value-table'),head=el('thead'),headRow=el('tr'),body=el('tbody'),colgroup=el('colgroup');
@@ -76,6 +77,7 @@ export function compactDetails(record,data,select,options={}){
  function boundaryLabel(boundary){
   if(!boundary||boundary.kind==='unknown')return 'unknown';
   if(boundary.kind==='open')return 'open';
+  if(boundary.kind==='simulation_end')return simulationEnd+' · simulation end';
   const target=data.index.get(boundary.event_id||boundary.process_id);
   const point=boundary.kind==='event'?target?.time:resolvePoint(target?.period?.[boundary.boundary],data.index);
   const name=target?titleOf(target):(boundary.event_id||boundary.process_id);

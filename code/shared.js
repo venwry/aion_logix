@@ -7,7 +7,7 @@ import {resolvePoint, pointBounds} from './temporal.js';
 export const $ = id => document.getElementById(id);
 export const human = value => String(value).replaceAll('_',' ').replace(/\b\w/g, c=>c.toUpperCase());
 export const typeOf = record => record.id.split('.')[0];
-export const titleOf = record => record.title || record.name || record.statement?.split('\n')[0] || record.description?.split('\n')[0] || record.id;
+export const titleOf = record => record.title || record.name || record.topic || record.statement?.split('\n')[0] || record.description?.split('\n')[0] || record.id;
 export function el(tag, className='', text) { const node=document.createElement(tag); if(className)node.className=className; if(text!==undefined)node.textContent=text; return node; }
 export function statusBadge(status) {return el('span','badge '+(status==='authorized'?'confirmed':'pending'),status==='authorized'?'Authorized':'Unauthorized');}
 export async function loadData() {
@@ -78,7 +78,7 @@ export function details(record,data,select){
     }
     const dl=el('dl',depth?'field-list nested-object':'field-list');for(const [key,v] of Object.entries(value)){const row=el('div');const dd=el('dd');dd.append(valueNode(v,depth+1));row.append(el('dt','',human(key)),dd);dl.append(row);}return dl;
   }
-  const skip=new Set(['id','status','name','title','description','statement','objective']);
+  const skip=new Set(['id','status','name','title','description','statement','topic','objective']);
   for(const [key,value] of Object.entries(record)){
     if(skip.has(key))continue;
     const group=el('details','detail-group');group.append(el('summary','',human(key)+(Array.isArray(value)?' · '+value.length:'')));

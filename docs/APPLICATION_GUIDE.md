@@ -118,3 +118,5 @@ Data browser includes External Product alongside the existing datasets. Its spec
 ## Reference interpretation
 
 Inputs and outcomes explain dependency, delivery, decision or qualification roles. Top-level subjects remain in some records and need individual role review. Their presence is not blanket approval of a loose reference; documented external participation and later promotion can be valid exceptions. Read the [reference rules](data_model/REFERENCE_RULES.md); the presence of a link alone does not establish ownership, readiness or an initial launch. The “Referenced by” section derives incoming links without storing a second copy.
+
+Assumption detail headings use `topic` when present; their `statements` are displayed separately in order. Legacy assumptions remain readable while their migration is pending. Composition selectors display the `simulation_end` boundary as `1995-01-01 · simulation end`, alongside event/process dates, including their original precision.

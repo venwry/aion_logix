@@ -1,6 +1,6 @@
 # Storytelling data — current file reference
 
-Contract **0.9.2**. `data_storytelling/` contains eight active JSON files at its root. Consult those files and the application for live counts and review state. Supporting evidence can be stored in subdirectories; it is not another foundation collection or authorization target.
+Contract **0.9.3**. `data_storytelling/` contains eight active JSON files at its root. Consult those files and the application for live counts and review state. Supporting evidence can be stored in subdirectories; it is not another foundation collection or authorization target.
 
 | File | Current responsibility |
 | --- | --- |
@@ -37,7 +37,7 @@ Metadata and supporting evidence describe the editorial workflow and do not beco
 
 The `review-transport-2` metadata version permits `category: discussion`. These entries require `id`, `title`, `reason`, empty `elements`, `affected_record_ids` and nonempty `findings`. Each finding has a `description` and optional `record_id` and `path`; a finding’s record must be in the affected-record list, and listed IDs must exist in the current foundation. Model-wide questions may have no affected IDs. See [discussion.schema.json](../../schemas/storytelling/discussion.schema.json).
 
-Discussion entries cannot be authorized, including through direct API calls. They can receive the same hash-bound feedback or be removed through `save_review`. Removing one saves a `remove_change` decision with no foundation targets. Converting a discussion into a concrete proposal preserves its ID and earlier feedback but changes its hash; remove discussion-only fields and supply complete review elements. The foundation schema version remains 0.9.2 because this is an editorial transport capability.
+Discussion entries cannot be authorized, including through direct API calls. They can receive the same hash-bound feedback or be removed through `save_review`. Removing one saves a `remove_change` decision with no foundation targets. Converting a discussion into a concrete proposal preserves its ID and earlier feedback but changes its hash; remove discussion-only fields and supply complete review elements. The editorial transport version is independent of the foundation schema contract.
 
 ## Manifest and paths
 

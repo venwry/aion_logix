@@ -7,6 +7,10 @@ import {datasetForFile} from '../code/model-contract.js';
 import {validateCatalogue} from './validate-catalogue.js';
 import {pointBounds} from '../code/temporal.js';
 const read=p=>JSON.parse(fs.readFileSync(p)),root='data_storytelling/review_evidence/closeout-audit/';
+// Saved feedback has its own lineage-preserving verification, without rewriting the baseline inventory.
+if(fs.existsSync(root+'feedback-amendment.json')){
+ await import('./verify-closeout-feedback.js');
+}else{
 const inventory=read(root+'inventory.json');
 const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[d+'/'+f,read(d+'/'+f)]))),before=structuredClone(files);
 const pending=files['data_storytelling/change.json'].change,decisions=files['data_storytelling/authorization_decision.json'].authorization_decision;
@@ -52,3 +56,5 @@ const archived=fs.readFileSync(inventory.editorial_issue_reconciliation.archived
 for(const item of inventory.documentation){assert(fs.existsSync(item.path),item.path);assert.equal(crypto.createHash('sha256').update(fs.readFileSync(item.path)).digest('hex'),item.sha256,'Documentation changed since audit '+item.path);}
 assert.deepEqual(files,before,'Simulation changed input');
 console.log(JSON.stringify({result:'passed',foundation_records:1080,products_with_launch_pairs:104,concrete_proposals:10,discussion_entries:31,changed_records_if_approved:touched.size,foundation_and_authorization_files_preserved:true,independent_batch_reverse_and_sequential_approvals_valid:true,discussions_cannot_authorize:true,strict_catalogue_passes_before_and_after:true,legacy_issue_targets_resolve:true,markdown_files_audited:inventory.documentation.length},null,2));
+
+}

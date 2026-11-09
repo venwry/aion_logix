@@ -14,6 +14,8 @@ For events/processes, minimize top-level subjects. Document any exception in edi
 
 The current model does not support pricing information. Remove prices, fees, discounts, price histories and pricing placeholders from proposed product, event, process and campaign records; check narrative fields as well as specifications. Do not import legacy pricing or relocate it into other record types. Retain non-price service scope, duration and eligibility. Preserve Regular Support’s specifically author-retained 10% depot-repair discount; do not re-propose its removal without a new instruction. Preserve immutable before snapshots and historical decisions so review remains accurate; changes to existing foundation content still require Changes confirm.
 
+Apply the composition and software-distribution defaults in the [model guide](data_model/MODEL_GUIDE.md). Trace first use through pinned version paths, document inferred revision assignments and retain unresolved hardware questions as discussions. Use `simulation_end` only for a final composition end. Migrate assumption text to `topic` and `statements` through complete-record proposals.
+
 Keep the existing date precision. A later-stage resource can be an input to the relevant work without being available at the whole process's start. Do not turn a commitment, pilot or demo into a completed delivery or successful qualification. Keep child categories empty when changing ownership, and include all affected records in the same coherent proposal.
 
 ## Proposals and authorization

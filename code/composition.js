@@ -1,3 +1,4 @@
+import {simulationEnd} from './model-contract.js';
 // Shared definition-only BOM traversal. Child versions are explicitly pinned;
 // unknown temporal bounds never select a default or latest version.
 export function resolveComposition(records, id, versionNumber) {
@@ -24,6 +25,7 @@ export function resolveComposition(records, id, versionNumber) {
 export function validateCompositions(records){
  const errors=[],fail=m=>errors.push(m),index=records;
  const boundary=b=>{
+  if(b?.kind==='simulation_end')return simulationEnd;
   if(b?.kind==='event')return index.get(b.event_id)?.time?.value;
   if(b?.kind==='process_boundary'){const p=index.get(b.process_id)?.period?.[b.boundary];return p?.precision==='event'?index.get(p.value)?.time?.value:p?.precision==='day'?p.value:undefined;}
  };
@@ -31,13 +33,17 @@ export function validateCompositions(records){
   if(r.technical_identity&&!index.has(r.technical_identity.record_id))fail(r.id+': unresolved technical identity');
   if(r.offering_category&&r.offering_category!=='service'&&!r.composition_history?.length)fail(r.id+': offering needs composition');
   if(r.kind==='family'&&r.composition_history?.length)fail(r.id+': family cannot have composition');
-  const nums=new Set();let previousNumber=0;const intervals=[];
+  const nums=new Set();let previousNumber=0,previousEnd;const intervals=[];
   for(const v of r.composition_history||[]){
    if(nums.has(v.version_number)||v.version_number<=previousNumber)fail(r.id+': composition versions must increase');nums.add(v.version_number);previousNumber=v.version_number;
    const checkBoundary=b=>{if(b.kind==='event'&&!index.has(b.event_id))fail(r.id+': unresolved event boundary');if(b.kind==='process_boundary'&&!index.has(b.process_id))fail(r.id+': unresolved process boundary');};
    checkBoundary(v.effective_from);checkBoundary(v.effective_until);
-   if(v.effective_from.kind==='open')fail(r.id+': start cannot be open');
+   if(['open','simulation_end'].includes(v.effective_from.kind))fail(r.id+': start cannot be open or simulation end');
+   if(v.effective_until.kind==='simulation_end'&&v!==r.composition_history.at(-1))fail(r.id+': simulation end is only valid for the final composition version');
    const start=boundary(v.effective_from),end=boundary(v.effective_until);
+   if(previousEnd&&start&&previousEnd!==start)fail(r.id+': composition revisions must share a boundary');
+   previousEnd=end;
+   if(v.effective_until.kind==='simulation_end'&&start&&start>=simulationEnd)fail(r.id+': composition starts at or after simulation end');
    if(start&&end&&start>=end)fail(r.id+': reversed composition interval');
    if(start){const stop=v.effective_until.kind==='open'?'9999-12-31':end;if(stop){if(intervals.some(([a,b])=>start<b&&stop>a))fail(r.id+': overlapping composition intervals');intervals.push([start,stop]);}}
    const lines=new Map();for(const l of v.composition_definition){if(lines.has(l.id))fail(r.id+': duplicate composition line '+l.id);lines.set(l.id,l);}

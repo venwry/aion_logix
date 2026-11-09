@@ -50,6 +50,8 @@ const lines = [
   '- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the ' + names.length + ' target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.',
   '- Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.',
   '- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. All current clauses use this shape; the runtime schema also accepts the legacy representation for compatibility.',
+  '- Assumptions require either topic plus non-empty statements[] or the legacy statement; the two forms cannot be mixed. New authoring uses topic/statements.',
+  '- Composition boundaries are event, process_boundary, unknown, open, or simulation_end. The last resolves to 1995-01-01 and is valid only as the final version end. Adjacent resolved revisions share a boundary; authoring defaults and first-use rules are in MODEL_GUIDE.md.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',
