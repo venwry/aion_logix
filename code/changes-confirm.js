@@ -15,7 +15,7 @@ try{
  const cleanup=()=>{detailHosts.forEach(disposeDetails);detailHosts=[];};
  const review=p=>reviews.findLast(r=>r.change_id===p.id&&r.proposal_sha256===hashes.get(p.id));
  const stale=p=>p.elements.some(e=>e.record_type!=='schema'&&!equal(data.originals.get(e.record_id)??null,e.before));
- const blocked=p=>p.category==='schema'||stale(p)||!!review(p)||!!drafts.get(p.id)||feedbackEditing.has(p.id);
+ const blocked=p=>['schema','discussion'].includes(p.category)||stale(p)||!!review(p)||!!drafts.get(p.id)||feedbackEditing.has(p.id);
  function updateSelection(){
   $('selected-count').textContent=selected.size+' selected';$('removal-count').textContent=removals.size+' removals';
   const n=Object.keys(drafts.all()).length;$('save-review').disabled=saving||!(n+selected.size+removals.size);$('feedback-count').textContent=n+' uncommitted';renderOrphanDrafts(recovery,drafts,id=>proposals.some(p=>p.id===id),id=>{drafts.remove(id);updateSelection();},saving);
@@ -24,7 +24,7 @@ try{
  function navigation(){
   const nav=$('proposal-nav');nav.replaceChildren();for(const p of matching()){
    const button=el('button','proposal-nav-item');button.type='button';button.dataset.changeId=p.id;button.setAttribute('aria-current',String(current===p.id));
-   button.append(el('strong','',p.title),el('span','',p.elements.length+' affected record(s)'),el('span','',removals.has(p.id)?'Marked for removal':selected.has(p.id)?'Selected for authorization':drafts.get(p.id)?'Unsaved feedback':review(p)?'Needs refinement':stale(p)?'Stale comparison':'Pending review'));
+   button.append(el('strong','',p.title),el('span','',(p.category==='discussion'?p.affected_record_ids.length:p.elements.length)+' affected record(s)'),el('span','',removals.has(p.id)?'Marked for removal':selected.has(p.id)?'Selected for authorization':drafts.get(p.id)?'Unsaved feedback':review(p)?'Needs refinement':stale(p)?'Stale comparison':p.category==='discussion'?'Discussion · remarks needed':'Pending review'));
    button.onclick=()=>{current=p.id;activeElement=0;history.replaceState(null,'','#'+encodeURIComponent(p.id));render();};nav.append(button);
   }
   if(!nav.children.length)nav.append(el('p','empty-state','No proposals match these filters.'));
@@ -49,11 +49,12 @@ try{
  }
  function render(){
   cleanup();$('proposal-actions').replaceChildren();$('affected-record-control').replaceChildren();$('affected-record-control').hidden=true;const host=$('proposals');host.replaceChildren();if(!proposals.some(p=>p.id===current)){current=matching()[0]?.id||proposals[0]?.id;activeElement=0;}
-  const p=proposals.find(p=>p.id===current);navigation();if(!p){host.append(el('p','empty-state','No pending changes.'));return;}
-  const card=el('article','proposal-card');card.dataset.changeId=p.id;card.append(el('span','type-tag',review(p)?'Needs refinement':'Pending review'),el('h2','',p.title),el('p','',p.reason));host.append(card);
+  const p=proposals.find(p=>p.id===current);$('comparison-mode').closest('label').hidden=p?.category==='discussion';$('full-json-control').hidden=p?.category==='discussion'||$('comparison-mode').value!=='json';navigation();if(!p){host.append(el('p','empty-state','No pending changes.'));return;}
+  const card=el('article','proposal-card');card.dataset.changeId=p.id;card.append(el('span','type-tag',review(p)?'Needs refinement':p.category==='discussion'?'Discussion':'Pending review'),el('h2','',p.title),el('p','',p.reason));host.append(card);
   if(p.annotation_ids?.length){const source=el('div','source-annotations');source.append(el('h3','','Source annotations'));for(const id of p.annotation_ids){const a=annotations.find(a=>a.id===id);if(a){const link=el('a','',a.record_id);link.href='timeline.html#'+encodeURIComponent(a.record_id);source.append(link,el('p','',a.text));}}card.append(source);}
   if(p.depends_on_change_ids?.length)card.append(el('p','dependency-note','Requires proposals: '+p.depends_on_change_ids.join(', ')));
   const controls=$('proposal-actions'),authorize=el('button','quiet-button authorize-choice','Authorize'),reject=el('button','quiet-button','Request changes'),remove=el('button','quiet-button',removals.has(p.id)?'Undo removal':'Remove');authorize.type=reject.type=remove.type='button';authorize.setAttribute('aria-pressed',String(selected.has(p.id)));authorize.disabled=saving||removals.has(p.id)||blocked(p);reject.disabled=saving||removals.has(p.id);remove.disabled=saving||!!drafts.get(p.id)||feedbackEditing.has(p.id);
+  if(p.category==='discussion'){reject.textContent='Add remarks';authorize.title='This entry describes a problem and has no proposed data edits.';card.append(el('p','review-warning','Discussion only — no data change is proposed. Add remarks and Save to help prepare a concrete proposal.'));}
   if(remove.disabled&&!saving)remove.title='Save or cancel feedback before removing this proposal.';
   authorize.onclick=()=>{if(selected.has(p.id))selected.delete(p.id);else selected.add(p.id);render();};reject.onclick=()=>{selected.delete(p.id);feedbackEditing.add(p.id);render();$('proposals').querySelector('textarea')?.focus();};
   remove.onclick=()=>{selected.delete(p.id);if(removals.has(p.id))removals.delete(p.id);else removals.add(p.id);render();};controls.append(authorize,reject,remove);
@@ -69,6 +70,10 @@ try{
    text.oninput=()=>{selected.delete(p.id);if(text.value===(previous?.text||'')){drafts.remove(p.id);note.textContent='No uncommitted feedback changes';}else{const saved=drafts.set(p.id,{...(drafts.get(p.id)||{id:'change_review.'+crypto.randomUUID(),change_id:p.id,proposal_sha256:hashes.get(p.id),supersedes_id:previous?.id||null}),text:text.value});note.textContent=saved?'Saved locally · not committed to GitHub':'Draft in this page only';}navigation();};card.append(area);
   }
   const earlier=reviews.filter(r=>r.change_id===p.id&&r.id!==previous?.id);if(earlier.length){const history=el('details','feedback-history');history.append(el('summary','','Earlier feedback ('+earlier.length+')'));for(const r of earlier)history.append(el('p','',r.text));card.append(history);}
+  if(p.category==='discussion'){
+   const affected=el('details','discussion-records');affected.append(el('summary','','Affected records ('+p.affected_record_ids.length+')'));const list=el('ul');for(const id of p.affected_record_ids){const item=el('li'),link=el('a','ref-link',id+' — '+titleOf(data.originals.get(id)||{id}));link.href='browser.html#'+encodeURIComponent(id);item.append(link);list.append(item);}affected.append(list);card.append(affected);
+   const evidence=el('details','discussion-findings');evidence.append(el('summary','','Findings ('+p.findings.length+')'));for(const f of p.findings){const item=el('div','discussion-finding');if(f.record_id||f.path)item.append(el('code','',[f.record_id,f.path].filter(Boolean).join(' ')));item.append(el('p','',f.description));evidence.append(item);}card.append(evidence);updateSelection();return;
+  }
   const mode=$('comparison-mode').value;$('full-json-control').hidden=mode!=='json';
   if(mode==='json'||p.category==='schema'){
    const table=el('table','change-table'),head=el('thead'),tr=el('tr'),body=el('tbody');for(const name of ['Subject','Before','After']){const th=el('th','',name);th.scope='col';tr.append(th);}head.append(tr);table.append(head,body);

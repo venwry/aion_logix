@@ -9,7 +9,7 @@ This is the current organisation of the maintained repository. [Current document
 | `data_storytelling/review_evidence/` | Supporting audits and proposal rationale; excluded from foundation discovery and authorization. |
 | `data_calculation/` | Reserved for separately designed derived assessments. |
 | `schemas/` | Current foundation schemas and shared technical/composition structures. |
-| `schemas/storytelling/` | Authorization and feedback schemas. |
+| `schemas/storytelling/` | Authorization, feedback and problem-only discussion schemas. |
 | `code/` | Native-module Timeline, Data browser and Changes confirm application. |
 | `server/` | Authenticated GitHub reading, validation, feedback and authorization transactions. |
 | `assets/` | Documentation viewer source, styles, images and ignored generated bundles. |
@@ -25,7 +25,7 @@ This is the current organisation of the maintained repository. [Current document
 - `index.html`, `code/index.html`: application entry/redirects.
 - `code/timeline.html` and `timeline.js`: timeline, selection history and annotations; `timeline-layout.js`, `timeline-lanes.js` and `temporal.js` support display.
 - `code/browser.html` and `browser.js`: browsing, filtering and batch record authorization.
-- `code/changes-confirm.html` and `changes-confirm.js`: grouped JSON/detail comparisons, selection, refinement feedback and authorization.
+- `code/changes-confirm.html` and `changes-confirm.js`: grouped JSON/detail comparisons, discussion findings, saved remarks, refinement feedback and authorization.
 - `code/shared.js`, `compact-details.js`, `composition.js`: loading, references and versioned technical detail rendering.
 - `code/model-contract.js`: schema version, dataset types, filenames and path helpers.
 - `code/product-launches.js`: validation of populated product launch relationships.
@@ -37,7 +37,7 @@ This is the current organisation of the maintained repository. [Current document
 
 `tools/validate-model.js` validates schema references, dates and graph rules. `tools/validate-foundation.js` adds editorial validation and optional complete authorization checks. `tools/generate-foundation-spec.js` generates `docs/data_model/FOUNDATION_SPECIFICATION.md`. Import tools are deliberately scoped and guarded; do not run them to overwrite reviewed data.
 
-`tools/verify-catalogue-phase3.js` and `tools/verify-catalogue-phase4.js` are read-only audits of their respective catalogue proposal sets, using evidence under `data_storytelling/review_evidence/`. They simulate approval in memory against the recorded source baseline. The phase-4 audit also checks independent offering approvals and prerequisite-gated reverse-link cleanup. These tools require their complete proposal sets to remain pending; use the normal validators after those proposals are approved.
+`tools/validate-catalogue.js` provides the optional strict product profile. `tools/verify-closeout-audit.js` verifies the closeout audit queue, preservation of source data and concrete approval simulations. Phase-specific `verify-catalogue-phase*.js` tools retain historical expectations and may reconstruct saved proposals or require their original pending cohort; they are not substitutes for current validation. Run only the audit tool applicable to the queue being reviewed.
 
 `package.json` and `package-lock.json` define dependencies and commands. `playwright.config.cjs` configures browser tests and their local server. `Dockerfile`, `render.yaml` and `.dockerignore` configure deployment; `.gitignore` excludes generated assets, dependencies, test outputs and secrets. See the [editing guide](EDITING_GUIDE.md) for checks and [Render setup](RENDER_SETUP.md) for publication.
 

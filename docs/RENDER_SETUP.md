@@ -9,7 +9,7 @@ The static application lives on GitHub Pages. A separate Render Docker service a
 3. Render generates `AION_REVIEW_TOKEN`, a separate backend access key. Copy it from Render's environment settings for your own use in the app. Anyone holding this key can authorize changes; this deployment is intended for the single author.
 4. Keep `AION_ALLOWED_ORIGINS=https://venwry.github.io`, or replace it with the exact origin of your Pages/custom domain. Comma-separated origins are supported; no wildcard is used. Leave `AION_REPOSITORY` and `AION_BRANCH` as configured unless deliberately changing the target.
 5. Deploy, then copy the service's HTTPS URL. `/health` checks the running process. Connecting from the application additionally verifies GitHub access and the repository schema.
-6. In the application, enter the service URL and **backend access key** in the Saving service bar, then click **Connect**. This is not the GitHub token. The connection is retained for that browser session; **Disconnect** clears it.
+6. In Timeline or Data browser, enter the service URL and **backend access key** in the Saving service bar, then click **Connect**. Changes confirm fixes the service URL to `https://aion-review-zu1t.onrender.com` and only accepts the backend access key. This is not the GitHub token. The connection is retained for that browser session; **Disconnect** clears it.
 
 No Render account or credentials are bundled with the repository. Deployment and setting the GitHub secret must be completed in your Render account. No persistent Render disk is needed: GitHub holds all records and decisions. Data-only authorization commits do not trigger backend rebuilds under the Blueprint's build filter.
 

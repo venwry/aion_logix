@@ -25,3 +25,5 @@ Use the [current documentation index](../README.md), [reference rules](../data_m
 The phase-3 directory also preserves the [original proposal snapshot](product-catalogue-phase3/original-change-proposals.json), which has been superseded by the live queue. Current machine-readable review evidence is under `data_storytelling/review_evidence/`, not in these historical reports.
 
 The pre-existing [legacy archive](../../archived_no_longer_valid/README.md) and its [checksum inventory](../../archived_no_longer_valid/inventory.json) remain unchanged. Its frozen files must be interpreted at their own historical paths and versions.
+
+The [superseded catalogue phase-7 validation guide](CATALOGUE_PHASE7_VALIDATION.md) is preserved with its [snapshot index](closeout-relocation-index.json). Its pending-review narrative is historical; the active validation guide describes the current contract. The [pre-closeout issue register](reconciliation-issues-before-closeout.json) preserves original wording and retired target IDs.

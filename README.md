@@ -4,7 +4,7 @@ A structured alternative-history project with technical product definitions, a t
 
 Start with the [current documentation](docs/README.md), [model principles](DATA_MODEL_PRINCIPLES.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md).
 
-The current schema contract is **0.9.2**, with sixteen foundation datasets. Existing legacy identities remain compatible while reviewed migrations are pending. Live records, proposals, feedback and exact-content authorizations determine the current state; old phase reports do not.
+The current schema contract is **0.9.2**, with sixteen foundation datasets. The catalogue migration is accepted. The optional strict catalogue profile passes, while the runtime schema retains compatibility with earlier record shapes; see [catalogue validation](docs/data_model/CATALOGUE_VALIDATION.md). Live records, proposals, feedback and exact-content authorizations determine the current state; old phase reports do not.
 
 | Layer | Location |
 | --- | --- |
@@ -24,12 +24,13 @@ npm run build
 npm run preview
 ```
 
-Serve the repository root over HTTP. Open `/` for Timeline, `/code/browser.html` for Data browser, `/code/changes-confirm.html` for pending proposals, or `/docs/viewer.html` for documentation. The documentation viewer requires generated assets; story pages use native JavaScript modules.
+Serve the repository root over HTTP. Open `/` for Timeline, `/code/browser.html` for Data browser, `/code/changes-confirm.html` for concrete proposals and discussion entries, or `/docs/viewer.html` for documentation. The documentation viewer requires generated assets; story pages use native JavaScript modules.
 
 The [application guide](docs/APPLICATION_GUIDE.md) explains navigation, annotations, comparisons and saving. [Render setup](docs/RENDER_SETUP.md) explains the GitHub saving service and static publication. The backend holds the GitHub credential; the browser uses a separate access key. Tests simulate transactions and never authorize live data.
 
 ```sh
 npm run validate:data
+npm run validate:catalogue
 node --test tests/model/*.test.js tests/review/*.test.js tests/server/*.test.js
 CHROMIUM_PATH=/usr/bin/chromium npm test
 ```

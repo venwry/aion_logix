@@ -7,6 +7,7 @@ import crypto from 'node:crypto';
 import {validateDocuments} from '../tools/validate-model.js';
 const editorialValidator=new Ajv2020({allErrors:true,strict:false});addFormats(editorialValidator);
 const checks=Object.fromEntries(['authorization','authorization_decision','annotation','change_review'].map(n=>[n,editorialValidator.compile(JSON.parse(fs.readFileSync(new URL('../schemas/storytelling/'+n+'.schema.json',import.meta.url))))]));
+const checkDiscussion=editorialValidator.compile(JSON.parse(fs.readFileSync(new URL('../schemas/storytelling/discussion.schema.json',import.meta.url))));
 export {datasets as names} from '../code/model-contract.js';
 import {datasets as names} from '../code/model-contract.js';
 export const stable=x=>Array.isArray(x)?x.map(stable):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,stable(x[k])])):x;
@@ -18,6 +19,11 @@ export function validate(files){
  for(const [name,check] of Object.entries(checks))if(!check(files[`data_storytelling/${name}.json`]||{[name]:[]}))result.errors.push(name+': '+editorialValidator.errorsText(check.errors));
  result.errors.push(...validateEditorialHistory(files));
  const index=new Map(records(files).map(r=>[r.id,r]));const seen=new Set();
+ for(const p of get(files,'change')||[])if(p.category==='discussion'){
+  if(!checkDiscussion(p)){result.errors.push(p.id+': '+editorialValidator.errorsText(checkDiscussion.errors));continue;}
+  for(const id of p.affected_record_ids)if(!index.has(id))result.errors.push(p.id+': unknown discussion record '+id);
+  for(const f of p.findings)if(f.record_id&&!p.affected_record_ids.includes(f.record_id))result.errors.push(p.id+': finding record must be listed in affected_record_ids');
+ }
  for(const a of get(files,'authorization')){if(seen.has(a.record_id))result.errors.push('Duplicate authorization');seen.add(a.record_id);if(!index.has(a.record_id))result.errors.push('Orphan authorization '+a.record_id);if(!['authorized','unauthorized'].includes(a.state))result.errors.push('Invalid authorization state');if(!/^[a-f0-9]{64}$/.test(a.content_sha256))result.errors.push('Invalid content hash');}
  for(const record of index.values())if(['status','confirmation','source_refs'].some(k=>k in record))result.errors.push('Editorial information in foundation '+record.id);
  return result;
@@ -40,6 +46,7 @@ function approveChanges(original, entries, actor) {
    fail('A selected proposal is no longer pending. Reload and review the changes.');
   }
   if(hash(proposal)!==entry.proposal_sha256)fail('A selected proposal has changed. Reload and review it again.');
+  if(proposal.category==='discussion')fail('Discussion entries cannot be authorized. Provide remarks so a concrete change can be proposed.');
   if(latestReview(files,proposal.id,hash(proposal))?.state==='needs_refinement')fail('This proposal needs refinement. Prepare a revised proposal before authorization.');
   if(proposal.category==='schema')fail('Schema proposals require a separately reviewed schema deployment.');
   if(!Array.isArray(proposal.elements)||!proposal.elements.length)bad('A selected proposal has no changes.');

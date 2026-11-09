@@ -12,7 +12,7 @@ The [reference rules](REFERENCE_RULES.md) govern semantic directness, inputs/out
 - A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.
 - Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the 16 target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.
 - Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.
-- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. Existing legacy clauses remain accepted during approval-driven migration; the diagram shows the new shape.
+- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. All current clauses use this shape; the runtime schema also accepts the legacy representation for compatibility.
 - These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.
 
 ## Entity and reference diagram
@@ -243,7 +243,7 @@ clauses*: array<object>
 | `clauses[].value` | yes | `number | string | null` | — |
 | `clauses[].unit` | yes | `string | null` | minLength: 1 |
 
-**Transition:** clauses accept either the exact five-field shape shown here or the unchanged legacy shape. Hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.
+**Runtime compatibility:** clauses accept either the exact five-field shape shown here or the unchanged legacy shape. Hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.
 
 ### assumption
 
@@ -5113,7 +5113,7 @@ category?: string
 
 ### product
 
-Logix/AION customer-facing offering; legacy identities remain during migration. Optional paired launch links are checked for campaign ownership and temporal containment.
+Logix/AION customer-facing offering. All current offerings have launch pairs; the runtime schema retains optional paired links, checked for campaign ownership and temporal containment.
 
 File: [product.json](../../data_foundation/product.json) · Schema: [product.schema.json](../../schemas/product.schema.json)
 
@@ -5278,7 +5278,7 @@ launch_event_id?: string → event
 | `service_definition.requirements[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|actor_relationship\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition\|external_product)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `launch_event_id` | no | `string` | pattern: "^event\\.[a-z0-9][a-z0-9_.-]*$" |
 
-**Transition:** launch campaign and event links are optional as a pair. When supplied, the event must have single-parent ownership through the campaign execution process and fit its period. Legacy product kinds remain accepted until reviewed migrations finish.
+**Runtime compatibility:** the schema permits both launch links to be absent and still accepts legacy product kinds. Current authoring rules and all accepted products use explicit pairs and customer-facing kinds. The optional catalogue profile requires these rules; it is not yet a saving-service gate. When supplied, a launch event must have single-parent ownership through the campaign execution process and fit its period.
 
 ### software_edition
 

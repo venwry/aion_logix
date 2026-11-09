@@ -7,6 +7,7 @@ mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutra
 const entries = [
   {id:'guide',title:'Repository objective and start here',path:'README.md',type:'md'},
   {id:'principles',title:'Data model principles',path:'DATA_MODEL_PRINCIPLES.md',type:'md'},
+  {id:'catalogue-validation',title:'Catalogue validation — current checks',path:'docs/data_model/CATALOGUE_VALIDATION.md',type:'md'},
   {id:'model-guide',title:'Current model guide',path:'docs/data_model/MODEL_GUIDE.md',type:'md'},
   {id:'application-guide',title:'Application guide',path:'docs/APPLICATION_GUIDE.md',type:'md'},
   {id:'editing',title:'Editing guide',path:'docs/EDITING_GUIDE.md',type:'md'},
@@ -19,7 +20,7 @@ const entries = [
   {id:'backlog',title:'Archive · former review backlog',path:'docs/archived/REVIEW_BACKLOG.md',type:'md'},
   {id:'render',title:'Render setup',path:'docs/RENDER_SETUP.md',type:'md'},
   ...datasets.map(name=>({id:'migration_'+name,title:'Data · '+name.replaceAll('_',' '),path:datasetPath(name),type:'json'})),
-  ...['authorization','authorization_decision','change','manifest','source','reconciliation_issue'].map(name=>({id:'migration_'+name,title:'Storytelling · '+name.replaceAll('_',' '),path:'data_storytelling/'+name+'.json',type:'json'})),
+  ...['authorization','authorization_decision','change','manifest','annotation','change_review','source','reconciliation_issue'].map(name=>({id:'migration_'+name,title:'Storytelling · '+name.replaceAll('_',' '),path:'data_storytelling/'+name+'.json',type:'json'})),
   {id:'archive',title:'Archive — historical evidence only',path:'docs/archived/README.md',type:'md'},
   {id:'legacy-archive',title:'Legacy archive — model and source evidence',path:'archived_no_longer_valid/README.md',type:'md'},
   ...[['schemas','SCHEMA_DESIGN'],['phase-1','PHASE_1_PROPOSAL'],['phase-1b','PHASE_1B_DESIGN_REVIEW'],['phase-1b-migration','PHASE_1B_IMPLEMENTATION'],['migration-report','MIGRATION_REPORT'],['inventory','SOURCE_INVENTORY']].map(([id,name])=>({id,title:'Archive · '+name.replaceAll('_',' '),path:'archived_no_longer_valid/docs/data-model/'+name+'.md',type:'md'})),

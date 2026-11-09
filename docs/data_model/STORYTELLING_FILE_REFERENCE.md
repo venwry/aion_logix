@@ -6,12 +6,12 @@ Contract **0.9.2**. `data_storytelling/` contains eight active JSON files at its
 | --- | --- |
 | [authorization.json](../../data_storytelling/authorization.json) | Whole-record state and exact content hashes. |
 | [authorization_decision.json](../../data_storytelling/authorization_decision.json) | Immutable before/after decisions and reviewed proposal snapshots. |
-| [change.json](../../data_storytelling/change.json) | Current pending proposals and transport metadata. |
+| [change.json](../../data_storytelling/change.json) | Current concrete proposals, discussion entries and transport metadata. |
 | [manifest.json](../../data_storytelling/manifest.json) | Schema version, foundation types and filename exceptions. |
 | [annotation.json](../../data_storytelling/annotation.json) | Append-only revisions of record annotations. |
 | [change_review.json](../../data_storytelling/change_review.json) | Append-only feedback on exact proposal revisions. |
 | [source.json](../../data_storytelling/source.json) | Source bibliography and evidence catalogue. |
-| [reconciliation_issue.json](../../data_storytelling/reconciliation_issue.json) | Open editorial questions; references may require reconciliation as records evolve. |
+| [reconciliation_issue.json](../../data_storytelling/reconciliation_issue.json) | Inherited editorial questions with current target reconciliation; the live Changes confirm queue holds actionable proposals and discussions. |
 
 ## Authorization and decisions
 
@@ -31,7 +31,13 @@ The review actor is the application reviewer, not a fictional-world actor. Whole
 
 The API also accepts `approve_changes` with `{change_id, proposal_sha256}` selections; the legacy singular action remains supported. Prerequisites must be selected or previously approved. Retry protection uses the exact proposal hash. Schema proposals require separate deployment. A revised proposal has a new hash and needs fresh review; old feedback does not silently reject or approve that revision.
 
-Metadata and supporting evidence describe the editorial workflow and do not become story facts. There is no dedicated JSON Schema for the complete proposal envelope; runtime checks and proposal tests supplement schema validation of resulting foundation records.
+Metadata and supporting evidence describe the editorial workflow and do not become story facts. Concrete proposal envelopes continue to use runtime checks and proposal tests, alongside schema validation of their resulting foundation records. Discussion records have a dedicated schema and runtime checks; the complete mixed transport envelope still has no standalone JSON Schema.
+
+### Problem-only discussion entries
+
+The `review-transport-2` metadata version permits `category: discussion`. These entries require `id`, `title`, `reason`, empty `elements`, `affected_record_ids` and nonempty `findings`. Each finding has a `description` and optional `record_id` and `path`; a finding’s record must be in the affected-record list, and listed IDs must exist in the current foundation. Model-wide questions may have no affected IDs. See [discussion.schema.json](../../schemas/storytelling/discussion.schema.json).
+
+Discussion entries cannot be authorized, including through direct API calls. They can receive the same hash-bound feedback or be removed through `save_review`. Removing one saves a `remove_change` decision with no foundation targets. Converting a discussion into a concrete proposal preserves its ID and earlier feedback but changes its hash; remove discussion-only fields and supply complete review elements. The foundation schema version remains 0.9.2 because this is an editorial transport capability.
 
 ## Manifest and paths
 
@@ -47,7 +53,7 @@ Open issues record editorial questions and affected IDs. Later migrations can re
 
 ## Annotations and refinement feedback
 
-`annotation.json` contains revisions with `id`, `record_id`, `content_sha256`, `text`, `state` (`open`, `resolved`, `dismissed`), nullable `supersedes_id`, reviewer `actor` and `created_at`. Resolved entries additionally record `resolved_by_change_id`. A revision identifies the current tip for that record; old text remains immutable. Deleted foundation records do not erase annotation history.
+`annotation.json` contains revisions with `id`, `record_id`, `content_sha256`, `text`, `state` (`open`, `resolved`, `dismissed`), nullable `supersedes_id`, reviewer `actor` and `created_at`. All revisions include `change_ids`; a resolving revision records the responsible proposal ID in that array. A revision identifies the current tip for that record; old text remains immutable. Deleted foundation records do not erase annotation history.
 
 `change_review.json` contains revisions with `id`, `change_id`, `proposal_sha256`, `text`, `state: needs_refinement`, nullable `supersedes_id`, `actor` and `created_at`. Chains are scoped to the change ID and exact proposal hash. This deployment uses the shared author identity, not per-user attribution.
 

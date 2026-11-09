@@ -8,7 +8,7 @@ The application explores and reviews the alternative history stored in JSON. Dis
 | --- | --- |
 | [Timeline](../code/timeline.html) | Chronological exploration of events, processes and campaigns, with details on the left. |
 | [Data browser](../code/browser.html) | All foundation datasets, with a sortable record list on the left and details on the right. |
-| [Changes confirm](../code/changes-confirm.html) | Review proposed before/after changes and authorize their resulting records. |
+| [Changes confirm](../code/changes-confirm.html) | Review proposed before/after changes, or provide remarks on problem-only discussions. |
 | [Documentation](viewer.html) | Read current guides, dataset files and clearly labelled historical evidence. |
 
 The header switches between pages. On Timeline, Data browser and Changes confirm, **Saving service** in the top navigator hides or reveals the connection section. Its visibility is remembered across pages and reloads in this browser; hiding it frees the space for the content below and keeps the connection active. The original Logix/AION logo links to the timeline; the AION A emblem is the browser/favorites icon. Record URLs carry the selected ID after `#`, allowing direct links to details.
@@ -82,6 +82,8 @@ Changes confirm has a resizable proposal navigator and a comparison pane, withou
 
 A failed save retains staged decisions and drafts. Exact proposal hashes, stale-before checks for approvals, graph validation and non-forced GitHub saves protect the transaction. A revised proposal returns to pending review; earlier feedback remains available. Schema proposals can be withdrawn here, but authorization requires a separate reviewed deployment.
 
+**Discussion** entries have a problem statement, expandable findings and links to affected records, with no Before/After edits. Their **Authorize** button is disabled and the API rejects attempts to authorize them. **Add remarks** opens the same saved feedback workflow; **Save** commits the remarks without changing foundation records. **Remove** can withdraw a discussion and preserves its audit snapshot. The comparison controls return when a concrete proposal is selected. Use the category filter to distinguish Foundation changes, legacy Story changes, Discussion and Schema extensions. A discussion can later be revised under the same ID into a concrete proposal, with a new hash and the earlier remarks retained.
+
 ### Timeline annotations and selection history
 
 **Add annotation** beside the authorization badge opens a multiline field above the title. Drafts survive selection changes, filtering and full-screen changes. They are stored locally in this browser, scoped to this repository and main branch, and are explicitly labelled as uncommitted. Local storage can be unavailable or cleared; the page reports storage failures and warns on leaving with drafts. Committing requires a saving-service connection. If a record or proposal disappears, its local draft remains available in a recovery panel for copying or explicit discard.
@@ -92,7 +94,7 @@ The uncommitted count counts changed annotations, not keystrokes. **Save annotat
 
 For exact authorization file structures see the [storytelling reference](data_model/STORYTELLING_FILE_REFERENCE.md). Current pending proposals, feedback and open questions live in the storytelling JSON; archived backlog reports are historical only.
 
-Agreement details show simplified clause columns: id, kind, statement, value and unit. Non-quantitative clauses use null values; quantities and ranges summarize the full statement. During migration, agreements awaiting approval can still show the legacy columns. Review each whole agreement independently in Changes confirm. Frontend, saving backend and manifest must use the matching current schema contract.
+Agreement details show simplified clause columns: id, kind, statement, value and unit. Non-quantitative clauses use null values; quantities and ranges summarize the full statement. All current agreement records use these simplified clauses. The renderer can still display legacy clauses if supplied by a compatible historical snapshot. Review each whole agreement independently in Changes confirm. Frontend, saving backend and manifest must use the matching current schema contract.
 
 
 ## Timeline categories and swim lanes
@@ -111,8 +113,8 @@ Category assignments are story changes. Group reparenting and category changes w
 
 ## External products and product launches
 
-Data browser includes External Product alongside the existing datasets. Its specification table shows each reference with the description and role supplied by the author. Timeline details and Changes confirm use the same rendering and navigation. Product details show explicit launch campaign and event links when supplied; several products may share them. External records appear with their current exact-content authorization status; their relationships do not authorize referenced technical definitions.
+Data browser includes External Product alongside the existing datasets. Its specification table shows each reference with the description and role supplied by the author. Timeline details and Changes confirm use the same rendering and navigation. Product details show explicit launch campaign and event links; all current offerings supply them and several products may share them. External records appear with their current exact-content authorization status; their relationships do not authorize referenced technical definitions.
 
 ## Reference interpretation
 
-Inputs and outcomes explain dependency, delivery, decision or qualification roles. Top-level subjects can include documented compatibility exceptions while reviewed migrations are pending. Read the [reference rules](data_model/REFERENCE_RULES.md); the presence of a link alone does not establish ownership, readiness or an initial launch. The “Referenced by” section derives incoming links without storing a second copy.
+Inputs and outcomes explain dependency, delivery, decision or qualification roles. Top-level subjects remain in some records and need individual role review. Their presence is not blanket approval of a loose reference; documented external participation and later promotion can be valid exceptions. Read the [reference rules](data_model/REFERENCE_RULES.md); the presence of a link alone does not establish ownership, readiness or an initial launch. The “Referenced by” section derives incoming links without storing a second copy.

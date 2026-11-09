@@ -49,7 +49,7 @@ const lines = [
   '- A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.',
   '- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the ' + names.length + ' target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.',
   '- Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.',
-  '- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. Existing legacy clauses remain accepted during approval-driven migration; the diagram shows the new shape.',
+  '- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. All current clauses use this shape; the runtime schema also accepts the legacy representation for compatibility.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',
@@ -83,7 +83,7 @@ const purpose = {
  narrative_period: 'Named intervals used to organize the story.',
  process: 'An activity extending through time, with participants and milestones.',
  programme: 'Historical coordinating activity.',
- product: 'Logix/AION customer-facing offering; legacy identities remain during migration. Optional paired launch links are checked for campaign ownership and temporal containment.',
+ product: 'Logix/AION customer-facing offering. All current offerings have launch pairs; the runtime schema retains optional paired links, checked for campaign ownership and temporal containment.',
  external_product: 'Descriptive third-party commercial offering with direct role-labelled specification references. Stored in external_products.json.',
  base_part: 'Canonical physical base part and manufacturing definition.',
  device: 'Canonical device and versioned physical composition.',
@@ -102,10 +102,10 @@ function constraints(f) {
 for (const name of names) {
   lines.push(`### ${name}`, '', purpose[name], '', `File: [${datasetFiles[name]}](../../data_foundation/${datasetFiles[name]}) · Schema: [${name}.schema.json](../../schemas/${name}.schema.json)`, '', '```text', `${name}[]`, ...tree(name), '```', '', '| Field path | Required in parent | Type | Constraints / allowed values |', '| --- | --- | --- | --- |');
   for (const f of entities[name]) lines.push(`| \`${f.path}\` | ${f.required ? 'yes' : 'no'} | \`${f.type}\` | ${constraints(f).replaceAll('|', '\\|')} |`);
-  if (name === 'product') lines.push('', '**Transition:** launch campaign and event links are optional as a pair. When supplied, the event must have single-parent ownership through the campaign execution process and fit its period. Legacy product kinds remain accepted until reviewed migrations finish.');
+  if (name === 'product') lines.push('', '**Runtime compatibility:** the schema permits both launch links to be absent and still accepts legacy product kinds. Current authoring rules and all accepted products use explicit pairs and customer-facing kinds. The optional catalogue profile requires these rules; it is not yet a saving-service gate. When supplied, a launch event must have single-parent ownership through the campaign execution process and fit its period.');
   if (name === 'external_product') lines.push('', '**Direct relationships:** specification entries contain exactly `no`, `description`, one `ref_id` and `ref_role`; numbering is unique within the record. This descriptive identity does not own technical compositions, structured dates or editorial status.');
   if (name === 'process') lines.push('', '**Boundary union:** calendar value with year/month/day precision, event ID with `precision: event`, or null with `precision: unknown`. The diagram/catalogue value reference applies only to event anchors.');
-  if (name === 'agreement') lines.push('', '**Transition:** clauses accept either the exact five-field shape shown here or the unchanged legacy shape. Hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.');
+  if (name === 'agreement') lines.push('', '**Runtime compatibility:** clauses accept either the exact five-field shape shown here or the unchanged legacy shape. Hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.');
   lines.push('');
 }
 lines.push('## Reference catalogue', '', 'Every schema attribute marked `x-ref` appears here, including references inside shared and nested objects. Each target resolves to the target record’s `id`. Polymorphic alternatives are allowed targets, not simultaneous requirements.', '', '| Source dataset | Attribute path | Permitted target datasets |', '| --- | --- | --- |');
