@@ -59,6 +59,10 @@ Write a short chapter name and plain-English explanatory paragraphs. Store named
 }
 ```
 
+Parameter tables hold named data, not abbreviated prose. Express Boolean capability flags as natural English statements; do not interpolate `true` or `false` into a sentence. Move policies, commitments, requirements and other sentence-valued entries into the description, retaining their limits and qualifications. Every retained parameter must be used in the description through its `{key}` placeholder; remove redundant or irrelevant keys rather than leaving unexplained table rows.
+
+Consolidate numbered members of the same list into one key with an ordered textual value. Preserve repeated values when order matters, such as a `3, 2, 2, 2` clock sequence. Distinct memory layouts, address maps and platform profiles need meaningful names and preserved relationships, not a flattened list that loses which values belong together. A long enumeration may remain a parameter; a long statement belongs in prose. Keyboard bindings may remain short parameters while command scope and conditions belong in explanatory sentences.
+
 Substitutions are local to the chapter and nonrecursive. An unknown key fails model validation. Descriptions and values are plain text, never HTML or executable templates. Parameter values can retain existing record IDs as descriptive links; they do not create a new structured reference relationship. Keep the existing typed ownership and related-technology fields meaningful.
 
 The author-directed format migration preserves every original item number, renames `type` to `chapter_name` and keeps `description` unchanged. It adds a parameter named `value` only when the former value converted to text differs from the description, otherwise uses an empty list. Conversion is case-sensitive; numeric and Boolean values become text. Existing source records have no item-level units to migrate. Historical snapshots remain unchanged and readable, but the active technology schema accepts only the new chapter format.

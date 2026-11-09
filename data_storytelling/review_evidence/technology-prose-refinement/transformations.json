@@ -1,0 +1,4828 @@
+[
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Device identification"
+    ],
+    "value": "true",
+    "statement": "Devices support identification."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Attachment model"
+    ],
+    "value": "dynamic attachment is supported when the bus is inactive",
+    "statement": "Devices can be attached dynamically while the bus is inactive."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Peripheral ROM metadata 1",
+      "Peripheral ROM metadata 2",
+      "Peripheral ROM metadata 3",
+      "Peripheral ROM metadata 4",
+      "Peripheral ROM metadata 5"
+    ],
+    "new_key": "Peripheral ROM metadata",
+    "values": [
+      "DEVICE ID",
+      "DEVICE TYPE",
+      "VENDOR",
+      "PROTOCOL VERSION",
+      "POWER REQUIREMENTS"
+    ]
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 9,
+    "action": "statement_to_prose",
+    "keys": [
+      "Openness"
+    ],
+    "value": "The technical specification is published for third-party implementation."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 9,
+    "action": "statement_to_prose",
+    "keys": [
+      "Compatibility policy"
+    ],
+    "value": "Logix commits to forward peripheral compatibility across future Logix computer generations."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 9,
+    "action": "remove_redundant_title",
+    "keys": [
+      "Title"
+    ],
+    "value": "FlexiBUS v1 transport and driver model"
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 9,
+    "action": "statement_to_prose",
+    "keys": [
+      "Ecosystem programme policy"
+    ],
+    "value": "Non-exclusive independently branded implementations; software and video adoption are optional."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "Topology"
+    ],
+    "value": "Point-to-point host port to one device; no passive multidrop or implicit daisy chaining in v1."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "Signaling"
+    ],
+    "value": "Separate differential transmit and receive pairs; asynchronous serial framing."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "Cable target"
+    ],
+    "value": "Shielded cable up to 3 m at 500 kbit/s; qualify signal integrity and period-appropriate line components."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 12,
+    "action": "consolidate_list",
+    "keys": [
+      "Supported rate 1 (bps)",
+      "Supported rate 2 (bps)"
+    ],
+    "new_key": "Supported rate (bps)",
+    "values": [
+      "125000",
+      "500000"
+    ]
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 20,
+    "action": "statement_to_prose",
+    "keys": [
+      "Encoding"
+    ],
+    "value": "8N1 byte transport, 0x7E delimiter and escaped delimiter/escape bytes."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 20,
+    "action": "consolidate_list",
+    "keys": [
+      "Header 1",
+      "Header 2",
+      "Header 3",
+      "Header 4",
+      "Header 5"
+    ],
+    "new_key": "Header",
+    "values": [
+      "protocol version",
+      "message class",
+      "flags",
+      "request ID",
+      "payload length"
+    ]
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 29,
+    "action": "statement_to_prose",
+    "keys": [
+      "Reliability 2"
+    ],
+    "value": "Retries of writes must carry the same identity; media changes invalidate queued requests."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 29,
+    "action": "statement_to_prose",
+    "keys": [
+      "Reliability 3"
+    ],
+    "value": "Disk devices buffer complete sectors locally. Host throughput need not equal raw disk bit rate."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 29,
+    "action": "statement_to_prose",
+    "keys": [
+      "Reliability 4"
+    ],
+    "value": "Report removal, CRC errors, timeouts and unsupported operations through stable OS errors."
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 29,
+    "action": "consolidate_list",
+    "keys": [
+      "Commands 1",
+      "Commands 2",
+      "Commands 3",
+      "Commands 4",
+      "Commands 5"
+    ],
+    "new_key": "Commands",
+    "values": [
+      "IDENTIFY and capabilities",
+      "RESET and health",
+      "Keyboard event read",
+      "Printer status and bounded output blocks",
+      "Disk geometry/media generation, sector read/write and flush"
+    ]
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 41,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 1"
+    ],
+    "value": "FIFO overrun and worst-case CPU service latency"
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 41,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 2"
+    ],
+    "value": "Printer backpressure"
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 41,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 3"
+    ],
+    "value": "Disk retry after lost reply"
+  },
+  {
+    "record_id": "technology.flexibus",
+    "chapter_number": 41,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 4"
+    ],
+    "value": "CRC faults, cable removal and power sequencing"
+  },
+  {
+    "record_id": "technology.plug_and_execute",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Configuration switches required"
+    ],
+    "value": "false",
+    "statement": "Boards do not require manual configuration switches."
+  },
+  {
+    "record_id": "technology.plug_and_execute",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Driver storage"
+    ],
+    "value": "expansion device carries its driver/identification code in ROM",
+    "statement": "The expansion device carries its driver and identification code in ROM."
+  },
+  {
+    "record_id": "technology.plug_and_execute",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Design goal"
+    ],
+    "value": "automatic identification and execution without manual switch configuration",
+    "statement": "The host identifies and starts the device automatically without manual switch configuration."
+  },
+  {
+    "record_id": "technology.plug_and_execute",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Forward design policy"
+    ],
+    "value": "connector/pin standards may reserve unused capacity for later generations",
+    "statement": "Connector and pin standards may reserve unused capacity for later generations."
+  },
+  {
+    "record_id": "technology.xip_rom_platform",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Execution model"
+    ],
+    "value": "system and application components may execute directly from ROM where practical",
+    "statement": "System and application components may execute directly from ROM where practical."
+  },
+  {
+    "record_id": "technology.xip_rom_platform",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Distribution model"
+    ],
+    "value": "replaceable ROM/EEPROM cartridges are used for system and application distribution",
+    "statement": "Replaceable ROM/EEPROM cartridges distribute system and application software."
+  },
+  {
+    "record_id": "technology.xip_rom_platform",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Upgrade model"
+    ],
+    "value": "software/firmware can be upgraded by replacing the relevant cartridge",
+    "statement": "Replacing the relevant cartridge upgrades its software or firmware."
+  },
+  {
+    "record_id": "technology.xip_rom_platform",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Design goal"
+    ],
+    "value": "reduce RAM consumption and provide controlled, replaceable system images",
+    "statement": "This reduces RAM consumption and provides controlled, replaceable system images."
+  },
+  {
+    "record_id": "technology.logix_digital_video",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Plus base or reference connection"
+    ],
+    "value": "true",
+    "statement": "The cable also includes a base or reference connection."
+  },
+  {
+    "record_id": "technology.logix_digital_video",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Signals 1",
+      "Signals 2",
+      "Signals 3",
+      "Signals 4",
+      "Signals 5",
+      "Signals 6",
+      "Signals 7",
+      "Signals 8"
+    ],
+    "new_key": "Signals",
+    "values": [
+      "Data0",
+      "Data1",
+      "Data2",
+      "Data3",
+      "Clock",
+      "Control",
+      "H-sync",
+      "V-sync"
+    ]
+  },
+  {
+    "record_id": "technology.logix_digital_video",
+    "chapter_number": 12,
+    "action": "consolidate_list",
+    "keys": [
+      "Control channel startup 1",
+      "Control channel startup 2",
+      "Control channel startup 3",
+      "Control channel startup 4",
+      "Control channel startup 5"
+    ],
+    "new_key": "Control channel startup",
+    "values": [
+      "Blank picture",
+      "Read versioned capability record with integrity check and timeout",
+      "Intersect host and monitor raster support",
+      "Select raster and initialize palette",
+      "Enable picture"
+    ]
+  },
+  {
+    "record_id": "technology.logix_digital_video",
+    "chapter_number": 12,
+    "action": "consolidate_list",
+    "keys": [
+      "Control channel capability fields 1",
+      "Control channel capability fields 2",
+      "Control channel capability fields 3",
+      "Control channel capability fields 4",
+      "Control channel capability fields 5",
+      "Control channel capability fields 6",
+      "Control channel capability fields 7",
+      "Control channel capability fields 8"
+    ],
+    "new_key": "Control channel capability fields",
+    "values": [
+      "protocol version",
+      "monitor ID",
+      "supported raster IDs",
+      "maximum pixel clock",
+      "color or grayscale",
+      "palette precision",
+      "preferred raster",
+      "integrity check"
+    ]
+  },
+  {
+    "record_id": "technology.logix_digital_video",
+    "chapter_number": 41,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Interlaced"
+    ],
+    "value": "false",
+    "statement": "The raster is progressive."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "System clipboard"
+    ],
+    "value": "true",
+    "statement": "A system clipboard is available."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Developer API"
+    ],
+    "value": "true",
+    "statement": "Applications can use the common developer API."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Common components 1",
+      "Common components 2",
+      "Common components 3",
+      "Common components 4",
+      "Common components 5"
+    ],
+    "new_key": "Common components",
+    "values": [
+      "text editing",
+      "disk/file browsing",
+      "forms",
+      "lists",
+      "popup windows"
+    ]
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Consistent across 1",
+      "Consistent across 2",
+      "Consistent across 3",
+      "Consistent across 4",
+      "Consistent across 5"
+    ],
+    "new_key": "Consistent across",
+    "values": [
+      "text editor",
+      "C compiler/IDE",
+      "Abacus",
+      "command line",
+      "business applications"
+    ]
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Layout and screen"
+    ],
+    "value": "Query usable dimensions, clip and scroll; separate document coordinates from screen coordinates."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Adaptive layouts"
+    ],
+    "value": "Compact 40-column and expanded 80-column layouts; dialogs, long names and errors fit either width."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Semantic colors"
+    ],
+    "value": "Normal text, selection and warning roles map to color or monochrome attributes."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Input"
+    ],
+    "value": "Structured character, function/navigation key and modifier events; blocking input and polling."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Controls"
+    ],
+    "value": "Fields, lists, menus, dialogs, popup windows and consistent focus movement."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Editing"
+    ],
+    "value": "Common selection, insertion/deletion and clipboard commands."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Clipboard"
+    ],
+    "value": "Explicit formats, lengths, bounded capacity, ownership and errors."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Context lifecycle"
+    ],
+    "value": "Create/destroy and activate/deactivate contexts; redraw when needed. A context describes an assigned display region, which may be the full Aurelia screen."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Timing"
+    ],
+    "value": "System timing and keyboard-repeat services replace CPU-speed-dependent loops."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Portability goal"
+    ],
+    "value": "DRI is encouraged and later assumed to distribute the TUI extension for other CP/M computers."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 40,
+    "action": "statement_to_prose",
+    "keys": [
+      "Compatibility rules 1"
+    ],
+    "value": "Keep the same API behavior across Aurelia, Aurelia+ and Artemis."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 40,
+    "action": "statement_to_prose",
+    "keys": [
+      "Compatibility rules 2"
+    ],
+    "value": "Do not assume display stride, video RAM address, last column or direct peripheral registers."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 40,
+    "action": "statement_to_prose",
+    "keys": [
+      "Compatibility rules 3"
+    ],
+    "value": "Legacy CP/M console behavior is preserved; Logix-aware interfaces use the documented editing conventions."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 40,
+    "action": "statement_to_prose",
+    "keys": [
+      "Compatibility rules 4"
+    ],
+    "value": "Artemis implementation mediates process access to shared clipboard and display services."
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "MOVE_CHARACTER_LEFT / RIGHT"
+    ],
+    "value": "Left / Right; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Left / Right"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "MOVE_DISPLAY_LINE_UP / DOWN"
+    ],
+    "value": "Up / Down; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Up / Down"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "MOVE_WORD_LEFT / RIGHT"
+    ],
+    "value": "Ctrl+Left / Ctrl+Right; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Left / Ctrl+Right"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "MOVE_LINE_START / END"
+    ],
+    "value": "Home / End; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Home / End"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "MOVE_DOCUMENT_START / END"
+    ],
+    "value": "Ctrl+Home / Ctrl+End; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Home / Ctrl+End"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "MOVE_PAGE_UP / DOWN"
+    ],
+    "value": "Page Up / Page Down; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Page Up / Page Down"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "MOVE_PARAGRAPH_PREVIOUS / NEXT"
+    ],
+    "value": "Ctrl+Up / Ctrl+Down; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Up / Ctrl+Down"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "EXTEND_SELECTION"
+    ],
+    "value": "Shift + any navigation command; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Shift + any navigation command"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "SELECT_ALL"
+    ],
+    "value": "Ctrl+A; scope: focused editor/view",
+    "scope": "focused editor/view",
+    "binding": "Ctrl+A"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 7,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "CLEAR_SELECTION"
+    ],
+    "value": "Esc; scope: only after higher-priority transient UI is dismissed",
+    "scope": "only after higher-priority transient UI is dismissed",
+    "binding": "Esc"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 37,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "COPY"
+    ],
+    "value": "Ctrl+C; alias Ctrl+Insert; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+C; alias Ctrl+Insert"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 37,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "CUT"
+    ],
+    "value": "Ctrl+X; alias Shift+Delete in text editors only; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+X; alias Shift+Delete in text editors only"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 37,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "PASTE"
+    ],
+    "value": "Ctrl+V; alias Shift+Insert; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+V; alias Shift+Insert"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 37,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "UNDO"
+    ],
+    "value": "Ctrl+Z; alias Alt+Backspace; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Z; alias Alt+Backspace"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 37,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "REDO"
+    ],
+    "value": "Ctrl+Shift+Z; alias Ctrl+Y; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Shift+Z; alias Ctrl+Y"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 37,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "DELETE_PREVIOUS / NEXT_CHARACTER"
+    ],
+    "value": "Backspace / Delete; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Backspace / Delete"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 37,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "DELETE_PREVIOUS / NEXT_WORD"
+    ],
+    "value": "Ctrl+Backspace / Ctrl+Delete; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Backspace / Ctrl+Delete"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "NEW_DOCUMENT"
+    ],
+    "value": "Ctrl+N; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+N"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "OPEN_DOCUMENT"
+    ],
+    "value": "Ctrl+O; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+O"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "SAVE_DOCUMENT"
+    ],
+    "value": "Ctrl+S; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+S"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "SAVE_DOCUMENT_AS"
+    ],
+    "value": "Ctrl+Shift+S; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Shift+S"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "PRINT_DOCUMENT"
+    ],
+    "value": "Ctrl+P; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+P"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "FIND"
+    ],
+    "value": "Ctrl+F; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+F"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "FIND_NEXT / PREVIOUS"
+    ],
+    "value": "F3 / Shift+F3; aliases Ctrl+G / Ctrl+Shift+G; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "F3 / Shift+F3; aliases Ctrl+G / Ctrl+Shift+G"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "REPLACE"
+    ],
+    "value": "Ctrl+H; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+H"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "GO_TO"
+    ],
+    "value": "Ctrl+L; scope: line, cell or record in a document; context named in UI",
+    "scope": "line, cell or record in a document; context named in UI",
+    "binding": "Ctrl+L"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "CLOSE_DOCUMENT"
+    ],
+    "value": "Ctrl+W; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+W"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "QUIT_APPLICATION"
+    ],
+    "value": "Ctrl+Q; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Q"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 58,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "HELP"
+    ],
+    "value": "F1; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "F1"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "FOCUS_NEXT / PREVIOUS_FIELD"
+    ],
+    "value": "Tab / Shift+Tab; scope: forms/dialogs",
+    "scope": "forms/dialogs",
+    "binding": "Tab / Shift+Tab"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "ACTIVATE_OR_TOGGLE"
+    ],
+    "value": "Space; scope: focused button/checkbox",
+    "scope": "focused button/checkbox",
+    "binding": "Space"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "ACCEPT_DIALOG"
+    ],
+    "value": "Enter; scope: dialog; editor Enter inserts newline",
+    "scope": "dialog; editor Enter inserts newline",
+    "binding": "Enter"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "CANCEL_CONTEXT"
+    ],
+    "value": "Esc; scope: innermost active menu/dialog/transient operation",
+    "scope": "innermost active menu/dialog/transient operation",
+    "binding": "Esc"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "OPEN_MENU"
+    ],
+    "value": "F10; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "F10"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "OPEN_NAMED_MENU"
+    ],
+    "value": "Alt+underlined letter; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Alt+underlined letter"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "FOCUS_NEXT / PREVIOUS_PANE"
+    ],
+    "value": "F6 / Shift+F6; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "F6 / Shift+F6"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "NEXT / PREVIOUS_DOCUMENT"
+    ],
+    "value": "Ctrl+Tab / Ctrl+Shift+Tab; scope: native TUI",
+    "scope": "native TUI",
+    "binding": "Ctrl+Tab / Ctrl+Shift+Tab"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "NEXT / PREVIOUS_APPLICATION"
+    ],
+    "value": "Alt+Tab / Alt+Shift+Tab; scope: system",
+    "scope": "system",
+    "binding": "Alt+Tab / Alt+Shift+Tab"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "CLOSE_ACTIVE_SURFACE"
+    ],
+    "value": "Alt+F4; scope: system close request with unsaved-work checks",
+    "scope": "system close request with unsaved-work checks",
+    "binding": "Alt+F4"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "OPEN_SURFACE_ACTIONS"
+    ],
+    "value": "Alt+Space; scope: system",
+    "scope": "system",
+    "binding": "Alt+Space"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 94,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "REQUEST_CANCEL_OPERATION"
+    ],
+    "value": "Ctrl+Break; scope: cooperative cancellation; not immediate forced termination",
+    "scope": "cooperative cancellation; not immediate forced termination",
+    "binding": "Ctrl+Break"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "INTERRUPT"
+    ],
+    "value": "Ctrl+C; scope: when terminal processing enables it",
+    "scope": "when terminal processing enables it",
+    "binding": "Ctrl+C"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "SUSPEND"
+    ],
+    "value": "Ctrl+Z; scope: if supported/configured",
+    "scope": "if supported/configured",
+    "binding": "Ctrl+Z"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "EOF_OR_APPLICATION_INPUT"
+    ],
+    "value": "Ctrl+D; scope: depends on terminal mode and pending input; not unconditional Quit",
+    "scope": "depends on terminal mode and pending input; not unconditional Quit",
+    "binding": "Ctrl+D"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "READLINE_LINE_START / END"
+    ],
+    "value": "Ctrl+A / Ctrl+E; scope: Readline-compatible line editor",
+    "scope": "Readline-compatible line editor",
+    "binding": "Ctrl+A / Ctrl+E"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "READLINE_DELETE_PREVIOUS_WORD"
+    ],
+    "value": "Ctrl+W; scope: Readline-compatible line editor",
+    "scope": "Readline-compatible line editor",
+    "binding": "Ctrl+W"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "READLINE_YANK"
+    ],
+    "value": "Ctrl+Y; scope: Readline-compatible line editor",
+    "scope": "Readline-compatible line editor",
+    "binding": "Ctrl+Y"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "COPY_TERMINAL_VIEW"
+    ],
+    "value": "Ctrl+Shift+C; scope: terminal viewer",
+    "scope": "terminal viewer",
+    "binding": "Ctrl+Shift+C"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "PASTE_TERMINAL"
+    ],
+    "value": "Ctrl+Shift+V; scope: terminal viewer",
+    "scope": "terminal viewer",
+    "binding": "Ctrl+Shift+V"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "HISTORY_PREVIOUS / NEXT"
+    ],
+    "value": "Up / Down; scope: supported shell prompt",
+    "scope": "supported shell prompt",
+    "binding": "Up / Down"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "binding_scope_to_prose",
+    "keys": [
+      "HISTORY_REVERSE_SEARCH"
+    ],
+    "value": "Ctrl+R; scope: supported shell prompt",
+    "scope": "supported shell prompt",
+    "binding": "Ctrl+R"
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 138,
+    "action": "statement_to_prose",
+    "keys": [
+      "Selection"
+    ],
+    "value": "Explicit terminal profile; no selection-dependent change between Ctrl+C Copy and Interrupt."
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 171,
+    "action": "consolidate_list",
+    "keys": [
+      "Input contract required controls 1",
+      "Input contract required controls 2",
+      "Input contract required controls 3",
+      "Input contract required controls 4",
+      "Input contract required controls 5",
+      "Input contract required controls 6",
+      "Input contract required controls 7"
+    ],
+    "new_key": "Input contract required controls",
+    "values": [
+      "Arrows",
+      "Home / End",
+      "Page Up / Page Down",
+      "Separate Backspace / Delete",
+      "Ctrl / Shift / Alt",
+      "Function keys",
+      "Break"
+    ]
+  },
+  {
+    "record_id": "technology.logix_tui_keyboard_standard",
+    "chapter_number": 171,
+    "action": "consolidate_list",
+    "keys": [
+      "Related technology references 1",
+      "Related technology references 2",
+      "Related technology references 3",
+      "Related technology references 4"
+    ],
+    "new_key": "Related technology references",
+    "values": [
+      "technology.logix_tui_standard",
+      "technology.logix_c_api",
+      "technology.logix_display_api",
+      "technology.flexibus"
+    ]
+  },
+  {
+    "record_id": "technology.abacus_sparse_model",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Goal"
+    ],
+    "value": "handle larger documents than conventional dense memory organization on constrained 8-bit hardware"
+  },
+  {
+    "record_id": "technology.abacus_sparse_model",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Sparse matrix representation 1"
+    ],
+    "new_key": "Sparse matrix representation",
+    "values": [
+      "hash maps or quadtrees"
+    ]
+  },
+  {
+    "record_id": "technology.pulse_notebook_model",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Code organization"
+    ],
+    "value": "sequential independently executable sections/cells",
+    "statement": "Code is organised into sequential, independently executable sections or cells."
+  },
+  {
+    "record_id": "technology.pulse_notebook_model",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Fundamental types 1",
+      "Fundamental types 2",
+      "Fundamental types 3",
+      "Fundamental types 4"
+    ],
+    "new_key": "Fundamental types",
+    "values": [
+      "integers",
+      "text strings",
+      "booleans",
+      "lists"
+    ]
+  },
+  {
+    "record_id": "technology.pulse_notebook_model",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Language features 1",
+      "Language features 2",
+      "Language features 3",
+      "Language features 4",
+      "Language features 5"
+    ],
+    "new_key": "Language features",
+    "values": [
+      "loops",
+      "conditions",
+      "reusable functions",
+      "text tools",
+      "list tools"
+    ]
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Design goal"
+    ],
+    "value": "maximize source portability between Aurelia and Artemis"
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Targets 1",
+      "Targets 2"
+    ],
+    "new_key": "Targets",
+    "values": [
+      "Z80 CP/M / Aurelia",
+      "ERA / AIONix / Artemis"
+    ]
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Mechanisms 1",
+      "Mechanisms 2",
+      "Mechanisms 3"
+    ],
+    "new_key": "Mechanisms",
+    "values": [
+      "shared libraries",
+      "templates",
+      "common application structure"
+    ]
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Shared contract references 1",
+      "Shared contract references 2",
+      "Shared contract references 3",
+      "Shared contract references 4",
+      "Shared contract references 5"
+    ],
+    "new_key": "Shared contract references",
+    "values": [
+      "technology.logix_c_api",
+      "technology.logix_display_api",
+      "technology.logix_c_target_contract",
+      "technology.logix_tui_standard",
+      "technology.logix_tui_keyboard_standard"
+    ]
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "statement_to_prose",
+    "keys": [
+      "Build profiles 1 description"
+    ],
+    "value": "One Z80 binary for base Aurelia and Aurelia+; adapt at runtime and fit the base RAM budget."
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "statement_to_prose",
+    "keys": [
+      "Build profiles 2 description"
+    ],
+    "value": "Same Z80 instruction target; explicitly declare higher RAM/display requirements."
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "statement_to_prose",
+    "keys": [
+      "Build profiles 3 description"
+    ],
+    "value": "Native ERA/AIONix program with target-specific startup and libraries."
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "consolidate_list",
+    "keys": [
+      "Application structure 1",
+      "Application structure 2",
+      "Application structure 3",
+      "Application structure 4"
+    ],
+    "new_key": "Application structure",
+    "values": [
+      "Shared application and document logic",
+      "Shared Logix API calls",
+      "Small target-specific adapters",
+      "Separate build profiles and output directories"
+    ]
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 27,
+    "action": "statement_to_prose",
+    "keys": [
+      "Portability boundaries 1"
+    ],
+    "value": "Instruction set: recompile C and replace assembly."
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 27,
+    "action": "statement_to_prose",
+    "keys": [
+      "Portability boundaries 2"
+    ],
+    "value": "CP/M record/drive interfaces versus AIONix streams, paths and descriptors: use file adapters."
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 27,
+    "action": "statement_to_prose",
+    "keys": [
+      "Portability boundaries 3"
+    ],
+    "value": "Banked versus virtual memory: use object handles and bounded buffers."
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 27,
+    "action": "statement_to_prose",
+    "keys": [
+      "Portability boundaries 5"
+    ],
+    "value": "Disk structures: serialize portable fields rather than dumping C objects."
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 27,
+    "action": "statement_to_prose",
+    "keys": [
+      "Portability boundaries 6"
+    ],
+    "value": "More RAM and a wider display do not make later Artemis-only features available on Aurelia."
+  },
+  {
+    "record_id": "technology.era1_isa",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Conditional instructions"
+    ],
+    "value": "true",
+    "statement": "The instruction set supports conditional execution."
+  },
+  {
+    "record_id": "technology.era1_isa",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Abort support 1",
+      "Abort support 2"
+    ],
+    "new_key": "Abort support",
+    "values": [
+      "Data Abort",
+      "Prefetch Abort"
+    ]
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 1,
+    "action": "remove_redundant_title",
+    "keys": [
+      "Title"
+    ],
+    "value": "ERA MMU v1"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 9,
+    "action": "consolidate_list",
+    "keys": [
+      "Entry fields 1",
+      "Entry fields 2",
+      "Entry fields 3",
+      "Entry fields 4",
+      "Entry fields 5",
+      "Entry fields 6",
+      "Entry fields 7",
+      "Entry fields 8"
+    ],
+    "new_key": "Entry fields",
+    "values": [
+      "20-bit virtual page number",
+      "12-bit physical frame number",
+      "valid",
+      "user accessible",
+      "writable",
+      "referenced",
+      "dirty",
+      "locked"
+    ]
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Faults 4"
+    ],
+    "value": "No demand paging or implicit swap is introduced."
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "CPU contract 2"
+    ],
+    "value": "Kernel instructions update translations, invalidate entries and control protection."
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open items 1"
+    ],
+    "value": "Physical address map"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open items 2"
+    ],
+    "value": "Silicon timing and area"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open items 3"
+    ],
+    "value": "TLB entry count tuning"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open items 4"
+    ],
+    "value": "Final mapping-record layout"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open items 5"
+    ],
+    "value": "DMA interface and electrical implementation of the specified paired-bank memory organization"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design requirements 2"
+    ],
+    "value": "Four byte write enables per 32-bit bank; defined aligned byte/halfword/word access and alignment faults."
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design requirements 3"
+    ],
+    "value": "RAS/CAS/WE timing, data buffers, refresh arbitration and DMA contention handling."
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design requirements 4"
+    ],
+    "value": "Explicit READY/wait handshake; full-width data transfer is not a zero-wait guarantee."
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design requirements 5"
+    ],
+    "value": "Capacity straps, pair matching, boot memory test and incomplete-bank rejection."
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design open items 1"
+    ],
+    "value": "Exact controller ASIC versus discrete logic partition and physical component counts"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design open items 2"
+    ],
+    "value": "Connector/pinout/keying and rails"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design open items 3"
+    ],
+    "value": "Supplier-specific refresh and speed grades"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design open items 4"
+    ],
+    "value": "Contiguous physical bank decoding and reset ROM map"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design open items 5"
+    ],
+    "value": "Worst-case loading and power with eight modules"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Physical memory design open items 6"
+    ],
+    "value": "Optional server byte-parity variant"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "consolidate_list",
+    "keys": [
+      "Physical memory design chassis references 1",
+      "Physical memory design chassis references 2"
+    ],
+    "new_key": "Physical memory design chassis references",
+    "values": [
+      "device.base_computer.artemis",
+      "device.base_computer.artemis_pro"
+    ]
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 42,
+    "action": "consolidate_list",
+    "keys": [
+      "Display memory design device references 1",
+      "Display memory design device references 2",
+      "Display memory design device references 3"
+    ],
+    "new_key": "Display memory design device references",
+    "values": [
+      "device.artemis_video_card_16kb",
+      "device.artemis_video_card",
+      "device.artemis_video_card_64kb"
+    ]
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 61,
+    "action": "statement_to_prose",
+    "keys": [
+      "Population rules reliability policy"
+    ],
+    "value": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "ROM backed executables"
+    ],
+    "value": "true",
+    "statement": "Executables can run from ROM."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Virtual address space per process"
+    ],
+    "value": "true",
+    "statement": "Each process has its own virtual address space."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 1,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Rescue unix in ROM"
+    ],
+    "value": "true",
+    "statement": "A rescue Unix environment is available in ROM."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Programming model"
+    ],
+    "value": "recognizably Unix V7, simplified for small RAM",
+    "statement": "The programming model is recognizably Unix V7, simplified for small RAM."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Shell"
+    ],
+    "value": "small shell",
+    "statement": "A small shell provides the command interface."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Utilities"
+    ],
+    "value": "in ROM",
+    "statement": "System utilities reside in ROM."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "boolean_to_prose",
+    "keys": [
+      "File descriptors"
+    ],
+    "value": "true",
+    "statement": "Applications access open files through file descriptors."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Pipes"
+    ],
+    "value": "true",
+    "statement": "Pipes provide communication between processes."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Networking initial release"
+    ],
+    "value": "false",
+    "statement": "Networking is not included in the initial release."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Device files"
+    ],
+    "value": "true",
+    "statement": "Devices are exposed through device files."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Ioctl"
+    ],
+    "value": "true",
+    "statement": "Device control requests use ioctl."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Serial as tty"
+    ],
+    "value": "true",
+    "statement": "Serial interfaces are exposed as terminal devices."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Signals"
+    ],
+    "value": "drastically reduced",
+    "statement": "Signal support is drastically reduced."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Mmap"
+    ],
+    "value": "not full mmap()",
+    "statement": "Full mmap() support is not implemented."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Symbolic links"
+    ],
+    "value": "not implemented initially; reserved",
+    "statement": "Symbolic links are reserved but not implemented initially."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 6,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "DMA"
+    ],
+    "value": "hidden behind normal I/O",
+    "statement": "DMA remains hidden behind normal I/O."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Errno"
+    ],
+    "value": "true",
+    "statement": "Errors are reported through errno."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Stable C ABI"
+    ],
+    "value": "true",
+    "statement": "The C binary interface is stable within its target architecture."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Floating point ABI"
+    ],
+    "value": "false",
+    "statement": "No floating-point ABI is defined."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Brk sbrk"
+    ],
+    "value": "true",
+    "statement": "The brk and sbrk interfaces manage application memory allocation."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Demand paging"
+    ],
+    "value": "false",
+    "statement": "Demand paging is not implemented."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "boolean_to_prose",
+    "keys": [
+      "User kernel modes"
+    ],
+    "value": "true",
+    "statement": "User and kernel execution modes provide a protection boundary."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "boolean_to_prose",
+    "keys": [
+      "TUI API"
+    ],
+    "value": "true",
+    "statement": "Applications can use the TUI API."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Syscall ABI"
+    ],
+    "value": "deliberately POSIX-shaped",
+    "statement": "The system-call ABI is deliberately POSIX-shaped."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Syscall number policy"
+    ],
+    "value": "reserve aggressively",
+    "statement": "System-call numbers are reserved aggressively for future extensions."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Interrupt model"
+    ],
+    "value": "simple",
+    "statement": "The interrupt model is simple."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Permissions"
+    ],
+    "value": "simple but real",
+    "statement": "Permissions are simple but enforce real access restrictions."
+  },
+  {
+    "record_id": "technology.aionix_os_model",
+    "chapter_number": 19,
+    "action": "statement_to_prose",
+    "keys": [
+      "Stable C ABI scope"
+    ],
+    "value": "ERA target ABI, not binary compatibility with the Z80 target."
+  },
+  {
+    "record_id": "technology.cpm80_virtual_peripheral_bridge",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Goal"
+    ],
+    "value": "preserve the Aurelia software investment while transitioning to the 32-bit platform"
+  },
+  {
+    "record_id": "technology.cpm80_virtual_peripheral_bridge",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "API discovery"
+    ],
+    "value": "Return the display/input/service capabilities actually implemented by the compatibility environment."
+  },
+  {
+    "record_id": "technology.cpm80_virtual_peripheral_bridge",
+    "chapter_number": 1,
+    "action": "remove_redundant_title",
+    "keys": [
+      "Title"
+    ],
+    "value": "Z80 compatibility module and host driver"
+  },
+  {
+    "record_id": "technology.cpm80_virtual_peripheral_bridge",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Module requirements 1"
+    ],
+    "value": "Local boot/system ROM or a host-uploaded system image"
+  },
+  {
+    "record_id": "technology.cpm80_virtual_peripheral_bridge",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Module requirements 2"
+    ],
+    "value": "Bank/window emulation sufficient for documented Logix CP/M service entry points"
+  },
+  {
+    "record_id": "technology.cpm80_virtual_peripheral_bridge",
+    "chapter_number": 10,
+    "action": "consolidate_list",
+    "keys": [
+      "Mailbox 1",
+      "Mailbox 2",
+      "Mailbox 3",
+      "Mailbox 4",
+      "Mailbox 5",
+      "Mailbox 6"
+    ],
+    "new_key": "Mailbox",
+    "values": [
+      "version",
+      "request ID",
+      "opcode",
+      "buffer offset and length",
+      "completion status",
+      "transferred byte count"
+    ]
+  },
+  {
+    "record_id": "technology.cpm80_virtual_peripheral_bridge",
+    "chapter_number": 20,
+    "action": "statement_to_prose",
+    "keys": [
+      "Qualification"
+    ],
+    "value": "Artemis PRO support remains unclaimed until its compatibility list and tests explicitly add the module."
+  },
+  {
+    "record_id": "technology.logix_tcpip_lan",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Design goal"
+    ],
+    "value": "common network protocol stack across Aurelia CP/M and Artemis/AIONix clients and servers"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Design goal"
+    ],
+    "value": "simple, deterministic and inexpensive LAN implementation using technology comfortably available by 1981"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Pair assignment pair 1",
+      "Pair assignment pair 2",
+      "Pair assignment pair 3",
+      "Pair assignment pair 4"
+    ],
+    "new_key": "Pair assignment pair",
+    "values": [
+      "station-to-hub differential data",
+      "hub-to-station differential data",
+      "hub-distributed synchronous clock / transmit-grant timing",
+      "reserved for diagnostics or later expansion"
+    ]
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 14,
+    "action": "consolidate_list",
+    "keys": [
+      "Supported rates kbps 1",
+      "Supported rates kbps 2",
+      "Supported rates kbps 3",
+      "Supported rates kbps 4"
+    ],
+    "new_key": "Supported rates kbps",
+    "values": [
+      "100",
+      "250",
+      "500",
+      "1000"
+    ]
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 14,
+    "action": "consolidate_list",
+    "keys": [
+      "Qualified host 1",
+      "Qualified host 2",
+      "Qualified host 3",
+      "Qualified host 4"
+    ],
+    "new_key": "Qualified host",
+    "values": [
+      "device.base_computer.aurelia",
+      "device.base_computer.aurelia_plus",
+      "device.base_computer.artemis",
+      "device.base_computer.artemis_pro"
+    ]
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 31,
+    "action": "remove_redundant_title",
+    "keys": [
+      "Title"
+    ],
+    "value": "LogixLAN shared-rate negotiation and buffered adapters"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 31,
+    "action": "statement_to_prose",
+    "keys": [
+      "Negotiation 1"
+    ],
+    "value": "Reset/start at 100 kbit/s; keep unadmitted ports isolated from normal traffic."
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 31,
+    "action": "statement_to_prose",
+    "keys": [
+      "Negotiation 2"
+    ],
+    "value": "Poll station identity, supported-rate bitmap, host profile and receiver capacity at 100 kbit/s."
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Clock generation scope"
+    ],
+    "value": "Hub clock-divider reference only; does not require every adapter or host logic path to run at 10 MHz."
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Adapter requirements hardware services 1"
+    ],
+    "value": "Serial framing and CRC generation/checking"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Adapter requirements hardware services 2"
+    ],
+    "value": "Destination filtering before CPU interrupt"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Adapter requirements hardware services 3"
+    ],
+    "value": "Complete-frame buffering"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Adapter requirements hardware services 4"
+    ],
+    "value": "Packet-level interrupts and receiver-ready reporting"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 42,
+    "action": "consolidate_list",
+    "keys": [
+      "Clock generation bit clock divisors 1",
+      "Clock generation bit clock divisors 2",
+      "Clock generation bit clock divisors 3",
+      "Clock generation bit clock divisors 4"
+    ],
+    "new_key": "Clock generation bit clock divisors",
+    "values": [
+      "100",
+      "40",
+      "20",
+      "10"
+    ]
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 55,
+    "action": "statement_to_prose",
+    "keys": [
+      "Qualification gates 1"
+    ],
+    "value": "Cable lengths, termination, drivers and clock skew at each advertised rate"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 55,
+    "action": "statement_to_prose",
+    "keys": [
+      "Qualification gates 2"
+    ],
+    "value": "Exact frame format/length, IP MTU, buffer partitions and credit accounting"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 55,
+    "action": "statement_to_prose",
+    "keys": [
+      "Qualification gates 3"
+    ],
+    "value": "Discovery cadence, switch/ack timeouts and independent recovery watchdog"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 55,
+    "action": "statement_to_prose",
+    "keys": [
+      "Qualification gates 4"
+    ],
+    "value": "Error thresholds, test-frame counts and fallback hysteresis"
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 55,
+    "action": "statement_to_prose",
+    "keys": [
+      "Qualification gates 6"
+    ],
+    "value": "Sustained TCP/IP throughput and CPU load on all four host platforms"
+  },
+  {
+    "record_id": "technology.bpi_relational_database",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Model"
+    ],
+    "value": "relational database engine used as the common data foundation for BPI business applications",
+    "statement": "A relational database engine provides the common data foundation for BPI business applications."
+  },
+  {
+    "record_id": "technology.bpi_relational_database",
+    "chapter_number": 1,
+    "action": "short_statement_to_prose",
+    "keys": [
+      "Design goal"
+    ],
+    "value": "shared, structured business data across accounting, receivables, payables, inventory and payroll",
+    "statement": "Accounting, receivables, payables, inventory and payroll share structured business data."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Expansion policy"
+    ],
+    "value": "Additional RAM uses mapped pages; an expansion does not enlarge the CPU logical address space."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "remove_redundant_title",
+    "keys": [
+      "Title"
+    ],
+    "value": "CP/M-compatible application-memory boundary"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "statement_to_prose",
+    "keys": [
+      "Dispatch 1"
+    ],
+    "value": "CALL 0005H enters the top-of-TPA stub."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "statement_to_prose",
+    "keys": [
+      "Dispatch 2"
+    ],
+    "value": "The stub jumps to common memory before any bank mapping changes."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "statement_to_prose",
+    "keys": [
+      "Dispatch 3"
+    ],
+    "value": "Common code saves mapping and application stack, then adopts the system stack."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "statement_to_prose",
+    "keys": [
+      "Dispatch 4"
+    ],
+    "value": "Map the service; copy caller buffers in bounded chunks while respecting page boundaries."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "statement_to_prose",
+    "keys": [
+      "Dispatch 5"
+    ],
+    "value": "Restore the application view and stack before returning."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "statement_to_prose",
+    "keys": [
+      "Lifecycle 1"
+    ],
+    "value": "Choose all workspace reservations before launching the program. Never shrink TPA under a running program."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 1"
+    ],
+    "value": "Exercise programs that inspect 0006H and fill their advertised TPA."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 13,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 2"
+    ],
+    "value": "Test nested calls, interrupts, DMA buffers crossing pages and warm boot after application failure."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 44,
+    "action": "statement_to_prose",
+    "keys": [
+      "DMA segmentation boundary"
+    ],
+    "value": "4 KiB"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 44,
+    "action": "statement_to_prose",
+    "keys": [
+      "Completion"
+    ],
+    "value": "Completion/error interrupt, readable remaining count, controlled abort; reset disables DMA."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 44,
+    "action": "statement_to_prose",
+    "keys": [
+      "Video endpoint"
+    ],
+    "value": "Auto-incrementing upload ports for display DRAM or dedicated sprite SRAM; target-ready backpressure."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 44,
+    "action": "consolidate_list",
+    "keys": [
+      "Operations 1",
+      "Operations 2",
+      "Operations 3"
+    ],
+    "new_key": "Operations",
+    "values": [
+      "memory-to-memory",
+      "memory-to-I/O",
+      "I/O-to-memory"
+    ]
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 44,
+    "action": "consolidate_list",
+    "keys": [
+      "Address steps 1",
+      "Address steps 2",
+      "Address steps 3"
+    ],
+    "new_key": "Address steps",
+    "values": [
+      "fixed",
+      "increment",
+      "decrement"
+    ]
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 59,
+    "action": "boolean_to_prose",
+    "keys": [
+      "System refresh independent of CPU"
+    ],
+    "value": "true",
+    "statement": "System DRAM refresh runs independently of CPU execution."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 59,
+    "action": "boolean_to_prose",
+    "keys": [
+      "System refresh all installed banks"
+    ],
+    "value": "true",
+    "statement": "Refresh covers all installed system DRAM banks."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 59,
+    "action": "consolidate_list",
+    "keys": [
+      "System refresh supported populations 1",
+      "System refresh supported populations 2",
+      "System refresh supported populations 3"
+    ],
+    "new_key": "System refresh supported populations",
+    "values": [
+      "48 KiB: three banks of eight 16Kx1 DRAMs",
+      "64 KiB expanded Aurelia: four banks of eight 16Kx1 DRAMs",
+      "64 KiB Aurelia+: one bank of eight 64Kx1 DRAMs"
+    ]
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 59,
+    "action": "consolidate_list",
+    "keys": [
+      "Sprite memory device references 1",
+      "Sprite memory device references 2"
+    ],
+    "new_key": "Sprite memory device references",
+    "values": [
+      "device.subsystem.aurelia.video",
+      "device.subsystem.aurelia_plus.video"
+    ]
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "statement_to_prose",
+    "keys": [
+      "Normal view 1 description"
+    ],
+    "value": "Lower RAM, including CP/M page zero and application memory"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "statement_to_prose",
+    "keys": [
+      "Normal view 2 description"
+    ],
+    "value": "ROM / cartridge / video RAM windows"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "statement_to_prose",
+    "keys": [
+      "Normal view 3 description"
+    ],
+    "value": "Common system RAM"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "statement_to_prose",
+    "keys": [
+      "DMA addressing"
+    ],
+    "value": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "statement_to_prose",
+    "keys": [
+      "Refresh"
+    ],
+    "value": "AION system controller refreshes all installed system DRAM independently of CPU activity."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "statement_to_prose",
+    "keys": [
+      "Normal view 1 description"
+    ],
+    "value": "Base and expansion RAM, including CP/M page zero and application memory. The card supplies B000–EFFF."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "statement_to_prose",
+    "keys": [
+      "Normal view 2 description"
+    ],
+    "value": "Stable runtime entry code, system stack and critical state."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "statement_to_prose",
+    "keys": [
+      "DMA addressing"
+    ],
+    "value": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "statement_to_prose",
+    "keys": [
+      "Refresh"
+    ],
+    "value": "AION system controller refreshes all installed system DRAM independently of CPU activity."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "statement_to_prose",
+    "keys": [
+      "Normal view 1 description"
+    ],
+    "value": "Lower RAM, including CP/M page zero and application memory"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "statement_to_prose",
+    "keys": [
+      "Normal view 2 description"
+    ],
+    "value": "Common system RAM"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "statement_to_prose",
+    "keys": [
+      "DMA addressing"
+    ],
+    "value": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "statement_to_prose",
+    "keys": [
+      "Refresh"
+    ],
+    "value": "AION system controller refreshes all installed system DRAM independently of CPU activity."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Compatibility"
+    ],
+    "value": "Source API compatibility across Z80 and ERA; stable binary ABI within each target, not between targets."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Versioning 1"
+    ],
+    "value": "Mandatory v1 discovery entry points."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Versioning 2"
+    ],
+    "value": "Major/minor version and optional capability queries."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Versioning 3"
+    ],
+    "value": "Descriptor size/version negotiation with bounded writes."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Versioning 4"
+    ],
+    "value": "Published service identifiers retain their meaning."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Versioning 5"
+    ],
+    "value": "Unknown optional flags are ignored; unsupported services return a defined error."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 10,
+    "action": "statement_to_prose",
+    "keys": [
+      "Ownership 1"
+    ],
+    "value": "Caller supplies bounded descriptor buffers."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 10,
+    "action": "statement_to_prose",
+    "keys": [
+      "Ownership 2"
+    ],
+    "value": "Application owns its context; library state is not shared through unqualified globals."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 10,
+    "action": "statement_to_prose",
+    "keys": [
+      "Ownership 3"
+    ],
+    "value": "Clipboard copies data into system-managed storage instead of retaining application pointers."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 10,
+    "action": "statement_to_prose",
+    "keys": [
+      "Ownership 4"
+    ],
+    "value": "Banked objects use opaque handles; raw addresses do not identify banked storage."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 10,
+    "action": "consolidate_list",
+    "keys": [
+      "Errors 1",
+      "Errors 2",
+      "Errors 3",
+      "Errors 4",
+      "Errors 5"
+    ],
+    "new_key": "Errors",
+    "values": [
+      "unsupported operation",
+      "invalid argument",
+      "insufficient memory",
+      "device unavailable",
+      "I/O failure"
+    ]
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 10,
+    "action": "consolidate_list",
+    "keys": [
+      "Platform adapters 1",
+      "Platform adapters 2",
+      "Platform adapters 3",
+      "Platform adapters 4",
+      "Platform adapters 5"
+    ],
+    "new_key": "Platform adapters",
+    "values": [
+      "Text/graphics and input",
+      "File streams and path handling",
+      "Memory/object access",
+      "Clock and timing",
+      "Application lifecycle"
+    ]
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 26,
+    "action": "statement_to_prose",
+    "keys": [
+      "Aurelia software compatibility native target"
+    ],
+    "value": "z80_cpm"
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 26,
+    "action": "statement_to_prose",
+    "keys": [
+      "Aurelia software compatibility adaptive text"
+    ],
+    "value": "Applications query usable columns/rows instead of selecting behavior from model name."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 26,
+    "action": "statement_to_prose",
+    "keys": [
+      "Aurelia software compatibility native 40 column mode"
+    ],
+    "value": "Native 40x25 and 80x25 text on both hosts; usable width depends on monitor capabilities."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 26,
+    "action": "statement_to_prose",
+    "keys": [
+      "Aurelia plus software compatibility native target"
+    ],
+    "value": "z80_cpm"
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 26,
+    "action": "statement_to_prose",
+    "keys": [
+      "Aurelia plus software compatibility adaptive text"
+    ],
+    "value": "Applications query usable columns/rows instead of selecting behavior from model name."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 26,
+    "action": "statement_to_prose",
+    "keys": [
+      "Aurelia plus software compatibility native 40 column mode"
+    ],
+    "value": "Native 40x25 and 80x25 text on both hosts; usable width depends on monitor capabilities."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Artemis software compatibility native target"
+    ],
+    "value": "era_aionix"
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Artemis software compatibility adaptive text"
+    ],
+    "value": "Applications query usable columns/rows instead of selecting behavior from model name."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Artemis software compatibility native 40 column mode"
+    ],
+    "value": "Native 40×25 with 8×8 cells, plus all listed 80-column modes; discover via display API."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Artemis pro software compatibility native target"
+    ],
+    "value": "era_aionix"
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Artemis pro software compatibility adaptive text"
+    ],
+    "value": "Applications query usable columns/rows instead of selecting behavior from model name."
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Artemis pro software compatibility native 40 column mode"
+    ],
+    "value": "Native 40×25 with 8×8 cells, plus all listed 80-column modes; discover via display API."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 1,
+    "action": "function_to_prose",
+    "keys": [
+      "lx_display_query"
+    ],
+    "value": "Query display capabilities and limits",
+    "statement": "Call lx_display_query to query display capabilities and limits."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 1,
+    "action": "function_to_prose",
+    "keys": [
+      "lx_text_query"
+    ],
+    "value": "Query current usable rows, columns and text attributes",
+    "statement": "Call lx_text_query to query current usable rows, columns and text attributes."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 1,
+    "action": "function_to_prose",
+    "keys": [
+      "lx_mode_enum"
+    ],
+    "value": "Return one usable mode descriptor into a caller-provided buffer",
+    "statement": "Call lx_mode_enum to return one usable mode descriptor into a caller-provided buffer."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 1,
+    "action": "function_to_prose",
+    "keys": [
+      "lx_mode_test"
+    ],
+    "value": "Validate a requested configuration without changing display state",
+    "statement": "Call lx_mode_test to validate a requested configuration without changing display state."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 1,
+    "action": "function_to_prose",
+    "keys": [
+      "lx_mode_set"
+    ],
+    "value": "Request activation and report success or a defined failure",
+    "statement": "Call lx_mode_set to request activation and report success or a defined failure."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 1,
+    "action": "function_to_prose",
+    "keys": [
+      "lx_mode_current"
+    ],
+    "value": "Report the actual active mode",
+    "statement": "Call lx_mode_current to report the actual active mode."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 14,
+    "action": "statement_to_prose",
+    "keys": [
+      "Selection sequence 1"
+    ],
+    "value": "Query capabilities"
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 14,
+    "action": "statement_to_prose",
+    "keys": [
+      "Selection sequence 2"
+    ],
+    "value": "Choose a suitable descriptor"
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 14,
+    "action": "statement_to_prose",
+    "keys": [
+      "Selection sequence 3"
+    ],
+    "value": "Request the mode"
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 14,
+    "action": "statement_to_prose",
+    "keys": [
+      "Selection sequence 4"
+    ],
+    "value": "Check success or failure"
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 14,
+    "action": "statement_to_prose",
+    "keys": [
+      "Selection sequence 5"
+    ],
+    "value": "Query and use the actual configuration"
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 14,
+    "action": "consolidate_list",
+    "keys": [
+      "Mode descriptor fields 1",
+      "Mode descriptor fields 2",
+      "Mode descriptor fields 3",
+      "Mode descriptor fields 4",
+      "Mode descriptor fields 5",
+      "Mode descriptor fields 6",
+      "Mode descriptor fields 7",
+      "Mode descriptor fields 8",
+      "Mode descriptor fields 9",
+      "Mode descriptor fields 10",
+      "Mode descriptor fields 11",
+      "Mode descriptor fields 12",
+      "Mode descriptor fields 13",
+      "Mode descriptor fields 14",
+      "Mode descriptor fields 15"
+    ],
+    "new_key": "Mode descriptor fields",
+    "values": [
+      "descriptor size/version",
+      "opaque mode identifier",
+      "width",
+      "height",
+      "pixel format",
+      "bits per pixel",
+      "simultaneously addressable colors",
+      "palette capabilities",
+      "pixel aspect",
+      "buffering capabilities",
+      "native or emulated implementation",
+      "sprite count and per-scanline limit",
+      "valid buffer/sprite combinations",
+      "output raster ID",
+      "logical-to-output integer scaling"
+    ]
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 36,
+    "action": "statement_to_prose",
+    "keys": [
+      "Framebuffer policy"
+    ],
+    "value": "Application code uses drawing operations rather than native video RAM addresses, stride or pixel packing."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 36,
+    "action": "consolidate_list",
+    "keys": [
+      "Drawing operations 1",
+      "Drawing operations 2",
+      "Drawing operations 3",
+      "Drawing operations 4",
+      "Drawing operations 5",
+      "Drawing operations 6",
+      "Drawing operations 7"
+    ],
+    "new_key": "Drawing operations",
+    "values": [
+      "Create/destroy drawing context",
+      "Set clipping and drawing attributes",
+      "Draw pixel, line, rectangle and filled region",
+      "Transfer bitmap using a documented portable format",
+      "Draw text through display/font services",
+      "Query/control palette when supported",
+      "Begin/end update and request presentation"
+    ]
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 46,
+    "action": "statement_to_prose",
+    "keys": [
+      "Mode switch 1"
+    ],
+    "value": "Validate the requested mode and resource allocation before changing the display."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 46,
+    "action": "statement_to_prose",
+    "keys": [
+      "Mode switch 2"
+    ],
+    "value": "Quiesce rendering and blank or synchronize the change to avoid scanning partially reconfigured memory."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 46,
+    "action": "statement_to_prose",
+    "keys": [
+      "Mode switch 3"
+    ],
+    "value": "Reconfigure the video RAM layout. Reload the font and initialize text maps when entering text mode."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 46,
+    "action": "statement_to_prose",
+    "keys": [
+      "Mode switch 4"
+    ],
+    "value": "Notify the application/context of the changed mode and request a redraw from its document state."
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 46,
+    "action": "statement_to_prose",
+    "keys": [
+      "Boundary"
+    ],
+    "value": "Application documents remain in application RAM or files; a mode switch does not discard document state."
+  },
+  {
+    "record_id": "technology.logix_c_target_contract",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Required features 1",
+      "Required features 2",
+      "Required features 3",
+      "Required features 4",
+      "Required features 5"
+    ],
+    "new_key": "Required features",
+    "values": [
+      "structures",
+      "typedef",
+      "function pointers",
+      "documented 32-bit integer arithmetic",
+      "shared string and stream-I/O contracts"
+    ]
+  },
+  {
+    "record_id": "technology.logix_c_target_contract",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Rules 2"
+    ],
+    "value": "Supply project-specific fixed-width integer aliases; do not assume a standard stdint.h exists."
+  },
+  {
+    "record_id": "technology.logix_c_target_contract",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Rules 3"
+    ],
+    "value": "Warn about pointer/integer conversions and incompatible calls where feasible."
+  },
+  {
+    "record_id": "technology.logix_c_target_contract",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Rules 4"
+    ],
+    "value": "Never assume int, pointers or structure layout match across targets."
+  },
+  {
+    "record_id": "technology.logix_c_target_contract",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Rules 5"
+    ],
+    "value": "Put bank switching and physical memory access behind handles and platform adapters."
+  },
+  {
+    "record_id": "technology.logix_c_target_contract",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Rules 6"
+    ],
+    "value": "ROM-aware linking separates code/constants, initialized RAM data and uninitialized RAM."
+  },
+  {
+    "record_id": "technology.logix_c_target_contract",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Remaining ABI work 1"
+    ],
+    "value": "Finalize register/stack calling conventions and alignment rules."
+  },
+  {
+    "record_id": "technology.logix_c_target_contract",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Remaining ABI work 2"
+    ],
+    "value": "Conformance-test compiler, runtime and libraries on both targets."
+  },
+  {
+    "record_id": "technology.nmos_275um",
+    "chapter_number": 1,
+    "action": "method_qualification_to_prose",
+    "keys": [
+      "Lithography method"
+    ],
+    "value": "GCA reduction stepper; tool/optics upgrades qualified per node",
+    "method": "GCA reduction stepper",
+    "statement": "Tool/optics upgrades qualified per node."
+  },
+  {
+    "record_id": "technology.nmos_2um",
+    "chapter_number": 1,
+    "action": "method_qualification_to_prose",
+    "keys": [
+      "Lithography method"
+    ],
+    "value": "GCA reduction stepper; tool/optics upgrades qualified per node",
+    "method": "GCA reduction stepper",
+    "statement": "Tool/optics upgrades qualified per node."
+  },
+  {
+    "record_id": "technology.nmos_15um",
+    "chapter_number": 1,
+    "action": "method_qualification_to_prose",
+    "keys": [
+      "Lithography method"
+    ],
+    "value": "GCA reduction stepper; tool/optics upgrades qualified per node",
+    "method": "GCA reduction stepper",
+    "statement": "Tool/optics upgrades qualified per node."
+  },
+  {
+    "record_id": "technology.abacus_formatted_tables",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Schema column identity"
+    ],
+    "value": "Stable column ID, name, declared data type and nullability; stable row IDs survive sorting/filtering."
+  },
+  {
+    "record_id": "technology.abacus_formatted_tables",
+    "chapter_number": 1,
+    "action": "consolidate_list",
+    "keys": [
+      "Schema launch types 1",
+      "Schema launch types 2",
+      "Schema launch types 3",
+      "Schema launch types 4",
+      "Schema launch types 5"
+    ],
+    "new_key": "Schema launch types",
+    "values": [
+      "text",
+      "integer",
+      "decimal with declared precision/scale",
+      "date",
+      "Boolean"
+    ]
+  },
+  {
+    "record_id": "technology.abacus_formatted_tables",
+    "chapter_number": 9,
+    "action": "statement_to_prose",
+    "keys": [
+      "Column pruning"
+    ],
+    "value": "Read output columns plus all predicate, join and formula dependencies."
+  },
+  {
+    "record_id": "technology.abacus_formatted_tables",
+    "chapter_number": 9,
+    "action": "consolidate_list",
+    "keys": [
+      "Hierarchy 1",
+      "Hierarchy 2",
+      "Hierarchy 3"
+    ],
+    "new_key": "Hierarchy",
+    "values": [
+      "row groups",
+      "column chunks",
+      "pages"
+    ]
+  },
+  {
+    "record_id": "technology.abacus_formatted_tables",
+    "chapter_number": 25,
+    "action": "statement_to_prose",
+    "keys": [
+      "Launch"
+    ],
+    "value": "Flat typed columns; reserve versioned extension points for nested values."
+  },
+  {
+    "record_id": "technology.scanline_palette_list",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Count register"
+    ],
+    "value": "10-bit unsigned count, legal range 0..512; no in-band terminator consumes an entry."
+  },
+  {
+    "record_id": "technology.scanline_palette_list",
+    "chapter_number": 10,
+    "action": "consolidate_list",
+    "keys": [
+      "Command width",
+      "Command width 2"
+    ],
+    "new_key": "Command width",
+    "values": [
+      "32-bit",
+      "32-bit"
+    ]
+  },
+  {
+    "record_id": "technology.scanline_palette_list",
+    "chapter_number": 15,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 1"
+    ],
+    "value": "Worst-case four-command blanking with DAC settling"
+  },
+  {
+    "record_id": "technology.scanline_palette_list",
+    "chapter_number": 15,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 2"
+    ],
+    "value": "All 512 records, same-line writes, delta 255 and frame bounds"
+  },
+  {
+    "record_id": "technology.scanline_palette_list",
+    "chapter_number": 15,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 3"
+    ],
+    "value": "DRAM refresh and host/DMA contention during prefetch"
+  },
+  {
+    "record_id": "technology.scanline_palette_list",
+    "chapter_number": 15,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 4"
+    ],
+    "value": "CRC errors, late packets and safe palette retention"
+  },
+  {
+    "record_id": "technology.scanline_palette_list",
+    "chapter_number": 15,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 5"
+    ],
+    "value": "Base palette restore and list restart without frame-to-frame drift"
+  },
+  {
+    "record_id": "technology.logix_tui_mouse",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Behaviour 4"
+    ],
+    "value": "Dispatch existing semantic actions to applications; keyboard shortcuts remain fully functional."
+  },
+  {
+    "record_id": "technology.logix_tui_mouse",
+    "chapter_number": 11,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 1"
+    ],
+    "value": "Unchanged standard-control applications"
+  },
+  {
+    "record_id": "technology.logix_tui_mouse",
+    "chapter_number": 11,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 2"
+    ],
+    "value": "Static-library relink and ABI conformance"
+  },
+  {
+    "record_id": "technology.logix_tui_mouse",
+    "chapter_number": 11,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 3"
+    ],
+    "value": "Text and graphics cursor restore, clipping and scrolling"
+  },
+  {
+    "record_id": "technology.logix_tui_mouse",
+    "chapter_number": 11,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 4"
+    ],
+    "value": "Button ordering, drag capture and removal"
+  },
+  {
+    "record_id": "technology.logix_tui_mouse",
+    "chapter_number": 11,
+    "action": "statement_to_prose",
+    "keys": [
+      "Validation 5"
+    ],
+    "value": "Keyboard-only use and 40/80-column layouts"
+  },
+  {
+    "record_id": "technology.artemis_professional_graphics",
+    "chapter_number": 4,
+    "action": "consolidate_list",
+    "keys": [
+      "Acceleration 1",
+      "Acceleration 2",
+      "Acceleration 3",
+      "Acceleration 4"
+    ],
+    "new_key": "Acceleration",
+    "values": [
+      "Overlap-safe rectangular copies with stride and clipping",
+      "Rectangle fills and masked Boolean raster operations",
+      "Integer all-octant line drawing",
+      "Optional lookup-table antialiased line drawing with four output shades"
+    ]
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Register compatibility"
+    ],
+    "value": "Preserve documented ERAv1 R0–R15/CPSR, instruction semantics, data formats and calling conventions."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 8,
+    "action": "statement_to_prose",
+    "keys": [
+      "Floating point"
+    ],
+    "value": "Optional external FPU interface; no integrated or bundled FPU promised."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 8,
+    "action": "consolidate_list",
+    "keys": [
+      "External cache KB options 1",
+      "External cache KB options 2"
+    ],
+    "new_key": "External cache KB options",
+    "values": [
+      "8",
+      "16"
+    ]
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 12,
+    "action": "boolean_to_prose",
+    "keys": [
+      "TLB address space identifiers"
+    ],
+    "value": "true",
+    "statement": "The translation cache supports address-space identifiers."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "TLB software contract 1"
+    ],
+    "value": "ASID width/recycling and invalidation"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "TLB software contract 2"
+    ],
+    "value": "Replacement and permissions"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "TLB software contract 3"
+    ],
+    "value": "Referenced/dirty handling"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "TLB software contract 4"
+    ],
+    "value": "Resident accessible refill code"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "TLB software contract 5"
+    ],
+    "value": "Explicit instruction/data translation arbitration"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 1"
+    ],
+    "value": "Package/pinout and supply rails"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 2"
+    ],
+    "value": "Instruction timings and pipeline details"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 3"
+    ],
+    "value": "Cache coherency and DMA protocol"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 4"
+    ],
+    "value": "MMU/TLB implementation and transistor allocation"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 5"
+    ],
+    "value": "Board memory timing and qualified speed bins"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 6"
+    ],
+    "value": "512-byte versus 1 KiB cache trace/layout decision"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 7"
+    ],
+    "value": "ROM electrical timing and patch/cache synchronization"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 8"
+    ],
+    "value": "Detailed fault continuation and late bus-error behavior"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 23,
+    "action": "statement_to_prose",
+    "keys": [
+      "Open design items 9"
+    ],
+    "value": "Write-buffer inclusion after precise-fault verification"
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Pipeline contract 1"
+    ],
+    "value": "False conditional instructions have no architectural/data-memory side effects or associated data faults."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Pipeline contract 2"
+    ],
+    "value": "Younger wrong-path instructions cannot commit registers or memory."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Pipeline contract 3"
+    ],
+    "value": "Interrupts enter at documented restartable boundaries, including multiply and multi-access instructions."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Pipeline contract 4"
+    ],
+    "value": "Instruction timings and forwarding paths require implementation-level verification."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 34,
+    "action": "statement_to_prose",
+    "keys": [
+      "Fault contract 1"
+    ],
+    "value": "Earlier instructions completed; later instructions have no architectural effects."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 42,
+    "action": "statement_to_prose",
+    "keys": [
+      "Decision gate"
+    ],
+    "value": "Compare compiler, Abacus, interpreter and kernel traces within the 142000-transistor planning envelope."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 47,
+    "action": "statement_to_prose",
+    "keys": [
+      "Handshake"
+    ],
+    "value": "Programmable READY/wait controller, independent refresh and bounded DMA ownership."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 47,
+    "action": "statement_to_prose",
+    "keys": [
+      "Banks"
+    ],
+    "value": "No two-bank interleaving credit for one-bank base Athena; independently qualify populated server banks."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 47,
+    "action": "statement_to_prose",
+    "keys": [
+      "Clock scaling"
+    ],
+    "value": "16 MHz requires recalculated waits; DRAM nanoseconds do not scale with CPU clock."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 47,
+    "action": "consolidate_list",
+    "keys": [
+      "Controller target 12mhz four word refill clocks 1",
+      "Controller target 12mhz four word refill clocks 2",
+      "Controller target 12mhz four word refill clocks 3",
+      "Controller target 12mhz four word refill clocks 4"
+    ],
+    "new_key": "Controller target 12mhz four word refill clocks",
+    "values": [
+      "3",
+      "2",
+      "2",
+      "2"
+    ]
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 60,
+    "action": "statement_to_prose",
+    "keys": [
+      "Coherence contract 2"
+    ],
+    "value": "Uncached device regions and explicit DMA synchronization."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 60,
+    "action": "consolidate_list",
+    "keys": [
+      "Write buffer conditions 1",
+      "Write buffer conditions 2",
+      "Write buffer conditions 3",
+      "Write buffer conditions 4"
+    ],
+    "new_key": "Write buffer conditions",
+    "values": [
+      "Translation/protection checked before enqueue",
+      "Required ordering and draining before relevant DMA/device operations",
+      "Defined late bus-error behavior",
+      "Preserve multi-access restart contract"
+    ]
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Memory layout page flip"
+    ],
+    "value": "Latch selected page during vertical blank; drawing throughput is not guaranteed by double buffering."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 8,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Double buffering"
+    ],
+    "value": "true",
+    "statement": "The text display supports two-page buffering."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 39,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Double buffering"
+    ],
+    "value": "true",
+    "statement": "The text display supports two-page buffering."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 70,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Compatibility mode"
+    ],
+    "value": "false",
+    "statement": "This mode is outside the designated legacy compatibility profile."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 70,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Double buffering"
+    ],
+    "value": "false",
+    "statement": "Only one complete background page is available."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 87,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Compatibility mode"
+    ],
+    "value": "false",
+    "statement": "This mode is outside the designated legacy compatibility profile."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 87,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Double buffering"
+    ],
+    "value": "false",
+    "statement": "Only one complete background page is available."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 104,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Compatibility mode"
+    ],
+    "value": "false",
+    "statement": "This mode is outside the designated legacy compatibility profile."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 104,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Double buffering"
+    ],
+    "value": "true",
+    "statement": "Two background pages can be used for double buffering."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 129,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Compatibility mode"
+    ],
+    "value": "false",
+    "statement": "This mode is outside the designated legacy compatibility profile."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 129,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Double buffering"
+    ],
+    "value": "false",
+    "statement": "Only one complete background page is available."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 146,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Compatibility mode"
+    ],
+    "value": "false",
+    "statement": "This mode is outside the designated legacy compatibility profile."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 146,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Double buffering"
+    ],
+    "value": "true",
+    "statement": "Two background pages can be used for double buffering."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 171,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Compatibility mode"
+    ],
+    "value": "true",
+    "statement": "This is the designated legacy compatibility mode."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 171,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Double buffering"
+    ],
+    "value": "true",
+    "statement": "Two background pages can be used for double buffering."
+  },
+  {
+    "record_id": "technology.logix_sprite_system",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Coordinate space"
+    ],
+    "value": "Logical mode pixels; scale together with the background. Signed 16-bit X and Y; clip at screen edges."
+  },
+  {
+    "record_id": "technology.logix_sprite_system",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Priority"
+    ],
+    "value": "Lower sprite number wins; all sprites overlay background/text."
+  },
+  {
+    "record_id": "technology.logix_sprite_system",
+    "chapter_number": 13,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Available in all modes"
+    ],
+    "value": "true",
+    "statement": "Sprites remain available in every display mode."
+  },
+  {
+    "record_id": "technology.logix_sprite_system",
+    "chapter_number": 13,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Pattern double buffered"
+    ],
+    "value": "false",
+    "statement": "Sprite patterns have one complete storage set; descriptor buffering does not provide a second complete pattern set."
+  },
+  {
+    "record_id": "technology.logix_sprite_system",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Coordinate space"
+    ],
+    "value": "Logical mode pixels; scale together with the background. Signed 16-bit X and Y; clip at screen edges."
+  },
+  {
+    "record_id": "technology.logix_sprite_system",
+    "chapter_number": 21,
+    "action": "statement_to_prose",
+    "keys": [
+      "Priority"
+    ],
+    "value": "Lower sprite number wins; all sprites overlay background/text."
+  },
+  {
+    "record_id": "technology.logix_sprite_system",
+    "chapter_number": 33,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Available in all modes"
+    ],
+    "value": "true",
+    "statement": "Sprites remain available in every display mode."
+  },
+  {
+    "record_id": "technology.logix_sprite_system",
+    "chapter_number": 33,
+    "action": "boolean_to_prose",
+    "keys": [
+      "Pattern double buffered"
+    ],
+    "value": "false",
+    "statement": "Sprite patterns have one complete storage set; descriptor buffering does not provide a second complete pattern set."
+  },
+  {
+    "record_id": "technology.logix_digital_video",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "Control channel direction"
+    ],
+    "value": "Half-duplex bidirectional Control pair",
+    "reason": "A statement about control-channel operation.",
+    "statement": "The Control pair is half-duplex and bidirectional."
+  },
+  {
+    "record_id": "technology.logix_digital_video",
+    "chapter_number": 12,
+    "action": "statement_to_prose",
+    "keys": [
+      "Control channel startup"
+    ],
+    "value": "Blank picture, Read versioned capability record with integrity check and timeout, Intersect host and monitor raster support, Select raster and initialize palette, Enable picture",
+    "reason": "Startup actions are a procedure, not parameters.",
+    "statement": "Startup proceeds in this order: blank the picture; read the versioned capability record with an integrity check and timeout; intersect host and monitor raster support; select the raster and initialise the palette; then enable the picture."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Common interaction cursor"
+    ],
+    "value": "moves by character",
+    "reason": "Interaction behaviour is a statement.",
+    "statement": "The cursor moves by character."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Common interaction control cursor"
+    ],
+    "value": "moves by whole word",
+    "reason": "Interaction behaviour is a statement.",
+    "statement": "Ctrl changes cursor movement to whole words."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Common interaction shift"
+    ],
+    "value": "select text",
+    "reason": "Interaction behaviour is a statement.",
+    "statement": "Shift extends text selection."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Common interaction Ctrl-C"
+    ],
+    "value": "copy",
+    "reason": "Interaction behaviour is a statement.",
+    "statement": "Ctrl-C copies the selection."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Common interaction Ctrl-V"
+    ],
+    "value": "paste",
+    "reason": "Interaction behaviour is a statement.",
+    "statement": "Ctrl-V pastes clipboard content."
+  },
+  {
+    "record_id": "technology.logix_tui_standard",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Common interaction Ctrl-X"
+    ],
+    "value": "cut",
+    "reason": "Interaction behaviour is a statement.",
+    "statement": "Ctrl-X cuts the selection."
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "rename",
+    "keys": [
+      "Build profiles 1 ID"
+    ],
+    "new_key": "Base Aurelia profile"
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "rename",
+    "keys": [
+      "Build profiles 1 target"
+    ],
+    "new_key": "Base Aurelia target"
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "rename",
+    "keys": [
+      "Build profiles 2 ID"
+    ],
+    "new_key": "Aurelia+ profile"
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "rename",
+    "keys": [
+      "Build profiles 2 target"
+    ],
+    "new_key": "Aurelia+ target"
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "rename",
+    "keys": [
+      "Build profiles 3 ID"
+    ],
+    "new_key": "Native Artemis profile"
+  },
+  {
+    "record_id": "technology.aion_c_portability_framework",
+    "chapter_number": 14,
+    "action": "rename",
+    "keys": [
+      "Build profiles 3 target"
+    ],
+    "new_key": "Native Artemis target"
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 1,
+    "action": "remove_redundant",
+    "keys": [
+      "Addressing virtual bits"
+    ],
+    "value": "32",
+    "reason": "Duplicate of the virtual/physical address width already explained in this chapter.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.artemis_memory_model",
+    "chapter_number": 1,
+    "action": "remove_redundant",
+    "keys": [
+      "Addressing physical bits"
+    ],
+    "value": "24",
+    "reason": "Duplicate of the virtual/physical address width already explained in this chapter.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.cpm80_virtual_peripheral_bridge",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Peripheral model"
+    ],
+    "value": "the ERA host exposes Artemis peripherals through a virtual peripheral bridge",
+    "reason": "This is an explanation of host/guest responsibilities.",
+    "statement": "The ERA host exposes Artemis peripherals through a virtual peripheral bridge."
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Topology"
+    ],
+    "value": "active star through a multiport hub/repeater/arbiter",
+    "reason": "Describe the link contract in prose.",
+    "statement": "The network forms an active star through a multiport hub, repeater and arbiter."
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Signaling"
+    ],
+    "value": "balanced differential serial signaling compatible in principle with EIA-422-class line drivers/receivers",
+    "reason": "Describe the link contract in prose.",
+    "statement": "Balanced differential serial signalling is compatible in principle with EIA-422-class line drivers and receivers."
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Pair assignment pair"
+    ],
+    "value": "station-to-hub differential data, hub-to-station differential data, hub-distributed synchronous clock / transmit-grant timing, reserved for diagnostics or later expansion",
+    "reason": "Describe the link contract in prose.",
+    "statement": "Cable pairs have distinct roles: pair 1 carries station-to-hub differential data; pair 2 carries hub-to-station differential data; pair 3 carries the hub-distributed synchronous clock and transmit-grant timing; pair 4 is reserved for diagnostics or later expansion."
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Framing"
+    ],
+    "value": "HDLC-inspired bit-oriented framing with address/control fields and 16-bit frame check sequence",
+    "reason": "Describe the link contract in prose.",
+    "statement": "HDLC-inspired bit-oriented frames contain address and control fields and a 16-bit frame check sequence."
+  },
+  {
+    "record_id": "technology.logix_lan100_link",
+    "chapter_number": 1,
+    "action": "statement_to_prose",
+    "keys": [
+      "Station addressing"
+    ],
+    "value": "locally assigned link address stored/configured by the adapter; broadcast supported",
+    "reason": "Describe the link contract in prose.",
+    "statement": "The adapter stores or configures a locally assigned link address; broadcast is supported."
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 1 installed RAM KB"
+    ],
+    "new_key": "48 KB profile installed RAM KB"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 1 application start"
+    ],
+    "new_key": "48 KB profile application start"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 1 application end inclusive"
+    ],
+    "new_key": "48 KB profile application end inclusive"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 1 BDOS entry"
+    ],
+    "new_key": "48 KB profile BDOS entry"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 1 lower reserved range"
+    ],
+    "new_key": "48 KB profile lower reserved range"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 1 TPA bytes"
+    ],
+    "new_key": "48 KB profile TPA bytes"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 1 ID"
+    ],
+    "new_key": "48 KB profile ID"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 2 installed RAM KB"
+    ],
+    "new_key": "64 KB profile installed RAM KB"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 2 application start"
+    ],
+    "new_key": "64 KB profile application start"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 2 application end inclusive"
+    ],
+    "new_key": "64 KB profile application end inclusive"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 2 BDOS entry"
+    ],
+    "new_key": "64 KB profile BDOS entry"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 2 lower reserved range"
+    ],
+    "new_key": "64 KB profile lower reserved range"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 2 TPA bytes"
+    ],
+    "new_key": "64 KB profile TPA bytes"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 29,
+    "action": "rename",
+    "keys": [
+      "Application memory profiles 2 ID"
+    ],
+    "new_key": "64 KB profile ID"
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 start"
+    ],
+    "value": "0000",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 end"
+    ],
+    "value": "AFFF",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 role"
+    ],
+    "value": "Lower RAM",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 start"
+    ],
+    "value": "B000",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 end"
+    ],
+    "value": "EFFF",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 role"
+    ],
+    "value": "ROM / cartridge / video RAM windows",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 3 start"
+    ],
+    "value": "F000",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 3 end"
+    ],
+    "value": "FFFF",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 69,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 3 role"
+    ],
+    "value": "Common system RAM",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 start"
+    ],
+    "value": "0000",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 end"
+    ],
+    "value": "EFFF",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 role"
+    ],
+    "value": "Lower RAM",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 start"
+    ],
+    "value": "F000",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 end"
+    ],
+    "value": "FFFF",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 88,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 role"
+    ],
+    "value": "Common system RAM",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 start"
+    ],
+    "value": "0000",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 end"
+    ],
+    "value": "EFFF",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 1 role"
+    ],
+    "value": "Lower RAM",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 start"
+    ],
+    "value": "F000",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 end"
+    ],
+    "value": "FFFF",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_memory_model",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Normal view 2 role"
+    ],
+    "value": "Common system RAM",
+    "reason": "Represented by the named address range and its role.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 26,
+    "action": "remove_redundant",
+    "keys": [
+      "Aurelia software compatibility API reference"
+    ],
+    "value": "technology.logix_c_api",
+    "reason": "This is a redundant reference to the technology record that owns the chapter.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 26,
+    "action": "remove_redundant",
+    "keys": [
+      "Aurelia plus software compatibility API reference"
+    ],
+    "value": "technology.logix_c_api",
+    "reason": "This is a redundant reference to the technology record that owns the chapter.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 34,
+    "action": "remove_redundant",
+    "keys": [
+      "Artemis software compatibility API reference"
+    ],
+    "value": "technology.logix_c_api",
+    "reason": "This is a redundant reference to the technology record that owns the chapter.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.logix_c_api",
+    "chapter_number": 34,
+    "action": "remove_redundant",
+    "keys": [
+      "Artemis pro software compatibility API reference"
+    ],
+    "value": "technology.logix_c_api",
+    "reason": "This is a redundant reference to the technology record that owns the chapter.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.logix_display_api",
+    "chapter_number": 36,
+    "action": "statement_to_prose",
+    "keys": [
+      "Drawing operations"
+    ],
+    "value": "Create/destroy drawing context; Set clipping and drawing attributes; Draw pixel, line, rectangle and filled region; Transfer bitmap using a documented portable format; Draw text through display/font services; Query/control palette when supported; Begin/end update and request presentation",
+    "reason": "These are callable operations, not scalar parameters.",
+    "statement": "Drawing services create and destroy contexts, set clipping and attributes, draw pixels, lines, rectangles and filled regions, transfer documented bitmap formats, draw text, control supported palettes, and begin, end and present updates."
+  },
+  {
+    "record_id": "technology.artemis_professional_graphics",
+    "chapter_number": 4,
+    "action": "statement_to_prose",
+    "keys": [
+      "Acceleration"
+    ],
+    "value": "Overlap-safe rectangular copies with stride and clipping, Rectangle fills and masked Boolean raster operations, Integer all-octant line drawing, Optional lookup-table antialiased line drawing with four output shades",
+    "reason": "Acceleration operations are behaviours, not scalar parameters.",
+    "statement": "Acceleration covers overlap-safe rectangular copies with stride and clipping, rectangle fills, masked Boolean raster operations, and integer line drawing in all octants. Lookup-table antialiased lines with four output shades remain optional."
+  },
+  {
+    "record_id": "technology.era2_architecture",
+    "chapter_number": 60,
+    "action": "statement_to_prose",
+    "keys": [
+      "Write buffer conditions"
+    ],
+    "value": "Translation/protection checked before enqueue, Required ordering and draining before relevant DMA/device operations, Defined late bus-error behavior, Preserve multi-access restart contract",
+    "reason": "These are conditions for including the buffer.",
+    "statement": "Before enqueueing, translation and protection must be checked. Relevant DMA and device operations require ordering and draining. Late bus-error behaviour must be defined, and multi-access restart semantics must be preserved."
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 1,
+    "action": "remove_redundant",
+    "keys": [
+      "Memory layout policy reference"
+    ],
+    "value": "technology.logix_display_api",
+    "reason": "Redundant with the display API reference already used in the description.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 8,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 1"
+    ],
+    "value": "Text buffer count: 1; Sprite count: 0; Allocated bytes: 4096; Remaining video RAM bytes: 12288",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 8,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 2"
+    ],
+    "value": "Text buffer count: 1; Sprite count: 5; Allocated bytes: 4096; Remaining video RAM bytes: 12288",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 8,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 3"
+    ],
+    "value": "Text buffer count: 2; Sprite count: 0; Allocated bytes: 6144; Remaining video RAM bytes: 10240",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 8,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 4"
+    ],
+    "value": "Text buffer count: 2; Sprite count: 5; Allocated bytes: 6144; Remaining video RAM bytes: 10240",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 39,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 1"
+    ],
+    "value": "Text buffer count: 1; Sprite count: 0; Allocated bytes: 6144; Remaining video RAM bytes: 10240",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 39,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 2"
+    ],
+    "value": "Text buffer count: 1; Sprite count: 5; Allocated bytes: 6144; Remaining video RAM bytes: 10240",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 39,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 3"
+    ],
+    "value": "Text buffer count: 2; Sprite count: 0; Allocated bytes: 10240; Remaining video RAM bytes: 6144",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 39,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 4"
+    ],
+    "value": "Text buffer count: 2; Sprite count: 5; Allocated bytes: 10240; Remaining video RAM bytes: 6144",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 70,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 1"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 0; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 70,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 2"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 5; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 87,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 1"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 0; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 87,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 2"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 5; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 1"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 0; Allocated bytes: 8000; Remaining video RAM bytes: 8384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 2"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 5; Allocated bytes: 8000; Remaining video RAM bytes: 8384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 3"
+    ],
+    "value": "Framebuffer count: 2; Sprite count: 0; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 104,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 4"
+    ],
+    "value": "Framebuffer count: 2; Sprite count: 5; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 129,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 1"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 0; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 129,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 2"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 5; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 146,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 1"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 0; Allocated bytes: 8000; Remaining video RAM bytes: 8384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 146,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 2"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 5; Allocated bytes: 8000; Remaining video RAM bytes: 8384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 146,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 3"
+    ],
+    "value": "Framebuffer count: 2; Sprite count: 0; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 146,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 4"
+    ],
+    "value": "Framebuffer count: 2; Sprite count: 5; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 171,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 1"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 0; Allocated bytes: 8000; Remaining video RAM bytes: 8384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 171,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 2"
+    ],
+    "value": "Framebuffer count: 1; Sprite count: 5; Allocated bytes: 8000; Remaining video RAM bytes: 8384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 171,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 3"
+    ],
+    "value": "Framebuffer count: 2; Sprite count: 0; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  },
+  {
+    "record_id": "technology.aurelia_video_profile",
+    "chapter_number": 171,
+    "action": "remove_redundant",
+    "keys": [
+      "Configuration 4"
+    ],
+    "value": "Framebuffer count: 2; Sprite count: 5; Allocated bytes: 16000; Remaining video RAM bytes: 384",
+    "reason": "The same allocation applies with zero sprites or the full supported sprite count; retained as page-count alternatives.",
+    "statement": null
+  }
+]

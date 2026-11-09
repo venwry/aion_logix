@@ -5,6 +5,9 @@ import {migrateTechnologySpecification,specificationSegments} from '../code/tech
 import {datasetPath} from '../code/model-contract.js';
 import {validateCatalogue} from './validate-catalogue.js';
 const read=p=>JSON.parse(fs.readFileSync(p)),root='data_storytelling/review_evidence/technology-chapters/';
+if(fs.existsSync('data_storytelling/review_evidence/technology-prose-refinement/review.json')){
+ await import('./verify-technology-prose.js');
+}else{
 const baseline=read(root+'before-technology.json').technology,migration=read(root+'migration.json'),coverage=read(root+'coverage.json'),proposals=read(root+'proposals.json').change,priorQueue=read(root+'before-proposals.json').change;
 const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[d+'/'+f,read(d+'/'+f)]))),initial=structuredClone(files);
 const pending=files['data_storytelling/change.json'].change,decisions=files['data_storytelling/authorization_decision.json'].authorization_decision,auth=files['data_storytelling/authorization.json'].authorization;
@@ -56,3 +59,5 @@ assert.deepEqual(validateCatalogue(Object.fromEntries(Object.keys(applied).filte
 for(const r of records(applied))if(!touched.has(r.id))assert.deepEqual(r,index.get(r.id));
 assert.deepEqual(files,initial,'Simulation changed its source');
 console.log(JSON.stringify({result:'passed',converted_records:baseline.length,source_items:baseline.reduce((s,r)=>s+r.specification.length,0),proposed_chapters:coverage.length,proposals:proposals.length,pending_proposals:waiting.length,independent_and_batch_approval:true,prior_authorized_preserved:direct.target.length,previously_pending_not_promoted:30,source_facts_preserved:true},null,2));
+
+}

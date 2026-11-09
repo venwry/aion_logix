@@ -1,0 +1,19 @@
+const {test,expect}=require('@playwright/test');const fs=require('node:fs');
+test('refined FlexiBUS review uses natural prose, one metadata list and no flag-valued parameters',async({page})=>{
+ const {snapshot}=await import('../server/model.js');
+ const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/technology-prose-refinement/proposals.json')).change;
+ const flex=proposals.find(p=>p.elements[0].record_id==='technology.flexibus');
+ const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[d+'/'+f,JSON.parse(fs.readFileSync(d+'/'+f))])));
+ files['data_storytelling/change.json'].change=[flex];const rows=files['data_foundation/technology.json'].technology;rows[rows.findIndex(r=>r.id==='technology.flexibus')]=flex.elements[0].before;
+ await page.addInitScript(()=>sessionStorage.setItem('aion-backend',JSON.stringify({url:'https://aion-review-zu1t.onrender.com',token:'local-prose-test'})));
+ await page.route('**/api/state',r=>r.fulfill({json:snapshot(files,'prose-fixture')}));await page.route('**/api/authorize',r=>r.abort());
+ await page.goto('/code/changes-confirm.html#'+flex.id);await expect(page.locator('body')).toHaveAttribute('data-ready','true');await expect(page.getByRole('button',{name:'Authorize',exact:true})).toBeEnabled();
+ await page.getByLabel('Comparison',{exact:true}).selectOption('details');const after=page.locator('.comparison-column').nth(1),first=after.locator('[data-chapter-number="1"]');
+ await expect(first.locator('.specification-description')).toContainText('Devices support identification and can be attached dynamically while the bus is inactive.');
+ await expect(first.locator('.specification-parameters tbody tr')).toHaveCount(2);
+ await expect(first.locator('.specification-parameters')).toContainText('DEVICE ID, DEVICE TYPE, VENDOR, PROTOCOL VERSION, POWER REQUIREMENTS');
+ await expect(after.locator('.specification-description')).not.toContainText(['Identification is supported: true.']);
+ const compatibility=after.locator('[data-chapter-number="9"]');await expect(compatibility.locator('.specification-description')).toContainText('Logix commits to forward peripheral compatibility');await expect(compatibility.locator('.specification-parameters')).not.toContainText('Compatibility policy');
+ expect(await after.locator('.specification-parameters td').allTextContents()).not.toContain('true');
+ for(const p of flex.elements[0].after.specification[0].parameters)await expect(first.locator('.specification-description')).toContainText(p.value);
+});
