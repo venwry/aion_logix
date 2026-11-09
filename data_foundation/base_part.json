@@ -1325,7 +1325,7 @@
       "id": "base_part.ball_tv90_crt",
       "name": "Ball Brothers TV-90 CRT display",
       "kind": "supplied_assembly",
-      "description": "Ball Brothers TV-90 CRT display",
+      "description": "Ball Brothers TV-90 display components purchased without HV, deflection electronics or PSU; those functions are supplied by the separate Logix assembly in the monitor BOM.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.ball_brothers",
       "supplier_actor_ids": [
@@ -1341,7 +1341,7 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Exact OEM orderable part, supplied assembly boundary, screen/phosphor, scan requirements, life/acceptance limits and what analog/HV components remain to buy."
+          "description": "Confirm the exact orderable part and tube/yoke contents within this supply boundary, screen/phosphor, scan requirements, life/acceptance limits and compatibility with the separate electronics."
         },
         {
           "number": 2,
@@ -1369,7 +1369,7 @@
       "id": "base_part.sony_kv1204_display_assembly",
       "name": "Sony KV-1204 12-inch color display components",
       "kind": "supplied_assembly",
-      "description": "Sony KV-1204 12-inch color display components",
+      "description": "Sony KV-1204 OEM display kit containing the color tube, deflection yoke, convergence circuitry, HV supply and deflection circuitry. The Logix RGB DAC and amplifiers are excluded and supplied as a separate mandatory monitor BOM assembly.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.sony",
       "supplier_actor_ids": [
@@ -1395,7 +1395,7 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Exact OEM supply boundary and permitted purchasable kit, with included component list"
+          "description": "Confirm an orderable OEM kit and supply agreement matching the specified included components and RGB electronics exclusion; do not assume disassembly of retail TVs."
         },
         {
           "number": 2,
@@ -1428,7 +1428,7 @@
       "id": "base_part.motorola_ds3000_140a_crt",
       "name": "Motorola DS3000-140A CRT display",
       "kind": "supplied_assembly",
-      "description": "Motorola DS3000-140A CRT display",
+      "description": "Motorola DS3000-140A display components purchased without HV, deflection electronics or PSU; those functions are supplied by the separate Logix assembly in the monitor BOM.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.motorola",
       "supplier_actor_ids": [
@@ -1444,7 +1444,7 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Exact tube or monitor-assembly identification, included electronics, raster/bandwidth and acceptance test"
+          "description": "Confirm the exact orderable display components and tube/yoke contents within this supply boundary, raster/bandwidth, electrical compatibility and acceptance tests."
         },
         {
           "number": 2,
@@ -1477,7 +1477,7 @@
       "id": "base_part.medium_resolution_rgb_crt",
       "name": "12-inch medium-resolution RGB CRT display assembly",
       "kind": "supplied_assembly",
-      "description": "12-inch medium-resolution RGB CRT display assembly",
+      "description": "12-inch medium-resolution RGB display components purchased without HV, deflection electronics or PSU; those functions are supplied by the separate Logix assembly in the monitor BOM.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": null,
       "supplier_actor_ids": [],
@@ -1491,7 +1491,7 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Supplier and model are absent. Freeze physical dimensions, dot/stripe pitch, scan range, bandwidth, yoke/HV inclusion and actual volume quote basis."
+          "description": "Supplier and model remain unresolved. Specify dimensions, dot/stripe pitch, scan range, bandwidth and tube/yoke contents within this supply boundary; qualify compatibility with the separate HV, deflection and PSU assembly."
         },
         {
           "number": 2,
@@ -1519,7 +1519,7 @@
       "id": "base_part.mpi_mp40_mechanism",
       "name": "Micro Peripherals MP-40 bare printer mechanism",
       "kind": "material",
-      "description": "Micro Peripherals MP-40 bare printer mechanism",
+      "description": "Micro Peripherals MP-40 bare printer mechanism supplied without motor or printhead drivers, controller, PSU or case. The Logix motor and printhead driver assembly is a separate mandatory printer BOM item.",
       "supply_form": "individual_part",
       "manufacturer_actor_id": "actor.mpi",
       "supplier_actor_ids": [
@@ -1535,12 +1535,12 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Orderable revision and contents: head, motors, sensors, frame, carriage/platen, ribbon system, wiring"
+          "description": "Confirm the orderable revision and supplied head, motors, sensors, frame, carriage/platen, ribbon system and wiring. Qualify voltage/current and timing compatibility with the separately supplied drivers."
         },
         {
           "number": 2,
           "kind": "testing",
-          "description": "define excluded controller/PSU/case and incoming tests."
+          "description": "Verify that the incoming mechanism excludes motor/head drivers, controller, PSU and case, and document its incoming acceptance tests."
         },
         {
           "number": 3,
@@ -2773,9 +2773,9 @@
     },
     {
       "id": "base_part.device.mono_monitor_1.hv_deflection_and_psu_not_included_by_oem",
-      "name": "HV deflection and PSU not included by OEM",
+      "name": "HV, deflection and PSU assembly",
       "kind": "supplied_assembly",
-      "description": "HV deflection and PSU not included by OEM",
+      "description": "Mandatory Logix HV, deflection and PSU assembly, supplied separately from the OEM display components and explicitly included in the monitor BOM.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
@@ -2796,7 +2796,7 @@
         {
           "number": 2,
           "kind": "testing",
-          "description": "Logix completes only the power/deflection functions absent from the purchased OEM display assembly. Verify the OEM delivery boundary before procurement; do not double-count an included supply."
+          "description": "Provide the complete HV, deflection electronics and PSU functions excluded from the OEM display purchase. Qualify compatibility with the specified tube/yoke, raster and power requirements; do not count these functions within the OEM assembly."
         },
         {
           "number": 3,
@@ -2918,9 +2918,9 @@
     },
     {
       "id": "base_part.device.color_monitor_1.rgb_dac_and_amplifiers_not_included_by_oem",
-      "name": "RGB DAC and amplifiers not included by OEM",
+      "name": "RGB DAC and amplifier assembly",
       "kind": "supplied_assembly",
-      "description": "RGB DAC and amplifiers not included by OEM",
+      "description": "Mandatory Logix RGB DAC and amplifier assembly supplied separately from the Sony display kit. Convert palette values to analog RGB and drive the display through the qualified insertion interface; the OEM kit retains its HV and deflection circuitry.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
@@ -3058,9 +3058,9 @@
     },
     {
       "id": "base_part.device.mono_monitor_2.hv_deflection_and_psu_not_included_by_oem",
-      "name": "HV deflection and PSU not included by OEM",
+      "name": "HV, deflection and PSU assembly",
       "kind": "supplied_assembly",
-      "description": "HV deflection and PSU not included by OEM",
+      "description": "Mandatory Logix HV, deflection and PSU assembly, supplied separately from the OEM display components and explicitly included in the monitor BOM.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
@@ -3081,7 +3081,7 @@
         {
           "number": 2,
           "kind": "testing",
-          "description": "Logix completes only the power/deflection functions absent from the purchased OEM display assembly. Verify the OEM delivery boundary before procurement; do not double-count an included supply."
+          "description": "Provide the complete HV, deflection electronics and PSU functions excluded from the OEM display purchase. Qualify compatibility with the specified tube/yoke, raster and power requirements; do not count these functions within the OEM assembly."
         },
         {
           "number": 3,
@@ -3203,9 +3203,9 @@
     },
     {
       "id": "base_part.device.color_monitor_2.hv_deflection_and_psu_not_included_by_oem",
-      "name": "HV deflection and PSU not included by OEM",
+      "name": "HV, deflection and PSU assembly",
       "kind": "supplied_assembly",
-      "description": "HV deflection and PSU not included by OEM",
+      "description": "Mandatory Logix HV, deflection and PSU assembly, supplied separately from the OEM display components and explicitly included in the monitor BOM.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
@@ -3226,7 +3226,7 @@
         {
           "number": 2,
           "kind": "testing",
-          "description": "Logix completes only the power/deflection functions absent from the purchased OEM display assembly. Verify the OEM delivery boundary before procurement; do not double-count an included supply."
+          "description": "Provide the complete HV, deflection electronics and PSU functions excluded from the OEM display purchase. Qualify compatibility with the specified tube/yoke, raster and power requirements; do not count these functions within the OEM assembly."
         },
         {
           "number": 3,
@@ -3488,9 +3488,9 @@
     },
     {
       "id": "base_part.device.flexiprint40.motor_and_printhead_drivers_excluded_by_mechanism",
-      "name": "motor and printhead drivers excluded by mechanism",
+      "name": "Motor and printhead driver assembly",
       "kind": "material",
-      "description": "motor and printhead drivers excluded by mechanism",
+      "description": "Mandatory Logix motor and printhead driver assembly supplied separately from the MP-40 bare mechanism. Qualify the drivers with the mechanism, local sequencer and PSU before production.",
       "supply_form": "individual_part",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
