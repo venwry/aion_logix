@@ -28,3 +28,40 @@ Run `npm run validate:data`, `npm run test:server` and `CHROMIUM_PATH=/usr/bin/c
 Run `npm ci` and `npm run build` before publishing the documentation viewer; `assets/app.js` and `assets/chunks/` are generated and ignored by Git. The current Dockerfile installs production dependencies and does not build this bundle, so a fresh Render build supports the story application but requires separately built assets for the documentation viewer. GitHub Pages publishing must include generated assets.
 
 The Render static preview allows the archive directory for reading preserved evidence. The archive is excluded from live dataset discovery and authorization writes. Both deployed code and `AION_BRANCH` should target the current model on `main`. A branch name in an archived migration report is historical.
+
+## Memory use and interrupted saves
+
+The free Render service has a 512 MB memory limit. The Docker image sets
+`NODE_OPTIONS=--max-old-space-size=160` to leave room for HTTP buffers, native
+allocations and JSON parsing. Preserve that setting if defining `NODE_OPTIONS`
+explicitly in Render; increasing the JavaScript heap can exhaust the instance
+before Node reports a heap error.
+
+The saving backend reads GitHub blobs as raw JSON, stages one mutable copy per
+review, and shares existing append-only audit entries without modifying them.
+It streams changed files into separate GitHub blobs and builds a small tree of
+blob SHAs. One commit and one non-forced branch update still publish the entire
+review atomically. Failed uploads cannot partially apply the review. The
+ordinary `/api/state` response does not use the audit archive, so that route
+omits its download. Historical authorization decisions are never truncated or
+rewritten to reduce memory use.
+
+A service restart or dropped response can leave the browser uncertain whether
+GitHub committed the request. The application keeps selections on the current
+page and explains how to retry the same save. Exact proposal hashes and stored
+decisions make a completed request idempotent; retrying it does not authorize
+changed content or create duplicate decisions. Inspect Render's event log for
+memory-related instance restarts when diagnosing an interrupted connection.
+
+Run the read-only memory probe with the production heap limit:
+
+```sh
+node --max-old-space-size=160 tools/profile-review-memory.js
+```
+
+It reconstructs the three composition-cleanup proposals in memory and exercises
+three saves against mocked GitHub transport with the current audit history.
+It writes no files and sends no network requests. Its 480 MB RSS ceiling leaves
+headroom below the deployment limit; peak usage depends on Node and the history
+size. Regression tests also cover exact streamed JSON bytes, atomic persistence,
+stale updates and recovery after a committed save loses its response.

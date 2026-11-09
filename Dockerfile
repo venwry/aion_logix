@@ -7,6 +7,6 @@ RUN --mount=type=secret,id=proxy_ca \
     npm ci --omit=dev --strict-ssl=true && npm cache clean --force
 COPY --chown=node:node . .
 USER node
-ENV NODE_ENV=production AION_BIND=0.0.0.0 PORT=10000
+ENV NODE_ENV=production AION_BIND=0.0.0.0 PORT=10000 NODE_OPTIONS="--max-old-space-size=160"
 EXPOSE 10000
 CMD ["node", "server/index.js"]

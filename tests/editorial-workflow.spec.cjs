@@ -1,11 +1,11 @@
 const {test,expect}=require('@playwright/test');const fs=require('node:fs');
 function fixture(){const files={};for(const dir of ['data_foundation','data_storytelling'])for(const f of fs.readdirSync(dir).filter(n=>n.endsWith('.json')))files[dir+'/'+f]=JSON.parse(fs.readFileSync(dir+'/'+f));return files;}
 async function service(page,files){
- const {snapshot,transact}=await import('../server/model.js');let current=files,fail=false,calls=0;
+ const {snapshot,transact}=await import('../server/model.js');let current=files,fail=false,drop=false,calls=0;
  await page.addInitScript(()=>sessionStorage.setItem('aion-backend',JSON.stringify({url:'https://aion-review-zu1t.onrender.com',token:'test-key'})));
  await page.route('**/api/state',r=>r.fulfill({json:snapshot(current,'base1234')}));
- await page.route(/\/api\/(feedback|authorize)$/,async r=>{calls++;if(fail){fail=false;return r.fulfill({status:409,json:{error:'Concurrent change. Drafts retained.'}});}try{const result=transact(current,r.request().postDataJSON());current=result.files;await r.fulfill({json:snapshot(current,'saved1234')});}catch(e){await r.fulfill({status:e.status||500,json:{error:e.message}});}});
- page.on('dialog',d=>d.accept());return {files:()=>current,fail:()=>fail=true,calls:()=>calls};
+ await page.route(/\/api\/(feedback|authorize)$/,async r=>{calls++;if(fail){fail=false;return r.fulfill({status:409,json:{error:'Concurrent change. Drafts retained.'}});}try{const result=transact(current,r.request().postDataJSON());current=result.files;if(drop){drop=false;return r.abort('failed');}await r.fulfill({json:snapshot(current,'saved1234')});}catch(e){await r.fulfill({status:e.status||500,json:{error:e.message}});}});
+ page.on('dialog',d=>d.accept());return {files:()=>current,fail:()=>fail=true,drop:()=>drop=true,calls:()=>calls};
 }
 async function ready(page,url){await page.goto('/code/'+url);await expect(page.locator('body')).toHaveAttribute('data-ready','true');}
 test('timeline annotations recover drafts, survive Go Back, save once and remain read-only until edited',async({page})=>{
@@ -25,7 +25,7 @@ test('Go Back restores composition version and filter redraws do not create hist
 });
 test('split proposal details use separate snapshots and synchronized versions; refinement blocks approval until revised',async({page})=>{
  const files=fixture(),device=files['data_foundation/device.json'].device.find(r=>r.id==='device.ram_64kb_x32'),part=files['data_foundation/base_part.json'].base_part.find(r=>r.id==='base_part.dram_16kbit');
- const after=structuredClone(device);after.composition_history.push({...structuredClone(after.composition_history[0]),version_number:2,description:'Second version'});
+ const after=structuredClone(device),revision={kind:'event',event_id:'event.autodesk_comdex'};after.composition_history.push({...structuredClone(after.composition_history[0]),version_number:2,description:'Second version',effective_from:revision});after.composition_history[0].effective_until=revision;
  const p={id:'change.test_combined',category:'story',title:'Improve RAM module',reason:'Combined technical change',elements:[{record_type:'device',record_id:device.id,before:device,after},{record_type:'base_part',record_id:part.id,before:part,after:{...part,name:'Refined RAM chip'}}]};files['data_storytelling/change.json'].change=[p];
  const api=await service(page,files);await ready(page,'changes-confirm.html');await expect(page.locator('.proposal-nav-item')).toHaveCount(1);await expect(page.locator('.change-table tbody tr')).toHaveCount(2);
  await page.getByLabel('Comparison',{exact:true}).selectOption('details');await expect(page.locator('.comparison-record')).toHaveCount(2);await expect(page.locator('.comparison-column').nth(1)).toContainText('Refined RAM chip');await expect(page.locator('.comparison-column').first()).not.toContainText('Refined RAM chip');
@@ -50,4 +50,13 @@ test('Remove stages an undoable withdrawal and Save commits mixed decisions with
  api.fail();await save.click();await expect(page.locator('#warning')).toContainText('Concurrent change');await expect(page.locator('#selected-count')).toHaveText('1 selected');await expect(page.locator('#removal-count')).toHaveText('1 removals');await expect(area).toHaveValue('Please refine this proposal.');
  await save.click();await expect(page.locator('#review-count')).toHaveText('1 pending proposal(s)');await expect(page.locator('#removal-count')).toHaveText('0 removals');await expect(area).toHaveAttribute('readonly','');expect(api.calls()).toBe(2);
  const current=api.files();expect(current['data_foundation/actor.json'].actor[0]).toEqual(original.actor[0]);expect(current['data_foundation/actor.json'].actor[1]).toEqual(proposals[1].elements[0].after);expect(current['data_storytelling/authorization_decision.json'].authorization_decision.findLast(d=>d.change_id===proposals[0].id).action).toBe('remove_change');
+});
+
+test('lost save response retains selection and retry does not duplicate the committed decision',async({page})=>{
+ const files=fixture(),actor=files['data_foundation/actor.json'].actor[0];
+ files['data_storytelling/change.json'].change=[{id:'change.dropped_response',category:'story',title:'Retry a dropped response',reason:'Isolated transport test',elements:[{record_type:'actor',record_id:actor.id,before:actor,after:{...actor,name:actor.name+' updated'}}]}];
+ const api=await service(page,files);await ready(page,'changes-confirm.html');await page.getByRole('button',{name:'Authorize',exact:true}).click();api.drop();
+ const save=page.getByRole('button',{name:'Save',exact:true});await save.click();await expect(page.locator('#warning')).toContainText('commit status is unknown');await expect(page.locator('#selected-count')).toHaveText('1 selected');await expect(save).toBeEnabled();
+ await save.click();await expect(page.locator('#warning')).toContainText('Review decisions saved');expect(api.calls()).toBe(2);
+ expect(api.files()['data_storytelling/authorization_decision.json'].authorization_decision.filter(d=>d.change_id==='change.dropped_response')).toHaveLength(1);
 });

@@ -15,7 +15,7 @@ export function createServer({store,accessToken,origins=[],root=process.cwd()}){
    if(!allowed)return send(403,{error:'Origin not allowed'});
    if(!equal(req.headers.authorization,'Bearer '+accessToken))return send(401,{error:'Connect with the backend access key to save authorizations.'});
    try{
-    if(pathname==='/api/state'&&req.method==='GET'){await queue;const state=await store.read();return send(200,snapshot(state.files,state.revision));}
+    if(pathname==='/api/state'&&req.method==='GET'){await queue;const state=await store.read({includeHistory:false});return send(200,snapshot(state.files,state.revision));}
     if(['/api/authorize','/api/feedback'].includes(pathname)&&req.method==='POST'){
      if(!req.headers['content-type']?.startsWith('application/json'))return send(415,{error:'JSON required'});
      let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>256000)return send(413,{error:'Request too large'});}let request;try{request=JSON.parse(body);}catch{return send(400,{error:'Invalid JSON'});}

@@ -1,4 +1,5 @@
 import {datasetPath} from '../code/model-contract.js';
+import {stageFiles} from './staging.js';
 import {editorialRows,latestReview,saveEditorial,resolveAnnotations,validateEditorialHistory} from './editorial.js';
 import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
@@ -30,11 +31,11 @@ export function validate(files){
 }
 export function snapshot(files,revision){return {revision,collections:Object.fromEntries(names.map(n=>[n,files[datasetPath(n)][n]])),authorization:get(files,'authorization'),changes:files['data_storytelling/change.json'],annotations:editorialRows(files,'annotation'),change_reviews:editorialRows(files,'change_review')};}
 
-function approveChanges(original, entries, actor) {
+function approveChanges(original, entries, actor, staged=false) {
  const bad=message=>{const e=new Error(message);e.status=400;throw e;};
  const fail=message=>{const e=new Error(message);e.status=409;throw e;};
  if(!Array.isArray(entries)||!entries.length||entries.length>1000)bad('Select between 1 and 1000 proposals.');
- const files=structuredClone(original),index=new Map(records(files).map(r=>[r.id,r]));
+ const files=staged?original:stageFiles(original),index=new Map(records(files).map(r=>[r.id,r]));
  const pending=get(files,'change'),decisions=get(files,'authorization_decision'),auth=get(files,'authorization');
  const seen=new Set(),targetIds=new Set(),selected=[];
  for(const entry of entries){
@@ -95,7 +96,7 @@ function saveReview(original,request,actor){
   if(!entry||typeof entry.change_id!=='string'||!/^[a-f0-9]{64}$/.test(entry.proposal_sha256)||seen.has(entry.change_id))fail('Invalid or duplicate review decision.',400);
   seen.add(entry.change_id);
  }
- let files=structuredClone(original),changed=false;
+ let files=stageFiles(original),changed=false;
  const pending=get(files,'change'),decisions=get(files,'authorization_decision'),removed=[];
  for(const entry of removals){
   const proposal=pending.find(p=>p.id===entry.change_id);
@@ -109,8 +110,8 @@ function saveReview(original,request,actor){
   pending.splice(pending.indexOf(proposal),1);
   decisions.push({id:'authorization_decision.'+crypto.randomUUID(),action:'remove_change',actor,decided_at:new Date().toISOString(),change_id:proposal.id,proposal_sha256:hash(proposal),proposal,target:[]});changed=true;
  }
- if(feedback.length){const result=saveEditorial(files,{action:'save_review_feedback',entries:feedback},actor);files=result.files;changed||=result.changed;}
- if(approvals.length){const result=approveChanges(files,approvals,actor);files=result.files;changed||=result.changed;}
+ if(feedback.length){const result=saveEditorial(files,{action:'save_review_feedback',entries:feedback},actor,true);files=result.files;changed||=result.changed;}
+ if(approvals.length){const result=approveChanges(files,approvals,actor,true);files=result.files;changed||=result.changed;}
  const result=validate(files);if(result.errors.length)fail('The review could not be saved: '+result.errors.slice(0,5).join('; '));
  return {files,changed};
 }
@@ -124,7 +125,7 @@ export function transact(original,request,actor='author'){
  }
  if(request.action==='approve_changes')return approveChanges(original,request.changes,actor);
  if(request.action==='approve_change')return approveChanges(original,[request],actor);
- const files=structuredClone(original);const index=new Map(records(files).map(r=>[r.id,r]));const auth=get(files,'authorization');const decisions=get(files,'authorization_decision');const targets=[];let proposal=null;
+ const files=stageFiles(original);const index=new Map(records(files).map(r=>[r.id,r]));const auth=get(files,'authorization');const decisions=get(files,'authorization_decision');const targets=[];let proposal=null;
  const fail=message=>{const e=new Error(message);e.status=409;throw e;};
  if(request.action==='authorize_record'||request.action==='authorize_records'){
   const entries=request.action==='authorize_record'?[request]:request.records;

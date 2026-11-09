@@ -25,16 +25,18 @@ test('new external records are pending without authorization and support direct 
 test('GitHub reader fetches external_products.json and save never introduces a singular filename',async()=>{
  const files=fixture(),paths=Object.keys(files);const calls=[];
  const store=new GitHubStore({repository:'test/repo',token:'test'});
- store.api=async(path,method='GET',body)=>{
+ store.api=async(path,method='GET',body,options)=>{
   calls.push({path,method,body});
   if(path==='/git/ref/heads/main')return {object:{sha:'head'}};
   if(path==='/git/commits/head')return {tree:{sha:'tree'}};
   if(path==='/git/trees/tree?recursive=1')return {tree:paths.map((p,i)=>({path:p,type:'blob',sha:String(i)}))};
-  if(path.startsWith('/git/blobs/'))return {content:Buffer.from(JSON.stringify(files[paths[Number(path.split('/').at(-1))]])).toString('base64')};
+  if(path.startsWith('/git/blobs/')){assert.equal(options.raw,true);return files[paths[Number(path.split('/').at(-1))]];}
   return {sha:method==='POST'?'created':'saved'};
  };
  const previous=await store.read();assert.equal(previous.files['data_storytelling/manifest.json'].manifest[0].schema_version,schemaVersion);
  const next=structuredClone(previous.files);next['data_foundation/external_products.json'].external_product.push(record());await store.save(previous,next);
  const tree=calls.find(c=>c.path==='/git/trees'&&c.method==='POST');assert.deepEqual(tree.body.tree.map(e=>e.path),['data_foundation/external_products.json']);
  assert.equal(calls.at(-1).body.force,false);
+ calls.length=0;const light=await store.read({includeHistory:false});assert(!('data_storytelling/authorization_decision.json' in light.files));
+ const historyIndex=paths.indexOf('data_storytelling/authorization_decision.json');assert(!calls.some(c=>c.path==='/git/blobs/'+historyIndex));
 });

@@ -21,4 +21,11 @@ export function mountConnection(){
  disconnect.onclick=()=>{sessionStorage.removeItem('aion-backend');location.reload();};
 }
 export async function remoteState(){mountConnection();const c=connection();if(!c)return null;if(connectedSnapshot)return connectedSnapshot;const r=await fetch(c.url+'/api/state',{headers:{Authorization:'Bearer '+c.token},cache:'no-store'});if(!r.ok)throw Error('Cannot load the saving service. Reconnect or disconnect to browse published data.');return connectedSnapshot=await r.json();}
-export async function saveAuthorization(request){const c=connection();if(!c)throw Error('Connect to Saving service to save your changes.');const r=await fetch(c.url+'/api/authorize',{method:'POST',headers:{Authorization:'Bearer '+c.token,'Content-Type':'application/json'},body:JSON.stringify(request)});const body=await r.json();if(!r.ok)throw Error(body.error||'Saving failed. Nothing has been marked as saved.');connectedSnapshot=body;return body;}
+export async function saveAuthorization(request){
+ const c=connection();if(!c)throw Error('Connect to Saving service to save your changes.');
+ const uncertain='The saving service connection was interrupted or returned an unreadable response. The commit status is unknown. Your selections remain on this page; retry the same save when the service is ready. Completed decisions will not be committed twice.';
+ let r;try{r=await fetch(c.url+'/api/authorize',{method:'POST',headers:{Authorization:'Bearer '+c.token,'Content-Type':'application/json'},body:JSON.stringify(request)});}catch{throw Error(uncertain);}
+ let body;try{body=await r.json();}catch{throw Error(uncertain+' (HTTP '+r.status+')');}
+ if(!r.ok)throw Error(body.error||'Saving failed. Nothing has been marked as saved.');
+ connectedSnapshot=body;return body;
+}

@@ -1,13 +1,14 @@
 import crypto from 'node:crypto';
+import {stageFiles} from './staging.js';
 import {hash,records} from './model.js';
 export const editorialRows=(files,name)=>files['data_storytelling/'+name+'.json']?.[name]||[];
 export const latestAnnotation=(files,id)=>editorialRows(files,'annotation').findLast(a=>a.record_id===id);
 export const latestReview=(files,id,digest)=>editorialRows(files,'change_review').findLast(r=>r.change_id===id&&r.proposal_sha256===digest);
 const fail=(message,status=409)=>{throw Object.assign(Error(message),{status});};
-export function saveEditorial(original,request,actor){
+export function saveEditorial(original,request,actor,staged=false){
  const name=request.action==='save_annotations'?'annotation':'change_review',entries=request.entries;
  if(!Array.isArray(entries)||!entries.length||entries.length>1000)fail('Select between 1 and 1000 feedback entries.',400);
- const files=structuredClone(original),rows=editorialRows(files,name),index=new Map(records(files).map(r=>[r.id,r])),seen=new Set();let changed=false;
+ const files=staged?original:stageFiles(original),rows=editorialRows(files,name),index=new Map(records(files).map(r=>[r.id,r])),seen=new Set();let changed=false;
  files['data_storytelling/'+name+'.json']={[name]:rows};
  for(const e of entries){
   if(!e||typeof e.id!=='string'||!new RegExp('^'+name+'\\.[a-zA-Z0-9_-]{8,}$').test(e.id)||typeof e.text!=='string'||!e.text.trim()||e.text.length>20000||!(e.supersedes_id===null||typeof e.supersedes_id==='string'))fail('Feedback requires an ID, non-empty text (up to 20,000 characters), and a saved baseline.',400);
