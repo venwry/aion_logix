@@ -392,1125 +392,281 @@
       "specification": [
         {
           "number": 1,
-          "chapter_name": "scope",
-          "description": "Native Logix-aware editors, forms, spreadsheets, file views and application lifecycle. Legacy CP/M console and Unix-compatible terminal sessions retain explicitly selected compatibility profiles.",
-          "parameters": []
-        },
-        {
-          "number": 2,
-          "chapter_name": "historical_context",
-          "description": "Forward-looking alternative-history design at the TUI launch; later DOS, Windows and Linux conventions are design references, not claimed historical 1978 standards.",
-          "parameters": []
-        },
-        {
-          "number": 3,
-          "chapter_name": "assignment_rules[1]",
-          "description": "Arrows navigate; Ctrl modifies navigation granularity; Shift extends selection using the same movement destination.",
-          "parameters": []
-        },
-        {
-          "number": 4,
-          "chapter_name": "assignment_rules[2]",
-          "description": "Ctrl supplies editing/document commands; Alt supplies menu and system actions. System-reserved commands cannot be rebound by applications.",
-          "parameters": []
-        },
-        {
-          "number": 5,
-          "chapter_name": "assignment_rules[3]",
-          "description": "Dispatch stable logical command identifiers separately from physical keys. Resolve focused control, active dialog, application and system ownership explicitly.",
-          "parameters": []
-        },
-        {
-          "number": 6,
-          "chapter_name": "assignment_rules[4]",
-          "description": "Show shortcuts in menus/help; disabled or unavailable commands report their state. Compatibility profiles are explicit, visible and never silently mixed.",
+          "chapter_name": "Scope and assignment rules",
+          "description": "Native Logix applications use a common command vocabulary. Terminal compatibility profiles remain explicit so an editing shortcut cannot silently become a process-control command.\n\nNative Logix-aware editors, forms, spreadsheets, file views and application lifecycle. Legacy CP/M console and Unix-compatible terminal sessions retain explicitly selected compatibility profiles.\n\nForward-looking alternative-history design at the TUI launch; later DOS, Windows and Linux conventions are design references, not claimed historical 1978 standards.\n\nArrows navigate; Ctrl modifies navigation granularity; Shift extends selection using the same movement destination.\n\nCtrl supplies editing/document commands; Alt supplies menu and system actions. System-reserved commands cannot be rebound by applications.\n\nDispatch stable logical command identifiers separately from physical keys. Resolve focused control, active dialog, application and system ownership explicitly.\n\nShow shortcuts in menus/help; disabled or unavailable commands report their state. Compatibility profiles are explicit, visible and never silently mixed.",
           "parameters": []
         },
         {
           "number": 7,
-          "chapter_name": "navigation[1].command",
-          "description": "MOVE_CHARACTER_LEFT / RIGHT",
-          "parameters": []
-        },
-        {
-          "number": 8,
-          "chapter_name": "navigation[1].keys",
-          "description": "Left / Right",
-          "parameters": []
-        },
-        {
-          "number": 9,
-          "chapter_name": "navigation[1].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 10,
-          "chapter_name": "navigation[2].command",
-          "description": "MOVE_DISPLAY_LINE_UP / DOWN",
-          "parameters": []
-        },
-        {
-          "number": 11,
-          "chapter_name": "navigation[2].keys",
-          "description": "Up / Down",
-          "parameters": []
-        },
-        {
-          "number": 12,
-          "chapter_name": "navigation[2].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 13,
-          "chapter_name": "navigation[3].command",
-          "description": "MOVE_WORD_LEFT / RIGHT",
-          "parameters": []
-        },
-        {
-          "number": 14,
-          "chapter_name": "navigation[3].keys",
-          "description": "Ctrl+Left / Ctrl+Right",
-          "parameters": []
-        },
-        {
-          "number": 15,
-          "chapter_name": "navigation[3].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 16,
-          "chapter_name": "navigation[4].command",
-          "description": "MOVE_LINE_START / END",
-          "parameters": []
-        },
-        {
-          "number": 17,
-          "chapter_name": "navigation[4].keys",
-          "description": "Home / End",
-          "parameters": []
-        },
-        {
-          "number": 18,
-          "chapter_name": "navigation[4].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 19,
-          "chapter_name": "navigation[5].command",
-          "description": "MOVE_DOCUMENT_START / END",
-          "parameters": []
-        },
-        {
-          "number": 20,
-          "chapter_name": "navigation[5].keys",
-          "description": "Ctrl+Home / Ctrl+End",
-          "parameters": []
-        },
-        {
-          "number": 21,
-          "chapter_name": "navigation[5].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 22,
-          "chapter_name": "navigation[6].command",
-          "description": "MOVE_PAGE_UP / DOWN",
-          "parameters": []
-        },
-        {
-          "number": 23,
-          "chapter_name": "navigation[6].keys",
-          "description": "Page Up / Page Down",
-          "parameters": []
-        },
-        {
-          "number": 24,
-          "chapter_name": "navigation[6].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 25,
-          "chapter_name": "navigation[7].command",
-          "description": "MOVE_PARAGRAPH_PREVIOUS / NEXT",
-          "parameters": []
-        },
-        {
-          "number": 26,
-          "chapter_name": "navigation[7].keys",
-          "description": "Ctrl+Up / Ctrl+Down",
-          "parameters": []
-        },
-        {
-          "number": 27,
-          "chapter_name": "navigation[7].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 28,
-          "chapter_name": "navigation[8].command",
-          "description": "EXTEND_SELECTION",
-          "parameters": []
-        },
-        {
-          "number": 29,
-          "chapter_name": "navigation[8].keys",
-          "description": "Shift + any navigation command",
-          "parameters": []
-        },
-        {
-          "number": 30,
-          "chapter_name": "navigation[8].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 31,
-          "chapter_name": "navigation[9].command",
-          "description": "SELECT_ALL",
-          "parameters": []
-        },
-        {
-          "number": 32,
-          "chapter_name": "navigation[9].keys",
-          "description": "Ctrl+A",
-          "parameters": []
-        },
-        {
-          "number": 33,
-          "chapter_name": "navigation[9].scope",
-          "description": "focused editor/view",
-          "parameters": []
-        },
-        {
-          "number": 34,
-          "chapter_name": "navigation[10].command",
-          "description": "CLEAR_SELECTION",
-          "parameters": []
-        },
-        {
-          "number": 35,
-          "chapter_name": "navigation[10].keys",
-          "description": "Esc",
-          "parameters": []
-        },
-        {
-          "number": 36,
-          "chapter_name": "navigation[10].scope",
-          "description": "only after higher-priority transient UI is dismissed",
-          "parameters": []
+          "chapter_name": "Navigation and selection",
+          "description": "Navigation commands move the caret or selection by a defined unit. Shift extends the same movement; selection clearing respects active menus and dialogs. For example, character movement uses Left / Right.\n\nUse {MOVE_CHARACTER_LEFT / RIGHT} for move character left / right (native TUI).\n\nUse {MOVE_DISPLAY_LINE_UP / DOWN} for move display line up / down (native TUI).\n\nUse {MOVE_WORD_LEFT / RIGHT} for move word left / right (native TUI).\n\nUse {MOVE_LINE_START / END} for move line start / end (native TUI).\n\nUse {MOVE_DOCUMENT_START / END} for move document start / end (native TUI).\n\nUse {MOVE_PAGE_UP / DOWN} for move page up / down (native TUI).\n\nUse {MOVE_PARAGRAPH_PREVIOUS / NEXT} for move paragraph previous / next (native TUI).\n\nUse {EXTEND_SELECTION} for extend selection (native TUI).\n\nUse {SELECT_ALL} for select all (focused editor/view).\n\nUse {CLEAR_SELECTION} for clear selection (only after higher-priority transient UI is dismissed).",
+          "parameters": [
+            {
+              "key": "MOVE_CHARACTER_LEFT / RIGHT",
+              "value": "Left / Right"
+            },
+            {
+              "key": "MOVE_DISPLAY_LINE_UP / DOWN",
+              "value": "Up / Down"
+            },
+            {
+              "key": "MOVE_WORD_LEFT / RIGHT",
+              "value": "Ctrl+Left / Ctrl+Right"
+            },
+            {
+              "key": "MOVE_LINE_START / END",
+              "value": "Home / End"
+            },
+            {
+              "key": "MOVE_DOCUMENT_START / END",
+              "value": "Ctrl+Home / Ctrl+End"
+            },
+            {
+              "key": "MOVE_PAGE_UP / DOWN",
+              "value": "Page Up / Page Down"
+            },
+            {
+              "key": "MOVE_PARAGRAPH_PREVIOUS / NEXT",
+              "value": "Ctrl+Up / Ctrl+Down"
+            },
+            {
+              "key": "EXTEND_SELECTION",
+              "value": "Shift + any navigation command"
+            },
+            {
+              "key": "SELECT_ALL",
+              "value": "Ctrl+A"
+            },
+            {
+              "key": "CLEAR_SELECTION",
+              "value": "Esc"
+            }
+          ]
         },
         {
           "number": 37,
-          "chapter_name": "editing[1].command",
-          "description": "COPY",
-          "parameters": []
-        },
-        {
-          "number": 38,
-          "chapter_name": "editing[1].keys",
-          "description": "Ctrl+C; alias Ctrl+Insert",
-          "parameters": []
-        },
-        {
-          "number": 39,
-          "chapter_name": "editing[1].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 40,
-          "chapter_name": "editing[2].command",
-          "description": "CUT",
-          "parameters": []
-        },
-        {
-          "number": 41,
-          "chapter_name": "editing[2].keys",
-          "description": "Ctrl+X; alias Shift+Delete in text editors only",
-          "parameters": []
-        },
-        {
-          "number": 42,
-          "chapter_name": "editing[2].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 43,
-          "chapter_name": "editing[3].command",
-          "description": "PASTE",
-          "parameters": []
-        },
-        {
-          "number": 44,
-          "chapter_name": "editing[3].keys",
-          "description": "Ctrl+V; alias Shift+Insert",
-          "parameters": []
-        },
-        {
-          "number": 45,
-          "chapter_name": "editing[3].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 46,
-          "chapter_name": "editing[4].command",
-          "description": "UNDO",
-          "parameters": []
-        },
-        {
-          "number": 47,
-          "chapter_name": "editing[4].keys",
-          "description": "Ctrl+Z; alias Alt+Backspace",
-          "parameters": []
-        },
-        {
-          "number": 48,
-          "chapter_name": "editing[4].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 49,
-          "chapter_name": "editing[5].command",
-          "description": "REDO",
-          "parameters": []
-        },
-        {
-          "number": 50,
-          "chapter_name": "editing[5].keys",
-          "description": "Ctrl+Shift+Z; alias Ctrl+Y",
-          "parameters": []
-        },
-        {
-          "number": 51,
-          "chapter_name": "editing[5].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 52,
-          "chapter_name": "editing[6].command",
-          "description": "DELETE_PREVIOUS / NEXT_CHARACTER",
-          "parameters": []
-        },
-        {
-          "number": 53,
-          "chapter_name": "editing[6].keys",
-          "description": "Backspace / Delete",
-          "parameters": []
-        },
-        {
-          "number": 54,
-          "chapter_name": "editing[6].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 55,
-          "chapter_name": "editing[7].command",
-          "description": "DELETE_PREVIOUS / NEXT_WORD",
-          "parameters": []
-        },
-        {
-          "number": 56,
-          "chapter_name": "editing[7].keys",
-          "description": "Ctrl+Backspace / Ctrl+Delete",
-          "parameters": []
-        },
-        {
-          "number": 57,
-          "chapter_name": "editing[7].scope",
-          "description": "native TUI",
-          "parameters": []
+          "chapter_name": "Editing and undo",
+          "description": "Copy, cut, paste and undo have shared logical commands. Keyboard aliases retain the same command scope. Copy uses Ctrl+C; alias Ctrl+Insert, while paste uses Ctrl+V; alias Shift+Insert.\n\nUse {COPY} for copy (native TUI).\n\nUse {CUT} for cut (native TUI).\n\nUse {PASTE} for paste (native TUI).\n\nUse {UNDO} for undo (native TUI).\n\nUse {REDO} for redo (native TUI).\n\nUse {DELETE_PREVIOUS / NEXT_CHARACTER} for delete previous / next character (native TUI).\n\nUse {DELETE_PREVIOUS / NEXT_WORD} for delete previous / next word (native TUI).",
+          "parameters": [
+            {
+              "key": "COPY",
+              "value": "Ctrl+C; alias Ctrl+Insert"
+            },
+            {
+              "key": "CUT",
+              "value": "Ctrl+X; alias Shift+Delete in text editors only"
+            },
+            {
+              "key": "PASTE",
+              "value": "Ctrl+V; alias Shift+Insert"
+            },
+            {
+              "key": "UNDO",
+              "value": "Ctrl+Z; alias Alt+Backspace"
+            },
+            {
+              "key": "REDO",
+              "value": "Ctrl+Shift+Z; alias Ctrl+Y"
+            },
+            {
+              "key": "DELETE_PREVIOUS / NEXT_CHARACTER",
+              "value": "Backspace / Delete"
+            },
+            {
+              "key": "DELETE_PREVIOUS / NEXT_WORD",
+              "value": "Ctrl+Backspace / Ctrl+Delete"
+            }
+          ]
         },
         {
           "number": 58,
-          "chapter_name": "documents[1].command",
-          "description": "NEW_DOCUMENT",
-          "parameters": []
-        },
-        {
-          "number": 59,
-          "chapter_name": "documents[1].keys",
-          "description": "Ctrl+N",
-          "parameters": []
-        },
-        {
-          "number": 60,
-          "chapter_name": "documents[1].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 61,
-          "chapter_name": "documents[2].command",
-          "description": "OPEN_DOCUMENT",
-          "parameters": []
-        },
-        {
-          "number": 62,
-          "chapter_name": "documents[2].keys",
-          "description": "Ctrl+O",
-          "parameters": []
-        },
-        {
-          "number": 63,
-          "chapter_name": "documents[2].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 64,
-          "chapter_name": "documents[3].command",
-          "description": "SAVE_DOCUMENT",
-          "parameters": []
-        },
-        {
-          "number": 65,
-          "chapter_name": "documents[3].keys",
-          "description": "Ctrl+S",
-          "parameters": []
-        },
-        {
-          "number": 66,
-          "chapter_name": "documents[3].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 67,
-          "chapter_name": "documents[4].command",
-          "description": "SAVE_DOCUMENT_AS",
-          "parameters": []
-        },
-        {
-          "number": 68,
-          "chapter_name": "documents[4].keys",
-          "description": "Ctrl+Shift+S",
-          "parameters": []
-        },
-        {
-          "number": 69,
-          "chapter_name": "documents[4].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 70,
-          "chapter_name": "documents[5].command",
-          "description": "PRINT_DOCUMENT",
-          "parameters": []
-        },
-        {
-          "number": 71,
-          "chapter_name": "documents[5].keys",
-          "description": "Ctrl+P",
-          "parameters": []
-        },
-        {
-          "number": 72,
-          "chapter_name": "documents[5].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 73,
-          "chapter_name": "documents[6].command",
-          "description": "FIND",
-          "parameters": []
-        },
-        {
-          "number": 74,
-          "chapter_name": "documents[6].keys",
-          "description": "Ctrl+F",
-          "parameters": []
-        },
-        {
-          "number": 75,
-          "chapter_name": "documents[6].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 76,
-          "chapter_name": "documents[7].command",
-          "description": "FIND_NEXT / PREVIOUS",
-          "parameters": []
-        },
-        {
-          "number": 77,
-          "chapter_name": "documents[7].keys",
-          "description": "F3 / Shift+F3; aliases Ctrl+G / Ctrl+Shift+G",
-          "parameters": []
-        },
-        {
-          "number": 78,
-          "chapter_name": "documents[7].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 79,
-          "chapter_name": "documents[8].command",
-          "description": "REPLACE",
-          "parameters": []
-        },
-        {
-          "number": 80,
-          "chapter_name": "documents[8].keys",
-          "description": "Ctrl+H",
-          "parameters": []
-        },
-        {
-          "number": 81,
-          "chapter_name": "documents[8].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 82,
-          "chapter_name": "documents[9].command",
-          "description": "GO_TO",
-          "parameters": []
-        },
-        {
-          "number": 83,
-          "chapter_name": "documents[9].keys",
-          "description": "Ctrl+L",
-          "parameters": []
-        },
-        {
-          "number": 84,
-          "chapter_name": "documents[9].scope",
-          "description": "line, cell or record in a document; context named in UI",
-          "parameters": []
-        },
-        {
-          "number": 85,
-          "chapter_name": "documents[10].command",
-          "description": "CLOSE_DOCUMENT",
-          "parameters": []
-        },
-        {
-          "number": 86,
-          "chapter_name": "documents[10].keys",
-          "description": "Ctrl+W",
-          "parameters": []
-        },
-        {
-          "number": 87,
-          "chapter_name": "documents[10].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 88,
-          "chapter_name": "documents[11].command",
-          "description": "QUIT_APPLICATION",
-          "parameters": []
-        },
-        {
-          "number": 89,
-          "chapter_name": "documents[11].keys",
-          "description": "Ctrl+Q",
-          "parameters": []
-        },
-        {
-          "number": 90,
-          "chapter_name": "documents[11].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 91,
-          "chapter_name": "documents[12].command",
-          "description": "HELP",
-          "parameters": []
-        },
-        {
-          "number": 92,
-          "chapter_name": "documents[12].keys",
-          "description": "F1",
-          "parameters": []
-        },
-        {
-          "number": 93,
-          "chapter_name": "documents[12].scope",
-          "description": "native TUI",
-          "parameters": []
+          "chapter_name": "Documents, search and help",
+          "description": "Document commands cover creation, opening, saving, search and closure. Save uses Ctrl+S; the application must still report errors and protect modified work.\n\nUse {NEW_DOCUMENT} for new document (native TUI).\n\nUse {OPEN_DOCUMENT} for open document (native TUI).\n\nUse {SAVE_DOCUMENT} for save document (native TUI).\n\nUse {SAVE_DOCUMENT_AS} for save document as (native TUI).\n\nUse {PRINT_DOCUMENT} for print document (native TUI).\n\nUse {FIND} for find (native TUI).\n\nUse {FIND_NEXT / PREVIOUS} for find next / previous (native TUI).\n\nUse {REPLACE} for replace (native TUI).\n\nUse {GO_TO} for go to (line, cell or record in a document; context named in UI).\n\nUse {CLOSE_DOCUMENT} for close document (native TUI).\n\nUse {QUIT_APPLICATION} for quit application (native TUI).\n\nUse {HELP} for help (native TUI).",
+          "parameters": [
+            {
+              "key": "NEW_DOCUMENT",
+              "value": "Ctrl+N"
+            },
+            {
+              "key": "OPEN_DOCUMENT",
+              "value": "Ctrl+O"
+            },
+            {
+              "key": "SAVE_DOCUMENT",
+              "value": "Ctrl+S"
+            },
+            {
+              "key": "SAVE_DOCUMENT_AS",
+              "value": "Ctrl+Shift+S"
+            },
+            {
+              "key": "PRINT_DOCUMENT",
+              "value": "Ctrl+P"
+            },
+            {
+              "key": "FIND",
+              "value": "Ctrl+F"
+            },
+            {
+              "key": "FIND_NEXT / PREVIOUS",
+              "value": "F3 / Shift+F3; aliases Ctrl+G / Ctrl+Shift+G"
+            },
+            {
+              "key": "REPLACE",
+              "value": "Ctrl+H"
+            },
+            {
+              "key": "GO_TO",
+              "value": "Ctrl+L"
+            },
+            {
+              "key": "CLOSE_DOCUMENT",
+              "value": "Ctrl+W"
+            },
+            {
+              "key": "QUIT_APPLICATION",
+              "value": "Ctrl+Q"
+            },
+            {
+              "key": "HELP",
+              "value": "F1"
+            }
+          ]
         },
         {
           "number": 94,
-          "chapter_name": "focus_and_lifecycle[1].command",
-          "description": "FOCUS_NEXT / PREVIOUS_FIELD",
-          "parameters": []
-        },
-        {
-          "number": 95,
-          "chapter_name": "focus_and_lifecycle[1].keys",
-          "description": "Tab / Shift+Tab",
-          "parameters": []
-        },
-        {
-          "number": 96,
-          "chapter_name": "focus_and_lifecycle[1].scope",
-          "description": "forms/dialogs",
-          "parameters": []
-        },
-        {
-          "number": 97,
-          "chapter_name": "focus_and_lifecycle[2].command",
-          "description": "ACTIVATE_OR_TOGGLE",
-          "parameters": []
-        },
-        {
-          "number": 98,
-          "chapter_name": "focus_and_lifecycle[2].keys",
-          "description": "Space",
-          "parameters": []
-        },
-        {
-          "number": 99,
-          "chapter_name": "focus_and_lifecycle[2].scope",
-          "description": "focused button/checkbox",
-          "parameters": []
-        },
-        {
-          "number": 100,
-          "chapter_name": "focus_and_lifecycle[3].command",
-          "description": "ACCEPT_DIALOG",
-          "parameters": []
-        },
-        {
-          "number": 101,
-          "chapter_name": "focus_and_lifecycle[3].keys",
-          "description": "Enter",
-          "parameters": []
-        },
-        {
-          "number": 102,
-          "chapter_name": "focus_and_lifecycle[3].scope",
-          "description": "dialog; editor Enter inserts newline",
-          "parameters": []
-        },
-        {
-          "number": 103,
-          "chapter_name": "focus_and_lifecycle[4].command",
-          "description": "CANCEL_CONTEXT",
-          "parameters": []
-        },
-        {
-          "number": 104,
-          "chapter_name": "focus_and_lifecycle[4].keys",
-          "description": "Esc",
-          "parameters": []
-        },
-        {
-          "number": 105,
-          "chapter_name": "focus_and_lifecycle[4].scope",
-          "description": "innermost active menu/dialog/transient operation",
-          "parameters": []
-        },
-        {
-          "number": 106,
-          "chapter_name": "focus_and_lifecycle[5].command",
-          "description": "OPEN_MENU",
-          "parameters": []
-        },
-        {
-          "number": 107,
-          "chapter_name": "focus_and_lifecycle[5].keys",
-          "description": "F10",
-          "parameters": []
-        },
-        {
-          "number": 108,
-          "chapter_name": "focus_and_lifecycle[5].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 109,
-          "chapter_name": "focus_and_lifecycle[6].command",
-          "description": "OPEN_NAMED_MENU",
-          "parameters": []
-        },
-        {
-          "number": 110,
-          "chapter_name": "focus_and_lifecycle[6].keys",
-          "description": "Alt+underlined letter",
-          "parameters": []
-        },
-        {
-          "number": 111,
-          "chapter_name": "focus_and_lifecycle[6].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 112,
-          "chapter_name": "focus_and_lifecycle[7].command",
-          "description": "FOCUS_NEXT / PREVIOUS_PANE",
-          "parameters": []
-        },
-        {
-          "number": 113,
-          "chapter_name": "focus_and_lifecycle[7].keys",
-          "description": "F6 / Shift+F6",
-          "parameters": []
-        },
-        {
-          "number": 114,
-          "chapter_name": "focus_and_lifecycle[7].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 115,
-          "chapter_name": "focus_and_lifecycle[8].command",
-          "description": "NEXT / PREVIOUS_DOCUMENT",
-          "parameters": []
-        },
-        {
-          "number": 116,
-          "chapter_name": "focus_and_lifecycle[8].keys",
-          "description": "Ctrl+Tab / Ctrl+Shift+Tab",
-          "parameters": []
-        },
-        {
-          "number": 117,
-          "chapter_name": "focus_and_lifecycle[8].scope",
-          "description": "native TUI",
-          "parameters": []
-        },
-        {
-          "number": 118,
-          "chapter_name": "focus_and_lifecycle[9].command",
-          "description": "NEXT / PREVIOUS_APPLICATION",
-          "parameters": []
-        },
-        {
-          "number": 119,
-          "chapter_name": "focus_and_lifecycle[9].keys",
-          "description": "Alt+Tab / Alt+Shift+Tab",
-          "parameters": []
-        },
-        {
-          "number": 120,
-          "chapter_name": "focus_and_lifecycle[9].scope",
-          "description": "system",
-          "parameters": []
-        },
-        {
-          "number": 121,
-          "chapter_name": "focus_and_lifecycle[10].command",
-          "description": "CLOSE_ACTIVE_SURFACE",
-          "parameters": []
-        },
-        {
-          "number": 122,
-          "chapter_name": "focus_and_lifecycle[10].keys",
-          "description": "Alt+F4",
-          "parameters": []
-        },
-        {
-          "number": 123,
-          "chapter_name": "focus_and_lifecycle[10].scope",
-          "description": "system close request with unsaved-work checks",
-          "parameters": []
-        },
-        {
-          "number": 124,
-          "chapter_name": "focus_and_lifecycle[11].command",
-          "description": "OPEN_SURFACE_ACTIONS",
-          "parameters": []
-        },
-        {
-          "number": 125,
-          "chapter_name": "focus_and_lifecycle[11].keys",
-          "description": "Alt+Space",
-          "parameters": []
-        },
-        {
-          "number": 126,
-          "chapter_name": "focus_and_lifecycle[11].scope",
-          "description": "system",
-          "parameters": []
-        },
-        {
-          "number": 127,
-          "chapter_name": "focus_and_lifecycle[12].command",
-          "description": "REQUEST_CANCEL_OPERATION",
-          "parameters": []
-        },
-        {
-          "number": 128,
-          "chapter_name": "focus_and_lifecycle[12].keys",
-          "description": "Ctrl+Break",
-          "parameters": []
-        },
-        {
-          "number": 129,
-          "chapter_name": "focus_and_lifecycle[12].scope",
-          "description": "cooperative cancellation; not immediate forced termination",
-          "parameters": []
+          "chapter_name": "Focus, dialogs and application lifecycle",
+          "description": "Focus and lifecycle commands are dispatched to the appropriate control, dialog, application or system. Cooperative cancellation uses Ctrl+Break; it does not imply forced termination.\n\nUse {FOCUS_NEXT / PREVIOUS_FIELD} for focus next / previous field (forms/dialogs).\n\nUse {ACTIVATE_OR_TOGGLE} for activate or toggle (focused button/checkbox).\n\nUse {ACCEPT_DIALOG} for accept dialog (dialog; editor Enter inserts newline).\n\nUse {CANCEL_CONTEXT} for cancel context (innermost active menu/dialog/transient operation).\n\nUse {OPEN_MENU} for open menu (native TUI).\n\nUse {OPEN_NAMED_MENU} for open named menu (native TUI).\n\nUse {FOCUS_NEXT / PREVIOUS_PANE} for focus next / previous pane (native TUI).\n\nUse {NEXT / PREVIOUS_DOCUMENT} for next / previous document (native TUI).\n\nUse {NEXT / PREVIOUS_APPLICATION} for next / previous application (system).\n\nUse {CLOSE_ACTIVE_SURFACE} for close active surface (system close request with unsaved-work checks).\n\nUse {OPEN_SURFACE_ACTIONS} for open surface actions (system).\n\nUse {REQUEST_CANCEL_OPERATION} for request cancel operation (cooperative cancellation; not immediate forced termination).",
+          "parameters": [
+            {
+              "key": "FOCUS_NEXT / PREVIOUS_FIELD",
+              "value": "Tab / Shift+Tab"
+            },
+            {
+              "key": "ACTIVATE_OR_TOGGLE",
+              "value": "Space"
+            },
+            {
+              "key": "ACCEPT_DIALOG",
+              "value": "Enter"
+            },
+            {
+              "key": "CANCEL_CONTEXT",
+              "value": "Esc"
+            },
+            {
+              "key": "OPEN_MENU",
+              "value": "F10"
+            },
+            {
+              "key": "OPEN_NAMED_MENU",
+              "value": "Alt+underlined letter"
+            },
+            {
+              "key": "FOCUS_NEXT / PREVIOUS_PANE",
+              "value": "F6 / Shift+F6"
+            },
+            {
+              "key": "NEXT / PREVIOUS_DOCUMENT",
+              "value": "Ctrl+Tab / Ctrl+Shift+Tab"
+            },
+            {
+              "key": "NEXT / PREVIOUS_APPLICATION",
+              "value": "Alt+Tab / Alt+Shift+Tab"
+            },
+            {
+              "key": "CLOSE_ACTIVE_SURFACE",
+              "value": "Alt+F4"
+            },
+            {
+              "key": "OPEN_SURFACE_ACTIONS",
+              "value": "Alt+Space"
+            },
+            {
+              "key": "REQUEST_CANCEL_OPERATION",
+              "value": "Ctrl+Break"
+            }
+          ]
         },
         {
           "number": 130,
-          "chapter_name": "behavior.selection",
-          "description": "Fixed anchor and moving caret. Plain Left/Right collapses to the corresponding selection edge without an extra step; vertical motion retains the preferred column. Home/End target displayed-line boundaries.",
-          "parameters": []
-        },
-        {
-          "number": 131,
-          "chapter_name": "behavior.boundaries",
-          "description": "Shared word-boundary implementation groups letters, digits and underscore; freeze punctuation/whitespace traversal in conformance examples. Plain-text paragraphs are separated by blank lines; structured editors use paragraph objects.",
-          "parameters": []
-        },
-        {
-          "number": 132,
-          "chapter_name": "behavior.clipboard",
-          "description": "Copy/Cut without a selection does nothing. Cut removes data only after clipboard transfer succeeds. Delete preserves clipboard. Typing or pasting replaces a selection as one undoable operation; allocation failure must not partially destroy selected content.",
-          "parameters": []
-        },
-        {
-          "number": 133,
-          "chapter_name": "behavior.saving",
-          "description": "Report Save success only after successful completion; retain modified state on failure. Close offers Save/Discard/Cancel for modified content; Quit checks every modified document.",
-          "parameters": []
-        },
-        {
-          "number": 134,
-          "chapter_name": "behavior.contexts",
-          "description": "Spreadsheet navigation selects cells until cell-edit mode, which uses text rules. Editor Tab indents and Shift+Tab unindents; form Tab traverses focus. F6 leaves a multiline editor. Esc acts on only one innermost context per press.",
-          "parameters": []
-        },
-        {
-          "number": 135,
-          "chapter_name": "behavior.overwrite",
-          "description": "Insertion mode by default. Overwrite is an explicit visibly indicated option; bare Insert does not toggle it by default.",
-          "parameters": []
-        },
-        {
-          "number": 136,
-          "chapter_name": "behavior.optional_commands",
-          "description": "Formatting Ctrl+B/I/U is optional in capable editors. Whole-line deletion, duplication, transpose and rectangular selection remain menu commands outside the common shortcut core.",
-          "parameters": []
-        },
-        {
-          "number": 137,
-          "chapter_name": "behavior.platform_limits",
-          "description": "Aurelia remains single-foreground. Alt+Tab exposes the supported launcher/switch mechanism and does not promise concurrent applications or preserved running state. Query lifecycle capabilities on each host.",
+          "chapter_name": "Editing behaviour and ownership of state",
+          "description": "Shared behaviour defines selection boundaries, clipboard failure handling, saving and context-sensitive keys. Resource limits and the single-foreground Aurelia model still apply.\n\nFixed anchor and moving caret. Plain Left/Right collapses to the corresponding selection edge without an extra step; vertical motion retains the preferred column. Home/End target displayed-line boundaries.\n\nShared word-boundary implementation groups letters, digits and underscore; freeze punctuation/whitespace traversal in conformance examples. Plain-text paragraphs are separated by blank lines; structured editors use paragraph objects.\n\nCopy/Cut without a selection does nothing. Cut removes data only after clipboard transfer succeeds. Delete preserves clipboard. Typing or pasting replaces a selection as one undoable operation; allocation failure must not partially destroy selected content.\n\nReport Save success only after successful completion; retain modified state on failure. Close offers Save/Discard/Cancel for modified content; Quit checks every modified document.\n\nSpreadsheet navigation selects cells until cell-edit mode, which uses text rules. Editor Tab indents and Shift+Tab unindents; form Tab traverses focus. F6 leaves a multiline editor. Esc acts on only one innermost context per press.\n\nInsertion mode by default. Overwrite is an explicit visibly indicated option; bare Insert does not toggle it by default.\n\nFormatting Ctrl+B/I/U is optional in capable editors. Whole-line deletion, duplication, transpose and rectangular selection remain menu commands outside the common shortcut core.\n\nAurelia remains single-foreground. Alt+Tab exposes the supported launcher/switch mechanism and does not promise concurrent applications or preserved running state. Query lifecycle capabilities on each host.",
           "parameters": []
         },
         {
           "number": 138,
-          "chapter_name": "terminal_compatibility.selection",
-          "description": "Explicit terminal profile; no selection-dependent change between Ctrl+C Copy and Interrupt.",
-          "parameters": []
-        },
-        {
-          "number": 139,
-          "chapter_name": "terminal_compatibility.bindings[1].command",
-          "description": "INTERRUPT",
-          "parameters": []
-        },
-        {
-          "number": 140,
-          "chapter_name": "terminal_compatibility.bindings[1].keys",
-          "description": "Ctrl+C",
-          "parameters": []
-        },
-        {
-          "number": 141,
-          "chapter_name": "terminal_compatibility.bindings[1].scope",
-          "description": "when terminal processing enables it",
-          "parameters": []
-        },
-        {
-          "number": 142,
-          "chapter_name": "terminal_compatibility.bindings[2].command",
-          "description": "SUSPEND",
-          "parameters": []
-        },
-        {
-          "number": 143,
-          "chapter_name": "terminal_compatibility.bindings[2].keys",
-          "description": "Ctrl+Z",
-          "parameters": []
-        },
-        {
-          "number": 144,
-          "chapter_name": "terminal_compatibility.bindings[2].scope",
-          "description": "if supported/configured",
-          "parameters": []
-        },
-        {
-          "number": 145,
-          "chapter_name": "terminal_compatibility.bindings[3].command",
-          "description": "EOF_OR_APPLICATION_INPUT",
-          "parameters": []
-        },
-        {
-          "number": 146,
-          "chapter_name": "terminal_compatibility.bindings[3].keys",
-          "description": "Ctrl+D",
-          "parameters": []
-        },
-        {
-          "number": 147,
-          "chapter_name": "terminal_compatibility.bindings[3].scope",
-          "description": "depends on terminal mode and pending input; not unconditional Quit",
-          "parameters": []
-        },
-        {
-          "number": 148,
-          "chapter_name": "terminal_compatibility.bindings[4].command",
-          "description": "READLINE_LINE_START / END",
-          "parameters": []
-        },
-        {
-          "number": 149,
-          "chapter_name": "terminal_compatibility.bindings[4].keys",
-          "description": "Ctrl+A / Ctrl+E",
-          "parameters": []
-        },
-        {
-          "number": 150,
-          "chapter_name": "terminal_compatibility.bindings[4].scope",
-          "description": "Readline-compatible line editor",
-          "parameters": []
-        },
-        {
-          "number": 151,
-          "chapter_name": "terminal_compatibility.bindings[5].command",
-          "description": "READLINE_DELETE_PREVIOUS_WORD",
-          "parameters": []
-        },
-        {
-          "number": 152,
-          "chapter_name": "terminal_compatibility.bindings[5].keys",
-          "description": "Ctrl+W",
-          "parameters": []
-        },
-        {
-          "number": 153,
-          "chapter_name": "terminal_compatibility.bindings[5].scope",
-          "description": "Readline-compatible line editor",
-          "parameters": []
-        },
-        {
-          "number": 154,
-          "chapter_name": "terminal_compatibility.bindings[6].command",
-          "description": "READLINE_YANK",
-          "parameters": []
-        },
-        {
-          "number": 155,
-          "chapter_name": "terminal_compatibility.bindings[6].keys",
-          "description": "Ctrl+Y",
-          "parameters": []
-        },
-        {
-          "number": 156,
-          "chapter_name": "terminal_compatibility.bindings[6].scope",
-          "description": "Readline-compatible line editor",
-          "parameters": []
-        },
-        {
-          "number": 157,
-          "chapter_name": "terminal_compatibility.bindings[7].command",
-          "description": "COPY_TERMINAL_VIEW",
-          "parameters": []
-        },
-        {
-          "number": 158,
-          "chapter_name": "terminal_compatibility.bindings[7].keys",
-          "description": "Ctrl+Shift+C",
-          "parameters": []
-        },
-        {
-          "number": 159,
-          "chapter_name": "terminal_compatibility.bindings[7].scope",
-          "description": "terminal viewer",
-          "parameters": []
-        },
-        {
-          "number": 160,
-          "chapter_name": "terminal_compatibility.bindings[8].command",
-          "description": "PASTE_TERMINAL",
-          "parameters": []
-        },
-        {
-          "number": 161,
-          "chapter_name": "terminal_compatibility.bindings[8].keys",
-          "description": "Ctrl+Shift+V",
-          "parameters": []
-        },
-        {
-          "number": 162,
-          "chapter_name": "terminal_compatibility.bindings[8].scope",
-          "description": "terminal viewer",
-          "parameters": []
-        },
-        {
-          "number": 163,
-          "chapter_name": "terminal_compatibility.bindings[9].command",
-          "description": "HISTORY_PREVIOUS / NEXT",
-          "parameters": []
-        },
-        {
-          "number": 164,
-          "chapter_name": "terminal_compatibility.bindings[9].keys",
-          "description": "Up / Down",
-          "parameters": []
-        },
-        {
-          "number": 165,
-          "chapter_name": "terminal_compatibility.bindings[9].scope",
-          "description": "supported shell prompt",
-          "parameters": []
-        },
-        {
-          "number": 166,
-          "chapter_name": "terminal_compatibility.bindings[10].command",
-          "description": "HISTORY_REVERSE_SEARCH",
-          "parameters": []
-        },
-        {
-          "number": 167,
-          "chapter_name": "terminal_compatibility.bindings[10].keys",
-          "description": "Ctrl+R",
-          "parameters": []
-        },
-        {
-          "number": 168,
-          "chapter_name": "terminal_compatibility.bindings[10].scope",
-          "description": "supported shell prompt",
-          "parameters": []
-        },
-        {
-          "number": 169,
-          "chapter_name": "terminal_compatibility.flow_control",
-          "description": "Native TUI Ctrl+S/Q are Save/Quit and must not be intercepted by software flow control. Terminal sessions may preserve configured XON/XOFF behavior.",
-          "parameters": []
-        },
-        {
-          "number": 170,
-          "chapter_name": "terminal_compatibility.legacy_profiles",
-          "description": "Optional WordStar/Emacs profiles are whole opt-in keymaps, not conflicting default aliases. Legacy CP/M control-character semantics are preserved outside native TUI contexts.",
-          "parameters": []
+          "chapter_name": "Terminal compatibility profiles",
+          "description": "Terminal sessions may assign control keys to interrupt, suspend or line editing. These are explicit terminal profiles, separate from the native TUI keymap. Terminal copy uses Ctrl+Shift+C.\n\nNative TUI Ctrl+S/Q are Save/Quit and must not be intercepted by software flow control. Terminal sessions may preserve configured XON/XOFF behavior.\n\nOptional WordStar/Emacs profiles are whole opt-in keymaps, not conflicting default aliases. Legacy CP/M control-character semantics are preserved outside native TUI contexts.\n\nUse {INTERRUPT} for interrupt (when terminal processing enables it).\n\nUse {SUSPEND} for suspend (if supported/configured).\n\nUse {EOF_OR_APPLICATION_INPUT} for eof or application input (depends on terminal mode and pending input; not unconditional Quit).\n\nUse {READLINE_LINE_START / END} for readline line start / end (Readline-compatible line editor).\n\nUse {READLINE_DELETE_PREVIOUS_WORD} for readline delete previous word (Readline-compatible line editor).\n\nUse {READLINE_YANK} for readline yank (Readline-compatible line editor).\n\nUse {COPY_TERMINAL_VIEW} for copy terminal view (terminal viewer).\n\nUse {PASTE_TERMINAL} for paste terminal (terminal viewer).\n\nUse {HISTORY_PREVIOUS / NEXT} for history previous / next (supported shell prompt).\n\nUse {HISTORY_REVERSE_SEARCH} for history reverse search (supported shell prompt).\n\nExplicit terminal profile; no selection-dependent change between Ctrl+C Copy and Interrupt.",
+          "parameters": [
+            {
+              "key": "INTERRUPT",
+              "value": "Ctrl+C"
+            },
+            {
+              "key": "SUSPEND",
+              "value": "Ctrl+Z"
+            },
+            {
+              "key": "EOF_OR_APPLICATION_INPUT",
+              "value": "Ctrl+D"
+            },
+            {
+              "key": "READLINE_LINE_START / END",
+              "value": "Ctrl+A / Ctrl+E"
+            },
+            {
+              "key": "READLINE_DELETE_PREVIOUS_WORD",
+              "value": "Ctrl+W"
+            },
+            {
+              "key": "READLINE_YANK",
+              "value": "Ctrl+Y"
+            },
+            {
+              "key": "COPY_TERMINAL_VIEW",
+              "value": "Ctrl+Shift+C"
+            },
+            {
+              "key": "PASTE_TERMINAL",
+              "value": "Ctrl+Shift+V"
+            },
+            {
+              "key": "HISTORY_PREVIOUS / NEXT",
+              "value": "Up / Down"
+            },
+            {
+              "key": "HISTORY_REVERSE_SEARCH",
+              "value": "Ctrl+R"
+            }
+          ]
         },
         {
           "number": 171,
-          "chapter_name": "input_contract.keyboard_ref",
-          "description": "device.flexibus_keyboard",
-          "parameters": []
-        },
-        {
-          "number": 172,
-          "chapter_name": "input_contract.transport_ref",
-          "description": "technology.flexibus",
-          "parameters": []
-        },
-        {
-          "number": 173,
-          "chapter_name": "input_contract.api_ref",
-          "description": "technology.logix_c_api",
-          "parameters": []
-        },
-        {
-          "number": 174,
-          "chapter_name": "input_contract.events",
-          "description": "Key identity plus Ctrl/Shift/Alt modifier state; text translation is separate. Preserve Ctrl+Shift navigation and Ctrl+Shift letter distinctions.",
-          "parameters": []
-        },
-        {
-          "number": 175,
-          "chapter_name": "input_contract.required_controls[1]",
-          "description": "Arrows",
-          "parameters": []
-        },
-        {
-          "number": 176,
-          "chapter_name": "input_contract.required_controls[2]",
-          "description": "Home / End",
-          "parameters": []
-        },
-        {
-          "number": 177,
-          "chapter_name": "input_contract.required_controls[3]",
-          "description": "Page Up / Page Down",
-          "parameters": []
-        },
-        {
-          "number": 178,
-          "chapter_name": "input_contract.required_controls[4]",
-          "description": "Separate Backspace / Delete",
-          "parameters": []
-        },
-        {
-          "number": 179,
-          "chapter_name": "input_contract.required_controls[5]",
-          "description": "Ctrl / Shift / Alt",
-          "parameters": []
-        },
-        {
-          "number": 180,
-          "chapter_name": "input_contract.required_controls[6]",
-          "description": "Function keys",
-          "parameters": []
-        },
-        {
-          "number": 181,
-          "chapter_name": "input_contract.required_controls[7]",
-          "description": "Break",
-          "parameters": []
-        },
-        {
-          "number": 182,
-          "chapter_name": "input_contract.terminal_fallback",
-          "description": "Traditional byte terminals can conflate Tab/Ctrl+I, Enter/Ctrl+M, Esc/Ctrl+[, Backspace/Ctrl+H and shifted Ctrl letters. Advertise capabilities and offer menu equivalents rather than ambiguous shortcut promises.",
-          "parameters": []
-        },
-        {
-          "number": 183,
-          "chapter_name": "input_contract.qualification",
-          "description": "Existing keyboard exact layout, event encoding, rollover and firmware remain engineering gates; required controls are conformance requirements, not a qualified new hardware revision.",
-          "parameters": []
-        },
-        {
-          "number": 184,
-          "chapter_name": "related_technology_refs[1]",
-          "description": "technology.logix_tui_standard",
-          "parameters": []
-        },
-        {
-          "number": 185,
-          "chapter_name": "related_technology_refs[2]",
-          "description": "technology.logix_c_api",
-          "parameters": []
-        },
-        {
-          "number": 186,
-          "chapter_name": "related_technology_refs[3]",
-          "description": "technology.logix_display_api",
-          "parameters": []
-        },
-        {
-          "number": 187,
-          "chapter_name": "related_technology_refs[4]",
-          "description": "technology.flexibus",
-          "parameters": []
+          "chapter_name": "Keyboard events and conformance",
+          "description": "The keyboard is {Input contract keyboard reference} and transport uses {Input contract transport reference}. Events must preserve key identity and modifiers; byte-terminal fallbacks must advertise limitations instead of promising ambiguous shortcuts.\n\nKey identity plus Ctrl/Shift/Alt modifier state; text translation is separate. Preserve Ctrl+Shift navigation and Ctrl+Shift letter distinctions.\n\nTraditional byte terminals can conflate Tab/Ctrl+I, Enter/Ctrl+M, Esc/Ctrl+[, Backspace/Ctrl+H and shifted Ctrl letters. Advertise capabilities and offer menu equivalents rather than ambiguous shortcut promises.\n\nExisting keyboard exact layout, event encoding, rollover and firmware remain engineering gates; required controls are conformance requirements, not a qualified new hardware revision.\n\nInput services use {Input contract API reference}. A conforming keyboard provides {Input contract required controls}. The shared input and display contracts are documented in {Related technology references}.",
+          "parameters": [
+            {
+              "key": "Input contract keyboard reference",
+              "value": "device.flexibus_keyboard"
+            },
+            {
+              "key": "Input contract transport reference",
+              "value": "technology.flexibus"
+            },
+            {
+              "key": "Input contract API reference",
+              "value": "technology.logix_c_api"
+            },
+            {
+              "key": "Input contract required controls",
+              "value": "Arrows, Home / End, Page Up / Page Down, Separate Backspace / Delete, Ctrl / Shift / Alt, Function keys, Break"
+            },
+            {
+              "key": "Related technology references",
+              "value": "technology.logix_tui_standard, technology.logix_c_api, technology.logix_display_api, technology.flexibus"
+            }
+          ]
         }
       ]
     },
