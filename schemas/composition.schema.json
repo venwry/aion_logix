@@ -127,7 +127,8 @@
             "number",
             "null"
           ],
-          "exclusiveMinimum": 0
+          "exclusiveMinimum": 0,
+          "description": "Number of complete referenced items; a kit or assembly counts as one defined item. Without a legacy unit, a known quantity must be a positive integer. Null retains an explicitly unknown quantity."
         },
         "unit": {
           "enum": [
@@ -137,7 +138,9 @@
             "kg",
             "g",
             "litre"
-          ]
+          ],
+          "deprecated": true,
+          "description": "Transitional legacy unit retained while removal proposals await approval. Omit from new compositions: quantity counts complete units of the referenced item, including any kit or assembly defined there."
         },
         "supply_condition": {
           "oneOf": [
@@ -170,7 +173,9 @@
               ],
               "additionalProperties": false
             }
-          ]
+          ],
+          "deprecated": true,
+          "description": "Transitional legacy supply condition retained while removal proposals await approval. Omit from new compositions: every listed item is always required. Existing explicit conditions remain effective until their removal is authorized."
         },
         "connection": {
           "oneOf": [
@@ -259,9 +264,7 @@
       "required": [
         "id",
         "target",
-        "quantity",
-        "unit",
-        "supply_condition"
+        "quantity"
       ],
       "additionalProperties": false
     },

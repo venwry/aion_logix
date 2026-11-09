@@ -13,8 +13,10 @@ export function resolveComposition(records, id, versionNumber) {
   for(const line of version.composition_definition){
    const target=index.get(line.target.record_id);if(!target)throw Error('Unresolved composition reference '+line.target.record_id);
    const quantity=multiplier===null||line.quantity===null?null:multiplier*line.quantity;
-   const conditionsHere=[...conditions,...(line.supply_condition.kind==='conditional'?[line.supply_condition.description]:[])];
-   const item={record_id:target.id,quantity,unit:line.unit,conditions:conditionsHere,path:next,line_id:line.id};
+   // New compositions list required items only. Preserve explicit legacy
+   // conditions and units while proposals await approval and in old snapshots.
+   const conditionsHere=[...conditions,...(line.supply_condition?.kind==='conditional'?[line.supply_condition.description]:[])];
+   const item={record_id:target.id,quantity,...(line.unit===undefined?{}:{unit:line.unit}),conditions:conditionsHere,path:next,line_id:line.id};
    if(target.id.startsWith('base_part.'))leaves.push(item);
    else if(target.id.startsWith('product.')&&target.kind==='service')services.push(item);
    else walk(target.id,line.target.version_number,quantity,conditionsHere,next);
@@ -53,7 +55,7 @@ export function validateCompositions(records){
     if(!child){fail(r.id+': unresolved composition reference '+l.target.record_id);continue;}
     if(child.id.startsWith('product.')&&child.kind!=='service')fail(r.id+': commercial product nesting is forbidden');
     if(child.kind==='service'&&!r.id.startsWith('product.'))fail(r.id+': service cannot be a device material');
-    if(['each','set'].includes(l.unit)&&l.quantity!==null&&!Number.isInteger(l.quantity))fail(r.id+': count quantities must be integers');
+    if((l.unit===undefined||['each','set'].includes(l.unit))&&l.quantity!==null&&!Number.isInteger(l.quantity))fail(r.id+': count quantities must be integers');
     if(l.placements){const qty=l.placements.reduce((s,p)=>s+p.quantity,0);if(l.quantity!==null&&qty!==l.quantity)fail(r.id+': placement quantity differs from supplied quantity');}
     const connections=[...(l.connection?.host_line_id?[{...l.connection,quantity:l.quantity}]:[]),...(l.placements||[])];
     for(const c of connections){const host=lines.get(c.host_line_id);if(!host){fail(r.id+': missing connection host');continue;}
