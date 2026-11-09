@@ -10,6 +10,8 @@ test('refined FlexiBUS review uses natural prose, one metadata list and no flag-
  await page.goto('/code/changes-confirm.html#'+flex.id);await expect(page.locator('body')).toHaveAttribute('data-ready','true');await expect(page.getByRole('button',{name:'Authorize',exact:true})).toBeEnabled();
  await page.getByLabel('Comparison',{exact:true}).selectOption('details');const after=page.locator('.comparison-column').nth(1),first=after.locator('[data-chapter-number="1"]');
  await expect(first.locator('.specification-description')).toContainText('Devices support identification and can be attached dynamically while the bus is inactive.');
+ await expect(first.locator('.specification-parameters')).toBeHidden();await first.getByRole('button').click();await expect(first.locator('.specification-parameters')).toBeVisible();await expect(page.locator('.comparison-column').first().locator('.specification-parameters').first()).toBeHidden();
+ await expect(after.locator('[data-chapter-number="41"] button')).toHaveCount(0);
  await expect(first.locator('.specification-parameters tbody tr')).toHaveCount(2);
  await expect(first.locator('.specification-parameters')).toContainText('DEVICE ID, DEVICE TYPE, VENDOR, PROTOCOL VERSION, POWER REQUIREMENTS');
  await expect(after.locator('.specification-description')).not.toContainText(['Identification is supported: true.']);
