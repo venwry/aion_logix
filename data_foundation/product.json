@@ -4004,7 +4004,7 @@
       "id": "product.artemis_budget_128_hdd",
       "name": "Artemis 128 — Budget Hard-Disk Office",
       "kind": "bundle",
-      "description": "Artemis 128 — Budget Hard-Disk Office",
+      "description": "Artemis Budget Hard-Disk Office package, introduced at COMDEX 1980, with the defined computer, display, input devices, system and Business Tools cartridges, and one year of Regular Support. Abacus 3 is separately selectable at launch. Networking becomes an optional later addition, subject to software compatibility and qualification.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -4014,12 +4014,14 @@
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Product definition revision 1",
+          "description": "COMDEX 1980 launch package; Abacus 3 is separately selectable and networking is not yet offered.",
           "effective_from": {
-            "kind": "unknown"
+            "kind": "event",
+            "event_id": "event.software32"
           },
           "effective_until": {
-            "kind": "unknown"
+            "kind": "event",
+            "event_id": "event.network_launch"
           },
           "technical_definition": {},
           "composition_definition": [
@@ -4219,9 +4221,10 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "Included application software",
+              "role": "Optional application selected with the package",
               "supply_condition": {
-                "kind": "always"
+                "kind": "conditional",
+                "description": "Supply only when the customer selects the separately offered Abacus 3 edition; it is not included in the base package."
               },
               "requirements": [],
               "element_type": "attached_product"
@@ -4237,12 +4240,13 @@
         },
         {
           "version_number": 2,
-          "description": "Product definition revision 2",
+          "description": "Network-capable ordering revision; network hardware and Abacus 3 are separately selected options.",
           "effective_from": {
-            "kind": "unknown"
+            "kind": "event",
+            "event_id": "event.network_launch"
           },
           "effective_until": {
-            "kind": "unknown"
+            "kind": "open"
           },
           "technical_definition": {},
           "composition_definition": [
@@ -4326,9 +4330,10 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "",
+              "role": "Optional network interface; network software is not included in this base package",
               "supply_condition": {
-                "kind": "always"
+                "kind": "conditional",
+                "description": "Supply only when the customer selects the network option. Network operation requires a separately selected compatible software edition and a qualified configuration."
               },
               "requirements": [],
               "element_type": "connected_device",
@@ -4461,9 +4466,10 @@
               },
               "quantity": 1,
               "unit": "each",
-              "role": "Included application software",
+              "role": "Optional application selected with the package",
               "supply_condition": {
-                "kind": "always"
+                "kind": "conditional",
+                "description": "Supply only when the customer selects the separately offered Abacus 3 edition; it is not included in the base package."
               },
               "requirements": [],
               "element_type": "attached_product"
@@ -4477,7 +4483,9 @@
             }
           ]
         }
-      ]
+      ],
+      "launch_campaign_id": "campaign.comdex1980",
+      "launch_event_id": "event.software32"
     },
     {
       "id": "product.proposed_aurelia_office",
@@ -6430,15 +6438,28 @@
     },
     {
       "id": "product.ram_64kb_module",
-      "name": "Logix 64 KB RAM module",
+      "name": "Logix 64 KB RAM replacement module",
       "kind": "hardware",
-      "description": "Logix 64 KB RAM module",
+      "description": "One replacement RAM module for a qualified Artemis memory bank, supplied with packout and installation instructions. This offering does not supply a complete expansion bank; the canonical device defines matched-pair installation and qualification requirements.",
       "provider_actor_ids": [
         "actor.logix"
       ],
       "technology_ids": [],
-      "specification": [],
-      "offering_category": "expansion_kit",
+      "specification": [
+        {
+          "number": 1,
+          "type": "package_scope",
+          "description": "The package supplies one module for replacement within an existing compatible bank.",
+          "value": "One replacement module"
+        },
+        {
+          "number": 2,
+          "type": "eligibility",
+          "description": "Use the module only within a qualified matching pair; one module alone does not form an installable bank.",
+          "value": "Qualified matching pair required"
+        }
+      ],
+      "offering_category": "peripheral",
       "composition_history": [
         {
           "version_number": 1,
@@ -6489,7 +6510,9 @@
             }
           ]
         }
-      ]
+      ],
+      "launch_campaign_id": "campaign.ncc1980",
+      "launch_event_id": "event.artemis_launch"
     },
     {
       "id": "product.ram_256kb_bank",
@@ -10210,104 +10233,12 @@
       "id": "product.aion_c_ide",
       "name": "AION C IDE (AIONix edition)",
       "kind": "software",
-      "description": "AION C IDE (AIONix edition)",
+      "description": "AION C IDE, supplied as the AIONix edition for Artemis-hosted development. The delivered software edition defines the supported hosts, target builds and development tools.",
       "provider_actor_ids": [
         "actor.aion"
       ],
-      "technology_ids": [
-        "technology.logix_c_target_contract",
-        "technology.logix_c_api",
-        "technology.logix_display_api",
-        "technology.aion_c_portability_framework",
-        "technology.logix_tui_standard",
-        "technology.logix_tui_keyboard_standard"
-      ],
-      "specification": [
-        {
-          "number": 1,
-          "type": "features[1]",
-          "description": "C compiler",
-          "value": "C compiler"
-        },
-        {
-          "number": 2,
-          "type": "features[2]",
-          "description": "optimizer",
-          "value": "optimizer"
-        },
-        {
-          "number": 3,
-          "type": "features[3]",
-          "description": "IDE",
-          "value": "IDE"
-        },
-        {
-          "number": 4,
-          "type": "features[4]",
-          "description": "shared portability libraries/templates for Aurelia and Artemis",
-          "value": "shared portability libraries/templates for Aurelia and Artemis"
-        },
-        {
-          "number": 5,
-          "type": "features[5]",
-          "description": "support for adapting applications to a multitasking C environment",
-          "value": "support for adapting applications to a multitasking C environment"
-        },
-        {
-          "number": 6,
-          "type": "features[6]",
-          "description": "Native ERA and cross Z80 backends",
-          "value": "Native ERA and cross Z80 backends"
-        },
-        {
-          "number": 7,
-          "type": "features[7]",
-          "description": "Isolated target libraries and startup code",
-          "value": "Isolated target libraries and startup code"
-        },
-        {
-          "number": 8,
-          "type": "features[8]",
-          "description": "Named build profiles and separate output directories",
-          "value": "Named build profiles and separate output directories"
-        },
-        {
-          "number": 9,
-          "type": "features[9]",
-          "description": "Disk-image and cartridge-image generation",
-          "value": "Disk-image and cartridge-image generation"
-        },
-        {
-          "number": 10,
-          "type": "features[10]",
-          "description": "Memory-budget and portability reports",
-          "value": "Memory-budget and portability reports"
-        },
-        {
-          "number": 11,
-          "type": "features[11]",
-          "description": "Regression profiles for 40-column, 80-column and monochrome displays",
-          "value": "Regression profiles for 40-column, 80-column and monochrome displays"
-        },
-        {
-          "number": 12,
-          "type": "execution_target",
-          "description": "era_aionix",
-          "value": "era_aionix"
-        },
-        {
-          "number": 13,
-          "type": "platform_support[1].computer_ref",
-          "description": "computer.artemis",
-          "value": "computer.artemis"
-        },
-        {
-          "number": 14,
-          "type": "platform_support[2].computer_ref",
-          "description": "computer.artemis_pro",
-          "value": "computer.artemis_pro"
-        }
-      ],
+      "technology_ids": [],
+      "specification": [],
       "offering_category": "software",
       "composition_history": [
         {
@@ -10342,7 +10273,9 @@
       ],
       "technical_identity": {
         "record_id": "software_edition.aion_c_ide"
-      }
+      },
+      "launch_campaign_id": "campaign.ncc1980",
+      "launch_event_id": "event.artemis_launch"
     },
     {
       "id": "product.artemis_sdk",
