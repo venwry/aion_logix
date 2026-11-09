@@ -1,0 +1,95 @@
+{
+  "source_commit": "c36fbe7eb170fbf74b6542c6ed5c9ccd634898e5",
+  "instruction": "Remove process-step subject_ids already represented in inputs or outcomes; add the specified Abacus technology and CP/M networking outcomes before removing those step references.",
+  "changes": [
+    {
+      "change_id": "change.step_subject_cleanup_open_compatibility",
+      "record_id": "process.open_compatibility",
+      "removals": [
+        {
+          "step_number": 2,
+          "removed_subject_ids": [
+            "technology.logix_tui_standard",
+            "technology.flexibus",
+            "technology.logix_c_api",
+            "technology.logix_display_api",
+            "technology.logix_digital_video",
+            "technology.aurelia_video_profile"
+          ]
+        }
+      ],
+      "added_outcomes": []
+    },
+    {
+      "change_id": "change.step_subject_cleanup_comdex1979_campaign",
+      "record_id": "process.comdex1979_campaign",
+      "removals": [
+        {
+          "step_number": 1,
+          "removed_subject_ids": [
+            "device.base_computer.aurelia_plus"
+          ]
+        }
+      ],
+      "added_outcomes": []
+    },
+    {
+      "change_id": "change.step_subject_cleanup_native_abacus_pulse_development",
+      "record_id": "process.native_abacus_pulse_development",
+      "removals": [
+        {
+          "step_number": 1,
+          "removed_subject_ids": [
+            "product.abacus_3",
+            "product.pulse_3",
+            "technology.abacus_formatted_tables",
+            "technology.abacus_embedded_pulse"
+          ]
+        }
+      ],
+      "added_outcomes": [
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "The native application generation implements formatted tables and embedded Pulse integration in Abacus, covering bounded columnar storage, calculated columns and lookups, read-only SQL queries and graphical reporting within documented resource limits.",
+          "subject_ids": [
+            "technology.abacus_formatted_tables",
+            "technology.abacus_embedded_pulse"
+          ]
+        }
+      ]
+    },
+    {
+      "change_id": "change.step_subject_cleanup_artemis_networking_development",
+      "record_id": "process.artemis_networking_development",
+      "removals": [
+        {
+          "step_number": 1,
+          "removed_subject_ids": [
+            "technology.logix_tcpip_lan",
+            "software_edition.aionix_server",
+            "software_edition.cpm_aurelia_networking"
+          ]
+        },
+        {
+          "step_number": 2,
+          "removed_subject_ids": [
+            "software_edition.bpi_client_server",
+            "software_edition.bpi_client_server.era_client",
+            "software_edition.bpi_client_server.era_server"
+          ]
+        }
+      ],
+      "added_outcomes": [
+        {
+          "number": 3,
+          "type": "deliverable",
+          "description": "The CP/M Aurelia networking edition supplies the TCP/IP stack, LogixLAN adapter driver, network configuration tools and BPI client networking API for supported Aurelia and Aurelia+ upgrades. Availability remains subject to configuration-specific qualification and the programme’s shipment gates.",
+          "subject_ids": [
+            "software_edition.cpm_aurelia_networking"
+          ]
+        }
+      ]
+    }
+  ]
+}
