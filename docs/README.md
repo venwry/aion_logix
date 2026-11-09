@@ -10,6 +10,7 @@ These guides describe the repository and application as they work now. The schem
 | [Development workflow](DEVELOPMENT_WORKFLOW.md) | Schema support, data review and later calculations. |
 | [Model guide](data_model/MODEL_GUIDE.md) | Entity responsibilities, ownership and compatibility rules. |
 | [Reference rules](data_model/REFERENCE_RULES.md) | Direct dependencies, deliverables, launch links and justified exceptions. |
+| [Catalogue validation](data_model/CATALOGUE_VALIDATION.md) | Optional strict product profile, migration checks and activation order. |
 | [Foundation specification](data_model/FOUNDATION_SPECIFICATION.md) | Generated attribute-level schemas and allowed references. |
 | [Storytelling file reference](data_model/STORYTELLING_FILE_REFERENCE.md) | Authorization, proposals, feedback and editorial evidence. |
 | [Render setup](RENDER_SETUP.md) | Deployment, credentials, local checks and static publishing. |

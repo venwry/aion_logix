@@ -51,4 +51,6 @@ Migration-evidence tests live in `tests/migration/`; run them when changing arch
 
 Validate grouped proposals through the real transaction code in memory; never use a production authorization endpoint for tests. Verify no unintended foundation or authorization changes occurred. Regenerate `docs/data_model/FOUNDATION_SPECIFICATION.md` after schema changes. Generated viewer assets are ignored by Git and must be included in static publication.
 
+The optional `npm run validate:catalogue` checks the stricter catalogue target against the live foundation; it may fail while migration proposals remain pending. It is separate from the active schema and saving service. See [catalogue validation](data_model/CATALOGUE_VALIDATION.md) for proposal simulation and the required activation order.
+
 The maintained branch is `main`. Publish the authorized implementation and reviewable proposals there, leaving content authorization to the author. Check the resulting remote commit. Frontend, backend and `AION_BRANCH` must agree with the schema version; see [Render setup](RENDER_SETUP.md).
