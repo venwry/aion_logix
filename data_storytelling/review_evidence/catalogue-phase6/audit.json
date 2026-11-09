@@ -1,0 +1,170 @@
+{
+  "phase": 6,
+  "source_commit": "b029e7880f20a4c996df5b4a5f60cf472d08d3fd",
+  "status": "pending_author_review",
+  "scope": "Campaign launch ownership and timing reconciliation from the product catalogue cleanup plan; strict catalogue enforcement and remaining definition gaps are not part of this phase.",
+  "preserved_files_sha256": {
+    "data_foundation/technology.json": "f9540de2493e4a9cad4e20cb7b1c057ad02bcd326bfc2d972292d3265ddf3fdf",
+    "data_foundation/software_edition.json": "6086cd5534cfb9cbc389d5f89c5ff17988963a5f07c6b95ab98d3b5ad01210dd",
+    "data_foundation/event.json": "3b80afe886f1c07cdd805cdff0f8f83d9dd5a11be0fd360dfb80dd46c50e6b7c",
+    "data_foundation/location.json": "29f7c7a7d17823a86294c8f00f6670608d83793fd04e13e8fb3f1d86002eb410",
+    "data_foundation/campaign.json": "02530c8846bf47871ffff20526001865a5af0d6bcbcde9a901028a47aabf4db5",
+    "data_foundation/process.json": "68f0363676762de50fce8a6f05c8d0d91203f1d0c2ebf10d3235d8f3ad708099",
+    "data_foundation/agreement.json": "4e4aa072af59e8f9740573e793c3bede795dba8a91a2f4b0621e77e04ca98951",
+    "data_foundation/actor.json": "fc20af964190cbf5469980ddde4b6bbdab6380017b494aece8a1ada5967a03d0",
+    "data_foundation/manufacturing_capability.json": "5ce3a0e5a54fb7cb927c27b69812616a28a50d34e8f6af196a3b30cf7afefc2a",
+    "data_foundation/assumption.json": "8c2f2348e8b69325a2649fcd1ae27f5dbcffa2303b96bdba223266f4358d5abc",
+    "data_foundation/market_response.json": "f01aeae3419d46f61675f86122e4638ce72eae4c2663e48a92dd51b977fbbf68",
+    "data_foundation/product.json": "991862edd9961cd0f8730ff13de08edae977114042164794d2f93eb7da8e6470",
+    "data_foundation/base_part.json": "25a9e9a1786b2a907df3dc67d3f3cb239ff4eec943eedee43c2a602d7d2d89ab",
+    "data_foundation/external_products.json": "9e68a151ccfaa022efb7db2a497c87a1b5aa54fc85be015609f1ca2cc7a9ad60",
+    "data_foundation/device.json": "1b7b90cae98fb6d194144ff4a543069760ba8b7bd24499c769b1b5675d2c56cd",
+    "data_foundation/actor_relationship.json": "d8f1432265e38000d3eb5dd7271df94e66dc78d470a0bd51849041fc08d0bf0b",
+    "data_storytelling/source.json": "6f4d824a7fafc233463d8de03dee3d1f4d58dfb7c6b4436704057b79e173d9e9",
+    "data_storytelling/change_review.json": "b63728423dd2e5bc2b777a49d0177be0f469162ebfa660bca1064e442c9ab2cd",
+    "data_storytelling/reconciliation_issue.json": "8b655f4eca91283269eee2f46b2de250279367bfa6bc3dcc9d421061cd27e29a",
+    "data_storytelling/authorization.json": "70883fa776b745654fa42004e71f41b155e9492744aee1c3857a958a2f6574a0",
+    "data_storytelling/authorization_decision.json": "1556d76893b85b7aa2e071dcb5fdf98bfcef9195b821e8a2236ac58564a8e823",
+    "data_storytelling/manifest.json": "5dbb003f47dfd19b9af02d7256ce6b862e019000bb8720653ee726bbd4ecd698",
+    "data_storytelling/annotation.json": "2f403e724b1adfe8d67a0aa67fd47a926bb919bd3663a87f6a026cd3be70bf51"
+  },
+  "proposals": [
+    {
+      "change_id": "change.catalogue_phase6_model_ii_release",
+      "proposal_sha256": "dd21fd0fe54270301f60db25e9bbfdad230618a81f727b18e4775ea9b6db9d12",
+      "record_ids": [
+        "product.abacus_1.model_ii",
+        "campaign.ncc1979",
+        "process.ncc1979_campaign",
+        "process.tandy_cooperation",
+        "event.tandy_release",
+        "event.open79_delivery"
+      ]
+    },
+    {
+      "change_id": "change.catalogue_phase6_1980_campaign_scope",
+      "proposal_sha256": "d068d0bb02a9cdc40651a073e8e9efaf03bcf0a39502faed57af160bc9533048",
+      "record_ids": [
+        "process.ncc1980_campaign",
+        "process.comdex1980_campaign"
+      ]
+    },
+    {
+      "change_id": "change.catalogue_phase6_comdex1982_beta_dependency",
+      "proposal_sha256": "ff2bbd155d57c125b8a427f764a497f9f6ad3f767b3242da5852b2d44d110a4c",
+      "record_ids": [
+        "process.comdex1982_campaign"
+      ]
+    },
+    {
+      "change_id": "change.catalogue_phase6_clone_campaign_launch",
+      "proposal_sha256": "1ceb2acf5bfbbf23587ac061cedf19b97a277ae8a2318d8186c0e7cd29164ca6",
+      "record_ids": [
+        "campaign.clone_january1982"
+      ]
+    }
+  ],
+  "reference_dispositions": [
+    {
+      "record_id": "event.tandy_release",
+      "relationship": "ownership",
+      "before_owner": "process.tandy_cooperation",
+      "after_owner": "process.ncc1979_campaign",
+      "rationale": "The campaign already spans the autumn release and promotes Tandy delivery; engineering responsibility is retained without duplicate event ownership."
+    },
+    {
+      "record_id": "event.tandy_ncc_demo",
+      "relationship": "ownership",
+      "action": "preserve",
+      "owner": "process.tandy_cooperation",
+      "rationale": "Prototype demonstration remains a technical-cooperation milestone, not the Model II customer release."
+    },
+    {
+      "record_id": "event.open79_delivery",
+      "relationship": "input",
+      "target_id": "event.tandy_release",
+      "rationale": "Directly consumes the same-day release evidence for promotion; no ordering time finer than the recorded day is invented."
+    },
+    {
+      "record_id": "event.tandy_release",
+      "relationship": "subject_ids",
+      "action": "preserve_external_release_scope",
+      "target_ids": [
+        "external_product.trs80_model_ii",
+        "external_product.cpm_model_ii",
+        "external_product.model_ii_flexibus"
+      ],
+      "rationale": "External products lack authoritative launch fields; the host, DRI configuration and FlexiBUS option remain explicit release subjects. Technical acceptance references already carry their separate qualification role."
+    },
+    {
+      "record_id": "process.ncc1980_campaign",
+      "relationship": "action_scope",
+      "target_id": "process.comdex1980_campaign",
+      "rationale": "November presentation work belongs to the existing November campaign, not the May–October campaign. The existing event.software32 boundary remains the sole owner of that launch."
+    },
+    {
+      "record_id": "process.comdex1982_campaign",
+      "relationship": "input",
+      "target_id": "event.autodesk_beta",
+      "rationale": "The existing September technical milestone is a direct prerequisite to October campaign preparation, not a newly owned campaign activity."
+    },
+    {
+      "record_id": "campaign.clone_january1982",
+      "relationship": "launch_event_id",
+      "target_id": "event.clone_january_launch",
+      "rationale": "Makes the existing campaign premiere explicit without a new event, new product or reclassification of partner activity."
+    }
+  ],
+  "resolved_previous_gaps": [
+    "D13: all existing campaign headline launches already have single, contained ownership; the Autodesk ownership fix was previously authorized.",
+    "Model II Abacus: the October customer release is proposed under the existing NCC 1979 campaign, enabling its paired product launch links."
+  ],
+  "remaining_deferred": [
+    {
+      "product_id": "product.comdex82_reference_hardware",
+      "reason_code": "D09",
+      "reason": "Standalone orderability of this reference configuration is still unresolved. Do not turn a demonstrated technical configuration into a launched offering before that decision."
+    },
+    {
+      "product_id": "product.aion_c_ide",
+      "reason_code": "D10",
+      "reason": "The current AIONix identity appears in both the 1978 and 1980 launches. Do not choose the earliest association or invent a separate historical edition; retain both references pending identity review."
+    },
+    {
+      "product_id": "product.ram_64kb_module",
+      "reason_code": "D11",
+      "reason": "The commercial record supplies one module while the technical definition requires matched-pair installation. Retain the existing campaign association without deciding whether this is a replacement module or an installable upgrade."
+    },
+    {
+      "product_id": "product.artemis_budget_128_hdd",
+      "reason_code": "launch_composition_conflict",
+      "reason": "The Artemis launch explicitly introduces the HDD configuration in May 1980; the current commercial composition includes Abacus 3 unconditionally, while the event says it becomes an addition in November. Its only campaign subject association is COMDEX 1980. Preserve the competing evidence until package/version chronology is reconciled; neither earliest-event nor campaign-only inference is safe."
+    }
+  ],
+  "scope_limits": [
+    "Preserve all 100 previously approved product launch pairs.",
+    "Do not infer product availability from prototype demonstrations, campaign membership alone or technical work that is still under qualification.",
+    "No new events, products, campaigns or process periods; preserve date precision and all technical definitions.",
+    "Keep owned timeline categories empty.",
+    "Do not change or resolve saved author feedback or annotations; no authorizations are written.",
+    "Other historical specification, pricing, identity and version-chronology gaps remain for closeout, including the author-retained Regular Support discount."
+  ],
+  "external_or_supplier_launches_preserved": [
+    {
+      "event_id": "event.dri_release",
+      "rationale": "DRI platform-extension release for independent manufacturers is an external software release, not a new Logix/AION catalogue product."
+    },
+    {
+      "event_id": "event.basic_launch",
+      "rationale": "Microsoft BASIC is independently licensed third-party software. Its existing NCC participation is not converted into a Logix product or a new internal campaign."
+    },
+    {
+      "event_id": "event.smc_sales",
+      "rationale": "Staged supplier chip availability is manufacturing/partner activity; it does not establish an OEM catalogue or marketing campaign."
+    },
+    {
+      "event_id": "event.apple_business",
+      "rationale": "Apple partner package activity remains external; no new internal product or campaign is invented."
+    }
+  ]
+}
