@@ -1,3 +1,4 @@
+import {migrateTechnologySpecification} from '../../code/technology-specification.js';
 import {datasetPath,datasetForFile} from '../../code/model-contract.js';
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import crypto from 'node:crypto';
 import {readDocuments,validateDocuments} from '../../tools/validate-model.js';
@@ -13,6 +14,9 @@ const importEnd=decisions.findLastIndex(d=>d.change_id?.startsWith('change.produ
 if(importEnd>=0)for(const d of decisions.slice(importEnd+1).filter(d=>d.action==='approve_change').reverse())for(const e of d.proposal?.elements||[]){const rows=docs[e.record_type][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(e.before===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=structuredClone(e.before);else rows.push(structuredClone(e.before));}
 const proposals=[...new Map([...decisions.map(d=>d.proposal).filter(Boolean),...pending].filter(p=>p.id.startsWith('change.product_definition_import_')).map(p=>[p.id,p])).values()];
 for(const p of proposals)for(const e of p.elements){const rows=docs[e.record_type][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(e.before===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=structuredClone(e.before);else rows.push(structuredClone(e.before));}
+// The inventory fixture predates the author-directed technology format migration.
+// Adapt only that unrelated representation; preserve the pinned BOM inventory.
+for(const r of docs.technology.technology)r.specification=migrateTechnologySpecification(r.specification);
 const files=Object.fromEntries(Object.entries(docs).map(([n,d])=>[datasetPath(n),d]));for(const n of ['authorization','authorization_decision','change','manifest','annotation','change_review'])files['data_storytelling/'+n+'.json']=read('data_storytelling/'+n+'.json');
 files['data_storytelling/change.json']={change:proposals};
 const fixtureRecords=new Map(Object.values(docs).flatMap(d=>Object.values(d)[0]).map(r=>[r.id,r]));

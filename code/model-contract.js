@@ -1,4 +1,4 @@
-export const schemaVersion = "0.9.3";
+export const schemaVersion = "0.10.0";
 export const datasets = ["actor", "actor_relationship", "agreement", "assumption", "campaign", "event", "location", "manufacturing_capability", "market_response", "process", "product", "technology", "base_part", "device", "software_edition", "external_product"];
 
 // Record types and envelope keys stay singular; filenames may differ.

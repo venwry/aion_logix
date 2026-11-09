@@ -1,0 +1,27 @@
+const {test,expect}=require('@playwright/test');const fs=require('node:fs');
+const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/technology-chapters/proposals.json')).change;
+const flex=proposals.find(p=>p.elements[0].record_id==='technology.flexibus');
+for(const name of ['browser','timeline'])test(name+' renders technology chapters, red parameters and reference navigation',async({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/data_foundation/technology.json',async route=>{const response=await route.fetch(),doc=await response.json();doc.technology=doc.technology.map(r=>proposals.find(p=>p.elements[0].record_id===r.id)?.elements[0].after||r);await route.fulfill({json:doc});});
+ await page.goto('/code/'+name+'.html#technology.flexibus');await expect(page.locator('body')).toHaveAttribute('data-ready','true');
+ const section=page.locator('#details .technology-specification');await expect(section.locator('.specification-chapter')).toHaveCount(6);await expect(section.locator('h3').first()).toHaveText('1. Peripheral connection and identification');
+ const electrical=section.locator('[data-chapter-number="12"]');await expect(electrical.locator('.specification-description')).toContainText('125000 bps');const red=electrical.locator('.specification-parameter').first();await expect(red).toHaveCSS('color','rgb(180, 35, 24)');
+ await expect(section.locator('table table')).toHaveCount(0);await expect(electrical.locator('th',{hasText:'Startup rate bps'})).toHaveCount(1);
+ await page.setViewportSize({width:390,height:844});expect(await section.evaluate(n=>n.scrollWidth<=n.clientWidth+1)).toBe(true);
+ if(name==='browser'){await page.setViewportSize({width:1200,height:900});await electrical.scrollIntoViewIfNeeded();await page.screenshot({path:'/tmp/technology-chapters.png'});}
+ await section.locator('a[href="#technology.logix_tui_keyboard_standard"]').first().click();await expect(page.locator('#details h2')).toHaveText('Logix TUI keyboard commands and assignment standard');expect(errors).toEqual([]);
+});
+test('technology text substitutions do not execute markup or recursively expand values',async({page})=>{
+ await page.route('**/data_foundation/technology.json',async route=>{const response=await route.fetch(),doc=await response.json();doc.technology[0].specification=[{number:7,chapter_name:'Safety fixture',description:'Value {payload}, again {payload}. Unknown {missing}.',parameters:[{key:'payload',value:'<img src=x onerror=alert(1)>{nested}'},{key:'nested',value:'Do not expand'}]},{number:9,chapter_name:'Empty parameters',description:'Plain text.',parameters:[]}];await route.fulfill({json:doc});});
+ await page.goto('/code/browser.html#technology.flexibus');await expect(page.locator('body')).toHaveAttribute('data-ready','true');
+ const spec=page.locator('#details .technology-specification');await expect(spec.locator('img')).toHaveCount(0);await expect(spec.locator('.specification-parameter')).toHaveCount(2);await expect(spec.locator('.specification-parameter').first()).toHaveText('<img src=x onerror=alert(1)>{nested}');await expect(spec.locator('.specification-unresolved')).toHaveText('{missing}');await expect(spec.locator('.specification-empty')).toHaveText('No parameters.');
+});
+test('Changes confirm shows converted and rewritten technology chapters side by side',async({page})=>{
+ const {snapshot}=await import('../server/model.js');const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[d+'/'+f,JSON.parse(fs.readFileSync(d+'/'+f))])));
+ files['data_storytelling/change.json'].change=[flex];const rows=files['data_foundation/technology.json'].technology;rows[rows.findIndex(r=>r.id==='technology.flexibus')]=flex.elements[0].before;
+ await page.addInitScript(()=>sessionStorage.setItem('aion-backend',JSON.stringify({url:'https://aion-review-zu1t.onrender.com',token:'local-technology-test'})));
+ await page.route('**/api/state',r=>r.fulfill({json:snapshot(files,'technology-fixture')}));await page.route('**/api/authorize',r=>r.abort());
+ await page.goto('/code/changes-confirm.html#'+flex.id);await expect(page.locator('body')).toHaveAttribute('data-ready','true');await expect(page.getByRole('button',{name:'Authorize',exact:true})).toBeEnabled();
+ await page.getByLabel('Comparison',{exact:true}).selectOption('details');const columns=page.locator('.comparison-column');await expect(columns.nth(0).locator('.specification-chapter')).toHaveCount(48);await expect(columns.nth(1).locator('.specification-chapter')).toHaveCount(6);await expect(columns.nth(1).locator('.technology-specification')).toHaveClass(/changed-field/);await expect(columns.nth(1).locator('.specification-parameter').first()).toHaveText('true');
+});

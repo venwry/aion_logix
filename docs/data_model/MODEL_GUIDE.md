@@ -1,4 +1,4 @@
-# Current model guide — version 0.9.3
+# Current model guide — version 0.10.0
 
 The model separates fictional-world records, editorial review and later calculations. [Principles](../../DATA_MODEL_PRINCIPLES.md), [reference rules](REFERENCE_RULES.md) and [JSON Schemas](../../schemas/) govern editing. The [generated specification](FOUNDATION_SPECIFICATION.md) describes exact attributes; historical reports do not extend the contract.
 
@@ -24,7 +24,7 @@ A physical cartridge can be a Logix offering while its software is licensed from
 
 Commercial product specifications describe package contents, entitlements, duration, eligibility, service scope and delivery terms. The current model does not support pricing information: exclude prices, fees, discounts, price histories and pricing placeholders from every field of products, events, processes and campaigns. Do not relocate them into technical records or another existing dataset; a future pricing model requires separate design. Preserve the specifically author-retained 10% depot-repair discount in Regular Support; this exception does not establish a general pricing model. Hardware features, implementation limits and technology references belong to the canonical device/computer or software-edition record. Keep the required product `technology_ids` array empty in revised offerings; check that removed technical facts are already represented at their proper destination or move them in the same reviewed change. A cartridge offering points to its device, which owns the physical BOM and includes the software edition. Do not put that cartridge inside the edition it contains.
 
-Specification items use repeatable semantic types such as `feature`, `duration` or `exclusion`. `number` identifies the item; type labels need not be unique. Write a short plain-English explanation in `description` and the substantive term in `value` (for example, `1 year`). Do not expose import paths such as `features[1]` as types or duplicate the entire explanation in the value. Service duration is an entitlement, not a new historical date. A course's delivery location is a feature of the concrete course, not an additional course product.
+Product specification items use repeatable semantic types such as `feature`, `duration` or `exclusion`. `number` identifies the item; type labels need not be unique. Write a short plain-English explanation in `description` and the substantive term in `value` (for example, `1 year`). Do not expose import paths such as `features[1]` as types or duplicate the entire explanation in the value. Service duration is an entitlement, not a new historical date. A course's delivery location is a feature of the concrete course, not an additional course product.
 
 The accepted catalogue has no chip/software-edition aliases or artificial families as products. Those old kinds remain schema-compatible, but are not valid authoring choices under the current product principles. The stricter optional profile checks this distinction. No OEM sales structure is inferred from the existence of a base part.
 
@@ -43,6 +43,27 @@ For missing software version labels, use an evidenced or explicitly approved ext
 For diskette composition quantities, the author's scenario defaults are: Abacus one; AION C IDE two; full BPI suite three; other diskette media groups one. Separate BPI network client/server distributions use the other-case default; each separately listed SDK media group is one diskette. These interpretations remain reviewable in the proposals. Count physical diskettes on the edition's composition lines, with each referenced base-part unit representing one physical diskette. These counts do not prove that released images fit; retain image/format and installation qualification. Do not extend diskette defaults to site-dependent cables, optional hardware or service entitlements. Legacy unknowns remain valid where these defaults do not apply. Product composition supplies the package; device composition supplies physical construction; software editions retain their executable contracts. Do not duplicate a software edition as a second physical cartridge merely to record licensing.
 
 Technology records describe architectures, interfaces, methods and fabrication technology. Manufacturing capabilities describe scoped recipes and qualification. Dated maturity transitions belong in event outcomes. A licence, pilot or historical elapsed time does not prove production readiness. Costs, yields, sales forecasts and ROI calculations require separately designed calculation models.
+
+## Technology specification chapters
+
+Technology `specification[]` uses `{number, chapter_name, description, parameters}`. Each parameter is exactly `{key, value}`, both text. `number` is a positive integer and is unique within the record. Keys are unique within their chapter, case-sensitive, nonblank and cannot contain braces. Other entity types retain their existing specification schemas; technology chapters do not change product or external-product specifications.
+
+Write a short chapter name and plain-English explanatory paragraphs. Store named technical parameters in `parameters[]`, and insert them in the description using `{key}`. For example:
+
+```json
+{
+  "number": 12,
+  "chapter_name": "Electrical link and operating rates",
+  "description": "The port starts at {Startup rate (bps)} bps before negotiating a supported rate.",
+  "parameters": [{"key": "Startup rate (bps)", "value": "125000"}]
+}
+```
+
+Substitutions are local to the chapter and nonrecursive. An unknown key fails model validation. Descriptions and values are plain text, never HTML or executable templates. Parameter values can retain existing record IDs as descriptive links; they do not create a new structured reference relationship. Keep the existing typed ownership and related-technology fields meaningful.
+
+The author-directed format migration preserves every original item number, renames `type` to `chapter_name` and keeps `description` unchanged. It adds a parameter named `value` only when the former value converted to text differs from the description, otherwise uses an empty list. Conversion is case-sensitive; numeric and Boolean values become text. Existing source records have no item-level units to migrate. Historical snapshots remain unchanged and readable, but the active technology schema accepts only the new chapter format.
+
+Editorial regrouping is a separate reviewed change. Each proposed chapter retains the number of its first contributing item; gaps after grouping are intentional. Preserve a coverage map in review evidence so every former entry is traceable. Keep technical values, command identities, platform limitations, uncertainties and qualification gates; clearer wording cannot turn a target into measured performance. Existing typed fabrication attributes remain in place.
 
 ## Timeline ownership and categories
 

@@ -1,3 +1,4 @@
+import {renderTechnologySpecification} from './technology-specification.js';
 import {datasetPath,simulationEnd} from './model-contract.js';
 import {$,el,human,typeOf,titleOf,references} from './shared.js';
 import {resolvePoint} from './temporal.js';
@@ -115,6 +116,7 @@ export function compactDetails(record,data,select,options={}){
  const content=el('div','compact-fields');
  for(const [key,value] of fields(data.originals.get(record.id)||record)){
   if(key==='status')continue;
+  if(key==='specification'&&typeOf(record)==='technology'){const section=renderTechnologySpecification(value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='composition_history'&&Array.isArray(value)){const history=compositionHistory(value);if(options.changedFields?.has(key))history.classList.add('changed-field');content.append(history);continue;}
   const row=el('div','compact-field');row.dataset.field=key;if(options.changedFields?.has(key.split('.')[0]))row.classList.add('changed-field');if(isReferences(value))row.append(referenceList(value,key));else row.append(el('strong','compact-key',key+': '),key==='id'?el('span','record-id',value):valueNode(value,key));content.append(row);
  }

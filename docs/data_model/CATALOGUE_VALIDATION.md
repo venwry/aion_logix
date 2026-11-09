@@ -1,6 +1,6 @@
 # Catalogue validation
 
-The current foundation contract is **0.9.3**. The accepted catalogue consists of customer-facing offerings with explicit launch campaign/event links, commercial categories and providers. Chips, technical aliases and artificial families are not internal products; technical definitions live in base parts, devices and software editions. A commercial launch does not establish shipment readiness or date every technical revision.
+The current foundation contract is **0.10.0**. The accepted catalogue consists of customer-facing offerings with explicit launch campaign/event links, commercial categories and providers. Chips, technical aliases and artificial families are not internal products; technical definitions live in base parts, devices and software editions. A commercial launch does not establish shipment readiness or date every technical revision.
 
 ## Checks and their limits
 
@@ -22,7 +22,9 @@ Technical-fact migration needs a corresponding canonical field, not merely an eq
 
 The live queue is `data_storytelling/change.json`. Concrete proposals contain complete before/after records; Discussion entries contain problems and findings without edits. The latter accept remarks and cannot be authorized. Audit inventories under `data_storytelling/review_evidence/` identify their source commit and check scope; their counts are historical snapshots, not permanent catalogue-size rules.
 
-The closeout feedback amendment is verified with `node tools/verify-closeout-feedback.js` (also selected by `verify-closeout-audit.js` when amendment evidence exists). It checks feedback lineage, non-overlapping snapshots, independent/batch approval, revision boundaries, first-use ordering and physical diskette quantities, without writing foundation or authorization files.
+The current technology chapter proposals are checked by `node tools/verify-technology-chapters.js`; `verify-closeout-audit.js` selects that verifier when its migration evidence exists. It validates direct conversion, authorization-state preservation, source coverage and independent/batch approval.
+
+The earlier closeout feedback amendment is verified with `node tools/verify-closeout-feedback.js` (selected by `verify-closeout-audit.js` when no later technology migration evidence exists). It checks feedback lineage, non-overlapping snapshots, independent/batch approval, revision boundaries, first-use ordering and physical diskette quantities, without writing foundation or authorization files.
 
 Phase-specific verifiers are historical regression tools with pinned expectations. Use the ordinary validators for ongoing work and the verifier associated with the active proposal set for approval simulations. The superseded phase-7 walkthrough is [archived](../archived/CATALOGUE_PHASE7_VALIDATION.md).
 

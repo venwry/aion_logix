@@ -1,3 +1,4 @@
+import {renderTechnologySpecification} from './technology-specification.js';
 import {datasetPath} from './model-contract.js';
 import {remoteState} from './api-client.js';
 import {digest} from './review-log.js';
@@ -81,6 +82,7 @@ export function details(record,data,select){
   const skip=new Set(['id','status','name','title','description','statement','topic','objective']);
   for(const [key,value] of Object.entries(record)){
     if(skip.has(key))continue;
+    if(key==='specification'&&typeOf(record)==='technology'){host.append(renderTechnologySpecification(value,v=>valueNode(v)));continue;}
     const group=el('details','detail-group');group.append(el('summary','',human(key)+(Array.isArray(value)?' · '+value.length:'')));
     let built=false;const build=()=>{if(built)return;built=true;const content=el('div');content.append(valueNode(value));
       if(key==='source_refs')for(const ref of value){const source=data.index.get(ref.source_id);if(source?.kind==='repository_snapshot'&&source.url?.startsWith('https://github.com/')&&source.commit&&ref.path){const a=el('a','source-note','View source: '+ref.path+(ref.pointer||''));a.href=source.url.replace(/\/$/,'')+'/blob/'+source.commit+'/'+ref.path.split('/').map(encodeURIComponent).join('/');a.target='_blank';a.rel='noopener noreferrer';const p=el('p');p.append(a);content.append(p);}}

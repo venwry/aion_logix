@@ -482315,6 +482315,3072 @@
           "content_sha256": "db69b9e45ff48060f941520b1d5e3af711b542970df965c510511476d10934c7"
         }
       ]
+    },
+    {
+      "id": "authorization_decision.b2262436-8319-45c3-b47a-b7b368e5eddf",
+      "action": "authorize_records",
+      "actor": "author — direct specification-format conversion request",
+      "decided_at": "2026-11-09T15:48:01.441Z",
+      "target": [
+        {
+          "record_id": "technology.flexibus",
+          "before": {
+            "id": "technology.flexibus",
+            "name": "FlexiBUS",
+            "kind": "interface",
+            "description": "FlexiBUS",
+            "owner_actor_ids": [
+              "actor.logix"
+            ],
+            "related_technology_ids": [
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "communication",
+                "description": "serial duplex peripheral communication",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "attachment_model",
+                "description": "dynamic attachment is supported when the bus is inactive",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "device_identification",
+                "description": "True",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "true"
+                  }
+                ]
+              },
+              {
+                "number": 4,
+                "chapter_name": "peripheral_rom_metadata[1]",
+                "description": "DEVICE ID",
+                "parameters": []
+              },
+              {
+                "number": 5,
+                "chapter_name": "peripheral_rom_metadata[2]",
+                "description": "DEVICE TYPE",
+                "parameters": []
+              },
+              {
+                "number": 6,
+                "chapter_name": "peripheral_rom_metadata[3]",
+                "description": "VENDOR",
+                "parameters": []
+              },
+              {
+                "number": 7,
+                "chapter_name": "peripheral_rom_metadata[4]",
+                "description": "PROTOCOL VERSION",
+                "parameters": []
+              },
+              {
+                "number": 8,
+                "chapter_name": "peripheral_rom_metadata[5]",
+                "description": "POWER REQUIREMENTS",
+                "parameters": []
+              },
+              {
+                "number": 9,
+                "chapter_name": "openness",
+                "description": "The technical specification is published for third-party implementation.",
+                "parameters": []
+              },
+              {
+                "number": 10,
+                "chapter_name": "compatibility_policy",
+                "description": "Logix commits to forward peripheral compatibility across future Logix computer generations.",
+                "parameters": []
+              },
+              {
+                "number": 11,
+                "chapter_name": "implementation_design.title",
+                "description": "FlexiBUS v1 transport and driver model",
+                "parameters": []
+              },
+              {
+                "number": 12,
+                "chapter_name": "implementation_design.physical.topology",
+                "description": "Point-to-point host port to one device; no passive multidrop or implicit daisy chaining in v1.",
+                "parameters": []
+              },
+              {
+                "number": 13,
+                "chapter_name": "implementation_design.physical.signaling",
+                "description": "Separate differential transmit and receive pairs; asynchronous serial framing.",
+                "parameters": []
+              },
+              {
+                "number": 14,
+                "chapter_name": "implementation_design.physical.rates_bps[1]",
+                "description": "125000",
+                "parameters": []
+              },
+              {
+                "number": 15,
+                "chapter_name": "implementation_design.physical.rates_bps[2]",
+                "description": "500000",
+                "parameters": []
+              },
+              {
+                "number": 16,
+                "chapter_name": "implementation_design.physical.startup_rate_bps",
+                "description": "125000",
+                "parameters": []
+              },
+              {
+                "number": 17,
+                "chapter_name": "implementation_design.physical.cable_target",
+                "description": "Shielded cable up to 3 m at 500 kbit/s; qualify signal integrity and period-appropriate line components.",
+                "parameters": []
+              },
+              {
+                "number": 18,
+                "chapter_name": "implementation_design.physical.power",
+                "description": "Power contacts/current limits and keyed connector pinout require an electrical drawing. Disk/printer devices self-powered; keyboard power is current-limited.",
+                "parameters": []
+              },
+              {
+                "number": 19,
+                "chapter_name": "implementation_design.physical.attachment",
+                "description": "Attach or detach only while the port is quiescent. Ground-first/power sequencing must be defined; no unrestricted live hot-plug claim.",
+                "parameters": []
+              },
+              {
+                "number": 20,
+                "chapter_name": "implementation_design.frames.encoding",
+                "description": "8N1 byte transport, 0x7E delimiter and escaped delimiter/escape bytes.",
+                "parameters": []
+              },
+              {
+                "number": 21,
+                "chapter_name": "implementation_design.frames.header[1]",
+                "description": "protocol version",
+                "parameters": []
+              },
+              {
+                "number": 22,
+                "chapter_name": "implementation_design.frames.header[2]",
+                "description": "message class",
+                "parameters": []
+              },
+              {
+                "number": 23,
+                "chapter_name": "implementation_design.frames.header[3]",
+                "description": "flags",
+                "parameters": []
+              },
+              {
+                "number": 24,
+                "chapter_name": "implementation_design.frames.header[4]",
+                "description": "request ID",
+                "parameters": []
+              },
+              {
+                "number": 25,
+                "chapter_name": "implementation_design.frames.header[5]",
+                "description": "payload length",
+                "parameters": []
+              },
+              {
+                "number": 26,
+                "chapter_name": "implementation_design.frames.max_payload_bytes",
+                "description": "256",
+                "parameters": []
+              },
+              {
+                "number": 27,
+                "chapter_name": "implementation_design.frames.integrity",
+                "description": "CRC-16-CCITT, polynomial 0x1021, init 0xFFFF, no reflection, xorout 0x0000; cover unescaped header and payload. Byte order must be frozen in wire specification.",
+                "parameters": []
+              },
+              {
+                "number": 28,
+                "chapter_name": "implementation_design.frames.flow_control",
+                "description": "One outstanding request per device initially; explicit ACK/NAK, bounded timeout/retry, device BUSY and response credit.",
+                "parameters": []
+              },
+              {
+                "number": 29,
+                "chapter_name": "implementation_design.commands[1]",
+                "description": "IDENTIFY and capabilities",
+                "parameters": []
+              },
+              {
+                "number": 30,
+                "chapter_name": "implementation_design.commands[2]",
+                "description": "RESET and health",
+                "parameters": []
+              },
+              {
+                "number": 31,
+                "chapter_name": "implementation_design.commands[3]",
+                "description": "Keyboard event read",
+                "parameters": []
+              },
+              {
+                "number": 32,
+                "chapter_name": "implementation_design.commands[4]",
+                "description": "Printer status and bounded output blocks",
+                "parameters": []
+              },
+              {
+                "number": 33,
+                "chapter_name": "implementation_design.commands[5]",
+                "description": "Disk geometry/media generation, sector read/write and flush",
+                "parameters": []
+              },
+              {
+                "number": 34,
+                "chapter_name": "implementation_design.reliability[1]",
+                "description": "Sequence/request IDs reject duplicate execution; keep the last completed request/response until session reset.",
+                "parameters": []
+              },
+              {
+                "number": 35,
+                "chapter_name": "implementation_design.reliability[2]",
+                "description": "Retries of writes must carry the same identity; media changes invalidate queued requests.",
+                "parameters": []
+              },
+              {
+                "number": 36,
+                "chapter_name": "implementation_design.reliability[3]",
+                "description": "Disk devices buffer complete sectors locally. Host throughput need not equal raw disk bit rate.",
+                "parameters": []
+              },
+              {
+                "number": 37,
+                "chapter_name": "implementation_design.reliability[4]",
+                "description": "Report removal, CRC errors, timeouts and unsupported operations through stable OS errors.",
+                "parameters": []
+              },
+              {
+                "number": 38,
+                "chapter_name": "implementation_design.reliability[5]",
+                "description": "Reset changes the session epoch. Do not silently retry an unresolved non-idempotent operation such as print output after reset; report uncertain completion to the caller.",
+                "parameters": []
+              },
+              {
+                "number": 39,
+                "chapter_name": "implementation_design.performance",
+                "description": "500 kbit/s with 8N1 permits at most 50 KB/s before headers, escaping and turnaround; 125 kbit/s permits at most 12.5 KB/s. Keyboard polling must not monopolize CPU during disk transfers.",
+                "parameters": []
+              },
+              {
+                "number": 40,
+                "chapter_name": "implementation_design.drivers",
+                "description": "Use architecture-neutral device descriptors and class protocols. Host OS provides Z80 or ERA class drivers. Optional device-specific ROM drivers must carry explicit ISA/ABI tags; never execute a Z80 ROM driver as ERA code.",
+                "parameters": []
+              },
+              {
+                "number": 41,
+                "chapter_name": "implementation_design.validation[1]",
+                "description": "FIFO overrun and worst-case CPU service latency",
+                "parameters": []
+              },
+              {
+                "number": 42,
+                "chapter_name": "implementation_design.validation[2]",
+                "description": "Printer backpressure",
+                "parameters": []
+              },
+              {
+                "number": 43,
+                "chapter_name": "implementation_design.validation[3]",
+                "description": "Disk retry after lost reply",
+                "parameters": []
+              },
+              {
+                "number": 44,
+                "chapter_name": "implementation_design.validation[4]",
+                "description": "CRC faults, cable removal and power sequencing",
+                "parameters": []
+              },
+              {
+                "number": 45,
+                "chapter_name": "keyboard_standard_ref",
+                "description": "technology.logix_tui_keyboard_standard",
+                "parameters": []
+              },
+              {
+                "number": 46,
+                "chapter_name": "ecosystem_programme.policy",
+                "description": "Non-exclusive independently branded implementations; software and video adoption are optional.",
+                "parameters": []
+              },
+              {
+                "number": 47,
+                "chapter_name": "ecosystem_programme.class_extension_gates",
+                "description": "Plotter, modem and specialist profiles and drivers require design and qualification. Discovery metadata alone does not guarantee operation.",
+                "parameters": []
+              },
+              {
+                "number": 48,
+                "chapter_name": "ecosystem_programme.governance",
+                "description": "DRI leads software interfaces; Logix contributes hardware specifications; independent manufacturers participate. Final charter, fees and support period remain open.",
+                "parameters": []
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.flexibus",
+            "name": "FlexiBUS",
+            "kind": "interface",
+            "description": "FlexiBUS",
+            "owner_actor_ids": [
+              "actor.logix"
+            ],
+            "related_technology_ids": [
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "communication",
+                "description": "serial duplex peripheral communication",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "attachment_model",
+                "description": "dynamic attachment is supported when the bus is inactive",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "device_identification",
+                "description": "True",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "true"
+                  }
+                ]
+              },
+              {
+                "number": 4,
+                "chapter_name": "peripheral_rom_metadata[1]",
+                "description": "DEVICE ID",
+                "parameters": []
+              },
+              {
+                "number": 5,
+                "chapter_name": "peripheral_rom_metadata[2]",
+                "description": "DEVICE TYPE",
+                "parameters": []
+              },
+              {
+                "number": 6,
+                "chapter_name": "peripheral_rom_metadata[3]",
+                "description": "VENDOR",
+                "parameters": []
+              },
+              {
+                "number": 7,
+                "chapter_name": "peripheral_rom_metadata[4]",
+                "description": "PROTOCOL VERSION",
+                "parameters": []
+              },
+              {
+                "number": 8,
+                "chapter_name": "peripheral_rom_metadata[5]",
+                "description": "POWER REQUIREMENTS",
+                "parameters": []
+              },
+              {
+                "number": 9,
+                "chapter_name": "openness",
+                "description": "The technical specification is published for third-party implementation.",
+                "parameters": []
+              },
+              {
+                "number": 10,
+                "chapter_name": "compatibility_policy",
+                "description": "Logix commits to forward peripheral compatibility across future Logix computer generations.",
+                "parameters": []
+              },
+              {
+                "number": 11,
+                "chapter_name": "implementation_design.title",
+                "description": "FlexiBUS v1 transport and driver model",
+                "parameters": []
+              },
+              {
+                "number": 12,
+                "chapter_name": "implementation_design.physical.topology",
+                "description": "Point-to-point host port to one device; no passive multidrop or implicit daisy chaining in v1.",
+                "parameters": []
+              },
+              {
+                "number": 13,
+                "chapter_name": "implementation_design.physical.signaling",
+                "description": "Separate differential transmit and receive pairs; asynchronous serial framing.",
+                "parameters": []
+              },
+              {
+                "number": 14,
+                "chapter_name": "implementation_design.physical.rates_bps[1]",
+                "description": "125000",
+                "parameters": []
+              },
+              {
+                "number": 15,
+                "chapter_name": "implementation_design.physical.rates_bps[2]",
+                "description": "500000",
+                "parameters": []
+              },
+              {
+                "number": 16,
+                "chapter_name": "implementation_design.physical.startup_rate_bps",
+                "description": "125000",
+                "parameters": []
+              },
+              {
+                "number": 17,
+                "chapter_name": "implementation_design.physical.cable_target",
+                "description": "Shielded cable up to 3 m at 500 kbit/s; qualify signal integrity and period-appropriate line components.",
+                "parameters": []
+              },
+              {
+                "number": 18,
+                "chapter_name": "implementation_design.physical.power",
+                "description": "Power contacts/current limits and keyed connector pinout require an electrical drawing. Disk/printer devices self-powered; keyboard power is current-limited.",
+                "parameters": []
+              },
+              {
+                "number": 19,
+                "chapter_name": "implementation_design.physical.attachment",
+                "description": "Attach or detach only while the port is quiescent. Ground-first/power sequencing must be defined; no unrestricted live hot-plug claim.",
+                "parameters": []
+              },
+              {
+                "number": 20,
+                "chapter_name": "implementation_design.frames.encoding",
+                "description": "8N1 byte transport, 0x7E delimiter and escaped delimiter/escape bytes.",
+                "parameters": []
+              },
+              {
+                "number": 21,
+                "chapter_name": "implementation_design.frames.header[1]",
+                "description": "protocol version",
+                "parameters": []
+              },
+              {
+                "number": 22,
+                "chapter_name": "implementation_design.frames.header[2]",
+                "description": "message class",
+                "parameters": []
+              },
+              {
+                "number": 23,
+                "chapter_name": "implementation_design.frames.header[3]",
+                "description": "flags",
+                "parameters": []
+              },
+              {
+                "number": 24,
+                "chapter_name": "implementation_design.frames.header[4]",
+                "description": "request ID",
+                "parameters": []
+              },
+              {
+                "number": 25,
+                "chapter_name": "implementation_design.frames.header[5]",
+                "description": "payload length",
+                "parameters": []
+              },
+              {
+                "number": 26,
+                "chapter_name": "implementation_design.frames.max_payload_bytes",
+                "description": "256",
+                "parameters": []
+              },
+              {
+                "number": 27,
+                "chapter_name": "implementation_design.frames.integrity",
+                "description": "CRC-16-CCITT, polynomial 0x1021, init 0xFFFF, no reflection, xorout 0x0000; cover unescaped header and payload. Byte order must be frozen in wire specification.",
+                "parameters": []
+              },
+              {
+                "number": 28,
+                "chapter_name": "implementation_design.frames.flow_control",
+                "description": "One outstanding request per device initially; explicit ACK/NAK, bounded timeout/retry, device BUSY and response credit.",
+                "parameters": []
+              },
+              {
+                "number": 29,
+                "chapter_name": "implementation_design.commands[1]",
+                "description": "IDENTIFY and capabilities",
+                "parameters": []
+              },
+              {
+                "number": 30,
+                "chapter_name": "implementation_design.commands[2]",
+                "description": "RESET and health",
+                "parameters": []
+              },
+              {
+                "number": 31,
+                "chapter_name": "implementation_design.commands[3]",
+                "description": "Keyboard event read",
+                "parameters": []
+              },
+              {
+                "number": 32,
+                "chapter_name": "implementation_design.commands[4]",
+                "description": "Printer status and bounded output blocks",
+                "parameters": []
+              },
+              {
+                "number": 33,
+                "chapter_name": "implementation_design.commands[5]",
+                "description": "Disk geometry/media generation, sector read/write and flush",
+                "parameters": []
+              },
+              {
+                "number": 34,
+                "chapter_name": "implementation_design.reliability[1]",
+                "description": "Sequence/request IDs reject duplicate execution; keep the last completed request/response until session reset.",
+                "parameters": []
+              },
+              {
+                "number": 35,
+                "chapter_name": "implementation_design.reliability[2]",
+                "description": "Retries of writes must carry the same identity; media changes invalidate queued requests.",
+                "parameters": []
+              },
+              {
+                "number": 36,
+                "chapter_name": "implementation_design.reliability[3]",
+                "description": "Disk devices buffer complete sectors locally. Host throughput need not equal raw disk bit rate.",
+                "parameters": []
+              },
+              {
+                "number": 37,
+                "chapter_name": "implementation_design.reliability[4]",
+                "description": "Report removal, CRC errors, timeouts and unsupported operations through stable OS errors.",
+                "parameters": []
+              },
+              {
+                "number": 38,
+                "chapter_name": "implementation_design.reliability[5]",
+                "description": "Reset changes the session epoch. Do not silently retry an unresolved non-idempotent operation such as print output after reset; report uncertain completion to the caller.",
+                "parameters": []
+              },
+              {
+                "number": 39,
+                "chapter_name": "implementation_design.performance",
+                "description": "500 kbit/s with 8N1 permits at most 50 KB/s before headers, escaping and turnaround; 125 kbit/s permits at most 12.5 KB/s. Keyboard polling must not monopolize CPU during disk transfers.",
+                "parameters": []
+              },
+              {
+                "number": 40,
+                "chapter_name": "implementation_design.drivers",
+                "description": "Use architecture-neutral device descriptors and class protocols. Host OS provides Z80 or ERA class drivers. Optional device-specific ROM drivers must carry explicit ISA/ABI tags; never execute a Z80 ROM driver as ERA code.",
+                "parameters": []
+              },
+              {
+                "number": 41,
+                "chapter_name": "implementation_design.validation[1]",
+                "description": "FIFO overrun and worst-case CPU service latency",
+                "parameters": []
+              },
+              {
+                "number": 42,
+                "chapter_name": "implementation_design.validation[2]",
+                "description": "Printer backpressure",
+                "parameters": []
+              },
+              {
+                "number": 43,
+                "chapter_name": "implementation_design.validation[3]",
+                "description": "Disk retry after lost reply",
+                "parameters": []
+              },
+              {
+                "number": 44,
+                "chapter_name": "implementation_design.validation[4]",
+                "description": "CRC faults, cable removal and power sequencing",
+                "parameters": []
+              },
+              {
+                "number": 45,
+                "chapter_name": "keyboard_standard_ref",
+                "description": "technology.logix_tui_keyboard_standard",
+                "parameters": []
+              },
+              {
+                "number": 46,
+                "chapter_name": "ecosystem_programme.policy",
+                "description": "Non-exclusive independently branded implementations; software and video adoption are optional.",
+                "parameters": []
+              },
+              {
+                "number": 47,
+                "chapter_name": "ecosystem_programme.class_extension_gates",
+                "description": "Plotter, modem and specialist profiles and drivers require design and qualification. Discovery metadata alone does not guarantee operation.",
+                "parameters": []
+              },
+              {
+                "number": 48,
+                "chapter_name": "ecosystem_programme.governance",
+                "description": "DRI leads software interfaces; Logix contributes hardware specifications; independent manufacturers participate. Final charter, fees and support period remain open.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "28fa8828ff50c6549ad34eb517896cdb6f6976a9f18d70903981a9c7fd1134a4"
+        },
+        {
+          "record_id": "technology.logix_lan100_link",
+          "before": {
+            "id": "technology.logix_lan100_link",
+            "name": "LogixLAN negotiated-rate physical and data-link standard",
+            "kind": "interface",
+            "description": "LogixLAN negotiated-rate physical and data-link standard",
+            "owner_actor_ids": [
+              "actor.logix"
+            ],
+            "related_technology_ids": [],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "topology",
+                "description": "active star through a multiport hub/repeater/arbiter",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "signaling",
+                "description": "balanced differential serial signaling compatible in principle with EIA-422-class line drivers/receivers",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "connector",
+                "description": "8-position modular connector (RJ45-style / 8P8C family)",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "cable",
+                "description": "four twisted pairs",
+                "parameters": []
+              },
+              {
+                "number": 5,
+                "chapter_name": "pair_assignment.pair_1",
+                "description": "station-to-hub differential data",
+                "parameters": []
+              },
+              {
+                "number": 6,
+                "chapter_name": "pair_assignment.pair_2",
+                "description": "hub-to-station differential data",
+                "parameters": []
+              },
+              {
+                "number": 7,
+                "chapter_name": "pair_assignment.pair_3",
+                "description": "hub-distributed synchronous clock / transmit-grant timing",
+                "parameters": []
+              },
+              {
+                "number": 8,
+                "chapter_name": "pair_assignment.pair_4",
+                "description": "reserved for diagnostics or later expansion",
+                "parameters": []
+              },
+              {
+                "number": 9,
+                "chapter_name": "media_access",
+                "description": "hub-controlled polling/grant; one station is granted transmit access at a time, avoiding collision-detection hardware",
+                "parameters": []
+              },
+              {
+                "number": 10,
+                "chapter_name": "framing",
+                "description": "HDLC-inspired bit-oriented framing with address/control fields and 16-bit frame check sequence",
+                "parameters": []
+              },
+              {
+                "number": 11,
+                "chapter_name": "hub_behavior",
+                "description": "Stream the granted frame to other admitted ports at the common rate; destination filtering and CRC validation occur in adapters. No independent per-port rates, frame-store switching or rate conversion in the 1981 baseline.",
+                "parameters": []
+              },
+              {
+                "number": 12,
+                "chapter_name": "station_addressing",
+                "description": "locally assigned link address stored/configured by the adapter; broadcast supported",
+                "parameters": []
+              },
+              {
+                "number": 13,
+                "chapter_name": "design_goal",
+                "description": "simple, deterministic and inexpensive LAN implementation using technology comfortably available by 1981",
+                "parameters": []
+              },
+              {
+                "number": 14,
+                "chapter_name": "supported_rates_kbps[1]",
+                "description": "100",
+                "parameters": []
+              },
+              {
+                "number": 15,
+                "chapter_name": "supported_rates_kbps[2]",
+                "description": "250",
+                "parameters": []
+              },
+              {
+                "number": 16,
+                "chapter_name": "supported_rates_kbps[3]",
+                "description": "500",
+                "parameters": []
+              },
+              {
+                "number": 17,
+                "chapter_name": "supported_rates_kbps[4]",
+                "description": "1000",
+                "parameters": []
+              },
+              {
+                "number": 18,
+                "chapter_name": "startup_rate_kbps",
+                "description": "100",
+                "parameters": []
+              },
+              {
+                "number": 19,
+                "chapter_name": "fallback_rate_kbps",
+                "description": "100",
+                "parameters": []
+              },
+              {
+                "number": 20,
+                "chapter_name": "maximum_shared_raw_rate_kbps",
+                "description": "1000",
+                "parameters": []
+              },
+              {
+                "number": 21,
+                "chapter_name": "rate_scope",
+                "description": "One common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.",
+                "parameters": []
+              },
+              {
+                "number": 22,
+                "chapter_name": "legacy_identifier",
+                "description": "The stable logix_lan100_link identifier is retained for references; 100 denotes the mandatory startup/fallback rate, not the maximum rate.",
+                "parameters": []
+              },
+              {
+                "number": 23,
+                "chapter_name": "platform_rate_profiles[1].path[1]",
+                "description": "host_qualification",
+                "parameters": []
+              },
+              {
+                "number": 24,
+                "chapter_name": "platform_rate_profiles[1].path[2]",
+                "description": "Compatible computer implementation.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "device.base_computer.aurelia"
+                  }
+                ]
+              },
+              {
+                "number": 25,
+                "chapter_name": "platform_rate_profiles[2].path[1]",
+                "description": "host_qualification",
+                "parameters": []
+              },
+              {
+                "number": 26,
+                "chapter_name": "platform_rate_profiles[2].path[2]",
+                "description": "Compatible computer implementation.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "device.base_computer.aurelia_plus"
+                  }
+                ]
+              },
+              {
+                "number": 27,
+                "chapter_name": "platform_rate_profiles[3].path[1]",
+                "description": "host_qualification",
+                "parameters": []
+              },
+              {
+                "number": 28,
+                "chapter_name": "platform_rate_profiles[3].path[2]",
+                "description": "Compatible computer implementation.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "device.base_computer.artemis"
+                  }
+                ]
+              },
+              {
+                "number": 29,
+                "chapter_name": "platform_rate_profiles[4].path[1]",
+                "description": "host_qualification",
+                "parameters": []
+              },
+              {
+                "number": 30,
+                "chapter_name": "platform_rate_profiles[4].path[2]",
+                "description": "Compatible computer implementation.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "device.base_computer.artemis_pro"
+                  }
+                ]
+              },
+              {
+                "number": 31,
+                "chapter_name": "implementation_design.title",
+                "description": "LogixLAN shared-rate negotiation and buffered adapters",
+                "parameters": []
+              },
+              {
+                "number": 32,
+                "chapter_name": "implementation_design.advertised_rates",
+                "description": "Intersection of adapter hardware capability, firmware-enforced host qualification ceiling and configured cable/reliability limits. Platform ceilings are design qualification targets, not measured throughput claims.",
+                "parameters": []
+              },
+              {
+                "number": 33,
+                "chapter_name": "implementation_design.selection",
+                "description": "Hub selects the highest rate in the intersection of its own capability and every admitted station/link capability. A 100-only station or link limits the whole network to 100 kbit/s.",
+                "parameters": []
+              },
+              {
+                "number": 34,
+                "chapter_name": "implementation_design.negotiation[1]",
+                "description": "Reset/start at 100 kbit/s; keep unadmitted ports isolated from normal traffic.",
+                "parameters": []
+              },
+              {
+                "number": 35,
+                "chapter_name": "implementation_design.negotiation[2]",
+                "description": "Poll station identity, supported-rate bitmap, host profile and receiver capacity at 100 kbit/s.",
+                "parameters": []
+              },
+              {
+                "number": 36,
+                "chapter_name": "implementation_design.negotiation[3]",
+                "description": "Choose the highest common candidate; announce a switch epoch and bounded idle interval at 100 kbit/s and collect acknowledgments from all admitted stations.",
+                "parameters": []
+              },
+              {
+                "number": 37,
+                "chapter_name": "implementation_design.negotiation[4]",
+                "description": "Drain the current frame and stop grants before changing the distributed clock. Do not switch with a missing acknowledgment.",
+                "parameters": []
+              },
+              {
+                "number": 38,
+                "chapter_name": "implementation_design.negotiation[5]",
+                "description": "Run bounded test frames on every admitted link at the candidate rate; resume normal grants only after every link passes.",
+                "parameters": []
+              },
+              {
+                "number": 39,
+                "chapter_name": "implementation_design.negotiation[6]",
+                "description": "On failed qualification or persistent link errors, return to 100 kbit/s for coordination, exclude the failed candidate and try the next lower common rate. If 100 fails, isolate the faulty port and report the fault.",
+                "parameters": []
+              },
+              {
+                "number": 40,
+                "chapter_name": "implementation_design.admission",
+                "description": "Periodically drain traffic and open an announced 100 kbit/s discovery window. New stations join only after coordinated renegotiation; admitting a slower station lowers the common rate. Discovery windows consume shared bandwidth.",
+                "parameters": []
+              },
+              {
+                "number": 41,
+                "chapter_name": "implementation_design.recovery",
+                "description": "Adapters use a timeout independent of the distributed bit clock. On lost clock/control or switch timeout, stop transmitting and await the hub at 100 kbit/s. The hub watchdog restores 100 kbit/s and a new negotiation epoch; never allow unilateral station transmission at a different rate.",
+                "parameters": []
+              },
+              {
+                "number": 42,
+                "chapter_name": "implementation_design.clock_generation.bit_clock_divisors[1]",
+                "description": "100",
+                "parameters": []
+              },
+              {
+                "number": 43,
+                "chapter_name": "implementation_design.clock_generation.bit_clock_divisors[2]",
+                "description": "40",
+                "parameters": []
+              },
+              {
+                "number": 44,
+                "chapter_name": "implementation_design.clock_generation.bit_clock_divisors[3]",
+                "description": "20",
+                "parameters": []
+              },
+              {
+                "number": 45,
+                "chapter_name": "implementation_design.clock_generation.bit_clock_divisors[4]",
+                "description": "10",
+                "parameters": []
+              },
+              {
+                "number": 46,
+                "chapter_name": "implementation_design.clock_generation.scope",
+                "description": "Hub clock-divider reference only; does not require every adapter or host logic path to run at 10 MHz.",
+                "parameters": []
+              },
+              {
+                "number": 47,
+                "chapter_name": "implementation_design.adapter_requirements.hardware_services[1]",
+                "description": "Serial framing and CRC generation/checking",
+                "parameters": []
+              },
+              {
+                "number": 48,
+                "chapter_name": "implementation_design.adapter_requirements.hardware_services[2]",
+                "description": "Destination filtering before CPU interrupt",
+                "parameters": []
+              },
+              {
+                "number": 49,
+                "chapter_name": "implementation_design.adapter_requirements.hardware_services[3]",
+                "description": "Complete-frame buffering",
+                "parameters": []
+              },
+              {
+                "number": 50,
+                "chapter_name": "implementation_design.adapter_requirements.hardware_services[4]",
+                "description": "Packet-level interrupts and receiver-ready reporting",
+                "parameters": []
+              },
+              {
+                "number": 51,
+                "chapter_name": "implementation_design.adapter_requirements.local_packet_ram_target_bytes",
+                "description": "4096",
+                "parameters": []
+              },
+              {
+                "number": 52,
+                "chapter_name": "implementation_design.adapter_requirements.buffer_policy",
+                "description": "Local adapter RAM, additional to host system RAM. Partition transmit/receive buffers and metadata; freeze maximum frame length and IP MTU to fit complete frames before implementation. Physical RAM chip count remains unresolved.",
+                "parameters": []
+              },
+              {
+                "number": 53,
+                "chapter_name": "implementation_design.adapter_requirements.flow_control",
+                "description": "Grant unicast only when the destination advertises credit for a complete frame; reserve that credit until completion. Broadcast requires credit from all intended admitted receivers. Timeouts revoke stale credits; bounded queues and retry/error reporting prevent indefinite blocking. Use flow control first for receiver pressure, not automatic rate changes.",
+                "parameters": []
+              },
+              {
+                "number": 54,
+                "chapter_name": "implementation_design.adapter_requirements.host_service",
+                "description": "No per-byte interrupt requirement. Aurelia at 250 kbit/s has 128 CPU clocks per raw byte at 4 MHz; Aurelia+ at 500 kbit/s has 96 at 6 MHz. Validate worst-case service latency. A persistently slow host may advertise a lower configured ceiling.",
+                "parameters": []
+              },
+              {
+                "number": 55,
+                "chapter_name": "implementation_design.qualification_gates[1]",
+                "description": "Cable lengths, termination, drivers and clock skew at each advertised rate",
+                "parameters": []
+              },
+              {
+                "number": 56,
+                "chapter_name": "implementation_design.qualification_gates[2]",
+                "description": "Exact frame format/length, IP MTU, buffer partitions and credit accounting",
+                "parameters": []
+              },
+              {
+                "number": 57,
+                "chapter_name": "implementation_design.qualification_gates[3]",
+                "description": "Discovery cadence, switch/ack timeouts and independent recovery watchdog",
+                "parameters": []
+              },
+              {
+                "number": 58,
+                "chapter_name": "implementation_design.qualification_gates[4]",
+                "description": "Error thresholds, test-frame counts and fallback hysteresis",
+                "parameters": []
+              },
+              {
+                "number": 59,
+                "chapter_name": "implementation_design.qualification_gates[5]",
+                "description": "Mixed-platform admission, missing acknowledgments, clock loss, buffer exhaustion and broadcast backpressure",
+                "parameters": []
+              },
+              {
+                "number": 60,
+                "chapter_name": "implementation_design.qualification_gates[6]",
+                "description": "Sustained TCP/IP throughput and CPU load on all four host platforms",
+                "parameters": []
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.logix_lan100_link",
+            "name": "LogixLAN negotiated-rate physical and data-link standard",
+            "kind": "interface",
+            "description": "LogixLAN negotiated-rate physical and data-link standard",
+            "owner_actor_ids": [
+              "actor.logix"
+            ],
+            "related_technology_ids": [],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "topology",
+                "description": "active star through a multiport hub/repeater/arbiter",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "signaling",
+                "description": "balanced differential serial signaling compatible in principle with EIA-422-class line drivers/receivers",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "connector",
+                "description": "8-position modular connector (RJ45-style / 8P8C family)",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "cable",
+                "description": "four twisted pairs",
+                "parameters": []
+              },
+              {
+                "number": 5,
+                "chapter_name": "pair_assignment.pair_1",
+                "description": "station-to-hub differential data",
+                "parameters": []
+              },
+              {
+                "number": 6,
+                "chapter_name": "pair_assignment.pair_2",
+                "description": "hub-to-station differential data",
+                "parameters": []
+              },
+              {
+                "number": 7,
+                "chapter_name": "pair_assignment.pair_3",
+                "description": "hub-distributed synchronous clock / transmit-grant timing",
+                "parameters": []
+              },
+              {
+                "number": 8,
+                "chapter_name": "pair_assignment.pair_4",
+                "description": "reserved for diagnostics or later expansion",
+                "parameters": []
+              },
+              {
+                "number": 9,
+                "chapter_name": "media_access",
+                "description": "hub-controlled polling/grant; one station is granted transmit access at a time, avoiding collision-detection hardware",
+                "parameters": []
+              },
+              {
+                "number": 10,
+                "chapter_name": "framing",
+                "description": "HDLC-inspired bit-oriented framing with address/control fields and 16-bit frame check sequence",
+                "parameters": []
+              },
+              {
+                "number": 11,
+                "chapter_name": "hub_behavior",
+                "description": "Stream the granted frame to other admitted ports at the common rate; destination filtering and CRC validation occur in adapters. No independent per-port rates, frame-store switching or rate conversion in the 1981 baseline.",
+                "parameters": []
+              },
+              {
+                "number": 12,
+                "chapter_name": "station_addressing",
+                "description": "locally assigned link address stored/configured by the adapter; broadcast supported",
+                "parameters": []
+              },
+              {
+                "number": 13,
+                "chapter_name": "design_goal",
+                "description": "simple, deterministic and inexpensive LAN implementation using technology comfortably available by 1981",
+                "parameters": []
+              },
+              {
+                "number": 14,
+                "chapter_name": "supported_rates_kbps[1]",
+                "description": "100",
+                "parameters": []
+              },
+              {
+                "number": 15,
+                "chapter_name": "supported_rates_kbps[2]",
+                "description": "250",
+                "parameters": []
+              },
+              {
+                "number": 16,
+                "chapter_name": "supported_rates_kbps[3]",
+                "description": "500",
+                "parameters": []
+              },
+              {
+                "number": 17,
+                "chapter_name": "supported_rates_kbps[4]",
+                "description": "1000",
+                "parameters": []
+              },
+              {
+                "number": 18,
+                "chapter_name": "startup_rate_kbps",
+                "description": "100",
+                "parameters": []
+              },
+              {
+                "number": 19,
+                "chapter_name": "fallback_rate_kbps",
+                "description": "100",
+                "parameters": []
+              },
+              {
+                "number": 20,
+                "chapter_name": "maximum_shared_raw_rate_kbps",
+                "description": "1000",
+                "parameters": []
+              },
+              {
+                "number": 21,
+                "chapter_name": "rate_scope",
+                "description": "One common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.",
+                "parameters": []
+              },
+              {
+                "number": 22,
+                "chapter_name": "legacy_identifier",
+                "description": "The stable logix_lan100_link identifier is retained for references; 100 denotes the mandatory startup/fallback rate, not the maximum rate.",
+                "parameters": []
+              },
+              {
+                "number": 23,
+                "chapter_name": "platform_rate_profiles[1].path[1]",
+                "description": "host_qualification",
+                "parameters": []
+              },
+              {
+                "number": 24,
+                "chapter_name": "platform_rate_profiles[1].path[2]",
+                "description": "Compatible computer implementation.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "device.base_computer.aurelia"
+                  }
+                ]
+              },
+              {
+                "number": 25,
+                "chapter_name": "platform_rate_profiles[2].path[1]",
+                "description": "host_qualification",
+                "parameters": []
+              },
+              {
+                "number": 26,
+                "chapter_name": "platform_rate_profiles[2].path[2]",
+                "description": "Compatible computer implementation.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "device.base_computer.aurelia_plus"
+                  }
+                ]
+              },
+              {
+                "number": 27,
+                "chapter_name": "platform_rate_profiles[3].path[1]",
+                "description": "host_qualification",
+                "parameters": []
+              },
+              {
+                "number": 28,
+                "chapter_name": "platform_rate_profiles[3].path[2]",
+                "description": "Compatible computer implementation.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "device.base_computer.artemis"
+                  }
+                ]
+              },
+              {
+                "number": 29,
+                "chapter_name": "platform_rate_profiles[4].path[1]",
+                "description": "host_qualification",
+                "parameters": []
+              },
+              {
+                "number": 30,
+                "chapter_name": "platform_rate_profiles[4].path[2]",
+                "description": "Compatible computer implementation.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "device.base_computer.artemis_pro"
+                  }
+                ]
+              },
+              {
+                "number": 31,
+                "chapter_name": "implementation_design.title",
+                "description": "LogixLAN shared-rate negotiation and buffered adapters",
+                "parameters": []
+              },
+              {
+                "number": 32,
+                "chapter_name": "implementation_design.advertised_rates",
+                "description": "Intersection of adapter hardware capability, firmware-enforced host qualification ceiling and configured cable/reliability limits. Platform ceilings are design qualification targets, not measured throughput claims.",
+                "parameters": []
+              },
+              {
+                "number": 33,
+                "chapter_name": "implementation_design.selection",
+                "description": "Hub selects the highest rate in the intersection of its own capability and every admitted station/link capability. A 100-only station or link limits the whole network to 100 kbit/s.",
+                "parameters": []
+              },
+              {
+                "number": 34,
+                "chapter_name": "implementation_design.negotiation[1]",
+                "description": "Reset/start at 100 kbit/s; keep unadmitted ports isolated from normal traffic.",
+                "parameters": []
+              },
+              {
+                "number": 35,
+                "chapter_name": "implementation_design.negotiation[2]",
+                "description": "Poll station identity, supported-rate bitmap, host profile and receiver capacity at 100 kbit/s.",
+                "parameters": []
+              },
+              {
+                "number": 36,
+                "chapter_name": "implementation_design.negotiation[3]",
+                "description": "Choose the highest common candidate; announce a switch epoch and bounded idle interval at 100 kbit/s and collect acknowledgments from all admitted stations.",
+                "parameters": []
+              },
+              {
+                "number": 37,
+                "chapter_name": "implementation_design.negotiation[4]",
+                "description": "Drain the current frame and stop grants before changing the distributed clock. Do not switch with a missing acknowledgment.",
+                "parameters": []
+              },
+              {
+                "number": 38,
+                "chapter_name": "implementation_design.negotiation[5]",
+                "description": "Run bounded test frames on every admitted link at the candidate rate; resume normal grants only after every link passes.",
+                "parameters": []
+              },
+              {
+                "number": 39,
+                "chapter_name": "implementation_design.negotiation[6]",
+                "description": "On failed qualification or persistent link errors, return to 100 kbit/s for coordination, exclude the failed candidate and try the next lower common rate. If 100 fails, isolate the faulty port and report the fault.",
+                "parameters": []
+              },
+              {
+                "number": 40,
+                "chapter_name": "implementation_design.admission",
+                "description": "Periodically drain traffic and open an announced 100 kbit/s discovery window. New stations join only after coordinated renegotiation; admitting a slower station lowers the common rate. Discovery windows consume shared bandwidth.",
+                "parameters": []
+              },
+              {
+                "number": 41,
+                "chapter_name": "implementation_design.recovery",
+                "description": "Adapters use a timeout independent of the distributed bit clock. On lost clock/control or switch timeout, stop transmitting and await the hub at 100 kbit/s. The hub watchdog restores 100 kbit/s and a new negotiation epoch; never allow unilateral station transmission at a different rate.",
+                "parameters": []
+              },
+              {
+                "number": 42,
+                "chapter_name": "implementation_design.clock_generation.bit_clock_divisors[1]",
+                "description": "100",
+                "parameters": []
+              },
+              {
+                "number": 43,
+                "chapter_name": "implementation_design.clock_generation.bit_clock_divisors[2]",
+                "description": "40",
+                "parameters": []
+              },
+              {
+                "number": 44,
+                "chapter_name": "implementation_design.clock_generation.bit_clock_divisors[3]",
+                "description": "20",
+                "parameters": []
+              },
+              {
+                "number": 45,
+                "chapter_name": "implementation_design.clock_generation.bit_clock_divisors[4]",
+                "description": "10",
+                "parameters": []
+              },
+              {
+                "number": 46,
+                "chapter_name": "implementation_design.clock_generation.scope",
+                "description": "Hub clock-divider reference only; does not require every adapter or host logic path to run at 10 MHz.",
+                "parameters": []
+              },
+              {
+                "number": 47,
+                "chapter_name": "implementation_design.adapter_requirements.hardware_services[1]",
+                "description": "Serial framing and CRC generation/checking",
+                "parameters": []
+              },
+              {
+                "number": 48,
+                "chapter_name": "implementation_design.adapter_requirements.hardware_services[2]",
+                "description": "Destination filtering before CPU interrupt",
+                "parameters": []
+              },
+              {
+                "number": 49,
+                "chapter_name": "implementation_design.adapter_requirements.hardware_services[3]",
+                "description": "Complete-frame buffering",
+                "parameters": []
+              },
+              {
+                "number": 50,
+                "chapter_name": "implementation_design.adapter_requirements.hardware_services[4]",
+                "description": "Packet-level interrupts and receiver-ready reporting",
+                "parameters": []
+              },
+              {
+                "number": 51,
+                "chapter_name": "implementation_design.adapter_requirements.local_packet_ram_target_bytes",
+                "description": "4096",
+                "parameters": []
+              },
+              {
+                "number": 52,
+                "chapter_name": "implementation_design.adapter_requirements.buffer_policy",
+                "description": "Local adapter RAM, additional to host system RAM. Partition transmit/receive buffers and metadata; freeze maximum frame length and IP MTU to fit complete frames before implementation. Physical RAM chip count remains unresolved.",
+                "parameters": []
+              },
+              {
+                "number": 53,
+                "chapter_name": "implementation_design.adapter_requirements.flow_control",
+                "description": "Grant unicast only when the destination advertises credit for a complete frame; reserve that credit until completion. Broadcast requires credit from all intended admitted receivers. Timeouts revoke stale credits; bounded queues and retry/error reporting prevent indefinite blocking. Use flow control first for receiver pressure, not automatic rate changes.",
+                "parameters": []
+              },
+              {
+                "number": 54,
+                "chapter_name": "implementation_design.adapter_requirements.host_service",
+                "description": "No per-byte interrupt requirement. Aurelia at 250 kbit/s has 128 CPU clocks per raw byte at 4 MHz; Aurelia+ at 500 kbit/s has 96 at 6 MHz. Validate worst-case service latency. A persistently slow host may advertise a lower configured ceiling.",
+                "parameters": []
+              },
+              {
+                "number": 55,
+                "chapter_name": "implementation_design.qualification_gates[1]",
+                "description": "Cable lengths, termination, drivers and clock skew at each advertised rate",
+                "parameters": []
+              },
+              {
+                "number": 56,
+                "chapter_name": "implementation_design.qualification_gates[2]",
+                "description": "Exact frame format/length, IP MTU, buffer partitions and credit accounting",
+                "parameters": []
+              },
+              {
+                "number": 57,
+                "chapter_name": "implementation_design.qualification_gates[3]",
+                "description": "Discovery cadence, switch/ack timeouts and independent recovery watchdog",
+                "parameters": []
+              },
+              {
+                "number": 58,
+                "chapter_name": "implementation_design.qualification_gates[4]",
+                "description": "Error thresholds, test-frame counts and fallback hysteresis",
+                "parameters": []
+              },
+              {
+                "number": 59,
+                "chapter_name": "implementation_design.qualification_gates[5]",
+                "description": "Mixed-platform admission, missing acknowledgments, clock loss, buffer exhaustion and broadcast backpressure",
+                "parameters": []
+              },
+              {
+                "number": 60,
+                "chapter_name": "implementation_design.qualification_gates[6]",
+                "description": "Sustained TCP/IP throughput and CPU load on all four host platforms",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "35e371ae739c450b0561f49add7330c47862e0e3ea91aa0d5f7c5231ec8e29f1"
+        },
+        {
+          "record_id": "technology.aurelia_memory_model",
+          "before": {
+            "id": "technology.aurelia_memory_model",
+            "name": "Aurelia banked memory organization",
+            "kind": "interface",
+            "description": "Aurelia banked memory organization",
+            "owner_actor_ids": [],
+            "related_technology_ids": [
+              "technology.logix_sprite_system"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "cpu_address_space_kb",
+                "description": "64",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "page_size_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "fixed_low_ram_kb",
+                "description": "28",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "switchable_window_kb",
+                "description": "32",
+                "parameters": []
+              },
+              {
+                "number": 5,
+                "chapter_name": "common_system_ram_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 6,
+                "chapter_name": "mapping_register_access",
+                "description": "I/O ports",
+                "parameters": []
+              },
+              {
+                "number": 7,
+                "chapter_name": "implementation",
+                "description": "One AION system-controller chip replaces mapper registers and selected decode/control logic; external clock/reset/interrupt and electrical buffers remain as required.",
+                "parameters": []
+              },
+              {
+                "number": 8,
+                "chapter_name": "rom_policy",
+                "description": "Read-only code and constants execute directly from ROM where practical. Mutable state, stacks and buffers reside in RAM.",
+                "parameters": []
+              },
+              {
+                "number": 9,
+                "chapter_name": "video_ram_policy",
+                "description": "CPU uses temporary 4 KiB display-memory windows or auto-incrementing upload ports. DMA uses physical source banks and target-ready video ports. Video controller independently refreshes display DRAM and arbitrates sprite SRAM; sprite storage is not system RAM.",
+                "parameters": []
+              },
+              {
+                "number": 10,
+                "chapter_name": "reset_policy",
+                "description": "Initialize refresh and boot mapping before RAM use; disable DMA and clear pending ownership on reset. Warm boot aborts/drains DMA before restoring bank maps.",
+                "parameters": []
+              },
+              {
+                "number": 11,
+                "chapter_name": "application_policy",
+                "description": "Installed RAM is accessible, but system workspaces and the resident Business Tools workspace reduce application memory.",
+                "parameters": []
+              },
+              {
+                "number": 12,
+                "chapter_name": "expansion_policy",
+                "description": "Additional RAM uses mapped pages; an expansion does not enlarge the CPU logical address space.",
+                "parameters": []
+              },
+              {
+                "number": 13,
+                "chapter_name": "implementation_design.title",
+                "description": "CP/M-compatible application-memory boundary",
+                "parameters": []
+              },
+              {
+                "number": 14,
+                "chapter_name": "implementation_design.discovery",
+                "description": "At launch, the little-endian word at 0006H (the operand of JMP at 0005H) points to the BDOS entry stub at the exclusive top of usable contiguous application RAM. Keep the entire advertised range writable RAM.",
+                "parameters": []
+              },
+              {
+                "number": 15,
+                "chapter_name": "implementation_design.budget",
+                "description": "Reserve 4 KB at the top of lower RAM for the entry stub and resident workspace, in addition to F000–FFFF common system RAM. These are the initial design allocations, not measured image sizes. If implementation requires more workspace, revise the boot profile before application launch and report the actual lower boundary.",
+                "parameters": []
+              },
+              {
+                "number": 16,
+                "chapter_name": "implementation_design.dispatch[1]",
+                "description": "CALL 0005H enters the top-of-TPA stub.",
+                "parameters": []
+              },
+              {
+                "number": 17,
+                "chapter_name": "implementation_design.dispatch[2]",
+                "description": "The stub jumps to common memory before any bank mapping changes.",
+                "parameters": []
+              },
+              {
+                "number": 18,
+                "chapter_name": "implementation_design.dispatch[3]",
+                "description": "Common code saves mapping and application stack, then adopts the system stack.",
+                "parameters": []
+              },
+              {
+                "number": 19,
+                "chapter_name": "implementation_design.dispatch[4]",
+                "description": "Map the service; copy caller buffers in bounded chunks while respecting page boundaries.",
+                "parameters": []
+              },
+              {
+                "number": 20,
+                "chapter_name": "implementation_design.dispatch[5]",
+                "description": "Restore the application view and stack before returning.",
+                "parameters": []
+              },
+              {
+                "number": 21,
+                "chapter_name": "implementation_design.lifecycle[1]",
+                "description": "Choose all workspace reservations before launching the program. Never shrink TPA under a running program.",
+                "parameters": []
+              },
+              {
+                "number": 22,
+                "chapter_name": "implementation_design.lifecycle[2]",
+                "description": "Warm boot restores vectors and the normal map. Legacy programs with hardcoded addresses beyond the published boundary remain unsupported.",
+                "parameters": []
+              },
+              {
+                "number": 23,
+                "chapter_name": "implementation_design.lifecycle[3]",
+                "description": "Disable optional resident tools or choose a smaller TPA when networking needs more RAM; never silently consume advertised program memory.",
+                "parameters": []
+              },
+              {
+                "number": 24,
+                "chapter_name": "implementation_design.extension_api",
+                "description": "lx_memory_query returns installed RAM, TPA bounds, reserved bytes and optional banked-handle capacity. Standard CP/M programs need not use it.",
+                "parameters": []
+              },
+              {
+                "number": 25,
+                "chapter_name": "implementation_design.validation[1]",
+                "description": "Exercise programs that inspect 0006H and fill their advertised TPA.",
+                "parameters": []
+              },
+              {
+                "number": 26,
+                "chapter_name": "implementation_design.validation[2]",
+                "description": "Test nested calls, interrupts, DMA buffers crossing pages and warm boot after application failure.",
+                "parameters": []
+              },
+              {
+                "number": 27,
+                "chapter_name": "implementation_design.validation[3]",
+                "description": "Stress CPU/DMA/refresh/peripherals and display together at both host clocks and process/temperature corners.",
+                "parameters": []
+              },
+              {
+                "number": 28,
+                "chapter_name": "implementation_design.validation[4]",
+                "description": "Validate hidden and expanded RAM refresh, physical DMA bounds, page-crossing segmentation, abort and warm boot.",
+                "parameters": []
+              },
+              {
+                "number": 29,
+                "chapter_name": "implementation_design.application_memory_profiles[1].installed_ram_kb",
+                "description": "48",
+                "parameters": []
+              },
+              {
+                "number": 30,
+                "chapter_name": "implementation_design.application_memory_profiles[1].application_start",
+                "description": "0100",
+                "parameters": []
+              },
+              {
+                "number": 31,
+                "chapter_name": "implementation_design.application_memory_profiles[1].application_end_inclusive",
+                "description": "9FFF",
+                "parameters": []
+              },
+              {
+                "number": 32,
+                "chapter_name": "implementation_design.application_memory_profiles[1].bdos_entry",
+                "description": "A000",
+                "parameters": []
+              },
+              {
+                "number": 33,
+                "chapter_name": "implementation_design.application_memory_profiles[1].lower_reserved_range",
+                "description": "A000–AFFF",
+                "parameters": []
+              },
+              {
+                "number": 34,
+                "chapter_name": "implementation_design.application_memory_profiles[1].tpa_bytes",
+                "description": "40704",
+                "parameters": []
+              },
+              {
+                "number": 35,
+                "chapter_name": "implementation_design.application_memory_profiles[1].id",
+                "description": "ram_48kb",
+                "parameters": []
+              },
+              {
+                "number": 36,
+                "chapter_name": "implementation_design.application_memory_profiles[2].installed_ram_kb",
+                "description": "64",
+                "parameters": []
+              },
+              {
+                "number": 37,
+                "chapter_name": "implementation_design.application_memory_profiles[2].application_start",
+                "description": "0100",
+                "parameters": []
+              },
+              {
+                "number": 38,
+                "chapter_name": "implementation_design.application_memory_profiles[2].application_end_inclusive",
+                "description": "DFFF",
+                "parameters": []
+              },
+              {
+                "number": 39,
+                "chapter_name": "implementation_design.application_memory_profiles[2].bdos_entry",
+                "description": "E000",
+                "parameters": []
+              },
+              {
+                "number": 40,
+                "chapter_name": "implementation_design.application_memory_profiles[2].lower_reserved_range",
+                "description": "E000–EFFF",
+                "parameters": []
+              },
+              {
+                "number": 41,
+                "chapter_name": "implementation_design.application_memory_profiles[2].tpa_bytes",
+                "description": "57088",
+                "parameters": []
+              },
+              {
+                "number": 42,
+                "chapter_name": "implementation_design.application_memory_profiles[2].id",
+                "description": "ram_64kb",
+                "parameters": []
+              },
+              {
+                "number": 43,
+                "chapter_name": "controller_ref",
+                "description": "System controller implementing this memory function.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 44,
+                "chapter_name": "dma.transfer_contexts",
+                "description": "2",
+                "parameters": []
+              },
+              {
+                "number": 45,
+                "chapter_name": "dma.active_transfer_engines",
+                "description": "1",
+                "parameters": []
+              },
+              {
+                "number": 46,
+                "chapter_name": "dma.destination_address_bits",
+                "description": "16",
+                "parameters": []
+              },
+              {
+                "number": 47,
+                "chapter_name": "dma.length_bits",
+                "description": "16",
+                "parameters": []
+              },
+              {
+                "number": 48,
+                "chapter_name": "dma.operations[1]",
+                "description": "memory-to-memory",
+                "parameters": []
+              },
+              {
+                "number": 49,
+                "chapter_name": "dma.operations[2]",
+                "description": "memory-to-I/O",
+                "parameters": []
+              },
+              {
+                "number": 50,
+                "chapter_name": "dma.operations[3]",
+                "description": "I/O-to-memory",
+                "parameters": []
+              },
+              {
+                "number": 51,
+                "chapter_name": "dma.address_steps[1]",
+                "description": "fixed",
+                "parameters": []
+              },
+              {
+                "number": 52,
+                "chapter_name": "dma.address_steps[2]",
+                "description": "increment",
+                "parameters": []
+              },
+              {
+                "number": 53,
+                "chapter_name": "dma.address_steps[3]",
+                "description": "decrement",
+                "parameters": []
+              },
+              {
+                "number": 54,
+                "chapter_name": "dma.bank_selection",
+                "description": "Latch physical source/destination bank and offsets on start. CPU mapping changes cannot redirect an active transfer; split logical buffers at 4 KiB boundaries before programming physical segments. Reject ROM writes, unmapped banks and out-of-range lengths.",
+                "parameters": []
+              },
+              {
+                "number": 55,
+                "chapter_name": "dma.arbitration",
+                "description": "Bounded bursts with guaranteed CPU and refresh service; device-ready/WAIT handshake; video uploads yield to video-controller fetch deadlines. Numeric grant limits require cycle-level validation.",
+                "parameters": []
+              },
+              {
+                "number": 56,
+                "chapter_name": "dma.completion",
+                "description": "Completion/error interrupt, readable remaining count, controlled abort; reset disables DMA.",
+                "parameters": []
+              },
+              {
+                "number": 57,
+                "chapter_name": "dma.video_endpoint",
+                "description": "Auto-incrementing upload ports for display DRAM or dedicated sprite SRAM; target-ready backpressure.",
+                "parameters": []
+              },
+              {
+                "number": 58,
+                "chapter_name": "dma.peripheral_scope",
+                "description": "Disk/FlexiBUS DMA requires qualified request/ready or FIFO endpoints and drivers; legacy programmed I/O remains supported.",
+                "parameters": []
+              },
+              {
+                "number": 59,
+                "chapter_name": "system_refresh.independent_of_cpu",
+                "description": "True",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "true"
+                  }
+                ]
+              },
+              {
+                "number": 60,
+                "chapter_name": "system_refresh.all_installed_banks",
+                "description": "True",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "true"
+                  }
+                ]
+              },
+              {
+                "number": 61,
+                "chapter_name": "system_refresh.scope",
+                "description": "System DRAM only, including hidden banks and expansion. Video controller refreshes display DRAM; sprite SRAM needs no refresh.",
+                "parameters": []
+              },
+              {
+                "number": 62,
+                "chapter_name": "system_refresh.scheduler",
+                "description": "Always-running timer, row counter and refresh arbitration during CPU execution, HALT and DMA; initialize before enabling RAM use. Match row count and retention deadlines to each qualified system DRAM type.",
+                "parameters": []
+              },
+              {
+                "number": 63,
+                "chapter_name": "system_refresh.supported_populations[1]",
+                "description": "48 KiB: three banks of eight 16Kx1 DRAMs",
+                "parameters": []
+              },
+              {
+                "number": 64,
+                "chapter_name": "system_refresh.supported_populations[2]",
+                "description": "64 KiB expanded Aurelia: four banks of eight 16Kx1 DRAMs",
+                "parameters": []
+              },
+              {
+                "number": 65,
+                "chapter_name": "system_refresh.supported_populations[3]",
+                "description": "64 KiB Aurelia+: one bank of eight 64Kx1 DRAMs",
+                "parameters": []
+              },
+              {
+                "number": 66,
+                "chapter_name": "sprite_memory.technology_ref",
+                "description": "technology.logix_sprite_system",
+                "parameters": []
+              },
+              {
+                "number": 67,
+                "chapter_name": "sprite_memory.device_refs[1]",
+                "description": "device.subsystem.aurelia.video",
+                "parameters": []
+              },
+              {
+                "number": 68,
+                "chapter_name": "sprite_memory.device_refs[2]",
+                "description": "device.subsystem.aurelia_plus.video",
+                "parameters": []
+              },
+              {
+                "number": 69,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.common_system_ram_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 70,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.contiguous_lower_ram_kb",
+                "description": "44",
+                "parameters": []
+              },
+              {
+                "number": 71,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[1].start",
+                "description": "0000",
+                "parameters": []
+              },
+              {
+                "number": 72,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[1].end",
+                "description": "AFFF",
+                "parameters": []
+              },
+              {
+                "number": 73,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[1].role",
+                "description": "Lower RAM",
+                "parameters": []
+              },
+              {
+                "number": 74,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[1].description",
+                "description": "Lower RAM, including CP/M page zero and application memory",
+                "parameters": []
+              },
+              {
+                "number": 75,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[2].start",
+                "description": "B000",
+                "parameters": []
+              },
+              {
+                "number": 76,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[2].end",
+                "description": "EFFF",
+                "parameters": []
+              },
+              {
+                "number": 77,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[2].role",
+                "description": "ROM / cartridge / video RAM windows",
+                "parameters": []
+              },
+              {
+                "number": 78,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[2].description",
+                "description": "ROM / cartridge / video RAM windows",
+                "parameters": []
+              },
+              {
+                "number": 79,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[3].start",
+                "description": "F000",
+                "parameters": []
+              },
+              {
+                "number": 80,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[3].end",
+                "description": "FFFF",
+                "parameters": []
+              },
+              {
+                "number": 81,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[3].role",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 82,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[3].description",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 83,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.note",
+                "description": "This is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.",
+                "parameters": []
+              },
+              {
+                "number": 84,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.application_memory_profile",
+                "description": "ram_48kb",
+                "parameters": []
+              },
+              {
+                "number": 85,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.controller_ref",
+                "description": "System controller implementing this memory function.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 86,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.dma_addressing",
+                "description": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.",
+                "parameters": []
+              },
+              {
+                "number": 87,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.refresh",
+                "description": "AION system controller refreshes all installed system DRAM independently of CPU activity.",
+                "parameters": []
+              },
+              {
+                "number": 88,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.ram_kb",
+                "description": "64",
+                "parameters": []
+              },
+              {
+                "number": 89,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.common_system_ram_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 90,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.contiguous_lower_ram_kb",
+                "description": "60",
+                "parameters": []
+              },
+              {
+                "number": 91,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[1].start",
+                "description": "0000",
+                "parameters": []
+              },
+              {
+                "number": 92,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[1].end",
+                "description": "EFFF",
+                "parameters": []
+              },
+              {
+                "number": 93,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[1].role",
+                "description": "Lower RAM",
+                "parameters": []
+              },
+              {
+                "number": 94,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[1].description",
+                "description": "Base and expansion RAM, including CP/M page zero and application memory. The card supplies B000–EFFF.",
+                "parameters": []
+              },
+              {
+                "number": 95,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[2].start",
+                "description": "F000",
+                "parameters": []
+              },
+              {
+                "number": 96,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[2].end",
+                "description": "FFFF",
+                "parameters": []
+              },
+              {
+                "number": 97,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[2].role",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 98,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[2].description",
+                "description": "Stable runtime entry code, system stack and critical state.",
+                "parameters": []
+              },
+              {
+                "number": 99,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.note",
+                "description": "The card fills B000–EFFF with RAM in the normal view. ROM, cartridges and video RAM use temporary overlays within 7000–EFFF; the underlying RAM retains its contents.",
+                "parameters": []
+              },
+              {
+                "number": 100,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.application_memory_profile",
+                "description": "ram_64kb",
+                "parameters": []
+              },
+              {
+                "number": 101,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.controller_ref",
+                "description": "System controller implementing this memory function.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 102,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.dma_addressing",
+                "description": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.",
+                "parameters": []
+              },
+              {
+                "number": 103,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.refresh",
+                "description": "AION system controller refreshes all installed system DRAM independently of CPU activity.",
+                "parameters": []
+              },
+              {
+                "number": 104,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.common_system_ram_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 105,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.contiguous_lower_ram_kb",
+                "description": "60",
+                "parameters": []
+              },
+              {
+                "number": 106,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[1].start",
+                "description": "0000",
+                "parameters": []
+              },
+              {
+                "number": 107,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[1].end",
+                "description": "EFFF",
+                "parameters": []
+              },
+              {
+                "number": 108,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[1].role",
+                "description": "Lower RAM",
+                "parameters": []
+              },
+              {
+                "number": 109,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[1].description",
+                "description": "Lower RAM, including CP/M page zero and application memory",
+                "parameters": []
+              },
+              {
+                "number": 110,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[2].start",
+                "description": "F000",
+                "parameters": []
+              },
+              {
+                "number": 111,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[2].end",
+                "description": "FFFF",
+                "parameters": []
+              },
+              {
+                "number": 112,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[2].role",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 113,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[2].description",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 114,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.note",
+                "description": "This is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.",
+                "parameters": []
+              },
+              {
+                "number": 115,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.application_memory_profile",
+                "description": "ram_64kb",
+                "parameters": []
+              },
+              {
+                "number": 116,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.controller_ref",
+                "description": "System controller implementing this memory function.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 117,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.dma_addressing",
+                "description": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.",
+                "parameters": []
+              },
+              {
+                "number": 118,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.refresh",
+                "description": "AION system controller refreshes all installed system DRAM independently of CPU activity.",
+                "parameters": []
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.aurelia_memory_model",
+            "name": "Aurelia banked memory organization",
+            "kind": "interface",
+            "description": "Aurelia banked memory organization",
+            "owner_actor_ids": [],
+            "related_technology_ids": [
+              "technology.logix_sprite_system"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "cpu_address_space_kb",
+                "description": "64",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "page_size_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "fixed_low_ram_kb",
+                "description": "28",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "switchable_window_kb",
+                "description": "32",
+                "parameters": []
+              },
+              {
+                "number": 5,
+                "chapter_name": "common_system_ram_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 6,
+                "chapter_name": "mapping_register_access",
+                "description": "I/O ports",
+                "parameters": []
+              },
+              {
+                "number": 7,
+                "chapter_name": "implementation",
+                "description": "One AION system-controller chip replaces mapper registers and selected decode/control logic; external clock/reset/interrupt and electrical buffers remain as required.",
+                "parameters": []
+              },
+              {
+                "number": 8,
+                "chapter_name": "rom_policy",
+                "description": "Read-only code and constants execute directly from ROM where practical. Mutable state, stacks and buffers reside in RAM.",
+                "parameters": []
+              },
+              {
+                "number": 9,
+                "chapter_name": "video_ram_policy",
+                "description": "CPU uses temporary 4 KiB display-memory windows or auto-incrementing upload ports. DMA uses physical source banks and target-ready video ports. Video controller independently refreshes display DRAM and arbitrates sprite SRAM; sprite storage is not system RAM.",
+                "parameters": []
+              },
+              {
+                "number": 10,
+                "chapter_name": "reset_policy",
+                "description": "Initialize refresh and boot mapping before RAM use; disable DMA and clear pending ownership on reset. Warm boot aborts/drains DMA before restoring bank maps.",
+                "parameters": []
+              },
+              {
+                "number": 11,
+                "chapter_name": "application_policy",
+                "description": "Installed RAM is accessible, but system workspaces and the resident Business Tools workspace reduce application memory.",
+                "parameters": []
+              },
+              {
+                "number": 12,
+                "chapter_name": "expansion_policy",
+                "description": "Additional RAM uses mapped pages; an expansion does not enlarge the CPU logical address space.",
+                "parameters": []
+              },
+              {
+                "number": 13,
+                "chapter_name": "implementation_design.title",
+                "description": "CP/M-compatible application-memory boundary",
+                "parameters": []
+              },
+              {
+                "number": 14,
+                "chapter_name": "implementation_design.discovery",
+                "description": "At launch, the little-endian word at 0006H (the operand of JMP at 0005H) points to the BDOS entry stub at the exclusive top of usable contiguous application RAM. Keep the entire advertised range writable RAM.",
+                "parameters": []
+              },
+              {
+                "number": 15,
+                "chapter_name": "implementation_design.budget",
+                "description": "Reserve 4 KB at the top of lower RAM for the entry stub and resident workspace, in addition to F000–FFFF common system RAM. These are the initial design allocations, not measured image sizes. If implementation requires more workspace, revise the boot profile before application launch and report the actual lower boundary.",
+                "parameters": []
+              },
+              {
+                "number": 16,
+                "chapter_name": "implementation_design.dispatch[1]",
+                "description": "CALL 0005H enters the top-of-TPA stub.",
+                "parameters": []
+              },
+              {
+                "number": 17,
+                "chapter_name": "implementation_design.dispatch[2]",
+                "description": "The stub jumps to common memory before any bank mapping changes.",
+                "parameters": []
+              },
+              {
+                "number": 18,
+                "chapter_name": "implementation_design.dispatch[3]",
+                "description": "Common code saves mapping and application stack, then adopts the system stack.",
+                "parameters": []
+              },
+              {
+                "number": 19,
+                "chapter_name": "implementation_design.dispatch[4]",
+                "description": "Map the service; copy caller buffers in bounded chunks while respecting page boundaries.",
+                "parameters": []
+              },
+              {
+                "number": 20,
+                "chapter_name": "implementation_design.dispatch[5]",
+                "description": "Restore the application view and stack before returning.",
+                "parameters": []
+              },
+              {
+                "number": 21,
+                "chapter_name": "implementation_design.lifecycle[1]",
+                "description": "Choose all workspace reservations before launching the program. Never shrink TPA under a running program.",
+                "parameters": []
+              },
+              {
+                "number": 22,
+                "chapter_name": "implementation_design.lifecycle[2]",
+                "description": "Warm boot restores vectors and the normal map. Legacy programs with hardcoded addresses beyond the published boundary remain unsupported.",
+                "parameters": []
+              },
+              {
+                "number": 23,
+                "chapter_name": "implementation_design.lifecycle[3]",
+                "description": "Disable optional resident tools or choose a smaller TPA when networking needs more RAM; never silently consume advertised program memory.",
+                "parameters": []
+              },
+              {
+                "number": 24,
+                "chapter_name": "implementation_design.extension_api",
+                "description": "lx_memory_query returns installed RAM, TPA bounds, reserved bytes and optional banked-handle capacity. Standard CP/M programs need not use it.",
+                "parameters": []
+              },
+              {
+                "number": 25,
+                "chapter_name": "implementation_design.validation[1]",
+                "description": "Exercise programs that inspect 0006H and fill their advertised TPA.",
+                "parameters": []
+              },
+              {
+                "number": 26,
+                "chapter_name": "implementation_design.validation[2]",
+                "description": "Test nested calls, interrupts, DMA buffers crossing pages and warm boot after application failure.",
+                "parameters": []
+              },
+              {
+                "number": 27,
+                "chapter_name": "implementation_design.validation[3]",
+                "description": "Stress CPU/DMA/refresh/peripherals and display together at both host clocks and process/temperature corners.",
+                "parameters": []
+              },
+              {
+                "number": 28,
+                "chapter_name": "implementation_design.validation[4]",
+                "description": "Validate hidden and expanded RAM refresh, physical DMA bounds, page-crossing segmentation, abort and warm boot.",
+                "parameters": []
+              },
+              {
+                "number": 29,
+                "chapter_name": "implementation_design.application_memory_profiles[1].installed_ram_kb",
+                "description": "48",
+                "parameters": []
+              },
+              {
+                "number": 30,
+                "chapter_name": "implementation_design.application_memory_profiles[1].application_start",
+                "description": "0100",
+                "parameters": []
+              },
+              {
+                "number": 31,
+                "chapter_name": "implementation_design.application_memory_profiles[1].application_end_inclusive",
+                "description": "9FFF",
+                "parameters": []
+              },
+              {
+                "number": 32,
+                "chapter_name": "implementation_design.application_memory_profiles[1].bdos_entry",
+                "description": "A000",
+                "parameters": []
+              },
+              {
+                "number": 33,
+                "chapter_name": "implementation_design.application_memory_profiles[1].lower_reserved_range",
+                "description": "A000–AFFF",
+                "parameters": []
+              },
+              {
+                "number": 34,
+                "chapter_name": "implementation_design.application_memory_profiles[1].tpa_bytes",
+                "description": "40704",
+                "parameters": []
+              },
+              {
+                "number": 35,
+                "chapter_name": "implementation_design.application_memory_profiles[1].id",
+                "description": "ram_48kb",
+                "parameters": []
+              },
+              {
+                "number": 36,
+                "chapter_name": "implementation_design.application_memory_profiles[2].installed_ram_kb",
+                "description": "64",
+                "parameters": []
+              },
+              {
+                "number": 37,
+                "chapter_name": "implementation_design.application_memory_profiles[2].application_start",
+                "description": "0100",
+                "parameters": []
+              },
+              {
+                "number": 38,
+                "chapter_name": "implementation_design.application_memory_profiles[2].application_end_inclusive",
+                "description": "DFFF",
+                "parameters": []
+              },
+              {
+                "number": 39,
+                "chapter_name": "implementation_design.application_memory_profiles[2].bdos_entry",
+                "description": "E000",
+                "parameters": []
+              },
+              {
+                "number": 40,
+                "chapter_name": "implementation_design.application_memory_profiles[2].lower_reserved_range",
+                "description": "E000–EFFF",
+                "parameters": []
+              },
+              {
+                "number": 41,
+                "chapter_name": "implementation_design.application_memory_profiles[2].tpa_bytes",
+                "description": "57088",
+                "parameters": []
+              },
+              {
+                "number": 42,
+                "chapter_name": "implementation_design.application_memory_profiles[2].id",
+                "description": "ram_64kb",
+                "parameters": []
+              },
+              {
+                "number": 43,
+                "chapter_name": "controller_ref",
+                "description": "System controller implementing this memory function.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 44,
+                "chapter_name": "dma.transfer_contexts",
+                "description": "2",
+                "parameters": []
+              },
+              {
+                "number": 45,
+                "chapter_name": "dma.active_transfer_engines",
+                "description": "1",
+                "parameters": []
+              },
+              {
+                "number": 46,
+                "chapter_name": "dma.destination_address_bits",
+                "description": "16",
+                "parameters": []
+              },
+              {
+                "number": 47,
+                "chapter_name": "dma.length_bits",
+                "description": "16",
+                "parameters": []
+              },
+              {
+                "number": 48,
+                "chapter_name": "dma.operations[1]",
+                "description": "memory-to-memory",
+                "parameters": []
+              },
+              {
+                "number": 49,
+                "chapter_name": "dma.operations[2]",
+                "description": "memory-to-I/O",
+                "parameters": []
+              },
+              {
+                "number": 50,
+                "chapter_name": "dma.operations[3]",
+                "description": "I/O-to-memory",
+                "parameters": []
+              },
+              {
+                "number": 51,
+                "chapter_name": "dma.address_steps[1]",
+                "description": "fixed",
+                "parameters": []
+              },
+              {
+                "number": 52,
+                "chapter_name": "dma.address_steps[2]",
+                "description": "increment",
+                "parameters": []
+              },
+              {
+                "number": 53,
+                "chapter_name": "dma.address_steps[3]",
+                "description": "decrement",
+                "parameters": []
+              },
+              {
+                "number": 54,
+                "chapter_name": "dma.bank_selection",
+                "description": "Latch physical source/destination bank and offsets on start. CPU mapping changes cannot redirect an active transfer; split logical buffers at 4 KiB boundaries before programming physical segments. Reject ROM writes, unmapped banks and out-of-range lengths.",
+                "parameters": []
+              },
+              {
+                "number": 55,
+                "chapter_name": "dma.arbitration",
+                "description": "Bounded bursts with guaranteed CPU and refresh service; device-ready/WAIT handshake; video uploads yield to video-controller fetch deadlines. Numeric grant limits require cycle-level validation.",
+                "parameters": []
+              },
+              {
+                "number": 56,
+                "chapter_name": "dma.completion",
+                "description": "Completion/error interrupt, readable remaining count, controlled abort; reset disables DMA.",
+                "parameters": []
+              },
+              {
+                "number": 57,
+                "chapter_name": "dma.video_endpoint",
+                "description": "Auto-incrementing upload ports for display DRAM or dedicated sprite SRAM; target-ready backpressure.",
+                "parameters": []
+              },
+              {
+                "number": 58,
+                "chapter_name": "dma.peripheral_scope",
+                "description": "Disk/FlexiBUS DMA requires qualified request/ready or FIFO endpoints and drivers; legacy programmed I/O remains supported.",
+                "parameters": []
+              },
+              {
+                "number": 59,
+                "chapter_name": "system_refresh.independent_of_cpu",
+                "description": "True",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "true"
+                  }
+                ]
+              },
+              {
+                "number": 60,
+                "chapter_name": "system_refresh.all_installed_banks",
+                "description": "True",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "true"
+                  }
+                ]
+              },
+              {
+                "number": 61,
+                "chapter_name": "system_refresh.scope",
+                "description": "System DRAM only, including hidden banks and expansion. Video controller refreshes display DRAM; sprite SRAM needs no refresh.",
+                "parameters": []
+              },
+              {
+                "number": 62,
+                "chapter_name": "system_refresh.scheduler",
+                "description": "Always-running timer, row counter and refresh arbitration during CPU execution, HALT and DMA; initialize before enabling RAM use. Match row count and retention deadlines to each qualified system DRAM type.",
+                "parameters": []
+              },
+              {
+                "number": 63,
+                "chapter_name": "system_refresh.supported_populations[1]",
+                "description": "48 KiB: three banks of eight 16Kx1 DRAMs",
+                "parameters": []
+              },
+              {
+                "number": 64,
+                "chapter_name": "system_refresh.supported_populations[2]",
+                "description": "64 KiB expanded Aurelia: four banks of eight 16Kx1 DRAMs",
+                "parameters": []
+              },
+              {
+                "number": 65,
+                "chapter_name": "system_refresh.supported_populations[3]",
+                "description": "64 KiB Aurelia+: one bank of eight 64Kx1 DRAMs",
+                "parameters": []
+              },
+              {
+                "number": 66,
+                "chapter_name": "sprite_memory.technology_ref",
+                "description": "technology.logix_sprite_system",
+                "parameters": []
+              },
+              {
+                "number": 67,
+                "chapter_name": "sprite_memory.device_refs[1]",
+                "description": "device.subsystem.aurelia.video",
+                "parameters": []
+              },
+              {
+                "number": 68,
+                "chapter_name": "sprite_memory.device_refs[2]",
+                "description": "device.subsystem.aurelia_plus.video",
+                "parameters": []
+              },
+              {
+                "number": 69,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.common_system_ram_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 70,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.contiguous_lower_ram_kb",
+                "description": "44",
+                "parameters": []
+              },
+              {
+                "number": 71,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[1].start",
+                "description": "0000",
+                "parameters": []
+              },
+              {
+                "number": 72,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[1].end",
+                "description": "AFFF",
+                "parameters": []
+              },
+              {
+                "number": 73,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[1].role",
+                "description": "Lower RAM",
+                "parameters": []
+              },
+              {
+                "number": 74,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[1].description",
+                "description": "Lower RAM, including CP/M page zero and application memory",
+                "parameters": []
+              },
+              {
+                "number": 75,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[2].start",
+                "description": "B000",
+                "parameters": []
+              },
+              {
+                "number": 76,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[2].end",
+                "description": "EFFF",
+                "parameters": []
+              },
+              {
+                "number": 77,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[2].role",
+                "description": "ROM / cartridge / video RAM windows",
+                "parameters": []
+              },
+              {
+                "number": 78,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[2].description",
+                "description": "ROM / cartridge / video RAM windows",
+                "parameters": []
+              },
+              {
+                "number": 79,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[3].start",
+                "description": "F000",
+                "parameters": []
+              },
+              {
+                "number": 80,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[3].end",
+                "description": "FFFF",
+                "parameters": []
+              },
+              {
+                "number": 81,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[3].role",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 82,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.normal_view[3].description",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 83,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.note",
+                "description": "This is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.",
+                "parameters": []
+              },
+              {
+                "number": 84,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.application_memory_profile",
+                "description": "ram_48kb",
+                "parameters": []
+              },
+              {
+                "number": 85,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.controller_ref",
+                "description": "System controller implementing this memory function.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 86,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.dma_addressing",
+                "description": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.",
+                "parameters": []
+              },
+              {
+                "number": 87,
+                "chapter_name": "platform_profiles.computer.aurelia.organization.refresh",
+                "description": "AION system controller refreshes all installed system DRAM independently of CPU activity.",
+                "parameters": []
+              },
+              {
+                "number": 88,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.ram_kb",
+                "description": "64",
+                "parameters": []
+              },
+              {
+                "number": 89,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.common_system_ram_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 90,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.contiguous_lower_ram_kb",
+                "description": "60",
+                "parameters": []
+              },
+              {
+                "number": 91,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[1].start",
+                "description": "0000",
+                "parameters": []
+              },
+              {
+                "number": 92,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[1].end",
+                "description": "EFFF",
+                "parameters": []
+              },
+              {
+                "number": 93,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[1].role",
+                "description": "Lower RAM",
+                "parameters": []
+              },
+              {
+                "number": 94,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[1].description",
+                "description": "Base and expansion RAM, including CP/M page zero and application memory. The card supplies B000–EFFF.",
+                "parameters": []
+              },
+              {
+                "number": 95,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[2].start",
+                "description": "F000",
+                "parameters": []
+              },
+              {
+                "number": 96,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[2].end",
+                "description": "FFFF",
+                "parameters": []
+              },
+              {
+                "number": 97,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[2].role",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 98,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.normal_view[2].description",
+                "description": "Stable runtime entry code, system stack and critical state.",
+                "parameters": []
+              },
+              {
+                "number": 99,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.note",
+                "description": "The card fills B000–EFFF with RAM in the normal view. ROM, cartridges and video RAM use temporary overlays within 7000–EFFF; the underlying RAM retains its contents.",
+                "parameters": []
+              },
+              {
+                "number": 100,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.application_memory_profile",
+                "description": "ram_64kb",
+                "parameters": []
+              },
+              {
+                "number": 101,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.controller_ref",
+                "description": "System controller implementing this memory function.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 102,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.dma_addressing",
+                "description": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.",
+                "parameters": []
+              },
+              {
+                "number": 103,
+                "chapter_name": "platform_profiles.computer.aurelia.expanded_organization.refresh",
+                "description": "AION system controller refreshes all installed system DRAM independently of CPU activity.",
+                "parameters": []
+              },
+              {
+                "number": 104,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.common_system_ram_kb",
+                "description": "4",
+                "parameters": []
+              },
+              {
+                "number": 105,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.contiguous_lower_ram_kb",
+                "description": "60",
+                "parameters": []
+              },
+              {
+                "number": 106,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[1].start",
+                "description": "0000",
+                "parameters": []
+              },
+              {
+                "number": 107,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[1].end",
+                "description": "EFFF",
+                "parameters": []
+              },
+              {
+                "number": 108,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[1].role",
+                "description": "Lower RAM",
+                "parameters": []
+              },
+              {
+                "number": 109,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[1].description",
+                "description": "Lower RAM, including CP/M page zero and application memory",
+                "parameters": []
+              },
+              {
+                "number": 110,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[2].start",
+                "description": "F000",
+                "parameters": []
+              },
+              {
+                "number": 111,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[2].end",
+                "description": "FFFF",
+                "parameters": []
+              },
+              {
+                "number": 112,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[2].role",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 113,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.normal_view[2].description",
+                "description": "Common system RAM",
+                "parameters": []
+              },
+              {
+                "number": 114,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.note",
+                "description": "This is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.",
+                "parameters": []
+              },
+              {
+                "number": 115,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.application_memory_profile",
+                "description": "ram_64kb",
+                "parameters": []
+              },
+              {
+                "number": 116,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.controller_ref",
+                "description": "System controller implementing this memory function.",
+                "parameters": [
+                  {
+                    "key": "value",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 117,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.dma_addressing",
+                "description": "Physical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.",
+                "parameters": []
+              },
+              {
+                "number": 118,
+                "chapter_name": "platform_profiles.computer.aurelia_plus.organization.refresh",
+                "description": "AION system controller refreshes all installed system DRAM independently of CPU activity.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "c1c1487da111791141b2439d5768c40065bb92627da3b723d447bc5dc30fd641"
+        },
+        {
+          "record_id": "technology.aion_fab_process_control",
+          "before": {
+            "id": "technology.aion_fab_process_control",
+            "name": "AION wafer traceability, process control and yield engineering",
+            "kind": "fabrication",
+            "description": "Control of the Cambridge fabrication line through traceable lots, measured process windows, failure analysis and controlled recipe changes.",
+            "owner_actor_ids": [
+              "actor.labs"
+            ],
+            "related_technology_ids": [
+              "technology.nmos_3um"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "requirement",
+                "description": "Trace each wafer to material batch, tool, operator, recipe revision and electrical results; map defects and distinguish random from systematic failures.",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "requirement",
+                "description": "Monitor particles, film thickness, sheet resistance, transistor thresholds, contacts and tool drift; use control charts and documented corrective action.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "requirement",
+                "description": "Separate engineering lots from released production; qualify maintenance and tool substitutions before customer manufacture.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "requirement",
+                "description": "Report wafer completion, electrical die yield, accepted speed/retention bins, package yield and good saleable chips per wafer separately.",
+                "parameters": []
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.aion_fab_process_control",
+            "name": "AION wafer traceability, process control and yield engineering",
+            "kind": "fabrication",
+            "description": "Control of the Cambridge fabrication line through traceable lots, measured process windows, failure analysis and controlled recipe changes.",
+            "owner_actor_ids": [
+              "actor.labs"
+            ],
+            "related_technology_ids": [
+              "technology.nmos_3um"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "requirement",
+                "description": "Trace each wafer to material batch, tool, operator, recipe revision and electrical results; map defects and distinguish random from systematic failures.",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "requirement",
+                "description": "Monitor particles, film thickness, sheet resistance, transistor thresholds, contacts and tool drift; use control charts and documented corrective action.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "requirement",
+                "description": "Separate engineering lots from released production; qualify maintenance and tool substitutions before customer manufacture.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "requirement",
+                "description": "Report wafer completion, electrical die yield, accepted speed/retention bins, package yield and good saleable chips per wafer separately.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "f8510e7b961f778b2dc6835237e8241f7ab02591229d502766677d7df416942e"
+        },
+        {
+          "record_id": "technology.aion_memory_test",
+          "before": {
+            "id": "technology.aion_memory_test",
+            "name": "AION memory characterisation and production testing",
+            "kind": "fabrication",
+            "description": "Wafer-probe, packaged-device and reliability tests supporting separate ROM, SRAM and DRAM release decisions.",
+            "owner_actor_ids": [
+              "actor.labs"
+            ],
+            "related_technology_ids": [
+              "technology.nmos_3um"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "requirement",
+                "description": "Qualify ROM image verification and SRAM read/write margins separately from DRAM retention, sensing, refresh and disturb behaviour.",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "requirement",
+                "description": "Test across specified voltage and temperature limits; retain lot histories, wafer maps and failure-analysis evidence.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "requirement",
+                "description": "For repairable DRAM revisions, map defects, programme only supported redundancy and retest the complete device; unrepairable launch revisions receive no assumed repair benefit.",
+                "parameters": []
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.aion_memory_test",
+            "name": "AION memory characterisation and production testing",
+            "kind": "fabrication",
+            "description": "Wafer-probe, packaged-device and reliability tests supporting separate ROM, SRAM and DRAM release decisions.",
+            "owner_actor_ids": [
+              "actor.labs"
+            ],
+            "related_technology_ids": [
+              "technology.nmos_3um"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "requirement",
+                "description": "Qualify ROM image verification and SRAM read/write margins separately from DRAM retention, sensing, refresh and disturb behaviour.",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "requirement",
+                "description": "Test across specified voltage and temperature limits; retain lot histories, wafer maps and failure-analysis evidence.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "requirement",
+                "description": "For repairable DRAM revisions, map defects, programme only supported redundancy and retest the complete device; unrepairable launch revisions receive no assumed repair benefit.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "b4c766f7b8f61124edb7905019fe8fbe1f887891189c7af46ffd9b5d9a9a9f3e"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,2013 @@
+{
+  "technology.flexibus": [
+    {
+      "chapter_name": "Peripheral connection and identification",
+      "introduction": "FlexiBUS provides a serial connection between a host and its peripherals. Identification is supported: @3. Devices describe their identity and power needs before normal operation.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "chapter_name": "Published interfaces and compatibility",
+      "introduction": "The interface is available to independent manufacturers. Compatibility commitments depend on implementing the published contracts, including the keyboard standard @45; discovery alone does not qualify a new device class.",
+      "source_numbers": [
+        9,
+        10,
+        11,
+        45,
+        46,
+        47,
+        48
+      ]
+    },
+    {
+      "chapter_name": "Electrical link and operating rates",
+      "introduction": "Each port connects to one device over separate transmit and receive pairs. Supported raw rates are @14 and @15 bps; the port starts at @16 bps. Cable, power and attachment rules remain part of electrical qualification.",
+      "source_numbers": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "chapter_name": "Message framing and flow control",
+      "introduction": "Messages identify their class, request and payload length. A payload is limited to @26 bytes. Framing, error detection and explicit receiver readiness bound each exchange.",
+      "source_numbers": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "chapter_name": "Commands, retries and driver responsibilities",
+      "introduction": "Device commands cover discovery, reset, input, printing and disk operations. Request identity and session state prevent a retry from repeating an operation whose outcome is uncertain.",
+      "source_numbers": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "chapter_name": "Transport qualification",
+      "introduction": "Qualification must exercise the host and peripheral together, including service delays, backpressure and fault recovery. The checks below are requirements, not recorded passing results.",
+      "source_numbers": [
+        41,
+        42,
+        43,
+        44
+      ]
+    }
+  ],
+  "technology.plug_and_execute": [
+    {
+      "chapter_name": "Automatic board configuration",
+      "introduction": "An expansion board carries identification and driver code in ROM so the host can configure it automatically. Manual configuration switches are required: @1. Reserved connector capacity permits later extensions without promising that every future board is already supported.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "technology.xip_rom_platform": [
+    {
+      "chapter_name": "Execution and replaceable software images",
+      "introduction": "The execution model is @1. Keeping suitable code and constants in ROM reduces RAM demand, while replaceable cartridges provide a controlled distribution and upgrade path.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "technology.logix_digital_video": [
+    {
+      "chapter_name": "Digital video wiring",
+      "introduction": "The link carries @1 data bits over a cable with @2. Separate clock, control and synchronisation signals accompany the pixel data.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "chapter_name": "Monitor discovery and palette control",
+      "introduction": "The host negotiates a raster the monitor can actually display before enabling the picture. Capability failures require an explicit safe profile; connection alone does not establish a supported resolution.",
+      "source_numbers": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        52
+      ]
+    },
+    {
+      "chapter_name": "320 × 200 output timing",
+      "introduction": "Raster @29 displays @30 by @31 active pixels at @32 MHz. The total pixel and line counts below include blanking.",
+      "source_numbers": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "chapter_name": "640 × 200 output timing",
+      "introduction": "Raster @35 displays @36 by @37 active pixels at @38 MHz. The total pixel and line counts below include blanking.",
+      "source_numbers": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "chapter_name": "640 × 400 output timing",
+      "introduction": "Raster @41 displays @42 by @43 active pixels at @44 MHz. Its frame rate is @48 Hz and interlacing is enabled: @49.",
+      "source_numbers": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ]
+    },
+    {
+      "chapter_name": "Logical scaling and colour interpretation",
+      "introduction": "Logical image sizes and palette indices must be mapped explicitly to the selected output. A wider logical mode cannot be forced onto a monitor that lacks the required raster.",
+      "source_numbers": [
+        50,
+        51
+      ]
+    }
+  ],
+  "technology.logix_tui_standard": [
+    {
+      "chapter_name": "Shared controls and editing commands",
+      "introduction": "Applications share controls and editing conventions rather than defining incompatible interfaces. System clipboard support is enabled: @12. The same conventions cover the listed application classes.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "chapter_name": "Portable services and API contracts",
+      "introduction": "The portable API is @20 and display services use @21. Layout, editing, input and lifecycle services provide the same meanings across the supported hosts.",
+      "source_numbers": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        45,
+        46
+      ]
+    },
+    {
+      "chapter_name": "Context ownership and platform compatibility",
+      "introduction": "Each application owns its interface state. Host differences affect resource and lifecycle capabilities, but do not silently change the meaning of the common API.",
+      "source_numbers": [
+        40,
+        41,
+        42,
+        43,
+        44
+      ]
+    }
+  ],
+  "technology.logix_tui_keyboard_standard": [
+    {
+      "chapter_name": "Scope and assignment rules",
+      "introduction": "Native Logix applications use a common command vocabulary. Terminal compatibility profiles remain explicit so an editing shortcut cannot silently become a process-control command.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "chapter_name": "Navigation and selection",
+      "introduction": "Navigation commands move the caret or selection by a defined unit. Shift extends the same movement; selection clearing respects active menus and dialogs. For example, character movement uses @8.",
+      "source_numbers": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "chapter_name": "Editing and undo",
+      "introduction": "Copy, cut, paste and undo have shared logical commands. Keyboard aliases retain the same command scope. Copy uses @38, while paste uses @44.",
+      "source_numbers": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "chapter_name": "Documents, search and help",
+      "introduction": "Document commands cover creation, opening, saving, search and closure. Save uses @65; the application must still report errors and protect modified work.",
+      "source_numbers": [
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93
+      ]
+    },
+    {
+      "chapter_name": "Focus, dialogs and application lifecycle",
+      "introduction": "Focus and lifecycle commands are dispatched to the appropriate control, dialog, application or system. Cooperative cancellation uses @128; it does not imply forced termination.",
+      "source_numbers": [
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129
+      ]
+    },
+    {
+      "chapter_name": "Editing behaviour and ownership of state",
+      "introduction": "Shared behaviour defines selection boundaries, clipboard failure handling, saving and context-sensitive keys. Resource limits and the single-foreground Aurelia model still apply.",
+      "source_numbers": [
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ]
+    },
+    {
+      "chapter_name": "Terminal compatibility profiles",
+      "introduction": "Terminal sessions may assign control keys to interrupt, suspend or line editing. These are explicit terminal profiles, separate from the native TUI keymap. Terminal copy uses @158.",
+      "source_numbers": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170
+      ]
+    },
+    {
+      "chapter_name": "Keyboard events and conformance",
+      "introduction": "The keyboard is @171 and transport uses @172. Events must preserve key identity and modifiers; byte-terminal fallbacks must advertise limitations instead of promising ambiguous shortcuts.",
+      "source_numbers": [
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187
+      ]
+    }
+  ],
+  "technology.abacus_sparse_model": [
+    {
+      "chapter_name": "Sparse cells and compact encoding",
+      "introduction": "Abacus stores populated cells using @1 and represents their contents with @2. This avoids the memory cost of reserving storage for every possible cell on an 8-bit computer.",
+      "source_numbers": [
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "technology.pulse_notebook_model": [
+    {
+      "chapter_name": "Executable cells and language primitives",
+      "introduction": "Pulse organises code as @1. Its basic types and control-flow tools support interactive work without changing the ownership rules for documents.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "chapter_name": "Abacus document access",
+      "introduction": "Standalone Pulse works on closed documents under exclusive writer ownership. Embedded execution is a separate versioned feature; introducing it does not extend older editions automatically.",
+      "source_numbers": [
+        11
+      ]
+    }
+  ],
+  "technology.aion_c_portability_framework": [
+    {
+      "chapter_name": "Source portability and shared contracts",
+      "introduction": "The framework targets @1 and @2. Applications share source code, libraries and API meanings; moving between instruction sets still requires a target-specific build.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "chapter_name": "Application structure and build profiles",
+      "introduction": "Separate shared application logic from host adapters and target build outputs. The three build profiles make the base Aurelia budget, Aurelia+ requirements and native Artemis target explicit.",
+      "source_numbers": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "chapter_name": "Limits of portability",
+      "introduction": "Portability work must address instruction sets, OS interfaces, memory ownership and file encoding. More capable hardware does not automatically make its application features available on an older host.",
+      "source_numbers": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    }
+  ],
+  "technology.era1_isa": [
+    {
+      "chapter_name": "Processor interface and execution",
+      "introduction": "ERAv1 has a @1-bit system bus, @2 and @4. The prefetch buffer holds @8 words. Conditional execution and the two abort classes are part of the instruction contract.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    }
+  ],
+  "technology.artemis_memory_model": [
+    {
+      "chapter_name": "Addressing and page organisation",
+      "introduction": "Artemis separates @1-bit virtual addresses from @2-bit physical addresses. Pages contain @7 bytes, and the design avoids allocating a flat table for the entire virtual space.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "chapter_name": "Translation cache",
+      "introduction": "The translation cache has @9 entries and is @10. Software controls replacement and preserves the access, reference and dirty information needed by the kernel.",
+      "source_numbers": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "chapter_name": "Backing maps and faults",
+      "introduction": "Only allocated virtual mappings require backing records. The per-record planning budget is @22 bytes; it is not a measured total for a process. Fault handling must preserve memory ownership and restart semantics.",
+      "source_numbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "chapter_name": "Timing and unresolved implementation work",
+      "introduction": "Translation uses a conservative wait/ready interface. Faster internal clocks are an option to qualify, not a promise that DRAM access or software refill becomes free.",
+      "source_numbers": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "chapter_name": "Physical RAM banks",
+      "introduction": "A module and its selected bank each transfer @42 bits. Banks require independent rank selection, refresh, byte writes and a qualified electrical interface.",
+      "source_numbers": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "chapter_name": "Installed capacity and upgrade rules",
+      "introduction": "Populate capacity banks with matched full-width modules and distinguish installed capacity from the CPU address-space limit. The current parity-bit count is @67; a later parity design requires its own BOM.",
+      "source_numbers": [
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67
+      ]
+    }
+  ],
+  "technology.aionix_os_model": [
+    {
+      "chapter_name": "Small-memory Unix-style execution",
+      "introduction": "AIONix follows @1 with a minimum RAM design target of @2 KB. ROM-backed executables are supported: @3. The process-count example is @5, not an unrestricted concurrency guarantee.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        17,
+        18,
+        30
+      ]
+    },
+    {
+      "chapter_name": "Files, processes and device services",
+      "introduction": "Normal operating-system interfaces mediate application access to files and devices. Initial networking support is @12, and symbolic-link support remains explicitly limited.",
+      "source_numbers": [
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        29
+      ]
+    },
+    {
+      "chapter_name": "ABI, memory protection and portable applications",
+      "introduction": "The C ABI is stable within the ERA target. Demand paging is enabled: @25. Portable source services use @32; this does not establish Z80 binary compatibility.",
+      "source_numbers": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        31,
+        32,
+        33
+      ]
+    }
+  ],
+  "technology.cpm80_virtual_peripheral_bridge": [
+    {
+      "chapter_name": "Guest execution and module resources",
+      "introduction": "Qualified CP/M binaries run on a Z80 guest while the ERA host supplies services. The bridge preserves documented interfaces; it is not native execution of Z80 instructions on ERA.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "chapter_name": "Host and guest communication",
+      "introduction": "Guest stubs marshal bounded requests to a privileged host driver. The mailbox identifies requests, buffers and completion status; every guest buffer must be validated before the host uses it.",
+      "source_numbers": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "chapter_name": "Display capability and compatibility limits",
+      "introduction": "The guest sees the surface and services actually exposed by the bridge. Direct hardware access and undocumented software behaviour remain outside the guaranteed compatibility scope.",
+      "source_numbers": [
+        20,
+        21,
+        22
+      ]
+    }
+  ],
+  "technology.logix_tcpip_lan": [
+    {
+      "chapter_name": "Portable networking over a local link",
+      "introduction": "The network protocol is @1, carried by @2. Keeping the internet protocols above the local link permits future physical links to preserve higher-level software interfaces.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "technology.logix_lan100_link": [
+    {
+      "chapter_name": "Shared network and cabling",
+      "introduction": "Stations connect through an active hub over @4 using @3. The hub grants one transmitter at a time; this baseline is a shared network rather than independent switched links.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "chapter_name": "Rates and host qualification",
+      "introduction": "Supported raw rates are @14, @15, @16 and @17 kbit/s. Startup and fallback use @18 kbit/s. Every admitted station shares the same negotiated rate, and host qualification constrains advertised capabilities.",
+      "source_numbers": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "chapter_name": "Negotiation, admission and recovery",
+      "introduction": "The hub selects the highest rate supported by every admitted station and link. Changes are coordinated through acknowledgements, a quiet switch interval and test frames; failures return to the startup rate.",
+      "source_numbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "chapter_name": "Clocking and buffered adapters",
+      "introduction": "Adapters offload framing and buffer complete frames. The local packet RAM target is @51 bytes, separate from host RAM. Receiver credit controls admission of complete frames before transmission.",
+      "source_numbers": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ]
+    },
+    {
+      "chapter_name": "Network qualification",
+      "introduction": "Timing, buffer limits, recovery and mixed-host throughput require measurement. The qualification checks below must pass before advertised rates become delivery claims.",
+      "source_numbers": [
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    }
+  ],
+  "technology.bpi_relational_database": [
+    {
+      "chapter_name": "Shared business data",
+      "introduction": "BPI applications share a relational database so accounting, receivables, payables, inventory and payroll can use a consistent data foundation. The specification defines that architecture without asserting unrecorded capacity or throughput.",
+      "source_numbers": [
+        1,
+        2
+      ]
+    }
+  ],
+  "technology.aurelia_memory_model": [
+    {
+      "chapter_name": "Banked logical memory",
+      "introduction": "The CPU addresses @1 KB at once, with @2 KB pages. Fixed lower RAM is @3 KB, the switchable window is @4 KB and common system RAM is @5 KB. Additional physical RAM does not widen the CPU logical address space.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "chapter_name": "CP/M application boundary and service dispatch",
+      "introduction": "The published top of application memory must remain writable throughout program execution. System-call dispatch temporarily changes mappings only after moving into common memory, then restores the caller view.",
+      "source_numbers": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "chapter_name": "Application RAM profiles",
+      "introduction": "With @29 KB installed, the application range is @30–@31 and contains @34 bytes. The @36 KB profile exposes @41 bytes. These profiles reserve workspace before launch rather than shrinking a running program.",
+      "source_numbers": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ]
+    },
+    {
+      "chapter_name": "DMA transfers and arbitration",
+      "introduction": "The controller has @44 transfer contexts but @45 active transfer engine. Destination addresses and lengths use @46 and @47 bits respectively. Physical bank selection must remain stable for an active transfer.",
+      "source_numbers": [
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    {
+      "chapter_name": "Refresh and separate sprite storage",
+      "introduction": "System DRAM refresh runs independently of CPU execution: @59. It covers all installed banks: @60. Display DRAM and sprite SRAM have separate ownership and refresh requirements.",
+      "source_numbers": [
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68
+      ]
+    },
+    {
+      "chapter_name": "Base Aurelia address map",
+      "introduction": "The normal base-system view contains @70 KB of contiguous lower RAM and @69 KB of common system RAM. Temporary overlays preserve hidden RAM while exposing ROM and display windows.",
+      "source_numbers": [
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87
+      ]
+    },
+    {
+      "chapter_name": "Expanded Aurelia address map",
+      "introduction": "The expansion profile contains @88 KB of installed RAM, including @90 KB of contiguous lower RAM. The expansion fills the normal B000–EFFF range; system overlays remain temporary.",
+      "source_numbers": [
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103
+      ]
+    },
+    {
+      "chapter_name": "Aurelia+ address map",
+      "introduction": "Aurelia+ exposes @105 KB of contiguous lower RAM and @104 KB of common system RAM. The normal application map and the temporary service overlays have distinct roles.",
+      "source_numbers": [
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118
+      ]
+    }
+  ],
+  "technology.logix_c_api": [
+    {
+      "chapter_name": "Versioned source API",
+      "introduction": "Version @1 defines shared function meanings, ownership and errors. Source compatibility spans Z80 and ERA, while each target retains its own binary ABI.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        25
+      ]
+    },
+    {
+      "chapter_name": "Errors, memory ownership and host adapters",
+      "introduction": "Applications receive defined errors and provide bounded buffers. Platform adapters hide host-specific display, file, memory, timing and lifecycle services; persistent files never contain raw pointers.",
+      "source_numbers": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "chapter_name": "Aurelia and Aurelia+ contracts",
+      "introduction": "Both hosts use the @26 target. Applications query usable display dimensions and capabilities rather than choosing behaviour from the computer name.",
+      "source_numbers": [
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "chapter_name": "Artemis contracts",
+      "introduction": "Artemis and Artemis PRO use the @34 target. Native applications discover supported text modes through the display API while keeping the shared source-level contract.",
+      "source_numbers": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "chapter_name": "Athena compatibility policy",
+      "introduction": "The AIONix2 system-ROM baseline retains a documented execution path for ERA applications. Individual editions still require qualification; internal system ROM does not imply external application cartridges.",
+      "source_numbers": [
+        42,
+        43
+      ]
+    }
+  ],
+  "technology.logix_display_api": [
+    {
+      "chapter_name": "Discovery and mode requests",
+      "introduction": "Applications enumerate and test usable modes before changing the display. The API reports the configuration actually selected; a named mode is not guaranteed to exist on every host.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "chapter_name": "Mode descriptors and safe selection",
+      "introduction": "Descriptors report geometry, pixel format, buffering, sprites and output scaling. The host intersects controller, monitor and memory capabilities; failures use defined results rather than an unsafe display mode.",
+      "source_numbers": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "chapter_name": "Drawing services and portability",
+      "introduction": "Applications draw through context, clipping, bitmap and presentation operations instead of assuming native video RAM layout. Optional compatibility canvases and richer text modes must be discovered explicitly.",
+      "source_numbers": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        56
+      ]
+    },
+    {
+      "chapter_name": "Display memory and mode transitions",
+      "introduction": "Text and bitmap modes reuse display memory. Mode changes validate resources, quiesce drawing and rebuild the layout while preserving application document state outside the screen buffer.",
+      "source_numbers": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ]
+    }
+  ],
+  "technology.logix_c_target_contract": [
+    {
+      "chapter_name": "Language subset and required facilities",
+      "introduction": "Both compilers implement a documented contemporary C subset. Shared structures, function pointers and library contracts support portability without assuming later language standards.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "chapter_name": "Z80 data model",
+      "introduction": "Target @7 uses @9-bit characters, @10-bit short integers, @11-bit integers and @12-bit long integers. Ordinary data pointers contain @13 bits.",
+      "source_numbers": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "chapter_name": "ERA data model",
+      "introduction": "Target @14 uses @16-bit characters, @17-bit short integers, @18-bit integers and @19-bit long integers. Ordinary data pointers contain @20 bits.",
+      "source_numbers": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "chapter_name": "ABI and conformance responsibilities",
+      "introduction": "Each target must define layout, calling conventions and numeric behaviour. Portability requires explicit serialization and bounded platform adapters rather than identical pointer or structure representations.",
+      "source_numbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ]
+    }
+  ],
+  "technology.nmos_3um": [
+    {
+      "chapter_name": "Process geometry and recipe qualification",
+      "introduction": "This fabrication technology defines a process family. Geometry and lithography parameters describe its baseline; logic, memories and analog circuits still require separate recipes and qualification.",
+      "source_numbers": [
+        1
+      ]
+    }
+  ],
+  "technology.nmos_275um": [
+    {
+      "chapter_name": "Process geometry and recipe qualification",
+      "introduction": "This fabrication technology defines a process family. Geometry and lithography parameters describe its baseline; logic, memories and analog circuits still require separate recipes and qualification.",
+      "source_numbers": [
+        1
+      ]
+    }
+  ],
+  "technology.nmos_2um": [
+    {
+      "chapter_name": "Process geometry and recipe qualification",
+      "introduction": "This fabrication technology defines a process family. Geometry and lithography parameters describe its baseline; logic, memories and analog circuits still require separate recipes and qualification.",
+      "source_numbers": [
+        1
+      ]
+    }
+  ],
+  "technology.nmos_15um": [
+    {
+      "chapter_name": "Process geometry and recipe qualification",
+      "introduction": "This fabrication technology defines a process family. Geometry and lithography parameters describe its baseline; logic, memories and analog circuits still require separate recipes and qualification.",
+      "source_numbers": [
+        1
+      ]
+    }
+  ],
+  "technology.abacus_formatted_tables": [
+    {
+      "chapter_name": "Typed tables alongside worksheets",
+      "introduction": "Formatted tables coexist with sparse worksheet tabs. Stable row and column identities preserve meaning through sorting and filtering; the format is an independent Abacus design.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "chapter_name": "Column storage and bounded execution",
+      "introduction": "Storage is divided into row groups, column chunks and pages. Queries read required columns and skip blocks only when conservative metadata proves that no row can match.",
+      "source_numbers": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "chapter_name": "Expressions, lookups and query limits",
+      "introduction": "Calculated columns use side-effect-free expressions with explicit dependencies. Scalar lookup and multi-row joins have different cardinality rules; the launch SQL subset is read-only.",
+      "source_numbers": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "chapter_name": "Launch schema and later nested values",
+      "introduction": "Launch tables use flat typed columns. Nested arrays, maps and structures remain a later extension with explicit resource and semantic limits, not an implied launch capability.",
+      "source_numbers": [
+        25,
+        26
+      ]
+    }
+  ],
+  "technology.abacus_embedded_pulse": [
+    {
+      "chapter_name": "Execution modes and writer ownership",
+      "introduction": "Embedded Pulse runs inside Abacus under the host document API. The open document has one writer; standalone offline access remains a separate mode.",
+      "source_numbers": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "chapter_name": "Editing, recalculation and compatibility",
+      "introduction": "Scripts may perform explicit document edits, but ordinary formula evaluation remains side-effect-free. Cancellation, undo and recalculation boundaries protect consistency without duplicating the whole document.",
+      "source_numbers": [
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "technology.scanline_palette_list": [
+    {
+      "chapter_name": "List allocation and record format",
+      "introduction": "The list begins at @1 and occupies @2 bytes. Each record uses @3 bytes, allowing @4 entries. The record format encodes a scanline delta and a palette-register write.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "chapter_name": "Replay coordinates and safe updates",
+      "introduction": "List positions refer to physical output scanlines. Replay restarts from a restored base palette each frame; CPU updates occur only while the single list buffer is safe to modify.",
+      "source_numbers": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "chapter_name": "Control-channel protocol and timing budget",
+      "introduction": "Palette commands use an opt-in blanking-window extension on the existing control pair. Complete validated batches commit before active pixels; the per-line write budget requires qualification.",
+      "source_numbers": [
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "chapter_name": "Palette sequencer qualification",
+      "introduction": "Test worst-case timing, record limits, memory contention and recovery together. A large total list does not permit an unlimited number of writes during one horizontal blank.",
+      "source_numbers": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    }
+  ],
+  "technology.flexibus_pointing_device": [
+    {
+      "chapter_name": "Discovery and event transport",
+      "introduction": "The pointing device uses @1 with versioned class discovery and bounded reports. Motion and button transitions must survive retry without being applied twice.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "chapter_name": "Controls and host compatibility",
+      "introduction": "Buttons and independent rollers have defined actions. Host drivers preserve the common protocol across architectures and retain the bus attachment restrictions.",
+      "source_numbers": [
+        5,
+        6
+      ]
+    }
+  ],
+  "technology.logix_tui_mouse": [
+    {
+      "chapter_name": "Standard controls and pointer interaction",
+      "introduction": "The mouse extension builds on @1 and uses @2. Standard controls receive semantic actions while retaining keyboard operation, clipping, capture and modal behaviour.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "chapter_name": "Application compatibility and event ownership",
+      "introduction": "Existing applications gain pointer support only through compatible replaceable services or a qualified relink. Input remains owned by the active context, and a hardware cursor consumes an existing sprite resource.",
+      "source_numbers": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "chapter_name": "Mouse and keyboard qualification",
+      "introduction": "Test both updated pointer interaction and unchanged keyboard-only use. Rendering, capture, removal and ABI compatibility must work across the supported layouts.",
+      "source_numbers": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    }
+  ],
+  "technology.artemis_professional_graphics": [
+    {
+      "chapter_name": "Two displays with explicit ownership",
+      "introduction": "Professional graphics uses @1 for capability discovery. The colour command display and monochrome CAD canvas have independent resources and explicit input focus.",
+      "source_numbers": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "chapter_name": "Acceleration and rendering correctness",
+      "introduction": "The accelerator supports bounded drawing operations while vector geometry remains authoritative. Damage redraw, line quality and memory limits govern the rendering strategy.",
+      "source_numbers": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "chapter_name": "Bandwidth and development fallback",
+      "introduction": "Visible display reads consume bandwidth before host drawing or acceleration is considered. Qualify worst-case arbitration and provide a capability-based software development path.",
+      "source_numbers": [
+        9,
+        10
+      ]
+    }
+  ],
+  "technology.era2_architecture": [
+    {
+      "chapter_name": "Architecture and binary continuity",
+      "introduction": "ERA² builds on @1 with a @2-bit system bus and @3-bit virtual addresses. Physical addresses contain @4 bits, spanning @5 GiB; installed board memory remains a separate limit.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        24
+      ]
+    },
+    {
+      "chapter_name": "Cache and floating-point options",
+      "introduction": "The instruction-cache target is @8 bytes. External cache options are @9 and @10 KB, but neither external cache nor an FPU is automatically included in the system BOM.",
+      "source_numbers": [
+        8,
+        9,
+        10,
+        11,
+        22
+      ]
+    },
+    {
+      "chapter_name": "Translation and restartable faults",
+      "introduction": "The translation cache targets @12 entries with associativity @13 and address-space identifiers enabled: @14. Stronger restart semantics support the intended paging model without claiming that ERAv1 lacked aborts.",
+      "source_numbers": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "chapter_name": "Performance and open design decisions",
+      "introduction": "Measure improvement on named workloads and configurations. Packaging, timing, coherency, translation and write buffering remain design decisions or qualification gates.",
+      "source_numbers": [
+        23,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "chapter_name": "Pipeline and precise-fault contract",
+      "introduction": "Conditional and speculative work must not commit effects that the architectural instruction stream did not perform. Fault reporting distinguishes restartable translation failures from external effects that cannot be undone.",
+      "source_numbers": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "chapter_name": "Instruction-cache implementation",
+      "introduction": "The baseline allocation is @42 bytes, with @43 bytes under evaluation. Cache layout, refill policy and the transistor envelope must be checked against real workload traces.",
+      "source_numbers": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ]
+    },
+    {
+      "chapter_name": "Memory timing and wait states",
+      "introduction": "The controller uses explicit waits and bounded ownership. At the 12 MHz planning point, the first word takes @49 clocks and a same-row following word takes @50; these are engineering budgets with stated exclusions.",
+      "source_numbers": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    },
+    {
+      "chapter_name": "Coherency and optional write buffering",
+      "introduction": "Instruction visibility and DMA synchronization must be explicit. The candidate write buffer has @63 entries and is conditional on preserving ordering, error reporting and restart semantics.",
+      "source_numbers": [
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67
+      ]
+    }
+  ],
+  "technology.aurelia_video_profile": [
+    {
+      "chapter_name": "Mode discovery and shared video memory",
+      "introduction": "The display link is @1 and applications use @2. Text and bitmap allocations are mutually exclusive uses of display DRAM, while sprites retain their separate SRAM.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        196,
+        197
+      ]
+    },
+    {
+      "chapter_name": "40-column text",
+      "introduction": "Mode @8 provides @9 columns by @10 rows, with @13 by @14 pixel glyphs. One shared font serves both text pages; the configurations list exact memory allocations with and without sprites.",
+      "source_numbers": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "chapter_name": "80-column text",
+      "introduction": "Mode @39 provides @40 columns by @41 rows, with @44 by @45 pixel glyphs. Monitor capability must support the wider raster; memory allocations remain explicit for each page and sprite combination.",
+      "source_numbers": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ]
+    },
+    {
+      "chapter_name": "640 × 200 monochrome bitmap",
+      "introduction": "Mode @70 uses @73 bit per pixel and @74 bytes per framebuffer. Its configurations expose one bitmap page while keeping optional sprites in separate SRAM.",
+      "source_numbers": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86
+      ]
+    },
+    {
+      "chapter_name": "320 × 200 two-bit bitmap",
+      "introduction": "Mode @87 uses @90 bits per pixel and @91 bytes per framebuffer. The listed allocations do not promise a second complete background page.",
+      "source_numbers": [
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103
+      ]
+    },
+    {
+      "chapter_name": "320 × 200 one-bit bitmap",
+      "introduction": "Mode @104 uses @107 bit per pixel and @108 bytes per framebuffer. Two background pages fit when the listed double-buffered configuration is selected.",
+      "source_numbers": [
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128
+      ]
+    },
+    {
+      "chapter_name": "320 × 100 four-bit bitmap",
+      "introduction": "Mode @129 uses @132 bits per pixel and @133 bytes per framebuffer. It trades vertical resolution for a wider pixel index within the same display RAM budget.",
+      "source_numbers": [
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145
+      ]
+    },
+    {
+      "chapter_name": "320 × 100 two-bit bitmap",
+      "introduction": "Mode @146 uses @149 bits per pixel and @150 bytes per framebuffer. The smaller page permits the listed one-page and two-page configurations.",
+      "source_numbers": [
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170
+      ]
+    },
+    {
+      "chapter_name": "160 × 100 compatibility bitmap",
+      "introduction": "Mode @171 uses @174 bits per pixel and @175 bytes per framebuffer. This is the explicit compatibility mode; scaling and available sprites still follow the common display contracts.",
+      "source_numbers": [
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195
+      ]
+    }
+  ],
+  "technology.logix_sprite_system": [
+    {
+      "chapter_name": "Profile 1 geometry and display behaviour",
+      "introduction": "Profile 1 supports @1 sprites, with up to @2 on a scanline. Each is @3 by @4 pixels at @5 bits per pixel; palette index @7 is transparent.",
+      "source_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "chapter_name": "Profile 1 SRAM allocation",
+      "introduction": "Patterns consume @13 bytes and descriptors consume @16 bytes within @17 bytes of dedicated SRAM. Spare storage is @18 bytes. Descriptor double buffering does not imply two complete pattern sets.",
+      "source_numbers": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "chapter_name": "Profile 2 geometry and display behaviour",
+      "introduction": "Profile 2 supports @21 sprites, with up to @22 on a scanline. Each is @23 by @24 pixels at @25 bits per pixel; palette index @27 is transparent.",
+      "source_numbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "chapter_name": "Profile 2 SRAM allocation",
+      "introduction": "Patterns consume @33 bytes and the descriptor allocation reserves @36 bytes within @37 bytes of SRAM. The @38 spare bytes and the descriptor-padding note make the reservation explicit.",
+      "source_numbers": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ]
+    }
+  ],
+  "technology.aion_fab_process_control": [
+    {
+      "chapter_name": "Wafer traceability and process monitoring",
+      "introduction": "A wafer history connects material, equipment, recipe and electrical results. Process measurements and corrective action distinguish random defects from systematic drift.",
+      "source_numbers": [
+        1,
+        2
+      ]
+    },
+    {
+      "chapter_name": "Production release and yield reporting",
+      "introduction": "Engineering activity and released manufacture have different acceptance requirements. Yield reporting keeps wafer, die, package and saleable-output measures separate.",
+      "source_numbers": [
+        3,
+        4
+      ]
+    }
+  ],
+  "technology.aion_memory_test": [
+    {
+      "chapter_name": "Memory-specific electrical qualification",
+      "introduction": "ROM, SRAM and DRAM need different electrical tests. Qualification spans the specified operating conditions and retains evidence that can be traced to lots and failures.",
+      "source_numbers": [
+        1,
+        2
+      ]
+    },
+    {
+      "chapter_name": "Conditional repair and full retest",
+      "introduction": "Redundancy can improve accepted output only on revisions that implement it. After supported repair, the complete device must be tested again; unrepaired launch designs receive no assumed repair benefit.",
+      "source_numbers": [
+        3
+      ]
+    }
+  ]
+}

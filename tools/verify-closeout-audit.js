@@ -8,7 +8,9 @@ import {validateCatalogue} from './validate-catalogue.js';
 import {pointBounds} from '../code/temporal.js';
 const read=p=>JSON.parse(fs.readFileSync(p)),root='data_storytelling/review_evidence/closeout-audit/';
 // Saved feedback has its own lineage-preserving verification, without rewriting the baseline inventory.
-if(fs.existsSync(root+'feedback-amendment.json')){
+if(fs.existsSync('data_storytelling/review_evidence/technology-chapters/migration.json')){
+ await import('./verify-technology-chapters.js');
+}else if(fs.existsSync(root+'feedback-amendment.json')){
  await import('./verify-closeout-feedback.js');
 }else{
 const inventory=read(root+'inventory.json');
