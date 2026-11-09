@@ -1,0 +1,83 @@
+{
+  "phase": 6,
+  "source_commit": "a73aaa971b7de8a2f1bd27a728d0440af6609dc8",
+  "status": "pending_author_review",
+  "proposals": [
+    {
+      "change_id": "change.catalogue_phase6_model_ii_release",
+      "feedback_id": "change_review.f4971cb6-d6c9-424e-8aec-b2e13806524b",
+      "feedback_text": "product.abacus_1.model_ii can't be part of NCC 1979 campaign as the computer it is running on is not yet ready at that time with launch date set to Oct 1979. \ni would create a campaign record for Tandy's campaign promoting Model II - with Tandy as main actor (we don't need details as this is not our business). Just connect event.tandy_release with this campaign and product.abacus_1.model_ii\n\nagain campaign.ncc1979 and process.ncc1979_campaign should not take cover Tandy's Model II and Abacus for Model II premiere which is set to Oct 1970 rather than June 1979.\n\nfor the XXX process.tandy_cooperation: I would remove event.tandy_response  step and the process with event.tandy_release\nI would entirely remove event.tandy_response and market_response.tandy_response as they don't bring any value\nI would also remove event.open79_delivery as it is more sotrytellin/editorial record than meaninful event.\n\n",
+      "reviewed_proposal_sha256": "dd21fd0fe54270301f60db25e9bbfdad230618a81f727b18e4775ea9b6db9d12",
+      "revised_proposal_sha256": "8724cd8e54e96a72d7a8d4a1edc1f2fb79192339308e598cece625872bbffd00",
+      "record_ids": [
+        "product.abacus_1.model_ii",
+        "campaign.ncc1979",
+        "process.ncc1979_campaign",
+        "process.tandy_cooperation",
+        "event.tandy_release",
+        "event.tandy_response",
+        "market_response.tandy_response",
+        "event.open79_delivery",
+        "campaign.tandy_model_ii_1979",
+        "process.tandy_model_ii_campaign"
+      ]
+    },
+    {
+      "change_id": "change.catalogue_phase6_1980_campaign_scope",
+      "feedback_id": "change_review.ad5e3972-8663-41ca-8e57-bfae59e6b397",
+      "feedback_text": "process.ncc1980_campaign should end with the end or NCC 1980 unless there are follow up activities\n\nprocess.comdex1980_campaign should start at least a month before COMDEX with Advertisment and promotion focused on COMDEX offering \n\n",
+      "reviewed_proposal_sha256": "d068d0bb02a9cdc40651a073e8e9efaf03bcf0a39502faed57af160bc9533048",
+      "revised_proposal_sha256": "6b307062577d5c49ea84143d744a9f651fb2cff2ab9dee6f9c22f2cd87870bf8",
+      "record_ids": [
+        "process.ncc1980_campaign",
+        "process.comdex1980_campaign",
+        "campaign.comdex1980"
+      ]
+    }
+  ],
+  "retired_record_ids": [
+    "event.tandy_response",
+    "market_response.tandy_response",
+    "event.open79_delivery"
+  ],
+  "added_record_ids": [
+    "campaign.tandy_model_ii_1979",
+    "process.tandy_model_ii_campaign"
+  ],
+  "date_interpretation": "15 October 1979 is preserved; the single “Oct 1970” reference in feedback is a typo.",
+  "ownership_design": "The Tandy campaign execution child owns the release through its end event. Its enclosing cooperation ends on that same calendar day; reusing the event as both parent and child boundaries would create two owners.",
+  "ncc1980_followup_evidence": [
+    "event.ncc1980_followup",
+    "process.ncc1980_roadshows"
+  ],
+  "approved_proposals_unchanged": [
+    "change.catalogue_phase6_comdex1982_beta_dependency",
+    "change.catalogue_phase6_clone_campaign_launch"
+  ],
+  "preserved_files_sha256": {
+    "data_foundation/technology.json": "f9540de2493e4a9cad4e20cb7b1c057ad02bcd326bfc2d972292d3265ddf3fdf",
+    "data_foundation/software_edition.json": "6086cd5534cfb9cbc389d5f89c5ff17988963a5f07c6b95ab98d3b5ad01210dd",
+    "data_foundation/event.json": "3b80afe886f1c07cdd805cdff0f8f83d9dd5a11be0fd360dfb80dd46c50e6b7c",
+    "data_foundation/location.json": "29f7c7a7d17823a86294c8f00f6670608d83793fd04e13e8fb3f1d86002eb410",
+    "data_foundation/campaign.json": "f60d0914e6ecd1844bfb62811081c38140b6dba7b5526c0439d44c5edaa5eddc",
+    "data_foundation/process.json": "a20cf46cbd6e765964db56cd5f37ffb5f64a23c5f1230d3f595393737ce82cf4",
+    "data_foundation/agreement.json": "4e4aa072af59e8f9740573e793c3bede795dba8a91a2f4b0621e77e04ca98951",
+    "data_foundation/actor.json": "fc20af964190cbf5469980ddde4b6bbdab6380017b494aece8a1ada5967a03d0",
+    "data_foundation/manufacturing_capability.json": "5ce3a0e5a54fb7cb927c27b69812616a28a50d34e8f6af196a3b30cf7afefc2a",
+    "data_foundation/assumption.json": "8c2f2348e8b69325a2649fcd1ae27f5dbcffa2303b96bdba223266f4358d5abc",
+    "data_foundation/market_response.json": "f01aeae3419d46f61675f86122e4638ce72eae4c2663e48a92dd51b977fbbf68",
+    "data_foundation/product.json": "991862edd9961cd0f8730ff13de08edae977114042164794d2f93eb7da8e6470",
+    "data_foundation/base_part.json": "25a9e9a1786b2a907df3dc67d3f3cb239ff4eec943eedee43c2a602d7d2d89ab",
+    "data_foundation/external_products.json": "9e68a151ccfaa022efb7db2a497c87a1b5aa54fc85be015609f1ca2cc7a9ad60",
+    "data_foundation/device.json": "1b7b90cae98fb6d194144ff4a543069760ba8b7bd24499c769b1b5675d2c56cd",
+    "data_foundation/actor_relationship.json": "d8f1432265e38000d3eb5dd7271df94e66dc78d470a0bd51849041fc08d0bf0b",
+    "data_storytelling/source.json": "6f4d824a7fafc233463d8de03dee3d1f4d58dfb7c6b4436704057b79e173d9e9",
+    "data_storytelling/change_review.json": "84f584eb26589a3fa572a16b453aacdd1a266917157819016545f164388980f1",
+    "data_storytelling/reconciliation_issue.json": "8b655f4eca91283269eee2f46b2de250279367bfa6bc3dcc9d421061cd27e29a",
+    "data_storytelling/authorization.json": "1cd976c92bfc155b158c1a56d6dc6274c4e001ce07b5a0d96bf5c1ade723d76d",
+    "data_storytelling/authorization_decision.json": "8aa55ff19731ff3847bc3318b037956c6635772674d14a58591c6e31ea30d189",
+    "data_storytelling/manifest.json": "5dbb003f47dfd19b9af02d7256ce6b862e019000bb8720653ee726bbd4ecd698",
+    "data_storytelling/annotation.json": "2f403e724b1adfe8d67a0aa67fd47a926bb919bd3663a87f6a026cd3be70bf51"
+  },
+  "historical_reference_note": "The existing reconciliation_issue.baseline_review_20261027 retains its historical candidate-event list, including event.tandy_response. It is an editorial register, not a live foundation reference or an authorization. Historical issue text, decisions, sources and feedback are not rewritten."
+}

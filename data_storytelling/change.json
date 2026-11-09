@@ -3,8 +3,8 @@
     {
       "id": "change.catalogue_phase6_model_ii_release",
       "category": "foundation",
-      "title": "Phase 6: Model II customer release within the NCC campaign",
-      "reason": "Keep the 4 June 1979 Model II prototype demonstration and the 15 October customer release distinct. The existing NCC 1979 campaign already runs through January 1980 and explicitly promotes autumn Tandy deliveries; give it sole ownership of the public release instead of creating a new campaign or moving the whole engineering cooperation. Retain Tandy implementation and qualification responsibilities in its cooperation process, with technical deliverable outcomes unchanged. Assign the Model II Abacus product its campaign and October launch event, remove only the corresponding redundant reverse product references, and make the delivery-promotion event depend directly on the customer release. Remove scenario commentary and pricing-comparison wording from the touched release description. All event dates, process periods, technical definitions, compositions and current authorizations stay unchanged until review. Existing external-product release references remain necessary because external products have no product-owned launch fields. Remaining commercial-specification cleanup and the four other unresolved offerings remain for the catalogue closeout.",
+      "title": "Phase 6: Tandy-led Model II launch and retirement of redundant events",
+      "reason": "Revised to follow author feedback: create a minimal Tandy-led campaign for the supported Model II customer release on 15 October 1979 and assign Model II Abacus to that campaign and event. The isolated “1970” in the feedback is interpreted as a typo against the repeated October 1979 references and the existing event date. Keep the June NCC prototype demonstration; neither NCC 1979 nor its execution process owns the October premiere. End Tandy cooperation on the release date and remove its later-response step and outcome. A small campaign-execution child owns the release event; the cooperation ends on the same recorded calendar day, avoiding duplicate event ownership from two end anchors. Retire event.tandy_response, market_response.tandy_response and event.open79_delivery together with their live incoming references. Preserve the minimal external campaign scope, partner technical responsibilities, historical decisions and feedback. Remaining catalogue-definition gaps stay deferred.",
       "elements": [
         {
           "record_type": "product",
@@ -198,7 +198,7 @@
             "technical_identity": {
               "record_id": "software_edition.abacus_1.model_ii"
             },
-            "launch_campaign_id": "campaign.ncc1979",
+            "launch_campaign_id": "campaign.tandy_model_ii_1979",
             "launch_event_id": "event.tandy_release"
           }
         },
@@ -578,11 +578,6 @@
                 "number": 21,
                 "type": "Adoption targets",
                 "description": "By the end of 1979, aim for Tandy shipping, one additional OEM selling a supported CP/M-extension or FlexiBUS configuration, another in qualification and verified third-party devices in several categories. By NCC 1980, aim for three to five distinct non-Logix manufacturers with supported configurations. Count Tandy once and exclude duplicate dealer builds and product variants; these are targets, not achieved results."
-              },
-              {
-                "number": 22,
-                "type": "customer_release_followup",
-                "description": "Follow the June Model II prototype demonstration with the supported CP/M and Model II Abacus customer release on 15 October 1979. Publish named configurations, qualification limits and the separately supported FlexiBUS option, then update the compatibility directory and dealer materials. The June NCC demonstration remains a prototype demonstration; Tandy, DRI and AION retain their own products and support responsibilities."
               }
             ],
             "process_id": "process.ncc1979_campaign",
@@ -868,30 +863,18 @@
                 "event_id": "event.open79_roadshows"
               },
               {
-                "type": "milestone",
-                "description": "Introduce the supported Model II CP/M and Abacus configuration to customers on 15 October, after qualification, as the autumn release following the June prototype demonstration. Keep the separately supported FlexiBUS option and partner responsibilities explicit.",
-                "event_id": "event.tandy_release",
-                "number": 8
-              },
-              {
-                "number": 9,
-                "type": "milestone",
-                "description": "Update availability evidence for the separately recorded Tandy release and individually qualified SMC and peripheral products. Keep future products out of shipping claims.",
-                "event_id": "event.open79_delivery"
-              },
-              {
-                "number": 10,
+                "number": 8,
                 "type": "milestone",
                 "description": "Review progress against the campaign’s adoption targets using verified OEM configurations, qualifications and third-party device availability.",
                 "event_id": "event.open79_targets"
               },
               {
-                "number": 11,
+                "number": 9,
                 "type": "action",
                 "description": "Track compatible-computer sell-through across vendors, qualified application editions, peripheral shipments and supported device classes, document-interchange results, support incidents, supplier concentration and component availability. Count distinct manufacturers rather than duplicate dealer builds or SKUs."
               },
               {
-                "number": 12,
+                "number": 10,
                 "type": "action",
                 "description": "Prepare the closing review with verified customer examples, compatibility results and partner configurations. Report progress toward NCC 1980 goals without claiming unverified results or disclosing future architecture."
               }
@@ -1012,14 +995,14 @@
             "id": "process.tandy_cooperation",
             "title": "Model II software and interface cooperation",
             "kind": "coordination",
-            "description": "Develop and release the native-display Model II CP/M, Abacus and qualified FlexiBUS offering, then reinforce dealer training and integrated business bundles through 31 March 1980. Tandy retains its hardware platform and sales; its hardware revenue is not Logix revenue.",
+            "description": "Develop and qualify native-display Model II CP/M, Abacus and the separately supported FlexiBUS option, concluding with the Tandy-led customer release on 15 October 1979. Tandy retains its hardware platform, sales and promotion; DRI and AION retain their respective software responsibilities.",
             "period": {
               "start": {
                 "value": "event.tandy_contact",
                 "precision": "event"
               },
               "end": {
-                "value": "1980-03-31",
+                "value": "1979-10-15",
                 "precision": "day"
               }
             },
@@ -1062,11 +1045,6 @@
                   "software_edition.abacus_1.model_ii",
                   "external_product.model_ii_flexibus"
                 ]
-              },
-              {
-                "number": 2,
-                "type": "result",
-                "description": "The released cooperation continues with reinforced business bundles and dealer training. Tandy’s independent hardware sales remain outside Logix revenue."
               }
             ],
             "steps": [
@@ -1103,13 +1081,8 @@
               {
                 "number": 6,
                 "type": "action",
-                "description": "Complete the Model II CP/M and Abacus release builds, native-interface and peripheral qualification, and resource-limit documentation for the October customer release. The public release is carried by the existing NCC campaign follow-up; this cooperation retains responsibility for the technical implementations and subsequent dealer support."
-              },
-              {
-                "number": 7,
-                "type": "milestone",
-                "description": "Reinforce native-video CP/M business bundles, dealer training and the existing cooperation after the customer release.",
-                "event_id": "event.tandy_response"
+                "description": "Conclude the cooperation with the supported customer release through the Tandy-led Model II campaign, after the required software and interface qualification.",
+                "process_id": "process.tandy_model_ii_campaign"
               }
             ],
             "agreement_id": "agreement.tandy"
@@ -1178,7 +1151,7 @@
             "id": "event.tandy_release",
             "title": "Supported Model II CP/M and Abacus configuration released",
             "kind": "launch",
-            "description": "Release the supported 64 KB Model II CP/M configuration, Model II Abacus and the separately supported FlexiBUS option to customers on 15 October 1979. Release follows disk, printing, save/reopen, native UI and interface qualification; publish resource limits. The June NCC prototype demonstration is distinct from this customer release.",
+            "description": "Tandy leads the customer release of the supported 64 KB Model II CP/M configuration, Model II Abacus and the separately supported FlexiBUS option on 15 October 1979. Release follows disk, printing, save/reopen, native UI and interface qualification; publish resource limits. The June NCC prototype demonstration is distinct from this customer release.",
             "participant": [
               {
                 "actor_id": "actor.tandy",
@@ -1232,6 +1205,55 @@
         },
         {
           "record_type": "event",
+          "record_id": "event.tandy_response",
+          "before": {
+            "id": "event.tandy_response",
+            "title": "Tandy reinforces native-video CP/M business bundles",
+            "kind": "activity",
+            "description": "Sustain the existing native-video CP/M/Abacus agreement. Improve dealer training and integrated business bundles; independent Tandy hardware sales are excluded from Logix revenue.",
+            "participant": [
+              {
+                "actor_id": "actor.tandy",
+                "role": "participant"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "market_response",
+                "description": "Establish the response described in Tandy reinforces native-video CP/M business bundles.",
+                "subject_ids": [
+                  "market_response.tandy_response"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1980-03-31",
+              "precision": "day"
+            }
+          },
+          "after": null
+        },
+        {
+          "record_type": "market_response",
+          "record_id": "market_response.tandy_response",
+          "before": {
+            "id": "market_response.tandy_response",
+            "title": "Tandy reinforces native-video CP/M business bundles",
+            "kind": "partnership",
+            "respondent_actor_ids": [
+              "actor.tandy"
+            ],
+            "subject_ids": [],
+            "trigger_ids": [],
+            "description": "Sustain the existing native-video CP/M/Abacus agreement. Improve dealer training and integrated business bundles; independent Tandy hardware sales are excluded from Logix revenue."
+          },
+          "after": null
+        },
+        {
+          "record_type": "event",
           "record_id": "event.open79_delivery",
           "before": {
             "id": "event.open79_delivery",
@@ -1265,44 +1287,51 @@
               "precision": "day"
             }
           },
+          "after": null
+        },
+        {
+          "record_type": "campaign",
+          "record_id": "campaign.tandy_model_ii_1979",
+          "before": null,
           "after": {
-            "id": "event.open79_delivery",
-            "title": "Promote verified ecosystem deliveries",
-            "kind": "activity",
-            "description": "Promote the separately recorded Tandy customer release and only individually qualified SMC or peripheral products. Update directory evidence; do not imply all licensed chips, every peripheral class or new independent OEM systems are shipping. This day is a selected scenario milestone.",
+            "id": "campaign.tandy_model_ii_1979",
+            "title": "Tandy Model II supported configuration launch",
+            "objective": "Promote Tandy’s supported Model II configuration and the separately licensed CP/M and Model II Abacus offerings.",
+            "lead_actor_ids": [
+              "actor.tandy"
+            ],
+            "process_id": "process.tandy_model_ii_campaign",
+            "launch_event_id": "event.tandy_release"
+          }
+        },
+        {
+          "record_type": "process",
+          "record_id": "process.tandy_model_ii_campaign",
+          "before": null,
+          "after": {
+            "id": "process.tandy_model_ii_campaign",
+            "title": "Tandy Model II customer launch",
+            "kind": "campaign_execution",
+            "description": "Tandy leads the public introduction of the supported Model II configuration on 15 October 1979. This launch concludes the software and interface cooperation; the June NCC prototype demonstration is not its customer premiere.",
             "participant": [
               {
-                "actor_id": "actor.logix",
-                "role": "programme organiser"
-              },
-              {
-                "actor_id": "actor.aion",
-                "role": "programme organiser"
-              },
-              {
-                "actor_id": "actor.dri",
-                "role": "programme organiser"
+                "actor_id": "actor.tandy",
+                "role": "campaign_lead"
               }
             ],
-            "subject_ids": [
-              "event.dri_release",
-              "technology.flexibus",
-              "technology.logix_tui_standard",
-              "product.aurelia_sdk"
-            ],
-            "inputs": [
-              {
-                "number": 1,
-                "type": "resource",
-                "description": "The supported Model II customer release supplies the availability and qualification evidence promoted in the campaign directory and dealer material. The earlier NCC prototype demonstration alone does not establish customer availability.",
-                "event_id": "event.tandy_release"
+            "period": {
+              "start": {
+                "value": "1979-10-15",
+                "precision": "day"
+              },
+              "end": {
+                "value": "event.tandy_release",
+                "precision": "event"
               }
-            ],
+            },
+            "inputs": [],
             "outcomes": [],
-            "time": {
-              "value": "1979-10-15",
-              "precision": "day"
-            }
+            "steps": []
           }
         }
       ]
@@ -1310,8 +1339,8 @@
     {
       "id": "change.catalogue_phase6_1980_campaign_scope",
       "category": "foundation",
-      "title": "Phase 6: Place the November software presentation in COMDEX 1980",
-      "reason": "Move the November Abacus 3/Pulse 3 presentation work out of the NCC campaign whose existing period ends in October, and consolidate it into the existing COMDEX 1980 execution process. Its existing start event already owns the 19 November launch; no second event, ownership edge or date change is needed. Preserve compatibility-progress and Aurelia-maintenance messages, but omit the obsolete forecast-specific revenue sentence from story activity text. Keep the unresolved Budget Hard-Disk Office composition/launch conflict for catalogue closeout; this proposal neither resolves it nor revises its product.",
+      "title": "Phase 6: NCC follow-up scope and advance COMDEX 1980 promotion",
+      "reason": "Revised after author feedback: NCC 1980 retains its October end because the existing 17 July regional-sales/Academy rollout and July–October roadshow subprocess are actual follow-up activities. Make this reason explicit and remove the November presentation work from NCC. Begin COMDEX advertising and promotion on 19 October 1980, one calendar month before the unchanged 19 November launch, focused on Abacus 3 and Pulse 3 and qualified business-workflow demonstrations. Record this as a proposed campaign preparation date, not a historical source claim or earlier software release. Keep event.software32 explicitly owned as the presentation milestone after replacing the old event-based start with the earlier calendar start. Preserve the unresolved Budget Hard-Disk Office composition/launch conflict for catalogue closeout; no technical definitions or product launch dates change.",
       "elements": [
         {
           "record_type": "process",
@@ -1398,7 +1427,7 @@
             "id": "process.ncc1980_campaign",
             "title": "Artemis. A new generation. A familiar way to work. — execution",
             "kind": "campaign_execution",
-            "description": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "description": "Present Artemis at NCC on 19 May 1980, then conduct dealer demonstrations, customer trials, transition training and developer clinics. The recorded 17 July Academy and regional-sales rollout begins regional roadshows and certification workshops continuing through October, which is the end of this campaign. The November native-software presentation belongs to the separate COMDEX campaign.",
             "participant": [
               {
                 "actor_id": "actor.logix",
@@ -1512,7 +1541,7 @@
             "id": "process.comdex1980_campaign",
             "title": "AION shifts major software development to 32-bit Artemis — execution",
             "kind": "campaign_execution",
-            "description": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "description": "From 19 October 1980, advertise the forthcoming Abacus 3 and Pulse 3 presentation on Artemis and invite customers, dealers and press to COMDEX. Prepare demonstrations and clear qualification limits before the 19 November presentation. Retain Aurelia/Aurelia+ maintenance messaging and distinguish pre-show promotion from released software availability.",
             "participant": [
               {
                 "actor_id": "actor.logix",
@@ -1521,8 +1550,8 @@
             ],
             "period": {
               "start": {
-                "value": "event.software32",
-                "precision": "event"
+                "value": "1980-10-19",
+                "precision": "day"
               },
               "end": {
                 "value": "1980-11-19",
@@ -1541,13 +1570,83 @@
               {
                 "number": 1,
                 "type": "action",
-                "description": "On 19 November 1980, present released Abacus 3 and Pulse 3 on Artemis, demonstrate native application workflows, report compatibility progress and retain Aurelia maintenance messaging. This is the COMDEX software presentation following the May Artemis platform launch."
+                "description": "From 19 October, place trade-press advertising and distribute dealer and customer invitations focused on the forthcoming Abacus 3 and Pulse 3 offerings and their COMDEX business-workflow demonstrations. Announce the November presentation without claiming that unfinished builds are already released."
               },
               {
                 "number": 2,
                 "type": "action",
+                "description": "Prepare press and dealer material and rehearse qualified Artemis workflows: formatted tables, graphical reports and repeatable Pulse automation. Publish measured resource and compatibility limits and preserve the existing Aurelia/Aurelia+ maintenance message."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "On 19 November 1980, present released Abacus 3 and Pulse 3 on Artemis, demonstrate native application workflows and report compatibility progress.",
+                "event_id": "event.software32"
+              },
+              {
+                "number": 4,
+                "type": "action",
                 "description": "Offer Artemis 128 — Budget Hard-Disk Office as an accessible hard-disk office configuration alongside the native Abacus/Pulse presentation."
               }
+            ]
+          }
+        },
+        {
+          "record_type": "campaign",
+          "record_id": "campaign.comdex1980",
+          "before": {
+            "id": "campaign.comdex1980",
+            "title": "AION shifts major software development to 32-bit Artemis",
+            "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "audience": [],
+            "message": [],
+            "claim_policy": [],
+            "launch_event_id": "event.software32",
+            "presentation": {
+              "stage": []
+            },
+            "marketing_content": [],
+            "process_id": "process.comdex1980_campaign",
+            "subject_ids": [
+              "product.artemis_budget_128_hdd",
+              "technology.abacus_formatted_tables",
+              "technology.abacus_embedded_pulse"
+            ]
+          },
+          "after": {
+            "id": "campaign.comdex1980",
+            "title": "AION shifts major software development to 32-bit Artemis",
+            "objective": "Promote the forthcoming Abacus 3 and Pulse 3 offerings on Artemis through pre-show advertising and qualified business-workflow demonstrations at COMDEX on 19 November 1980.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "audience": [],
+            "message": [],
+            "claim_policy": [],
+            "launch_event_id": "event.software32",
+            "presentation": {
+              "stage": []
+            },
+            "marketing_content": [
+              {
+                "number": 1,
+                "type": "advance_advertising",
+                "description": "Beginning 19 October 1980, use trade-press advertising and dealer/customer invitations to promote the COMDEX presentation of native Abacus 3 and Pulse 3. Keep announcement and released availability distinct."
+              },
+              {
+                "number": 2,
+                "type": "demonstration_material",
+                "description": "Prepare business examples using formatted tables, graphical reporting and repeatable Pulse automation on Artemis. State tested RAM, disk, correctness and recovery limits, report compatibility progress and retain Aurelia/Aurelia+ maintenance messaging."
+              }
+            ],
+            "process_id": "process.comdex1980_campaign",
+            "subject_ids": [
+              "product.artemis_budget_128_hdd",
+              "technology.abacus_formatted_tables",
+              "technology.abacus_embedded_pulse"
             ]
           }
         }
