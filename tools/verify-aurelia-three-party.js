@@ -6,9 +6,11 @@ const root='data_storytelling/review_evidence/aurelia-three-party/';
 const read=p=>JSON.parse(fs.readFileSync(p));
 const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[`${d}/${f}`,read(`${d}/${f}`)])));
 const originalHash=hash(files),prior=read(root+'pre-expansion-pending.json').change;
-const ids=prior.map(p=>p.id),queue=files['data_storytelling/change.json'].change;
+const ids=['change.aurelia_aion_c_ide','change.aurelia_aion_c_ide_packages','change.aurelia_c_ide_launch'],queue=files['data_storytelling/change.json'].change;
 const ps=ids.map(id=>queue.find(p=>p.id===id));assert.ok(ps.every(Boolean));
-for(const p of ps){const old=prior.find(x=>x.id===p.id);assert.deepEqual(p.elements.map(e=>[e.record_id,e.before]),old.elements.map(e=>[e.record_id,e.before]));}
+const unsplit=read(root+'ide-before-split.json');
+assert.deepEqual(ps.slice(0,2).flatMap(p=>p.elements),unsplit.elements);
+for(const p of prior){const current=ps.filter(x=>x.id===p.id || (p.id===unsplit.id && x.id==='change.aurelia_aion_c_ide_packages')).flatMap(x=>x.elements);assert.deepEqual(current.map(e=>[e.record_id,e.before]),p.elements.map(e=>[e.record_id,e.before]));}
 const pendingIds=new Set(ids);
 for(const p of ps)for(const id of p.depends_on_change_ids||[])if(!pendingIds.has(id))assert.ok(files['data_storytelling/authorization_decision.json'].authorization_decision.some(d=>d.action==='approve_change'&&d.change_id===id));
 assert.deepEqual(validate(files).errors,[]);
@@ -17,7 +19,7 @@ const applied=transact(files,request(ps),'simulation-only').files;
 let sequential=files;
 for(const p of ps){sequential=transact(sequential,request([p]),'simulation-only').files;assert.deepEqual(validate(sequential).errors,[]);}
 assert.deepEqual(records(sequential),records(applied));
-assert.throws(()=>transact(files,request([ps[1]])),/Select required proposal/);
+for(const p of ps.slice(1))assert.throws(()=>transact(files,request([p])),/Select required proposal/);
 assert.deepEqual(validateCatalogue(Object.fromEntries(Object.entries(applied).filter(([f])=>f.startsWith('data_foundation/')).map(([,d])=>[Object.keys(d)[0],d]))).errors,[]);
 const before=new Map(records(files).map(r=>[r.id,r])),after=new Map(records(applied).map(r=>[r.id,r]));
 const touched=new Set(ps.flatMap(p=>p.elements.map(e=>e.record_id)));
