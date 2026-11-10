@@ -490,9 +490,9 @@
     },
     {
       "id": "event.letwin",
-      "title": "Gordon Letwin recruited",
+      "title": "Letwin recruited to Copenhagen systems-software leadership",
       "kind": "recruitment",
-      "description": "Recruits Gordon Letwin from his then-current employer.",
+      "description": "Letwin eagerly accepts a move to Europe and joins AION Software in Copenhagen as Director of Systems Software and DRI Technical Liaison. He values the opportunity to build a team and collaborate with Kildall. AION supports relocation and US technical visits.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -501,6 +501,10 @@
         {
           "actor_id": "actor.letwin",
           "role": "recruit"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "employer"
         }
       ],
       "subject_ids": [],
@@ -510,12 +514,21 @@
           "number": 1,
           "type": "result",
           "description": "Letwin never joins Microsoft in this scenario."
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "Letwin takes the Copenhagen-based systems-software role and receives a contractual four-year equity grant; this event does not establish completed vesting."
         }
       ],
       "time": {
         "value": "1977-06-01",
         "precision": "day"
-      }
+      },
+      "agreement_id": "agreement.letwin_aion_appointment",
+      "location_ids": [
+        "location.copenhagen"
+      ]
     },
     {
       "id": "event.paterson",
@@ -989,7 +1002,7 @@
       "id": "event.aionix_agreement",
       "title": "AIONix development programme and ownership formalised",
       "kind": "agreement_milestone",
-      "description": "Formalise the AIONix programme begun in February 1978: joint ERA development in assembler and C, funded by AION. Existing ownership, equity and future porting-right terms remain.",
+      "description": "Formalise the AIONix programme begun in February 1978: joint ERA development in assembler and C, funded by AION. Adam promises Kildall 10% of Logix, fulfilled by the October transfer. AION ownership and future DRI porting rights remain.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -4889,9 +4902,9 @@
     },
     {
       "id": "event.logix_share_transfer_1978",
-      "title": "Adam transfers 40% of Logix to five contributors",
+      "title": "Adam transfers 30% of Logix to four contributors",
       "kind": "agreement_milestone",
-      "description": "Adam transferred 8% of Logix shares to each of Gary Kildall, the chief executive officer, the chief financial officer, Tim Paterson and Gordon Letwin. The five allocations totalled 40% of the company. Gary’s transfer fulfilled his earlier 8% promise.",
+      "description": "Adam transfers 10% each to Gary Kildall and CEO George Comstock, and 5% each to the CFO and Tim Paterson. Kildall and Comstock receive their previously promised interests. Letwin is excluded from this Logix allocation.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -4912,10 +4925,6 @@
         {
           "actor_id": "actor.paterson",
           "role": "share recipient"
-        },
-        {
-          "actor_id": "actor.letwin",
-          "role": "share recipient"
         }
       ],
       "subject_ids": [],
@@ -4923,15 +4932,21 @@
         {
           "number": 1,
           "type": "requirement",
-          "description": "The preceding AIONix agreement milestone establishes Gary Kildall’s earlier 8% Logix equity promise, fulfilled by this share transfer. The agreement remains associated with that earlier event.",
+          "description": "The preceding AIONix agreement milestone establishes Gary Kildall’s earlier 10% Logix equity promise, fulfilled by this share transfer. The agreement remains associated with that earlier event.",
           "event_id": "event.aionix_agreement"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "Comstock’s appointment establishes his 10% equity commitment.",
+          "event_id": "event.comstock_appointed"
         }
       ],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
-          "description": "The five contributors became shareholders with equal 8% interests."
+          "description": "The four recipients hold 30% in total and Adam retains 70% of issued shares immediately after the transfer."
         }
       ],
       "time": {
@@ -5155,7 +5170,7 @@
       "id": "event.aionix_relocation",
       "title": "AIONix department relocates near DRI",
       "kind": "relocation",
-      "description": "On 24 February 1978, the AIONix department moves from Copenhagen to Logix offices near DRI headquarters.",
+      "description": "On 24 February 1978, the AIONix department moves from Copenhagen to Logix offices near DRI headquarters. Letwin remains in Copenhagen to lead the systems-software group and liaise with DRI through scheduled visits. Separate day-to-day leadership is provided for the relocated AIONix team.",
       "participant": [
         {
           "actor_id": "actor.aion",
@@ -5178,7 +5193,7 @@
         {
           "number": 1,
           "type": "result",
-          "description": "The AIONix department is based at Logix offices near DRI headquarters to support the continuing development programme."
+          "description": "The AIONix department is based at Logix offices near DRI headquarters to support the continuing development programme. Letwin’s Copenhagen post is retained."
         }
       ],
       "subject_ids": []
@@ -5746,6 +5761,86 @@
       ],
       "location_ids": [
         "location.cambridge"
+      ]
+    },
+    {
+      "id": "event.rovsing_acquisition_signed",
+      "title": "Rovsing acquisition agreement signed",
+      "kind": "agreement_milestone",
+      "description": "Adam, AION Software and the selling shareholders sign the acquisition agreement and designate Rovsing to lead AION Software after closing. They agree to preserve ongoing customer work while establishing a separately funded software-product programme.",
+      "participant": [
+        {
+          "actor_id": "actor.adam",
+          "role": "funding sponsor and transferor of AION Software equity"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "buyer and future parent"
+        },
+        {
+          "actor_id": "actor.christian_rovsing_as",
+          "role": "acquired operating company"
+        },
+        {
+          "actor_id": "actor.rovsing",
+          "role": "seller and designated CEO"
+        },
+        {
+          "actor_id": "actor.rovsing_sellers",
+          "role": "sellers of all company shares"
+        }
+      ],
+      "time": {
+        "value": "1975-01",
+        "precision": "month"
+      },
+      "agreement_id": "agreement.rovsing_acquisition",
+      "location_ids": [
+        "location.copenhagen"
+      ],
+      "inputs": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "decision",
+          "description": "Adam, AION Software and the selling shareholders sign the acquisition agreement and designate Rovsing to lead AION Software after closing. They agree to preserve ongoing customer work while establishing a separately funded software-product programme."
+        }
+      ]
+    },
+    {
+      "id": "event.comstock_appointed",
+      "title": "Comstock appointed Logix CEO",
+      "kind": "agreement_milestone",
+      "description": "Following an agreed release from prior employer obligations, Comstock accepts the San Jose CEO appointment and the associated equity commitment.",
+      "participant": [
+        {
+          "actor_id": "actor.adam",
+          "role": "sponsor and equity transferor"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "employer"
+        },
+        {
+          "actor_id": "actor.logix_ceo",
+          "role": "chief executive"
+        }
+      ],
+      "time": {
+        "value": "1975-01",
+        "precision": "month"
+      },
+      "agreement_id": "agreement.comstock_appointment",
+      "location_ids": [
+        "location.san_jose"
+      ],
+      "inputs": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "decision",
+          "description": "Following an agreed release from prior employer obligations, Comstock accepts the San Jose CEO appointment and the associated equity commitment."
+        }
       ]
     }
   ]
