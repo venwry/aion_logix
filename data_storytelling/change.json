@@ -6963,8 +6963,8 @@
     {
       "id": "change.aurelia_three_party_cpm_tui_ide",
       "category": "foundation",
-      "title": "Make AION a party to Aurelia CP/M development and launch AION C IDE",
-      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted.",
+      "title": "1. Establish the Logix–DRI–AION agreement and TUI rights",
+      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted. Split for separate review and authorization at the user's request; before/after contents are preserved from the original proposal. This group establishes the agreement and rights for the dependent implementation proposals.",
       "elements": [
         {
           "record_type": "agreement",
@@ -7301,6 +7301,275 @@
             "agreement_id": "agreement.dri_cpm"
           }
         },
+        {
+          "record_type": "technology",
+          "record_id": "technology.logix_tui_standard",
+          "before": {
+            "id": "technology.logix_tui_standard",
+            "name": "Logix common TUI and editing standard",
+            "kind": "interface",
+            "description": "Logix common TUI and editing standard",
+            "owner_actor_ids": [
+              "actor.logix",
+              "actor.dri"
+            ],
+            "related_technology_ids": [
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_keyboard_standard",
+              "technology.logix_tui_mouse"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Shared controls and editing commands",
+                "description": "Applications share controls and editing conventions rather than defining incompatible interfaces. A system clipboard is available. The same conventions cover the listed application classes.\n\nApplications can use the common developer API.\n\nThe cursor moves by character.\n\nCtrl changes cursor movement to whole words.\n\nShift extends text selection.\n\nCtrl-C copies the selection.\n\nCtrl-V pastes clipboard content.\n\nCtrl-X cuts the selection.\n\nThe common controls cover {Common components}. These conventions apply consistently to {Consistent across}.",
+                "parameters": [
+                  {
+                    "key": "Common components",
+                    "value": "text editing, disk/file browsing, forms, lists, popup windows"
+                  },
+                  {
+                    "key": "Consistent across",
+                    "value": "text editor, C compiler/IDE, Abacus, command line, business applications"
+                  }
+                ]
+              },
+              {
+                "number": 19,
+                "chapter_name": "Portable services and API contracts",
+                "description": "The portable API is {API reference} and display services use {Display API reference}. Layout, editing, input and lifecycle services provide the same meanings across the supported hosts.\n\nQuery usable dimensions, clip and scroll; separate document coordinates from screen coordinates.\n\nCompact 40-column and expanded 80-column layouts; dialogs, long names and errors fit either width.\n\nNormal text, selection and warning roles map to color or monochrome attributes.\n\nStructured character, function/navigation key and modifier events; blocking input and polling.\n\nFields, lists, menus, dialogs, popup windows and consistent focus movement.\n\nCommon selection, insertion/deletion and clipboard commands.\n\nExplicit formats, lengths, bounded capacity, ownership and errors.\n\nCreate/destroy and activate/deactivate contexts; redraw when needed. A context describes an assigned display region, which may be the full Aurelia screen.\n\nSystem timing and keyboard-repeat services replace CPU-speed-dependent loops.\n\nDRI is encouraged and later assumed to distribute the TUI extension for other CP/M computers.\n\nKeyboard commands follow {Keyboard standard reference}; pointer interaction extends them through {Mouse extension reference}.",
+                "parameters": [
+                  {
+                    "key": "API reference",
+                    "value": "technology.logix_c_api"
+                  },
+                  {
+                    "key": "Display API reference",
+                    "value": "technology.logix_display_api"
+                  },
+                  {
+                    "key": "Keyboard standard reference",
+                    "value": "technology.logix_tui_keyboard_standard"
+                  },
+                  {
+                    "key": "Mouse extension reference",
+                    "value": "technology.logix_tui_mouse"
+                  }
+                ]
+              },
+              {
+                "number": 40,
+                "chapter_name": "Context ownership and platform compatibility",
+                "description": "Each application owns its interface state. Host differences affect resource and lifecycle capabilities, but do not silently change the meaning of the common API.\n\nPer-application context state; no accidental shared cursor, selection or editing globals. Aurelia remains single-foreground; Artemis may manage multiple isolated application contexts.\n\nKeep the same API behavior across Aurelia, Aurelia+ and Artemis.\n\nDo not assume display stride, video RAM address, last column or direct peripheral registers.\n\nLegacy CP/M console behavior is preserved; Logix-aware interfaces use the documented editing conventions.\n\nArtemis implementation mediates process access to shared clipboard and display services.",
+                "parameters": []
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.logix_tui_standard",
+            "name": "Logix common TUI and editing standard",
+            "kind": "interface",
+            "description": "Logix common TUI and editing standard",
+            "owner_actor_ids": [
+              "actor.logix",
+              "actor.dri",
+              "actor.aion"
+            ],
+            "related_technology_ids": [
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_keyboard_standard",
+              "technology.logix_tui_mouse"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Shared controls and editing commands",
+                "description": "Applications share controls and editing conventions rather than defining incompatible interfaces. A system clipboard is available. The same conventions cover the listed application classes.\n\nApplications can use the common developer API.\n\nThe cursor moves by character.\n\nCtrl changes cursor movement to whole words.\n\nShift extends text selection.\n\nCtrl-C copies the selection.\n\nCtrl-V pastes clipboard content.\n\nCtrl-X cuts the selection.\n\nThe common controls cover {Common components}. These conventions apply consistently to {Consistent across}.",
+                "parameters": [
+                  {
+                    "key": "Common components",
+                    "value": "text editing, disk/file browsing, forms, lists, popup windows"
+                  },
+                  {
+                    "key": "Consistent across",
+                    "value": "text editor, C compiler/IDE, Abacus, command line, business applications"
+                  }
+                ]
+              },
+              {
+                "number": 19,
+                "chapter_name": "Portable services and API contracts",
+                "description": "The portable API is {API reference} and display services use {Display API reference}. Layout, editing, input and lifecycle services provide the same meanings across the supported hosts.\n\nQuery usable dimensions, clip and scroll; separate document coordinates from screen coordinates.\n\nCompact 40-column and expanded 80-column layouts; dialogs, long names and errors fit either width.\n\nNormal text, selection and warning roles map to color or monochrome attributes.\n\nStructured character, function/navigation key and modifier events; blocking input and polling.\n\nFields, lists, menus, dialogs, popup windows and consistent focus movement.\n\nCommon selection, insertion/deletion and clipboard commands.\n\nExplicit formats, lengths, bounded capacity, ownership and errors.\n\nCreate/destroy and activate/deactivate contexts; redraw when needed. A context describes an assigned display region, which may be the full Aurelia screen.\n\nSystem timing and keyboard-repeat services replace CPU-speed-dependent loops.\n\nDRI is encouraged and later assumed to distribute the TUI extension for other CP/M computers.\n\nKeyboard commands follow {Keyboard standard reference}; pointer interaction extends them through {Mouse extension reference}.",
+                "parameters": [
+                  {
+                    "key": "API reference",
+                    "value": "technology.logix_c_api"
+                  },
+                  {
+                    "key": "Display API reference",
+                    "value": "technology.logix_display_api"
+                  },
+                  {
+                    "key": "Keyboard standard reference",
+                    "value": "technology.logix_tui_keyboard_standard"
+                  },
+                  {
+                    "key": "Mouse extension reference",
+                    "value": "technology.logix_tui_mouse"
+                  }
+                ]
+              },
+              {
+                "number": 40,
+                "chapter_name": "Context ownership and platform compatibility",
+                "description": "Each application owns its interface state. Host differences affect resource and lifecycle capabilities, but do not silently change the meaning of the common API.\n\nPer-application context state; no accidental shared cursor, selection or editing globals. Aurelia remains single-foreground; Artemis may manage multiple isolated application contexts.\n\nKeep the same API behavior across Aurelia, Aurelia+ and Artemis.\n\nDo not assume display stride, video RAM address, last column or direct peripheral registers.\n\nLegacy CP/M console behavior is preserved; Logix-aware interfaces use the documented editing conventions.\n\nArtemis implementation mediates process access to shared clipboard and display services.",
+                "parameters": []
+              },
+              {
+                "number": 50,
+                "chapter_name": "Development, implementation ownership and reuse",
+                "description": "Logix, DRI and AION jointly maintain the interface specification. AION develops the CP/M TUI and delivers source, tests and documentation to DRI. DRI owns, integrates and maintains the accepted CP/M implementation and licenses it non-exclusively. AION retains explicit rights to reuse and adapt the shared source and technology on other processors and operating systems. Pre-existing AION components remain AION-owned with perpetual CP/M maintenance and redistribution rights for DRI. The interface contract distinguishes implementation rights from ownership of applications using it.",
+                "parameters": []
+              }
+            ]
+          }
+        },
+        {
+          "record_type": "external_product",
+          "record_id": "external_product.cpm_aurelia",
+          "before": {
+            "id": "external_product.cpm_aurelia",
+            "name": "DRI CP/M with Platform Extensions — Aurelia software",
+            "description": "DRI-owned CP/M 1.4-derived software with the Aurelia platform extensions, supporting Aurelia and Aurelia+. It combines CP/M application/file services with text-mode TUI, smart-device/FlexiBUS integration, XIP cartridge support and named user areas. DRI owns the resulting CP/M version and its software enhancements and licenses it non-exclusively. The Logix-produced physical ROM cartridge is a separate offering and device.",
+            "specification": [
+              {
+                "no": 1,
+                "description": "DRI retains ownership and non-exclusive licensing rights.",
+                "ref_id": "actor.dri",
+                "ref_role": "software owner and licensor"
+              },
+              {
+                "no": 2,
+                "description": "Defines the software image, interfaces and supported Aurelia platforms, separate from physical manufacture.",
+                "ref_id": "software_edition.cpm_aurelia",
+                "ref_role": "Aurelia software implementation"
+              },
+              {
+                "no": 3,
+                "description": "Defines collaboration, DRI software ownership and the scope of non-exclusive licensing.",
+                "ref_id": "agreement.dri_cpm",
+                "ref_role": "development and licensing agreement"
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.cpm_aurelia",
+            "name": "DRI CP/M with Platform Extensions — Aurelia software",
+            "description": "DRI-owned CP/M 1.4-derived software with the Aurelia platform extensions, supporting Aurelia and Aurelia+. It combines CP/M application/file services with text-mode TUI, smart-device/FlexiBUS integration, XIP cartridge support and named user areas. DRI owns the resulting CP/M version and its software enhancements and licenses it non-exclusively. The Logix-produced physical ROM cartridge is a separate offering and device. AION develops and delivers the TUI implementation to DRI under the three-party agreement, retaining cross-platform reuse rights. Logix supplies boot firmware and hardware drivers.",
+            "specification": [
+              {
+                "no": 1,
+                "description": "DRI retains ownership and non-exclusive licensing rights.",
+                "ref_id": "actor.dri",
+                "ref_role": "software owner and licensor"
+              },
+              {
+                "no": 2,
+                "description": "Defines the software image, interfaces and supported Aurelia platforms, separate from physical manufacture.",
+                "ref_id": "software_edition.cpm_aurelia",
+                "ref_role": "Aurelia software implementation"
+              },
+              {
+                "no": 3,
+                "description": "Defines collaboration, DRI software ownership and the scope of non-exclusive licensing.",
+                "ref_id": "agreement.dri_cpm",
+                "ref_role": "development and licensing agreement"
+              },
+              {
+                "no": 4,
+                "description": "Develops the TUI and delivers source, tests and documentation to DRI while retaining cross-platform reuse rights.",
+                "ref_id": "actor.aion",
+                "ref_role": "TUI development and delivery partner"
+              }
+            ]
+          }
+        },
+        {
+          "record_type": "external_product",
+          "record_id": "external_product.cpm_platform_extensions",
+          "before": {
+            "id": "external_product.cpm_platform_extensions",
+            "name": "DRI portable CP/M Platform Extensions",
+            "description": "Optional, documented CP/M Platform Extensions for non-Logix manufacturers, covering text-mode TUI, capability discovery and FlexiBUS adapters. Ordinary CP/M remains usable without them. Implementations require host-specific integration and qualification; this software offering does not imply delivery of the Aurelia ROM cartridge or an identical binary image to other manufacturers.",
+            "specification": [
+              {
+                "no": 1,
+                "description": "DRI develops and licenses the portable CP/M extensions.",
+                "ref_id": "actor.dri",
+                "ref_role": "software provider and licensor"
+              },
+              {
+                "no": 2,
+                "description": "DRI may implement and license the CP/M enhancements for non-Logix computers.",
+                "ref_id": "agreement.dri_cpm",
+                "ref_role": "software ownership and reuse rights"
+              },
+              {
+                "no": 3,
+                "description": "The portable extensions provide CP/M integration for the shared text-mode interface conventions.",
+                "ref_id": "technology.logix_tui_standard",
+                "ref_role": "supported text-user-interface contract"
+              },
+              {
+                "no": 4,
+                "description": "The extension scope includes CP/M-side adapters for qualified FlexiBUS hosts.",
+                "ref_id": "technology.flexibus",
+                "ref_role": "bus supported by platform adapters"
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.cpm_platform_extensions",
+            "name": "DRI portable CP/M Platform Extensions",
+            "description": "Optional, documented CP/M Platform Extensions for non-Logix manufacturers, covering text-mode TUI, capability discovery and FlexiBUS adapters. Ordinary CP/M remains usable without them. Implementations require host-specific integration and qualification; this software offering does not imply delivery of the Aurelia ROM cartridge or an identical binary image to other manufacturers. DRI may adapt and distribute the accepted AION-developed CP/M TUI under the three-party development agreement; each external host requires its own driver integration and qualification.",
+            "specification": [
+              {
+                "no": 1,
+                "description": "DRI develops and licenses the portable CP/M extensions.",
+                "ref_id": "actor.dri",
+                "ref_role": "software provider and licensor"
+              },
+              {
+                "no": 2,
+                "description": "DRI may implement and license the CP/M enhancements for non-Logix computers.",
+                "ref_id": "agreement.dri_cpm",
+                "ref_role": "software ownership and reuse rights"
+              },
+              {
+                "no": 3,
+                "description": "The portable extensions provide CP/M integration for the shared text-mode interface conventions.",
+                "ref_id": "technology.logix_tui_standard",
+                "ref_role": "supported text-user-interface contract"
+              },
+              {
+                "no": 4,
+                "description": "The extension scope includes CP/M-side adapters for qualified FlexiBUS hosts.",
+                "ref_id": "technology.flexibus",
+                "ref_role": "bus supported by platform adapters"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "change.aurelia_cpm_runtime",
+      "category": "foundation",
+      "title": "2. Define CP/M runtime, memory services and cartridge qualification",
+      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted. Split for separate review and authorization at the user's request; before/after contents are preserved from the original proposal. Approve the prerequisite groups first or together.",
+      "elements": [
         {
           "record_type": "software_edition",
           "record_id": "software_edition.cpm_aurelia",
@@ -8208,267 +8477,6 @@
           }
         },
         {
-          "record_type": "technology",
-          "record_id": "technology.logix_tui_standard",
-          "before": {
-            "id": "technology.logix_tui_standard",
-            "name": "Logix common TUI and editing standard",
-            "kind": "interface",
-            "description": "Logix common TUI and editing standard",
-            "owner_actor_ids": [
-              "actor.logix",
-              "actor.dri"
-            ],
-            "related_technology_ids": [
-              "technology.logix_c_api",
-              "technology.logix_display_api",
-              "technology.logix_tui_keyboard_standard",
-              "technology.logix_tui_mouse"
-            ],
-            "specification": [
-              {
-                "number": 1,
-                "chapter_name": "Shared controls and editing commands",
-                "description": "Applications share controls and editing conventions rather than defining incompatible interfaces. A system clipboard is available. The same conventions cover the listed application classes.\n\nApplications can use the common developer API.\n\nThe cursor moves by character.\n\nCtrl changes cursor movement to whole words.\n\nShift extends text selection.\n\nCtrl-C copies the selection.\n\nCtrl-V pastes clipboard content.\n\nCtrl-X cuts the selection.\n\nThe common controls cover {Common components}. These conventions apply consistently to {Consistent across}.",
-                "parameters": [
-                  {
-                    "key": "Common components",
-                    "value": "text editing, disk/file browsing, forms, lists, popup windows"
-                  },
-                  {
-                    "key": "Consistent across",
-                    "value": "text editor, C compiler/IDE, Abacus, command line, business applications"
-                  }
-                ]
-              },
-              {
-                "number": 19,
-                "chapter_name": "Portable services and API contracts",
-                "description": "The portable API is {API reference} and display services use {Display API reference}. Layout, editing, input and lifecycle services provide the same meanings across the supported hosts.\n\nQuery usable dimensions, clip and scroll; separate document coordinates from screen coordinates.\n\nCompact 40-column and expanded 80-column layouts; dialogs, long names and errors fit either width.\n\nNormal text, selection and warning roles map to color or monochrome attributes.\n\nStructured character, function/navigation key and modifier events; blocking input and polling.\n\nFields, lists, menus, dialogs, popup windows and consistent focus movement.\n\nCommon selection, insertion/deletion and clipboard commands.\n\nExplicit formats, lengths, bounded capacity, ownership and errors.\n\nCreate/destroy and activate/deactivate contexts; redraw when needed. A context describes an assigned display region, which may be the full Aurelia screen.\n\nSystem timing and keyboard-repeat services replace CPU-speed-dependent loops.\n\nDRI is encouraged and later assumed to distribute the TUI extension for other CP/M computers.\n\nKeyboard commands follow {Keyboard standard reference}; pointer interaction extends them through {Mouse extension reference}.",
-                "parameters": [
-                  {
-                    "key": "API reference",
-                    "value": "technology.logix_c_api"
-                  },
-                  {
-                    "key": "Display API reference",
-                    "value": "technology.logix_display_api"
-                  },
-                  {
-                    "key": "Keyboard standard reference",
-                    "value": "technology.logix_tui_keyboard_standard"
-                  },
-                  {
-                    "key": "Mouse extension reference",
-                    "value": "technology.logix_tui_mouse"
-                  }
-                ]
-              },
-              {
-                "number": 40,
-                "chapter_name": "Context ownership and platform compatibility",
-                "description": "Each application owns its interface state. Host differences affect resource and lifecycle capabilities, but do not silently change the meaning of the common API.\n\nPer-application context state; no accidental shared cursor, selection or editing globals. Aurelia remains single-foreground; Artemis may manage multiple isolated application contexts.\n\nKeep the same API behavior across Aurelia, Aurelia+ and Artemis.\n\nDo not assume display stride, video RAM address, last column or direct peripheral registers.\n\nLegacy CP/M console behavior is preserved; Logix-aware interfaces use the documented editing conventions.\n\nArtemis implementation mediates process access to shared clipboard and display services.",
-                "parameters": []
-              }
-            ]
-          },
-          "after": {
-            "id": "technology.logix_tui_standard",
-            "name": "Logix common TUI and editing standard",
-            "kind": "interface",
-            "description": "Logix common TUI and editing standard",
-            "owner_actor_ids": [
-              "actor.logix",
-              "actor.dri",
-              "actor.aion"
-            ],
-            "related_technology_ids": [
-              "technology.logix_c_api",
-              "technology.logix_display_api",
-              "technology.logix_tui_keyboard_standard",
-              "technology.logix_tui_mouse"
-            ],
-            "specification": [
-              {
-                "number": 1,
-                "chapter_name": "Shared controls and editing commands",
-                "description": "Applications share controls and editing conventions rather than defining incompatible interfaces. A system clipboard is available. The same conventions cover the listed application classes.\n\nApplications can use the common developer API.\n\nThe cursor moves by character.\n\nCtrl changes cursor movement to whole words.\n\nShift extends text selection.\n\nCtrl-C copies the selection.\n\nCtrl-V pastes clipboard content.\n\nCtrl-X cuts the selection.\n\nThe common controls cover {Common components}. These conventions apply consistently to {Consistent across}.",
-                "parameters": [
-                  {
-                    "key": "Common components",
-                    "value": "text editing, disk/file browsing, forms, lists, popup windows"
-                  },
-                  {
-                    "key": "Consistent across",
-                    "value": "text editor, C compiler/IDE, Abacus, command line, business applications"
-                  }
-                ]
-              },
-              {
-                "number": 19,
-                "chapter_name": "Portable services and API contracts",
-                "description": "The portable API is {API reference} and display services use {Display API reference}. Layout, editing, input and lifecycle services provide the same meanings across the supported hosts.\n\nQuery usable dimensions, clip and scroll; separate document coordinates from screen coordinates.\n\nCompact 40-column and expanded 80-column layouts; dialogs, long names and errors fit either width.\n\nNormal text, selection and warning roles map to color or monochrome attributes.\n\nStructured character, function/navigation key and modifier events; blocking input and polling.\n\nFields, lists, menus, dialogs, popup windows and consistent focus movement.\n\nCommon selection, insertion/deletion and clipboard commands.\n\nExplicit formats, lengths, bounded capacity, ownership and errors.\n\nCreate/destroy and activate/deactivate contexts; redraw when needed. A context describes an assigned display region, which may be the full Aurelia screen.\n\nSystem timing and keyboard-repeat services replace CPU-speed-dependent loops.\n\nDRI is encouraged and later assumed to distribute the TUI extension for other CP/M computers.\n\nKeyboard commands follow {Keyboard standard reference}; pointer interaction extends them through {Mouse extension reference}.",
-                "parameters": [
-                  {
-                    "key": "API reference",
-                    "value": "technology.logix_c_api"
-                  },
-                  {
-                    "key": "Display API reference",
-                    "value": "technology.logix_display_api"
-                  },
-                  {
-                    "key": "Keyboard standard reference",
-                    "value": "technology.logix_tui_keyboard_standard"
-                  },
-                  {
-                    "key": "Mouse extension reference",
-                    "value": "technology.logix_tui_mouse"
-                  }
-                ]
-              },
-              {
-                "number": 40,
-                "chapter_name": "Context ownership and platform compatibility",
-                "description": "Each application owns its interface state. Host differences affect resource and lifecycle capabilities, but do not silently change the meaning of the common API.\n\nPer-application context state; no accidental shared cursor, selection or editing globals. Aurelia remains single-foreground; Artemis may manage multiple isolated application contexts.\n\nKeep the same API behavior across Aurelia, Aurelia+ and Artemis.\n\nDo not assume display stride, video RAM address, last column or direct peripheral registers.\n\nLegacy CP/M console behavior is preserved; Logix-aware interfaces use the documented editing conventions.\n\nArtemis implementation mediates process access to shared clipboard and display services.",
-                "parameters": []
-              },
-              {
-                "number": 50,
-                "chapter_name": "Development, implementation ownership and reuse",
-                "description": "Logix, DRI and AION jointly maintain the interface specification. AION develops the CP/M TUI and delivers source, tests and documentation to DRI. DRI owns, integrates and maintains the accepted CP/M implementation and licenses it non-exclusively. AION retains explicit rights to reuse and adapt the shared source and technology on other processors and operating systems. Pre-existing AION components remain AION-owned with perpetual CP/M maintenance and redistribution rights for DRI. The interface contract distinguishes implementation rights from ownership of applications using it.",
-                "parameters": []
-              }
-            ]
-          }
-        },
-        {
-          "record_type": "external_product",
-          "record_id": "external_product.cpm_aurelia",
-          "before": {
-            "id": "external_product.cpm_aurelia",
-            "name": "DRI CP/M with Platform Extensions — Aurelia software",
-            "description": "DRI-owned CP/M 1.4-derived software with the Aurelia platform extensions, supporting Aurelia and Aurelia+. It combines CP/M application/file services with text-mode TUI, smart-device/FlexiBUS integration, XIP cartridge support and named user areas. DRI owns the resulting CP/M version and its software enhancements and licenses it non-exclusively. The Logix-produced physical ROM cartridge is a separate offering and device.",
-            "specification": [
-              {
-                "no": 1,
-                "description": "DRI retains ownership and non-exclusive licensing rights.",
-                "ref_id": "actor.dri",
-                "ref_role": "software owner and licensor"
-              },
-              {
-                "no": 2,
-                "description": "Defines the software image, interfaces and supported Aurelia platforms, separate from physical manufacture.",
-                "ref_id": "software_edition.cpm_aurelia",
-                "ref_role": "Aurelia software implementation"
-              },
-              {
-                "no": 3,
-                "description": "Defines collaboration, DRI software ownership and the scope of non-exclusive licensing.",
-                "ref_id": "agreement.dri_cpm",
-                "ref_role": "development and licensing agreement"
-              }
-            ]
-          },
-          "after": {
-            "id": "external_product.cpm_aurelia",
-            "name": "DRI CP/M with Platform Extensions — Aurelia software",
-            "description": "DRI-owned CP/M 1.4-derived software with the Aurelia platform extensions, supporting Aurelia and Aurelia+. It combines CP/M application/file services with text-mode TUI, smart-device/FlexiBUS integration, XIP cartridge support and named user areas. DRI owns the resulting CP/M version and its software enhancements and licenses it non-exclusively. The Logix-produced physical ROM cartridge is a separate offering and device. AION develops and delivers the TUI implementation to DRI under the three-party agreement, retaining cross-platform reuse rights. Logix supplies boot firmware and hardware drivers.",
-            "specification": [
-              {
-                "no": 1,
-                "description": "DRI retains ownership and non-exclusive licensing rights.",
-                "ref_id": "actor.dri",
-                "ref_role": "software owner and licensor"
-              },
-              {
-                "no": 2,
-                "description": "Defines the software image, interfaces and supported Aurelia platforms, separate from physical manufacture.",
-                "ref_id": "software_edition.cpm_aurelia",
-                "ref_role": "Aurelia software implementation"
-              },
-              {
-                "no": 3,
-                "description": "Defines collaboration, DRI software ownership and the scope of non-exclusive licensing.",
-                "ref_id": "agreement.dri_cpm",
-                "ref_role": "development and licensing agreement"
-              },
-              {
-                "no": 4,
-                "description": "Develops the TUI and delivers source, tests and documentation to DRI while retaining cross-platform reuse rights.",
-                "ref_id": "actor.aion",
-                "ref_role": "TUI development and delivery partner"
-              }
-            ]
-          }
-        },
-        {
-          "record_type": "external_product",
-          "record_id": "external_product.cpm_platform_extensions",
-          "before": {
-            "id": "external_product.cpm_platform_extensions",
-            "name": "DRI portable CP/M Platform Extensions",
-            "description": "Optional, documented CP/M Platform Extensions for non-Logix manufacturers, covering text-mode TUI, capability discovery and FlexiBUS adapters. Ordinary CP/M remains usable without them. Implementations require host-specific integration and qualification; this software offering does not imply delivery of the Aurelia ROM cartridge or an identical binary image to other manufacturers.",
-            "specification": [
-              {
-                "no": 1,
-                "description": "DRI develops and licenses the portable CP/M extensions.",
-                "ref_id": "actor.dri",
-                "ref_role": "software provider and licensor"
-              },
-              {
-                "no": 2,
-                "description": "DRI may implement and license the CP/M enhancements for non-Logix computers.",
-                "ref_id": "agreement.dri_cpm",
-                "ref_role": "software ownership and reuse rights"
-              },
-              {
-                "no": 3,
-                "description": "The portable extensions provide CP/M integration for the shared text-mode interface conventions.",
-                "ref_id": "technology.logix_tui_standard",
-                "ref_role": "supported text-user-interface contract"
-              },
-              {
-                "no": 4,
-                "description": "The extension scope includes CP/M-side adapters for qualified FlexiBUS hosts.",
-                "ref_id": "technology.flexibus",
-                "ref_role": "bus supported by platform adapters"
-              }
-            ]
-          },
-          "after": {
-            "id": "external_product.cpm_platform_extensions",
-            "name": "DRI portable CP/M Platform Extensions",
-            "description": "Optional, documented CP/M Platform Extensions for non-Logix manufacturers, covering text-mode TUI, capability discovery and FlexiBUS adapters. Ordinary CP/M remains usable without them. Implementations require host-specific integration and qualification; this software offering does not imply delivery of the Aurelia ROM cartridge or an identical binary image to other manufacturers. DRI may adapt and distribute the accepted AION-developed CP/M TUI under the three-party development agreement; each external host requires its own driver integration and qualification.",
-            "specification": [
-              {
-                "no": 1,
-                "description": "DRI develops and licenses the portable CP/M extensions.",
-                "ref_id": "actor.dri",
-                "ref_role": "software provider and licensor"
-              },
-              {
-                "no": 2,
-                "description": "DRI may implement and license the CP/M enhancements for non-Logix computers.",
-                "ref_id": "agreement.dri_cpm",
-                "ref_role": "software ownership and reuse rights"
-              },
-              {
-                "no": 3,
-                "description": "The portable extensions provide CP/M integration for the shared text-mode interface conventions.",
-                "ref_id": "technology.logix_tui_standard",
-                "ref_role": "supported text-user-interface contract"
-              },
-              {
-                "no": 4,
-                "description": "The extension scope includes CP/M-side adapters for qualified FlexiBUS hosts.",
-                "ref_id": "technology.flexibus",
-                "ref_role": "bus supported by platform adapters"
-              }
-            ]
-          }
-        },
-        {
           "record_type": "device",
           "record_id": "device.rom_cartridge.cpm_aurelia",
           "before": {
@@ -8637,6 +8645,579 @@
             }
           }
         },
+        {
+          "record_type": "technology",
+          "record_id": "technology.aurelia_memory_model",
+          "before": {
+            "id": "technology.aurelia_memory_model",
+            "name": "Aurelia banked memory organization",
+            "kind": "interface",
+            "description": "Aurelia banked memory organization",
+            "owner_actor_ids": [],
+            "related_technology_ids": [
+              "technology.logix_sprite_system"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Banked logical memory",
+                "description": "The CPU addresses {CPU address space KB} KB at once, with {Page size KB} KB pages. Fixed lower RAM is {Fixed low RAM KB} KB, the switchable window is {Switchable window KB} KB and common system RAM is {Common system RAM KB} KB. Additional physical RAM does not widen the CPU logical address space.\n\nOne AION system-controller chip replaces mapper registers and selected decode/control logic; external clock/reset/interrupt and electrical buffers remain as required.\n\nRead-only code and constants execute directly from ROM where practical. Mutable state, stacks and buffers reside in RAM.\n\nCPU uses temporary 4 KiB display-memory windows or auto-incrementing upload ports. DMA uses physical source banks and target-ready video ports. Video controller independently refreshes display DRAM and arbitrates sprite SRAM; sprite storage is not system RAM.\n\nInitialize refresh and boot mapping before RAM use; disable DMA and clear pending ownership on reset. Warm boot aborts/drains DMA before restoring bank maps.\n\nInstalled RAM is accessible, but system workspaces and the resident Business Tools workspace reduce application memory.\n\nAdditional RAM uses mapped pages; an expansion does not enlarge the CPU logical address space.\n\nSoftware accesses mapper registers through {Mapping register access}.",
+                "parameters": [
+                  {
+                    "key": "CPU address space KB",
+                    "value": "64"
+                  },
+                  {
+                    "key": "Page size KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Fixed low RAM KB",
+                    "value": "28"
+                  },
+                  {
+                    "key": "Switchable window KB",
+                    "value": "32"
+                  },
+                  {
+                    "key": "Common system RAM KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Mapping register access",
+                    "value": "I/O ports"
+                  }
+                ]
+              },
+              {
+                "number": 13,
+                "chapter_name": "CP/M application boundary and service dispatch",
+                "description": "The published top of application memory must remain writable throughout program execution. System-call dispatch temporarily changes mappings only after moving into common memory, then restores the caller view.\n\nAt launch, the little-endian word at 0006H (the operand of JMP at 0005H) points to the BDOS entry stub at the exclusive top of usable contiguous application RAM. Keep the entire advertised range writable RAM.\n\nReserve {Lower workspace reservation} at the top of lower RAM for the entry stub and resident workspace, in addition to {Common RAM range} common system RAM. These are the initial design allocations, not measured image sizes. If implementation requires more workspace, revise the boot profile before application launch and report the actual lower boundary.\n\nWarm boot restores vectors and the normal map. Legacy programs with hardcoded addresses beyond the published boundary remain unsupported.\n\nDisable optional resident tools or choose a smaller TPA when networking needs more RAM; never silently consume advertised program memory.\n\nlx_memory_query returns installed RAM, TPA bounds, reserved bytes and optional banked-handle capacity. Standard CP/M programs need not use it.\n\nStress CPU/DMA/refresh/peripherals and display together at both host clocks and process/temperature corners.\n\nValidate hidden and expanded RAM refresh, physical DMA bounds, page-crossing segmentation, abort and warm boot.\n\nCALL 0005H enters the top-of-TPA stub.\n\nThe stub jumps to common memory before any bank mapping changes.\n\nCommon code saves mapping and application stack, then adopts the system stack.\n\nMap the service; copy caller buffers in bounded chunks while respecting page boundaries.\n\nRestore the application view and stack before returning.\n\nChoose all workspace reservations before launching the program. Never shrink TPA under a running program.\n\nExercise programs that inspect 0006H and fill their advertised TPA.\n\nTest nested calls, interrupts, DMA buffers crossing pages and warm boot after application failure.",
+                "parameters": [
+                  {
+                    "key": "Lower workspace reservation",
+                    "value": "4 KB"
+                  },
+                  {
+                    "key": "Common RAM range",
+                    "value": "F000–FFFF"
+                  }
+                ]
+              },
+              {
+                "number": 29,
+                "chapter_name": "Application RAM profiles",
+                "description": "With {48 KB profile installed RAM KB} KB installed, the application range is {48 KB profile application start}–{48 KB profile application end inclusive} and contains {48 KB profile TPA bytes} bytes. The {64 KB profile installed RAM KB} KB profile exposes {64 KB profile TPA bytes} bytes. These profiles reserve workspace before launch rather than shrinking a running program.\n\nProfile {48 KB profile ID} enters BDOS at {48 KB profile BDOS entry} and reserves {48 KB profile lower reserved range} below common memory. Profile {64 KB profile ID} exposes addresses {64 KB profile application start}–{64 KB profile application end inclusive}, enters BDOS at {64 KB profile BDOS entry}, and reserves {64 KB profile lower reserved range}. These hexadecimal address maps are implemented by {Controller reference}.",
+                "parameters": [
+                  {
+                    "key": "48 KB profile installed RAM KB",
+                    "value": "48"
+                  },
+                  {
+                    "key": "48 KB profile application start",
+                    "value": "0100"
+                  },
+                  {
+                    "key": "48 KB profile application end inclusive",
+                    "value": "9FFF"
+                  },
+                  {
+                    "key": "48 KB profile BDOS entry",
+                    "value": "A000"
+                  },
+                  {
+                    "key": "48 KB profile lower reserved range",
+                    "value": "A000–AFFF"
+                  },
+                  {
+                    "key": "48 KB profile TPA bytes",
+                    "value": "40704"
+                  },
+                  {
+                    "key": "48 KB profile ID",
+                    "value": "ram_48kb"
+                  },
+                  {
+                    "key": "64 KB profile installed RAM KB",
+                    "value": "64"
+                  },
+                  {
+                    "key": "64 KB profile application start",
+                    "value": "0100"
+                  },
+                  {
+                    "key": "64 KB profile application end inclusive",
+                    "value": "DFFF"
+                  },
+                  {
+                    "key": "64 KB profile BDOS entry",
+                    "value": "E000"
+                  },
+                  {
+                    "key": "64 KB profile lower reserved range",
+                    "value": "E000–EFFF"
+                  },
+                  {
+                    "key": "64 KB profile TPA bytes",
+                    "value": "57088"
+                  },
+                  {
+                    "key": "64 KB profile ID",
+                    "value": "ram_64kb"
+                  },
+                  {
+                    "key": "Controller reference",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 44,
+                "chapter_name": "DMA transfers and arbitration",
+                "description": "The controller has {Transfer contexts} transfer contexts but {Active transfer engines} active transfer engine. Destination addresses and lengths use {Destination address bits} and {Length bits} bits respectively. Physical bank selection must remain stable for an active transfer.\n\nLatch physical source/destination bank and offsets on start. CPU mapping changes cannot redirect an active transfer; split logical buffers at 4 KiB boundaries before programming physical segments. Reject ROM writes, unmapped banks and out-of-range lengths.\n\nBounded bursts with guaranteed CPU and refresh service; device-ready/WAIT handshake; video uploads yield to video-controller fetch deadlines. Numeric grant limits require cycle-level validation.\n\nDisk/FlexiBUS DMA requires qualified request/ready or FIFO endpoints and drivers; legacy programmed I/O remains supported.\n\nCompletion/error interrupt, readable remaining count, controlled abort; reset disables DMA.\n\nAuto-incrementing upload ports for display DRAM or dedicated sprite SRAM; target-ready backpressure.\n\nSupported transfer operations are {Operations}. Each address can use one of the following step modes: {Address steps}.",
+                "parameters": [
+                  {
+                    "key": "Transfer contexts",
+                    "value": "2"
+                  },
+                  {
+                    "key": "Active transfer engines",
+                    "value": "1"
+                  },
+                  {
+                    "key": "Destination address bits",
+                    "value": "16"
+                  },
+                  {
+                    "key": "Length bits",
+                    "value": "16"
+                  },
+                  {
+                    "key": "Operations",
+                    "value": "memory-to-memory, memory-to-I/O, I/O-to-memory"
+                  },
+                  {
+                    "key": "Address steps",
+                    "value": "fixed, increment, decrement"
+                  }
+                ]
+              },
+              {
+                "number": 59,
+                "chapter_name": "Refresh and separate sprite storage",
+                "description": "System DRAM refresh runs independently of CPU execution. It covers all installed system DRAM banks. Display DRAM and sprite SRAM have separate ownership and refresh requirements.\n\nSystem DRAM only, including hidden banks and expansion. Video controller refreshes display DRAM; sprite SRAM needs no refresh.\n\nAlways-running timer, row counter and refresh arbitration during CPU execution, HALT and DMA; initialize before enabling RAM use. Match row count and retention deadlines to each qualified system DRAM type.\n\nSupported system DRAM populations are {System refresh supported populations}. Sprite storage follows {Sprite memory technology reference} and is implemented in {Sprite memory device references}.",
+                "parameters": [
+                  {
+                    "key": "System refresh supported populations",
+                    "value": "48 KiB: three banks of eight 16Kx1 DRAMs, 64 KiB expanded Aurelia: four banks of eight 16Kx1 DRAMs, 64 KiB Aurelia+: one bank of eight 64Kx1 DRAMs"
+                  },
+                  {
+                    "key": "Sprite memory technology reference",
+                    "value": "technology.logix_sprite_system"
+                  },
+                  {
+                    "key": "Sprite memory device references",
+                    "value": "device.subsystem.aurelia.video, device.subsystem.aurelia_plus.video"
+                  }
+                ]
+              },
+              {
+                "number": 69,
+                "chapter_name": "Base Aurelia address map",
+                "description": "The normal base-system view contains {Contiguous lower RAM KB} KB of contiguous lower RAM and {Common system RAM KB} KB of common system RAM. Temporary overlays preserve hidden RAM while exposing ROM and display windows.\n\nThis is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.\n\nLower RAM, including CP/M page zero and application memory.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The rom / cartridge / video ram windows region occupies {ROM / cartridge / video RAM windows range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.",
+                "parameters": [
+                  {
+                    "key": "Common system RAM KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Contiguous lower RAM KB",
+                    "value": "44"
+                  },
+                  {
+                    "key": "Application memory profile",
+                    "value": "ram_48kb"
+                  },
+                  {
+                    "key": "Controller reference",
+                    "value": "base_part.aurelia_system_controller"
+                  },
+                  {
+                    "key": "Lower RAM range (hex)",
+                    "value": "0000–AFFF"
+                  },
+                  {
+                    "key": "ROM / cartridge / video RAM windows range (hex)",
+                    "value": "B000–EFFF"
+                  },
+                  {
+                    "key": "Common system RAM range (hex)",
+                    "value": "F000–FFFF"
+                  }
+                ]
+              },
+              {
+                "number": 88,
+                "chapter_name": "Expanded Aurelia address map",
+                "description": "The expansion profile contains {RAM KB} KB of installed RAM, including {Contiguous lower RAM KB} KB of contiguous lower RAM. The expansion fills the normal B000–EFFF range; system overlays remain temporary.\n\nThe card fills B000–EFFF with RAM in the normal view. ROM, cartridges and video RAM use temporary overlays within 7000–EFFF; the underlying RAM retains its contents.\n\nBase and expansion RAM, including CP/M page zero and application memory. The card supplies B000–EFFF.\n\nStable runtime entry code, system stack and critical state.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.\n\nCommon system RAM occupies {Common system RAM KB} KB.",
+                "parameters": [
+                  {
+                    "key": "RAM KB",
+                    "value": "64"
+                  },
+                  {
+                    "key": "Common system RAM KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Contiguous lower RAM KB",
+                    "value": "60"
+                  },
+                  {
+                    "key": "Application memory profile",
+                    "value": "ram_64kb"
+                  },
+                  {
+                    "key": "Controller reference",
+                    "value": "base_part.aurelia_system_controller"
+                  },
+                  {
+                    "key": "Lower RAM range (hex)",
+                    "value": "0000–EFFF"
+                  },
+                  {
+                    "key": "Common system RAM range (hex)",
+                    "value": "F000–FFFF"
+                  }
+                ]
+              },
+              {
+                "number": 104,
+                "chapter_name": "Aurelia+ address map",
+                "description": "Aurelia+ exposes {Contiguous lower RAM KB} KB of contiguous lower RAM and {Common system RAM KB} KB of common system RAM. The normal application map and the temporary service overlays have distinct roles.\n\nThis is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.\n\nLower RAM, including CP/M page zero and application memory.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.",
+                "parameters": [
+                  {
+                    "key": "Common system RAM KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Contiguous lower RAM KB",
+                    "value": "60"
+                  },
+                  {
+                    "key": "Application memory profile",
+                    "value": "ram_64kb"
+                  },
+                  {
+                    "key": "Controller reference",
+                    "value": "base_part.aurelia_system_controller"
+                  },
+                  {
+                    "key": "Lower RAM range (hex)",
+                    "value": "0000–EFFF"
+                  },
+                  {
+                    "key": "Common system RAM range (hex)",
+                    "value": "F000–FFFF"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.aurelia_memory_model",
+            "name": "Aurelia banked memory organization",
+            "kind": "interface",
+            "description": "Aurelia banked memory organization",
+            "owner_actor_ids": [],
+            "related_technology_ids": [
+              "technology.logix_sprite_system"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Banked logical memory",
+                "description": "The CPU addresses {CPU address space KB} KB at once, with {Page size KB} KB pages. Fixed lower RAM is {Fixed low RAM KB} KB, the switchable window is {Switchable window KB} KB and common system RAM is {Common system RAM KB} KB. Additional physical RAM does not widen the CPU logical address space.\n\nOne AION system-controller chip replaces mapper registers and selected decode/control logic; external clock/reset/interrupt and electrical buffers remain as required.\n\nRead-only code and constants execute directly from ROM where practical. Mutable state, stacks and buffers reside in RAM.\n\nCPU uses temporary 4 KiB display-memory windows or auto-incrementing upload ports. DMA uses physical source banks and target-ready video ports. Video controller independently refreshes display DRAM and arbitrates sprite SRAM; sprite storage is not system RAM.\n\nInitialize refresh and boot mapping before RAM use; disable DMA and clear pending ownership on reset. Warm boot aborts/drains DMA before restoring bank maps.\n\nInstalled RAM is accessible, but system workspaces and the resident Business Tools workspace reduce application memory.\n\nAdditional RAM uses mapped pages; an expansion does not enlarge the CPU logical address space.\n\nSoftware accesses mapper registers through {Mapping register access}.",
+                "parameters": [
+                  {
+                    "key": "CPU address space KB",
+                    "value": "64"
+                  },
+                  {
+                    "key": "Page size KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Fixed low RAM KB",
+                    "value": "28"
+                  },
+                  {
+                    "key": "Switchable window KB",
+                    "value": "32"
+                  },
+                  {
+                    "key": "Common system RAM KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Mapping register access",
+                    "value": "I/O ports"
+                  }
+                ]
+              },
+              {
+                "number": 13,
+                "chapter_name": "CP/M application boundary and service dispatch",
+                "description": "The published top of application memory must remain writable throughout program execution. System-call dispatch temporarily changes mappings only after moving into common memory, then restores the caller view.\n\nAt launch, the little-endian word at 0006H (the operand of JMP at 0005H) points to the BDOS entry stub at the exclusive top of usable contiguous application RAM. Keep the entire advertised range writable RAM.\n\nReserve {Lower workspace reservation} at the top of lower RAM for the entry stub and resident workspace, in addition to {Common RAM range} common system RAM. These are the initial design allocations, not measured image sizes. If implementation requires more workspace, revise the boot profile before application launch and report the actual lower boundary.\n\nWarm boot restores vectors and the normal map. Legacy programs with hardcoded addresses beyond the published boundary remain unsupported.\n\nDisable optional resident tools or choose a smaller TPA when networking needs more RAM; never silently consume advertised program memory.\n\nlx_memory_query returns installed RAM, TPA bounds, reserved bytes and optional banked-handle capacity. Standard CP/M programs need not use it.\n\nStress CPU/DMA/refresh/peripherals and display together at both host clocks and process/temperature corners.\n\nValidate hidden and expanded RAM refresh, physical DMA bounds, page-crossing segmentation, abort and warm boot.\n\nCALL 0005H enters the top-of-TPA stub.\n\nThe stub jumps to common memory before any bank mapping changes.\n\nCommon code saves mapping and application stack, then adopts the system stack.\n\nMap the service; copy caller buffers in bounded chunks while respecting page boundaries.\n\nRestore the application view and stack before returning.\n\nChoose all workspace reservations before launching the program. Never shrink TPA under a running program.\n\nExercise programs that inspect 0006H and fill their advertised TPA.\n\nTest nested calls, interrupts, DMA buffers crossing pages and warm boot after application failure.",
+                "parameters": [
+                  {
+                    "key": "Lower workspace reservation",
+                    "value": "4 KB"
+                  },
+                  {
+                    "key": "Common RAM range",
+                    "value": "F000–FFFF"
+                  }
+                ]
+              },
+              {
+                "number": 29,
+                "chapter_name": "Application RAM profiles",
+                "description": "With {48 KB profile installed RAM KB} KB installed, the application range is {48 KB profile application start}–{48 KB profile application end inclusive} and contains {48 KB profile TPA bytes} bytes. The {64 KB profile installed RAM KB} KB profile exposes {64 KB profile TPA bytes} bytes. These profiles reserve workspace before launch rather than shrinking a running program.\n\nProfile {48 KB profile ID} enters BDOS at {48 KB profile BDOS entry} and reserves {48 KB profile lower reserved range} below common memory. Profile {64 KB profile ID} exposes addresses {64 KB profile application start}–{64 KB profile application end inclusive}, enters BDOS at {64 KB profile BDOS entry}, and reserves {64 KB profile lower reserved range}. These hexadecimal address maps are implemented by {Controller reference}.",
+                "parameters": [
+                  {
+                    "key": "48 KB profile installed RAM KB",
+                    "value": "48"
+                  },
+                  {
+                    "key": "48 KB profile application start",
+                    "value": "0100"
+                  },
+                  {
+                    "key": "48 KB profile application end inclusive",
+                    "value": "9FFF"
+                  },
+                  {
+                    "key": "48 KB profile BDOS entry",
+                    "value": "A000"
+                  },
+                  {
+                    "key": "48 KB profile lower reserved range",
+                    "value": "A000–AFFF"
+                  },
+                  {
+                    "key": "48 KB profile TPA bytes",
+                    "value": "40704"
+                  },
+                  {
+                    "key": "48 KB profile ID",
+                    "value": "ram_48kb"
+                  },
+                  {
+                    "key": "64 KB profile installed RAM KB",
+                    "value": "64"
+                  },
+                  {
+                    "key": "64 KB profile application start",
+                    "value": "0100"
+                  },
+                  {
+                    "key": "64 KB profile application end inclusive",
+                    "value": "DFFF"
+                  },
+                  {
+                    "key": "64 KB profile BDOS entry",
+                    "value": "E000"
+                  },
+                  {
+                    "key": "64 KB profile lower reserved range",
+                    "value": "E000–EFFF"
+                  },
+                  {
+                    "key": "64 KB profile TPA bytes",
+                    "value": "57088"
+                  },
+                  {
+                    "key": "64 KB profile ID",
+                    "value": "ram_64kb"
+                  },
+                  {
+                    "key": "Controller reference",
+                    "value": "base_part.aurelia_system_controller"
+                  }
+                ]
+              },
+              {
+                "number": 44,
+                "chapter_name": "DMA transfers and arbitration",
+                "description": "The controller has {Transfer contexts} transfer contexts but {Active transfer engines} active transfer engine. Destination addresses and lengths use {Destination address bits} and {Length bits} bits respectively. Physical bank selection must remain stable for an active transfer.\n\nLatch physical source/destination bank and offsets on start. CPU mapping changes cannot redirect an active transfer; split logical buffers at 4 KiB boundaries before programming physical segments. Reject ROM writes, unmapped banks and out-of-range lengths.\n\nBounded bursts with guaranteed CPU and refresh service; device-ready/WAIT handshake; video uploads yield to video-controller fetch deadlines. Numeric grant limits require cycle-level validation.\n\nDisk/FlexiBUS DMA requires qualified request/ready or FIFO endpoints and drivers; legacy programmed I/O remains supported.\n\nCompletion/error interrupt, readable remaining count, controlled abort; reset disables DMA.\n\nAuto-incrementing upload ports for display DRAM or dedicated sprite SRAM; target-ready backpressure.\n\nSupported transfer operations are {Operations}. Each address can use one of the following step modes: {Address steps}.",
+                "parameters": [
+                  {
+                    "key": "Transfer contexts",
+                    "value": "2"
+                  },
+                  {
+                    "key": "Active transfer engines",
+                    "value": "1"
+                  },
+                  {
+                    "key": "Destination address bits",
+                    "value": "16"
+                  },
+                  {
+                    "key": "Length bits",
+                    "value": "16"
+                  },
+                  {
+                    "key": "Operations",
+                    "value": "memory-to-memory, memory-to-I/O, I/O-to-memory"
+                  },
+                  {
+                    "key": "Address steps",
+                    "value": "fixed, increment, decrement"
+                  }
+                ]
+              },
+              {
+                "number": 59,
+                "chapter_name": "Refresh and separate sprite storage",
+                "description": "System DRAM refresh runs independently of CPU execution. It covers all installed system DRAM banks. Display DRAM and sprite SRAM have separate ownership and refresh requirements.\n\nSystem DRAM only, including hidden banks and expansion. Video controller refreshes display DRAM; sprite SRAM needs no refresh.\n\nAlways-running timer, row counter and refresh arbitration during CPU execution, HALT and DMA; initialize before enabling RAM use. Match row count and retention deadlines to each qualified system DRAM type.\n\nSupported system DRAM populations are {System refresh supported populations}. Sprite storage follows {Sprite memory technology reference} and is implemented in {Sprite memory device references}.",
+                "parameters": [
+                  {
+                    "key": "System refresh supported populations",
+                    "value": "48 KiB: three banks of eight 16Kx1 DRAMs, 64 KiB expanded Aurelia: four banks of eight 16Kx1 DRAMs, 64 KiB Aurelia+: one bank of eight 64Kx1 DRAMs"
+                  },
+                  {
+                    "key": "Sprite memory technology reference",
+                    "value": "technology.logix_sprite_system"
+                  },
+                  {
+                    "key": "Sprite memory device references",
+                    "value": "device.subsystem.aurelia.video, device.subsystem.aurelia_plus.video"
+                  }
+                ]
+              },
+              {
+                "number": 69,
+                "chapter_name": "Base Aurelia address map",
+                "description": "The normal base-system view contains {Contiguous lower RAM KB} KB of contiguous lower RAM and {Common system RAM KB} KB of common system RAM. Temporary overlays preserve hidden RAM while exposing ROM and display windows.\n\nThis is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.\n\nLower RAM, including CP/M page zero and application memory.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The rom / cartridge / video ram windows region occupies {ROM / cartridge / video RAM windows range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.",
+                "parameters": [
+                  {
+                    "key": "Common system RAM KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Contiguous lower RAM KB",
+                    "value": "44"
+                  },
+                  {
+                    "key": "Application memory profile",
+                    "value": "ram_48kb"
+                  },
+                  {
+                    "key": "Controller reference",
+                    "value": "base_part.aurelia_system_controller"
+                  },
+                  {
+                    "key": "Lower RAM range (hex)",
+                    "value": "0000–AFFF"
+                  },
+                  {
+                    "key": "ROM / cartridge / video RAM windows range (hex)",
+                    "value": "B000–EFFF"
+                  },
+                  {
+                    "key": "Common system RAM range (hex)",
+                    "value": "F000–FFFF"
+                  }
+                ]
+              },
+              {
+                "number": 88,
+                "chapter_name": "Expanded Aurelia address map",
+                "description": "The expansion profile contains {RAM KB} KB of installed RAM, including {Contiguous lower RAM KB} KB of contiguous lower RAM. The expansion fills the normal B000–EFFF range; system overlays remain temporary.\n\nThe card fills B000–EFFF with RAM in the normal view. ROM, cartridges and video RAM use temporary overlays within 7000–EFFF; the underlying RAM retains its contents.\n\nBase and expansion RAM, including CP/M page zero and application memory. The card supplies B000–EFFF.\n\nStable runtime entry code, system stack and critical state.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.\n\nCommon system RAM occupies {Common system RAM KB} KB.",
+                "parameters": [
+                  {
+                    "key": "RAM KB",
+                    "value": "64"
+                  },
+                  {
+                    "key": "Common system RAM KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Contiguous lower RAM KB",
+                    "value": "60"
+                  },
+                  {
+                    "key": "Application memory profile",
+                    "value": "ram_64kb"
+                  },
+                  {
+                    "key": "Controller reference",
+                    "value": "base_part.aurelia_system_controller"
+                  },
+                  {
+                    "key": "Lower RAM range (hex)",
+                    "value": "0000–EFFF"
+                  },
+                  {
+                    "key": "Common system RAM range (hex)",
+                    "value": "F000–FFFF"
+                  }
+                ]
+              },
+              {
+                "number": 104,
+                "chapter_name": "Aurelia+ address map",
+                "description": "Aurelia+ exposes {Contiguous lower RAM KB} KB of contiguous lower RAM and {Common system RAM KB} KB of common system RAM. The normal application map and the temporary service overlays have distinct roles.\n\nThis is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.\n\nLower RAM, including CP/M page zero and application memory.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.",
+                "parameters": [
+                  {
+                    "key": "Common system RAM KB",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Contiguous lower RAM KB",
+                    "value": "60"
+                  },
+                  {
+                    "key": "Application memory profile",
+                    "value": "ram_64kb"
+                  },
+                  {
+                    "key": "Controller reference",
+                    "value": "base_part.aurelia_system_controller"
+                  },
+                  {
+                    "key": "Lower RAM range (hex)",
+                    "value": "0000–EFFF"
+                  },
+                  {
+                    "key": "Common system RAM range (hex)",
+                    "value": "F000–FFFF"
+                  }
+                ]
+              },
+              {
+                "number": 120,
+                "chapter_name": "Firmware and operating-system responsibilities",
+                "description": "Logix supplies reset mapping, boot/recovery and low-level mapper/controller drivers. DRI implements the operating-system bank/cartridge runtime over those primitives, including stable dispatch, mapping and stack preservation, nested calls, page-crossing buffers and recovery. AION TUI/IDE clients use the documented services. Clipboard and queued I/O state consume reserved RAM; measure their combined allocation before publishing the application boundary. Existing numeric memory profiles remain design allocations subject to qualification, never permission to take memory from a running application.",
+                "parameters": []
+              }
+            ]
+          }
+        }
+      ],
+      "depends_on_change_ids": [
+        "change.aurelia_three_party_cpm_tui_ide"
+      ]
+    },
+    {
+      "id": "change.aurelia_aion_c_ide",
+      "category": "foundation",
+      "title": "3. Replace Simple C with AION C IDE and align developer packages",
+      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted. Split for separate review and authorization at the user's request; before/after contents are preserved from the original proposal. Approve the prerequisite groups first or together.",
+      "elements": [
         {
           "record_type": "software_edition",
           "record_id": "software_edition.simple_c_z80",
@@ -9714,6 +10295,541 @@
         },
         {
           "record_type": "product",
+          "record_id": "product.proposed_aurelia_developer",
+          "before": {
+            "id": "product.proposed_aurelia_developer",
+            "name": "Aurelia — C development",
+            "kind": "bundle",
+            "description": "A complete platform starting point for C development and hardware/software integration.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.mono_monitor_1",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.rom_cartridge.cpm_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch"
+          },
+          "after": {
+            "id": "product.proposed_aurelia_developer",
+            "name": "Aurelia — C development",
+            "kind": "bundle",
+            "description": "A complete platform for C development and hardware/software integration with AION C IDE (CP/M edition), the platform SDK and the configured computer peripherals.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.mono_monitor_1",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.rom_cartridge.cpm_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch"
+          }
+        },
+        {
+          "record_type": "product",
+          "record_id": "product.proposed_aurelia_plus_developer",
+          "before": {
+            "id": "product.proposed_aurelia_plus_developer",
+            "name": "Aurelia+ — C development",
+            "kind": "bundle",
+            "description": "A complete platform starting point for C development and hardware/software integration.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.plus_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.aurelia_plus",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.mono_monitor_2",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.rom_cartridge.cpm_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "launch_campaign_id": "campaign.comdex1979",
+            "launch_event_id": "event.plus_launch"
+          },
+          "after": {
+            "id": "product.proposed_aurelia_plus_developer",
+            "name": "Aurelia+ — C development",
+            "kind": "bundle",
+            "description": "A complete platform for C development and hardware/software integration with AION C IDE (CP/M edition), the platform SDK and the configured computer peripherals.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.plus_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.aurelia_plus",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.mono_monitor_2",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.rom_cartridge.cpm_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "launch_campaign_id": "campaign.comdex1979",
+            "launch_event_id": "event.plus_launch"
+          }
+        }
+      ],
+      "depends_on_change_ids": [
+        "change.aurelia_cpm_runtime"
+      ]
+    },
+    {
+      "id": "change.aurelia_c_ide_launch",
+      "category": "foundation",
+      "title": "4. Align Aurelia C training and NCC launch demonstrations",
+      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted. Split for separate review and authorization at the user's request; before/after contents are preserved from the original proposal. Approve the prerequisite groups first or together.",
+      "elements": [
+        {
+          "record_type": "product",
           "record_id": "product.academy_course_4",
           "before": {
             "id": "product.academy_course_4",
@@ -10288,1093 +11404,10 @@
               }
             ]
           }
-        },
-        {
-          "record_type": "product",
-          "record_id": "product.proposed_aurelia_developer",
-          "before": {
-            "id": "product.proposed_aurelia_developer",
-            "name": "Aurelia — C development",
-            "kind": "bundle",
-            "description": "A complete platform starting point for C development and hardware/software integration.",
-            "provider_actor_ids": [
-              "actor.logix"
-            ],
-            "specification": [],
-            "offering_category": "computer_software_bundle",
-            "composition_history": [
-              {
-                "version_number": 1,
-                "description": "Product definition revision 1",
-                "effective_from": {
-                  "kind": "event",
-                  "event_id": "event.aurelia_launch"
-                },
-                "effective_until": {
-                  "kind": "simulation_end"
-                },
-                "composition_definition": [
-                  {
-                    "id": "line_1",
-                    "target": {
-                      "record_id": "device.base_computer.aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "main_product"
-                  },
-                  {
-                    "id": "line_2",
-                    "target": {
-                      "record_id": "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "internal_drive"
-                    }
-                  },
-                  {
-                    "id": "line_3",
-                    "target": {
-                      "record_id": "device.flexibus_keyboard",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "flexibus"
-                    }
-                  },
-                  {
-                    "id": "line_4",
-                    "target": {
-                      "record_id": "device.mono_monitor_1",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "video_out"
-                    }
-                  },
-                  {
-                    "id": "line_5",
-                    "target": {
-                      "record_id": "device.rom_cartridge.cpm_aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "system_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_6",
-                    "target": {
-                      "record_id": "product.service_regular_support"
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  },
-                  {
-                    "id": "line_7",
-                    "target": {
-                      "record_id": "device.rom_cartridge.business_tools_aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "application_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_8",
-                    "target": {
-                      "record_id": "software_edition.simple_c_z80",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  },
-                  {
-                    "id": "line_9",
-                    "target": {
-                      "record_id": "software_edition.aurelia_sdk",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  }
-                ],
-                "assembly_requirements": []
-              }
-            ],
-            "launch_campaign_id": "campaign.ncc1978",
-            "launch_event_id": "event.aurelia_launch"
-          },
-          "after": {
-            "id": "product.proposed_aurelia_developer",
-            "name": "Aurelia — C development",
-            "kind": "bundle",
-            "description": "A complete platform for C development and hardware/software integration with AION C IDE (CP/M edition), the platform SDK and the configured computer peripherals.",
-            "provider_actor_ids": [
-              "actor.logix"
-            ],
-            "specification": [],
-            "offering_category": "computer_software_bundle",
-            "composition_history": [
-              {
-                "version_number": 1,
-                "description": "Product definition revision 1",
-                "effective_from": {
-                  "kind": "event",
-                  "event_id": "event.aurelia_launch"
-                },
-                "effective_until": {
-                  "kind": "simulation_end"
-                },
-                "composition_definition": [
-                  {
-                    "id": "line_1",
-                    "target": {
-                      "record_id": "device.base_computer.aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "main_product"
-                  },
-                  {
-                    "id": "line_2",
-                    "target": {
-                      "record_id": "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "internal_drive"
-                    }
-                  },
-                  {
-                    "id": "line_3",
-                    "target": {
-                      "record_id": "device.flexibus_keyboard",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "flexibus"
-                    }
-                  },
-                  {
-                    "id": "line_4",
-                    "target": {
-                      "record_id": "device.mono_monitor_1",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "video_out"
-                    }
-                  },
-                  {
-                    "id": "line_5",
-                    "target": {
-                      "record_id": "device.rom_cartridge.cpm_aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "system_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_6",
-                    "target": {
-                      "record_id": "product.service_regular_support"
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  },
-                  {
-                    "id": "line_7",
-                    "target": {
-                      "record_id": "device.rom_cartridge.business_tools_aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "application_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_8",
-                    "target": {
-                      "record_id": "software_edition.simple_c_z80",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  },
-                  {
-                    "id": "line_9",
-                    "target": {
-                      "record_id": "software_edition.aurelia_sdk",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  }
-                ],
-                "assembly_requirements": []
-              }
-            ],
-            "launch_campaign_id": "campaign.ncc1978",
-            "launch_event_id": "event.aurelia_launch"
-          }
-        },
-        {
-          "record_type": "product",
-          "record_id": "product.proposed_aurelia_plus_developer",
-          "before": {
-            "id": "product.proposed_aurelia_plus_developer",
-            "name": "Aurelia+ — C development",
-            "kind": "bundle",
-            "description": "A complete platform starting point for C development and hardware/software integration.",
-            "provider_actor_ids": [
-              "actor.logix"
-            ],
-            "specification": [],
-            "offering_category": "computer_software_bundle",
-            "composition_history": [
-              {
-                "version_number": 1,
-                "description": "Product definition revision 1",
-                "effective_from": {
-                  "kind": "event",
-                  "event_id": "event.plus_launch"
-                },
-                "effective_until": {
-                  "kind": "simulation_end"
-                },
-                "composition_definition": [
-                  {
-                    "id": "line_1",
-                    "target": {
-                      "record_id": "device.base_computer.aurelia_plus",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "main_product"
-                  },
-                  {
-                    "id": "line_2",
-                    "target": {
-                      "record_id": "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism",
-                      "version_number": 1
-                    },
-                    "quantity": 2,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "internal_drive"
-                    }
-                  },
-                  {
-                    "id": "line_3",
-                    "target": {
-                      "record_id": "device.flexibus_keyboard",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "flexibus"
-                    }
-                  },
-                  {
-                    "id": "line_4",
-                    "target": {
-                      "record_id": "device.mono_monitor_2",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "video_out"
-                    }
-                  },
-                  {
-                    "id": "line_5",
-                    "target": {
-                      "record_id": "device.rom_cartridge.cpm_aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "system_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_6",
-                    "target": {
-                      "record_id": "product.service_regular_support"
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  },
-                  {
-                    "id": "line_7",
-                    "target": {
-                      "record_id": "device.rom_cartridge.business_tools_aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "application_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_8",
-                    "target": {
-                      "record_id": "software_edition.simple_c_z80",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  },
-                  {
-                    "id": "line_9",
-                    "target": {
-                      "record_id": "software_edition.aurelia_sdk",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  }
-                ],
-                "assembly_requirements": []
-              }
-            ],
-            "launch_campaign_id": "campaign.comdex1979",
-            "launch_event_id": "event.plus_launch"
-          },
-          "after": {
-            "id": "product.proposed_aurelia_plus_developer",
-            "name": "Aurelia+ — C development",
-            "kind": "bundle",
-            "description": "A complete platform for C development and hardware/software integration with AION C IDE (CP/M edition), the platform SDK and the configured computer peripherals.",
-            "provider_actor_ids": [
-              "actor.logix"
-            ],
-            "specification": [],
-            "offering_category": "computer_software_bundle",
-            "composition_history": [
-              {
-                "version_number": 1,
-                "description": "Product definition revision 1",
-                "effective_from": {
-                  "kind": "event",
-                  "event_id": "event.plus_launch"
-                },
-                "effective_until": {
-                  "kind": "simulation_end"
-                },
-                "composition_definition": [
-                  {
-                    "id": "line_1",
-                    "target": {
-                      "record_id": "device.base_computer.aurelia_plus",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "main_product"
-                  },
-                  {
-                    "id": "line_2",
-                    "target": {
-                      "record_id": "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism",
-                      "version_number": 1
-                    },
-                    "quantity": 2,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "internal_drive"
-                    }
-                  },
-                  {
-                    "id": "line_3",
-                    "target": {
-                      "record_id": "device.flexibus_keyboard",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "flexibus"
-                    }
-                  },
-                  {
-                    "id": "line_4",
-                    "target": {
-                      "record_id": "device.mono_monitor_2",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "video_out"
-                    }
-                  },
-                  {
-                    "id": "line_5",
-                    "target": {
-                      "record_id": "device.rom_cartridge.cpm_aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "system_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_6",
-                    "target": {
-                      "record_id": "product.service_regular_support"
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  },
-                  {
-                    "id": "line_7",
-                    "target": {
-                      "record_id": "device.rom_cartridge.business_tools_aurelia",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "connected_device",
-                    "connection": {
-                      "host_line_id": "line_1",
-                      "socket_id": "application_cartridge"
-                    }
-                  },
-                  {
-                    "id": "line_8",
-                    "target": {
-                      "record_id": "software_edition.simple_c_z80",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  },
-                  {
-                    "id": "line_9",
-                    "target": {
-                      "record_id": "software_edition.aurelia_sdk",
-                      "version_number": 1
-                    },
-                    "quantity": 1,
-                    "element_type": "attached_product"
-                  }
-                ],
-                "assembly_requirements": []
-              }
-            ],
-            "launch_campaign_id": "campaign.comdex1979",
-            "launch_event_id": "event.plus_launch"
-          }
-        },
-        {
-          "record_type": "technology",
-          "record_id": "technology.aurelia_memory_model",
-          "before": {
-            "id": "technology.aurelia_memory_model",
-            "name": "Aurelia banked memory organization",
-            "kind": "interface",
-            "description": "Aurelia banked memory organization",
-            "owner_actor_ids": [],
-            "related_technology_ids": [
-              "technology.logix_sprite_system"
-            ],
-            "specification": [
-              {
-                "number": 1,
-                "chapter_name": "Banked logical memory",
-                "description": "The CPU addresses {CPU address space KB} KB at once, with {Page size KB} KB pages. Fixed lower RAM is {Fixed low RAM KB} KB, the switchable window is {Switchable window KB} KB and common system RAM is {Common system RAM KB} KB. Additional physical RAM does not widen the CPU logical address space.\n\nOne AION system-controller chip replaces mapper registers and selected decode/control logic; external clock/reset/interrupt and electrical buffers remain as required.\n\nRead-only code and constants execute directly from ROM where practical. Mutable state, stacks and buffers reside in RAM.\n\nCPU uses temporary 4 KiB display-memory windows or auto-incrementing upload ports. DMA uses physical source banks and target-ready video ports. Video controller independently refreshes display DRAM and arbitrates sprite SRAM; sprite storage is not system RAM.\n\nInitialize refresh and boot mapping before RAM use; disable DMA and clear pending ownership on reset. Warm boot aborts/drains DMA before restoring bank maps.\n\nInstalled RAM is accessible, but system workspaces and the resident Business Tools workspace reduce application memory.\n\nAdditional RAM uses mapped pages; an expansion does not enlarge the CPU logical address space.\n\nSoftware accesses mapper registers through {Mapping register access}.",
-                "parameters": [
-                  {
-                    "key": "CPU address space KB",
-                    "value": "64"
-                  },
-                  {
-                    "key": "Page size KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Fixed low RAM KB",
-                    "value": "28"
-                  },
-                  {
-                    "key": "Switchable window KB",
-                    "value": "32"
-                  },
-                  {
-                    "key": "Common system RAM KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Mapping register access",
-                    "value": "I/O ports"
-                  }
-                ]
-              },
-              {
-                "number": 13,
-                "chapter_name": "CP/M application boundary and service dispatch",
-                "description": "The published top of application memory must remain writable throughout program execution. System-call dispatch temporarily changes mappings only after moving into common memory, then restores the caller view.\n\nAt launch, the little-endian word at 0006H (the operand of JMP at 0005H) points to the BDOS entry stub at the exclusive top of usable contiguous application RAM. Keep the entire advertised range writable RAM.\n\nReserve {Lower workspace reservation} at the top of lower RAM for the entry stub and resident workspace, in addition to {Common RAM range} common system RAM. These are the initial design allocations, not measured image sizes. If implementation requires more workspace, revise the boot profile before application launch and report the actual lower boundary.\n\nWarm boot restores vectors and the normal map. Legacy programs with hardcoded addresses beyond the published boundary remain unsupported.\n\nDisable optional resident tools or choose a smaller TPA when networking needs more RAM; never silently consume advertised program memory.\n\nlx_memory_query returns installed RAM, TPA bounds, reserved bytes and optional banked-handle capacity. Standard CP/M programs need not use it.\n\nStress CPU/DMA/refresh/peripherals and display together at both host clocks and process/temperature corners.\n\nValidate hidden and expanded RAM refresh, physical DMA bounds, page-crossing segmentation, abort and warm boot.\n\nCALL 0005H enters the top-of-TPA stub.\n\nThe stub jumps to common memory before any bank mapping changes.\n\nCommon code saves mapping and application stack, then adopts the system stack.\n\nMap the service; copy caller buffers in bounded chunks while respecting page boundaries.\n\nRestore the application view and stack before returning.\n\nChoose all workspace reservations before launching the program. Never shrink TPA under a running program.\n\nExercise programs that inspect 0006H and fill their advertised TPA.\n\nTest nested calls, interrupts, DMA buffers crossing pages and warm boot after application failure.",
-                "parameters": [
-                  {
-                    "key": "Lower workspace reservation",
-                    "value": "4 KB"
-                  },
-                  {
-                    "key": "Common RAM range",
-                    "value": "F000–FFFF"
-                  }
-                ]
-              },
-              {
-                "number": 29,
-                "chapter_name": "Application RAM profiles",
-                "description": "With {48 KB profile installed RAM KB} KB installed, the application range is {48 KB profile application start}–{48 KB profile application end inclusive} and contains {48 KB profile TPA bytes} bytes. The {64 KB profile installed RAM KB} KB profile exposes {64 KB profile TPA bytes} bytes. These profiles reserve workspace before launch rather than shrinking a running program.\n\nProfile {48 KB profile ID} enters BDOS at {48 KB profile BDOS entry} and reserves {48 KB profile lower reserved range} below common memory. Profile {64 KB profile ID} exposes addresses {64 KB profile application start}–{64 KB profile application end inclusive}, enters BDOS at {64 KB profile BDOS entry}, and reserves {64 KB profile lower reserved range}. These hexadecimal address maps are implemented by {Controller reference}.",
-                "parameters": [
-                  {
-                    "key": "48 KB profile installed RAM KB",
-                    "value": "48"
-                  },
-                  {
-                    "key": "48 KB profile application start",
-                    "value": "0100"
-                  },
-                  {
-                    "key": "48 KB profile application end inclusive",
-                    "value": "9FFF"
-                  },
-                  {
-                    "key": "48 KB profile BDOS entry",
-                    "value": "A000"
-                  },
-                  {
-                    "key": "48 KB profile lower reserved range",
-                    "value": "A000–AFFF"
-                  },
-                  {
-                    "key": "48 KB profile TPA bytes",
-                    "value": "40704"
-                  },
-                  {
-                    "key": "48 KB profile ID",
-                    "value": "ram_48kb"
-                  },
-                  {
-                    "key": "64 KB profile installed RAM KB",
-                    "value": "64"
-                  },
-                  {
-                    "key": "64 KB profile application start",
-                    "value": "0100"
-                  },
-                  {
-                    "key": "64 KB profile application end inclusive",
-                    "value": "DFFF"
-                  },
-                  {
-                    "key": "64 KB profile BDOS entry",
-                    "value": "E000"
-                  },
-                  {
-                    "key": "64 KB profile lower reserved range",
-                    "value": "E000–EFFF"
-                  },
-                  {
-                    "key": "64 KB profile TPA bytes",
-                    "value": "57088"
-                  },
-                  {
-                    "key": "64 KB profile ID",
-                    "value": "ram_64kb"
-                  },
-                  {
-                    "key": "Controller reference",
-                    "value": "base_part.aurelia_system_controller"
-                  }
-                ]
-              },
-              {
-                "number": 44,
-                "chapter_name": "DMA transfers and arbitration",
-                "description": "The controller has {Transfer contexts} transfer contexts but {Active transfer engines} active transfer engine. Destination addresses and lengths use {Destination address bits} and {Length bits} bits respectively. Physical bank selection must remain stable for an active transfer.\n\nLatch physical source/destination bank and offsets on start. CPU mapping changes cannot redirect an active transfer; split logical buffers at 4 KiB boundaries before programming physical segments. Reject ROM writes, unmapped banks and out-of-range lengths.\n\nBounded bursts with guaranteed CPU and refresh service; device-ready/WAIT handshake; video uploads yield to video-controller fetch deadlines. Numeric grant limits require cycle-level validation.\n\nDisk/FlexiBUS DMA requires qualified request/ready or FIFO endpoints and drivers; legacy programmed I/O remains supported.\n\nCompletion/error interrupt, readable remaining count, controlled abort; reset disables DMA.\n\nAuto-incrementing upload ports for display DRAM or dedicated sprite SRAM; target-ready backpressure.\n\nSupported transfer operations are {Operations}. Each address can use one of the following step modes: {Address steps}.",
-                "parameters": [
-                  {
-                    "key": "Transfer contexts",
-                    "value": "2"
-                  },
-                  {
-                    "key": "Active transfer engines",
-                    "value": "1"
-                  },
-                  {
-                    "key": "Destination address bits",
-                    "value": "16"
-                  },
-                  {
-                    "key": "Length bits",
-                    "value": "16"
-                  },
-                  {
-                    "key": "Operations",
-                    "value": "memory-to-memory, memory-to-I/O, I/O-to-memory"
-                  },
-                  {
-                    "key": "Address steps",
-                    "value": "fixed, increment, decrement"
-                  }
-                ]
-              },
-              {
-                "number": 59,
-                "chapter_name": "Refresh and separate sprite storage",
-                "description": "System DRAM refresh runs independently of CPU execution. It covers all installed system DRAM banks. Display DRAM and sprite SRAM have separate ownership and refresh requirements.\n\nSystem DRAM only, including hidden banks and expansion. Video controller refreshes display DRAM; sprite SRAM needs no refresh.\n\nAlways-running timer, row counter and refresh arbitration during CPU execution, HALT and DMA; initialize before enabling RAM use. Match row count and retention deadlines to each qualified system DRAM type.\n\nSupported system DRAM populations are {System refresh supported populations}. Sprite storage follows {Sprite memory technology reference} and is implemented in {Sprite memory device references}.",
-                "parameters": [
-                  {
-                    "key": "System refresh supported populations",
-                    "value": "48 KiB: three banks of eight 16Kx1 DRAMs, 64 KiB expanded Aurelia: four banks of eight 16Kx1 DRAMs, 64 KiB Aurelia+: one bank of eight 64Kx1 DRAMs"
-                  },
-                  {
-                    "key": "Sprite memory technology reference",
-                    "value": "technology.logix_sprite_system"
-                  },
-                  {
-                    "key": "Sprite memory device references",
-                    "value": "device.subsystem.aurelia.video, device.subsystem.aurelia_plus.video"
-                  }
-                ]
-              },
-              {
-                "number": 69,
-                "chapter_name": "Base Aurelia address map",
-                "description": "The normal base-system view contains {Contiguous lower RAM KB} KB of contiguous lower RAM and {Common system RAM KB} KB of common system RAM. Temporary overlays preserve hidden RAM while exposing ROM and display windows.\n\nThis is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.\n\nLower RAM, including CP/M page zero and application memory.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The rom / cartridge / video ram windows region occupies {ROM / cartridge / video RAM windows range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.",
-                "parameters": [
-                  {
-                    "key": "Common system RAM KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Contiguous lower RAM KB",
-                    "value": "44"
-                  },
-                  {
-                    "key": "Application memory profile",
-                    "value": "ram_48kb"
-                  },
-                  {
-                    "key": "Controller reference",
-                    "value": "base_part.aurelia_system_controller"
-                  },
-                  {
-                    "key": "Lower RAM range (hex)",
-                    "value": "0000–AFFF"
-                  },
-                  {
-                    "key": "ROM / cartridge / video RAM windows range (hex)",
-                    "value": "B000–EFFF"
-                  },
-                  {
-                    "key": "Common system RAM range (hex)",
-                    "value": "F000–FFFF"
-                  }
-                ]
-              },
-              {
-                "number": 88,
-                "chapter_name": "Expanded Aurelia address map",
-                "description": "The expansion profile contains {RAM KB} KB of installed RAM, including {Contiguous lower RAM KB} KB of contiguous lower RAM. The expansion fills the normal B000–EFFF range; system overlays remain temporary.\n\nThe card fills B000–EFFF with RAM in the normal view. ROM, cartridges and video RAM use temporary overlays within 7000–EFFF; the underlying RAM retains its contents.\n\nBase and expansion RAM, including CP/M page zero and application memory. The card supplies B000–EFFF.\n\nStable runtime entry code, system stack and critical state.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.\n\nCommon system RAM occupies {Common system RAM KB} KB.",
-                "parameters": [
-                  {
-                    "key": "RAM KB",
-                    "value": "64"
-                  },
-                  {
-                    "key": "Common system RAM KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Contiguous lower RAM KB",
-                    "value": "60"
-                  },
-                  {
-                    "key": "Application memory profile",
-                    "value": "ram_64kb"
-                  },
-                  {
-                    "key": "Controller reference",
-                    "value": "base_part.aurelia_system_controller"
-                  },
-                  {
-                    "key": "Lower RAM range (hex)",
-                    "value": "0000–EFFF"
-                  },
-                  {
-                    "key": "Common system RAM range (hex)",
-                    "value": "F000–FFFF"
-                  }
-                ]
-              },
-              {
-                "number": 104,
-                "chapter_name": "Aurelia+ address map",
-                "description": "Aurelia+ exposes {Contiguous lower RAM KB} KB of contiguous lower RAM and {Common system RAM KB} KB of common system RAM. The normal application map and the temporary service overlays have distinct roles.\n\nThis is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.\n\nLower RAM, including CP/M page zero and application memory.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.",
-                "parameters": [
-                  {
-                    "key": "Common system RAM KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Contiguous lower RAM KB",
-                    "value": "60"
-                  },
-                  {
-                    "key": "Application memory profile",
-                    "value": "ram_64kb"
-                  },
-                  {
-                    "key": "Controller reference",
-                    "value": "base_part.aurelia_system_controller"
-                  },
-                  {
-                    "key": "Lower RAM range (hex)",
-                    "value": "0000–EFFF"
-                  },
-                  {
-                    "key": "Common system RAM range (hex)",
-                    "value": "F000–FFFF"
-                  }
-                ]
-              }
-            ]
-          },
-          "after": {
-            "id": "technology.aurelia_memory_model",
-            "name": "Aurelia banked memory organization",
-            "kind": "interface",
-            "description": "Aurelia banked memory organization",
-            "owner_actor_ids": [],
-            "related_technology_ids": [
-              "technology.logix_sprite_system"
-            ],
-            "specification": [
-              {
-                "number": 1,
-                "chapter_name": "Banked logical memory",
-                "description": "The CPU addresses {CPU address space KB} KB at once, with {Page size KB} KB pages. Fixed lower RAM is {Fixed low RAM KB} KB, the switchable window is {Switchable window KB} KB and common system RAM is {Common system RAM KB} KB. Additional physical RAM does not widen the CPU logical address space.\n\nOne AION system-controller chip replaces mapper registers and selected decode/control logic; external clock/reset/interrupt and electrical buffers remain as required.\n\nRead-only code and constants execute directly from ROM where practical. Mutable state, stacks and buffers reside in RAM.\n\nCPU uses temporary 4 KiB display-memory windows or auto-incrementing upload ports. DMA uses physical source banks and target-ready video ports. Video controller independently refreshes display DRAM and arbitrates sprite SRAM; sprite storage is not system RAM.\n\nInitialize refresh and boot mapping before RAM use; disable DMA and clear pending ownership on reset. Warm boot aborts/drains DMA before restoring bank maps.\n\nInstalled RAM is accessible, but system workspaces and the resident Business Tools workspace reduce application memory.\n\nAdditional RAM uses mapped pages; an expansion does not enlarge the CPU logical address space.\n\nSoftware accesses mapper registers through {Mapping register access}.",
-                "parameters": [
-                  {
-                    "key": "CPU address space KB",
-                    "value": "64"
-                  },
-                  {
-                    "key": "Page size KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Fixed low RAM KB",
-                    "value": "28"
-                  },
-                  {
-                    "key": "Switchable window KB",
-                    "value": "32"
-                  },
-                  {
-                    "key": "Common system RAM KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Mapping register access",
-                    "value": "I/O ports"
-                  }
-                ]
-              },
-              {
-                "number": 13,
-                "chapter_name": "CP/M application boundary and service dispatch",
-                "description": "The published top of application memory must remain writable throughout program execution. System-call dispatch temporarily changes mappings only after moving into common memory, then restores the caller view.\n\nAt launch, the little-endian word at 0006H (the operand of JMP at 0005H) points to the BDOS entry stub at the exclusive top of usable contiguous application RAM. Keep the entire advertised range writable RAM.\n\nReserve {Lower workspace reservation} at the top of lower RAM for the entry stub and resident workspace, in addition to {Common RAM range} common system RAM. These are the initial design allocations, not measured image sizes. If implementation requires more workspace, revise the boot profile before application launch and report the actual lower boundary.\n\nWarm boot restores vectors and the normal map. Legacy programs with hardcoded addresses beyond the published boundary remain unsupported.\n\nDisable optional resident tools or choose a smaller TPA when networking needs more RAM; never silently consume advertised program memory.\n\nlx_memory_query returns installed RAM, TPA bounds, reserved bytes and optional banked-handle capacity. Standard CP/M programs need not use it.\n\nStress CPU/DMA/refresh/peripherals and display together at both host clocks and process/temperature corners.\n\nValidate hidden and expanded RAM refresh, physical DMA bounds, page-crossing segmentation, abort and warm boot.\n\nCALL 0005H enters the top-of-TPA stub.\n\nThe stub jumps to common memory before any bank mapping changes.\n\nCommon code saves mapping and application stack, then adopts the system stack.\n\nMap the service; copy caller buffers in bounded chunks while respecting page boundaries.\n\nRestore the application view and stack before returning.\n\nChoose all workspace reservations before launching the program. Never shrink TPA under a running program.\n\nExercise programs that inspect 0006H and fill their advertised TPA.\n\nTest nested calls, interrupts, DMA buffers crossing pages and warm boot after application failure.",
-                "parameters": [
-                  {
-                    "key": "Lower workspace reservation",
-                    "value": "4 KB"
-                  },
-                  {
-                    "key": "Common RAM range",
-                    "value": "F000–FFFF"
-                  }
-                ]
-              },
-              {
-                "number": 29,
-                "chapter_name": "Application RAM profiles",
-                "description": "With {48 KB profile installed RAM KB} KB installed, the application range is {48 KB profile application start}–{48 KB profile application end inclusive} and contains {48 KB profile TPA bytes} bytes. The {64 KB profile installed RAM KB} KB profile exposes {64 KB profile TPA bytes} bytes. These profiles reserve workspace before launch rather than shrinking a running program.\n\nProfile {48 KB profile ID} enters BDOS at {48 KB profile BDOS entry} and reserves {48 KB profile lower reserved range} below common memory. Profile {64 KB profile ID} exposes addresses {64 KB profile application start}–{64 KB profile application end inclusive}, enters BDOS at {64 KB profile BDOS entry}, and reserves {64 KB profile lower reserved range}. These hexadecimal address maps are implemented by {Controller reference}.",
-                "parameters": [
-                  {
-                    "key": "48 KB profile installed RAM KB",
-                    "value": "48"
-                  },
-                  {
-                    "key": "48 KB profile application start",
-                    "value": "0100"
-                  },
-                  {
-                    "key": "48 KB profile application end inclusive",
-                    "value": "9FFF"
-                  },
-                  {
-                    "key": "48 KB profile BDOS entry",
-                    "value": "A000"
-                  },
-                  {
-                    "key": "48 KB profile lower reserved range",
-                    "value": "A000–AFFF"
-                  },
-                  {
-                    "key": "48 KB profile TPA bytes",
-                    "value": "40704"
-                  },
-                  {
-                    "key": "48 KB profile ID",
-                    "value": "ram_48kb"
-                  },
-                  {
-                    "key": "64 KB profile installed RAM KB",
-                    "value": "64"
-                  },
-                  {
-                    "key": "64 KB profile application start",
-                    "value": "0100"
-                  },
-                  {
-                    "key": "64 KB profile application end inclusive",
-                    "value": "DFFF"
-                  },
-                  {
-                    "key": "64 KB profile BDOS entry",
-                    "value": "E000"
-                  },
-                  {
-                    "key": "64 KB profile lower reserved range",
-                    "value": "E000–EFFF"
-                  },
-                  {
-                    "key": "64 KB profile TPA bytes",
-                    "value": "57088"
-                  },
-                  {
-                    "key": "64 KB profile ID",
-                    "value": "ram_64kb"
-                  },
-                  {
-                    "key": "Controller reference",
-                    "value": "base_part.aurelia_system_controller"
-                  }
-                ]
-              },
-              {
-                "number": 44,
-                "chapter_name": "DMA transfers and arbitration",
-                "description": "The controller has {Transfer contexts} transfer contexts but {Active transfer engines} active transfer engine. Destination addresses and lengths use {Destination address bits} and {Length bits} bits respectively. Physical bank selection must remain stable for an active transfer.\n\nLatch physical source/destination bank and offsets on start. CPU mapping changes cannot redirect an active transfer; split logical buffers at 4 KiB boundaries before programming physical segments. Reject ROM writes, unmapped banks and out-of-range lengths.\n\nBounded bursts with guaranteed CPU and refresh service; device-ready/WAIT handshake; video uploads yield to video-controller fetch deadlines. Numeric grant limits require cycle-level validation.\n\nDisk/FlexiBUS DMA requires qualified request/ready or FIFO endpoints and drivers; legacy programmed I/O remains supported.\n\nCompletion/error interrupt, readable remaining count, controlled abort; reset disables DMA.\n\nAuto-incrementing upload ports for display DRAM or dedicated sprite SRAM; target-ready backpressure.\n\nSupported transfer operations are {Operations}. Each address can use one of the following step modes: {Address steps}.",
-                "parameters": [
-                  {
-                    "key": "Transfer contexts",
-                    "value": "2"
-                  },
-                  {
-                    "key": "Active transfer engines",
-                    "value": "1"
-                  },
-                  {
-                    "key": "Destination address bits",
-                    "value": "16"
-                  },
-                  {
-                    "key": "Length bits",
-                    "value": "16"
-                  },
-                  {
-                    "key": "Operations",
-                    "value": "memory-to-memory, memory-to-I/O, I/O-to-memory"
-                  },
-                  {
-                    "key": "Address steps",
-                    "value": "fixed, increment, decrement"
-                  }
-                ]
-              },
-              {
-                "number": 59,
-                "chapter_name": "Refresh and separate sprite storage",
-                "description": "System DRAM refresh runs independently of CPU execution. It covers all installed system DRAM banks. Display DRAM and sprite SRAM have separate ownership and refresh requirements.\n\nSystem DRAM only, including hidden banks and expansion. Video controller refreshes display DRAM; sprite SRAM needs no refresh.\n\nAlways-running timer, row counter and refresh arbitration during CPU execution, HALT and DMA; initialize before enabling RAM use. Match row count and retention deadlines to each qualified system DRAM type.\n\nSupported system DRAM populations are {System refresh supported populations}. Sprite storage follows {Sprite memory technology reference} and is implemented in {Sprite memory device references}.",
-                "parameters": [
-                  {
-                    "key": "System refresh supported populations",
-                    "value": "48 KiB: three banks of eight 16Kx1 DRAMs, 64 KiB expanded Aurelia: four banks of eight 16Kx1 DRAMs, 64 KiB Aurelia+: one bank of eight 64Kx1 DRAMs"
-                  },
-                  {
-                    "key": "Sprite memory technology reference",
-                    "value": "technology.logix_sprite_system"
-                  },
-                  {
-                    "key": "Sprite memory device references",
-                    "value": "device.subsystem.aurelia.video, device.subsystem.aurelia_plus.video"
-                  }
-                ]
-              },
-              {
-                "number": 69,
-                "chapter_name": "Base Aurelia address map",
-                "description": "The normal base-system view contains {Contiguous lower RAM KB} KB of contiguous lower RAM and {Common system RAM KB} KB of common system RAM. Temporary overlays preserve hidden RAM while exposing ROM and display windows.\n\nThis is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.\n\nLower RAM, including CP/M page zero and application memory.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The rom / cartridge / video ram windows region occupies {ROM / cartridge / video RAM windows range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.",
-                "parameters": [
-                  {
-                    "key": "Common system RAM KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Contiguous lower RAM KB",
-                    "value": "44"
-                  },
-                  {
-                    "key": "Application memory profile",
-                    "value": "ram_48kb"
-                  },
-                  {
-                    "key": "Controller reference",
-                    "value": "base_part.aurelia_system_controller"
-                  },
-                  {
-                    "key": "Lower RAM range (hex)",
-                    "value": "0000–AFFF"
-                  },
-                  {
-                    "key": "ROM / cartridge / video RAM windows range (hex)",
-                    "value": "B000–EFFF"
-                  },
-                  {
-                    "key": "Common system RAM range (hex)",
-                    "value": "F000–FFFF"
-                  }
-                ]
-              },
-              {
-                "number": 88,
-                "chapter_name": "Expanded Aurelia address map",
-                "description": "The expansion profile contains {RAM KB} KB of installed RAM, including {Contiguous lower RAM KB} KB of contiguous lower RAM. The expansion fills the normal B000–EFFF range; system overlays remain temporary.\n\nThe card fills B000–EFFF with RAM in the normal view. ROM, cartridges and video RAM use temporary overlays within 7000–EFFF; the underlying RAM retains its contents.\n\nBase and expansion RAM, including CP/M page zero and application memory. The card supplies B000–EFFF.\n\nStable runtime entry code, system stack and critical state.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.\n\nCommon system RAM occupies {Common system RAM KB} KB.",
-                "parameters": [
-                  {
-                    "key": "RAM KB",
-                    "value": "64"
-                  },
-                  {
-                    "key": "Common system RAM KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Contiguous lower RAM KB",
-                    "value": "60"
-                  },
-                  {
-                    "key": "Application memory profile",
-                    "value": "ram_64kb"
-                  },
-                  {
-                    "key": "Controller reference",
-                    "value": "base_part.aurelia_system_controller"
-                  },
-                  {
-                    "key": "Lower RAM range (hex)",
-                    "value": "0000–EFFF"
-                  },
-                  {
-                    "key": "Common system RAM range (hex)",
-                    "value": "F000–FFFF"
-                  }
-                ]
-              },
-              {
-                "number": 104,
-                "chapter_name": "Aurelia+ address map",
-                "description": "Aurelia+ exposes {Contiguous lower RAM KB} KB of contiguous lower RAM and {Common system RAM KB} KB of common system RAM. The normal application map and the temporary service overlays have distinct roles.\n\nThis is the normal application mapping. Within it, 7000–EFFF remains switchable in 4 KB pages. A system call can temporarily map ROM or video RAM there, preserving and later restoring any hidden RAM. F000–FFFF remains common system RAM.\n\nLower RAM, including CP/M page zero and application memory.\n\nPhysical bank selections are latched per transfer; CPU mapping changes cannot redirect DMA.\n\nAION system controller refreshes all installed system DRAM independently of CPU activity.\n\nThe lower ram region occupies {Lower RAM range (hex)}. The common system ram region occupies {Common system RAM range (hex)}. The application-memory profile is {Application memory profile}, implemented by {Controller reference}.",
-                "parameters": [
-                  {
-                    "key": "Common system RAM KB",
-                    "value": "4"
-                  },
-                  {
-                    "key": "Contiguous lower RAM KB",
-                    "value": "60"
-                  },
-                  {
-                    "key": "Application memory profile",
-                    "value": "ram_64kb"
-                  },
-                  {
-                    "key": "Controller reference",
-                    "value": "base_part.aurelia_system_controller"
-                  },
-                  {
-                    "key": "Lower RAM range (hex)",
-                    "value": "0000–EFFF"
-                  },
-                  {
-                    "key": "Common system RAM range (hex)",
-                    "value": "F000–FFFF"
-                  }
-                ]
-              },
-              {
-                "number": 120,
-                "chapter_name": "Firmware and operating-system responsibilities",
-                "description": "Logix supplies reset mapping, boot/recovery and low-level mapper/controller drivers. DRI implements the operating-system bank/cartridge runtime over those primitives, including stable dispatch, mapping and stack preservation, nested calls, page-crossing buffers and recovery. AION TUI/IDE clients use the documented services. Clipboard and queued I/O state consume reserved RAM; measure their combined allocation before publishing the application boundary. Existing numeric memory profiles remain design allocations subject to qualification, never permission to take memory from a running application.",
-                "parameters": []
-              }
-            ]
-          }
         }
+      ],
+      "depends_on_change_ids": [
+        "change.aurelia_aion_c_ide"
       ]
     }
   ]

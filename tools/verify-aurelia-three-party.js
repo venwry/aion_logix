@@ -4,13 +4,22 @@ import {hash,records,transact,validate} from '../server/model.js';
 import {validateCatalogue} from './validate-catalogue.js';
 const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[`${d}/${f}`,JSON.parse(fs.readFileSync(`${d}/${f}`))])));
 const originalHash=hash(files),id='change.aurelia_three_party_cpm_tui_ide';
-const p=files['data_storytelling/change.json'].change.find(p=>p.id===id);
+const groupIds=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/aurelia-three-party/split.json')).groups.map(g=>g.id);
+const proposals=groupIds.map(id=>files['data_storytelling/change.json'].change.find(p=>p.id===id));
+assert.ok(proposals.every(Boolean));
+const p={elements:proposals.flatMap(p=>p.elements)};
+const original=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/aurelia-three-party/original-proposal.json'));
+assert.deepEqual([...p.elements].sort((a,b)=>a.record_id.localeCompare(b.record_id)),[...original.elements].sort((a,b)=>a.record_id.localeCompare(b.record_id)));
 assert.ok(p,'Expected pending proposal');
 assert.equal(new Set(p.elements.map(e=>e.record_id)).size,p.elements.length);
 assert.deepEqual(validate(files).errors,[]);
-const applied=transact(files,{action:'approve_changes',changes:[{change_id:id,proposal_sha256:hash(p)}]},'simulation-only').files;
+const applied=transact(files,{action:'approve_changes',changes:proposals.map(p=>({change_id:p.id,proposal_sha256:hash(p)}))},'simulation-only').files;
 assert.deepEqual(validate(applied).errors,[]);
 assert.deepEqual(validateCatalogue(Object.fromEntries(Object.entries(applied).filter(([f])=>f.startsWith('data_foundation/')).map(([,d])=>[Object.keys(d)[0],d]))).errors,[]);
+let sequential=files;
+for(const proposal of proposals){sequential=transact(sequential,{action:'approve_changes',changes:[{change_id:proposal.id,proposal_sha256:hash(proposal)}]},'simulation-only').files;assert.deepEqual(validate(sequential).errors,[]);}
+assert.deepEqual(records(sequential),records(applied));
+for(const proposal of proposals.slice(1))assert.throws(()=>transact(files,{action:'approve_changes',changes:[{change_id:proposal.id,proposal_sha256:hash(proposal)}]}),/Select required proposal/);
 const before=new Map(records(files).map(r=>[r.id,r])),after=new Map(records(applied).map(r=>[r.id,r]));
 const touched=new Set(p.elements.map(e=>e.record_id));
 for(const [id,r] of before){
@@ -26,6 +35,6 @@ assert.ok(after.get('agreement.dri_cpm').party.some(x=>x.actor_id==='actor.aion'
 assert.equal(after.get('software_edition.simple_c_z80').name,'AION C IDE (CP/M edition)');
 assert.deepEqual(after.get('software_edition.simple_c_z80').provider_actor_ids,['actor.aion']);
 assert.equal(hash(files),originalHash,'Simulation must not mutate source data or authorization');
-const report={proposal_id:id,proposal_sha256:hash(p),records:p.elements.length,result:'passed',transaction_simulation:'passed',strict_catalogue:'passed',existing_dates_and_memory_maps_preserved:true,unrelated_records_unchanged:true,source_and_authorization_unchanged:true};
-if(process.argv.includes('--write-report'))fs.writeFileSync('data_storytelling/review_evidence/aurelia-three-party/verification.json',JSON.stringify(report,null,2)+'\n');
+const report={proposals:proposals.map(p=>({id:p.id,proposal_sha256:hash(p),records:p.elements.length})),sequential_and_batch_equivalent:true,dependencies_enforced:true,records:p.elements.length,result:'passed',transaction_simulation:'passed',strict_catalogue:'passed',existing_dates_and_memory_maps_preserved:true,unrelated_records_unchanged:true,source_and_authorization_unchanged:true};
+if(process.argv.includes('--write-report'))fs.writeFileSync('data_storytelling/review_evidence/aurelia-three-party/split-verification.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));
