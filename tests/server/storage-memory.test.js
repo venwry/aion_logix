@@ -56,3 +56,20 @@ test('streamed blob request works over HTTP with the native fetch implementation
   assert.equal(received.content,JSON.stringify(value,null,2)+'\n');assert.equal(received.encoding,'utf-8');
  }finally{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}
 });
+
+test('422 blob failure identifies upload rather than inventing a branch conflict',async()=>{
+ let calls=0;
+ const store=new GitHubStore({token:'test-only',repository:'test/repo',fetchImpl:async()=>{calls++;return Response.json({message:'Validation Failed'},{status:422});}});
+ await assert.rejects(store.save({revision:'old',files:{}},{'new.json':{value:1}}),e=>e.status===502&&/upload repository file \(HTTP 422\): Validation Failed/.test(e.message));
+ assert.equal(calls,1);
+});
+test('only an explicit non-fast-forward ref rejection asks to reload',async()=>{
+ const store=message=>new GitHubStore({token:'test-only',repository:'test/repo',fetchImpl:async()=>Response.json({message},{status:422})});
+ await assert.rejects(store('Update is not a fast forward').api('/git/refs/heads/main','PATCH',{sha:'new',force:false}),e=>e.status===409&&/branch changed/.test(e.message));
+ await assert.rejects(store('Protected branch update failed').api('/git/refs/heads/main','PATCH',{sha:'new',force:false}),e=>e.status===502&&/update branch.*Protected branch/.test(e.message));
+ await assert.rejects(store('Validation Failed').api('/git/commits','POST',{}),/create save commit.*Validation Failed/);
+});
+test('non-JSON upstream errors retain the failed operation and HTTP status',async()=>{
+ const store=new GitHubStore({token:'test-only',repository:'test/repo',fetchImpl:async()=>new Response('upstream unavailable',{status:503})});
+ await assert.rejects(store.api('/git/trees','POST',{}),/create repository tree \(HTTP 503\)/);
+});
