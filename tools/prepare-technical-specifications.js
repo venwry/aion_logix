@@ -162,4 +162,4 @@ export function prepare(){
  const root='data_storytelling/review_evidence/root-technical-specifications';fs.mkdirSync(root,{recursive:true});fs.writeFileSync(root+'/proposals.json',JSON.stringify({change:proposals},null,2)+'\n');fs.writeFileSync(root+'/audit.json',JSON.stringify(audit,null,2)+'\n');fs.writeFileSync('data_storytelling/change.json',JSON.stringify(queue,null,2)+'\n');
  console.log(JSON.stringify({proposals:proposals.length,counts:audit.counts,graphics_modes:audit.records.reduce((a,r)=>a+r.graphics_modes,0)},null,2));
 }
-if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))prepare();
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))throw Error('The mechanical conversion is historical only. Use the authored narratives in tools/revise-technical-narratives.js; do not regenerate property-based proposals.');

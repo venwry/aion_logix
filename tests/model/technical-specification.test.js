@@ -2,7 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';import fs f
 import {validateTechnicalSpecifications} from '../../code/technical-specification.js';
 import {validateCompositions} from '../../code/composition.js';
 import {readDocuments,validateDocuments} from '../../tools/validate-model.js';
-const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/root-technical-specifications/proposals.json')).change;
+const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/technical-narrative-refinement/proposals.json')).change;
 const migrated=new Map(proposals.flatMap(p=>p.elements.map(e=>[e.record_id,e.after])));
 const allDocs=readDocuments('data_foundation');
 for(const p of proposals)for(const e of p.elements){const rows=allDocs[e.record_type][e.record_type];rows[rows.findIndex(r=>r.id===e.record_id)]=e.after;}
@@ -40,4 +40,17 @@ test('professional card explicitly includes inherited modes without duplicate eq
  assert.equal(modes.length,17);assert.equal(modes.filter(m=>m.type==='text').length,4);
  const special=modes.find(m=>m.id==='professional_800_600_2bpp');assert.equal(special.framebuffer_size,120000);assert.equal(special.double_buffering,false);assert.equal(special.sprites_available,5);
  assert.equal(modes.filter(m=>m.type==='bitmap'&&m.width===640&&m.height===400&&m.parameters.some(p=>p.key==='bits_per_pixel'&&p.value===2)).length,1);
+});
+test('authored narratives keep socket structures out of root prose and consolidate numeric lists',()=>{
+ for(const r of migrated.values()){
+  const s=r.technical_specification;
+  assert(!JSON.stringify(s).includes('expansion_socket_groups'),r.id);
+  assert(!s.parameters.some(p=>/(?:_item_\d+|supported_rates_kbps_\d+|supply_rails_v_\d+|internal_relationships_\d+)/.test(p.key)),r.id);
+  assert(!s.chapters.some(c=>['Slot count','Connection','Specification','Host qualification'].includes(c.chapter_name)),r.id);
+ }
+ const nic=migrated.get('device.network_card_artemis').technical_specification;
+ assert.equal(nic.parameters.filter(p=>p.key==='supported_rates_kbps').length,1);
+ assert.equal(nic.parameters.find(p=>p.key==='supported_rates_kbps').value,'100, 250, 500, 1000');
+ assert.equal(nic.chapters.map(c=>c.description).join(' ').match(/\{supported_rates_kbps\}/g).length,1);
+ assert.equal(migrated.get('base_part.aion_4116').technical_specification.parameters.find(p=>p.key==='supply_rails_v').value,'12, 5, -5');
 });
