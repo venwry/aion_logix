@@ -1780,7 +1780,9 @@
       "edition": "Aurelia",
       "family_name": "CP/M",
       "description": "A ROM-adapted CP/M 1.4 platform combining the standard application and file-service interfaces with Logix memory, peripheral and TUI services. The same architecture supports Aurelia and Aurelia+.",
-      "provider_actor_ids": [],
+      "provider_actor_ids": [
+        "actor.dri"
+      ],
       "technology_ids": [
         "technology.logix_c_api",
         "technology.logix_display_api",
@@ -1813,7 +1815,9 @@
                 "CP/M BDOS",
                 "Aurelia BIOS extension",
                 "Utilities",
-                "Version Info"
+                "Version Info",
+                "AION-developed TUI implementation accepted and maintained by DRI",
+                "Clipboard and bounded I/O service interfaces"
               ]
             },
             "extensions": [
@@ -1822,7 +1826,9 @@
               "system clipboard",
               "Business Tools workspace when resident",
               "common command-line editing behavior",
-              "TUI libraries/API"
+              "TUI libraries/API",
+              "Named user areas as an explicit extension to the 1.4-derived core",
+              "Bounded consolidated I/O request service with separate device ordering"
             ],
             "base_version": "CP/M 1.4",
             "vanilla_architecture": {
@@ -1897,7 +1903,7 @@
               {
                 "id": "runtime",
                 "name": "Memory / cartridge runtime",
-                "responsibility": "Logix",
+                "responsibility": "DRI operating-system runtime over Logix boot and mapping primitives",
                 "residence": "Stable common-memory entry routines plus ROM services",
                 "description": "Select banks, preserve mappings and stacks, support nested calls and execute cartridge components.",
                 "diagram_label": "Memory runtime"
@@ -1913,7 +1919,7 @@
               {
                 "id": "bios",
                 "name": "CP/M BIOS adapter",
-                "responsibility": "Customized CP/M interface",
+                "responsibility": "DRI CP/M adapter over Logix low-level hardware drivers",
                 "residence": "Stable firmware primitives plus system-cartridge adaptation",
                 "description": "Translate CP/M console, printer and disk operations into Logix driver calls.",
                 "diagram_label": "BIOS adapter"
@@ -1921,7 +1927,7 @@
               {
                 "id": "bdos",
                 "name": "CP/M 1.4-derived BDOS",
-                "responsibility": "DRI / Logix adaptation",
+                "responsibility": "DRI",
                 "residence": "System cartridge; mutable state in RAM",
                 "description": "Preserve file/application services; adapt disk-format assumptions and code for banked ROM execution.",
                 "diagram_label": "BDOS"
@@ -1929,7 +1935,7 @@
               {
                 "id": "ccp",
                 "name": "CP/M 1.4-derived CCP",
-                "responsibility": "DRI / Logix adaptation",
+                "responsibility": "DRI",
                 "residence": "System cartridge; command buffers in RAM",
                 "description": "Interpret commands, launch disk/cartridge applications and use shared command-line editing.",
                 "diagram_label": "CCP"
@@ -1937,9 +1943,9 @@
               {
                 "id": "tui",
                 "name": "Logix TUI and shared services",
-                "responsibility": "Logix / AION",
+                "responsibility": "AION development and source delivery; DRI ownership, integration and CP/M maintenance",
                 "residence": "CP/M system cartridge; mutable state in reserved RAM; hardware operations delegated to drivers",
-                "description": "Own the shared application-facing screen and keyboard API, editing controls, menus, forms, lists, popup windows, clipboard service and workspace entry/return support. Business Tools and other compatible applications call these services rather than carrying a second shared TUI library.",
+                "description": "Own the shared application-facing screen and keyboard API, editing controls, menus, forms, lists, popup windows, clipboard service and workspace entry/return support. Business Tools and other compatible applications call these services rather than carrying a second shared TUI library. DRI manages shared clipboard storage and lifecycle; AION defines application-facing editing behaviour with DRI. Logix supplies low-level display/input drivers.",
                 "diagram_label": "TUI & services"
               },
               {
@@ -1998,7 +2004,12 @@
               "Map Logix peripherals to standard CP/M console, printer and disk services.",
               "Provide a separate versioned Logix service interface and C bindings.",
               "Drivers use bounded DMA transfers with physical-bank descriptors and device-ready handshakes; abort/drain transfers before warm boot or reusing buffers.",
-              "Video API exposes dedicated sprite SRAM, atomic descriptor swaps and upload-port backpressure; use programmed I/O fallback where peripherals lack DMA endpoints."
+              "Video API exposes dedicated sprite SRAM, atomic descriptor swaps and upload-port backpressure; use programmed I/O fallback where peripherals lack DMA endpoints.",
+              "DRI freezes group-name metadata, valid names, default group, enumeration and rename rules while preserving ordinary CP/M tool behaviour.",
+              "DRI and AION specify clipboard formats, maximum capacity, overflow, copy ownership and persistence across exit/warm boot. Clipboard storage is separate from in-flight I/O buffers.",
+              "DRI specifies request bounds, buffer ownership until completion, cancellation, timeouts, error/flush semantics and recovery. Logix drivers supply completion and device errors; printer traffic cannot block keyboard service.",
+              "Measure combined clipboard, I/O, stack and resident-workspace use against the existing 4 KiB lower and 4 KiB common reservations. Revise the advertised TPA before application launch if those allocations are insufficient.",
+              "DRI integrates accepted AION TUI code into a versioned ROM image; Logix and AION Labs qualify physical capacity, timing, production image verification and replacement/patch procedures."
             ],
             "tui_features": [
               {
@@ -2045,7 +2056,10 @@
               "Keep the same API behavior across Aurelia, Aurelia+ and Artemis.",
               "Do not assume display stride, video RAM address, last column or direct peripheral registers.",
               "Legacy CP/M console behavior is preserved; Logix-aware interfaces use the documented editing conventions.",
-              "Artemis implementation mediates process access to shared clipboard and display services."
+              "Artemis implementation mediates process access to shared clipboard and display services.",
+              "Named user areas are a scenario extension to the 1.4-derived baseline, not a claim that vanilla CP/M 1.4 already supplies the later user-area model.",
+              "Consolidated I/O uses a common bounded request interface with device-specific ordering; ordinary CP/M operations retain synchronous semantics.",
+              "AION retains rights to port the TUI; DRI owns and independently licenses the accepted CP/M implementation."
             ],
             "tui_ownership": {
               "owner": "System TUI & services",

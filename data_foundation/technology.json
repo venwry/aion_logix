@@ -1519,6 +1519,12 @@
               "value": "F000–FFFF"
             }
           ]
+        },
+        {
+          "number": 120,
+          "chapter_name": "Firmware and operating-system responsibilities",
+          "description": "Logix supplies reset mapping, boot/recovery and low-level mapper/controller drivers. DRI implements the operating-system bank/cartridge runtime over those primitives, including stable dispatch, mapping and stack preservation, nested calls, page-crossing buffers and recovery. AION TUI/IDE clients use the documented services. Clipboard and queued I/O state consume reserved RAM; measure their combined allocation before publishing the application boundary. Existing numeric memory profiles remain design allocations subject to qualification, never permission to take memory from a running application.",
+          "parameters": []
         }
       ]
     },
