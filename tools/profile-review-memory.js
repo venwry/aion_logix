@@ -5,9 +5,12 @@ import {setImmediate} from 'node:timers/promises';
 import {GitHubStore} from '../server/github.js';
 import {hash,transact,snapshot} from '../server/model.js';
 const paths=['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>d+'/'+f));
-// Reconstruct the incident's three proposals in memory, even after the author
+// Reconstruct the incident fixture (or an explicit --proposals evidence file), even after the author
 // commits them. Read the current (larger) history to retain a conservative load.
-const pinned=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/fixed-required-compositions/proposals.json')).change;
+const fixtureFlag=process.argv.indexOf('--proposals');
+const fixture=fixtureFlag<0?'data_storytelling/review_evidence/fixed-required-compositions/proposals.json':process.argv[fixtureFlag+1];
+if(!fixture)throw Error('--proposals requires an evidence JSON path');
+const pinned=JSON.parse(fs.readFileSync(fixture)).change;
 const overrides=new Map();
 for(const proposal of pinned)for(const e of proposal.elements){
  const path='data_foundation/'+e.record_type+'.json';

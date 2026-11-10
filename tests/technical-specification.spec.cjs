@@ -1,0 +1,28 @@
+const {test,expect}=require('@playwright/test');const fs=require('node:fs');
+const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/root-technical-specifications/proposals.json')).change;
+async function migrated(page){for(const type of ['device','software_edition','base_part'])await page.route('**/data_foundation/'+type+'.json',async route=>{const response=await route.fetch(),doc=await response.json();doc[type]=doc[type].map(r=>proposals.flatMap(p=>p.elements).find(e=>e.record_id===r.id)?.after||r);await route.fulfill({json:doc});});}
+for(const name of ['browser','timeline'])test(name+' renders global technical parameters, mode tables and relocated sockets',async({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));await migrated(page);
+ await page.goto('/code/'+name+'.html#device.artemis_video_card_64kb');await expect(page.locator('body')).toHaveAttribute('data-ready','true');
+ const spec=page.locator('#details .technical-specification'),modes=page.locator('#details .graphic-modes-specification');
+ await expect(spec).toBeVisible();await expect(spec.locator('table')).toHaveCount(1);await expect(spec.locator('table')).toBeHidden();await expect(spec.locator('button')).toHaveCount(1);
+ await spec.getByRole('button').focus();await page.keyboard.press('Enter');await expect(spec.locator('table')).toBeVisible();await page.keyboard.press('Space');await expect(spec.locator('table')).toBeHidden();
+ await expect(spec.locator('.specification-unresolved')).toHaveCount(0);await expect(modes.locator('.specification-unresolved')).toHaveCount(0);
+ await expect(modes.locator('.specification-chapter')).toHaveCount(16);const mode=modes.locator('.specification-chapter').first();await expect(mode.locator('table')).toBeHidden();await mode.getByRole('button').click();await expect(mode.locator('table')).toBeVisible();await expect(modes.locator('.specification-chapter').nth(1).locator('table')).toBeHidden();
+ await expect(page.locator('#details [data-field="technical_definition"]')).toHaveCount(0);await expect(page.locator('#details [data-field="expansion_socket_groups"]')).toBeVisible();await expect(page.locator('#details [data-field="expansion_socket_groups"] table table')).toHaveCount(0);
+ await expect(spec.locator('.specification-parameter').first()).toHaveCSS('color','rgb(180, 35, 24)');
+ await page.setViewportSize({width:390,height:844});expect(await spec.evaluate(n=>n.scrollWidth<=n.clientWidth+1)).toBe(true);
+ await page.setViewportSize({width:1200,height:900});if(name==='browser'){await spec.scrollIntoViewIfNeeded();await page.screenshot({path:'/tmp/root-technical-specifications.png'});}
+ const link=spec.locator('.specification-description a.ref-link').first();const href=await link.getAttribute('href');await link.click();await expect(page.locator('#details .record-id')).toHaveText(decodeURIComponent(href.slice(1)));expect(errors).toEqual([]);
+});
+test('unknown values and safe substitutions, with no toggle for empty parameters',async({page})=>{
+ await page.route('**/data_foundation/device.json',async route=>{const response=await route.fetch(),doc=await response.json(),r=doc.device.find(r=>r.id==='device.ram_64kb_x32');r.technical_specification={chapters:[{number:1,chapter_name:'Safe text',description:'Unknown {size}. Literal {payload}.'}],parameters:[{key:'size',value:null},{key:'payload',value:'<img src=x onerror=alert(1)>{size}'}]};await route.fulfill({json:doc});});
+ await page.goto('/code/browser.html#device.ram_64kb_x32');await expect(page.locator('body')).toHaveAttribute('data-ready','true');const spec=page.locator('#details .technical-specification');await expect(spec.locator('img')).toHaveCount(0);await expect(spec.locator('.specification-description')).toHaveText('Unknown unknown. Literal <img src=x onerror=alert(1)>{size}.');
+ const result=await page.evaluate(async()=>{const {renderTechnicalSpecification}=await import('/code/technical-specification.js');const n=renderTechnicalSpecification({chapters:[{number:1,chapter_name:'No parameters',description:'Plain explanation.'}],parameters:[]});return {buttons:n.querySelectorAll('button').length,tables:n.querySelectorAll('table').length};});expect(result).toEqual({buttons:0,tables:0});
+});
+test('Changes confirm shows legacy before and new root specification after',async({page})=>{
+ const {snapshot}=await import('../server/model.js');const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[d+'/'+f,JSON.parse(fs.readFileSync(d+'/'+f))]))),proposal=proposals[0];files['data_storytelling/change.json'].change=[proposal];
+ await page.addInitScript(()=>sessionStorage.setItem('aion-backend',JSON.stringify({url:'https://aion-review-zu1t.onrender.com',token:'local-technical-test'})));
+ await page.route('**/api/state',r=>r.fulfill({json:snapshot(files,'technical-fixture')}));await page.route('**/api/authorize',r=>r.abort());
+ await page.goto('/code/changes-confirm.html#'+proposal.id);await expect(page.locator('body')).toHaveAttribute('data-ready','true');await page.getByLabel('Comparison',{exact:true}).selectOption('details');const cols=page.locator('.comparison-column');await expect(cols.nth(0).locator('[data-field="technical_definition"]')).toBeVisible();await expect(cols.nth(0).locator('.technical-specification')).toHaveCount(0);await expect(cols.nth(1).locator('.technical-specification')).toBeVisible();await expect(cols.nth(1).locator('.technical-specification')).toHaveClass(/changed-field/);await expect(cols.nth(1).locator('.technical-specification table')).toBeHidden();
+});

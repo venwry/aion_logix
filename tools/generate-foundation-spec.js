@@ -7,6 +7,10 @@ const names = [...datasets].sort();
 const schemas = Object.fromEntries([...names, 'common', 'technical', 'composition'].map(n => [n, JSON.parse(fs.readFileSync(`schemas/${n}.schema.json`))]));
 function resolve(value, owner) {
   if(value['x-boundary'])return [{type:'object',properties:{value:{type:'string | null','x-ref':['event']},precision:{type:'string',enum:['year','month','day','event','unknown']}},required:['value','precision']},owner];
+  if(value.oneOf?.every(b=>b.$ref?.match(/parameter_(value|reference)$/))){
+    const variants=value.oneOf.map(b=>resolve(b,owner)[0]);
+    return [{type:'object',properties:Object.assign({},...variants.map(v=>v.properties)),required:['key']},owner];
+  }
   if(value.oneOf?.[0]?.$ref)return resolve(value.oneOf[0],owner);
   if (!value.$ref) return [value, owner];
   const [file, pointer] = value.$ref.split('#');
@@ -52,7 +56,7 @@ const lines = [
   '- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. All current clauses use this shape; the runtime schema also accepts the legacy representation for compatibility.',
   '- Assumptions require either topic plus non-empty statements[] or the legacy statement; the two forms cannot be mixed. New authoring uses topic/statements.',
   '- Composition boundaries are event, unknown, open, or simulation_end. The last resolves to 1995-01-01 and is valid only as the final version end. Adjacent resolved revisions share a boundary; authoring defaults and first-use rules are in MODEL_GUIDE.md.',
-  '- Technology specification chapters contain number, chapter_name, description and parameters[] of key/value text pairs. Numbers and chapter-local keys are unique. Description placeholders {key} resolve locally; model validation rejects missing keys. Other specification schemas are unchanged.',
+  '- Technology specification chapters contain number, chapter_name, description and parameters[] of key/value text pairs. Numbers and chapter-local keys are unique. Description placeholders {key} resolve locally; model validation rejects missing keys. Devices, software editions and base parts instead have root technical_specification chapters with one global parameter table. Each parameter is exactly key/value OR key/ref_id/ref_role; optional-looking union members in the diagram must satisfy one complete variant. Graphics modes have local parameters and typed fixed fields. See MODEL_GUIDE.md for canonical numeric keys, buffer units and transitional legacy support.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',

@@ -112,77 +112,7 @@
           "type": "string"
         },
         "expansion_socket_groups": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "sockets": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "capacity": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    },
-                    "compatible_device_ids": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
-                        "x-ref": [
-                          "device"
-                        ]
-                      }
-                    },
-                    "connection": {
-                      "type": "string"
-                    },
-                    "device_quantity_limits": {
-                      "type": "object",
-                      "properties": {
-                        "device.aurelia_ram_16kb_card": {
-                          "type": "number"
-                        }
-                      },
-                      "additionalProperties": false
-                    },
-                    "id": {
-                      "type": "string"
-                    },
-                    "installation_multiple": {
-                      "type": "number"
-                    },
-                    "matched_modules": {
-                      "type": "boolean"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "population_order": {
-                      "type": "string"
-                    },
-                    "requirements": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "additionalProperties": false
-                }
-              }
-            },
-            "additionalProperties": false
-          }
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/expansion_socket_groups"
         },
         "firmware_contents": {
           "type": "array",
@@ -4407,6 +4337,262 @@
         "description"
       ],
       "additionalProperties": false
+    },
+    "parameter_value": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "parameter_reference": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "ref_id": {
+          "type": "string",
+          "pattern": "^[a-z_]+\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "actor",
+            "technology",
+            "base_part",
+            "device",
+            "software_edition",
+            "product",
+            "external_product",
+            "manufacturing_capability"
+          ]
+        },
+        "ref_role": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "key",
+        "ref_id",
+        "ref_role"
+      ],
+      "additionalProperties": false
+    },
+    "technical_parameter": {
+      "oneOf": [
+        {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/parameter_value"
+        },
+        {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/parameter_reference"
+        }
+      ]
+    },
+    "technical_chapter": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "chapter_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "number",
+        "chapter_name",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "technical_specification": {
+      "type": "object",
+      "properties": {
+        "chapters": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/technical_chapter"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/technical_parameter"
+          }
+        }
+      },
+      "required": [
+        "chapters",
+        "parameters"
+      ],
+      "additionalProperties": false
+    },
+    "graphic_mode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "text",
+            "bitmap"
+          ]
+        },
+        "width": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Logical pixel dimension."
+        },
+        "height": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Logical pixel dimension."
+        },
+        "framebuffer_size": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Bytes allocated to ONE display page/buffer; excludes shared font, sprite and palette storage."
+        },
+        "double_buffering": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sprites_available": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/technical_parameter"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "type",
+        "width",
+        "height",
+        "framebuffer_size",
+        "double_buffering",
+        "sprites_available",
+        "parameters"
+      ],
+      "additionalProperties": false
+    },
+    "expansion_socket_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "sockets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "capacity": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "compatible_device_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
+                    "x-ref": [
+                      "device"
+                    ]
+                  }
+                },
+                "connection": {
+                  "type": "string"
+                },
+                "device_quantity_limits": {
+                  "type": "object",
+                  "properties": {
+                    "device.aurelia_ram_16kb_card": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "id": {
+                  "type": "string"
+                },
+                "installation_multiple": {
+                  "type": "number"
+                },
+                "matched_modules": {
+                  "type": "boolean"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "population_order": {
+                  "type": "string"
+                },
+                "requirements": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
     }
   }
 }

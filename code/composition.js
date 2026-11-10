@@ -1,3 +1,4 @@
+import {parameterValues} from './technical-specification.js';
 import {simulationEnd} from './model-contract.js';
 // Shared definition-only BOM traversal. Child versions are explicitly pinned;
 // unknown temporal bounds never select a default or latest version.
@@ -61,7 +62,7 @@ export function validateCompositions(records){
     for(const c of connections){const host=lines.get(c.host_line_id);if(!host){fail(r.id+': missing connection host');continue;}
      if(c.host_instance&&host.quantity!==null&&c.host_instance>host.quantity)fail(r.id+': host instance exceeds population');
      const hr=index.get(host.target.record_id),hv=hr?.composition_history?.find(x=>x.version_number===host.target.version_number);
-     const sockets=hv?.technical_definition?.expansion_socket_groups?.flatMap(g=>g.sockets)||[];
+     const sockets=(hv?.expansion_socket_groups??hv?.technical_definition?.expansion_socket_groups)?.flatMap(g=>g.sockets)||[];
      if(sockets.length&&!sockets.some(s=>s.id===c.socket_id))fail(r.id+': nonexistent socket '+c.socket_id);
      const socket=sockets.find(s=>s.id===c.socket_id);
      if(socket?.compatible_device_ids?.length&&!socket.compatible_device_ids.includes(child.id))fail(r.id+': incompatible device at '+c.socket_id);
@@ -73,20 +74,21 @@ export function validateCompositions(records){
     const key=c.host_line_id+'|'+(c.host_instance||'all')+'|'+c.socket_id;const old=usage.get(key);usage.set(key,{...c,quantity:old?.quantity===null||c.quantity===null?null:(old?.quantity||0)+c.quantity});
    }
    for(const c of usage.values()){
-    const h=lines.get(c.host_line_id),hr=h&&index.get(h.target.record_id),hv=hr?.composition_history?.find(x=>x.version_number===h.target.version_number),s=hv?.technical_definition?.expansion_socket_groups?.flatMap(g=>g.sockets).find(s=>s.id===c.socket_id);
+    const h=lines.get(c.host_line_id),hr=h&&index.get(h.target.record_id),hv=hr?.composition_history?.find(x=>x.version_number===h.target.version_number),s=(hv?.expansion_socket_groups??hv?.technical_definition?.expansion_socket_groups)?.flatMap(g=>g.sockets).find(s=>s.id===c.socket_id);
     if(s?.capacity!=null&&c.quantity!==null){const hosts=c.host_instance?1:h.quantity;if(hosts!==null&&c.quantity>s.capacity*hosts)fail(r.id+': socket capacity exceeded');}
    }
    try{resolveComposition(index,r.id,v.version_number);}catch(e){fail(e.message);}
-   checkTechnical(v.technical_definition,r.id,index,fail);
+   if(!r.technical_specification)checkTechnical(v.technical_definition,r.id,index,fail);
   }
-  if(r.technical_definition)checkTechnical(r.technical_definition,r.id,index,fail);
+  if(r.technical_definition&&!r.technical_specification)checkTechnical(r.technical_definition,r.id,index,fail);
  }
  return errors;
 }
 function checkTechnical(value,id,index,fail){
  if(!value||typeof value!=='object')return;
  if(Array.isArray(value)){for(const v of value)checkTechnical(v,id,index,fail);return;}
- const chip=index.get(value.chip_type_id)?.technical_definition?.specification;
+ const chipRecord=index.get(value.chip_type_id);
+ const chip=chipRecord?.technical_specification?Object.fromEntries(parameterValues(chipRecord.technical_specification.parameters)):chipRecord?.technical_definition?.specification;
  if(chip&&value.chips!=null&&value.capacity_kb!=null&&chip.capacity_kbit!=null&&value.chips*chip.capacity_kbit/8!==value.capacity_kb)fail(id+': memory capacity arithmetic mismatch');
  if(['width','height','bits_per_pixel'].every(k=>Number.isFinite(value[k])))for(const k of ['bytes_per_framebuffer','framebuffer_bytes'])if(Number.isFinite(value[k])&&value[k]!==value.width*value.height*value.bits_per_pixel/8)fail(id+': framebuffer arithmetic mismatch');
  for(const [key,v] of Object.entries(value)){

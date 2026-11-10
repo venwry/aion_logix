@@ -1,3 +1,4 @@
+import {validateTechnicalSpecifications} from '../code/technical-specification.js';
 import {validateTechnologySpecifications} from '../code/technology-specification.js';
 import {validateProductLaunches} from '../code/product-launches.js';
 import fs from 'node:fs';
@@ -138,7 +139,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if (record.occurrence==='unknown'||record.state==='unknown'||record.completion_state==='unknown') report(`${record.id}: unresolved story state`);
     }
   }
-  errors.push(...validateTechnologySpecifications(records),...validateCompositions(records),...validateProductLaunches(records));
+  errors.push(...validateTechnicalSpecifications(records),...validateTechnologySpecifications(records),...validateCompositions(records),...validateProductLaunches(records));
   if (complete && count===0) report('No records: an empty graph cannot establish completeness');
   return {errors,count};
 }

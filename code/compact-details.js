@@ -1,3 +1,4 @@
+import {renderTechnicalSpecification,renderGraphicModes} from './technical-specification.js';
 import {renderTechnologySpecification} from './technology-specification.js';
 import {datasetPath,simulationEnd} from './model-contract.js';
 import {$,el,human,typeOf,titleOf,references} from './shared.js';
@@ -10,7 +11,7 @@ export function disposeDetails(host){for(const cleanup of cleanupByHost.get(host
 function fields(value,prefix='',result=[]){
  for(const [key,item] of Object.entries(value)){
   const name=prefix?prefix+'.'+key:key;
-  if(item&&typeof item==='object'&&!Array.isArray(item)&&Object.keys(item).length)fields(item,name,result);
+  if(name!=='technical_specification'&&item&&typeof item==='object'&&!Array.isArray(item)&&Object.keys(item).length)fields(item,name,result);
   else result.push([name,item]);
  }
  return result;
@@ -99,10 +100,13 @@ export function compactDetails(record,data,select,options={}){
   function renderVersion(){
    clear();panel.replaceChildren();const version=versions[Number(picker.value)];
    if(!version){panel.append(el('p','composition-empty','Version not present in this record.'));return;}
-   for(const [key,title] of [['technical_definition','Technical definition'],['composition_definition','Composition definition'],['assembly_requirements','Assembly requirements']]){
-    if(!Object.hasOwn(version,key))continue;
+   for(const [key,title] of [['technical_definition','Technical definition'],['expansion_socket_groups','Expansion sockets'],['composition_definition','Composition definition'],['assembly_requirements','Assembly requirements']]){
+    if(!Object.hasOwn(version,key)||(key==='technical_definition'&&record.technical_specification))continue;
     const group=el('section','composition-section');group.dataset.field=key;group.append(el('h3','',title));const value=version[key];
-    if(!value||!Object.keys(value).length)group.append(el('p','composition-empty',key==='assembly_requirements'?'No assembly requirements specified.':key==='composition_definition'?'No composition entries specified.':'No technical definition specified.'));
+    if(!value||!Object.keys(value).length)group.append(el('p','composition-empty',key==='assembly_requirements'?'No assembly requirements specified.':key==='composition_definition'?'No composition entries specified.':key==='expansion_socket_groups'?'No expansion sockets specified.':'No technical definition specified.'));
+    else if(key==='expansion_socket_groups')for(const sockets of value){
+     const socketGroup=el('section','composition-socket-group');socketGroup.append(el('h4','',sockets.name+' ('+sockets.id+')'),valueNode(sockets.sockets,'Sockets',false,cleanups));group.append(socketGroup);
+    }
     else if(key==='technical_definition')for(const [name,item] of fields(value)){
      const row=el('div','compact-field');row.append(el('strong','compact-key',name+': '),valueNode(item,name,false,cleanups));group.append(row);
     }
@@ -115,8 +119,14 @@ export function compactDetails(record,data,select,options={}){
   renderVersion();return section;
  }
  const content=el('div','compact-fields');
- for(const [key,value] of fields(data.originals.get(record.id)||record)){
-  if(key==='status')continue;
+ const original=data.originals.get(record.id)||record,detailFields=fields(original);
+ const specifications=detailFields.filter(([key])=>['technical_specification','graphic_modes_specification'].includes(key));
+ const orderedFields=detailFields.filter(([key])=>!['technical_specification','graphic_modes_specification'].includes(key));
+ const construction=orderedFields.findIndex(([key])=>key==='composition_history'||key==='technical_definition'||key.startsWith('technical_definition.'));
+ orderedFields.splice(construction<0?orderedFields.length:construction,0,...specifications);
+ for(const [key,value] of orderedFields){
+  if(key==='status'||(record.technical_specification&&(key==='technical_definition'||key.startsWith('technical_definition.'))))continue;
+  if(key==='technical_specification'||key==='graphic_modes_specification'){const section=key==='technical_specification'?renderTechnicalSpecification(value,v=>valueNode(v)):renderGraphicModes(value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='specification'&&typeOf(record)==='technology'){const section=renderTechnologySpecification(value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='composition_history'&&Array.isArray(value)){const history=compositionHistory(value);if(options.changedFields?.has(key))history.classList.add('changed-field');content.append(history);continue;}
   const row=el('div','compact-field');row.dataset.field=key;if(options.changedFields?.has(key.split('.')[0]))row.classList.add('changed-field');if(isReferences(value))row.append(referenceList(value,key));else row.append(el('strong','compact-key',key+': '),key==='id'?el('span','record-id',value):valueNode(value,key));content.append(row);
