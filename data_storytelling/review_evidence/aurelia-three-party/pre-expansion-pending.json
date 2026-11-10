@@ -1,0 +1,2202 @@
+{
+  "change": [
+    {
+      "id": "change.aurelia_aion_c_ide",
+      "category": "foundation",
+      "title": "3. Replace Simple C with AION C IDE and align developer packages",
+      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted. Split for separate review and authorization at the user's request; before/after contents are preserved from the original proposal. Approve the prerequisite groups first or together.",
+      "elements": [
+        {
+          "record_type": "software_edition",
+          "record_id": "software_edition.simple_c_z80",
+          "before": {
+            "id": "software_edition.simple_c_z80",
+            "name": "Logix Simple C (CP/M edition)",
+            "version": "1.0",
+            "edition": "CP/M",
+            "family_name": "Logix Simple C",
+            "description": "Aurelia-hosted C development package with the Z80 backend, assembler/linker, startup code and target libraries for enhanced CP/M. Builds applications that discover display and memory capabilities at runtime.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.logix_c_target_contract",
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_standard",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "features": [
+                    "basic C libraries",
+                    "structures",
+                    "typedef",
+                    "function pointers",
+                    "documented 32-bit integer arithmetic",
+                    "shared string and stream-I/O contracts",
+                    "Shared Logix C/TUI/graphics headers and target libraries",
+                    "ROM-aware linker and cartridge/disk output",
+                    "ROM, RAM and stack-budget reports",
+                    "Portability diagnostics where feasible"
+                  ],
+                  "toolchain": {
+                    "host": [
+                      "device.base_computer.aurelia",
+                      "device.base_computer.aurelia_plus"
+                    ],
+                    "targets": [
+                      "z80_cpm"
+                    ],
+                    "profiles": [
+                      "aurelia_compatible",
+                      "aurelia_plus_required"
+                    ],
+                    "components": [
+                      "C compiler Z80 backend",
+                      "Z80 assembler",
+                      "linker",
+                      "CP/M startup code",
+                      "target runtime libraries",
+                      "ROM/cartridge image tools"
+                    ],
+                    "language_contract_id": "technology.logix_c_target_contract",
+                    "runtime_contract_id": "technology.logix_c_api",
+                    "layout_tests": [
+                      "40x25",
+                      "80x25",
+                      "monochrome"
+                    ],
+                    "resource_tests": [
+                      "48 KB installed RAM",
+                      "64 KB installed RAM",
+                      "reserved common RAM and resident workspace"
+                    ]
+                  },
+                  "execution_target": "z80_cpm",
+                  "role": "development_tools",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.aurelia"
+                    },
+                    {
+                      "computer_id": "device.base_computer.aurelia_plus"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": 48,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "software_edition.cpm_aurelia"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "edition_delivery"
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.software.simple_c_z80.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.software.simple_c_z80.license_document"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.software.simple_c_z80.installation_media"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.software.simple_c_z80.software_packaging"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Compiler and build targets",
+                  "description": "The toolset implements {language_contract_id} with {runtime_contract_id}. It supports structures, typedef, function pointers, documented 32-bit integer arithmetic and shared string/stream-I/O behaviour. The toolchain combines a Z80 compiler backend, assembler, linker, CP/M startup, target runtimes and ROM/cartridge image tools.\n\nBuild profiles are {build_profiles} for {build_targets}. ROM-aware linking generates disk or cartridge images, with RAM/ROM/stack budget reports and portability diagnostics."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Development and conformance",
+                  "description": "Test 48 KiB and 64 KiB installed-RAM profiles, including reserved common RAM and resident workspace.\n\nDisplay regressions cover 40-column, 80-column and monochrome layouts. Each target keeps its own assembler/linker, startup and runtime; shared source is not interchangeable binaries."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This development toolset targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "language_contract_id",
+                  "ref_id": "technology.logix_c_target_contract",
+                  "ref_role": "Portable C language and target ABI contract"
+                },
+                {
+                  "key": "runtime_contract_id",
+                  "ref_id": "technology.logix_c_api",
+                  "ref_role": "Shared C/TUI/graphics service contract"
+                },
+                {
+                  "key": "build_profiles",
+                  "value": "aurelia_compatible, aurelia_plus_required"
+                },
+                {
+                  "key": "build_targets",
+                  "value": "z80_cpm"
+                },
+                {
+                  "key": "host_base_computer_aurelia",
+                  "ref_id": "device.base_computer.aurelia",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "host_base_computer_aurelia_plus",
+                  "ref_id": "device.base_computer.aurelia_plus",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "minimum_ram_kib",
+                  "value": 48
+                },
+                {
+                  "key": "runtime_cpm_aurelia",
+                  "ref_id": "software_edition.cpm_aurelia",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "software_edition.simple_c_z80",
+            "name": "AION C IDE (CP/M edition)",
+            "version": "1.0",
+            "edition": "CP/M",
+            "family_name": "AION C IDE",
+            "description": "Aurelia-hosted AION C IDE 1.0 for enhanced CP/M: integrated editing and builds, an optimizing Z80 C compiler, assembler/linker, diagnostics, debugging and target libraries. Applications call the shared ROM TUI through versioned bindings; IDE tools are disk-distributed.",
+            "provider_actor_ids": [
+              "actor.aion"
+            ],
+            "technology_ids": [
+              "technology.logix_c_target_contract",
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_standard",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "features": [
+                    "basic C libraries",
+                    "structures",
+                    "typedef",
+                    "function pointers",
+                    "documented 32-bit integer arithmetic",
+                    "shared string and stream-I/O contracts",
+                    "Shared Logix C/TUI/graphics headers and target libraries",
+                    "ROM-aware linker and cartridge/disk output",
+                    "ROM, RAM and stack-budget reports",
+                    "Portability diagnostics where feasible",
+                    "Integrated source editor, project build commands and compiler-error navigation",
+                    "Size/speed optimization profiles with constant folding, local and peephole optimization",
+                    "Documented C/assembly calling convention and separately linkable assembly libraries",
+                    "Symbol/address maps and breakpoints/single-step for qualified RAM-loaded application builds; no claim of unrestricted ROM breakpoints",
+                    "Shared ROM TUI call bindings; no second full TUI library embedded in each application",
+                    "Publish symbol naming, register/stack argument passing, returns, preserved registers, data layout and callback/reentrancy rules. Assembly routines and ROM-call stubs implement the same target ABI.",
+                    "Measure complete editor/compiler/linker/runtime working sets and disk use on 48/64 KiB hosts. Sequential tools and overlays are permitted; no assumed simultaneous residency or unmeasured performance improvement."
+                  ],
+                  "toolchain": {
+                    "host": [
+                      "device.base_computer.aurelia",
+                      "device.base_computer.aurelia_plus"
+                    ],
+                    "targets": [
+                      "z80_cpm"
+                    ],
+                    "profiles": [
+                      "aurelia_compatible",
+                      "aurelia_plus_required"
+                    ],
+                    "components": [
+                      "C compiler Z80 backend",
+                      "Z80 assembler",
+                      "linker",
+                      "CP/M startup code",
+                      "target runtime libraries",
+                      "ROM/cartridge image tools",
+                      "Integrated source editor and build driver",
+                      "Z80 optimizer",
+                      "Diagnostic navigation and RAM-application debug monitor"
+                    ],
+                    "language_contract_id": "technology.logix_c_target_contract",
+                    "runtime_contract_id": "technology.logix_c_api",
+                    "layout_tests": [
+                      "40x25",
+                      "80x25",
+                      "monochrome"
+                    ],
+                    "resource_tests": [
+                      "48 KB installed RAM",
+                      "64 KB installed RAM",
+                      "reserved common RAM and resident workspace"
+                    ],
+                    "development_workflow": [
+                      "Edit project and select a Z80 target profile",
+                      "Compile with size or speed optimization and link only required modules",
+                      "Review errors and ROM/RAM/stack reports",
+                      "Debug qualified RAM-loaded builds using maps and breakpoints",
+                      "Package disk/XIP images and run target regression tests"
+                    ]
+                  },
+                  "execution_target": "z80_cpm",
+                  "role": "development_tools",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.aurelia"
+                    },
+                    {
+                      "computer_id": "device.base_computer.aurelia_plus"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": 48,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "software_edition.cpm_aurelia"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "edition_delivery"
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.software.simple_c_z80.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.software.simple_c_z80.license_document"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.software.simple_c_z80.installation_media"
+                    },
+                    "quantity": 2
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.software.simple_c_z80.software_packaging"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Compiler and build targets",
+                  "description": "The toolset implements {language_contract_id} with {runtime_contract_id}. It supports structures, typedef, function pointers, documented 32-bit integer arithmetic and shared string/stream-I/O behaviour. The toolchain combines a Z80 compiler backend, assembler, linker, CP/M startup, target runtimes and ROM/cartridge image tools.\n\nBuild profiles are {build_profiles} for {build_targets}. ROM-aware linking generates disk or cartridge images, with RAM/ROM/stack budget reports and portability diagnostics."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Development and conformance",
+                  "description": "Test 48 KiB and 64 KiB installed-RAM profiles, including reserved common RAM and resident workspace.\n\nDisplay regressions cover 40-column, 80-column and monochrome layouts. Each target keeps its own assembler/linker, startup and runtime; shared source is not interchangeable binaries."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This development toolset targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "language_contract_id",
+                  "ref_id": "technology.logix_c_target_contract",
+                  "ref_role": "Portable C language and target ABI contract"
+                },
+                {
+                  "key": "runtime_contract_id",
+                  "ref_id": "technology.logix_c_api",
+                  "ref_role": "Shared C/TUI/graphics service contract"
+                },
+                {
+                  "key": "build_profiles",
+                  "value": "aurelia_compatible, aurelia_plus_required"
+                },
+                {
+                  "key": "build_targets",
+                  "value": "z80_cpm"
+                },
+                {
+                  "key": "host_base_computer_aurelia",
+                  "ref_id": "device.base_computer.aurelia",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "host_base_computer_aurelia_plus",
+                  "ref_id": "device.base_computer.aurelia_plus",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "minimum_ram_kib",
+                  "value": 48
+                },
+                {
+                  "key": "runtime_cpm_aurelia",
+                  "ref_id": "software_edition.cpm_aurelia",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "record_type": "base_part",
+          "record_id": "base_part.software.simple_c_z80.software_documentation",
+          "before": {
+            "id": "base_part.software.simple_c_z80.software_documentation",
+            "name": "Logix Simple C (CP/M edition) — software documentation set",
+            "kind": "documentation",
+            "description": "Logix Simple C (CP/M edition) — software documentation set",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "One edition-specific printed documentation set. No duplicate cartridge hardware instructions. Page count remains unspecified unless constrained by the containing package."
+              }
+            ]
+          },
+          "after": {
+            "id": "base_part.software.simple_c_z80.software_documentation",
+            "name": "AION C IDE (CP/M edition) — software documentation set",
+            "kind": "documentation",
+            "description": "AION C IDE (CP/M edition) — software documentation set",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "One edition-specific printed documentation set. No duplicate cartridge hardware instructions. Page count remains unspecified unless constrained by the containing package."
+              }
+            ]
+          }
+        },
+        {
+          "record_type": "base_part",
+          "record_id": "base_part.software.simple_c_z80.license_document",
+          "before": {
+            "id": "base_part.software.simple_c_z80.license_document",
+            "name": "Logix Simple C (CP/M edition) — licence document",
+            "kind": "documentation",
+            "description": "Logix Simple C (CP/M edition) — licence document",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": []
+          },
+          "after": {
+            "id": "base_part.software.simple_c_z80.license_document",
+            "name": "AION C IDE (CP/M edition) — licence document",
+            "kind": "documentation",
+            "description": "AION C IDE (CP/M edition) — licence document",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": []
+          }
+        },
+        {
+          "record_type": "base_part",
+          "record_id": "base_part.software.simple_c_z80.installation_media",
+          "before": {
+            "id": "base_part.software.simple_c_z80.installation_media",
+            "name": "Logix Simple C (CP/M edition) — installation diskettes",
+            "kind": "material",
+            "description": "Logix Simple C (CP/M edition) — installation diskettes",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "One physical recorded diskette, with its label and sleeve, from this edition media group. The containing software-edition composition specifies the disk count. Verify released-image capacity, target format and installation before distribution."
+              }
+            ]
+          },
+          "after": {
+            "id": "base_part.software.simple_c_z80.installation_media",
+            "name": "AION C IDE (CP/M edition) — installation diskettes",
+            "kind": "material",
+            "description": "AION C IDE (CP/M edition) — installation diskettes",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "One physical recorded diskette, with its label and sleeve, from this edition media group. The containing software-edition composition specifies the disk count. Verify released-image capacity, target format and installation before distribution."
+              }
+            ]
+          }
+        },
+        {
+          "record_type": "base_part",
+          "record_id": "base_part.software.simple_c_z80.software_packaging",
+          "before": {
+            "id": "base_part.software.simple_c_z80.software_packaging",
+            "name": "Logix Simple C (CP/M edition) — software package",
+            "kind": "documentation",
+            "description": "Logix Simple C (CP/M edition) — software package",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "One outer package; disk labels and sleeves belong to distribution media."
+              }
+            ]
+          },
+          "after": {
+            "id": "base_part.software.simple_c_z80.software_packaging",
+            "name": "AION C IDE (CP/M edition) — software package",
+            "kind": "documentation",
+            "description": "AION C IDE (CP/M edition) — software package",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "One outer package; disk labels and sleeves belong to distribution media."
+              }
+            ]
+          }
+        },
+        {
+          "record_type": "product",
+          "record_id": "product.simple_c_z80",
+          "before": {
+            "id": "product.simple_c_z80",
+            "name": "Logix Simple C (CP/M edition)",
+            "kind": "software",
+            "description": "Logix Simple C (CP/M edition)",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "software",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "technical_identity": {
+              "record_id": "software_edition.simple_c_z80"
+            },
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch"
+          },
+          "after": {
+            "id": "product.simple_c_z80",
+            "name": "AION C IDE (CP/M edition)",
+            "kind": "software",
+            "description": "AION C IDE 1.0, CP/M edition for Aurelia development, supplied with documentation, licence and installation media. Technical tools and requirements are defined by its software edition.",
+            "provider_actor_ids": [
+              "actor.aion"
+            ],
+            "specification": [],
+            "offering_category": "software",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "technical_identity": {
+              "record_id": "software_edition.simple_c_z80"
+            },
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch"
+          }
+        },
+        {
+          "record_type": "software_edition",
+          "record_id": "software_edition.aurelia_sdk",
+          "before": {
+            "id": "software_edition.aurelia_sdk",
+            "name": "Logix Developer Package SDK (CP/M edition)",
+            "version": "1.0",
+            "edition": "CP/M",
+            "family_name": "Logix Developer Package SDK",
+            "description": "Logix Developer Package SDK (CP/M edition)",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.logix_c_target_contract",
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "contents": [
+                    "Aurelia Technical Reference",
+                    "Aurelia Programmer's Manual",
+                    "Video Programmer's Guide",
+                    "Expansion Card Developer Guide",
+                    "FlexiBUS Developer Guide",
+                    "Cartridge Developer Guide",
+                    "SDK tools/software",
+                    "Portable C language/ABI contract",
+                    "Logix API v1 headers and service discovery guide",
+                    "Capability-based display and TUI guide",
+                    "Portable file-format and memory-handle conventions",
+                    "40/80-column and monochrome examples",
+                    "Target conformance and resource-budget test guidance",
+                    "DMA physical-bank API, refresh/arbitration contract, upload ports and abort handling",
+                    "Dedicated sprite SRAM and atomic descriptor-bank examples"
+                  ],
+                  "execution_target": "z80_cpm",
+                  "role": "development_tools",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.aurelia"
+                    },
+                    {
+                      "computer_id": "device.base_computer.aurelia_plus"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": 48,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "software_edition.cpm_aurelia",
+                    "software_edition.simple_c_z80"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "edition_delivery",
+                    "toolchain": "Platform SDK supplement: headers, bindings, libraries, startup code, examples, small utilities and tests. Compiler/IDE is separately supplied."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.license_document"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.interfaces_media"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.examples_media"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.utilities_media"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.software_packaging"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Platform development kit",
+                  "description": "The kit combines the Aurelia technical reference and programmer’s manual with video, expansion-card, FlexiBUS and cartridge guides. It supplies headers, bindings, target libraries, startup code, examples, small utilities and tests; the compiler/IDE is a separate tool.\n\nDocumentation covers the portable C/ABI contract, Logix API v1 and service discovery, capability-driven display/TUI operation, portable file formats, memory handles, resource budgets and target conformance. Examples exercise 40/80-column and monochrome interfaces. Additional material covers physical-bank DMA, refresh/arbitration, upload ports, abort handling and dedicated sprite SRAM with atomic descriptor-bank changes."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This development toolset targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia} and {runtime_simple_c_z80}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "host_base_computer_aurelia",
+                  "ref_id": "device.base_computer.aurelia",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "host_base_computer_aurelia_plus",
+                  "ref_id": "device.base_computer.aurelia_plus",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "minimum_ram_kib",
+                  "value": 48
+                },
+                {
+                  "key": "runtime_cpm_aurelia",
+                  "ref_id": "software_edition.cpm_aurelia",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                },
+                {
+                  "key": "runtime_simple_c_z80",
+                  "ref_id": "software_edition.simple_c_z80",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "software_edition.aurelia_sdk",
+            "name": "Logix Developer Package SDK (CP/M edition)",
+            "version": "1.0",
+            "edition": "CP/M",
+            "family_name": "Logix Developer Package SDK",
+            "description": "Logix Developer Package SDK (CP/M edition) Platform SDK supplement for AION C IDE (CP/M edition); compiler/IDE supplied separately.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.logix_c_target_contract",
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "contents": [
+                    "Aurelia Technical Reference",
+                    "Aurelia Programmer's Manual",
+                    "Video Programmer's Guide",
+                    "Expansion Card Developer Guide",
+                    "FlexiBUS Developer Guide",
+                    "Cartridge Developer Guide",
+                    "SDK tools/software",
+                    "Portable C language/ABI contract",
+                    "Logix API v1 headers and service discovery guide",
+                    "Capability-based display and TUI guide",
+                    "Portable file-format and memory-handle conventions",
+                    "40/80-column and monochrome examples",
+                    "Target conformance and resource-budget test guidance",
+                    "DMA physical-bank API, refresh/arbitration contract, upload ports and abort handling",
+                    "Dedicated sprite SRAM and atomic descriptor-bank examples"
+                  ],
+                  "execution_target": "z80_cpm",
+                  "role": "development_tools",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.aurelia"
+                    },
+                    {
+                      "computer_id": "device.base_computer.aurelia_plus"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": 48,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "software_edition.cpm_aurelia",
+                    "software_edition.simple_c_z80"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "edition_delivery",
+                    "toolchain": "Platform SDK supplement: headers, bindings, libraries, startup code, examples, small utilities and tests. Compiler/IDE is separately supplied."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.license_document"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.interfaces_media"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.examples_media"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.utilities_media"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.software.aurelia_sdk.software_packaging"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Platform development kit",
+                  "description": "The kit combines the Aurelia technical reference and programmer’s manual with video, expansion-card, FlexiBUS and cartridge guides. It supplies headers, bindings, target libraries, startup code, examples, small utilities and tests; the compiler/IDE is a separate tool.\n\nDocumentation covers the portable C/ABI contract, Logix API v1 and service discovery, capability-driven display/TUI operation, portable file formats, memory handles, resource budgets and target conformance. Examples exercise 40/80-column and monochrome interfaces. Additional material covers physical-bank DMA, refresh/arbitration, upload ports, abort handling and dedicated sprite SRAM with atomic descriptor-bank changes."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This development toolset targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia} and {runtime_simple_c_z80}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "host_base_computer_aurelia",
+                  "ref_id": "device.base_computer.aurelia",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "host_base_computer_aurelia_plus",
+                  "ref_id": "device.base_computer.aurelia_plus",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "minimum_ram_kib",
+                  "value": 48
+                },
+                {
+                  "key": "runtime_cpm_aurelia",
+                  "ref_id": "software_edition.cpm_aurelia",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                },
+                {
+                  "key": "runtime_simple_c_z80",
+                  "ref_id": "software_edition.simple_c_z80",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "record_type": "product",
+          "record_id": "product.aurelia_sdk",
+          "before": {
+            "id": "product.aurelia_sdk",
+            "name": "Logix Developer Package SDK (CP/M edition)",
+            "kind": "software",
+            "description": "Logix Developer Package SDK (CP/M edition)",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "software",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "technical_identity": {
+              "record_id": "software_edition.aurelia_sdk"
+            },
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch"
+          },
+          "after": {
+            "id": "product.aurelia_sdk",
+            "name": "Logix Developer Package SDK (CP/M edition)",
+            "kind": "software",
+            "description": "Logix Developer Package SDK (CP/M edition) Platform SDK supplement for AION C IDE (CP/M edition); compiler/IDE supplied separately.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "software",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "technical_identity": {
+              "record_id": "software_edition.aurelia_sdk"
+            },
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch"
+          }
+        },
+        {
+          "record_type": "product",
+          "record_id": "product.proposed_aurelia_developer",
+          "before": {
+            "id": "product.proposed_aurelia_developer",
+            "name": "Aurelia — C development",
+            "kind": "bundle",
+            "description": "A complete platform starting point for C development and hardware/software integration.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.mono_monitor_1",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.rom_cartridge.cpm_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch"
+          },
+          "after": {
+            "id": "product.proposed_aurelia_developer",
+            "name": "Aurelia — C development",
+            "kind": "bundle",
+            "description": "A complete platform for C development and hardware/software integration with AION C IDE (CP/M edition), the platform SDK and the configured computer peripherals.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.mono_monitor_1",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.rom_cartridge.cpm_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch"
+          }
+        },
+        {
+          "record_type": "product",
+          "record_id": "product.proposed_aurelia_plus_developer",
+          "before": {
+            "id": "product.proposed_aurelia_plus_developer",
+            "name": "Aurelia+ — C development",
+            "kind": "bundle",
+            "description": "A complete platform starting point for C development and hardware/software integration.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.plus_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.aurelia_plus",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.mono_monitor_2",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.rom_cartridge.cpm_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "launch_campaign_id": "campaign.comdex1979",
+            "launch_event_id": "event.plus_launch"
+          },
+          "after": {
+            "id": "product.proposed_aurelia_plus_developer",
+            "name": "Aurelia+ — C development",
+            "kind": "bundle",
+            "description": "A complete platform for C development and hardware/software integration with AION C IDE (CP/M edition), the platform SDK and the configured computer peripherals.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.plus_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.aurelia_plus",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.mono_monitor_2",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.rom_cartridge.cpm_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "software_edition.simple_c_z80",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "software_edition.aurelia_sdk",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "launch_campaign_id": "campaign.comdex1979",
+            "launch_event_id": "event.plus_launch"
+          }
+        }
+      ],
+      "depends_on_change_ids": [
+        "change.aurelia_cpm_runtime"
+      ]
+    },
+    {
+      "id": "change.aurelia_c_ide_launch",
+      "category": "foundation",
+      "title": "4. Align Aurelia C training and NCC launch demonstrations",
+      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted. Split for separate review and authorization at the user's request; before/after contents are preserved from the original proposal. Approve the prerequisite groups first or together.",
+      "elements": [
+        {
+          "record_type": "product",
+          "record_id": "product.academy_course_4",
+          "before": {
+            "id": "product.academy_course_4",
+            "name": "Aurelia + C (IDE + TUI library)",
+            "kind": "service",
+            "description": "Aurelia + C (IDE + TUI library) training course.",
+            "provider_actor_ids": [
+              "actor.academy"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "type": "duration",
+                "description": "The course provides this amount of instruction.",
+                "value": "5 days"
+              },
+              {
+                "number": 2,
+                "type": "location",
+                "description": "The course can be delivered at either of these locations.",
+                "value": "Logix Computer Academy facility or customer’s office"
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch",
+            "offering_category": "service"
+          },
+          "after": {
+            "id": "product.academy_course_4",
+            "name": "Aurelia + AION C IDE and TUI library",
+            "kind": "service",
+            "description": "Training in AION C IDE, C/assembly integration and use of the shared system-cartridge TUI. Course duration and delivery options follow the commercial specifications.",
+            "provider_actor_ids": [
+              "actor.academy"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "type": "duration",
+                "description": "The course provides this amount of instruction.",
+                "value": "5 days"
+              },
+              {
+                "number": 2,
+                "type": "location",
+                "description": "The course can be delivered at either of these locations.",
+                "value": "Logix Computer Academy facility or customer’s office"
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1978",
+            "launch_event_id": "event.aurelia_launch",
+            "offering_category": "service"
+          }
+        },
+        {
+          "record_type": "campaign",
+          "record_id": "campaign.ncc1978",
+          "before": {
+            "id": "campaign.ncc1978",
+            "title": "Aurelia 1978 launch campaign and Logix Computer Academy",
+            "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "audience": [],
+            "message": [
+              "positioning / tagline: Logix Aurelia—a computer like no other. Your personal assistant in business.",
+              "positioning / academy message: Learn before you decide.",
+              "positioning / audience: Nontechnical business owners and managers; secondary audiences are dealers, software developers and peripheral manufacturers.",
+              "positioning / partner message: Business Tools organise office work; Abacus supports planning; independent BPI Systems maintains business records. Logix supplies the computer, not ownership of every application.",
+              "tagline: Logix Aurelia—a computer like no other. Your personal assistant in business."
+            ],
+            "claim_policy": [
+              "Legacy acceptance wording (not new confirmation) / status: Accepted alternative-story plan; vendor contracts, measured demonstration performance and unspecified operating details remain execution gates.",
+              "acceptance gates / 0: Qualify 500-plus-row workload with stated RAM, populated-cell/formula count, IF and fill-down semantics, measured recalculation and disk loading time; sparse storage is not proof of performance.",
+              "acceptance gates / 1: Qualify powered-on attachment at quiescent ports, including electrical sequencing and safe suspension of keyboard polling; no unplugging during printing or disk writes.",
+              "acceptance gates / 2: Demonstrate save/close/reopen without loss; printer, disk and projection paths must pass the complete rehearsal.",
+              "acceptance gates / 3: Confirm celebrity/partner contracts, venue, Academy cities/course dates, product packages, delivery, warranty and service before publishing definitive claims.",
+              "acceptance gates / 4: Measured 48 KB workspace, disk capacity and supported disk configuration; 64 KB or extra drives only when qualified.",
+              "acceptance gates / 5: Posting consistency, correction history, disk-full handling and tested backup/restore.",
+              "acceptance gates / 6: Readable reports on launch display and supported printers; supported forms and paper documented.",
+              "acceptance gates / 7: Payroll jurisdictions, update process and maintenance responsibility explicitly documented.",
+              "acceptance gates / 8: Qualify BPI summary export and Abacus import; demonstrate actual sequential applications and label prepared data.",
+              "broadcast policy: Every Logix presentation at NCC 1978, including the premiere, both technical sessions, partner appearances, questions and any additional Logix sessions. Offer and supply the material to any television station wishing to broadcast it; Logix arranges normal duplication and dispatch. Supply station-compatible broadcast copies on request."
+            ],
+            "launch_event_id": "event.aurelia_launch",
+            "presentation": {
+              "stage": [
+                {
+                  "label": "opening",
+                  "description": "Adam introduces almost four years of development toward an accessible, dependable business assistant; acknowledges the assembled personal computers popularised in 1977.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "reveal",
+                  "description": "Reveal one Aurelia platform with detachable keyboard and two display choices. Power on colour and 16-shade grayscale systems and show startup; no claim of two different CPU models.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "editing",
+                  "description": "Prepare a customer quotation letter, demonstrate consistent editing and the copy-buffer; explain how learning transfers between applications.",
+                  "duration_minutes": 5
+                },
+                {
+                  "label": "peripherals",
+                  "description": "Attach the self-powered printer at a safely quiescent FlexiBUS port with Aurelia powered on, wait for identification, and print. Once the job finishes, safely interchange printer and keyboard ports and verify both. No removal during traffic or unrestricted hot-plug claim.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "business_tools",
+                  "description": "Use address book, calendar and calculator in the same customer-order workflow.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "abacus",
+                  "description": "Safely attach external FDD, load Abacus from diskette, explain a small worksheet, then open a 500-plus-row business document. Raise supplier costs by 8%, show automatic recalculation, add and fill a column using IF to flag low-margin orders, print a short report, save, close and reopen. Use readable worksheet sections on 320x200 launch displays. Use a labelled prepared worksheet with BPI-exported totals; explain their origin. The separate BPI session on 6 June shows the source records and export. Rehearse the shorter slot; retain the full workload for hands-on sessions.",
+                  "duration_minutes": 8
+                },
+                {
+                  "label": "partners",
+                  "description": "Gary explains independent CP/M OEM availability, published interfaces and optional extensions; CP/M, hardware and application licenses remain distinct. MPI explains the printer partnership and any separately agreed future FlexiBUS devices. Do not announce the later July SMC agreement. The head of BPI Systems explains its independent brand, management, software ownership and support, with Adam investment and AION/Logix cooperation disclosed. No invented name or claim of unrelated ownership.",
+                  "duration_minutes": 7
+                },
+                {
+                  "label": "academy",
+                  "description": "Announce Logix Computer Academy in five US cities: learn before you decide, hands-on Fundamentals, configuration advice and direct ordering. Show selected locations, first course dates once finalised. BPI-authorised courses and the dealer programme start July 17; specialist support is provided by BPI.",
+                  "duration_minutes": 2
+                },
+                {
+                  "label": "packages",
+                  "description": "State complete package contents, delivery dates, warranty, training and service; invite orders, Academy registration and dealer demonstrations; announce the two technical sessions. Show optional dealer-assembled BPI configurations, separate supplier licences and training and setup arrangements.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "Aurelia architecture and the open peripheral ecosystem",
+                  "description": "FlexiBUS, display interfaces, implementation/licensing, compatibility and third-party peripheral development."
+                },
+                {
+                  "label": "Aurelia C compiler Integrated Development Environment and SDK",
+                  "description": "Build and run an application, common TUI behaviour, published interfaces and C source portability without promising universal binary compatibility."
+                },
+                {
+                  "label": "premiere / venue",
+                  "description": "Booked auditorium or negotiated NCC presentation slot in Anaheim; access to a main stage is not assumed."
+                },
+                {
+                  "label": "premiere / stages / 7 / description",
+                  "description": "Gary explains independent CP/M OEM availability, published interfaces and optional extensions; CP/M, hardware and application licenses remain distinct. MPI explains the printer partnership and any separately agreed future FlexiBUS devices. Do not announce the later July SMC agreement. The head of BPI Systems explains its independent brand, management, software ownership and support, with AION/Logix cooperation and Adam’s accepted investment and AION’s C/TUI redevelopment commitments disclosed. No invented name or claim of unrelated ownership."
+                },
+                {
+                  "label": "premiere / questions",
+                  "description": "Moderated questions follow the presentation."
+                },
+                {
+                  "label": "premiere / display",
+                  "description": "Colour and grayscale launch monitor options; readable 320x200 worksheet sections, not an implied 80-column or whole-document display."
+                },
+                {
+                  "label": "technical sessions / 0 / topic",
+                  "description": "Aurelia architecture and the open peripheral ecosystem"
+                },
+                {
+                  "label": "technical sessions / 1 / topic",
+                  "description": "Aurelia C compiler Integrated Development Environment and SDK"
+                },
+                {
+                  "label": "business sessions / 0 / provider",
+                  "description": "BPI Systems"
+                },
+                {
+                  "label": "business sessions / 0 / topic",
+                  "description": "Setup, payments, corrections, backups, month-end, inventory and payroll coverage"
+                },
+                {
+                  "label": "BPI application launch session — 6 June 1978",
+                  "description": "Independent BPI Systems demonstrates a small wholesaler: existing customer/invoice records, incoming payment and remaining balance, receivables/payables and a concise report, then summary export for Abacus. Prepared history is labelled. No live write-back or simultaneous applications. Software presenter explains the workflow; the BPI head speaks in this dedicated session.",
+                  "duration_minutes": 7
+                }
+              ],
+              "duration_minutes": 44
+            },
+            "marketing_content": [
+              {
+                "number": 1,
+                "type": "television_commercial_format",
+                "description": "Proposed 60-second film-trailer-style advertisement; final 10–15 seconds show Aurelia, Abacus, a printed result, logo and June 5 premiere date. Include a recognisable BPI report with its own branding; detailed accounting explanation belongs in print and follow-up films."
+              },
+              {
+                "number": 2,
+                "type": "television_commercial_proposed_lead",
+                "description": "Michael Douglas"
+              },
+              {
+                "number": 3,
+                "type": "television_commercial_story",
+                "description": "Narrator introduces This spring. Douglas discusses a remarkably helpful new assistant during a therapy session. The reveal identifies Aurelia as a computer, and the therapist becomes curious about a demonstration."
+              },
+              {
+                "number": 4,
+                "type": "television_commercial_tone",
+                "description": "Warm humour, concrete business benefits and consistent interaction; avoid unhealthy dependency or claims of speech recognition/artificial intelligence."
+              },
+              {
+                "number": 5,
+                "type": "television_commercial_conversion",
+                "description": "Telephone enquiries, mailed brochures, demo appointments and Academy bookings; trained staff handle responses."
+              },
+              {
+                "number": 6,
+                "type": "academy_established_date",
+                "description": "1978-03-25"
+              },
+              {
+                "number": 7,
+                "type": "academy_public_announcement_date",
+                "description": "1978-06-05"
+              },
+              {
+                "number": 8,
+                "type": "academy_launch_city_count",
+                "description": "5"
+              },
+              {
+                "number": 9,
+                "type": "academy_fundamentals_days",
+                "description": "2"
+              },
+              {
+                "number": 10,
+                "type": "academy_teaching",
+                "description": "Small classes, substantial hands-on time, ideally one machine per participant or pair; business tools, introductory Abacus and advice on appropriate configurations and unnecessary purchases."
+              },
+              {
+                "number": 11,
+                "type": "academy_sales",
+                "description": "Order and pay at training centres; immediate collection only where stock is available. No purchase obligation."
+              },
+              {
+                "number": 12,
+                "type": "academy_bpi_training_start",
+                "description": "1978-07-17"
+              },
+              {
+                "number": 13,
+                "type": "academy_bpi_support",
+                "description": "Access to a BPI specialist at each launch centre; authorised curriculum and escalation agreement. Training, setup and software licensing are separate."
+              }
+            ],
+            "process_id": "process.ncc1978_campaign",
+            "subject_ids": [
+              "external_product.bpi_suite"
+            ]
+          },
+          "after": {
+            "id": "campaign.ncc1978",
+            "title": "Aurelia 1978 launch campaign and Logix Computer Academy",
+            "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "audience": [],
+            "message": [
+              "positioning / tagline: Logix Aurelia—a computer like no other. Your personal assistant in business.",
+              "positioning / academy message: Learn before you decide.",
+              "positioning / audience: Nontechnical business owners and managers; secondary audiences are dealers, software developers and peripheral manufacturers.",
+              "positioning / partner message: Business Tools organise office work; Abacus supports planning; independent BPI Systems maintains business records. Logix supplies the computer, not ownership of every application.",
+              "tagline: Logix Aurelia—a computer like no other. Your personal assistant in business."
+            ],
+            "claim_policy": [
+              "Legacy acceptance wording (not new confirmation) / status: Accepted alternative-story plan; vendor contracts, measured demonstration performance and unspecified operating details remain execution gates.",
+              "acceptance gates / 0: Qualify 500-plus-row workload with stated RAM, populated-cell/formula count, IF and fill-down semantics, measured recalculation and disk loading time; sparse storage is not proof of performance.",
+              "acceptance gates / 1: Qualify powered-on attachment at quiescent ports, including electrical sequencing and safe suspension of keyboard polling; no unplugging during printing or disk writes.",
+              "acceptance gates / 2: Demonstrate save/close/reopen without loss; printer, disk and projection paths must pass the complete rehearsal.",
+              "acceptance gates / 3: Confirm celebrity/partner contracts, venue, Academy cities/course dates, product packages, delivery, warranty and service before publishing definitive claims.",
+              "acceptance gates / 4: Measured 48 KB workspace, disk capacity and supported disk configuration; 64 KB or extra drives only when qualified.",
+              "acceptance gates / 5: Posting consistency, correction history, disk-full handling and tested backup/restore.",
+              "acceptance gates / 6: Readable reports on launch display and supported printers; supported forms and paper documented.",
+              "acceptance gates / 7: Payroll jurisdictions, update process and maintenance responsibility explicitly documented.",
+              "acceptance gates / 8: Qualify BPI summary export and Abacus import; demonstrate actual sequential applications and label prepared data.",
+              "broadcast policy: Every Logix presentation at NCC 1978, including the premiere, both technical sessions, partner appearances, questions and any additional Logix sessions. Offer and supply the material to any television station wishing to broadcast it; Logix arranges normal duplication and dispatch. Supply station-compatible broadcast copies on request.",
+              "Demonstrate qualified AION C IDE editing, optimizing compilation, C/assembly library linkage and calls into the shared ROM TUI. State actual RAM/disk requirements; shared source/API contracts do not imply universal binary compatibility or an already released future target."
+            ],
+            "launch_event_id": "event.aurelia_launch",
+            "presentation": {
+              "stage": [
+                {
+                  "label": "opening",
+                  "description": "Adam introduces almost four years of development toward an accessible, dependable business assistant; acknowledges the assembled personal computers popularised in 1977.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "reveal",
+                  "description": "Reveal one Aurelia platform with detachable keyboard and two display choices. Power on colour and 16-shade grayscale systems and show startup; no claim of two different CPU models.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "editing",
+                  "description": "Prepare a customer quotation letter, demonstrate consistent editing and the copy-buffer; explain how learning transfers between applications.",
+                  "duration_minutes": 5
+                },
+                {
+                  "label": "peripherals",
+                  "description": "Attach the self-powered printer at a safely quiescent FlexiBUS port with Aurelia powered on, wait for identification, and print. Once the job finishes, safely interchange printer and keyboard ports and verify both. No removal during traffic or unrestricted hot-plug claim.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "business_tools",
+                  "description": "Use address book, calendar and calculator in the same customer-order workflow.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "abacus",
+                  "description": "Safely attach external FDD, load Abacus from diskette, explain a small worksheet, then open a 500-plus-row business document. Raise supplier costs by 8%, show automatic recalculation, add and fill a column using IF to flag low-margin orders, print a short report, save, close and reopen. Use readable worksheet sections on 320x200 launch displays. Use a labelled prepared worksheet with BPI-exported totals; explain their origin. The separate BPI session on 6 June shows the source records and export. Rehearse the shorter slot; retain the full workload for hands-on sessions.",
+                  "duration_minutes": 8
+                },
+                {
+                  "label": "partners",
+                  "description": "Gary explains independent CP/M OEM availability, published interfaces and optional extensions; CP/M, hardware and application licenses remain distinct. MPI explains the printer partnership and any separately agreed future FlexiBUS devices. Do not announce the later July SMC agreement. The head of BPI Systems explains its independent brand, management, software ownership and support, with Adam investment and AION/Logix cooperation disclosed. No invented name or claim of unrelated ownership.",
+                  "duration_minutes": 7
+                },
+                {
+                  "label": "academy",
+                  "description": "Announce Logix Computer Academy in five US cities: learn before you decide, hands-on Fundamentals, configuration advice and direct ordering. Show selected locations, first course dates once finalised. BPI-authorised courses and the dealer programme start July 17; specialist support is provided by BPI.",
+                  "duration_minutes": 2
+                },
+                {
+                  "label": "packages",
+                  "description": "State complete package contents, delivery dates, warranty, training and service; invite orders, Academy registration and dealer demonstrations; announce the two technical sessions. Show optional dealer-assembled BPI configurations, separate supplier licences and training and setup arrangements.",
+                  "duration_minutes": 3
+                },
+                {
+                  "label": "Aurelia architecture and the open peripheral ecosystem",
+                  "description": "FlexiBUS, display interfaces, implementation/licensing, compatibility and third-party peripheral development."
+                },
+                {
+                  "label": "AION C IDE for Aurelia and Developer Package SDK",
+                  "description": "Build and run an application, common TUI behaviour, published interfaces and C source portability without promising universal binary compatibility."
+                },
+                {
+                  "label": "premiere / venue",
+                  "description": "Booked auditorium or negotiated NCC presentation slot in Anaheim; access to a main stage is not assumed."
+                },
+                {
+                  "label": "premiere / stages / 7 / description",
+                  "description": "Gary explains independent CP/M OEM availability, published interfaces and optional extensions; CP/M, hardware and application licenses remain distinct. MPI explains the printer partnership and any separately agreed future FlexiBUS devices. Do not announce the later July SMC agreement. The head of BPI Systems explains its independent brand, management, software ownership and support, with AION/Logix cooperation and Adam’s accepted investment and AION’s C/TUI redevelopment commitments disclosed. No invented name or claim of unrelated ownership."
+                },
+                {
+                  "label": "premiere / questions",
+                  "description": "Moderated questions follow the presentation."
+                },
+                {
+                  "label": "premiere / display",
+                  "description": "Colour and grayscale launch monitor options; readable 320x200 worksheet sections, not an implied 80-column or whole-document display."
+                },
+                {
+                  "label": "technical sessions / 0 / topic",
+                  "description": "Aurelia architecture and the open peripheral ecosystem"
+                },
+                {
+                  "label": "technical sessions / 1 / topic",
+                  "description": "AION C IDE for Aurelia and Developer Package SDK"
+                },
+                {
+                  "label": "business sessions / 0 / provider",
+                  "description": "BPI Systems"
+                },
+                {
+                  "label": "business sessions / 0 / topic",
+                  "description": "Setup, payments, corrections, backups, month-end, inventory and payroll coverage"
+                },
+                {
+                  "label": "BPI application launch session — 6 June 1978",
+                  "description": "Independent BPI Systems demonstrates a small wholesaler: existing customer/invoice records, incoming payment and remaining balance, receivables/payables and a concise report, then summary export for Abacus. Prepared history is labelled. No live write-back or simultaneous applications. Software presenter explains the workflow; the BPI head speaks in this dedicated session.",
+                  "duration_minutes": 7
+                }
+              ],
+              "duration_minutes": 44
+            },
+            "marketing_content": [
+              {
+                "number": 1,
+                "type": "television_commercial_format",
+                "description": "Proposed 60-second film-trailer-style advertisement; final 10–15 seconds show Aurelia, Abacus, a printed result, logo and June 5 premiere date. Include a recognisable BPI report with its own branding; detailed accounting explanation belongs in print and follow-up films."
+              },
+              {
+                "number": 2,
+                "type": "television_commercial_proposed_lead",
+                "description": "Michael Douglas"
+              },
+              {
+                "number": 3,
+                "type": "television_commercial_story",
+                "description": "Narrator introduces This spring. Douglas discusses a remarkably helpful new assistant during a therapy session. The reveal identifies Aurelia as a computer, and the therapist becomes curious about a demonstration."
+              },
+              {
+                "number": 4,
+                "type": "television_commercial_tone",
+                "description": "Warm humour, concrete business benefits and consistent interaction; avoid unhealthy dependency or claims of speech recognition/artificial intelligence."
+              },
+              {
+                "number": 5,
+                "type": "television_commercial_conversion",
+                "description": "Telephone enquiries, mailed brochures, demo appointments and Academy bookings; trained staff handle responses."
+              },
+              {
+                "number": 6,
+                "type": "academy_established_date",
+                "description": "1978-03-25"
+              },
+              {
+                "number": 7,
+                "type": "academy_public_announcement_date",
+                "description": "1978-06-05"
+              },
+              {
+                "number": 8,
+                "type": "academy_launch_city_count",
+                "description": "5"
+              },
+              {
+                "number": 9,
+                "type": "academy_fundamentals_days",
+                "description": "2"
+              },
+              {
+                "number": 10,
+                "type": "academy_teaching",
+                "description": "Small classes, substantial hands-on time, ideally one machine per participant or pair; business tools, introductory Abacus and advice on appropriate configurations and unnecessary purchases."
+              },
+              {
+                "number": 11,
+                "type": "academy_sales",
+                "description": "Order and pay at training centres; immediate collection only where stock is available. No purchase obligation."
+              },
+              {
+                "number": 12,
+                "type": "academy_bpi_training_start",
+                "description": "1978-07-17"
+              },
+              {
+                "number": 13,
+                "type": "academy_bpi_support",
+                "description": "Access to a BPI specialist at each launch centre; authorised curriculum and escalation agreement. Training, setup and software licensing are separate."
+              }
+            ],
+            "process_id": "process.ncc1978_campaign",
+            "subject_ids": [
+              "external_product.bpi_suite"
+            ]
+          }
+        },
+        {
+          "record_type": "process",
+          "record_id": "process.ncc78_sessions_media",
+          "before": {
+            "id": "process.ncc78_sessions_media",
+            "title": "NCC technical sessions and professional filming",
+            "kind": "activity",
+            "description": "Deliver the Aurelia premiere, BPI launch session, architecture/open-peripheral and C IDE/SDK sessions, hands-on demonstrations and professional recording throughout 5–8 June 1978. Supply the full-session recordings and production masters for subsequent campaign editing and television distribution.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "organiser"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [
+              {
+                "type": "deliverable",
+                "description": "Full-session recordings and production masters document the NCC presentations and demonstrations for subsequent cleared editing and redistribution.",
+                "number": 1
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1978-06-05",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1978-06-08",
+                "precision": "day"
+              }
+            },
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Launch Aurelia at NCC in Anaheim, presenting the platform, partner demonstrations, Academy programme, packages and availability.",
+                "event_id": "event.aurelia_launch"
+              },
+              {
+                "number": 2,
+                "type": "milestone",
+                "description": "BPI launches its independently owned Aurelia application family in a dedicated NCC session on 6 June, the day after the Aurelia premiere.",
+                "event_id": "event.bpi_launch"
+              },
+              {
+                "type": "action",
+                "description": "Run architecture/open-peripheral and C IDE/SDK technical sessions and hands-on demonstrations.",
+                "number": 3
+              },
+              {
+                "type": "action",
+                "description": "Record every Logix NCC presentation, including the premiere, both technical sessions, additional sessions, partner appearances and questions, with a professional multi-camera crew. Capture clean presenter audio, audience reactions and close-ups of the computer, display, connections and printouts; retain full-session recordings and production masters.",
+                "number": 4
+              },
+              {
+                "type": "action",
+                "description": "Preserve demonstration fidelity: do not accelerate startup or recalculation, conceal failures with misleading cuts or present recorded footage as a live result. Identify edited excerpts and recorded fallback, and show only qualified claims.",
+                "number": 5
+              }
+            ]
+          },
+          "after": {
+            "id": "process.ncc78_sessions_media",
+            "title": "NCC technical sessions and professional filming",
+            "kind": "activity",
+            "description": "Deliver the Aurelia premiere, BPI launch session, architecture/open-peripheral and C IDE/SDK sessions, hands-on demonstrations and professional recording throughout 5–8 June 1978. Supply the full-session recordings and production masters for subsequent campaign editing and television distribution.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "organiser"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [],
+            "outcomes": [
+              {
+                "type": "deliverable",
+                "description": "Full-session recordings and production masters document the NCC presentations and demonstrations for subsequent cleared editing and redistribution.",
+                "number": 1
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1978-06-05",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1978-06-08",
+                "precision": "day"
+              }
+            },
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Launch Aurelia at NCC in Anaheim, presenting the platform, partner demonstrations, Academy programme, packages and availability.",
+                "event_id": "event.aurelia_launch"
+              },
+              {
+                "number": 2,
+                "type": "milestone",
+                "description": "BPI launches its independently owned Aurelia application family in a dedicated NCC session on 6 June, the day after the Aurelia premiere.",
+                "event_id": "event.bpi_launch"
+              },
+              {
+                "type": "action",
+                "description": "Run AION C IDE/SDK and architecture technical sessions: edit, build and debug a qualified application, link an assembly library and call the shared ROM TUI; show measured resource reports and published interfaces.",
+                "number": 3
+              },
+              {
+                "type": "action",
+                "description": "Record every Logix NCC presentation, including the premiere, both technical sessions, additional sessions, partner appearances and questions, with a professional multi-camera crew. Capture clean presenter audio, audience reactions and close-ups of the computer, display, connections and printouts; retain full-session recordings and production masters.",
+                "number": 4
+              },
+              {
+                "type": "action",
+                "description": "Preserve demonstration fidelity: do not accelerate startup or recalculation, conceal failures with misleading cuts or present recorded footage as a live result. Identify edited excerpts and recorded fallback, and show only qualified claims.",
+                "number": 5
+              }
+            ]
+          }
+        }
+      ],
+      "depends_on_change_ids": [
+        "change.aurelia_aion_c_ide"
+      ]
+    }
+  ]
+}

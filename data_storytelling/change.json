@@ -6964,7 +6964,7 @@
       "id": "change.aurelia_aion_c_ide",
       "category": "foundation",
       "title": "3. Replace Simple C with AION C IDE and align developer packages",
-      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted. Split for separate review and authorization at the user's request; before/after contents are preserved from the original proposal. Approve the prerequisite groups first or together.",
+      "reason": "Expand the pending AION C IDE launch offering at the author's request: lexical syntax highlighting, integrated project/build/debug workflow, substantial Z80 optimization, tuned assembly kernels, user assembly libraries, text/bitmap drawing and keyboard-operated TUI forms. Use SDK composite controls where the accepted ROM lacks a native service. Preserve the original before snapshots, stable IDs, version 1.0 and launch dates. The two-diskette quantity remains the author's scenario default, subject to image fit. No Apple target, new ROM capability, benchmark result or guaranteed memory fit is asserted. Prerequisite agreement and runtime groups have been authorized.",
       "elements": [
         {
           "record_type": "software_edition",
@@ -7163,7 +7163,7 @@
             "version": "1.0",
             "edition": "CP/M",
             "family_name": "AION C IDE",
-            "description": "Aurelia-hosted AION C IDE 1.0 for enhanced CP/M: integrated editing and builds, an optimizing Z80 C compiler, assembler/linker, diagnostics, debugging and target libraries. Applications call the shared ROM TUI through versioned bindings; IDE tools are disk-distributed.",
+            "description": "AION C IDE 1.0 for Aurelia enhanced CP/M: an integrated syntax-highlighting editor, project build workflow, optimizing Z80 C compiler, assembler/linker, debugger and tuned runtime libraries. Shared ROM TUI bindings and SDK helpers support keyboard-operated forms and data controls; capability-based drawing supports text and bitmap modes. Tools run sequentially with overlays as required by the 48/64 KiB profiles.",
             "provider_actor_ids": [
               "actor.aion"
             ],
@@ -7187,7 +7187,7 @@
                 },
                 "technical_definition": {
                   "features": [
-                    "basic C libraries",
+                    "Core C runtime and target-specific optimized libraries",
                     "structures",
                     "typedef",
                     "function pointers",
@@ -7197,13 +7197,22 @@
                     "ROM-aware linker and cartridge/disk output",
                     "ROM, RAM and stack-budget reports",
                     "Portability diagnostics where feasible",
-                    "Integrated source editor, project build commands and compiler-error navigation",
-                    "Size/speed optimization profiles with constant folding, local and peephole optimization",
-                    "Documented C/assembly calling convention and separately linkable assembly libraries",
-                    "Symbol/address maps and breakpoints/single-step for qualified RAM-loaded application builds; no claim of unrestricted ROM breakpoints",
-                    "Shared ROM TUI call bindings; no second full TUI library embedded in each application",
-                    "Publish symbol naming, register/stack argument passing, returns, preserved registers, data layout and callback/reentrancy rules. Assembly routines and ROM-call stubs implement the same target ABI.",
-                    "Measure complete editor/compiler/linker/runtime working sets and disk use on 48/64 KiB hosts. Sequential tools and overlays are permitted; no assumed simultaneous residency or unmeasured performance improvement."
+                    "Integrated source editor with lexical syntax highlighting for C keywords, comments, strings, character literals and preprocessor lines; selection and diagnostics remain distinguishable on color and monochrome monitors.",
+                    "Incremental recoloring of affected visible lines, bounded multiline-comment state and disk-backed source editing; no full semantic language server or requirement to hold an entire project in RAM.",
+                    "Project source/module list, include paths, library selection, size/speed/debug profiles, incremental rebuilds and compiler-error navigation; source and cursor state survive sequential tool execution.",
+                    "Optimizing Z80 backend: constant folding/propagation, dead and unreachable code elimination when provably safe, local common-expression elimination, redundant load/store removal, branch simplification and target-specific peephole optimization.",
+                    "Basic-block liveness and register-pair allocation; loop address induction and strength reduction where profitable, with conservative treatment of aliases, external calls, signed arithmetic and hardware access.",
+                    "Selective small-function inlining when a definition is available, balanced against code growth; no promised whole-program optimizer or universal speed multiplier.",
+                    "Optimized assembly library kernels for block copy/fill, string scan/compare, integer arithmetic, selected decimal/fixed-point operations and record comparison/search; documented numeric precision, rounding, overflow and errors.",
+                    "Link only referenced library modules. Use optimized routines at useful granularity, measuring call and ROM-bank overhead; benchmarks compare identical workloads and correctness, not unsupported claims of assembly-equivalent performance.",
+                    "Forms with text fields, bounded lists, tables, dropdown selection and buttons. SDK helpers compose existing ROM TUI controls where a native service is absent; tables use row callbacks or bounded visible pages rather than copying an entire dataset.",
+                    "Tab and Shift-Tab focus traversal, documented keyboard shortcuts, copy/cut/paste through the system clipboard, consistent selection/editing and validation. Controls have explicit buffer lengths, ownership, error and event semantics.",
+                    "Text and bitmap drawing bindings: discover usable modes, clip, draw text/glyphs, lines, rectangles/fills and transfer documented bitmap formats. A bitmap control renderer shares control state and keyboard semantics, with application-linked helper code where required.",
+                    "Applications redraw from document state after mode changes. Text and bitmap modes share video RAM; no simultaneous full-screen buffers, universal 80-column mode, guaranteed bitmap speed or automatic conversion of legacy applications.",
+                    "User-supplied Z80 assembly modules and libraries link with C objects using a published ABI, symbol convention and object/archive format; examples cover C-to-assembly calls, assembly-to-C calls and safe callbacks.",
+                    "Assembly interfaces document arguments/returns, preserved registers, stack balance, integer/pointer sizes, layout, clobbers and reentrancy. ROM-call stubs preserve banks/stacks; interrupt code must not reenter non-reentrant OS/TUI services.",
+                    "Debug builds retain source/line-to-address maps where emitted, symbol inspection and RAM breakpoints/single-step. Optimized instructions may not map one-to-one to source; ROM code is debugged through supported stubs or qualified RAM-loaded equivalents.",
+                    "Measure tool overlays, editor buffers, optimizer intermediates, stack, system workspaces and disk scratch usage on 48/64 KiB hosts; resource requirements are qualification gates and no measured throughput or fit is invented."
                   ],
                   "toolchain": {
                     "host": [
@@ -7218,34 +7227,39 @@
                       "aurelia_plus_required"
                     ],
                     "components": [
-                      "C compiler Z80 backend",
+                      "Syntax-highlighting source editor and project/build driver",
+                      "Z80 C compiler frontend and optimizing backend",
                       "Z80 assembler",
-                      "linker",
-                      "CP/M startup code",
-                      "target runtime libraries",
-                      "ROM/cartridge image tools",
-                      "Integrated source editor and build driver",
-                      "Z80 optimizer",
-                      "Diagnostic navigation and RAM-application debug monitor"
+                      "Object linker and selectable library archive tools",
+                      "CP/M startup and optimized C/assembly runtime libraries",
+                      "Shared ROM TUI bindings, forms/data-control helpers and text/bitmap drawing adapters",
+                      "Symbol/source maps and RAM-application debugging monitor",
+                      "ROM/cartridge and disk image tools"
                     ],
                     "language_contract_id": "technology.logix_c_target_contract",
                     "runtime_contract_id": "technology.logix_c_api",
                     "layout_tests": [
-                      "40x25",
-                      "80x25",
-                      "monochrome"
+                      "40x25 and 80x25 where host/monitor permit",
+                      "Monochrome and color lexical highlighting with readable selection/diagnostics",
+                      "Forms, lists, bounded tables, dropdowns and buttons with Tab/Shift-Tab and keyboard shortcuts",
+                      "Text-to-bitmap mode transitions and redraw without document loss",
+                      "Clipboard limits, validation errors and exhausted memory"
                     ],
                     "resource_tests": [
-                      "48 KB installed RAM",
-                      "64 KB installed RAM",
-                      "reserved common RAM and resident workspace"
+                      "48 KB installed RAM with 40704-byte published TPA before any extra qualified reservation",
+                      "64 KB installed RAM with 57088-byte published TPA before any extra qualified reservation",
+                      "Reserved common RAM, lower workspace and resident tools remain unavailable to the application",
+                      "Compiler passes, editor overlays, optimizer scratch files and two-diskette distribution image-fit qualification",
+                      "C/assembly ABI, bank restoration, callback safety and debug/optimized numeric equivalence"
                     ],
                     "development_workflow": [
-                      "Edit project and select a Z80 target profile",
-                      "Compile with size or speed optimization and link only required modules",
-                      "Review errors and ROM/RAM/stack reports",
-                      "Debug qualified RAM-loaded builds using maps and breakpoints",
-                      "Package disk/XIP images and run target regression tests"
+                      "Edit source with lexical highlighting and shared editing commands",
+                      "Configure modules, includes, libraries and debug/size/speed profile",
+                      "Save editor state and compile changed modules with bounded multi-pass tools",
+                      "Assemble user routines and link referenced library modules with target bindings",
+                      "Navigate errors and inspect code/data/stack estimates and resource limits",
+                      "Debug a qualified RAM build, then run correctness and performance workloads",
+                      "Package the disk or XIP build and test on actual supported host/monitor configurations"
                     ]
                   },
                   "execution_target": "z80_cpm",
@@ -7307,18 +7321,48 @@
               "chapters": [
                 {
                   "number": 1,
-                  "chapter_name": "Compiler and build targets",
-                  "description": "The toolset implements {language_contract_id} with {runtime_contract_id}. It supports structures, typedef, function pointers, documented 32-bit integer arithmetic and shared string/stream-I/O behaviour. The toolchain combines a Z80 compiler backend, assembler, linker, CP/M startup, target runtimes and ROM/cartridge image tools.\n\nBuild profiles are {build_profiles} for {build_targets}. ROM-aware linking generates disk or cartridge images, with RAM/ROM/stack budget reports and portability diagnostics."
+                  "chapter_name": "Integrated editing and project workflow",
+                  "description": "AION C IDE integrates source editing, project/module configuration, compilation, assembly, linking, diagnostics and debugging. The editor highlights C keywords, comments, string/character literals and preprocessor lines using semantic attributes. Monochrome displays use distinguishable supported intensity/inverse attributes; selection and error emphasis remain readable. Lexical recoloring is restricted to affected visible text with bounded state for multiline comments. Disk-backed buffers support sources larger than editor working memory. Tools may execute sequentially and use overlays, preserving source, cursor and diagnostic state."
                 },
                 {
                   "number": 2,
-                  "chapter_name": "Development and conformance",
-                  "description": "Test 48 KiB and 64 KiB installed-RAM profiles, including reserved common RAM and resident workspace.\n\nDisplay regressions cover 40-column, 80-column and monochrome layouts. Each target keeps its own assembler/linker, startup and runtime; shared source is not interchangeable binaries."
+                  "chapter_name": "Language, targets and build contracts",
+                  "description": "The compiler implements {language_contract_id} and libraries follow {runtime_contract_id}. Structures, typedef, function pointers, documented 32-bit integer arithmetic and shared string/stream-I/O semantics are retained. Profiles {build_profiles} build {build_targets}; later ANSI C features and future processor targets are not implied. The project records modules, include paths, libraries and debug/size/speed options, rebuilds changed modules and maps diagnostics back to source locations."
                 },
                 {
                   "number": 3,
-                  "chapter_name": "Execution and delivery",
-                  "description": "This development toolset targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+                  "chapter_name": "Optimizer scope and safeguards",
+                  "description": "The Z80 optimizer performs constant folding and propagation, provably safe dead/unreachable-code elimination, local common-expression elimination, redundant load/store removal, branch simplification and target-specific peephole optimization. Basic-block liveness and register-pair allocation reduce memory traffic. Loop address induction and strength reduction are used when profitable; small visible function bodies may be selectively inlined under size/speed policy. Aliasing, external/assembly calls, signed arithmetic and hardware effects constrain transformations. Driver calls and declared hardware accesses are treated as observable effects. Assembly interface declarations must expose clobbers and side effects or the compiler assumes conservative barriers. No full modern whole-program optimizer is promised. Compare optimized and unoptimized outputs for identical numeric and I/O behaviour."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Optimized libraries and assembly interoperability",
+                  "description": "Performance-critical block copying/filling, string scanning/comparison, integer arithmetic, selected decimal/fixed-point operations and record comparison/search kernels are implemented in tuned Z80 assembly. Publish operation widths, precision, rounding, overflow, overlap and error rules. Link only referenced library modules; application data and writable runtime state remain in RAM. Users can assemble their own modules, create libraries and link them with C objects. Publish symbols, object/archive format, argument/return locations, preserved registers, stack rules, data layout and callback/reentrancy requirements. Supply C-to-assembly, assembly-to-C and callback examples. Interrupt handlers do not reenter non-reentrant CP/M/TUI routines. Benchmark useful operations including call and bank-switch overhead; no blanket speed or code-size guarantee."
+                },
+                {
+                  "number": 5,
+                  "chapter_name": "Forms and shared TUI integration",
+                  "description": "Headers, ROM-call stubs and examples use the accepted system-cartridge TUI. Provide text fields, lists, tables, dropdown selection and buttons with consistent validation, Tab/Shift-Tab focus traversal, keyboard shortcuts, selection and copy/cut/paste. DRI owns shared clipboard storage/lifecycle; helpers obey published capacity, formats and ownership. The IDE SDK supplies composite table/dropdown helpers over existing ROM primitives when a native control is absent; this does not silently add new services to the accepted ROM image. Tables request bounded rows/pages through application callbacks. Forms use C-defined descriptors and callbacks; a visual drag-and-drop form designer is not part of this release."
+                },
+                {
+                  "number": 6,
+                  "chapter_name": "Text and bitmap presentation",
+                  "description": "Use {display_api} to enumerate/test/select modes and query the actual configuration. Text mode is the compact default for the IDE; generated applications can draw text/glyphs, lines, rectangles, fills and documented bitmap formats with clipping. SDK adapters render the same control model in text or bitmap mode with shared keyboard semantics; optional helper code links into the application rather than assuming every renderer is in ROM. Bitmap rendering is limited to qualified modes and memory budgets. Mode changes preserve application document/control state and trigger redraw. Do not assume simultaneous text and full bitmap buffers, readable 80 columns on every monitor, transparent conversion of old programs or hardware drawing acceleration."
+                },
+                {
+                  "number": 7,
+                  "chapter_name": "Debugging and executable packaging",
+                  "description": "Provide symbol maps, emitted source/line-to-address mappings, inspectable RAM state, RAM breakpoints and single-step for qualified builds. Optimized code may reorder or remove source operations; use debug builds for predictable stepping. XIP ROM cannot be patched with software breakpoints: use supported call stubs or qualified RAM-loaded equivalents. ROM-aware linking separates code/constants from initialized and uninitialized RAM data, provides disk/cartridge images and reports ROM/RAM usage and stack estimates. Indirect calls, recursion and assembly routines can prevent a proven stack bound and must be flagged."
+                },
+                {
+                  "number": 8,
+                  "chapter_name": "Resource budgets and qualification",
+                  "description": "Supported hosts are {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}, using {runtime_cpm_aurelia}; the nominal installed-RAM minimum remains {minimum_ram_kib} KiB. The 48 KiB profile publishes 40704 application bytes and the 64 KiB profile 57088 bytes under the existing reservations. These are ceilings, not spare space available to every tool. Measure editor buffers, pass overlays, library state, stack and disk intermediate files against actual reservations. A single-drive workflow may require media exchanges. Two distribution diskettes follow the recorded package definition, with image fit, working-disk requirements and installation qualification still required. No additional RAM or ROM capacity is inferred."
+                },
+                {
+                  "number": 9,
+                  "chapter_name": "Acceptance workloads and performance evidence",
+                  "description": "Qualify syntax coloring and recovery from unterminated comments/strings, diagnostic navigation, incremental builds, library selection, C/assembly calls and nested bank restoration. Compare debug/optimized arithmetic and file results; test overlap, rounding, overflow and invalid inputs. Exercise forms and bitmap redraw in 40/80-column and monochrome/color configurations, clipboard-full, disk-full and exhausted-memory failures. Benchmark forms/record entry, sorting/search, decimal accounting and a bounded recalculation workload on named hardware. Report executable size, peak workspace, stack estimates, disk scratch use and build/run times. Fast libraries and advanced optimization are implementation commitments; measured superiority to earlier tools or hand-written assembly remains to be demonstrated."
                 }
               ],
               "parameters": [
@@ -7358,6 +7402,11 @@
                   "key": "runtime_cpm_aurelia",
                   "ref_id": "software_edition.cpm_aurelia",
                   "ref_role": "Runtime prerequisite for this software edition"
+                },
+                {
+                  "key": "display_api",
+                  "ref_id": "technology.logix_display_api",
+                  "ref_role": "Capability discovery and text/bitmap drawing contract"
                 }
               ]
             }
@@ -7840,7 +7889,11 @@
                     "40/80-column and monochrome examples",
                     "Target conformance and resource-budget test guidance",
                     "DMA physical-bank API, refresh/arbitration contract, upload ports and abort handling",
-                    "Dedicated sprite SRAM and atomic descriptor-bank examples"
+                    "Dedicated sprite SRAM and atomic descriptor-bank examples",
+                    "C-defined forms with fields, lists, bounded tables, dropdowns and buttons; keyboard focus/shortcut examples",
+                    "Text/bitmap renderer adapters over published display services; mode-switch redraw examples",
+                    "C/assembly ABI, library archive and ROM-call stub examples",
+                    "Optimizer correctness and application performance acceptance workloads"
                   ],
                   "execution_target": "z80_cpm",
                   "role": "development_tools",
@@ -7924,6 +7977,11 @@
                   "number": 2,
                   "chapter_name": "Execution and delivery",
                   "description": "This development toolset targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia} and {runtime_simple_c_z80}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "AION C IDE integration examples",
+                  "description": "Supply form descriptors, callbacks and bounded table/dropdown helper examples using the shared ROM TUI; show Tab/Shift-Tab, shortcuts, clipboard and validation. Text/bitmap renderer adapters use capability discovery and redraw from application state. Include C/assembly calling-convention and archive/link examples, ROM-bank-safe stubs and correctness/performance workloads. Compiler/IDE is separately supplied; helper examples do not imply additions to DRI-owned ROM services."
                 }
               ],
               "parameters": [
@@ -8574,7 +8632,7 @@
       "id": "change.aurelia_c_ide_launch",
       "category": "foundation",
       "title": "4. Align Aurelia C training and NCC launch demonstrations",
-      "reason": "User-requested three-party split for the 12 January 1975 agreement: DRI owns OS integration, AION delivers the TUI and owns the stronger C IDE, Logix supplies hardware/boot/drivers with qualified AION Labs ROM supply. This atomic proposal aligns implementation responsibilities, DRI CP/M ownership and AION cross-platform reuse, named user areas, XIP, memory/video/clipboard/I/O boundaries, cartridge acceptance, SDK/training/campaign labels and the two-diskette IDE distribution. Preserve IDs and existing launch dates; no Apple compiler release, new measured capacity/performance result, or completed qualification is asserted. Split for separate review and authorization at the user's request; before/after contents are preserved from the original proposal. Approve the prerequisite groups first or together.",
+      "reason": "Align the existing five-day C course and NCC sessions with the expanded pending AION C IDE specification: lexical highlighting, optimized builds, assembly libraries, keyboard forms and qualified text/bitmap presentation. Preserve before snapshots, dates and course terms; demonstrations do not establish unmeasured performance or new ROM services.",
       "elements": [
         {
           "record_type": "product",
@@ -8609,7 +8667,7 @@
             "id": "product.academy_course_4",
             "name": "Aurelia + AION C IDE and TUI library",
             "kind": "service",
-            "description": "Training in AION C IDE, C/assembly integration and use of the shared system-cartridge TUI. Course duration and delivery options follow the commercial specifications.",
+            "description": "Training in AION C IDE syntax-highlighting editing, project builds, optimization profiles, debugging, C/assembly libraries and shared TUI forms with text/bitmap presentation. Course duration and delivery options follow its commercial specifications.",
             "provider_actor_ids": [
               "actor.academy"
             ],
@@ -8858,7 +8916,8 @@
               "acceptance gates / 7: Payroll jurisdictions, update process and maintenance responsibility explicitly documented.",
               "acceptance gates / 8: Qualify BPI summary export and Abacus import; demonstrate actual sequential applications and label prepared data.",
               "broadcast policy: Every Logix presentation at NCC 1978, including the premiere, both technical sessions, partner appearances, questions and any additional Logix sessions. Offer and supply the material to any television station wishing to broadcast it; Logix arranges normal duplication and dispatch. Supply station-compatible broadcast copies on request.",
-              "Demonstrate qualified AION C IDE editing, optimizing compilation, C/assembly library linkage and calls into the shared ROM TUI. State actual RAM/disk requirements; shared source/API contracts do not imply universal binary compatibility or an already released future target."
+              "Demonstrate qualified AION C IDE editing, optimizing compilation, C/assembly library linkage and calls into the shared ROM TUI. State actual RAM/disk requirements; shared source/API contracts do not imply universal binary compatibility or an already released future target.",
+              "Demonstrate syntax highlighting and diagnostic navigation, qualified optimization profiles, an assembly library and a keyboard-operated form with bounded data controls. Show text/bitmap presentation only on tested modes; identify SDK composite helpers separately from native ROM services and publish measured resource/performance results."
             ],
             "launch_event_id": "event.aurelia_launch",
             "presentation": {
@@ -9137,7 +9196,7 @@
               },
               {
                 "type": "action",
-                "description": "Run AION C IDE/SDK and architecture technical sessions: edit, build and debug a qualified application, link an assembly library and call the shared ROM TUI; show measured resource reports and published interfaces.",
+                "description": "Run AION C IDE/SDK sessions: edit with syntax highlighting, build with a qualified optimization profile, link an assembly library, debug a RAM application and demonstrate keyboard-operated TUI forms and tested text/bitmap presentation. Show measured resource reports and distinguish SDK helpers from ROM services.",
                 "number": 3
               },
               {
