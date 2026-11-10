@@ -5361,133 +5361,10 @@
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Product definition revision 1",
+          "description": "Professional hardware specification and composition from the Autodesk handover",
           "effective_from": {
             "kind": "event",
             "event_id": "event.autodesk_professional_handover"
-          },
-          "effective_until": {
-            "kind": "event",
-            "event_id": "event.autodesk_comdex"
-          },
-          "technical_definition": {
-            "compatible_with": [
-              "device.base_computer.artemis",
-              "device.base_computer.artemis_pro"
-            ],
-            "specification": {
-              "controller_id": "base_part.professional_graphics_controller",
-              "technology_id": "technology.artemis_professional_graphics",
-              "monitor_id": "device.mono_pro_17",
-              "slot": "One general 32-bit expansion slot; coexists with the dedicated primary video card",
-              "video_ram_bytes": 131072,
-              "bitmap_modes": [
-                {
-                  "id": "professional_800_600_2bpp",
-                  "width": 800,
-                  "height": 600,
-                  "bits_per_pixel": 2,
-                  "stride_bytes": 200,
-                  "bytes_per_framebuffer": 120000,
-                  "framebuffer_count": 1,
-                  "remaining_video_ram_bytes": 11072,
-                  "simultaneous_shades": 4,
-                  "palette_grayscale_levels": 16,
-                  "double_buffering": false
-                }
-              ],
-              "memory_policy": "11072 bytes remain for bounded scratch/cursor work; allocations must be accounted for. No second framebuffer or inherited five-sprite subsystem is promised."
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "display",
-                "name": "Display output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_pro_17"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          "composition_definition": [
-            {
-              "id": "line_1",
-              "target": {
-                "record_id": "base_part.professional_graphics_controller"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_2",
-              "target": {
-                "record_id": "base_part.aion_4164"
-              },
-              "quantity": 16,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_3",
-              "target": {
-                "record_id": "base_part.device.artemis_professional_video_128kb.pcb"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_4",
-              "target": {
-                "record_id": "base_part.device.artemis_professional_video_128kb.slot_connector"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_5",
-              "target": {
-                "record_id": "base_part.device.artemis_professional_video_128kb.host_dma_arbitration_buffers"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_6",
-              "target": {
-                "record_id": "base_part.device.artemis_professional_video_128kb.line_fifo_clock_link"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_7",
-              "target": {
-                "record_id": "base_part.device.artemis_professional_video_128kb.passives_power_filtering"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            }
-          ],
-          "assembly_requirements": [
-            {
-              "number": 1,
-              "kind": "testing",
-              "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
-            }
-          ]
-        },
-        {
-          "version_number": 2,
-          "description": "Product definition revision 2",
-          "effective_from": {
-            "kind": "event",
-            "event_id": "event.autodesk_comdex"
           },
           "effective_until": {
             "kind": "simulation_end"
@@ -5676,125 +5553,10 @@
       "composition_history": [
         {
           "version_number": 1,
-          "description": "Product definition revision 1",
+          "description": "Professional hardware specification and composition from the Autodesk handover",
           "effective_from": {
             "kind": "event",
             "event_id": "event.autodesk_professional_handover"
-          },
-          "effective_until": {
-            "kind": "event",
-            "event_id": "event.autodesk_comdex"
-          },
-          "technical_definition": {
-            "specification": {
-              "controller_id": "base_part.mono_pro_17_controller",
-              "diagonal_inches": 17,
-              "scan": "800x600 progressive; 60 Hz production target subject to OEM qualification",
-              "palette_grayscale_levels": 16,
-              "simultaneous_shades_with_128kb_card": 4,
-              "timing_target": {
-                "horizontal_total_pixels": 1024,
-                "vertical_total_lines": 625,
-                "refresh_hz": 60,
-                "horizontal_khz": 37.5,
-                "pixel_clock_mhz": 38.4
-              },
-              "oem_basis": "Period 17-inch monochrome OEM assembly, with Ball HD17H family as a candidate rather than a confirmed supplier. Published Ball HD 26-36 kHz range does not meet the 37.5 kHz target without modification. Its digital video amplifier is not evidence of grayscale support.",
-              "qualification": "Qualify revised deflection, analog grayscale amplifier and high-speed digital link; no stock-monitor plug compatibility or final OEM contract assumed."
-            }
-          },
-          "composition_definition": [
-            {
-              "id": "line_1",
-              "target": {
-                "record_id": "base_part.mono_pro_17_controller"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_2",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.oem_17inch_core"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_3",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.deflection_60hz_upgrade"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_4",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.grayscale_dac_linear_amplifier"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_5",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.highspeed_link_pcb"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_6",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.enclosure"
-              },
-              "quantity": 1,
-              "element_type": "included component"
-            },
-            {
-              "id": "line_7",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.documentation"
-              },
-              "quantity": 1
-            },
-            {
-              "id": "line_8",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.mains_cable"
-              },
-              "quantity": 1
-            },
-            {
-              "id": "line_9",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.signal_cable"
-              },
-              "quantity": 1
-            },
-            {
-              "id": "line_10",
-              "target": {
-                "record_id": "base_part.device.mono_pro_17.packout"
-              },
-              "quantity": 1
-            }
-          ],
-          "assembly_requirements": [
-            {
-              "number": 1,
-              "kind": "testing",
-              "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
-            }
-          ]
-        },
-        {
-          "version_number": 2,
-          "description": "Product definition revision 2",
-          "effective_from": {
-            "kind": "event",
-            "event_id": "event.autodesk_comdex"
           },
           "effective_until": {
             "kind": "simulation_end"
@@ -5931,7 +5693,93 @@
         "actor.logix"
       ],
       "technology_ids": [],
-      "composition_history": [],
+      "composition_history": [
+        {
+          "version_number": 1,
+          "description": "32 KiB noncommercial prototype RAM module",
+          "effective_from": {
+            "kind": "unknown"
+          },
+          "effective_until": {
+            "kind": "simulation_end"
+          },
+          "technical_definition": {
+            "specification": {
+              "chips": 16,
+              "chip_type_id": "base_part.dram_16kbit",
+              "physical_arrangement": "4 rows x 4 chips",
+              "capacity_kb": 32,
+              "data_width_bits": 16
+            }
+          },
+          "composition_definition": [
+            {
+              "id": "line_1",
+              "target": {
+                "record_id": "base_part.dram_16kbit"
+              },
+              "quantity": 16,
+              "element_type": "16 16K × 1 DRAM chips; 32 KiB on a 16-bit module"
+            },
+            {
+              "id": "line_2",
+              "target": {
+                "record_id": "base_part.artemis_ram_module_prototype.module_pcb"
+              },
+              "quantity": 1,
+              "element_type": "PCB for one module"
+            },
+            {
+              "id": "line_3",
+              "target": {
+                "record_id": "base_part.artemis_ram_module_prototype.connector_contacts"
+              },
+              "quantity": 1,
+              "element_type": "connector/contact set for one module"
+            },
+            {
+              "id": "line_4",
+              "target": {
+                "record_id": "base_part.artemis_ram_module_prototype.passive_components"
+              },
+              "quantity": 1,
+              "element_type": "passive-component set for one module"
+            }
+          ],
+          "assembly_requirements": [
+            {
+              "number": 1,
+              "kind": "testing",
+              "description": "Fit 16 qualified 16K × 1 DRAM chips in the recorded 4 rows × 4 chips arrangement. Verify 32 KiB capacity and the recorded 16-bit data path."
+            },
+            {
+              "number": 2,
+              "kind": "testing",
+              "description": "Retain the noncommercial prototype role; this definition does not create an offering or a released replacement for the shared 32-bit RAM modules."
+            },
+            {
+              "number": 3,
+              "kind": "testing",
+              "description": "Complete the device-specific PCB, connector and fitted passive definitions. The BOM names these required items separately; their detailed drawings, part identities and electrical values remain open."
+            },
+            {
+              "number": 4,
+              "kind": "testing",
+              "description": "Specify DRAM package, supply rails, refresh, access timing, power sequencing and thermal limits; qualify the assembled module against its intended controller."
+            },
+            {
+              "number": 5,
+              "kind": "testing",
+              "description": "Determine any necessary buffering, address/control circuitry and identification components and add their explicit BOM lines before fabrication. The current source does not identify or count these components; the present BOM is an engineering definition, not a complete production release."
+            },
+            {
+              "number": 6,
+              "kind": "testing",
+              "description": "Define assembly routing, fixtures, memory and interface tests, cycle times, yield/rework/scrap criteria and handling or packout. No firmware or programming requirement is inferred for a passive DRAM board."
+            }
+          ]
+        }
+      ],
       "requirements": [
         {
           "number": 1,
@@ -5973,16 +5821,7 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ],
-      "technical_definition": {
-        "specification": {
-          "chips": 16,
-          "chip_type_id": "base_part.dram_16kbit",
-          "physical_arrangement": "4 rows x 4 chips",
-          "capacity_kb": 32,
-          "data_width_bits": 16
-        }
-      }
+      ]
     },
     {
       "id": "device.artemis_ram_module_64kb",
@@ -5993,7 +5832,96 @@
         "actor.logix"
       ],
       "technology_ids": [],
-      "composition_history": [],
+      "composition_history": [
+        {
+          "version_number": 1,
+          "description": "Legacy eight-chip 64 KiB RAM module",
+          "effective_from": {
+            "kind": "unknown"
+          },
+          "effective_until": {
+            "kind": "simulation_end"
+          },
+          "technical_definition": {
+            "specification": {
+              "capacity_kb": 64,
+              "chips": 8,
+              "chip_type_id": "base_part.dram_64kbit",
+              "physical_arrangement": "2 rows x 4 chips",
+              "data_width_bits": 8
+            },
+            "compatible_with": [
+              "device.base_computer.artemis"
+            ]
+          },
+          "composition_definition": [
+            {
+              "id": "line_1",
+              "target": {
+                "record_id": "base_part.dram_64kbit"
+              },
+              "quantity": 8,
+              "element_type": "8 64K × 1 DRAM chips; 64 KiB on an 8-bit module"
+            },
+            {
+              "id": "line_2",
+              "target": {
+                "record_id": "base_part.artemis_ram_module_64kb.module_pcb"
+              },
+              "quantity": 1,
+              "element_type": "PCB for one module"
+            },
+            {
+              "id": "line_3",
+              "target": {
+                "record_id": "base_part.artemis_ram_module_64kb.connector_contacts"
+              },
+              "quantity": 1,
+              "element_type": "connector/contact set for one module"
+            },
+            {
+              "id": "line_4",
+              "target": {
+                "record_id": "base_part.artemis_ram_module_64kb.passive_components"
+              },
+              "quantity": 1,
+              "element_type": "passive-component set for one module"
+            }
+          ],
+          "assembly_requirements": [
+            {
+              "number": 1,
+              "kind": "testing",
+              "description": "Fit 8 qualified 64K × 1 DRAM chips in the recorded 2 rows × 4 chips arrangement. Verify 64 KiB capacity and the 8-bit data path identified in the existing requirements."
+            },
+            {
+              "number": 2,
+              "kind": "testing",
+              "description": "Retain this legacy eight-chip design. The existing Artemis host reference records intended use, not qualified compatibility with the released 32-bit module interface. Resolve supersession and treatment of prototypes/spares separately; do not silently convert this board into a matched-pair offering."
+            },
+            {
+              "number": 3,
+              "kind": "testing",
+              "description": "Complete the device-specific PCB, connector and fitted passive definitions. The BOM names these required items separately; their detailed drawings, part identities and electrical values remain open."
+            },
+            {
+              "number": 4,
+              "kind": "testing",
+              "description": "Specify DRAM package, supply rails, refresh, access timing, power sequencing and thermal limits; qualify the assembled module against its intended controller."
+            },
+            {
+              "number": 5,
+              "kind": "testing",
+              "description": "Determine any necessary buffering, address/control circuitry and identification components and add their explicit BOM lines before fabrication. The current source does not identify or count these components; the present BOM is an engineering definition, not a complete production release."
+            },
+            {
+              "number": 6,
+              "kind": "testing",
+              "description": "Define assembly routing, fixtures, memory and interface tests, cycle times, yield/rework/scrap criteria and handling or packout. No firmware or programming requirement is inferred for a passive DRAM board."
+            }
+          ]
+        }
+      ],
       "requirements": [
         {
           "number": 1,
@@ -6040,18 +5968,7 @@
           "kind": "testing",
           "description": "identify how existing prototypes/spares are handled."
         }
-      ],
-      "technical_definition": {
-        "specification": {
-          "capacity_kb": 64,
-          "chips": 8,
-          "chip_type_id": "base_part.dram_64kbit",
-          "physical_arrangement": "2 rows x 4 chips"
-        },
-        "compatible_with": [
-          "device.base_computer.artemis"
-        ]
-      }
+      ]
     },
     {
       "id": "device.ram_64kb_x32",
