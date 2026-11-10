@@ -143,7 +143,39 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Keyboard layout and interface",
+            "description": "The keyboard connects over {connection} and provides {key_count} keys, including {function_keys}, a numeric keypad and separate cursor keys. Its navigation section contains {navigation_keys}. Key assignments and editing conventions follow {keyboard_standard_id}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "connection",
+            "value": "FlexiBUS"
+          },
+          {
+            "key": "key_count",
+            "value": 104
+          },
+          {
+            "key": "function_keys",
+            "value": "F1-F12"
+          },
+          {
+            "key": "navigation_keys",
+            "value": "Insert, Home, Page Down, Page Up"
+          },
+          {
+            "key": "keyboard_standard_id",
+            "ref_id": "technology.logix_tui_keyboard_standard",
+            "ref_role": "Shared keyboard command and assignment standard"
+          }
+        ]
+      }
     },
     {
       "id": "device.mono_monitor_1",
@@ -320,7 +352,49 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display and signal path",
+            "description": "The monitor combines {display_assembly_id} with {controller_id} to display {displayed_levels} grayscale levels from Logix’s 4-bit digital video signal. The fixed intensity conversion does not provide a programmable palette."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Raster compatibility",
+            "description": "Capability protocol version {capability_protocol_version} advertises {raster_profiles} as its supported and preferred raster. The maximum pixel clock is {maximum_pixel_clock_mhz} MHz.\n\nOnly advertised legacy raster profiles. The 26.88 kHz 640×400 progressive profile is unsupported; host must reject it."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.aurelia_monitor_dac",
+            "ref_role": "Converts digital pixel indices into the monitor’s output levels"
+          },
+          {
+            "key": "display_assembly_id",
+            "ref_id": "base_part.ball_tv90_crt",
+            "ref_role": "CRT used by this monitor"
+          },
+          {
+            "key": "displayed_levels",
+            "value": 16
+          },
+          {
+            "key": "capability_protocol_version",
+            "value": 1
+          },
+          {
+            "key": "raster_profiles",
+            "value": "320 × 200"
+          },
+          {
+            "key": "maximum_pixel_clock_mhz",
+            "value": 7.15909
+          }
+        ]
+      }
     },
     {
       "id": "device.color_monitor_1",
@@ -480,7 +554,53 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display and signal path",
+            "description": "The monitor combines {display_assembly_id} with {controller_id} to display {displayed_levels} palette-selected colours from Logix’s 4-bit digital video signal. Its programmable palette uses {palette_precision_bits}-bit RGB values."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Raster compatibility",
+            "description": "Capability protocol version {capability_protocol_version} advertises {raster_profiles} as its supported and preferred raster. The maximum pixel clock is {maximum_pixel_clock_mhz} MHz.\n\nOnly advertised legacy raster profiles. The 26.88 kHz 640×400 progressive profile is unsupported; host must reject it."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.color_monitor_controller",
+            "ref_role": "Converts digital pixel indices into the monitor’s output levels"
+          },
+          {
+            "key": "display_assembly_id",
+            "ref_id": "base_part.sony_kv1204_display_assembly",
+            "ref_role": "OEM display assembly adapted for this monitor"
+          },
+          {
+            "key": "displayed_levels",
+            "value": 16
+          },
+          {
+            "key": "palette_precision_bits",
+            "value": 12
+          },
+          {
+            "key": "capability_protocol_version",
+            "value": 1
+          },
+          {
+            "key": "raster_profiles",
+            "value": "320 × 200"
+          },
+          {
+            "key": "maximum_pixel_clock_mhz",
+            "value": 7.15909
+          }
+        ]
+      }
     },
     {
       "id": "device.mono_monitor_2",
@@ -650,7 +770,57 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display and signal path",
+            "description": "The monitor combines {display_assembly_id} with {controller_id} to display {displayed_levels} grayscale levels from Logix’s 4-bit digital video signal. Its programmable palette uses {palette_precision_bits}-bit intensity values."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Raster compatibility",
+            "description": "Capability protocol version {capability_protocol_version} advertises {raster_profiles} raster profiles, preferring {preferred_raster}. The maximum pixel clock is {maximum_pixel_clock_mhz} MHz.\n\nOnly advertised legacy raster profiles. The 26.88 kHz 640×400 progressive profile is unsupported; host must reject it."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.mono_monitor2_controller",
+            "ref_role": "Converts digital pixel indices into the monitor’s output levels"
+          },
+          {
+            "key": "display_assembly_id",
+            "ref_id": "base_part.motorola_ds3000_140a_crt",
+            "ref_role": "CRT used by this monitor"
+          },
+          {
+            "key": "displayed_levels",
+            "value": 16
+          },
+          {
+            "key": "palette_precision_bits",
+            "value": 8
+          },
+          {
+            "key": "capability_protocol_version",
+            "value": 1
+          },
+          {
+            "key": "raster_profiles",
+            "value": "320 × 200, 640 × 200"
+          },
+          {
+            "key": "preferred_raster",
+            "value": "640 × 200"
+          },
+          {
+            "key": "maximum_pixel_clock_mhz",
+            "value": 14.31818
+          }
+        ]
+      }
     },
     {
       "id": "device.color_monitor_2",
@@ -830,7 +1000,57 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display and signal path",
+            "description": "The monitor combines {display_assembly_id} with {controller_id} to display {displayed_levels} palette-selected colours from Logix’s 4-bit digital video signal. Its programmable palette uses {palette_precision_bits}-bit RGB values."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Raster compatibility",
+            "description": "Capability protocol version {capability_protocol_version} advertises {raster_profiles} raster profiles, preferring {preferred_raster}. The maximum pixel clock is {maximum_pixel_clock_mhz} MHz.\n\nOnly advertised legacy raster profiles. The 26.88 kHz 640×400 progressive profile is unsupported; host must reject it."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.color_monitor_controller",
+            "ref_role": "Converts digital pixel indices into the monitor’s output levels"
+          },
+          {
+            "key": "display_assembly_id",
+            "ref_id": "base_part.medium_resolution_rgb_crt",
+            "ref_role": "CRT used by this monitor"
+          },
+          {
+            "key": "displayed_levels",
+            "value": 16
+          },
+          {
+            "key": "palette_precision_bits",
+            "value": 12
+          },
+          {
+            "key": "capability_protocol_version",
+            "value": 1
+          },
+          {
+            "key": "raster_profiles",
+            "value": "320 × 200, 640 × 200"
+          },
+          {
+            "key": "preferred_raster",
+            "value": "640 × 200"
+          },
+          {
+            "key": "maximum_pixel_clock_mhz",
+            "value": 14.31818
+          }
+        ]
+      }
     },
     {
       "id": "device.aurelia_ram_16kb_card",
@@ -961,7 +1181,32 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Expansion and address mapping",
+            "description": "The card adds {capacity_kb} KiB to {host_base_computer_aurelia}, raising lower RAM from 44 to 60 KiB before workspace reservations. Eight {dram_id} chips form an 8-bit bank. Its four 4 KiB pages occupy B000–EFFF in the normal mapping; the existing common system RAM remains at F000–FFFF.\n\nThe card occupies one expansion slot. Install it with power off and restart: firmware discovers, tests and maps the pages without address switches. Common-memory service routines save the mapping, temporarily select ROM or video RAM and restore the card pages on return. The host must refresh the card even while it is overlaid; the exact refresh interface remains to be qualified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 16
+          },
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Computer expanded by this card"
+          },
+          {
+            "key": "dram_id",
+            "ref_id": "base_part.dram_16kbit",
+            "ref_role": "DRAM used on the expansion card"
+          }
+        ]
+      }
     },
     {
       "id": "device.flexiprint40",
@@ -1091,7 +1336,28 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Printing mechanism and connection",
+            "description": "FlexiPrint40 combines {print_mechanism_id} with {bus_controller_id} to receive print data over FlexiBUS."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "print_mechanism_id",
+            "ref_id": "base_part.mpi_mp40_mechanism",
+            "ref_role": "Printing mechanism fitted to this printer"
+          },
+          {
+            "key": "bus_controller_id",
+            "ref_id": "base_part.flexibus_device_controller",
+            "ref_role": "FlexiBUS device-side interface controller"
+          }
+        ]
+      }
     },
     {
       "id": "device.flexidisk",
@@ -1224,7 +1490,31 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Removable storage and host access",
+            "description": "This external drive uses {media} media and connects over {connection}. Its bus interface is implemented by {bus_controller_id}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "media",
+            "value": "5.25-inch FDD"
+          },
+          {
+            "key": "connection",
+            "value": "FlexiBUS"
+          },
+          {
+            "key": "bus_controller_id",
+            "ref_id": "base_part.flexibus_device_controller",
+            "ref_role": "FlexiBUS device-side controller in the drive"
+          }
+        ]
+      }
     },
     {
       "id": "device.apple2_expansion_card",
@@ -1353,7 +1643,22 @@
           "kind": "selection",
           "description": "AION chips at June 1979 launch; qualified SMC alternatives after their individual release, no earlier than October 1979."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Apple II peripheral expansion",
+            "description": "The card adds {flexibus_ports} FlexiBUS ports and a Disk II-compatible controller interface to Apple II. Native 6502 drivers and examples operate both interfaces; the card supplies neither a Z80 execution environment nor a CP/M port."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "flexibus_ports",
+            "value": 2
+          }
+        ]
+      }
     },
     {
       "id": "device.flexidisk_ii",
@@ -1493,7 +1798,34 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Removable storage and host access",
+            "description": "This external drive uses {media} media and connects over {connection}. It handles {disk_formats} disk formats and is usable from {supported_hosts}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "media",
+            "value": "5.25-inch FDD"
+          },
+          {
+            "key": "connection",
+            "value": "FlexiBUS"
+          },
+          {
+            "key": "disk_formats",
+            "value": "Aurelia, Apple II-compatible"
+          },
+          {
+            "key": "supported_hosts",
+            "value": "Logix Aurelia, Apple II with Logix Apple II Expansion Card"
+          }
+        ]
+      }
     },
     {
       "id": "device.artemis_cpm80_module",
@@ -1637,7 +1969,37 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "CP/M guest execution",
+            "description": "This expansion module lets {host_base_computer_artemis} run qualified Aurelia/CP/M binaries on a {guest_cpu_id} with {guest_ram_kib} KiB of local RAM. The {peripheral_bridge_id} mediates device access.\n\nThis is a separate guest execution path, not native execution by ERA or recompilation to it. Capability queries must describe the emulated CP/M environment and must not expose ERA facilities that the guest cannot use."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Host of the separate CP/M guest environment"
+          },
+          {
+            "key": "guest_cpu_id",
+            "ref_id": "base_part.z80a",
+            "ref_role": "Processor executing guest Z80 instructions"
+          },
+          {
+            "key": "guest_ram_kib",
+            "value": 64
+          },
+          {
+            "key": "peripheral_bridge_id",
+            "ref_id": "technology.cpm80_virtual_peripheral_bridge",
+            "ref_role": "Virtual peripheral interface between guest and host"
+          }
+        ]
+      }
     },
     {
       "id": "device.network_card_aurelia",
@@ -1713,25 +2075,6 @@
                 "host_service": "No per-byte interrupt requirement. Aurelia at 250 kbit/s has 128 CPU clocks per raw byte at 4 MHz; Aurelia+ at 500 kbit/s has 96 at 6 MHz. Validate worst-case service latency. A persistently slow host may advertise a lower configured ceiling."
               }
             },
-            "expansion_socket_groups": [
-              {
-                "id": "network",
-                "name": "Network connection",
-                "sockets": [
-                  {
-                    "id": "network_out",
-                    "name": "Network connection",
-                    "connection": "logix_network",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.network_hub.4_port",
-                      "device.network_hub.8_port",
-                      "device.network_hub.16_port"
-                    ]
-                  }
-                ]
-              }
-            ],
             "host_qualification": {
               "device.base_computer.aurelia": {
                 "technology_ids": [
@@ -1844,6 +2187,25 @@
               "kind": "testing",
               "description": "Implement host-specific rate advertisement, hardware framing/CRC and destination filtering, 4 KiB local packet-RAM target, packet interrupts and receiver credits. Qualify serial electronics and worst-case CPU service at each advertised rate; select actual RAM parts and freeze frame/MTU limits before release."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "network",
+              "name": "Network connection",
+              "sockets": [
+                {
+                  "id": "network_out",
+                  "name": "Network connection",
+                  "connection": "logix_network",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.network_hub.4_port",
+                    "device.network_hub.8_port",
+                    "device.network_hub.16_port"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -1883,7 +2245,59 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Network connection and link behaviour",
+            "description": "This adapter connects {host_base_computer_aurelia} and {host_base_computer_aurelia_plus} to Logix LAN.\n\nThe adapter carries {tcpip_stack_id} over {link_protocol_id}. Discovery starts at {startup_rate_kbps} kbit/s. Aurelia supports {aurelia_rates_kbps} kbit/s; Aurelia+ supports {aurelia_plus_rates_kbps} kbit/s. Firmware enforces each host’s highest listed rate as its ceiling. The negotiated common rate must also satisfy every admitted station and qualified link.\n\nGrant unicast only when the destination advertises credit for a complete frame; reserve that credit until completion. Broadcast requires credit from all intended admitted receivers. Timeouts revoke stale credits; bounded queues and retry/error reporting prevent indefinite blocking. Use flow control first for receiver pressure, not automatic rate changes."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Packet buffering and host service",
+            "description": "Hardware performs framing and CRC checks, rejects frames for other destinations before interrupting the CPU, buffers complete frames, and reports receiver readiness through packet-level interrupts. Local packet RAM targets {packet_ram_target_bytes} bytes in addition to system RAM. Its chip population remains unresolved; transmit/receive partitions, metadata, maximum frame length and IP MTU must be qualified together.\n\nAt the respective host ceilings, Aurelia has 128 CPU clocks per raw byte at 4 MHz and Aurelia+ has 96 at 6 MHz. These budgets require worst-case service-latency testing; a persistently slow host may advertise a lower configured ceiling."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Host covered by this adapter’s rate profile"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Host covered by this adapter’s rate profile"
+          },
+          {
+            "key": "link_protocol_id",
+            "ref_id": "technology.logix_lan100_link",
+            "ref_role": "Negotiation and shared-medium protocol implemented by the adapter"
+          },
+          {
+            "key": "tcpip_stack_id",
+            "ref_id": "technology.logix_tcpip_lan",
+            "ref_role": "Network stack carried over this adapter"
+          },
+          {
+            "key": "startup_rate_kbps",
+            "value": 100
+          },
+          {
+            "key": "aurelia_rates_kbps",
+            "value": "100, 250"
+          },
+          {
+            "key": "aurelia_plus_rates_kbps",
+            "value": "100, 250, 500"
+          },
+          {
+            "key": "packet_ram_target_bytes",
+            "value": 4096
+          }
+        ]
+      }
     },
     {
       "id": "device.network_card_artemis",
@@ -1972,25 +2386,6 @@
               "device.base_computer.athena_server"
             ],
             "athena_qualification": "Existing card baseline selected; Athena host electrical/firmware compatibility remains a release gate.",
-            "expansion_socket_groups": [
-              {
-                "id": "network",
-                "name": "Network connection",
-                "sockets": [
-                  {
-                    "id": "network_out",
-                    "name": "Network connection",
-                    "connection": "logix_network",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.network_hub.4_port",
-                      "device.network_hub.8_port",
-                      "device.network_hub.16_port"
-                    ]
-                  }
-                ]
-              }
-            ],
             "host_qualification": {
               "device.base_computer.artemis": {
                 "technology_ids": [
@@ -2115,6 +2510,25 @@
               "kind": "testing",
               "description": "Implement host-specific rate advertisement, hardware framing/CRC and destination filtering, 4 KiB local packet-RAM target, packet interrupts and receiver credits. Qualify serial electronics and worst-case CPU service at each advertised rate; select actual RAM parts and freeze frame/MTU limits before release."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "network",
+              "name": "Network connection",
+              "sockets": [
+                {
+                  "id": "network_out",
+                  "name": "Network connection",
+                  "connection": "logix_network",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.network_hub.4_port",
+                    "device.network_hub.8_port",
+                    "device.network_hub.16_port"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -2154,7 +2568,70 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Host connection and purpose",
+            "description": "This removable 32-bit Plug and Execute adapter occupies one general-purpose slot on {host_base_computer_artemis} and {host_base_computer_artemis_pro}. It is fitted to networking-era systems and can upgrade earlier Artemis computers; electrical implementation remains open. Artemis PRO supports the server role.\n\nThe same baseline is planned for {planned_base_computer_athena} and {planned_base_computer_athena_server}, subject to host qualification."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Rates and shared-medium operation",
+            "description": "The adapter carries {tcpip_stack_id} over {link_protocol_id}. Discovery starts at {startup_rate_kbps} kbit/s. Both recorded hosts support {supported_rates_kbps} kbit/s. Firmware enforces each host’s highest listed rate as its ceiling. The negotiated common rate must also satisfy every admitted station and qualified link.\n\nGrant unicast only when the destination advertises credit for a complete frame; reserve that credit until completion. Broadcast requires credit from all intended admitted receivers. Timeouts revoke stale credits; bounded queues and retry/error reporting prevent indefinite blocking. Use flow control first for receiver pressure, not automatic rate changes."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Packet buffering and host service",
+            "description": "Hardware performs framing and CRC checks, rejects frames for other destinations before interrupting the CPU, buffers complete frames, and reports receiver readiness through packet-level interrupts. Local packet RAM targets {packet_ram_target_bytes} bytes in addition to system RAM. Its chip population remains unresolved; transmit/receive partitions, metadata, maximum frame length and IP MTU must be qualified together.\n\nThe host must service packets within a validated worst-case latency without per-byte interrupts. A persistently slow host may advertise a lower configured ceiling."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Host covered by this adapter’s rate profile"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Host covered by this adapter’s rate profile"
+          },
+          {
+            "key": "planned_base_computer_athena",
+            "ref_id": "device.base_computer.athena",
+            "ref_role": "Planned host; electrical and firmware qualification remain open"
+          },
+          {
+            "key": "planned_base_computer_athena_server",
+            "ref_id": "device.base_computer.athena_server",
+            "ref_role": "Planned host; electrical and firmware qualification remain open"
+          },
+          {
+            "key": "link_protocol_id",
+            "ref_id": "technology.logix_lan100_link",
+            "ref_role": "Negotiation and shared-medium protocol implemented by the adapter"
+          },
+          {
+            "key": "tcpip_stack_id",
+            "ref_id": "technology.logix_tcpip_lan",
+            "ref_role": "Network stack carried over this adapter"
+          },
+          {
+            "key": "startup_rate_kbps",
+            "value": 100
+          },
+          {
+            "key": "supported_rates_kbps",
+            "value": "100, 250, 500, 1000"
+          },
+          {
+            "key": "packet_ram_target_bytes",
+            "value": 4096
+          }
+        ]
+      }
     },
     {
       "id": "device.network_hub.4_port",
@@ -2194,25 +2671,7 @@
               "rate_scope": "One common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.",
               "negotiation_id": "technology.logix_lan100_link",
               "port_count": 4
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "network",
-                "name": "Network connections",
-                "sockets": [
-                  {
-                    "id": "network_ports",
-                    "name": "Network ports",
-                    "connection": "logix_network",
-                    "capacity": 4,
-                    "compatible_device_ids": [
-                      "device.network_card_aurelia",
-                      "device.network_card_artemis"
-                    ]
-                  }
-                ]
-              }
-            ]
+            }
           },
           "composition_definition": [
             {
@@ -2264,6 +2723,24 @@
               "kind": "testing",
               "description": "Qualify this 4-port SKU with a shared selectable clock, negotiation/recovery firmware and receiver-credit-aware arbiter. Forward by streaming at one common rate; no per-port rate conversion. Qualify cables, fault isolation and diagnostics at 100/250/500/1000 kbit/s. Port count does not multiply the maximum 1 Mbit/s shared raw capacity."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "network",
+              "name": "Network connections",
+              "sockets": [
+                {
+                  "id": "network_ports",
+                  "name": "Network ports",
+                  "connection": "logix_network",
+                  "capacity": 4,
+                  "compatible_device_ids": [
+                    "device.network_card_aurelia",
+                    "device.network_card_artemis"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -2293,7 +2770,31 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Shared-rate LAN repeater",
+            "description": "This active-star repeater connects {port_count} stations using {link_protocol_id}. The supported raw rates are {supported_rates_kbps} kbit/s, with discovery beginning at the lowest rate. All admitted stations share one negotiated rate and one transmitter at a time; additional ports do not multiply bandwidth.\n\nThe arbiter grants transmission only when the intended receivers have complete-frame credit. It coordinates discovery, link qualification and fallback while repeating traffic at the common rate. Application throughput is lower than raw line rate and remains unvalidated."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "port_count",
+            "value": 4
+          },
+          {
+            "key": "link_protocol_id",
+            "ref_id": "technology.logix_lan100_link",
+            "ref_role": "Station discovery, rate negotiation and transmit-grant protocol"
+          },
+          {
+            "key": "supported_rates_kbps",
+            "value": "100, 250, 500, 1000"
+          }
+        ]
+      }
     },
     {
       "id": "device.network_hub.8_port",
@@ -2333,25 +2834,7 @@
               "rate_scope": "One common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.",
               "negotiation_id": "technology.logix_lan100_link",
               "port_count": 8
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "network",
-                "name": "Network connections",
-                "sockets": [
-                  {
-                    "id": "network_ports",
-                    "name": "Network ports",
-                    "connection": "logix_network",
-                    "capacity": 8,
-                    "compatible_device_ids": [
-                      "device.network_card_aurelia",
-                      "device.network_card_artemis"
-                    ]
-                  }
-                ]
-              }
-            ]
+            }
           },
           "composition_definition": [
             {
@@ -2403,6 +2886,24 @@
               "kind": "testing",
               "description": "Qualify this 8-port SKU with a shared selectable clock, negotiation/recovery firmware and receiver-credit-aware arbiter. Forward by streaming at one common rate; no per-port rate conversion. Qualify cables, fault isolation and diagnostics at 100/250/500/1000 kbit/s. Port count does not multiply the maximum 1 Mbit/s shared raw capacity."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "network",
+              "name": "Network connections",
+              "sockets": [
+                {
+                  "id": "network_ports",
+                  "name": "Network ports",
+                  "connection": "logix_network",
+                  "capacity": 8,
+                  "compatible_device_ids": [
+                    "device.network_card_aurelia",
+                    "device.network_card_artemis"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -2432,7 +2933,31 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Shared-rate LAN repeater",
+            "description": "This active-star repeater connects {port_count} stations using {link_protocol_id}. The supported raw rates are {supported_rates_kbps} kbit/s, with discovery beginning at the lowest rate. All admitted stations share one negotiated rate and one transmitter at a time; additional ports do not multiply bandwidth.\n\nThe arbiter grants transmission only when the intended receivers have complete-frame credit. It coordinates discovery, link qualification and fallback while repeating traffic at the common rate. Application throughput is lower than raw line rate and remains unvalidated."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "port_count",
+            "value": 8
+          },
+          {
+            "key": "link_protocol_id",
+            "ref_id": "technology.logix_lan100_link",
+            "ref_role": "Station discovery, rate negotiation and transmit-grant protocol"
+          },
+          {
+            "key": "supported_rates_kbps",
+            "value": "100, 250, 500, 1000"
+          }
+        ]
+      }
     },
     {
       "id": "device.network_hub.16_port",
@@ -2472,25 +2997,7 @@
               "rate_scope": "One common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.",
               "negotiation_id": "technology.logix_lan100_link",
               "port_count": 16
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "network",
-                "name": "Network connections",
-                "sockets": [
-                  {
-                    "id": "network_ports",
-                    "name": "Network ports",
-                    "connection": "logix_network",
-                    "capacity": 16,
-                    "compatible_device_ids": [
-                      "device.network_card_aurelia",
-                      "device.network_card_artemis"
-                    ]
-                  }
-                ]
-              }
-            ]
+            }
           },
           "composition_definition": [
             {
@@ -2542,6 +3049,24 @@
               "kind": "testing",
               "description": "Qualify this 16-port SKU with a shared selectable clock, negotiation/recovery firmware and receiver-credit-aware arbiter. Forward by streaming at one common rate; no per-port rate conversion. Qualify cables, fault isolation and diagnostics at 100/250/500/1000 kbit/s. Port count does not multiply the maximum 1 Mbit/s shared raw capacity."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "network",
+              "name": "Network connections",
+              "sockets": [
+                {
+                  "id": "network_ports",
+                  "name": "Network ports",
+                  "connection": "logix_network",
+                  "capacity": 16,
+                  "compatible_device_ids": [
+                    "device.network_card_aurelia",
+                    "device.network_card_artemis"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -2571,7 +3096,31 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Shared-rate LAN repeater",
+            "description": "This active-star repeater connects {port_count} stations using {link_protocol_id}. The supported raw rates are {supported_rates_kbps} kbit/s, with discovery beginning at the lowest rate. All admitted stations share one negotiated rate and one transmitter at a time; additional ports do not multiply bandwidth.\n\nThe arbiter grants transmission only when the intended receivers have complete-frame credit. It coordinates discovery, link qualification and fallback while repeating traffic at the common rate. Application throughput is lower than raw line rate and remains unvalidated."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "port_count",
+            "value": 16
+          },
+          {
+            "key": "link_protocol_id",
+            "ref_id": "technology.logix_lan100_link",
+            "ref_role": "Station discovery, rate negotiation and transmit-grant protocol"
+          },
+          {
+            "key": "supported_rates_kbps",
+            "value": "100, 250, 500, 1000"
+          }
+        ]
+      }
     },
     {
       "id": "device.s100_flexibus_card",
@@ -2703,7 +3252,32 @@
           "kind": "testing",
           "description": "Qualify the controller population for two FlexiBUS ports. One host-controller die per port is a design candidate, not a released population; freeze the supported ports per die and final count before manufacture."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "S-100 bus and peripheral service",
+            "description": "The configurable 8-bit S-100 interface provides {flexibus_ports} ports using {host_controller_id} and the {bus_protocol_id} protocol. Controller die count remains unspecified. Address decode, waits, power and conflicts require qualification on named hosts.\n\nCP/M BIOS adapters, installation diagnostics and optional Platform Extensions/TUI support target qualified 8080/Z80 systems with declared ISA and memory prerequisites. Driver loading from an existing boot disk is the baseline; booting through FlexiBUS needs a separately qualified boot ROM. The card does not include a Disk II interface."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "flexibus_ports",
+            "value": 2
+          },
+          {
+            "key": "host_controller_id",
+            "ref_id": "base_part.flexibus_host_controller",
+            "ref_role": "Host-side bus controller"
+          },
+          {
+            "key": "bus_protocol_id",
+            "ref_id": "technology.flexibus",
+            "ref_role": "Peripheral transport implemented by the card"
+          }
+        ]
+      }
     },
     {
       "id": "device.apple2_video_card",
@@ -2748,29 +3322,7 @@
                 "separate_from_system_and_display_ram": true
               },
               "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "display",
-                "name": "Display output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_monitor_1",
-                      "device.color_monitor_1",
-                      "device.mono_monitor_2",
-                      "device.color_monitor_2",
-                      "device.mono_pro",
-                      "device.color_pro_14"
-                    ]
-                  }
-                ]
-              }
-            ]
+            }
           },
           "composition_definition": [
             {
@@ -2893,6 +3445,28 @@
               "kind": "testing",
               "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "display",
+              "name": "Display output",
+              "sockets": [
+                {
+                  "id": "video_out",
+                  "name": "Video output",
+                  "connection": "video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.mono_monitor_1",
+                    "device.color_monitor_1",
+                    "device.mono_monitor_2",
+                    "device.color_monitor_2",
+                    "device.mono_pro",
+                    "device.color_pro_14"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -2922,7 +3496,51 @@
           "kind": "selection",
           "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Host integration",
+            "description": "This Apple II card uses slot decoding and a driver ROM while preserving the native memory map and avoiding conflicts with other cards. Native 6502 drivers, callable libraries and examples expose a card API; existing graphics are not transparently redirected, and no CP/M port or Z80 CPU is supplied."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Independent display and sprite memory",
+            "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "display_controller_id",
+            "ref_id": "base_part.aurelia_video_chip",
+            "ref_role": "Aurelia graphics controller reused on this host"
+          },
+          {
+            "key": "video_ram_kib",
+            "value": 16
+          },
+          {
+            "key": "video_chip_count",
+            "value": 8
+          },
+          {
+            "key": "video_chip_id",
+            "ref_id": "base_part.aion_4116",
+            "ref_role": "Display DRAM"
+          },
+          {
+            "key": "sprite_chip_id",
+            "ref_id": "base_part.aion_2114",
+            "ref_role": "SRAM dedicated to sprites"
+          },
+          {
+            "key": "video_link_id",
+            "ref_id": "technology.logix_digital_video",
+            "ref_role": "Digital monitor connection"
+          }
+        ]
+      }
     },
     {
       "id": "device.s100_video_card",
@@ -2967,29 +3585,7 @@
                 "separate_from_system_and_display_ram": true
               },
               "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "display",
-                "name": "Display output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_monitor_1",
-                      "device.color_monitor_1",
-                      "device.mono_monitor_2",
-                      "device.color_monitor_2",
-                      "device.mono_pro",
-                      "device.color_pro_14"
-                    ]
-                  }
-                ]
-              }
-            ]
+            }
           },
           "composition_definition": [
             {
@@ -3112,6 +3708,28 @@
               "kind": "testing",
               "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "display",
+              "name": "Display output",
+              "sockets": [
+                {
+                  "id": "video_out",
+                  "name": "Video output",
+                  "connection": "video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.mono_monitor_1",
+                    "device.color_monitor_1",
+                    "device.mono_monitor_2",
+                    "device.color_monitor_2",
+                    "device.mono_pro",
+                    "device.color_pro_14"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -3141,7 +3759,51 @@
           "kind": "selection",
           "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Host integration",
+            "description": "This card uses a configurable 8-bit S-100 interface. Named hosts require address-decode, wait-state, power and conflict qualification. CP/M BIOS adapters, diagnostics and optional Platform Extensions/TUI support are provided for qualified 8080/Z80 hosts with declared ISA and memory prerequisites."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Independent display and sprite memory",
+            "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "display_controller_id",
+            "ref_id": "base_part.aurelia_video_chip",
+            "ref_role": "Aurelia graphics controller reused on this host"
+          },
+          {
+            "key": "video_ram_kib",
+            "value": 16
+          },
+          {
+            "key": "video_chip_count",
+            "value": 8
+          },
+          {
+            "key": "video_chip_id",
+            "ref_id": "base_part.aion_4116",
+            "ref_role": "Display DRAM"
+          },
+          {
+            "key": "sprite_chip_id",
+            "ref_id": "base_part.aion_2114",
+            "ref_role": "SRAM dedicated to sprites"
+          },
+          {
+            "key": "video_link_id",
+            "ref_id": "technology.logix_digital_video",
+            "ref_role": "Digital monitor connection"
+          }
+        ]
+      }
     },
     {
       "id": "device.artemis_video_card",
@@ -3639,29 +4301,7 @@
                 "technology_id": "technology.logix_sprite_system",
                 "profile": "profile_2"
               }
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "display",
-                "name": "Display output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_monitor_1",
-                      "device.color_monitor_1",
-                      "device.mono_monitor_2",
-                      "device.color_monitor_2",
-                      "device.mono_pro",
-                      "device.color_pro_14"
-                    ]
-                  }
-                ]
-              }
-            ]
+            }
           },
           "composition_definition": [
             {
@@ -3727,6 +4367,28 @@
               "kind": "testing",
               "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "display",
+              "name": "Display output",
+              "sockets": [
+                {
+                  "id": "video_out",
+                  "name": "Video output",
+                  "connection": "video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.mono_monitor_1",
+                    "device.color_monitor_1",
+                    "device.mono_monitor_2",
+                    "device.color_monitor_2",
+                    "device.mono_pro",
+                    "device.color_pro_14"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -3740,6 +4402,516 @@
           "number": 2,
           "kind": "testing",
           "description": "Qualification pending."
+        }
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display architecture",
+            "description": "The card uses {graphics_controller_id} and implements {video_link_id} through {display_api_id}. Software selects only modes supported by the controller, monitor profile and available buffer/sprite allocation; unsupported downscaling is rejected."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Display memory and sprites",
+            "description": "Display storage is {video_ram_kib} KiB, built from {display_chip_count} {display_chip_id} devices on a {display_bus_bits}-bit bus. Text/font and bitmap allocations are alternative uses of this memory. Sprite storage is independent: {sprite_ram_bytes} bytes from {sprite_chip_count} {sprite_chip_id} chips on a separate {sprite_bus_bits}-bit bus.\n\nOne shared 256-glyph bank per mode. Font allocation 2048 bytes at 8×8, 4096 at 8×16 or 8×10 (16-byte glyph stride). Font writes affect both pages.\n\nPage selection latches during vertical blank. Double buffering does not guarantee drawing throughput.\n\nSprite geometry and compositing follow {sprite_protocol_id} {sprite_profile}."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Scanout pipeline",
+            "description": "The ASIC pixel pipeline contains {pixel_buffer_pages} banks of {pixel_buffer_page_bytes} bytes, holding {pixel_depth_bits}-bit pixels. Separate ownership states prevent the renderer from overwriting a bank being scanned out: {pixel_bank_states}. Completed banks feed output latches and a serializer; the pipeline is prefetched before active display and preserves sync on underrun.\n\nEach bank comprises 40 × 32-bit words and holds 320 pixels, so a 640-pixel line consumes two banks. The renderer expands eight pixels at a time while a separate serializer latch drains ready banks. Underrun blanks pixels and sets a sticky fault.\n\nTwo {character_cache_bytes}-byte row caches hold current and next character/attribute rows independently of the pixel FIFO.\n\nThe dot clock is {pixel_clock_mhz} MHz. Eight-pixel renderer steps and SRAM latch loads run at {renderer_step_mhz} MHz, rather than requiring one SRAM read per dot. A pixel bank drains in {pixel_bank_drain_us} µs."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Memory arbitration and display qualification",
+            "description": "Card-local sequencer arbitrates display fetch and deadline-reserved independent DRAM refresh before bounded host/DMA transfers with READY. Sprite SRAM has its own 8-bit bus. System DMA/MMU remain dedicated host components; the card does not replace system-memory refresh.\n\nAt 250 ns conservative DRAM cycle, 80 glyph fetches consume 20 microseconds per active line; 160-byte row prefetch amortizes across 8/10/16 scanlines. Two row caches and 16-bit reads cover text-row transitions. Verify sprites, refresh and bounded host/DMA slots together at voltage/temperature corners; no guaranteed maximum CPU upload rate.\n\nRead capability descriptor before enabling sync. Mono Pro accepts only raster_640_400; integer-scale legacy modes. Old monitors retain their advertised 200-line raster(s), never 640×400. Native 400-line modes require Mono Pro; new 200-line bitmap modes also work on capable older displays. This is display-mode/API compatibility, not Z80 binary compatibility."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "graphics_controller_id",
+            "ref_id": "base_part.artemis_graphics_chip",
+            "ref_role": "Graphics controller fitted to this card"
+          },
+          {
+            "key": "video_link_id",
+            "ref_id": "technology.logix_digital_video",
+            "ref_role": "Digital display signal protocol"
+          },
+          {
+            "key": "display_api_id",
+            "ref_id": "technology.logix_display_api",
+            "ref_role": "Mode discovery and display-memory contract"
+          },
+          {
+            "key": "video_ram_kib",
+            "value": 32
+          },
+          {
+            "key": "display_chip_count",
+            "value": 16
+          },
+          {
+            "key": "display_chip_id",
+            "ref_id": "base_part.aion_4116",
+            "ref_role": "External DRAM used for display storage"
+          },
+          {
+            "key": "display_bus_bits",
+            "value": 16
+          },
+          {
+            "key": "sprite_ram_bytes",
+            "value": 1024
+          },
+          {
+            "key": "sprite_chip_count",
+            "value": 2
+          },
+          {
+            "key": "sprite_chip_id",
+            "ref_id": "base_part.aion_2114",
+            "ref_role": "SRAM dedicated to sprite data"
+          },
+          {
+            "key": "sprite_bus_bits",
+            "value": 8
+          },
+          {
+            "key": "sprite_protocol_id",
+            "ref_id": "technology.logix_sprite_system",
+            "ref_role": "Sprite semantics implemented by the controller"
+          },
+          {
+            "key": "sprite_profile",
+            "value": "profile_2"
+          },
+          {
+            "key": "pixel_buffer_pages",
+            "value": 4
+          },
+          {
+            "key": "pixel_buffer_page_bytes",
+            "value": 160
+          },
+          {
+            "key": "pixel_depth_bits",
+            "value": 4
+          },
+          {
+            "key": "pixel_bank_states",
+            "value": "free, filling, ready, displaying"
+          },
+          {
+            "key": "character_cache_bytes",
+            "value": 160
+          },
+          {
+            "key": "pixel_clock_mhz",
+            "value": 21.504
+          },
+          {
+            "key": "renderer_step_mhz",
+            "value": 2.688
+          },
+          {
+            "key": "pixel_bank_drain_us",
+            "value": 14.881
+          }
+        ]
+      },
+      "graphic_modes_specification": [
+        {
+          "id": "text_40",
+          "type": "text",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 2048,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 40
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 8
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 1024
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 1024
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 2048
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 5 sprites uses 4096 bytes, leaving 28672 bytes of display RAM. The recorded allocation with 2 text page(s) and 5 sprites uses 6144 bytes, leaving 26624 bytes of display RAM."
+        },
+        {
+          "id": "text_80",
+          "type": "text",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 4096,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 8
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 2048
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 5 sprites uses 6144 bytes, leaving 26624 bytes of display RAM. The recorded allocation with 2 text page(s) and 5 sprites uses 10240 bytes, leaving 22528 bytes of display RAM."
+        },
+        {
+          "id": "text_80_25_400",
+          "type": "text",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 4096,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 16
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 4096
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 5 sprites uses 8192 bytes, leaving 24576 bytes of display RAM. The recorded allocation with 2 text page(s) and 5 sprites uses 12288 bytes, leaving 20480 bytes of display RAM."
+        },
+        {
+          "id": "text_80_40_400",
+          "type": "text",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 8192,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 40
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 10
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 4096
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 4096
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 4096
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 5 sprites uses 12288 bytes, leaving 20480 bytes of display RAM. The recorded allocation with 2 text page(s) and 5 sprites uses 20480 bytes, leaving 12288 bytes of display RAM."
+        },
+        {
+          "id": "graphics_a",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 16768 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 32000 bytes, leaving 768 bytes of display RAM."
+        },
+        {
+          "id": "graphics_b2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 16768 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 32000 bytes, leaving 768 bytes of display RAM."
+        },
+        {
+          "id": "graphics_b1",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 40
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 8000 bytes, leaving 24768 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 16768 bytes of display RAM."
+        },
+        {
+          "id": "graphics_c4",
+          "type": "bitmap",
+          "width": 320,
+          "height": 100,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 16768 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 32000 bytes, leaving 768 bytes of display RAM."
+        },
+        {
+          "id": "graphics_c2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 100,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 8000 bytes, leaving 24768 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 16768 bytes of display RAM."
+        },
+        {
+          "id": "graphics_legacy",
+          "type": "bitmap",
+          "width": 160,
+          "height": 100,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 8000 bytes, leaving 24768 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 16768 bytes of display RAM. This is a compatibility mode."
+        },
+        {
+          "id": "graphics_640_400_1",
+          "type": "bitmap",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 32000 bytes, leaving 768 bytes of display RAM."
+        },
+        {
+          "id": "graphics_640_200_2",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 32000 bytes, leaving 768 bytes of display RAM."
+        },
+        {
+          "id": "graphics_320_400_2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 400,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 32000 bytes, leaving 768 bytes of display RAM."
+        },
+        {
+          "id": "graphics_320_200_4",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 32000 bytes, leaving 768 bytes of display RAM."
         }
       ]
     },
