@@ -10769,7 +10769,26 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "This internal {diameter_inches}-inch floppy mechanism uses {density} recording."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "diameter_inches",
+            "value": 5.25
+          },
+          {
+            "key": "density",
+            "value": "single density"
+          }
+        ]
+      }
     },
     {
       "id": "device.subsystem.aurelia.base_memory",
@@ -10817,7 +10836,30 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System memory organization",
+            "description": "The subsystem provides {capacity_kb} KiB in {bank_count} {bank_width_bits}-bit banks, including common system RAM. No parity is fitted, and display memory is separate. Physical bank/page decoding must preserve the existing mapper and common-memory reservations."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 48
+          },
+          {
+            "key": "bank_count",
+            "value": 3
+          },
+          {
+            "key": "bank_width_bits",
+            "value": 8
+          }
+        ]
+      }
     },
     {
       "id": "device.subsystem.aurelia.video",
@@ -10896,7 +10938,28 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display subsystem",
+            "description": "The subsystem implements {video_profile_id} using {controller_id}. Display RAM has an 8-bit bus independent of system RAM. Sprite memory uses a separate 8-bit bus, independent of both system and display RAM."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "video_profile_id",
+            "ref_id": "technology.aurelia_video_profile",
+            "ref_role": "Functional video profile"
+          },
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.aurelia_video_chip",
+            "ref_role": "Video controller in the subsystem"
+          }
+        ]
+      }
     },
     {
       "id": "device.base_computer.aurelia_plus",
@@ -10940,103 +11003,6 @@
                 "future_pin_area_reserved_for_bits": 32
               }
             },
-            "expansion_socket_groups": [
-              {
-                "id": "expansion",
-                "name": "Expansion cards",
-                "sockets": [
-                  {
-                    "id": "expansion",
-                    "name": "General expansion slots",
-                    "connection": "expansion_card",
-                    "capacity": 2,
-                    "compatible_device_ids": [
-                      "device.network_card_aurelia"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "cartridges",
-                "name": "ROM cartridges",
-                "sockets": [
-                  {
-                    "id": "system_cartridge",
-                    "name": "System cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.rom_cartridge.cpm_aurelia",
-                      "device.rom_cartridge.cpm_aurelia_networking"
-                    ]
-                  },
-                  {
-                    "id": "application_cartridge",
-                    "name": "Application cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.rom_cartridge.business_tools_aurelia"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "external",
-                "name": "External connections",
-                "sockets": [
-                  {
-                    "id": "flexibus",
-                    "name": "FlexiBUS ports",
-                    "connection": "flexibus",
-                    "capacity": 3,
-                    "compatible_device_ids": [
-                      "device.flexibus_keyboard",
-                      "device.flexiprint40",
-                      "device.flexidisk",
-                      "device.flexidisk_ii",
-                      "device.logix_mouse"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "display",
-                "name": "Integrated video output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_monitor_1",
-                      "device.color_monitor_1",
-                      "device.mono_monitor_2",
-                      "device.color_monitor_2"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "internal_drive",
-                "name": "Internal storage",
-                "sockets": [
-                  {
-                    "id": "internal_drive",
-                    "name": "Internal drive bays",
-                    "connection": "internal_storage",
-                    "capacity": 2,
-                    "compatible_device_ids": [
-                      "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism"
-                    ],
-                    "requirements": [
-                      "Recorded fitted-drive count; additional spare bays are not established."
-                    ]
-                  }
-                ]
-              }
-            ],
             "configuration_requirements": {
               "scope": "complete_system",
               "rules": [
@@ -11335,10 +11301,178 @@
               "kind": "testing",
               "description": "Freeze package/pinout, external buffers, memory decode, bank-latched DMA addressing and simultaneous video/peripheral stress tests."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "expansion",
+              "name": "Expansion cards",
+              "sockets": [
+                {
+                  "id": "expansion",
+                  "name": "General expansion slots",
+                  "connection": "expansion_card",
+                  "capacity": 2,
+                  "compatible_device_ids": [
+                    "device.network_card_aurelia"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cartridges",
+              "name": "ROM cartridges",
+              "sockets": [
+                {
+                  "id": "system_cartridge",
+                  "name": "System cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.rom_cartridge.cpm_aurelia",
+                    "device.rom_cartridge.cpm_aurelia_networking"
+                  ]
+                },
+                {
+                  "id": "application_cartridge",
+                  "name": "Application cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.rom_cartridge.business_tools_aurelia"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "external",
+              "name": "External connections",
+              "sockets": [
+                {
+                  "id": "flexibus",
+                  "name": "FlexiBUS ports",
+                  "connection": "flexibus",
+                  "capacity": 3,
+                  "compatible_device_ids": [
+                    "device.flexibus_keyboard",
+                    "device.flexiprint40",
+                    "device.flexidisk",
+                    "device.flexidisk_ii",
+                    "device.logix_mouse"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "display",
+              "name": "Integrated video output",
+              "sockets": [
+                {
+                  "id": "video_out",
+                  "name": "Video output",
+                  "connection": "video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.mono_monitor_1",
+                    "device.color_monitor_1",
+                    "device.mono_monitor_2",
+                    "device.color_monitor_2"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "internal_drive",
+              "name": "Internal storage",
+              "sockets": [
+                {
+                  "id": "internal_drive",
+                  "name": "Internal drive bays",
+                  "connection": "internal_storage",
+                  "capacity": 2,
+                  "compatible_device_ids": [
+                    "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism"
+                  ],
+                  "requirements": [
+                    "Recorded fitted-drive count; additional spare bays are not established."
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System architecture",
+            "description": "Logix Aurelia+ — base computer is a slim desktop built around {processor_id}.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. Connector space is reserved for a future 32-bit interface; that is not current bus width.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported."
+          },
+          {
+            "number": 2,
+            "chapter_name": "System RAM and bank switching",
+            "description": "The {memory_model_id} maps {lower_ram_kib} KiB of lower RAM plus {common_ram_kib} KiB of fixed common RAM at F000–FFFF. The 64 KiB normal view maps lower RAM at 0000–EFFF. Within 7000–EFFF, 4 KiB pages may temporarily expose ROM or video RAM; hidden RAM retains its contents and is restored after service calls.\n\nThe {system_controller_id} refreshes every installed bank independently of CPU activity and latches physical DMA bank selections so mapping changes cannot redirect a transfer. The base population uses {ram_bank_count} 8-bit bank, with common RAM included and no parity. Mixed module types are not allowed."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Firmware and built-in video",
+            "description": "Motherboard ROM contains {firmware_services}. The {video_controller_id} operates display RAM on an independent 8-bit bus; sprite RAM has a further separate 8-bit bus.\n\n{recommended_system_id} supplies the native Z80/CP/M environment. Applications use {application_api_id} and query usable dimensions rather than branching on model names. Native 40 × 25 and 80 × 25 text are available subject to monitor capabilities."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "processor_id",
+            "ref_id": "base_part.z80b",
+            "ref_role": "Processor fitted to this computer"
+          },
+          {
+            "key": "expansion_bus_bits",
+            "value": 8
+          },
+          {
+            "key": "memory_model_id",
+            "ref_id": "technology.aurelia_memory_model",
+            "ref_role": "Aurelia logical memory and bank-switching contract"
+          },
+          {
+            "key": "lower_ram_kib",
+            "value": 60
+          },
+          {
+            "key": "common_ram_kib",
+            "value": 4
+          },
+          {
+            "key": "system_controller_id",
+            "ref_id": "base_part.aurelia_system_controller",
+            "ref_role": "Controller responsible for system DRAM refresh, mapping and DMA"
+          },
+          {
+            "key": "ram_bank_count",
+            "value": 1
+          },
+          {
+            "key": "firmware_services",
+            "value": "Boot, Monitor, BIOS, Hardware Drivers"
+          },
+          {
+            "key": "video_controller_id",
+            "ref_id": "base_part.aurelia_video_chip",
+            "ref_role": "Built-in video controller"
+          },
+          {
+            "key": "recommended_system_id",
+            "ref_id": "software_edition.cpm_aurelia",
+            "ref_role": "Recommended operating-system implementation"
+          },
+          {
+            "key": "application_api_id",
+            "ref_id": "technology.logix_c_api",
+            "ref_role": "Portable application interface implemented on this host"
+          }
+        ]
+      }
     },
     {
       "id": "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism",
@@ -11379,7 +11513,26 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "This internal {diameter_inches}-inch floppy mechanism uses {density} recording."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "diameter_inches",
+            "value": 5.25
+          },
+          {
+            "key": "density",
+            "value": "double density"
+          }
+        ]
+      }
     },
     {
       "id": "device.subsystem.aurelia_plus.base_memory",
@@ -11427,7 +11580,30 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System memory organization",
+            "description": "The subsystem provides {capacity_kb} KiB in {bank_count} {bank_width_bits}-bit bank, including common system RAM. No parity is fitted, and display memory is separate. Physical bank/page decoding must preserve the existing mapper and common-memory reservations."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 64
+          },
+          {
+            "key": "bank_count",
+            "value": 1
+          },
+          {
+            "key": "bank_width_bits",
+            "value": 8
+          }
+        ]
+      }
     },
     {
       "id": "device.subsystem.aurelia_plus.video",
@@ -11506,7 +11682,28 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display subsystem",
+            "description": "The subsystem implements {video_profile_id} using {controller_id}. Display RAM has an 8-bit bus independent of system RAM. Sprite memory uses a separate 8-bit bus, independent of both system and display RAM."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "video_profile_id",
+            "ref_id": "technology.aurelia_video_profile",
+            "ref_role": "Functional video profile"
+          },
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.aurelia_video_chip",
+            "ref_role": "Video controller in the subsystem"
+          }
+        ]
+      }
     },
     {
       "id": "device.base_computer.artemis",
@@ -11563,125 +11760,6 @@
                 "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
               }
             },
-            "expansion_socket_groups": [
-              {
-                "id": "memory",
-                "name": "RAM modules",
-                "sockets": [
-                  {
-                    "id": "ram",
-                    "name": "RAM sockets",
-                    "connection": "memory_module",
-                    "capacity": 8,
-                    "compatible_device_ids": [
-                      "device.ram_64kb_x32",
-                      "device.ram_128kb_x32",
-                      "device.ram_256kb_x32"
-                    ],
-                    "installation_multiple": 2,
-                    "matched_modules": true,
-                    "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
-                  }
-                ]
-              },
-              {
-                "id": "expansion",
-                "name": "Expansion cards",
-                "sockets": [
-                  {
-                    "id": "expansion",
-                    "name": "General expansion slots",
-                    "connection": "expansion_card",
-                    "capacity": 4,
-                    "compatible_device_ids": [
-                      "device.artemis_cpm80_module",
-                      "device.artemis_professional_video_128kb",
-                      "device.network_card_artemis"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "graphics",
-                "name": "Video card",
-                "sockets": [
-                  {
-                    "id": "video_card",
-                    "name": "Dedicated video slot",
-                    "connection": "dedicated_video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.artemis_video_card",
-                      "device.artemis_video_card_16kb",
-                      "device.artemis_video_card_64kb"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "cartridges",
-                "name": "ROM cartridges",
-                "sockets": [
-                  {
-                    "id": "system_cartridge",
-                    "name": "System cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.rom_cartridge.aionix",
-                      "device.rom_cartridge.aionix_server"
-                    ]
-                  },
-                  {
-                    "id": "application_cartridge",
-                    "name": "Application cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.rom_cartridge.business_tools_artemis"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "external",
-                "name": "External connections",
-                "sockets": [
-                  {
-                    "id": "flexibus",
-                    "name": "FlexiBUS ports",
-                    "connection": "flexibus",
-                    "capacity": 4,
-                    "compatible_device_ids": [
-                      "device.flexibus_keyboard",
-                      "device.flexiprint40",
-                      "device.flexidisk",
-                      "device.flexidisk_ii",
-                      "device.logix_mouse"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "internal_drive",
-                "name": "Internal storage",
-                "sockets": [
-                  {
-                    "id": "internal_drive",
-                    "name": "Internal drive bays",
-                    "connection": "internal_storage",
-                    "capacity": 2,
-                    "compatible_device_ids": [
-                      "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
-                      "device.storage.hdd_5mb"
-                    ],
-                    "requirements": [
-                      "Recorded fitted-drive count; additional spare bays are not established."
-                    ]
-                  }
-                ]
-              }
-            ],
             "configuration_requirements": {
               "scope": "complete_system",
               "rules": [
@@ -11695,382 +11773,18 @@
               "max_ram_kib": 1024,
               "mixed_module_types_allowed": false
             },
-            "integration_requirements": {
-              "video_ram_policy": "16 KiB with the 128 KiB low-density configuration; 32 KiB with the 256 KiB AION high-density configuration. Expanding a low-density machine does not automatically replace its card."
-            },
             "technical_profile": {
               "memory": {
                 "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
                 "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
                 "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
                 "bank_data_width_bits": 32,
-                "parity_bits": 0,
-                "video_ram_policy": "16 KiB with the 128 KiB low-density configuration; 32 KiB with the 256 KiB AION high-density configuration. Expanding a low-density machine does not automatically replace its card."
-              },
-              "video": {
-                "technology_id": "technology.logix_digital_video",
-                "api_id": "technology.logix_display_api",
-                "mode_discovery": "Enumerate controller modes intersected with identified or configured monitor raster capabilities and available buffering/sprite allocations. Reject unsupported downscaling.",
-                "memory_layout": {
-                  "policy_id": "technology.logix_display_api",
-                  "mode_exclusivity": "Text/font and bitmap allocations are alternative uses of 16 KiB display DRAM. The exclusive 1 KiB sprite SRAM remains available in every mode.",
-                  "font_policy": "One shared 2048-byte font; glyph edits affect both pages. Independent font buffering is not advertised in this baseline.",
-                  "page_flip": "Latch selected page during vertical blank; drawing throughput is not guaranteed by double buffering."
-                },
-                "controller_id": "base_part.aurelia_video_chip",
-                "text_modes": [
-                  {
-                    "id": "text_40",
-                    "columns": 40,
-                    "rows": 25,
-                    "width": 320,
-                    "height": 200,
-                    "glyph_width": 8,
-                    "glyph_height": 8,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 1024,
-                    "attribute_map_bytes_per_buffer": 1024,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 2048,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 0,
-                        "allocated_bytes": 4096,
-                        "remaining_video_ram_bytes": 12288
-                      },
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 4096,
-                        "remaining_video_ram_bytes": 12288
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 0,
-                        "allocated_bytes": 6144,
-                        "remaining_video_ram_bytes": 10240
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 6144,
-                        "remaining_video_ram_bytes": 10240
-                      }
-                    ],
-                    "ram_bytes_per_page": 2048,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200"
-                    ]
-                  },
-                  {
-                    "id": "text_80",
-                    "columns": 80,
-                    "rows": 25,
-                    "width": 640,
-                    "height": 200,
-                    "glyph_width": 8,
-                    "glyph_height": 8,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 2048,
-                    "attribute_map_bytes_per_buffer": 2048,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 2048,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 0,
-                        "allocated_bytes": 6144,
-                        "remaining_video_ram_bytes": 10240
-                      },
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 6144,
-                        "remaining_video_ram_bytes": 10240
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 0,
-                        "allocated_bytes": 10240,
-                        "remaining_video_ram_bytes": 6144
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 10240,
-                        "remaining_video_ram_bytes": 6144
-                      }
-                    ],
-                    "ram_bytes_per_page": 4096,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_200"
-                    ]
-                  }
-                ],
-                "bitmap_modes": [
-                  {
-                    "id": "graphics_a",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 0,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      },
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": false,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_200"
-                    ]
-                  },
-                  {
-                    "id": "graphics_b2",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 0,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      },
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": false,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200"
-                    ]
-                  },
-                  {
-                    "id": "graphics_b1",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 40,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 0,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 8384
-                      },
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 8384
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 0,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200"
-                    ]
-                  },
-                  {
-                    "id": "graphics_c4",
-                    "width": 320,
-                    "height": 100,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 160,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 0,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      },
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": false,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200"
-                    ]
-                  },
-                  {
-                    "id": "graphics_c2",
-                    "width": 320,
-                    "height": 100,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 0,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 8384
-                      },
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 8384
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 0,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200"
-                    ]
-                  },
-                  {
-                    "id": "graphics_legacy",
-                    "width": 160,
-                    "height": 100,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 0,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 8384
-                      },
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 8384
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 0,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 384
-                      }
-                    ],
-                    "compatibility_mode": true,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200"
-                    ]
-                  }
-                ],
-                "sprite_memory": {
-                  "chip_id": "base_part.aion_2114",
-                  "chip_count": 2,
-                  "bank_data_width_bits": 8,
-                  "capacity_bytes": 1024,
-                  "separate_bus": true,
-                  "separate_from_system_and_display_ram": true
-                },
-                "video_ram_kb": 16,
-                "display_memory": {
-                  "chip_id": "base_part.aion_4116",
-                  "chip_count": 8,
-                  "capacity_bytes": 16384,
-                  "bank_data_width_bits": 8,
-                  "organization": "16K × 8 bits; independent display refresh."
-                },
-                "pixel_buffer": {
-                  "pages": 4,
-                  "bytes_per_page": 40,
-                  "total_bytes": 160,
-                  "bits_per_pixel": 4,
-                  "location": "Inside reused Aurelia controller",
-                  "policy": "FREE/FILLING/READY/READING banks; output latches and serializer. Never overwrite active bank; underrun preserves sync."
-                },
-                "character_row_cache": {
-                  "banks": 2,
-                  "bytes_per_bank": 160,
-                  "total_bytes": 320
-                },
-                "host_interface": {
-                  "host_width_bits": 32,
-                  "local_display_width_bits": 8,
-                  "implementation": "Buffered 32-to-8-bit bridge with byte enables, staging latches and bounded READY/backpressure. Word uploads require up to four local transfers; no native 32-bit display-memory bank is claimed.",
-                  "hot_swap": false
-                },
-                "arbitration": "Card-local sequencer arbitrates display fetch and deadline-reserved independent DRAM refresh before bounded host/DMA transfers with READY. Sprite SRAM has its own 8-bit bus. System DMA/MMU remain dedicated host components; the card does not replace system-memory refresh.",
-                "monitor_policy": "Mono II / Color II use legacy 200-line raster profiles. No 26.88 kHz output and no Mono Pro support. CPU word size does not widen local display memory. All five sprites remain available.",
-                "sprite_profile_ref": {
-                  "technology_id": "technology.logix_sprite_system",
-                  "profile": "profile_1"
-                }
+                "parity_bits": 0
               },
               "software_compatibility": {
                 "native_target": "era_aionix",
                 "api_id": "technology.logix_c_api",
-                "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name.",
-                "native_40_column_mode": "Native 40×25 with 8×8 cells, plus all listed 80-column modes; discover via display API."
+                "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
               }
             }
           },
@@ -12225,10 +11939,163 @@
               "kind": "testing",
               "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify the selected 16/32 KiB card and 1 KiB sprite SRAM; Mono Pro is offered with the 32 KiB card only."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "memory",
+              "name": "RAM modules",
+              "sockets": [
+                {
+                  "id": "ram",
+                  "name": "RAM sockets",
+                  "connection": "memory_module",
+                  "capacity": 8,
+                  "compatible_device_ids": [
+                    "device.ram_64kb_x32",
+                    "device.ram_128kb_x32",
+                    "device.ram_256kb_x32"
+                  ],
+                  "installation_multiple": 2,
+                  "matched_modules": true,
+                  "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                }
+              ]
+            },
+            {
+              "id": "expansion",
+              "name": "Expansion cards",
+              "sockets": [
+                {
+                  "id": "expansion",
+                  "name": "General expansion slots",
+                  "connection": "expansion_card",
+                  "capacity": 4,
+                  "compatible_device_ids": [
+                    "device.artemis_cpm80_module",
+                    "device.artemis_professional_video_128kb",
+                    "device.network_card_artemis"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "graphics",
+              "name": "Video card",
+              "sockets": [
+                {
+                  "id": "video_card",
+                  "name": "Dedicated video slot",
+                  "connection": "dedicated_video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.artemis_video_card",
+                    "device.artemis_video_card_16kb",
+                    "device.artemis_video_card_64kb"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cartridges",
+              "name": "ROM cartridges",
+              "sockets": [
+                {
+                  "id": "system_cartridge",
+                  "name": "System cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.rom_cartridge.aionix",
+                    "device.rom_cartridge.aionix_server"
+                  ]
+                },
+                {
+                  "id": "application_cartridge",
+                  "name": "Application cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.rom_cartridge.business_tools_artemis"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "external",
+              "name": "External connections",
+              "sockets": [
+                {
+                  "id": "flexibus",
+                  "name": "FlexiBUS ports",
+                  "connection": "flexibus",
+                  "capacity": 4,
+                  "compatible_device_ids": [
+                    "device.flexibus_keyboard",
+                    "device.flexiprint40",
+                    "device.flexidisk",
+                    "device.flexidisk_ii",
+                    "device.logix_mouse"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "internal_drive",
+              "name": "Internal storage",
+              "sockets": [
+                {
+                  "id": "internal_drive",
+                  "name": "Internal drive bays",
+                  "connection": "internal_storage",
+                  "capacity": 2,
+                  "compatible_device_ids": [
+                    "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                    "device.storage.hdd_5mb"
+                  ],
+                  "requirements": [
+                    "Recorded fitted-drive count; additional spare bays are not established."
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System architecture",
+            "description": "Logix Artemis — base computer is a full desktop built around {processor_id}.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+          },
+          {
+            "number": 2,
+            "chapter_name": "RAM population and software environment",
+            "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "processor_id",
+            "ref_id": "base_part.erav1_6mhz",
+            "ref_role": "Processor fitted to this computer"
+          },
+          {
+            "key": "expansion_bus_bits",
+            "value": 32
+          },
+          {
+            "key": "maximum_ram_kib",
+            "value": 1024
+          },
+          {
+            "key": "application_api_id",
+            "ref_id": "technology.logix_c_api",
+            "ref_role": "Portable application interface on this host"
+          }
+        ]
+      }
     },
     {
       "id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
@@ -12269,7 +12136,26 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "This internal {diameter_inches}-inch floppy mechanism uses {density} recording."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "diameter_inches",
+            "value": 5.25
+          },
+          {
+            "key": "density",
+            "value": "double density"
+          }
+        ]
+      }
     },
     {
       "id": "device.base_computer.artemis_pro",
@@ -12326,122 +12212,6 @@
                 "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
               }
             },
-            "expansion_socket_groups": [
-              {
-                "id": "memory",
-                "name": "RAM modules",
-                "sockets": [
-                  {
-                    "id": "ram",
-                    "name": "RAM sockets",
-                    "connection": "memory_module",
-                    "capacity": 8,
-                    "compatible_device_ids": [
-                      "device.ram_256kb_x32",
-                      "device.ram_128kb_x32"
-                    ],
-                    "installation_multiple": 2,
-                    "matched_modules": true,
-                    "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
-                  }
-                ]
-              },
-              {
-                "id": "expansion",
-                "name": "Expansion cards",
-                "sockets": [
-                  {
-                    "id": "expansion",
-                    "name": "General expansion slots",
-                    "connection": "expansion_card",
-                    "capacity": 4,
-                    "compatible_device_ids": [
-                      "device.artemis_professional_video_128kb",
-                      "device.network_card_artemis"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "graphics",
-                "name": "Video card",
-                "sockets": [
-                  {
-                    "id": "video_card",
-                    "name": "Dedicated video slot",
-                    "connection": "dedicated_video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.artemis_video_card",
-                      "device.artemis_video_card_64kb"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "cartridges",
-                "name": "ROM cartridges",
-                "sockets": [
-                  {
-                    "id": "system_cartridge",
-                    "name": "System cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.rom_cartridge.aionix",
-                      "device.rom_cartridge.aionix_server"
-                    ]
-                  },
-                  {
-                    "id": "application_cartridge",
-                    "name": "Application cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.rom_cartridge.business_tools_artemis"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "external",
-                "name": "External connections",
-                "sockets": [
-                  {
-                    "id": "flexibus",
-                    "name": "FlexiBUS ports",
-                    "connection": "flexibus",
-                    "capacity": 4,
-                    "compatible_device_ids": [
-                      "device.flexibus_keyboard",
-                      "device.flexiprint40",
-                      "device.flexidisk",
-                      "device.flexidisk_ii",
-                      "device.logix_mouse"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "internal_drive",
-                "name": "Internal storage",
-                "sockets": [
-                  {
-                    "id": "internal_drive",
-                    "name": "Internal drive bays",
-                    "connection": "internal_storage",
-                    "capacity": 3,
-                    "compatible_device_ids": [
-                      "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
-                      "device.storage.hdd_5mb"
-                    ],
-                    "requirements": [
-                      "Recorded fitted-drive count; additional spare bays are not established."
-                    ]
-                  }
-                ]
-              }
-            ],
             "configuration_requirements": {
               "scope": "complete_system",
               "rules": [
@@ -12468,487 +12238,10 @@
                 "parity_bits": 0,
                 "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
               },
-              "video": {
-                "technology_id": "technology.logix_digital_video",
-                "api_id": "technology.logix_display_api",
-                "mode_discovery": "Enumerate controller modes intersected with identified or configured monitor raster capabilities and available buffering/sprite allocations. Reject unsupported downscaling.",
-                "memory_layout": {
-                  "policy_id": "technology.logix_display_api",
-                  "mode_exclusivity": "Text/font and bitmap allocations are alternative uses of 32 KiB display DRAM. Exclusive 1 KiB sprite SRAM is available in every mode.",
-                  "font_policy": "One shared 256-glyph bank per mode. Font allocation 2048 bytes at 8×8, 4096 at 8×16 or 8×10 (16-byte glyph stride). Font writes affect both pages.",
-                  "page_flip": "Latch selected page during vertical blank; drawing throughput is not guaranteed by double buffering."
-                },
-                "controller_id": "base_part.artemis_graphics_chip",
-                "text_modes": [
-                  {
-                    "id": "text_40",
-                    "columns": 40,
-                    "rows": 25,
-                    "width": 320,
-                    "height": 200,
-                    "glyph_width": 8,
-                    "glyph_height": 8,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 1024,
-                    "attribute_map_bytes_per_buffer": 1024,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 2048,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 4096,
-                        "remaining_video_ram_bytes": 28672
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 6144,
-                        "remaining_video_ram_bytes": 26624
-                      }
-                    ],
-                    "ram_bytes_per_page": 2048,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80",
-                    "columns": 80,
-                    "rows": 25,
-                    "width": 640,
-                    "height": 200,
-                    "glyph_width": 8,
-                    "glyph_height": 8,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 2048,
-                    "attribute_map_bytes_per_buffer": 2048,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 2048,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 6144,
-                        "remaining_video_ram_bytes": 26624
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 10240,
-                        "remaining_video_ram_bytes": 22528
-                      }
-                    ],
-                    "ram_bytes_per_page": 4096,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80_25_400",
-                    "columns": 80,
-                    "rows": 25,
-                    "width": 640,
-                    "height": 400,
-                    "glyph_width": 8,
-                    "glyph_height": 16,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 2048,
-                    "attribute_map_bytes_per_buffer": 2048,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 4096,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 8192,
-                        "remaining_video_ram_bytes": 24576
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 12288,
-                        "remaining_video_ram_bytes": 20480
-                      }
-                    ],
-                    "ram_bytes_per_page": 4096,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80_40_400",
-                    "columns": 80,
-                    "rows": 40,
-                    "width": 640,
-                    "height": 400,
-                    "glyph_width": 8,
-                    "glyph_height": 10,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 4096,
-                    "attribute_map_bytes_per_buffer": 4096,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 4096,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 12288,
-                        "remaining_video_ram_bytes": 20480
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 20480,
-                        "remaining_video_ram_bytes": 12288
-                      }
-                    ],
-                    "ram_bytes_per_page": 8192,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ]
-                  }
-                ],
-                "bitmap_modes": [
-                  {
-                    "id": "graphics_a",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 16768
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 32000,
-                        "remaining_video_ram_bytes": 768
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_b2",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 16768
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 32000,
-                        "remaining_video_ram_bytes": 768
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_b1",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 40,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 24768
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 16768
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_c4",
-                    "width": 320,
-                    "height": 100,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 160,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 16768
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 32000,
-                        "remaining_video_ram_bytes": 768
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_c2",
-                    "width": 320,
-                    "height": 100,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 24768
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 16768
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_legacy",
-                    "width": 160,
-                    "height": 100,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 8000,
-                        "remaining_video_ram_bytes": 24768
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 16000,
-                        "remaining_video_ram_bytes": 16768
-                      }
-                    ],
-                    "compatibility_mode": true,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_400_1",
-                    "width": 640,
-                    "height": 400,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 80,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 32000,
-                        "remaining_video_ram_bytes": 768
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_200_2",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 160,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 32000,
-                        "remaining_video_ram_bytes": 768
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_320_400_2",
-                    "width": 320,
-                    "height": 400,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 80,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 32000,
-                        "remaining_video_ram_bytes": 768
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_320_200_4",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 160,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 32000,
-                        "remaining_video_ram_bytes": 768
-                      }
-                    ]
-                  }
-                ],
-                "sprite_memory": {
-                  "chip_id": "base_part.aion_2114",
-                  "chip_count": 2,
-                  "bank_data_width_bits": 8,
-                  "capacity_bytes": 1024,
-                  "separate_bus": true,
-                  "separate_from_system_and_display_ram": true
-                },
-                "video_ram_kb": 32,
-                "display_memory": {
-                  "chip_id": "base_part.aion_4116",
-                  "chip_count": 16,
-                  "capacity_bytes": 32768,
-                  "bank_data_width_bits": 16,
-                  "organization": "16K × 16 bits; ordinary external DRAM, independent display refresh sequencer."
-                },
-                "pixel_buffer": {
-                  "pages": 4,
-                  "bytes_per_page": 160,
-                  "total_bytes": 640,
-                  "pixels_per_page": 320,
-                  "bits_per_pixel": 4,
-                  "location": "On video ASIC; SRAM banks with page ownership latches",
-                  "page_states": [
-                    "free",
-                    "filling",
-                    "ready",
-                    "displaying"
-                  ],
-                  "policy": "Eight-pixel parallel renderer fills free pages; independent clocked serializer drains ready pages. Two pages per 640-pixel line; prefill before active display; never overwrite displaying pages. Underflow blanks pixels, preserves sync and sets sticky fault.",
-                  "physical_organization": "Each 160-byte bank is 40 words × 32 bits. Load eight 4-bit pixels into a separate 32-bit serializer latch every eight dot clocks, then shift at 21.504 MHz. SRAM array reads run at 2.688 MHz, not one read per dot; filler and drain use different banks."
-                },
-                "character_row_cache": {
-                  "banks": 2,
-                  "bytes_per_bank": 160,
-                  "total_bytes": 320,
-                  "purpose": "Current and next 80-column character/attribute row; separate from 640-byte pixel FIFO."
-                },
-                "timing_budget": {
-                  "pixel_clock_mhz": 21.504,
-                  "renderer_pixels_per_step": 8,
-                  "renderer_step_mhz": 2.688,
-                  "page_drain_microseconds": 14.881,
-                  "qualification": "At 250 ns conservative DRAM cycle, 80 glyph fetches consume 20 microseconds per active line; 160-byte row prefetch amortizes across 8/10/16 scanlines. Two row caches and 16-bit reads cover text-row transitions. Verify sprites, refresh and bounded host/DMA slots together at voltage/temperature corners; no guaranteed maximum CPU upload rate."
-                },
-                "arbitration": "Card-local sequencer arbitrates display fetch and deadline-reserved independent DRAM refresh before bounded host/DMA transfers with READY. Sprite SRAM has its own 8-bit bus. System DMA/MMU remain dedicated host components; the card does not replace system-memory refresh.",
-                "monitor_policy": "Read capability descriptor before enabling sync. Mono Pro accepts only raster_640_400; integer-scale legacy modes. Old monitors retain their advertised 200-line raster(s), never 640×400. Native 400-line modes require Mono Pro; new 200-line bitmap modes also work on capable older displays. This is display-mode/API compatibility, not Z80 binary compatibility.",
-                "sprite_profile_ref": {
-                  "technology_id": "technology.logix_sprite_system",
-                  "profile": "profile_2"
-                }
-              },
               "software_compatibility": {
                 "native_target": "era_aionix",
                 "api_id": "technology.logix_c_api",
-                "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name.",
-                "native_40_column_mode": "Native 40×25 with 8×8 cells, plus all listed 80-column modes; discover via display API."
+                "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
               },
               "networking": {
                 "technology_ids": [
@@ -13125,10 +12418,179 @@
               "kind": "testing",
               "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify 32 KiB DRAM, 1 KiB sprite SRAM and Mono Pro timings together."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "memory",
+              "name": "RAM modules",
+              "sockets": [
+                {
+                  "id": "ram",
+                  "name": "RAM sockets",
+                  "connection": "memory_module",
+                  "capacity": 8,
+                  "compatible_device_ids": [
+                    "device.ram_256kb_x32",
+                    "device.ram_128kb_x32"
+                  ],
+                  "installation_multiple": 2,
+                  "matched_modules": true,
+                  "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                }
+              ]
+            },
+            {
+              "id": "expansion",
+              "name": "Expansion cards",
+              "sockets": [
+                {
+                  "id": "expansion",
+                  "name": "General expansion slots",
+                  "connection": "expansion_card",
+                  "capacity": 4,
+                  "compatible_device_ids": [
+                    "device.artemis_professional_video_128kb",
+                    "device.network_card_artemis"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "graphics",
+              "name": "Video card",
+              "sockets": [
+                {
+                  "id": "video_card",
+                  "name": "Dedicated video slot",
+                  "connection": "dedicated_video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.artemis_video_card",
+                    "device.artemis_video_card_64kb"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cartridges",
+              "name": "ROM cartridges",
+              "sockets": [
+                {
+                  "id": "system_cartridge",
+                  "name": "System cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.rom_cartridge.aionix",
+                    "device.rom_cartridge.aionix_server"
+                  ]
+                },
+                {
+                  "id": "application_cartridge",
+                  "name": "Application cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.rom_cartridge.business_tools_artemis"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "external",
+              "name": "External connections",
+              "sockets": [
+                {
+                  "id": "flexibus",
+                  "name": "FlexiBUS ports",
+                  "connection": "flexibus",
+                  "capacity": 4,
+                  "compatible_device_ids": [
+                    "device.flexibus_keyboard",
+                    "device.flexiprint40",
+                    "device.flexidisk",
+                    "device.flexidisk_ii",
+                    "device.logix_mouse"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "internal_drive",
+              "name": "Internal storage",
+              "sockets": [
+                {
+                  "id": "internal_drive",
+                  "name": "Internal drive bays",
+                  "connection": "internal_storage",
+                  "capacity": 3,
+                  "compatible_device_ids": [
+                    "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
+                    "device.storage.hdd_5mb"
+                  ],
+                  "requirements": [
+                    "Recorded fitted-drive count; additional spare bays are not established."
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System architecture",
+            "description": "Logix Artemis PRO — base computer is a full desktop / server built around {processor_id}. The PRO configuration serves as a network server.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+          },
+          {
+            "number": 2,
+            "chapter_name": "RAM population and software environment",
+            "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nQualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Network service",
+            "description": "One removable NIC occupies one of the four general-purpose slots, providing server operation over {network_stack_id} and {network_link_id}. Firmware permits {supported_network_rates_kbps} kbit/s, with the highest listed rate as its ceiling. The actual common rate also depends on every admitted station and qualified link."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "processor_id",
+            "ref_id": "base_part.erav1_8mhz",
+            "ref_role": "Processor fitted to this computer"
+          },
+          {
+            "key": "expansion_bus_bits",
+            "value": 32
+          },
+          {
+            "key": "maximum_ram_kib",
+            "value": 1024
+          },
+          {
+            "key": "application_api_id",
+            "ref_id": "technology.logix_c_api",
+            "ref_role": "Portable application interface on this host"
+          },
+          {
+            "key": "network_stack_id",
+            "ref_id": "technology.logix_tcpip_lan",
+            "ref_role": "Network stack used by the server"
+          },
+          {
+            "key": "network_link_id",
+            "ref_id": "technology.logix_lan100_link",
+            "ref_role": "Shared-rate link and negotiation protocol"
+          },
+          {
+            "key": "supported_network_rates_kbps",
+            "value": "100, 250, 500, 1000"
+          }
+        ]
+      }
     },
     {
       "id": "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
@@ -13169,7 +12631,26 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "This internal {diameter_inches}-inch floppy mechanism uses {density} recording."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "diameter_inches",
+            "value": 5.25
+          },
+          {
+            "key": "density",
+            "value": "double density"
+          }
+        ]
+      }
     },
     {
       "id": "device.storage.hdd_5mb",
@@ -13223,7 +12704,22 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "The internal hard disk provides {capacity_mb} MB."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_mb",
+            "value": 5
+          }
+        ]
+      }
     },
     {
       "id": "device.base_computer.athena",
@@ -13259,90 +12755,6 @@
                 "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
               }
             },
-            "expansion_socket_groups": [
-              {
-                "id": "memory",
-                "name": "RAM modules",
-                "sockets": [
-                  {
-                    "id": "ram",
-                    "name": "RAM sockets",
-                    "connection": "memory_module",
-                    "capacity": null,
-                    "compatible_device_ids": [
-                      "device.ram_128kb_x32"
-                    ],
-                    "installation_multiple": 2,
-                    "matched_modules": true,
-                    "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
-                  }
-                ]
-              },
-              {
-                "id": "expansion",
-                "name": "Expansion cards",
-                "sockets": [
-                  {
-                    "id": "expansion",
-                    "name": "General expansion slots",
-                    "connection": "expansion_card",
-                    "capacity": null,
-                    "compatible_device_ids": [
-                      "device.network_card_artemis"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "graphics",
-                "name": "Video card",
-                "sockets": [
-                  {
-                    "id": "video_card",
-                    "name": "Dedicated video slot",
-                    "connection": "dedicated_video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.artemis_video_card_64kb"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "cartridges",
-                "name": "ROM cartridges",
-                "sockets": [
-                  {
-                    "id": "system_cartridge",
-                    "name": "System cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.athena.system_rom"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "internal_drive",
-                "name": "Internal storage",
-                "sockets": [
-                  {
-                    "id": "internal_drive",
-                    "name": "Internal drive bays",
-                    "connection": "internal_storage",
-                    "capacity": 2,
-                    "compatible_device_ids": [
-                      "device.athena.fdd",
-                      "device.athena.hdd"
-                    ],
-                    "requirements": [
-                      "Recorded fitted-drive count; additional spare bays are not established."
-                    ]
-                  }
-                ]
-              }
-            ],
             "configuration_requirements": {
               "scope": "complete_system",
               "rules": [
@@ -13365,557 +12777,6 @@
                   "capacity_bytes": 262144,
                   "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
                   "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
-                }
-              },
-              "video": {
-                "technology_id": "technology.logix_digital_video",
-                "api_id": "technology.logix_display_api",
-                "mode_discovery": "Enumerate controller modes intersected with identified or configured monitor raster capabilities and available buffering/sprite allocations. Reject unsupported downscaling.",
-                "memory_layout": {
-                  "policy_id": "technology.logix_display_api",
-                  "mode_exclusivity": "With palette-list mode enabled reserve 0xFA00–0xFFFF (1536 bytes); framebuffer/text/font allocations use 0x0000–0xF9FF. Text/font and bitmap layouts remain exclusive. Five sprites retain separate 1 KiB SRAM.",
-                  "font_policy": "One shared 256-glyph bank per mode. Font allocation 2048 bytes at 8×8, 4096 at 8×16 or 8×10 (16-byte glyph stride). Font writes affect both pages.",
-                  "page_flip": "Latch selected page during vertical blank; drawing throughput is not guaranteed by double buffering."
-                },
-                "controller_id": "base_part.artemis_graphics_chip_64kb",
-                "text_modes": [
-                  {
-                    "id": "text_40",
-                    "columns": 40,
-                    "rows": 25,
-                    "width": 320,
-                    "height": 200,
-                    "glyph_width": 8,
-                    "glyph_height": 8,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 1024,
-                    "attribute_map_bytes_per_buffer": 1024,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 2048,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 5632,
-                        "remaining_video_ram_bytes": 59904,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 7680,
-                        "remaining_video_ram_bytes": 57856,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "ram_bytes_per_page": 2048,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80",
-                    "columns": 80,
-                    "rows": 25,
-                    "width": 640,
-                    "height": 200,
-                    "glyph_width": 8,
-                    "glyph_height": 8,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 2048,
-                    "attribute_map_bytes_per_buffer": 2048,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 2048,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 7680,
-                        "remaining_video_ram_bytes": 57856,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 11776,
-                        "remaining_video_ram_bytes": 53760,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "ram_bytes_per_page": 4096,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80_25_400",
-                    "columns": 80,
-                    "rows": 25,
-                    "width": 640,
-                    "height": 400,
-                    "glyph_width": 8,
-                    "glyph_height": 16,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 2048,
-                    "attribute_map_bytes_per_buffer": 2048,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 4096,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 9728,
-                        "remaining_video_ram_bytes": 55808,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 13824,
-                        "remaining_video_ram_bytes": 51712,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "ram_bytes_per_page": 4096,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80_40_400",
-                    "columns": 80,
-                    "rows": 40,
-                    "width": 640,
-                    "height": 400,
-                    "glyph_width": 8,
-                    "glyph_height": 10,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 4096,
-                    "attribute_map_bytes_per_buffer": 4096,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 4096,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 13824,
-                        "remaining_video_ram_bytes": 51712,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 22016,
-                        "remaining_video_ram_bytes": 43520,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "ram_bytes_per_page": 8192,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ]
-                  }
-                ],
-                "bitmap_modes": [
-                  {
-                    "id": "graphics_a",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_b2",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_b1",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 40,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 9536,
-                        "remaining_video_ram_bytes": 56000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_c4",
-                    "width": 320,
-                    "height": 100,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 160,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_c2",
-                    "width": 320,
-                    "height": 100,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 9536,
-                        "remaining_video_ram_bytes": 56000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_legacy",
-                    "width": 160,
-                    "height": 100,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 9536,
-                        "remaining_video_ram_bytes": 56000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": true,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_400_1",
-                    "width": 640,
-                    "height": 400,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 80,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_200_2",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 160,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_320_400_2",
-                    "width": 320,
-                    "height": 400,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 80,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_320_200_4",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 160,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_400_2",
-                    "width": 640,
-                    "height": 400,
-                    "bits_per_pixel": 2,
-                    "stride_bytes": 160,
-                    "bytes_per_framebuffer": 64000,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "framebuffer_bytes": 64000,
-                        "palette_list_bytes": 1536,
-                        "allocated_bytes": 65536,
-                        "remaining_video_ram_bytes": 0
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_200_4",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 4,
-                    "stride_bytes": 320,
-                    "bytes_per_framebuffer": 64000,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "framebuffer_bytes": 64000,
-                        "palette_list_bytes": 1536,
-                        "allocated_bytes": 65536,
-                        "remaining_video_ram_bytes": 0
-                      }
-                    ]
-                  }
-                ],
-                "sprite_memory": {
-                  "chip_id": "base_part.aion_2114",
-                  "chip_count": 2,
-                  "bank_data_width_bits": 8,
-                  "capacity_bytes": 1024,
-                  "separate_bus": true,
-                  "separate_from_system_and_display_ram": true
-                },
-                "video_ram_kb": 64,
-                "display_memory": {
-                  "chip_id": "base_part.aion_4116",
-                  "chip_count": 32,
-                  "capacity_bytes": 65536,
-                  "bank_data_width_bits": 16,
-                  "organization": "Two 16K x 16-bit banks; ordinary DRAM, not dual-port VRAM. Preserve independent refresh and bounded host access."
-                },
-                "pixel_buffer": {
-                  "pages": 4,
-                  "bytes_per_page": 160,
-                  "total_bytes": 640,
-                  "pixels_per_page": 320,
-                  "bits_per_pixel": 4,
-                  "location": "On video ASIC; SRAM banks with page ownership latches",
-                  "page_states": [
-                    "free",
-                    "filling",
-                    "ready",
-                    "displaying"
-                  ],
-                  "policy": "Eight-pixel parallel renderer fills free pages; independent clocked serializer drains ready pages. Two pages per 640-pixel line; prefill before active display; never overwrite displaying pages. Underflow blanks pixels, preserves sync and sets sticky fault.",
-                  "physical_organization": "Each 160-byte bank is 40 words × 32 bits. Load eight 4-bit pixels into a separate 32-bit serializer latch every eight dot clocks, then shift at 21.504 MHz. SRAM array reads run at 2.688 MHz, not one read per dot; filler and drain use different banks."
-                },
-                "character_row_cache": {
-                  "banks": 2,
-                  "bytes_per_bank": 160,
-                  "total_bytes": 320,
-                  "purpose": "Current and next 80-column character/attribute row; separate from 640-byte pixel FIFO."
-                },
-                "timing_budget": {
-                  "pixel_clock_mhz": 21.504,
-                  "renderer_pixels_per_step": 8,
-                  "renderer_step_mhz": 2.688,
-                  "page_drain_microseconds": 14.881,
-                  "qualification": "Requalify existing renderer/FIFO and 16-bit DRAM organization for 640x400x2 and 640x200x4, refresh, sprite fetches, list prefetch and host/DMA stalls together. No greater upload throughput is promised by added capacity."
-                },
-                "arbitration": "Card-local sequencer arbitrates display fetch and deadline-reserved independent DRAM refresh before bounded host/DMA transfers with READY. Sprite SRAM has its own 8-bit bus. System DMA/MMU remain dedicated host components; the card does not replace system-memory refresh.",
-                "monitor_policy": "All earlier modes and sprite/host/API features retained subject to monitor capabilities. Color Pro 14 and Mono Pro support the 640x400 raster; older displays retain their declared raster limits. Horizontal-retrace palette lists require explicit monitor capability; otherwise use static/vertical-retrace palette updates. No forced high scan rate on old monitors.",
-                "palette_list_id": "technology.scanline_palette_list",
-                "feature_continuity_id": "device.artemis_video_card",
-                "sprite_profile_ref": {
-                  "technology_id": "technology.logix_sprite_system",
-                  "profile": "profile_2"
                 }
               },
               "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
@@ -13993,10 +12854,124 @@
               "kind": "testing",
               "description": "Storage sourcing: Seagate ST506 5 MB HDD and Shugart Associates SA450 DS/DD FDD. Preserve functional BOM sets; model, controller, rail/startup load, enclosure and formatted geometry qualification remain open. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "memory",
+              "name": "RAM modules",
+              "sockets": [
+                {
+                  "id": "ram",
+                  "name": "RAM sockets",
+                  "connection": "memory_module",
+                  "capacity": null,
+                  "compatible_device_ids": [
+                    "device.ram_128kb_x32"
+                  ],
+                  "installation_multiple": 2,
+                  "matched_modules": true,
+                  "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                }
+              ]
+            },
+            {
+              "id": "expansion",
+              "name": "Expansion cards",
+              "sockets": [
+                {
+                  "id": "expansion",
+                  "name": "General expansion slots",
+                  "connection": "expansion_card",
+                  "capacity": null,
+                  "compatible_device_ids": [
+                    "device.network_card_artemis"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "graphics",
+              "name": "Video card",
+              "sockets": [
+                {
+                  "id": "video_card",
+                  "name": "Dedicated video slot",
+                  "connection": "dedicated_video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.artemis_video_card_64kb"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cartridges",
+              "name": "ROM cartridges",
+              "sockets": [
+                {
+                  "id": "system_cartridge",
+                  "name": "System cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.athena.system_rom"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "internal_drive",
+              "name": "Internal storage",
+              "sockets": [
+                {
+                  "id": "internal_drive",
+                  "name": "Internal drive bays",
+                  "connection": "internal_storage",
+                  "capacity": 2,
+                  "compatible_device_ids": [
+                    "device.athena.fdd",
+                    "device.athena.hdd"
+                  ],
+                  "requirements": [
+                    "Recorded fitted-drive count; additional spare bays are not established."
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System architecture",
+            "description": "Logix Athena — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+          },
+          {
+            "number": 2,
+            "chapter_name": "RAM population and software environment",
+            "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "processor_id",
+            "ref_id": "base_part.era2_12mhz",
+            "ref_role": "Processor fitted to this computer"
+          },
+          {
+            "key": "system_rom_bytes",
+            "value": 262144
+          },
+          {
+            "key": "recommended_system_id",
+            "ref_id": "software_edition.aionix2",
+            "ref_role": "Operating-system implementation for this host"
+          }
+        ]
+      }
     },
     {
       "id": "device.athena.hdd",
@@ -14051,7 +13026,26 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "The internal hard disk provides {capacity_mb} MB through a {interface}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_mb",
+            "value": 5
+          },
+          {
+            "key": "interface",
+            "value": "ST-506 MFM interface"
+          }
+        ]
+      }
     },
     {
       "id": "device.athena.fdd",
@@ -14095,7 +13089,26 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "This internal {diameter_inches}-inch floppy mechanism uses {density} recording. It is double-sided (DS/DD); formatted capacity remains unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "diameter_inches",
+            "value": 5.25
+          },
+          {
+            "key": "density",
+            "value": "double density"
+          }
+        ]
+      }
     },
     {
       "id": "device.athena.system_rom",
@@ -14172,7 +13185,27 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Executable system cartridge",
+            "description": "This replaceable cartridge supplies {capacity_bytes} bytes of directly executable, shared read-only AIONix2 code for {host_base_computer_athena}. Private writable state and patch overlays remain in DRAM. The ROM organization, carrier, connector, enclosure and access timing require host qualification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_bytes",
+            "value": 262144
+          },
+          {
+            "key": "host_base_computer_athena",
+            "ref_id": "device.base_computer.athena",
+            "ref_role": "Host for the system cartridge"
+          }
+        ]
+      }
     },
     {
       "id": "device.base_computer.athena_server",
@@ -14208,90 +13241,6 @@
                 "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
               }
             },
-            "expansion_socket_groups": [
-              {
-                "id": "memory",
-                "name": "RAM modules",
-                "sockets": [
-                  {
-                    "id": "ram",
-                    "name": "RAM sockets",
-                    "connection": "memory_module",
-                    "capacity": null,
-                    "compatible_device_ids": [
-                      "device.ram_256kb_x32_2um"
-                    ],
-                    "installation_multiple": 2,
-                    "matched_modules": true,
-                    "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
-                  }
-                ]
-              },
-              {
-                "id": "expansion",
-                "name": "Expansion cards",
-                "sockets": [
-                  {
-                    "id": "expansion",
-                    "name": "General expansion slots",
-                    "connection": "expansion_card",
-                    "capacity": null,
-                    "compatible_device_ids": [
-                      "device.network_card_artemis"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "graphics",
-                "name": "Video card",
-                "sockets": [
-                  {
-                    "id": "video_card",
-                    "name": "Dedicated video slot",
-                    "connection": "dedicated_video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.artemis_video_card_64kb"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "cartridges",
-                "name": "ROM cartridges",
-                "sockets": [
-                  {
-                    "id": "system_cartridge",
-                    "name": "System cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.athena_server.system_rom"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "internal_drive",
-                "name": "Internal storage",
-                "sockets": [
-                  {
-                    "id": "internal_drive",
-                    "name": "Internal drive bays",
-                    "connection": "internal_storage",
-                    "capacity": 2,
-                    "compatible_device_ids": [
-                      "device.athena_server.fdd",
-                      "device.athena_server.hdd"
-                    ],
-                    "requirements": [
-                      "Recorded fitted-drive count; additional spare bays are not established."
-                    ]
-                  }
-                ]
-              }
-            ],
             "configuration_requirements": {
               "scope": "complete_system",
               "rules": [
@@ -14314,557 +13263,6 @@
                   "capacity_bytes": 262144,
                   "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
                   "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
-                }
-              },
-              "video": {
-                "technology_id": "technology.logix_digital_video",
-                "api_id": "technology.logix_display_api",
-                "mode_discovery": "Enumerate controller modes intersected with identified or configured monitor raster capabilities and available buffering/sprite allocations. Reject unsupported downscaling.",
-                "memory_layout": {
-                  "policy_id": "technology.logix_display_api",
-                  "mode_exclusivity": "With palette-list mode enabled reserve 0xFA00–0xFFFF (1536 bytes); framebuffer/text/font allocations use 0x0000–0xF9FF. Text/font and bitmap layouts remain exclusive. Five sprites retain separate 1 KiB SRAM.",
-                  "font_policy": "One shared 256-glyph bank per mode. Font allocation 2048 bytes at 8×8, 4096 at 8×16 or 8×10 (16-byte glyph stride). Font writes affect both pages.",
-                  "page_flip": "Latch selected page during vertical blank; drawing throughput is not guaranteed by double buffering."
-                },
-                "controller_id": "base_part.artemis_graphics_chip_64kb",
-                "text_modes": [
-                  {
-                    "id": "text_40",
-                    "columns": 40,
-                    "rows": 25,
-                    "width": 320,
-                    "height": 200,
-                    "glyph_width": 8,
-                    "glyph_height": 8,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 1024,
-                    "attribute_map_bytes_per_buffer": 1024,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 2048,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 5632,
-                        "remaining_video_ram_bytes": 59904,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 7680,
-                        "remaining_video_ram_bytes": 57856,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "ram_bytes_per_page": 2048,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80",
-                    "columns": 80,
-                    "rows": 25,
-                    "width": 640,
-                    "height": 200,
-                    "glyph_width": 8,
-                    "glyph_height": 8,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 2048,
-                    "attribute_map_bytes_per_buffer": 2048,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 2048,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 7680,
-                        "remaining_video_ram_bytes": 57856,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 11776,
-                        "remaining_video_ram_bytes": 53760,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "ram_bytes_per_page": 4096,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80_25_400",
-                    "columns": 80,
-                    "rows": 25,
-                    "width": 640,
-                    "height": 400,
-                    "glyph_width": 8,
-                    "glyph_height": 16,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 2048,
-                    "attribute_map_bytes_per_buffer": 2048,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 4096,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 9728,
-                        "remaining_video_ram_bytes": 55808,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 13824,
-                        "remaining_video_ram_bytes": 51712,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "ram_bytes_per_page": 4096,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "text_80_40_400",
-                    "columns": 80,
-                    "rows": 40,
-                    "width": 640,
-                    "height": 400,
-                    "glyph_width": 8,
-                    "glyph_height": 10,
-                    "character_count": 256,
-                    "character_map_bytes_per_buffer": 4096,
-                    "attribute_map_bytes_per_buffer": 4096,
-                    "attribute_format": "4-bit foreground index + 4-bit background index",
-                    "font_bytes": 4096,
-                    "configurations": [
-                      {
-                        "text_buffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 13824,
-                        "remaining_video_ram_bytes": 51712,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "text_buffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 22016,
-                        "remaining_video_ram_bytes": 43520,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "ram_bytes_per_page": 8192,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ]
-                  }
-                ],
-                "bitmap_modes": [
-                  {
-                    "id": "graphics_a",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_b2",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_b1",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 40,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 9536,
-                        "remaining_video_ram_bytes": 56000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_c4",
-                    "width": 320,
-                    "height": 100,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 16000,
-                    "stride_bytes": 160,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_c2",
-                    "width": 320,
-                    "height": 100,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 9536,
-                        "remaining_video_ram_bytes": 56000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": false,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_legacy",
-                    "width": 160,
-                    "height": 100,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 8000,
-                    "stride_bytes": 80,
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 9536,
-                        "remaining_video_ram_bytes": 56000,
-                        "palette_list_bytes": 1536
-                      },
-                      {
-                        "framebuffer_count": 2,
-                        "sprite_count": 5,
-                        "allocated_bytes": 17536,
-                        "remaining_video_ram_bytes": 48000,
-                        "palette_list_bytes": 1536
-                      }
-                    ],
-                    "compatibility_mode": true,
-                    "double_buffering": true,
-                    "sprites_available": 5,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_400_1",
-                    "width": 640,
-                    "height": 400,
-                    "bits_per_pixel": 1,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 80,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_200_2",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 160,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_320_400_2",
-                    "width": 320,
-                    "height": 400,
-                    "bits_per_pixel": 2,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 80,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_320_200_4",
-                    "width": 320,
-                    "height": 200,
-                    "bits_per_pixel": 4,
-                    "bytes_per_framebuffer": 32000,
-                    "stride_bytes": 160,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_320_200",
-                      "raster_640_200",
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "allocated_bytes": 33536,
-                        "remaining_video_ram_bytes": 32000,
-                        "palette_list_bytes": 1536
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_400_2",
-                    "width": 640,
-                    "height": 400,
-                    "bits_per_pixel": 2,
-                    "stride_bytes": 160,
-                    "bytes_per_framebuffer": 64000,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "framebuffer_bytes": 64000,
-                        "palette_list_bytes": 1536,
-                        "allocated_bytes": 65536,
-                        "remaining_video_ram_bytes": 0
-                      }
-                    ]
-                  },
-                  {
-                    "id": "graphics_640_200_4",
-                    "width": 640,
-                    "height": 200,
-                    "bits_per_pixel": 4,
-                    "stride_bytes": 320,
-                    "bytes_per_framebuffer": 64000,
-                    "compatibility_mode": false,
-                    "sprites_available": 5,
-                    "double_buffering": false,
-                    "required_raster_ids": [
-                      "raster_640_200",
-                      "raster_640_400"
-                    ],
-                    "configurations": [
-                      {
-                        "framebuffer_count": 1,
-                        "sprite_count": 5,
-                        "framebuffer_bytes": 64000,
-                        "palette_list_bytes": 1536,
-                        "allocated_bytes": 65536,
-                        "remaining_video_ram_bytes": 0
-                      }
-                    ]
-                  }
-                ],
-                "sprite_memory": {
-                  "chip_id": "base_part.aion_2114",
-                  "chip_count": 2,
-                  "bank_data_width_bits": 8,
-                  "capacity_bytes": 1024,
-                  "separate_bus": true,
-                  "separate_from_system_and_display_ram": true
-                },
-                "video_ram_kb": 64,
-                "display_memory": {
-                  "chip_id": "base_part.aion_4116",
-                  "chip_count": 32,
-                  "capacity_bytes": 65536,
-                  "bank_data_width_bits": 16,
-                  "organization": "Two 16K x 16-bit banks; ordinary DRAM, not dual-port VRAM. Preserve independent refresh and bounded host access."
-                },
-                "pixel_buffer": {
-                  "pages": 4,
-                  "bytes_per_page": 160,
-                  "total_bytes": 640,
-                  "pixels_per_page": 320,
-                  "bits_per_pixel": 4,
-                  "location": "On video ASIC; SRAM banks with page ownership latches",
-                  "page_states": [
-                    "free",
-                    "filling",
-                    "ready",
-                    "displaying"
-                  ],
-                  "policy": "Eight-pixel parallel renderer fills free pages; independent clocked serializer drains ready pages. Two pages per 640-pixel line; prefill before active display; never overwrite displaying pages. Underflow blanks pixels, preserves sync and sets sticky fault.",
-                  "physical_organization": "Each 160-byte bank is 40 words × 32 bits. Load eight 4-bit pixels into a separate 32-bit serializer latch every eight dot clocks, then shift at 21.504 MHz. SRAM array reads run at 2.688 MHz, not one read per dot; filler and drain use different banks."
-                },
-                "character_row_cache": {
-                  "banks": 2,
-                  "bytes_per_bank": 160,
-                  "total_bytes": 320,
-                  "purpose": "Current and next 80-column character/attribute row; separate from 640-byte pixel FIFO."
-                },
-                "timing_budget": {
-                  "pixel_clock_mhz": 21.504,
-                  "renderer_pixels_per_step": 8,
-                  "renderer_step_mhz": 2.688,
-                  "page_drain_microseconds": 14.881,
-                  "qualification": "Requalify existing renderer/FIFO and 16-bit DRAM organization for 640x400x2 and 640x200x4, refresh, sprite fetches, list prefetch and host/DMA stalls together. No greater upload throughput is promised by added capacity."
-                },
-                "arbitration": "Card-local sequencer arbitrates display fetch and deadline-reserved independent DRAM refresh before bounded host/DMA transfers with READY. Sprite SRAM has its own 8-bit bus. System DMA/MMU remain dedicated host components; the card does not replace system-memory refresh.",
-                "monitor_policy": "All earlier modes and sprite/host/API features retained subject to monitor capabilities. Color Pro 14 and Mono Pro support the 640x400 raster; older displays retain their declared raster limits. Horizontal-retrace palette lists require explicit monitor capability; otherwise use static/vertical-retrace palette updates. No forced high scan rate on old monitors.",
-                "palette_list_id": "technology.scanline_palette_list",
-                "feature_continuity_id": "device.artemis_video_card",
-                "sprite_profile_ref": {
-                  "technology_id": "technology.logix_sprite_system",
-                  "profile": "profile_2"
                 }
               },
               "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
@@ -14942,10 +13340,124 @@
               "kind": "testing",
               "description": "Storage sourcing: Rodime RO202E 20 MB HDD and Shugart Associates SA450 DS/DD FDD. Preserve functional BOM sets; model, controller, rail/startup load, enclosure and formatted geometry qualification remain open. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "memory",
+              "name": "RAM modules",
+              "sockets": [
+                {
+                  "id": "ram",
+                  "name": "RAM sockets",
+                  "connection": "memory_module",
+                  "capacity": null,
+                  "compatible_device_ids": [
+                    "device.ram_256kb_x32_2um"
+                  ],
+                  "installation_multiple": 2,
+                  "matched_modules": true,
+                  "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                }
+              ]
+            },
+            {
+              "id": "expansion",
+              "name": "Expansion cards",
+              "sockets": [
+                {
+                  "id": "expansion",
+                  "name": "General expansion slots",
+                  "connection": "expansion_card",
+                  "capacity": null,
+                  "compatible_device_ids": [
+                    "device.network_card_artemis"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "graphics",
+              "name": "Video card",
+              "sockets": [
+                {
+                  "id": "video_card",
+                  "name": "Dedicated video slot",
+                  "connection": "dedicated_video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.artemis_video_card_64kb"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cartridges",
+              "name": "ROM cartridges",
+              "sockets": [
+                {
+                  "id": "system_cartridge",
+                  "name": "System cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.athena_server.system_rom"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "internal_drive",
+              "name": "Internal storage",
+              "sockets": [
+                {
+                  "id": "internal_drive",
+                  "name": "Internal drive bays",
+                  "connection": "internal_storage",
+                  "capacity": 2,
+                  "compatible_device_ids": [
+                    "device.athena_server.fdd",
+                    "device.athena_server.hdd"
+                  ],
+                  "requirements": [
+                    "Recorded fitted-drive count; additional spare bays are not established."
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System architecture",
+            "description": "Logix Athena Server — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+          },
+          {
+            "number": 2,
+            "chapter_name": "RAM population and software environment",
+            "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "processor_id",
+            "ref_id": "base_part.era2_12mhz",
+            "ref_role": "Processor fitted to this computer"
+          },
+          {
+            "key": "system_rom_bytes",
+            "value": 262144
+          },
+          {
+            "key": "recommended_system_id",
+            "ref_id": "software_edition.aionix2",
+            "ref_role": "Operating-system implementation for this host"
+          }
+        ]
+      }
     },
     {
       "id": "device.athena_server.hdd",
@@ -14986,7 +13498,26 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "The internal hard disk provides {capacity_mb} MB through a {interface}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_mb",
+            "value": 20
+          },
+          {
+            "key": "interface",
+            "value": "ST-506-style MFM interface"
+          }
+        ]
+      }
     },
     {
       "id": "device.athena_server.fdd",
@@ -15030,7 +13561,26 @@
           "assembly_requirements": []
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "This internal {diameter_inches}-inch floppy mechanism uses {density} recording. It is double-sided (DS/DD); formatted capacity remains unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "diameter_inches",
+            "value": 5.25
+          },
+          {
+            "key": "density",
+            "value": "double density"
+          }
+        ]
+      }
     },
     {
       "id": "device.athena_server.system_rom",
@@ -15107,7 +13657,27 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Executable system cartridge",
+            "description": "This replaceable cartridge supplies {capacity_bytes} bytes of directly executable, shared read-only AIONix2 code for {host_base_computer_athena_server}. Private writable state and patch overlays remain in DRAM. The ROM organization, carrier, connector, enclosure and access timing require host qualification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_bytes",
+            "value": 262144
+          },
+          {
+            "key": "host_base_computer_athena_server",
+            "ref_id": "device.base_computer.athena_server",
+            "ref_role": "Host for the system cartridge"
+          }
+        ]
+      }
     }
   ]
 }
