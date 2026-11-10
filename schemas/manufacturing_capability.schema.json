@@ -58,15 +58,9 @@
         },
         "product_ids": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(product)\\.[a-z0-9][a-z0-9_.-]*$",
-            "x-ref": [
-              "product"
-            ]
-          },
-          "minItems": 0,
-          "uniqueItems": true
+          "maxItems": 0,
+          "deprecated": true,
+          "description": "Empty-only compatibility pending Changes confirm cleanup. Run tools/retire-unpopulated-fields.py --final --apply after approval."
         },
         "description": {
           "type": "string",
@@ -96,7 +90,6 @@
         "actor_id",
         "technology_id",
         "recipe_kind",
-        "product_ids",
         "description",
         "qualification_requirements"
       ],

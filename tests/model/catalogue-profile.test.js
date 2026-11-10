@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validateCatalogueProduct} from '../../tools/validate-catalogue.js';
-const service=()=>({id:'product.example',name:'Example support',kind:'service',description:'Customer support offering',provider_actor_ids:['actor.logix'],technology_ids:[],specification:[],offering_category:'service',launch_campaign_id:'campaign.example',launch_event_id:'event.example'});
-const device=()=>({...service(),kind:'hardware',offering_category:'peripheral',composition_history:[{version_number:1,description:'Supplied device',effective_from:{kind:'unknown'},effective_until:{kind:'unknown'},technical_definition:{},composition_definition:[{id:'line_1',target:{record_id:'device.example',version_number:1},element_type:'main_product',quantity:1,unit:'each',supply_condition:{kind:'always'},requirements:[]}],assembly_requirements:[]}]});
+const service=()=>({id:'product.example',name:'Example support',kind:'service',description:'Customer support offering',provider_actor_ids:['actor.logix'],specification:[],offering_category:'service',launch_campaign_id:'campaign.example',launch_event_id:'event.example'});
+const device=()=>({...service(),kind:'hardware',offering_category:'peripheral',composition_history:[{version_number:1,description:'Supplied device',effective_from:{kind:'unknown'},effective_until:{kind:'unknown'},composition_definition:[{id:'line_1',target:{record_id:'device.example',version_number:1},element_type:'main_product',quantity:1}],assembly_requirements:[]}]});
 test('catalogue profile accepts a service and a composed device offering',()=>{
  assert.deepEqual(validateCatalogueProduct(service()),[]);
  assert.deepEqual(validateCatalogueProduct(device()),[]);

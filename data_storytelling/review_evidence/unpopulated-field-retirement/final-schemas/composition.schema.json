@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/composition.schema.json",
+  "$defs": {
+    "boundary": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "event"
+            },
+            "event_id": {
+              "type": "string",
+              "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+              "x-ref": [
+                "event"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "event_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "unknown",
+                "open"
+              ]
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "simulation_end"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false,
+          "description": "Exclusive end at the model simulation horizon, 1995-01-01. Valid only as effective_until; not a withdrawal date."
+        }
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "record_id": {
+          "type": "string",
+          "pattern": "^(base_part|device|software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "base_part",
+            "device",
+            "software_edition"
+          ]
+        }
+      },
+      "required": [
+        "record_id"
+      ],
+      "additionalProperties": false
+    },
+    "line": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "record_id": {
+                  "type": "string",
+                  "pattern": "^(base_part|product)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "base_part",
+                    "product"
+                  ]
+                }
+              },
+              "required": [
+                "record_id"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "record_id": {
+                  "type": "string",
+                  "pattern": "^(device|software_edition)\\.[a-z0-9][a-z0-9_.-]*$",
+                  "x-ref": [
+                    "device",
+                    "software_edition"
+                  ]
+                },
+                "version_number": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "record_id",
+                "version_number"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "quantity": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "description": "Number of complete referenced items; a kit or assembly counts as one defined item. Without a legacy unit, a known quantity must be a positive integer. Null retains an explicitly unknown quantity."
+        },
+        "connection": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "host_line_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "socket_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "host_line_id",
+                "socket_id"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "host_scope": {
+                  "const": "existing_customer_device"
+                },
+                "socket_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "host_scope",
+                "socket_id"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "placements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "host_line_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "host_instance": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "socket_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "quantity": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "host_line_id",
+              "host_instance",
+              "socket_id",
+              "quantity"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "element_type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Descriptive composition element classification. Retain an existing classification and enrich it with useful former role text; leave absent where neither was populated. This field does not establish connectivity or physical quantities."
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "quantity"
+      ],
+      "additionalProperties": false
+    },
+    "hardware_version": {
+      "type": "object",
+      "properties": {
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effective_from": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "effective_until": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "technical_definition": {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/hardware"
+        },
+        "composition_definition": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/line"
+          }
+        },
+        "assembly_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        },
+        "expansion_socket_groups": {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/expansion_socket_groups"
+        }
+      },
+      "required": [
+        "version_number",
+        "description",
+        "effective_from",
+        "effective_until",
+        "technical_definition",
+        "composition_definition",
+        "assembly_requirements"
+      ],
+      "additionalProperties": false
+    },
+    "software_version": {
+      "type": "object",
+      "properties": {
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effective_from": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "effective_until": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "technical_definition": {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/software"
+        },
+        "composition_definition": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/line"
+          }
+        }
+      },
+      "required": [
+        "version_number",
+        "description",
+        "effective_from",
+        "effective_until",
+        "technical_definition",
+        "composition_definition"
+      ],
+      "additionalProperties": false
+    },
+    "product_version": {
+      "type": "object",
+      "properties": {
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effective_from": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "effective_until": {
+          "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
+        },
+        "composition_definition": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/line"
+          }
+        },
+        "assembly_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        }
+      },
+      "required": [
+        "version_number",
+        "description",
+        "effective_from",
+        "effective_until",
+        "composition_definition",
+        "assembly_requirements"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # Catalogue validation
 
-The current foundation contract is **0.15.0**. The accepted catalogue consists of customer-facing offerings with explicit launch campaign/event links, commercial categories and providers. Chips, technical aliases and artificial families are not internal products; technical definitions live in base parts, devices and software editions. A commercial launch does not establish shipment readiness or date every technical revision.
+The current foundation contract is **0.16.0**. The accepted catalogue consists of customer-facing offerings with explicit launch campaign/event links, commercial categories and providers. Chips, technical aliases and artificial families are not internal products; technical definitions live in base parts, devices and software editions. A commercial launch does not establish shipment readiness or date every technical revision.
 
 ## Checks and their limits
 
@@ -22,7 +22,7 @@ Technical-fact migration needs a corresponding canonical field, not merely an eq
 
 The live queue is `data_storytelling/change.json`. Concrete proposals contain complete before/after records; Discussion entries contain problems and findings without edits. The latter accept remarks and cannot be authorized. Audit inventories under `data_storytelling/review_evidence/` identify their source commit and check scope; their counts are historical snapshots, not permanent catalogue-size rules.
 
-The current unused-field cleanup is checked by `node tools/verify-unused-field-cleanup.js`, selected by `verify-closeout-audit.js` when its audit exists. It verifies exact empty-only deletions, independent and batch authorization, unchanged nonempty data and the strict catalogue profile.
+The historical unused-field cleanup is checked by `node tools/verify-unused-field-cleanup.js`, selected by `verify-closeout-audit.js` when its audit exists. It verifies exact empty-only deletions, independent and batch authorization, unchanged nonempty data and the strict catalogue profile.
 
 The earlier fixed-composition offering and role-consolidation proposals are checked by `node tools/verify-fixed-composition-offerings.js`, selected by `verify-closeout-audit.js` when its evidence exists. It validates independent/batch authorization, platform splits, fixed commercial contents, preserved role text and the strict catalogue profile without applying proposals to disk.
 
@@ -33,3 +33,5 @@ The earlier closeout feedback amendment is verified with `node tools/verify-clos
 Phase-specific verifiers are historical regression tools with pinned expectations. Use the ordinary validators for ongoing work and the verifier associated with the active proposal set for approval simulations. The superseded phase-7 walkthrough is [archived](../archived/CATALOGUE_PHASE7_VALIDATION.md).
 
 Authorization accepts exact content; it does not approve referenced records, prove a qualification result, certify historical sourcing or make forecasts reproducible. Non-quantitative agreement values may intentionally be null. An internal assembly may have no manufacturer ordering code. Commercial pricing has no general model; Regular Support’s existing 10% depot-repair discount is an explicit retained author exception. Manufacturing costs, investments and observed stock-market data have separate meanings.
+
+The current 0.16.0 unpopulated-field cleanup is checked by `node tools/verify-unpopulated-field-retirement.js`. It validates independent/batch approvals and final schema rejection after cleanup. The seven empty-only declarations cannot retire before the corresponding data removals are approved.

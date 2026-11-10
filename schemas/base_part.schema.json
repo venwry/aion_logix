@@ -75,18 +75,6 @@
             "null"
           ]
         },
-        "drawing_reference": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "drawing_revision": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
         "technology_ids": {
           "type": "array",
           "items": {
@@ -99,13 +87,9 @@
         },
         "manufacturing_capability_ids": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$",
-            "x-ref": [
-              "manufacturing_capability"
-            ]
-          }
+          "maxItems": 0,
+          "deprecated": true,
+          "description": "Empty-only compatibility pending Changes confirm cleanup. Run tools/retire-unpopulated-fields.py --final --apply after approval."
         },
         "technical_definition": {
           "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/hardware"
@@ -142,7 +126,6 @@
         "supplier_actor_ids",
         "manufacturer_part_number",
         "technology_ids",
-        "manufacturing_capability_ids",
         "technical_definition",
         "specification",
         "requirements"

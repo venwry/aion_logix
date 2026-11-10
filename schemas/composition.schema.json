@@ -130,53 +130,6 @@
           "exclusiveMinimum": 0,
           "description": "Number of complete referenced items; a kit or assembly counts as one defined item. Without a legacy unit, a known quantity must be a positive integer. Null retains an explicitly unknown quantity."
         },
-        "unit": {
-          "enum": [
-            "each",
-            "set",
-            "m",
-            "kg",
-            "g",
-            "litre"
-          ],
-          "deprecated": true,
-          "description": "Transitional legacy unit retained while removal proposals await approval. Omit from new compositions: quantity counts complete units of the referenced item, including any kit or assembly defined there."
-        },
-        "supply_condition": {
-          "oneOf": [
-            {
-              "type": "object",
-              "properties": {
-                "kind": {
-                  "const": "always"
-                }
-              },
-              "required": [
-                "kind"
-              ],
-              "additionalProperties": false
-            },
-            {
-              "type": "object",
-              "properties": {
-                "kind": {
-                  "const": "conditional"
-                },
-                "description": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              },
-              "required": [
-                "kind",
-                "description"
-              ],
-              "additionalProperties": false
-            }
-          ],
-          "deprecated": true,
-          "description": "Transitional legacy supply condition retained while removal proposals await approval. Omit from new compositions: every listed item is always required. Existing explicit conditions remain effective until their removal is authorized."
-        },
         "connection": {
           "oneOf": [
             {
@@ -246,14 +199,6 @@
             ],
             "additionalProperties": false
           }
-        },
-        "requirements": {
-          "type": "array",
-          "items": {
-            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
-          },
-          "deprecated": true,
-          "description": "Transitional empty container retained until the author approves its removal from existing records. Do not populate in new records."
         },
         "element_type": {
           "type": "string",
@@ -340,14 +285,6 @@
           "items": {
             "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/line"
           }
-        },
-        "assembly_requirements": {
-          "type": "array",
-          "items": {
-            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
-          },
-          "deprecated": true,
-          "description": "Transitional empty container retained until the author approves its removal from existing records. Do not populate in new records."
         }
       },
       "required": [
@@ -376,14 +313,6 @@
         },
         "effective_until": {
           "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/boundary"
-        },
-        "technical_definition": {
-          "type": "object",
-          "properties": {},
-          "required": [],
-          "additionalProperties": false,
-          "deprecated": true,
-          "description": "Transitional empty container retained until the author approves its removal from existing records. Do not populate in new records."
         },
         "composition_definition": {
           "type": "array",

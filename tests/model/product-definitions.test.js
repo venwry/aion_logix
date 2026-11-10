@@ -1,3 +1,4 @@
+import {currentImportShape} from '../fixtures/current-import-shape.js';
 import {migrateTechnologySpecification} from '../../code/technology-specification.js';
 import {datasetPath,datasetForFile} from '../../code/model-contract.js';
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import crypto from 'node:crypto';
@@ -39,7 +40,12 @@ function currentShape(r){
   if(l.role)l.element_type=l.element_type?l.element_type+' — '+l.role:l.role;
   delete l.role;delete l.entitlement;
  }
+ currentImportShape(r);
 }
+// Keep the original physical units for the independent historical inventory hash.
+const historicalDocs=structuredClone(docs);
+for(const p of proposals)for(const e of p.elements){const rows=historicalDocs[e.record_type][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(i>=0)rows[i]=structuredClone(e.after);else if(e.after)rows.push(structuredClone(e.after));}
+const historicalIndex=new Map(Object.values(historicalDocs).flatMap(d=>Object.values(d)[0]).map(r=>[r.id,r]));
 for(const d of Object.values(docs))for(const r of Object.values(d)[0])currentShape(r);
 for(const p of proposals)for(const e of p.elements){currentShape(e.before);currentShape(e.after);}
 const files=Object.fromEntries(Object.entries(docs).map(([n,d])=>[datasetPath(n),d]));for(const n of ['authorization','authorization_decision','change','manifest','annotation','change_review'])files['data_storytelling/'+n+'.json']=read('data_storytelling/'+n+'.json');
@@ -51,7 +57,7 @@ const applied=Object.fromEntries(Object.entries(result.files).filter(([p])=>p.st
 const index=new Map(Object.values(applied).flatMap(d=>Object.values(d)[0]).map(r=>[r.id,r]));
 test('all 164 imported composition inventories match the independent pinned-source audit',()=>{
  const fixtures=read('tests/fixtures/product-import-inventories.json');assert.equal(fixtures.length,164);
- for(const f of fixtures){const r=resolveComposition(index,f.record_id,f.version_number);const inventory=r.leaves.map(l=>JSON.stringify([l.record_id,l.quantity,l.unit,l.path.map(x=>x.id)])).sort();assert.equal(inventory.length,f.leaf_paths);assert.equal(crypto.createHash('sha256').update(JSON.stringify(inventory)).digest('hex'),f.inventory_sha256,f.record_id);}
+ for(const f of fixtures){const r=resolveComposition(historicalIndex,f.record_id,f.version_number);const inventory=r.leaves.map(l=>JSON.stringify([l.record_id,l.quantity,l.unit,l.path.map(x=>x.id)])).sort();assert.equal(inventory.length,f.leaf_paths);assert.equal(crypto.createHash('sha256').update(JSON.stringify(inventory)).digest('hex'),f.inventory_sha256,f.record_id);}
 });
 test('new definitions are unauthorized with exact current hashes and no legacy editorial fields',()=>{
  const auth=new Map(files['data_storytelling/authorization.json'].authorization.map(a=>[a.record_id,a]));

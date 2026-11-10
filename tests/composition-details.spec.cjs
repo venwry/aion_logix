@@ -4,6 +4,8 @@ for(const pageName of ['browser','timeline'])test(pageName+' selects composition
  await page.route('**/data_foundation/device.json',async route=>{
   const response=await route.fetch(),doc=await response.json();
   const record=doc.device.find(r=>r.id==='device.ram_64kb_x32');
+  // This fixture deliberately exercises historical per-version detail rendering.
+  delete record.technical_specification;
   record.composition_history=[
    {version_number:1,description:'Initial module',effective_from:{kind:'unknown'},effective_until:{kind:'unknown'},technical_definition:{specification:{capacity_kb:64}},composition_definition:[{id:'first',target:{record_id:'base_part.dram_16kbit'},quantity:32,unit:'each'}],assembly_requirements:[{number:1,kind:'testing',description:'Test initial module'}]},
    {version_number:2,description:'Expanded module',effective_from:{kind:'event',event_id:'event.autodesk_agreement'},effective_until:{kind:'open'},technical_definition:{specification:{capacity_kb:128}},composition_definition:[{id:'second',target:{record_id:'base_part.dram_16kbit'},quantity:64,unit:'each'}],assembly_requirements:[{number:1,kind:'testing',description:'Test expanded module'}]},

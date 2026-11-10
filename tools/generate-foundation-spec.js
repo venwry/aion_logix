@@ -29,7 +29,7 @@ for (const name of names) {
     for (const [key, definition] of Object.entries(object.properties || {})) {
       const [field, fieldOwner] = resolve(definition, context);
       const array = field.type === 'array';
-      const [item, itemOwner] = array ? resolve(field.items, fieldOwner) : [field, fieldOwner];
+      const [item, itemOwner] = array ? resolve(field.items || {}, fieldOwner) : [field, fieldOwner];
       const fieldPath = prefix + key + (array ? '[]' : '');
       const targets = item['x-ref'] || [];
       fields.push({key, path: fieldPath, depth, required: (object.required || []).includes(key), type: array ? `array<${schemaType(item)}>` : schemaType(field), targets, definition: field, item});
@@ -53,8 +53,8 @@ const lines = [
   '- A solid arrow runs from the referencing dataset to the dataset containing the referenced `id`; labels give exact paths, with `[]` denoting array items. Several fields between the same pair share one line.',
   '- Dashed arrows through `Any foundation record` represent polymorphic references: each value chooses one of the ' + names.length + ' target datasets by its ID prefix. They do not require a value from every target dataset. Self-references are included.',
   '- Process boundary `value` references an event only when `precision` is `event`; calendar and unknown variants are not references.',
-  '- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. All current clauses use this shape; the runtime schema also accepts the legacy representation for compatibility.',
-  '- Assumptions require either topic plus non-empty statements[] or the legacy statement; the two forms cannot be mixed. New authoring uses topic/statements.',
+  '- Clauses use exactly id, kind, statement, value and unit. Target kinds begin with target_. No quantity is represented by null value and null unit. The active schema accepts only this shape; historical snapshots remain unchanged.',
+  '- Assumptions require topic plus non-empty statements[]. The legacy statement field is retired.',
   '- Composition boundaries are event, unknown, open, or simulation_end. The last resolves to 1995-01-01 and is valid only as the final version end. Adjacent resolved revisions share a boundary; authoring defaults and first-use rules are in MODEL_GUIDE.md.',
   '- Technology specification chapters contain number, chapter_name, description and parameters[] of key/value text pairs. Numbers and chapter-local keys are unique. Description placeholders {key} resolve locally; model validation rejects missing keys. Devices, software editions and base parts instead have root technical_specification chapters with one global parameter table. Each parameter is exactly key/value OR key/ref_id/ref_role; optional-looking union members in the diagram must satisfy one complete variant. Graphics modes have local parameters and typed fixed fields. See MODEL_GUIDE.md for canonical numeric keys, buffer units and transitional legacy support.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
@@ -112,7 +112,7 @@ for (const name of names) {
   if (name === 'product') lines.push('', '**Runtime compatibility:** the schema permits both launch links to be absent and still accepts legacy product kinds. Current authoring rules and all accepted products use explicit pairs and customer-facing kinds. The optional catalogue profile requires these rules; it is not yet a saving-service gate. When supplied, a launch event must have single-parent ownership through the campaign execution process and fit its period.');
   if (name === 'external_product') lines.push('', '**Direct relationships:** specification entries contain exactly `no`, `description`, one `ref_id` and `ref_role`; numbering is unique within the record. This descriptive identity does not own technical compositions, structured dates or editorial status.');
   if (name === 'process') lines.push('', '**Boundary union:** calendar value with year/month/day precision, event ID with `precision: event`, or null with `precision: unknown`. The diagram/catalogue value reference applies only to event anchors.');
-  if (name === 'agreement') lines.push('', '**Runtime compatibility:** clauses accept either the exact five-field shape shown here or the unchanged legacy shape. Hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.');
+  if (name === 'agreement') lines.push('', '**Clause contract:** clauses require the exact five-field shape shown here. Legacy fields and hybrids fail validation. A null value requires a null unit; a quantified value requires a nonempty unit. Equity basis, beneficiary and allocation belong in the statement.');
   lines.push('');
 }
 lines.push('## Reference catalogue', '', 'Every schema attribute marked `x-ref` appears here, including references inside shared and nested objects. Each target resolves to the target record’s `id`. Polymorphic alternatives are allowed targets, not simultaneous requirements.', '', '| Source dataset | Attribute path | Permitted target datasets |', '| --- | --- | --- |');

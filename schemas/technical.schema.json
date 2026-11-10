@@ -111,9 +111,6 @@
         "connection": {
           "type": "string"
         },
-        "expansion_socket_groups": {
-          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/expansion_socket_groups"
-        },
         "firmware_contents": {
           "type": "array",
           "items": {
@@ -309,9 +306,6 @@
           "properties": {
             "sourcing_policy": {
               "type": "string"
-            },
-            "video_ram_policy": {
-              "type": "string"
             }
           },
           "additionalProperties": false
@@ -344,10 +338,9 @@
               "type": "object",
               "properties": {
                 "capacity_kb": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
+                  "type": "null",
+                  "deprecated": true,
+                  "description": "Empty-only compatibility pending Changes confirm cleanup. Run tools/retire-unpopulated-fields.py --final --apply after approval."
                 },
                 "included": {
                   "type": "boolean"
@@ -703,16 +696,10 @@
                   "id": {
                     "type": "string"
                   },
-                  "palette_grayscale_levels": {
-                    "type": "number"
-                  },
                   "palette_list_bytes": {
                     "type": "number"
                   },
                   "remaining_bytes": {
-                    "type": "number"
-                  },
-                  "remaining_video_ram_bytes": {
                     "type": "number"
                   },
                   "required_raster_ids": {
@@ -720,9 +707,6 @@
                     "items": {
                       "type": "string"
                     }
-                  },
-                  "simultaneous_shades": {
-                    "type": "number"
                   },
                   "simultaneous_values": {
                     "type": "number"
@@ -859,10 +843,9 @@
               "type": "string"
             },
             "controller_die_count": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "null",
+              "deprecated": true,
+              "description": "Empty-only compatibility pending Changes confirm cleanup. Run tools/retire-unpopulated-fields.py --final --apply after approval."
             },
             "controller_id": {
               "type": "string",
@@ -1058,10 +1041,9 @@
               "type": "string"
             },
             "formatted_capacity_kb": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "null",
+              "deprecated": true,
+              "description": "Empty-only compatibility pending Changes confirm cleanup. Run tools/retire-unpopulated-fields.py --final --apply after approval."
             },
             "function_keys": {
               "type": "string"
@@ -1457,9 +1439,6 @@
                 }
               },
               "additionalProperties": false
-            },
-            "memory_policy": {
-              "type": "string"
             },
             "mode_discovery": {
               "type": "string"
@@ -2469,9 +2448,6 @@
                     }
                   },
                   "additionalProperties": false
-                },
-                "video_ram_policy": {
-                  "type": "string"
                 }
               },
               "additionalProperties": false
@@ -2570,103 +2546,6 @@
             "video": {
               "type": "object",
               "properties": {
-                "api_id": {
-                  "type": "string",
-                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
-                  "x-ref": [
-                    "technology"
-                  ]
-                },
-                "arbitration": {
-                  "type": "string"
-                },
-                "bitmap_modes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "bits_per_pixel": {
-                        "type": "number"
-                      },
-                      "bytes_per_framebuffer": {
-                        "type": "number"
-                      },
-                      "compatibility_mode": {
-                        "type": "boolean"
-                      },
-                      "configurations": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "allocated_bytes": {
-                              "type": "number"
-                            },
-                            "framebuffer_bytes": {
-                              "type": "number"
-                            },
-                            "framebuffer_count": {
-                              "type": "number"
-                            },
-                            "palette_list_bytes": {
-                              "type": "number"
-                            },
-                            "remaining_video_ram_bytes": {
-                              "type": "number"
-                            },
-                            "sprite_count": {
-                              "type": "number"
-                            }
-                          },
-                          "additionalProperties": false
-                        }
-                      },
-                      "double_buffering": {
-                        "type": "boolean"
-                      },
-                      "height": {
-                        "type": "number"
-                      },
-                      "id": {
-                        "type": "string"
-                      },
-                      "required_raster_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "sprites_available": {
-                        "type": "number"
-                      },
-                      "stride_bytes": {
-                        "type": "number"
-                      },
-                      "width": {
-                        "type": "number"
-                      }
-                    },
-                    "additionalProperties": false
-                  }
-                },
-                "character_row_cache": {
-                  "type": "object",
-                  "properties": {
-                    "banks": {
-                      "type": "number"
-                    },
-                    "bytes_per_bank": {
-                      "type": "number"
-                    },
-                    "purpose": {
-                      "type": "string"
-                    },
-                    "total_bytes": {
-                      "type": "number"
-                    }
-                  },
-                  "additionalProperties": false
-                },
                 "controller_id": {
                   "type": "string",
                   "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
@@ -2674,145 +2553,11 @@
                     "base_part"
                   ]
                 },
-                "display_memory": {
-                  "type": "object",
-                  "properties": {
-                    "bank_data_width_bits": {
-                      "type": "number"
-                    },
-                    "capacity_bytes": {
-                      "type": "number"
-                    },
-                    "chip_count": {
-                      "type": "number"
-                    },
-                    "chip_id": {
-                      "type": "string",
-                      "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
-                      "x-ref": [
-                        "base_part"
-                      ]
-                    },
-                    "organization": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "feature_continuity_id": {
-                  "type": "string",
-                  "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$",
-                  "x-ref": [
-                    "device"
-                  ]
-                },
-                "host_interface": {
-                  "type": "object",
-                  "properties": {
-                    "host_width_bits": {
-                      "type": "number"
-                    },
-                    "hot_swap": {
-                      "type": "boolean"
-                    },
-                    "implementation": {
-                      "type": "string"
-                    },
-                    "local_display_width_bits": {
-                      "type": "number"
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "memory_layout": {
-                  "type": "object",
-                  "properties": {
-                    "font_policy": {
-                      "type": "string"
-                    },
-                    "mode_exclusivity": {
-                      "type": "string"
-                    },
-                    "page_flip": {
-                      "type": "string"
-                    },
-                    "policy_id": {
-                      "type": "string",
-                      "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
-                      "x-ref": [
-                        "technology"
-                      ]
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "mode_discovery": {
-                  "type": "string"
-                },
-                "monitor_policy": {
-                  "type": "string"
-                },
-                "palette_list_id": {
-                  "type": "string",
-                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
-                  "x-ref": [
-                    "technology"
-                  ]
-                },
-                "pixel_buffer": {
-                  "type": "object",
-                  "properties": {
-                    "bits_per_pixel": {
-                      "type": "number"
-                    },
-                    "bytes_per_page": {
-                      "type": "number"
-                    },
-                    "location": {
-                      "type": "string"
-                    },
-                    "page_states": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "pages": {
-                      "type": "number"
-                    },
-                    "physical_organization": {
-                      "type": "string"
-                    },
-                    "pixels_per_page": {
-                      "type": "number"
-                    },
-                    "policy": {
-                      "type": "string"
-                    },
-                    "total_bytes": {
-                      "type": "number"
-                    }
-                  },
-                  "additionalProperties": false
-                },
                 "sprite_memory": {
                   "type": "object",
                   "properties": {
                     "bank_data_width_bits": {
                       "type": "number"
-                    },
-                    "capacity_bytes": {
-                      "type": "number"
-                    },
-                    "chip_count": {
-                      "type": "number"
-                    },
-                    "chip_id": {
-                      "type": "string",
-                      "pattern": "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$",
-                      "x-ref": [
-                        "base_part"
-                      ]
                     },
                     "separate_bus": {
                       "type": "boolean"
@@ -2838,134 +2583,6 @@
                   },
                   "additionalProperties": false
                 },
-                "sprite_profile_ref": {
-                  "type": "object",
-                  "properties": {
-                    "profile": {
-                      "type": "string"
-                    },
-                    "technology_id": {
-                      "type": "string",
-                      "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
-                      "x-ref": [
-                        "technology"
-                      ]
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "technology_id": {
-                  "type": "string",
-                  "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
-                  "x-ref": [
-                    "technology"
-                  ]
-                },
-                "text_modes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "attribute_format": {
-                        "type": "string"
-                      },
-                      "attribute_map_bytes_per_buffer": {
-                        "type": "number"
-                      },
-                      "character_count": {
-                        "type": "number"
-                      },
-                      "character_map_bytes_per_buffer": {
-                        "type": "number"
-                      },
-                      "columns": {
-                        "type": "number"
-                      },
-                      "configurations": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "allocated_bytes": {
-                              "type": "number"
-                            },
-                            "palette_list_bytes": {
-                              "type": "number"
-                            },
-                            "remaining_video_ram_bytes": {
-                              "type": "number"
-                            },
-                            "sprite_count": {
-                              "type": "number"
-                            },
-                            "text_buffer_count": {
-                              "type": "number"
-                            }
-                          },
-                          "additionalProperties": false
-                        }
-                      },
-                      "double_buffering": {
-                        "type": "boolean"
-                      },
-                      "font_bytes": {
-                        "type": "number"
-                      },
-                      "glyph_height": {
-                        "type": "number"
-                      },
-                      "glyph_width": {
-                        "type": "number"
-                      },
-                      "height": {
-                        "type": "number"
-                      },
-                      "id": {
-                        "type": "string"
-                      },
-                      "ram_bytes_per_page": {
-                        "type": "number"
-                      },
-                      "required_raster_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "rows": {
-                        "type": "number"
-                      },
-                      "sprites_available": {
-                        "type": "number"
-                      },
-                      "width": {
-                        "type": "number"
-                      }
-                    },
-                    "additionalProperties": false
-                  }
-                },
-                "timing_budget": {
-                  "type": "object",
-                  "properties": {
-                    "page_drain_microseconds": {
-                      "type": "number"
-                    },
-                    "pixel_clock_mhz": {
-                      "type": "number"
-                    },
-                    "qualification": {
-                      "type": "string"
-                    },
-                    "renderer_pixels_per_step": {
-                      "type": "number"
-                    },
-                    "renderer_step_mhz": {
-                      "type": "number"
-                    }
-                  },
-                  "additionalProperties": false
-                },
                 "video_physical_population": {
                   "type": "object",
                   "properties": {
@@ -2977,9 +2594,6 @@
                     }
                   },
                   "additionalProperties": false
-                },
-                "video_ram_kb": {
-                  "type": "number"
                 }
               },
               "additionalProperties": false
@@ -3387,10 +3001,9 @@
           "type": "object",
           "properties": {
             "application_ram_bytes": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "null",
+              "deprecated": true,
+              "description": "Empty-only compatibility pending Changes confirm cleanup. Run tools/retire-unpopulated-fields.py --final --apply after approval."
             },
             "installed_ram_kb": {
               "type": [
@@ -4300,35 +3913,6 @@
             "boolean",
             "null"
           ]
-        },
-        "unit": {
-          "type": "string",
-          "minLength": 1
-        },
-        "subject_ids": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
-            "x-ref": [
-              "actor",
-              "actor_relationship",
-              "agreement",
-              "assumption",
-              "campaign",
-              "event",
-              "location",
-              "manufacturing_capability",
-              "market_response",
-              "process",
-              "product",
-              "technology",
-              "base_part",
-              "device",
-              "software_edition",
-              "external_product"
-            ]
-          }
         }
       },
       "required": [

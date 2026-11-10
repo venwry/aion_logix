@@ -7,7 +7,7 @@ function fixture(){
  const files={};for(const dir of ['data_foundation','data_storytelling'])for(const f of fs.readdirSync(dir).filter(x=>x.endsWith('.json')))files[dir+'/'+f]=JSON.parse(fs.readFileSync(dir+'/'+f));
  const proposal=(id,record)=>({id:'change.'+id,category:'story',title:id,reason:'Batch test',elements:[{record_type:record.id.split('.')[0],record_id:record.id,before:null,after:record}]});
  const a=proposal('batch_actor',{id:'actor.batch_test',kind:'person',name:'Batch test'});
- const b=proposal('batch_assumption',{id:'assumption.batch_test',kind:'world_premise',statement:'Test premise',scope_ids:['actor.batch_test']});
+ const b=proposal('batch_assumption',{id:'assumption.batch_test',kind:'world_premise',topic:'Test premise',statements:['Test premise'],scope_ids:['actor.batch_test']});
  const c=proposal('unselected',{id:'actor.unselected',kind:'person',name:'Unselected'});
  files['data_storytelling/change.json']={change:[a,b,c]};
  return {files,a,b,c,request:{action:'approve_changes',changes:[b,a].map(p=>({change_id:p.id,proposal_sha256:hash(p)}))}};

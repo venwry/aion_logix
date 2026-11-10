@@ -88,15 +88,9 @@
         },
         "process_ids": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
-            "x-ref": [
-              "process"
-            ]
-          },
-          "minItems": 0,
-          "uniqueItems": true
+          "maxItems": 0,
+          "deprecated": true,
+          "description": "Empty-only compatibility pending Changes confirm cleanup. Run tools/retire-unpopulated-fields.py --final --apply after approval."
         },
         "location_ids": {
           "type": "array",
@@ -116,18 +110,6 @@
           "x-ref": [
             "agreement"
           ]
-        },
-        "category": {
-          "type": "string",
-          "enum": [
-            "",
-            "Adam's personal",
-            "Logix/AION investment",
-            "Product dev & launch",
-            "Ecosystem & Partners",
-            "Competition"
-          ],
-          "description": "Timeline swim lane. Assign only to a top-level event or process. Omit or use an empty string on owned children; they inherit their root category. An empty root is uncategorised."
         }
       },
       "required": [

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/device.schema.json",
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(device)\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider_actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          }
+        },
+        "technology_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "technology"
+            ]
+          }
+        },
+        "kind": {
+          "enum": [
+            "base_computer",
+            "memory_module",
+            "expansion_card",
+            "monitor",
+            "keyboard",
+            "printer",
+            "mouse",
+            "storage_device",
+            "network_device",
+            "rom_cartridge",
+            "firmware_bank",
+            "internal_subsystem"
+          ]
+        },
+        "composition_history": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/composition.schema.json#/$defs/hardware_version"
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/requirement"
+          }
+        },
+        "technical_specification": {
+          "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/technical_specification"
+        },
+        "graphic_modes_specification": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/technical.schema.json#/$defs/graphic_mode"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "provider_actor_ids",
+        "technology_ids",
+        "kind",
+        "composition_history",
+        "requirements"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "device": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    }
+  },
+  "required": [
+    "device"
+  ],
+  "additionalProperties": false
+}

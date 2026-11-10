@@ -33,11 +33,6 @@
             "baseline_condition"
           ]
         },
-        "statement": {
-          "type": "string",
-          "minLength": 1,
-          "deprecated": true
-        },
         "scope_ids": {
           "type": "array",
           "items": {
@@ -65,48 +60,6 @@
           "minItems": 0,
           "uniqueItems": true
         },
-        "exception_ids": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(assumption)\\.[a-z0-9][a-z0-9_.-]*$",
-            "x-ref": [
-              "assumption"
-            ]
-          },
-          "minItems": 0,
-          "uniqueItems": true
-        },
-        "equipment": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "minLength": 1
-              },
-              "components": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              }
-            },
-            "required": [
-              "name"
-            ],
-            "additionalProperties": false
-          }
-        },
-        "process_id": {
-          "type": "string",
-          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
-          "x-ref": [
-            "process"
-          ]
-        },
         "topic": {
           "type": "string",
           "minLength": 1,
@@ -124,41 +77,11 @@
       },
       "required": [
         "id",
-        "kind"
+        "kind",
+        "topic",
+        "statements"
       ],
-      "additionalProperties": false,
-      "oneOf": [
-        {
-          "required": [
-            "topic",
-            "statements"
-          ],
-          "not": {
-            "required": [
-              "statement"
-            ]
-          }
-        },
-        {
-          "required": [
-            "statement"
-          ],
-          "not": {
-            "anyOf": [
-              {
-                "required": [
-                  "topic"
-                ]
-              },
-              {
-                "required": [
-                  "statements"
-                ]
-              }
-            ]
-          }
-        }
-      ]
+      "additionalProperties": false
     }
   }
 }

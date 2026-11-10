@@ -27,8 +27,8 @@ test('process item schemas retain used references without inheriting unused fiel
  }
  const d=fresh(),e=d.event.event[0];e.outcomes=[{number:1,type:'maturity_transition',description:'Test an event-owned maturity result.',maturity:{capability_id:d.manufacturing_capability.manufacturing_capability[0].id,stage:'pilot'}}];const legacy=Boolean(JSON.parse(fs.readFileSync('schemas/common.schema.json')).$defs.item.properties.maturity);assert.equal(errors(d)==='',legacy);
 });
-test('empty-container proposals preserve all populated content and validate after removal',async()=>{
- const fs=await import('node:fs');const ps=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/unused-field-cleanup/proposals.json')).change;
+test('current unpopulated-field proposals validate without reinstating retired fields',async()=>{
+ const fs=await import('node:fs');const ps=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/unpopulated-field-retirement/proposals.json')).change;
  const d=fresh();for(const p of ps)for(const e of p.elements){const rows=d[e.record_type][e.record_type],i=rows.findIndex(r=>r.id===e.record_id);rows[i]=e.after;}
  assert.equal(errors(d),'');
  assert(d.product.product.every(r=>!Object.hasOwn(r,'technology_ids')));

@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/process.schema.json",
+  "type": "object",
+  "properties": {
+    "process": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "process"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^process\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "participant": {
+          "type": "array",
+          "items": {
+            "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/participant"
+          },
+          "minItems": 0
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology",
+              "base_part",
+              "device",
+              "software_edition",
+              "external_product"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/input"
+          },
+          "minItems": 0
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/outcome"
+          },
+          "minItems": 0
+        },
+        "period": {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/period"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/step"
+          },
+          "minItems": 0
+        },
+        "related_process_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "process"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "agreement_id": {
+          "type": "string",
+          "pattern": "^(agreement)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "agreement"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "",
+            "Adam's personal",
+            "Logix/AION investment",
+            "Product dev & launch",
+            "Ecosystem & Partners",
+            "Competition"
+          ],
+          "description": "Timeline swim lane. Assign only to a top-level event or process. Omit or use an empty string on owned children; they inherit their root category. An empty root is uncategorised."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "description",
+        "participant",
+        "period",
+        "steps",
+        "inputs",
+        "outcomes"
+      ],
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "action",
+            "milestone",
+            "resource",
+            "requirement",
+            "acceptance_criterion",
+            "deliverable",
+            "result",
+            "decision",
+            "qualification",
+            "maturity_transition",
+            "market_response",
+            "agreement_basis"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology",
+              "base_part",
+              "device",
+              "software_edition",
+              "external_product"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "process_id": {
+          "type": "string",
+          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "process"
+          ]
+        }
+      },
+      "required": [
+        "number",
+        "type",
+        "description"
+      ],
+      "additionalProperties": false,
+      "not": {
+        "required": [
+          "event_id",
+          "process_id"
+        ]
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "action",
+            "milestone",
+            "resource",
+            "requirement",
+            "acceptance_criterion",
+            "deliverable",
+            "result",
+            "decision",
+            "qualification",
+            "maturity_transition",
+            "market_response",
+            "agreement_basis"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology",
+              "base_part",
+              "device",
+              "software_edition",
+              "external_product"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "number",
+        "type",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "step": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "action",
+            "milestone",
+            "resource",
+            "requirement",
+            "acceptance_criterion",
+            "deliverable",
+            "result",
+            "decision",
+            "qualification",
+            "maturity_transition",
+            "market_response",
+            "agreement_basis"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_id": {
+          "type": "string",
+          "pattern": "^(event)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event"
+          ]
+        },
+        "process_id": {
+          "type": "string",
+          "pattern": "^(process)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "process"
+          ]
+        }
+      },
+      "required": [
+        "number",
+        "type",
+        "description"
+      ],
+      "additionalProperties": false,
+      "not": {
+        "required": [
+          "event_id",
+          "process_id"
+        ]
+      }
+    }
+  }
+}

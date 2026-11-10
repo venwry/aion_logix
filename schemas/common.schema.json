@@ -65,34 +65,8 @@
     },
     "money": {
       "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "minimum": 0
-        },
-        "currency": {
-          "type": "string",
-          "pattern": "^[A-Z]{3}$"
-        },
-        "reference_year": {
-          "type": "integer",
-          "minimum": 1972
-        },
-        "basis": {
-          "type": "string",
-          "enum": [
-            "nominal_commitment",
-            "planning_provision",
-            "actual_expenditure"
-          ]
-        }
-      },
-      "required": [
-        "value",
-        "currency",
-        "reference_year",
-        "basis"
-      ],
+      "properties": {},
+      "required": [],
       "additionalProperties": false
     },
     "boundary": {
@@ -207,34 +181,6 @@
           "x-ref": [
             "process"
           ]
-        },
-        "maturity": {
-          "type": "object",
-          "properties": {
-            "capability_id": {
-              "type": "string",
-              "pattern": "^(manufacturing_capability)\\.[a-z0-9][a-z0-9_.-]*$",
-              "x-ref": [
-                "manufacturing_capability"
-              ]
-            },
-            "stage": {
-              "enum": [
-                "pilot",
-                "qualified",
-                "production_released",
-                "repeatable_production",
-                "suspended"
-              ]
-            }
-          },
-          "required": [
-            "capability_id",
-            "stage"
-          ],
-          "additionalProperties": false,
-          "deprecated": true,
-          "description": "Transitional legacy field retained only until the existing outcome-removal proposals are approved. New outcomes mention the stage in description and reference the capability in subject_ids; omit maturity."
         }
       },
       "required": [

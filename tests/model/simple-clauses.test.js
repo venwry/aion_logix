@@ -13,16 +13,16 @@ test('simple clauses reject missing fields, hybrids, invalid targets and unpaire
  const missing=simple();delete missing.value;
  for(const c of [missing,{...simple(),assertion_mode:'commitment'},{...simple(),actor_ids:[]},{...simple(),kind:'target_unrecognized'},{...simple(),unit:'USD'},{...simple(),value:100},{...simple(),value:100,unit:''}])assert(validateDocuments(withClause(c)).errors.length,JSON.stringify(c));
 });
-test('legacy clause references still validate through transitional branch',()=>{
+test('legacy clause representation is rejected after retirement',()=>{
  const c={id:'clause.legacy_test',kind:'rights',statement:'Legacy term.',assertion_mode:'commitment',actor_ids:['actor.adam']};
- assert.deepEqual(validateDocuments(withClause(c)).errors,[]);
- assert(validateDocuments(withClause({...c,actor_ids:['actor.missing']})).errors.some(e=>e.includes('unresolved reference')));
+ assert(validateDocuments(withClause(c)).errors.length);
+ assert(validateDocuments(withClause({...c,actor_ids:['actor.missing']})).errors.length);
 });
 test('new clause duplicates remain invalid and whole agreement hash covers quantities',()=>{
  const d=withClause(simple());d.agreement.agreement[0].clauses.push(simple());assert(validateDocuments(d).errors.some(e=>e.includes('Duplicate ID')));
  const a=withClause(simple()).agreement.agreement[0],before=hash(a);a.clauses[0].value=30;a.clauses[0].unit='percent';assert.notEqual(hash(a),before);
 });
-test('a new-format agreement can be approved alongside legacy agreements',()=>{
+test('a simplified agreement can be approved alongside current agreements',()=>{
  const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(dir=>fs.readdirSync(dir).filter(p=>p.endsWith('.json')).map(p=>[dir+'/'+p,JSON.parse(fs.readFileSync(dir+'/'+p))])));
  const before=files['data_foundation/agreement.json'].agreement[0],after={...structuredClone(before),clauses:[simple()]};
  const proposal={id:'change.simple_clause_test',category:'story',title:'Simplify clauses',reason:'Test transition',elements:[{record_type:'agreement',record_id:before.id,before,after}]};

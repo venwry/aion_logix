@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/assumption.schema.json",
+  "type": "object",
+  "properties": {
+    "assumption": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "assumption"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^assumption\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "world_premise",
+            "policy",
+            "constraint",
+            "target",
+            "baseline_condition"
+          ]
+        },
+        "scope_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor",
+              "actor_relationship",
+              "agreement",
+              "assumption",
+              "campaign",
+              "event",
+              "location",
+              "manufacturing_capability",
+              "market_response",
+              "process",
+              "product",
+              "technology",
+              "base_part",
+              "device",
+              "software_edition",
+              "external_product"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Short summary used as the assumption heading."
+        },
+        "statements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Ordered statements expressing the assumption without one long text block."
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "topic",
+        "statements"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -4,7 +4,7 @@ test('new technical datasets are browsable and pending authorization',async({pag
  await page.goto('/code/browser.html#base_part.erav1_6mhz');await expect(page.locator('body')).toHaveAttribute('data-ready','true');
  await expect(page.locator('#details h2')).toHaveText('ERAv1 6MHz (initial)');await expect(page.locator('#details .badge')).toHaveText('Pending authorization');
  for(const n of ['base_part','device','software_edition'])await expect(page.locator('#dataset option[value="'+n+'"]').first()).toHaveCount(1);
- await page.locator('#dataset').selectOption('device');await page.locator('#search').fill('device.ram_64kb_x32');await page.locator('#rows tr[data-record-id="device.ram_64kb_x32"]').click();await expect(page.locator('#details h2')).toHaveText('Logix 64 KB 32-bit DRAM module');await expect(page.getByLabel('Composition history')).toBeVisible();await expect(page.locator('#details')).toContainText('unknown');
+ await page.locator('#dataset').selectOption('device');await page.locator('#search').fill('device.ram_64kb_x32');await page.locator('#rows tr[data-record-id="device.ram_64kb_x32"]').click();await expect(page.locator('#details h2')).toHaveText('Logix 64 KB 32-bit DRAM module');await expect(page.getByLabel('Composition history')).toBeVisible();await expect(page.locator('#details')).toContainText('1995-01-01 · simulation end');
 });
 test('existing products have reviewable before and after compositions',async({page})=>{
  const pending=JSON.parse(fs.readFileSync('data_storytelling/change.json')).change,decisions=JSON.parse(fs.readFileSync('data_storytelling/authorization_decision.json')).authorization_decision;

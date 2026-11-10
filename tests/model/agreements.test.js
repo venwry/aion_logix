@@ -21,7 +21,7 @@ const legacyDocs=()=>{
  for(const a of d.agreement.agreement){a.clauses=old.filter(c=>c.agreement_id===a.id).map(({agreement_id,...c})=>c);}
  return d;
 };
-test('nested clauses validate duplicates, references, equity allocations and supersession cycles',()=>{
+test('legacy nested clause fields are rejected without rewriting historical evidence',()=>{
  for(const mutate of [
   a=>a.clauses.push(structuredClone(a.clauses[0])),
   a=>{a.clauses[0].actor_ids=['actor.missing'];},
@@ -30,7 +30,7 @@ test('nested clauses validate duplicates, references, equity allocations and sup
   a=>{const c=a.clauses.find(c=>c.equity);c.equity.allocation='individual';c.equity.beneficiary_actor_ids=[];},
   a=>{a.clauses[0].agreement_id=a.id;}
  ]){const d=legacyDocs(),a=d.agreement.agreement.find(a=>a.id==='agreement.dri_founding');mutate(a);assert(validateDocuments(d).errors.length);}
- const d=legacyDocs(),clauses=d.agreement.agreement[0].clauses;clauses[0].supersedes_clause_id=clauses[1].id;assert.deepEqual(validateDocuments(d).errors,[]);
+ const d=legacyDocs(),clauses=d.agreement.agreement[0].clauses;clauses[0].supersedes_clause_id=clauses[1].id;assert(validateDocuments(d).errors.length);
 });
 test('whole-agreement authorization covers nested terms and clause edits invalidate its hash',()=>{
  const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(dir=>fs.readdirSync(dir).filter(p=>p.endsWith('.json')).map(p=>[dir+'/'+p,read(dir+'/'+p)])));
