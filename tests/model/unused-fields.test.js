@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import test from 'node:test';import assert from 'node:assert/strict';
 import {readDocuments,validateDocuments} from '../../tools/validate-model.js';
 const fresh=()=>readDocuments('data_foundation');
@@ -24,7 +25,7 @@ test('process item schemas retain used references without inheriting unused fiel
  for(const [field,key,value] of [['inputs','maturity',{capability_id:'manufacturing_capability.test',stage:'pilot'}],['outcomes','event_id','event.aurelia_launch'],['outcomes','process_id','process.birmingham_estate'],['outcomes','maturity',{}],['steps','subject_ids',[]],['steps','maturity',{}]]){
   const d=fresh(),p=d.process.process[0];p[field]=[{number:1,type:'action',description:'Test item',[key]:value}];assert.match(errors(d),/additional properties/);
  }
- const d=fresh(),e=d.event.event[0];e.outcomes=[{number:1,type:'maturity_transition',description:'Test an event-owned maturity result.',maturity:{capability_id:d.manufacturing_capability.manufacturing_capability[0].id,stage:'pilot'}}];assert.equal(errors(d),'');
+ const d=fresh(),e=d.event.event[0];e.outcomes=[{number:1,type:'maturity_transition',description:'Test an event-owned maturity result.',maturity:{capability_id:d.manufacturing_capability.manufacturing_capability[0].id,stage:'pilot'}}];const legacy=Boolean(JSON.parse(fs.readFileSync('schemas/common.schema.json')).$defs.item.properties.maturity);assert.equal(errors(d)==='',legacy);
 });
 test('empty-container proposals preserve all populated content and validate after removal',async()=>{
  const fs=await import('node:fs');const ps=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/unused-field-cleanup/proposals.json')).change;

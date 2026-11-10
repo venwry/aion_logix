@@ -20,8 +20,13 @@ for(const r of docs.technology.technology)r.specification=migrateTechnologySpeci
 // The old import fixture predates retirement of unused fields. Adapt only its
 // representation in memory; pinned inventory quantities, targets and source files
 // remain unchanged. Archived decisions must never be rewritten for a new schema.
+const legacyMaturitySupported=Boolean(read('schemas/common.schema.json').$defs.item.properties.maturity);
 function currentShape(r){
  if(!r)return;
+ if(!legacyMaturitySupported)for(const field of ['inputs','outcomes','steps'])for(const item of r[field]||[])if(item.maturity){
+  const {capability_id,stage}=item.maturity;item.subject_ids=[...new Set([...(item.subject_ids||[]),capability_id])];
+  if(!item.description.toLowerCase().includes(stage.replaceAll('_',' ')))item.description+=' — '+stage.replaceAll('_',' ');delete item.maturity;
+ }
  if(r.id.startsWith('product.')){delete r.family_product_id;delete r.service_definition;for(const s of r.specification||[])if(s.unit){if(s.value!==undefined)s.value=String(s.value)+' '+s.unit;delete s.unit;}}
  if(r.id.startsWith('software_edition.'))delete r.family_product_id;
  if(r.id.startsWith('process.')){

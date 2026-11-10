@@ -103,7 +103,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
     }
     if(record.id.startsWith('campaign.')&&records.get(record.process_id)?.kind!=='campaign_execution')report(`${record.id}: campaign needs an execution process`);
     for(const outcome of record.outcomes||[]){
-      if(outcome.type==='maturity_transition'&&!outcome.maturity)report(`${record.id}: maturity transition needs capability and stage`);
+      if(outcome.type==='maturity_transition'&&!outcome.maturity&&!outcome.subject_ids?.some(id=>id.startsWith('manufacturing_capability.')))report(`${record.id}: maturity transition needs a capability reference in subject_ids and its stage in description`);
       if(outcome.maturity&&outcome.type!=='maturity_transition')report(`${record.id}: maturity payload requires maturity_transition type`);
     }
 
