@@ -3913,7 +3913,53 @@
           "kind": "testing",
           "description": "Qualification pending."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display and signal path",
+            "description": "The monitor combines {display_assembly_id} with {controller_id} to display {displayed_levels} grayscale levels from Logix’s 4-bit digital video signal. Its programmable palette uses {palette_precision_bits}-bit intensity values.\n\n4-bit index → 16×8-bit palette → external precision DAC ladder → external 25–30 MHz target video amplifier → CRT; independent HV/deflection/PSU."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Raster compatibility",
+            "description": "Capability protocol version {capability_protocol_version} advertises {raster_profiles} as its supported and preferred raster. The maximum pixel clock is {maximum_pixel_clock_mhz} MHz.\n\nThe display uses fixed-frequency progressive scanning; older logical modes must be scaled by the card."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.mono_pro_controller",
+            "ref_role": "Converts digital pixel indices into the monitor’s output levels"
+          },
+          {
+            "key": "display_assembly_id",
+            "ref_id": "base_part.brimar_m36_141w_crt",
+            "ref_role": "CRT used by this monitor"
+          },
+          {
+            "key": "displayed_levels",
+            "value": 16
+          },
+          {
+            "key": "palette_precision_bits",
+            "value": 8
+          },
+          {
+            "key": "capability_protocol_version",
+            "value": 1
+          },
+          {
+            "key": "raster_profiles",
+            "value": "640 × 400"
+          },
+          {
+            "key": "maximum_pixel_clock_mhz",
+            "value": 21.504
+          }
+        ]
+      }
     },
     {
       "id": "device.artemis_video_card_16kb",
@@ -4294,29 +4340,7 @@
                 "technology_id": "technology.logix_sprite_system",
                 "profile": "profile_1"
               }
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "display",
-                "name": "Display output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_monitor_1",
-                      "device.color_monitor_1",
-                      "device.mono_monitor_2",
-                      "device.color_monitor_2",
-                      "device.mono_pro",
-                      "device.color_pro_14"
-                    ]
-                  }
-                ]
-              }
-            ]
+            }
           },
           "composition_definition": [
             {
@@ -4390,6 +4414,28 @@
               "kind": "testing",
               "description": "Reuse qualified Aurelia video silicon; verify 32-bit host bridge, byte order, byte enables, DMA wait handling, clocks and power. Mono Pro unsupported."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "display",
+              "name": "Display output",
+              "sockets": [
+                {
+                  "id": "video_out",
+                  "name": "Video output",
+                  "connection": "video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.mono_monitor_1",
+                    "device.color_monitor_1",
+                    "device.mono_monitor_2",
+                    "device.color_monitor_2",
+                    "device.mono_pro",
+                    "device.color_pro_14"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -4398,6 +4444,332 @@
           "number": 1,
           "kind": "testing",
           "description": "Reuse qualified Aurelia video silicon; verify 32-bit host bridge, byte order, byte enables, DMA wait handling, clocks and power. Mono Pro unsupported."
+        }
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display architecture",
+            "description": "The card uses {graphics_controller_id} and implements {video_link_id} through {display_api_id}. Software selects only modes supported by the controller, monitor profile and available buffer/sprite allocation; unsupported downscaling is rejected."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Display memory and sprites",
+            "description": "Display storage is {video_ram_kib} KiB, built from {display_chip_count} {display_chip_id} devices on a {display_bus_bits}-bit bus. Text/font and bitmap allocations are alternative uses of this memory. Sprite storage is independent: {sprite_ram_bytes} bytes from {sprite_chip_count} {sprite_chip_id} chips on a separate {sprite_bus_bits}-bit bus.\n\nOne shared 2048-byte font; glyph edits affect both pages. Independent font buffering is not advertised in this baseline.\n\nPage selection latches during vertical blank. Double buffering does not guarantee drawing throughput.\n\nSprite geometry and compositing follow {sprite_protocol_id} {sprite_profile}."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Scanout pipeline",
+            "description": "The Aurelia-derived pixel pipeline contains {pixel_buffer_pages} banks of {pixel_buffer_page_bytes} bytes, holding {pixel_depth_bits}-bit pixels. Separate ownership states prevent the renderer from overwriting a bank being scanned out: {pixel_bank_states}. Completed banks feed output latches and a serializer; the pipeline is prefetched before active display and preserves sync on underrun.\n\nThe FIFO sits inside the reused Aurelia controller; it is not another framebuffer.\n\nTwo {character_cache_bytes}-byte row caches hold current and next character/attribute rows independently of the pixel FIFO."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Memory arbitration and display qualification",
+            "description": "Card-local sequencer arbitrates display fetch and deadline-reserved independent DRAM refresh before bounded host/DMA transfers with READY. Sprite SRAM has its own 8-bit bus. System DMA/MMU remain dedicated host components; the card does not replace system-memory refresh.\n\nMono II / Color II use legacy 200-line raster profiles. No 26.88 kHz output and no Mono Pro support. CPU word size does not widen local display memory. All five sprites remain available.\n\nThe host’s {host_bus_bits}-bit interface is bridged to the local display bus using byte enables, staging latches and bounded READY/backpressure. A word upload can require four local transfers; the board is not hot-swappable."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "graphics_controller_id",
+            "ref_id": "base_part.aurelia_video_chip",
+            "ref_role": "Graphics controller fitted to this card"
+          },
+          {
+            "key": "video_link_id",
+            "ref_id": "technology.logix_digital_video",
+            "ref_role": "Digital display signal protocol"
+          },
+          {
+            "key": "display_api_id",
+            "ref_id": "technology.logix_display_api",
+            "ref_role": "Mode discovery and display-memory contract"
+          },
+          {
+            "key": "video_ram_kib",
+            "value": 16
+          },
+          {
+            "key": "display_chip_count",
+            "value": 8
+          },
+          {
+            "key": "display_chip_id",
+            "ref_id": "base_part.aion_4116",
+            "ref_role": "External DRAM used for display storage"
+          },
+          {
+            "key": "display_bus_bits",
+            "value": 8
+          },
+          {
+            "key": "sprite_ram_bytes",
+            "value": 1024
+          },
+          {
+            "key": "sprite_chip_count",
+            "value": 2
+          },
+          {
+            "key": "sprite_chip_id",
+            "ref_id": "base_part.aion_2114",
+            "ref_role": "SRAM dedicated to sprite data"
+          },
+          {
+            "key": "sprite_bus_bits",
+            "value": 8
+          },
+          {
+            "key": "sprite_protocol_id",
+            "ref_id": "technology.logix_sprite_system",
+            "ref_role": "Sprite semantics implemented by the controller"
+          },
+          {
+            "key": "sprite_profile",
+            "value": "profile_1"
+          },
+          {
+            "key": "pixel_buffer_pages",
+            "value": 4
+          },
+          {
+            "key": "pixel_buffer_page_bytes",
+            "value": 40
+          },
+          {
+            "key": "pixel_depth_bits",
+            "value": 4
+          },
+          {
+            "key": "pixel_bank_states",
+            "value": "free, filling, ready, reading"
+          },
+          {
+            "key": "character_cache_bytes",
+            "value": 160
+          },
+          {
+            "key": "host_bus_bits",
+            "value": 32
+          }
+        ]
+      },
+      "graphic_modes_specification": [
+        {
+          "id": "text_40",
+          "type": "text",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 2048,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 40
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 8
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 1024
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 1024
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 2048
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 0 sprites uses 4096 bytes, leaving 12288 bytes of display RAM. The recorded allocation with 1 text page(s) and 5 sprites uses 4096 bytes, leaving 12288 bytes of display RAM. The recorded allocation with 2 text page(s) and 0 sprites uses 6144 bytes, leaving 10240 bytes of display RAM. The recorded allocation with 2 text page(s) and 5 sprites uses 6144 bytes, leaving 10240 bytes of display RAM."
+        },
+        {
+          "id": "text_80",
+          "type": "text",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 4096,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 8
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 2048
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 0 sprites uses 6144 bytes, leaving 10240 bytes of display RAM. The recorded allocation with 1 text page(s) and 5 sprites uses 6144 bytes, leaving 10240 bytes of display RAM. The recorded allocation with 2 text page(s) and 0 sprites uses 10240 bytes, leaving 6144 bytes of display RAM. The recorded allocation with 2 text page(s) and 5 sprites uses 10240 bytes, leaving 6144 bytes of display RAM."
+        },
+        {
+          "id": "graphics_a",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 16000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 0 sprites uses 16000 bytes, leaving 384 bytes of display RAM. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 384 bytes of display RAM."
+        },
+        {
+          "id": "graphics_b2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 16000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 0 sprites uses 16000 bytes, leaving 384 bytes of display RAM. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 384 bytes of display RAM."
+        },
+        {
+          "id": "graphics_b1",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 40
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 0 sprites uses 8000 bytes, leaving 8384 bytes of display RAM. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 8000 bytes, leaving 8384 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 0 sprites uses 16000 bytes, leaving 384 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 384 bytes of display RAM."
+        },
+        {
+          "id": "graphics_c4",
+          "type": "bitmap",
+          "width": 320,
+          "height": 100,
+          "framebuffer_size": 16000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 0 sprites uses 16000 bytes, leaving 384 bytes of display RAM. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 384 bytes of display RAM."
+        },
+        {
+          "id": "graphics_c2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 100,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 0 sprites uses 8000 bytes, leaving 8384 bytes of display RAM. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 8000 bytes, leaving 8384 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 0 sprites uses 16000 bytes, leaving 384 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 384 bytes of display RAM."
+        },
+        {
+          "id": "graphics_legacy",
+          "type": "bitmap",
+          "width": 160,
+          "height": 100,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 0 sprites uses 8000 bytes, leaving 8384 bytes of display RAM. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 8000 bytes, leaving 8384 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 0 sprites uses 16000 bytes, leaving 384 bytes of display RAM. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 16000 bytes, leaving 384 bytes of display RAM. This is a compatibility mode."
         }
       ]
     },
@@ -4977,29 +5349,7 @@
               "device.base_computer.athena",
               "device.base_computer.athena_server"
             ],
-            "athena_qualification": "Existing card baseline selected; Athena host electrical/firmware compatibility remains a release gate.",
-            "expansion_socket_groups": [
-              {
-                "id": "display",
-                "name": "Display output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_monitor_1",
-                      "device.color_monitor_1",
-                      "device.mono_monitor_2",
-                      "device.color_monitor_2",
-                      "device.mono_pro",
-                      "device.color_pro_14"
-                    ]
-                  }
-                ]
-              }
-            ]
+            "athena_qualification": "Existing card baseline selected; Athena host electrical/firmware compatibility remains a release gate."
           },
           "composition_definition": [
             {
@@ -5073,6 +5423,28 @@
               "kind": "testing",
               "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "display",
+              "name": "Display output",
+              "sockets": [
+                {
+                  "id": "video_out",
+                  "name": "Video output",
+                  "connection": "video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.mono_monitor_1",
+                    "device.color_monitor_1",
+                    "device.mono_monitor_2",
+                    "device.color_monitor_2",
+                    "device.mono_pro",
+                    "device.color_pro_14"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
@@ -5081,6 +5453,576 @@
           "number": 1,
           "kind": "testing",
           "description": "New controller, 64 KiB DRAM decoding, palette sequencer and host/DMA arbitration require timing, power and release qualification."
+        }
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display architecture",
+            "description": "The card uses {graphics_controller_id} and implements {video_link_id} through {display_api_id}. Software selects only modes supported by the controller, monitor profile and available buffer/sprite allocation; unsupported downscaling is rejected.\n\nIt extends {previous_card_id}; {palette_list_id} adds scanline palette changes."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Display memory and sprites",
+            "description": "Display storage is {video_ram_kib} KiB, built from {display_chip_count} {display_chip_id} devices on a {display_bus_bits}-bit bus. Two 16K × 16-bit banks use ordinary DRAM, not dual-port VRAM. Text/font and bitmap allocations are alternative uses of this memory. Sprite storage is independent: {sprite_ram_bytes} bytes from {sprite_chip_count} {sprite_chip_id} chips on a separate {sprite_bus_bits}-bit bus.\n\nWhen palette lists are enabled, reserve 0xFA00–0xFFFF (1536 bytes); text, fonts and framebuffers occupy 0x0000–0xF9FF.\n\nOne shared 256-glyph bank per mode. Font allocation 2048 bytes at 8×8, 4096 at 8×16 or 8×10 (16-byte glyph stride). Font writes affect both pages.\n\nPage selection latches during vertical blank. Double buffering does not guarantee drawing throughput.\n\nSprite geometry and compositing follow {sprite_protocol_id} {sprite_profile}."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Scanout pipeline",
+            "description": "The ASIC pixel pipeline contains {pixel_buffer_pages} banks of {pixel_buffer_page_bytes} bytes, holding {pixel_depth_bits}-bit pixels. Separate ownership states prevent the renderer from overwriting a bank being scanned out: {pixel_bank_states}. Completed banks feed output latches and a serializer; the pipeline is prefetched before active display and preserves sync on underrun.\n\nEach bank comprises 40 × 32-bit words and holds 320 pixels, so a 640-pixel line consumes two banks. The renderer expands eight pixels at a time while a separate serializer latch drains ready banks. Underrun blanks pixels and sets a sticky fault.\n\nTwo {character_cache_bytes}-byte row caches hold current and next character/attribute rows independently of the pixel FIFO.\n\nThe dot clock is {pixel_clock_mhz} MHz. Eight-pixel renderer steps and SRAM latch loads run at {renderer_step_mhz} MHz, rather than requiring one SRAM read per dot. A pixel bank drains in {pixel_bank_drain_us} µs."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Memory arbitration and display qualification",
+            "description": "Card-local sequencer arbitrates display fetch and deadline-reserved independent DRAM refresh before bounded host/DMA transfers with READY. Sprite SRAM has its own 8-bit bus. System DMA/MMU remain dedicated host components; the card does not replace system-memory refresh.\n\nRequalify existing renderer/FIFO and 16-bit DRAM organization for 640x400x2 and 640x200x4, refresh, sprite fetches, list prefetch and host/DMA stalls together. No greater upload throughput is promised by added capacity.\n\nAll earlier modes and sprite/host/API features retained subject to monitor capabilities. Color Pro 14 and Mono Pro support the 640x400 raster; older displays retain their declared raster limits. Horizontal-retrace palette lists require explicit monitor capability; otherwise use static/vertical-retrace palette updates. No forced high scan rate on old monitors.\n\nUse on {planned_base_computer_athena} and {planned_base_computer_athena_server} requires electrical and firmware qualification; selection of the existing baseline does not establish that these hosts are ready."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "graphics_controller_id",
+            "ref_id": "base_part.artemis_graphics_chip_64kb",
+            "ref_role": "Graphics controller fitted to this card"
+          },
+          {
+            "key": "video_link_id",
+            "ref_id": "technology.logix_digital_video",
+            "ref_role": "Digital display signal protocol"
+          },
+          {
+            "key": "display_api_id",
+            "ref_id": "technology.logix_display_api",
+            "ref_role": "Mode discovery and display-memory contract"
+          },
+          {
+            "key": "previous_card_id",
+            "ref_id": "device.artemis_video_card",
+            "ref_role": "Baseline whose modes and host/API features are retained"
+          },
+          {
+            "key": "palette_list_id",
+            "ref_id": "technology.scanline_palette_list",
+            "ref_role": "Bounded horizontal-retrace palette update mechanism"
+          },
+          {
+            "key": "video_ram_kib",
+            "value": 64
+          },
+          {
+            "key": "display_chip_count",
+            "value": 32
+          },
+          {
+            "key": "display_chip_id",
+            "ref_id": "base_part.aion_4116",
+            "ref_role": "External DRAM used for display storage"
+          },
+          {
+            "key": "display_bus_bits",
+            "value": 16
+          },
+          {
+            "key": "sprite_ram_bytes",
+            "value": 1024
+          },
+          {
+            "key": "sprite_chip_count",
+            "value": 2
+          },
+          {
+            "key": "sprite_chip_id",
+            "ref_id": "base_part.aion_2114",
+            "ref_role": "SRAM dedicated to sprite data"
+          },
+          {
+            "key": "sprite_bus_bits",
+            "value": 8
+          },
+          {
+            "key": "sprite_protocol_id",
+            "ref_id": "technology.logix_sprite_system",
+            "ref_role": "Sprite semantics implemented by the controller"
+          },
+          {
+            "key": "sprite_profile",
+            "value": "profile_2"
+          },
+          {
+            "key": "pixel_buffer_pages",
+            "value": 4
+          },
+          {
+            "key": "pixel_buffer_page_bytes",
+            "value": 160
+          },
+          {
+            "key": "pixel_depth_bits",
+            "value": 4
+          },
+          {
+            "key": "pixel_bank_states",
+            "value": "free, filling, ready, displaying"
+          },
+          {
+            "key": "character_cache_bytes",
+            "value": 160
+          },
+          {
+            "key": "pixel_clock_mhz",
+            "value": 21.504
+          },
+          {
+            "key": "renderer_step_mhz",
+            "value": 2.688
+          },
+          {
+            "key": "pixel_bank_drain_us",
+            "value": 14.881
+          },
+          {
+            "key": "planned_base_computer_athena",
+            "ref_id": "device.base_computer.athena",
+            "ref_role": "Planned host for the selected graphics-card baseline"
+          },
+          {
+            "key": "planned_base_computer_athena_server",
+            "ref_id": "device.base_computer.athena_server",
+            "ref_role": "Planned host for the selected graphics-card baseline"
+          }
+        ]
+      },
+      "graphic_modes_specification": [
+        {
+          "id": "text_40",
+          "type": "text",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 2048,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 40
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 8
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 1024
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 1024
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 2048
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 5 sprites uses 5632 bytes, leaving 59904 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 text page(s) and 5 sprites uses 7680 bytes, leaving 57856 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "text_80",
+          "type": "text",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 4096,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 8
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 2048
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 5 sprites uses 7680 bytes, leaving 57856 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 text page(s) and 5 sprites uses 11776 bytes, leaving 53760 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "text_80_25_400",
+          "type": "text",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 4096,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 16
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 4096
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 5 sprites uses 9728 bytes, leaving 55808 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 text page(s) and 5 sprites uses 13824 bytes, leaving 51712 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "text_80_40_400",
+          "type": "text",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 8192,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 40
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 10
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 4096
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 4096
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 4096
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 text page(s) and 5 sprites uses 13824 bytes, leaving 51712 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 text page(s) and 5 sprites uses 22016 bytes, leaving 43520 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_a",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 17536 bytes, leaving 48000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 33536 bytes, leaving 32000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_b2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 17536 bytes, leaving 48000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 33536 bytes, leaving 32000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_b1",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 40
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 9536 bytes, leaving 56000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 17536 bytes, leaving 48000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_c4",
+          "type": "bitmap",
+          "width": 320,
+          "height": 100,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 17536 bytes, leaving 48000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 33536 bytes, leaving 32000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_c2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 100,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 9536 bytes, leaving 56000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 17536 bytes, leaving 48000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_legacy",
+          "type": "bitmap",
+          "width": 160,
+          "height": 100,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 9536 bytes, leaving 56000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. The recorded allocation with 2 framebuffer(s) and 5 sprites uses 17536 bytes, leaving 48000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list. This is a compatibility mode."
+        },
+        {
+          "id": "graphics_640_400_1",
+          "type": "bitmap",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 33536 bytes, leaving 32000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_640_200_2",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 33536 bytes, leaving 32000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_320_400_2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 400,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 33536 bytes, leaving 32000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_320_200_4",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_320_200, raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 33536 bytes, leaving 32000 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_640_400_2",
+          "type": "bitmap",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 64000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 65536 bytes, leaving 0 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
+        },
+        {
+          "id": "graphics_640_200_4",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 64000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 320
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nThe original mode requires a compatible monitor raster from: raster_640_200, raster_640_400. Raster selection still depends on the identified or configured monitor. The recorded allocation with 1 framebuffer(s) and 5 sprites uses 65536 bytes, leaving 0 bytes of display RAM; the allocation includes 1536 bytes reserved for the palette list."
         }
       ]
     },
@@ -5213,7 +6155,58 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Display and signal path",
+            "description": "The monitor combines {display_assembly_id} with {controller_id} to display {displayed_levels} palette-selected colours from Logix’s 4-bit digital video signal. Its programmable palette uses {palette_precision_bits}-bit RGB values."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Raster compatibility",
+            "description": "Capability protocol version {capability_protocol_version} advertises {raster_profiles} as its supported and preferred raster. The maximum pixel clock is {maximum_pixel_clock_mhz} MHz.\n\nThe display uses fixed-frequency progressive scanning; older logical modes must be scaled by the card.\n\nHorizontal-retrace palette updates follow {palette_list_id}. The 64 KiB card executes these lists; an earlier 32 KiB card can provide static or vertical-retrace colour after monitor identification support. The Color Pro timing target is 26.88 kHz horizontal at 60 Hz."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.color_pro_monitor_controller",
+            "ref_role": "Converts digital pixel indices into the monitor’s output levels"
+          },
+          {
+            "key": "display_assembly_id",
+            "ref_id": "base_part.nec_pc8853_display_assembly",
+            "ref_role": "OEM display assembly adapted for this monitor"
+          },
+          {
+            "key": "displayed_levels",
+            "value": 16
+          },
+          {
+            "key": "palette_precision_bits",
+            "value": 12
+          },
+          {
+            "key": "capability_protocol_version",
+            "value": 2
+          },
+          {
+            "key": "raster_profiles",
+            "value": "640 × 400"
+          },
+          {
+            "key": "maximum_pixel_clock_mhz",
+            "value": 21.504
+          },
+          {
+            "key": "palette_list_id",
+            "ref_id": "technology.scanline_palette_list",
+            "ref_role": "Protocol for scanline palette updates"
+          }
+        ]
+      }
     },
     {
       "id": "device.logix_mouse",
@@ -5347,7 +6340,52 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Pointing and scrolling controls",
+            "description": "This relative X/Y mouse uses {bus_id} and {pointing_protocol_id}. It has {buttons} primary/secondary buttons and two independent rollers: one beneath the middle finger for vertical scrolling, and a thumb-side roller for horizontal scrolling. Mechanical-ball quadrature tracking is the design baseline.\n\nIt supports {host_base_computer_aurelia}, {host_base_computer_aurelia_plus}, {host_base_computer_artemis} and {host_base_computer_artemis_pro}. Resolution, tracking, accidental actuation, handedness, detent force, reach and side-wheel placement require qualification. Port power is a target; current draw, connector and protection remain to be validated."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "bus_id",
+            "ref_id": "technology.flexibus",
+            "ref_role": "Peripheral transport for the mouse"
+          },
+          {
+            "key": "pointing_protocol_id",
+            "ref_id": "technology.flexibus_pointing_device",
+            "ref_role": "Pointing-device reports and control protocol"
+          },
+          {
+            "key": "buttons",
+            "value": 2
+          },
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Computer supporting the pointing-device interface"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Computer supporting the pointing-device interface"
+          },
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Computer supporting the pointing-device interface"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Computer supporting the pointing-device interface"
+          }
+        ]
+      }
     },
     {
       "id": "device.artemis_professional_video_128kb",
@@ -5445,24 +6483,7 @@
               "sprites": "Five legacy sprites use separate 1 KiB SRAM (two AION 2114 chips), outside the 128 KiB framebuffer/list allocation. Extend coordinate/addressing and line-budget validation to the 800x600 raster; no automatic sixth pointer sprite.",
               "monitor_modes": "Mono Pro 17 uses a qualified fixed 800x600 raster. Older modes can be centered without scaling; the card reports presentation geometry and logical/output coordinate mapping. Older full-screen timings are enabled only for a monitor profile explicitly supporting them. No automatic multisync claim.",
               "host_integration": "One general 32-bit Artemis slot for the additional professional card; the primary 64 KiB colour card keeps the dedicated video slot. Independent display handles, palettes, clocks, DMA/address resources and input focus."
-            },
-            "expansion_socket_groups": [
-              {
-                "id": "display",
-                "name": "Display output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_pro_17"
-                    ]
-                  }
-                ]
-              }
-            ]
+            }
           },
           "composition_definition": [
             {
@@ -5536,10 +6557,670 @@
               "kind": "testing",
               "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "display",
+              "name": "Display output",
+              "sockets": [
+                {
+                  "id": "video_out",
+                  "name": "Video output",
+                  "connection": "video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.mono_pro_17"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Professional display engine",
+            "description": "The card implements {graphics_design_id} with {controller_id} for {host_base_computer_artemis} and {host_base_computer_artemis_pro}. It uses one general 32-bit slot alongside the primary card in the dedicated video slot, with independent display handles, palettes, clocks, DMA/address resources and input focus.\n\n{monitor_id} uses a fixed 800 × 600 raster. The card retains the text/bitmap capabilities of {legacy_card_id}; older logical modes are centered without scaling. Older full-screen timings require an explicitly compatible monitor profile, with logical/output coordinate mapping reported to software."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Memory, drawing and redraw",
+            "description": "The framebuffer/list allocation contains {video_ram_bytes} bytes. Five legacy sprites use a separate {sprite_sram_bytes}-byte SRAM bank built from two AION 2114 chips; 800 × 600 coordinate and line-budget validation remains required, and no sixth pointer sprite is implied.\n\nDrawing supports overlap-safe clipped rectangle copies, fills, masked Boolean raster operations and all-octant integer lines. Lookup-table antialiasing with four output shades is optional at 800 × 600. Retain vector geometry and redraw dirty areas or exposed pan strips. XOR suits temporary simple cursors, not removal of overlapping antialiased geometry. A full 800 × 600 × 2bpp double buffer does not fit."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Palette sequencing and qualification",
+            "description": "Reserve {palette_list_bytes} bytes at {palette_list_address_range} for up to {palette_command_count} three-byte commands. Byte 0 is an unsigned scanline delta; byte 1 combines palette-register index and red, and byte 2 combines green and blue, each colour component occupying four bits. The palette has sixteen registers.\n\nDeltas accumulate from active output line zero; zero permits another write at the same boundary. Execute in preceding horizontal blank and latch before the line. A 10-bit count distinguishes 0–512 entries. Split gaps over 255 lines with harmless writes, which still consume entries. At vertical blank restore the initial palette and list position; edit or swap only in a defined safe interval.\n\nThe target is at most four writes per output-line boundary, subject to transfer/settling qualification at the faster raster. Reject over-budget lists. Static grayscale is the CAD default; 512 commands neither imply 512 distinct scanlines nor sixteen simultaneous shades in a 2bpp mode."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "graphics_design_id",
+            "ref_id": "technology.artemis_professional_graphics",
+            "ref_role": "Professional graphics architecture"
+          },
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.professional_graphics_controller",
+            "ref_role": "Professional graphics controller"
+          },
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Host for the additional professional display card"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Host for the additional professional display card"
+          },
+          {
+            "key": "monitor_id",
+            "ref_id": "device.mono_pro_17",
+            "ref_role": "Qualified fixed-raster display intended for the professional card"
+          },
+          {
+            "key": "legacy_card_id",
+            "ref_id": "device.artemis_video_card_64kb",
+            "ref_role": "Source of the inherited display modes"
+          },
+          {
+            "key": "video_ram_bytes",
+            "value": 131072
+          },
+          {
+            "key": "sprite_sram_bytes",
+            "value": 1024
+          },
+          {
+            "key": "palette_list_bytes",
+            "value": 1536
+          },
+          {
+            "key": "palette_list_address_range",
+            "value": "0x1FA00–0x1FFFF"
+          },
+          {
+            "key": "palette_command_count",
+            "value": 512
+          }
+        ]
+      },
+      "graphic_modes_specification": [
+        {
+          "id": "professional_800_600_2bpp",
+          "type": "bitmap",
+          "width": 800,
+          "height": 600,
+          "framebuffer_size": 120000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 200
+            },
+            {
+              "key": "framebuffer_count",
+              "value": 1
+            },
+            {
+              "key": "simultaneous_values",
+              "value": 4
+            },
+            {
+              "key": "palette_list_bytes",
+              "value": 1536
+            },
+            {
+              "key": "remaining_bytes",
+              "value": 9536
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available. The {framebuffer_count}-buffer layout reserves {palette_list_bytes} bytes for the palette list and leaves {remaining_bytes} bytes unused; it supports {simultaneous_values} simultaneous pixel values.\n\nThe five legacy sprites use separate 1 KiB SRAM. Sprite coordinates and line budgets require qualification at 800×600; this is not a guarantee of a sixth pointer sprite."
+        },
+        {
+          "id": "compatibility_640_400_2bpp",
+          "type": "bitmap",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 64000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            },
+            {
+              "key": "framebuffer_count",
+              "value": 2
+            },
+            {
+              "key": "simultaneous_values",
+              "value": 4
+            },
+            {
+              "key": "palette_list_bytes",
+              "value": 1536
+            },
+            {
+              "key": "remaining_bytes",
+              "value": 1536
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available. The {framebuffer_count}-buffer layout reserves {palette_list_bytes} bytes for the palette list and leaves {remaining_bytes} bytes unused; it supports {simultaneous_values} simultaneous pixel values.\n\nThe five legacy sprites use separate 1 KiB SRAM. Sprite coordinates and line budgets require qualification at 800×600; this is not a guarantee of a sixth pointer sprite."
+        },
+        {
+          "id": "compatibility_640_200_4bpp",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 64000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 320
+            },
+            {
+              "key": "framebuffer_count",
+              "value": 2
+            },
+            {
+              "key": "simultaneous_values",
+              "value": 16
+            },
+            {
+              "key": "palette_list_bytes",
+              "value": 1536
+            },
+            {
+              "key": "remaining_bytes",
+              "value": 1536
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available. The {framebuffer_count}-buffer layout reserves {palette_list_bytes} bytes for the palette list and leaves {remaining_bytes} bytes unused; it supports {simultaneous_values} simultaneous pixel values.\n\nThe five legacy sprites use separate 1 KiB SRAM. Sprite coordinates and line budgets require qualification at 800×600; this is not a guarantee of a sixth pointer sprite."
+        },
+        {
+          "id": "text_40",
+          "type": "text",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 2048,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 40
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 8
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 1024
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 1024
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 2048
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "text_80",
+          "type": "text",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 4096,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 8
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 2048
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "text_80_25_400",
+          "type": "text",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 4096,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 25
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 16
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 2048
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 4096
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "text_80_40_400",
+          "type": "text",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 8192,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "columns",
+              "value": 80
+            },
+            {
+              "key": "rows",
+              "value": 40
+            },
+            {
+              "key": "glyph_width",
+              "value": 8
+            },
+            {
+              "key": "glyph_height",
+              "value": 10
+            },
+            {
+              "key": "character_count",
+              "value": 256
+            },
+            {
+              "key": "character_map_bytes_per_buffer",
+              "value": 4096
+            },
+            {
+              "key": "attribute_map_bytes_per_buffer",
+              "value": 4096
+            },
+            {
+              "key": "attribute_format",
+              "value": "4-bit foreground index + 4-bit background index"
+            },
+            {
+              "key": "font_bytes",
+              "value": 4096
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The {columns} × {rows} character grid occupies {width} × {height} logical pixels, using {glyph_width} × {glyph_height}-pixel glyphs. One page reserves {framebuffer_size} bytes, including {character_map_bytes_per_buffer} bytes for character codes and {attribute_map_bytes_per_buffer} bytes for attributes. The {character_count}-character font occupies {font_bytes} shared bytes; it is separate from each page. Attributes encode {attribute_format}. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_a",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_b2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_b1",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 40
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_c4",
+          "type": "bitmap",
+          "width": 320,
+          "height": 100,
+          "framebuffer_size": 16000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_c2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 100,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_legacy",
+          "type": "bitmap",
+          "width": 160,
+          "height": 100,
+          "framebuffer_size": 8000,
+          "double_buffering": true,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. Double buffering is supported within the recorded memory allocation. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board. This is a compatibility mode."
+        },
+        {
+          "id": "graphics_640_400_1",
+          "type": "bitmap",
+          "width": 640,
+          "height": 400,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 1
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_640_200_2",
+          "type": "bitmap",
+          "width": 640,
+          "height": 200,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_320_400_2",
+          "type": "bitmap",
+          "width": 320,
+          "height": 400,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 2
+            },
+            {
+              "key": "stride_bytes",
+              "value": 80
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        },
+        {
+          "id": "graphics_320_200_4",
+          "type": "bitmap",
+          "width": 320,
+          "height": 200,
+          "framebuffer_size": 32000,
+          "double_buffering": false,
+          "sprites_available": 5,
+          "parameters": [
+            {
+              "key": "bits_per_pixel",
+              "value": 4
+            },
+            {
+              "key": "stride_bytes",
+              "value": 160
+            },
+            {
+              "key": "inherited_from_id",
+              "ref_id": "device.artemis_video_card_64kb",
+              "ref_role": "Source of the inherited mode geometry and baseline buffering capability"
+            }
+          ],
+          "description": "The bitmap contains {width} × {height} pixels at {bits_per_pixel} bits per pixel. Its scanline stride is {stride_bytes} bytes and one framebuffer occupies {framebuffer_size} bytes. The recorded allocation does not support double buffering. The independent sprite store keeps {sprites_available} sprites available.\n\nGeometry and baseline buffering are inherited from {inherited_from_id}. The professional display centers older modes in its fixed 800 × 600 raster without scaling. Qualify monitor support, palette allocation and sprite timing; the source board’s allocation totals do not describe the professional board."
+        }
+      ]
     },
     {
       "id": "device.mono_pro_17",
@@ -5682,7 +7363,52 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Professional grayscale display",
+            "description": "The {diagonal_inches}-inch display uses {controller_id} to present a fixed 800 × 600 progressive raster. Its {intensity_levels} intensity levels support four simultaneous shades in 800 × 600 × 2bpp and sixteen in 640 × 200 × 4bpp. A 4-bit intensity DAC drives a level-matched linear amplifier; TTL/ECL-only video input is insufficient.\n\nThe RGB palette command format remains 12-bit: equal-channel codes 000 through FFF select corresponding grayscale levels. Other RGB values need a documented luminance mapping, with DAC/gamma calibration on the actual CRT."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Timing target and OEM qualification",
+            "description": "The production target is {refresh_hz} Hz at totals of {raster_totals}, requiring {horizontal_khz} kHz horizontal and {pixel_clock_mhz} MHz pixel timing.\n\nA Ball HD-series HD17H horizontal-format OEM assembly with the analog/linear-video option is a candidate, not a confirmed or qualified supplier. Its documented 26–36 kHz horizontal and 40–80 Hz vertical ranges and typical 35 MHz linear amplifier do not establish the target timing or grayscale performance. Qualify a deflection revision, contrast, grayscale settling, geometry and corner focus. The 56 Hz/35 kHz fallback remains an engineering option rather than the production specification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "diagonal_inches",
+            "value": 17
+          },
+          {
+            "key": "controller_id",
+            "ref_id": "base_part.mono_pro_17_controller",
+            "ref_role": "Pixel-index and grayscale palette controller"
+          },
+          {
+            "key": "intensity_levels",
+            "value": 16
+          },
+          {
+            "key": "refresh_hz",
+            "value": 60
+          },
+          {
+            "key": "raster_totals",
+            "value": "1024 pixels × 625 lines"
+          },
+          {
+            "key": "horizontal_khz",
+            "value": 37.5
+          },
+          {
+            "key": "pixel_clock_mhz",
+            "value": 38.4
+          }
+        ]
+      }
     },
     {
       "id": "device.artemis_ram_module_prototype",
@@ -5821,7 +7547,39 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Memory organization",
+            "description": "This module provides {capacity_kb} KiB from {chips} {chip_type_id} chips on a {data_width_bits}-bit interface. The chips are physically arranged as {physical_arrangement}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 32
+          },
+          {
+            "key": "chips",
+            "value": 16
+          },
+          {
+            "key": "chip_type_id",
+            "ref_id": "base_part.dram_16kbit",
+            "ref_role": "DRAM chip used to populate this module"
+          },
+          {
+            "key": "data_width_bits",
+            "value": 16
+          },
+          {
+            "key": "physical_arrangement",
+            "value": "4 rows x 4 chips"
+          }
+        ]
+      }
     },
     {
       "id": "device.artemis_ram_module_64kb",
@@ -5968,7 +7726,44 @@
           "kind": "testing",
           "description": "identify how existing prototypes/spares are handled."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Memory organization",
+            "description": "This module provides {capacity_kb} KiB from {chips} {chip_type_id} chips on a {data_width_bits}-bit interface. The chips are physically arranged as {physical_arrangement}.\n\nThe recorded host is {host_base_computer_artemis}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 64
+          },
+          {
+            "key": "chips",
+            "value": 8
+          },
+          {
+            "key": "chip_type_id",
+            "ref_id": "base_part.dram_64kbit",
+            "ref_role": "DRAM chip used to populate this module"
+          },
+          {
+            "key": "data_width_bits",
+            "value": 8
+          },
+          {
+            "key": "physical_arrangement",
+            "value": "2 rows x 4 chips"
+          },
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Host for this memory-module design"
+          }
+        ]
+      }
     },
     {
       "id": "device.ram_64kb_x32",
@@ -6074,7 +7869,68 @@
           "kind": "testing",
           "description": "32 ×1 DRAM chips per rank. Independently selected full-width modules; no 64-bit host bus implied."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Memory organization",
+            "description": "This module provides {capacity_kb} KiB from {chips} {chip_type_id} chips on a {data_width_bits}-bit interface. Each chip is organized as {chip_organization}. The module has {ranks} rank, each containing {chips_per_rank} chips and {rank_capacity_kib} KiB."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Bank installation and qualification",
+            "description": "Install matched pairs with power off: {modules_per_bank} independently selected modules form a {bank_capacity_kib} KiB capacity bank on the shared {bank_data_width_bits}-bit bus. The pair adds addressable capacity rather than concatenating data lanes. No parity bits are fitted.\n\nThe controller must decode every installed module and rank and refresh all arrays. Artemis/Athena connector, rank selection, power, timing and loading qualification remain open for each controller."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 64
+          },
+          {
+            "key": "chips",
+            "value": 32
+          },
+          {
+            "key": "chip_type_id",
+            "ref_id": "base_part.dram_16kbit",
+            "ref_role": "DRAM chip used to populate this module"
+          },
+          {
+            "key": "data_width_bits",
+            "value": 32
+          },
+          {
+            "key": "chip_organization",
+            "value": "16K × 1"
+          },
+          {
+            "key": "ranks",
+            "value": 1
+          },
+          {
+            "key": "chips_per_rank",
+            "value": 32
+          },
+          {
+            "key": "rank_capacity_kib",
+            "value": 64
+          },
+          {
+            "key": "modules_per_bank",
+            "value": 2
+          },
+          {
+            "key": "bank_capacity_kib",
+            "value": 128
+          },
+          {
+            "key": "bank_data_width_bits",
+            "value": 32
+          }
+        ]
+      }
     },
     {
       "id": "device.ram_128kb_x32",
@@ -6180,7 +8036,68 @@
           "kind": "testing",
           "description": "32 ×1 DRAM chips per rank. Independently selected full-width modules; no 64-bit host bus implied."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Memory organization",
+            "description": "This module provides {capacity_kb} KiB from {chips} {chip_type_id} chips on a {data_width_bits}-bit interface. Each chip is organized as {chip_organization}. The module has {ranks} ranks, each containing {chips_per_rank} chips and {rank_capacity_kib} KiB."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Bank installation and qualification",
+            "description": "Install matched pairs with power off: {modules_per_bank} independently selected modules form a {bank_capacity_kib} KiB capacity bank on the shared {bank_data_width_bits}-bit bus. The pair adds addressable capacity rather than concatenating data lanes. No parity bits are fitted.\n\nThe controller must decode every installed module and rank and refresh all arrays. Artemis/Athena connector, rank selection, power, timing and loading qualification remain open for each controller."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 128
+          },
+          {
+            "key": "chips",
+            "value": 64
+          },
+          {
+            "key": "chip_type_id",
+            "ref_id": "base_part.dram_16kbit",
+            "ref_role": "DRAM chip used to populate this module"
+          },
+          {
+            "key": "data_width_bits",
+            "value": 32
+          },
+          {
+            "key": "chip_organization",
+            "value": "16K × 1"
+          },
+          {
+            "key": "ranks",
+            "value": 2
+          },
+          {
+            "key": "chips_per_rank",
+            "value": 32
+          },
+          {
+            "key": "rank_capacity_kib",
+            "value": 64
+          },
+          {
+            "key": "modules_per_bank",
+            "value": 2
+          },
+          {
+            "key": "bank_capacity_kib",
+            "value": 256
+          },
+          {
+            "key": "bank_data_width_bits",
+            "value": 32
+          }
+        ]
+      }
     },
     {
       "id": "device.ram_256kb_x32",
@@ -6286,7 +8203,68 @@
           "kind": "testing",
           "description": "32 ×1 DRAM chips per rank. Independently selected full-width modules; no 64-bit host bus implied."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Memory organization",
+            "description": "This module provides {capacity_kb} KiB from {chips} {chip_type_id} chips on a {data_width_bits}-bit interface. Each chip is organized as {chip_organization}. The module has {ranks} rank, each containing {chips_per_rank} chips and {rank_capacity_kib} KiB."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Bank installation and qualification",
+            "description": "Install matched pairs with power off: {modules_per_bank} independently selected modules form a {bank_capacity_kib} KiB capacity bank on the shared {bank_data_width_bits}-bit bus. The pair adds addressable capacity rather than concatenating data lanes. No parity bits are fitted.\n\nThe controller must decode every installed module and rank and refresh all arrays. Artemis/Athena connector, rank selection, power, timing and loading qualification remain open for each controller."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 256
+          },
+          {
+            "key": "chips",
+            "value": 32
+          },
+          {
+            "key": "chip_type_id",
+            "ref_id": "base_part.aion_4164",
+            "ref_role": "DRAM chip used to populate this module"
+          },
+          {
+            "key": "data_width_bits",
+            "value": 32
+          },
+          {
+            "key": "chip_organization",
+            "value": "64K × 1"
+          },
+          {
+            "key": "ranks",
+            "value": 1
+          },
+          {
+            "key": "chips_per_rank",
+            "value": 32
+          },
+          {
+            "key": "rank_capacity_kib",
+            "value": 256
+          },
+          {
+            "key": "modules_per_bank",
+            "value": 2
+          },
+          {
+            "key": "bank_capacity_kib",
+            "value": 512
+          },
+          {
+            "key": "bank_data_width_bits",
+            "value": 32
+          }
+        ]
+      }
     },
     {
       "id": "device.ram_256kb_x32_2um",
@@ -6392,7 +8370,68 @@
           "kind": "testing",
           "description": "32 ×1 DRAM chips per rank. Independently selected full-width modules; no 64-bit host bus implied."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Memory organization",
+            "description": "This module provides {capacity_kb} KiB from {chips} {chip_type_id} chips on a {data_width_bits}-bit interface. Each chip is organized as {chip_organization}. The module has {ranks} rank, each containing {chips_per_rank} chips and {rank_capacity_kib} KiB."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Bank installation and qualification",
+            "description": "Install matched pairs with power off: {modules_per_bank} independently selected modules form a {bank_capacity_kib} KiB capacity bank on the shared {bank_data_width_bits}-bit bus. The pair adds addressable capacity rather than concatenating data lanes. No parity bits are fitted.\n\nThe controller must decode every installed module and rank and refresh all arrays. Artemis/Athena connector, rank selection, power, timing and loading qualification remain open for each controller."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kb",
+            "value": 256
+          },
+          {
+            "key": "chips",
+            "value": 32
+          },
+          {
+            "key": "chip_type_id",
+            "ref_id": "base_part.aion_4164_2um",
+            "ref_role": "DRAM chip used to populate this module"
+          },
+          {
+            "key": "data_width_bits",
+            "value": 32
+          },
+          {
+            "key": "chip_organization",
+            "value": "64K × 1"
+          },
+          {
+            "key": "ranks",
+            "value": 1
+          },
+          {
+            "key": "chips_per_rank",
+            "value": 32
+          },
+          {
+            "key": "rank_capacity_kib",
+            "value": 256
+          },
+          {
+            "key": "modules_per_bank",
+            "value": 2
+          },
+          {
+            "key": "bank_capacity_kib",
+            "value": 512
+          },
+          {
+            "key": "bank_data_width_bits",
+            "value": 32
+          }
+        ]
+      }
     },
     {
       "id": "device.rom_cartridge.aionix",
@@ -6474,7 +8513,23 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "ROM cartridge and host fit",
+            "description": "AIONix (ERA edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM. It is intended for {host_base_computer_artemis}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Compatible host for this physical cartridge"
+          }
+        ]
+      }
     },
     {
       "id": "device.rom_cartridge.aionix_server",
@@ -6557,7 +8612,28 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "ROM cartridge and host fit",
+            "description": "AIONix (Server edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM. It is intended for {host_base_computer_artemis} and {host_base_computer_artemis_pro}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Compatible host for this physical cartridge"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Compatible host for this physical cartridge"
+          }
+        ]
+      }
     },
     {
       "id": "device.rom_cartridge.cpm_aurelia",
@@ -6627,7 +8703,17 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "ROM cartridge and host fit",
+            "description": "CP/M 1.4-derived / Platform Extensions 1.0 (Aurelia edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "device.rom_cartridge.cpm_aurelia_networking",
@@ -6710,7 +8796,28 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "ROM cartridge and host fit",
+            "description": "CP/M (Aurelia networking edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM. It is intended for {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Compatible host for this physical cartridge"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Compatible host for this physical cartridge"
+          }
+        ]
+      }
     },
     {
       "id": "device.rom_cartridge.business_tools_aurelia",
@@ -6785,7 +8892,17 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "ROM cartridge and host fit",
+            "description": "Business Tools (CP/M edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "device.rom_cartridge.business_tools_artemis",
@@ -6855,7 +8972,17 @@
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "ROM cartridge and host fit",
+            "description": "Business Tools (AIONix edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "device.base_computer.aurelia",
@@ -6899,107 +9026,6 @@
                 "future_pin_area_reserved_for_bits": 32
               }
             },
-            "expansion_socket_groups": [
-              {
-                "id": "expansion",
-                "name": "Expansion cards",
-                "sockets": [
-                  {
-                    "id": "expansion",
-                    "name": "General expansion slots",
-                    "connection": "expansion_card",
-                    "capacity": 2,
-                    "compatible_device_ids": [
-                      "device.network_card_aurelia",
-                      "device.aurelia_ram_16kb_card"
-                    ],
-                    "device_quantity_limits": {
-                      "device.aurelia_ram_16kb_card": 1
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "cartridges",
-                "name": "ROM cartridges",
-                "sockets": [
-                  {
-                    "id": "system_cartridge",
-                    "name": "System cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.rom_cartridge.cpm_aurelia",
-                      "device.rom_cartridge.cpm_aurelia_networking"
-                    ]
-                  },
-                  {
-                    "id": "application_cartridge",
-                    "name": "Application cartridge slot",
-                    "connection": "rom_cartridge",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.rom_cartridge.business_tools_aurelia"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "external",
-                "name": "External connections",
-                "sockets": [
-                  {
-                    "id": "flexibus",
-                    "name": "FlexiBUS ports",
-                    "connection": "flexibus",
-                    "capacity": 3,
-                    "compatible_device_ids": [
-                      "device.flexibus_keyboard",
-                      "device.flexiprint40",
-                      "device.flexidisk",
-                      "device.flexidisk_ii",
-                      "device.logix_mouse"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "display",
-                "name": "Integrated video output",
-                "sockets": [
-                  {
-                    "id": "video_out",
-                    "name": "Video output",
-                    "connection": "video",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.mono_monitor_1",
-                      "device.color_monitor_1",
-                      "device.mono_monitor_2",
-                      "device.color_monitor_2"
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "internal_drive",
-                "name": "Internal storage",
-                "sockets": [
-                  {
-                    "id": "internal_drive",
-                    "name": "Internal drive bays",
-                    "connection": "internal_storage",
-                    "capacity": 1,
-                    "compatible_device_ids": [
-                      "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism"
-                    ],
-                    "requirements": [
-                      "Recorded fitted-drive count; additional spare bays are not established."
-                    ]
-                  }
-                ]
-              }
-            ],
             "configuration_requirements": {
               "scope": "complete_system",
               "rules": [
@@ -7350,10 +9376,187 @@
               "kind": "testing",
               "description": "Freeze package/pinout, external buffers, memory decode, bank-latched DMA addressing and simultaneous video/peripheral stress tests."
             }
+          ],
+          "expansion_socket_groups": [
+            {
+              "id": "expansion",
+              "name": "Expansion cards",
+              "sockets": [
+                {
+                  "id": "expansion",
+                  "name": "General expansion slots",
+                  "connection": "expansion_card",
+                  "capacity": 2,
+                  "compatible_device_ids": [
+                    "device.network_card_aurelia",
+                    "device.aurelia_ram_16kb_card"
+                  ],
+                  "device_quantity_limits": {
+                    "device.aurelia_ram_16kb_card": 1
+                  }
+                }
+              ]
+            },
+            {
+              "id": "cartridges",
+              "name": "ROM cartridges",
+              "sockets": [
+                {
+                  "id": "system_cartridge",
+                  "name": "System cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.rom_cartridge.cpm_aurelia",
+                    "device.rom_cartridge.cpm_aurelia_networking"
+                  ]
+                },
+                {
+                  "id": "application_cartridge",
+                  "name": "Application cartridge slot",
+                  "connection": "rom_cartridge",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.rom_cartridge.business_tools_aurelia"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "external",
+              "name": "External connections",
+              "sockets": [
+                {
+                  "id": "flexibus",
+                  "name": "FlexiBUS ports",
+                  "connection": "flexibus",
+                  "capacity": 3,
+                  "compatible_device_ids": [
+                    "device.flexibus_keyboard",
+                    "device.flexiprint40",
+                    "device.flexidisk",
+                    "device.flexidisk_ii",
+                    "device.logix_mouse"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "display",
+              "name": "Integrated video output",
+              "sockets": [
+                {
+                  "id": "video_out",
+                  "name": "Video output",
+                  "connection": "video",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.mono_monitor_1",
+                    "device.color_monitor_1",
+                    "device.mono_monitor_2",
+                    "device.color_monitor_2"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "internal_drive",
+              "name": "Internal storage",
+              "sockets": [
+                {
+                  "id": "internal_drive",
+                  "name": "Internal drive bays",
+                  "connection": "internal_storage",
+                  "capacity": 1,
+                  "compatible_device_ids": [
+                    "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism"
+                  ],
+                  "requirements": [
+                    "Recorded fitted-drive count; additional spare bays are not established."
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System architecture",
+            "description": "Logix Aurelia — base computer is a slim desktop built around {processor_id}.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. Connector space is reserved for a future 32-bit interface; that is not current bus width.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported."
+          },
+          {
+            "number": 2,
+            "chapter_name": "System RAM and bank switching",
+            "description": "The {memory_model_id} maps {lower_ram_kib} KiB of lower RAM plus {common_ram_kib} KiB of fixed common RAM at F000–FFFF. The normal 48 KiB view maps RAM at 0000–AFFF and ROM/cartridge/video windows at B000–EFFF. {expansion_card_id} extends lower RAM to 60 KiB by supplying B000–EFFF, reaching the 64 KiB system limit. Within 7000–EFFF, 4 KiB pages may temporarily expose ROM or video RAM; hidden RAM retains its contents and is restored after service calls.\n\nThe {system_controller_id} refreshes every installed bank independently of CPU activity and latches physical DMA bank selections so mapping changes cannot redirect a transfer. The base population uses {ram_bank_count} 8-bit banks, with common RAM included and no parity. Mixed module types are not allowed."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Firmware and built-in video",
+            "description": "Motherboard ROM contains {firmware_services}. The {video_controller_id} operates display RAM on an independent 8-bit bus; sprite RAM has a further separate 8-bit bus.\n\n{recommended_system_id} supplies the native Z80/CP/M environment. Applications use {application_api_id} and query usable dimensions rather than branching on model names. Native 40 × 25 and 80 × 25 text are available subject to monitor capabilities."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "processor_id",
+            "ref_id": "base_part.z80a",
+            "ref_role": "Processor fitted to this computer"
+          },
+          {
+            "key": "expansion_bus_bits",
+            "value": 8
+          },
+          {
+            "key": "memory_model_id",
+            "ref_id": "technology.aurelia_memory_model",
+            "ref_role": "Aurelia logical memory and bank-switching contract"
+          },
+          {
+            "key": "lower_ram_kib",
+            "value": 44
+          },
+          {
+            "key": "common_ram_kib",
+            "value": 4
+          },
+          {
+            "key": "expansion_card_id",
+            "ref_id": "device.aurelia_ram_16kb_card",
+            "ref_role": "Card that fills the normal upper window with RAM"
+          },
+          {
+            "key": "system_controller_id",
+            "ref_id": "base_part.aurelia_system_controller",
+            "ref_role": "Controller responsible for system DRAM refresh, mapping and DMA"
+          },
+          {
+            "key": "ram_bank_count",
+            "value": 3
+          },
+          {
+            "key": "firmware_services",
+            "value": "Boot, Monitor, BIOS, Hardware Drivers"
+          },
+          {
+            "key": "video_controller_id",
+            "ref_id": "base_part.aurelia_video_chip",
+            "ref_role": "Built-in video controller"
+          },
+          {
+            "key": "recommended_system_id",
+            "ref_id": "software_edition.cpm_aurelia",
+            "ref_role": "Recommended operating-system implementation"
+          },
+          {
+            "key": "application_api_id",
+            "ref_id": "technology.logix_c_api",
+            "ref_role": "Portable application interface implemented on this host"
+          }
+        ]
+      }
     },
     {
       "id": "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism",

@@ -2784,7 +2784,65 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Compiler and build targets",
+            "description": "The toolset implements {language_contract_id} with {runtime_contract_id}. It supports structures, typedef, function pointers, documented 32-bit integer arithmetic and shared string/stream-I/O behaviour. The toolchain combines a Z80 compiler backend, assembler, linker, CP/M startup, target runtimes and ROM/cartridge image tools.\n\nBuild profiles are {build_profiles} for {build_targets}. ROM-aware linking generates disk or cartridge images, with RAM/ROM/stack budget reports and portability diagnostics."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Development and conformance",
+            "description": "Test 48 KiB and 64 KiB installed-RAM profiles, including reserved common RAM and resident workspace.\n\nDisplay regressions cover 40-column, 80-column and monochrome layouts. Each target keeps its own assembler/linker, startup and runtime; shared source is not interchangeable binaries."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Execution and delivery",
+            "description": "This development toolset targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "language_contract_id",
+            "ref_id": "technology.logix_c_target_contract",
+            "ref_role": "Portable C language and target ABI contract"
+          },
+          {
+            "key": "runtime_contract_id",
+            "ref_id": "technology.logix_c_api",
+            "ref_role": "Shared C/TUI/graphics service contract"
+          },
+          {
+            "key": "build_profiles",
+            "value": "aurelia_compatible, aurelia_plus_required"
+          },
+          {
+            "key": "build_targets",
+            "value": "z80_cpm"
+          },
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "minimum_ram_kib",
+            "value": 48
+          },
+          {
+            "key": "runtime_cpm_aurelia",
+            "ref_id": "software_edition.cpm_aurelia",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.aurelia_sdk",
@@ -2901,7 +2959,47 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Platform development kit",
+            "description": "The kit combines the Aurelia technical reference and programmer’s manual with video, expansion-card, FlexiBUS and cartridge guides. It supplies headers, bindings, target libraries, startup code, examples, small utilities and tests; the compiler/IDE is a separate tool.\n\nDocumentation covers the portable C/ABI contract, Logix API v1 and service discovery, capability-driven display/TUI operation, portable file formats, memory handles, resource budgets and target conformance. Examples exercise 40/80-column and monochrome interfaces. Additional material covers physical-bank DMA, refresh/arbitration, upload ports, abort handling and dedicated sprite SRAM with atomic descriptor-bank changes."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Execution and delivery",
+            "description": "This development toolset targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia} and {runtime_simple_c_z80}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "minimum_ram_kib",
+            "value": 48
+          },
+          {
+            "key": "runtime_cpm_aurelia",
+            "ref_id": "software_edition.cpm_aurelia",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "runtime_simple_c_z80",
+            "ref_id": "software_edition.simple_c_z80",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.microsoft_basic_aurelia",
@@ -2956,7 +3054,42 @@
           },
           "composition_definition": []
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Licensed BASIC implementation",
+            "description": "This licensed third-party BASIC was developed in cooperation with AION for Aurelia CP/M. It uses the shared Logix TUI and capability-discovery interfaces; that integration does not imply that the BASIC implementation itself is portable C."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Execution and delivery",
+            "description": "This application suite targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The external supplier’s delivery medium is unspecified. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "minimum_ram_kib",
+            "value": 48
+          },
+          {
+            "key": "runtime_cpm_aurelia",
+            "ref_id": "software_edition.cpm_aurelia",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.aion_c_ide",
@@ -3084,7 +3217,56 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Compiler and build targets",
+            "description": "The C compiler, optimizer and IDE implement {portability_framework_id}. Native ERA and cross-Z80 backends use separate target libraries, startup code, output directories and build profiles; a Z80 build cannot link AIONix-only or host libraries.\n\nBuild profiles are {build_profiles} for {build_targets}. ROM-aware linking generates disk or cartridge images, with RAM/ROM/stack budget reports and portability diagnostics."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Development and conformance",
+            "description": "Edit the shared project on Artemis, select a target, compile/link with its libraries, inspect resource requirements, package the target image and run conformance/application regressions. Shared libraries and templates support adaptation to multitasking C, but emulation and remote execution/debugging on physical Aurelia are optional development features.\n\nDisplay regressions cover 40-column, 80-column and monochrome layouts. Each target keeps its own assembler/linker, startup and runtime; shared source is not interchangeable binaries."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Execution and delivery",
+            "description": "This development toolset targets native ERA/AIONix on {host_base_computer_artemis} and {host_base_computer_artemis_pro}. It requires {runtime_aionix_os_model}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "portability_framework_id",
+            "ref_id": "technology.aion_c_portability_framework",
+            "ref_role": "Framework for shared source and isolated target builds"
+          },
+          {
+            "key": "build_profiles",
+            "value": "aurelia_compatible, aurelia_plus_required, artemis_native"
+          },
+          {
+            "key": "build_targets",
+            "value": "z80_cpm, era_aionix"
+          },
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "runtime_aionix_os_model",
+            "ref_id": "technology.aionix_os_model",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.artemis_sdk",
@@ -3199,7 +3381,43 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Platform development kit",
+            "description": "The kit combines the Artemis technical reference and programmer’s manual with video, expansion-card, FlexiBUS and cartridge guides. It supplies headers, bindings, target libraries, startup code, examples, small utilities and tests; the compiler/IDE is a separate tool.\n\nDocumentation covers the portable C/ABI contract, Logix API v1 and service discovery, capability-driven display/TUI operation, portable file formats, memory handles, resource budgets and target conformance. Examples exercise 40/80-column and monochrome interfaces."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Execution and delivery",
+            "description": "This development toolset targets native ERA/AIONix on {host_base_computer_artemis} and {host_base_computer_artemis_pro}. It requires {runtime_aionix_os_model} and {runtime_aion_c_ide}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "runtime_aionix_os_model",
+            "ref_id": "technology.aionix_os_model",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "runtime_aion_c_ide",
+            "ref_id": "software_edition.aion_c_ide",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.aurelia_compatibility_kit",
@@ -3290,7 +3508,27 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Published compatibility environment",
+            "description": "The kit documents released 8-bit Aurelia processor, CP/M, memory, display, keyboard, storage and error-behaviour contracts. It supplies runtime-adapter source and redistribution terms, diagnostics and failure/resource-limit tests, plus Abacus/Business Tools workloads for calculation, interchange, printing and save/reopen. Manuals, source listings, machine-readable disks and versioned result forms support independent implementations.\n\nAny manufacturer or integrator can implement the environment without a bespoke partnership or mandatory certification. Existing Z80 binaries need compatible instructions and OS/runtime/memory behaviour; CP/M alone is insufficient, and another processor needs a port or execution solution. Native video, keyboard, disk and printer interfaces may use adapters; FlexiBUS and Logix video are separate optional profiles, including applicable terms for hardware clones."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Qualification and distribution",
+            "description": "Named supported platforms are tested configurations, not an exclusive permission list for properly licensed applications. Optional certification applies to an exact configuration/version and distinguishes a manufacturer’s claim from AION-tested application compatibility; FlexiBUS electrical/protocol and Logix display claims are separate. Printed documentation/source listings accompany disks; host/media conversion is a separate delivery requirement."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Execution and delivery",
+            "description": "This application suite targets Z80/CP/M. No specific host configuration is listed. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "software_edition.aion_development_team",
@@ -3384,7 +3622,38 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Shared development repository",
+            "description": "The server stores atomic multi-file commits with authors, dates, messages, branches, release labels, diffs, rollback and comments tied to immutable revisions. Workspaces are isolated: saving a file does not commit it. Text channels, posts/replies, file/revision/commit links, calendars, meetings, invitations, tasks, owners, deadlines and milestones support collaboration.\n\nArtemis supports local ERA/Z80 builds. Heavy or ERA work can be queued on the server; Aurelia/Aurelia+ retain local Z80 tools. Breakthru TUI adapters and separate target binaries, startup and libraries serve CP/M/Z80 and AIONix/ERA. Reproducible builds record source revision, compiler version, settings and target libraries. Apple and Commodore packages are future work, without launch or binary-compatibility claims."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Storage, networking and acceptance",
+            "description": "The server baseline is Artemis PRO with 1 MiB recommended RAM. The existing 5 MB disk supports bounded pilots only; archive old history, rotate external floppy backups and qualify larger storage for substantial projects. It is not included in the software definition. Network transfers are bounded, saves acknowledged and workspaces recoverable after disconnect. Four concurrent developers is a validation target, not measured throughput. Gate release on commit recovery, access control, backup/restore, conflicts and both target regression suites.\n\nSponsored deployments must supply and qualify their own workstation/server capacity, storage, concurrency and dedicated support. This engineering requirement does not change retail entitlement."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Execution and delivery",
+            "description": "This development-team server targets native ERA/AIONix on {host_base_computer_artemis_pro}. It requires {runtime_aionix_server}. Install the server from diskette onto its HDD. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "runtime_aionix_server",
+            "ref_id": "software_edition.aionix_server",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.aion_development_team.era_client",
@@ -3487,7 +3756,43 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Developer workspace",
+            "description": "The client accesses atomic multi-file commits with authors, dates, messages, branches, release labels, diffs, rollback and comments tied to immutable revisions. Workspaces are isolated: saving a file does not commit it. Text channels, posts/replies, file/revision/commit links, calendars, meetings, invitations, tasks, owners, deadlines and milestones support collaboration.\n\nArtemis supports local ERA/Z80 builds. Heavy or ERA work can be queued on the server; Aurelia/Aurelia+ retain local Z80 tools. Breakthru TUI adapters and separate target binaries, startup and libraries serve CP/M/Z80 and AIONix/ERA. Reproducible builds record source revision, compiler version, settings and target libraries. Apple and Commodore packages are future work, without launch or binary-compatibility claims."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Storage, networking and acceptance",
+            "description": "The server baseline is Artemis PRO with 1 MiB recommended RAM. The existing 5 MB disk supports bounded pilots only; archive old history, rotate external floppy backups and qualify larger storage for substantial projects. It is not included in the software definition. Network transfers are bounded, saves acknowledged and workspaces recoverable after disconnect. Four concurrent developers is a validation target, not measured throughput. Gate release on commit recovery, access control, backup/restore, conflicts and both target regression suites.\n\nSponsored deployments must supply and qualify their own workstation/server capacity, storage, concurrency and dedicated support. This engineering requirement does not change retail entitlement."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Execution and delivery",
+            "description": "This development client targets native ERA/AIONix on {host_base_computer_artemis} and {host_base_computer_artemis_pro}. It requires {runtime_aionix_server}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "runtime_aionix_server",
+            "ref_id": "software_edition.aionix_server",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.aion_development_team.z80_client",
@@ -3590,7 +3895,43 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Developer workspace",
+            "description": "The client accesses atomic multi-file commits with authors, dates, messages, branches, release labels, diffs, rollback and comments tied to immutable revisions. Workspaces are isolated: saving a file does not commit it. Text channels, posts/replies, file/revision/commit links, calendars, meetings, invitations, tasks, owners, deadlines and milestones support collaboration.\n\nThe Aurelia client uses compact TUI tools and sequential CP/M overlays; the complete suite is not assumed resident in 48 KiB. Heavy or ERA work can be queued on the server; Aurelia/Aurelia+ retain local Z80 tools. Breakthru TUI adapters and separate target binaries, startup and libraries serve CP/M/Z80 and AIONix/ERA. Reproducible builds record source revision, compiler version, settings and target libraries. Apple and Commodore packages are future work, without launch or binary-compatibility claims."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Storage, networking and acceptance",
+            "description": "The server baseline is Artemis PRO with 1 MiB recommended RAM. The existing 5 MB disk supports bounded pilots only; archive old history, rotate external floppy backups and qualify larger storage for substantial projects. It is not included in the software definition. Network transfers are bounded, saves acknowledged and workspaces recoverable after disconnect. Four concurrent developers is a validation target, not measured throughput. Gate release on commit recovery, access control, backup/restore, conflicts and both target regression suites.\n\nSponsored deployments must supply and qualify their own workstation/server capacity, storage, concurrency and dedicated support. This engineering requirement does not change retail entitlement."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Execution and delivery",
+            "description": "This development client targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. It requires {runtime_cpm_aurelia_networking}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "runtime_cpm_aurelia_networking",
+            "ref_id": "software_edition.cpm_aurelia_networking",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.entertainment_suite",
@@ -3685,7 +4026,47 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Games and input practice",
+            "description": "The suite includes {games} and tutorials for pointing, clicking, dragging and both scrolling rollers. Keyboard alternatives, undo and clear rules remain available.\n\nStandard TUI/display and pointing APIs use colour to distinguish suits and selections while retaining monochrome patterns and labels. Older supported monitors remain usable, and the 64 KiB graphics card is not required. Validate puzzle validity/uniqueness, legal moves, deals, undo, input and resource budgets; random card deals are not all guaranteed solvable."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Execution and delivery",
+            "description": "This application suite targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. It requires {runtime_logix_tui_mouse} and {runtime_flexibus_pointing_device}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "games",
+            "value": "Sudoku, Solitaire (Klondike), Spider, FreeCell"
+          },
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "runtime_logix_tui_mouse",
+            "ref_id": "technology.logix_tui_mouse",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "runtime_flexibus_pointing_device",
+            "ref_id": "technology.flexibus_pointing_device",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.entertainment_suite.era",
@@ -3780,7 +4161,47 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Games and input practice",
+            "description": "The suite includes {games} and tutorials for pointing, clicking, dragging and both scrolling rollers. Keyboard alternatives, undo and clear rules remain available.\n\nStandard TUI/display and pointing APIs use colour to distinguish suits and selections while retaining monochrome patterns and labels. Older supported monitors remain usable, and the 64 KiB graphics card is not required. Validate puzzle validity/uniqueness, legal moves, deals, undo, input and resource budgets; random card deals are not all guaranteed solvable."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Execution and delivery",
+            "description": "This application suite targets native ERA/AIONix on {host_base_computer_artemis} and {host_base_computer_artemis_pro}. It requires {runtime_logix_tui_mouse} and {runtime_flexibus_pointing_device}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "games",
+            "value": "Sudoku, Solitaire (Klondike), Spider, FreeCell"
+          },
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "runtime_logix_tui_mouse",
+            "ref_id": "technology.logix_tui_mouse",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "runtime_flexibus_pointing_device",
+            "ref_id": "technology.flexibus_pointing_device",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     },
     {
       "id": "software_edition.autocad_1_artemis",
@@ -3880,7 +4301,68 @@
             }
           ]
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Native CAD workflow",
+            "description": "AutoCAD provides native 2D CAD with typed coordinates and validated numerical geometry, separate command/status and 800 × 600 drawing displays, explicit Logix Mouse input, professional line/blit acceleration, drawing interchange and supported pen-plotter output. {launch_package_id} packages the implementation; Autodesk retains ownership and non-exclusive cross-platform rights."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Development and shipping qualification",
+            "description": "The sponsored development environment uses Artemis PRO workstations with 1 MiB RAM and qualified storage, plus shared server/test capacity. Measure the shipping minimum against representative drawings; development equipment does not qualify base 128/256 KiB Artemis automatically."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Execution and delivery",
+            "description": "This application suite targets native ERA/AIONix on {host_base_computer_artemis} and {host_base_computer_artemis_pro}. It requires {runtime_aionix}, {runtime_artemis_professional_graphics}, {runtime_artemis_professional_video_128kb}, {runtime_mono_pro_17} and {runtime_logix_mouse}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "launch_package_id",
+            "ref_id": "product.comdex82_artemis_autocad",
+            "ref_role": "Commercial package supplying this AutoCAD implementation"
+          },
+          {
+            "key": "host_base_computer_artemis",
+            "ref_id": "device.base_computer.artemis",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_artemis_pro",
+            "ref_id": "device.base_computer.artemis_pro",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "runtime_aionix",
+            "ref_id": "software_edition.aionix",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "runtime_artemis_professional_graphics",
+            "ref_id": "technology.artemis_professional_graphics",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "runtime_artemis_professional_video_128kb",
+            "ref_id": "device.artemis_professional_video_128kb",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "runtime_mono_pro_17",
+            "ref_id": "device.mono_pro_17",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "runtime_logix_mouse",
+            "ref_id": "device.logix_mouse",
+            "ref_role": "Runtime prerequisite for this software edition"
+          }
+        ]
+      }
     }
   ]
 }
