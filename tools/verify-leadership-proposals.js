@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {hash,records,transact,validate} from '../server/model.js';
+const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[`${d}/${f}`,JSON.parse(fs.readFileSync(`${d}/${f}`))])));
+const beforeHash=hash(files),queue=files['data_storytelling/change.json'].change;
+const ids=['change.rovsing_acquisition_1975','change.logix_comstock_equity','change.letwin_copenhagen_equity'];
+const ps=ids.map(id=>queue.find(p=>p.id===id));
+const req=p=>({action:'approve_changes',changes:p.map(x=>({change_id:x.id,proposal_sha256:hash(x)}))});
+const touched=new Set();
+for(const p of ps)for(const e of p.elements){assert.notEqual(e.record_type,'actor_relationship');assert.ok(!touched.has(e.record_id));touched.add(e.record_id);assert.deepEqual(e.before,records(files).find(r=>r.id===e.record_id)||null);}
+for(const p of queue.filter(p=>!ids.includes(p.id)))for(const e of p.elements||[])assert.ok(!touched.has(e.record_id),`Overlap with ${p.id}: ${e.record_id}`);
+for(const p of ps.slice(0,2))assert.deepEqual(validate(transact(files,req([p]),'simulation-only').files).errors,[]);
+const batch=transact(files,req(ps),'simulation-only').files;
+let seq=files;for(const p of ps)seq=transact(seq,req([p]),'simulation-only').files;
+assert.deepEqual(records(batch),records(seq));assert.deepEqual(validate(batch).errors,[]);
+assert.throws(()=>transact(files,req([ps[2]]),'simulation-only'),/Select required proposal/);
+const after=new Map(records(batch).map(r=>[r.id,r]));
+for(const r of records(files))if(!touched.has(r.id))assert.deepEqual(after.get(r.id),r);
+assert.equal(after.get('event.rovsing_acquisition_signed').time.value,'1975-01');
+assert.equal(after.get('event.letwin').time.value,'1977-06-01');
+const grant=after.get('agreement.logix_share_transfer_1978');
+assert.deepEqual(grant.clauses.slice(0,4).map(c=>c.value),[10,10,5,5]);
+assert.ok(!grant.party.some(p=>p.actor_id==='actor.letwin'));
+assert.equal(hash(files),beforeHash);
+console.log(JSON.stringify({result:'passed',independent_first_two:true,sequential_and_batch:true,dependencies_enforced:true,no_overlap:true,foundation_unchanged:true,proposals:ps.map(p=>({id:p.id,records:p.elements.length,bytes:Buffer.byteLength(JSON.stringify(p))}))},null,2));
