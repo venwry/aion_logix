@@ -1,5 +1,6 @@
 const {test,expect}=require('@playwright/test');const fs=require('node:fs');
-const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/technical-narrative-refinement/proposals.json')).change;
+const boundaries=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/base-computer-graphics-boundary/proposals.json')).change;
+const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/technical-narrative-refinement/proposals.json')).change.map(p=>boundaries.find(q=>q.id===p.id)||p);
 async function migrated(page){for(const type of ['device','software_edition','base_part'])await page.route('**/data_foundation/'+type+'.json',async route=>{const response=await route.fetch(),doc=await response.json();doc[type]=doc[type].map(r=>proposals.flatMap(p=>p.elements).find(e=>e.record_id===r.id)?.after||r);await route.fulfill({json:doc});});}
 for(const name of ['browser','timeline'])test(name+' renders global technical parameters, mode tables and relocated sockets',async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await migrated(page);

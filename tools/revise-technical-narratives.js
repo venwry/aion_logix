@@ -1,3 +1,4 @@
+import {correctBaseComputerGraphics} from './base-computer-graphics-boundary.js';
 // Authored technical narratives, selected by implementation rather than JSON shape.
 // Source values are interpolated explicitly; no property-to-chapter fallback.
 import fs from 'node:fs';
@@ -227,7 +228,7 @@ for(const proposal of draft){
  if(['base_part.aion_4116','base_part.aion_2114'].includes(r.id)){n.chapters=[{number:1,chapter_name:'Memory organization and operating targets',description:n.chapters.map(c=>c.description.trim()).join('\n\n')}];}
  if(r.id==='base_part.aion_4164_2um'){n.chapters[0].description+=' '+n.chapters.pop().description;}
  n.chapters.forEach((c,i)=>{c.number=i+1;c.description=c.description.trim();});
- const spec=n.done();e.after.technical_specification=spec;if(e.after.graphic_modes_specification)e.after.graphic_modes_specification=reviseModes(e.after.graphic_modes_specification);
+ const spec=n.done();e.after.technical_specification=spec;if(e.after.graphic_modes_specification)e.after.graphic_modes_specification=reviseModes(e.after.graphic_modes_specification);correctBaseComputerGraphics(e.after);
  audit.records.push({id:r.id,chapter_titles:spec.chapters.map(c=>c.chapter_name),parameters:spec.parameters.length,old_chapters:original.flatMap(p=>p.elements).find(x=>x.record_id===r.id).after.technical_specification.chapters.length});
  }
 }

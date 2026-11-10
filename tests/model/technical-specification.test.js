@@ -2,7 +2,8 @@ import test from 'node:test';import assert from 'node:assert/strict';import fs f
 import {validateTechnicalSpecifications} from '../../code/technical-specification.js';
 import {validateCompositions} from '../../code/composition.js';
 import {readDocuments,validateDocuments} from '../../tools/validate-model.js';
-const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/technical-narrative-refinement/proposals.json')).change;
+const boundaries=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/base-computer-graphics-boundary/proposals.json')).change;
+const proposals=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/technical-narrative-refinement/proposals.json')).change.map(p=>boundaries.find(q=>q.id===p.id)||p);
 const migrated=new Map(proposals.flatMap(p=>p.elements.map(e=>[e.record_id,e.after])));
 const allDocs=readDocuments('data_foundation');
 for(const p of proposals)for(const e of p.elements){const rows=allDocs[e.record_type][e.record_type];rows[rows.findIndex(r=>r.id===e.record_id)]=e.after;}
@@ -53,4 +54,28 @@ test('authored narratives keep socket structures out of root prose and consolida
  assert.equal(nic.parameters.find(p=>p.key==='supported_rates_kbps').value,'100, 250, 500, 1000');
  assert.equal(nic.chapters.map(c=>c.description).join(' ').match(/\{supported_rates_kbps\}/g).length,1);
  assert.equal(migrated.get('base_part.aion_4116').technical_specification.parameters.find(p=>p.key==='supply_rails_v').value,'12, 5, -5');
+});
+test('unfitted graphics remain on card definitions, while integrated video and host sockets are preserved',()=>{
+ const previous=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/base-computer-graphics-boundary/before-proposal.json')).change[0];
+ const revised=boundaries[0];
+ const owners={'device.base_computer.artemis':'device.artemis_video_card_16kb','device.base_computer.artemis_pro':'device.artemis_video_card','device.base_computer.athena':'device.artemis_video_card_64kb','device.base_computer.athena_server':'device.artemis_video_card_64kb'};
+ for(const e of revised.elements){
+  const old=previous.elements.find(x=>x.record_id===e.record_id);assert.deepEqual(e.before,old.before);
+  if(!owners[e.record_id]){assert.deepEqual(e.after,old.after);continue;}
+  const r=e.after,card=index.get(owners[e.record_id]);
+  assert(!Object.hasOwn(r,'graphic_modes_specification'));
+  assert(!/sprite|framebuffer|pixel_clock|video_ram|40 × 25|80-column|scanout/i.test(JSON.stringify(r.technical_specification)));
+  assert(r.technical_specification.chapters.some(c=>c.description.includes('supplied without a graphics card')));
+  for(const [i,v] of r.composition_history.entries()){
+   assert(!Object.hasOwn(v.technical_definition.technical_profile,'video'));
+   assert.deepEqual(v.composition_definition,old.after.composition_history[i].composition_definition);
+   assert.deepEqual(v.expansion_socket_groups,old.after.composition_history[i].expansion_socket_groups);
+   assert.deepEqual(old.after.composition_history[i].technical_definition.technical_profile.video,card.composition_history[0].technical_definition.specification);
+  }
+  for(const mode of old.after.graphic_modes_specification){const owned=card.graphic_modes_specification.find(m=>m.id===mode.id);assert(owned);assert.deepEqual(owned,mode);}
+ }
+ for(const id of ['device.base_computer.aurelia','device.base_computer.aurelia_plus']){
+  const r=index.get(id);assert(r.technical_specification.chapters.some(c=>c.chapter_name==='Firmware and built-in video'));
+  assert(r.composition_history[0].composition_definition.some(l=>l.target.record_id.endsWith('.video')));
+ }
 });
