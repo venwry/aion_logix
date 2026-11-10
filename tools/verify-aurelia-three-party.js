@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {hash,records,transact,validate} from '../server/model.js';
+import {validateCatalogue} from './validate-catalogue.js';
+const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>[`${d}/${f}`,JSON.parse(fs.readFileSync(`${d}/${f}`))])));
+const originalHash=hash(files),id='change.aurelia_three_party_cpm_tui_ide';
+const p=files['data_storytelling/change.json'].change.find(p=>p.id===id);
+assert.ok(p,'Expected pending proposal');
+assert.equal(new Set(p.elements.map(e=>e.record_id)).size,p.elements.length);
+assert.deepEqual(validate(files).errors,[]);
+const applied=transact(files,{action:'approve_changes',changes:[{change_id:id,proposal_sha256:hash(p)}]},'simulation-only').files;
+assert.deepEqual(validate(applied).errors,[]);
+assert.deepEqual(validateCatalogue(Object.fromEntries(Object.entries(applied).filter(([f])=>f.startsWith('data_foundation/')).map(([,d])=>[Object.keys(d)[0],d]))).errors,[]);
+const before=new Map(records(files).map(r=>[r.id,r])),after=new Map(records(applied).map(r=>[r.id,r]));
+const touched=new Set(p.elements.map(e=>e.record_id));
+for(const [id,r] of before){
+ const n=after.get(id);assert.ok(n);
+ if(!touched.has(id))assert.deepEqual(n,r);
+ if(r.time)assert.deepEqual(n.time,r.time);
+ if(r.launch_event_id)assert.equal(n.launch_event_id,r.launch_event_id);
+ if(r.launch_campaign_id)assert.equal(n.launch_campaign_id,r.launch_campaign_id);
+ if(r.composition_history)assert.deepEqual(n.composition_history.map(v=>[v.version_number,v.effective_from,v.effective_until]),r.composition_history.map(v=>[v.version_number,v.effective_from,v.effective_until]));
+}
+assert.deepEqual(after.get('technology.aurelia_memory_model').specification.slice(0,-1),before.get('technology.aurelia_memory_model').specification);
+assert.ok(after.get('agreement.dri_cpm').party.some(x=>x.actor_id==='actor.aion'));
+assert.equal(after.get('software_edition.simple_c_z80').name,'AION C IDE (CP/M edition)');
+assert.deepEqual(after.get('software_edition.simple_c_z80').provider_actor_ids,['actor.aion']);
+assert.equal(hash(files),originalHash,'Simulation must not mutate source data or authorization');
+const report={proposal_id:id,proposal_sha256:hash(p),records:p.elements.length,result:'passed',transaction_simulation:'passed',strict_catalogue:'passed',existing_dates_and_memory_maps_preserved:true,unrelated_records_unchanged:true,source_and_authorization_unchanged:true};
+if(process.argv.includes('--write-report'))fs.writeFileSync('data_storytelling/review_evidence/aurelia-three-party/verification.json',JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));
