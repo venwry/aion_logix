@@ -319,7 +319,8 @@
       "description": "Logix common TUI and editing standard",
       "owner_actor_ids": [
         "actor.logix",
-        "actor.dri"
+        "actor.dri",
+        "actor.aion"
       ],
       "related_technology_ids": [
         "technology.logix_c_api",
@@ -370,6 +371,12 @@
           "number": 40,
           "chapter_name": "Context ownership and platform compatibility",
           "description": "Each application owns its interface state. Host differences affect resource and lifecycle capabilities, but do not silently change the meaning of the common API.\n\nPer-application context state; no accidental shared cursor, selection or editing globals. Aurelia remains single-foreground; Artemis may manage multiple isolated application contexts.\n\nKeep the same API behavior across Aurelia, Aurelia+ and Artemis.\n\nDo not assume display stride, video RAM address, last column or direct peripheral registers.\n\nLegacy CP/M console behavior is preserved; Logix-aware interfaces use the documented editing conventions.\n\nArtemis implementation mediates process access to shared clipboard and display services.",
+          "parameters": []
+        },
+        {
+          "number": 50,
+          "chapter_name": "Development, implementation ownership and reuse",
+          "description": "Logix, DRI and AION jointly maintain the interface specification. AION develops the CP/M TUI and delivers source, tests and documentation to DRI. DRI owns, integrates and maintains the accepted CP/M implementation and licenses it non-exclusively. AION retains explicit rights to reuse and adapt the shared source and technology on other processors and operating systems. Pre-existing AION components remain AION-owned with perpetual CP/M maintenance and redistribution rights for DRI. The interface contract distinguishes implementation rights from ownership of applications using it.",
           "parameters": []
         }
       ]

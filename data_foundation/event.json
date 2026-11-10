@@ -327,9 +327,9 @@
     },
     {
       "id": "event.dri_cpm",
-      "title": "Logix and DRI agree CP/M development for Aurelia",
+      "title": "Logix, DRI and AION agree Aurelia CP/M, TUI and C development",
       "kind": "agreement_milestone",
-      "description": "Building on the established DRI partnership, Logix and DRI agree a new CP/M version for Aurelia, fully owned by DRI and available to other vendors. Its development scope includes a text-mode TUI, Plug and Execute smart devices/cards over FlexiBUS, XIP cartridges and names for CP/M User Numbers.",
+      "description": "Logix, DRI and AION Software establish the Aurelia development programme. DRI upgrades CP/M with named user areas, XIP and banked-memory services, video integration, clipboard storage and bounded I/O scheduling. Logix supplies hardware, boot firmware and low-level drivers; AION develops the TUI for delivery to DRI and the separately owned AION C IDE. DRI retains non-exclusive CP/M licensing, while AION retains explicit TUI reuse rights for other targets. Implementation and acceptance follow this January 1975 commitment.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -342,6 +342,10 @@
         {
           "actor_id": "actor.logix",
           "role": "platform and development partner"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "TUI and C development partner"
         }
       ],
       "inputs": [
@@ -356,7 +360,7 @@
         {
           "number": 1,
           "type": "decision",
-          "description": "The agreed product is a new CP/M version for Logix Aurelia, fully owned by DRI and available for non-exclusive licensing to other vendors. Its scope includes XIP cartridges and named CP/M user areas; implementation and qualification follow this agreement.",
+          "description": "Commit to the DRI-owned CP/M implementation and non-exclusive licensing under the three-party agreement, with AION TUI source delivery and reserved reuse rights. This is a development decision, not software delivery.",
           "subject_ids": [
             "external_product.cpm_aurelia"
           ]
@@ -364,7 +368,7 @@
         {
           "number": 2,
           "type": "decision",
-          "description": "The agreement establishes integration of the Logix TUI standard into the CP/M development scope: a consistent pseudo-window user interface in text mode for participating applications.",
+          "description": "AION develops the shared TUI implementation; DRI accepts and incorporates it into the CP/M system cartridge, with published interface governance and AION reuse rights.",
           "subject_ids": [
             "technology.logix_tui_standard"
           ]
@@ -375,6 +379,14 @@
           "description": "The agreement establishes CP/M integration work for FlexiBUS smart devices and expansion cards using Plug and Execute. This outcome covers agreed software support, not invention or completed manufacture of the underlying bus.",
           "subject_ids": [
             "technology.flexibus"
+          ]
+        },
+        {
+          "number": 4,
+          "type": "decision",
+          "description": "Commit AION Software to the separately owned Aurelia C IDE, integrated toolchain and TUI bindings; commercial availability follows qualification at the Aurelia launch.",
+          "subject_ids": [
+            "software_edition.simple_c_z80"
           ]
         }
       ],
