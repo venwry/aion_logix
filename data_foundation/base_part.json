@@ -2989,7 +2989,73 @@
           "kind": "testing",
           "description": "Purchased DRAM maturity is not evidence of AION production yield."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Memory organization",
+            "description": "This dynamic RAM provides {capacity_kbit} Kibit organized as {organization_words} words with a {data_width_bits}-bit data interface.  Package, supply rails, pinout, timing, retention and refresh remain release gates. A common module interface requires all-bank qualification; this definition does not change capacity or bus width."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Fabrication alternatives",
+            "description": "Two 3 µm routes are compared on {wafer_mm} mm wafers. The baseline {control_recipe_id} uses a {control_die_mm2} mm² die, defect density {control_defects_cm2} cm⁻² and processed-wafer estimate {control_wafer_cost_usd} USD; {repair_recipe_id} uses {repair_die_mm2} mm², {repair_defects_cm2} cm⁻² and {repair_wafer_cost_usd} USD. These are manufacturing estimates.\n\nEvaluate 2.75 µm against repaired 3 µm only if it reduces cost; later 2/1.5 µm releases are prospective."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kbit",
+            "value": 64
+          },
+          {
+            "key": "organization_words",
+            "value": 65536
+          },
+          {
+            "key": "data_width_bits",
+            "value": 1
+          },
+          {
+            "key": "wafer_mm",
+            "value": 75
+          },
+          {
+            "key": "control_recipe_id",
+            "ref_id": "manufacturing_capability.dram64_3um_control",
+            "ref_role": "Control fabrication recipe"
+          },
+          {
+            "key": "control_die_mm2",
+            "value": 45
+          },
+          {
+            "key": "control_defects_cm2",
+            "value": 2
+          },
+          {
+            "key": "control_wafer_cost_usd",
+            "value": 235
+          },
+          {
+            "key": "repair_recipe_id",
+            "ref_id": "manufacturing_capability.dram64_3um_repair",
+            "ref_role": "Repair-enabled fabrication recipe"
+          },
+          {
+            "key": "repair_die_mm2",
+            "value": 47.25
+          },
+          {
+            "key": "repair_defects_cm2",
+            "value": 1.7
+          },
+          {
+            "key": "repair_wafer_cost_usd",
+            "value": 255
+          }
+        ]
+      }
     },
     {
       "id": "base_part.artemis_graphics_chip_64kb",
@@ -3052,7 +3118,58 @@
           "kind": "testing",
           "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Graphics-controller extension",
+            "description": "This revision extends {base_controller_id} for {card_id}. It adds 64 KiB display addressing, 640 × 400 × 2bpp and 640 × 200 × 4bpp modes, and bounded prefetch/sequencing for {palette_list_id}. Earlier modes, five sprites with independent SRAM, refresh and bounded host/DMA arbitration remain part of the design."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Scanout pipeline",
+            "description": "The ASIC pixel pipeline contains {pixel_buffer_pages} banks of {pixel_buffer_page_bytes} bytes, holding {pixel_depth_bits}-bit pixels. Separate ownership states prevent the renderer from overwriting a bank being scanned out: {pixel_bank_states}. Completed banks feed output latches and a serializer; the pipeline is prefetched before active display and preserves sync on underrun.\n\nEach bank comprises 40 × 32-bit words and holds 320 pixels, so a 640-pixel line consumes two banks. The renderer expands eight pixels at a time while a separate serializer latch drains ready banks. Underrun blanks pixels and sets a sticky fault.\n\nTwo {character_cache_bytes}-byte row caches hold current and next character/attribute rows independently of the pixel FIFO.\n\nThe serializer shifts at 21.504 MHz, loading eight pixels every eight dot clocks; SRAM latch reads therefore run at 2.688 MHz with filler and drain on different banks."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "base_controller_id",
+            "ref_id": "base_part.artemis_graphics_chip",
+            "ref_role": "Earlier controller whose rendering and sprite architecture is retained"
+          },
+          {
+            "key": "card_id",
+            "ref_id": "device.artemis_video_card_64kb",
+            "ref_role": "Board carrying the detailed qualified memory layout"
+          },
+          {
+            "key": "palette_list_id",
+            "ref_id": "technology.scanline_palette_list",
+            "ref_role": "Horizontal-retrace palette update protocol"
+          },
+          {
+            "key": "pixel_buffer_pages",
+            "value": 4
+          },
+          {
+            "key": "pixel_buffer_page_bytes",
+            "value": 160
+          },
+          {
+            "key": "pixel_depth_bits",
+            "value": 4
+          },
+          {
+            "key": "pixel_bank_states",
+            "value": "free, filling, ready, displaying"
+          },
+          {
+            "key": "character_cache_bytes",
+            "value": 160
+          }
+        ]
+      }
     },
     {
       "id": "base_part.nec_pc8853_display_assembly",
@@ -3088,7 +3205,26 @@
           "kind": "testing",
           "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "OEM assembly and required adaptation",
+            "description": "The {diagonal_inches}-inch assembly has a {dot_pitch_mm} mm dot pitch. Its historical 640 × 400 raster used 24.83 kHz horizontal and 56.4/55.4 Hz vertical timing with a stock digital RGB input.\n\nThe Logix design requires a qualified 26.88 kHz/60 Hz progressive adaptation of the OEM tube/yoke/deflection assembly, plus AION palette/DAC electronics. The stock monitor is not plug-compatible; historical shipment establishes neither an OEM supply agreement nor modified-timing qualification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "diagonal_inches",
+            "value": 14
+          },
+          {
+            "key": "dot_pitch_mm",
+            "value": 0.31
+          }
+        ]
+      }
     },
     {
       "id": "base_part.color_pro_monitor_controller",
@@ -3125,7 +3261,31 @@
           "kind": "testing",
           "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Colour conversion and line updates",
+            "description": "A 4-bit pixel index selects one of {palette_registers} {palette_entry_bits}-bit RGB entries. Three 4-bit DAC channels feed external voltage amplifiers; DAC ladders, analog drivers and high-voltage/deflection electronics are explicit board components, not assumed on-chip functions. {palette_list_id} controls palette changes.\n\nThe RGB amplifier design target is 25–30 MHz. DAC settling, text focus, convergence and line-boundary commits require qualification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "palette_registers",
+            "value": 16
+          },
+          {
+            "key": "palette_entry_bits",
+            "value": 12
+          },
+          {
+            "key": "palette_list_id",
+            "ref_id": "technology.scanline_palette_list",
+            "ref_role": "Line-boundary palette update protocol"
+          }
+        ]
+      }
     },
     {
       "id": "base_part.professional_graphics_controller",
@@ -3160,7 +3320,27 @@
           "kind": "testing",
           "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Professional graphics implementation",
+            "description": "The controller implements {graphics_architecture_id} with {addressable_memory_bytes} bytes of memory addressing. Engineering prototypes may use discrete or microcoded logic. Production custom silicon, timing and arbitration must be qualified before release; no performance or process-node qualification is implied."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "graphics_architecture_id",
+            "ref_id": "technology.artemis_professional_graphics",
+            "ref_role": "Professional drawing and display architecture"
+          },
+          {
+            "key": "addressable_memory_bytes",
+            "value": 131072
+          }
+        ]
+      }
     },
     {
       "id": "base_part.mono_pro_17_controller",
@@ -3195,7 +3375,22 @@
           "kind": "testing",
           "description": "Engineering baseline; electrical qualification, routing and supplier quotes pending."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Professional grayscale conversion",
+            "description": "Four pixel codes select four programmable values from a {intensity_levels}-level range. The custom controller drives a 4-bit DAC and a qualified linear video amplifier; CRT deflection and high-voltage electronics remain separate. Qualify pixel-clock settling, distinct grayscale levels, geometry, corner focus, phosphor persistence and sync compatibility."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "intensity_levels",
+            "value": 16
+          }
+        ]
+      }
     },
     {
       "id": "base_part.aion_4164_2um",
@@ -3245,7 +3440,72 @@
           "kind": "testing",
           "description": "Planned Athena/ERA² product; excluded from current costed production coverage, not cancelled."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Memory organization",
+            "description": "This dynamic RAM provides {capacity_kbit} Kibit organized as {organization_words} words with a {data_width_bits}-bit data interface. It is the {process_um} µm {recipe} revision of {base_part_id}, not a 128- or 256-Kibit device. The revised die-area target is {die_area_mm2} mm²."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Speed and electrical qualification",
+            "description": "Preferred targets are {preferred_access_ns} ns row access and {preferred_cycle_ns} ns random cycle. The fallback is {fallback_access_ns} ns access with a {fallback_cycle_range_ns} ns cycle. The {stretch_access_ns} ns stretch target is not the launch baseline; actual access time is unknown until qualification.\n\nPackage, supply rails, speed, loading, page timing, temperature, retention, refresh and yield need independent qualification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kbit",
+            "value": 64
+          },
+          {
+            "key": "organization_words",
+            "value": 65536
+          },
+          {
+            "key": "data_width_bits",
+            "value": 1
+          },
+          {
+            "key": "process_um",
+            "value": 2
+          },
+          {
+            "key": "recipe",
+            "value": "dram64_2um_repair"
+          },
+          {
+            "key": "base_part_id",
+            "ref_id": "base_part.aion_4164",
+            "ref_role": "Earlier part whose capacity is preserved"
+          },
+          {
+            "key": "preferred_access_ns",
+            "value": 120
+          },
+          {
+            "key": "preferred_cycle_ns",
+            "value": 240
+          },
+          {
+            "key": "fallback_access_ns",
+            "value": 150
+          },
+          {
+            "key": "fallback_cycle_range_ns",
+            "value": "270–300"
+          },
+          {
+            "key": "stretch_access_ns",
+            "value": 100
+          },
+          {
+            "key": "die_area_mm2",
+            "value": 28
+          }
+        ]
+      }
     },
     {
       "id": "base_part.artemis_ram_module_128kb.module_pcb",
@@ -10034,7 +10294,35 @@
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Processor and fabrication target",
+            "description": "The processor implements {architecture_id} at {clock_mhz} MHz. It remains on the original {process_um} µm Micralign process with a {die_area_mm2} mm² planning die; speed-bin and electrical qualification are unchanged."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "architecture_id",
+            "ref_id": "technology.era1_isa",
+            "ref_role": "Instruction-set and processor architecture"
+          },
+          {
+            "key": "clock_mhz",
+            "value": 6
+          },
+          {
+            "key": "process_um",
+            "value": 3
+          },
+          {
+            "key": "die_area_mm2",
+            "value": 55
+          }
+        ]
+      }
     },
     {
       "id": "base_part.erav1_8mhz",
@@ -10071,7 +10359,35 @@
           "kind": "testing",
           "description": "Define 6/8 MHz die revision versus speed-bin relationship, process/node, die area, wafer source, mask count, package/pinout, power, tester vectors, wafer/package yields and bin distribution."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Processor and fabrication target",
+            "description": "The processor implements {architecture_id} at {clock_mhz} MHz. It remains on the original {process_um} µm Micralign process with a {die_area_mm2} mm² planning die; speed-bin and electrical qualification are unchanged."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "architecture_id",
+            "ref_id": "technology.era1_isa",
+            "ref_role": "Instruction-set and processor architecture"
+          },
+          {
+            "key": "clock_mhz",
+            "value": 8
+          },
+          {
+            "key": "process_um",
+            "value": 3
+          },
+          {
+            "key": "die_area_mm2",
+            "value": 55
+          }
+        ]
+      }
     },
     {
       "id": "base_part.era2_12mhz",
@@ -10110,7 +10426,43 @@
           "kind": "testing",
           "description": "Planned Athena/ERA² product; excluded from current costed production coverage, not cancelled."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Processor and fabrication target",
+            "description": "The processor implements {architecture_id} at {clock_mhz} MHz. AION Labs is the initial manufacturer. The design targets a {process_um} µm process on {wafer_diameter_mm} mm wafers, a {die_area_mm2} mm² die and a {transistor_budget}-transistor budget."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "architecture_id",
+            "ref_id": "technology.era2_architecture",
+            "ref_role": "Instruction-set and processor architecture"
+          },
+          {
+            "key": "clock_mhz",
+            "value": 12
+          },
+          {
+            "key": "process_um",
+            "value": 2
+          },
+          {
+            "key": "wafer_diameter_mm",
+            "value": 75
+          },
+          {
+            "key": "die_area_mm2",
+            "value": 90
+          },
+          {
+            "key": "transistor_budget",
+            "value": 142000
+          }
+        ]
+      }
     },
     {
       "id": "base_part.athena.fdd",
@@ -10136,7 +10488,17 @@
           "kind": "testing",
           "description": "Formatted capacity remains unqualified."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Component role",
+            "description": "5.25-inch DS/DD FDD"
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.athena.bios",
@@ -10158,7 +10520,17 @@
         }
       },
       "specification": [],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Boot firmware storage",
+            "description": "This part provides boot/diagnostic firmware storage for Athena. Capacity remains unspecified."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.athena.mainboard_set",
@@ -10184,7 +10556,17 @@
           "kind": "testing",
           "description": "Scope excludes separately listed device documentation, external mains cable, delivery packaging and FDD controller data cable; retain fixed internal wiring and power harnesses here."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Component role",
+            "description": "Mainboard, controllers, power supply, chassis and wiring"
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.athena.system_rom",
@@ -10206,7 +10588,22 @@
         }
       },
       "specification": [],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System ROM storage",
+            "description": "This physical ROM provision stores {capacity_bytes} bytes of system code for its owning Athena cartridge. Execution behaviour belongs to the software and cartridge definitions."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_bytes",
+            "value": 262144
+          }
+        ]
+      }
     },
     {
       "id": "base_part.athena_server.hdd",
@@ -10234,7 +10631,22 @@
           "kind": "testing",
           "description": "Period sourcing candidate; qualify controller, power, mounting and capacity geometry before release."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage capacity",
+            "description": "This hard-disk mechanism supplies {capacity_mb} MB of storage."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_mb",
+            "value": 20
+          }
+        ]
+      }
     },
     {
       "id": "base_part.athena_server.fdd",
@@ -10260,7 +10672,17 @@
           "kind": "testing",
           "description": "Formatted capacity remains unqualified."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Component role",
+            "description": "5.25-inch DS/DD FDD"
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.athena_server.bios",
@@ -10282,7 +10704,17 @@
         }
       },
       "specification": [],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Boot firmware storage",
+            "description": "This part provides boot/diagnostic firmware storage for Athena Server. Capacity remains unspecified."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.athena_server.mainboard_set",
@@ -10308,7 +10740,17 @@
           "kind": "testing",
           "description": "Scope excludes separately listed device documentation, external mains cable, delivery packaging and FDD controller data cable; retain fixed internal wiring and power harnesses here."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Component role",
+            "description": "Mainboard, controllers, power supply, chassis and wiring"
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.athena_server.system_rom",
@@ -10330,7 +10772,22 @@
         }
       },
       "specification": [],
-      "requirements": []
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "System ROM storage",
+            "description": "This physical ROM provision stores {capacity_bytes} bytes of system code for its owning Athena cartridge. Execution behaviour belongs to the software and cartridge definitions."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_bytes",
+            "value": 262144
+          }
+        ]
+      }
     },
     {
       "id": "base_part.logix_network_cable",
