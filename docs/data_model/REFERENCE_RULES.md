@@ -11,13 +11,15 @@ Prefer the narrowest meaningful field:
 | A directly required existing resource or implementation | `inputs[]`, usually `resource`, with an explanation. |
 | A prerequisite constraint, interface or acceptance requirement | `inputs[]`, with `requirement` or `acceptance_criterion`. |
 | A directly enabling predecessor event/process | An explained input using `event_id` or `process_id`. Use the nearest actual dependency. |
-| An agreement governs the activity | The singular `agreement_id`; an input may explain a distinct enabling milestone without repeating the same agreement relation. |
+| An event records signing or contractual acceptance of an agreement | The singular `agreement_id`, only on the evidenced signing/formalisation/acceptance event. Operational events, closings and processes omit it. |
 | The activity delivers an object or implementation | `outcomes[]` with `deliverable` and a description of what is supplied. |
 | It qualifies, improves or changes an existing object | An explained outcome such as `qualification`, `maturity_transition`, `decision` or `result`. |
 | It decides or commits future work | A `decision` outcome identifying the scope where useful; do not call the promised product a finished deliverable. |
 | An actor participates, or a place hosts activity | `participant[]` or `location_ids`, rather than general subject lists. |
 | An event/process belongs to another process | Process steps/boundaries or the established ownership fields; inputs and outcomes do not establish ownership. |
 | A loosely connected topic or background fact | Preserve useful prose; remove the reference. |
+
+Apply this signing-only rule to every agreement. An offer or negotiation does not establish signing. If only fulfilment of prior promises is recorded and no signing event is supported, omit `agreement_id` rather than inventing a date or event. Preserve useful obligations in prose and genuine prerequisites through explained inputs referencing the signing event. Do not use other generic reference fields merely to recreate the removed agreement link. Compatibility schemas still accept existing operational links while their removal proposals await approval.
 
 Top-level `subject_ids` is exceptional. Each retained reference needs a specific reason that cannot be represented more accurately above. Record that reason in proposal evidence or review rationale, not in a new foundation metadata field. References inside `inputs[].subject_ids` and `outcomes[].subject_ids` are useful because their enclosing type and description explain the relationship. Action-step references may remain when the step directly states what is done to or with the object and that reference is not already represented in the containing process’s inputs or outcomes. Remove redundant step subjects while retaining the action description. If a genuine delivery relationship is missing, add an explained outcome in the same reviewed proposal before removing its step reference. Avoid unexplained lists there too.
 

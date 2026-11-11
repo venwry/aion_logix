@@ -1,0 +1,13 @@
+# Product launch and agreement-signing corrections
+
+Three independent Changes confirm proposals preserve full before/after snapshots. No foundation records or authorization hashes are changed by preparing them. The baseline commit and the review of all 22 agreements are in `audit.json`.
+
+1. Launch `product.academy_course_1` through `product.academy_course_4` at `event.academy_launch` on 16 June 1978.
+2. Launch `product.aurelia_sdk`, `product.service_aurelia_commercial_developer_license`, `product.proposed_aurelia_developer` and `product.simple_c_z80` at `event.aurelia_developer_presentation` on 6 June 1978. Set the event kind to `launch`. Align the first commercial composition boundary of the SDK, developer bundle and C IDE product with that event. Do not change their composition contents, referenced versions, technical implementation histories or campaign.
+3. Reserve `agreement_id` for an evidenced signing/formalisation/contractual-acceptance event across all agreements. Remove 11 links from operational events, the CAP closing, processes, the unsigned Apple–Peachtree negotiation and the Logix share-transfer event that records fulfilment of prior promises. No separate signing event is invented for that transfer. Nineteen agreements retain their existing signing/acceptance event. The casting offer and Apple–Peachtree negotiation remain unsigned; all agreement records, states and clauses remain unchanged. Also bring the BPI cooperation outcome's stale July 17 date into line with the already approved June 16 Academy launch.
+
+The signing determination uses each record's narrative and agreement state, not its event-kind label alone. The DRI founding and Letwin appointment events explicitly formalise/accept their contractual terms; operational BPI cooperation and CAP closing instead implement earlier agreements. `audit.json` records each retention and removal so those interpretations are reviewable.
+
+The product-owned references automatically drive the existing Timeline display. After approval, Academy launch lists five products (four courses plus existing BPI training), the developer launch lists four, and the Aurelia platform launch lists fifteen. No duplicate reverse product lists are stored in events.
+
+Run `node tools/verify-launch-agreement-corrections.js` to verify current before snapshots, each independent approval, batch and reverse sequential approval, exact field changes, complete agreement coverage and untouched live inputs. The user’s signing-only authoring rule is documented now; compatibility schema declarations remain available for records awaiting approval.
