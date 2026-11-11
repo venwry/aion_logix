@@ -27,7 +27,7 @@ export function timing(record,index,seen=new Set()) {
   if(!record||seen.has(record.id))return null;
   seen.add(record.id);
   if(typeOf(record)==='event'&&record.time){const date=pointBounds(record.time,index);return date?{...date,span:false,derived:false,label:record.time.value}:null;}
-  if(typeOf(record)==='process'){
+  if(typeOf(record)==='process'||(typeOf(record)==='campaign'&&record.period)){
     const first=pointBounds(record.period?.start,index),last=pointBounds(record.period?.end,index);
     // An unknown end is not silently replaced with the start or the latest child event.
     if(!first||!last)return null;

@@ -1,5 +1,6 @@
 import {validateTechnicalSpecifications} from '../code/technical-specification.js';
 import {validateTechnologySpecifications} from '../code/technology-specification.js';
+import {validateCampaigns} from '../code/campaigns.js';
 import {validateProductLaunches} from '../code/product-launches.js';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -91,9 +92,10 @@ export function validateDocuments(documents, { complete = false } = {}) {
   const timelineChildren=new Set();
   for(const record of records.values()){
     if(record.id.startsWith('process.')){
-      for(const step of record.steps||[])if(step.event_id||step.process_id)timelineChildren.add(step.event_id||step.process_id);
+      for(const step of record.steps||[])if(step.event_id||step.process_id||step.campaign_id)timelineChildren.add(step.event_id||step.process_id||step.campaign_id);
       for(const point of [record.period?.start,record.period?.end])if(point?.precision==='event')timelineChildren.add(point.value);
     }
+    if(record.id.startsWith('campaign.'))for(const step of record.marketing_steps||[])if(step.reference_id)timelineChildren.add(step.reference_id);
     if(record.id.startsWith('event.')&&record.process_ids?.length)timelineChildren.add(record.id);
   }
   for(const id of timelineChildren)if(records.get(id)?.category)report(`${id}: child timeline records must leave category empty and inherit from their parent`);
@@ -102,7 +104,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       const numbers=(record[key]||[]).map(x=>record.id.startsWith('external_product.')&&key==='specification'?x.no:x.number);
       if(new Set(numbers).size!==numbers.length)report(`${record.id}: duplicate number in ${key}`);
     }
-    if(record.id.startsWith('campaign.')&&records.get(record.process_id)?.kind!=='campaign_execution')report(`${record.id}: campaign needs an execution process`);
+    if(record.id.startsWith('campaign.')&&!record.period&&records.get(record.process_id)?.kind!=='campaign_execution')report(`${record.id}: campaign needs an execution process`);
     for(const outcome of record.outcomes||[]){
       if(outcome.type==='maturity_transition'&&!outcome.maturity&&!outcome.subject_ids?.some(id=>id.startsWith('manufacturing_capability.')))report(`${record.id}: maturity transition needs a capability reference in subject_ids and its stage in description`);
       if(outcome.maturity&&outcome.type!=='maturity_transition')report(`${record.id}: maturity payload requires maturity_transition type`);
@@ -139,7 +141,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if (record.occurrence==='unknown'||record.state==='unknown'||record.completion_state==='unknown') report(`${record.id}: unresolved story state`);
     }
   }
-  errors.push(...validateTechnicalSpecifications(records),...validateTechnologySpecifications(records),...validateCompositions(records),...validateProductLaunches(records));
+  errors.push(...validateCampaigns(records),...validateTechnicalSpecifications(records),...validateTechnologySpecifications(records),...validateCompositions(records),...validateProductLaunches(records));
   if (complete && count===0) report('No records: an empty graph cannot establish completeness');
   return {errors,count};
 }

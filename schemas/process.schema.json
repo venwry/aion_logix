@@ -325,6 +325,13 @@
           "x-ref": [
             "process"
           ]
+        },
+        "campaign_id": {
+          "type": "string",
+          "pattern": "^(campaign)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "campaign"
+          ]
         }
       },
       "required": [
@@ -334,9 +341,25 @@
       ],
       "additionalProperties": false,
       "not": {
-        "required": [
-          "event_id",
-          "process_id"
+        "anyOf": [
+          {
+            "required": [
+              "event_id",
+              "process_id"
+            ]
+          },
+          {
+            "required": [
+              "event_id",
+              "campaign_id"
+            ]
+          },
+          {
+            "required": [
+              "process_id",
+              "campaign_id"
+            ]
+          }
         ]
       }
     }

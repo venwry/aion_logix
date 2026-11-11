@@ -33,7 +33,9 @@ Qualification concerns an existing object; it does not claim that the activity i
 | --- | --- |
 | A Logix/AION product's initial launch campaign | `product.launch_campaign_id`. |
 | Its launch event | `product.launch_event_id`. Multiple products can share it. |
-| Campaign execution and timing | `campaign.process_id` and that process's dates/steps. |
+| Campaign timing | `campaign.period` with calendar or unknown boundaries; legacy campaigns still use `process_id`. |
+| Campaign owns an event or subprocess | `marketing_steps[].reference_id`; only one owner, no duplicate direct ownership of a subprocess’s event. |
+| Parent process owns a campaign | `steps[].campaign_id`; mutually exclusive with event_id and process_id on that step. |
 | A process is responsible for delivering an offering | An explained outcome on that delivery process pointing to the product. |
 | Work delivers a technical implementation | An explained outcome pointing to the device, software edition, base part, technology or capability actually delivered. |
 | Later promotion, demonstration or third-party participation | A separately explained relationship; initial-launch links cannot replace it. |

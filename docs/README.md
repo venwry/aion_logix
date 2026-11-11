@@ -1,6 +1,6 @@
 # Current documentation
 
-These guides describe the repository and application as they work now. The schema contract is **0.16.0**. Live JSON, rather than a historical report, determines current records, pending proposals and authorization state. The catalogue migration is accepted; current authoring rules, runtime compatibility and remaining review discussions are distinguished in these guides.
+These guides describe the repository and application as they work now. The schema contract is **0.17.0**. Live JSON, rather than a historical report, determines current records, pending proposals and authorization state. The catalogue migration is accepted; current authoring rules, runtime compatibility and remaining review discussions are distinguished in these guides.
 
 | Guide | Use |
 | --- | --- |
@@ -18,3 +18,5 @@ These guides describe the repository and application as they work now. The schem
 [Model principles](../DATA_MODEL_PRINCIPLES.md) apply throughout. The canonical model-documentation directory is `docs/data_model`.
 
 [Archived documentation](archived/README.md) contains historical story proposals, assessments, migration reports and superseded guidance. Those files are not current instructions or a statement of what is pending now. The earlier [legacy evidence archive](../archived_no_longer_valid/README.md) remains immutable.
+
+- [Campaign timeline contract](data_model/CAMPAIGN_TIMELINES.md): independent campaign dates, marketing steps, presentation blocks and staged ownership migration.

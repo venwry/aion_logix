@@ -8,7 +8,8 @@ export function timelineTree(items){
  const canonical=id=>aliases.get(id)||id,candidates=new Map();
  function offer(child,parent,priority){child=canonical(child);parent=canonical(parent);if(child===parent||!nodes.has(child)||!nodes.has(parent))return;const list=candidates.get(child)||[];list.push({parent,priority});candidates.set(child,list);}
  for(const item of items){const r=item.record;
-  if(item.type==='process'){for(const step of r.steps||[])if(step.event_id||step.process_id)offer(step.event_id||step.process_id,r.id,aliases.has(r.id)?1:2);}
+  if(item.type==='process'){for(const step of r.steps||[])if(step.event_id||step.process_id||step.campaign_id)offer(step.event_id||step.process_id||step.campaign_id,r.id,aliases.has(r.id)?1:2);}
+  if(item.type==='campaign')for(const step of r.marketing_steps||[])if(step.reference_id)offer(step.reference_id,r.id,2);
   if(item.type==='event')for(const id of r.process_ids||[])offer(r.id,id,3);
  }
  for(const [id,list] of candidates){const node=nodes.get(id);list.sort((a,b)=>a.priority-b.priority||a.parent.localeCompare(b.parent));
@@ -43,7 +44,7 @@ export function timelineTree(items){
  // Resolve on the complete ownership tree, before filters can hide ancestors.
  function category(node){
   if(node.category!==undefined)return node.category;
-  const owner=node.members.find(m=>m.type==='process')||node.members.find(m=>m.type==='event');
+  const owner=node.members.find(m=>m.type==='process')||node.members.find(m=>m.type==='event')||node.members.find(m=>m.type==='campaign');
   return node.category=node.parent?category(nodes.get(node.parent)):(owner?.record.category||'');
  }
  for(const node of nodes.values())category(node);

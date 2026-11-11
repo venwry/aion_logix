@@ -17,6 +17,16 @@
   "additionalProperties": false,
   "$defs": {
     "record": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/timeline_record"
+        },
+        {
+          "$ref": "#/$defs/legacy_record"
+        }
+      ]
+    },
+    "legacy_record": {
       "type": "object",
       "properties": {
         "id": {
@@ -196,6 +206,254 @@
         "objective",
         "lead_actor_ids",
         "process_id"
+      ],
+      "additionalProperties": false
+    },
+    "unknown_date": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "null"
+        },
+        "precision": {
+          "const": "unknown"
+        }
+      },
+      "required": [
+        "value",
+        "precision"
+      ],
+      "additionalProperties": false
+    },
+    "calendar_boundary": {
+      "oneOf": [
+        {
+          "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
+        },
+        {
+          "$ref": "#/$defs/unknown_date"
+        }
+      ]
+    },
+    "period": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/calendar_boundary"
+        },
+        "end": {
+          "$ref": "#/$defs/calendar_boundary"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false,
+      "x-period": true
+    },
+    "timeline_record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^campaign\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lead_actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(actor)\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "message": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "audience": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "period": {
+          "$ref": "#/$defs/period"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "",
+            "Adam's personal",
+            "Logix/AION investment",
+            "Product dev & launch",
+            "Ecosystem & Partners",
+            "Competition"
+          ],
+          "description": "Timeline swim lane for a root campaign; owned campaigns inherit their parent category."
+        },
+        "marketing_steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/marketing_step"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "objective",
+        "lead_actor_ids",
+        "period",
+        "marketing_steps"
+      ],
+      "additionalProperties": false
+    },
+    "marketing_step": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference_id": {
+          "type": "string",
+          "pattern": "^(event|process)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "event",
+            "process"
+          ]
+        },
+        "marketing_presentation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/presentation_block"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "number",
+        "type",
+        "description",
+        "marketing_presentation"
+      ],
+      "additionalProperties": false
+    },
+    "presentation_block": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        }
+      },
+      "required": [
+        "number",
+        "description",
+        "parameters"
+      ],
+      "additionalProperties": false
+    },
+    "parameter": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/value_parameter"
+        },
+        {
+          "$ref": "#/$defs/reference_parameter"
+        }
+      ]
+    },
+    "value_parameter": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number"
+          ],
+          "minLength": 1
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "reference_parameter": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "ref_id": {
+          "type": "string",
+          "pattern": "^(actor|product|external_product|technology|device|software_edition|agreement|manufacturing_capability|market_response|location|base_part)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "actor",
+            "product",
+            "external_product",
+            "technology",
+            "device",
+            "software_edition",
+            "agreement",
+            "manufacturing_capability",
+            "market_response",
+            "location",
+            "base_part"
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "ref_id"
       ],
       "additionalProperties": false
     }

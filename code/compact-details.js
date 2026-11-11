@@ -1,3 +1,4 @@
+import {renderMarketingSteps} from './campaigns.js';
 import {renderTechnicalSpecification,renderGraphicModes} from './technical-specification.js';
 import {renderTechnologySpecification} from './technology-specification.js';
 import {datasetPath,simulationEnd} from './model-contract.js';
@@ -126,6 +127,7 @@ export function compactDetails(record,data,select,options={}){
  orderedFields.splice(construction<0?orderedFields.length:construction,0,...specifications);
  for(const [key,value] of orderedFields){
   if(key==='status'||(record.technical_specification&&(key==='technical_definition'||key.startsWith('technical_definition.'))))continue;
+  if(key==='marketing_steps'&&typeOf(record)==='campaign'){const section=renderMarketingSteps(value,data.index,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='technical_specification'||key==='graphic_modes_specification'){const section=key==='technical_specification'?renderTechnicalSpecification(value,v=>valueNode(v)):renderGraphicModes(value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='specification'&&typeOf(record)==='technology'){const section=renderTechnologySpecification(value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='composition_history'&&Array.isArray(value)){const history=compositionHistory(value);if(options.changedFields?.has(key))history.classList.add('changed-field');content.append(history);continue;}

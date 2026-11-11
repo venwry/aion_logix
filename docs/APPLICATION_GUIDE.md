@@ -33,7 +33,7 @@ Explicit parent-process links and process-step references place events and sub-p
 
 All child levels share a compact track panel. Overlapping children use adjacent tracks; a slot is reused after its previous process ends. Child cards share a common left edge. Parentage remains available in card descriptions and details. Undated processes stay in their separate section.
 
-A campaign shares one visual card with its execution process. Its light-red **Campaign** badge opens campaign details; the heading and **Process** label open execution-process details. These remain two distinct records with separate content hashes and authorizations. “Mixed authorization” means only one of the pair is authorized; it is a display summary, not a stored status or group approval.
+A converted campaign has its own light-red duration block, independent of its former execution process. Its heading opens campaign details. Until conversion is approved, a legacy campaign shares one visual card with its execution process. Its light-red **Campaign** badge opens campaign details; the heading and **Process** label open execution-process details. These remain two distinct records with separate content hashes and authorizations. “Mixed authorization” means only one of the pair is authorized; it is a display summary, not a stored status or group approval.
 
 ### Filters and space
 
@@ -99,9 +99,9 @@ Agreement details show simplified clause columns: id, kind, statement, value and
 
 ## Timeline categories and swim lanes
 
-Processes support an optional `category` string; the unused event category declaration is retired in contract 0.16.0. The permitted non-empty values are `Adam's personal`, `Logix/AION investment`, `Product dev & launch`, `Ecosystem & Partners`, and `Competition`. An omitted field or `""` is empty; `null` and other spellings are invalid.
+Processes and converted campaigns support an optional `category` string; the unused event category declaration is retired in contract 0.16.0. The permitted non-empty values are `Adam's personal`, `Logix/AION investment`, `Product dev & launch`, `Ecosystem & Partners`, and `Competition`. An omitted field or `""` is empty; `null` and other spellings are invalid.
 
-Assign a category only to a top-level process. Children must leave it empty and inherit their root's category. Ownership comes from process steps, event-based period boundaries, or event `process_ids`. Inputs, outcomes, subjects and related-process references do not establish ownership. The model validator rejects a non-empty category on an owned child. When reparenting a root, clear its category in the same approval batch. Campaigns use their execution process's category; they have no separate category field.
+Assign a category only to a top-level process or converted campaign. Children must leave it empty and inherit their root's category. Ownership comes from process steps, event-based period boundaries, or event `process_ids`. Inputs, outcomes, subjects and related-process references do not establish ownership. The model validator rejects a non-empty category on an owned child. When reparenting a root, clear its category in the same approval batch. Legacy campaigns use their execution process’s category. Converted campaigns inherit from their parent or use their own root category. Marketing-step details use narrative presentation blocks with expandable parameter tables. Each step header shows number, type and description; a second line shows the referenced event/process name and date/start date when reference_id is present.
 
 The timeline displays five lightly colored vertical lanes, with an additional grey Uncategorised lane when matching records have no category. Each lane has a labeled collapse/expand button above the workspace. Collapse hides the lane and its cards, including undated entries, while leaving its button available. Controls work by keyboard and remain available in full screen. Lane visibility lasts until page reload; filter reset does not change it.
 

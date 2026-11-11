@@ -1,4 +1,4 @@
-# Current model guide — version 0.16.0
+# Current model guide — version 0.17.0
 
 The model separates fictional-world records, editorial review and later calculations. [Principles](../../DATA_MODEL_PRINCIPLES.md), [reference rules](REFERENCE_RULES.md) and [JSON Schemas](../../schemas/) govern editing. The [generated specification](FOUNDATION_SPECIFICATION.md) describes exact attributes; historical reports do not extend the contract.
 
@@ -16,7 +16,7 @@ Inputs explain direct prerequisites; outcomes explain deliveries, decisions, cha
 
 ## Marketing and products
 
-Campaigns own marketing objectives, audiences, messages, presentations and booth content. `process_id` identifies their execution process and supplies timing. Every current offering has authoritative product-owned launch campaign/event links. Repeated reverse launch lists and inherited product lists should be removed through reviewed migrations; later promotion and external participation are distinct relationships that must survive.
+Campaigns own marketing objectives, audiences, messages, calendar periods and marketing steps. During individually reviewed conversion, the legacy shape with `process_id` remains supported; converted campaigns have their own dates and no execution-process reference. Every current offering has authoritative product-owned launch campaign/event links. Repeated reverse launch lists and inherited product lists should be removed through reviewed migrations; later promotion and external participation are distinct relationships that must survive.
 
 `product` means a Logix/AION customer-facing offering. `base_part` defines a physical part; `device` owns hardware construction; `software_edition` defines a software implementation. Third-party commercial offerings use descriptive `external_product` records with `id`, `name`, `description` and `specification` entries containing exactly `no`, `description`, one `ref_id` and `ref_role`. Direct relationships distinguish publishers, licensors, hosts, implementations and agreements. External descriptions do not replace technical BOMs.
 
@@ -77,16 +77,16 @@ Editorial regrouping is a separate reviewed change. Each proposed chapter retain
 
 ## Timeline ownership and categories
 
-Ownership is expressed through process steps, event boundaries or event boundaries. The unused `parent_process_id` field has been removed. Inputs, outcomes and general references do not establish it. Keep one owner; preserve dates and empty the child's category when reparenting. Only processes currently declare categories; the unused event category declaration is retired. Root process categories are `Adam's personal`, `Logix/AION investment`, `Product dev & launch`, `Ecosystem & Partners` and `Competition`. Omitted or empty-string categories are empty; null is invalid. Campaigns inherit their execution process's category.
+Ownership is expressed through process steps, campaign marketing-step references, process event boundaries or event membership fields. The unused `parent_process_id` field has been removed. Inputs, outcomes and general references do not establish it. Keep one owner; preserve dates and empty the child's category when reparenting. Processes and converted campaigns declare categories; the unused event category declaration is retired. Root process categories are `Adam's personal`, `Logix/AION investment`, `Product dev & launch`, `Ecosystem & Partners` and `Competition`. Omitted or empty-string categories are empty; null is invalid. Legacy campaigns inherit their execution process's category. Converted campaigns inherit from their structural parent, or declare their own root category.
 
-Product launch references must be supplied as a pair when used. The launch event must belong directly or through subprocesses to the campaign execution process and fit its period. Multiple products may share a campaign/event, and a campaign can contain several launch events. All current offerings have both links. The active schema still permits omission of both; mandatory enforcement is provided only by the optional catalogue profile until it is promoted into the runtime contract.
+Product launch references must be supplied as a pair when used. The launch event must belong directly or through subprocesses to the campaign, or its legacy execution process, and fit its period. During conversion, code/campaign-transition.js explicitly maps the twelve migrated campaign IDs to their still-owning execution processes. This bridge is validation metadata and never creates visual ownership. It is not available to arbitrary new campaigns. Multiple products may share a campaign/event, and a campaign can contain several launch events. All current offerings have both links. The active schema still permits omission of both; mandatory enforcement is provided only by the optional catalogue profile until it is promoted into the runtime contract.
 
 ```mermaid
 flowchart LR
   Product[Customer-facing product] -->|launch campaign| Campaign[Campaign]
   Product -->|launch event| Launch[Launch event]
-  Campaign -->|execution| Execution[Execution process]
-  Execution -->|owns milestone| Launch
+  Campaign -->|future marketing-step ownership| Launch
+  Execution[Legacy execution process] -->|owns during conversion| Launch
   Delivery[Delivery process] -->|explained outcome| Product
   Technical[Engineering work] -->|explained outcome| Definition[Device or software edition]
   Activity[Event or process] -->|explained input| Prerequisite[Direct prerequisite]

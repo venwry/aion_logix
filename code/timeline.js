@@ -35,7 +35,7 @@ try{
   const state=el('span','timeline-state',status);state.title=n.members.map(x=>human(x.type)+': '+(x.record.status==='authorized'?'Authorized':'Pending authorization')).join(' · ');meta.append(state);
   const owner=n.members.find(x=>['event','process'].includes(x.type)),agreementId=owner?.record.agreement_id||owner?.record.agreement_ids?.[0];
   if(agreementId&&data.index.has(agreementId)){const agreement=el('button','timeline-agreement','Agreement');agreement.type='button';agreement.title=titleOf(data.index.get(agreementId));agreement.onclick=()=>choose(agreementId);meta.append(agreement);}
-  if(n.type==='campaign'){const campaign=el('button','timeline-campaign','Campaign');campaign.type='button';campaign.title=titleOf(n.record);campaign.onclick=()=>choose(n.record.id);meta.append(campaign);}
+  if(n.type==='campaign'&&execution){const campaign=el('button','timeline-campaign','Campaign');campaign.type='button';campaign.title=titleOf(n.record);campaign.onclick=()=>choose(n.record.id);meta.append(campaign);}
   if(n.boundary)meta.append(el('span','timeline-role',human(n.boundary)));
   if(n.clippedStart)meta.append(el('span','timeline-role','Continued'));
   const dates=n.date?n.date.startLabel+(n.date.span?' – '+n.date.endLabel:''):'Unknown dates';
@@ -61,7 +61,7 @@ try{
   function remember(time,label){if(label){if(!localDates.has(time))localDates.set(time,new Set());localDates.get(time).add(label);}}
   for(const n of group.entries){
    if(n.date.span){
-    const x=56+n.track*layout.trackGap,rail=el('div','duration-track');rail.dataset.trackId=n.id;rail.dataset.recordId=n.record.id;
+    const x=56+n.track*layout.trackGap,rail=el('div','duration-track');rail.dataset.trackId=n.id;rail.dataset.recordId=n.record.id;rail.dataset.type=n.type;
     Object.assign(rail.style,{left:x-2+'px',top:n.anchor-group.groupTop+'px',height:Math.max(0,n.endAnchor-n.anchor)+'px'});panel.append(rail);
     const zero=n.begin===n.finish?'zero-duration':'';
     marker(x,n.anchor,n.clippedStart?'continued-start':'start',(n.clippedStart?'Continues from before range: ':'Start: ')+n.date.startLabel,n.record.id,zero);

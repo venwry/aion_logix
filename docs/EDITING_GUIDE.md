@@ -94,3 +94,7 @@ When preparing a computer specification, first check what is actually installed 
 ## Unpopulated fields
 
 The current audit is in `data_storytelling/review_evidence/unpopulated-field-retirement/`. Empty-only data removals are complete-record Changes confirm proposals. Do not apply their after-snapshots directly or refresh authorization hashes. Absent schema declarations are retired in 0.16.0; seven empty-only compatibility declarations remain until review. After approval, run `python3 tools/retire-unpopulated-fields.py --final --apply` and `node tools/verify-unpopulated-field-retirement.js`, then publish the matching schemas, registry, manifest and generated documentation together. Shared fields with populated uses are retained. Historical snapshots are evidence, not current schema fixtures.
+
+## Campaign timeline conversion
+
+Use the [campaign timeline contract](data_model/CAMPAIGN_TIMELINES.md) for new campaigns and the staged conversion. Schema/application support is deployed separately; twelve complete-record proposals convert campaigns individually, with parent-process additions in the same proposal. Run `node tools/verify-campaign-timelines.js` and the campaign model/browser tests. Preserve old event/subprocess ownership until the later explicit rewiring phase; presentation blocks have no event IDs, and marketing-step references remain absent in this phase. Do not retire the legacy schema branch or launch-validation bridge until their final users have migrated.

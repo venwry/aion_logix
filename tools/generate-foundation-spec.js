@@ -6,8 +6,9 @@ import path from 'node:path';
 const names = [...datasets].sort();
 const schemas = Object.fromEntries([...names, 'common', 'technical', 'composition'].map(n => [n, JSON.parse(fs.readFileSync(`schemas/${n}.schema.json`))]));
 function resolve(value, owner) {
+  if(value.oneOf?.some(b=>b.$ref?.endsWith('/unknown_date')))return [{type:'object',properties:{value:{type:'string | null'},precision:{type:'string',enum:['year','month','day','unknown']}},required:['value','precision']},owner];
   if(value['x-boundary'])return [{type:'object',properties:{value:{type:'string | null','x-ref':['event']},precision:{type:'string',enum:['year','month','day','event','unknown']}},required:['value','precision']},owner];
-  if(value.oneOf?.every(b=>b.$ref?.match(/parameter_(value|reference)$/))){
+  if(value.oneOf?.every(b=>b.$ref?.match(/(parameter_(value|reference)|(value|reference)_parameter)$/))){
     const variants=value.oneOf.map(b=>resolve(b,owner)[0]);
     return [{type:'object',properties:Object.assign({},...variants.map(v=>v.properties)),required:['key']},owner];
   }
@@ -57,6 +58,7 @@ const lines = [
   '- Assumptions require topic plus non-empty statements[]. The legacy statement field is retired.',
   '- Composition boundaries are event, unknown, open, or simulation_end. The last resolves to 1995-01-01 and is valid only as the final version end. Adjacent resolved revisions share a boundary; authoring defaults and first-use rules are in MODEL_GUIDE.md.',
   '- Technology specification chapters contain number, chapter_name, description and parameters[] of key/value text pairs. Numbers and chapter-local keys are unique. Description placeholders {key} resolve locally; model validation rejects missing keys. Devices, software editions and base parts instead have root technical_specification chapters with one global parameter table. Each parameter is exactly key/value OR key/ref_id/ref_role; optional-looking union members in the diagram must satisfy one complete variant. Graphics modes have local parameters and typed fixed fields. See MODEL_GUIDE.md for canonical numeric keys, buffer units and transitional legacy support.',
+  '- Campaigns use the timeline shape shown here. The legacy process_id/presentation/marketing_content shape remains accepted solely during individual conversion; mixing the two shapes is rejected. Campaign dates accept calendar precision or explicit unknowns, never event anchors. Marketing presentation parameters are exactly key/value or key/ref_id, with no ref_role. Process steps select at most one event_id, process_id or campaign_id. See CAMPAIGN_TIMELINES.md for the staged ownership contract.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',
