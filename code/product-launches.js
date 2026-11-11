@@ -42,3 +42,13 @@ export function validateProductLaunches(records) {
  }
  return errors;
 }
+
+// Product-owned references determine launch display; event.kind is descriptive.
+export function indexProductLaunches(records){
+ const result=new Map();
+ for(const record of records)if(record.id.startsWith('product.')&&record.launch_event_id){
+  if(!result.has(record.launch_event_id))result.set(record.launch_event_id,[]);
+  result.get(record.launch_event_id).push(record);
+ }
+ return result;
+}

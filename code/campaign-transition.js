@@ -2,7 +2,6 @@
 // This is compatibility metadata, not timeline ownership. Remove each entry when its
 // launch events are explicitly rewired; new campaigns must own their launches.
 export const legacyCampaignExecutions = Object.freeze({
-  "campaign.ncc1978": "process.ncc1978_campaign",
   "campaign.ncc1979": "process.ncc1979_campaign",
   "campaign.ncc1980": "process.ncc1980_campaign",
   "campaign.comdex1979": "process.comdex1979_campaign",

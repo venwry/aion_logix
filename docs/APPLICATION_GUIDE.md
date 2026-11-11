@@ -27,13 +27,15 @@ Events and processes with an associated agreement show a small white **Agreement
 
 ### Nested work and campaign cards
 
-Events referenced by `period.start` and `period.end` appear inside the process as light grey **Start** and **End** cards, respectively before and after step events and sub-processes. Same-day boundaries reserve room for the steps between them. A shared boundary appears in each owning process; selecting any occurrence opens the same event record and highlights its other visible occurrences. Legacy records using one event for both boundaries retain explicit roles until corrected through review. These visual occurrences do not duplicate foundation records or increase the matching-record count.
+Events referenced by `period.start` and `period.end` appear inside the process as **Start** and **End** cards (light grey, or green for product launches), respectively before and after step events and sub-processes. Same-day boundaries reserve room for the steps between them. A shared boundary appears in each owning process; selecting any occurrence opens the same event record and highlights its other visible occurrences. Legacy records using one event for both boundaries retain explicit roles until corrected through review. These visual occurrences do not duplicate foundation records or increase the matching-record count.
 
 Explicit parent-process links and process-step references place events and sub-processes inside their owner where their dates fit. Membership selection prioritizes explicit parent links, then campaign execution steps, other process steps, and event process references; equal-priority ties use stable IDs. Other relationships remain available in details. A child outside its parent's stated dates stays separate; rendering does not change either record's dates. Undated children remain in the undated section.
 
 All child levels share a compact track panel. Overlapping children use adjacent tracks; a slot is reused after its previous process ends. Child cards share a common left edge. Parentage remains available in card descriptions and details. Undated processes stay in their separate section.
 
 A converted campaign has its own light-red duration block, independent of its former execution process. Its heading opens campaign details. Until conversion is approved, a legacy campaign shares one visual card with its execution process. Its light-red **Campaign** badge opens campaign details; the heading and **Process** label open execution-process details. These remain two distinct records with separate content hashes and authorizations. “Mixed authorization” means only one of the pair is authorized; it is a display summary, not a stored status or group approval.
+
+Events referenced by a product’s `launch_event_id` are green, including every boundary occurrence. This display follows product references, independently of the event’s `kind`. In Timeline details, **Launched products** appears immediately after the event description and links to all products naming that event. The list is derived at display time; it is not stored on the event. Events without product launch references have no such list and retain their normal colour.
 
 ### Filters and space
 

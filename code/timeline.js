@@ -1,3 +1,4 @@
+import {indexProductLaunches} from './product-launches.js';
 import {annotationController} from './annotations.js';
 import {$,el,human,typeOf,titleOf,loadData,timing,actorSet,fillActors,stats,splitter,showError,debounce} from './shared.js';
 import {compactDetails} from './compact-details.js';
@@ -6,6 +7,7 @@ import {arrangeSwimlanes,laneFor} from './timeline-lanes.js';
 const collapsedLanes=new Set();
 try{
  const data=await loadData(),items=data.records.filter(r=>['event','process','campaign'].includes(typeOf(r))).map(record=>({record,type:typeOf(record),date:timing(record,data.index),actors:actorSet(record,data.index),search:JSON.stringify(record).toLowerCase()}));
+ const launchedProducts=indexProductLaunches(data.records);
  const tree=timelineTree(items),dated=items.filter(x=>x.date),first=Math.min(...dated.map(x=>new Date(x.date.start).getUTCFullYear())),last=Math.max(...dated.map(x=>new Date(x.date.end).getUTCFullYear()));
  for(let y=first;y<=last;y++)for(const id of ['from','to']){const option=el('option','',y);option.value=y;$(id).append(option);}
  $('from').value=first;$('to').value=last;fillActors($('actor'),data);splitter('aion-timeline-width',360);let selected='';
@@ -22,7 +24,7 @@ try{
  $('timeline-back').onclick=()=>{if(selectionHistory.length<2)return;selectionHistory.pop();while(selectionHistory.length&&!data.index.has(selectionHistory.at(-1).id))selectionHistory.pop();if(selectionHistory.length)choose(selectionHistory.at(-1).id,true);};
 
  function card(n){
-  const box=el('article','timeline-card '+(n.type==='event'?'event-box':'duration-box'));box.dataset.recordId=n.record.id;box.dataset.type=n.type;box.dataset.context=String(n.context||false);box.dataset.parentId=n.parent||'';
+  const box=el('article','timeline-card '+(n.type==='event'?'event-box':'duration-box'));box.dataset.recordId=n.record.id;box.dataset.type=n.type;box.dataset.context=String(n.context||false);box.dataset.parentId=n.parent||'';box.dataset.productLaunch=String(n.type==='event'&&launchedProducts.has(n.record.id));
   const execution=n.members.find(x=>x.type==='process'&&x.record.id!==n.id),primary=execution?.record||n.record;
   if(execution)box.dataset.executionId=execution.record.id;
   if(n.date?.span)box.dataset.spanId=n.id;

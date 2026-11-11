@@ -1,3 +1,4 @@
+import {indexProductLaunches} from './product-launches.js';
 import {renderMarketingSteps} from './campaigns.js';
 import {renderTechnicalSpecification,renderGraphicModes} from './technical-specification.js';
 import {renderTechnologySpecification} from './technology-specification.js';
@@ -119,6 +120,7 @@ export function compactDetails(record,data,select,options={}){
   if(options.versionNumber!==undefined){const match=[...picker.options].find(o=>o.dataset.versionNumber===String(options.versionNumber));if(match)picker.value=match.value;else{const missing=el('option','','Version '+options.versionNumber+' — not present');missing.value='missing';picker.append(missing);picker.value='missing';}}
   renderVersion();return section;
  }
+ const launchedProducts=document.body.dataset.page==='timeline'&&typeOf(record)==='event'?(indexProductLaunches(data.records).get(record.id)||[]):[];
  const content=el('div','compact-fields');
  const original=data.originals.get(record.id)||record,detailFields=fields(original);
  const specifications=detailFields.filter(([key])=>['technical_specification','graphic_modes_specification'].includes(key));
@@ -132,6 +134,7 @@ export function compactDetails(record,data,select,options={}){
   if(key==='specification'&&typeOf(record)==='technology'){const section=renderTechnologySpecification(value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='composition_history'&&Array.isArray(value)){const history=compositionHistory(value);if(options.changedFields?.has(key))history.classList.add('changed-field');content.append(history);continue;}
   const row=el('div','compact-field');row.dataset.field=key;if(options.changedFields?.has(key.split('.')[0]))row.classList.add('changed-field');if(isReferences(value))row.append(referenceList(value,key));else row.append(el('strong','compact-key',key+': '),key==='id'?el('span','record-id',value):valueNode(value,key));content.append(row);
+  if(key==='description'&&launchedProducts.length){const launches=el('div','compact-field launched-products');launches.dataset.field='launched_products';launches.append(referenceList(launchedProducts.map(p=>p.id),'Launched products'));content.append(launches);}
  }
  host.append(content);
  if(options.comparison)return;

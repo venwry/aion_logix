@@ -1,4 +1,4 @@
-const {test,expect}=require('@playwright/test');
+const {test,expect}=require('@playwright/test');const fs=require('node:fs');
 async function ready(page){await page.goto('/code/timeline.html');await expect(page.locator('body')).toHaveAttribute('data-ready','true');}
 const card=(page,id)=>page.locator('#timeline .timeline-card[data-record-id="'+id+'"]');
 test('Harvard shares a compact track panel and keeps graduation at the global end date',async({page})=>{
@@ -23,6 +23,11 @@ test('overlapping children use distinct tracks but a common card edge',async({pa
  const ra=await a.boundingBox(),rb=await b.boundingBox();expect(ra.y).toBeLessThan(rb.y+rb.height);expect(ra.y+ra.height).toBeGreaterThan(rb.y);
 });
 test('campaign badge and agreement badge open the right records',async({page})=>{
+ // Pin the legacy representation: live campaigns are individually converted and their processes retired.
+ const campaignBefore=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/campaign-timelines/proposals.json')).change[0].elements[0].before;
+ const history=JSON.parse(fs.readFileSync('data_storytelling/review_evidence/ncc1978-reorganisation/proposals.json')).change[0].elements;
+ const processBefore=history.find(e=>e.record_id==='process.ncc1978_campaign').before;processBefore.period.end=history.find(e=>e.record_id==='event.bpi_dealer_program').before.time;
+ for(const [type,record] of [['campaign',campaignBefore],['process',processBefore]])await page.route('**/data_foundation/'+type+'.json',async route=>{const doc=await(await route.fetch()).json();doc[type]=doc[type].filter(r=>r.id!==record.id);doc[type].push(record);await route.fulfill({json:doc});});
  await ready(page);const campaign=card(page,'campaign.ncc1978');await expect(campaign).toHaveCount(1);await expect(card(page,'process.ncc1978_campaign')).toHaveCount(0);
  await campaign.locator('.timeline-campaign').click();await expect(page.locator('#details .record-id')).toHaveText('campaign.ncc1978');
  await campaign.locator('.timeline-kind').click();await expect(page.locator('#details .record-id')).toHaveText('process.ncc1978_campaign');
