@@ -1,0 +1,2288 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.d6fba2c8-29e3-4a03-b421-b029482b14eb",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-11T12:35:09.886Z",
+      "change_id": "change.cap_london_identity",
+      "proposal_sha256": "fd08c02a7f1d66468b6bcc12159654d0c1bcce93f497a9eb272c4f439583071d",
+      "proposal": {
+        "id": "change.cap_london_identity",
+        "category": "data",
+        "title": "CAP / London 1 — Acquisition, company identity and founding chronology",
+        "reason": "Replace the abandoned Danish acquisition with CAP becoming AION Software in its existing London offices. Retain actor.aion as the continuing company identity, with CAP aliases; remove the five Rovsing-only records atomically with their references. Signing remains January 1975 at month precision. A new, explicitly proposed January closing before the existing 12 January CP/M agreement establishes the operating company; this is a new story decision, not evidence inferred from signature. Adam holds 70%, former CAP shareholders collectively 30%; no personal holding is invented for Alex. No illustrative cash valuation is made canonical. Update the Letwin agreement atomically with acquisition ownership so the former 90% Adam balance cannot survive the new 70% closing allocation. Its new-share option yields a conditional 66.5/28.5/5 split after full exercise.",
+        "elements": [
+          {
+            "record_type": "actor",
+            "record_id": "actor.rovsing",
+            "before": {
+              "id": "actor.rovsing",
+              "kind": "person",
+              "name": "Christian Foldberg Rovsing",
+              "aliases": [
+                "Christian Rovsing"
+              ],
+              "description": "Founder of Christian Rovsing A/S and designated CEO of AION Software under the acquisition agreement."
+            },
+            "after": null
+          },
+          {
+            "record_type": "actor",
+            "record_id": "actor.christian_rovsing_as",
+            "before": {
+              "id": "actor.christian_rovsing_as",
+              "kind": "organisation",
+              "name": "Christian Rovsing A/S",
+              "description": "Danish software, communications and electronics business founded in 1963. Acquisition by AION Software preserves customer obligations and its specialist systems teams; ownership changes on contractual closing."
+            },
+            "after": null
+          },
+          {
+            "record_type": "actor",
+            "record_id": "actor.rovsing_sellers",
+            "before": {
+              "id": "actor.rovsing_sellers",
+              "kind": "group",
+              "name": "Christian Rovsing A/S selling shareholders",
+              "description": "Christian Rovsing and any other registered shareholders required to convey the entire company. Individual holdings must be verified before closing."
+            },
+            "after": null
+          },
+          {
+            "record_type": "agreement",
+            "record_id": "agreement.rovsing_acquisition",
+            "before": {
+              "id": "agreement.rovsing_acquisition",
+              "title": "Acquisition of Christian Rovsing A/S and appointment of AION Software CEO",
+              "kind": "other",
+              "state": "executed",
+              "description": "Signed acquisition commitments with conditions to closing; signature does not establish payment, share transfer or completed integration.",
+              "party": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "funding sponsor and transferor of AION Software equity"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "buyer and future parent"
+                },
+                {
+                  "actor_id": "actor.christian_rovsing_as",
+                  "role": "acquired operating company"
+                },
+                {
+                  "actor_id": "actor.rovsing",
+                  "role": "seller and designated CEO"
+                },
+                {
+                  "actor_id": "actor.rovsing_sellers",
+                  "role": "sellers of all company shares"
+                }
+              ],
+              "clauses": [
+                {
+                  "id": "clause.rovsing_scope",
+                  "kind": "rights",
+                  "statement": "AION Software agrees to acquire 100% of Christian Rovsing A/S. On closing it becomes a wholly owned operating subsidiary; existing contract teams and customer obligations continue.",
+                  "value": 100,
+                  "unit": "percent of acquired company shares"
+                },
+                {
+                  "id": "clause.rovsing_cash",
+                  "kind": "funding",
+                  "statement": "Adam funds aggregate cash acquisition consideration of DKK 12 million, payable by AION Software to the selling shareholders according to verified holdings and the agreed allocation. This is a commitment, not evidence of payment.",
+                  "value": 12000000,
+                  "unit": "DKK, nominal 1975"
+                },
+                {
+                  "id": "clause.rovsing_cash_closing",
+                  "kind": "funding",
+                  "statement": "DKK 9 million of the aggregate consideration is payable at closing, subject to agreed net-debt and working-capital adjustments.",
+                  "value": 9000000,
+                  "unit": "DKK, nominal 1975"
+                },
+                {
+                  "id": "clause.rovsing_cash_deferred",
+                  "kind": "funding",
+                  "statement": "The remaining DKK 3 million is deferred until twelve months after closing, subject to agreed warranty adjustments; it is included in the total, not additional.",
+                  "value": 3000000,
+                  "unit": "DKK, nominal 1975"
+                },
+                {
+                  "id": "clause.rovsing_aion_equity",
+                  "kind": "equity",
+                  "statement": "At closing Adam transfers 5% of AION Software issued shares to Christian Rovsing as additional acquisition consideration. The shares are vested purchase consideration, not a service grant. Any other sellers must consent to the consideration allocation.",
+                  "value": 5,
+                  "unit": "percent of AION Software issued shares"
+                },
+                {
+                  "id": "clause.rovsing_closing",
+                  "kind": "qualification",
+                  "statement": "Closing requires verification of ownership, accounts, net debt, working capital, intellectual-property rights and customer change-of-control requirements. The closing date and actual payments are not yet established.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.rovsing_ceo",
+                  "kind": "responsibility",
+                  "statement": "On closing Rovsing becomes Copenhagen-based CEO of AION Software with a board seat, responsibility for operations and recruitment within approved budgets, and reporting to the board. Until closing his appointment is designated, not effective.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.rovsing_continuity",
+                  "kind": "responsibility",
+                  "statement": "Retain specialist contract-engineering teams, including any subsequently awarded Meteosat work, with their own delivery management. Compiler and TUI development receives a separate staffing plan; acquired staff are not assumed immediately available.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.rovsing_funding",
+                  "kind": "funding",
+                  "statement": "Adam commits to fund an agreed integration and C/TUI development budget separately from acquisition consideration; its amount remains to be agreed.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.rovsing_equity_basis",
+                  "kind": "equity",
+                  "statement": "The 5% is measured immediately after closing and transfers existing shares from Adam. Subsequent share issues may dilute it; no automatic percentage protection or employee pool is created.",
+                  "value": null,
+                  "unit": null
+                }
+              ]
+            },
+            "after": null
+          },
+          {
+            "record_type": "event",
+            "record_id": "event.rovsing_acquisition_signed",
+            "before": {
+              "id": "event.rovsing_acquisition_signed",
+              "title": "Rovsing acquisition agreement signed",
+              "kind": "agreement_milestone",
+              "description": "Adam, AION Software and the selling shareholders sign the acquisition agreement and designate Rovsing to lead AION Software after closing. They agree to preserve ongoing customer work while establishing a separately funded software-product programme.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "funding sponsor and transferor of AION Software equity"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "buyer and future parent"
+                },
+                {
+                  "actor_id": "actor.christian_rovsing_as",
+                  "role": "acquired operating company"
+                },
+                {
+                  "actor_id": "actor.rovsing",
+                  "role": "seller and designated CEO"
+                },
+                {
+                  "actor_id": "actor.rovsing_sellers",
+                  "role": "sellers of all company shares"
+                }
+              ],
+              "time": {
+                "value": "1975-01",
+                "precision": "month"
+              },
+              "agreement_id": "agreement.rovsing_acquisition",
+              "location_ids": [
+                "location.copenhagen"
+              ],
+              "inputs": [],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "decision",
+                  "description": "Adam, AION Software and the selling shareholders sign the acquisition agreement and designate Rovsing to lead AION Software after closing. They agree to preserve ongoing customer work while establishing a separately funded software-product programme."
+                }
+              ]
+            },
+            "after": null
+          },
+          {
+            "record_type": "actor",
+            "record_id": "actor.aion",
+            "before": {
+              "id": "actor.aion",
+              "kind": "organisation",
+              "name": "AION Software",
+              "aliases": []
+            },
+            "after": {
+              "id": "actor.aion",
+              "kind": "organisation",
+              "name": "AION Software",
+              "aliases": [
+                "AION Software Ltd",
+                "CAP",
+                "Computer Analysts and Programmers"
+              ],
+              "description": "British software company continuing CAP after Adam Pleskot acquires a controlling interest and the company adopts the AION Software name. Headquarters and established contract teams remain in CAP’s London offices. Alex d’Agapeyeff leads the company as CEO; its dedicated product programme works with AION Labs in Cambridge, Logix and independent software partners."
+            }
+          },
+          {
+            "record_type": "actor",
+            "record_id": "actor.alex_dagapeyeff",
+            "before": null,
+            "after": {
+              "id": "actor.alex_dagapeyeff",
+              "kind": "person",
+              "name": "Alex d’Agapeyeff",
+              "aliases": [
+                "Alex d'Agapeyeff"
+              ],
+              "description": "CAP co-founder and software-industry leader retained as CEO and director when CAP becomes AION Software. He leads customer work and product initiatives within board-approved budgets. His personal holding is part of the former CAP shareholder block; its allocation is not specified."
+            }
+          },
+          {
+            "record_type": "actor",
+            "record_id": "actor.cap_shareholders",
+            "before": null,
+            "after": {
+              "id": "actor.cap_shareholders",
+              "kind": "group",
+              "name": "CAP existing shareholders",
+              "description": "Registered CAP shareholders participating in the investment and share-sale agreement, including Alex d’Agapeyeff to the extent of his verified holding. They collectively retain 30% immediately after closing; individual holdings and proceeds follow the verified register and agreed allocation."
+            }
+          },
+          {
+            "record_type": "location",
+            "record_id": "location.london",
+            "before": null,
+            "after": {
+              "id": "location.london",
+              "name": "London",
+              "kind": "city",
+              "parent_location_id": "location.uk",
+              "description": "London is the headquarters city of AION Software, which continues in CAP’s existing offices after the acquisition. No street address or property ownership is specified."
+            }
+          },
+          {
+            "record_type": "location",
+            "record_id": "location.aion_software_london",
+            "before": null,
+            "after": {
+              "id": "location.aion_software_london",
+              "name": "AION Software offices, London",
+              "kind": "facility",
+              "parent_location_id": "location.london",
+              "description": "Existing CAP offices retained as AION Software’s headquarters and software-development base after closing. Address, floor area and tenure remain unspecified. AION Labs retains its separate Cambridge location."
+            }
+          },
+          {
+            "record_type": "agreement",
+            "record_id": "agreement.cap_acquisition",
+            "before": null,
+            "after": {
+              "id": "agreement.cap_acquisition",
+              "title": "CAP controlling investment, AION Software identity and CEO continuity",
+              "kind": "other",
+              "state": "executed",
+              "description": "Adam, CAP and its participating shareholders sign a controlling-investment agreement. CAP continues as the operating company and adopts the AION Software name at closing. Signature creates commitments; the separate closing milestone establishes the ownership change and leadership arrangements.",
+              "party": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "investor, purchaser and incoming non-executive chairman"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "CAP operating company, renamed AION Software at closing"
+                },
+                {
+                  "actor_id": "actor.alex_dagapeyeff",
+                  "role": "continuing CEO, director and participating shareholder"
+                },
+                {
+                  "actor_id": "actor.cap_shareholders",
+                  "role": "existing shareholders approving the transaction and conveying the agreed shares"
+                }
+              ],
+              "clauses": [
+                {
+                  "id": "clause.cap_control",
+                  "kind": "equity",
+                  "statement": "Adam obtains 70% of voting and economic rights immediately after closing through subscription for new shares and purchase of existing shares. No superior-voting share class is created.",
+                  "value": 70,
+                  "unit": "percent of issued shares at closing"
+                },
+                {
+                  "id": "clause.cap_retained_shares",
+                  "kind": "equity",
+                  "statement": "Former CAP shareholders collectively retain 30% immediately after closing. Alex retains a meaningful personal interest within this block, with individual allocations agreed against the verified share register.",
+                  "value": 30,
+                  "unit": "percent of issued shares at closing"
+                },
+                {
+                  "id": "clause.cap_financing",
+                  "kind": "funding",
+                  "statement": "Adam funds a new-share subscription providing development capital and working capital to the company, plus separate consideration paid to selling shareholders. Amounts and the split require the agreed accounts, valuation and investment schedule; neither company funding nor seller consideration is inferred from the ownership percentages.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_closing_conditions",
+                  "kind": "qualification",
+                  "statement": "Closing requires shareholder consent, verified accounts and ownership, intellectual-property rights, existing corporate commitments, and necessary customer or other change-of-control approvals. The parties settle the subscription and purchase documents and record their completion separately from signature.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_identity",
+                  "kind": "term",
+                  "statement": "CAP continues its operating legal entity as AION Software Ltd, subject to registration of the name. The trading transition may use AION Software, formerly CAP. There is no separately founded Danish software company or acquired Danish subsidiary.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_london",
+                  "kind": "term",
+                  "statement": "Retain headquarters, contract teams and software development in CAP’s London offices. Coordinate through regular engineering visits with AION Labs in Cambridge; co-operation does not merge the companies or their ownership.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_ceo",
+                  "kind": "responsibility",
+                  "statement": "Alex d’Agapeyeff continues as CEO and director, with authority over staffing, organisation, existing customer work and new initiatives within the approved business plan. Adam serves as non-executive chairman. The board retains authority over major financing, acquisitions, strategy and CEO appointment; removal without cause carries agreed severance, without guaranteeing tenure regardless of performance.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_board",
+                  "kind": "rights",
+                  "statement": "The five-member board comprises three Adam nominees and two former-CAP shareholder nominees, including Alex. Minority holders receive regular accounts, information rights and proportionate participation rights in later share issues, subject to the agreed employee award.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_customer_continuity",
+                  "kind": "responsibility",
+                  "statement": "Preserve existing customer obligations, specialist teams and commercially sound initiatives. No acquisition-driven redundancies are planned. Allocate customer delivery management separately from the product programme and agree retention arrangements for key staff.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_programme",
+                  "kind": "responsibility",
+                  "statement": "Maintain a separately budgeted product programme for the CP/M TUI API, AION C IDE and Abacus, with provision for application-partner engineering and BPI cooperation in 1977. Continuing CAP work and Alex’s initiatives must preserve the programme’s agreed staffing and delivery commitments. BPI obligations arise only under BPI’s separate agreement.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_staffing",
+                  "kind": "funding",
+                  "statement": "Approve an initial development budget and recruitment plan separately from seller consideration. Plan initially for 15–25 experienced staff, subject to the actual available team and customer commitments; this planning range is not a claim that those staff have already been hired or released from existing contracts. Review capacity, milestones and funding quarterly.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_rights",
+                  "kind": "rights",
+                  "statement": "Existing customer and third-party intellectual-property obligations survive. The investment does not grant rights in CP/M or BPI applications. Define delivery, reuse and licensing rights in the separate partner agreements; retain the company’s compiler, application and reusable-component rights as specified there.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.cap_employee_awards",
+                  "kind": "equity",
+                  "statement": "Any later employee award must specify its share source, vesting and dilution. The closing percentages exclude ungranted awards; no undisclosed employee pool or automatic percentage protection is created.",
+                  "value": null,
+                  "unit": null
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "event",
+            "record_id": "event.cap_acquisition_signed",
+            "before": null,
+            "after": {
+              "id": "event.cap_acquisition_signed",
+              "title": "CAP controlling-investment agreement signed",
+              "kind": "agreement_milestone",
+              "description": "In January 1975 Adam, Alex and the participating CAP shareholders sign the controlling-investment agreement, preserving customer work and Alex’s leadership while committing capital and protected capacity to the AION software programme. Signing precedes closing and does not itself establish share transfer.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "investor, purchaser and incoming non-executive chairman"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "CAP operating company, renamed AION Software at closing"
+                },
+                {
+                  "actor_id": "actor.alex_dagapeyeff",
+                  "role": "continuing CEO, director and participating shareholder"
+                },
+                {
+                  "actor_id": "actor.cap_shareholders",
+                  "role": "existing shareholders approving the transaction and conveying the agreed shares"
+                }
+              ],
+              "time": {
+                "value": "1975-01",
+                "precision": "month"
+              },
+              "agreement_id": "agreement.cap_acquisition",
+              "location_ids": [
+                "location.aion_software_london"
+              ],
+              "inputs": [],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "decision",
+                  "description": "Agree the controlling investment, continued London operation, CEO continuity and protected AION product programme."
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "event",
+            "record_id": "event.cap_acquisition_closed",
+            "before": null,
+            "after": {
+              "id": "event.cap_acquisition_closed",
+              "title": "CAP becomes AION Software in London",
+              "kind": "acquisition_closing",
+              "description": "In January 1975, after signing and before the 12 January CP/M development agreement, the parties complete the agreed conditions, share subscription and share purchase. CAP continues as AION Software Ltd in its existing London offices. Adam becomes non-executive chairman and holds 70%; former CAP shareholders collectively hold 30%. Alex d’Agapeyeff continues as CEO. The exact closing day and cash amounts are not specified.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "investor, purchaser and incoming non-executive chairman"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "CAP operating company, renamed AION Software at closing"
+                },
+                {
+                  "actor_id": "actor.alex_dagapeyeff",
+                  "role": "continuing CEO, director and participating shareholder"
+                },
+                {
+                  "actor_id": "actor.cap_shareholders",
+                  "role": "existing shareholders approving the transaction and conveying the agreed shares"
+                }
+              ],
+              "time": {
+                "value": "1975-01",
+                "precision": "month"
+              },
+              "agreement_id": "agreement.cap_acquisition",
+              "location_ids": [
+                "location.aion_software_london"
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "requirement",
+                  "description": "The signed agreement and satisfaction of its closing conditions enable completion.",
+                  "event_id": "event.cap_acquisition_signed"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "CAP continues as AION Software in London with the agreed ownership and Alex as CEO.",
+                  "subject_ids": [
+                    "actor.aion"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "decision",
+                  "description": "Approve the dedicated software-product programme and its budget and staffing planning; this is not delivery of a compiler, TUI or application."
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "event",
+            "record_id": "event.companies",
+            "before": {
+              "id": "event.companies",
+              "title": "Three technology companies founded",
+              "kind": "founding",
+              "description": "On 23 November 1974 Adam establishes Logix Tech in San Jose, California, for computers and associated software; AION Labs in Cambridge, England, for semiconductors; and AION Software in Copenhagen, Denmark, for business applications and compilers. He has prepared a recruitment shortlist for a CEO, CFO and CTO at each company and begins approaching candidates for these nine leadership roles.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "founder"
+                },
+                {
+                  "actor_id": "actor.logix",
+                  "role": "new_company"
+                },
+                {
+                  "actor_id": "actor.labs",
+                  "role": "new_company"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "new_company"
+                }
+              ],
+              "subject_ids": [],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Adam’s established stock-market investment activity provides the funding basis for company formation.",
+                  "event_id": "event.us_nyse_start"
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "Adam brings a prepared leadership shortlist and an understanding of future technology and market needs."
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "The three companies exist before the DRI founding agreement of 7 December 1974.",
+                  "subject_ids": [
+                    "actor.logix",
+                    "actor.labs",
+                    "actor.aion"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "result",
+                  "description": "Recruitment begins for separate CEO, CFO and CTO positions in San Jose, Cambridge and Copenhagen; individual appointments remain unspecified."
+                }
+              ],
+              "time": {
+                "value": "1974-11-23",
+                "precision": "day"
+              },
+              "location_ids": [
+                "location.san_jose",
+                "location.cambridge",
+                "location.copenhagen"
+              ]
+            },
+            "after": {
+              "id": "event.companies",
+              "title": "Logix and AION Labs founded; UK software venture planned",
+              "kind": "founding",
+              "description": "On 23 November 1974 Adam establishes Logix Tech in San Jose, California, and AION Labs in Cambridge, England. He plans a UK software business through investment in an established software house. Leadership recruitment starts for the two new companies; the software company’s leadership is settled through the subsequent CAP transaction.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "founder"
+                },
+                {
+                  "actor_id": "actor.logix",
+                  "role": "new_company"
+                },
+                {
+                  "actor_id": "actor.labs",
+                  "role": "new_company"
+                }
+              ],
+              "subject_ids": [],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Adam’s established stock-market investment activity provides the funding basis for company formation.",
+                  "event_id": "event.us_nyse_start"
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "Adam brings a prepared leadership shortlist and an understanding of future technology and market needs."
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Logix Tech and AION Labs exist before the DRI founding agreement of 7 December 1974.",
+                  "subject_ids": [
+                    "actor.logix",
+                    "actor.labs"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "decision",
+                  "description": "Pursue an established UK software organisation for the planned applications and development-tools business; no third incorporation or software CEO appointment is established at this milestone."
+                }
+              ],
+              "time": {
+                "value": "1974-11-23",
+                "precision": "day"
+              },
+              "location_ids": [
+                "location.san_jose",
+                "location.cambridge"
+              ]
+            }
+          },
+          {
+            "record_type": "event",
+            "record_id": "event.dri_founding",
+            "before": {
+              "id": "event.dri_founding",
+              "title": "Joint DRI founding and funding",
+              "kind": "founding",
+              "description": "On 7 December 1974 Gary Kildall, Dorothy McEwen and Adam formalise and finance DRI, following the formation of Logix Tech, AION Labs and AION Software. Gary and Dorothy independently manage DRI’s engineering and operations; Adam contributes minority capital, strategy and OEM relationships to support CP/M-compatible personal computing. DRI retains CP/M ownership and independent licensing. Hardware abstraction and documented interfaces begin here, with optional ROM, memory and TUI services developed progressively.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "partner"
+                },
+                {
+                  "actor_id": "actor.kildall",
+                  "role": "partner"
+                },
+                {
+                  "actor_id": "actor.dorothy",
+                  "role": "partner"
+                },
+                {
+                  "actor_id": "actor.dri",
+                  "role": "partner"
+                }
+              ],
+              "subject_ids": [],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Formation of Logix Tech, AION Labs and AION Software establishes Adam’s companies and the basis for the planned technology cooperation.",
+                  "event_id": "event.companies"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "DRI is established with agreed funding, independent founder management and CP/M ownership, providing an operating-system partner for the planned computers.",
+                  "subject_ids": [
+                    "actor.dri"
+                  ]
+                }
+              ],
+              "time": {
+                "value": "1974-12-07",
+                "precision": "day"
+              },
+              "agreement_id": "agreement.dri_founding"
+            },
+            "after": {
+              "id": "event.dri_founding",
+              "title": "Joint DRI founding and funding",
+              "kind": "founding",
+              "description": "On 7 December 1974 Gary Kildall, Dorothy McEwen and Adam formalise and finance DRI, following the formation of Logix Tech and AION Labs and the decision to establish a UK software business. Gary and Dorothy independently manage DRI’s engineering and operations; Adam contributes minority capital, strategy and OEM relationships to support CP/M-compatible personal computing. DRI retains CP/M ownership and independent licensing. Hardware abstraction and documented interfaces begin here, with optional ROM, memory and TUI services developed progressively.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "partner"
+                },
+                {
+                  "actor_id": "actor.kildall",
+                  "role": "partner"
+                },
+                {
+                  "actor_id": "actor.dorothy",
+                  "role": "partner"
+                },
+                {
+                  "actor_id": "actor.dri",
+                  "role": "partner"
+                }
+              ],
+              "subject_ids": [],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Formation of Logix Tech and AION Labs and Adam’s UK software-business plan provide the basis for the planned technology cooperation.",
+                  "event_id": "event.companies"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "DRI is established with agreed funding, independent founder management and CP/M ownership, providing an operating-system partner for the planned computers.",
+                  "subject_ids": [
+                    "actor.dri"
+                  ]
+                }
+              ],
+              "time": {
+                "value": "1974-12-07",
+                "precision": "day"
+              },
+              "agreement_id": "agreement.dri_founding"
+            }
+          },
+          {
+            "record_type": "process",
+            "record_id": "process.computer_business_incorporation",
+            "before": {
+              "id": "process.computer_business_incorporation",
+              "title": "Incorporation of Computer business",
+              "kind": "business_formation",
+              "description": "Adam establishes Logix Tech, AION Labs and AION Software and develops their initial leadership, engineering and software partnerships with DRI, BPI and others. This formation phase starts with the three companies on 23 November 1974 and ends with Tim Paterson’s recruitment.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "founder, financier and organiser"
+                },
+                {
+                  "actor_id": "actor.logix",
+                  "role": "computer-business participant after its formation"
+                },
+                {
+                  "actor_id": "actor.labs",
+                  "role": "semiconductor research and development participant after its formation"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "software development participant after its formation"
+                },
+                {
+                  "actor_id": "actor.dri",
+                  "role": "operating-system cooperation partner"
+                },
+                {
+                  "actor_id": "actor.bpi",
+                  "role": "independent application cooperation partner"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "event.companies",
+                  "precision": "event"
+                },
+                "end": {
+                  "value": "event.paterson",
+                  "precision": "event"
+                }
+              },
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Adam’s established investment activity provides a financial basis for forming and supporting the computer businesses.",
+                  "event_id": "event.us_nyse_start",
+                  "subject_ids": [
+                    "actor.adam"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "Adam contributes knowledge of future demand and technology while keeping its origin private.",
+                  "subject_ids": [
+                    "assumption.identity",
+                    "assumption.finance"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "milestone",
+                  "description": "Establish and fund independent DRI as the operating-system cooperation partner.",
+                  "event_id": "event.dri_founding"
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "Recruit company leadership: appoint Comstock in San Jose, sign the Rovsing acquisition and conditional CEO appointment in Copenhagen, and recruit the remaining finance and technical roles."
+                },
+                {
+                  "number": 3,
+                  "type": "milestone",
+                  "description": "Establish the separate secret future-equipped facility supporting chip design.",
+                  "event_id": "event.facility"
+                },
+                {
+                  "number": 4,
+                  "type": "milestone",
+                  "description": "Agree development and distribution cooperation with independent BPI Systems.",
+                  "event_id": "event.bpi_cooperation"
+                },
+                {
+                  "number": 5,
+                  "type": "milestone",
+                  "description": "Recruit Letwin to Copenhagen systems-software leadership and DRI liaison under the AION Software service-equity agreement.",
+                  "event_id": "event.letwin"
+                },
+                {
+                  "number": 6,
+                  "type": "milestone",
+                  "description": "Sign the January 1975 Rovsing acquisition and conditional AION Software CEO agreement.",
+                  "event_id": "event.rovsing_acquisition_signed"
+                },
+                {
+                  "number": 7,
+                  "type": "milestone",
+                  "description": "Appoint Comstock CEO of Logix with a 10% equity commitment.",
+                  "event_id": "event.comstock_appointed"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Logix Tech, AION Labs and AION Software are established, with initial engineering infrastructure and supporting access to the separate future-equipped facility.",
+                  "subject_ids": [
+                    "actor.logix",
+                    "actor.labs",
+                    "actor.aion",
+                    "location.secret_facility"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "result",
+                  "description": "Cooperation with DRI and BPI is established under the existing agreements. DRI and BPI retain the independence and rights specified in those agreements.",
+                  "subject_ids": []
+                },
+                {
+                  "number": 3,
+                  "type": "result",
+                  "description": "Letwin joins AION Software in Copenhagen and Tim Paterson joins the developing computer business. Comstock leads Logix; Rovsing’s AION Software CEO appointment takes effect on acquisition closing.",
+                  "subject_ids": [
+                    "actor.letwin",
+                    "actor.paterson"
+                  ]
+                }
+              ],
+              "subject_ids": [],
+              "category": "Logix/AION investment"
+            },
+            "after": {
+              "id": "process.computer_business_incorporation",
+              "title": "Incorporation of Computer business",
+              "kind": "business_formation",
+              "description": "Adam establishes Logix Tech and AION Labs, then obtains control of CAP, which becomes AION Software in London under Alex d’Agapeyeff. This formation phase begins on 23 November 1974 and develops leadership and partnerships with DRI, BPI and others through Tim Paterson’s recruitment.",
+              "participant": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "founder, financier and organiser"
+                },
+                {
+                  "actor_id": "actor.logix",
+                  "role": "computer-business participant after its formation"
+                },
+                {
+                  "actor_id": "actor.labs",
+                  "role": "semiconductor research and development participant after its formation"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "software operating company continuing CAP after acquisition closing"
+                },
+                {
+                  "actor_id": "actor.dri",
+                  "role": "operating-system cooperation partner"
+                },
+                {
+                  "actor_id": "actor.bpi",
+                  "role": "independent application cooperation partner"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "event.companies",
+                  "precision": "event"
+                },
+                "end": {
+                  "value": "event.paterson",
+                  "precision": "event"
+                }
+              },
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Adam’s established investment activity provides a financial basis for forming and supporting the computer businesses.",
+                  "event_id": "event.us_nyse_start",
+                  "subject_ids": [
+                    "actor.adam"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "Adam contributes knowledge of future demand and technology while keeping its origin private.",
+                  "subject_ids": [
+                    "assumption.identity",
+                    "assumption.finance"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "milestone",
+                  "description": "Establish and fund independent DRI as the operating-system cooperation partner.",
+                  "event_id": "event.dri_founding"
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "Appoint Comstock in San Jose, retain Alex d’Agapeyeff as CEO through the CAP transaction, and recruit the remaining finance and technical roles."
+                },
+                {
+                  "number": 3,
+                  "type": "milestone",
+                  "description": "Establish the separate secret future-equipped facility supporting chip design.",
+                  "event_id": "event.facility"
+                },
+                {
+                  "number": 4,
+                  "type": "milestone",
+                  "description": "Agree development and distribution cooperation with independent BPI Systems.",
+                  "event_id": "event.bpi_cooperation"
+                },
+                {
+                  "number": 5,
+                  "type": "milestone",
+                  "description": "Recruit Letwin to London systems-software leadership and DRI liaison under the AION Software service-equity agreement.",
+                  "event_id": "event.letwin"
+                },
+                {
+                  "number": 6,
+                  "type": "milestone",
+                  "description": "Sign the January 1975 CAP controlling-investment and CEO-continuity agreement.",
+                  "event_id": "event.cap_acquisition_signed"
+                },
+                {
+                  "number": 7,
+                  "type": "milestone",
+                  "description": "Appoint Comstock CEO of Logix with a 10% equity commitment.",
+                  "event_id": "event.comstock_appointed"
+                },
+                {
+                  "number": 8,
+                  "type": "milestone",
+                  "description": "Complete the CAP investment before the January CP/M agreement; continue the company as AION Software in its London offices.",
+                  "event_id": "event.cap_acquisition_closed"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Logix Tech and AION Labs are established and CAP continues as AION Software in London, supported by engineering infrastructure and access to the separate future-equipped facility.",
+                  "subject_ids": [
+                    "actor.logix",
+                    "actor.labs",
+                    "actor.aion",
+                    "location.secret_facility"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "result",
+                  "description": "Cooperation with DRI and BPI is established under the existing agreements. DRI and BPI retain the independence and rights specified in those agreements.",
+                  "subject_ids": []
+                },
+                {
+                  "number": 3,
+                  "type": "result",
+                  "description": "Letwin joins AION Software in London and Tim Paterson joins the developing computer business. Comstock leads Logix; Alex d’Agapeyeff continues as AION Software CEO after the CAP investment.",
+                  "subject_ids": [
+                    "actor.letwin",
+                    "actor.paterson"
+                  ]
+                }
+              ],
+              "subject_ids": [],
+              "category": "Logix/AION investment"
+            }
+          },
+          {
+            "record_type": "agreement",
+            "record_id": "agreement.letwin_aion_appointment",
+            "before": {
+              "id": "agreement.letwin_aion_appointment",
+              "title": "Letwin Copenhagen systems-software appointment and equity",
+              "kind": "employment",
+              "state": "executed",
+              "description": "AION Software employs Letwin in Copenhagen as Director of Systems Software and technical liaison to DRI.",
+              "party": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "equity transferor and recruitment sponsor"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "employer"
+                },
+                {
+                  "actor_id": "actor.letwin",
+                  "role": "systems-software director"
+                }
+              ],
+              "clauses": [
+                {
+                  "id": "clause.letwin_role",
+                  "kind": "responsibility",
+                  "statement": "Letwin leads AION’s systems-software group: CP/M/TUI interface coordination, runtime libraries, assembler integration, development tools, joint acceptance testing and systems-programmer recruitment. DRI retains its own engineering authority and software rights.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.letwin_location",
+                  "kind": "term",
+                  "statement": "Letwin eagerly accepts Copenhagen as his home base. AION covers relocation, temporary housing and scheduled US technical visits. The AIONix team’s later move to California does not relocate Letwin; its local lead remains a separate appointment.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.letwin_equity",
+                  "kind": "equity",
+                  "statement": "Adam grants Letwin a contractual right to receive existing AION Software shares in four equal annual instalments after completed service, totalling 5% measured against issued shares at grant. First vesting is on the first anniversary of recruitment; unvested rights lapse on departure. No completed vesting is asserted by signature.",
+                  "value": 5,
+                  "unit": "percent of AION Software issued shares at grant"
+                },
+                {
+                  "id": "clause.letwin_vesting",
+                  "kind": "term",
+                  "statement": "The service period is four years from recruitment. Each completed year earns one quarter of the grant. Subsequent share issuance may dilute both Letwin and other shareholders; there is no automatic percentage protection.",
+                  "value": 4,
+                  "unit": "years"
+                },
+                {
+                  "id": "clause.letwin_no_logix",
+                  "kind": "equity",
+                  "statement": "This AION Software grant is Letwin’s equity participation in the leadership plan; he receives no Logix allocation.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.aion_leadership_balance",
+                  "kind": "equity",
+                  "statement": "After the Rovsing acquisition closes and Letwin fully earns his grant, Rovsing and Letwin each hold 5% and Adam retains 90%, absent other transfers or issuance. This is a conditional allocation, not a claim that closing or vesting has occurred.",
+                  "value": 90,
+                  "unit": "percent of AION Software issued shares, absent intervening dilution"
+                }
+              ]
+            },
+            "after": {
+              "id": "agreement.letwin_aion_appointment",
+              "title": "Letwin London systems-software appointment and equity",
+              "kind": "employment",
+              "state": "executed",
+              "description": "AION Software employs Letwin in London as Director of Systems Software and technical liaison to DRI.",
+              "party": [
+                {
+                  "actor_id": "actor.adam",
+                  "role": "controlling shareholder consenting to the employee award and recruitment sponsor"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "employer"
+                },
+                {
+                  "actor_id": "actor.letwin",
+                  "role": "systems-software director"
+                },
+                {
+                  "actor_id": "actor.alex_dagapeyeff",
+                  "role": "CEO approving the role within the company business plan"
+                }
+              ],
+              "clauses": [
+                {
+                  "id": "clause.letwin_role",
+                  "kind": "responsibility",
+                  "statement": "Letwin leads AION’s systems-software group: CP/M/TUI interface coordination, runtime libraries, assembler integration, development tools, joint acceptance testing and systems-programmer recruitment. DRI retains its own engineering authority and software rights. He reports to Alex d’Agapeyeff; Alex retains company-wide management authority.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.letwin_location",
+                  "kind": "term",
+                  "statement": "Letwin accepts London as his home base. AION supports the required work permission, relocation, temporary housing, Cambridge engineering visits and scheduled US technical visits. The AIONix team’s later move to California does not relocate Letwin; that team has a separate local lead.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.letwin_equity",
+                  "kind": "equity",
+                  "statement": "AION Software grants Letwin an option over a fixed number of newly issued ordinary shares equal to 5% of the enlarged share capital after full exercise, calculated against the capital at grant and assuming no intervening capital changes. The fixed option share count equals one nineteenth of pre-award issued shares. The option vests in four equal annual instalments after completed service, first on the recruitment anniversary; unvested rights lapse on departure. Vesting establishes exercisable rights, not completed exercise or issued shares.",
+                  "value": 5,
+                  "unit": "percent of enlarged share capital after full option exercise"
+                },
+                {
+                  "id": "clause.letwin_vesting",
+                  "kind": "term",
+                  "statement": "The service period is four years from recruitment. Each completed year vests one quarter of the fixed option award. Exercise and share issuance are separate actions. Subsequent capital changes may dilute the award; it has no automatic percentage protection.",
+                  "value": 4,
+                  "unit": "years"
+                },
+                {
+                  "id": "clause.letwin_no_logix",
+                  "kind": "equity",
+                  "statement": "This AION Software grant is Letwin’s equity participation in the leadership plan; he receives no Logix allocation.",
+                  "value": null,
+                  "unit": null
+                },
+                {
+                  "id": "clause.aion_leadership_balance",
+                  "kind": "equity",
+                  "statement": "Starting from the closing allocation of Adam 70% and former CAP shareholders 30%, full exercise of Letwin’s option yields Adam 66.5%, former CAP shareholders 28.5% collectively and Letwin 5%, absent other capital changes. Alex’s interest remains within the former CAP block. This is a conditional fully exercised allocation, not a claim that vesting or issuance has occurred.",
+                  "value": 66.5,
+                  "unit": "percent of enlarged shares held by Adam after full exercise"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "actor.rovsing",
+          "before": {
+            "id": "actor.rovsing",
+            "kind": "person",
+            "name": "Christian Foldberg Rovsing",
+            "aliases": [
+              "Christian Rovsing"
+            ],
+            "description": "Founder of Christian Rovsing A/S and designated CEO of AION Software under the acquisition agreement."
+          },
+          "after": null,
+          "content_sha256": null
+        },
+        {
+          "record_id": "actor.christian_rovsing_as",
+          "before": {
+            "id": "actor.christian_rovsing_as",
+            "kind": "organisation",
+            "name": "Christian Rovsing A/S",
+            "description": "Danish software, communications and electronics business founded in 1963. Acquisition by AION Software preserves customer obligations and its specialist systems teams; ownership changes on contractual closing."
+          },
+          "after": null,
+          "content_sha256": null
+        },
+        {
+          "record_id": "actor.rovsing_sellers",
+          "before": {
+            "id": "actor.rovsing_sellers",
+            "kind": "group",
+            "name": "Christian Rovsing A/S selling shareholders",
+            "description": "Christian Rovsing and any other registered shareholders required to convey the entire company. Individual holdings must be verified before closing."
+          },
+          "after": null,
+          "content_sha256": null
+        },
+        {
+          "record_id": "agreement.rovsing_acquisition",
+          "before": {
+            "id": "agreement.rovsing_acquisition",
+            "title": "Acquisition of Christian Rovsing A/S and appointment of AION Software CEO",
+            "kind": "other",
+            "state": "executed",
+            "description": "Signed acquisition commitments with conditions to closing; signature does not establish payment, share transfer or completed integration.",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "funding sponsor and transferor of AION Software equity"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "buyer and future parent"
+              },
+              {
+                "actor_id": "actor.christian_rovsing_as",
+                "role": "acquired operating company"
+              },
+              {
+                "actor_id": "actor.rovsing",
+                "role": "seller and designated CEO"
+              },
+              {
+                "actor_id": "actor.rovsing_sellers",
+                "role": "sellers of all company shares"
+              }
+            ],
+            "clauses": [
+              {
+                "id": "clause.rovsing_scope",
+                "kind": "rights",
+                "statement": "AION Software agrees to acquire 100% of Christian Rovsing A/S. On closing it becomes a wholly owned operating subsidiary; existing contract teams and customer obligations continue.",
+                "value": 100,
+                "unit": "percent of acquired company shares"
+              },
+              {
+                "id": "clause.rovsing_cash",
+                "kind": "funding",
+                "statement": "Adam funds aggregate cash acquisition consideration of DKK 12 million, payable by AION Software to the selling shareholders according to verified holdings and the agreed allocation. This is a commitment, not evidence of payment.",
+                "value": 12000000,
+                "unit": "DKK, nominal 1975"
+              },
+              {
+                "id": "clause.rovsing_cash_closing",
+                "kind": "funding",
+                "statement": "DKK 9 million of the aggregate consideration is payable at closing, subject to agreed net-debt and working-capital adjustments.",
+                "value": 9000000,
+                "unit": "DKK, nominal 1975"
+              },
+              {
+                "id": "clause.rovsing_cash_deferred",
+                "kind": "funding",
+                "statement": "The remaining DKK 3 million is deferred until twelve months after closing, subject to agreed warranty adjustments; it is included in the total, not additional.",
+                "value": 3000000,
+                "unit": "DKK, nominal 1975"
+              },
+              {
+                "id": "clause.rovsing_aion_equity",
+                "kind": "equity",
+                "statement": "At closing Adam transfers 5% of AION Software issued shares to Christian Rovsing as additional acquisition consideration. The shares are vested purchase consideration, not a service grant. Any other sellers must consent to the consideration allocation.",
+                "value": 5,
+                "unit": "percent of AION Software issued shares"
+              },
+              {
+                "id": "clause.rovsing_closing",
+                "kind": "qualification",
+                "statement": "Closing requires verification of ownership, accounts, net debt, working capital, intellectual-property rights and customer change-of-control requirements. The closing date and actual payments are not yet established.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.rovsing_ceo",
+                "kind": "responsibility",
+                "statement": "On closing Rovsing becomes Copenhagen-based CEO of AION Software with a board seat, responsibility for operations and recruitment within approved budgets, and reporting to the board. Until closing his appointment is designated, not effective.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.rovsing_continuity",
+                "kind": "responsibility",
+                "statement": "Retain specialist contract-engineering teams, including any subsequently awarded Meteosat work, with their own delivery management. Compiler and TUI development receives a separate staffing plan; acquired staff are not assumed immediately available.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.rovsing_funding",
+                "kind": "funding",
+                "statement": "Adam commits to fund an agreed integration and C/TUI development budget separately from acquisition consideration; its amount remains to be agreed.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.rovsing_equity_basis",
+                "kind": "equity",
+                "statement": "The 5% is measured immediately after closing and transfers existing shares from Adam. Subsequent share issues may dilute it; no automatic percentage protection or employee pool is created.",
+                "value": null,
+                "unit": null
+              }
+            ]
+          },
+          "after": null,
+          "content_sha256": null
+        },
+        {
+          "record_id": "event.rovsing_acquisition_signed",
+          "before": {
+            "id": "event.rovsing_acquisition_signed",
+            "title": "Rovsing acquisition agreement signed",
+            "kind": "agreement_milestone",
+            "description": "Adam, AION Software and the selling shareholders sign the acquisition agreement and designate Rovsing to lead AION Software after closing. They agree to preserve ongoing customer work while establishing a separately funded software-product programme.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "funding sponsor and transferor of AION Software equity"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "buyer and future parent"
+              },
+              {
+                "actor_id": "actor.christian_rovsing_as",
+                "role": "acquired operating company"
+              },
+              {
+                "actor_id": "actor.rovsing",
+                "role": "seller and designated CEO"
+              },
+              {
+                "actor_id": "actor.rovsing_sellers",
+                "role": "sellers of all company shares"
+              }
+            ],
+            "time": {
+              "value": "1975-01",
+              "precision": "month"
+            },
+            "agreement_id": "agreement.rovsing_acquisition",
+            "location_ids": [
+              "location.copenhagen"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "decision",
+                "description": "Adam, AION Software and the selling shareholders sign the acquisition agreement and designate Rovsing to lead AION Software after closing. They agree to preserve ongoing customer work while establishing a separately funded software-product programme."
+              }
+            ]
+          },
+          "after": null,
+          "content_sha256": null
+        },
+        {
+          "record_id": "actor.aion",
+          "before": {
+            "id": "actor.aion",
+            "kind": "organisation",
+            "name": "AION Software",
+            "aliases": []
+          },
+          "after": {
+            "id": "actor.aion",
+            "kind": "organisation",
+            "name": "AION Software",
+            "aliases": [
+              "AION Software Ltd",
+              "CAP",
+              "Computer Analysts and Programmers"
+            ],
+            "description": "British software company continuing CAP after Adam Pleskot acquires a controlling interest and the company adopts the AION Software name. Headquarters and established contract teams remain in CAP’s London offices. Alex d’Agapeyeff leads the company as CEO; its dedicated product programme works with AION Labs in Cambridge, Logix and independent software partners."
+          },
+          "content_sha256": "1bc41294c4ecf18ebbf4565d0cf5608f3cb8f4149022bb5035c7505f642464b6"
+        },
+        {
+          "record_id": "actor.alex_dagapeyeff",
+          "before": null,
+          "after": {
+            "id": "actor.alex_dagapeyeff",
+            "kind": "person",
+            "name": "Alex d’Agapeyeff",
+            "aliases": [
+              "Alex d'Agapeyeff"
+            ],
+            "description": "CAP co-founder and software-industry leader retained as CEO and director when CAP becomes AION Software. He leads customer work and product initiatives within board-approved budgets. His personal holding is part of the former CAP shareholder block; its allocation is not specified."
+          },
+          "content_sha256": "fce17a91fa5e2ca3a96cb6d59a24201a8d9d104062b80b6562524ff01bf6bb24"
+        },
+        {
+          "record_id": "actor.cap_shareholders",
+          "before": null,
+          "after": {
+            "id": "actor.cap_shareholders",
+            "kind": "group",
+            "name": "CAP existing shareholders",
+            "description": "Registered CAP shareholders participating in the investment and share-sale agreement, including Alex d’Agapeyeff to the extent of his verified holding. They collectively retain 30% immediately after closing; individual holdings and proceeds follow the verified register and agreed allocation."
+          },
+          "content_sha256": "66ee56365325ae2bdf921cbaf152aeaf0e1f6200f3d1e555e76edc6e90edb449"
+        },
+        {
+          "record_id": "location.london",
+          "before": null,
+          "after": {
+            "id": "location.london",
+            "name": "London",
+            "kind": "city",
+            "parent_location_id": "location.uk",
+            "description": "London is the headquarters city of AION Software, which continues in CAP’s existing offices after the acquisition. No street address or property ownership is specified."
+          },
+          "content_sha256": "29a55e5c1780d106b286dc7239ed56e47d8a8fc890452cff1e8c1bb3de3517d4"
+        },
+        {
+          "record_id": "location.aion_software_london",
+          "before": null,
+          "after": {
+            "id": "location.aion_software_london",
+            "name": "AION Software offices, London",
+            "kind": "facility",
+            "parent_location_id": "location.london",
+            "description": "Existing CAP offices retained as AION Software’s headquarters and software-development base after closing. Address, floor area and tenure remain unspecified. AION Labs retains its separate Cambridge location."
+          },
+          "content_sha256": "99a64e78a648f7fe8f7e0fad6607dde83425bfa5c371982fa8f46766bf8d2ccf"
+        },
+        {
+          "record_id": "agreement.cap_acquisition",
+          "before": null,
+          "after": {
+            "id": "agreement.cap_acquisition",
+            "title": "CAP controlling investment, AION Software identity and CEO continuity",
+            "kind": "other",
+            "state": "executed",
+            "description": "Adam, CAP and its participating shareholders sign a controlling-investment agreement. CAP continues as the operating company and adopts the AION Software name at closing. Signature creates commitments; the separate closing milestone establishes the ownership change and leadership arrangements.",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "investor, purchaser and incoming non-executive chairman"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "CAP operating company, renamed AION Software at closing"
+              },
+              {
+                "actor_id": "actor.alex_dagapeyeff",
+                "role": "continuing CEO, director and participating shareholder"
+              },
+              {
+                "actor_id": "actor.cap_shareholders",
+                "role": "existing shareholders approving the transaction and conveying the agreed shares"
+              }
+            ],
+            "clauses": [
+              {
+                "id": "clause.cap_control",
+                "kind": "equity",
+                "statement": "Adam obtains 70% of voting and economic rights immediately after closing through subscription for new shares and purchase of existing shares. No superior-voting share class is created.",
+                "value": 70,
+                "unit": "percent of issued shares at closing"
+              },
+              {
+                "id": "clause.cap_retained_shares",
+                "kind": "equity",
+                "statement": "Former CAP shareholders collectively retain 30% immediately after closing. Alex retains a meaningful personal interest within this block, with individual allocations agreed against the verified share register.",
+                "value": 30,
+                "unit": "percent of issued shares at closing"
+              },
+              {
+                "id": "clause.cap_financing",
+                "kind": "funding",
+                "statement": "Adam funds a new-share subscription providing development capital and working capital to the company, plus separate consideration paid to selling shareholders. Amounts and the split require the agreed accounts, valuation and investment schedule; neither company funding nor seller consideration is inferred from the ownership percentages.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_closing_conditions",
+                "kind": "qualification",
+                "statement": "Closing requires shareholder consent, verified accounts and ownership, intellectual-property rights, existing corporate commitments, and necessary customer or other change-of-control approvals. The parties settle the subscription and purchase documents and record their completion separately from signature.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_identity",
+                "kind": "term",
+                "statement": "CAP continues its operating legal entity as AION Software Ltd, subject to registration of the name. The trading transition may use AION Software, formerly CAP. There is no separately founded Danish software company or acquired Danish subsidiary.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_london",
+                "kind": "term",
+                "statement": "Retain headquarters, contract teams and software development in CAP’s London offices. Coordinate through regular engineering visits with AION Labs in Cambridge; co-operation does not merge the companies or their ownership.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_ceo",
+                "kind": "responsibility",
+                "statement": "Alex d’Agapeyeff continues as CEO and director, with authority over staffing, organisation, existing customer work and new initiatives within the approved business plan. Adam serves as non-executive chairman. The board retains authority over major financing, acquisitions, strategy and CEO appointment; removal without cause carries agreed severance, without guaranteeing tenure regardless of performance.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_board",
+                "kind": "rights",
+                "statement": "The five-member board comprises three Adam nominees and two former-CAP shareholder nominees, including Alex. Minority holders receive regular accounts, information rights and proportionate participation rights in later share issues, subject to the agreed employee award.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_customer_continuity",
+                "kind": "responsibility",
+                "statement": "Preserve existing customer obligations, specialist teams and commercially sound initiatives. No acquisition-driven redundancies are planned. Allocate customer delivery management separately from the product programme and agree retention arrangements for key staff.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_programme",
+                "kind": "responsibility",
+                "statement": "Maintain a separately budgeted product programme for the CP/M TUI API, AION C IDE and Abacus, with provision for application-partner engineering and BPI cooperation in 1977. Continuing CAP work and Alex’s initiatives must preserve the programme’s agreed staffing and delivery commitments. BPI obligations arise only under BPI’s separate agreement.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_staffing",
+                "kind": "funding",
+                "statement": "Approve an initial development budget and recruitment plan separately from seller consideration. Plan initially for 15–25 experienced staff, subject to the actual available team and customer commitments; this planning range is not a claim that those staff have already been hired or released from existing contracts. Review capacity, milestones and funding quarterly.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_rights",
+                "kind": "rights",
+                "statement": "Existing customer and third-party intellectual-property obligations survive. The investment does not grant rights in CP/M or BPI applications. Define delivery, reuse and licensing rights in the separate partner agreements; retain the company’s compiler, application and reusable-component rights as specified there.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.cap_employee_awards",
+                "kind": "equity",
+                "statement": "Any later employee award must specify its share source, vesting and dilution. The closing percentages exclude ungranted awards; no undisclosed employee pool or automatic percentage protection is created.",
+                "value": null,
+                "unit": null
+              }
+            ]
+          },
+          "content_sha256": "3253094191c190d00d5bb8e4f26bc55995f28d7d6008d4b00b13df4a231d9c42"
+        },
+        {
+          "record_id": "event.cap_acquisition_signed",
+          "before": null,
+          "after": {
+            "id": "event.cap_acquisition_signed",
+            "title": "CAP controlling-investment agreement signed",
+            "kind": "agreement_milestone",
+            "description": "In January 1975 Adam, Alex and the participating CAP shareholders sign the controlling-investment agreement, preserving customer work and Alex’s leadership while committing capital and protected capacity to the AION software programme. Signing precedes closing and does not itself establish share transfer.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "investor, purchaser and incoming non-executive chairman"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "CAP operating company, renamed AION Software at closing"
+              },
+              {
+                "actor_id": "actor.alex_dagapeyeff",
+                "role": "continuing CEO, director and participating shareholder"
+              },
+              {
+                "actor_id": "actor.cap_shareholders",
+                "role": "existing shareholders approving the transaction and conveying the agreed shares"
+              }
+            ],
+            "time": {
+              "value": "1975-01",
+              "precision": "month"
+            },
+            "agreement_id": "agreement.cap_acquisition",
+            "location_ids": [
+              "location.aion_software_london"
+            ],
+            "inputs": [],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "decision",
+                "description": "Agree the controlling investment, continued London operation, CEO continuity and protected AION product programme."
+              }
+            ]
+          },
+          "content_sha256": "da4bdc06b681f35a020837a2fbc478ac361d4236c7ecd016e08673f3e3faab9e"
+        },
+        {
+          "record_id": "event.cap_acquisition_closed",
+          "before": null,
+          "after": {
+            "id": "event.cap_acquisition_closed",
+            "title": "CAP becomes AION Software in London",
+            "kind": "acquisition_closing",
+            "description": "In January 1975, after signing and before the 12 January CP/M development agreement, the parties complete the agreed conditions, share subscription and share purchase. CAP continues as AION Software Ltd in its existing London offices. Adam becomes non-executive chairman and holds 70%; former CAP shareholders collectively hold 30%. Alex d’Agapeyeff continues as CEO. The exact closing day and cash amounts are not specified.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "investor, purchaser and incoming non-executive chairman"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "CAP operating company, renamed AION Software at closing"
+              },
+              {
+                "actor_id": "actor.alex_dagapeyeff",
+                "role": "continuing CEO, director and participating shareholder"
+              },
+              {
+                "actor_id": "actor.cap_shareholders",
+                "role": "existing shareholders approving the transaction and conveying the agreed shares"
+              }
+            ],
+            "time": {
+              "value": "1975-01",
+              "precision": "month"
+            },
+            "agreement_id": "agreement.cap_acquisition",
+            "location_ids": [
+              "location.aion_software_london"
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "requirement",
+                "description": "The signed agreement and satisfaction of its closing conditions enable completion.",
+                "event_id": "event.cap_acquisition_signed"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "CAP continues as AION Software in London with the agreed ownership and Alex as CEO.",
+                "subject_ids": [
+                  "actor.aion"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "decision",
+                "description": "Approve the dedicated software-product programme and its budget and staffing planning; this is not delivery of a compiler, TUI or application."
+              }
+            ]
+          },
+          "content_sha256": "2e95146058ca592f5740d50eebd7524202d7a89a3a635a8329fd75c9b524bfd6"
+        },
+        {
+          "record_id": "event.companies",
+          "before": {
+            "id": "event.companies",
+            "title": "Three technology companies founded",
+            "kind": "founding",
+            "description": "On 23 November 1974 Adam establishes Logix Tech in San Jose, California, for computers and associated software; AION Labs in Cambridge, England, for semiconductors; and AION Software in Copenhagen, Denmark, for business applications and compilers. He has prepared a recruitment shortlist for a CEO, CFO and CTO at each company and begins approaching candidates for these nine leadership roles.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "founder"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "new_company"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "new_company"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "new_company"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Adam’s established stock-market investment activity provides the funding basis for company formation.",
+                "event_id": "event.us_nyse_start"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Adam brings a prepared leadership shortlist and an understanding of future technology and market needs."
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "The three companies exist before the DRI founding agreement of 7 December 1974.",
+                "subject_ids": [
+                  "actor.logix",
+                  "actor.labs",
+                  "actor.aion"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Recruitment begins for separate CEO, CFO and CTO positions in San Jose, Cambridge and Copenhagen; individual appointments remain unspecified."
+              }
+            ],
+            "time": {
+              "value": "1974-11-23",
+              "precision": "day"
+            },
+            "location_ids": [
+              "location.san_jose",
+              "location.cambridge",
+              "location.copenhagen"
+            ]
+          },
+          "after": {
+            "id": "event.companies",
+            "title": "Logix and AION Labs founded; UK software venture planned",
+            "kind": "founding",
+            "description": "On 23 November 1974 Adam establishes Logix Tech in San Jose, California, and AION Labs in Cambridge, England. He plans a UK software business through investment in an established software house. Leadership recruitment starts for the two new companies; the software company’s leadership is settled through the subsequent CAP transaction.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "founder"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "new_company"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "new_company"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Adam’s established stock-market investment activity provides the funding basis for company formation.",
+                "event_id": "event.us_nyse_start"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Adam brings a prepared leadership shortlist and an understanding of future technology and market needs."
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Logix Tech and AION Labs exist before the DRI founding agreement of 7 December 1974.",
+                "subject_ids": [
+                  "actor.logix",
+                  "actor.labs"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "decision",
+                "description": "Pursue an established UK software organisation for the planned applications and development-tools business; no third incorporation or software CEO appointment is established at this milestone."
+              }
+            ],
+            "time": {
+              "value": "1974-11-23",
+              "precision": "day"
+            },
+            "location_ids": [
+              "location.san_jose",
+              "location.cambridge"
+            ]
+          },
+          "content_sha256": "8e5778c84fb6ae69dd47ede12c9cd3088f0af632ff8ec578bf56a667aa492630"
+        },
+        {
+          "record_id": "event.dri_founding",
+          "before": {
+            "id": "event.dri_founding",
+            "title": "Joint DRI founding and funding",
+            "kind": "founding",
+            "description": "On 7 December 1974 Gary Kildall, Dorothy McEwen and Adam formalise and finance DRI, following the formation of Logix Tech, AION Labs and AION Software. Gary and Dorothy independently manage DRI’s engineering and operations; Adam contributes minority capital, strategy and OEM relationships to support CP/M-compatible personal computing. DRI retains CP/M ownership and independent licensing. Hardware abstraction and documented interfaces begin here, with optional ROM, memory and TUI services developed progressively.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.dorothy",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Formation of Logix Tech, AION Labs and AION Software establishes Adam’s companies and the basis for the planned technology cooperation.",
+                "event_id": "event.companies"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "DRI is established with agreed funding, independent founder management and CP/M ownership, providing an operating-system partner for the planned computers.",
+                "subject_ids": [
+                  "actor.dri"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1974-12-07",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.dri_founding"
+          },
+          "after": {
+            "id": "event.dri_founding",
+            "title": "Joint DRI founding and funding",
+            "kind": "founding",
+            "description": "On 7 December 1974 Gary Kildall, Dorothy McEwen and Adam formalise and finance DRI, following the formation of Logix Tech and AION Labs and the decision to establish a UK software business. Gary and Dorothy independently manage DRI’s engineering and operations; Adam contributes minority capital, strategy and OEM relationships to support CP/M-compatible personal computing. DRI retains CP/M ownership and independent licensing. Hardware abstraction and documented interfaces begin here, with optional ROM, memory and TUI services developed progressively.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.kildall",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.dorothy",
+                "role": "partner"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Formation of Logix Tech and AION Labs and Adam’s UK software-business plan provide the basis for the planned technology cooperation.",
+                "event_id": "event.companies"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "DRI is established with agreed funding, independent founder management and CP/M ownership, providing an operating-system partner for the planned computers.",
+                "subject_ids": [
+                  "actor.dri"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1974-12-07",
+              "precision": "day"
+            },
+            "agreement_id": "agreement.dri_founding"
+          },
+          "content_sha256": "f867e4e9932f5fbe589c804973aa7d305b7bb37e5c38e6312157ef1b62417f7a"
+        },
+        {
+          "record_id": "process.computer_business_incorporation",
+          "before": {
+            "id": "process.computer_business_incorporation",
+            "title": "Incorporation of Computer business",
+            "kind": "business_formation",
+            "description": "Adam establishes Logix Tech, AION Labs and AION Software and develops their initial leadership, engineering and software partnerships with DRI, BPI and others. This formation phase starts with the three companies on 23 November 1974 and ends with Tim Paterson’s recruitment.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "founder, financier and organiser"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "computer-business participant after its formation"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "semiconductor research and development participant after its formation"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "software development participant after its formation"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "operating-system cooperation partner"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent application cooperation partner"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "event.companies",
+                "precision": "event"
+              },
+              "end": {
+                "value": "event.paterson",
+                "precision": "event"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Adam’s established investment activity provides a financial basis for forming and supporting the computer businesses.",
+                "event_id": "event.us_nyse_start",
+                "subject_ids": [
+                  "actor.adam"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Adam contributes knowledge of future demand and technology while keeping its origin private.",
+                "subject_ids": [
+                  "assumption.identity",
+                  "assumption.finance"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Establish and fund independent DRI as the operating-system cooperation partner.",
+                "event_id": "event.dri_founding"
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Recruit company leadership: appoint Comstock in San Jose, sign the Rovsing acquisition and conditional CEO appointment in Copenhagen, and recruit the remaining finance and technical roles."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Establish the separate secret future-equipped facility supporting chip design.",
+                "event_id": "event.facility"
+              },
+              {
+                "number": 4,
+                "type": "milestone",
+                "description": "Agree development and distribution cooperation with independent BPI Systems.",
+                "event_id": "event.bpi_cooperation"
+              },
+              {
+                "number": 5,
+                "type": "milestone",
+                "description": "Recruit Letwin to Copenhagen systems-software leadership and DRI liaison under the AION Software service-equity agreement.",
+                "event_id": "event.letwin"
+              },
+              {
+                "number": 6,
+                "type": "milestone",
+                "description": "Sign the January 1975 Rovsing acquisition and conditional AION Software CEO agreement.",
+                "event_id": "event.rovsing_acquisition_signed"
+              },
+              {
+                "number": 7,
+                "type": "milestone",
+                "description": "Appoint Comstock CEO of Logix with a 10% equity commitment.",
+                "event_id": "event.comstock_appointed"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Logix Tech, AION Labs and AION Software are established, with initial engineering infrastructure and supporting access to the separate future-equipped facility.",
+                "subject_ids": [
+                  "actor.logix",
+                  "actor.labs",
+                  "actor.aion",
+                  "location.secret_facility"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Cooperation with DRI and BPI is established under the existing agreements. DRI and BPI retain the independence and rights specified in those agreements.",
+                "subject_ids": []
+              },
+              {
+                "number": 3,
+                "type": "result",
+                "description": "Letwin joins AION Software in Copenhagen and Tim Paterson joins the developing computer business. Comstock leads Logix; Rovsing’s AION Software CEO appointment takes effect on acquisition closing.",
+                "subject_ids": [
+                  "actor.letwin",
+                  "actor.paterson"
+                ]
+              }
+            ],
+            "subject_ids": [],
+            "category": "Logix/AION investment"
+          },
+          "after": {
+            "id": "process.computer_business_incorporation",
+            "title": "Incorporation of Computer business",
+            "kind": "business_formation",
+            "description": "Adam establishes Logix Tech and AION Labs, then obtains control of CAP, which becomes AION Software in London under Alex d’Agapeyeff. This formation phase begins on 23 November 1974 and develops leadership and partnerships with DRI, BPI and others through Tim Paterson’s recruitment.",
+            "participant": [
+              {
+                "actor_id": "actor.adam",
+                "role": "founder, financier and organiser"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "computer-business participant after its formation"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "semiconductor research and development participant after its formation"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "software operating company continuing CAP after acquisition closing"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "operating-system cooperation partner"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent application cooperation partner"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "event.companies",
+                "precision": "event"
+              },
+              "end": {
+                "value": "event.paterson",
+                "precision": "event"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Adam’s established investment activity provides a financial basis for forming and supporting the computer businesses.",
+                "event_id": "event.us_nyse_start",
+                "subject_ids": [
+                  "actor.adam"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Adam contributes knowledge of future demand and technology while keeping its origin private.",
+                "subject_ids": [
+                  "assumption.identity",
+                  "assumption.finance"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Establish and fund independent DRI as the operating-system cooperation partner.",
+                "event_id": "event.dri_founding"
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Appoint Comstock in San Jose, retain Alex d’Agapeyeff as CEO through the CAP transaction, and recruit the remaining finance and technical roles."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Establish the separate secret future-equipped facility supporting chip design.",
+                "event_id": "event.facility"
+              },
+              {
+                "number": 4,
+                "type": "milestone",
+                "description": "Agree development and distribution cooperation with independent BPI Systems.",
+                "event_id": "event.bpi_cooperation"
+              },
+              {
+                "number": 5,
+                "type": "milestone",
+                "description": "Recruit Letwin to London systems-software leadership and DRI liaison under the AION Software service-equity agreement.",
+                "event_id": "event.letwin"
+              },
+              {
+                "number": 6,
+                "type": "milestone",
+                "description": "Sign the January 1975 CAP controlling-investment and CEO-continuity agreement.",
+                "event_id": "event.cap_acquisition_signed"
+              },
+              {
+                "number": 7,
+                "type": "milestone",
+                "description": "Appoint Comstock CEO of Logix with a 10% equity commitment.",
+                "event_id": "event.comstock_appointed"
+              },
+              {
+                "number": 8,
+                "type": "milestone",
+                "description": "Complete the CAP investment before the January CP/M agreement; continue the company as AION Software in its London offices.",
+                "event_id": "event.cap_acquisition_closed"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Logix Tech and AION Labs are established and CAP continues as AION Software in London, supported by engineering infrastructure and access to the separate future-equipped facility.",
+                "subject_ids": [
+                  "actor.logix",
+                  "actor.labs",
+                  "actor.aion",
+                  "location.secret_facility"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Cooperation with DRI and BPI is established under the existing agreements. DRI and BPI retain the independence and rights specified in those agreements.",
+                "subject_ids": []
+              },
+              {
+                "number": 3,
+                "type": "result",
+                "description": "Letwin joins AION Software in London and Tim Paterson joins the developing computer business. Comstock leads Logix; Alex d’Agapeyeff continues as AION Software CEO after the CAP investment.",
+                "subject_ids": [
+                  "actor.letwin",
+                  "actor.paterson"
+                ]
+              }
+            ],
+            "subject_ids": [],
+            "category": "Logix/AION investment"
+          },
+          "content_sha256": "ffeabc9e9f7003e79d2ce2fbef61e6e51a1449cb05221d97538c9fb948b0e963"
+        },
+        {
+          "record_id": "agreement.letwin_aion_appointment",
+          "before": {
+            "id": "agreement.letwin_aion_appointment",
+            "title": "Letwin Copenhagen systems-software appointment and equity",
+            "kind": "employment",
+            "state": "executed",
+            "description": "AION Software employs Letwin in Copenhagen as Director of Systems Software and technical liaison to DRI.",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "equity transferor and recruitment sponsor"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "employer"
+              },
+              {
+                "actor_id": "actor.letwin",
+                "role": "systems-software director"
+              }
+            ],
+            "clauses": [
+              {
+                "id": "clause.letwin_role",
+                "kind": "responsibility",
+                "statement": "Letwin leads AION’s systems-software group: CP/M/TUI interface coordination, runtime libraries, assembler integration, development tools, joint acceptance testing and systems-programmer recruitment. DRI retains its own engineering authority and software rights.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.letwin_location",
+                "kind": "term",
+                "statement": "Letwin eagerly accepts Copenhagen as his home base. AION covers relocation, temporary housing and scheduled US technical visits. The AIONix team’s later move to California does not relocate Letwin; its local lead remains a separate appointment.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.letwin_equity",
+                "kind": "equity",
+                "statement": "Adam grants Letwin a contractual right to receive existing AION Software shares in four equal annual instalments after completed service, totalling 5% measured against issued shares at grant. First vesting is on the first anniversary of recruitment; unvested rights lapse on departure. No completed vesting is asserted by signature.",
+                "value": 5,
+                "unit": "percent of AION Software issued shares at grant"
+              },
+              {
+                "id": "clause.letwin_vesting",
+                "kind": "term",
+                "statement": "The service period is four years from recruitment. Each completed year earns one quarter of the grant. Subsequent share issuance may dilute both Letwin and other shareholders; there is no automatic percentage protection.",
+                "value": 4,
+                "unit": "years"
+              },
+              {
+                "id": "clause.letwin_no_logix",
+                "kind": "equity",
+                "statement": "This AION Software grant is Letwin’s equity participation in the leadership plan; he receives no Logix allocation.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.aion_leadership_balance",
+                "kind": "equity",
+                "statement": "After the Rovsing acquisition closes and Letwin fully earns his grant, Rovsing and Letwin each hold 5% and Adam retains 90%, absent other transfers or issuance. This is a conditional allocation, not a claim that closing or vesting has occurred.",
+                "value": 90,
+                "unit": "percent of AION Software issued shares, absent intervening dilution"
+              }
+            ]
+          },
+          "after": {
+            "id": "agreement.letwin_aion_appointment",
+            "title": "Letwin London systems-software appointment and equity",
+            "kind": "employment",
+            "state": "executed",
+            "description": "AION Software employs Letwin in London as Director of Systems Software and technical liaison to DRI.",
+            "party": [
+              {
+                "actor_id": "actor.adam",
+                "role": "controlling shareholder consenting to the employee award and recruitment sponsor"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "employer"
+              },
+              {
+                "actor_id": "actor.letwin",
+                "role": "systems-software director"
+              },
+              {
+                "actor_id": "actor.alex_dagapeyeff",
+                "role": "CEO approving the role within the company business plan"
+              }
+            ],
+            "clauses": [
+              {
+                "id": "clause.letwin_role",
+                "kind": "responsibility",
+                "statement": "Letwin leads AION’s systems-software group: CP/M/TUI interface coordination, runtime libraries, assembler integration, development tools, joint acceptance testing and systems-programmer recruitment. DRI retains its own engineering authority and software rights. He reports to Alex d’Agapeyeff; Alex retains company-wide management authority.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.letwin_location",
+                "kind": "term",
+                "statement": "Letwin accepts London as his home base. AION supports the required work permission, relocation, temporary housing, Cambridge engineering visits and scheduled US technical visits. The AIONix team’s later move to California does not relocate Letwin; that team has a separate local lead.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.letwin_equity",
+                "kind": "equity",
+                "statement": "AION Software grants Letwin an option over a fixed number of newly issued ordinary shares equal to 5% of the enlarged share capital after full exercise, calculated against the capital at grant and assuming no intervening capital changes. The fixed option share count equals one nineteenth of pre-award issued shares. The option vests in four equal annual instalments after completed service, first on the recruitment anniversary; unvested rights lapse on departure. Vesting establishes exercisable rights, not completed exercise or issued shares.",
+                "value": 5,
+                "unit": "percent of enlarged share capital after full option exercise"
+              },
+              {
+                "id": "clause.letwin_vesting",
+                "kind": "term",
+                "statement": "The service period is four years from recruitment. Each completed year vests one quarter of the fixed option award. Exercise and share issuance are separate actions. Subsequent capital changes may dilute the award; it has no automatic percentage protection.",
+                "value": 4,
+                "unit": "years"
+              },
+              {
+                "id": "clause.letwin_no_logix",
+                "kind": "equity",
+                "statement": "This AION Software grant is Letwin’s equity participation in the leadership plan; he receives no Logix allocation.",
+                "value": null,
+                "unit": null
+              },
+              {
+                "id": "clause.aion_leadership_balance",
+                "kind": "equity",
+                "statement": "Starting from the closing allocation of Adam 70% and former CAP shareholders 30%, full exercise of Letwin’s option yields Adam 66.5%, former CAP shareholders 28.5% collectively and Letwin 5%, absent other capital changes. Alex’s interest remains within the former CAP block. This is a conditional fully exercised allocation, not a claim that vesting or issuance has occurred.",
+                "value": 66.5,
+                "unit": "percent of enlarged shares held by Adam after full exercise"
+              }
+            ]
+          },
+          "content_sha256": "632127ed5bd78a354b5781d6f63d89aec0fafe544f95fcd998efafeb2fde55be"
+        }
+      ]
+    }
+  ]
+}
