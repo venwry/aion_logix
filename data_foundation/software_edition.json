@@ -2426,11 +2426,11 @@
     },
     {
       "id": "software_edition.bpi_suite",
-      "name": "BPI (CP/M edition)",
+      "name": "SSG General Ledger (CP/M edition)",
       "version": "1.0",
       "edition": "CP/M",
-      "family_name": "BPI",
-      "description": "BPI (CP/M edition)",
+      "family_name": "SSG General Ledger",
+      "description": "SSG-owned General Ledger implemented in AION C with the shared TUI, explicit decimal accounting rules and versioned record files. The Aurelia port executes native Z80 application code and calls assembler-written ROM TUI services in XIP mode; writable application state remains in RAM.",
       "provider_actor_ids": [
         "actor.bpi"
       ],
@@ -2448,7 +2448,7 @@
           "description": "Product definition revision 1",
           "effective_from": {
             "kind": "event",
-            "event_id": "event.bpi_launch"
+            "event_id": "event.aurelia_developer_presentation"
           },
           "effective_until": {
             "kind": "simulation_end"
@@ -2457,54 +2457,20 @@
             "implementation": {
               "language": "AION C",
               "ui": "Logix TUI",
-              "database": "relational base engine",
+              "database": "Versioned ledger record files with bounded buffers and application-level access routines; no general relational engine is required for this standalone edition.",
               "printing": "native FlexiBUS printer support"
             },
             "modules": [
               {
-                "name": "BPI General Accounting",
+                "name": "SSG General Ledger",
                 "features": [
-                  "general ledger",
-                  "simplified AR",
-                  "simplified AP",
-                  "payroll integration",
-                  "balance sheets"
-                ]
-              },
-              {
-                "name": "BPI Accounts Receivable",
-                "features": [
-                  "customer accounts",
-                  "open invoices",
-                  "incoming payments",
-                  "customer statements"
-                ]
-              },
-              {
-                "name": "BPI Accounts Payable",
-                "features": [
-                  "vendor accounts",
-                  "outstanding liabilities",
-                  "cash-flow obligations",
-                  "check printing"
-                ]
-              },
-              {
-                "name": "BPI Inventory Control",
-                "features": [
-                  "stock levels",
-                  "purchase orders",
-                  "journal entries for product movement",
-                  "profitability reports"
-                ]
-              },
-              {
-                "name": "BPI Payroll",
-                "features": [
-                  "employee hours",
-                  "local/federal tax withholding",
-                  "benefits",
-                  "payroll check printing"
+                  "custom charts of accounts",
+                  "single or multiple departments",
+                  "validated journal entry and posting",
+                  "corrections and audit records",
+                  "period balances and trial balance",
+                  "customisable financial reports",
+                  "backup, restore and reconciled summary export"
                 ]
               }
             ],
@@ -2519,7 +2485,7 @@
             "specification": {
               "summary_export": {
                 "format": "Versioned delimited-text file on disk with named columns, period, currency, account identifiers, decimal amounts and control totals.",
-                "scope": "Selected balances or monthly totals imported into Abacus as planning inputs. No automatic write-back, concurrent execution or live database link. Close BPI before loading Abacus.",
+                "scope": "Selected account balances and monthly totals become independent Abacus planning inputs through a versioned disk file. Close General Ledger before loading Abacus; there is no automatic ledger write-back or live database link.",
                 "acceptance": "Reconcile record counts and control totals; validate rounding, quoting, disk-full errors, memory use and save/reopen. Prepared demo data is labelled."
               }
             },
@@ -2566,7 +2532,7 @@
               "target": {
                 "record_id": "base_part.software.bpi_suite.installation_media"
               },
-              "quantity": 3
+              "quantity": 1
             },
             {
               "id": "line_4",
@@ -2582,13 +2548,13 @@
         "chapters": [
           {
             "number": 1,
-            "chapter_name": "Accounting modules and implementation",
-            "description": "The suite is implemented in AION C around a relational base engine, the Logix TUI and native FlexiBUS printing. General Accounting covers ledger, simplified receivables/payables, payroll integration and balance sheets. Accounts Receivable tracks customers, open invoices, payments and statements; Accounts Payable tracks vendors, liabilities, cash-flow obligations and cheque printing. Inventory Control handles stock, purchase orders, movement journals and profitability. Payroll handles employee hours, local/federal withholding, benefits and payroll cheques."
+            "chapter_name": "General Ledger implementation",
+            "description": "General Ledger maintains custom charts of accounts, departments, journal entries, corrections, period balances and financial reports. The AION C implementation uses versioned record files and bounded buffers; the standalone release does not depend on a general relational database or include receivables, payables, inventory or payroll modules. Performance-critical string, record and decimal routines may be written in assembly and linked through the published ABI. Application code and state run in RAM; shared assembler-written TUI code executes from the system ROM through bank-safe calls."
           },
           {
             "number": 2,
             "chapter_name": "Planning-data export",
-            "description": "Selected balances or monthly totals are exported as versioned delimited text with named columns, period, currency, account identifiers, decimal amounts and control totals. Close BPI before loading Abacus to use these as independent planning inputs; there is no automatic write-back, simultaneous execution or live database link. Reconcile counts/totals and test rounding, quoting, disk-full handling, memory and save/reopen; label prepared demonstration data."
+            "description": "Selected account balances and monthly totals become independent Abacus planning inputs through a versioned disk file. Close General Ledger before loading Abacus; there is no automatic ledger write-back or live database link. Reconcile counts and control totals, validate decimals and quoting, and test disk-full, memory exhaustion and save/reopen. Label prepared demonstration data."
           },
           {
             "number": 3,
@@ -2598,7 +2564,17 @@
           {
             "number": 4,
             "chapter_name": "Execution and delivery",
-            "description": "This application suite targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+            "description": "This General Ledger application targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified. One distribution diskette is the package assumption; installation, working-data space and any media exchanges require qualification."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Financial equivalence and recovery",
+            "description": "Use explicit decimal or sufficiently wide scaled-integer routines with documented range, rounding and overflow handling. Reconcile CBASIC reference reports and cases exercising 14-digit precision before timing the port. Preserve posting and recovery semantics. Test maximum balances, reversals, period closing, interrupted updates, disk-full handling and backup restoration. On-disk values use explicit encodings, not raw C structures."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Forms and measured performance",
+            "description": "Bounded text fields, lists, account tables, selection dropdowns and buttons use Tab/Shift-Tab, shortcuts, shared selection/editing and copy/paste. Composite controls may be SDK helpers over ROM primitives. Text mode is the baseline; bitmap rendering is optional only on qualified configurations. Measure native code, selected C/assembly libraries and ROM TUI call/bank-switch costs. Compare identical datasets and financial outputs on the same hardware; report CPU work separately from disk and printer waits without a promised speed ratio."
           }
         ],
         "parameters": [
@@ -3812,7 +3788,7 @@
           "description": "Product definition revision 1",
           "effective_from": {
             "kind": "event",
-            "event_id": "event.aurelia_launch"
+            "event_id": "event.aurelia_developer_presentation"
           },
           "effective_until": {
             "kind": "simulation_end"
@@ -3994,7 +3970,7 @@
           {
             "number": 9,
             "chapter_name": "Acceptance workloads and performance evidence",
-            "description": "Qualify syntax coloring and recovery from unterminated comments/strings, diagnostic navigation, incremental builds, library selection, C/assembly calls and nested bank restoration. Compare debug/optimized arithmetic and file results; test overlap, rounding, overflow and invalid inputs. Exercise forms and bitmap redraw in 40/80-column and monochrome/color configurations, clipboard-full, disk-full and exhausted-memory failures. Benchmark forms/record entry, sorting/search, decimal accounting and a bounded recalculation workload on named hardware. Report executable size, peak workspace, stack estimates, disk scratch use and build/run times. Fast libraries and advanced optimization are implementation commitments; measured superiority to earlier tools or hand-written assembly remains to be demonstrated."
+            "description": "Qualify syntax coloring and recovery from unterminated comments/strings, diagnostic navigation, incremental builds, library selection, C/assembly calls and nested bank restoration. Compare debug/optimized arithmetic and file results; test overlap, rounding, overflow and invalid inputs. Exercise forms and bitmap redraw in 40/80-column and monochrome/color configurations, clipboard-full, disk-full and exhausted-memory failures. Benchmark forms/record entry, sorting/search, decimal accounting and a bounded recalculation workload on named hardware. Report executable size, peak workspace, stack estimates, disk scratch use and build/run times. Fast libraries and advanced optimization are implementation commitments; measured superiority to earlier tools or hand-written assembly remains to be demonstrated. SSG General Ledger is an external acceptance workload: reconcile CBASIC and C financial results, measure native application work and ROM TUI overhead separately, and keep the publisher’s source and accounting rules outside the reusable IDE product."
           }
         ],
         "parameters": [

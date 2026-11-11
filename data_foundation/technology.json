@@ -1230,9 +1230,9 @@
     },
     {
       "id": "technology.bpi_relational_database",
-      "name": "BPI relational database platform",
-      "kind": "interface",
-      "description": "BPI relational database platform",
+      "name": "SSG General Ledger data and transaction architecture",
+      "kind": "software_method",
+      "description": "Ledger file and numeric contracts, with a separately qualified client/server transaction service for the later network edition.",
       "owner_actor_ids": [
         "actor.bpi"
       ],
@@ -1240,8 +1240,14 @@
       "specification": [
         {
           "number": 1,
-          "chapter_name": "Shared business data",
-          "description": "BPI applications share a relational database so accounting, receivables, payables, inventory and payroll can use a consistent data foundation. The specification defines that architecture without asserting unrecorded capacity or throughput.\n\nA relational database engine provides the common data foundation for BPI business applications.\n\nAccounting, receivables, payables, inventory and payroll share structured business data.",
+          "chapter_name": "Standalone ledger data",
+          "description": "Standalone SSG General Ledger uses explicitly encoded chart, journal and balance records, bounded access buffers, consistent decimal rules and auditable corrections. Its 1978 C/TUI port preserves the original application semantics without requiring a relational database engine or additional accounting modules.",
+          "parameters": []
+        },
+        {
+          "number": 2,
+          "chapter_name": "Later network transaction service",
+          "description": "The later client/server edition moves ledger validation, posting, queries and durable transactions to the server. Its defined relational service, logging, checkpoint, duplicate-request handling and restoration design require independent qualification; these capabilities are not attributed to the January or June 1978 standalone releases.",
           "parameters": []
         }
       ]
