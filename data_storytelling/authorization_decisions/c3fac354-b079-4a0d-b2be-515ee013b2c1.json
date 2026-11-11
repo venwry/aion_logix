@@ -1,0 +1,492 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.1a1ec575-d08c-4d7d-a55b-ad8a3e1d8999",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-11T11:59:53.867Z",
+      "change_id": "change.campaign_timeline_tandy_model_ii_1979",
+      "proposal_sha256": "e8a68bff0da1070fc12ca901c63762636cf145fb6c14de518e2c00dde5578e6b",
+      "proposal": {
+        "id": "change.campaign_timeline_tandy_model_ii_1979",
+        "category": "foundation",
+        "title": "Campaign timeline — Tandy Model II supported configuration launch",
+        "reason": "Convert this campaign to an independent dated timeline object. Dates are resolved from its execution process without changing precision. Preserve all existing event/subprocess ownership; marketing-step reference_id is absent throughout. Consolidate presentations, campaign material and useful claim-policy requirements into narrated steps; remove historical acceptance labels and duplicate import fragments. Product-owned launch links remain authoritative and validated through the explicit transitional execution mapping. Add the campaign alongside the unchanged execution-process step in process.tandy_cooperation. Keep the marketing programme empty as requested in the earlier Model II review; no Tandy presentation details are invented.",
+        "elements": [
+          {
+            "record_type": "campaign",
+            "record_id": "campaign.tandy_model_ii_1979",
+            "before": {
+              "id": "campaign.tandy_model_ii_1979",
+              "title": "Tandy Model II supported configuration launch",
+              "objective": "Promote Tandy’s supported Model II configuration and the separately licensed CP/M and Model II Abacus offerings.",
+              "lead_actor_ids": [
+                "actor.tandy"
+              ],
+              "process_id": "process.tandy_model_ii_campaign",
+              "launch_event_id": "event.tandy_release"
+            },
+            "after": {
+              "id": "campaign.tandy_model_ii_1979",
+              "title": "Tandy Model II supported configuration launch",
+              "objective": "Promote Tandy’s supported Model II configuration and the separately licensed CP/M and Model II Abacus offerings.",
+              "lead_actor_ids": [
+                "actor.tandy"
+              ],
+              "period": {
+                "start": {
+                  "value": "1979-10-15",
+                  "precision": "day"
+                },
+                "end": {
+                  "value": "1979-10-15",
+                  "precision": "day"
+                }
+              },
+              "marketing_steps": []
+            }
+          },
+          {
+            "record_type": "process",
+            "record_id": "process.tandy_cooperation",
+            "before": {
+              "id": "process.tandy_cooperation",
+              "title": "Model II software and interface cooperation",
+              "kind": "coordination",
+              "description": "Develop and qualify native-display Model II CP/M, Abacus and the separately supported FlexiBUS option, concluding with the Tandy-led customer release on 15 October 1979. Tandy retains its hardware platform, sales and promotion; DRI and AION retain their respective software responsibilities.",
+              "period": {
+                "start": {
+                  "value": "event.tandy_contact",
+                  "precision": "event"
+                },
+                "end": {
+                  "value": "1979-10-15",
+                  "precision": "day"
+                }
+              },
+              "participant": [
+                {
+                  "actor_id": "actor.tandy",
+                  "role": "sponsor"
+                },
+                {
+                  "actor_id": "actor.dri",
+                  "role": "sponsor"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "sponsor"
+                },
+                {
+                  "actor_id": "actor.logix",
+                  "role": "sponsor"
+                }
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "requirement",
+                  "description": "The cooperation must preserve the Model II native hardware architecture and satisfy its internal bus and host-interface constraints.",
+                  "subject_ids": [
+                    "external_product.trs80_model_ii",
+                    "technology.flexibus"
+                  ]
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "deliverable",
+                  "description": "Deliver the Model II CP/M and Abacus implementations and the qualified Model-II-specific FlexiBUS option while retaining Tandy’s existing host architecture. These outputs do not create the Model II computer or the FlexiBUS standard.",
+                  "subject_ids": [
+                    "software_edition.cpm_model_ii",
+                    "software_edition.abacus_1.model_ii",
+                    "external_product.model_ii_flexibus"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "milestone",
+                  "description": "Sign the Model II CP/M, FlexiBUS and Abacus cooperation agreement.",
+                  "event_id": "event.tandy_agreement"
+                },
+                {
+                  "number": 2,
+                  "type": "milestone",
+                  "description": "Agree the Model II compatibility design baseline and responsibilities.",
+                  "event_id": "event.tandy_design_review"
+                },
+                {
+                  "number": 3,
+                  "type": "milestone",
+                  "description": "Review prototype CP/M boot, native TUI, Abacus interchange, memory limits and the Model-II-specific FlexiBUS interface.",
+                  "event_id": "event.tandy_port_review"
+                },
+                {
+                  "number": 4,
+                  "type": "milestone",
+                  "description": "Announce the planned supported Model II CP/M, FlexiBUS and Abacus offering, distinguishing planned availability from completed sales.",
+                  "event_id": "event.tandy_announcement"
+                },
+                {
+                  "number": 5,
+                  "type": "milestone",
+                  "description": "Demonstrate the qualified Model II prototype at NCC while distinguishing demonstration from autumn customer release.",
+                  "event_id": "event.tandy_ncc_demo"
+                },
+                {
+                  "number": 6,
+                  "type": "action",
+                  "description": "Conclude the cooperation with the supported customer release through the Tandy-led Model II campaign, after the required software and interface qualification.",
+                  "process_id": "process.tandy_model_ii_campaign"
+                }
+              ],
+              "agreement_id": "agreement.tandy"
+            },
+            "after": {
+              "id": "process.tandy_cooperation",
+              "title": "Model II software and interface cooperation",
+              "kind": "coordination",
+              "description": "Develop and qualify native-display Model II CP/M, Abacus and the separately supported FlexiBUS option, concluding with the Tandy-led customer release on 15 October 1979. Tandy retains its hardware platform, sales and promotion; DRI and AION retain their respective software responsibilities.",
+              "period": {
+                "start": {
+                  "value": "event.tandy_contact",
+                  "precision": "event"
+                },
+                "end": {
+                  "value": "1979-10-15",
+                  "precision": "day"
+                }
+              },
+              "participant": [
+                {
+                  "actor_id": "actor.tandy",
+                  "role": "sponsor"
+                },
+                {
+                  "actor_id": "actor.dri",
+                  "role": "sponsor"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "sponsor"
+                },
+                {
+                  "actor_id": "actor.logix",
+                  "role": "sponsor"
+                }
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "requirement",
+                  "description": "The cooperation must preserve the Model II native hardware architecture and satisfy its internal bus and host-interface constraints.",
+                  "subject_ids": [
+                    "external_product.trs80_model_ii",
+                    "technology.flexibus"
+                  ]
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "deliverable",
+                  "description": "Deliver the Model II CP/M and Abacus implementations and the qualified Model-II-specific FlexiBUS option while retaining Tandy’s existing host architecture. These outputs do not create the Model II computer or the FlexiBUS standard.",
+                  "subject_ids": [
+                    "software_edition.cpm_model_ii",
+                    "software_edition.abacus_1.model_ii",
+                    "external_product.model_ii_flexibus"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "milestone",
+                  "description": "Sign the Model II CP/M, FlexiBUS and Abacus cooperation agreement.",
+                  "event_id": "event.tandy_agreement"
+                },
+                {
+                  "number": 2,
+                  "type": "milestone",
+                  "description": "Agree the Model II compatibility design baseline and responsibilities.",
+                  "event_id": "event.tandy_design_review"
+                },
+                {
+                  "number": 3,
+                  "type": "milestone",
+                  "description": "Review prototype CP/M boot, native TUI, Abacus interchange, memory limits and the Model-II-specific FlexiBUS interface.",
+                  "event_id": "event.tandy_port_review"
+                },
+                {
+                  "number": 4,
+                  "type": "milestone",
+                  "description": "Announce the planned supported Model II CP/M, FlexiBUS and Abacus offering, distinguishing planned availability from completed sales.",
+                  "event_id": "event.tandy_announcement"
+                },
+                {
+                  "number": 5,
+                  "type": "milestone",
+                  "description": "Demonstrate the qualified Model II prototype at NCC while distinguishing demonstration from autumn customer release.",
+                  "event_id": "event.tandy_ncc_demo"
+                },
+                {
+                  "number": 6,
+                  "type": "action",
+                  "description": "Conclude the cooperation with the supported customer release through the Tandy-led Model II campaign, after the required software and interface qualification.",
+                  "process_id": "process.tandy_model_ii_campaign"
+                },
+                {
+                  "number": 7,
+                  "type": "action",
+                  "description": "Coordinate the marketing campaign: Tandy Model II supported configuration launch.",
+                  "campaign_id": "campaign.tandy_model_ii_1979"
+                }
+              ],
+              "agreement_id": "agreement.tandy"
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "campaign.tandy_model_ii_1979",
+          "before": {
+            "id": "campaign.tandy_model_ii_1979",
+            "title": "Tandy Model II supported configuration launch",
+            "objective": "Promote Tandy’s supported Model II configuration and the separately licensed CP/M and Model II Abacus offerings.",
+            "lead_actor_ids": [
+              "actor.tandy"
+            ],
+            "process_id": "process.tandy_model_ii_campaign",
+            "launch_event_id": "event.tandy_release"
+          },
+          "after": {
+            "id": "campaign.tandy_model_ii_1979",
+            "title": "Tandy Model II supported configuration launch",
+            "objective": "Promote Tandy’s supported Model II configuration and the separately licensed CP/M and Model II Abacus offerings.",
+            "lead_actor_ids": [
+              "actor.tandy"
+            ],
+            "period": {
+              "start": {
+                "value": "1979-10-15",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1979-10-15",
+                "precision": "day"
+              }
+            },
+            "marketing_steps": []
+          },
+          "content_sha256": "9fa19dd40a1d848c2e70159263420edafe85e4e3d8940479a847c30fc3a59e48"
+        },
+        {
+          "record_id": "process.tandy_cooperation",
+          "before": {
+            "id": "process.tandy_cooperation",
+            "title": "Model II software and interface cooperation",
+            "kind": "coordination",
+            "description": "Develop and qualify native-display Model II CP/M, Abacus and the separately supported FlexiBUS option, concluding with the Tandy-led customer release on 15 October 1979. Tandy retains its hardware platform, sales and promotion; DRI and AION retain their respective software responsibilities.",
+            "period": {
+              "start": {
+                "value": "event.tandy_contact",
+                "precision": "event"
+              },
+              "end": {
+                "value": "1979-10-15",
+                "precision": "day"
+              }
+            },
+            "participant": [
+              {
+                "actor_id": "actor.tandy",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "sponsor"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "requirement",
+                "description": "The cooperation must preserve the Model II native hardware architecture and satisfy its internal bus and host-interface constraints.",
+                "subject_ids": [
+                  "external_product.trs80_model_ii",
+                  "technology.flexibus"
+                ]
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "Deliver the Model II CP/M and Abacus implementations and the qualified Model-II-specific FlexiBUS option while retaining Tandy’s existing host architecture. These outputs do not create the Model II computer or the FlexiBUS standard.",
+                "subject_ids": [
+                  "software_edition.cpm_model_ii",
+                  "software_edition.abacus_1.model_ii",
+                  "external_product.model_ii_flexibus"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Sign the Model II CP/M, FlexiBUS and Abacus cooperation agreement.",
+                "event_id": "event.tandy_agreement"
+              },
+              {
+                "number": 2,
+                "type": "milestone",
+                "description": "Agree the Model II compatibility design baseline and responsibilities.",
+                "event_id": "event.tandy_design_review"
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Review prototype CP/M boot, native TUI, Abacus interchange, memory limits and the Model-II-specific FlexiBUS interface.",
+                "event_id": "event.tandy_port_review"
+              },
+              {
+                "number": 4,
+                "type": "milestone",
+                "description": "Announce the planned supported Model II CP/M, FlexiBUS and Abacus offering, distinguishing planned availability from completed sales.",
+                "event_id": "event.tandy_announcement"
+              },
+              {
+                "number": 5,
+                "type": "milestone",
+                "description": "Demonstrate the qualified Model II prototype at NCC while distinguishing demonstration from autumn customer release.",
+                "event_id": "event.tandy_ncc_demo"
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "Conclude the cooperation with the supported customer release through the Tandy-led Model II campaign, after the required software and interface qualification.",
+                "process_id": "process.tandy_model_ii_campaign"
+              }
+            ],
+            "agreement_id": "agreement.tandy"
+          },
+          "after": {
+            "id": "process.tandy_cooperation",
+            "title": "Model II software and interface cooperation",
+            "kind": "coordination",
+            "description": "Develop and qualify native-display Model II CP/M, Abacus and the separately supported FlexiBUS option, concluding with the Tandy-led customer release on 15 October 1979. Tandy retains its hardware platform, sales and promotion; DRI and AION retain their respective software responsibilities.",
+            "period": {
+              "start": {
+                "value": "event.tandy_contact",
+                "precision": "event"
+              },
+              "end": {
+                "value": "1979-10-15",
+                "precision": "day"
+              }
+            },
+            "participant": [
+              {
+                "actor_id": "actor.tandy",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "sponsor"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "sponsor"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "requirement",
+                "description": "The cooperation must preserve the Model II native hardware architecture and satisfy its internal bus and host-interface constraints.",
+                "subject_ids": [
+                  "external_product.trs80_model_ii",
+                  "technology.flexibus"
+                ]
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "Deliver the Model II CP/M and Abacus implementations and the qualified Model-II-specific FlexiBUS option while retaining Tandy’s existing host architecture. These outputs do not create the Model II computer or the FlexiBUS standard.",
+                "subject_ids": [
+                  "software_edition.cpm_model_ii",
+                  "software_edition.abacus_1.model_ii",
+                  "external_product.model_ii_flexibus"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Sign the Model II CP/M, FlexiBUS and Abacus cooperation agreement.",
+                "event_id": "event.tandy_agreement"
+              },
+              {
+                "number": 2,
+                "type": "milestone",
+                "description": "Agree the Model II compatibility design baseline and responsibilities.",
+                "event_id": "event.tandy_design_review"
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Review prototype CP/M boot, native TUI, Abacus interchange, memory limits and the Model-II-specific FlexiBUS interface.",
+                "event_id": "event.tandy_port_review"
+              },
+              {
+                "number": 4,
+                "type": "milestone",
+                "description": "Announce the planned supported Model II CP/M, FlexiBUS and Abacus offering, distinguishing planned availability from completed sales.",
+                "event_id": "event.tandy_announcement"
+              },
+              {
+                "number": 5,
+                "type": "milestone",
+                "description": "Demonstrate the qualified Model II prototype at NCC while distinguishing demonstration from autumn customer release.",
+                "event_id": "event.tandy_ncc_demo"
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "Conclude the cooperation with the supported customer release through the Tandy-led Model II campaign, after the required software and interface qualification.",
+                "process_id": "process.tandy_model_ii_campaign"
+              },
+              {
+                "number": 7,
+                "type": "action",
+                "description": "Coordinate the marketing campaign: Tandy Model II supported configuration launch.",
+                "campaign_id": "campaign.tandy_model_ii_1979"
+              }
+            ],
+            "agreement_id": "agreement.tandy"
+          },
+          "content_sha256": "c526661a5966e712e96dd13f35620a6d139cae459726bcce725d2af7e146db27"
+        }
+      ]
+    }
+  ]
+}

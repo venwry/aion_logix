@@ -1,0 +1,584 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.c0cfc9b6-e8dc-4321-9890-cf62ce69f449",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-11T11:59:53.865Z",
+      "change_id": "change.campaign_timeline_comdex1981",
+      "proposal_sha256": "af7919d5b544b89d42263cb4d9bd8c38a0c16dca76408f8ed288ff8177a33942",
+      "proposal": {
+        "id": "change.campaign_timeline_comdex1981",
+        "category": "foundation",
+        "title": "Campaign timeline — Team Edition: whole-team development",
+        "reason": "Convert this campaign to an independent dated timeline object. Dates are resolved from its execution process without changing precision. Preserve all existing event/subprocess ownership; marketing-step reference_id is absent throughout. Consolidate presentations, campaign material and useful claim-policy requirements into narrated steps; remove historical acceptance labels and duplicate import fragments. Product-owned launch links remain authoritative and validated through the explicit transitional execution mapping. Add the campaign alongside the unchanged execution-process step in process.team_edition_server_development.",
+        "elements": [
+          {
+            "record_type": "campaign",
+            "record_id": "campaign.comdex1981",
+            "before": {
+              "id": "campaign.comdex1981",
+              "title": "Team Edition: whole-team development",
+              "objective": "Recruit development teams to Team Edition by demonstrating shared projects, review, reproducible builds and separate CP/M and AIONix targets.",
+              "lead_actor_ids": [
+                "actor.logix"
+              ],
+              "audience": [],
+              "message": [
+                "campaign message: Complex products. Whole teams. One development environment.",
+                "campaign promise: Your team’s development environment should outlast any single computer architecture."
+              ],
+              "claim_policy": [
+                "claim policy: Robustness is a design goal demonstrated by recovery and reproducible builds, not an untested most-robust comparison. No write-once/run-anywhere or Apple/Commodore launch claim."
+              ],
+              "launch_event_id": "event.team_launch",
+              "presentation": {
+                "stage": []
+              },
+              "marketing_content": [],
+              "process_id": "process.comdex1981_campaign",
+              "subject_ids": []
+            },
+            "after": {
+              "id": "campaign.comdex1981",
+              "title": "Team Edition: whole-team development",
+              "objective": "Recruit development teams to Team Edition by demonstrating shared projects, review, reproducible builds and separate CP/M and AIONix targets.",
+              "lead_actor_ids": [
+                "actor.logix"
+              ],
+              "message": [
+                "Complex products. Whole teams. One development environment.",
+                "Your team’s development environment should outlast any single computer architecture."
+              ],
+              "period": {
+                "start": {
+                  "value": "1981-10-01",
+                  "precision": "day"
+                },
+                "end": {
+                  "value": "1981-12-01",
+                  "precision": "day"
+                }
+              },
+              "marketing_steps": [
+                {
+                  "id": "readiness",
+                  "number": 1,
+                  "type": "preparation",
+                  "description": "Prepare qualified whole-team development demonstrations.",
+                  "marketing_presentation": [
+                    {
+                      "number": 1,
+                      "description": "Prepare campaign demonstrations, dealer materials and press briefings that explain whole-team development, hardware/storage requirements, C source portability and separate target binaries.",
+                      "parameters": []
+                    },
+                    {
+                      "number": 2,
+                      "description": "Robustness is a design goal demonstrated by recovery and reproducible builds, not an untested most-robust comparison. No write-once/run-anywhere or Apple/Commodore launch claim.",
+                      "parameters": []
+                    }
+                  ]
+                },
+                {
+                  "id": "premiere",
+                  "number": 2,
+                  "type": "presentation",
+                  "description": "Introduce Team Edition at COMDEX on 19 November 1981.",
+                  "marketing_presentation": [
+                    {
+                      "number": 1,
+                      "description": "Recruit development teams to Team Edition by demonstrating shared projects, review, reproducible builds and separate CP/M and AIONix targets.",
+                      "parameters": []
+                    }
+                  ]
+                },
+                {
+                  "id": "follow-up",
+                  "number": 3,
+                  "type": "follow_up",
+                  "description": "Prepare the workshop and trade programme starting on 1 December.",
+                  "marketing_presentation": [
+                    {
+                      "number": 1,
+                      "description": "Prepare the workshop, case-study and trade-advertising follow-up launched by the 1 December end milestone; the 90-day programme is not claimed to have finished on that date.",
+                      "parameters": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "process",
+            "record_id": "process.team_edition_server_development",
+            "before": {
+              "id": "process.team_edition_server_development",
+              "title": "Team Edition server development and launch",
+              "kind": "development",
+              "description": "Develop and qualify Team Edition shared development services, validate reference-site use and coordinate its COMDEX 1981 launch. Begin with engineering on 1 December 1980 and end with the launch campaign on 1 December 1981, when the existing workshop and trade follow-up begins. Retail deployment, the later 90-day follow-up work and Autodesk sponsorship are not treated as completed development activities.",
+              "participant": [
+                {
+                  "actor_id": "actor.aion",
+                  "role": "Team Edition engineering and reference-site qualification"
+                },
+                {
+                  "actor_id": "actor.logix",
+                  "role": "platform support, programme sponsorship and launch coordination"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "event.team_engineering",
+                  "precision": "event"
+                },
+                "end": {
+                  "value": "1981-12-01",
+                  "precision": "day"
+                }
+              },
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "The Artemis commercial launch establishes the platform for the Team Edition development system.",
+                  "event_id": "event.artemis_launch"
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "Existing AIONix and Artemis development facilities provide the operating-system and hardware basis for shared development services.",
+                  "subject_ids": [
+                    "software_edition.aionix",
+                    "device.base_computer.artemis"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "action",
+                  "description": "AION Software developed shared projects, source history, branches, reviews and reproducible builds for development teams."
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "The team tested permissions, interrupted saves, backup recovery and separate CP/M and AIONix builds at reference sites."
+                },
+                {
+                  "number": 3,
+                  "type": "milestone",
+                  "description": "Run the 1 September 1981 reference-site pilots for shared projects, permissions, interrupted saves, recovery and separate CP/M/AIONix builds; participants are not assumed paying customers.",
+                  "event_id": "event.team_pilots"
+                },
+                {
+                  "number": 4,
+                  "type": "action",
+                  "description": "Prepare dealers, present Team Edition at COMDEX and begin the existing workshop/trade follow-up through the dedicated launch campaign.",
+                  "process_id": "process.comdex1981_campaign"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "deliverable",
+                  "description": "AION Development System — Team Edition",
+                  "subject_ids": [
+                    "product.aion_development_team"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "result",
+                  "description": "Team Edition shared services and distinct CP/M/AIONix target builds undergo reference-site qualification and are presented through the launch campaign, with documented deployment and recovery requirements. Retail installations and sponsored Autodesk work remain separately accounted for.",
+                  "subject_ids": [
+                    "software_edition.aion_development_team",
+                    "software_edition.aion_development_team.era_client",
+                    "software_edition.aion_development_team.z80_client"
+                  ]
+                }
+              ],
+              "category": "Product dev & launch"
+            },
+            "after": {
+              "id": "process.team_edition_server_development",
+              "title": "Team Edition server development and launch",
+              "kind": "development",
+              "description": "Develop and qualify Team Edition shared development services, validate reference-site use and coordinate its COMDEX 1981 launch. Begin with engineering on 1 December 1980 and end with the launch campaign on 1 December 1981, when the existing workshop and trade follow-up begins. Retail deployment, the later 90-day follow-up work and Autodesk sponsorship are not treated as completed development activities.",
+              "participant": [
+                {
+                  "actor_id": "actor.aion",
+                  "role": "Team Edition engineering and reference-site qualification"
+                },
+                {
+                  "actor_id": "actor.logix",
+                  "role": "platform support, programme sponsorship and launch coordination"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "event.team_engineering",
+                  "precision": "event"
+                },
+                "end": {
+                  "value": "1981-12-01",
+                  "precision": "day"
+                }
+              },
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "The Artemis commercial launch establishes the platform for the Team Edition development system.",
+                  "event_id": "event.artemis_launch"
+                },
+                {
+                  "number": 2,
+                  "type": "resource",
+                  "description": "Existing AIONix and Artemis development facilities provide the operating-system and hardware basis for shared development services.",
+                  "subject_ids": [
+                    "software_edition.aionix",
+                    "device.base_computer.artemis"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "action",
+                  "description": "AION Software developed shared projects, source history, branches, reviews and reproducible builds for development teams."
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "The team tested permissions, interrupted saves, backup recovery and separate CP/M and AIONix builds at reference sites."
+                },
+                {
+                  "number": 3,
+                  "type": "milestone",
+                  "description": "Run the 1 September 1981 reference-site pilots for shared projects, permissions, interrupted saves, recovery and separate CP/M/AIONix builds; participants are not assumed paying customers.",
+                  "event_id": "event.team_pilots"
+                },
+                {
+                  "number": 4,
+                  "type": "action",
+                  "description": "Prepare dealers, present Team Edition at COMDEX and begin the existing workshop/trade follow-up through the dedicated launch campaign.",
+                  "process_id": "process.comdex1981_campaign"
+                },
+                {
+                  "number": 5,
+                  "type": "action",
+                  "description": "Coordinate the marketing campaign: Team Edition: whole-team development.",
+                  "campaign_id": "campaign.comdex1981"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "deliverable",
+                  "description": "AION Development System — Team Edition",
+                  "subject_ids": [
+                    "product.aion_development_team"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "result",
+                  "description": "Team Edition shared services and distinct CP/M/AIONix target builds undergo reference-site qualification and are presented through the launch campaign, with documented deployment and recovery requirements. Retail installations and sponsored Autodesk work remain separately accounted for.",
+                  "subject_ids": [
+                    "software_edition.aion_development_team",
+                    "software_edition.aion_development_team.era_client",
+                    "software_edition.aion_development_team.z80_client"
+                  ]
+                }
+              ],
+              "category": "Product dev & launch"
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "campaign.comdex1981",
+          "before": {
+            "id": "campaign.comdex1981",
+            "title": "Team Edition: whole-team development",
+            "objective": "Recruit development teams to Team Edition by demonstrating shared projects, review, reproducible builds and separate CP/M and AIONix targets.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "audience": [],
+            "message": [
+              "campaign message: Complex products. Whole teams. One development environment.",
+              "campaign promise: Your team’s development environment should outlast any single computer architecture."
+            ],
+            "claim_policy": [
+              "claim policy: Robustness is a design goal demonstrated by recovery and reproducible builds, not an untested most-robust comparison. No write-once/run-anywhere or Apple/Commodore launch claim."
+            ],
+            "launch_event_id": "event.team_launch",
+            "presentation": {
+              "stage": []
+            },
+            "marketing_content": [],
+            "process_id": "process.comdex1981_campaign",
+            "subject_ids": []
+          },
+          "after": {
+            "id": "campaign.comdex1981",
+            "title": "Team Edition: whole-team development",
+            "objective": "Recruit development teams to Team Edition by demonstrating shared projects, review, reproducible builds and separate CP/M and AIONix targets.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "message": [
+              "Complex products. Whole teams. One development environment.",
+              "Your team’s development environment should outlast any single computer architecture."
+            ],
+            "period": {
+              "start": {
+                "value": "1981-10-01",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1981-12-01",
+                "precision": "day"
+              }
+            },
+            "marketing_steps": [
+              {
+                "id": "readiness",
+                "number": 1,
+                "type": "preparation",
+                "description": "Prepare qualified whole-team development demonstrations.",
+                "marketing_presentation": [
+                  {
+                    "number": 1,
+                    "description": "Prepare campaign demonstrations, dealer materials and press briefings that explain whole-team development, hardware/storage requirements, C source portability and separate target binaries.",
+                    "parameters": []
+                  },
+                  {
+                    "number": 2,
+                    "description": "Robustness is a design goal demonstrated by recovery and reproducible builds, not an untested most-robust comparison. No write-once/run-anywhere or Apple/Commodore launch claim.",
+                    "parameters": []
+                  }
+                ]
+              },
+              {
+                "id": "premiere",
+                "number": 2,
+                "type": "presentation",
+                "description": "Introduce Team Edition at COMDEX on 19 November 1981.",
+                "marketing_presentation": [
+                  {
+                    "number": 1,
+                    "description": "Recruit development teams to Team Edition by demonstrating shared projects, review, reproducible builds and separate CP/M and AIONix targets.",
+                    "parameters": []
+                  }
+                ]
+              },
+              {
+                "id": "follow-up",
+                "number": 3,
+                "type": "follow_up",
+                "description": "Prepare the workshop and trade programme starting on 1 December.",
+                "marketing_presentation": [
+                  {
+                    "number": 1,
+                    "description": "Prepare the workshop, case-study and trade-advertising follow-up launched by the 1 December end milestone; the 90-day programme is not claimed to have finished on that date.",
+                    "parameters": []
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "9fadb4af7d66963654b5338b59ed16def76b5836fac3b394c9142fcc40eb39a0"
+        },
+        {
+          "record_id": "process.team_edition_server_development",
+          "before": {
+            "id": "process.team_edition_server_development",
+            "title": "Team Edition server development and launch",
+            "kind": "development",
+            "description": "Develop and qualify Team Edition shared development services, validate reference-site use and coordinate its COMDEX 1981 launch. Begin with engineering on 1 December 1980 and end with the launch campaign on 1 December 1981, when the existing workshop and trade follow-up begins. Retail deployment, the later 90-day follow-up work and Autodesk sponsorship are not treated as completed development activities.",
+            "participant": [
+              {
+                "actor_id": "actor.aion",
+                "role": "Team Edition engineering and reference-site qualification"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "platform support, programme sponsorship and launch coordination"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "event.team_engineering",
+                "precision": "event"
+              },
+              "end": {
+                "value": "1981-12-01",
+                "precision": "day"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The Artemis commercial launch establishes the platform for the Team Edition development system.",
+                "event_id": "event.artemis_launch"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Existing AIONix and Artemis development facilities provide the operating-system and hardware basis for shared development services.",
+                "subject_ids": [
+                  "software_edition.aionix",
+                  "device.base_computer.artemis"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "AION Software developed shared projects, source history, branches, reviews and reproducible builds for development teams."
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "The team tested permissions, interrupted saves, backup recovery and separate CP/M and AIONix builds at reference sites."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Run the 1 September 1981 reference-site pilots for shared projects, permissions, interrupted saves, recovery and separate CP/M/AIONix builds; participants are not assumed paying customers.",
+                "event_id": "event.team_pilots"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "Prepare dealers, present Team Edition at COMDEX and begin the existing workshop/trade follow-up through the dedicated launch campaign.",
+                "process_id": "process.comdex1981_campaign"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "AION Development System — Team Edition",
+                "subject_ids": [
+                  "product.aion_development_team"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Team Edition shared services and distinct CP/M/AIONix target builds undergo reference-site qualification and are presented through the launch campaign, with documented deployment and recovery requirements. Retail installations and sponsored Autodesk work remain separately accounted for.",
+                "subject_ids": [
+                  "software_edition.aion_development_team",
+                  "software_edition.aion_development_team.era_client",
+                  "software_edition.aion_development_team.z80_client"
+                ]
+              }
+            ],
+            "category": "Product dev & launch"
+          },
+          "after": {
+            "id": "process.team_edition_server_development",
+            "title": "Team Edition server development and launch",
+            "kind": "development",
+            "description": "Develop and qualify Team Edition shared development services, validate reference-site use and coordinate its COMDEX 1981 launch. Begin with engineering on 1 December 1980 and end with the launch campaign on 1 December 1981, when the existing workshop and trade follow-up begins. Retail deployment, the later 90-day follow-up work and Autodesk sponsorship are not treated as completed development activities.",
+            "participant": [
+              {
+                "actor_id": "actor.aion",
+                "role": "Team Edition engineering and reference-site qualification"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "platform support, programme sponsorship and launch coordination"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "event.team_engineering",
+                "precision": "event"
+              },
+              "end": {
+                "value": "1981-12-01",
+                "precision": "day"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The Artemis commercial launch establishes the platform for the Team Edition development system.",
+                "event_id": "event.artemis_launch"
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "Existing AIONix and Artemis development facilities provide the operating-system and hardware basis for shared development services.",
+                "subject_ids": [
+                  "software_edition.aionix",
+                  "device.base_computer.artemis"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "AION Software developed shared projects, source history, branches, reviews and reproducible builds for development teams."
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "The team tested permissions, interrupted saves, backup recovery and separate CP/M and AIONix builds at reference sites."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "Run the 1 September 1981 reference-site pilots for shared projects, permissions, interrupted saves, recovery and separate CP/M/AIONix builds; participants are not assumed paying customers.",
+                "event_id": "event.team_pilots"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "Prepare dealers, present Team Edition at COMDEX and begin the existing workshop/trade follow-up through the dedicated launch campaign.",
+                "process_id": "process.comdex1981_campaign"
+              },
+              {
+                "number": 5,
+                "type": "action",
+                "description": "Coordinate the marketing campaign: Team Edition: whole-team development.",
+                "campaign_id": "campaign.comdex1981"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "AION Development System — Team Edition",
+                "subject_ids": [
+                  "product.aion_development_team"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "Team Edition shared services and distinct CP/M/AIONix target builds undergo reference-site qualification and are presented through the launch campaign, with documented deployment and recovery requirements. Retail installations and sponsored Autodesk work remain separately accounted for.",
+                "subject_ids": [
+                  "software_edition.aion_development_team",
+                  "software_edition.aion_development_team.era_client",
+                  "software_edition.aion_development_team.z80_client"
+                ]
+              }
+            ],
+            "category": "Product dev & launch"
+          },
+          "content_sha256": "2cc0e4a2bcaa126e36fab1c083ec5939fe40f377404047ced99c17efc27e794a"
+        }
+      ]
+    }
+  ]
+}

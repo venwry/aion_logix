@@ -1,0 +1,572 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.a3477c03-38ae-4c9e-b04f-4c869ef051c7",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-11T11:59:53.866Z",
+      "change_id": "change.campaign_timeline_ncc1981",
+      "proposal_sha256": "b57399bd57bbf806b647c0005e2d22406298bebf63ad169d0b287d21b1ea23fe",
+      "proposal": {
+        "id": "change.campaign_timeline_ncc1981",
+        "category": "foundation",
+        "title": "Campaign timeline — Networked business-computing platform presented",
+        "reason": "Convert this campaign to an independent dated timeline object. Dates are resolved from its execution process without changing precision. Preserve all existing event/subprocess ownership; marketing-step reference_id is absent throughout. Consolidate presentations, campaign material and useful claim-policy requirements into narrated steps; remove historical acceptance labels and duplicate import fragments. Product-owned launch links remain authoritative and validated through the explicit transitional execution mapping. Add the campaign alongside the unchanged execution-process step in process.artemis_networking_development.",
+        "elements": [
+          {
+            "record_type": "campaign",
+            "record_id": "campaign.ncc1981",
+            "before": {
+              "id": "campaign.ncc1981",
+              "title": "Networked business-computing platform presented",
+              "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+              "lead_actor_ids": [
+                "actor.logix"
+              ],
+              "audience": [],
+              "message": [],
+              "claim_policy": [],
+              "launch_event_id": "event.network_launch",
+              "presentation": {
+                "stage": []
+              },
+              "marketing_content": [],
+              "process_id": "process.ncc1981_campaign",
+              "subject_ids": [
+                "external_product.bpi_client_server",
+                "technology.logix_tcpip_lan"
+              ]
+            },
+            "after": {
+              "id": "campaign.ncc1981",
+              "title": "Networked business-computing platform presented",
+              "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+              "lead_actor_ids": [
+                "actor.logix"
+              ],
+              "period": {
+                "start": {
+                  "value": "1981-05-04",
+                  "precision": "day"
+                },
+                "end": {
+                  "value": "1981-06-30",
+                  "precision": "day"
+                }
+              },
+              "marketing_steps": [
+                {
+                  "id": "premiere",
+                  "number": 1,
+                  "type": "presentation",
+                  "description": "Present networked business computing at NCC on 4 May 1981.",
+                  "marketing_presentation": [
+                    {
+                      "number": 1,
+                      "description": "Present the networked business-computing platform at NCC on 4 May 1981, then coordinate dealer and BPI follow-up through the multi-client recovery pilots on 30 June. Sales and July shipments remain conditional on configuration-specific qualification.",
+                      "parameters": []
+                    },
+                    {
+                      "number": 2,
+                      "description": "The networked business demonstration involves {subject}; configuration-specific recovery qualification still gates sales.",
+                      "parameters": [
+                        {
+                          "key": "subject",
+                          "ref_id": "external_product.bpi_client_server"
+                        }
+                      ]
+                    },
+                    {
+                      "number": 3,
+                      "description": "The networking workflow uses {subject}; demonstrate only qualified configurations.",
+                      "parameters": [
+                        {
+                          "key": "subject",
+                          "ref_id": "technology.logix_tcpip_lan"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "pilot-follow-up",
+                  "number": 2,
+                  "type": "follow_up",
+                  "description": "Prepare dealer and BPI pilots with explicit recovery requirements.",
+                  "marketing_presentation": [
+                    {
+                      "number": 1,
+                      "description": "Coordinate post-presentation dealer and BPI pilot preparation, including authentication, locking, backup and crash-recovery checks, without treating launch attendance as qualified sales.",
+                      "parameters": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "process",
+            "record_id": "process.artemis_networking_development",
+            "before": {
+              "id": "process.artemis_networking_development",
+              "title": "Artemis Networking development and launch",
+              "kind": "development",
+              "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign and its recovery pilots ending on 30 June 1981. The campaign presents the platform in May and coordinates dealer/BPI qualification follow-up; commercial shipments remain conditional.",
+              "participant": [
+                {
+                  "actor_id": "actor.logix",
+                  "role": "network-capable systems and platform coordination"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "networking and AIONix server software"
+                },
+                {
+                  "actor_id": "actor.bpi",
+                  "role": "client-server application integration"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "1980-07-12",
+                  "precision": "day"
+                },
+                "end": {
+                  "value": "1981-06-30",
+                  "precision": "day"
+                }
+              },
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "The existing Artemis and AIONix platform supplies the hardware and operating-system foundation for network development.",
+                  "subject_ids": [
+                    "device.base_computer.artemis",
+                    "software_edition.aionix"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "action",
+                  "description": "Develop and integrate TCP/IP networking, AIONix server services and supported Aurelia/Artemis network upgrades."
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "Integrate the client-server application generation and prepare configuration-specific authentication, locking, backup and crash-recovery tests."
+                },
+                {
+                  "number": 3,
+                  "type": "action",
+                  "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades at NCC, and carry the campaign through its dealer/BPI recovery pilots.",
+                  "process_id": "process.ncc1981_campaign"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability or forecast revenue from unpriced larger storage."
+                },
+                {
+                  "number": 2,
+                  "type": "qualification",
+                  "description": "The programme reaches configuration-specific multi-client recovery pilots for the networking/server platform and BPI client/server implementations. Their results gate sales and shipments; completion of every qualification is not inferred.",
+                  "subject_ids": [
+                    "technology.logix_tcpip_lan",
+                    "software_edition.aionix_server",
+                    "software_edition.bpi_client_server",
+                    "software_edition.bpi_client_server.era_client",
+                    "software_edition.bpi_client_server.era_server"
+                  ]
+                },
+                {
+                  "number": 3,
+                  "type": "deliverable",
+                  "description": "The CP/M Aurelia networking edition supplies the TCP/IP stack, LogixLAN adapter driver, network configuration tools and BPI client networking API for supported Aurelia and Aurelia+ upgrades. Availability remains subject to configuration-specific qualification and the programme’s shipment gates.",
+                  "subject_ids": [
+                    "software_edition.cpm_aurelia_networking"
+                  ]
+                }
+              ],
+              "category": "Product dev & launch"
+            },
+            "after": {
+              "id": "process.artemis_networking_development",
+              "title": "Artemis Networking development and launch",
+              "kind": "development",
+              "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign and its recovery pilots ending on 30 June 1981. The campaign presents the platform in May and coordinates dealer/BPI qualification follow-up; commercial shipments remain conditional.",
+              "participant": [
+                {
+                  "actor_id": "actor.logix",
+                  "role": "network-capable systems and platform coordination"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "networking and AIONix server software"
+                },
+                {
+                  "actor_id": "actor.bpi",
+                  "role": "client-server application integration"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "1980-07-12",
+                  "precision": "day"
+                },
+                "end": {
+                  "value": "1981-06-30",
+                  "precision": "day"
+                }
+              },
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "The existing Artemis and AIONix platform supplies the hardware and operating-system foundation for network development.",
+                  "subject_ids": [
+                    "device.base_computer.artemis",
+                    "software_edition.aionix"
+                  ]
+                }
+              ],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "action",
+                  "description": "Develop and integrate TCP/IP networking, AIONix server services and supported Aurelia/Artemis network upgrades."
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "Integrate the client-server application generation and prepare configuration-specific authentication, locking, backup and crash-recovery tests."
+                },
+                {
+                  "number": 3,
+                  "type": "action",
+                  "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades at NCC, and carry the campaign through its dealer/BPI recovery pilots.",
+                  "process_id": "process.ncc1981_campaign"
+                },
+                {
+                  "number": 4,
+                  "type": "action",
+                  "description": "Coordinate the marketing campaign: Networked business-computing platform presented.",
+                  "campaign_id": "campaign.ncc1981"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability or forecast revenue from unpriced larger storage."
+                },
+                {
+                  "number": 2,
+                  "type": "qualification",
+                  "description": "The programme reaches configuration-specific multi-client recovery pilots for the networking/server platform and BPI client/server implementations. Their results gate sales and shipments; completion of every qualification is not inferred.",
+                  "subject_ids": [
+                    "technology.logix_tcpip_lan",
+                    "software_edition.aionix_server",
+                    "software_edition.bpi_client_server",
+                    "software_edition.bpi_client_server.era_client",
+                    "software_edition.bpi_client_server.era_server"
+                  ]
+                },
+                {
+                  "number": 3,
+                  "type": "deliverable",
+                  "description": "The CP/M Aurelia networking edition supplies the TCP/IP stack, LogixLAN adapter driver, network configuration tools and BPI client networking API for supported Aurelia and Aurelia+ upgrades. Availability remains subject to configuration-specific qualification and the programme’s shipment gates.",
+                  "subject_ids": [
+                    "software_edition.cpm_aurelia_networking"
+                  ]
+                }
+              ],
+              "category": "Product dev & launch"
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "campaign.ncc1981",
+          "before": {
+            "id": "campaign.ncc1981",
+            "title": "Networked business-computing platform presented",
+            "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "audience": [],
+            "message": [],
+            "claim_policy": [],
+            "launch_event_id": "event.network_launch",
+            "presentation": {
+              "stage": []
+            },
+            "marketing_content": [],
+            "process_id": "process.ncc1981_campaign",
+            "subject_ids": [
+              "external_product.bpi_client_server",
+              "technology.logix_tcpip_lan"
+            ]
+          },
+          "after": {
+            "id": "campaign.ncc1981",
+            "title": "Networked business-computing platform presented",
+            "objective": "Communicate the launch, qualify demonstrations and coordinate follow-up described by the source campaign.",
+            "lead_actor_ids": [
+              "actor.logix"
+            ],
+            "period": {
+              "start": {
+                "value": "1981-05-04",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1981-06-30",
+                "precision": "day"
+              }
+            },
+            "marketing_steps": [
+              {
+                "id": "premiere",
+                "number": 1,
+                "type": "presentation",
+                "description": "Present networked business computing at NCC on 4 May 1981.",
+                "marketing_presentation": [
+                  {
+                    "number": 1,
+                    "description": "Present the networked business-computing platform at NCC on 4 May 1981, then coordinate dealer and BPI follow-up through the multi-client recovery pilots on 30 June. Sales and July shipments remain conditional on configuration-specific qualification.",
+                    "parameters": []
+                  },
+                  {
+                    "number": 2,
+                    "description": "The networked business demonstration involves {subject}; configuration-specific recovery qualification still gates sales.",
+                    "parameters": [
+                      {
+                        "key": "subject",
+                        "ref_id": "external_product.bpi_client_server"
+                      }
+                    ]
+                  },
+                  {
+                    "number": 3,
+                    "description": "The networking workflow uses {subject}; demonstrate only qualified configurations.",
+                    "parameters": [
+                      {
+                        "key": "subject",
+                        "ref_id": "technology.logix_tcpip_lan"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "pilot-follow-up",
+                "number": 2,
+                "type": "follow_up",
+                "description": "Prepare dealer and BPI pilots with explicit recovery requirements.",
+                "marketing_presentation": [
+                  {
+                    "number": 1,
+                    "description": "Coordinate post-presentation dealer and BPI pilot preparation, including authentication, locking, backup and crash-recovery checks, without treating launch attendance as qualified sales.",
+                    "parameters": []
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "eec4d4f961163a5bb8b3f35c872bf3d82e60db8e2e50e8f3802789349f647478"
+        },
+        {
+          "record_id": "process.artemis_networking_development",
+          "before": {
+            "id": "process.artemis_networking_development",
+            "title": "Artemis Networking development and launch",
+            "kind": "development",
+            "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign and its recovery pilots ending on 30 June 1981. The campaign presents the platform in May and coordinates dealer/BPI qualification follow-up; commercial shipments remain conditional.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "network-capable systems and platform coordination"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "networking and AIONix server software"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "client-server application integration"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1980-07-12",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1981-06-30",
+                "precision": "day"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The existing Artemis and AIONix platform supplies the hardware and operating-system foundation for network development.",
+                "subject_ids": [
+                  "device.base_computer.artemis",
+                  "software_edition.aionix"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "Develop and integrate TCP/IP networking, AIONix server services and supported Aurelia/Artemis network upgrades."
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Integrate the client-server application generation and prepare configuration-specific authentication, locking, backup and crash-recovery tests."
+              },
+              {
+                "number": 3,
+                "type": "action",
+                "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades at NCC, and carry the campaign through its dealer/BPI recovery pilots.",
+                "process_id": "process.ncc1981_campaign"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability or forecast revenue from unpriced larger storage."
+              },
+              {
+                "number": 2,
+                "type": "qualification",
+                "description": "The programme reaches configuration-specific multi-client recovery pilots for the networking/server platform and BPI client/server implementations. Their results gate sales and shipments; completion of every qualification is not inferred.",
+                "subject_ids": [
+                  "technology.logix_tcpip_lan",
+                  "software_edition.aionix_server",
+                  "software_edition.bpi_client_server",
+                  "software_edition.bpi_client_server.era_client",
+                  "software_edition.bpi_client_server.era_server"
+                ]
+              },
+              {
+                "number": 3,
+                "type": "deliverable",
+                "description": "The CP/M Aurelia networking edition supplies the TCP/IP stack, LogixLAN adapter driver, network configuration tools and BPI client networking API for supported Aurelia and Aurelia+ upgrades. Availability remains subject to configuration-specific qualification and the programme’s shipment gates.",
+                "subject_ids": [
+                  "software_edition.cpm_aurelia_networking"
+                ]
+              }
+            ],
+            "category": "Product dev & launch"
+          },
+          "after": {
+            "id": "process.artemis_networking_development",
+            "title": "Artemis Networking development and launch",
+            "kind": "development",
+            "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign and its recovery pilots ending on 30 June 1981. The campaign presents the platform in May and coordinates dealer/BPI qualification follow-up; commercial shipments remain conditional.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "network-capable systems and platform coordination"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "networking and AIONix server software"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "client-server application integration"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1980-07-12",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1981-06-30",
+                "precision": "day"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The existing Artemis and AIONix platform supplies the hardware and operating-system foundation for network development.",
+                "subject_ids": [
+                  "device.base_computer.artemis",
+                  "software_edition.aionix"
+                ]
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "Develop and integrate TCP/IP networking, AIONix server services and supported Aurelia/Artemis network upgrades."
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Integrate the client-server application generation and prepare configuration-specific authentication, locking, backup and crash-recovery tests."
+              },
+              {
+                "number": 3,
+                "type": "action",
+                "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades at NCC, and carry the campaign through its dealer/BPI recovery pilots.",
+                "process_id": "process.ncc1981_campaign"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "Coordinate the marketing campaign: Networked business-computing platform presented.",
+                "campaign_id": "campaign.ncc1981"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability or forecast revenue from unpriced larger storage."
+              },
+              {
+                "number": 2,
+                "type": "qualification",
+                "description": "The programme reaches configuration-specific multi-client recovery pilots for the networking/server platform and BPI client/server implementations. Their results gate sales and shipments; completion of every qualification is not inferred.",
+                "subject_ids": [
+                  "technology.logix_tcpip_lan",
+                  "software_edition.aionix_server",
+                  "software_edition.bpi_client_server",
+                  "software_edition.bpi_client_server.era_client",
+                  "software_edition.bpi_client_server.era_server"
+                ]
+              },
+              {
+                "number": 3,
+                "type": "deliverable",
+                "description": "The CP/M Aurelia networking edition supplies the TCP/IP stack, LogixLAN adapter driver, network configuration tools and BPI client networking API for supported Aurelia and Aurelia+ upgrades. Availability remains subject to configuration-specific qualification and the programme’s shipment gates.",
+                "subject_ids": [
+                  "software_edition.cpm_aurelia_networking"
+                ]
+              }
+            ],
+            "category": "Product dev & launch"
+          },
+          "content_sha256": "23e408c533d5633abd571b696434057dad46a061386a9536089014ae5125a7a7"
+        }
+      ]
+    }
+  ]
+}
