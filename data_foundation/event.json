@@ -784,7 +784,7 @@
       "id": "event.aurelia_launch",
       "title": "Aurelia platform launches",
       "kind": "launch",
-      "description": "Aurelia premieres on 5 June 1978 with startup, common editing, safe peripheral attachment, Business Tools and the eight-minute Abacus demonstration. DRI, MPI and BPI introduce their partnerships; Academy and dealer configurations follow. BPI’s dedicated application launch session takes place the following day at NCC. Questions follow the premiere presentation.",
+      "description": "Aurelia premieres on 5 June 1978 with startup, common editing, safe peripheral attachment, Business Tools and the eight-minute Abacus demonstration. DRI, MPI and BPI introduce their partnerships; Academy and dealer configurations follow, with the official Academy launch announced for 16 June. The next morning’s AION C IDE/Software Developer Package presentation and afternoon BPI application session continue the NCC programme. Questions follow the premiere presentation.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -830,6 +830,11 @@
           "number": 2,
           "type": "result",
           "description": "Academy Fundamentals offers two days of hands-on learning before purchase. Orders are accepted at Academy or participating dealers with no purchase obligation. Locations and first class dates remain to be selected."
+        },
+        {
+          "number": 3,
+          "type": "deliverable",
+          "description": "Full-session recordings and production masters of the Aurelia premiere, partner appearances and questions are supplied for subsequent cleared editing and television redistribution."
         }
       ],
       "time": {
@@ -844,7 +849,7 @@
       "id": "event.bpi_launch",
       "title": "Independent BPI Systems launches Aurelia applications",
       "kind": "launch",
-      "description": "On 6 June 1978, the day after the Aurelia premiere, BPI presents its separately licensed five-module application family in a dedicated NCC session. The demonstration covers source records and summary export for Abacus. The head of BPI explains independent management, ownership and support and cooperation with Adam, AION and Logix. No personal identity for the head is specified.",
+      "description": "On the afternoon of 6 June 1978, the day after the Aurelia premiere, BPI presents its separately licensed five-module application family in a dedicated NCC session. The demonstration covers source records and summary export for Abacus. The head of BPI explains independent management, ownership and support and cooperation with Adam, AION and Logix. No personal identity for the head is specified.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -874,6 +879,11 @@
           "number": 1,
           "type": "result",
           "description": "Dealer configurations combine separately identified suppliers; BPI is not a Logix division. A documented BPI-to-Abacus summary export supports planning without modifying accounting records."
+        },
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "Full-session recordings and production masters of the BPI presentation and questions are supplied for subsequent cleared editing and redistribution, retaining BPI branding and support responsibilities."
         }
       ],
       "time": {
@@ -882,6 +892,9 @@
       },
       "subject_ids": [
         "external_product.bpi_suite"
+      ],
+      "location_ids": [
+        "location.anaheim"
       ]
     },
     {
@@ -952,63 +965,6 @@
         "value": "1978-07-17",
         "precision": "day"
       }
-    },
-    {
-      "id": "event.bpi_dealer_program",
-      "title": "BPI training, direct sales and qualified dealer programme begin",
-      "kind": "activity",
-      "description": "On 17 July 1978, Academy begins BPI-authorised practical courses and direct distribution alongside BPI dealer qualification, accountant demonstration access, permission-based case studies and defined setup assistance. Each initial Academy centre has access to a BPI specialist. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Training, setup services and software licences remain separate offerings.",
-      "participant": [
-        {
-          "actor_id": "actor.bpi",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.adam",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.aion",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.logix",
-          "role": "cooperating partner"
-        },
-        {
-          "actor_id": "actor.academy",
-          "role": "authorised training and direct distribution provider"
-        }
-      ],
-      "inputs": [
-        {
-          "number": 1,
-          "type": "resource",
-          "description": "The BPI application launch establishes the product offering for subsequent authorised training, direct distribution and dealer demonstrations.",
-          "event_id": "event.bpi_launch"
-        },
-        {
-          "number": 2,
-          "type": "resource",
-          "description": "Separately licensed BPI applications are the subject of the authorised courses, direct distribution and dealer demonstrations. They remain BPI offerings rather than newly created Academy software.",
-          "subject_ids": [
-            "external_product.bpi_suite"
-          ]
-        }
-      ],
-      "outcomes": [
-        {
-          "number": 1,
-          "type": "result",
-          "description": "Authorised BPI training, direct sales and the qualified dealer programme are operating with defined support responsibilities and access to BPI specialists.",
-          "subject_ids": []
-        }
-      ],
-      "time": {
-        "value": "1978-07-17",
-        "precision": "day"
-      },
-      "agreement_id": "agreement.bpi_offer"
     },
     {
       "id": "event.aionix_agreement",
@@ -5905,6 +5861,154 @@
           "description": "Approve the dedicated software-product programme and its budget and staffing planning; this is not delivery of a compiler, TUI or application."
         }
       ]
+    },
+    {
+      "id": "event.aurelia_developer_presentation",
+      "title": "NCC morning presentation: AION C IDE and Software Developer Package",
+      "kind": "presentation",
+      "description": "On the morning of 6 June 1978 at NCC in Anaheim, AION and Logix present the Aurelia development environment and Software Developer Package. The presentation explains platform and peripheral interfaces, edits and builds an application, links an assembly library, debugs a RAM application and demonstrates TUI forms and tested text/bitmap presentation. It reports measured resource use and distinguishes SDK helpers from ROM services.",
+      "time": {
+        "value": "1978-06-06",
+        "precision": "day"
+      },
+      "participant": [
+        {
+          "actor_id": "actor.aion",
+          "role": "developer tools presenter"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "organiser and platform presenter"
+        }
+      ],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The Aurelia C IDE and Developer Package supply the tools and documented interfaces used in the presentation.",
+          "subject_ids": [
+            "product.simple_c_z80",
+            "product.aurelia_sdk"
+          ]
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "Developers see the Aurelia editing, compilation, library, debugging and TUI workflow with its measured resource limits and supported interface boundaries."
+        },
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "Full-session recordings and production masters of the developer presentation and questions are supplied for subsequent cleared editing and redistribution."
+        }
+      ],
+      "location_ids": [
+        "location.anaheim"
+      ]
+    },
+    {
+      "id": "event.aurelia_sales_premiere",
+      "title": "Official Aurelia sales premiere at ComputerLand",
+      "kind": "launch",
+      "description": "On 14 June 1978, a ComputerLand shop hosts the official Aurelia sales premiere with Logix, following the NCC platform announcement. Visitors see the business-assistant workflow and receive configuration and software advice. The particular shop and city are not specified.",
+      "time": {
+        "value": "1978-06-14",
+        "precision": "day"
+      },
+      "participant": [
+        {
+          "actor_id": "actor.computerland",
+          "role": "retail host"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "platform presenter"
+        }
+      ],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The NCC platform launch supplies the announced Aurelia offering for the subsequent shop sales premiere.",
+          "event_id": "event.aurelia_launch"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The official Aurelia retail sales premiere takes place at a ComputerLand shop; no sales volume or wider stock availability is implied."
+        }
+      ]
+    },
+    {
+      "id": "event.academy_launch",
+      "title": "Official Logix Computer Academy launch, including BPI training and distribution",
+      "kind": "launch",
+      "description": "On 16 June 1978, Logix Computer Academy officially launches its public training programme, including Aurelia Fundamentals and BPI-authorised offerings. Academy begins BPI-authorised practical courses and direct distribution alongside BPI dealer qualification, accountant demonstration access, permission-based case studies and defined setup assistance. Each initial Academy centre has access to a BPI specialist. Dealers handle first-line installation enquiries, BPI handles software defects and specialist support, and Logix supports hardware. Training, setup services and software licences remain separate offerings.",
+      "participant": [
+        {
+          "actor_id": "actor.bpi",
+          "role": "cooperating partner"
+        },
+        {
+          "actor_id": "actor.adam",
+          "role": "cooperating partner"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "cooperating partner"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "cooperating partner"
+        },
+        {
+          "actor_id": "actor.academy",
+          "role": "authorised training and direct distribution provider"
+        }
+      ],
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The BPI application launch establishes the product offering for subsequent authorised training, direct distribution and dealer demonstrations.",
+          "event_id": "event.bpi_launch"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Separately licensed BPI applications are the subject of the authorised courses, direct distribution and dealer demonstrations. They remain BPI offerings rather than newly created Academy software.",
+          "subject_ids": [
+            "external_product.bpi_suite"
+          ]
+        },
+        {
+          "number": 3,
+          "type": "resource",
+          "description": "The Academy company and its preparation of the initial five-city programme provide the organisation and facilities basis for the public launch.",
+          "event_id": "event.academy"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The Academy publicly launches hands-on Aurelia training, configuration advice and direct ordering; customer-site delivery remains an option and immediate collection depends on stock."
+        },
+        {
+          "number": 2,
+          "type": "result",
+          "description": "Authorised BPI training, direct sales and the qualified dealer programme are operating with defined support responsibilities and access to BPI specialists."
+        }
+      ],
+      "time": {
+        "value": "1978-06-16",
+        "precision": "day"
+      },
+      "agreement_id": "agreement.bpi_offer"
     }
   ]
 }
