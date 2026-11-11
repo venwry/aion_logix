@@ -6963,8 +6963,8 @@
     {
       "id": "change.ssg_abacus_early",
       "category": "data",
-      "title": "5. SSG General Ledger — Use SSG ledger summaries in Abacus 1 and Abacus 2",
-      "reason": "Replace the former BPI scenario with the author-requested independent SSG General Ledger partnership. Use the confirmed story dates: agreement 1977-07-28, team/development 1977-08-12, vanilla CP/M/CBASIC release 1978-01-15 and joint AION C/General Ledger Aurelia launch on the morning of 1978-06-06. SSG retains application ownership and sales; AION funds bounded porting and later networking work, not an equity investment. Preserve stable legacy record IDs for reference and review continuity; displayed identities and product scope are SSG General Ledger. Exact original GL/runtime revisions and speed ratios remain unverified. See review_evidence/ssg-general-ledger for source distinctions, scope and validation.",
+      "title": "5. SSG General Ledger — Correct Abacus 1.x scope and retain later Abacus 2 integration",
+      "reason": "Replace the former BPI scenario with the author-requested independent SSG General Ledger partnership. Use the confirmed story dates: agreement 1977-07-28, team/development 1977-08-12, vanilla CP/M/CBASIC release 1978-01-15 and joint AION C/General Ledger Aurelia launch on the morning of 1978-06-06. SSG retains application ownership and sales; AION funds bounded porting and later networking work, not an equity investment. Preserve stable legacy record IDs for reference and review continuity; displayed identities and product scope are SSG General Ledger. Exact original GL/runtime revisions and speed ratios remain unverified. See review_evidence/ssg-general-ledger for source distinctions, scope and validation. Revised against author feedback change_review.1065e77b-8905-4302-a025-0d92b6b6738f: Abacus 1.x, including the Model II edition, must not claim Pulse access or formatted table/report layouts. Remove the legacy programmatic-file-access claim and printed-form feature as well as correcting chapters 1 and 2. Retain the direct SSG summary-file import into ordinary worksheet cells. Abacus 2 retains its later Pulse and report/layout capabilities; no advanced Abacus 3 storage/query features are moved into 1.x. Original before snapshots and feedback history remain unchanged.",
       "elements": [
         {
           "record_type": "software_edition",
@@ -7163,7 +7163,6 @@
                     "one tab per document",
                     "editor-consistent navigation/editing",
                     "formulas",
-                    "print forms/layout using spreadsheet data",
                     "sparse storage model"
                   ],
                   "portability_contract": {
@@ -7174,10 +7173,9 @@
                     "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
                     "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
                   },
-                  "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
                   "data_interchange": {
                     "partner": "Structured Systems Group",
-                    "contract": "Import versioned SSG disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+                    "contract": "Import versioned SSG General Ledger summary files into ordinary worksheet cells as independent planning inputs. Map named columns, account identifiers, period, currency and decimal amounts; reconcile control totals. Validate parsing, rounding, memory and save/reopen. Close General Ledger before loading Abacus. The import is handled by Abacus itself and requires no scripting runtime, formatted-table object or report-layout engine. There is no direct ledger write-back, live database link or simultaneous application execution.",
                     "export_definition_id": "software_edition.bpi_suite"
                   },
                   "execution_target": "z80_cpm",
@@ -7239,13 +7237,13 @@
               "chapters": [
                 {
                   "number": 1,
-                  "chapter_name": "Spreadsheet and reporting model",
-                  "description": "Abacus stores one sparse worksheet per document, with formulas and editor-consistent navigation. Spreadsheet data can populate printed forms and layouts."
+                  "chapter_name": "Sparse worksheet model",
+                  "description": "Abacus 1.x stores one sparse worksheet per document, with formulas and editor-consistent navigation and editing. Its initial scope is worksheet calculation and printing worksheet results. Formatted table/report layouts and scripting integration belong to later releases."
                 },
                 {
                   "number": 2,
-                  "chapter_name": "File interchange and safe editing",
-                  "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous SSG execution."
+                  "chapter_name": "General Ledger summary-file import",
+                  "description": "Abacus imports versioned disk summaries from {accounting_export_id} into ordinary worksheet cells as independent planning inputs. Map named columns, account identifiers, period, currency and decimal amounts, then reconcile record counts and control totals. Validate parsing, rounding, memory limits and save/reopen. Close General Ledger before loading Abacus; there is no ledger write-back, live database access or simultaneous application execution. This built-in import does not depend on a scripting runtime, formatted-table object or report-layout engine."
                 },
                 {
                   "number": 3,
@@ -7262,7 +7260,7 @@
                 {
                   "key": "accounting_export_id",
                   "ref_id": "software_edition.bpi_suite",
-                  "ref_role": "SSG edition defining the imported accounting summaries"
+                  "ref_role": "SSG General Ledger edition defining the imported accounting summaries"
                 },
                 {
                   "key": "portable_api_id",
@@ -7487,7 +7485,6 @@
                     "one tab per document",
                     "editor-consistent navigation/editing",
                     "formulas",
-                    "print forms/layout using spreadsheet data",
                     "sparse storage model"
                   ],
                   "portability_contract": {
@@ -7498,10 +7495,9 @@
                     "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
                     "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
                   },
-                  "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
                   "data_interchange": {
                     "partner": "Structured Systems Group",
-                    "contract": "Import versioned SSG disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+                    "contract": "Import versioned SSG General Ledger summary files into ordinary worksheet cells as independent planning inputs. Map named columns, account identifiers, period, currency and decimal amounts; reconcile control totals. Validate parsing, rounding, memory and save/reopen. Close General Ledger before loading Abacus. The import is handled by Abacus itself and requires no scripting runtime, formatted-table object or report-layout engine. There is no direct ledger write-back, live database link or simultaneous application execution.",
                     "export_definition_id": "software_edition.bpi_suite"
                   },
                   "execution_target": "z80_cpm",
@@ -7562,13 +7558,13 @@
               "chapters": [
                 {
                   "number": 1,
-                  "chapter_name": "Spreadsheet and reporting model",
-                  "description": "Abacus stores one sparse worksheet per document, with formulas and editor-consistent navigation. Spreadsheet data can populate printed forms and layouts."
+                  "chapter_name": "Sparse worksheet model",
+                  "description": "Abacus 1.x stores one sparse worksheet per document, with formulas and editor-consistent navigation and editing. Its initial scope is worksheet calculation and printing worksheet results. Formatted table/report layouts and scripting integration belong to later releases."
                 },
                 {
                   "number": 2,
-                  "chapter_name": "File interchange and safe editing",
-                  "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous SSG execution."
+                  "chapter_name": "General Ledger summary-file import",
+                  "description": "Abacus imports versioned disk summaries from {accounting_export_id} into ordinary worksheet cells as independent planning inputs. Map named columns, account identifiers, period, currency and decimal amounts, then reconcile record counts and control totals. Validate parsing, rounding, memory limits and save/reopen. Close General Ledger before loading Abacus; there is no ledger write-back, live database access or simultaneous application execution. This built-in import does not depend on a scripting runtime, formatted-table object or report-layout engine."
                 },
                 {
                   "number": 3,
@@ -7585,7 +7581,7 @@
                 {
                   "key": "accounting_export_id",
                   "ref_id": "software_edition.bpi_suite",
-                  "ref_role": "SSG edition defining the imported accounting summaries"
+                  "ref_role": "SSG General Ledger edition defining the imported accounting summaries"
                 },
                 {
                   "key": "portable_api_id",
@@ -15217,6 +15213,247 @@
         "change.ssg_aurelia_edition",
         "change.ssg_network_clients",
         "change.ssg_network_server"
+      ]
+    },
+    {
+      "id": "change.ssg_remove_pilot",
+      "category": "data",
+      "title": "12. SSG General Ledger — Remove the business/accountant pilot event",
+      "reason": "The author requests removal of event.bpi_pilot. Remove the already approved event and its owning development-process step atomically. Preserve the separate compiler, financial-regression, recovery and release checks already specified in the port; do not introduce another pilot event or invent a replacement date. The July agreement, August development start, January CBASIC release and June joint launch dates remain unchanged.",
+      "elements": [
+        {
+          "record_type": "event",
+          "record_id": "event.bpi_pilot",
+          "before": {
+            "id": "event.bpi_pilot",
+            "title": "SSG General Ledger business and accountant pilot programme",
+            "kind": "activity",
+            "description": "Target 10–15 pilot businesses and several accounting practices for the Aurelia C/TUI General Ledger. Reconcile the January CBASIC release and port against identical records, including postings, corrections, period-end totals and reports. Exercise TUI data entry, backup/restore, interruption recovery, disk-full and memory limits. Pilot participation does not itself establish acceptance.",
+            "participant": [
+              {
+                "actor_id": "actor.bpi",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.adam",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "cooperating partner"
+              },
+              {
+                "actor_id": "actor.logix",
+                "role": "cooperating partner"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The native C/TUI candidate is the application under test.",
+                "subject_ids": [
+                  "software_edition.bpi_suite"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "resource",
+                "description": "The released vanilla CP/M/CBASIC application provides the reference results and comparison baseline.",
+                "subject_ids": [
+                  "external_product.ssg_general_ledger_cbasic"
+                ]
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "qualification",
+                "description": "Record reconciled financial results, supported resource limits and unresolved defects. Measure responsiveness on the same Aurelia configuration without inferring speed from language alone; approve only configurations that pass recovery and financial checks.",
+                "subject_ids": [
+                  "software_edition.bpi_suite"
+                ]
+              }
+            ],
+            "time": {
+              "value": "1978-03-20",
+              "precision": "day"
+            }
+          },
+          "after": null
+        },
+        {
+          "record_type": "process",
+          "record_id": "process.ssg_general_ledger_port",
+          "before": {
+            "id": "process.ssg_general_ledger_port",
+            "title": "SSG General Ledger AION C/TUI port",
+            "kind": "development",
+            "description": "Develop and qualify the Aurelia adaptation of SSG’s General Ledger. The existing ledger work supplies the application semantics; AION contributes tools, integration and focused implementation support. The CBASIC release and C/TUI port remain distinct products.",
+            "participant": [
+              {
+                "actor_id": "actor.bpi",
+                "role": "application owner and acceptance authority"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "funded porting and tools engineering"
+              },
+              {
+                "actor_id": "actor.alan_cooper",
+                "role": "application technical lead"
+              },
+              {
+                "actor_id": "actor.letwin",
+                "role": "platform interface liaison"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1977-08-12",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1978-06-06",
+                "precision": "day"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The agreement establishes the port scope and funded responsibilities.",
+                "event_id": "event.bpi_offer"
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Form the joint team and begin development.",
+                "event_id": "event.bpi_cooperation"
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Port ledger logic and explicit decimal routines first; use regression fixtures while SSG independently completes its CBASIC release."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "SSG releases the vanilla CP/M edition; freeze a copy and its runtime for regression and same-machine comparisons.",
+                "event_id": "event.ssg_cbasic_release"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "Integrate bounded TUI forms, lists, account tables, selection controls and buttons with shared editing, Tab navigation, shortcuts and copy/paste. Link measured assembly kernels and use the ROM TUI through documented bank-safe calls."
+              },
+              {
+                "number": 5,
+                "type": "milestone",
+                "description": "Run business and accountant qualification pilots.",
+                "event_id": "event.bpi_pilot"
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "Complete reconciled reports, migration checks, error/recovery tests, resource measurements and instructor preparation. Hand over a reproducible release build for the June 6 joint presentation."
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "Deliver SSG’s native Z80 C/TUI General Ledger adaptation, source/build material, reconciled regression suite and maintenance documentation for its June 6 release. Qualification records identify supported configurations; SSG retains release and application ownership.",
+                "subject_ids": [
+                  "software_edition.bpi_suite"
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "process.ssg_general_ledger_port",
+            "title": "SSG General Ledger AION C/TUI port",
+            "kind": "development",
+            "description": "Develop and qualify the Aurelia adaptation of SSG’s General Ledger. The existing ledger work supplies the application semantics; AION contributes tools, integration and focused implementation support. The CBASIC release and C/TUI port remain distinct products.",
+            "participant": [
+              {
+                "actor_id": "actor.bpi",
+                "role": "application owner and acceptance authority"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "funded porting and tools engineering"
+              },
+              {
+                "actor_id": "actor.alan_cooper",
+                "role": "application technical lead"
+              },
+              {
+                "actor_id": "actor.letwin",
+                "role": "platform interface liaison"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1977-08-12",
+                "precision": "day"
+              },
+              "end": {
+                "value": "1978-06-06",
+                "precision": "day"
+              }
+            },
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "The agreement establishes the port scope and funded responsibilities.",
+                "event_id": "event.bpi_offer"
+              }
+            ],
+            "steps": [
+              {
+                "number": 1,
+                "type": "milestone",
+                "description": "Form the joint team and begin development.",
+                "event_id": "event.bpi_cooperation"
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "Port ledger logic and explicit decimal routines first; use regression fixtures while SSG independently completes its CBASIC release."
+              },
+              {
+                "number": 3,
+                "type": "milestone",
+                "description": "SSG releases the vanilla CP/M edition; freeze a copy and its runtime for regression and same-machine comparisons.",
+                "event_id": "event.ssg_cbasic_release"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "Integrate bounded TUI forms, lists, account tables, selection controls and buttons with shared editing, Tab navigation, shortcuts and copy/paste. Link measured assembly kernels and use the ROM TUI through documented bank-safe calls."
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "Complete reconciled reports, migration checks, error/recovery tests, resource measurements and instructor preparation. Hand over a reproducible release build for the June 6 joint presentation."
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "deliverable",
+                "description": "Deliver SSG’s native Z80 C/TUI General Ledger adaptation, source/build material, reconciled regression suite and maintenance documentation for its June 6 release. Qualification records identify supported configurations; SSG retains release and application ownership.",
+                "subject_ids": [
+                  "software_edition.bpi_suite"
+                ]
+              }
+            ]
+          }
+        }
       ]
     }
   ]

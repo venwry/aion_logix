@@ -1,0 +1,984 @@
+{
+  "id": "change.ssg_abacus_early",
+  "category": "data",
+  "title": "5. SSG General Ledger — Use SSG ledger summaries in Abacus 1 and Abacus 2",
+  "reason": "Replace the former BPI scenario with the author-requested independent SSG General Ledger partnership. Use the confirmed story dates: agreement 1977-07-28, team/development 1977-08-12, vanilla CP/M/CBASIC release 1978-01-15 and joint AION C/General Ledger Aurelia launch on the morning of 1978-06-06. SSG retains application ownership and sales; AION funds bounded porting and later networking work, not an equity investment. Preserve stable legacy record IDs for reference and review continuity; displayed identities and product scope are SSG General Ledger. Exact original GL/runtime revisions and speed ratios remain unverified. See review_evidence/ssg-general-ledger for source distinctions, scope and validation.",
+  "elements": [
+    {
+      "record_type": "software_edition",
+      "record_id": "software_edition.abacus_1",
+      "before": {
+        "id": "software_edition.abacus_1",
+        "name": "Abacus 1.x (CP/M edition)",
+        "version": "1.x",
+        "edition": "CP/M",
+        "family_name": "Abacus",
+        "description": "Abacus 1.x (CP/M edition)",
+        "provider_actor_ids": [
+          "actor.aion"
+        ],
+        "technology_ids": [
+          "technology.abacus_sparse_model",
+          "technology.logix_tui_standard",
+          "technology.logix_c_api",
+          "technology.logix_display_api",
+          "technology.logix_tui_keyboard_standard"
+        ],
+        "composition_history": [
+          {
+            "version_number": 1,
+            "description": "Product definition revision 1",
+            "effective_from": {
+              "kind": "event",
+              "event_id": "event.aurelia_launch"
+            },
+            "effective_until": {
+              "kind": "simulation_end"
+            },
+            "technical_definition": {
+              "features": [
+                "one tab per document",
+                "editor-consistent navigation/editing",
+                "formulas",
+                "print forms/layout using spreadsheet data",
+                "sparse storage model"
+              ],
+              "portability_contract": {
+                "api_id": "technology.logix_c_api",
+                "shared_logic": "Separate application/document algorithms from platform adapters.",
+                "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+              },
+              "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
+              "data_interchange": {
+                "partner": "BPI Systems",
+                "contract": "Import versioned BPI disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+                "export_definition_id": "software_edition.bpi_suite"
+              },
+              "execution_target": "z80_cpm",
+              "role": "application",
+              "platform_support": [
+                {
+                  "computer_id": "device.base_computer.aurelia"
+                },
+                {
+                  "computer_id": "device.base_computer.aurelia_plus"
+                }
+              ],
+              "minimum_resources": {
+                "installed_ram_kb": 48,
+                "application_ram_bytes": null,
+                "rom_bytes": null
+              },
+              "dependency_ids": [
+                "software_edition.cpm_aurelia"
+              ],
+              "distribution": {
+                "medium": "diskette",
+                "fulfillment": "edition_delivery"
+              }
+            },
+            "composition_definition": [
+              {
+                "id": "line_1",
+                "target": {
+                  "record_id": "base_part.software.abacus_1.software_documentation"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_2",
+                "target": {
+                  "record_id": "base_part.software.abacus_1.license_document"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_3",
+                "target": {
+                  "record_id": "base_part.software.abacus_1.installation_media"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_4",
+                "target": {
+                  "record_id": "base_part.software.abacus_1.software_packaging"
+                },
+                "quantity": 1
+              }
+            ]
+          }
+        ],
+        "technical_specification": {
+          "chapters": [
+            {
+              "number": 1,
+              "chapter_name": "Spreadsheet and reporting model",
+              "description": "Abacus stores one sparse worksheet per document, with formulas and editor-consistent navigation. Spreadsheet data can populate printed forms and layouts."
+            },
+            {
+              "number": 2,
+              "chapter_name": "File interchange and safe editing",
+              "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous BPI execution."
+            },
+            {
+              "number": 3,
+              "chapter_name": "Portable implementation",
+              "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+            },
+            {
+              "number": 4,
+              "chapter_name": "Execution and delivery",
+              "description": "This application suite targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+            }
+          ],
+          "parameters": [
+            {
+              "key": "accounting_export_id",
+              "ref_id": "software_edition.bpi_suite",
+              "ref_role": "BPI edition defining the imported accounting summaries"
+            },
+            {
+              "key": "portable_api_id",
+              "ref_id": "technology.logix_c_api",
+              "ref_role": "Shared C service contract used by this edition"
+            },
+            {
+              "key": "host_base_computer_aurelia",
+              "ref_id": "device.base_computer.aurelia",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "host_base_computer_aurelia_plus",
+              "ref_id": "device.base_computer.aurelia_plus",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "minimum_ram_kib",
+              "value": 48
+            },
+            {
+              "key": "runtime_cpm_aurelia",
+              "ref_id": "software_edition.cpm_aurelia",
+              "ref_role": "Runtime prerequisite for this software edition"
+            }
+          ]
+        }
+      },
+      "after": {
+        "id": "software_edition.abacus_1",
+        "name": "Abacus 1.x (CP/M edition)",
+        "version": "1.x",
+        "edition": "CP/M",
+        "family_name": "Abacus",
+        "description": "Abacus 1.x (CP/M edition)",
+        "provider_actor_ids": [
+          "actor.aion"
+        ],
+        "technology_ids": [
+          "technology.abacus_sparse_model",
+          "technology.logix_tui_standard",
+          "technology.logix_c_api",
+          "technology.logix_display_api",
+          "technology.logix_tui_keyboard_standard"
+        ],
+        "composition_history": [
+          {
+            "version_number": 1,
+            "description": "Product definition revision 1",
+            "effective_from": {
+              "kind": "event",
+              "event_id": "event.aurelia_launch"
+            },
+            "effective_until": {
+              "kind": "simulation_end"
+            },
+            "technical_definition": {
+              "features": [
+                "one tab per document",
+                "editor-consistent navigation/editing",
+                "formulas",
+                "print forms/layout using spreadsheet data",
+                "sparse storage model"
+              ],
+              "portability_contract": {
+                "api_id": "technology.logix_c_api",
+                "shared_logic": "Separate application/document algorithms from platform adapters.",
+                "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+              },
+              "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
+              "data_interchange": {
+                "partner": "Structured Systems Group",
+                "contract": "Import versioned SSG disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+                "export_definition_id": "software_edition.bpi_suite"
+              },
+              "execution_target": "z80_cpm",
+              "role": "application",
+              "platform_support": [
+                {
+                  "computer_id": "device.base_computer.aurelia"
+                },
+                {
+                  "computer_id": "device.base_computer.aurelia_plus"
+                }
+              ],
+              "minimum_resources": {
+                "installed_ram_kb": 48,
+                "application_ram_bytes": null,
+                "rom_bytes": null
+              },
+              "dependency_ids": [
+                "software_edition.cpm_aurelia"
+              ],
+              "distribution": {
+                "medium": "diskette",
+                "fulfillment": "edition_delivery"
+              }
+            },
+            "composition_definition": [
+              {
+                "id": "line_1",
+                "target": {
+                  "record_id": "base_part.software.abacus_1.software_documentation"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_2",
+                "target": {
+                  "record_id": "base_part.software.abacus_1.license_document"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_3",
+                "target": {
+                  "record_id": "base_part.software.abacus_1.installation_media"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_4",
+                "target": {
+                  "record_id": "base_part.software.abacus_1.software_packaging"
+                },
+                "quantity": 1
+              }
+            ]
+          }
+        ],
+        "technical_specification": {
+          "chapters": [
+            {
+              "number": 1,
+              "chapter_name": "Spreadsheet and reporting model",
+              "description": "Abacus stores one sparse worksheet per document, with formulas and editor-consistent navigation. Spreadsheet data can populate printed forms and layouts."
+            },
+            {
+              "number": 2,
+              "chapter_name": "File interchange and safe editing",
+              "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous SSG execution."
+            },
+            {
+              "number": 3,
+              "chapter_name": "Portable implementation",
+              "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+            },
+            {
+              "number": 4,
+              "chapter_name": "Execution and delivery",
+              "description": "This application suite targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+            }
+          ],
+          "parameters": [
+            {
+              "key": "accounting_export_id",
+              "ref_id": "software_edition.bpi_suite",
+              "ref_role": "SSG edition defining the imported accounting summaries"
+            },
+            {
+              "key": "portable_api_id",
+              "ref_id": "technology.logix_c_api",
+              "ref_role": "Shared C service contract used by this edition"
+            },
+            {
+              "key": "host_base_computer_aurelia",
+              "ref_id": "device.base_computer.aurelia",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "host_base_computer_aurelia_plus",
+              "ref_id": "device.base_computer.aurelia_plus",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "minimum_ram_kib",
+              "value": 48
+            },
+            {
+              "key": "runtime_cpm_aurelia",
+              "ref_id": "software_edition.cpm_aurelia",
+              "ref_role": "Runtime prerequisite for this software edition"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "record_type": "software_edition",
+      "record_id": "software_edition.abacus_1.model_ii",
+      "before": {
+        "id": "software_edition.abacus_1.model_ii",
+        "name": "Abacus 1.x (CP/M / Tandy Model II edition)",
+        "version": "1.x",
+        "edition": "CP/M / Tandy Model II",
+        "family_name": "Abacus",
+        "description": "Abacus 1.x (CP/M / Tandy Model II edition)",
+        "provider_actor_ids": [
+          "actor.aion"
+        ],
+        "technology_ids": [
+          "technology.abacus_sparse_model",
+          "technology.logix_tui_standard",
+          "technology.logix_c_api",
+          "technology.logix_display_api",
+          "technology.logix_tui_keyboard_standard"
+        ],
+        "composition_history": [
+          {
+            "version_number": 1,
+            "description": "Product definition revision 1",
+            "effective_from": {
+              "kind": "event",
+              "event_id": "event.tandy_release"
+            },
+            "effective_until": {
+              "kind": "simulation_end"
+            },
+            "technical_definition": {
+              "features": [
+                "one tab per document",
+                "editor-consistent navigation/editing",
+                "formulas",
+                "print forms/layout using spreadsheet data",
+                "sparse storage model"
+              ],
+              "portability_contract": {
+                "api_id": "technology.logix_c_api",
+                "shared_logic": "Separate application/document algorithms from platform adapters.",
+                "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+              },
+              "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
+              "data_interchange": {
+                "partner": "BPI Systems",
+                "contract": "Import versioned BPI disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+                "export_definition_id": "software_edition.bpi_suite"
+              },
+              "execution_target": "z80_cpm",
+              "role": "application",
+              "platform_support": [
+                {
+                  "computer_id": "external_product.trs80_model_ii"
+                }
+              ],
+              "minimum_resources": {
+                "installed_ram_kb": 64,
+                "application_ram_bytes": null,
+                "rom_bytes": null
+              },
+              "dependency_ids": [
+                "software_edition.cpm_model_ii"
+              ],
+              "distribution": {
+                "medium": "diskette",
+                "fulfillment": "edition_delivery",
+                "disk_format": "Model II-compatible 8-inch",
+                "channel": "Radio Shack / Tandy OEM distribution"
+              }
+            },
+            "composition_definition": [
+              {
+                "id": "line_1",
+                "target": {
+                  "record_id": "base_part.edition.abacus_1.model_ii.software_documentation"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_2",
+                "target": {
+                  "record_id": "base_part.edition.abacus_1.model_ii.license_document"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_3",
+                "target": {
+                  "record_id": "base_part.edition.abacus_1.model_ii.installation_media"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_4",
+                "target": {
+                  "record_id": "base_part.edition.abacus_1.model_ii.software_packaging"
+                },
+                "quantity": 1
+              }
+            ]
+          }
+        ],
+        "technical_specification": {
+          "chapters": [
+            {
+              "number": 1,
+              "chapter_name": "Spreadsheet and reporting model",
+              "description": "Abacus stores one sparse worksheet per document, with formulas and editor-consistent navigation. Spreadsheet data can populate printed forms and layouts."
+            },
+            {
+              "number": 2,
+              "chapter_name": "File interchange and safe editing",
+              "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous BPI execution."
+            },
+            {
+              "number": 3,
+              "chapter_name": "Portable implementation",
+              "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+            },
+            {
+              "number": 4,
+              "chapter_name": "Execution and delivery",
+              "description": "This application suite targets Z80/CP/M on {host_trs80_model_ii}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_model_ii}. The edition is delivered on diskette. Media use {disk_format} format through Radio Shack / Tandy OEM distribution. Application workspace and ROM footprint remain unspecified."
+            }
+          ],
+          "parameters": [
+            {
+              "key": "accounting_export_id",
+              "ref_id": "software_edition.bpi_suite",
+              "ref_role": "BPI edition defining the imported accounting summaries"
+            },
+            {
+              "key": "portable_api_id",
+              "ref_id": "technology.logix_c_api",
+              "ref_role": "Shared C service contract used by this edition"
+            },
+            {
+              "key": "host_trs80_model_ii",
+              "ref_id": "external_product.trs80_model_ii",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "minimum_ram_kib",
+              "value": 64
+            },
+            {
+              "key": "runtime_cpm_model_ii",
+              "ref_id": "software_edition.cpm_model_ii",
+              "ref_role": "Runtime prerequisite for this software edition"
+            },
+            {
+              "key": "disk_format",
+              "value": "Model II-compatible 8-inch"
+            }
+          ]
+        }
+      },
+      "after": {
+        "id": "software_edition.abacus_1.model_ii",
+        "name": "Abacus 1.x (CP/M / Tandy Model II edition)",
+        "version": "1.x",
+        "edition": "CP/M / Tandy Model II",
+        "family_name": "Abacus",
+        "description": "Abacus 1.x (CP/M / Tandy Model II edition)",
+        "provider_actor_ids": [
+          "actor.aion"
+        ],
+        "technology_ids": [
+          "technology.abacus_sparse_model",
+          "technology.logix_tui_standard",
+          "technology.logix_c_api",
+          "technology.logix_display_api",
+          "technology.logix_tui_keyboard_standard"
+        ],
+        "composition_history": [
+          {
+            "version_number": 1,
+            "description": "Product definition revision 1",
+            "effective_from": {
+              "kind": "event",
+              "event_id": "event.tandy_release"
+            },
+            "effective_until": {
+              "kind": "simulation_end"
+            },
+            "technical_definition": {
+              "features": [
+                "one tab per document",
+                "editor-consistent navigation/editing",
+                "formulas",
+                "print forms/layout using spreadsheet data",
+                "sparse storage model"
+              ],
+              "portability_contract": {
+                "api_id": "technology.logix_c_api",
+                "shared_logic": "Separate application/document algorithms from platform adapters.",
+                "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+              },
+              "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
+              "data_interchange": {
+                "partner": "Structured Systems Group",
+                "contract": "Import versioned SSG disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+                "export_definition_id": "software_edition.bpi_suite"
+              },
+              "execution_target": "z80_cpm",
+              "role": "application",
+              "platform_support": [
+                {
+                  "computer_id": "external_product.trs80_model_ii"
+                }
+              ],
+              "minimum_resources": {
+                "installed_ram_kb": 64,
+                "application_ram_bytes": null,
+                "rom_bytes": null
+              },
+              "dependency_ids": [
+                "software_edition.cpm_model_ii"
+              ],
+              "distribution": {
+                "medium": "diskette",
+                "fulfillment": "edition_delivery",
+                "disk_format": "Model II-compatible 8-inch",
+                "channel": "Radio Shack / Tandy OEM distribution"
+              }
+            },
+            "composition_definition": [
+              {
+                "id": "line_1",
+                "target": {
+                  "record_id": "base_part.edition.abacus_1.model_ii.software_documentation"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_2",
+                "target": {
+                  "record_id": "base_part.edition.abacus_1.model_ii.license_document"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_3",
+                "target": {
+                  "record_id": "base_part.edition.abacus_1.model_ii.installation_media"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_4",
+                "target": {
+                  "record_id": "base_part.edition.abacus_1.model_ii.software_packaging"
+                },
+                "quantity": 1
+              }
+            ]
+          }
+        ],
+        "technical_specification": {
+          "chapters": [
+            {
+              "number": 1,
+              "chapter_name": "Spreadsheet and reporting model",
+              "description": "Abacus stores one sparse worksheet per document, with formulas and editor-consistent navigation. Spreadsheet data can populate printed forms and layouts."
+            },
+            {
+              "number": 2,
+              "chapter_name": "File interchange and safe editing",
+              "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous SSG execution."
+            },
+            {
+              "number": 3,
+              "chapter_name": "Portable implementation",
+              "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+            },
+            {
+              "number": 4,
+              "chapter_name": "Execution and delivery",
+              "description": "This application suite targets Z80/CP/M on {host_trs80_model_ii}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_model_ii}. The edition is delivered on diskette. Media use {disk_format} format through Radio Shack / Tandy OEM distribution. Application workspace and ROM footprint remain unspecified."
+            }
+          ],
+          "parameters": [
+            {
+              "key": "accounting_export_id",
+              "ref_id": "software_edition.bpi_suite",
+              "ref_role": "SSG edition defining the imported accounting summaries"
+            },
+            {
+              "key": "portable_api_id",
+              "ref_id": "technology.logix_c_api",
+              "ref_role": "Shared C service contract used by this edition"
+            },
+            {
+              "key": "host_trs80_model_ii",
+              "ref_id": "external_product.trs80_model_ii",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "minimum_ram_kib",
+              "value": 64
+            },
+            {
+              "key": "runtime_cpm_model_ii",
+              "ref_id": "software_edition.cpm_model_ii",
+              "ref_role": "Runtime prerequisite for this software edition"
+            },
+            {
+              "key": "disk_format",
+              "value": "Model II-compatible 8-inch"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "record_type": "software_edition",
+      "record_id": "software_edition.abacus_2",
+      "before": {
+        "id": "software_edition.abacus_2",
+        "name": "Abacus 2.0 (CP/M edition)",
+        "version": "2.0",
+        "edition": "CP/M",
+        "family_name": "Abacus",
+        "description": "Abacus 2.0 (CP/M edition)",
+        "provider_actor_ids": [
+          "actor.aion"
+        ],
+        "technology_ids": [
+          "technology.logix_c_api",
+          "technology.logix_display_api",
+          "technology.logix_tui_standard",
+          "technology.logix_tui_keyboard_standard"
+        ],
+        "composition_history": [
+          {
+            "version_number": 1,
+            "description": "Product definition revision 1",
+            "effective_from": {
+              "kind": "event",
+              "event_id": "event.plus_launch"
+            },
+            "effective_until": {
+              "kind": "simulation_end"
+            },
+            "technical_definition": {
+              "features": [
+                "text-mode vertical or horizontal bar charts",
+                "report/document layouts",
+                "layouts can use spreadsheet field values",
+                "layouts can contain charts",
+                "one-off and repeating sections"
+              ],
+              "portability_contract": {
+                "api_id": "technology.logix_c_api",
+                "shared_logic": "Separate application/document algorithms from platform adapters.",
+                "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+              },
+              "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
+              "data_interchange": {
+                "partner": "BPI Systems",
+                "contract": "Import versioned BPI disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+                "export_definition_id": "software_edition.bpi_suite"
+              },
+              "execution_target": "z80_cpm",
+              "role": "application",
+              "platform_support": [
+                {
+                  "computer_id": "device.base_computer.aurelia"
+                },
+                {
+                  "computer_id": "device.base_computer.aurelia_plus"
+                }
+              ],
+              "minimum_resources": {
+                "installed_ram_kb": 48,
+                "application_ram_bytes": null,
+                "rom_bytes": null
+              },
+              "dependency_ids": [
+                "software_edition.cpm_aurelia"
+              ],
+              "distribution": {
+                "medium": "diskette",
+                "fulfillment": "edition_delivery"
+              }
+            },
+            "composition_definition": [
+              {
+                "id": "line_1",
+                "target": {
+                  "record_id": "base_part.software.abacus_2.software_documentation"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_2",
+                "target": {
+                  "record_id": "base_part.software.abacus_2.license_document"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_3",
+                "target": {
+                  "record_id": "base_part.software.abacus_2.installation_media"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_4",
+                "target": {
+                  "record_id": "base_part.software.abacus_2.software_packaging"
+                },
+                "quantity": 1
+              }
+            ]
+          }
+        ],
+        "technical_specification": {
+          "chapters": [
+            {
+              "number": 1,
+              "chapter_name": "Spreadsheet and reporting model",
+              "description": "Abacus combines spreadsheet fields with report/document layouts containing text-mode horizontal or vertical bar charts and one-off or repeating sections."
+            },
+            {
+              "number": 2,
+              "chapter_name": "File interchange and safe editing",
+              "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous BPI execution."
+            },
+            {
+              "number": 3,
+              "chapter_name": "Portable implementation",
+              "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+            },
+            {
+              "number": 4,
+              "chapter_name": "Execution and delivery",
+              "description": "This application suite targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+            }
+          ],
+          "parameters": [
+            {
+              "key": "accounting_export_id",
+              "ref_id": "software_edition.bpi_suite",
+              "ref_role": "BPI edition defining the imported accounting summaries"
+            },
+            {
+              "key": "portable_api_id",
+              "ref_id": "technology.logix_c_api",
+              "ref_role": "Shared C service contract used by this edition"
+            },
+            {
+              "key": "host_base_computer_aurelia",
+              "ref_id": "device.base_computer.aurelia",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "host_base_computer_aurelia_plus",
+              "ref_id": "device.base_computer.aurelia_plus",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "minimum_ram_kib",
+              "value": 48
+            },
+            {
+              "key": "runtime_cpm_aurelia",
+              "ref_id": "software_edition.cpm_aurelia",
+              "ref_role": "Runtime prerequisite for this software edition"
+            }
+          ]
+        }
+      },
+      "after": {
+        "id": "software_edition.abacus_2",
+        "name": "Abacus 2.0 (CP/M edition)",
+        "version": "2.0",
+        "edition": "CP/M",
+        "family_name": "Abacus",
+        "description": "Abacus 2.0 (CP/M edition)",
+        "provider_actor_ids": [
+          "actor.aion"
+        ],
+        "technology_ids": [
+          "technology.logix_c_api",
+          "technology.logix_display_api",
+          "technology.logix_tui_standard",
+          "technology.logix_tui_keyboard_standard"
+        ],
+        "composition_history": [
+          {
+            "version_number": 1,
+            "description": "Product definition revision 1",
+            "effective_from": {
+              "kind": "event",
+              "event_id": "event.plus_launch"
+            },
+            "effective_until": {
+              "kind": "simulation_end"
+            },
+            "technical_definition": {
+              "features": [
+                "text-mode vertical or horizontal bar charts",
+                "report/document layouts",
+                "layouts can use spreadsheet field values",
+                "layouts can contain charts",
+                "one-off and repeating sections"
+              ],
+              "portability_contract": {
+                "api_id": "technology.logix_c_api",
+                "shared_logic": "Separate application/document algorithms from platform adapters.",
+                "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+              },
+              "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
+              "data_interchange": {
+                "partner": "Structured Systems Group",
+                "contract": "Import versioned SSG disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+                "export_definition_id": "software_edition.bpi_suite"
+              },
+              "execution_target": "z80_cpm",
+              "role": "application",
+              "platform_support": [
+                {
+                  "computer_id": "device.base_computer.aurelia"
+                },
+                {
+                  "computer_id": "device.base_computer.aurelia_plus"
+                }
+              ],
+              "minimum_resources": {
+                "installed_ram_kb": 48,
+                "application_ram_bytes": null,
+                "rom_bytes": null
+              },
+              "dependency_ids": [
+                "software_edition.cpm_aurelia"
+              ],
+              "distribution": {
+                "medium": "diskette",
+                "fulfillment": "edition_delivery"
+              }
+            },
+            "composition_definition": [
+              {
+                "id": "line_1",
+                "target": {
+                  "record_id": "base_part.software.abacus_2.software_documentation"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_2",
+                "target": {
+                  "record_id": "base_part.software.abacus_2.license_document"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_3",
+                "target": {
+                  "record_id": "base_part.software.abacus_2.installation_media"
+                },
+                "quantity": 1
+              },
+              {
+                "id": "line_4",
+                "target": {
+                  "record_id": "base_part.software.abacus_2.software_packaging"
+                },
+                "quantity": 1
+              }
+            ]
+          }
+        ],
+        "technical_specification": {
+          "chapters": [
+            {
+              "number": 1,
+              "chapter_name": "Spreadsheet and reporting model",
+              "description": "Abacus combines spreadsheet fields with report/document layouts containing text-mode horizontal or vertical bar charts and one-off or repeating sections."
+            },
+            {
+              "number": 2,
+              "chapter_name": "File interchange and safe editing",
+              "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous SSG execution."
+            },
+            {
+              "number": 3,
+              "chapter_name": "Portable implementation",
+              "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+            },
+            {
+              "number": 4,
+              "chapter_name": "Execution and delivery",
+              "description": "This application suite targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+            }
+          ],
+          "parameters": [
+            {
+              "key": "accounting_export_id",
+              "ref_id": "software_edition.bpi_suite",
+              "ref_role": "SSG edition defining the imported accounting summaries"
+            },
+            {
+              "key": "portable_api_id",
+              "ref_id": "technology.logix_c_api",
+              "ref_role": "Shared C service contract used by this edition"
+            },
+            {
+              "key": "host_base_computer_aurelia",
+              "ref_id": "device.base_computer.aurelia",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "host_base_computer_aurelia_plus",
+              "ref_id": "device.base_computer.aurelia_plus",
+              "ref_role": "Supported execution host for this edition"
+            },
+            {
+              "key": "minimum_ram_kib",
+              "value": 48
+            },
+            {
+              "key": "runtime_cpm_aurelia",
+              "ref_id": "software_edition.cpm_aurelia",
+              "ref_role": "Runtime prerequisite for this software edition"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "depends_on_change_ids": [
+    "change.ssg_agreement",
+    "change.ssg_aurelia_edition"
+  ]
+}
