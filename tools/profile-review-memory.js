@@ -15,7 +15,7 @@ const overrides=new Map();
 for(const proposal of pinned)for(const e of proposal.elements){
  const path='data_foundation/'+e.record_type+'.json';
  if(!overrides.has(path))overrides.set(path,JSON.parse(fs.readFileSync(path)));
- const rows=overrides.get(path)[e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(i>=0)rows[i]=e.before;else rows.push(e.before);
+ const rows=overrides.get(path)[e.record_type],i=rows.findIndex(r=>r.id===e.record_id);if(e.before===null){if(i>=0)rows.splice(i,1);}else if(i>=0)rows[i]=e.before;else rows.push(e.before);
 }
 overrides.set('data_storytelling/change.json',{change:pinned});
 const runs=[];

@@ -37,13 +37,15 @@ function approveChanges(original, entries, actor, staged=false) {
  if(!Array.isArray(entries)||!entries.length||entries.length>1000)bad('Select between 1 and 1000 proposals.');
  const files=staged?original:stageFiles(original),index=new Map(records(files).map(r=>[r.id,r]));
  const pending=get(files,'change'),decisions=get(files,'authorization_decision'),auth=get(files,'authorization');
+ const previousDecisions=files['data_storytelling/authorization_decision_index.json']?.authorization_decision_index||[];
+ const allDecisions=()=>[...previousDecisions,...decisions];
  const seen=new Set(),targetIds=new Set(),selected=[];
  for(const entry of entries){
   if(!entry||typeof entry.change_id!=='string'||typeof entry.proposal_sha256!=='string'||seen.has(entry.change_id))bad('Invalid or duplicate proposal selection.');
   seen.add(entry.change_id);
   const proposal=pending.find(p=>p.id===entry.change_id);
   if(!proposal){
-   if(decisions.some(d=>d.action==='approve_change'&&d.change_id===entry.change_id&&d.proposal_sha256===entry.proposal_sha256))continue;
+   if(allDecisions().some(d=>d.action==='approve_change'&&d.change_id===entry.change_id&&d.proposal_sha256===entry.proposal_sha256))continue;
    fail('A selected proposal is no longer pending. Reload and review the changes.');
   }
   if(hash(proposal)!==entry.proposal_sha256)fail('A selected proposal has changed. Reload and review it again.');
@@ -64,7 +66,7 @@ function approveChanges(original, entries, actor, staged=false) {
  for(const proposal of selected){
   const dependencies=proposal.depends_on_change_ids||[];
   if(!Array.isArray(dependencies)||dependencies.some(id=>typeof id!=='string'||id===proposal.id))bad('Invalid proposal dependencies.');
-  for(const id of dependencies)if(!selected.some(p=>p.id===id)&&!decisions.some(d=>d.action==='approve_change'&&d.change_id===id))fail('Select required proposal '+id+' before authorization.');
+  for(const id of dependencies)if(!selected.some(p=>p.id===id)&&!allDecisions().some(d=>d.action==='approve_change'&&d.change_id===id))fail('Select required proposal '+id+' before authorization.');
  }
  // Apply every selected proposal before validating, allowing references between new records.
  for(const proposal of selected){
@@ -98,9 +100,10 @@ function saveReview(original,request,actor){
  }
  let files=stageFiles(original),changed=false;
  const pending=get(files,'change'),decisions=get(files,'authorization_decision'),removed=[];
+ const allDecisions=()=>[...(files['data_storytelling/authorization_decision_index.json']?.authorization_decision_index||[]),...decisions];
  for(const entry of removals){
   const proposal=pending.find(p=>p.id===entry.change_id);
-  if(!proposal){if(decisions.some(d=>d.action==='remove_change'&&d.change_id===entry.change_id&&d.proposal_sha256===entry.proposal_sha256))continue;fail('A proposal selected for removal is no longer pending. Reload and review the changes.');}
+  if(!proposal){if(allDecisions().some(d=>d.action==='remove_change'&&d.change_id===entry.change_id&&d.proposal_sha256===entry.proposal_sha256))continue;fail('A proposal selected for removal is no longer pending. Reload and review the changes.');}
   if(hash(proposal)!==entry.proposal_sha256)fail('A proposal selected for removal has changed. Reload and review it again.');
   removed.push(proposal);
  }

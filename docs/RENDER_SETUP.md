@@ -37,8 +37,7 @@ allocations and JSON parsing. Preserve that setting if defining `NODE_OPTIONS`
 explicitly in Render; increasing the JavaScript heap can exhaust the instance
 before Node reports a heap error.
 
-The saving backend reads GitHub blobs as raw JSON, stages one mutable copy per
-review, and shares existing append-only audit entries without modifying them.
+The saving backend reads GitHub blobs as raw JSON sequentially and stages one mutable copy per review. Existing decisions remain in the immutable `data_storytelling/authorization_decision.json` archive. A compact `authorization_decision_index.json` records each decision’s identity, action, proposal hash and archive path; future decisions are written individually under `data_storytelling/authorization_decisions/`. The backend loads the index instead of the historical archive for save-time dependency and retry checks. Each new shard, the index and changed foundation files are committed atomically. Historical full snapshots are preserved and can be recovered through their indexed paths. Do not remove or manually edit the index or referenced archive files.
 It streams changed files into separate GitHub blobs and builds a small tree of
 blob SHAs. One commit and one non-forced branch update still publish the entire
 review atomically. Failed uploads cannot partially apply the review. The
@@ -59,8 +58,7 @@ Run the read-only memory probe with the production heap limit:
 node --max-old-space-size=160 tools/profile-review-memory.js
 ```
 
-It reconstructs the three composition-cleanup proposals in memory and exercises
-three saves against mocked GitHub transport with the current audit history.
+The default probe fixture is historical and may need replacement when schemas change. Pass `--proposals PATH` with a compatible proposal fixture to exercise three saves against mocked GitHub transport.
 It writes no files and sends no network requests. Its 480 MB RSS ceiling leaves
 headroom below the deployment limit; peak usage depends on Node and the history
 size. Regression tests also cover exact streamed JSON bytes, atomic persistence,
