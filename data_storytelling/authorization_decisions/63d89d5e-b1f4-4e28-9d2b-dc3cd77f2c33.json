@@ -1,0 +1,1858 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.7d9cbf1d-4af3-4f19-9483-2ad3ff0d4833",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-11T18:23:28.011Z",
+      "change_id": "change.ssg_network_clients",
+      "proposal_sha256": "5c5e081c365f4b564ecd20ef9da1db1c1a17d76b1cddb32bfa407c98ad1a5387",
+      "proposal": {
+        "id": "change.ssg_network_clients",
+        "category": "data",
+        "title": "8. SSG General Ledger — Scope network clients to SSG General Ledger",
+        "reason": "Replace the former BPI scenario with the author-requested independent SSG General Ledger partnership. Use the confirmed story dates: agreement 1977-07-28, team/development 1977-08-12, vanilla CP/M/CBASIC release 1978-01-15 and joint AION C/General Ledger Aurelia launch on the morning of 1978-06-06. SSG retains application ownership and sales; AION funds bounded porting and later networking work, not an equity investment. Preserve stable legacy record IDs for reference and review continuity; displayed identities and product scope are SSG General Ledger. Exact original GL/runtime revisions and speed ratios remain unverified. See review_evidence/ssg-general-ledger for source distinctions, scope and validation.",
+        "elements": [
+          {
+            "record_type": "software_edition",
+            "record_id": "software_edition.bpi_client_server",
+            "before": {
+              "id": "software_edition.bpi_client_server",
+              "name": "BPI client-server (CP/M Client edition)",
+              "version": "client-server",
+              "edition": "CP/M Client",
+              "family_name": "BPI",
+              "description": "BPI client-server (CP/M Client edition)",
+              "provider_actor_ids": [
+                "actor.bpi"
+              ],
+              "technology_ids": [
+                "technology.logix_c_api",
+                "technology.logix_display_api",
+                "technology.logix_tui_standard",
+                "technology.logix_tui_keyboard_standard"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "architecture": {
+                      "client_server": true,
+                      "server": "device.base_computer.artemis_pro",
+                      "database": "Relational engine with the specified transaction, logging, checkpoint and recovery design; robustness and capacity remain subject to acceptance testing.",
+                      "network_id": "technology.logix_tcpip_lan",
+                      "server_edition_id": "software_edition.bpi_client_server.era_server"
+                    },
+                    "portability_contract": {
+                      "api_id": "technology.logix_c_api",
+                      "shared_logic": "Separate application/document algorithms from platform adapters.",
+                      "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                      "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                      "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                      "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                    },
+                    "specification": {
+                      "implementation_design": {
+                        "title": "BPI transactional client/server v1",
+                        "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
+                        "transactions": {
+                          "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
+                          "commit": "Append checked log records and a commit marker, force them to durable storage, then acknowledge. Apply/replay committed changes idempotently.",
+                          "recovery": "On startup validate checksums and recover committed log records; incomplete transactions never become visible. Use shadow page/index replacement or another explicitly validated torn-write-safe method.",
+                          "failure": "Do not claim durable commit until disk/controller completion semantics are proven; no battery-backed cache is assumed.",
+                          "log_format": "Redo-only changed-record/page after-images with transaction ID, sequence, length and checksum; the commit marker covers transaction record count and checksum. Persist duplicate-suppression outcomes in the same transaction.",
+                          "buffer_policy": "Do not write uncommitted changes to database files (no-steal); cap transaction size to available transaction buffers.",
+                          "checkpoint": "Write replacement pages and indexes to new locations, force them, then alternate checksummed generation-numbered root/checkpoint records. Retain the preceding valid root and necessary redo log until the new checkpoint is durable."
+                        },
+                        "protocol": {
+                          "transport": "Length-framed requests over TCP; bounded messages and chunked results.",
+                          "fields": [
+                            "protocol version",
+                            "authenticated session",
+                            "durable request ID",
+                            "operation",
+                            "payload length",
+                            "payload"
+                          ],
+                          "operations": [
+                            "login",
+                            "lookup",
+                            "paged query",
+                            "validate draft",
+                            "post invoice/payment/journal",
+                            "transaction status",
+                            "report job",
+                            "logout"
+                          ],
+                          "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same payment twice."
+                        },
+                        "data_integrity": [
+                          "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
+                          "Record currency, rounding, posting dates, account periods and unique document IDs.",
+                          "Cross-module posting is atomic and produces an append-only audit record."
+                        ],
+                        "operations": [
+                          "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
+                          "Bounded log growth, disk-full handling and operator-visible recovery status",
+                          "Plan backups and report traffic around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; slower admitted hosts limit the whole network."
+                        ],
+                        "initial_limits": {
+                          "server_ram_kb": 512,
+                          "concurrent_sessions_target": 4,
+                          "client_policy": "Bounded pages of results and forms; no entire-table download or whole-document duplication."
+                        },
+                        "acceptance_tests": [
+                          "Power loss before/after commit acknowledgement",
+                          "Lost acknowledgement and duplicate retry",
+                          "Concurrent invoice/payment updates",
+                          "Full disk, corrupt log tail and failed backup restore",
+                          "48 KB Aurelia client resource budget"
+                        ]
+                      }
+                    },
+                    "execution_target": "z80_cpm",
+                    "role": "client",
+                    "platform_support": [
+                      {
+                        "computer_id": "device.base_computer.aurelia"
+                      },
+                      {
+                        "computer_id": "device.base_computer.aurelia_plus"
+                      }
+                    ],
+                    "minimum_resources": {
+                      "installed_ram_kb": 48,
+                      "application_ram_bytes": null,
+                      "rom_bytes": null
+                    },
+                    "dependency_ids": [
+                      "software_edition.cpm_aurelia_networking"
+                    ],
+                    "distribution": {
+                      "medium": "diskette",
+                      "fulfillment": "included_in_package",
+                      "installation": "client_startup_diskette",
+                      "network_operation": "Start under the existing networking OS, connect to server, and load further modules/data over the network; bootstrap remains local.",
+                      "data_access": "Business transactions, validation and database writes remain server-side; clients do not directly modify shared database files."
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.software.bpi_client_server.software_documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.software.bpi_client_server.installation_media"
+                      },
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Thin accounting client",
+                    "description": "This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Commit, recovery and duplicate protection",
+                    "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a payment twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Protocol and operational limits",
+                    "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Cross-module postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "Portable implementation",
+                    "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                  },
+                  {
+                    "number": 5,
+                    "chapter_name": "Execution and delivery",
+                    "description": "This client targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia_networking}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "server_host_id",
+                    "ref_id": "device.base_computer.artemis_pro",
+                    "ref_role": "Host executing database and transaction work"
+                  },
+                  {
+                    "key": "server_edition_id",
+                    "ref_id": "software_edition.bpi_client_server.era_server",
+                    "ref_role": "Server implementation used by this client"
+                  },
+                  {
+                    "key": "network_stack_id",
+                    "ref_id": "technology.logix_tcpip_lan",
+                    "ref_role": "Transport stack used by the accounting protocol"
+                  },
+                  {
+                    "key": "request_fields",
+                    "value": "protocol version, authenticated session, durable request ID, operation, payload length, payload"
+                  },
+                  {
+                    "key": "operations",
+                    "value": "login, lookup, paged query, validate draft, post invoice/payment/journal, transaction status, report job, logout"
+                  },
+                  {
+                    "key": "server_ram_kib",
+                    "value": 512
+                  },
+                  {
+                    "key": "concurrent_sessions_target",
+                    "value": 4
+                  },
+                  {
+                    "key": "portable_api_id",
+                    "ref_id": "technology.logix_c_api",
+                    "ref_role": "Shared C service contract used by this edition"
+                  },
+                  {
+                    "key": "host_base_computer_aurelia",
+                    "ref_id": "device.base_computer.aurelia",
+                    "ref_role": "Supported execution host for this edition"
+                  },
+                  {
+                    "key": "host_base_computer_aurelia_plus",
+                    "ref_id": "device.base_computer.aurelia_plus",
+                    "ref_role": "Supported execution host for this edition"
+                  },
+                  {
+                    "key": "minimum_ram_kib",
+                    "value": 48
+                  },
+                  {
+                    "key": "runtime_cpm_aurelia_networking",
+                    "ref_id": "software_edition.cpm_aurelia_networking",
+                    "ref_role": "Runtime prerequisite for this software edition"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "software_edition.bpi_client_server",
+              "name": "SSG General Ledger client-server (CP/M Client edition)",
+              "version": "client-server",
+              "edition": "CP/M Client",
+              "family_name": "SSG General Ledger",
+              "description": "SSG General Ledger client-server (CP/M Client edition) provides the separately qualified networked ledger generation. SSG owns the application; AION supplies finite platform/integration assistance followed by source/build handover. Journal validation, posting and durable data changes execute on the server.",
+              "provider_actor_ids": [
+                "actor.bpi"
+              ],
+              "technology_ids": [
+                "technology.logix_c_api",
+                "technology.logix_display_api",
+                "technology.logix_tui_standard",
+                "technology.logix_tui_keyboard_standard"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "architecture": {
+                      "client_server": true,
+                      "server": "device.base_computer.artemis_pro",
+                      "database": "Relational engine with the specified transaction, logging, checkpoint and recovery design; robustness and capacity remain subject to acceptance testing.",
+                      "network_id": "technology.logix_tcpip_lan",
+                      "server_edition_id": "software_edition.bpi_client_server.era_server"
+                    },
+                    "portability_contract": {
+                      "api_id": "technology.logix_c_api",
+                      "shared_logic": "Separate application/document algorithms from platform adapters.",
+                      "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                      "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                      "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                      "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                    },
+                    "specification": {
+                      "implementation_design": {
+                        "title": "SSG General Ledger transactional client/server v1",
+                        "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
+                        "transactions": {
+                          "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
+                          "commit": "Append checked log records and a commit marker, force them to durable storage, then acknowledge. Apply/replay committed changes idempotently.",
+                          "recovery": "On startup validate checksums and recover committed log records; incomplete transactions never become visible. Use shadow page/index replacement or another explicitly validated torn-write-safe method.",
+                          "failure": "Do not claim durable commit until disk/controller completion semantics are proven; no battery-backed cache is assumed.",
+                          "log_format": "Redo-only changed-record/page after-images with transaction ID, sequence, length and checksum; the commit marker covers transaction record count and checksum. Persist duplicate-suppression outcomes in the same transaction.",
+                          "buffer_policy": "Do not write uncommitted changes to database files (no-steal); cap transaction size to available transaction buffers.",
+                          "checkpoint": "Write replacement pages and indexes to new locations, force them, then alternate checksummed generation-numbered root/checkpoint records. Retain the preceding valid root and necessary redo log until the new checkpoint is durable."
+                        },
+                        "protocol": {
+                          "transport": "Length-framed requests over TCP; bounded messages and chunked results.",
+                          "fields": [
+                            "protocol version",
+                            "authenticated session",
+                            "durable request ID",
+                            "operation",
+                            "payload length",
+                            "payload"
+                          ],
+                          "operations": [
+                            "login",
+                            "lookup",
+                            "paged query",
+                            "validate draft",
+                            "post journal/reversal",
+                            "transaction status",
+                            "report job",
+                            "logout"
+                          ],
+                          "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same journal twice."
+                        },
+                        "data_integrity": [
+                          "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
+                          "Record currency, rounding, posting dates, account periods and unique document IDs.",
+                          "Journal and balance posting is atomic and produces an append-only audit record."
+                        ],
+                        "operations": [
+                          "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
+                          "Bounded log growth, disk-full handling and operator-visible recovery status",
+                          "Plan backups and report traffic around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; slower admitted hosts limit the whole network."
+                        ],
+                        "initial_limits": {
+                          "server_ram_kb": 512,
+                          "concurrent_sessions_target": 4,
+                          "client_policy": "Bounded pages of results and forms; no entire-table download or whole-document duplication."
+                        },
+                        "acceptance_tests": [
+                          "Power loss before/after commit acknowledgement",
+                          "Lost acknowledgement and duplicate retry",
+                          "Concurrent journal postings and account inquiries",
+                          "Full disk, corrupt log tail and failed backup restore",
+                          "48 KB Aurelia client resource budget"
+                        ]
+                      }
+                    },
+                    "execution_target": "z80_cpm",
+                    "role": "client",
+                    "platform_support": [
+                      {
+                        "computer_id": "device.base_computer.aurelia"
+                      },
+                      {
+                        "computer_id": "device.base_computer.aurelia_plus"
+                      }
+                    ],
+                    "minimum_resources": {
+                      "installed_ram_kb": 48,
+                      "application_ram_bytes": null,
+                      "rom_bytes": null
+                    },
+                    "dependency_ids": [
+                      "software_edition.cpm_aurelia_networking"
+                    ],
+                    "distribution": {
+                      "medium": "diskette",
+                      "fulfillment": "included_in_package",
+                      "installation": "client_startup_diskette",
+                      "network_operation": "Start under the existing networking OS, connect to server, and load further modules/data over the network; bootstrap remains local.",
+                      "data_access": "Business transactions, validation and database writes remain server-side; clients do not directly modify shared database files."
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.software.bpi_client_server.software_documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.software.bpi_client_server.installation_media"
+                      },
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Thin accounting client",
+                    "description": "The scope is SSG General Ledger journals, balances, queries and reports. This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Commit, recovery and duplicate protection",
+                    "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a journal twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Protocol and operational limits",
+                    "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Journal and balance postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "Portable implementation",
+                    "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                  },
+                  {
+                    "number": 5,
+                    "chapter_name": "Execution and delivery",
+                    "description": "This client targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia_networking}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "server_host_id",
+                    "ref_id": "device.base_computer.artemis_pro",
+                    "ref_role": "Host executing database and transaction work"
+                  },
+                  {
+                    "key": "server_edition_id",
+                    "ref_id": "software_edition.bpi_client_server.era_server",
+                    "ref_role": "Server implementation used by this client"
+                  },
+                  {
+                    "key": "network_stack_id",
+                    "ref_id": "technology.logix_tcpip_lan",
+                    "ref_role": "Transport stack used by the accounting protocol"
+                  },
+                  {
+                    "key": "request_fields",
+                    "value": "protocol version, authenticated session, durable request ID, operation, payload length, payload"
+                  },
+                  {
+                    "key": "operations",
+                    "value": "login, lookup, paged query, validate draft, post journal/reversal, transaction status, report job, logout"
+                  },
+                  {
+                    "key": "server_ram_kib",
+                    "value": 512
+                  },
+                  {
+                    "key": "concurrent_sessions_target",
+                    "value": 4
+                  },
+                  {
+                    "key": "portable_api_id",
+                    "ref_id": "technology.logix_c_api",
+                    "ref_role": "Shared C service contract used by this edition"
+                  },
+                  {
+                    "key": "host_base_computer_aurelia",
+                    "ref_id": "device.base_computer.aurelia",
+                    "ref_role": "Supported execution host for this edition"
+                  },
+                  {
+                    "key": "host_base_computer_aurelia_plus",
+                    "ref_id": "device.base_computer.aurelia_plus",
+                    "ref_role": "Supported execution host for this edition"
+                  },
+                  {
+                    "key": "minimum_ram_kib",
+                    "value": 48
+                  },
+                  {
+                    "key": "runtime_cpm_aurelia_networking",
+                    "ref_id": "software_edition.cpm_aurelia_networking",
+                    "ref_role": "Runtime prerequisite for this software edition"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "software_edition",
+            "record_id": "software_edition.bpi_client_server.era_client",
+            "before": {
+              "id": "software_edition.bpi_client_server.era_client",
+              "name": "BPI client-server (AIONix Client edition)",
+              "version": "client-server",
+              "edition": "AIONix Client",
+              "family_name": "BPI",
+              "description": "BPI client-server (AIONix Client edition)",
+              "provider_actor_ids": [
+                "actor.bpi"
+              ],
+              "technology_ids": [
+                "technology.logix_c_api",
+                "technology.logix_display_api",
+                "technology.logix_tui_standard",
+                "technology.logix_tui_keyboard_standard"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "architecture": {
+                      "client_server": true,
+                      "server": "device.base_computer.artemis_pro",
+                      "database": "Relational engine with the specified transaction, logging, checkpoint and recovery design; robustness and capacity remain subject to acceptance testing.",
+                      "network_id": "technology.logix_tcpip_lan",
+                      "server_edition_id": "software_edition.bpi_client_server.era_server"
+                    },
+                    "portability_contract": {
+                      "api_id": "technology.logix_c_api",
+                      "shared_logic": "Separate application/document algorithms from platform adapters.",
+                      "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                      "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                      "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                      "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                    },
+                    "specification": {
+                      "implementation_design": {
+                        "title": "BPI transactional client/server v1",
+                        "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
+                        "transactions": {
+                          "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
+                          "commit": "Append checked log records and a commit marker, force them to durable storage, then acknowledge. Apply/replay committed changes idempotently.",
+                          "recovery": "On startup validate checksums and recover committed log records; incomplete transactions never become visible. Use shadow page/index replacement or another explicitly validated torn-write-safe method.",
+                          "failure": "Do not claim durable commit until disk/controller completion semantics are proven; no battery-backed cache is assumed.",
+                          "log_format": "Redo-only changed-record/page after-images with transaction ID, sequence, length and checksum; the commit marker covers transaction record count and checksum. Persist duplicate-suppression outcomes in the same transaction.",
+                          "buffer_policy": "Do not write uncommitted changes to database files (no-steal); cap transaction size to available transaction buffers.",
+                          "checkpoint": "Write replacement pages and indexes to new locations, force them, then alternate checksummed generation-numbered root/checkpoint records. Retain the preceding valid root and necessary redo log until the new checkpoint is durable."
+                        },
+                        "protocol": {
+                          "transport": "Length-framed requests over TCP; bounded messages and chunked results.",
+                          "fields": [
+                            "protocol version",
+                            "authenticated session",
+                            "durable request ID",
+                            "operation",
+                            "payload length",
+                            "payload"
+                          ],
+                          "operations": [
+                            "login",
+                            "lookup",
+                            "paged query",
+                            "validate draft",
+                            "post invoice/payment/journal",
+                            "transaction status",
+                            "report job",
+                            "logout"
+                          ],
+                          "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same payment twice."
+                        },
+                        "data_integrity": [
+                          "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
+                          "Record currency, rounding, posting dates, account periods and unique document IDs.",
+                          "Cross-module posting is atomic and produces an append-only audit record."
+                        ],
+                        "operations": [
+                          "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
+                          "Bounded log growth, disk-full handling and operator-visible recovery status",
+                          "Plan backups and report traffic around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; slower admitted hosts limit the whole network."
+                        ],
+                        "initial_limits": {
+                          "server_ram_kb": 512,
+                          "concurrent_sessions_target": 4,
+                          "client_policy": "Bounded pages of results and forms; no entire-table download or whole-document duplication."
+                        },
+                        "acceptance_tests": [
+                          "Power loss before/after commit acknowledgement",
+                          "Lost acknowledgement and duplicate retry",
+                          "Concurrent invoice/payment updates",
+                          "Full disk, corrupt log tail and failed backup restore",
+                          "48 KB Aurelia client resource budget"
+                        ]
+                      }
+                    },
+                    "execution_target": "era_aionix",
+                    "role": "client",
+                    "platform_support": [
+                      {
+                        "computer_id": "device.base_computer.artemis"
+                      }
+                    ],
+                    "minimum_resources": {
+                      "installed_ram_kb": null,
+                      "application_ram_bytes": null,
+                      "rom_bytes": null
+                    },
+                    "dependency_ids": [
+                      "software_edition.aionix_server"
+                    ],
+                    "distribution": {
+                      "medium": "diskette",
+                      "fulfillment": "included_in_package",
+                      "installation": "client_startup_diskette",
+                      "network_operation": "Start under the existing networking OS, connect to server, and load further modules/data over the network; bootstrap remains local.",
+                      "data_access": "Business transactions, validation and database writes remain server-side; clients do not directly modify shared database files."
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_client_server.era_client.software_documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_client_server.era_client.installation_media"
+                      },
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Thin accounting client",
+                    "description": "This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Commit, recovery and duplicate protection",
+                    "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a payment twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Protocol and operational limits",
+                    "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Cross-module postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "Portable implementation",
+                    "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                  },
+                  {
+                    "number": 5,
+                    "chapter_name": "Execution and delivery",
+                    "description": "This client targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_server}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "server_host_id",
+                    "ref_id": "device.base_computer.artemis_pro",
+                    "ref_role": "Host executing database and transaction work"
+                  },
+                  {
+                    "key": "server_edition_id",
+                    "ref_id": "software_edition.bpi_client_server.era_server",
+                    "ref_role": "Server implementation used by this client"
+                  },
+                  {
+                    "key": "network_stack_id",
+                    "ref_id": "technology.logix_tcpip_lan",
+                    "ref_role": "Transport stack used by the accounting protocol"
+                  },
+                  {
+                    "key": "request_fields",
+                    "value": "protocol version, authenticated session, durable request ID, operation, payload length, payload"
+                  },
+                  {
+                    "key": "operations",
+                    "value": "login, lookup, paged query, validate draft, post invoice/payment/journal, transaction status, report job, logout"
+                  },
+                  {
+                    "key": "server_ram_kib",
+                    "value": 512
+                  },
+                  {
+                    "key": "concurrent_sessions_target",
+                    "value": 4
+                  },
+                  {
+                    "key": "portable_api_id",
+                    "ref_id": "technology.logix_c_api",
+                    "ref_role": "Shared C service contract used by this edition"
+                  },
+                  {
+                    "key": "host_base_computer_artemis",
+                    "ref_id": "device.base_computer.artemis",
+                    "ref_role": "Supported execution host for this edition"
+                  },
+                  {
+                    "key": "runtime_aionix_server",
+                    "ref_id": "software_edition.aionix_server",
+                    "ref_role": "Runtime prerequisite for this software edition"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "software_edition.bpi_client_server.era_client",
+              "name": "SSG General Ledger client-server (AIONix Client edition)",
+              "version": "client-server",
+              "edition": "AIONix Client",
+              "family_name": "SSG General Ledger",
+              "description": "SSG General Ledger client-server (AIONix Client edition) provides the separately qualified networked ledger generation. SSG owns the application; AION supplies finite platform/integration assistance followed by source/build handover. Journal validation, posting and durable data changes execute on the server.",
+              "provider_actor_ids": [
+                "actor.bpi"
+              ],
+              "technology_ids": [
+                "technology.logix_c_api",
+                "technology.logix_display_api",
+                "technology.logix_tui_standard",
+                "technology.logix_tui_keyboard_standard"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "architecture": {
+                      "client_server": true,
+                      "server": "device.base_computer.artemis_pro",
+                      "database": "Relational engine with the specified transaction, logging, checkpoint and recovery design; robustness and capacity remain subject to acceptance testing.",
+                      "network_id": "technology.logix_tcpip_lan",
+                      "server_edition_id": "software_edition.bpi_client_server.era_server"
+                    },
+                    "portability_contract": {
+                      "api_id": "technology.logix_c_api",
+                      "shared_logic": "Separate application/document algorithms from platform adapters.",
+                      "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                      "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                      "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                      "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                    },
+                    "specification": {
+                      "implementation_design": {
+                        "title": "SSG General Ledger transactional client/server v1",
+                        "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
+                        "transactions": {
+                          "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
+                          "commit": "Append checked log records and a commit marker, force them to durable storage, then acknowledge. Apply/replay committed changes idempotently.",
+                          "recovery": "On startup validate checksums and recover committed log records; incomplete transactions never become visible. Use shadow page/index replacement or another explicitly validated torn-write-safe method.",
+                          "failure": "Do not claim durable commit until disk/controller completion semantics are proven; no battery-backed cache is assumed.",
+                          "log_format": "Redo-only changed-record/page after-images with transaction ID, sequence, length and checksum; the commit marker covers transaction record count and checksum. Persist duplicate-suppression outcomes in the same transaction.",
+                          "buffer_policy": "Do not write uncommitted changes to database files (no-steal); cap transaction size to available transaction buffers.",
+                          "checkpoint": "Write replacement pages and indexes to new locations, force them, then alternate checksummed generation-numbered root/checkpoint records. Retain the preceding valid root and necessary redo log until the new checkpoint is durable."
+                        },
+                        "protocol": {
+                          "transport": "Length-framed requests over TCP; bounded messages and chunked results.",
+                          "fields": [
+                            "protocol version",
+                            "authenticated session",
+                            "durable request ID",
+                            "operation",
+                            "payload length",
+                            "payload"
+                          ],
+                          "operations": [
+                            "login",
+                            "lookup",
+                            "paged query",
+                            "validate draft",
+                            "post journal/reversal",
+                            "transaction status",
+                            "report job",
+                            "logout"
+                          ],
+                          "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same journal twice."
+                        },
+                        "data_integrity": [
+                          "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
+                          "Record currency, rounding, posting dates, account periods and unique document IDs.",
+                          "Journal and balance posting is atomic and produces an append-only audit record."
+                        ],
+                        "operations": [
+                          "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
+                          "Bounded log growth, disk-full handling and operator-visible recovery status",
+                          "Plan backups and report traffic around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; slower admitted hosts limit the whole network."
+                        ],
+                        "initial_limits": {
+                          "server_ram_kb": 512,
+                          "concurrent_sessions_target": 4,
+                          "client_policy": "Bounded pages of results and forms; no entire-table download or whole-document duplication."
+                        },
+                        "acceptance_tests": [
+                          "Power loss before/after commit acknowledgement",
+                          "Lost acknowledgement and duplicate retry",
+                          "Concurrent journal postings and account inquiries",
+                          "Full disk, corrupt log tail and failed backup restore",
+                          "48 KB Aurelia client resource budget"
+                        ]
+                      }
+                    },
+                    "execution_target": "era_aionix",
+                    "role": "client",
+                    "platform_support": [
+                      {
+                        "computer_id": "device.base_computer.artemis"
+                      }
+                    ],
+                    "minimum_resources": {
+                      "installed_ram_kb": null,
+                      "application_ram_bytes": null,
+                      "rom_bytes": null
+                    },
+                    "dependency_ids": [
+                      "software_edition.aionix_server"
+                    ],
+                    "distribution": {
+                      "medium": "diskette",
+                      "fulfillment": "included_in_package",
+                      "installation": "client_startup_diskette",
+                      "network_operation": "Start under the existing networking OS, connect to server, and load further modules/data over the network; bootstrap remains local.",
+                      "data_access": "Business transactions, validation and database writes remain server-side; clients do not directly modify shared database files."
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_client_server.era_client.software_documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_client_server.era_client.installation_media"
+                      },
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Thin accounting client",
+                    "description": "The scope is SSG General Ledger journals, balances, queries and reports. This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Commit, recovery and duplicate protection",
+                    "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a journal twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Protocol and operational limits",
+                    "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Journal and balance postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "Portable implementation",
+                    "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                  },
+                  {
+                    "number": 5,
+                    "chapter_name": "Execution and delivery",
+                    "description": "This client targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_server}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "server_host_id",
+                    "ref_id": "device.base_computer.artemis_pro",
+                    "ref_role": "Host executing database and transaction work"
+                  },
+                  {
+                    "key": "server_edition_id",
+                    "ref_id": "software_edition.bpi_client_server.era_server",
+                    "ref_role": "Server implementation used by this client"
+                  },
+                  {
+                    "key": "network_stack_id",
+                    "ref_id": "technology.logix_tcpip_lan",
+                    "ref_role": "Transport stack used by the accounting protocol"
+                  },
+                  {
+                    "key": "request_fields",
+                    "value": "protocol version, authenticated session, durable request ID, operation, payload length, payload"
+                  },
+                  {
+                    "key": "operations",
+                    "value": "login, lookup, paged query, validate draft, post journal/reversal, transaction status, report job, logout"
+                  },
+                  {
+                    "key": "server_ram_kib",
+                    "value": 512
+                  },
+                  {
+                    "key": "concurrent_sessions_target",
+                    "value": 4
+                  },
+                  {
+                    "key": "portable_api_id",
+                    "ref_id": "technology.logix_c_api",
+                    "ref_role": "Shared C service contract used by this edition"
+                  },
+                  {
+                    "key": "host_base_computer_artemis",
+                    "ref_id": "device.base_computer.artemis",
+                    "ref_role": "Supported execution host for this edition"
+                  },
+                  {
+                    "key": "runtime_aionix_server",
+                    "ref_id": "software_edition.aionix_server",
+                    "ref_role": "Runtime prerequisite for this software edition"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "depends_on_change_ids": [
+          "change.ssg_agreement",
+          "change.ssg_aurelia_edition"
+        ]
+      },
+      "target": [
+        {
+          "record_id": "software_edition.bpi_client_server",
+          "before": {
+            "id": "software_edition.bpi_client_server",
+            "name": "BPI client-server (CP/M Client edition)",
+            "version": "client-server",
+            "edition": "CP/M Client",
+            "family_name": "BPI",
+            "description": "BPI client-server (CP/M Client edition)",
+            "provider_actor_ids": [
+              "actor.bpi"
+            ],
+            "technology_ids": [
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_standard",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "architecture": {
+                    "client_server": true,
+                    "server": "device.base_computer.artemis_pro",
+                    "database": "Relational engine with the specified transaction, logging, checkpoint and recovery design; robustness and capacity remain subject to acceptance testing.",
+                    "network_id": "technology.logix_tcpip_lan",
+                    "server_edition_id": "software_edition.bpi_client_server.era_server"
+                  },
+                  "portability_contract": {
+                    "api_id": "technology.logix_c_api",
+                    "shared_logic": "Separate application/document algorithms from platform adapters.",
+                    "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                    "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                    "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                    "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                  },
+                  "specification": {
+                    "implementation_design": {
+                      "title": "BPI transactional client/server v1",
+                      "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
+                      "transactions": {
+                        "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
+                        "commit": "Append checked log records and a commit marker, force them to durable storage, then acknowledge. Apply/replay committed changes idempotently.",
+                        "recovery": "On startup validate checksums and recover committed log records; incomplete transactions never become visible. Use shadow page/index replacement or another explicitly validated torn-write-safe method.",
+                        "failure": "Do not claim durable commit until disk/controller completion semantics are proven; no battery-backed cache is assumed.",
+                        "log_format": "Redo-only changed-record/page after-images with transaction ID, sequence, length and checksum; the commit marker covers transaction record count and checksum. Persist duplicate-suppression outcomes in the same transaction.",
+                        "buffer_policy": "Do not write uncommitted changes to database files (no-steal); cap transaction size to available transaction buffers.",
+                        "checkpoint": "Write replacement pages and indexes to new locations, force them, then alternate checksummed generation-numbered root/checkpoint records. Retain the preceding valid root and necessary redo log until the new checkpoint is durable."
+                      },
+                      "protocol": {
+                        "transport": "Length-framed requests over TCP; bounded messages and chunked results.",
+                        "fields": [
+                          "protocol version",
+                          "authenticated session",
+                          "durable request ID",
+                          "operation",
+                          "payload length",
+                          "payload"
+                        ],
+                        "operations": [
+                          "login",
+                          "lookup",
+                          "paged query",
+                          "validate draft",
+                          "post invoice/payment/journal",
+                          "transaction status",
+                          "report job",
+                          "logout"
+                        ],
+                        "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same payment twice."
+                      },
+                      "data_integrity": [
+                        "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
+                        "Record currency, rounding, posting dates, account periods and unique document IDs.",
+                        "Cross-module posting is atomic and produces an append-only audit record."
+                      ],
+                      "operations": [
+                        "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
+                        "Bounded log growth, disk-full handling and operator-visible recovery status",
+                        "Plan backups and report traffic around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; slower admitted hosts limit the whole network."
+                      ],
+                      "initial_limits": {
+                        "server_ram_kb": 512,
+                        "concurrent_sessions_target": 4,
+                        "client_policy": "Bounded pages of results and forms; no entire-table download or whole-document duplication."
+                      },
+                      "acceptance_tests": [
+                        "Power loss before/after commit acknowledgement",
+                        "Lost acknowledgement and duplicate retry",
+                        "Concurrent invoice/payment updates",
+                        "Full disk, corrupt log tail and failed backup restore",
+                        "48 KB Aurelia client resource budget"
+                      ]
+                    }
+                  },
+                  "execution_target": "z80_cpm",
+                  "role": "client",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.aurelia"
+                    },
+                    {
+                      "computer_id": "device.base_computer.aurelia_plus"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": 48,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "software_edition.cpm_aurelia_networking"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "included_in_package",
+                    "installation": "client_startup_diskette",
+                    "network_operation": "Start under the existing networking OS, connect to server, and load further modules/data over the network; bootstrap remains local.",
+                    "data_access": "Business transactions, validation and database writes remain server-side; clients do not directly modify shared database files."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.software.bpi_client_server.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.software.bpi_client_server.installation_media"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Thin accounting client",
+                  "description": "This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Commit, recovery and duplicate protection",
+                  "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a payment twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Protocol and operational limits",
+                  "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Cross-module postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Portable implementation",
+                  "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                },
+                {
+                  "number": 5,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This client targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia_networking}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "server_host_id",
+                  "ref_id": "device.base_computer.artemis_pro",
+                  "ref_role": "Host executing database and transaction work"
+                },
+                {
+                  "key": "server_edition_id",
+                  "ref_id": "software_edition.bpi_client_server.era_server",
+                  "ref_role": "Server implementation used by this client"
+                },
+                {
+                  "key": "network_stack_id",
+                  "ref_id": "technology.logix_tcpip_lan",
+                  "ref_role": "Transport stack used by the accounting protocol"
+                },
+                {
+                  "key": "request_fields",
+                  "value": "protocol version, authenticated session, durable request ID, operation, payload length, payload"
+                },
+                {
+                  "key": "operations",
+                  "value": "login, lookup, paged query, validate draft, post invoice/payment/journal, transaction status, report job, logout"
+                },
+                {
+                  "key": "server_ram_kib",
+                  "value": 512
+                },
+                {
+                  "key": "concurrent_sessions_target",
+                  "value": 4
+                },
+                {
+                  "key": "portable_api_id",
+                  "ref_id": "technology.logix_c_api",
+                  "ref_role": "Shared C service contract used by this edition"
+                },
+                {
+                  "key": "host_base_computer_aurelia",
+                  "ref_id": "device.base_computer.aurelia",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "host_base_computer_aurelia_plus",
+                  "ref_id": "device.base_computer.aurelia_plus",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "minimum_ram_kib",
+                  "value": 48
+                },
+                {
+                  "key": "runtime_cpm_aurelia_networking",
+                  "ref_id": "software_edition.cpm_aurelia_networking",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "software_edition.bpi_client_server",
+            "name": "SSG General Ledger client-server (CP/M Client edition)",
+            "version": "client-server",
+            "edition": "CP/M Client",
+            "family_name": "SSG General Ledger",
+            "description": "SSG General Ledger client-server (CP/M Client edition) provides the separately qualified networked ledger generation. SSG owns the application; AION supplies finite platform/integration assistance followed by source/build handover. Journal validation, posting and durable data changes execute on the server.",
+            "provider_actor_ids": [
+              "actor.bpi"
+            ],
+            "technology_ids": [
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_standard",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "architecture": {
+                    "client_server": true,
+                    "server": "device.base_computer.artemis_pro",
+                    "database": "Relational engine with the specified transaction, logging, checkpoint and recovery design; robustness and capacity remain subject to acceptance testing.",
+                    "network_id": "technology.logix_tcpip_lan",
+                    "server_edition_id": "software_edition.bpi_client_server.era_server"
+                  },
+                  "portability_contract": {
+                    "api_id": "technology.logix_c_api",
+                    "shared_logic": "Separate application/document algorithms from platform adapters.",
+                    "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                    "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                    "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                    "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                  },
+                  "specification": {
+                    "implementation_design": {
+                      "title": "SSG General Ledger transactional client/server v1",
+                      "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
+                      "transactions": {
+                        "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
+                        "commit": "Append checked log records and a commit marker, force them to durable storage, then acknowledge. Apply/replay committed changes idempotently.",
+                        "recovery": "On startup validate checksums and recover committed log records; incomplete transactions never become visible. Use shadow page/index replacement or another explicitly validated torn-write-safe method.",
+                        "failure": "Do not claim durable commit until disk/controller completion semantics are proven; no battery-backed cache is assumed.",
+                        "log_format": "Redo-only changed-record/page after-images with transaction ID, sequence, length and checksum; the commit marker covers transaction record count and checksum. Persist duplicate-suppression outcomes in the same transaction.",
+                        "buffer_policy": "Do not write uncommitted changes to database files (no-steal); cap transaction size to available transaction buffers.",
+                        "checkpoint": "Write replacement pages and indexes to new locations, force them, then alternate checksummed generation-numbered root/checkpoint records. Retain the preceding valid root and necessary redo log until the new checkpoint is durable."
+                      },
+                      "protocol": {
+                        "transport": "Length-framed requests over TCP; bounded messages and chunked results.",
+                        "fields": [
+                          "protocol version",
+                          "authenticated session",
+                          "durable request ID",
+                          "operation",
+                          "payload length",
+                          "payload"
+                        ],
+                        "operations": [
+                          "login",
+                          "lookup",
+                          "paged query",
+                          "validate draft",
+                          "post journal/reversal",
+                          "transaction status",
+                          "report job",
+                          "logout"
+                        ],
+                        "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same journal twice."
+                      },
+                      "data_integrity": [
+                        "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
+                        "Record currency, rounding, posting dates, account periods and unique document IDs.",
+                        "Journal and balance posting is atomic and produces an append-only audit record."
+                      ],
+                      "operations": [
+                        "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
+                        "Bounded log growth, disk-full handling and operator-visible recovery status",
+                        "Plan backups and report traffic around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; slower admitted hosts limit the whole network."
+                      ],
+                      "initial_limits": {
+                        "server_ram_kb": 512,
+                        "concurrent_sessions_target": 4,
+                        "client_policy": "Bounded pages of results and forms; no entire-table download or whole-document duplication."
+                      },
+                      "acceptance_tests": [
+                        "Power loss before/after commit acknowledgement",
+                        "Lost acknowledgement and duplicate retry",
+                        "Concurrent journal postings and account inquiries",
+                        "Full disk, corrupt log tail and failed backup restore",
+                        "48 KB Aurelia client resource budget"
+                      ]
+                    }
+                  },
+                  "execution_target": "z80_cpm",
+                  "role": "client",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.aurelia"
+                    },
+                    {
+                      "computer_id": "device.base_computer.aurelia_plus"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": 48,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "software_edition.cpm_aurelia_networking"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "included_in_package",
+                    "installation": "client_startup_diskette",
+                    "network_operation": "Start under the existing networking OS, connect to server, and load further modules/data over the network; bootstrap remains local.",
+                    "data_access": "Business transactions, validation and database writes remain server-side; clients do not directly modify shared database files."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.software.bpi_client_server.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.software.bpi_client_server.installation_media"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Thin accounting client",
+                  "description": "The scope is SSG General Ledger journals, balances, queries and reports. This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Commit, recovery and duplicate protection",
+                  "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a journal twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Protocol and operational limits",
+                  "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Journal and balance postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Portable implementation",
+                  "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                },
+                {
+                  "number": 5,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This client targets Z80/CP/M on {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}. The recorded installed-RAM requirement is {minimum_ram_kib} KiB. It requires {runtime_cpm_aurelia_networking}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "server_host_id",
+                  "ref_id": "device.base_computer.artemis_pro",
+                  "ref_role": "Host executing database and transaction work"
+                },
+                {
+                  "key": "server_edition_id",
+                  "ref_id": "software_edition.bpi_client_server.era_server",
+                  "ref_role": "Server implementation used by this client"
+                },
+                {
+                  "key": "network_stack_id",
+                  "ref_id": "technology.logix_tcpip_lan",
+                  "ref_role": "Transport stack used by the accounting protocol"
+                },
+                {
+                  "key": "request_fields",
+                  "value": "protocol version, authenticated session, durable request ID, operation, payload length, payload"
+                },
+                {
+                  "key": "operations",
+                  "value": "login, lookup, paged query, validate draft, post journal/reversal, transaction status, report job, logout"
+                },
+                {
+                  "key": "server_ram_kib",
+                  "value": 512
+                },
+                {
+                  "key": "concurrent_sessions_target",
+                  "value": 4
+                },
+                {
+                  "key": "portable_api_id",
+                  "ref_id": "technology.logix_c_api",
+                  "ref_role": "Shared C service contract used by this edition"
+                },
+                {
+                  "key": "host_base_computer_aurelia",
+                  "ref_id": "device.base_computer.aurelia",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "host_base_computer_aurelia_plus",
+                  "ref_id": "device.base_computer.aurelia_plus",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "minimum_ram_kib",
+                  "value": 48
+                },
+                {
+                  "key": "runtime_cpm_aurelia_networking",
+                  "ref_id": "software_edition.cpm_aurelia_networking",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          },
+          "content_sha256": "eb9e98d5a309d1fb3dc37dd09c35235f467cedc545dce2091bcbd04bf78591cc"
+        },
+        {
+          "record_id": "software_edition.bpi_client_server.era_client",
+          "before": {
+            "id": "software_edition.bpi_client_server.era_client",
+            "name": "BPI client-server (AIONix Client edition)",
+            "version": "client-server",
+            "edition": "AIONix Client",
+            "family_name": "BPI",
+            "description": "BPI client-server (AIONix Client edition)",
+            "provider_actor_ids": [
+              "actor.bpi"
+            ],
+            "technology_ids": [
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_standard",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "architecture": {
+                    "client_server": true,
+                    "server": "device.base_computer.artemis_pro",
+                    "database": "Relational engine with the specified transaction, logging, checkpoint and recovery design; robustness and capacity remain subject to acceptance testing.",
+                    "network_id": "technology.logix_tcpip_lan",
+                    "server_edition_id": "software_edition.bpi_client_server.era_server"
+                  },
+                  "portability_contract": {
+                    "api_id": "technology.logix_c_api",
+                    "shared_logic": "Separate application/document algorithms from platform adapters.",
+                    "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                    "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                    "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                    "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                  },
+                  "specification": {
+                    "implementation_design": {
+                      "title": "BPI transactional client/server v1",
+                      "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
+                      "transactions": {
+                        "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
+                        "commit": "Append checked log records and a commit marker, force them to durable storage, then acknowledge. Apply/replay committed changes idempotently.",
+                        "recovery": "On startup validate checksums and recover committed log records; incomplete transactions never become visible. Use shadow page/index replacement or another explicitly validated torn-write-safe method.",
+                        "failure": "Do not claim durable commit until disk/controller completion semantics are proven; no battery-backed cache is assumed.",
+                        "log_format": "Redo-only changed-record/page after-images with transaction ID, sequence, length and checksum; the commit marker covers transaction record count and checksum. Persist duplicate-suppression outcomes in the same transaction.",
+                        "buffer_policy": "Do not write uncommitted changes to database files (no-steal); cap transaction size to available transaction buffers.",
+                        "checkpoint": "Write replacement pages and indexes to new locations, force them, then alternate checksummed generation-numbered root/checkpoint records. Retain the preceding valid root and necessary redo log until the new checkpoint is durable."
+                      },
+                      "protocol": {
+                        "transport": "Length-framed requests over TCP; bounded messages and chunked results.",
+                        "fields": [
+                          "protocol version",
+                          "authenticated session",
+                          "durable request ID",
+                          "operation",
+                          "payload length",
+                          "payload"
+                        ],
+                        "operations": [
+                          "login",
+                          "lookup",
+                          "paged query",
+                          "validate draft",
+                          "post invoice/payment/journal",
+                          "transaction status",
+                          "report job",
+                          "logout"
+                        ],
+                        "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same payment twice."
+                      },
+                      "data_integrity": [
+                        "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
+                        "Record currency, rounding, posting dates, account periods and unique document IDs.",
+                        "Cross-module posting is atomic and produces an append-only audit record."
+                      ],
+                      "operations": [
+                        "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
+                        "Bounded log growth, disk-full handling and operator-visible recovery status",
+                        "Plan backups and report traffic around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; slower admitted hosts limit the whole network."
+                      ],
+                      "initial_limits": {
+                        "server_ram_kb": 512,
+                        "concurrent_sessions_target": 4,
+                        "client_policy": "Bounded pages of results and forms; no entire-table download or whole-document duplication."
+                      },
+                      "acceptance_tests": [
+                        "Power loss before/after commit acknowledgement",
+                        "Lost acknowledgement and duplicate retry",
+                        "Concurrent invoice/payment updates",
+                        "Full disk, corrupt log tail and failed backup restore",
+                        "48 KB Aurelia client resource budget"
+                      ]
+                    }
+                  },
+                  "execution_target": "era_aionix",
+                  "role": "client",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.artemis"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": null,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "software_edition.aionix_server"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "included_in_package",
+                    "installation": "client_startup_diskette",
+                    "network_operation": "Start under the existing networking OS, connect to server, and load further modules/data over the network; bootstrap remains local.",
+                    "data_access": "Business transactions, validation and database writes remain server-side; clients do not directly modify shared database files."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_client_server.era_client.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_client_server.era_client.installation_media"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Thin accounting client",
+                  "description": "This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Commit, recovery and duplicate protection",
+                  "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a payment twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Protocol and operational limits",
+                  "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Cross-module postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Portable implementation",
+                  "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                },
+                {
+                  "number": 5,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This client targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_server}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "server_host_id",
+                  "ref_id": "device.base_computer.artemis_pro",
+                  "ref_role": "Host executing database and transaction work"
+                },
+                {
+                  "key": "server_edition_id",
+                  "ref_id": "software_edition.bpi_client_server.era_server",
+                  "ref_role": "Server implementation used by this client"
+                },
+                {
+                  "key": "network_stack_id",
+                  "ref_id": "technology.logix_tcpip_lan",
+                  "ref_role": "Transport stack used by the accounting protocol"
+                },
+                {
+                  "key": "request_fields",
+                  "value": "protocol version, authenticated session, durable request ID, operation, payload length, payload"
+                },
+                {
+                  "key": "operations",
+                  "value": "login, lookup, paged query, validate draft, post invoice/payment/journal, transaction status, report job, logout"
+                },
+                {
+                  "key": "server_ram_kib",
+                  "value": 512
+                },
+                {
+                  "key": "concurrent_sessions_target",
+                  "value": 4
+                },
+                {
+                  "key": "portable_api_id",
+                  "ref_id": "technology.logix_c_api",
+                  "ref_role": "Shared C service contract used by this edition"
+                },
+                {
+                  "key": "host_base_computer_artemis",
+                  "ref_id": "device.base_computer.artemis",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "runtime_aionix_server",
+                  "ref_id": "software_edition.aionix_server",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "software_edition.bpi_client_server.era_client",
+            "name": "SSG General Ledger client-server (AIONix Client edition)",
+            "version": "client-server",
+            "edition": "AIONix Client",
+            "family_name": "SSG General Ledger",
+            "description": "SSG General Ledger client-server (AIONix Client edition) provides the separately qualified networked ledger generation. SSG owns the application; AION supplies finite platform/integration assistance followed by source/build handover. Journal validation, posting and durable data changes execute on the server.",
+            "provider_actor_ids": [
+              "actor.bpi"
+            ],
+            "technology_ids": [
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_standard",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "architecture": {
+                    "client_server": true,
+                    "server": "device.base_computer.artemis_pro",
+                    "database": "Relational engine with the specified transaction, logging, checkpoint and recovery design; robustness and capacity remain subject to acceptance testing.",
+                    "network_id": "technology.logix_tcpip_lan",
+                    "server_edition_id": "software_edition.bpi_client_server.era_server"
+                  },
+                  "portability_contract": {
+                    "api_id": "technology.logix_c_api",
+                    "shared_logic": "Separate application/document algorithms from platform adapters.",
+                    "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                    "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                    "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                    "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                  },
+                  "specification": {
+                    "implementation_design": {
+                      "title": "SSG General Ledger transactional client/server v1",
+                      "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
+                      "transactions": {
+                        "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
+                        "commit": "Append checked log records and a commit marker, force them to durable storage, then acknowledge. Apply/replay committed changes idempotently.",
+                        "recovery": "On startup validate checksums and recover committed log records; incomplete transactions never become visible. Use shadow page/index replacement or another explicitly validated torn-write-safe method.",
+                        "failure": "Do not claim durable commit until disk/controller completion semantics are proven; no battery-backed cache is assumed.",
+                        "log_format": "Redo-only changed-record/page after-images with transaction ID, sequence, length and checksum; the commit marker covers transaction record count and checksum. Persist duplicate-suppression outcomes in the same transaction.",
+                        "buffer_policy": "Do not write uncommitted changes to database files (no-steal); cap transaction size to available transaction buffers.",
+                        "checkpoint": "Write replacement pages and indexes to new locations, force them, then alternate checksummed generation-numbered root/checkpoint records. Retain the preceding valid root and necessary redo log until the new checkpoint is durable."
+                      },
+                      "protocol": {
+                        "transport": "Length-framed requests over TCP; bounded messages and chunked results.",
+                        "fields": [
+                          "protocol version",
+                          "authenticated session",
+                          "durable request ID",
+                          "operation",
+                          "payload length",
+                          "payload"
+                        ],
+                        "operations": [
+                          "login",
+                          "lookup",
+                          "paged query",
+                          "validate draft",
+                          "post journal/reversal",
+                          "transaction status",
+                          "report job",
+                          "logout"
+                        ],
+                        "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same journal twice."
+                      },
+                      "data_integrity": [
+                        "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
+                        "Record currency, rounding, posting dates, account periods and unique document IDs.",
+                        "Journal and balance posting is atomic and produces an append-only audit record."
+                      ],
+                      "operations": [
+                        "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
+                        "Bounded log growth, disk-full handling and operator-visible recovery status",
+                        "Plan backups and report traffic around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; slower admitted hosts limit the whole network."
+                      ],
+                      "initial_limits": {
+                        "server_ram_kb": 512,
+                        "concurrent_sessions_target": 4,
+                        "client_policy": "Bounded pages of results and forms; no entire-table download or whole-document duplication."
+                      },
+                      "acceptance_tests": [
+                        "Power loss before/after commit acknowledgement",
+                        "Lost acknowledgement and duplicate retry",
+                        "Concurrent journal postings and account inquiries",
+                        "Full disk, corrupt log tail and failed backup restore",
+                        "48 KB Aurelia client resource budget"
+                      ]
+                    }
+                  },
+                  "execution_target": "era_aionix",
+                  "role": "client",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.artemis"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": null,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "software_edition.aionix_server"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "included_in_package",
+                    "installation": "client_startup_diskette",
+                    "network_operation": "Start under the existing networking OS, connect to server, and load further modules/data over the network; bootstrap remains local.",
+                    "data_access": "Business transactions, validation and database writes remain server-side; clients do not directly modify shared database files."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_client_server.era_client.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_client_server.era_client.installation_media"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Thin accounting client",
+                  "description": "The scope is SSG General Ledger journals, balances, queries and reports. This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Commit, recovery and duplicate protection",
+                  "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a journal twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Protocol and operational limits",
+                  "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Journal and balance postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Portable implementation",
+                  "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                },
+                {
+                  "number": 5,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This client targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_server}. A local startup diskette boots the client under its existing networking OS before bounded transfers load further modules or data. This edition is supplied as part of its containing package. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "server_host_id",
+                  "ref_id": "device.base_computer.artemis_pro",
+                  "ref_role": "Host executing database and transaction work"
+                },
+                {
+                  "key": "server_edition_id",
+                  "ref_id": "software_edition.bpi_client_server.era_server",
+                  "ref_role": "Server implementation used by this client"
+                },
+                {
+                  "key": "network_stack_id",
+                  "ref_id": "technology.logix_tcpip_lan",
+                  "ref_role": "Transport stack used by the accounting protocol"
+                },
+                {
+                  "key": "request_fields",
+                  "value": "protocol version, authenticated session, durable request ID, operation, payload length, payload"
+                },
+                {
+                  "key": "operations",
+                  "value": "login, lookup, paged query, validate draft, post journal/reversal, transaction status, report job, logout"
+                },
+                {
+                  "key": "server_ram_kib",
+                  "value": 512
+                },
+                {
+                  "key": "concurrent_sessions_target",
+                  "value": 4
+                },
+                {
+                  "key": "portable_api_id",
+                  "ref_id": "technology.logix_c_api",
+                  "ref_role": "Shared C service contract used by this edition"
+                },
+                {
+                  "key": "host_base_computer_artemis",
+                  "ref_id": "device.base_computer.artemis",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "runtime_aionix_server",
+                  "ref_id": "software_edition.aionix_server",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          },
+          "content_sha256": "95ad5458ffc5142db88f7429a561b9389457b283ef1dca461b3e0b332462c6de"
+        }
+      ]
+    }
+  ]
+}

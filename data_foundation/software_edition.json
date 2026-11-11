@@ -33,7 +33,6 @@
               "one tab per document",
               "editor-consistent navigation/editing",
               "formulas",
-              "print forms/layout using spreadsheet data",
               "sparse storage model"
             ],
             "portability_contract": {
@@ -44,10 +43,9 @@
               "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
               "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
             },
-            "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
             "data_interchange": {
-              "partner": "BPI Systems",
-              "contract": "Import versioned BPI disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+              "partner": "Structured Systems Group",
+              "contract": "Import versioned SSG General Ledger summary files into ordinary worksheet cells as independent planning inputs. Map named columns, account identifiers, period, currency and decimal amounts; reconcile control totals. Validate parsing, rounding, memory and save/reopen. Close General Ledger before loading Abacus. The import is handled by Abacus itself and requires no scripting runtime, formatted-table object or report-layout engine. There is no direct ledger write-back, live database link or simultaneous application execution.",
               "export_definition_id": "software_edition.bpi_suite"
             },
             "execution_target": "z80_cpm",
@@ -109,13 +107,13 @@
         "chapters": [
           {
             "number": 1,
-            "chapter_name": "Spreadsheet and reporting model",
-            "description": "Abacus stores one sparse worksheet per document, with formulas and editor-consistent navigation. Spreadsheet data can populate printed forms and layouts."
+            "chapter_name": "Sparse worksheet model",
+            "description": "Abacus 1.x stores one sparse worksheet per document, with formulas and editor-consistent navigation and editing. Its initial scope is worksheet calculation and printing worksheet results. Formatted table/report layouts and scripting integration belong to later releases."
           },
           {
             "number": 2,
-            "chapter_name": "File interchange and safe editing",
-            "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous BPI execution."
+            "chapter_name": "General Ledger summary-file import",
+            "description": "Abacus imports versioned disk summaries from {accounting_export_id} into ordinary worksheet cells as independent planning inputs. Map named columns, account identifiers, period, currency and decimal amounts, then reconcile record counts and control totals. Validate parsing, rounding, memory limits and save/reopen. Close General Ledger before loading Abacus; there is no ledger write-back, live database access or simultaneous application execution. This built-in import does not depend on a scripting runtime, formatted-table object or report-layout engine."
           },
           {
             "number": 3,
@@ -132,7 +130,7 @@
           {
             "key": "accounting_export_id",
             "ref_id": "software_edition.bpi_suite",
-            "ref_role": "BPI edition defining the imported accounting summaries"
+            "ref_role": "SSG General Ledger edition defining the imported accounting summaries"
           },
           {
             "key": "portable_api_id",
@@ -194,7 +192,6 @@
               "one tab per document",
               "editor-consistent navigation/editing",
               "formulas",
-              "print forms/layout using spreadsheet data",
               "sparse storage model"
             ],
             "portability_contract": {
@@ -205,10 +202,9 @@
               "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
               "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
             },
-            "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
             "data_interchange": {
-              "partner": "BPI Systems",
-              "contract": "Import versioned BPI disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+              "partner": "Structured Systems Group",
+              "contract": "Import versioned SSG General Ledger summary files into ordinary worksheet cells as independent planning inputs. Map named columns, account identifiers, period, currency and decimal amounts; reconcile control totals. Validate parsing, rounding, memory and save/reopen. Close General Ledger before loading Abacus. The import is handled by Abacus itself and requires no scripting runtime, formatted-table object or report-layout engine. There is no direct ledger write-back, live database link or simultaneous application execution.",
               "export_definition_id": "software_edition.bpi_suite"
             },
             "execution_target": "z80_cpm",
@@ -269,13 +265,13 @@
         "chapters": [
           {
             "number": 1,
-            "chapter_name": "Spreadsheet and reporting model",
-            "description": "Abacus stores one sparse worksheet per document, with formulas and editor-consistent navigation. Spreadsheet data can populate printed forms and layouts."
+            "chapter_name": "Sparse worksheet model",
+            "description": "Abacus 1.x stores one sparse worksheet per document, with formulas and editor-consistent navigation and editing. Its initial scope is worksheet calculation and printing worksheet results. Formatted table/report layouts and scripting integration belong to later releases."
           },
           {
             "number": 2,
-            "chapter_name": "File interchange and safe editing",
-            "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous BPI execution."
+            "chapter_name": "General Ledger summary-file import",
+            "description": "Abacus imports versioned disk summaries from {accounting_export_id} into ordinary worksheet cells as independent planning inputs. Map named columns, account identifiers, period, currency and decimal amounts, then reconcile record counts and control totals. Validate parsing, rounding, memory limits and save/reopen. Close General Ledger before loading Abacus; there is no ledger write-back, live database access or simultaneous application execution. This built-in import does not depend on a scripting runtime, formatted-table object or report-layout engine."
           },
           {
             "number": 3,
@@ -292,7 +288,7 @@
           {
             "key": "accounting_export_id",
             "ref_id": "software_edition.bpi_suite",
-            "ref_role": "BPI edition defining the imported accounting summaries"
+            "ref_role": "SSG General Ledger edition defining the imported accounting summaries"
           },
           {
             "key": "portable_api_id",
@@ -365,8 +361,8 @@
             },
             "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
             "data_interchange": {
-              "partner": "BPI Systems",
-              "contract": "Import versioned BPI disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+              "partner": "Structured Systems Group",
+              "contract": "Import versioned SSG disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
               "export_definition_id": "software_edition.bpi_suite"
             },
             "execution_target": "z80_cpm",
@@ -434,7 +430,7 @@
           {
             "number": 2,
             "chapter_name": "File interchange and safe editing",
-            "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous BPI execution."
+            "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous SSG execution."
           },
           {
             "number": 3,
@@ -451,7 +447,7 @@
           {
             "key": "accounting_export_id",
             "ref_id": "software_edition.bpi_suite",
-            "ref_role": "BPI edition defining the imported accounting summaries"
+            "ref_role": "SSG edition defining the imported accounting summaries"
           },
           {
             "key": "portable_api_id",
@@ -529,8 +525,8 @@
             },
             "programmatic_file_access": "Pulse may read and edit supported Abacus file versions offline. Preserve formulas and versioned features; prevent concurrent writers and invalidate stale cached results.",
             "data_interchange": {
-              "partner": "BPI Systems",
-              "contract": "Import versioned BPI disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
+              "partner": "Structured Systems Group",
+              "contract": "Import versioned SSG disk-file summaries as independent planning inputs: named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. No direct ledger write-back, live database link or simultaneous execution.",
               "export_definition_id": "software_edition.bpi_suite"
             },
             "execution_target": "era_aionix",
@@ -595,7 +591,7 @@
           {
             "number": 2,
             "chapter_name": "File interchange and safe editing",
-            "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous BPI execution."
+            "description": "Pulse can edit supported closed Abacus files offline, preserving formulas and versioned features while excluding concurrent writers and invalidating stale cached results.\n\nVersioned disk summaries from {accounting_export_id} supply independent planning inputs with named columns, account identifiers, period, currency, decimal amounts and reconciliation totals. Validate parsing, rounding, memory and save/reopen. This is not ledger write-back, live database access or simultaneous SSG execution."
           },
           {
             "number": 3,
@@ -612,7 +608,7 @@
           {
             "key": "accounting_export_id",
             "ref_id": "software_edition.bpi_suite",
-            "ref_role": "BPI edition defining the imported accounting summaries"
+            "ref_role": "SSG edition defining the imported accounting summaries"
           },
           {
             "key": "portable_api_id",
@@ -702,7 +698,7 @@
               "output": "Print reports and charts through supported printer drivers; define pagination and refresh stale query/formula results before output."
             },
             "data_interchange": {
-              "bpi_continuity": "Retain versioned BPI summary imports as independent planning inputs with reconciliation and decimal validation; no ledger write-back or live database connection.",
+              "bpi_continuity": "Retain versioned SSG summary imports as independent planning inputs with reconciliation and decimal validation; no ledger write-back or live database connection.",
               "csv": "Schema-mapped CSV import with quoted fields, delimiter/character encoding selection, explicit date and decimal conventions, null handling, text preservation for identifiers and rejected-record diagnostics. Provide value-only CSV export with explicit loss-of-formulas/types warning.",
               "vsam": "Import host-exported sequential logical records from supported VSAM datasets using a supplied field/record layout. Host-side export (for example IDCAMS REPRO) and a documented transfer path are prerequisites; raw VSAM clusters, indexes and disk images are not desktop interchange formats.",
               "vsam_conversion": "Declare supported record boundaries, lengths, offsets, keys and character encoding; convert EBCDIC, supported binary, packed-decimal and zoned-decimal fields explicitly. Reject unsupported layouts without silently changing values.",
@@ -787,7 +783,7 @@
           {
             "number": 2,
             "chapter_name": "Scripting and data interchange",
-            "description": "Embedded Pulse uses the Abacus-owned document API; standalone Pulse retains exclusive offline access to supported closed files. Preserve formulas and invalidate changed cached results rather than allowing a second concurrent writer.\n\nVersioned BPI summaries remain independent planning inputs with decimal checks and reconciliation, without ledger write-back or a live database link. CSV import maps schemas, quoting, delimiters, encodings, dates, decimal conventions, nulls and text identifiers, with rejected-record diagnostics. Value-only export explicitly loses formulas and types.\n\nVSAM import consumes host-exported sequential logical records, for example through IDCAMS REPRO, with a supplied record layout and transfer path. Declare boundaries, lengths, offsets and keys; convert EBCDIC, supported binary, packed decimal and zoned decimal explicitly. Raw VSAM images, clusters and indexes are not desktop interchange files. Reject unsupported layouts without reinterpretation. Preserve older document versions; older Abacus/Pulse editions must reject unsupported new features before writing."
+            "description": "Embedded Pulse uses the Abacus-owned document API; standalone Pulse retains exclusive offline access to supported closed files. Preserve formulas and invalidate changed cached results rather than allowing a second concurrent writer.\n\nVersioned SSG summaries remain independent planning inputs with decimal checks and reconciliation, without ledger write-back or a live database link. CSV import maps schemas, quoting, delimiters, encodings, dates, decimal conventions, nulls and text identifiers, with rejected-record diagnostics. Value-only export explicitly loses formulas and types.\n\nVSAM import consumes host-exported sequential logical records, for example through IDCAMS REPRO, with a supplied record layout and transfer path. Declare boundaries, lengths, offsets and keys; convert EBCDIC, supported binary, packed decimal and zoned decimal explicitly. Raw VSAM images, clusters and indexes are not desktop interchange files. Reject unsupported layouts without reinterpretation. Preserve older document versions; older Abacus/Pulse editions must reject unsupported new features before writing."
           },
           {
             "number": 3,
@@ -1269,7 +1265,7 @@
       "version": "1.0",
       "edition": "Server",
       "family_name": "AIONix",
-      "description": "Separate AIONix edition for networked Artemis and Artemis PRO systems. Includes the base operating system, TCP/IP and server-service interfaces. BPI server applications are separately licensed offerings.",
+      "description": "Separate AIONix edition for networked Artemis and Artemis PRO systems. Includes the base operating system, TCP/IP and server-service interfaces. SSG server applications are separately licensed offerings.",
       "provider_actor_ids": [
         "actor.aion"
       ],
@@ -2140,7 +2136,7 @@
           {
             "number": 3,
             "chapter_name": "Shared TUI ownership and application behaviour",
-            "description": "The system owns {tui_contract_id}, exposed through {portable_api_id} and {display_api_id}. It supplies reusable controls, while {consumer_business_tools_aurelia}, {consumer_abacus_1}, {consumer_abacus_2}, {consumer_bpi_suite} and {consumer_pulse_1} retain their document, calculation, file-management and scheduling logic.\n\nScreen services query usable dimensions, clip/scroll and distinguish document from display coordinates. Compact 40-column and expanded 80-column layouts fit dialogs, names and errors; semantic text/selection/warning roles map to colour or monochrome. Structured character, function/navigation and modifier events support blocking or polled input. Shared fields, lists, menus, forms, popups and focus movement use consistent editing and clipboard commands. Clipboard formats, lengths, capacity, ownership and errors are explicit. Contexts are created/destroyed and activated/deactivated with redraw; one may cover the whole screen. System timing and repeat replace CPU-speed loops.\n\nSequential applications can use these services without multitasking. Exact widgets, clipboard capacity and workspace reservations remain implementation choices. Preserve legacy console behaviour and stable target ABI, use capability discovery, and avoid hard-coded stride, video addresses, last columns or hardware registers. The same documented API spans Aurelia, Aurelia+ and Artemis; Artemis mediates shared display/clipboard access between processes."
+            "description": "The system owns {tui_contract_id}, exposed through {portable_api_id} and {display_api_id}. It supplies reusable controls, while {consumer_business_tools_aurelia}, {consumer_abacus_1}, {consumer_abacus_2}, {consumer_ssg_general_ledger} and {consumer_pulse_1} retain their document, calculation, file-management and scheduling logic.\n\nScreen services query usable dimensions, clip/scroll and distinguish document from display coordinates. Compact 40-column and expanded 80-column layouts fit dialogs, names and errors; semantic text/selection/warning roles map to colour or monochrome. Structured character, function/navigation and modifier events support blocking or polled input. Shared fields, lists, menus, forms, popups and focus movement use consistent editing and clipboard commands. Clipboard formats, lengths, capacity, ownership and errors are explicit. Contexts are created/destroyed and activated/deactivated with redraw; one may cover the whole screen. System timing and repeat replace CPU-speed loops.\n\nSequential applications can use these services without multitasking. Exact widgets, clipboard capacity and workspace reservations remain implementation choices. Preserve legacy console behaviour and stable target ABI, use capability discovery, and avoid hard-coded stride, video addresses, last columns or hardware registers. The same documented API spans Aurelia, Aurelia+ and Artemis; Artemis mediates shared display/clipboard access between processes."
           },
           {
             "number": 4,
@@ -2205,7 +2201,7 @@
             "ref_role": "Application consuming system-owned TUI services"
           },
           {
-            "key": "consumer_bpi_suite",
+            "key": "consumer_ssg_general_ledger",
             "ref_id": "software_edition.bpi_suite",
             "ref_role": "Application consuming system-owned TUI services"
           },
@@ -2262,7 +2258,7 @@
               "TCP/IP stack",
               "LogixLAN negotiated-rate adapter driver",
               "network configuration tools",
-              "BPI client networking API"
+              "SSG client networking API"
             ],
             "api_compatibility": "Retains the base platform C/TUI API; optional networking services are discovered through versioned capability checks.",
             "network_link_policy": {
@@ -2318,7 +2314,7 @@
           {
             "number": 1,
             "chapter_name": "Network services and system continuity",
-            "description": "The Aurelia extension adds a TCP/IP stack, negotiated-rate adapter driver, network configuration tools and the BPI client networking API. It retains the underlying CP/M platform services.\n\nBoth optional services and inherited C/TUI interfaces use versioned capability checks. The driver implements {link_protocol_id}: enforce host ceilings, distinguish advertised and negotiated rates, process packet interrupts/credits and expose fallback/error diagnostics. TCP/IP payload throughput is below the shared raw line rate and must be measured."
+            "description": "The Aurelia extension adds a TCP/IP stack, negotiated-rate adapter driver, network configuration tools and the SSG client networking API. It retains the underlying CP/M platform services.\n\nBoth optional services and inherited C/TUI interfaces use versioned capability checks. The driver implements {link_protocol_id}: enforce host ceilings, distinguish advertised and negotiated rates, process packet interrupts/credits and expose fallback/error diagnostics. TCP/IP payload throughput is below the shared raw line rate and must be measured."
           },
           {
             "number": 2,
@@ -2607,11 +2603,11 @@
     },
     {
       "id": "software_edition.bpi_suite.era",
-      "name": "BPI (AIONix edition)",
+      "name": "SSG General Ledger (AIONix edition)",
       "version": "1.0",
       "edition": "AIONix",
-      "family_name": "BPI",
-      "description": "BPI (AIONix edition)",
+      "family_name": "SSG General Ledger",
+      "description": "SSG-owned General Ledger implemented in AION C with the shared TUI, explicit decimal accounting rules and versioned record files. The separate native ERA/AIONix build requires target-specific qualification.",
       "provider_actor_ids": [
         "actor.bpi"
       ],
@@ -2638,54 +2634,20 @@
             "implementation": {
               "language": "AION C",
               "ui": "Logix TUI",
-              "database": "relational base engine",
+              "database": "Versioned ledger record files with bounded buffers and application-level access routines; no general relational engine is required for this standalone edition.",
               "printing": "native FlexiBUS printer support"
             },
             "modules": [
               {
-                "name": "BPI General Accounting",
+                "name": "SSG General Ledger",
                 "features": [
-                  "general ledger",
-                  "simplified AR",
-                  "simplified AP",
-                  "payroll integration",
-                  "balance sheets"
-                ]
-              },
-              {
-                "name": "BPI Accounts Receivable",
-                "features": [
-                  "customer accounts",
-                  "open invoices",
-                  "incoming payments",
-                  "customer statements"
-                ]
-              },
-              {
-                "name": "BPI Accounts Payable",
-                "features": [
-                  "vendor accounts",
-                  "outstanding liabilities",
-                  "cash-flow obligations",
-                  "check printing"
-                ]
-              },
-              {
-                "name": "BPI Inventory Control",
-                "features": [
-                  "stock levels",
-                  "purchase orders",
-                  "journal entries for product movement",
-                  "profitability reports"
-                ]
-              },
-              {
-                "name": "BPI Payroll",
-                "features": [
-                  "employee hours",
-                  "local/federal tax withholding",
-                  "benefits",
-                  "payroll check printing"
+                  "custom charts of accounts",
+                  "single or multiple departments",
+                  "validated journal entry and posting",
+                  "corrections and audit records",
+                  "period balances and trial balance",
+                  "customisable financial reports",
+                  "backup, restore and reconciled summary export"
                 ]
               }
             ],
@@ -2700,7 +2662,7 @@
             "specification": {
               "summary_export": {
                 "format": "Versioned delimited-text file on disk with named columns, period, currency, account identifiers, decimal amounts and control totals.",
-                "scope": "Selected balances or monthly totals imported into Abacus as planning inputs. No automatic write-back, concurrent execution or live database link. Close BPI before loading Abacus.",
+                "scope": "Selected account balances and monthly totals become independent Abacus planning inputs through a versioned disk file. Close General Ledger before loading Abacus; there is no automatic ledger write-back or live database link.",
                 "acceptance": "Reconcile record counts and control totals; validate rounding, quoting, disk-full errors, memory use and save/reopen. Prepared demo data is labelled."
               }
             },
@@ -2744,7 +2706,7 @@
               "target": {
                 "record_id": "base_part.edition.bpi_suite.era.installation_media"
               },
-              "quantity": 3
+              "quantity": 1
             },
             {
               "id": "line_4",
@@ -2760,13 +2722,13 @@
         "chapters": [
           {
             "number": 1,
-            "chapter_name": "Accounting modules and implementation",
-            "description": "The suite is implemented in AION C around a relational base engine, the Logix TUI and native FlexiBUS printing. General Accounting covers ledger, simplified receivables/payables, payroll integration and balance sheets. Accounts Receivable tracks customers, open invoices, payments and statements; Accounts Payable tracks vendors, liabilities, cash-flow obligations and cheque printing. Inventory Control handles stock, purchase orders, movement journals and profitability. Payroll handles employee hours, local/federal withholding, benefits and payroll cheques."
+            "chapter_name": "General Ledger implementation",
+            "description": "General Ledger maintains custom charts of accounts, departments, journal entries, corrections, period balances and financial reports. The AION C implementation uses versioned record files and bounded buffers; the standalone release does not depend on a general relational database or include receivables, payables, inventory or payroll modules. Performance-critical string, record and decimal routines may be written in assembly and linked through the published ABI. This native ERA build uses AIONix-mediated TUI and display services with target-specific runtime libraries; it does not reuse Z80 binaries or assume the Aurelia ROM-bank arrangement."
           },
           {
             "number": 2,
             "chapter_name": "Planning-data export",
-            "description": "Selected balances or monthly totals are exported as versioned delimited text with named columns, period, currency, account identifiers, decimal amounts and control totals. Close BPI before loading Abacus to use these as independent planning inputs; there is no automatic write-back, simultaneous execution or live database link. Reconcile counts/totals and test rounding, quoting, disk-full handling, memory and save/reopen; label prepared demonstration data."
+            "description": "Selected account balances and monthly totals become independent Abacus planning inputs through a versioned disk file. Close General Ledger before loading Abacus; there is no automatic ledger write-back or live database link. Reconcile counts and control totals, validate decimals and quoting, and test disk-full, memory exhaustion and save/reopen. Label prepared demonstration data."
           },
           {
             "number": 3,
@@ -2776,7 +2738,17 @@
           {
             "number": 4,
             "chapter_name": "Execution and delivery",
-            "description": "This application suite targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_os_model}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+            "description": "This General Ledger application targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_os_model}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified. One distribution diskette is the package assumption; installation, working-data space and any media exchanges require qualification."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Financial equivalence and recovery",
+            "description": "Use explicit decimal or sufficiently wide scaled-integer routines with documented range, rounding and overflow handling. Reconcile CBASIC reference reports and cases exercising 14-digit precision before timing the port. Preserve posting and recovery semantics. Test maximum balances, reversals, period closing, interrupted updates, disk-full handling and backup restoration. On-disk values use explicit encodings, not raw C structures."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Forms and measured performance",
+            "description": "Bounded text fields, lists, account tables, selection dropdowns and buttons use Tab/Shift-Tab, shortcuts, shared selection/editing and copy/paste. Composite controls may be SDK helpers over ROM primitives. Text mode is the baseline; bitmap rendering is optional only on qualified configurations. Measure native code, selected C/assembly libraries and ROM TUI call/bank-switch costs. Compare identical datasets and financial outputs on the same hardware; report CPU work separately from disk and printer waits without a promised speed ratio."
           }
         ],
         "parameters": [
@@ -2800,11 +2772,11 @@
     },
     {
       "id": "software_edition.bpi_client_server",
-      "name": "BPI client-server (CP/M Client edition)",
+      "name": "SSG General Ledger client-server (CP/M Client edition)",
       "version": "client-server",
       "edition": "CP/M Client",
-      "family_name": "BPI",
-      "description": "BPI client-server (CP/M Client edition)",
+      "family_name": "SSG General Ledger",
+      "description": "SSG General Ledger client-server (CP/M Client edition) provides the separately qualified networked ledger generation. SSG owns the application; AION supplies finite platform/integration assistance followed by source/build handover. Journal validation, posting and durable data changes execute on the server.",
       "provider_actor_ids": [
         "actor.bpi"
       ],
@@ -2843,7 +2815,7 @@
             },
             "specification": {
               "implementation_design": {
-                "title": "BPI transactional client/server v1",
+                "title": "SSG General Ledger transactional client/server v1",
                 "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
                 "transactions": {
                   "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
@@ -2869,17 +2841,17 @@
                     "lookup",
                     "paged query",
                     "validate draft",
-                    "post invoice/payment/journal",
+                    "post journal/reversal",
                     "transaction status",
                     "report job",
                     "logout"
                   ],
-                  "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same payment twice."
+                  "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same journal twice."
                 },
                 "data_integrity": [
                   "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
                   "Record currency, rounding, posting dates, account periods and unique document IDs.",
-                  "Cross-module posting is atomic and produces an append-only audit record."
+                  "Journal and balance posting is atomic and produces an append-only audit record."
                 ],
                 "operations": [
                   "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
@@ -2894,7 +2866,7 @@
                 "acceptance_tests": [
                   "Power loss before/after commit acknowledgement",
                   "Lost acknowledgement and duplicate retry",
-                  "Concurrent invoice/payment updates",
+                  "Concurrent journal postings and account inquiries",
                   "Full disk, corrupt log tail and failed backup restore",
                   "48 KB Aurelia client resource budget"
                 ]
@@ -2949,17 +2921,17 @@
           {
             "number": 1,
             "chapter_name": "Thin accounting client",
-            "description": "This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+            "description": "The scope is SSG General Ledger journals, balances, queries and reports. This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
           },
           {
             "number": 2,
             "chapter_name": "Commit, recovery and duplicate protection",
-            "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a payment twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+            "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a journal twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
           },
           {
             "number": 3,
             "chapter_name": "Protocol and operational limits",
-            "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Cross-module postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+            "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Journal and balance postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
           },
           {
             "number": 4,
@@ -2994,7 +2966,7 @@
           },
           {
             "key": "operations",
-            "value": "login, lookup, paged query, validate draft, post invoice/payment/journal, transaction status, report job, logout"
+            "value": "login, lookup, paged query, validate draft, post journal/reversal, transaction status, report job, logout"
           },
           {
             "key": "server_ram_kib",
@@ -3033,11 +3005,11 @@
     },
     {
       "id": "software_edition.bpi_client_server.era_client",
-      "name": "BPI client-server (AIONix Client edition)",
+      "name": "SSG General Ledger client-server (AIONix Client edition)",
       "version": "client-server",
       "edition": "AIONix Client",
-      "family_name": "BPI",
-      "description": "BPI client-server (AIONix Client edition)",
+      "family_name": "SSG General Ledger",
+      "description": "SSG General Ledger client-server (AIONix Client edition) provides the separately qualified networked ledger generation. SSG owns the application; AION supplies finite platform/integration assistance followed by source/build handover. Journal validation, posting and durable data changes execute on the server.",
       "provider_actor_ids": [
         "actor.bpi"
       ],
@@ -3076,7 +3048,7 @@
             },
             "specification": {
               "implementation_design": {
-                "title": "BPI transactional client/server v1",
+                "title": "SSG General Ledger transactional client/server v1",
                 "architecture": "Thin Z80/ERA clients send bounded business operations to an Artemis PRO server. Query evaluation, indexes, validation, accounting posting and transactions execute on the server; clients do not fetch arbitrary database pages.",
                 "transactions": {
                   "concurrency": "Single serialized writer for v1 with short transactions and bounded reader locks; no long interactive transaction while a user edits a form.",
@@ -3102,17 +3074,17 @@
                     "lookup",
                     "paged query",
                     "validate draft",
-                    "post invoice/payment/journal",
+                    "post journal/reversal",
                     "transaction status",
                     "report job",
                     "logout"
                   ],
-                  "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same payment twice."
+                  "duplicate_suppression": "Store committed write request IDs and outcomes durably. After reconnect, clients query status or retry with the same ID; never post the same journal twice."
                 },
                 "data_integrity": [
                   "Amounts use explicitly scaled integers/decimal rules, never unspecified binary floating-point rounding.",
                   "Record currency, rounding, posting dates, account periods and unique document IDs.",
-                  "Cross-module posting is atomic and produces an append-only audit record."
+                  "Journal and balance posting is atomic and produces an append-only audit record."
                 ],
                 "operations": [
                   "Backup captures a consistent checkpoint plus required logs; test restoration onto a clean disk.",
@@ -3127,7 +3099,7 @@
                 "acceptance_tests": [
                   "Power loss before/after commit acknowledgement",
                   "Lost acknowledgement and duplicate retry",
-                  "Concurrent invoice/payment updates",
+                  "Concurrent journal postings and account inquiries",
                   "Full disk, corrupt log tail and failed backup restore",
                   "48 KB Aurelia client resource budget"
                 ]
@@ -3179,17 +3151,17 @@
           {
             "number": 1,
             "chapter_name": "Thin accounting client",
-            "description": "This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
+            "description": "The scope is SSG General Ledger journals, balances, queries and reports. This edition sends bounded business operations to the relational accounting service on {server_host_id} running {server_edition_id}. Queries, indexes, validation, posting and transactions stay server-side; clients receive bounded pages of forms/results rather than arbitrary database pages or whole tables. {network_stack_id} supplies the network path. Robustness and capacity remain acceptance targets."
           },
           {
             "number": 2,
             "chapter_name": "Commit, recovery and duplicate protection",
-            "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a payment twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
+            "description": "Version 1 serializes writers with short transactions and bounded reader locks; editing a form must not hold an interactive transaction open. Redo after-images carry transaction ID, sequence, length and checksum; a commit marker covers record count and checksum. Force log and commit marker to durable storage before acknowledging, then apply/replay changes idempotently. Persist request IDs and outcomes in the same transaction so a lost acknowledgement can be retried without posting a journal twice.\n\nUncommitted data must not reach database files; transaction size is limited by buffers. Checkpoint into replacement pages/indexes, force them, then alternate checksummed generation-numbered roots. Retain the previous valid root and required redo log until the new checkpoint is durable. Startup validates checksums and exposes only committed work. Torn-write safety and disk/controller completion semantics must be proven; no battery-backed cache is assumed."
           },
           {
             "number": 3,
             "chapter_name": "Protocol and operational limits",
-            "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Cross-module postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
+            "description": "Length-framed TCP requests use {request_fields}. Operations are {operations}; messages and streamed results are bounded. Reconnecting clients query status or reuse the original durable request ID.\n\nAmounts use explicit scaled-integer/decimal rules with currency, rounding, posting dates, periods and unique document IDs. Journal and balance postings are atomic and append an audit record. Backups capture a consistent checkpoint and required logs, with restoration tested on a clean disk. Bound log growth, handle full disks and expose recovery status.\n\nThe server target is {server_ram_kib} KiB with {concurrent_sessions_target} concurrent sessions. Plan backups/reports around the negotiated shared 100/250/500/1000 kbit/s raw LAN budget and measured payload throughput; the slowest admitted host limits the common rate. Test power loss around acknowledgements, duplicate retries, concurrent postings, disk-full/corrupt-log failures, backup restoration and a 48 KiB Aurelia client."
           },
           {
             "number": 4,
@@ -3224,7 +3196,7 @@
           },
           {
             "key": "operations",
-            "value": "login, lookup, paged query, validate draft, post invoice/payment/journal, transaction status, report job, logout"
+            "value": "login, lookup, paged query, validate draft, post journal/reversal, transaction status, report job, logout"
           },
           {
             "key": "server_ram_kib",

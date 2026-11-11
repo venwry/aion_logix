@@ -1,0 +1,866 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.acde1260-98ce-44a0-a8d3-5ce96e21cf57",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-11T18:23:28.010Z",
+      "change_id": "change.ssg_native_edition",
+      "proposal_sha256": "abd5ead3c3b954bfe58c6dc6ebec10ceb7298503bdb2d03ec6c0bda7be98bbf0",
+      "proposal": {
+        "id": "change.ssg_native_edition",
+        "category": "data",
+        "title": "7. SSG General Ledger — Define the separate native AIONix General Ledger edition",
+        "reason": "Replace the former BPI scenario with the author-requested independent SSG General Ledger partnership. Use the confirmed story dates: agreement 1977-07-28, team/development 1977-08-12, vanilla CP/M/CBASIC release 1978-01-15 and joint AION C/General Ledger Aurelia launch on the morning of 1978-06-06. SSG retains application ownership and sales; AION funds bounded porting and later networking work, not an equity investment. Preserve stable legacy record IDs for reference and review continuity; displayed identities and product scope are SSG General Ledger. Exact original GL/runtime revisions and speed ratios remain unverified. See review_evidence/ssg-general-ledger for source distinctions, scope and validation.",
+        "elements": [
+          {
+            "record_type": "software_edition",
+            "record_id": "software_edition.bpi_suite.era",
+            "before": {
+              "id": "software_edition.bpi_suite.era",
+              "name": "BPI (AIONix edition)",
+              "version": "1.0",
+              "edition": "AIONix",
+              "family_name": "BPI",
+              "description": "BPI (AIONix edition)",
+              "provider_actor_ids": [
+                "actor.bpi"
+              ],
+              "technology_ids": [
+                "technology.bpi_relational_database",
+                "technology.aion_c_portability_framework",
+                "technology.logix_c_api",
+                "technology.logix_display_api",
+                "technology.logix_tui_standard",
+                "technology.logix_tui_keyboard_standard"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "implementation": {
+                      "language": "AION C",
+                      "ui": "Logix TUI",
+                      "database": "relational base engine",
+                      "printing": "native FlexiBUS printer support"
+                    },
+                    "modules": [
+                      {
+                        "name": "BPI General Accounting",
+                        "features": [
+                          "general ledger",
+                          "simplified AR",
+                          "simplified AP",
+                          "payroll integration",
+                          "balance sheets"
+                        ]
+                      },
+                      {
+                        "name": "BPI Accounts Receivable",
+                        "features": [
+                          "customer accounts",
+                          "open invoices",
+                          "incoming payments",
+                          "customer statements"
+                        ]
+                      },
+                      {
+                        "name": "BPI Accounts Payable",
+                        "features": [
+                          "vendor accounts",
+                          "outstanding liabilities",
+                          "cash-flow obligations",
+                          "check printing"
+                        ]
+                      },
+                      {
+                        "name": "BPI Inventory Control",
+                        "features": [
+                          "stock levels",
+                          "purchase orders",
+                          "journal entries for product movement",
+                          "profitability reports"
+                        ]
+                      },
+                      {
+                        "name": "BPI Payroll",
+                        "features": [
+                          "employee hours",
+                          "local/federal tax withholding",
+                          "benefits",
+                          "payroll check printing"
+                        ]
+                      }
+                    ],
+                    "portability_contract": {
+                      "api_id": "technology.logix_c_api",
+                      "shared_logic": "Separate application/document algorithms from platform adapters.",
+                      "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                      "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                      "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                      "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                    },
+                    "specification": {
+                      "summary_export": {
+                        "format": "Versioned delimited-text file on disk with named columns, period, currency, account identifiers, decimal amounts and control totals.",
+                        "scope": "Selected balances or monthly totals imported into Abacus as planning inputs. No automatic write-back, concurrent execution or live database link. Close BPI before loading Abacus.",
+                        "acceptance": "Reconcile record counts and control totals; validate rounding, quoting, disk-full errors, memory use and save/reopen. Prepared demo data is labelled."
+                      }
+                    },
+                    "execution_target": "era_aionix",
+                    "role": "application",
+                    "platform_support": [
+                      {
+                        "computer_id": "device.base_computer.artemis"
+                      }
+                    ],
+                    "minimum_resources": {
+                      "installed_ram_kb": null,
+                      "application_ram_bytes": null,
+                      "rom_bytes": null
+                    },
+                    "dependency_ids": [
+                      "technology.aionix_os_model"
+                    ],
+                    "distribution": {
+                      "medium": "diskette",
+                      "fulfillment": "edition_delivery"
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_suite.era.software_documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_suite.era.license_document"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_suite.era.installation_media"
+                      },
+                      "quantity": 3
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_suite.era.software_packaging"
+                      },
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Accounting modules and implementation",
+                    "description": "The suite is implemented in AION C around a relational base engine, the Logix TUI and native FlexiBUS printing. General Accounting covers ledger, simplified receivables/payables, payroll integration and balance sheets. Accounts Receivable tracks customers, open invoices, payments and statements; Accounts Payable tracks vendors, liabilities, cash-flow obligations and cheque printing. Inventory Control handles stock, purchase orders, movement journals and profitability. Payroll handles employee hours, local/federal withholding, benefits and payroll cheques."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Planning-data export",
+                    "description": "Selected balances or monthly totals are exported as versioned delimited text with named columns, period, currency, account identifiers, decimal amounts and control totals. Close BPI before loading Abacus to use these as independent planning inputs; there is no automatic write-back, simultaneous execution or live database link. Reconcile counts/totals and test rounding, quoting, disk-full handling, memory and save/reopen; label prepared demonstration data."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Portable implementation",
+                    "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "Execution and delivery",
+                    "description": "This application suite targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_os_model}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "portable_api_id",
+                    "ref_id": "technology.logix_c_api",
+                    "ref_role": "Shared C service contract used by this edition"
+                  },
+                  {
+                    "key": "host_base_computer_artemis",
+                    "ref_id": "device.base_computer.artemis",
+                    "ref_role": "Supported execution host for this edition"
+                  },
+                  {
+                    "key": "runtime_aionix_os_model",
+                    "ref_id": "technology.aionix_os_model",
+                    "ref_role": "Runtime prerequisite for this software edition"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "software_edition.bpi_suite.era",
+              "name": "SSG General Ledger (AIONix edition)",
+              "version": "1.0",
+              "edition": "AIONix",
+              "family_name": "SSG General Ledger",
+              "description": "SSG-owned General Ledger implemented in AION C with the shared TUI, explicit decimal accounting rules and versioned record files. The separate native ERA/AIONix build requires target-specific qualification.",
+              "provider_actor_ids": [
+                "actor.bpi"
+              ],
+              "technology_ids": [
+                "technology.bpi_relational_database",
+                "technology.aion_c_portability_framework",
+                "technology.logix_c_api",
+                "technology.logix_display_api",
+                "technology.logix_tui_standard",
+                "technology.logix_tui_keyboard_standard"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "implementation": {
+                      "language": "AION C",
+                      "ui": "Logix TUI",
+                      "database": "Versioned ledger record files with bounded buffers and application-level access routines; no general relational engine is required for this standalone edition.",
+                      "printing": "native FlexiBUS printer support"
+                    },
+                    "modules": [
+                      {
+                        "name": "SSG General Ledger",
+                        "features": [
+                          "custom charts of accounts",
+                          "single or multiple departments",
+                          "validated journal entry and posting",
+                          "corrections and audit records",
+                          "period balances and trial balance",
+                          "customisable financial reports",
+                          "backup, restore and reconciled summary export"
+                        ]
+                      }
+                    ],
+                    "portability_contract": {
+                      "api_id": "technology.logix_c_api",
+                      "shared_logic": "Separate application/document algorithms from platform adapters.",
+                      "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                      "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                      "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                      "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                    },
+                    "specification": {
+                      "summary_export": {
+                        "format": "Versioned delimited-text file on disk with named columns, period, currency, account identifiers, decimal amounts and control totals.",
+                        "scope": "Selected account balances and monthly totals become independent Abacus planning inputs through a versioned disk file. Close General Ledger before loading Abacus; there is no automatic ledger write-back or live database link.",
+                        "acceptance": "Reconcile record counts and control totals; validate rounding, quoting, disk-full errors, memory use and save/reopen. Prepared demo data is labelled."
+                      }
+                    },
+                    "execution_target": "era_aionix",
+                    "role": "application",
+                    "platform_support": [
+                      {
+                        "computer_id": "device.base_computer.artemis"
+                      }
+                    ],
+                    "minimum_resources": {
+                      "installed_ram_kb": null,
+                      "application_ram_bytes": null,
+                      "rom_bytes": null
+                    },
+                    "dependency_ids": [
+                      "technology.aionix_os_model"
+                    ],
+                    "distribution": {
+                      "medium": "diskette",
+                      "fulfillment": "edition_delivery"
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_suite.era.software_documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_suite.era.license_document"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_suite.era.installation_media"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.edition.bpi_suite.era.software_packaging"
+                      },
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "General Ledger implementation",
+                    "description": "General Ledger maintains custom charts of accounts, departments, journal entries, corrections, period balances and financial reports. The AION C implementation uses versioned record files and bounded buffers; the standalone release does not depend on a general relational database or include receivables, payables, inventory or payroll modules. Performance-critical string, record and decimal routines may be written in assembly and linked through the published ABI. This native ERA build uses AIONix-mediated TUI and display services with target-specific runtime libraries; it does not reuse Z80 binaries or assume the Aurelia ROM-bank arrangement."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Planning-data export",
+                    "description": "Selected account balances and monthly totals become independent Abacus planning inputs through a versioned disk file. Close General Ledger before loading Abacus; there is no automatic ledger write-back or live database link. Reconcile counts and control totals, validate decimals and quoting, and test disk-full, memory exhaustion and save/reopen. Label prepared demonstration data."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Portable implementation",
+                    "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "Execution and delivery",
+                    "description": "This General Ledger application targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_os_model}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified. One distribution diskette is the package assumption; installation, working-data space and any media exchanges require qualification."
+                  },
+                  {
+                    "number": 5,
+                    "chapter_name": "Financial equivalence and recovery",
+                    "description": "Use explicit decimal or sufficiently wide scaled-integer routines with documented range, rounding and overflow handling. Reconcile CBASIC reference reports and cases exercising 14-digit precision before timing the port. Preserve posting and recovery semantics. Test maximum balances, reversals, period closing, interrupted updates, disk-full handling and backup restoration. On-disk values use explicit encodings, not raw C structures."
+                  },
+                  {
+                    "number": 6,
+                    "chapter_name": "Forms and measured performance",
+                    "description": "Bounded text fields, lists, account tables, selection dropdowns and buttons use Tab/Shift-Tab, shortcuts, shared selection/editing and copy/paste. Composite controls may be SDK helpers over ROM primitives. Text mode is the baseline; bitmap rendering is optional only on qualified configurations. Measure native code, selected C/assembly libraries and ROM TUI call/bank-switch costs. Compare identical datasets and financial outputs on the same hardware; report CPU work separately from disk and printer waits without a promised speed ratio."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "portable_api_id",
+                    "ref_id": "technology.logix_c_api",
+                    "ref_role": "Shared C service contract used by this edition"
+                  },
+                  {
+                    "key": "host_base_computer_artemis",
+                    "ref_id": "device.base_computer.artemis",
+                    "ref_role": "Supported execution host for this edition"
+                  },
+                  {
+                    "key": "runtime_aionix_os_model",
+                    "ref_id": "technology.aionix_os_model",
+                    "ref_role": "Runtime prerequisite for this software edition"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.bpi_suite.era",
+            "before": {
+              "id": "external_product.bpi_suite.era",
+              "name": "BPI business applications — AIONix edition",
+              "description": "BPI-owned business applications for Artemis using AIONix. The suite covers general accounting, accounts receivable/payable, inventory control and payroll, using AION C, Logix TUI and a relational base engine. BPI owns licensing, updates and specialist support; Logix distribution and AION engineering assistance do not transfer ownership. Selected balances or monthly totals can be exported for Abacus planning through a versioned disk file; this is not a live database link.",
+              "specification": [
+                {
+                  "no": 1,
+                  "description": "BPI owns and licenses these business applications.",
+                  "ref_id": "actor.bpi",
+                  "ref_role": "application owner and publisher"
+                },
+                {
+                  "no": 2,
+                  "description": "Defines the AIONix implementation, modules, platform support and delivery contents.",
+                  "ref_id": "software_edition.bpi_suite.era",
+                  "ref_role": "technical implementation edition"
+                },
+                {
+                  "no": 3,
+                  "description": "Defines independent BPI ownership and the development, distribution and training relationship.",
+                  "ref_id": "agreement.bpi_offer",
+                  "ref_role": "redevelopment and distribution agreement"
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.bpi_suite.era",
+              "name": "SSG General Ledger — AIONix edition",
+              "description": "SSG General Ledger for Artemis/AIONix uses a separately built native ERA implementation. SSG owns and licenses the application and maintains specialist support. The package covers General Ledger, not a five-module accounting suite. Selected ledger balances and period totals can be exported to Abacus through a reconciled, versioned disk file. AION engineering sponsorship and Logix distribution confer no application ownership.",
+              "specification": [
+                {
+                  "no": 1,
+                  "description": "SSG owns and licenses General Ledger.",
+                  "ref_id": "actor.bpi",
+                  "ref_role": "application owner and publisher"
+                },
+                {
+                  "no": 2,
+                  "description": "Defines the AIONix implementation, ledger functions, platform support and delivery contents.",
+                  "ref_id": "software_edition.bpi_suite.era",
+                  "ref_role": "technical implementation edition"
+                },
+                {
+                  "no": 3,
+                  "description": "Defines independent SSG ownership and the development, distribution and training relationship.",
+                  "ref_id": "agreement.bpi_offer",
+                  "ref_role": "redevelopment and distribution agreement"
+                }
+              ]
+            }
+          }
+        ],
+        "depends_on_change_ids": [
+          "change.ssg_agreement",
+          "change.ssg_aurelia_edition"
+        ]
+      },
+      "target": [
+        {
+          "record_id": "software_edition.bpi_suite.era",
+          "before": {
+            "id": "software_edition.bpi_suite.era",
+            "name": "BPI (AIONix edition)",
+            "version": "1.0",
+            "edition": "AIONix",
+            "family_name": "BPI",
+            "description": "BPI (AIONix edition)",
+            "provider_actor_ids": [
+              "actor.bpi"
+            ],
+            "technology_ids": [
+              "technology.bpi_relational_database",
+              "technology.aion_c_portability_framework",
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_standard",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "implementation": {
+                    "language": "AION C",
+                    "ui": "Logix TUI",
+                    "database": "relational base engine",
+                    "printing": "native FlexiBUS printer support"
+                  },
+                  "modules": [
+                    {
+                      "name": "BPI General Accounting",
+                      "features": [
+                        "general ledger",
+                        "simplified AR",
+                        "simplified AP",
+                        "payroll integration",
+                        "balance sheets"
+                      ]
+                    },
+                    {
+                      "name": "BPI Accounts Receivable",
+                      "features": [
+                        "customer accounts",
+                        "open invoices",
+                        "incoming payments",
+                        "customer statements"
+                      ]
+                    },
+                    {
+                      "name": "BPI Accounts Payable",
+                      "features": [
+                        "vendor accounts",
+                        "outstanding liabilities",
+                        "cash-flow obligations",
+                        "check printing"
+                      ]
+                    },
+                    {
+                      "name": "BPI Inventory Control",
+                      "features": [
+                        "stock levels",
+                        "purchase orders",
+                        "journal entries for product movement",
+                        "profitability reports"
+                      ]
+                    },
+                    {
+                      "name": "BPI Payroll",
+                      "features": [
+                        "employee hours",
+                        "local/federal tax withholding",
+                        "benefits",
+                        "payroll check printing"
+                      ]
+                    }
+                  ],
+                  "portability_contract": {
+                    "api_id": "technology.logix_c_api",
+                    "shared_logic": "Separate application/document algorithms from platform adapters.",
+                    "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                    "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                    "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                    "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                  },
+                  "specification": {
+                    "summary_export": {
+                      "format": "Versioned delimited-text file on disk with named columns, period, currency, account identifiers, decimal amounts and control totals.",
+                      "scope": "Selected balances or monthly totals imported into Abacus as planning inputs. No automatic write-back, concurrent execution or live database link. Close BPI before loading Abacus.",
+                      "acceptance": "Reconcile record counts and control totals; validate rounding, quoting, disk-full errors, memory use and save/reopen. Prepared demo data is labelled."
+                    }
+                  },
+                  "execution_target": "era_aionix",
+                  "role": "application",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.artemis"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": null,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "technology.aionix_os_model"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "edition_delivery"
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_suite.era.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_suite.era.license_document"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_suite.era.installation_media"
+                    },
+                    "quantity": 3
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_suite.era.software_packaging"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Accounting modules and implementation",
+                  "description": "The suite is implemented in AION C around a relational base engine, the Logix TUI and native FlexiBUS printing. General Accounting covers ledger, simplified receivables/payables, payroll integration and balance sheets. Accounts Receivable tracks customers, open invoices, payments and statements; Accounts Payable tracks vendors, liabilities, cash-flow obligations and cheque printing. Inventory Control handles stock, purchase orders, movement journals and profitability. Payroll handles employee hours, local/federal withholding, benefits and payroll cheques."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Planning-data export",
+                  "description": "Selected balances or monthly totals are exported as versioned delimited text with named columns, period, currency, account identifiers, decimal amounts and control totals. Close BPI before loading Abacus to use these as independent planning inputs; there is no automatic write-back, simultaneous execution or live database link. Reconcile counts/totals and test rounding, quoting, disk-full handling, memory and save/reopen; label prepared demonstration data."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Portable implementation",
+                  "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This application suite targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_os_model}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "portable_api_id",
+                  "ref_id": "technology.logix_c_api",
+                  "ref_role": "Shared C service contract used by this edition"
+                },
+                {
+                  "key": "host_base_computer_artemis",
+                  "ref_id": "device.base_computer.artemis",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "runtime_aionix_os_model",
+                  "ref_id": "technology.aionix_os_model",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "software_edition.bpi_suite.era",
+            "name": "SSG General Ledger (AIONix edition)",
+            "version": "1.0",
+            "edition": "AIONix",
+            "family_name": "SSG General Ledger",
+            "description": "SSG-owned General Ledger implemented in AION C with the shared TUI, explicit decimal accounting rules and versioned record files. The separate native ERA/AIONix build requires target-specific qualification.",
+            "provider_actor_ids": [
+              "actor.bpi"
+            ],
+            "technology_ids": [
+              "technology.bpi_relational_database",
+              "technology.aion_c_portability_framework",
+              "technology.logix_c_api",
+              "technology.logix_display_api",
+              "technology.logix_tui_standard",
+              "technology.logix_tui_keyboard_standard"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "implementation": {
+                    "language": "AION C",
+                    "ui": "Logix TUI",
+                    "database": "Versioned ledger record files with bounded buffers and application-level access routines; no general relational engine is required for this standalone edition.",
+                    "printing": "native FlexiBUS printer support"
+                  },
+                  "modules": [
+                    {
+                      "name": "SSG General Ledger",
+                      "features": [
+                        "custom charts of accounts",
+                        "single or multiple departments",
+                        "validated journal entry and posting",
+                        "corrections and audit records",
+                        "period balances and trial balance",
+                        "customisable financial reports",
+                        "backup, restore and reconciled summary export"
+                      ]
+                    }
+                  ],
+                  "portability_contract": {
+                    "api_id": "technology.logix_c_api",
+                    "shared_logic": "Separate application/document algorithms from platform adapters.",
+                    "display": "Query dimensions and attributes; use semantic colors and clipping.",
+                    "memory": "Bounded buffers and handles for banked objects; report allocation failures.",
+                    "storage": "Versioned, explicitly encoded records; no persisted pointers or raw C structures.",
+                    "migration": "Recompile for the target, adapt OS-specific modules and test resource limits. This does not expand the listed supported platforms."
+                  },
+                  "specification": {
+                    "summary_export": {
+                      "format": "Versioned delimited-text file on disk with named columns, period, currency, account identifiers, decimal amounts and control totals.",
+                      "scope": "Selected account balances and monthly totals become independent Abacus planning inputs through a versioned disk file. Close General Ledger before loading Abacus; there is no automatic ledger write-back or live database link.",
+                      "acceptance": "Reconcile record counts and control totals; validate rounding, quoting, disk-full errors, memory use and save/reopen. Prepared demo data is labelled."
+                    }
+                  },
+                  "execution_target": "era_aionix",
+                  "role": "application",
+                  "platform_support": [
+                    {
+                      "computer_id": "device.base_computer.artemis"
+                    }
+                  ],
+                  "minimum_resources": {
+                    "installed_ram_kb": null,
+                    "application_ram_bytes": null,
+                    "rom_bytes": null
+                  },
+                  "dependency_ids": [
+                    "technology.aionix_os_model"
+                  ],
+                  "distribution": {
+                    "medium": "diskette",
+                    "fulfillment": "edition_delivery"
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_suite.era.software_documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_suite.era.license_document"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_suite.era.installation_media"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.edition.bpi_suite.era.software_packaging"
+                    },
+                    "quantity": 1
+                  }
+                ]
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "General Ledger implementation",
+                  "description": "General Ledger maintains custom charts of accounts, departments, journal entries, corrections, period balances and financial reports. The AION C implementation uses versioned record files and bounded buffers; the standalone release does not depend on a general relational database or include receivables, payables, inventory or payroll modules. Performance-critical string, record and decimal routines may be written in assembly and linked through the published ABI. This native ERA build uses AIONix-mediated TUI and display services with target-specific runtime libraries; it does not reuse Z80 binaries or assume the Aurelia ROM-bank arrangement."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Planning-data export",
+                  "description": "Selected account balances and monthly totals become independent Abacus planning inputs through a versioned disk file. Close General Ledger before loading Abacus; there is no automatic ledger write-back or live database link. Reconcile counts and control totals, validate decimals and quoting, and test disk-full, memory exhaustion and save/reopen. Label prepared demonstration data."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Portable implementation",
+                  "description": "The implementation uses {portable_api_id}. Keep application/document algorithms separate from platform adapters; query display dimensions and attributes, use semantic colours and clipping, and handle allocation failures with bounded buffers and banked-object handles. Persistent records are explicitly encoded and versioned rather than raw structures or pointers. Recompile and adapt OS-specific modules for another target, then test its resource limits; source portability does not extend the list of qualified hosts."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Execution and delivery",
+                  "description": "This General Ledger application targets native ERA/AIONix on {host_base_computer_artemis}. It requires {runtime_aionix_os_model}. The edition is delivered on diskette. Application workspace and ROM footprint remain unspecified. One distribution diskette is the package assumption; installation, working-data space and any media exchanges require qualification."
+                },
+                {
+                  "number": 5,
+                  "chapter_name": "Financial equivalence and recovery",
+                  "description": "Use explicit decimal or sufficiently wide scaled-integer routines with documented range, rounding and overflow handling. Reconcile CBASIC reference reports and cases exercising 14-digit precision before timing the port. Preserve posting and recovery semantics. Test maximum balances, reversals, period closing, interrupted updates, disk-full handling and backup restoration. On-disk values use explicit encodings, not raw C structures."
+                },
+                {
+                  "number": 6,
+                  "chapter_name": "Forms and measured performance",
+                  "description": "Bounded text fields, lists, account tables, selection dropdowns and buttons use Tab/Shift-Tab, shortcuts, shared selection/editing and copy/paste. Composite controls may be SDK helpers over ROM primitives. Text mode is the baseline; bitmap rendering is optional only on qualified configurations. Measure native code, selected C/assembly libraries and ROM TUI call/bank-switch costs. Compare identical datasets and financial outputs on the same hardware; report CPU work separately from disk and printer waits without a promised speed ratio."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "portable_api_id",
+                  "ref_id": "technology.logix_c_api",
+                  "ref_role": "Shared C service contract used by this edition"
+                },
+                {
+                  "key": "host_base_computer_artemis",
+                  "ref_id": "device.base_computer.artemis",
+                  "ref_role": "Supported execution host for this edition"
+                },
+                {
+                  "key": "runtime_aionix_os_model",
+                  "ref_id": "technology.aionix_os_model",
+                  "ref_role": "Runtime prerequisite for this software edition"
+                }
+              ]
+            }
+          },
+          "content_sha256": "b1cdc14e40237fd3e874aa72423322b6c5a0d9d7b8185728aed29df73856a817"
+        },
+        {
+          "record_id": "external_product.bpi_suite.era",
+          "before": {
+            "id": "external_product.bpi_suite.era",
+            "name": "BPI business applications — AIONix edition",
+            "description": "BPI-owned business applications for Artemis using AIONix. The suite covers general accounting, accounts receivable/payable, inventory control and payroll, using AION C, Logix TUI and a relational base engine. BPI owns licensing, updates and specialist support; Logix distribution and AION engineering assistance do not transfer ownership. Selected balances or monthly totals can be exported for Abacus planning through a versioned disk file; this is not a live database link.",
+            "specification": [
+              {
+                "no": 1,
+                "description": "BPI owns and licenses these business applications.",
+                "ref_id": "actor.bpi",
+                "ref_role": "application owner and publisher"
+              },
+              {
+                "no": 2,
+                "description": "Defines the AIONix implementation, modules, platform support and delivery contents.",
+                "ref_id": "software_edition.bpi_suite.era",
+                "ref_role": "technical implementation edition"
+              },
+              {
+                "no": 3,
+                "description": "Defines independent BPI ownership and the development, distribution and training relationship.",
+                "ref_id": "agreement.bpi_offer",
+                "ref_role": "redevelopment and distribution agreement"
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.bpi_suite.era",
+            "name": "SSG General Ledger — AIONix edition",
+            "description": "SSG General Ledger for Artemis/AIONix uses a separately built native ERA implementation. SSG owns and licenses the application and maintains specialist support. The package covers General Ledger, not a five-module accounting suite. Selected ledger balances and period totals can be exported to Abacus through a reconciled, versioned disk file. AION engineering sponsorship and Logix distribution confer no application ownership.",
+            "specification": [
+              {
+                "no": 1,
+                "description": "SSG owns and licenses General Ledger.",
+                "ref_id": "actor.bpi",
+                "ref_role": "application owner and publisher"
+              },
+              {
+                "no": 2,
+                "description": "Defines the AIONix implementation, ledger functions, platform support and delivery contents.",
+                "ref_id": "software_edition.bpi_suite.era",
+                "ref_role": "technical implementation edition"
+              },
+              {
+                "no": 3,
+                "description": "Defines independent SSG ownership and the development, distribution and training relationship.",
+                "ref_id": "agreement.bpi_offer",
+                "ref_role": "redevelopment and distribution agreement"
+              }
+            ]
+          },
+          "content_sha256": "fa018d3727fb9ecd2df9370e2fa2e6d09d23216ae1cb70cd508790c7b19817c1"
+        }
+      ]
+    }
+  ]
+}
