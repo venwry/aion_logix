@@ -13,7 +13,7 @@ test('campaign aliases, boundaries and descendants inherit only ownership catego
  const filtered=new Map([...tree.nodes].filter(([id])=>id==='process.child'));
  assert.equal(arrangeSwimlanes(layoutTimeline(filtered,1980,1980)).roots[0].laneId,'product');
 });
-test('swim lanes separate categories, pack overlaps, and collapse without moving dates',()=>{
+test('horizontal swim-lane packing separates categories and preserves supplied calendar geometry',()=>{
  const tree=timelineTree([item('process.a',{category:timelineCategories[0].label}),item('process.b',{category:timelineCategories[0].label}),item('process.c',{category:timelineCategories[1].label}),item('event.unknown')]);
  const full=arrangeSwimlanes(layoutTimeline(tree.nodes,1980,1980));
  assert.equal(full.lanes.length,6);

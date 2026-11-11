@@ -95,7 +95,10 @@ try{
   function descendants(id){for(const child of tree.nodes.get(id).children){included.add(child);descendants(child);}}
   for(const id of direct)if(tree.nodes.get(id).date?.span)descendants(id);
   const nodes=new Map([...tree.nodes].filter(([id])=>included.has(id)).map(([id,n])=>[id,{...n,context:!direct.has(id)}]));
-  const layout=arrangeSwimlanes(layoutTimeline(nodes,lo,hi),collapsedLanes,[...nodes.values()].some(n=>laneFor(n.category).id==='uncategorised'));$('timeline').replaceChildren();$('undated').replaceChildren();
+  // Hidden categories must not reserve dates or vertical space in the shared calendar.
+  const visibleNodes=new Map([...nodes].filter(([,n])=>!collapsedLanes.has(laneFor(n.category).id)));
+  const hiddenDated=[...nodes.values()].some(n=>n.date&&n.date.end>=start&&n.date.start<=end&&collapsedLanes.has(laneFor(n.category).id));
+  const layout=arrangeSwimlanes(layoutTimeline(visibleNodes,lo,hi),collapsedLanes,[...nodes.values()].some(n=>laneFor(n.category).id==='uncategorised'));$('timeline').replaceChildren();$('undated').replaceChildren();
   const controls=$('lane-controls');controls.replaceChildren();
   for(const lane of layout.lanes){const button=el('button','lane-toggle',(lane.hidden?'＋ ':'− ')+lane.label);button.type='button';button.dataset.lane=lane.id;button.style.backgroundColor=lane.color;button.setAttribute('aria-expanded',String(!lane.hidden));button.setAttribute('aria-controls','timeline undated');button.title=(lane.hidden?'Expand ':'Collapse ')+lane.label;button.onclick=()=>{if(lane.hidden)collapsedLanes.delete(lane.id);else collapsedLanes.add(lane.id);render();controls.querySelector('[data-lane="'+lane.id+'"]')?.focus();};controls.append(button);}
   stats($('stats'),['event','process','campaign'].map(t=>[matching.filter(i=>i.type===t).length,t==='process'?'processes':t+'s']));
@@ -109,7 +112,7 @@ try{
    const spine=el('div','date-spine');spine.style.top=layout.years[0].top+'px';spine.style.height=(layout.height-layout.years[0].top-30)+'px';axis.append(spine);
    for(const tick of layout.ticks){const row=el('div','date-tick');row.style.top=tick.top+'px';row.dataset.date=new Date(tick.time).toISOString().slice(0,10);row.title=tick.labels.join(' / ');const labels=tick.labels.map(value=>{if(value.length===4)return layout.years.some(year=>String(year.year)===value&&year.top===tick.top)?'':value;const date=new Date(value+(value.length===7?'-01':'')+'T00:00:00Z');return date.toLocaleDateString('en-GB',{month:'short',...(value.length>7?{day:'2-digit'}:{}),timeZone:'UTC'});});row.append(el('span','date-tick-label',[...new Set(labels.filter(Boolean))].join(' / ')),el('span','date-dot'));axis.append(row);}
    root.append(axis);
-  }else{const empty=el('div','empty-state');empty.append(el('h2','',layout.lanes.some(l=>l.hidden&&l.groups.length)?'Matching lanes are collapsed':'No dated records match'),el('p','','Expand a lane or adjust the filters to explore more of the story.'));root.append(empty);}
+  }else{const empty=el('div','empty-state');empty.append(el('h2','',hiddenDated?'Matching lanes are collapsed':'No dated records match'),el('p','','Expand a lane or adjust the filters to explore more of the story.'));root.append(empty);}
   const undated=[...nodes.values()].filter(n=>!n.date&&!collapsedLanes.has(laneFor(n.category).id));$('undated').hidden=!undated.length;
   if(undated.length){$('undated').append(el('h2','','Undated / relative timing'),el('p','','Unknown boundaries are not invented. Linked undated work is listed here until dates are supplied.'));for(const n of undated){const node=card(n);node.dataset.lane=laneFor(n.category).id;if(n.parent)node.title='Belongs to '+titleOf(tree.nodes.get(n.parent).record);$('undated').append(node);}}
   if(!selected&&matching.length)selected=matching[0].record.id;if(selected)choose(selected);else compactDetails(null,data,choose);

@@ -8,8 +8,8 @@ export const timelineCategories = [
 export const uncategorisedLane={id:'uncategorised',label:'Uncategorised',color:'#f1f3f5'};
 export function laneFor(category){return timelineCategories.find(l=>l.label===category)||uncategorisedLane;}
 
-// Pack concurrent groups inside their category. The shared vertical geometry is
-// calculated before hiding lanes, so collapse never changes calendar anchors.
+// Pack concurrent groups inside their category. Callers exclude hidden categories
+// before calculating the shared vertical geometry; retain their controls here.
 export function arrangeSwimlanes(layout,collapsed=new Set(),hasUncategorised=false){
  const definitions=[...timelineCategories];
  if(hasUncategorised||layout.roots.some(r=>laneFor(r.category).id==='uncategorised'))definitions.push(uncategorisedLane);
