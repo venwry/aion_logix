@@ -71,3 +71,15 @@ test('actor filtering and category collapse calculate the same calendar for the 
  await page.locator('#actor').selectOption('');await page.locator('.lane-toggle[data-lane="personal"]').click();expect(await geometry()).toEqual(filtered);expect(parseFloat(filtered.height)).toBeLessThan(parseFloat(full.height));
  await page.locator('.lane-toggle[data-lane="personal"]').click();expect(await geometry()).toEqual(full);
 });
+test('hiding personal category removes the unused 02 Jan 1972 date from the actual timeline',async({page})=>{
+ // Simulate an older cached unversioned entry: the page must request the versioned script.
+ await page.route('**/code/timeline.js',r=>r.fulfill({contentType:'text/javascript',body:'throw new Error("Stale unversioned timeline entry");'}));
+ await page.goto('/code/timeline.html#process.computer_business_incorporation');await expect(page.locator('body')).toHaveAttribute('data-ready','true');
+ await expect(page.locator('.date-tick[data-date="1972-01-02"]')).toHaveCount(1);
+ await page.locator('.lane-toggle[data-lane="personal"]').click();
+ await expect(page.locator('.timeline-card[data-record-id="event.identity"]')).toHaveCount(0);
+ await expect(page.locator('.date-tick[data-date="1972-01-02"]')).toHaveCount(0);
+ await expect(page.locator('#details .record-id')).toHaveText('process.computer_business_incorporation');
+ await page.locator('.lane-toggle[data-lane="personal"]').click();
+ await expect(page.locator('.date-tick[data-date="1972-01-02"]')).toHaveCount(1);
+});
