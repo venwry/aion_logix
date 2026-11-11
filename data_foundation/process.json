@@ -1062,7 +1062,7 @@
         {
           "number": 2,
           "type": "action",
-          "description": "activity: Confidential dealer/BPI training, demo qualification, workflow rehearsal and press-material preparation. Invite business buyers and manufacturers to separate sessions; do not disclose unreleased specifications publicly."
+          "description": "activity: Confidential dealer/SSG training, demo qualification, workflow rehearsal and press-material preparation. Invite business buyers and manufacturers to separate sessions; do not disclose unreleased specifications publicly."
         }
       ],
       "subject_ids": []
@@ -2070,7 +2070,7 @@
         {
           "number": 2,
           "type": "action",
-          "description": "activities / 1 / action: Live 55-minute keynote, independent BPI appearance after Abacus, benchmark method/results if measured, compatibility policy, software/configuration matrix and ordering sheets."
+          "description": "activities / 1 / action: Live 55-minute keynote, independent SSG appearance after Abacus, benchmark method/results if measured, compatibility policy, software/configuration matrix and ordering sheets."
         },
         {
           "number": 3,
@@ -2156,7 +2156,7 @@
         {
           "number": 3,
           "type": "action",
-          "description": "activities / 0 / activity: Confidential dealer/BPI training, demo qualification, workflow rehearsal and press-material preparation. Invite business buyers and manufacturers to separate sessions; do not disclose unreleased specifications publicly."
+          "description": "activities / 0 / activity: Confidential dealer/SSG training, demo qualification, workflow rehearsal and press-material preparation. Invite business buyers and manufacturers to separate sessions; do not disclose unreleased specifications publicly."
         },
         {
           "number": 4,
@@ -2561,7 +2561,7 @@
       "id": "process.ncc1981_campaign",
       "title": "Networked business-computing platform presented — execution",
       "kind": "campaign_execution",
-      "description": "Present the networked business-computing platform at NCC on 4 May 1981, then coordinate dealer and BPI follow-up through the multi-client recovery pilots on 30 June. Sales and July shipments remain conditional on configuration-specific qualification.",
+      "description": "Present the networked business-computing platform at NCC on 4 May 1981, then coordinate dealer and SSG follow-up through the multi-client recovery pilots on 30 June. Sales and July shipments remain conditional on configuration-specific qualification.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -2595,7 +2595,7 @@
         {
           "number": 2,
           "type": "action",
-          "description": "Coordinate post-presentation dealer and BPI pilot preparation, including authentication, locking, backup and crash-recovery checks, without treating launch attendance as qualified sales."
+          "description": "Coordinate post-presentation dealer and SSG pilot preparation, including authentication, locking, backup and crash-recovery checks, without treating launch attendance as qualified sales."
         }
       ]
     },
@@ -4052,7 +4052,7 @@
       "id": "process.artemis_networking_development",
       "title": "Artemis Networking development and launch",
       "kind": "development",
-      "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign and its recovery pilots ending on 30 June 1981. The campaign presents the platform in May and coordinates dealer/BPI qualification follow-up; commercial shipments remain conditional.",
+      "description": "Develop the Artemis networking and server platform from 12 July 1980 through the NCC launch campaign and its recovery pilots ending on 30 June 1981. The campaign presents the platform in May and coordinates dealer/SSG qualification follow-up; commercial shipments remain conditional.",
       "participant": [
         {
           "actor_id": "actor.logix",
@@ -4097,12 +4097,12 @@
         {
           "number": 2,
           "type": "action",
-          "description": "Integrate the client-server application generation and prepare configuration-specific authentication, locking, backup and crash-recovery tests."
+          "description": "Integrate the SSG General Ledger client/server adaptation, preserving ledger correctness and bounded clients. Prepare configuration-specific authentication, locking, durable posting, duplicate-retry, backup and crash-recovery tests."
         },
         {
           "number": 3,
           "type": "action",
-          "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades at NCC, and carry the campaign through its dealer/BPI recovery pilots.",
+          "description": "Present the networked business-computing platform, Artemis PRO and supported upgrades at NCC, and carry the campaign through its dealer/SSG recovery pilots.",
           "process_id": "process.ncc1981_campaign"
         },
         {
@@ -4110,18 +4110,23 @@
           "type": "action",
           "description": "Coordinate the marketing campaign: Networked business-computing platform presented.",
           "campaign_id": "campaign.ncc1981"
+        },
+        {
+          "number": 5,
+          "type": "action",
+          "description": "At acceptance of the separately scoped SSG networking phase, hand over source, reproducible builds, regression/recovery tests and maintainer training. End the special application-development assignment after agreed defect correction; SSG alone owns future product development and specialist support."
         }
       ],
       "outcomes": [
         {
           "number": 1,
           "type": "result",
-          "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability or forecast revenue from unpriced larger storage."
+          "description": "The networking and server platform is presented at NCC and reaches multi-client recovery pilots during campaign follow-up. Configuration-specific results gate server sales and July shipments; the programme does not establish unrestricted availability."
         },
         {
           "number": 2,
           "type": "qualification",
-          "description": "The programme reaches configuration-specific multi-client recovery pilots for the networking/server platform and BPI client/server implementations. Their results gate sales and shipments; completion of every qualification is not inferred.",
+          "description": "The programme reaches configuration-specific multi-client recovery pilots for the networking/server platform and SSG client/server implementations. Their results gate sales and shipments; completion of every qualification is not inferred.",
           "subject_ids": [
             "technology.logix_tcpip_lan",
             "software_edition.aionix_server",
@@ -4133,10 +4138,15 @@
         {
           "number": 3,
           "type": "deliverable",
-          "description": "The CP/M Aurelia networking edition supplies the TCP/IP stack, LogixLAN adapter driver, network configuration tools and BPI client networking API for supported Aurelia and Aurelia+ upgrades. Availability remains subject to configuration-specific qualification and the programme’s shipment gates.",
+          "description": "The CP/M Aurelia networking edition supplies the TCP/IP stack, LogixLAN adapter driver, network configuration tools and SSG client networking API for supported Aurelia and Aurelia+ upgrades. Availability remains subject to configuration-specific qualification and the programme’s shipment gates.",
           "subject_ids": [
             "software_edition.cpm_aurelia_networking"
           ]
+        },
+        {
+          "number": 4,
+          "type": "result",
+          "description": "The finite networking demonstration partnership defines acceptance and handover to SSG. Unfinished qualification postpones acceptance rather than creating an indefinite AION accounting-product obligation."
         }
       ],
       "category": "Product dev & launch"
@@ -4856,12 +4866,6 @@
           "number": 4,
           "type": "action",
           "description": "Integrate bounded TUI forms, lists, account tables, selection controls and buttons with shared editing, Tab navigation, shortcuts and copy/paste. Link measured assembly kernels and use the ROM TUI through documented bank-safe calls."
-        },
-        {
-          "number": 5,
-          "type": "milestone",
-          "description": "Run business and accountant qualification pilots.",
-          "event_id": "event.bpi_pilot"
         },
         {
           "number": 6,
