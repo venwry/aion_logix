@@ -23,18 +23,20 @@ export function validateTechnologySpecifications(records){
  return errors;
 }
 let parameterTableId=0;
-export function renderTechnologySpecification(chapters,renderValue=value=>document.createTextNode(value)){
+export function renderTechnologySpecification(chapters,renderValue=value=>document.createTextNode(value),options={}){
  const make=(tag,className='',text)=>{const n=document.createElement(tag);n.className=className;if(text!==undefined)n.textContent=text;return n;};
- const section=make('section','technology-specification');section.setAttribute('aria-label','Technology specification');
+ const inline=options.parentNumber!==undefined;
+ const section=make('section','technology-specification');section.setAttribute('aria-label',inline?'Marketing presentation':'Technology specification');
  for(const chapter of chapters){
   const card=make('section','specification-chapter');card.dataset.chapterNumber=chapter.number;
-  const heading=make('h3','specification-chapter-heading');
-  heading.append(make('span','',chapter.number+'. '+(chapter.chapter_name??chapter.type)));card.append(heading);
+  const label=inline?options.parentNumber+'.'+chapter.number:chapter.number+'. '+(chapter.chapter_name??chapter.type);
+  const heading=make(inline?'span':'h3',inline?'marketing-presentation-prefix':'specification-chapter-heading');
+  heading.append(make('span','',label));if(!inline)card.append(heading);
   // Read-only compatibility for preserved before snapshots from older schemas.
   const parameters=chapter.parameters??('value' in chapter&&String(chapter.value)!==chapter.description?[{key:'value',value:String(chapter.value)}]:[]);
   const description=make('div','specification-description');
   for(const paragraph of chapter.description.split(/\n\s*\n/)){
-   const p=make('p');for(const part of specificationSegments(paragraph,parameters)){
+   const p=make('p');if(inline&&!description.childElementCount)p.append(heading,document.createTextNode(' '));for(const part of specificationSegments(paragraph,parameters)){
     if(part.key){const span=make('span','specification-parameter');span.title=part.key;span.append(renderValue(part.text));p.append(span);}
     else if(part.missing){const span=make('span','specification-unresolved',part.text);span.title='No parameter named '+part.missing;p.append(span);}
     else p.append(document.createTextNode(part.text));
@@ -44,8 +46,8 @@ export function renderTechnologySpecification(chapters,renderValue=value=>docume
    const wrap=make('div','specification-parameters-scroll'),table=make('table','specification-parameters'),head=make('thead'),hr=make('tr'),body=make('tbody');
    wrap.id='specification-parameters-'+(++parameterTableId);wrap.hidden=true;
    const toggle=make('button','specification-parameters-toggle','[+]');toggle.type='button';toggle.setAttribute('aria-controls',wrap.id);
-   const updateToggle=()=>{const label=(wrap.hidden?'Show':'Hide')+' parameters for '+chapter.number+'. '+(chapter.chapter_name??chapter.type);toggle.textContent=wrap.hidden?'[+]':'[−]';toggle.setAttribute('aria-expanded',String(!wrap.hidden));toggle.setAttribute('aria-label',label);toggle.title=label;};
-   updateToggle();toggle.addEventListener('click',()=>{wrap.hidden=!wrap.hidden;updateToggle();});heading.append(toggle);
+   const updateToggle=()=>{const toggleLabel=(wrap.hidden?'Show':'Hide')+' parameters for '+label;toggle.textContent=wrap.hidden?'[+]':'[−]';toggle.setAttribute('aria-expanded',String(!wrap.hidden));toggle.setAttribute('aria-label',toggleLabel);toggle.title=toggleLabel;};
+   updateToggle();toggle.addEventListener('click',()=>{wrap.hidden=!wrap.hidden;updateToggle();});if(inline)heading.append(document.createTextNode(' '));heading.append(toggle);
    for(const label of ['Key','Value']){const th=make('th','',label);th.scope='col';hr.append(th);}head.append(hr);
    for(const parameter of parameters){const row=make('tr'),key=make('th','',parameter.key),value=make('td');key.scope='row';value.append(renderValue(parameter.value));row.append(key,value);body.append(row);}
    table.append(head,body);table.setAttribute('aria-label',(chapter.chapter_name??chapter.type)+' parameters');wrap.append(table);card.append(wrap);

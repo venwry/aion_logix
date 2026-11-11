@@ -49,7 +49,7 @@ export function renderMarketingSteps(steps,index,renderValue){
    const reference=document.createElement('div');reference.className='marketing-step-reference';reference.append(renderValue(step.reference_id),document.createTextNode(' · '+(point?.value||'unknown date')));card.append(reference);
   }
   const blocks=step.marketing_presentation.map(block=>({number:block.number,chapter_name:'Presentation block',description:block.description,parameters:block.parameters.map(p=>({key:p.key,value:p.ref_id??p.value}))}));
-  card.append(renderTechnologySpecification(blocks,renderValue));section.append(card);
+  card.append(renderTechnologySpecification(blocks,renderValue,{parentNumber:step.number}));section.append(card);
  }
  if(!steps.length){const empty=document.createElement('p');empty.textContent='No marketing steps specified.';section.append(empty);}
  return section;

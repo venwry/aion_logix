@@ -19,7 +19,7 @@ Each marketing step has:
 
 A block describes part of the activity: an opening, an introduction, a live demonstration or a specific follow-up explanation. It has no event reference of its own. Parameters are exactly `{key, value}` (text or number) or `{key, ref_id}`. Narrative `{key}` placeholders explain each parameter's role; there is no `ref_role`. Keys are unique within a block, every key must be used, and every placeholder must resolve. Reference parameters are contextual relationships, not ownership. Text is substituted safely without interpreting HTML or recursively evaluating templates.
 
-The renderer shows each step as a narrative section, using expandable parameter tables like technical specifications. Its first header line contains number, type and description. When `reference_id` exists, the second line identifies the referenced event/process and its date/start date. Campaigns occupy independent light-red timeline blocks and duration tracks. Legacy campaigns remain combined with their execution process until converted.
+The renderer shows each step as a narrative section, using expandable parameter tables like technical specifications. Its first header line contains number, type and description. When `reference_id` exists, the second line identifies the referenced event/process and its date/start date. Each presentation block has no separate heading: it reads `parent-number.block-number [+] description` in the description font. The toggle appears only for blocks with parameters. Campaigns occupy independent light-red timeline blocks and duration tracks. Legacy campaigns remain combined with their execution process until converted.
 
 ## Transition and ownership
 
