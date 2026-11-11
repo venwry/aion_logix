@@ -2960,7 +2960,7 @@
       "id": "process.computer_business_incorporation",
       "title": "Incorporation of Computer business",
       "kind": "business_formation",
-      "description": "Adam establishes Logix Tech and AION Labs, then obtains control of CAP, which becomes AION Software in London under Alex d’Agapeyeff. This formation phase begins on 23 November 1974 and develops leadership and partnerships with DRI, BPI and others through Tim Paterson’s recruitment.",
+      "description": "Adam establishes Logix Tech and AION Labs, then obtains control of CAP, which becomes AION Software in London under Alex d’Agapeyeff. This formation phase begins on 23 November 1974 and develops leadership and partnerships with DRI and other early partners through Tim Paterson’s recruitment.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -2981,10 +2981,6 @@
         {
           "actor_id": "actor.dri",
           "role": "operating-system cooperation partner"
-        },
-        {
-          "actor_id": "actor.bpi",
-          "role": "independent application cooperation partner"
         }
       ],
       "period": {
@@ -3036,12 +3032,6 @@
           "event_id": "event.facility"
         },
         {
-          "number": 4,
-          "type": "milestone",
-          "description": "Agree development and distribution cooperation with independent BPI Systems.",
-          "event_id": "event.bpi_cooperation"
-        },
-        {
           "number": 5,
           "type": "milestone",
           "description": "Recruit Letwin to London systems-software leadership and DRI liaison under the AION Software service-equity agreement.",
@@ -3081,7 +3071,7 @@
         {
           "number": 2,
           "type": "result",
-          "description": "Cooperation with DRI and BPI is established under the existing agreements. DRI and BPI retain the independence and rights specified in those agreements.",
+          "description": "Cooperation with DRI is established under its agreements while preserving its specified independence and rights. The later SSG agreement belongs to Aurelia’s partnership programme.",
           "subject_ids": []
         },
         {
@@ -3101,7 +3091,7 @@
       "id": "process.aurelia_foundation",
       "title": "Aurelia Foundation and Partnerships",
       "kind": "product_foundation",
-      "description": "Establish the commercial and partnership foundation for Aurelia: CP/M implementation, independent BPI cooperation, printer-mechanism supply, ComputerLand distribution and Academy support. Include the Aurelia launch campaign, NCC presentations, the start of BPI training and the dealer programme through the campaign’s end on 17 July 1978. The campaign hierarchy also owns recording, editing and free television distribution of cleared NCC material.",
+      "description": "Establish Aurelia’s CP/M, printer, retail and Academy partnerships and sponsor the independent SSG General Ledger C/TUI port. The SSG agreement is signed on 28 July 1977 and its development team starts on 12 August. Coordinate the June 1978 launch campaign and Academy follow-up through 17 July, including cleared presentation recordings.",
       "participant": [
         {
           "actor_id": "actor.adam",
@@ -3113,7 +3103,7 @@
         },
         {
           "actor_id": "actor.aion",
-          "role": "software engineering and BPI qualification"
+          "role": "software engineering and SSG qualification"
         },
         {
           "actor_id": "actor.dri",
@@ -3175,13 +3165,13 @@
         {
           "number": 2,
           "type": "result",
-          "description": "BPI pilot testing, launch qualification and dealer/instructor preparation support the launch of its independently owned Aurelia applications. Qualification gates and support limits remain those recorded in the milestones; BPI has accepted Adam’s investment and AION’s C/TUI redevelopment obligations, with future-platform work and a subsequent BPI share-buyback right."
+          "description": "The funded SSG port and qualification programme support an independently owned General Ledger release, dealer preparation and Academy training. SSG retains application ownership, licensing, sales proceeds and specialist support; there is no AION equity or share-buyback arrangement."
         }
       ],
       "steps": [
         {
           "type": "milestone",
-          "description": "BPI accepts the investment and C/TUI redevelopment agreement.",
+          "description": "Sign the funded SSG General Ledger porting agreement on 28 July 1977.",
           "event_id": "event.bpi_offer",
           "number": 1
         },
@@ -3198,31 +3188,10 @@
           "number": 3
         },
         {
-          "type": "milestone",
-          "description": "BPI business and accountant pilot programme.",
-          "event_id": "event.bpi_pilot",
-          "number": 4
-        },
-        {
           "type": "action",
           "description": "Establish and prepare Logix Computer Academy through its dedicated launch-and-training process, from its founding event through 17 July 1978.",
           "number": 5,
           "process_id": "process.academy"
-        },
-        {
-          "number": 6,
-          "type": "action",
-          "description": "BPI and AION engineers tested the application family with businesses and accounting practices, reconciling its reports with existing records."
-        },
-        {
-          "number": 7,
-          "type": "action",
-          "description": "The partners checked posting, corrections, backup recovery, advertised payroll coverage and the summary export to Abacus."
-        },
-        {
-          "number": 8,
-          "type": "action",
-          "description": "BPI trained dealers and Academy instructors in the released configurations and its specialist-support arrangements before the June launch."
         },
         {
           "number": 10,
@@ -3233,7 +3202,13 @@
         {
           "number": 11,
           "type": "action",
-          "description": "Alex maintains separately budgeted TUI, C IDE and Abacus teams alongside inherited customer work. Start Abacus design and prototypes early, expand implementation as shared tools become usable, and review integration milestones and staffing quarterly. Allocate BPI assistance when the 1977 partnership is agreed; these staffing commitments do not establish completed software or qualification."
+          "description": "Alex protects the London TUI, AION C IDE and Abacus teams from 1975 onward. A working compiler and stable library/ABI contracts support application development in 1977; optimization, testing and IDE completion continue toward the June 1978 public release. Allocate the separate SSG port team in August 1977 and review integration and staffing without displacing inherited CAP customer commitments."
+        },
+        {
+          "number": 12,
+          "type": "action",
+          "description": "Form the joint team on August 12 and deliver the SSG General Ledger port through its development and qualification programme.",
+          "process_id": "process.ssg_general_ledger_port"
         }
       ],
       "category": "Product dev & launch"
@@ -4817,6 +4792,93 @@
       "inputs": [],
       "outcomes": [],
       "steps": []
+    },
+    {
+      "id": "process.ssg_general_ledger_port",
+      "title": "SSG General Ledger AION C/TUI port",
+      "kind": "development",
+      "description": "Develop and qualify the Aurelia adaptation of SSG’s General Ledger. The existing ledger work supplies the application semantics; AION contributes tools, integration and focused implementation support. The CBASIC release and C/TUI port remain distinct products.",
+      "participant": [
+        {
+          "actor_id": "actor.bpi",
+          "role": "application owner and acceptance authority"
+        },
+        {
+          "actor_id": "actor.aion",
+          "role": "funded porting and tools engineering"
+        },
+        {
+          "actor_id": "actor.alan_cooper",
+          "role": "application technical lead"
+        },
+        {
+          "actor_id": "actor.letwin",
+          "role": "platform interface liaison"
+        }
+      ],
+      "period": {
+        "start": {
+          "value": "1977-08-12",
+          "precision": "day"
+        },
+        "end": {
+          "value": "1978-06-06",
+          "precision": "day"
+        }
+      },
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "The agreement establishes the port scope and funded responsibilities.",
+          "event_id": "event.bpi_offer"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "type": "milestone",
+          "description": "Form the joint team and begin development.",
+          "event_id": "event.bpi_cooperation"
+        },
+        {
+          "number": 2,
+          "type": "action",
+          "description": "Port ledger logic and explicit decimal routines first; use regression fixtures while SSG independently completes its CBASIC release."
+        },
+        {
+          "number": 3,
+          "type": "milestone",
+          "description": "SSG releases the vanilla CP/M edition; freeze a copy and its runtime for regression and same-machine comparisons.",
+          "event_id": "event.ssg_cbasic_release"
+        },
+        {
+          "number": 4,
+          "type": "action",
+          "description": "Integrate bounded TUI forms, lists, account tables, selection controls and buttons with shared editing, Tab navigation, shortcuts and copy/paste. Link measured assembly kernels and use the ROM TUI through documented bank-safe calls."
+        },
+        {
+          "number": 5,
+          "type": "milestone",
+          "description": "Run business and accountant qualification pilots.",
+          "event_id": "event.bpi_pilot"
+        },
+        {
+          "number": 6,
+          "type": "action",
+          "description": "Complete reconciled reports, migration checks, error/recovery tests, resource measurements and instructor preparation. Hand over a reproducible release build for the June 6 joint presentation."
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "deliverable",
+          "description": "Deliver SSG’s native Z80 C/TUI General Ledger adaptation, source/build material, reconciled regression suite and maintenance documentation for its June 6 release. Qualification records identify supported configurations; SSG retains release and application ownership.",
+          "subject_ids": [
+            "software_edition.bpi_suite"
+          ]
+        }
+      ]
     }
   ]
 }

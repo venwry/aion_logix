@@ -402,96 +402,106 @@
     },
     {
       "id": "event.bpi_offer",
-      "title": "BPI accepts investment and C/TUI redevelopment agreement",
+      "title": "AION Software and SSG sign General Ledger porting agreement",
       "kind": "agreement_milestone",
-      "description": "BPI Systems accepts Adam’s $150,000 investment in exchange for a 33% fully diluted interest. The agreement obliges AION Software to provide knowledge and resources to refactor BPI’s existing code into C with a competitive text-mode TUI. Further investment supports ports to future systems and platforms, after which BPI has the right to buy back Adam’s shares. Alex assigns engineering support from AION Software’s London product programme while retaining capacity for TUI, AION C IDE and Abacus.",
+      "description": "AION Software and SSG sign the General Ledger C/TUI porting agreement. Alex d’Agapeyeff commits London engineering capacity; Keith Parsons represents the independent publisher. SSG supplies its existing General Ledger development and accounting expertise while retaining the separate CBASIC release. AION funds the agreed adaptation and qualification, with no equity stake or share of application sales. The Aurelia port will launch with AION C IDE on the morning of 6 June 1978.",
       "participant": [
         {
-          "actor_id": "actor.adam",
-          "role": "investor"
-        },
-        {
-          "actor_id": "actor.bpi",
-          "role": "accepting company and software owner"
-        },
-        {
           "actor_id": "actor.aion",
-          "role": "redevelopment and porting partner"
+          "role": "funding and development partner"
         },
         {
           "actor_id": "actor.alex_dagapeyeff",
-          "role": "AION Software CEO committing redevelopment resources"
+          "role": "AION Software CEO"
+        },
+        {
+          "actor_id": "actor.bpi",
+          "role": "application owner and publisher"
+        },
+        {
+          "actor_id": "actor.keith_parsons",
+          "role": "SSG president"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "platform and distribution partner"
         }
       ],
       "inputs": [
         {
           "number": 1,
           "type": "resource",
-          "description": "BPI contributes its existing application code and domain knowledge; AION contributes engineering expertise and resources for C and TUI redevelopment. This refers to pre-existing BPI source material, not a completed Aurelia C/TUI edition.",
-          "subject_ids": [
-            "actor.bpi",
-            "actor.aion"
-          ]
+          "description": "SSG brings General Ledger source under development and accounting specifications; this is not yet its January 1978 commercial CBASIC release."
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "AION Software’s London product programme supplies compiler, TUI and integration engineering capacity.",
+          "event_id": "event.cap_acquisition_closed"
         }
       ],
       "outcomes": [
         {
           "number": 1,
           "type": "decision",
-          "description": "BPI accepts the $150,000 subscription for Adam’s 33% fully diluted interest and the accompanying AION C/TUI redevelopment obligations. The deal also provides for further platform-porting investment and BPI’s subsequent right to buy back Adam’s shares."
+          "description": "Commission the funded General Ledger port, its joint team, acceptance tests and June 1978 release. SSG retains all application ownership and independent commercial operations."
         }
       ],
       "time": {
-        "value": "1977-02-15",
+        "value": "1977-07-28",
         "precision": "day"
       },
       "agreement_id": "agreement.bpi_offer"
     },
     {
       "id": "event.bpi_cooperation",
-      "title": "BPI development and distribution cooperation",
-      "kind": "agreement_milestone",
-      "description": "BPI and Adam implement operational cooperation under the consolidated BPI agreement: independent BPI management, brand, application ownership, licences and specialist support; AION engineering assistance and Logix distribution/training. This cooperation implements the accepted $150,000 investment agreement for Adam’s 33% fully diluted interest, including AION’s C/TUI redevelopment work and future-platform cooperation. Date selected for the alternative scenario. The cooperation also provides for later launch qualification, BPI-authorised Academy training and direct sales, with BPI retaining its software, independent licensing and specialist support.",
+      "title": "Joint SSG–AION General Ledger team formed; port development starts",
+      "kind": "activity",
+      "description": "SSG and AION form the porting team and begin work. Alan Cooper leads SSG application design and accounting acceptance; Alex assigns London C/application, assembly-library, TUI and test engineers, with Gordon Letwin coordinating tools and platform interfaces. SSG continues the CBASIC branch. The team baselines the working C compiler, numeric and file formats, ABI and TUI interface, then starts a headless ledger port and automated result comparisons before integrating forms.",
       "participant": [
         {
           "actor_id": "actor.bpi",
-          "role": "cooperating partner"
+          "role": "application source and domain expertise"
         },
         {
-          "actor_id": "actor.adam",
-          "role": "cooperating partner"
+          "actor_id": "actor.alan_cooper",
+          "role": "SSG application technical lead"
         },
         {
           "actor_id": "actor.aion",
-          "role": "cooperating partner"
+          "role": "port and test engineering"
         },
         {
-          "actor_id": "actor.logix",
-          "role": "cooperating partner"
+          "actor_id": "actor.alex_dagapeyeff",
+          "role": "staffing and delivery sponsor"
+        },
+        {
+          "actor_id": "actor.letwin",
+          "role": "compiler, ABI and DRI liaison"
         }
       ],
       "inputs": [
         {
           "number": 1,
           "type": "resource",
-          "description": "BPI's accepted 15 February investment and C/TUI redevelopment agreement establishes the obligations implemented by this operational cooperation.",
+          "description": "The signed agreement authorises funded development and defines ownership and acceptance.",
           "event_id": "event.bpi_offer"
+        },
+        {
+          "number": 2,
+          "type": "requirement",
+          "description": "A working development compiler, linker, assembly interoperability and stable interface baseline are available for the port; optimizer tuning and public IDE packaging continue without changing the agreed application contracts."
         }
       ],
       "outcomes": [
         {
           "number": 1,
-          "type": "decision",
-          "description": "The partners establish arrangements for qualifying independently licensed BPI applications and supporting their launch, dealer preparation and BPI-authorised Logix Computer Academy courses. BPI retains application ownership, licences and specialist support."
-        },
-        {
-          "number": 2,
           "type": "result",
-          "description": "The cooperation supports a later programme of BPI-authorised courses and direct sales starting on 16 June 1978, after the NCC premiere. This start is separate from the Academy's March establishment and June 5 five-city public announcement."
+          "description": "The joint team starts implementation with a shared source, build and regression process. Application acceptance remains SSG’s responsibility; platform interface defects are assigned to AION or DRI through Letwin."
         }
       ],
       "time": {
-        "value": "1977-03-15",
+        "value": "1977-08-12",
         "precision": "day"
       }
     },
@@ -663,9 +673,9 @@
     },
     {
       "id": "event.bpi_pilot",
-      "title": "BPI business and accountant pilot programme",
+      "title": "SSG General Ledger business and accountant pilot programme",
       "kind": "activity",
-      "description": "Target 10–15 pilot businesses and several accounting practices; reconcile results against existing records. Validate representative data volumes, disk/RAM budgets, posting, corrections, backup/restore and supported payroll jurisdictions before launch claims. Date selected for the alternative scenario.",
+      "description": "Target 10–15 pilot businesses and several accounting practices for the Aurelia C/TUI General Ledger. Reconcile the January CBASIC release and port against identical records, including postings, corrections, period-end totals and reports. Exercise TUI data entry, backup/restore, interruption recovery, disk-full and memory limits. Pilot participation does not itself establish acceptance.",
       "participant": [
         {
           "actor_id": "actor.bpi",
@@ -688,9 +698,17 @@
         {
           "number": 1,
           "type": "resource",
-          "description": "The candidate CP/M implementation supplies the application under test; representative business records and resource budgets define the pilot, without presuming every jurisdiction or configuration is accepted.",
+          "description": "The native C/TUI candidate is the application under test.",
           "subject_ids": [
             "software_edition.bpi_suite"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The released vanilla CP/M/CBASIC application provides the reference results and comparison baseline.",
+          "subject_ids": [
+            "external_product.ssg_general_ledger_cbasic"
           ]
         }
       ],
@@ -698,7 +716,7 @@
         {
           "number": 1,
           "type": "qualification",
-          "description": "Reconcile pilot results and test posting, corrections, backup/restore, resource limits and supported payroll jurisdictions before making launch claims. This qualification activity does not guarantee that every pilot or configuration passes.",
+          "description": "Record reconciled financial results, supported resource limits and unresolved defects. Measure responsiveness on the same Aurelia configuration without inferring speed from language alone; approve only configurations that pass recovery and financial checks.",
           "subject_ids": [
             "software_edition.bpi_suite"
           ]
@@ -6009,6 +6027,33 @@
         "value": "1978-06-16",
         "precision": "day"
       }
+    },
+    {
+      "id": "event.ssg_cbasic_release",
+      "title": "SSG releases General Ledger for vanilla CP/M",
+      "kind": "launch",
+      "time": {
+        "value": "1978-01-15",
+        "precision": "day"
+      },
+      "description": "SSG releases General Ledger written in CBASIC for vanilla CP/M. Its compiled intermediate code runs under the CBASIC runtime interpreter. The original remains available independently while the joint team continues the native C/TUI Aurelia port. Preserve this release as the controlled accounting and performance baseline; no exact numbered application or runtime revision is assigned.",
+      "participant": [
+        {
+          "actor_id": "actor.bpi",
+          "role": "independent publisher"
+        }
+      ],
+      "inputs": [],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "result",
+          "description": "The original CP/M/CBASIC General Ledger is commercially released under SSG ownership and support.",
+          "subject_ids": [
+            "external_product.ssg_general_ledger_cbasic"
+          ]
+        }
+      ]
     }
   ]
 }
