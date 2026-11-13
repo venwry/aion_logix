@@ -1088,18 +1088,18 @@
               "application_memory": "Lower RAM rises from 44 KB to 60 KB, before other system and workspace reservations."
             },
             "physical_population": {
-              "chip_id": "base_part.dram_16kbit",
+              "chip_id": "base_part.aion_4116",
               "data_chip_count": 8,
               "data_width_bits": 8,
               "capacity_kb": 16,
-              "refresh_owner": "Host memory controller must refresh the card even while its pages are overlaid; exact interface pending."
+              "refresh_owner": "Host-controlled 128-row refresh within 2 ms independent of CPU mapping; card decoder forwards refresh while deselected and blocks ordinary accesses."
             }
           },
           "composition_definition": [
             {
               "id": "line_1",
               "target": {
-                "record_id": "base_part.dram_16kbit"
+                "record_id": "base_part.aion_4116"
               },
               "quantity": 8
             },
@@ -1150,7 +1150,7 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Add eight 16K×1 DRAMs, power/refresh strategy, identification ROM or defined equivalent, page/address decode, buffers, connector, PCB, decoupling and memory-test route. Specify who supplies refresh while the card is hidden by ROM/video RAM."
+              "description": "Fit the specified AION 4116-375 parts and test voltage/temperature timing, substrate-bias sequencing and refresh of all 128 rows within 2 ms, including memory hidden by ROM/video overlays. The host schedules refresh independently of the selected CPU mapping; the card decoder forwards refresh to its bank while suppressing ordinary accesses when deselected."
             }
           ]
         }
@@ -1159,7 +1159,7 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Add eight 16K×1 DRAMs, power/refresh strategy, identification ROM or defined equivalent, page/address decode, buffers, connector, PCB, decoupling and memory-test route. Specify who supplies refresh while the card is hidden by ROM/video RAM."
+          "description": "Fit the specified AION 4116-375 parts and test voltage/temperature timing, substrate-bias sequencing and refresh of all 128 rows within 2 ms, including memory hidden by ROM/video overlays. The host schedules refresh independently of the selected CPU mapping; the card decoder forwards refresh to its bank while suppressing ordinary accesses when deselected."
         },
         {
           "number": 2,
@@ -1187,7 +1187,7 @@
           {
             "number": 1,
             "chapter_name": "Expansion and address mapping",
-            "description": "The card adds {capacity_kb} KiB to {host_base_computer_aurelia}, raising lower RAM from 44 to 60 KiB before workspace reservations. Eight {dram_id} chips form an 8-bit bank. Its four 4 KiB pages occupy B000–EFFF in the normal mapping; the existing common system RAM remains at F000–FFFF.\n\nThe card occupies one expansion slot. Install it with power off and restart: firmware discovers, tests and maps the pages without address switches. Common-memory service routines save the mapping, temporarily select ROM or video RAM and restore the card pages on return. The host must refresh the card even while it is overlaid; the exact refresh interface remains to be qualified."
+            "description": "The card adds {capacity_kb} KiB to {host_base_computer_aurelia}, raising lower RAM from 44 to 60 KiB before workspace reservations. Eight {dram_id} chips form an 8-bit bank. Its four 4 KiB pages occupy B000–EFFF in the normal mapping; the existing common system RAM remains at F000–FFFF.\n\nThe card occupies one expansion slot. Install it with power off and restart: firmware discovers, tests and maps the pages without address switches. Common-memory service routines save the mapping, temporarily select ROM or video RAM and restore the card pages on return. The host schedules refresh independently of CPU mapping and refreshes all 128 rows within 2 ms even while the card is overlaid. The card decoder forwards those refresh cycles while suppressing ordinary accesses when deselected; board acceptance tests this interface and the three-rail power sequencing with the released AION part."
           }
         ],
         "parameters": [
@@ -1202,7 +1202,7 @@
           },
           {
             "key": "dram_id",
-            "ref_id": "base_part.dram_16kbit",
+            "ref_id": "base_part.aion_4116",
             "ref_role": "DRAM used on the expansion card"
           }
         ]
@@ -10829,13 +10829,19 @@
             {
               "id": "line_1",
               "target": {
-                "record_id": "base_part.dram_16kbit"
+                "record_id": "base_part.aion_4116"
               },
               "quantity": 24,
               "element_type": "system DRAM"
             }
           ],
-          "assembly_requirements": []
+          "assembly_requirements": [
+            {
+              "number": 1,
+              "kind": "testing",
+              "description": "Fit the specified AION 4116-375 parts and test voltage/temperature timing, substrate-bias sequencing and refresh of all 128 rows within 2 ms, including memory hidden by ROM/video overlays. The host schedules refresh independently of the selected CPU mapping; the card decoder forwards refresh to its bank while suppressing ordinary accesses when deselected."
+            }
+          ]
         }
       ],
       "requirements": [],
@@ -10844,7 +10850,7 @@
           {
             "number": 1,
             "chapter_name": "System memory organization",
-            "description": "The subsystem provides {capacity_kb} KiB in {bank_count} {bank_width_bits}-bit banks, including common system RAM. No parity is fitted, and display memory is separate. Physical bank/page decoding must preserve the existing mapper and common-memory reservations."
+            "description": "The subsystem provides {capacity_kb} KiB in {bank_count} {bank_width_bits}-bit banks, including common system RAM. No parity is fitted, and display memory is separate. Physical bank/page decoding must preserve the existing mapper and common-memory reservations. The 24 chips are released AION 4116-375 DRAMs. Refresh all rows within 2 ms, including hidden mappings; board timing must satisfy the released cycle and access contract."
           }
         ],
         "parameters": [

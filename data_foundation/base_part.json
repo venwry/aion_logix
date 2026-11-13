@@ -2455,7 +2455,7 @@
       "supplier_actor_ids": [
         "actor.labs"
       ],
-      "manufacturer_part_number": null,
+      "manufacturer_part_number": "AION 4116-375",
       "manufacturer_name": "AION Labs",
       "technology_ids": [],
       "technical_definition": {
@@ -2470,8 +2470,8 @@
           "array_columns": 128,
           "random_cycle_target_ns": 375,
           "serial_register_bits": 0,
-          "refresh": "Controller refreshes all 128 rows including hidden pages. Retention interval, refresh scheduling and speed grade require silicon qualification.",
-          "package": "16-pin DIP target; qualified ordering code pending",
+          "refresh": "Refresh all 128 rows within 2 ms, including hidden pages. Apply substrate bias before positive rails and remove it last; validate controller and power sequencing at board qualification.",
+          "package": "16-pin DIP; 4116-compatible pinout",
           "supply_rails_v": [
             12,
             5,
@@ -2491,15 +2491,25 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Release 4116-compatible pinout, package, rails, timing, power, wafer probe and final test. AION is the manufacturing source; compatibility and speed require qualification."
+          "description": "The production release must approve the grade-specific electrical drawing, independent-lot results and reliability plan. Later capacity qualification is separate from initial part release."
         }
       ],
       "technical_specification": {
         "chapters": [
           {
             "number": 1,
-            "chapter_name": "Memory organization and operating targets",
-            "description": "This dynamic RAM provides {capacity_kbit} Kibit organized as {organization_words} words with a {data_width_bits}-bit data interface.\n\nA single random read/write port accesses a {array_geometry} array; there is no serial shift register. Random-cycle time targets {random_cycle_target_ns} ns. The controller must refresh all rows, including hidden pages; retention, scheduling and speed grade require silicon qualification.\n\nSupply rails are {supply_rails_v} V. A 16-pin DIP is the target package; the qualified ordering code remains open.\n\nEstimated die area is {die_area_range_mm2} mm², with {central_die_area_mm2} mm² as the central planning value."
+            "chapter_name": "Organization and ordering grade",
+            "description": "AION 4116-375 provides {capacity_kbit} Kibit as {organization_words} one-bit words in a 16-pin 4116-compatible DIP. Its {array_geometry} array has a maximum random read/write cycle of {random_cycle_target_ns} ns; this is cycle time, not access time. The data interface is {data_width_bits} bit wide."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Operating limits and integration",
+            "description": "Operate at {temperature_range_c} °C from {supply_rails_v} V rails, each within ±{supply_tolerance_percent}%. Refresh all 128 rows within 2 ms, including pages hidden by the memory mapper. Apply −5 V substrate bias before positive rails and remove it last. Release a complete access, setup/hold, RAS/CAS, current and sequencing drawing before shipment; qualify the host controller against it."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Manufacturing planning",
+            "description": "Estimated die area is {die_area_range_mm2} mm², with {central_die_area_mm2} mm² as the central planning value. These estimates do not establish wafer-map die counts, actual yield or a qualified production rate."
           }
         ],
         "parameters": [
@@ -2534,6 +2544,14 @@
           {
             "key": "central_die_area_mm2",
             "value": 18
+          },
+          {
+            "key": "temperature_range_c",
+            "value": "0–70"
+          },
+          {
+            "key": "supply_tolerance_percent",
+            "value": 5
           }
         ]
       }
@@ -2548,7 +2566,7 @@
       "supplier_actor_ids": [
         "actor.labs"
       ],
-      "manufacturer_part_number": null,
+      "manufacturer_part_number": "AION 2114-250",
       "manufacturer_name": "AION Labs",
       "technology_ids": [],
       "technical_definition": {
@@ -2561,7 +2579,7 @@
             5
           ],
           "refresh_required": false,
-          "package": "18-pin DIP target; electrical qualification pending",
+          "package": "18-pin DIP; 2114-compatible pinout",
           "manufacturing_planning": {
             "die_area_mm2_range": [
               16,
@@ -2576,20 +2594,25 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
-        },
-        {
-          "number": 2,
-          "kind": "testing",
-          "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+          "description": "The production release must approve the grade-specific electrical drawing, independent-lot results and reliability plan. Later capacity qualification is separate from initial part release."
         }
       ],
       "technical_specification": {
         "chapters": [
           {
             "number": 1,
-            "chapter_name": "Memory organization and operating targets",
-            "description": "This static RAM provides {capacity_kbit} Kibit organized as {organization_words} words with a {data_width_bits}-bit data interface.\n\nThe SRAM needs no refresh and targets a {random_cycle_target_ns} ns random cycle from a {supply_rails_v} V supply. The package target is an 18-pin DIP, subject to electrical qualification.\n\nEstimated die area is {die_area_range_mm2} mm², with {central_die_area_mm2} mm² as the central planning value."
+            "chapter_name": "Organization and ordering grade",
+            "description": "AION 2114-250 provides {capacity_kbit} Kibit as {organization_words} words with a {data_width_bits}-bit interface in an 18-pin 2114-compatible DIP. Maximum random read/write cycle is {random_cycle_target_ns} ns; static data needs no refresh while powered."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Operating limits and integration",
+            "description": "Operate at {temperature_range_c} °C from {supply_rails_v} V within ±{supply_tolerance_percent}%. Release complete access, setup/hold, chip-select and current limits before shipment. Two chips form the 1 KiB, 8-bit sprite bank; board qualification covers CPU/DMA write arbitration and simultaneous sprite activity."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Manufacturing planning",
+            "description": "Estimated die area is {die_area_range_mm2} mm², with {central_die_area_mm2} mm² as the central planning value. These estimates do not establish wafer-map die counts, actual yield or a qualified production rate."
           }
         ],
         "parameters": [
@@ -2620,6 +2643,14 @@
           {
             "key": "central_die_area_mm2",
             "value": 20
+          },
+          {
+            "key": "temperature_range_c",
+            "value": "0–70"
+          },
+          {
+            "key": "supply_tolerance_percent",
+            "value": 5
           }
         ]
       }
@@ -14105,6 +14136,59 @@
           "description": "Select and qualify the supplier and exact drawing or part identity before fabrication; no production qualification is implied by this definition."
         }
       ]
+    },
+    {
+      "id": "base_part.aion_2102",
+      "name": "AION 2102-compatible 1K×1 static RAM",
+      "kind": "integrated_circuit",
+      "description": "Initial 1 Kbit NMOS static RAM for industrial control, terminals and instrumentation.",
+      "supply_form": "individual_part",
+      "manufacturer_actor_id": "actor.labs",
+      "supplier_actor_ids": [
+        "actor.labs"
+      ],
+      "manufacturer_part_number": "AION 2102",
+      "manufacturer_name": "AION Labs",
+      "technology_ids": [],
+      "technical_definition": {
+        "specification": {
+          "capacity_kbit": 1,
+          "organization_words": 1024,
+          "data_width_bits": 1,
+          "supply_rails_v": [
+            5
+          ],
+          "refresh_required": false,
+          "package": "16-pin DIP; 2102-compatible electrical interface"
+        }
+      },
+      "specification": [],
+      "requirements": [
+        {
+          "number": 1,
+          "kind": "testing",
+          "description": "Release grade-specific read/write timing, powered retention, standby current and package reliability on independent lots before shipment."
+        }
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Organization and interface",
+            "description": "This {capacity_kbit} Kibit static RAM is organized as {organization_words} one-bit words in a 16-pin DIP, powered from +5 V. Data is retained while powered without refresh. Customer ordering documentation must identify the qualified speed grade, voltage tolerance, temperature range and pin/timing contract; no unstated grade inherits qualification."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "capacity_kbit",
+            "value": 1
+          },
+          {
+            "key": "organization_words",
+            "value": 1024
+          }
+        ]
+      }
     }
   ]
 }

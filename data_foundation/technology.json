@@ -2996,14 +2996,20 @@
       "specification": [
         {
           "number": 1,
-          "chapter_name": "Wafer traceability and process monitoring",
-          "description": "A wafer history connects material, equipment, recipe and electrical results. Process measurements and corrective action distinguish random defects from systematic drift.\n\nTrace each wafer to material batch, tool, operator, recipe revision and electrical results; map defects and distinguish random from systematic failures.\n\nMonitor particles, film thickness, sheet resistance, transistor thresholds, contacts and tool drift; use control charts and documented corrective action.",
+          "chapter_name": "Traceability and process windows",
+          "description": "Trace every wafer through incoming material, mask revision, tool, operator and recipe to its wafer map and final-test bin. Monitor particle adders, oxide thickness and integrity, sheet resistance, threshold voltage, junction leakage, contact resistance and alignment using control wafers and scribe-line structures. Separate random defects from systematic signatures; stop and contain affected lots when a control limit is exceeded.",
+          "parameters": []
+        },
+        {
+          "number": 2,
+          "chapter_name": "Controlled improvement and maintenance",
+          "description": "Use split lots and designed experiments to isolate implant dose, oxidation, anneal, cleaning and contact effects. Release a change only after independent confirmation lots and reliability review. Qualify alternate tools and post-maintenance recovery with the same controls; retain golden wafers, spare critical assemblies and a frozen production route. Selected dry etches require layer-specific damage and residue qualification.",
           "parameters": []
         },
         {
           "number": 3,
-          "chapter_name": "Production release and yield reporting",
-          "description": "Engineering activity and released manufacture have different acceptance requirements. Yield reporting keeps wafer, die, package and saleable-output measures separate.\n\nSeparate engineering lots from released production; qualify maintenance and tool substitutions before customer manufacture.\n\nReport wafer completion, electrical die yield, accepted speed/retention bins, package yield and good saleable chips per wafer separately.",
+          "chapter_name": "Yield and capacity accounting",
+          "description": "Report wafer completion as completed production wafers divided by started production wafers; accepted electrical yield as die meeting the released grade divided by gross candidate die on completed wafers; and assembly/final-test yield as accepted packaged parts divided by accepted die sent to assembly. Keep engineering wafers, rejects, downgraded bins and rework separately traceable. Good output per start is the product of gross die and these three fractions. Measure cycle-time distributions and work in process as well as output; do not confuse installed tools, forecasts or shipped volume with qualified spare capacity.",
           "parameters": []
         }
       ]
@@ -3022,14 +3028,31 @@
       "specification": [
         {
           "number": 1,
-          "chapter_name": "Memory-specific electrical qualification",
-          "description": "ROM, SRAM and DRAM need different electrical tests. Qualification spans the specified operating conditions and retains evidence that can be traced to lots and failures.\n\nQualify ROM image verification and SRAM read/write margins separately from DRAM retention, sensing, refresh and disturb behaviour.\n\nTest across specified voltage and temperature limits; retain lot histories, wafer maps and failure-analysis evidence.",
+          "chapter_name": "Electrical coverage and grade release",
+          "description": "Verify ROM images and address decoding against the customer-approved pattern; test SRAM reads, writes, standby current and pattern sensitivity. For DRAM, cover retention, refresh addressing, sense margins, coupling, disturb, leakage and supply sequencing. Run walking, checkerboard and March-style patterns with deliberately stressful addresses and transitions; correlate wafer and packaged tests against characterized samples. Define each timing grade at its specified voltage and temperature corners.",
           "parameters": []
         },
         {
+          "number": 2,
+          "chapter_name": "Qualification and continuing reliability",
+          "description": "Qualify independent wafer lots and package lots, including alternate approved routes. Before release, specify sample sizes, acceptance limits and test conditions for powered high-temperature life, temperature cycling, humidity/package integrity and bond checks. A {life_hours}-hour powered life test uses multiple lots and documented junction temperature and electrical bias; it supports qualification, not an invented field failure rate. Contain failures, perform physical/electrical analysis and requalify the affected process or assembly change. Screening cannot substitute for correcting an unstable process.",
+          "parameters": [
+            {
+              "key": "life_hours",
+              "value": "1000"
+            }
+          ]
+        },
+        {
           "number": 3,
-          "chapter_name": "Conditional repair and full retest",
-          "description": "Redundancy can improve accepted output only on revisions that implement it. After supported repair, the complete device must be tested again; unrepaired launch designs receive no assumed repair benefit.\n\nFor repairable DRAM revisions, map defects, programme only supported redundancy and retest the complete device; unrepairable launch revisions receive no assumed repair benefit.",
+          "chapter_name": "Production test and assembly control",
+          "description": "Record probe maps, speed and retention bins, assembly traceability and final acceptance. Validate test coverage, calibration, fixture contact, test time and station availability against the committed mix; correlate independently staffed stations. Qualified outside assemblers receive controlled die maps and package drawings; AION owns incoming inspection and final release. Maintain an approved alternate assembly route and buffer stock against disruptions.",
+          "parameters": []
+        },
+        {
+          "number": 4,
+          "chapter_name": "Repair only where implemented",
+          "description": "Map defects and programme redundancy only on revisions that physically implement it, followed by full retest. The initial 1 Kbit SRAM, 4 Kbit SRAM and 16 Kbit DRAM receive no assumed spare-row, laser-repair or future stepper yield benefit.",
           "parameters": []
         }
       ]

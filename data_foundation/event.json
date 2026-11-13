@@ -779,6 +779,12 @@
           "type": "resource",
           "description": "The established Academy company and prepared facilities provide the organisation for the training presentation; first course dates remain unspecified.",
           "event_id": "event.academy"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "Memory integration, reserved launch inventory and replenishment have been accepted before the premiere.",
+          "event_id": "event.aion_aurelia_memory_supply"
         }
       ],
       "outcomes": [
@@ -5079,49 +5085,10 @@
       "subject_ids": []
     },
     {
-      "id": "event.aion_fab_team_hired",
-      "title": "AION appoints its Cambridge manufacturing team",
-      "kind": "activity",
-      "description": "AION appoints a fab director, silicon-gate NMOS integration lead, lithography lead, facilities lead and test/reliability lead with production-ramp experience. Recruitment draws on established British, European and US semiconductor operations; individual names and former employers are unspecified. Supplier engineers train the new staff.",
-      "participant": [
-        {
-          "actor_id": "actor.labs",
-          "role": "manufacturer, process developer and employer"
-        }
-      ],
-      "time": {
-        "value": "1975-03-31",
-        "precision": "day"
-      },
-      "inputs": [
-        {
-          "number": 1,
-          "type": "resource",
-          "description": "The founding authorises recruitment and investment.",
-          "event_id": "event.companies"
-        }
-      ],
-      "outcomes": [
-        {
-          "number": 1,
-          "type": "deliverable",
-          "description": "The appointed team takes responsibility for defining and qualifying the Cambridge process and its controls.",
-          "subject_ids": [
-            "technology.nmos_3um",
-            "technology.aion_fab_process_control",
-            "manufacturing_capability.aion_nmos_3um_logic"
-          ]
-        }
-      ],
-      "location_ids": [
-        "location.cambridge"
-      ]
-    },
-    {
       "id": "event.aion_pilot_line_acceptance",
-      "title": "Cambridge 75 mm NMOS pilot line accepted",
+      "title": "Cambridge pilot fabrication line accepted",
       "kind": "activity",
-      "description": "The team accepts the installed line and repeatable test-structure operation. Pilot acceptance establishes engineering capability, not commercial product release.",
+      "description": "The two-tool pilot configuration passes utilities, 75 mm handling, contamination, mask-overlay and transistor/contact test-structure acceptance. The installed route is ready for product engineering; this event does not release ROM, SRAM, DRAM or an ERAv1 production recipe.",
       "participant": [
         {
           "actor_id": "actor.labs",
@@ -5136,38 +5103,44 @@
         {
           "number": 1,
           "type": "resource",
-          "description": "The appointed team commissions equipment, trains operators and verifies the pilot route.",
-          "event_id": "event.aion_fab_team_hired"
+          "description": "The founding funds the staffed factory and its procurement.",
+          "event_id": "event.companies"
+        },
+        {
+          "number": 2,
+          "type": "resource",
+          "description": "The engineering facility supplies checked design and mask material.",
+          "event_id": "event.facility"
         }
       ],
       "outcomes": [
         {
           "number": 1,
+          "type": "maturity_transition",
+          "description": "Shared Cambridge line — pilot installed and electrically accepted.",
+          "subject_ids": [
+            "manufacturing_capability.aion_cambridge_nmos_line"
+          ]
+        },
+        {
+          "number": 2,
           "type": "deliverable",
-          "description": "Pilot recipes, wafer traceability and tool-acceptance evidence are available.",
+          "description": "The controlled 3 µm pilot route and traceability methods are established.",
           "subject_ids": [
             "technology.nmos_3um",
             "technology.aion_fab_process_control"
           ]
-        },
-        {
-          "number": 2,
-          "type": "maturity_transition",
-          "description": "Cambridge 75 mm NMOS pilot line accepted — pilot",
-          "subject_ids": [
-            "manufacturing_capability.aion_nmos_3um_logic"
-          ]
         }
       ],
       "location_ids": [
-        "location.cambridge"
+        "location.aion_cambridge_fab"
       ]
     },
     {
       "id": "event.aion_rom_sram_release",
-      "title": "AION releases initial mask-ROM and SRAM manufacture",
+      "title": "Initial AION mask-ROM and 1 Kbit SRAM production released",
       "kind": "activity",
-      "description": "Independent lots meet the selected ROM and 1 Kbit SRAM contracts. AION releases qualified order-specific ROMs and the initial SRAM grade for customer supply; the 4 Kbit extension and second-source licences require separate acceptance.",
+      "description": "Independent lots, customer-approved ROM patterns and the initial 2102-compatible SRAM pass grade-specific electrical, package and reliability acceptance. The commercial routes can accept external orders; no sales volume or executed second-source licence is inferred. This release excludes 4 Kbit SRAM.",
       "participant": [
         {
           "actor_id": "actor.labs",
@@ -5175,92 +5148,45 @@
         }
       ],
       "time": {
-        "value": "1976-12-15",
+        "value": "1976-09-30",
         "precision": "day"
       },
       "inputs": [
         {
           "number": 1,
           "type": "resource",
-          "description": "Product lots build on the accepted Cambridge pilot process.",
+          "description": "The accepted pilot route supports product qualification.",
           "event_id": "event.aion_pilot_line_acceptance"
         }
       ],
       "outcomes": [
         {
           "number": 1,
-          "type": "deliverable",
-          "description": "ROM/SRAM electrical, package and test evidence supports the released scope.",
+          "type": "maturity_transition",
+          "description": "Mask-ROM and 1 Kbit SRAM routes — production released.",
           "subject_ids": [
-            "technology.nmos_3um",
-            "technology.aion_memory_test"
+            "manufacturing_capability.aion_mask_rom_3um",
+            "manufacturing_capability.aion_sram_3um"
           ]
         },
         {
           "number": 2,
-          "type": "maturity_transition",
-          "description": "AION releases initial mask-ROM and SRAM manufacture — production released",
-          "subject_ids": [
-            "manufacturing_capability.aion_mask_rom_3um"
-          ]
-        },
-        {
-          "number": 3,
-          "type": "maturity_transition",
-          "description": "AION releases initial mask-ROM and SRAM manufacture — production released",
-          "subject_ids": [
-            "manufacturing_capability.aion_sram_3um"
-          ]
-        }
-      ],
-      "location_ids": [
-        "location.cambridge"
-      ]
-    },
-    {
-      "id": "event.aion_dram_team_hired",
-      "title": "AION recruits DRAM process and test specialists",
-      "kind": "activity",
-      "description": "AION recruits a DRAM integration lead, capacitor/device engineer, sense-amplifier designer and memory-test lead with production experience. Offers include relocation, equipment budgets and long-term incentives. No named employee, former employer or proprietary transfer is presumed.",
-      "participant": [
-        {
-          "actor_id": "actor.labs",
-          "role": "manufacturer, process developer and employer"
-        }
-      ],
-      "time": {
-        "value": "1976-06-30",
-        "precision": "day"
-      },
-      "inputs": [
-        {
-          "number": 1,
-          "type": "resource",
-          "description": "The operating pilot line gives the recruited specialists an executable development platform.",
-          "event_id": "event.aion_pilot_line_acceptance"
-        }
-      ],
-      "outcomes": [
-        {
-          "number": 1,
           "type": "deliverable",
-          "description": "Specialists establish the DRAM recipe and its retention, refresh and test requirements.",
+          "description": "The initial SRAM has a separately identified technical definition.",
           "subject_ids": [
-            "technology.nmos_3um",
-            "technology.aion_memory_test",
-            "manufacturing_capability.aion_dram16_3um"
+            "base_part.aion_2102"
           ]
         }
       ],
       "location_ids": [
-        "location.cambridge"
+        "location.aion_cambridge_fab"
       ]
     },
     {
       "id": "event.aion_dram16_release",
-      "title": "AION 16 Kbit DRAM production qualified",
+      "title": "AION 16 Kbit DRAM production released",
       "kind": "activity",
-      "description": "Independent lots of the AION 4116-equivalent meet released retention, refresh, timing, supply, package and reliability limits. The release supports manufacturing and inventory preparation for June 1978; no numeric yield is asserted.",
+      "description": "At least three independent AION 4116-375 lots meet the approved electrical drawing, 128-row/2 ms refresh, supply sequencing and multi-lot reliability plan, with accepted electrical die yield at least 50%. The 375 ns limit is random-cycle time. The released recipe can build customer and integration stock; mature factory output is not yet established.",
       "participant": [
         {
           "actor_id": "actor.labs",
@@ -5268,83 +5194,50 @@
         }
       ],
       "time": {
-        "value": "1978-04-28",
+        "value": "1977-09-30",
         "precision": "day"
       },
       "inputs": [
         {
           "number": 1,
           "type": "resource",
-          "description": "The specialist team develops the DRAM recipe and verifies the production qualification lots.",
-          "event_id": "event.aion_dram_team_hired"
-        }
-      ],
-      "outcomes": [
-        {
-          "number": 1,
-          "type": "deliverable",
-          "description": "The released 16 Kbit DRAM process includes controlled recipes and complete production-test evidence.",
-          "subject_ids": [
-            "technology.nmos_3um",
-            "technology.aion_memory_test"
-          ]
+          "description": "The accepted pilot route supplies the physical basis for the dedicated DRAM development.",
+          "event_id": "event.aion_pilot_line_acceptance"
         },
         {
           "number": 2,
-          "type": "maturity_transition",
-          "description": "AION 16 Kbit DRAM production qualified — production released",
-          "subject_ids": [
-            "manufacturing_capability.aion_dram16_3um"
-          ]
-        }
-      ],
-      "location_ids": [
-        "location.cambridge"
-      ]
-    },
-    {
-      "id": "event.aion_yield_team_hired",
-      "title": "AION establishes a permanent yield-engineering group",
-      "kind": "activity",
-      "description": "AION appoints a yield manager, failure-analysis engineer, process-control engineers and maintenance specialists with authority to hold suspect lots and reject uncontrolled recipe changes.",
-      "participant": [
-        {
-          "actor_id": "actor.labs",
-          "role": "manufacturer, process developer and employer"
-        }
-      ],
-      "time": {
-        "value": "1977-03-31",
-        "precision": "day"
-      },
-      "inputs": [
-        {
-          "number": 1,
           "type": "resource",
-          "description": "Commercial lot histories establish the immediate need for systematic yield engineering.",
+          "description": "Released small-memory lots establish qualified assembly and test operations.",
           "event_id": "event.aion_rom_sram_release"
         }
       ],
       "outcomes": [
         {
           "number": 1,
-          "type": "deliverable",
-          "description": "The team owns traceability, defect analysis, process windows and corrective-action methods.",
+          "type": "maturity_transition",
+          "description": "AION 16 Kbit DRAM route — production released.",
           "subject_ids": [
-            "technology.aion_fab_process_control",
-            "technology.aion_memory_test"
+            "manufacturing_capability.aion_dram16_3um"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "The 4116-compatible ordering grade and electrical interface are released.",
+          "subject_ids": [
+            "base_part.aion_4116"
           ]
         }
       ],
       "location_ids": [
-        "location.cambridge"
+        "location.aion_cambridge_fab"
       ]
     },
     {
       "id": "event.aion_3um_repeatable",
-      "title": "Cambridge demonstrates repeatable 3 µm production",
+      "title": "Cambridge sustained memory output accepted",
       "kind": "activity",
-      "description": "Independent logic test vehicles and released memory lots demonstrate controlled electrical distributions and stable production procedures. Product-specific timing, retention and package qualifications remain separate; no universal yield percentage is assigned.",
+      "description": "The four-tool factory demonstrates the released memory mix across ten independent production lots spanning weeks and qualified routes. DRAM wafer completion is at least 90%, pooled accepted electrical die yield at least 60% with no qualification lot below 50%, and assembly/final acceptance at least 95%. Sustained accepted output or verified equivalent spare capacity reaches 575,000 DRAMs and 31,500 4 Kbit SRAMs per month. Actual wafer maps, tester hours and assembly throughput support the result; estimates alone cannot establish it. Median wafer cycle is at most 35 days, its 90th percentile at most 45 days, followed by at most 14 days for assembly/final test. One projection-tool outage preserves the memory schedule by pausing engineering and some logic starts. Released ROM/SRAM/DRAM and independent logic vehicles demonstrate control; future 64 Kbit DRAM and ERAv1 remain separately qualified.",
       "participant": [
         {
           "actor_id": "actor.labs",
@@ -5352,69 +5245,47 @@
         }
       ],
       "time": {
-        "value": "1978-08-31",
+        "value": "1978-03-31",
         "precision": "day"
       },
       "inputs": [
         {
           "number": 1,
           "type": "resource",
-          "description": "The yield group establishes and verifies the production controls.",
-          "event_id": "event.aion_yield_team_hired"
+          "description": "The 16 Kbit recipe is production released.",
+          "event_id": "event.aion_dram16_release"
         },
         {
           "number": 2,
           "type": "resource",
-          "description": "Released 16 Kbit production supplies the DRAM evidence needed for this cross-recipe review.",
-          "event_id": "event.aion_dram16_release"
+          "description": "The 4 Kbit SRAM recipe is production released.",
+          "event_id": "event.aion_sram4_release"
         }
       ],
       "outcomes": [
         {
           "number": 1,
-          "type": "deliverable",
-          "description": "Process-control evidence supports the separately scoped Cambridge production recipes.",
+          "type": "maturity_transition",
+          "description": "Shared line and released memory routes — sustained production accepted.",
           "subject_ids": [
-            "technology.nmos_3um",
-            "technology.aion_fab_process_control",
-            "technology.aion_memory_test"
+            "manufacturing_capability.aion_cambridge_nmos_line",
+            "manufacturing_capability.aion_mask_rom_3um",
+            "manufacturing_capability.aion_sram_3um",
+            "manufacturing_capability.aion_dram16_3um",
+            "manufacturing_capability.aion_sram4_3um"
           ]
         },
         {
           "number": 2,
           "type": "maturity_transition",
-          "description": "Cambridge demonstrates repeatable 3 µm production — repeatable production",
+          "description": "The 3 µm logic test-vehicle route — repeatable process control demonstrated, not ERAv1 product release.",
           "subject_ids": [
             "manufacturing_capability.aion_nmos_3um_logic"
-          ]
-        },
-        {
-          "number": 3,
-          "type": "maturity_transition",
-          "description": "Cambridge demonstrates repeatable 3 µm production — repeatable production",
-          "subject_ids": [
-            "manufacturing_capability.aion_mask_rom_3um"
-          ]
-        },
-        {
-          "number": 4,
-          "type": "maturity_transition",
-          "description": "Cambridge demonstrates repeatable 3 µm production — repeatable production",
-          "subject_ids": [
-            "manufacturing_capability.aion_sram_3um"
-          ]
-        },
-        {
-          "number": 5,
-          "type": "maturity_transition",
-          "description": "Cambridge demonstrates repeatable 3 µm production — repeatable production",
-          "subject_ids": [
-            "manufacturing_capability.aion_dram16_3um"
           ]
         }
       ],
       "location_ids": [
-        "location.cambridge"
+        "location.aion_cambridge_fab"
       ]
     },
     {
@@ -5981,6 +5852,102 @@
             "external_product.ssg_general_ledger_cbasic"
           ]
         }
+      ]
+    },
+    {
+      "id": "event.aion_sram4_release",
+      "kind": "activity",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer and qualification authority"
+        }
+      ],
+      "title": "AION 4 Kbit SRAM production released",
+      "time": {
+        "value": "1977-03-31",
+        "precision": "day"
+      },
+      "description": "At least three independent 2114-compatible lots pass the 250 ns cycle, voltage/temperature, powered retention and package qualification plan. The larger array has its own release, separate from the earlier 1 Kbit route. Two-chip sprite-bank qualification is included; sustained Aurelia-scale output is accepted later.",
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Released small-memory manufacture provides controlled processes and assembly/test experience.",
+          "event_id": "event.aion_rom_sram_release"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "maturity_transition",
+          "description": "AION 4 Kbit SRAM route — production released.",
+          "subject_ids": [
+            "manufacturing_capability.aion_sram4_3um"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "The AION 2114-250 interface and ordering grade are released.",
+          "subject_ids": [
+            "base_part.aion_2114"
+          ]
+        }
+      ],
+      "location_ids": [
+        "location.aion_cambridge_fab"
+      ]
+    },
+    {
+      "id": "event.aion_aurelia_memory_supply",
+      "kind": "activity",
+      "participant": [
+        {
+          "actor_id": "actor.labs",
+          "role": "manufacturer and qualification authority"
+        },
+        {
+          "actor_id": "actor.logix",
+          "role": "hardware integration and incoming-memory acceptance"
+        }
+      ],
+      "title": "Aurelia memory integration and launch supply accepted",
+      "time": {
+        "value": "1978-05-15",
+        "precision": "day"
+      },
+      "description": "AION and Logix accept the released DRAM in the 24-chip mainboard bank and eight-chip video bank, and the released SRAM in the two-chip sprite bank. The optional eight-chip RAM-card design passes host refresh even while overlaid, power sequencing and mapper tests; this does not date its first commercial offering. Reserved, accepted internal stock totals at least 344,000 DRAMs and 20,000 4 Kbit SRAMs, separately reconciled from external orders. The stock covers one month of the 10,000-computer planning case plus the 30% RAM-card provision. Sustained replenishment, assembly capacity and external allocations are reconfirmed before June launch. This is memory-subsystem readiness, not proof that every custom IC or the complete computer has passed production release.",
+      "inputs": [
+        {
+          "number": 1,
+          "type": "resource",
+          "description": "Sustained qualified output and protected memory allocations are accepted.",
+          "event_id": "event.aion_3um_repeatable"
+        }
+      ],
+      "outcomes": [
+        {
+          "number": 1,
+          "type": "maturity_transition",
+          "description": "The shared line — Aurelia memory supply accepted, with segregated launch inventory and continuing replenishment.",
+          "subject_ids": [
+            "manufacturing_capability.aion_cambridge_nmos_line"
+          ]
+        },
+        {
+          "number": 2,
+          "type": "deliverable",
+          "description": "Released AION memory is integrated into the mainboard, video and optional card designs.",
+          "subject_ids": [
+            "device.subsystem.aurelia.base_memory",
+            "device.subsystem.aurelia.video",
+            "device.aurelia_ram_16kb_card"
+          ]
+        }
+      ],
+      "location_ids": [
+        "location.aion_cambridge_fab"
       ]
     }
   ]

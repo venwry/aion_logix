@@ -13,7 +13,10 @@
           "type": "acceptance_criterion",
           "description": "Qualify lithography, electrical behaviour and repeatable production for the scoped logic recipe."
         }
-      ]
+      ],
+      "capability_kind": "recipe",
+      "production_line_id": "manufacturing_capability.aion_cambridge_nmos_line",
+      "location_id": "location.aion_cambridge_fab"
     },
     {
       "id": "manufacturing_capability.aion_nmos_275um_logic",
@@ -292,7 +295,7 @@
       "id": "manufacturing_capability.aion_mask_rom_3um",
       "name": "AION 3 µm customer-specific mask-ROM manufacture",
       "actor_id": "actor.labs",
-      "location_id": "location.cambridge",
+      "location_id": "location.aion_cambridge_fab",
       "technology_id": "technology.nmos_3um",
       "recipe_kind": "logic",
       "description": "Mask-ROM product recipe within the silicon-gate NMOS logic family; ROM-specific qualification does not qualify arbitrary logic or CPUs.",
@@ -312,16 +315,18 @@
           "type": "acceptance_criterion",
           "description": "Released order-specific masks and acceptance before customer shipments."
         }
-      ]
+      ],
+      "capability_kind": "recipe",
+      "production_line_id": "manufacturing_capability.aion_cambridge_nmos_line"
     },
     {
       "id": "manufacturing_capability.aion_sram_3um",
-      "name": "AION 3 µm SRAM manufacture",
+      "name": "AION 3 µm 1 Kbit SRAM manufacture",
       "actor_id": "actor.labs",
-      "location_id": "location.cambridge",
+      "location_id": "location.aion_cambridge_fab",
       "technology_id": "technology.nmos_3um",
       "recipe_kind": "SRAM",
-      "description": "Small SRAM product-family capability, beginning with a 1 Kbit design and evaluating a separately qualified 4 Kbit extension.",
+      "description": "Initial 2102-compatible 1 Kbit SRAM recipe, released separately from the later 4 Kbit SRAM route.",
       "qualification_requirements": [
         {
           "number": 1,
@@ -338,13 +343,18 @@
           "type": "acceptance_criterion",
           "description": "Production test coverage, package reliability and recurring cost per accepted chip."
         }
+      ],
+      "capability_kind": "recipe",
+      "production_line_id": "manufacturing_capability.aion_cambridge_nmos_line",
+      "base_part_ids": [
+        "base_part.aion_2102"
       ]
     },
     {
       "id": "manufacturing_capability.aion_dram16_3um",
       "name": "AION 3 µm 16 Kbit DRAM manufacture",
       "actor_id": "actor.labs",
-      "location_id": "location.cambridge",
+      "location_id": "location.aion_cambridge_fab",
       "technology_id": "technology.nmos_3um",
       "recipe_kind": "DRAM",
       "description": "Cambridge recipe for the AION 4116-equivalent; production release precedes the June 1978 Aurelia launch.",
@@ -352,22 +362,24 @@
         {
           "number": 1,
           "type": "acceptance_criterion",
-          "description": "Qualify capacitor, sense amplifiers, retention, disturb patterns and refresh across temperature and voltage."
+          "description": "Release the 16K×1 AION 4116-375 contract over specified voltage and temperature limits, including 128-row refresh within 2 ms and supply sequencing."
         },
         {
           "number": 2,
           "type": "acceptance_criterion",
-          "description": "Release 16-pin package, +12/+5/-5 V supplies, sequencing and measured speed grades against the product contract."
+          "description": "At September 1977 release, at least three independent lots meet 50% accepted electrical die yield and the approved reliability plan. Production release does not yet establish March 1978 capacity."
         },
         {
           "number": 3,
           "type": "acceptance_criterion",
-          "description": "Demonstrate repeatable results across independent wafer lots, packaged final test and reliability screening."
+          "description": "At March 1978 sustained acceptance, satisfy the shared line yield, cycle-time and output gates with ten independent lots across weeks and qualified routes. No redundancy-repair credit applies."
         }
       ],
       "base_part_ids": [
         "base_part.aion_4116"
-      ]
+      ],
+      "capability_kind": "recipe",
+      "production_line_id": "manufacturing_capability.aion_cambridge_nmos_line"
     },
     {
       "id": "manufacturing_capability.aion_erav1_3um",
@@ -402,6 +414,539 @@
       "base_part_ids": [
         "base_part.erav1_6mhz",
         "base_part.erav1_8mhz"
+      ]
+    },
+    {
+      "id": "manufacturing_capability.aion_cambridge_nmos_line",
+      "name": "AION Cambridge shared 75 mm NMOS production line",
+      "capability_kind": "production_line",
+      "actor_id": "actor.labs",
+      "location_id": "location.aion_cambridge_fab",
+      "technology_id": "technology.nmos_3um",
+      "description": "One shared physical factory serving separately qualified ROM, SRAM, DRAM and logic recipes. Dated configurations specify installed resource groups and operating constraints; capacity is counted once. The configuration continuing beyond 1978 does not claim later smaller-geometry equipment or immutable future throughput.",
+      "qualification_requirements": [
+        {
+          "number": 1,
+          "type": "acceptance_criterion",
+          "description": "Accept utilities and process-control test structures before pilot release."
+        },
+        {
+          "number": 2,
+          "type": "acceptance_criterion",
+          "description": "Accept recipe-specific product lots separately from physical installation."
+        },
+        {
+          "number": 3,
+          "type": "acceptance_criterion",
+          "description": "Before Aurelia supply acceptance, demonstrate the committed memory mix, redundancy policy, tested output and inventory with traceable lot records."
+        }
+      ],
+      "configuration_history": [
+        {
+          "version_number": 1,
+          "description": "Pilot line and early commercial routes",
+          "effective_from": "1975-12-15",
+          "effective_until": "1977-01-01",
+          "equipment": [
+            {
+              "id": "projection",
+              "name": "Micralign-compatible projection aligner",
+              "quantity": 2,
+              "description": "75 mm wafer route; matched masks, overlay and critical-dimension acceptance. Counts are installed tools, not independent factories."
+            },
+            {
+              "id": "resist",
+              "name": "Independent resist coating, baking and development route",
+              "quantity": 2,
+              "description": "Each route includes coating, bake and development; qualify cross-route film and alignment consistency."
+            },
+            {
+              "id": "thermal",
+              "name": "Qualified oxidation/diffusion furnace bank",
+              "quantity": 2,
+              "description": "Independently maintainable banks with segregated clean oxidation and dopant tubes; qualify load sizes and turnaround against the recipe mix."
+            },
+            {
+              "id": "implant",
+              "name": "Ion implantation and annealing route",
+              "quantity": 1,
+              "description": "Implanter with qualified anneal access, spare critical assemblies and a qualified external implant fallback; fallback turnaround must meet the cycle-time gate."
+            },
+            {
+              "id": "deposition",
+              "name": "Silicon and dielectric deposition route",
+              "quantity": 2,
+              "description": "Independent qualified routes for the selected recipe films; no assumption that SRAM and DRAM capacitor stacks are interchangeable."
+            },
+            {
+              "id": "wet",
+              "name": "Segregated wet-clean and etch bench group",
+              "quantity": 2,
+              "description": "Contamination-controlled chemistry delivery, exhaust and compatible wafer handling; segregate metal-contaminated work."
+            },
+            {
+              "id": "metal",
+              "name": "Aluminium deposition and pattern route",
+              "quantity": 2,
+              "description": "Qualified metallisation routes with contact-chain, adhesion and step-coverage checks."
+            },
+            {
+              "id": "utilities",
+              "name": "Clean-area and high-purity utilities system",
+              "quantity": 1,
+              "description": "Filtered air, ultrapure water, gases, chemical handling, exhaust and safe backup power/cooling; critical pumps and filters have maintained spares."
+            },
+            {
+              "id": "metrology",
+              "name": "Process-control and failure-analysis laboratory",
+              "quantity": 1,
+              "description": "Film-thickness, sheet-resistance, transistor/leakage and optical inspection stations; contracted SEM and physical failure-analysis access."
+            },
+            {
+              "id": "wafer_probe",
+              "name": "Independent memory probe and test station",
+              "quantity": 2,
+              "description": "Temperature-capable probe plus qualified patterns; station hours and measured test/handling time must support every wafer and candidate die."
+            },
+            {
+              "id": "final_test",
+              "name": "Independent packaged-memory test station",
+              "quantity": 2,
+              "description": "Fixtures for each package and grade with correlated electrical results. Add parallel fixtures/stations if demonstrated cycle times require them."
+            },
+            {
+              "id": "reliability",
+              "name": "Controlled reliability and screening laboratory",
+              "quantity": 1,
+              "description": "Powered-life ovens, temperature cycling and package/bond checks with calibrated conditions and segregated qualification samples."
+            }
+          ],
+          "technical_specification": {
+            "chapters": [
+              {
+                "number": 1,
+                "chapter_name": "Installed route and operating envelope",
+                "description": "The factory processes {wafer_diameter_mm} mm wafers. Equipment groups below share material handling, utilities and staff; duplicate recipe records do not create extra machines. This configuration provisions capacity; dated acceptance events establish qualification."
+              },
+              {
+                "number": 2,
+                "chapter_name": "Production scheduling",
+                "description": "Operate engineering and released customer lots under separate travellers. Match operator staffing, probe, assembly and final test to each accepted route before increasing releases; this configuration makes no Aurelia-volume throughput claim."
+              }
+            ],
+            "parameters": [
+              {
+                "key": "wafer_diameter_mm",
+                "value": 75
+              }
+            ]
+          },
+          "constraints": [
+            {
+              "number": 1,
+              "type": "acceptance_criterion",
+              "description": "Supplier acceptance verifies uniformity, overlay, contamination and electrical results on the actual recipes. These equipment groups are procurement and qualification commitments; unspecified vendor model numbers or external supplier contracts are not represented as executed agreements."
+            },
+            {
+              "number": 2,
+              "type": "acceptance_criterion",
+              "description": "Protect released customer lots from development experiments; qualify tools and trained shifts before transferring work."
+            },
+            {
+              "number": 3,
+              "type": "acceptance_criterion",
+              "description": "For the mature 16 Kbit DRAM route, require wafer completion at least 90%, pooled accepted electrical die yield at least 60% across ten independent lots, no qualification lot below 50%, and assembly/final acceptance at least 95%. At the earlier DRAM release, 50% electrical die yield is the minimum. The 4 Kbit SRAM capacity case uses at least 50% electrical die yield and the same completion/assembly minima; ROM, 1 Kbit SRAM and logic retain their own grade-specific acceptance limits."
+            },
+            {
+              "number": 4,
+              "type": "acceptance_criterion",
+              "description": "Measure throughput at the released grade over sustained production, including probe, package, screening and final test. Two stations at each test stage are initial installed minima, not proof of adequate throughput. Demonstrate hours at measured test times, and add stations before output acceptance if needed."
+            },
+            {
+              "number": 5,
+              "type": "acceptance_criterion",
+              "description": "Qualify external package assembly with a second approved route; reserve at least the accepted-output requirement divided by 95% in die-loading capacity. Separate engineering and reliability samples from customer stock."
+            },
+            {
+              "number": 6,
+              "type": "acceptance_criterion",
+              "description": "At the March 1978 gate, wafer cycle time has median at most 35 days and 90th percentile at most 45 days; assembly and final test take at most 14 additional days. Schedule lot cohorts and inventory by these delays."
+            },
+            {
+              "number": 7,
+              "type": "acceptance_criterion",
+              "description": "The mature capacity calculation uses at least 190 candidate DRAM die per wafer and 160 candidate 4 Kbit SRAM die per wafer. Replace these planning values with the actual mask map and exclusions at acceptance; if output is insufficient, increase demonstrated capacity before claiming readiness."
+            }
+          ]
+        },
+        {
+          "version_number": 2,
+          "description": "Memory qualification and controlled ramp",
+          "effective_from": "1977-01-01",
+          "effective_until": "1977-12-01",
+          "equipment": [
+            {
+              "id": "projection",
+              "name": "Micralign-compatible projection aligner",
+              "quantity": 3,
+              "description": "75 mm wafer route; matched masks, overlay and critical-dimension acceptance. Counts are installed tools, not independent factories."
+            },
+            {
+              "id": "resist",
+              "name": "Independent resist coating, baking and development route",
+              "quantity": 2,
+              "description": "Each route includes coating, bake and development; qualify cross-route film and alignment consistency."
+            },
+            {
+              "id": "thermal",
+              "name": "Qualified oxidation/diffusion furnace bank",
+              "quantity": 2,
+              "description": "Independently maintainable banks with segregated clean oxidation and dopant tubes; qualify load sizes and turnaround against the recipe mix."
+            },
+            {
+              "id": "implant",
+              "name": "Ion implantation and annealing route",
+              "quantity": 1,
+              "description": "Implanter with qualified anneal access, spare critical assemblies and a qualified external implant fallback; fallback turnaround must meet the cycle-time gate."
+            },
+            {
+              "id": "deposition",
+              "name": "Silicon and dielectric deposition route",
+              "quantity": 2,
+              "description": "Independent qualified routes for the selected recipe films; no assumption that SRAM and DRAM capacitor stacks are interchangeable."
+            },
+            {
+              "id": "wet",
+              "name": "Segregated wet-clean and etch bench group",
+              "quantity": 2,
+              "description": "Contamination-controlled chemistry delivery, exhaust and compatible wafer handling; segregate metal-contaminated work."
+            },
+            {
+              "id": "metal",
+              "name": "Aluminium deposition and pattern route",
+              "quantity": 2,
+              "description": "Qualified metallisation routes with contact-chain, adhesion and step-coverage checks."
+            },
+            {
+              "id": "utilities",
+              "name": "Clean-area and high-purity utilities system",
+              "quantity": 1,
+              "description": "Filtered air, ultrapure water, gases, chemical handling, exhaust and safe backup power/cooling; critical pumps and filters have maintained spares."
+            },
+            {
+              "id": "metrology",
+              "name": "Process-control and failure-analysis laboratory",
+              "quantity": 1,
+              "description": "Film-thickness, sheet-resistance, transistor/leakage and optical inspection stations; contracted SEM and physical failure-analysis access."
+            },
+            {
+              "id": "wafer_probe",
+              "name": "Independent memory probe and test station",
+              "quantity": 2,
+              "description": "Temperature-capable probe plus qualified patterns; station hours and measured test/handling time must support every wafer and candidate die."
+            },
+            {
+              "id": "final_test",
+              "name": "Independent packaged-memory test station",
+              "quantity": 2,
+              "description": "Fixtures for each package and grade with correlated electrical results. Add parallel fixtures/stations if demonstrated cycle times require them."
+            },
+            {
+              "id": "reliability",
+              "name": "Controlled reliability and screening laboratory",
+              "quantity": 1,
+              "description": "Powered-life ovens, temperature cycling and package/bond checks with calibrated conditions and segregated qualification samples."
+            },
+            {
+              "id": "plasma",
+              "name": "Plasma strip and selective dry-etch cell",
+              "quantity": 1,
+              "description": "Qualify each layer for residues, damage and dimensions before replacing a wet step; retained wet routes remain the fallback until acceptance."
+            }
+          ],
+          "technical_specification": {
+            "chapters": [
+              {
+                "number": 1,
+                "chapter_name": "Installed route and operating envelope",
+                "description": "The factory processes {wafer_diameter_mm} mm wafers. Equipment groups below share material handling, utilities and staff; duplicate recipe records do not create extra machines. This configuration provisions capacity; dated acceptance events establish qualification."
+              },
+              {
+                "number": 2,
+                "chapter_name": "Production scheduling",
+                "description": "Operate engineering and released customer lots under separate travellers. Match operator staffing, probe, assembly and final test to each accepted route before increasing releases; this configuration makes no Aurelia-volume throughput claim."
+              }
+            ],
+            "parameters": [
+              {
+                "key": "wafer_diameter_mm",
+                "value": 75
+              }
+            ]
+          },
+          "constraints": [
+            {
+              "number": 1,
+              "type": "acceptance_criterion",
+              "description": "Supplier acceptance verifies uniformity, overlay, contamination and electrical results on the actual recipes. These equipment groups are procurement and qualification commitments; unspecified vendor model numbers or external supplier contracts are not represented as executed agreements."
+            },
+            {
+              "number": 2,
+              "type": "acceptance_criterion",
+              "description": "Protect released customer lots from development experiments; qualify tools and trained shifts before transferring work."
+            },
+            {
+              "number": 3,
+              "type": "acceptance_criterion",
+              "description": "For the mature 16 Kbit DRAM route, require wafer completion at least 90%, pooled accepted electrical die yield at least 60% across ten independent lots, no qualification lot below 50%, and assembly/final acceptance at least 95%. At the earlier DRAM release, 50% electrical die yield is the minimum. The 4 Kbit SRAM capacity case uses at least 50% electrical die yield and the same completion/assembly minima; ROM, 1 Kbit SRAM and logic retain their own grade-specific acceptance limits."
+            },
+            {
+              "number": 4,
+              "type": "acceptance_criterion",
+              "description": "Measure throughput at the released grade over sustained production, including probe, package, screening and final test. Two stations at each test stage are initial installed minima, not proof of adequate throughput. Demonstrate hours at measured test times, and add stations before output acceptance if needed."
+            },
+            {
+              "number": 5,
+              "type": "acceptance_criterion",
+              "description": "Qualify external package assembly with a second approved route; reserve at least the accepted-output requirement divided by 95% in die-loading capacity. Separate engineering and reliability samples from customer stock."
+            },
+            {
+              "number": 6,
+              "type": "acceptance_criterion",
+              "description": "At the March 1978 gate, wafer cycle time has median at most 35 days and 90th percentile at most 45 days; assembly and final test take at most 14 additional days. Schedule lot cohorts and inventory by these delays."
+            },
+            {
+              "number": 7,
+              "type": "acceptance_criterion",
+              "description": "The mature capacity calculation uses at least 190 candidate DRAM die per wafer and 160 candidate 4 Kbit SRAM die per wafer. Replace these planning values with the actual mask map and exclusions at acceptance; if output is insufficient, increase demonstrated capacity before claiming readiness."
+            }
+          ]
+        },
+        {
+          "version_number": 3,
+          "description": "Aurelia supply configuration",
+          "effective_from": "1977-12-01",
+          "effective_until": null,
+          "equipment": [
+            {
+              "id": "projection",
+              "name": "Micralign-compatible projection aligner",
+              "quantity": 4,
+              "description": "75 mm wafer route; matched masks, overlay and critical-dimension acceptance. Counts are installed tools, not independent factories."
+            },
+            {
+              "id": "resist",
+              "name": "Independent resist coating, baking and development route",
+              "quantity": 2,
+              "description": "Each route includes coating, bake and development; qualify cross-route film and alignment consistency."
+            },
+            {
+              "id": "thermal",
+              "name": "Qualified oxidation/diffusion furnace bank",
+              "quantity": 2,
+              "description": "Independently maintainable banks with segregated clean oxidation and dopant tubes; qualify load sizes and turnaround against the recipe mix."
+            },
+            {
+              "id": "implant",
+              "name": "Ion implantation and annealing route",
+              "quantity": 1,
+              "description": "Implanter with qualified anneal access, spare critical assemblies and a qualified external implant fallback; fallback turnaround must meet the cycle-time gate."
+            },
+            {
+              "id": "deposition",
+              "name": "Silicon and dielectric deposition route",
+              "quantity": 2,
+              "description": "Independent qualified routes for the selected recipe films; no assumption that SRAM and DRAM capacitor stacks are interchangeable."
+            },
+            {
+              "id": "wet",
+              "name": "Segregated wet-clean and etch bench group",
+              "quantity": 2,
+              "description": "Contamination-controlled chemistry delivery, exhaust and compatible wafer handling; segregate metal-contaminated work."
+            },
+            {
+              "id": "metal",
+              "name": "Aluminium deposition and pattern route",
+              "quantity": 2,
+              "description": "Qualified metallisation routes with contact-chain, adhesion and step-coverage checks."
+            },
+            {
+              "id": "utilities",
+              "name": "Clean-area and high-purity utilities system",
+              "quantity": 1,
+              "description": "Filtered air, ultrapure water, gases, chemical handling, exhaust and safe backup power/cooling; critical pumps and filters have maintained spares."
+            },
+            {
+              "id": "metrology",
+              "name": "Process-control and failure-analysis laboratory",
+              "quantity": 1,
+              "description": "Film-thickness, sheet-resistance, transistor/leakage and optical inspection stations; contracted SEM and physical failure-analysis access."
+            },
+            {
+              "id": "wafer_probe",
+              "name": "Independent memory probe and test station",
+              "quantity": 2,
+              "description": "Temperature-capable probe plus qualified patterns; station hours and measured test/handling time must support every wafer and candidate die."
+            },
+            {
+              "id": "final_test",
+              "name": "Independent packaged-memory test station",
+              "quantity": 2,
+              "description": "Fixtures for each package and grade with correlated electrical results. Add parallel fixtures/stations if demonstrated cycle times require them."
+            },
+            {
+              "id": "reliability",
+              "name": "Controlled reliability and screening laboratory",
+              "quantity": 1,
+              "description": "Powered-life ovens, temperature cycling and package/bond checks with calibrated conditions and segregated qualification samples."
+            },
+            {
+              "id": "plasma",
+              "name": "Plasma strip and selective dry-etch cell",
+              "quantity": 1,
+              "description": "Qualify each layer for residues, damage and dimensions before replacing a wet step; retained wet routes remain the fallback until acceptance."
+            }
+          ],
+          "technical_specification": {
+            "chapters": [
+              {
+                "number": 1,
+                "chapter_name": "Installed route and operating envelope",
+                "description": "The factory processes {wafer_diameter_mm} mm wafers. Equipment groups below share material handling, utilities and staff; duplicate recipe records do not create extra machines. This configuration provisions capacity; dated acceptance events establish qualification."
+              },
+              {
+                "number": 2,
+                "chapter_name": "Production scheduling",
+                "description": "Plan {total_starts_per_month} wafer starts per month over {operating_days} days with round-the-clock shifts. Reserve {dram_starts_per_month} starts for 16 Kbit DRAM. The remaining 2,000 starts cover 4 Kbit SRAM, ROM/1 Kbit SRAM, logic and engineering in four 500-start allocations. At {lithography_visits} projection visits per wafer, each available aligner must sustain {passes_per_hour} accepted wafer passes per hour at {availability_percent}% scheduled availability. These are factory acceptance thresholds, not vendor performance claims."
+              },
+              {
+                "number": 3,
+                "chapter_name": "Test-station loading",
+                "description": "Qualify a mean DRAM probe cycle of at most {probe_seconds_per_die} seconds per candidate die and a mean final-test cycle of at most {final_seconds_per_part} seconds per assembled part, including handling and production retests. The two stations at each stage supply {station_hours_per_month} combined available hours per month under the stated schedule. Reserve the balance for SRAM, ROM, logic and setup; prove the complete mix and add stations before release if its measured loading exceeds availability. Qualification corner testing uses separately scheduled samples and does not silently consume production slots."
+              }
+            ],
+            "parameters": [
+              {
+                "key": "wafer_diameter_mm",
+                "value": 75
+              },
+              {
+                "key": "total_starts_per_month",
+                "value": 8000
+              },
+              {
+                "key": "operating_days",
+                "value": 26
+              },
+              {
+                "key": "dram_starts_per_month",
+                "value": 6000
+              },
+              {
+                "key": "lithography_visits",
+                "value": 10
+              },
+              {
+                "key": "passes_per_hour",
+                "value": 55
+              },
+              {
+                "key": "availability_percent",
+                "value": 75
+              },
+              {
+                "key": "probe_seconds_per_die",
+                "value": 2
+              },
+              {
+                "key": "final_seconds_per_part",
+                "value": 3
+              },
+              {
+                "key": "station_hours_per_month",
+                "value": 936
+              }
+            ]
+          },
+          "constraints": [
+            {
+              "number": 1,
+              "type": "acceptance_criterion",
+              "description": "Supplier acceptance verifies uniformity, overlay, contamination and electrical results on the actual recipes. These equipment groups are procurement and qualification commitments; unspecified vendor model numbers or external supplier contracts are not represented as executed agreements."
+            },
+            {
+              "number": 2,
+              "type": "acceptance_criterion",
+              "description": "Freeze production recipes and qualify every alternate route. With one projection tool unavailable, prioritize the 7,000 memory starts; pause the 500 engineering and up to 500 logic starts rather than claim full 8,000-start redundancy."
+            },
+            {
+              "number": 3,
+              "type": "acceptance_criterion",
+              "description": "For the mature 16 Kbit DRAM route, require wafer completion at least 90%, pooled accepted electrical die yield at least 60% across ten independent lots, no qualification lot below 50%, and assembly/final acceptance at least 95%. At the earlier DRAM release, 50% electrical die yield is the minimum. The 4 Kbit SRAM capacity case uses at least 50% electrical die yield and the same completion/assembly minima; ROM, 1 Kbit SRAM and logic retain their own grade-specific acceptance limits."
+            },
+            {
+              "number": 4,
+              "type": "acceptance_criterion",
+              "description": "Measure throughput at the released grade over sustained production, including probe, package, screening and final test. Two stations at each test stage are initial installed minima, not proof of adequate throughput. Demonstrate hours at measured test times, and add stations before output acceptance if needed."
+            },
+            {
+              "number": 5,
+              "type": "acceptance_criterion",
+              "description": "Qualify external package assembly with a second approved route; reserve at least the accepted-output requirement divided by 95% in die-loading capacity. Separate engineering and reliability samples from customer stock."
+            },
+            {
+              "number": 6,
+              "type": "acceptance_criterion",
+              "description": "At the March 1978 gate, wafer cycle time has median at most 35 days and 90th percentile at most 45 days; assembly and final test take at most 14 additional days. Schedule lot cohorts and inventory by these delays."
+            },
+            {
+              "number": 7,
+              "type": "acceptance_criterion",
+              "description": "The mature capacity calculation uses at least 190 candidate DRAM die per wafer and 160 candidate 4 Kbit SRAM die per wafer. Replace these planning values with the actual mask map and exclusions at acceptance; if output is insufficient, increase demonstrated capacity before claiming readiness."
+            },
+            {
+              "number": 8,
+              "type": "acceptance_criterion",
+              "description": "Check every thermal, implant, deposition, wet, metallisation and resist route using the actual wafer starts × recipe visits × cycle time, including batch fill, queueing and maintenance. Installed group counts do not establish throughput; any bottleneck must be expanded or its schedule reduced before the accepted-output gate. Verify contracted implant fallback and assembly reservations before crediting them as outage protection."
+            },
+            {
+              "number": 9,
+              "type": "acceptance_criterion",
+              "description": "Maintain two qualified 75 mm starting-wafer supply routes and at least 16,000 accepted starting wafers as the two-month buffer for the 8,000-start schedule. Incoming release controls crystal orientation, resistivity, thickness, flatness, surface defects and lot traceability against the approved recipe specification. Qualify alternate critical gases, chemicals, masks and package materials, with replenishment lead times covered by funded stock or contracted backup. Raw-material stock is separate from finished-memory launch inventory."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "manufacturing_capability.aion_sram4_3um",
+      "name": "AION 3 µm 4 Kbit SRAM manufacture",
+      "capability_kind": "recipe",
+      "actor_id": "actor.labs",
+      "location_id": "location.aion_cambridge_fab",
+      "technology_id": "technology.nmos_3um",
+      "production_line_id": "manufacturing_capability.aion_cambridge_nmos_line",
+      "recipe_kind": "SRAM",
+      "description": "Separately qualified 2114-compatible 1K×4 SRAM for sprite buffers and external device makers, using the shared Cambridge line.",
+      "base_part_ids": [
+        "base_part.aion_2114"
+      ],
+      "qualification_requirements": [
+        {
+          "number": 1,
+          "type": "acceptance_criterion",
+          "description": "Release the 250 ns cycle, +5 V, 18-pin AION 2114-250 on at least three independent lots with full read/write and powered retention tests at voltage/temperature corners."
+        },
+        {
+          "number": 2,
+          "type": "acceptance_criterion",
+          "description": "Qualify the two-chip 1 KiB sprite bank, CPU/DMA arbitration and worst-case sprite overlap before the Aurelia memory integration gate."
+        },
+        {
+          "number": 3,
+          "type": "acceptance_criterion",
+          "description": "At March 1978 acceptance, demonstrate at least 31,500 accepted parts per month or equivalent qualified spare capacity; the capacity model assumes 160 candidate die per wafer, 90% wafer completion, 50% accepted electrical yield and 95% assembly/final acceptance. Replace assumptions with the actual route evidence."
+        }
       ]
     }
   ]
