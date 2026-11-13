@@ -1,0 +1,284 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.f43039f3-4047-4b7b-a7a7-d7b24aeb8663",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T15:14:13.514Z",
+      "change_id": "change.external_impacts.cromemco_4fdc",
+      "proposal_sha256": "2b90164ad2f2b6e8a90e7595c45f982ed0ec893ddd4d9b5ae195255d837c2062",
+      "proposal": {
+        "id": "change.external_impacts.cromemco_4fdc",
+        "category": "story",
+        "title": "Restructure external product impacts — Cromemco 4FDC",
+        "reason": "Consolidate descriptive content and move assessed product/standard effects into typed impact sections. Preserve historical interfaces, fictional-world boundaries and qualification limits. Evidence: data_storytelling/review_evidence/external-impact-revision/assessment.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.cromemco_4fdc",
+            "before": {
+              "id": "external_product.cromemco_4fdc",
+              "name": "Cromemco 4FDC",
+              "description": "Cromemco 4FDC is a disk controller for S-100.",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.cromemco"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Floppy controller supporting suitable 5¼- and 8-inch drives. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Product impact",
+                  "description": "Assessment at 1979-12-31. These are conditional commercial comparisons, not measured changes in sales.\n\n{primary_offering}: A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification.\n\n{related_offering}: On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive.",
+                  "parameters": [
+                    {
+                      "key": "primary_offering",
+                      "value": "product.device_s100_flexibus_card"
+                    },
+                    {
+                      "key": "related_offering",
+                      "value": "product.device_flexidisk"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": []
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.cromemco_4fdc",
+              "name": "Cromemco 4FDC",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.cromemco"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Floppy controller supporting suitable 5¼- and 8-inch drives. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Cromemco 4FDC"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Floppy controller supporting suitable 5¼- and 8-inch drives.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Floppy controller supporting suitable 5¼- and 8-inch drives.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.cromemco_4fdc",
+          "before": {
+            "id": "external_product.cromemco_4fdc",
+            "name": "Cromemco 4FDC",
+            "description": "Cromemco 4FDC is a disk controller for S-100.",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.cromemco"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Floppy controller supporting suitable 5¼- and 8-inch drives. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 3,
+                "chapter_name": "Product impact",
+                "description": "Assessment at 1979-12-31. These are conditional commercial comparisons, not measured changes in sales.\n\n{primary_offering}: A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification.\n\n{related_offering}: On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive.",
+                "parameters": [
+                  {
+                    "key": "primary_offering",
+                    "value": "product.device_s100_flexibus_card"
+                  },
+                  {
+                    "key": "related_offering",
+                    "value": "product.device_flexidisk"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": []
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.cromemco_4fdc",
+            "name": "Cromemco 4FDC",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.cromemco"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Floppy controller supporting suitable 5¼- and 8-inch drives. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Cromemco 4FDC"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Floppy controller supporting suitable 5¼- and 8-inch drives.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Floppy controller supporting suitable 5¼- and 8-inch drives.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "65de8008f6d8d6a6695eb8256ab2bf69aa48374ecdae4cc6f3867925b71aadc2"
+        }
+      ]
+    }
+  ]
+}
