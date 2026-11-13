@@ -47,3 +47,17 @@ The standard-family consolidation and external-product conversions are approved.
 The active campaign schema now accepts only the timeline shape. Its temporary launch-ownership bridge remains where existing campaigns still need it; schema cleanup does not rewire story ownership.
 
 [Market-response impact sections](MARKET_RESPONSES.md) and [annual sales calculations](../../data_calculation/README.md) are implemented separately. Existing response subjects and descriptions await a later reviewed migration.
+
+## Core families and chronology
+
+| Core technology ID | Standard scope |
+| --- | --- |
+| `technology.flexibus` | Peripheral transport; later pointing-device class. |
+| `technology.logix_tui_standard` | Controls and keyboard/editing core; later pointer interaction. |
+| `technology.aion_c_portability_framework` | Common language/source contracts, target profiles, portable API and display services. |
+| `technology.logix_digital_video` | Display link/control contract, raster profiles and palette extensions. |
+| `technology.logix_lan100_link` | Shared physical/data-link contract and negotiated rates. |
+
+These are the approved families, not a list of every interface or implementation technology. Plug and Execute retains kind `interface` pending a sufficiently defined contract. Z80/CP/M and ERA/AIONix are coexisting AION C profiles; source portability does not imply cross-target binary compatibility. The platform API's existing 1.0 label is retained without inventing a standard version for each OS release.
+
+Chronology is expressed in scoped specification chapters: the June 1978 commercial baseline, May 1979 independent compatibility programmes, May 1980 ERA/AIONix target, 1981 networking programme and June 1982 pointer/graphics extensions remain distinct. Development commitments and planned programmes do not establish completed qualification or shipment. No `revisions[]` schema or automatic as-of-date capability resolver exists; readers and assessments must respect the stated scope.

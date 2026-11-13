@@ -1,6 +1,6 @@
 # Current documentation
 
-These guides describe the repository and application as they work now. The schema contract is **0.17.0**. Live JSON, rather than a historical report, determines current records, pending proposals and authorization state. The catalogue migration is accepted; current authoring rules, runtime compatibility and remaining review discussions are distinguished in these guides.
+These guides describe the repository and application as they work now. The schema contract is **0.19.0**. Live JSON, rather than a historical report, determines current records, pending proposals and authorization state. The catalogue migration is accepted; current authoring rules, runtime compatibility and remaining review discussions are distinguished in these guides.
 
 | Guide | Use |
 | --- | --- |
@@ -11,14 +11,16 @@ These guides describe the repository and application as they work now. The schem
 | [Model guide](data_model/MODEL_GUIDE.md) | Entity responsibilities, ownership and compatibility rules. |
 | [Reference rules](data_model/REFERENCE_RULES.md) | Direct dependencies, deliverables, launch links and justified exceptions. |
 | [Catalogue validation](data_model/CATALOGUE_VALIDATION.md) | Optional strict product profile, migration checks and activation order. |
+| [Campaign timelines](data_model/CAMPAIGN_TIMELINES.md) | Current campaign structure, ownership and presentation blocks. |
 | [Foundation specification](data_model/FOUNDATION_SPECIFICATION.md) | Generated attribute-level schemas and allowed references. |
 | [Storytelling file reference](data_model/STORYTELLING_FILE_REFERENCE.md) | Authorization, proposals, feedback and editorial evidence. |
+| [External products and standards](data_model/ECOSYSTEM_STANDARDS.md) | Core standards, profiles, extensions and external-product specifications. |
+| [Market responses](data_model/MARKET_RESPONSES.md) | Standard/product effects and parameter validation. |
+| [Annual sales](../data_calculation/README.md) | Directly reassessable calculation records and independent checks. |
 | [Render setup](RENDER_SETUP.md) | Deployment, credentials, local checks and static publishing. |
 
 [Model principles](../DATA_MODEL_PRINCIPLES.md) apply throughout. The canonical model-documentation directory is `docs/data_model`.
 
 [Archived documentation](archived/README.md) contains historical story proposals, assessments, migration reports and superseded guidance. Those files are not current instructions or a statement of what is pending now. The earlier [legacy evidence archive](../archived_no_longer_valid/README.md) remains immutable.
 
-- [Campaign timeline contract](data_model/CAMPAIGN_TIMELINES.md): independent campaign dates, marketing steps, presentation blocks and staged ownership migration.
-
-Current market and calculation guides: [Market-response impacts](data_model/MARKET_RESPONSES.md) and [Annual sales estimates](../data_calculation/README.md).
+Run `npm run validate:docs` to check current guide links, viewer entries and agreement with the registry/manifest.

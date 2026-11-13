@@ -1,11 +1,12 @@
 # Storytelling data — current file reference
 
-Contract **0.16.0**. `data_storytelling/` contains eight active JSON files at its root. Consult those files and the application for live counts and review state. Supporting evidence can be stored in subdirectories; it is not another foundation collection or authorization target.
+Contract **0.19.0**. `data_storytelling/` contains nine root JSON files. Consult those files and the application for live counts and review state. Supporting evidence can be stored in subdirectories; it is not another foundation collection or authorization target.
 
 | File | Current responsibility |
 | --- | --- |
 | [authorization.json](../../data_storytelling/authorization.json) | Whole-record state and exact content hashes. |
-| [authorization_decision.json](../../data_storytelling/authorization_decision.json) | Immutable before/after decisions and reviewed proposal snapshots. |
+| [authorization_decision.json](../../data_storytelling/authorization_decision.json) | Preserved original decision archive; not rewritten on new saves. |
+| [authorization_decision_index.json](../../data_storytelling/authorization_decision_index.json) | Decision identities, actions, proposal hashes and archive/shard paths for retry and dependency checks. |
 | [change.json](../../data_storytelling/change.json) | Current concrete proposals, discussion entries and transport metadata. |
 | [manifest.json](../../data_storytelling/manifest.json) | Schema version, foundation types and filename exceptions. |
 | [annotation.json](../../data_storytelling/annotation.json) | Append-only revisions of record annotations. |
@@ -13,9 +14,13 @@ Contract **0.16.0**. `data_storytelling/` contains eight active JSON files at it
 | [source.json](../../data_storytelling/source.json) | Source bibliography and evidence catalogue. |
 | [reconciliation_issue.json](../../data_storytelling/reconciliation_issue.json) | Inherited editorial questions with current target reconciliation; the live Changes confirm queue holds actionable proposals and discussions. |
 
+New decisions are immutable JSON shards under `authorization_decisions/`. Each contains `authorization_decision[]`; the index and new shards are saved atomically with the reviewed changes. These subdirectory files do not add root datasets or foundation types.
+
 ## Authorization and decisions
 
 Authorization entries contain `id`, `record_id`, `state` (`authorized` or `unauthorized`), `content_sha256` and optional `decision_id`. The hash covers the whole record with recursively sorted object keys and preserved array order. Missing or mismatching authorization is Pending authorization. References never authorize their targets. Older entries can lack a direct-save decision ID; preserved evidence remains historical.
+
+The backend reads the compact decision index instead of downloading the full historical archive during ordinary state loading and saves. Preserve index targets and archived decisions; do not manually update them to simulate approval.
 
 Decisions contain `id`, `action`, reviewer `actor`, `decided_at` and `target[]`. Actions include `authorize_record`, `authorize_records`, `approve_change` and `remove_change`. Targets preserve whole before/after snapshots and hashes; null represents creation/removal. Proposal approvals retain `change_id`, `proposal_sha256` and the complete proposal. Removed records lose their current authorization entry only in the approved transaction; their historical decisions remain unchanged.
 

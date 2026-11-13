@@ -45,6 +45,8 @@ Run checks appropriate to the change:
 ```sh
 npm ci
 npm run validate:data
+npm run validate:calculation
+npm run validate:docs
 node tools/generate-foundation-spec.js
 npm run build
 node --test tests/model/*.test.js tests/review/*.test.js tests/server/*.test.js
@@ -59,27 +61,18 @@ The optional `npm run validate:catalogue` checks the stricter catalogue target a
 
 The maintained branch is `main`. Publish the authorized implementation and reviewable proposals there, leaving content authorization to the author. Check the resulting remote commit. Frontend, backend and `AION_BRANCH` must agree with the schema version; see [Render setup](RENDER_SETUP.md).
 
-For technology specifications, use the [chapter contract](data_model/MODEL_GUIDE.md#technology-specification-chapters). A direct format conversion requires an explicit author instruction. Preserve prior effective authorization states for that lossless conversion, record its instruction and before/after hashes, and append the corresponding decision for previously authorized content; do not promote pending records or authorize the subsequent editorial rewrite. The current technology rewrite proposals are verified with `node tools/verify-technology-chapters.js`, which checks exact conversion, full source coverage and independent/batch approval without applying proposals to disk. Its evidence is a pinned review snapshot.
+## Specifications and current migrations
 
-When refining technology chapters, run `node tools/verify-technology-prose.js` for the current author-feedback revision. The authoring checks reject unused keys, Boolean-valued parameters, sentence-valued parameters and redundant numbered lists. Approval simulations additionally check preserved numeric values, command scopes and video-memory configurations. These prose checks apply to revised proposals; the direct-conversion baseline remains schema-valid until its rewrite is authorized.
+Use the [model guide](data_model/MODEL_GUIDE.md), [standards guide](data_model/ECOSYSTEM_STANDARDS.md) and [market-response guide](data_model/MARKET_RESPONSES.md). All current campaigns use timeline records and all external products use technology-style chapters. Their legacy schema variants are retired. Standard-family consolidation is approved; retain core IDs and explain profiles/extensions chronologically. Market-response impact sections are available, but migrating existing subjects and descriptions remains a later reviewed task.
 
-For the fixed-composition offering and role-consolidation proposals, run `node tools/verify-fixed-composition-offerings.js`. It checks independent and batch authorization, fixed product contents, platform-specific offerings, unchanged workstation cable quantities, preserved role text and the strict catalogue profile without applying proposals to disk.
+Root device/software/base-part technical specifications are current. Populated legacy technical definitions still coexist in stored records and remain schema-supported; the viewer prefers the root narrative. Do not maintain competing definitions or delete stored legacy data outside a reviewed migration. Socket groups belong to composition versions.
 
-The Regular Support amendment is included by `node tools/verify-fixed-composition-offerings.js` when its evidence exists. Authorize the annual service definition before or together with the amended product proposals that remove duplicate entitlement blocks. Preserve their original before snapshots and multi-computer service quantities.
+Historical preparation and verification scripts target pinned migrations; they are not general maintenance commands. Many assert that their original proposals are still pending and will fail after approval. Use them only against their stated evidence/baseline, or write a focused verifier for the current proposal set. Never regenerate an approved or superseded queue to make an old verifier pass.
 
-For the unused-field cleanup, run `node tools/verify-unused-field-cleanup.js`. Schema fields already absent from current data are retired now. Authorize the three empty-container proposals before deleting their remaining transitional schema declarations; do not rewrite foundation records or authorization hashes directly. New records omit the transitional containers. Historical snapshots remain immutable, and historical regression fixtures may use an explicit in-memory representation adapter.
-
-For the revised fixed-required composition proposals, run `node tools/verify-required-compositions.js`. The three existing cleanup IDs now cover all 1,000 lines, with the five OEM exclusions and ten associated base parts included in the device group. Each group must authorize independently and in any batch order. Do not create overlapping whole-record proposals or rewrite the original cleanup evidence. Omit `unit` and `supply_condition` from newly authored lines; quantity counts complete referenced items and every line is required. Keep the transitional schema declarations until the current record removals are approved.
-
-For the maturity-description proposals, run `node tools/verify-maturity-description.js`. Verify all 25 stage mentions, unchanged capability subjects, independent and batch authorization, and validity under the proposed schema without `maturity`. The representation change must preserve review/target wording; it does not establish that a qualification succeeded. After data approval, `node tools/retire-maturity-schema.js --apply` removes the temporary schema declaration, advances the contract and regenerates its specification. Publish that schema deployment separately; the saving service does not modify schema files.
-
-## Technical specification migrations
-
-Use the root specification and canonical-key rules in [Model guide](data_model/MODEL_GUIDE.md#root-technical-specifications). Deploy schema, rendering and mixed-format validation support before proposing record migrations. For steps 1–4, add root chapters and graphics modes and relocate socket groups through complete-record proposals; retain legacy technical definitions until step 5. Preserve narrative qualifications, typed unknowns, direct reference roles, exact buffer units and inherited modes. Never infer engineering qualification from a format migration.
-
-`tools/prepare-technical-specifications.js` preserves the original conversion implementation as historical evidence and refuses direct execution. Its property-based conversion is not an authoring method. The current narratives are authored in `tools/revise-technical-narratives.js`, with revised evidence under `data_storytelling/review_evidence/technical-narrative-refinement/`; the original evidence remains immutable. `node tools/verify-technical-specifications.js` checks independent, batch and reverse sequential approvals, all explicit modes, unchanged resolved BOMs and socket relocation. This verifier does not save or authorize anything. Review the generated English descriptions and parameter names as well as machine validation.
+Six empty-only declarations have been retired; `minimum_resources.application_ram_bytes` remains in 32 software records. Inspect both live data and pending after snapshots before further schema retirement. The audit is in `data_storytelling/review_evidence/market-impacts-and-sales/retirement.json`. Existing technical definitions are populated, not unused schema branches.
 
 ### Writing technical narratives
+
 
 Read the complete record and its relevant implementation references before writing. Organize the explanation around the object’s purpose, architecture, operation and limitations, choosing the chapters appropriate to that particular component or software edition. Source property order, nesting and names are not an outline. Write connected prose; avoid field labels disguised as sentences, one-property chapters, duplicated feature inventories and repeated numerical facts.
 
@@ -87,14 +80,10 @@ Interpret overlapping definitions together. For example, an adapter’s platform
 
 Socket groups belong only to composition history and must never be traversed into narrative chapters or parameter tables. Concision must preserve functional and qualification constraints; derived totals may be explained by their constituent quantities instead of being stored repeatedly. Put long statements and Boolean assertions in prose. Preserve canonical numeric validation keys and units. Commercial prices, adoption-price formulas and entitlement labels are not engineering specifications and must not be copied into the new sections. Document such exclusions in editorial evidence while preserving immutable source snapshots.
 
-The authored revision tool replaces the seven pending proposal snapshots only with `--apply`, retaining IDs and before records. It never authorizes foundation data. Verify both semantic content and transaction validity after refinement; a structural schema pass cannot establish that the prose accurately explains the design.
+When preparing a computer specification, first inspect its installed base BOM. Keep host interfaces and socket compatibility on the base computer, but place separately fitted video-card implementation and modes on that card. Preserve the reviewed hardware boundary and all meaningful limits.
 
-When preparing a computer specification, first check what is actually installed in its base BOM. Do not copy a separately fitted video card’s details or graphics modes into the base computer. Keep host interfaces and socket compatibility there; the card owns its implementation. `tools/refine-base-computer-graphics.js` records the reviewed correction to the remaining technical-specification proposal, with immutable earlier evidence under `technical-narrative-refinement` and the correction under `base-computer-graphics-boundary`. The shared boundary helper also prevents the narrative preparation tool from recreating the same misleading copies. `tools/verify-technical-specifications.js` follows this refinement while retaining already approved proposals.
+## Calculations and documentation
 
-## Unpopulated fields
+Annual sales in `data_calculation/annual_sales.json` may be edited and reassessed directly. They do not require Changes confirm, foundation authorization entries or hash updates. Run `npm run validate:calculation`; record the scope, unit, basis and uncertainty. Do not fabricate estimates to fill an empty list or aggregate overlapping scopes. No existing sales engine or automatic invalidation is implied.
 
-The current audit is in `data_storytelling/review_evidence/unpopulated-field-retirement/`. Empty-only data removals are complete-record Changes confirm proposals. Do not apply their after-snapshots directly or refresh authorization hashes. Absent schema declarations are retired in 0.16.0; seven empty-only compatibility declarations remain until review. After approval, run `python3 tools/retire-unpopulated-fields.py --final --apply` and `node tools/verify-unpopulated-field-retirement.js`, then publish the matching schemas, registry, manifest and generated documentation together. Shared fields with populated uses are retained. Historical snapshots are evidence, not current schema fixtures.
-
-## Campaign timeline conversion
-
-Use the [campaign timeline contract](data_model/CAMPAIGN_TIMELINES.md) for new campaigns and the staged conversion. Schema/application support is deployed separately; twelve complete-record proposals convert campaigns individually, with parent-process additions in the same proposal. Run `node tools/verify-campaign-timelines.js` and the campaign model/browser tests. Preserve old event/subprocess ownership until the later explicit rewiring phase; presentation blocks have no event IDs, and marketing-step references remain absent in this phase. Do not retire the legacy schema branch or launch-validation bridge until their final users have migrated.
+For documentation maintenance, check `code/model-contract.js`, the manifest, schemas, runtime consumers and current records. Run `node tools/generate-foundation-spec.js` and `npm run validate:docs`. Preserve immutable evidence and archived documents. Mark approved/superseded design proposals clearly and link their current guide. Update documentation-viewer navigation when adding a guide.

@@ -19,7 +19,7 @@ Prefer the narrowest meaningful field:
 | An event/process belongs to another process | Process steps/boundaries or the established ownership fields; inputs and outcomes do not establish ownership. |
 | A loosely connected topic or background fact | Preserve useful prose; remove the reference. |
 
-Apply this signing-only rule to every agreement. An offer or negotiation does not establish signing. If only fulfilment of prior promises is recorded and no signing event is supported, omit `agreement_id` rather than inventing a date or event. Preserve useful obligations in prose and genuine prerequisites through explained inputs referencing the signing event. Do not use other generic reference fields merely to recreate the removed agreement link. Compatibility schemas still accept existing operational links while their removal proposals await approval.
+Apply this signing-only rule to every agreement. An offer or negotiation does not establish signing. If only fulfilment of prior promises is recorded and no signing event is supported, omit `agreement_id` rather than inventing a date or event. Preserve useful obligations in prose and genuine prerequisites through explained inputs referencing the signing event. Do not use other generic reference fields merely to recreate the removed agreement link. The signing-only cleanup is approved. The runtime may retain broader compatibility declarations, but they do not permit new operational agreement links.
 
 Top-level `subject_ids` is exceptional. Each retained reference needs a specific reason that cannot be represented more accurately above. Record that reason in proposal evidence or review rationale, not in a new foundation metadata field. References inside `inputs[].subject_ids` and `outcomes[].subject_ids` are useful because their enclosing type and description explain the relationship. Action-step references may remain when the step directly states what is done to or with the object and that reference is not already represented in the containing process’s inputs or outcomes. Remove redundant step subjects while retaining the action description. If a genuine delivery relationship is missing, add an explained outcome in the same reviewed proposal before removing its step reference. Avoid unexplained lists there too.
 
@@ -67,3 +67,11 @@ The UI's generic “Referenced by” section already derives reverse navigation.
 ## Review checklist
 
 For each reference, identify its exact role, the required input or changed output, its directness, and whether an existing field already records the same relationship. Review nested outcomes as well as top-level subjects. Document intentional removals and temporary exceptions in editorial evidence. Validate both the current graph and each proposed atomic result. A schema can check types and existence; semantic necessity still requires author review.
+
+## Standards, market effects and sales
+
+Use core `software_standard` or `hardware_standard` technology IDs in `impacted_standards`; other technology kinds are invalid targets. Features/extensions and platform profiles belong within their standard family. A target operating system or compiler version is not automatically a new standard version. Explain the applicable date/profile and qualifications; the schema has no separate standard-revision entity.
+
+External products use required kind/providers, technology-style chapters and optional direct release dates. Their impacts have one dated three-part assessment per standard. Market responses instead use direction, description and parameters for `impacted_standards` and `impacted_products`; the latter permits internal and external offerings. Existing response subjects/descriptions remain until a later reviewed migration.
+
+Annual-sales `product_id` references are validated against current internal/external offerings but never authorize them. Estimates are calculation data, with independently checked scopes/ranges and no automatic inference from compatibility or announcements. See [market responses](MARKET_RESPONSES.md) and [annual sales](../../data_calculation/README.md).

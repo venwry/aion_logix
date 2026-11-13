@@ -4,7 +4,7 @@ A structured alternative-history project with technical product definitions, a t
 
 Start with the [current documentation](docs/README.md), [model principles](DATA_MODEL_PRINCIPLES.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md).
 
-The current schema contract is **0.17.0**, with sixteen foundation datasets. The catalogue migration is accepted. The optional strict catalogue profile passes, while the runtime schema retains compatibility with earlier record shapes; see [catalogue validation](docs/data_model/CATALOGUE_VALIDATION.md). Live records, proposals, feedback and exact-content authorizations determine the current state; old phase reports do not.
+The current schema contract is **0.19.0**, with fifteen foundation datasets. The catalogue migration is accepted. The optional strict catalogue profile passes, while the runtime schema retains compatibility with earlier record shapes; see [catalogue validation](docs/data_model/CATALOGUE_VALIDATION.md). Live records, proposals, feedback and exact-content authorizations determine the current state; old phase reports do not.
 
 | Layer | Location |
 | --- | --- |
@@ -31,6 +31,7 @@ The [application guide](docs/APPLICATION_GUIDE.md) explains navigation, annotati
 ```sh
 npm run validate:data
 npm run validate:catalogue
+npm run validate:calculation
 node --test tests/model/*.test.js tests/review/*.test.js tests/server/*.test.js
 CHROMIUM_PATH=/usr/bin/chromium npm test
 ```
