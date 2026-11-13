@@ -1,0 +1,3873 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.61198c68-2c01-4556-b42a-ed9fd7e26b6b",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T20:39:41.540Z",
+      "change_id": "change.aion_c2_card_rom_and_disk",
+      "proposal_sha256": "b8927d75521141606da7232ef3201bf3103aadb8beace28d5fc0fed1cfde4fb4",
+      "proposal": {
+        "id": "change.aion_c2_card_rom_and_disk",
+        "category": "data",
+        "title": "Implement Aurelia-compatible video ROMs and Apple-format FlexiDisk II transfer",
+        "reason": "Use the existing card ROM and dual-format disk-controller records. No additional display RAM, undisclosed accelerator or transparent legacy-program conversion is assumed. Full parity concerns the June 1979 Aurelia release, matching monitors and logical API behaviour. ROM sizing, host keyboard mappings and qualification remain explicit. Apple DOS 3.2 is the period target; later DOS 3.3 is not backdated.",
+        "elements": [
+          {
+            "record_type": "device",
+            "record_id": "device.apple2_video_card",
+            "before": {
+              "id": "device.apple2_video_card",
+              "name": "Logix Video Card for Apple II",
+              "kind": "expansion_card",
+              "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "specification": {
+                      "host": "Apple II",
+                      "host_interface": "Apple II slot decode and driver ROM; preserve native memory map and avoid other cards.",
+                      "software": "Native Apple II 6502 drivers, callable libraries and examples; applications must use the card API. No CP/M port, Z80 CPU or transparent redirection of existing graphics.",
+                      "display_controller_id": "base_part.aurelia_video_chip",
+                      "video_ram_kb": 16,
+                      "video_ram_chip_id": "base_part.aion_4116",
+                      "video_ram_chip_count": 8,
+                      "video_link_id": "technology.logix_digital_video",
+                      "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
+                      "display_modes": "Reuse Aurelia controller text/bitmap capabilities subject to card/monitor qualification. 80-column output requires a compatible 640-pixel monitor. Host CPU determines drawing throughput.",
+                      "included_monitor": false,
+                      "flexibus_ports": 0,
+                      "sprite_memory": {
+                        "chip_id": "base_part.aion_2114",
+                        "chip_count": 2,
+                        "bank_data_width_bits": 8,
+                        "capacity_bytes": 1024,
+                        "separate_bus": true,
+                        "separate_from_system_and_display_ram": true
+                      },
+                      "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.aurelia_video_chip"
+                      },
+                      "quantity": 1,
+                      "element_type": "Display controller"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.aion_4116"
+                      },
+                      "quantity": 8,
+                      "element_type": "Eight 16Kx1 devices = 16 KiB display memory"
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.apple_expansion_pcb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.apple_host_interface"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.boot_and_driver_rom"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.passives_protection_and_internal_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.slot_connector_contacts"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.video_ram_window_and_bus_arbitration"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.video_clock_reset"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.digital_video_transceivers_and_connector"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "base_part.aion_2114"
+                      },
+                      "quantity": 2,
+                      "element_type": "Exclusive 1 KiB sprite SRAM on separate bus"
+                    },
+                    {
+                      "id": "line_12",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.sprite_interface_package_pcb_test"
+                      },
+                      "quantity": 1,
+                      "element_type": "Sprite interface package, PCB and test allowance"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "Release assembly routing, test fixtures and procurement specifications."
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
+                    },
+                    {
+                      "number": 6,
+                      "kind": "testing",
+                      "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "display",
+                      "name": "Display output",
+                      "sockets": [
+                        {
+                          "id": "video_out",
+                          "name": "Video output",
+                          "connection": "video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.mono_monitor_1",
+                            "device.color_monitor_1",
+                            "device.mono_monitor_2",
+                            "device.color_monitor_2",
+                            "device.mono_pro",
+                            "device.color_pro_14"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "Release assembly routing, test fixtures and procurement specifications."
+                },
+                {
+                  "number": 4,
+                  "kind": "testing",
+                  "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                },
+                {
+                  "number": 5,
+                  "kind": "selection",
+                  "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Host integration",
+                    "description": "This Apple II card uses slot decoding and a driver ROM while preserving the native memory map and avoiding conflicts with other cards. Native 6502 drivers, callable libraries and examples expose a card API; existing graphics are not transparently redirected, and no CP/M port or Z80 CPU is supplied."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Independent display and sprite memory",
+                    "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "display_controller_id",
+                    "ref_id": "base_part.aurelia_video_chip",
+                    "ref_role": "Aurelia graphics controller reused on this host"
+                  },
+                  {
+                    "key": "video_ram_kib",
+                    "value": 16
+                  },
+                  {
+                    "key": "video_chip_count",
+                    "value": 8
+                  },
+                  {
+                    "key": "video_chip_id",
+                    "ref_id": "base_part.aion_4116",
+                    "ref_role": "Display DRAM"
+                  },
+                  {
+                    "key": "sprite_chip_id",
+                    "ref_id": "base_part.aion_2114",
+                    "ref_role": "SRAM dedicated to sprites"
+                  },
+                  {
+                    "key": "video_link_id",
+                    "ref_id": "technology.logix_digital_video",
+                    "ref_role": "Digital monitor connection"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.apple2_video_card",
+              "name": "Logix Video Card for Apple II",
+              "kind": "expansion_card",
+              "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [
+                "technology.logix_tui_standard",
+                "technology.aion_c_portability_framework"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "specification": {
+                      "host": "Apple II",
+                      "host_interface": "Apple II slot decode and driver ROM; preserve native memory map and avoid other cards.",
+                      "software": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected.",
+                      "display_controller_id": "base_part.aurelia_video_chip",
+                      "video_ram_kb": 16,
+                      "video_ram_chip_id": "base_part.aion_4116",
+                      "video_ram_chip_count": 8,
+                      "video_link_id": "technology.logix_digital_video",
+                      "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
+                      "display_modes": "Full June 1979 Aurelia text/bitmap and sprite-mode behaviour on matching qualified card/monitor configurations; native host throughput and memory limits remain. No later-release modes are implied.",
+                      "included_monitor": false,
+                      "flexibus_ports": 0,
+                      "sprite_memory": {
+                        "chip_id": "base_part.aion_2114",
+                        "chip_count": 2,
+                        "bank_data_width_bits": 8,
+                        "capacity_bytes": 1024,
+                        "separate_bus": true,
+                        "separate_from_system_and_display_ram": true
+                      },
+                      "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.aurelia_video_chip"
+                      },
+                      "quantity": 1,
+                      "element_type": "Display controller"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.aion_4116"
+                      },
+                      "quantity": 8,
+                      "element_type": "Eight 16Kx1 devices = 16 KiB display memory"
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.apple_expansion_pcb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.apple_host_interface"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.boot_and_driver_rom"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.passives_protection_and_internal_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.slot_connector_contacts"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.video_ram_window_and_bus_arbitration"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.video_clock_reset"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.digital_video_transceivers_and_connector"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "base_part.aion_2114"
+                      },
+                      "quantity": 2,
+                      "element_type": "Exclusive 1 KiB sprite SRAM on separate bus"
+                    },
+                    {
+                      "id": "line_12",
+                      "target": {
+                        "record_id": "base_part.device.apple2_video_card.sprite_interface_package_pcb_test"
+                      },
+                      "quantity": 1,
+                      "element_type": "Sprite interface package, PCB and test allowance"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "Release assembly routing, test fixtures and procurement specifications."
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
+                    },
+                    {
+                      "number": 6,
+                      "kind": "testing",
+                      "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+                    },
+                    {
+                      "number": 7,
+                      "kind": "testing",
+                      "description": "Verify ROM image fit, bank restoration across display/disk calls, RAM/stack reservations, complete TUI and mode conformance, keyboard-command mappings and full-system compatibility on each supported host."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "display",
+                      "name": "Display output",
+                      "sockets": [
+                        {
+                          "id": "video_out",
+                          "name": "Video output",
+                          "connection": "video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.mono_monitor_1",
+                            "device.color_monitor_1",
+                            "device.mono_monitor_2",
+                            "device.color_monitor_2",
+                            "device.mono_pro",
+                            "device.color_pro_14"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "Release assembly routing, test fixtures and procurement specifications."
+                },
+                {
+                  "number": 4,
+                  "kind": "testing",
+                  "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                },
+                {
+                  "number": 5,
+                  "kind": "selection",
+                  "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Host integration",
+                    "description": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected. Preserve the host memory map, qualify address decoding and wait states, and avoid conflicts with other installed cards."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Independent display and sprite memory",
+                    "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Aurelia-compatible presentation",
+                    "description": "At the 4 June 1979 launch, the ROM and callable libraries implement every TUI feature and graphics mode of the contemporary Aurelia release: the same control semantics, text frames/windows, editing, clipping, glyphs, colours, display-mode behaviour and sprite services on matching qualified monitors. This is functional/API equivalence, not Z80 binary compatibility or equal drawing speed. Application state, clipboard buffers and control descriptors occupy bounded host RAM; complex controls can use linked helpers over ROM primitives. Logical keyboard commands use documented host mappings and menu equivalents where physical keys differ. Later pointer, professional-video and multitasking features are not implied."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "ROM mapping and runtime integration",
+                    "description": "Use the slot page as discovery and call entry points, with banked firmware behind the shared expansion-ROM window. A fixed RAM-resident trampoline restores card selection and bank state around disk or other peripheral calls, then returns safely to the correct ROM. Reserve zero-page and stack workspace and keep callbacks, interrupts and reentrancy within the published ABI. Determine ROM chip capacity/population from the linked firmware image; no additional memory is inferred from the existing supplied-set quantity."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "display_controller_id",
+                    "ref_id": "base_part.aurelia_video_chip",
+                    "ref_role": "Aurelia graphics controller reused on this host"
+                  },
+                  {
+                    "key": "video_ram_kib",
+                    "value": 16
+                  },
+                  {
+                    "key": "video_chip_count",
+                    "value": 8
+                  },
+                  {
+                    "key": "video_chip_id",
+                    "ref_id": "base_part.aion_4116",
+                    "ref_role": "Display DRAM"
+                  },
+                  {
+                    "key": "sprite_chip_id",
+                    "ref_id": "base_part.aion_2114",
+                    "ref_role": "SRAM dedicated to sprites"
+                  },
+                  {
+                    "key": "video_link_id",
+                    "ref_id": "technology.logix_digital_video",
+                    "ref_role": "Digital monitor connection"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "base_part",
+            "record_id": "base_part.device.apple2_video_card.boot_and_driver_rom",
+            "before": {
+              "id": "base_part.device.apple2_video_card.boot_and_driver_rom",
+              "name": "boot and driver rom",
+              "kind": "material",
+              "description": "boot and driver rom",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.labs",
+              "supplier_actor_ids": [
+                "actor.labs"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "AION Labs",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                }
+              ]
+            },
+            "after": {
+              "id": "base_part.device.apple2_video_card.boot_and_driver_rom",
+              "name": "Apple II video-card TUI and driver ROM set",
+              "kind": "material",
+              "description": "Host-specific ROM firmware implementing display primitives and TUI entry points for the June 1979 Aurelia-compatible profile.",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.labs",
+              "supplier_actor_ids": [
+                "actor.labs"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "AION Labs",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Specify ROM type, chip organization and count, bank decode, access timing, image version/checksum, programming and incoming readback after measuring the complete release image."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Firmware responsibilities",
+                    "description": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected. ROM code and linked helpers share the published ABI. Store application state in host RAM. The physical ROM population must be selected from measured linked-image size and the card bank/window design; a complete supplied set does not imply one chip or a known byte capacity."
+                  }
+                ],
+                "parameters": []
+              }
+            }
+          },
+          {
+            "record_type": "product",
+            "record_id": "product.device_apple2_video_card",
+            "before": {
+              "id": "product.device_apple2_video_card",
+              "name": "Logix Video Card for Apple II",
+              "kind": "hardware",
+              "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "type": "exclusion",
+                  "description": "The customer obtains a compatible monitor separately.",
+                  "value": "Monitor not included"
+                }
+              ],
+              "technical_identity": {
+                "record_id": "device.apple2_video_card"
+              },
+              "launch_campaign_id": "campaign.ncc1979",
+              "launch_event_id": "event.ncc79_campaign",
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Commercial package supplying the specified device revision.",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "element_type": "main_product — Supplied device with its defined delivery items",
+                      "target": {
+                        "record_id": "device.apple2_video_card",
+                        "version_number": 1
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": []
+                }
+              ],
+              "offering_category": "expansion_kit"
+            },
+            "after": {
+              "id": "product.device_apple2_video_card",
+              "name": "Logix Video Card for Apple II",
+              "kind": "hardware",
+              "description": "Logix Apple II video expansion supplied with host-specific ROM and libraries for the full contemporary Aurelia TUI and graphics profile. A compatible monitor is separate; host keyboard and performance characteristics remain. Native 6502 support requires no CP/M installation.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "type": "exclusion",
+                  "description": "The customer obtains a compatible monitor separately.",
+                  "value": "Monitor not included"
+                }
+              ],
+              "technical_identity": {
+                "record_id": "device.apple2_video_card"
+              },
+              "launch_campaign_id": "campaign.ncc1979",
+              "launch_event_id": "event.ncc79_campaign",
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Commercial package supplying the specified device revision.",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "element_type": "main_product — Supplied device with its defined delivery items",
+                      "target": {
+                        "record_id": "device.apple2_video_card",
+                        "version_number": 1
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": []
+                }
+              ],
+              "offering_category": "expansion_kit"
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.s100_video_card",
+            "before": {
+              "id": "device.s100_video_card",
+              "name": "Logix Video Card for S-100",
+              "kind": "expansion_card",
+              "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "specification": {
+                      "host": "S-100",
+                      "host_interface": "Configurable 8-bit S-100 interface; qualify address decode, waits, power and conflicts on named systems.",
+                      "software": "CP/M BIOS adapters, installation diagnostics and optional Platform Extensions/TUI support for qualified 8080/Z80 hosts; declare ISA and memory prerequisites.",
+                      "display_controller_id": "base_part.aurelia_video_chip",
+                      "video_ram_kb": 16,
+                      "video_ram_chip_id": "base_part.aion_4116",
+                      "video_ram_chip_count": 8,
+                      "video_link_id": "technology.logix_digital_video",
+                      "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
+                      "display_modes": "Reuse Aurelia controller text/bitmap capabilities subject to card/monitor qualification. 80-column output requires a compatible 640-pixel monitor. Host CPU determines drawing throughput.",
+                      "included_monitor": false,
+                      "flexibus_ports": 0,
+                      "sprite_memory": {
+                        "chip_id": "base_part.aion_2114",
+                        "chip_count": 2,
+                        "bank_data_width_bits": 8,
+                        "capacity_bytes": 1024,
+                        "separate_bus": true,
+                        "separate_from_system_and_display_ram": true
+                      },
+                      "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.aurelia_video_chip"
+                      },
+                      "quantity": 1,
+                      "element_type": "Display controller"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.aion_4116"
+                      },
+                      "quantity": 8,
+                      "element_type": "Eight 16Kx1 devices = 16 KiB display memory"
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.s100_expansion_pcb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.s100_host_interface"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.boot_and_driver_rom"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.passives_protection_and_internal_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.slot_connector_contacts"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.video_ram_window_and_bus_arbitration"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.video_clock_reset"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.digital_video_transceivers_and_connector"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "base_part.aion_2114"
+                      },
+                      "quantity": 2,
+                      "element_type": "Exclusive 1 KiB sprite SRAM on separate bus"
+                    },
+                    {
+                      "id": "line_12",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.sprite_interface_package_pcb_test"
+                      },
+                      "quantity": 1,
+                      "element_type": "Sprite interface package, PCB and test allowance"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "Release assembly routing, test fixtures and procurement specifications."
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
+                    },
+                    {
+                      "number": 6,
+                      "kind": "testing",
+                      "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "display",
+                      "name": "Display output",
+                      "sockets": [
+                        {
+                          "id": "video_out",
+                          "name": "Video output",
+                          "connection": "video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.mono_monitor_1",
+                            "device.color_monitor_1",
+                            "device.mono_monitor_2",
+                            "device.color_monitor_2",
+                            "device.mono_pro",
+                            "device.color_pro_14"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "Release assembly routing, test fixtures and procurement specifications."
+                },
+                {
+                  "number": 4,
+                  "kind": "testing",
+                  "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                },
+                {
+                  "number": 5,
+                  "kind": "selection",
+                  "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Host integration",
+                    "description": "This card uses a configurable 8-bit S-100 interface. Named hosts require address-decode, wait-state, power and conflict qualification. CP/M BIOS adapters, diagnostics and optional Platform Extensions/TUI support are provided for qualified 8080/Z80 hosts with declared ISA and memory prerequisites."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Independent display and sprite memory",
+                    "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "display_controller_id",
+                    "ref_id": "base_part.aurelia_video_chip",
+                    "ref_role": "Aurelia graphics controller reused on this host"
+                  },
+                  {
+                    "key": "video_ram_kib",
+                    "value": 16
+                  },
+                  {
+                    "key": "video_chip_count",
+                    "value": 8
+                  },
+                  {
+                    "key": "video_chip_id",
+                    "ref_id": "base_part.aion_4116",
+                    "ref_role": "Display DRAM"
+                  },
+                  {
+                    "key": "sprite_chip_id",
+                    "ref_id": "base_part.aion_2114",
+                    "ref_role": "SRAM dedicated to sprites"
+                  },
+                  {
+                    "key": "video_link_id",
+                    "ref_id": "technology.logix_digital_video",
+                    "ref_role": "Digital monitor connection"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.s100_video_card",
+              "name": "Logix Video Card for S-100",
+              "kind": "expansion_card",
+              "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [
+                "technology.logix_tui_standard",
+                "technology.aion_c_portability_framework"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "specification": {
+                      "host": "S-100",
+                      "host_interface": "Configurable 8-bit S-100 interface; qualify address decode, waits, power and conflicts on named systems.",
+                      "software": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile.",
+                      "display_controller_id": "base_part.aurelia_video_chip",
+                      "video_ram_kb": 16,
+                      "video_ram_chip_id": "base_part.aion_4116",
+                      "video_ram_chip_count": 8,
+                      "video_link_id": "technology.logix_digital_video",
+                      "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
+                      "display_modes": "Full June 1979 Aurelia text/bitmap and sprite-mode behaviour on matching qualified card/monitor configurations; native host throughput and memory limits remain. No later-release modes are implied.",
+                      "included_monitor": false,
+                      "flexibus_ports": 0,
+                      "sprite_memory": {
+                        "chip_id": "base_part.aion_2114",
+                        "chip_count": 2,
+                        "bank_data_width_bits": 8,
+                        "capacity_bytes": 1024,
+                        "separate_bus": true,
+                        "separate_from_system_and_display_ram": true
+                      },
+                      "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.aurelia_video_chip"
+                      },
+                      "quantity": 1,
+                      "element_type": "Display controller"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.aion_4116"
+                      },
+                      "quantity": 8,
+                      "element_type": "Eight 16Kx1 devices = 16 KiB display memory"
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.s100_expansion_pcb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.s100_host_interface"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.boot_and_driver_rom"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.passives_protection_and_internal_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.slot_connector_contacts"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.video_ram_window_and_bus_arbitration"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.video_clock_reset"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.digital_video_transceivers_and_connector"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "base_part.aion_2114"
+                      },
+                      "quantity": 2,
+                      "element_type": "Exclusive 1 KiB sprite SRAM on separate bus"
+                    },
+                    {
+                      "id": "line_12",
+                      "target": {
+                        "record_id": "base_part.device.s100_video_card.sprite_interface_package_pcb_test"
+                      },
+                      "quantity": 1,
+                      "element_type": "Sprite interface package, PCB and test allowance"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "Release assembly routing, test fixtures and procurement specifications."
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
+                    },
+                    {
+                      "number": 6,
+                      "kind": "testing",
+                      "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+                    },
+                    {
+                      "number": 7,
+                      "kind": "testing",
+                      "description": "Verify ROM image fit, bank restoration across display/disk calls, RAM/stack reservations, complete TUI and mode conformance, keyboard-command mappings and full-system compatibility on each supported host."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "display",
+                      "name": "Display output",
+                      "sockets": [
+                        {
+                          "id": "video_out",
+                          "name": "Video output",
+                          "connection": "video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.mono_monitor_1",
+                            "device.color_monitor_1",
+                            "device.mono_monitor_2",
+                            "device.color_monitor_2",
+                            "device.mono_pro",
+                            "device.color_pro_14"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "Release assembly routing, test fixtures and procurement specifications."
+                },
+                {
+                  "number": 4,
+                  "kind": "testing",
+                  "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                },
+                {
+                  "number": 5,
+                  "kind": "selection",
+                  "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Host integration",
+                    "description": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile. Preserve the host memory map, qualify address decoding and wait states, and avoid conflicts with other installed cards."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Independent display and sprite memory",
+                    "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Aurelia-compatible presentation",
+                    "description": "At the 4 June 1979 launch, the ROM and callable libraries implement every TUI feature and graphics mode of the contemporary Aurelia release: the same control semantics, text frames/windows, editing, clipping, glyphs, colours, display-mode behaviour and sprite services on matching qualified monitors. This is functional/API equivalence, not Z80 binary compatibility or equal drawing speed. Application state, clipboard buffers and control descriptors occupy bounded host RAM; complex controls can use linked helpers over ROM primitives. Logical keyboard commands use documented host mappings and menu equivalents where physical keys differ. Later pointer, professional-video and multitasking features are not implied."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "ROM mapping and runtime integration",
+                    "description": "Use a configurable ROM window and bounded common-RAM call stubs. Reserve the mapping explicitly alongside the CP/M memory layout; never overlay transient program memory or the BIOS without an installation contract. Preserve banking and CPU state across calls, callbacks and interrupts. The TUI extension handles host keyboard, file and lifecycle services while the card handles display operations. Determine ROM chip capacity/population from the linked firmware image; no additional memory is inferred from the existing supplied-set quantity."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "display_controller_id",
+                    "ref_id": "base_part.aurelia_video_chip",
+                    "ref_role": "Aurelia graphics controller reused on this host"
+                  },
+                  {
+                    "key": "video_ram_kib",
+                    "value": 16
+                  },
+                  {
+                    "key": "video_chip_count",
+                    "value": 8
+                  },
+                  {
+                    "key": "video_chip_id",
+                    "ref_id": "base_part.aion_4116",
+                    "ref_role": "Display DRAM"
+                  },
+                  {
+                    "key": "sprite_chip_id",
+                    "ref_id": "base_part.aion_2114",
+                    "ref_role": "SRAM dedicated to sprites"
+                  },
+                  {
+                    "key": "video_link_id",
+                    "ref_id": "technology.logix_digital_video",
+                    "ref_role": "Digital monitor connection"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "base_part",
+            "record_id": "base_part.device.s100_video_card.boot_and_driver_rom",
+            "before": {
+              "id": "base_part.device.s100_video_card.boot_and_driver_rom",
+              "name": "boot and driver rom",
+              "kind": "material",
+              "description": "boot and driver rom",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.labs",
+              "supplier_actor_ids": [
+                "actor.labs"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "AION Labs",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                }
+              ]
+            },
+            "after": {
+              "id": "base_part.device.s100_video_card.boot_and_driver_rom",
+              "name": "S-100 video-card TUI and driver ROM set",
+              "kind": "material",
+              "description": "Host-specific ROM firmware implementing display primitives and TUI entry points for the June 1979 Aurelia-compatible profile.",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.labs",
+              "supplier_actor_ids": [
+                "actor.labs"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "AION Labs",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Specify ROM type, chip organization and count, bank decode, access timing, image version/checksum, programming and incoming readback after measuring the complete release image."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Firmware responsibilities",
+                    "description": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile. ROM code and linked helpers share the published ABI. Store application state in host RAM. The physical ROM population must be selected from measured linked-image size and the card bank/window design; a complete supplied set does not imply one chip or a known byte capacity."
+                  }
+                ],
+                "parameters": []
+              }
+            }
+          },
+          {
+            "record_type": "product",
+            "record_id": "product.device_s100_video_card",
+            "before": {
+              "id": "product.device_s100_video_card",
+              "name": "Logix Video Card for S-100",
+              "kind": "hardware",
+              "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "type": "exclusion",
+                  "description": "The customer obtains a compatible monitor separately.",
+                  "value": "Monitor not included"
+                }
+              ],
+              "technical_identity": {
+                "record_id": "device.s100_video_card"
+              },
+              "launch_campaign_id": "campaign.ncc1979",
+              "launch_event_id": "event.ncc79_campaign",
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Commercial package supplying the specified device revision.",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "element_type": "main_product — Supplied device with its defined delivery items",
+                      "target": {
+                        "record_id": "device.s100_video_card",
+                        "version_number": 1
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": []
+                }
+              ],
+              "offering_category": "expansion_kit"
+            },
+            "after": {
+              "id": "product.device_s100_video_card",
+              "name": "Logix Video Card for S-100",
+              "kind": "hardware",
+              "description": "Logix S-100 video expansion supplied with host-specific ROM and libraries for the full contemporary Aurelia TUI and graphics profile. A compatible monitor is separate; host keyboard and performance characteristics remain. The supplied S-100 TUI requires qualified CP/M with TUI/Platform Extensions.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "type": "exclusion",
+                  "description": "The customer obtains a compatible monitor separately.",
+                  "value": "Monitor not included"
+                }
+              ],
+              "technical_identity": {
+                "record_id": "device.s100_video_card"
+              },
+              "launch_campaign_id": "campaign.ncc1979",
+              "launch_event_id": "event.ncc79_campaign",
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Commercial package supplying the specified device revision.",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "element_type": "main_product — Supplied device with its defined delivery items",
+                      "target": {
+                        "record_id": "device.s100_video_card",
+                        "version_number": 1
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": []
+                }
+              ],
+              "offering_category": "expansion_kit"
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.flexidisk_ii",
+            "before": {
+              "id": "device.flexidisk_ii",
+              "name": "Logix FlexiDisk II",
+              "kind": "storage_device",
+              "description": "Logix FlexiDisk II",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "specification": {
+                      "media": "5.25-inch FDD",
+                      "connection": "FlexiBUS",
+                      "disk_formats": [
+                        "Aurelia",
+                        "Apple II-compatible"
+                      ],
+                      "usable_from": [
+                        "Logix Aurelia",
+                        "Apple II with Logix Apple II Expansion Card"
+                      ]
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.525_inch_dual_format_floppy_mechanism"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.flexibus_device_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.drive_psu"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.drive_enclosure"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.passives_protection_and_internal_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.external_cable_and_regional_mains_packout"
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Exact mechanism/media geometry"
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+                    }
+                  ]
+                }
+              ],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Exact mechanism/media geometry"
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                },
+                {
+                  "number": 4,
+                  "kind": "testing",
+                  "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                },
+                {
+                  "number": 5,
+                  "kind": "testing",
+                  "description": "Firmware image capacity/revision, programming and verification"
+                },
+                {
+                  "number": 6,
+                  "kind": "testing",
+                  "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Removable storage and host access",
+                    "description": "This external drive uses {media} media and connects over {connection}. It handles {disk_formats} disk formats and is usable from {supported_hosts}."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "media",
+                    "value": "5.25-inch FDD"
+                  },
+                  {
+                    "key": "connection",
+                    "value": "FlexiBUS"
+                  },
+                  {
+                    "key": "disk_formats",
+                    "value": "Aurelia, Apple II-compatible"
+                  },
+                  {
+                    "key": "supported_hosts",
+                    "value": "Logix Aurelia, Apple II with Logix Apple II Expansion Card"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.flexidisk_ii",
+              "name": "Logix FlexiDisk II",
+              "kind": "storage_device",
+              "description": "Logix FlexiDisk II",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc79_campaign"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "specification": {
+                      "media": "5.25-inch FDD",
+                      "connection": "FlexiBUS",
+                      "disk_formats": [
+                        "Aurelia",
+                        "Apple DOS 3.2-compatible 13-sector format at June 1979 launch"
+                      ],
+                      "usable_from": [
+                        "Logix Aurelia",
+                        "Apple II with Logix Apple II Expansion Card"
+                      ]
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.525_inch_dual_format_floppy_mechanism"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.flexibus_device_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.drive_psu"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.drive_enclosure"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.passives_protection_and_internal_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.flexidisk_ii.external_cable_and_regional_mains_packout"
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Exact mechanism/media geometry"
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "Round-trip format, write and read on Aurelia FlexiDisk II and Apple Disk II; verify DOS catalogue/allocation, executable load/entry behaviour, write protection, full disks, damaged sectors and media interchange. Measure local encoding/sector-buffer timing independently of FlexiBUS transport."
+                    }
+                  ]
+                }
+              ],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Exact mechanism/media geometry"
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                },
+                {
+                  "number": 4,
+                  "kind": "testing",
+                  "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                },
+                {
+                  "number": 5,
+                  "kind": "testing",
+                  "description": "Firmware image capacity/revision, programming and verification"
+                },
+                {
+                  "number": 6,
+                  "kind": "testing",
+                  "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                },
+                {
+                  "number": 7,
+                  "kind": "testing",
+                  "description": "Round-trip format, write and read on Aurelia FlexiDisk II and Apple Disk II; verify DOS catalogue/allocation, executable load/entry behaviour, write protection, full disks, damaged sectors and media interchange. Measure local encoding/sector-buffer timing independently of FlexiBUS transport."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Removable storage and host access",
+                    "description": "This external drive uses {media} media and connects over {connection}. It handles {disk_formats} disk formats and is usable from {supported_hosts}."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Apple executable interchange from Aurelia",
+                    "description": "For AION C 2.0, Aurelia writes native Apple II executables to Apple DOS 3.2-compatible 13-sector diskettes through this drive. The launch format uses 35 tracks, 13 sectors per track and 256-byte sectors. The local controller implements Apple-compatible GCR encoding/decoding, sector addressing, checksums and format/read/write operations; the Aurelia export utility maintains catalogue, free-space allocation and binary-file load-address/length headers. A raw sector copy without a valid filesystem and executable header is not a runnable application disk."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Loading on Apple II",
+                    "description": "Move the completed diskette to a compatible Apple Disk II drive and load/run the binary under an existing Apple DOS 3.2 installation. This media-transfer route requires no Logix interface on the Apple. Alternatively, connect FlexiDisk II to the Apple through the Logix Apple II Expansion Card and its qualified disk-service adapter. Neither route runs CP/M on the Apple. Formatting a data disk does not supply or install Apple DOS; the developer uses an existing compatible boot disk. Later DOS 3.3 formats require a separately qualified update."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "media",
+                    "value": "5.25-inch FDD"
+                  },
+                  {
+                    "key": "connection",
+                    "value": "FlexiBUS"
+                  },
+                  {
+                    "key": "disk_formats",
+                    "value": "Aurelia and Apple DOS 3.2-compatible 13-sector formats"
+                  },
+                  {
+                    "key": "supported_hosts",
+                    "value": "Logix Aurelia, Apple II with Logix Apple II Expansion Card"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "base_part",
+            "record_id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller",
+            "before": {
+              "id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller",
+              "name": "Aurelia and Apple II format controller",
+              "kind": "supplied_assembly",
+              "description": "Aurelia and Apple II format controller",
+              "supply_form": "supplied_set",
+              "manufacturer_actor_id": "actor.logix",
+              "supplier_actor_ids": [
+                "actor.logix"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "Logix",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                }
+              ]
+            },
+            "after": {
+              "id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller",
+              "name": "FlexiDisk II dual-format controller",
+              "kind": "supplied_assembly",
+              "description": "The June 1979 release implements Aurelia disk operations and Apple DOS 3.2-compatible GCR format/read/write operations with 35 tracks, 13 sectors per track and 256-byte sectors. Maintain sector order, address/data checksums, gaps and physical timing locally; FlexiBUS carries commands and buffered sector data. Apple filesystem catalogue/allocation and executable headers belong to the Aurelia export software, not to transparent CPU binary translation.",
+              "supply_form": "supplied_set",
+              "manufacturer_actor_id": "actor.logix",
+              "supplier_actor_ids": [
+                "actor.logix"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "Logix",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Disk interchange implementation",
+                    "description": "The June 1979 release implements Aurelia disk operations and Apple DOS 3.2-compatible GCR format/read/write operations with 35 tracks, 13 sectors per track and 256-byte sectors. Maintain sector order, address/data checksums, gaps and physical timing locally; FlexiBUS carries commands and buffered sector data. Apple filesystem catalogue/allocation and executable headers belong to the Aurelia export software, not to transparent CPU binary translation."
+                  }
+                ],
+                "parameters": []
+              }
+            }
+          },
+          {
+            "record_type": "base_part",
+            "record_id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram",
+            "before": {
+              "id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram",
+              "name": "local firmware processor and sector RAM",
+              "kind": "supplied_assembly",
+              "description": "local firmware processor and sector RAM",
+              "supply_form": "supplied_set",
+              "manufacturer_actor_id": "actor.logix",
+              "supplier_actor_ids": [
+                "actor.logix"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "Logix",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                }
+              ]
+            },
+            "after": {
+              "id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram",
+              "name": "FlexiDisk II local firmware and sector-buffer set",
+              "kind": "supplied_assembly",
+              "description": "Local firmware schedules the selected format controller and buffers complete sector transfers so FlexiBUS service latency does not control bit-cell timing. Bound command queues, report write/verify errors and write-protection status, and test the Apple DOS 3.2 interchange profile. Processor identity, firmware ROM capacity, buffer population and timing remain to be sized from the implementation; existing set quantity does not establish those values.",
+              "supply_form": "supplied_set",
+              "manufacturer_actor_id": "actor.logix",
+              "supplier_actor_ids": [
+                "actor.logix"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "Logix",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Disk interchange implementation",
+                    "description": "Local firmware schedules the selected format controller and buffers complete sector transfers so FlexiBUS service latency does not control bit-cell timing. Bound command queues, report write/verify errors and write-protection status, and test the Apple DOS 3.2 interchange profile. Processor identity, firmware ROM capacity, buffer population and timing remain to be sized from the implementation; existing set quantity does not establish those values."
+                  }
+                ],
+                "parameters": []
+              }
+            }
+          }
+        ],
+        "depends_on_change_ids": [
+          "change.aion_c2_standard_profiles"
+        ]
+      },
+      "target": [
+        {
+          "record_id": "device.apple2_video_card",
+          "before": {
+            "id": "device.apple2_video_card",
+            "name": "Logix Video Card for Apple II",
+            "kind": "expansion_card",
+            "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "specification": {
+                    "host": "Apple II",
+                    "host_interface": "Apple II slot decode and driver ROM; preserve native memory map and avoid other cards.",
+                    "software": "Native Apple II 6502 drivers, callable libraries and examples; applications must use the card API. No CP/M port, Z80 CPU or transparent redirection of existing graphics.",
+                    "display_controller_id": "base_part.aurelia_video_chip",
+                    "video_ram_kb": 16,
+                    "video_ram_chip_id": "base_part.aion_4116",
+                    "video_ram_chip_count": 8,
+                    "video_link_id": "technology.logix_digital_video",
+                    "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
+                    "display_modes": "Reuse Aurelia controller text/bitmap capabilities subject to card/monitor qualification. 80-column output requires a compatible 640-pixel monitor. Host CPU determines drawing throughput.",
+                    "included_monitor": false,
+                    "flexibus_ports": 0,
+                    "sprite_memory": {
+                      "chip_id": "base_part.aion_2114",
+                      "chip_count": 2,
+                      "bank_data_width_bits": 8,
+                      "capacity_bytes": 1024,
+                      "separate_bus": true,
+                      "separate_from_system_and_display_ram": true
+                    },
+                    "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.aurelia_video_chip"
+                    },
+                    "quantity": 1,
+                    "element_type": "Display controller"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.aion_4116"
+                    },
+                    "quantity": 8,
+                    "element_type": "Eight 16Kx1 devices = 16 KiB display memory"
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.apple_expansion_pcb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.apple_host_interface"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.boot_and_driver_rom"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.passives_protection_and_internal_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.slot_connector_contacts"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.video_ram_window_and_bus_arbitration"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.video_clock_reset"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.digital_video_transceivers_and_connector"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "base_part.aion_2114"
+                    },
+                    "quantity": 2,
+                    "element_type": "Exclusive 1 KiB sprite SRAM on separate bus"
+                  },
+                  {
+                    "id": "line_12",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.sprite_interface_package_pcb_test"
+                    },
+                    "quantity": 1,
+                    "element_type": "Sprite interface package, PCB and test allowance"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "Release assembly routing, test fixtures and procurement specifications."
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
+                  },
+                  {
+                    "number": 6,
+                    "kind": "testing",
+                    "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "display",
+                    "name": "Display output",
+                    "sockets": [
+                      {
+                        "id": "video_out",
+                        "name": "Video output",
+                        "connection": "video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.mono_monitor_1",
+                          "device.color_monitor_1",
+                          "device.mono_monitor_2",
+                          "device.color_monitor_2",
+                          "device.mono_pro",
+                          "device.color_pro_14"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "Release assembly routing, test fixtures and procurement specifications."
+              },
+              {
+                "number": 4,
+                "kind": "testing",
+                "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+              },
+              {
+                "number": 5,
+                "kind": "selection",
+                "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Host integration",
+                  "description": "This Apple II card uses slot decoding and a driver ROM while preserving the native memory map and avoiding conflicts with other cards. Native 6502 drivers, callable libraries and examples expose a card API; existing graphics are not transparently redirected, and no CP/M port or Z80 CPU is supplied."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Independent display and sprite memory",
+                  "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "display_controller_id",
+                  "ref_id": "base_part.aurelia_video_chip",
+                  "ref_role": "Aurelia graphics controller reused on this host"
+                },
+                {
+                  "key": "video_ram_kib",
+                  "value": 16
+                },
+                {
+                  "key": "video_chip_count",
+                  "value": 8
+                },
+                {
+                  "key": "video_chip_id",
+                  "ref_id": "base_part.aion_4116",
+                  "ref_role": "Display DRAM"
+                },
+                {
+                  "key": "sprite_chip_id",
+                  "ref_id": "base_part.aion_2114",
+                  "ref_role": "SRAM dedicated to sprites"
+                },
+                {
+                  "key": "video_link_id",
+                  "ref_id": "technology.logix_digital_video",
+                  "ref_role": "Digital monitor connection"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.apple2_video_card",
+            "name": "Logix Video Card for Apple II",
+            "kind": "expansion_card",
+            "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.logix_tui_standard",
+              "technology.aion_c_portability_framework"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "specification": {
+                    "host": "Apple II",
+                    "host_interface": "Apple II slot decode and driver ROM; preserve native memory map and avoid other cards.",
+                    "software": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected.",
+                    "display_controller_id": "base_part.aurelia_video_chip",
+                    "video_ram_kb": 16,
+                    "video_ram_chip_id": "base_part.aion_4116",
+                    "video_ram_chip_count": 8,
+                    "video_link_id": "technology.logix_digital_video",
+                    "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
+                    "display_modes": "Full June 1979 Aurelia text/bitmap and sprite-mode behaviour on matching qualified card/monitor configurations; native host throughput and memory limits remain. No later-release modes are implied.",
+                    "included_monitor": false,
+                    "flexibus_ports": 0,
+                    "sprite_memory": {
+                      "chip_id": "base_part.aion_2114",
+                      "chip_count": 2,
+                      "bank_data_width_bits": 8,
+                      "capacity_bytes": 1024,
+                      "separate_bus": true,
+                      "separate_from_system_and_display_ram": true
+                    },
+                    "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.aurelia_video_chip"
+                    },
+                    "quantity": 1,
+                    "element_type": "Display controller"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.aion_4116"
+                    },
+                    "quantity": 8,
+                    "element_type": "Eight 16Kx1 devices = 16 KiB display memory"
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.apple_expansion_pcb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.apple_host_interface"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.boot_and_driver_rom"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.passives_protection_and_internal_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.slot_connector_contacts"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.video_ram_window_and_bus_arbitration"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.video_clock_reset"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.digital_video_transceivers_and_connector"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "base_part.aion_2114"
+                    },
+                    "quantity": 2,
+                    "element_type": "Exclusive 1 KiB sprite SRAM on separate bus"
+                  },
+                  {
+                    "id": "line_12",
+                    "target": {
+                      "record_id": "base_part.device.apple2_video_card.sprite_interface_package_pcb_test"
+                    },
+                    "quantity": 1,
+                    "element_type": "Sprite interface package, PCB and test allowance"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "Release assembly routing, test fixtures and procurement specifications."
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
+                  },
+                  {
+                    "number": 6,
+                    "kind": "testing",
+                    "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+                  },
+                  {
+                    "number": 7,
+                    "kind": "testing",
+                    "description": "Verify ROM image fit, bank restoration across display/disk calls, RAM/stack reservations, complete TUI and mode conformance, keyboard-command mappings and full-system compatibility on each supported host."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "display",
+                    "name": "Display output",
+                    "sockets": [
+                      {
+                        "id": "video_out",
+                        "name": "Video output",
+                        "connection": "video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.mono_monitor_1",
+                          "device.color_monitor_1",
+                          "device.mono_monitor_2",
+                          "device.color_monitor_2",
+                          "device.mono_pro",
+                          "device.color_pro_14"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "Release assembly routing, test fixtures and procurement specifications."
+              },
+              {
+                "number": 4,
+                "kind": "testing",
+                "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+              },
+              {
+                "number": 5,
+                "kind": "selection",
+                "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Host integration",
+                  "description": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected. Preserve the host memory map, qualify address decoding and wait states, and avoid conflicts with other installed cards."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Independent display and sprite memory",
+                  "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Aurelia-compatible presentation",
+                  "description": "At the 4 June 1979 launch, the ROM and callable libraries implement every TUI feature and graphics mode of the contemporary Aurelia release: the same control semantics, text frames/windows, editing, clipping, glyphs, colours, display-mode behaviour and sprite services on matching qualified monitors. This is functional/API equivalence, not Z80 binary compatibility or equal drawing speed. Application state, clipboard buffers and control descriptors occupy bounded host RAM; complex controls can use linked helpers over ROM primitives. Logical keyboard commands use documented host mappings and menu equivalents where physical keys differ. Later pointer, professional-video and multitasking features are not implied."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "ROM mapping and runtime integration",
+                  "description": "Use the slot page as discovery and call entry points, with banked firmware behind the shared expansion-ROM window. A fixed RAM-resident trampoline restores card selection and bank state around disk or other peripheral calls, then returns safely to the correct ROM. Reserve zero-page and stack workspace and keep callbacks, interrupts and reentrancy within the published ABI. Determine ROM chip capacity/population from the linked firmware image; no additional memory is inferred from the existing supplied-set quantity."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "display_controller_id",
+                  "ref_id": "base_part.aurelia_video_chip",
+                  "ref_role": "Aurelia graphics controller reused on this host"
+                },
+                {
+                  "key": "video_ram_kib",
+                  "value": 16
+                },
+                {
+                  "key": "video_chip_count",
+                  "value": 8
+                },
+                {
+                  "key": "video_chip_id",
+                  "ref_id": "base_part.aion_4116",
+                  "ref_role": "Display DRAM"
+                },
+                {
+                  "key": "sprite_chip_id",
+                  "ref_id": "base_part.aion_2114",
+                  "ref_role": "SRAM dedicated to sprites"
+                },
+                {
+                  "key": "video_link_id",
+                  "ref_id": "technology.logix_digital_video",
+                  "ref_role": "Digital monitor connection"
+                }
+              ]
+            }
+          },
+          "content_sha256": "e1af83e4c9943e4e67d51f66dad161ba233817a709db3e2a2127248d7446ad98"
+        },
+        {
+          "record_id": "base_part.device.apple2_video_card.boot_and_driver_rom",
+          "before": {
+            "id": "base_part.device.apple2_video_card.boot_and_driver_rom",
+            "name": "boot and driver rom",
+            "kind": "material",
+            "description": "boot and driver rom",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.labs",
+            "supplier_actor_ids": [
+              "actor.labs"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "AION Labs",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              }
+            ]
+          },
+          "after": {
+            "id": "base_part.device.apple2_video_card.boot_and_driver_rom",
+            "name": "Apple II video-card TUI and driver ROM set",
+            "kind": "material",
+            "description": "Host-specific ROM firmware implementing display primitives and TUI entry points for the June 1979 Aurelia-compatible profile.",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.labs",
+            "supplier_actor_ids": [
+              "actor.labs"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "AION Labs",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Specify ROM type, chip organization and count, bank decode, access timing, image version/checksum, programming and incoming readback after measuring the complete release image."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Firmware responsibilities",
+                  "description": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected. ROM code and linked helpers share the published ABI. Store application state in host RAM. The physical ROM population must be selected from measured linked-image size and the card bank/window design; a complete supplied set does not imply one chip or a known byte capacity."
+                }
+              ],
+              "parameters": []
+            }
+          },
+          "content_sha256": "bc3a3bcd77990e69e8a0d74144e45e107dc9b210f85a803d9b512c5634222705"
+        },
+        {
+          "record_id": "product.device_apple2_video_card",
+          "before": {
+            "id": "product.device_apple2_video_card",
+            "name": "Logix Video Card for Apple II",
+            "kind": "hardware",
+            "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "type": "exclusion",
+                "description": "The customer obtains a compatible monitor separately.",
+                "value": "Monitor not included"
+              }
+            ],
+            "technical_identity": {
+              "record_id": "device.apple2_video_card"
+            },
+            "launch_campaign_id": "campaign.ncc1979",
+            "launch_event_id": "event.ncc79_campaign",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Commercial package supplying the specified device revision.",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "element_type": "main_product — Supplied device with its defined delivery items",
+                    "target": {
+                      "record_id": "device.apple2_video_card",
+                      "version_number": 1
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "offering_category": "expansion_kit"
+          },
+          "after": {
+            "id": "product.device_apple2_video_card",
+            "name": "Logix Video Card for Apple II",
+            "kind": "hardware",
+            "description": "Logix Apple II video expansion supplied with host-specific ROM and libraries for the full contemporary Aurelia TUI and graphics profile. A compatible monitor is separate; host keyboard and performance characteristics remain. Native 6502 support requires no CP/M installation.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "type": "exclusion",
+                "description": "The customer obtains a compatible monitor separately.",
+                "value": "Monitor not included"
+              }
+            ],
+            "technical_identity": {
+              "record_id": "device.apple2_video_card"
+            },
+            "launch_campaign_id": "campaign.ncc1979",
+            "launch_event_id": "event.ncc79_campaign",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Commercial package supplying the specified device revision.",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "element_type": "main_product — Supplied device with its defined delivery items",
+                    "target": {
+                      "record_id": "device.apple2_video_card",
+                      "version_number": 1
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "offering_category": "expansion_kit"
+          },
+          "content_sha256": "07839112d54eafcd3fc962cd4426ce3ee6aaf075bf23a66a6cb069d303c2bdee"
+        },
+        {
+          "record_id": "device.s100_video_card",
+          "before": {
+            "id": "device.s100_video_card",
+            "name": "Logix Video Card for S-100",
+            "kind": "expansion_card",
+            "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "specification": {
+                    "host": "S-100",
+                    "host_interface": "Configurable 8-bit S-100 interface; qualify address decode, waits, power and conflicts on named systems.",
+                    "software": "CP/M BIOS adapters, installation diagnostics and optional Platform Extensions/TUI support for qualified 8080/Z80 hosts; declare ISA and memory prerequisites.",
+                    "display_controller_id": "base_part.aurelia_video_chip",
+                    "video_ram_kb": 16,
+                    "video_ram_chip_id": "base_part.aion_4116",
+                    "video_ram_chip_count": 8,
+                    "video_link_id": "technology.logix_digital_video",
+                    "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
+                    "display_modes": "Reuse Aurelia controller text/bitmap capabilities subject to card/monitor qualification. 80-column output requires a compatible 640-pixel monitor. Host CPU determines drawing throughput.",
+                    "included_monitor": false,
+                    "flexibus_ports": 0,
+                    "sprite_memory": {
+                      "chip_id": "base_part.aion_2114",
+                      "chip_count": 2,
+                      "bank_data_width_bits": 8,
+                      "capacity_bytes": 1024,
+                      "separate_bus": true,
+                      "separate_from_system_and_display_ram": true
+                    },
+                    "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.aurelia_video_chip"
+                    },
+                    "quantity": 1,
+                    "element_type": "Display controller"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.aion_4116"
+                    },
+                    "quantity": 8,
+                    "element_type": "Eight 16Kx1 devices = 16 KiB display memory"
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.s100_expansion_pcb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.s100_host_interface"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.boot_and_driver_rom"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.passives_protection_and_internal_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.slot_connector_contacts"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.video_ram_window_and_bus_arbitration"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.video_clock_reset"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.digital_video_transceivers_and_connector"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "base_part.aion_2114"
+                    },
+                    "quantity": 2,
+                    "element_type": "Exclusive 1 KiB sprite SRAM on separate bus"
+                  },
+                  {
+                    "id": "line_12",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.sprite_interface_package_pcb_test"
+                    },
+                    "quantity": 1,
+                    "element_type": "Sprite interface package, PCB and test allowance"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "Release assembly routing, test fixtures and procurement specifications."
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
+                  },
+                  {
+                    "number": 6,
+                    "kind": "testing",
+                    "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "display",
+                    "name": "Display output",
+                    "sockets": [
+                      {
+                        "id": "video_out",
+                        "name": "Video output",
+                        "connection": "video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.mono_monitor_1",
+                          "device.color_monitor_1",
+                          "device.mono_monitor_2",
+                          "device.color_monitor_2",
+                          "device.mono_pro",
+                          "device.color_pro_14"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "Release assembly routing, test fixtures and procurement specifications."
+              },
+              {
+                "number": 4,
+                "kind": "testing",
+                "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+              },
+              {
+                "number": 5,
+                "kind": "selection",
+                "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Host integration",
+                  "description": "This card uses a configurable 8-bit S-100 interface. Named hosts require address-decode, wait-state, power and conflict qualification. CP/M BIOS adapters, diagnostics and optional Platform Extensions/TUI support are provided for qualified 8080/Z80 hosts with declared ISA and memory prerequisites."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Independent display and sprite memory",
+                  "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "display_controller_id",
+                  "ref_id": "base_part.aurelia_video_chip",
+                  "ref_role": "Aurelia graphics controller reused on this host"
+                },
+                {
+                  "key": "video_ram_kib",
+                  "value": 16
+                },
+                {
+                  "key": "video_chip_count",
+                  "value": 8
+                },
+                {
+                  "key": "video_chip_id",
+                  "ref_id": "base_part.aion_4116",
+                  "ref_role": "Display DRAM"
+                },
+                {
+                  "key": "sprite_chip_id",
+                  "ref_id": "base_part.aion_2114",
+                  "ref_role": "SRAM dedicated to sprites"
+                },
+                {
+                  "key": "video_link_id",
+                  "ref_id": "technology.logix_digital_video",
+                  "ref_role": "Digital monitor connection"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.s100_video_card",
+            "name": "Logix Video Card for S-100",
+            "kind": "expansion_card",
+            "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.logix_tui_standard",
+              "technology.aion_c_portability_framework"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "specification": {
+                    "host": "S-100",
+                    "host_interface": "Configurable 8-bit S-100 interface; qualify address decode, waits, power and conflicts on named systems.",
+                    "software": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile.",
+                    "display_controller_id": "base_part.aurelia_video_chip",
+                    "video_ram_kb": 16,
+                    "video_ram_chip_id": "base_part.aion_4116",
+                    "video_ram_chip_count": 8,
+                    "video_link_id": "technology.logix_digital_video",
+                    "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
+                    "display_modes": "Full June 1979 Aurelia text/bitmap and sprite-mode behaviour on matching qualified card/monitor configurations; native host throughput and memory limits remain. No later-release modes are implied.",
+                    "included_monitor": false,
+                    "flexibus_ports": 0,
+                    "sprite_memory": {
+                      "chip_id": "base_part.aion_2114",
+                      "chip_count": 2,
+                      "bank_data_width_bits": 8,
+                      "capacity_bytes": 1024,
+                      "separate_bus": true,
+                      "separate_from_system_and_display_ram": true
+                    },
+                    "sprite_policy": "All five sprites in every supported Aurelia-family mode using exclusive 1 KiB SRAM; host-specific upload interface. No Aurelia system DMA controller on this card."
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.aurelia_video_chip"
+                    },
+                    "quantity": 1,
+                    "element_type": "Display controller"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.aion_4116"
+                    },
+                    "quantity": 8,
+                    "element_type": "Eight 16Kx1 devices = 16 KiB display memory"
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.s100_expansion_pcb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.s100_host_interface"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.boot_and_driver_rom"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.passives_protection_and_internal_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.slot_connector_contacts"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.video_ram_window_and_bus_arbitration"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.video_clock_reset"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.digital_video_transceivers_and_connector"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "base_part.aion_2114"
+                    },
+                    "quantity": 2,
+                    "element_type": "Exclusive 1 KiB sprite SRAM on separate bus"
+                  },
+                  {
+                    "id": "line_12",
+                    "target": {
+                      "record_id": "base_part.device.s100_video_card.sprite_interface_package_pcb_test"
+                    },
+                    "quantity": 1,
+                    "element_type": "Sprite interface package, PCB and test allowance"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "Release assembly routing, test fixtures and procurement specifications."
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Qualify AION 1Kx4 static cells, 250 ns cycle target, retention while powered, +5 V supply and 18-pin DIP compatibility before launch."
+                  },
+                  {
+                    "number": 6,
+                    "kind": "testing",
+                    "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+                  },
+                  {
+                    "number": 7,
+                    "kind": "testing",
+                    "description": "Verify ROM image fit, bank restoration across display/disk calls, RAM/stack reservations, complete TUI and mode conformance, keyboard-command mappings and full-system compatibility on each supported host."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "display",
+                    "name": "Display output",
+                    "sockets": [
+                      {
+                        "id": "video_out",
+                        "name": "Video output",
+                        "connection": "video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.mono_monitor_1",
+                          "device.color_monitor_1",
+                          "device.mono_monitor_2",
+                          "device.color_monitor_2",
+                          "device.mono_pro",
+                          "device.color_pro_14"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Freeze host decode, pinout, power and timings; select physical buffers/transceivers and PCB stack-up."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Release driver/ROM image and test on named host configurations; host and monitor sold separately."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "Release assembly routing, test fixtures and procurement specifications."
+              },
+              {
+                "number": 4,
+                "kind": "testing",
+                "description": "Qualify 16 KiB video RAM window access, controller arbitration, monitor capability negotiation and maximum supported video mode."
+              },
+              {
+                "number": 5,
+                "kind": "selection",
+                "description": "AION silicon at June 1979 launch; qualified SMC equivalents eligible only after the relevant part release, no earlier than October 1979."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Host integration",
+                  "description": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile. Preserve the host memory map, qualify address decoding and wait states, and avoid conflicts with other installed cards."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Independent display and sprite memory",
+                  "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Aurelia-compatible presentation",
+                  "description": "At the 4 June 1979 launch, the ROM and callable libraries implement every TUI feature and graphics mode of the contemporary Aurelia release: the same control semantics, text frames/windows, editing, clipping, glyphs, colours, display-mode behaviour and sprite services on matching qualified monitors. This is functional/API equivalence, not Z80 binary compatibility or equal drawing speed. Application state, clipboard buffers and control descriptors occupy bounded host RAM; complex controls can use linked helpers over ROM primitives. Logical keyboard commands use documented host mappings and menu equivalents where physical keys differ. Later pointer, professional-video and multitasking features are not implied."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "ROM mapping and runtime integration",
+                  "description": "Use a configurable ROM window and bounded common-RAM call stubs. Reserve the mapping explicitly alongside the CP/M memory layout; never overlay transient program memory or the BIOS without an installation contract. Preserve banking and CPU state across calls, callbacks and interrupts. The TUI extension handles host keyboard, file and lifecycle services while the card handles display operations. Determine ROM chip capacity/population from the linked firmware image; no additional memory is inferred from the existing supplied-set quantity."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "display_controller_id",
+                  "ref_id": "base_part.aurelia_video_chip",
+                  "ref_role": "Aurelia graphics controller reused on this host"
+                },
+                {
+                  "key": "video_ram_kib",
+                  "value": 16
+                },
+                {
+                  "key": "video_chip_count",
+                  "value": 8
+                },
+                {
+                  "key": "video_chip_id",
+                  "ref_id": "base_part.aion_4116",
+                  "ref_role": "Display DRAM"
+                },
+                {
+                  "key": "sprite_chip_id",
+                  "ref_id": "base_part.aion_2114",
+                  "ref_role": "SRAM dedicated to sprites"
+                },
+                {
+                  "key": "video_link_id",
+                  "ref_id": "technology.logix_digital_video",
+                  "ref_role": "Digital monitor connection"
+                }
+              ]
+            }
+          },
+          "content_sha256": "cc01ba185a75f6dc6e7608acb428f7889c5ab25e67b115014ddf15340b44bf11"
+        },
+        {
+          "record_id": "base_part.device.s100_video_card.boot_and_driver_rom",
+          "before": {
+            "id": "base_part.device.s100_video_card.boot_and_driver_rom",
+            "name": "boot and driver rom",
+            "kind": "material",
+            "description": "boot and driver rom",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.labs",
+            "supplier_actor_ids": [
+              "actor.labs"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "AION Labs",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              }
+            ]
+          },
+          "after": {
+            "id": "base_part.device.s100_video_card.boot_and_driver_rom",
+            "name": "S-100 video-card TUI and driver ROM set",
+            "kind": "material",
+            "description": "Host-specific ROM firmware implementing display primitives and TUI entry points for the June 1979 Aurelia-compatible profile.",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.labs",
+            "supplier_actor_ids": [
+              "actor.labs"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "AION Labs",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Specify ROM type, chip organization and count, bank decode, access timing, image version/checksum, programming and incoming readback after measuring the complete release image."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Firmware responsibilities",
+                  "description": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile. ROM code and linked helpers share the published ABI. Store application state in host RAM. The physical ROM population must be selected from measured linked-image size and the card bank/window design; a complete supplied set does not imply one chip or a known byte capacity."
+                }
+              ],
+              "parameters": []
+            }
+          },
+          "content_sha256": "cd827eaf18071e06397e09c70d5906e4456b3a6c9826ecd25c9ebbe6ca19bd99"
+        },
+        {
+          "record_id": "product.device_s100_video_card",
+          "before": {
+            "id": "product.device_s100_video_card",
+            "name": "Logix Video Card for S-100",
+            "kind": "hardware",
+            "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "type": "exclusion",
+                "description": "The customer obtains a compatible monitor separately.",
+                "value": "Monitor not included"
+              }
+            ],
+            "technical_identity": {
+              "record_id": "device.s100_video_card"
+            },
+            "launch_campaign_id": "campaign.ncc1979",
+            "launch_event_id": "event.ncc79_campaign",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Commercial package supplying the specified device revision.",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "element_type": "main_product — Supplied device with its defined delivery items",
+                    "target": {
+                      "record_id": "device.s100_video_card",
+                      "version_number": 1
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "offering_category": "expansion_kit"
+          },
+          "after": {
+            "id": "product.device_s100_video_card",
+            "name": "Logix Video Card for S-100",
+            "kind": "hardware",
+            "description": "Logix S-100 video expansion supplied with host-specific ROM and libraries for the full contemporary Aurelia TUI and graphics profile. A compatible monitor is separate; host keyboard and performance characteristics remain. The supplied S-100 TUI requires qualified CP/M with TUI/Platform Extensions.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "type": "exclusion",
+                "description": "The customer obtains a compatible monitor separately.",
+                "value": "Monitor not included"
+              }
+            ],
+            "technical_identity": {
+              "record_id": "device.s100_video_card"
+            },
+            "launch_campaign_id": "campaign.ncc1979",
+            "launch_event_id": "event.ncc79_campaign",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Commercial package supplying the specified device revision.",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "element_type": "main_product — Supplied device with its defined delivery items",
+                    "target": {
+                      "record_id": "device.s100_video_card",
+                      "version_number": 1
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "offering_category": "expansion_kit"
+          },
+          "content_sha256": "6b3ac62c0d6f7b7089c5dc9c72a7603fe6b919c69ed0e13abd9ff1fe50e17e77"
+        },
+        {
+          "record_id": "device.flexidisk_ii",
+          "before": {
+            "id": "device.flexidisk_ii",
+            "name": "Logix FlexiDisk II",
+            "kind": "storage_device",
+            "description": "Logix FlexiDisk II",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "specification": {
+                    "media": "5.25-inch FDD",
+                    "connection": "FlexiBUS",
+                    "disk_formats": [
+                      "Aurelia",
+                      "Apple II-compatible"
+                    ],
+                    "usable_from": [
+                      "Logix Aurelia",
+                      "Apple II with Logix Apple II Expansion Card"
+                    ]
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.525_inch_dual_format_floppy_mechanism"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.flexibus_device_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.drive_psu"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.drive_enclosure"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.passives_protection_and_internal_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.external_cable_and_regional_mains_packout"
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Exact mechanism/media geometry"
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+                  }
+                ]
+              }
+            ],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Exact mechanism/media geometry"
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+              },
+              {
+                "number": 4,
+                "kind": "testing",
+                "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+              },
+              {
+                "number": 5,
+                "kind": "testing",
+                "description": "Firmware image capacity/revision, programming and verification"
+              },
+              {
+                "number": 6,
+                "kind": "testing",
+                "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Removable storage and host access",
+                  "description": "This external drive uses {media} media and connects over {connection}. It handles {disk_formats} disk formats and is usable from {supported_hosts}."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "media",
+                  "value": "5.25-inch FDD"
+                },
+                {
+                  "key": "connection",
+                  "value": "FlexiBUS"
+                },
+                {
+                  "key": "disk_formats",
+                  "value": "Aurelia, Apple II-compatible"
+                },
+                {
+                  "key": "supported_hosts",
+                  "value": "Logix Aurelia, Apple II with Logix Apple II Expansion Card"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.flexidisk_ii",
+            "name": "Logix FlexiDisk II",
+            "kind": "storage_device",
+            "description": "Logix FlexiDisk II",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc79_campaign"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "specification": {
+                    "media": "5.25-inch FDD",
+                    "connection": "FlexiBUS",
+                    "disk_formats": [
+                      "Aurelia",
+                      "Apple DOS 3.2-compatible 13-sector format at June 1979 launch"
+                    ],
+                    "usable_from": [
+                      "Logix Aurelia",
+                      "Apple II with Logix Apple II Expansion Card"
+                    ]
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.525_inch_dual_format_floppy_mechanism"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.flexibus_device_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.drive_psu"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.drive_enclosure"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.passives_protection_and_internal_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.flexidisk_ii.external_cable_and_regional_mains_packout"
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Exact mechanism/media geometry"
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "Round-trip format, write and read on Aurelia FlexiDisk II and Apple Disk II; verify DOS catalogue/allocation, executable load/entry behaviour, write protection, full disks, damaged sectors and media interchange. Measure local encoding/sector-buffer timing independently of FlexiBUS transport."
+                  }
+                ]
+              }
+            ],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Exact mechanism/media geometry"
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+              },
+              {
+                "number": 4,
+                "kind": "testing",
+                "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+              },
+              {
+                "number": 5,
+                "kind": "testing",
+                "description": "Firmware image capacity/revision, programming and verification"
+              },
+              {
+                "number": 6,
+                "kind": "testing",
+                "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+              },
+              {
+                "number": 7,
+                "kind": "testing",
+                "description": "Round-trip format, write and read on Aurelia FlexiDisk II and Apple Disk II; verify DOS catalogue/allocation, executable load/entry behaviour, write protection, full disks, damaged sectors and media interchange. Measure local encoding/sector-buffer timing independently of FlexiBUS transport."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Removable storage and host access",
+                  "description": "This external drive uses {media} media and connects over {connection}. It handles {disk_formats} disk formats and is usable from {supported_hosts}."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Apple executable interchange from Aurelia",
+                  "description": "For AION C 2.0, Aurelia writes native Apple II executables to Apple DOS 3.2-compatible 13-sector diskettes through this drive. The launch format uses 35 tracks, 13 sectors per track and 256-byte sectors. The local controller implements Apple-compatible GCR encoding/decoding, sector addressing, checksums and format/read/write operations; the Aurelia export utility maintains catalogue, free-space allocation and binary-file load-address/length headers. A raw sector copy without a valid filesystem and executable header is not a runnable application disk."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Loading on Apple II",
+                  "description": "Move the completed diskette to a compatible Apple Disk II drive and load/run the binary under an existing Apple DOS 3.2 installation. This media-transfer route requires no Logix interface on the Apple. Alternatively, connect FlexiDisk II to the Apple through the Logix Apple II Expansion Card and its qualified disk-service adapter. Neither route runs CP/M on the Apple. Formatting a data disk does not supply or install Apple DOS; the developer uses an existing compatible boot disk. Later DOS 3.3 formats require a separately qualified update."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "media",
+                  "value": "5.25-inch FDD"
+                },
+                {
+                  "key": "connection",
+                  "value": "FlexiBUS"
+                },
+                {
+                  "key": "disk_formats",
+                  "value": "Aurelia and Apple DOS 3.2-compatible 13-sector formats"
+                },
+                {
+                  "key": "supported_hosts",
+                  "value": "Logix Aurelia, Apple II with Logix Apple II Expansion Card"
+                }
+              ]
+            }
+          },
+          "content_sha256": "e01ece8b4ca89a4e19ef44d55e4ce547169f657f227b3cd02ee36064623c03e1"
+        },
+        {
+          "record_id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller",
+          "before": {
+            "id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller",
+            "name": "Aurelia and Apple II format controller",
+            "kind": "supplied_assembly",
+            "description": "Aurelia and Apple II format controller",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              }
+            ]
+          },
+          "after": {
+            "id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller",
+            "name": "FlexiDisk II dual-format controller",
+            "kind": "supplied_assembly",
+            "description": "The June 1979 release implements Aurelia disk operations and Apple DOS 3.2-compatible GCR format/read/write operations with 35 tracks, 13 sectors per track and 256-byte sectors. Maintain sector order, address/data checksums, gaps and physical timing locally; FlexiBUS carries commands and buffered sector data. Apple filesystem catalogue/allocation and executable headers belong to the Aurelia export software, not to transparent CPU binary translation.",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Disk interchange implementation",
+                  "description": "The June 1979 release implements Aurelia disk operations and Apple DOS 3.2-compatible GCR format/read/write operations with 35 tracks, 13 sectors per track and 256-byte sectors. Maintain sector order, address/data checksums, gaps and physical timing locally; FlexiBUS carries commands and buffered sector data. Apple filesystem catalogue/allocation and executable headers belong to the Aurelia export software, not to transparent CPU binary translation."
+                }
+              ],
+              "parameters": []
+            }
+          },
+          "content_sha256": "ee6b3b61713f119ec771d826552be5a3411c319c95c570167710f3cd5207a877"
+        },
+        {
+          "record_id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram",
+          "before": {
+            "id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram",
+            "name": "local firmware processor and sector RAM",
+            "kind": "supplied_assembly",
+            "description": "local firmware processor and sector RAM",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              }
+            ]
+          },
+          "after": {
+            "id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram",
+            "name": "FlexiDisk II local firmware and sector-buffer set",
+            "kind": "supplied_assembly",
+            "description": "Local firmware schedules the selected format controller and buffers complete sector transfers so FlexiBUS service latency does not control bit-cell timing. Bound command queues, report write/verify errors and write-protection status, and test the Apple DOS 3.2 interchange profile. Processor identity, firmware ROM capacity, buffer population and timing remain to be sized from the implementation; existing set quantity does not establish those values.",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Disk interchange implementation",
+                  "description": "Local firmware schedules the selected format controller and buffers complete sector transfers so FlexiBUS service latency does not control bit-cell timing. Bound command queues, report write/verify errors and write-protection status, and test the Apple DOS 3.2 interchange profile. Processor identity, firmware ROM capacity, buffer population and timing remain to be sized from the implementation; existing set quantity does not establish those values."
+                }
+              ],
+              "parameters": []
+            }
+          },
+          "content_sha256": "1da93ca8efc3f83d217d90fa914909bda404da1637434adfbfcc17c6edec6fa4"
+        }
+      ]
+    }
+  ]
+}

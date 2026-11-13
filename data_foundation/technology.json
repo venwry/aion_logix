@@ -367,7 +367,7 @@
         {
           "number": 1,
           "chapter_name": "Scope, chronology and compatibility",
-          "description": "The Aurelia launch on 5 June 1978 establishes the commercial keyboard/control baseline. The developer launch follows on 6 June. Keyboard conventions are core TUI requirements, not a separate ecosystem standard. External CP/M extension qualification begins on 10 November 1978 and portable extensions are released on 5 May 1979. ERA/AIONix is a later platform implementation at the Artemis launch on 19 May 1980; it does not retroactively give Aurelia multiple concurrent applications. Pointer interaction is an optional extension introduced on 7 June 1982, retaining keyboard operation. No separately released TUI 2.0 is established by these records. Software editions and qualified builds implement the standard; optional terminal profiles do not redefine native TUI shortcuts.",
+          "description": "The Aurelia launch on 5 June 1978 establishes the commercial keyboard/control baseline. The developer launch follows on 6 June. Keyboard conventions are core TUI requirements, not a separate ecosystem standard. External CP/M extension qualification begins on 10 November 1978 and portable extensions are released on 5 May 1979. ERA/AIONix is a later platform implementation at the Artemis launch on 19 May 1980; it does not retroactively give Aurelia multiple concurrent applications. Pointer interaction is an optional extension introduced on 7 June 1982, retaining keyboard operation. No separately released TUI 2.0 is established by these records. Software editions and qualified builds implement the standard; optional terminal profiles do not redefine native TUI shortcuts. The June 1979 Apple II and S-100 Logix video-card profiles implement the contemporary Aurelia TUI through host-specific ROM code and libraries; later pointer and multi-application services are not introduced by those cards.",
           "parameters": []
         },
         {
@@ -724,6 +724,18 @@
           "chapter_name": "1982 pointer extension — Mouse and keyboard qualification",
           "description": "Optional extension introduced at NCC on 7 June 1982. Older applications require the qualified service-update or relink path described here; no blanket retrofit is promised.\n\nTest both updated pointer interaction and unchanged keyboard-only use. Rendering, capture, removal and ABI compatibility must work across the supported layouts.\n\nQualification must cover unchanged standard-control applications.\n\nQualification must cover static-library relink and ABI conformance.\n\nQualification must cover text and graphics cursor restore, clipping and scrolling.\n\nQualification must cover button ordering, drag capture and removal.\n\nQualification must cover keyboard-only use and 40/80-column layouts.",
           "parameters": []
+        },
+        {
+          "number": 17,
+          "chapter_name": "June 1979 Apple II and S-100 ROM-backed TUI",
+          "description": "Both Logix video cards provide the same contemporary Aurelia control behaviour, frames, text windows, menus, forms, lists, editing and clipboard semantics, with bounded application state in RAM. ROM primitives and linked composite-control helpers jointly implement the complete profile; application callbacks redraw obscured regions rather than requiring an unbounded window backing store. Apple uses native 6502 firmware and a host runtime. S-100 TUI services require a qualified CP/M installation with the matching TUI/Platform Extensions and an explicitly supported CPU. This requirement concerns supplied TUI services, not the physical ability of the card to display video under another operating system.",
+          "parameters": []
+        },
+        {
+          "number": 18,
+          "chapter_name": "Foreign-host input and conformance",
+          "description": "Preserve logical commands and visible behaviour while mapping host keyboard input. Apple and byte-terminal keyboards may not distinguish the Aurelia modifier combinations; provide unambiguous menu or documented key-sequence equivalents for every command. Exact Aurelia physical shortcuts require a qualified full-event keyboard path, such as the supported FlexiBUS keyboard/interface. Do not interpret missing modifier information as a different command. Test the complete released control set, fonts/frame glyphs, clipping, focus, selection, clipboard, redraw and failure behaviour against Aurelia reference workloads. Screen modes remain subject to the same card/monitor and resource limits; no identical rendering speed or extra host RAM is promised.",
+          "parameters": []
         }
       ]
     },
@@ -802,17 +814,17 @@
         {
           "number": 1,
           "chapter_name": "Scope, chronology and compatibility",
-          "description": "The Z80/enhanced-CP/M developer environment launches on 6 June 1978. ERA/AIONix exploratory work begins on 1 February 1978, but its commercial developer environment belongs to the Artemis launch on 19 May 1980. These are coexisting target profiles of one source-portability contract, not successive standard versions. The platform API is explicitly labelled 1.0; this is not evidence that every module or later operating system has the same release number. Each target retains its own compiler, libraries, ABI and resource constraints. Optional graphics capabilities must be queried. Networking belongs to the 1981 programme; mouse/professional graphics integration belongs to the 1982 programme. Athena/AIONix2 compatibility is a later planning/qualification commitment, not a released capability of the original standard. A new contract revision requires a documented semantic or compatibility change; no new revision numbers are invented.",
+          "description": "The Z80/enhanced-CP/M developer environment launches on 6 June 1978. ERA/AIONix exploratory work begins on 1 February 1978, but its commercial developer environment belongs to the Artemis launch on 19 May 1980. These are coexisting target profiles of one source-portability contract, not successive standard versions. The platform API is explicitly labelled 1.0; this is not evidence that every module or later operating system has the same release number. Each target retains its own compiler, libraries, ABI and resource constraints. Optional graphics capabilities must be queried. Networking belongs to the 1981 programme; mouse/professional graphics integration belongs to the 1982 programme. Athena/AIONix2 compatibility is a later planning/qualification commitment, not a released capability of the original standard. A new contract revision requires a documented semantic or compatibility change; no new revision numbers are invented. On 4 June 1979, AION C IDE 2.0 adds an Aurelia-hosted native MOS 6502/Apple II target. The IDE release number does not rename the platform API or TUI standard.",
           "parameters": []
         },
         {
           "number": 2,
           "chapter_name": "Source portability and build profiles — Source portability and shared contracts",
-          "description": "Cross-platform family overview. Z80/CP/M availability is June 1978; ERA/AIONix availability is May 1980. Later-host features do not become available on earlier computers through source portability alone.\n\nThe framework targets {Targets}. Applications share source code, libraries and API meanings; moving between instruction sets still requires a target-specific build.\n\nRecompile shared application code with the target compiler and target libraries. Adapt OS-specific modules, resource budgets and assembly; binary compatibility is a separate CP/M-80 module path.\n\nThe framework aims to show third-party developers that moving from the 8-bit platform to Artemis is comparatively easy.\n\nIts portability mechanisms are {Mechanisms}. Shared contracts are defined in {Shared contract references}.",
+          "description": "Cross-platform family overview. Z80/CP/M availability is June 1978; the native Apple II cross-target arrives in June 1979; ERA/AIONix availability is May 1980. Later-host features do not become available on earlier computers through source portability alone.\n\nThe framework targets {Targets}. Applications share source code, libraries and API meanings; moving between instruction sets still requires a target-specific build.\n\nRecompile shared application code with the target compiler and target libraries. Adapt OS-specific modules, resource budgets and assembly; binary compatibility is a separate CP/M-80 module path.\n\nThe framework aims to show third-party developers that moving from the 8-bit platform to Artemis is comparatively easy.\n\nIts portability mechanisms are {Mechanisms}. Shared contracts are defined in {Shared contract references}.",
           "parameters": [
             {
               "key": "Targets",
-              "value": "Z80 CP/M / Aurelia, ERA / AIONix / Artemis"
+              "value": "Z80 CP/M / Aurelia; MOS 6502 / Apple II from June 1979; ERA / AIONix / Artemis from May 1980"
             },
             {
               "key": "Mechanisms",
@@ -827,7 +839,7 @@
         {
           "number": 3,
           "chapter_name": "Source portability and build profiles — Application structure and build profiles",
-          "description": "Cross-platform family overview. Z80/CP/M availability is June 1978; ERA/AIONix availability is May 1980. Later-host features do not become available on earlier computers through source portability alone.\n\nApplication structure separates {Application structure}. The base-system profile {Base Aurelia profile} targets {Base Aurelia target}: one Z80 binary serves both Aurelia and Aurelia+, adapts at runtime and fits the base RAM budget.\n\nThe profile {Aurelia+ profile} also targets {Aurelia+ target}, but explicitly declares higher RAM and display requirements. The native profile {Native Artemis profile} targets {Native Artemis target} with target-specific startup code and libraries.",
+          "description": "Cross-platform family overview. Z80/CP/M availability is June 1978; the native Apple II cross-target arrives in June 1979; ERA/AIONix availability is May 1980. Later-host features do not become available on earlier computers through source portability alone.\n\nApplication structure separates {Application structure}. The base-system profile {Base Aurelia profile} targets {Base Aurelia target}: one Z80 binary serves both Aurelia and Aurelia+, adapts at runtime and fits the base RAM budget.\n\nThe profile {Aurelia+ profile} also targets {Aurelia+ target}, but explicitly declares higher RAM and display requirements. The native profile {Native Artemis profile} targets {Native Artemis target} with target-specific startup code and libraries.",
           "parameters": [
             {
               "key": "Application structure",
@@ -862,13 +874,13 @@
         {
           "number": 4,
           "chapter_name": "Source portability and build profiles — Limits of portability",
-          "description": "Cross-platform family overview. Z80/CP/M availability is June 1978; ERA/AIONix availability is May 1980. Later-host features do not become available on earlier computers through source portability alone.\n\nPortability work must address instruction sets, OS interfaces, memory ownership and file encoding. More capable hardware does not automatically make its application features available on an older host.\n\nSingle foreground versus multiple processes: explicit context ownership and shared-service synchronization.\n\nInstruction set: recompile C and replace assembly.\n\nCP/M record/drive interfaces versus AIONix streams, paths and descriptors: use file adapters.\n\nBanked versus virtual memory: use object handles and bounded buffers.\n\nDisk structures: serialize portable fields rather than dumping C objects.\n\nMore RAM and a wider display do not make later Artemis-only features available on Aurelia.",
+          "description": "Cross-platform family overview. Z80/CP/M availability is June 1978; the native Apple II cross-target arrives in June 1979; ERA/AIONix availability is May 1980. Later-host features do not become available on earlier computers through source portability alone.\n\nPortability work must address instruction sets, OS interfaces, memory ownership and file encoding. More capable hardware does not automatically make its application features available on an older host.\n\nSingle foreground versus multiple processes: explicit context ownership and shared-service synchronization.\n\nInstruction set: recompile C and replace assembly.\n\nCP/M record/drive interfaces versus AIONix streams, paths and descriptors: use file adapters.\n\nBanked versus virtual memory: use object handles and bounded buffers.\n\nDisk structures: serialize portable fields rather than dumping C objects.\n\nMore RAM and a wider display do not make later Artemis-only features available on Aurelia.",
           "parameters": []
         },
         {
           "number": 5,
           "chapter_name": "Language and target profiles — Language subset and required facilities",
-          "description": "The common language contract has separate Z80/CP/M and ERA/AIONix data models and ABIs. The ERA profile is a later target, not a replacement for the Z80 profile.\n\nBoth compilers implement a documented contemporary C subset. Shared structures, function pointers and library contracts support portability without assuming later language standards.\n\nDocumented contemporary C subset shared by both compilers; later ANSI C features are not implicitly available.\n\nThe required language and library facilities are {Required features}.",
+          "description": "The common language contract has separate Z80/CP/M and ERA/AIONix data models and ABIs. The ERA profile is a later target, not a replacement for the Z80 profile.\n\nSupported compilers implement a documented contemporary C subset. Shared structures, function pointers and library contracts support portability without assuming later language standards.\n\nDocumented contemporary C subset shared by both compilers; later ANSI C features are not implicitly available.\n\nThe required language and library facilities are {Required features}.",
           "parameters": [
             {
               "key": "Required features",
@@ -1070,6 +1082,34 @@
               "value": "32000"
             }
           ]
+        },
+        {
+          "number": 18,
+          "chapter_name": "Apple II target profile — June 1979",
+          "description": "The {target} target generates native MOS 6502 code from the documented contemporary C subset. The compiler and IDE execute on Aurelia under enhanced CP/M; the output executes on Apple II without CP/M or a Z80 coprocessor. The target uses 8-bit char, 16-bit short/int/data pointers and 32-bit long, with target-specific calling conventions and software arithmetic helpers. Define signedness, layout, zero-page allocation and separate hardware-return/software-data stacks. Persistent data uses explicit serialization, not raw structure copies. Z80 assembly and direct platform accesses require target-specific replacements.",
+          "parameters": [
+            {
+              "key": "target",
+              "value": "apple2_6502"
+            }
+          ]
+        },
+        {
+          "number": 19,
+          "chapter_name": "Apple II build profiles and hardware libraries",
+          "description": "The {profiles} profiles separate dependencies. The native profile provides console/file adapters and explicitly Apple-specific text, low/high-resolution graphics, speaker, paddle/button and supported peripheral access; those operations do not require Logix video. The Logix-video profile implements every TUI feature and graphics mode of the contemporary June 1979 Aurelia release through the card ROM, libraries and qualified monitor. Shared C application logic and common API calls retain their meanings; hardware-dependent source and assembly still need adaptation. Optional FlexiBUS services require their interface, drivers and peripherals. Equivalent functionality does not imply identical CPU throughput, keyboard hardware, memory capacity or future-release features.",
+          "parameters": [
+            {
+              "key": "profiles",
+              "value": "apple2_native; apple2_logix_video; optional apple2_flexibus services"
+            }
+          ]
+        },
+        {
+          "number": 20,
+          "chapter_name": "Cross-build and Apple-format disk interchange",
+          "description": "Aurelia builds the Apple executable and uses the FlexiDisk II controller plus host-side file tools to save it on Apple DOS 3.2-compatible media. The launch profile uses 35 tracks, 13 sectors per track and 256 bytes per sector; later 16-sector DOS 3.3 is not assumed. Physical encoding, sector order and checksums belong to the controller; catalogue, allocation and binary-file load-address/length headers belong to the host tools. Boot an existing compatible Apple DOS installation, then load/run the generated binary. Moving a disk from Aurelia FlexiDisk II to a compatible Apple Disk II needs no FlexiBUS interface on Apple; attaching FlexiDisk II directly to Apple does require the Logix Apple II Expansion Card. This is native 6502 execution, not translation or execution of a CP/M binary.",
+          "parameters": []
         }
       ]
     },

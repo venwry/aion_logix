@@ -5467,6 +5467,193 @@
           }
         ]
       }
+    },
+    {
+      "id": "software_edition.aion_c_2_cpm",
+      "name": "AION C IDE 2.0 — Aurelia and Apple II targets",
+      "version": "2.0",
+      "edition": "CP/M",
+      "family_name": "AION C IDE",
+      "description": "Aurelia-hosted C IDE retaining native Z80 development and adding native MOS 6502 output for Apple II. Save Apple-format executable disks through FlexiDisk II, then run them on Apple II. Optional Logix video provides the complete contemporary Aurelia TUI/graphics profile; separate libraries expose native Apple hardware.",
+      "provider_actor_ids": [
+        "actor.aion"
+      ],
+      "technology_ids": [
+        "technology.aion_c_portability_framework",
+        "technology.logix_tui_standard"
+      ],
+      "composition_history": [
+        {
+          "version_number": 1,
+          "description": "AION C 2.0 cross-development release at NCC 1979",
+          "effective_from": {
+            "kind": "event",
+            "event_id": "event.ncc79_campaign"
+          },
+          "effective_until": {
+            "kind": "simulation_end"
+          },
+          "composition_definition": [
+            {
+              "id": "line_1",
+              "target": {
+                "record_id": "base_part.software.aion_c_2_cpm.software_documentation"
+              },
+              "quantity": 1
+            },
+            {
+              "id": "line_2",
+              "target": {
+                "record_id": "base_part.software.aion_c_2_cpm.license_document"
+              },
+              "quantity": 1
+            },
+            {
+              "id": "line_3",
+              "target": {
+                "record_id": "base_part.software.aion_c_2_cpm.installation_media"
+              },
+              "quantity": 2
+            },
+            {
+              "id": "line_4",
+              "target": {
+                "record_id": "base_part.software.aion_c_2_cpm.software_packaging"
+              },
+              "quantity": 1
+            }
+          ],
+          "technical_definition": {}
+        }
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Integrated editing and project workflow",
+            "description": "AION C IDE integrates source editing, project/module configuration, compilation, assembly, linking, diagnostics and debugging. The editor highlights C keywords, comments, string/character literals and preprocessor lines using semantic attributes. Monochrome displays use distinguishable supported intensity/inverse attributes; selection and error emphasis remain readable. Lexical recoloring is restricted to affected visible text with bounded state for multiline comments. Disk-backed buffers support sources larger than editor working memory. Tools may execute sequentially and use overlays, preserving source, cursor and diagnostic state."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Language, targets and build contracts",
+            "description": "The compiler implements {language_contract_id} and libraries follow {runtime_contract_id}. Structures, typedef, function pointers, documented 32-bit integer arithmetic and shared string/stream-I/O semantics are retained. Profiles {build_profiles} build {build_targets}; later ANSI C features and future processor targets are not implied. The project records modules, include paths, libraries and debug/size/speed options, rebuilds changed modules and maps diagnostics back to source locations. Compilation executes on Aurelia or Aurelia+; Apple II is an output target, not an IDE host. Apple binaries use native MOS 6502 instructions, target startup code and libraries. The ERA/AIONix target remains a later release."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Optimizer scope and safeguards",
+            "description": "The Z80 optimizer performs constant folding and propagation, provably safe dead/unreachable-code elimination, local common-expression elimination, redundant load/store removal, branch simplification and target-specific peephole optimization. Basic-block liveness and register-pair allocation reduce memory traffic. Loop address induction and strength reduction are used when profitable; small visible function bodies may be selectively inlined under size/speed policy. Aliasing, external/assembly calls, signed arithmetic and hardware effects constrain transformations. Driver calls and declared hardware accesses are treated as observable effects. Assembly interface declarations must expose clobbers and side effects or the compiler assumes conservative barriers. No full modern whole-program optimizer is promised. Compare optimized and unoptimized outputs for identical numeric and I/O behaviour."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Optimized libraries and assembly interoperability",
+            "description": "Performance-critical block copying/filling, string scanning/comparison, integer arithmetic, selected decimal/fixed-point operations and record comparison/search kernels are implemented in tuned Z80 assembly. Publish operation widths, precision, rounding, overflow, overlap and error rules. Link only referenced library modules; application data and writable runtime state remain in RAM. Users can assemble their own modules, create libraries and link them with C objects. Publish symbols, object/archive format, argument/return locations, preserved registers, stack rules, data layout and callback/reentrancy requirements. Supply C-to-assembly, assembly-to-C and callback examples. Interrupt handlers do not reenter non-reentrant CP/M/TUI routines. Benchmark useful operations including call and bank-switch overhead; no blanket speed or code-size guarantee."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Forms and shared TUI integration",
+            "description": "Headers, ROM-call stubs and examples use the accepted system-cartridge TUI. Provide text fields, lists, tables, dropdown selection and buttons with consistent validation, Tab/Shift-Tab focus traversal, keyboard shortcuts, selection and copy/cut/paste. DRI owns shared clipboard storage/lifecycle; helpers obey published capacity, formats and ownership. The IDE SDK supplies composite table/dropdown helpers over existing ROM primitives when a native control is absent; this does not silently add new services to the accepted ROM image. Tables request bounded rows/pages through application callbacks. Forms use C-defined descriptors and callbacks; a visual drag-and-drop form designer is not part of this release. On Apple II, the native runtime and video-card ROM implement the same command/control semantics with host-specific clipboard storage; DRI CP/M implementation ownership is unchanged. Adapt physical keyboard shortcuts through documented aliases or menus. The S-100 ROM path requires qualified CP/M/TUI extensions."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Text and bitmap presentation",
+            "description": "Use {display_api} to enumerate/test/select modes and query the actual configuration. Text mode is the compact default for the IDE; generated applications can draw text/glyphs, lines, rectangles, fills and documented bitmap formats with clipping. SDK adapters render the same control model in text or bitmap mode with shared keyboard semantics; optional helper code links into the application rather than assuming every renderer is in ROM. Bitmap rendering is limited to qualified modes and memory budgets. Mode changes preserve application document/control state and trigger redraw. Do not assume simultaneous text and full bitmap buffers, readable 80 columns on every monitor, transparent conversion of old programs or hardware drawing acceleration."
+          },
+          {
+            "number": 7,
+            "chapter_name": "Debugging and executable packaging",
+            "description": "Provide symbol maps, emitted source/line-to-address mappings, inspectable RAM state, RAM breakpoints and single-step for qualified builds. Optimized code may reorder or remove source operations; use debug builds for predictable stepping. XIP ROM cannot be patched with software breakpoints: use supported call stubs or qualified RAM-loaded equivalents. ROM-aware linking separates code/constants from initialized and uninitialized RAM data, provides disk/cartridge images and reports ROM/RAM usage and stack estimates. Indirect calls, recursion and assembly routines can prevent a proven stack bound and must be flagged. These inherited debugging facilities concern the Z80 host path. Apple builds include link maps and symbols for target testing; an Apple-native monitor or remote debugging service is a separately qualified tool, not implied by cross-compilation."
+          },
+          {
+            "number": 8,
+            "chapter_name": "Resource budgets and qualification",
+            "description": "Supported hosts are {host_base_computer_aurelia} and {host_base_computer_aurelia_plus}, using {runtime_cpm_aurelia}; the nominal installed-RAM minimum remains {minimum_ram_kib} KiB. The 48 KiB profile publishes 40704 application bytes and the 64 KiB profile 57088 bytes under the existing reservations. These are ceilings, not spare space available to every tool. Measure editor buffers, pass overlays, library state, stack and disk intermediate files against actual reservations. A single-drive workflow may require media exchanges. Two distribution diskettes follow the recorded package definition, with image fit, working-disk requirements and installation qualification still required. No additional RAM or ROM capacity is inferred. Apple target RAM is a separate budget: publish code/data, DOS/firmware reservations, zero-page and stack use per profile. No particular Apple RAM minimum is claimed before image-fit measurement. The two-diskette packaging default remains a distribution target; added backend/library image fit must be tested."
+          },
+          {
+            "number": 9,
+            "chapter_name": "Acceptance workloads and performance evidence",
+            "description": "Qualify syntax coloring and recovery from unterminated comments/strings, diagnostic navigation, incremental builds, library selection, C/assembly calls and nested bank restoration. Compare debug/optimized arithmetic and file results; test overlap, rounding, overflow and invalid inputs. Exercise forms and bitmap redraw in 40/80-column and monochrome/color configurations, clipboard-full, disk-full and exhausted-memory failures. Benchmark forms/record entry, sorting/search, decimal accounting and a bounded recalculation workload on named hardware. Report executable size, peak workspace, stack estimates, disk scratch use and build/run times. Fast libraries and advanced optimization are implementation commitments; measured superiority to earlier tools or hand-written assembly remains to be demonstrated. SSG General Ledger is an external acceptance workload: reconcile CBASIC and C financial results, measure native application work and ROM TUI overhead separately, and keep the publisher’s source and accounting rules outside the reusable IDE product."
+          },
+          {
+            "number": 10,
+            "chapter_name": "6502 compiler, ABI and runtime",
+            "description": "The new backend emits native MOS 6502 code with target-specific instruction selection, local simplification and peephole optimization. Use 8-bit char, 16-bit short/int/data pointers and 32-bit long with explicit signedness/layout rules; provide software arithmetic and assembly-library kernels. Reserve zero-page locations and a software data stack separately from the processor return stack. Define C/assembly arguments, returns, clobbers, callbacks and bank restoration. Do not claim Z80 register allocation applies unchanged to 6502 or that generated code matches assembly performance. Compare optimized/debug results and measure code growth, runtime workspace and stack depth."
+          },
+          {
+            "number": 11,
+            "chapter_name": "Build on Aurelia, save to Apple disk, run on Apple",
+            "description": "Select the Apple target, compile/link on Aurelia and inspect target code/data/stack reports. The export tool creates or updates an Apple DOS 3.2-compatible filesystem through {transfer_drive}, writes native binary-file load-address/length headers and verifies the output. Use 13-sector media for this June 1979 release. Boot the Apple using its existing compatible DOS disk, insert the generated application disk and load/run the binary. A compatible Disk II reader needs no Logix expansion interface merely to read this disk. Directly attaching FlexiDisk II to Apple requires {apple_interface} and its disk adapter. Do not assume shared CP/M/Apple disk formats, CP/M execution on Apple or an included Apple OS boot image."
+          },
+          {
+            "number": 12,
+            "chapter_name": "Portable Logix presentation and native Apple hardware",
+            "description": "Programs using the common API can keep application logic, TUI descriptors and drawing calls when rebuilt for {apple_video}. The card and libraries reproduce every TUI feature and graphics mode in the June 1979 Aurelia profile on matching qualified monitors, including frames/windows, controls, text/bitmap modes and sprites. Recompile with the target ABI and replace direct Z80/Aurelia hardware access; equivalent API behaviour is not binary compatibility or a speed guarantee. Separate Apple-specific headers/libraries expose native text/graphics modes, speaker, paddles/buttons and documented peripheral hooks without requiring the Logix video card. Such calls belong in target adapters and need replacements for Aurelia. Capability checks distinguish native-video, Logix-video and optional FlexiBUS paths; errors report absent hardware instead of silently using an incompatible display."
+          },
+          {
+            "number": 13,
+            "chapter_name": "Cross-platform acceptance",
+            "description": "Build the same portable console, arithmetic, file and bounded TUI workloads for Z80 and 6502 and compare semantic results and serialized data. Exercise every contemporary Aurelia control and graphics mode on Apple Logix video and qualified S-100 CP/M/TUI configurations, including focus, frames, fonts, selection, clipboard, sprites and mode-change redraw. Test native Apple graphics/speaker separately, without a Logix video dependency. Validate ROM bank restoration when alternating UI and disk calls, physical key mappings, disk-full/write-protect failures and target memory exhaustion. Demonstrate the complete Aurelia build → FlexiDisk II Apple-format disk → Apple II execution route; measured fit, throughput and regression results remain release acceptance work, not invented benchmark results."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "language_contract_id",
+            "ref_id": "technology.aion_c_portability_framework",
+            "ref_role": "Portable C language and target ABI contract"
+          },
+          {
+            "key": "runtime_contract_id",
+            "ref_id": "technology.aion_c_portability_framework",
+            "ref_role": "Shared C/TUI/graphics service contract"
+          },
+          {
+            "key": "build_profiles",
+            "value": "aurelia_compatible, aurelia_plus_required, apple2_native, apple2_logix_video"
+          },
+          {
+            "key": "build_targets",
+            "value": "z80_cpm, apple2_6502"
+          },
+          {
+            "key": "host_base_computer_aurelia",
+            "ref_id": "device.base_computer.aurelia",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "host_base_computer_aurelia_plus",
+            "ref_id": "device.base_computer.aurelia_plus",
+            "ref_role": "Supported execution host for this edition"
+          },
+          {
+            "key": "minimum_ram_kib",
+            "value": 48
+          },
+          {
+            "key": "runtime_cpm_aurelia",
+            "ref_id": "software_edition.cpm_aurelia",
+            "ref_role": "Runtime prerequisite for this software edition"
+          },
+          {
+            "key": "display_api",
+            "ref_id": "technology.aion_c_portability_framework",
+            "ref_role": "Capability discovery and text/bitmap drawing contract"
+          },
+          {
+            "key": "transfer_drive",
+            "ref_id": "device.flexidisk_ii",
+            "ref_role": "Aurelia-connected Apple-format output drive"
+          },
+          {
+            "key": "apple_interface",
+            "ref_id": "device.apple2_expansion_card",
+            "ref_role": "Interface required only when FlexiDisk II is connected directly to Apple"
+          },
+          {
+            "key": "apple_video",
+            "ref_id": "device.apple2_video_card",
+            "ref_role": "Native Apple implementation of the contemporary Aurelia presentation profile"
+          }
+        ]
+      }
     }
   ]
 }

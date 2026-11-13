@@ -5298,9 +5298,9 @@
     },
     {
       "id": "base_part.device.flexidisk_ii.aurelia_and_apple_ii_format_controller",
-      "name": "Aurelia and Apple II format controller",
+      "name": "FlexiDisk II dual-format controller",
       "kind": "supplied_assembly",
-      "description": "Aurelia and Apple II format controller",
+      "description": "The June 1979 release implements Aurelia disk operations and Apple DOS 3.2-compatible GCR format/read/write operations with 35 tracks, 13 sectors per track and 256-byte sectors. Maintain sector order, address/data checksums, gaps and physical timing locally; FlexiBUS carries commands and buffered sector data. Apple filesystem catalogue/allocation and executable headers belong to the Aurelia export software, not to transparent CPU binary translation.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
@@ -5322,13 +5322,23 @@
           "kind": "testing",
           "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Disk interchange implementation",
+            "description": "The June 1979 release implements Aurelia disk operations and Apple DOS 3.2-compatible GCR format/read/write operations with 35 tracks, 13 sectors per track and 256-byte sectors. Maintain sector order, address/data checksums, gaps and physical timing locally; FlexiBUS carries commands and buffered sector data. Apple filesystem catalogue/allocation and executable headers belong to the Aurelia export software, not to transparent CPU binary translation."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.device.flexidisk_ii.local_firmware_processor_and_sector_ram",
-      "name": "local firmware processor and sector RAM",
+      "name": "FlexiDisk II local firmware and sector-buffer set",
       "kind": "supplied_assembly",
-      "description": "local firmware processor and sector RAM",
+      "description": "Local firmware schedules the selected format controller and buffers complete sector transfers so FlexiBUS service latency does not control bit-cell timing. Bound command queues, report write/verify errors and write-protection status, and test the Apple DOS 3.2 interchange profile. Processor identity, firmware ROM capacity, buffer population and timing remain to be sized from the implementation; existing set quantity does not establish those values.",
       "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
@@ -5350,7 +5360,17 @@
           "kind": "testing",
           "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Disk interchange implementation",
+            "description": "Local firmware schedules the selected format controller and buffers complete sector transfers so FlexiBUS service latency does not control bit-cell timing. Bound command queues, report write/verify errors and write-protection status, and test the Apple DOS 3.2 interchange profile. Processor identity, firmware ROM capacity, buffer population and timing remain to be sized from the implementation; existing set quantity does not establish those values."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.device.flexidisk_ii.drive_psu",
@@ -8589,9 +8609,9 @@
     },
     {
       "id": "base_part.device.apple2_video_card.boot_and_driver_rom",
-      "name": "boot and driver rom",
+      "name": "Apple II video-card TUI and driver ROM set",
       "kind": "material",
-      "description": "boot and driver rom",
+      "description": "Host-specific ROM firmware implementing display primitives and TUI entry points for the June 1979 Aurelia-compatible profile.",
       "supply_form": "individual_part",
       "manufacturer_actor_id": "actor.labs",
       "supplier_actor_ids": [
@@ -8607,8 +8627,23 @@
           "number": 1,
           "kind": "testing",
           "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+        },
+        {
+          "number": 2,
+          "kind": "testing",
+          "description": "Specify ROM type, chip organization and count, bank decode, access timing, image version/checksum, programming and incoming readback after measuring the complete release image."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Firmware responsibilities",
+            "description": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected. ROM code and linked helpers share the published ABI. Store application state in host RAM. The physical ROM population must be selected from measured linked-image size and the card bank/window design; a complete supplied set does not imply one chip or a known byte capacity."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.device.apple2_video_card.passives_protection_and_internal_harnesses",
@@ -8798,9 +8833,9 @@
     },
     {
       "id": "base_part.device.s100_video_card.boot_and_driver_rom",
-      "name": "boot and driver rom",
+      "name": "S-100 video-card TUI and driver ROM set",
       "kind": "material",
-      "description": "boot and driver rom",
+      "description": "Host-specific ROM firmware implementing display primitives and TUI entry points for the June 1979 Aurelia-compatible profile.",
       "supply_form": "individual_part",
       "manufacturer_actor_id": "actor.labs",
       "supplier_actor_ids": [
@@ -8816,8 +8851,23 @@
           "number": 1,
           "kind": "testing",
           "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+        },
+        {
+          "number": 2,
+          "kind": "testing",
+          "description": "Specify ROM type, chip organization and count, bank decode, access timing, image version/checksum, programming and incoming readback after measuring the complete release image."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Firmware responsibilities",
+            "description": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile. ROM code and linked helpers share the published ABI. Store application state in host RAM. The physical ROM population must be selected from measured linked-image size and the card bank/window design; a complete supplied set does not imply one chip or a known byte capacity."
+          }
+        ],
+        "parameters": []
+      }
     },
     {
       "id": "base_part.device.s100_video_card.passives_protection_and_internal_harnesses",
@@ -14614,6 +14664,92 @@
           }
         ]
       }
+    },
+    {
+      "id": "base_part.software.aion_c_2_cpm.software_documentation",
+      "name": "AION C IDE 2.0 (Aurelia-hosted Apple II cross-development edition) — software documentation set",
+      "kind": "documentation",
+      "description": "AION C IDE 2.0 (Aurelia-hosted Apple II cross-development edition) — software documentation set",
+      "supply_form": "supplied_set",
+      "manufacturer_actor_id": "actor.logix",
+      "supplier_actor_ids": [
+        "actor.logix"
+      ],
+      "manufacturer_part_number": null,
+      "manufacturer_name": "Logix",
+      "technology_ids": [],
+      "technical_definition": {},
+      "specification": [],
+      "requirements": [
+        {
+          "number": 1,
+          "kind": "testing",
+          "description": "One edition-specific printed documentation set. No duplicate cartridge hardware instructions. Page count remains unspecified unless constrained by the containing package."
+        }
+      ]
+    },
+    {
+      "id": "base_part.software.aion_c_2_cpm.license_document",
+      "name": "AION C IDE 2.0 (Aurelia-hosted Apple II cross-development edition) — licence document",
+      "kind": "documentation",
+      "description": "AION C IDE 2.0 (Aurelia-hosted Apple II cross-development edition) — licence document",
+      "supply_form": "supplied_set",
+      "manufacturer_actor_id": "actor.logix",
+      "supplier_actor_ids": [
+        "actor.logix"
+      ],
+      "manufacturer_part_number": null,
+      "manufacturer_name": "Logix",
+      "technology_ids": [],
+      "technical_definition": {},
+      "specification": [],
+      "requirements": []
+    },
+    {
+      "id": "base_part.software.aion_c_2_cpm.installation_media",
+      "name": "AION C IDE 2.0 (Aurelia-hosted Apple II cross-development edition) — installation diskettes",
+      "kind": "material",
+      "description": "AION C IDE 2.0 (Aurelia-hosted Apple II cross-development edition) — installation diskettes",
+      "supply_form": "individual_part",
+      "manufacturer_actor_id": "actor.logix",
+      "supplier_actor_ids": [
+        "actor.logix"
+      ],
+      "manufacturer_part_number": null,
+      "manufacturer_name": "Logix",
+      "technology_ids": [],
+      "technical_definition": {},
+      "specification": [],
+      "requirements": [
+        {
+          "number": 1,
+          "kind": "testing",
+          "description": "One physical recorded diskette, with its label and sleeve, from this edition media group. The containing software-edition composition specifies the disk count. Verify released-image capacity, target format and installation before distribution."
+        }
+      ]
+    },
+    {
+      "id": "base_part.software.aion_c_2_cpm.software_packaging",
+      "name": "AION C IDE 2.0 (Aurelia-hosted Apple II cross-development edition) — software package",
+      "kind": "documentation",
+      "description": "AION C IDE 2.0 (Aurelia-hosted Apple II cross-development edition) — software package",
+      "supply_form": "supplied_set",
+      "manufacturer_actor_id": "actor.logix",
+      "supplier_actor_ids": [
+        "actor.logix"
+      ],
+      "manufacturer_part_number": null,
+      "manufacturer_name": "Logix",
+      "technology_ids": [],
+      "technical_definition": {},
+      "specification": [],
+      "requirements": [
+        {
+          "number": 1,
+          "kind": "testing",
+          "description": "One outer package; disk labels and sleeves belong to distribution media."
+        }
+      ]
     }
   ]
 }

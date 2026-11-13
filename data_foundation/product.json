@@ -10871,7 +10871,7 @@
       "id": "product.device_apple2_video_card",
       "name": "Logix Video Card for Apple II",
       "kind": "hardware",
-      "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+      "description": "Logix Apple II video expansion supplied with host-specific ROM and libraries for the full contemporary Aurelia TUI and graphics profile. A compatible monitor is separate; host keyboard and performance characteristics remain. Native 6502 support requires no CP/M installation.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -12100,7 +12100,7 @@
       "id": "product.device_s100_video_card",
       "name": "Logix Video Card for S-100",
       "kind": "hardware",
-      "description": "Logix-developed open-ecosystem expansion, independent of DRI’s development obligations.",
+      "description": "Logix S-100 video expansion supplied with host-specific ROM and libraries for the full contemporary Aurelia TUI and graphics profile. A compatible monitor is separate; host keyboard and performance characteristics remain. The supplied S-100 TUI requires qualified CP/M with TUI/Platform Extensions.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -12416,6 +12416,47 @@
           ]
         }
       ]
+    },
+    {
+      "id": "product.aion_c_2_cpm",
+      "name": "AION C IDE 2.0 — Aurelia-hosted Apple II cross-development",
+      "kind": "software",
+      "description": "Aurelia-hosted C development tools with Z80 and native Apple II targets, target libraries, Apple-format export utility, documentation, licence and two installation diskettes. FlexiDisk II, the target Apple computer and optional interface/video hardware are supplied separately.",
+      "provider_actor_ids": [
+        "actor.aion"
+      ],
+      "specification": [],
+      "offering_category": "software",
+      "composition_history": [
+        {
+          "version_number": 1,
+          "description": "AION C IDE 2.0 package at NCC 1979",
+          "effective_from": {
+            "kind": "event",
+            "event_id": "event.ncc79_campaign"
+          },
+          "effective_until": {
+            "kind": "simulation_end"
+          },
+          "composition_definition": [
+            {
+              "id": "line_1",
+              "target": {
+                "record_id": "software_edition.aion_c_2_cpm",
+                "version_number": 1
+              },
+              "quantity": 1,
+              "element_type": "attached_product"
+            }
+          ],
+          "assembly_requirements": []
+        }
+      ],
+      "technical_identity": {
+        "record_id": "software_edition.aion_c_2_cpm"
+      },
+      "launch_campaign_id": "campaign.ncc1979",
+      "launch_event_id": "event.ncc79_campaign"
     }
   ]
 }

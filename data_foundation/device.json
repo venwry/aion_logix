@@ -1686,7 +1686,7 @@
               "connection": "FlexiBUS",
               "disk_formats": [
                 "Aurelia",
-                "Apple II-compatible"
+                "Apple DOS 3.2-compatible 13-sector format at June 1979 launch"
               ],
               "usable_from": [
                 "Logix Aurelia",
@@ -1763,6 +1763,11 @@
               "number": 2,
               "kind": "testing",
               "description": "controller and firmware able to handle each specified encoding/format, sector/track buffering, local CPU/ROM/RAM, PSU/enclosure and separate format-interchange tests. Define formatting and read/write capability explicitly. Avoid silently using the standard FlexiDisk BOM if its controller cannot implement both formats."
+            },
+            {
+              "number": 3,
+              "kind": "testing",
+              "description": "Round-trip format, write and read on Aurelia FlexiDisk II and Apple Disk II; verify DOS catalogue/allocation, executable load/entry behaviour, write protection, full disks, damaged sectors and media interchange. Measure local encoding/sector-buffer timing independently of FlexiBUS transport."
             }
           ]
         }
@@ -1797,6 +1802,11 @@
           "number": 6,
           "kind": "testing",
           "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+        },
+        {
+          "number": 7,
+          "kind": "testing",
+          "description": "Round-trip format, write and read on Aurelia FlexiDisk II and Apple Disk II; verify DOS catalogue/allocation, executable load/entry behaviour, write protection, full disks, damaged sectors and media interchange. Measure local encoding/sector-buffer timing independently of FlexiBUS transport."
         }
       ],
       "technical_specification": {
@@ -1805,6 +1815,16 @@
             "number": 1,
             "chapter_name": "Removable storage and host access",
             "description": "This external drive uses {media} media and connects over {connection}. It handles {disk_formats} disk formats and is usable from {supported_hosts}."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Apple executable interchange from Aurelia",
+            "description": "For AION C 2.0, Aurelia writes native Apple II executables to Apple DOS 3.2-compatible 13-sector diskettes through this drive. The launch format uses 35 tracks, 13 sectors per track and 256-byte sectors. The local controller implements Apple-compatible GCR encoding/decoding, sector addressing, checksums and format/read/write operations; the Aurelia export utility maintains catalogue, free-space allocation and binary-file load-address/length headers. A raw sector copy without a valid filesystem and executable header is not a runnable application disk."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Loading on Apple II",
+            "description": "Move the completed diskette to a compatible Apple Disk II drive and load/run the binary under an existing Apple DOS 3.2 installation. This media-transfer route requires no Logix interface on the Apple. Alternatively, connect FlexiDisk II to the Apple through the Logix Apple II Expansion Card and its qualified disk-service adapter. Neither route runs CP/M on the Apple. Formatting a data disk does not supply or install Apple DOS; the developer uses an existing compatible boot disk. Later DOS 3.3 formats require a separately qualified update."
           }
         ],
         "parameters": [
@@ -1818,7 +1838,7 @@
           },
           {
             "key": "disk_formats",
-            "value": "Aurelia, Apple II-compatible"
+            "value": "Aurelia and Apple DOS 3.2-compatible 13-sector formats"
           },
           {
             "key": "supported_hosts",
@@ -3286,7 +3306,10 @@
       "provider_actor_ids": [
         "actor.logix"
       ],
-      "technology_ids": [],
+      "technology_ids": [
+        "technology.logix_tui_standard",
+        "technology.aion_c_portability_framework"
+      ],
       "composition_history": [
         {
           "version_number": 1,
@@ -3302,14 +3325,14 @@
             "specification": {
               "host": "Apple II",
               "host_interface": "Apple II slot decode and driver ROM; preserve native memory map and avoid other cards.",
-              "software": "Native Apple II 6502 drivers, callable libraries and examples; applications must use the card API. No CP/M port, Z80 CPU or transparent redirection of existing graphics.",
+              "software": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected.",
               "display_controller_id": "base_part.aurelia_video_chip",
               "video_ram_kb": 16,
               "video_ram_chip_id": "base_part.aion_4116",
               "video_ram_chip_count": 8,
               "video_link_id": "technology.logix_digital_video",
               "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
-              "display_modes": "Reuse Aurelia controller text/bitmap capabilities subject to card/monitor qualification. 80-column output requires a compatible 640-pixel monitor. Host CPU determines drawing throughput.",
+              "display_modes": "Full June 1979 Aurelia text/bitmap and sprite-mode behaviour on matching qualified card/monitor configurations; native host throughput and memory limits remain. No later-release modes are implied.",
               "included_monitor": false,
               "flexibus_ports": 0,
               "sprite_memory": {
@@ -3443,6 +3466,11 @@
               "number": 6,
               "kind": "testing",
               "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+            },
+            {
+              "number": 7,
+              "kind": "testing",
+              "description": "Verify ROM image fit, bank restoration across display/disk calls, RAM/stack reservations, complete TUI and mode conformance, keyboard-command mappings and full-system compatibility on each supported host."
             }
           ],
           "expansion_socket_groups": [
@@ -3501,12 +3529,22 @@
           {
             "number": 1,
             "chapter_name": "Host integration",
-            "description": "This Apple II card uses slot decoding and a driver ROM while preserving the native memory map and avoiding conflicts with other cards. Native 6502 drivers, callable libraries and examples expose a card API; existing graphics are not transparently redirected, and no CP/M port or Z80 CPU is supplied."
+            "description": "Native MOS 6502 ROM firmware and libraries expose the common Aurelia TUI and graphics API without CP/M or a Z80 CPU. Apple-native graphics, sound and peripherals remain accessible through separate target libraries. Existing programs that bypass the API are not transparently redirected. Preserve the host memory map, qualify address decoding and wait states, and avoid conflicts with other installed cards."
           },
           {
             "number": 2,
             "chapter_name": "Independent display and sprite memory",
             "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Aurelia-compatible presentation",
+            "description": "At the 4 June 1979 launch, the ROM and callable libraries implement every TUI feature and graphics mode of the contemporary Aurelia release: the same control semantics, text frames/windows, editing, clipping, glyphs, colours, display-mode behaviour and sprite services on matching qualified monitors. This is functional/API equivalence, not Z80 binary compatibility or equal drawing speed. Application state, clipboard buffers and control descriptors occupy bounded host RAM; complex controls can use linked helpers over ROM primitives. Logical keyboard commands use documented host mappings and menu equivalents where physical keys differ. Later pointer, professional-video and multitasking features are not implied."
+          },
+          {
+            "number": 4,
+            "chapter_name": "ROM mapping and runtime integration",
+            "description": "Use the slot page as discovery and call entry points, with banked firmware behind the shared expansion-ROM window. A fixed RAM-resident trampoline restores card selection and bank state around disk or other peripheral calls, then returns safely to the correct ROM. Reserve zero-page and stack workspace and keep callbacks, interrupts and reentrancy within the published ABI. Determine ROM chip capacity/population from the linked firmware image; no additional memory is inferred from the existing supplied-set quantity."
           }
         ],
         "parameters": [
@@ -3549,7 +3587,10 @@
       "provider_actor_ids": [
         "actor.logix"
       ],
-      "technology_ids": [],
+      "technology_ids": [
+        "technology.logix_tui_standard",
+        "technology.aion_c_portability_framework"
+      ],
       "composition_history": [
         {
           "version_number": 1,
@@ -3565,14 +3606,14 @@
             "specification": {
               "host": "S-100",
               "host_interface": "Configurable 8-bit S-100 interface; qualify address decode, waits, power and conflicts on named systems.",
-              "software": "CP/M BIOS adapters, installation diagnostics and optional Platform Extensions/TUI support for qualified 8080/Z80 hosts; declare ISA and memory prerequisites.",
+              "software": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile.",
               "display_controller_id": "base_part.aurelia_video_chip",
               "video_ram_kb": 16,
               "video_ram_chip_id": "base_part.aion_4116",
               "video_ram_chip_count": 8,
               "video_link_id": "technology.logix_digital_video",
               "host_access": "Windowed/addressed access to onboard video RAM; onboard display refresh continues independently. No extra general-purpose host RAM is implied.",
-              "display_modes": "Reuse Aurelia controller text/bitmap capabilities subject to card/monitor qualification. 80-column output requires a compatible 640-pixel monitor. Host CPU determines drawing throughput.",
+              "display_modes": "Full June 1979 Aurelia text/bitmap and sprite-mode behaviour on matching qualified card/monitor configurations; native host throughput and memory limits remain. No later-release modes are implied.",
               "included_monitor": false,
               "flexibus_ports": 0,
               "sprite_memory": {
@@ -3706,6 +3747,11 @@
               "number": 6,
               "kind": "testing",
               "description": "Test two-chip 1Kx8 sprite bus, CPU/DMA write arbitration and worst-case five-sprite overlap."
+            },
+            {
+              "number": 7,
+              "kind": "testing",
+              "description": "Verify ROM image fit, bank restoration across display/disk calls, RAM/stack reservations, complete TUI and mode conformance, keyboard-command mappings and full-system compatibility on each supported host."
             }
           ],
           "expansion_socket_groups": [
@@ -3764,12 +3810,22 @@
           {
             "number": 1,
             "chapter_name": "Host integration",
-            "description": "This card uses a configurable 8-bit S-100 interface. Named hosts require address-decode, wait-state, power and conflict qualification. CP/M BIOS adapters, diagnostics and optional Platform Extensions/TUI support are provided for qualified 8080/Z80 hosts with declared ISA and memory prerequisites."
+            "description": "ROM firmware, BIOS adapters and libraries expose the common Aurelia TUI and graphics API only on qualified CP/M installations with the matching TUI/Platform Extensions. Supply an 8080-compatible core for supported 8080 and Z80 machines; any Z80-specific optimization must be selected explicitly. Other S-100 CPUs are outside this firmware profile. Preserve the host memory map, qualify address decoding and wait states, and avoid conflicts with other installed cards."
           },
           {
             "number": 2,
             "chapter_name": "Independent display and sprite memory",
             "description": "The card reuses {display_controller_id} with {video_ram_kib} KiB of local display RAM from {video_chip_count} {video_chip_id} chips. Windowed or addressed host access leaves display refresh independent and does not add general-purpose host RAM. Two {sprite_chip_id} chips provide an exclusive 1 KiB, 8-bit sprite bus.\n\nAll five sprites remain available in supported Aurelia-family modes through a host-specific upload interface. The card has no Aurelia system DMA controller. Output uses {video_link_id}; 80-column output requires a compatible 640-pixel monitor, and all modes need card/monitor qualification. Host CPU performance limits drawing throughput. No monitor or FlexiBUS ports are included."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Aurelia-compatible presentation",
+            "description": "At the 4 June 1979 launch, the ROM and callable libraries implement every TUI feature and graphics mode of the contemporary Aurelia release: the same control semantics, text frames/windows, editing, clipping, glyphs, colours, display-mode behaviour and sprite services on matching qualified monitors. This is functional/API equivalence, not Z80 binary compatibility or equal drawing speed. Application state, clipboard buffers and control descriptors occupy bounded host RAM; complex controls can use linked helpers over ROM primitives. Logical keyboard commands use documented host mappings and menu equivalents where physical keys differ. Later pointer, professional-video and multitasking features are not implied."
+          },
+          {
+            "number": 4,
+            "chapter_name": "ROM mapping and runtime integration",
+            "description": "Use a configurable ROM window and bounded common-RAM call stubs. Reserve the mapping explicitly alongside the CP/M memory layout; never overlay transient program memory or the BIOS without an installation contract. Preserve banking and CPU state across calls, callbacks and interrupts. The TUI extension handles host keyboard, file and lifecycle services while the card handles display operations. Determine ROM chip capacity/population from the linked firmware image; no additional memory is inferred from the existing supplied-set quantity."
           }
         ],
         "parameters": [
