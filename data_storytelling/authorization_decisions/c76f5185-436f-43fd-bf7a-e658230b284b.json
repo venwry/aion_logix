@@ -1,0 +1,1253 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.ac890603-3afd-4cfe-86f6-fbe6c955c153",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T15:11:13.114Z",
+      "change_id": "change.peripherals1979.terminals_02",
+      "proposal_sha256": "8bebc3238d831d93d5ee47cf94864be1e0538b9136824bff9e1f9390fc1ebd24",
+      "proposal": {
+        "id": "change.peripherals1979.terminals_02",
+        "category": "foundation",
+        "title": "1978–79 external peripherals — video and printing terminals 2",
+        "reason": "Import 9 distinct commercial identities from research items 161, 162, 163, 164, 165, 166, 167, 174, 175. Describe the native host boundary and assess product and core-standard impacts at 1979-12-31. Dedicated memory and other unrelated accessories explicitly carry no direct impact. Conditional comparisons do not establish qualified adapters, provider adoption or measured sales. Prices and cumulative sales remain editorial evidence, outside foundation and the annual-sales model. See the per-item evidence in data_storytelling/review_evidence/external-peripherals-1979/assessment.json. Revised for explicit product/standard relationships: consolidate descriptions into specification, relocate impact prose, compare canonical implementation boundaries and retain source/qualification limits. Historical documentation cannot establish fictional implementations or measured adoption. Per-record evidence: data_storytelling/review_evidence/external-impact-revision/assessment.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.lear_siegler_adm31",
+            "before": null,
+            "after": {
+              "id": "external_product.lear_siegler_adm31",
+              "name": "Lear Siegler ADM-31",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.lear_siegler"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "80 × 24 display, editing functions and additional screen memory. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                  "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Lear Siegler ADM-31"
+                    },
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_video_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 display, editing functions and additional screen memory.",
+                  "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_video_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexibus_keyboard",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 display, editing functions and additional screen memory.",
+                  "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexibus_keyboard"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.intertec_intertube_ii",
+            "before": null,
+            "after": {
+              "id": "external_product.intertec_intertube_ii",
+              "name": "Intertec InterTube II",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.intertec"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Z80-controlled 80 × 24 terminal with editing features. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                  "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Intertec InterTube II"
+                    },
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_video_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Z80-controlled 80 × 24 terminal with editing features.",
+                  "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_video_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexibus_keyboard",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Z80-controlled 80 × 24 terminal with editing features.",
+                  "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexibus_keyboard"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.televideo_912",
+            "before": null,
+            "after": {
+              "id": "external_product.televideo_912",
+              "name": "TeleVideo 912",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.televideo"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "80 × 24 display with cursor control and editing. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                  "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "TeleVideo 912"
+                    },
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_video_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 display with cursor control and editing.",
+                  "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_video_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexibus_keyboard",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 display with cursor control and editing.",
+                  "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexibus_keyboard"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.dec_vt52",
+            "before": null,
+            "after": {
+              "id": "external_product.dec_vt52",
+              "name": "DEC VT52",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.dec"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "80 × 24 upper/lowercase display with cursor addressing. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable serial/current-loop micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                  "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "DEC VT52"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Suitable serial/current-loop micros"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_video_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 upper/lowercase display with cursor addressing.",
+                  "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable serial/current-loop micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_video_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexibus_keyboard",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 upper/lowercase display with cursor addressing.",
+                  "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable serial/current-loop micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexibus_keyboard"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.dec_la34",
+            "before": null,
+            "after": {
+              "id": "external_product.dec_la34",
+              "name": "DEC LA34 DECwriter IV",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.dec"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Approximately 30 characters/s; keyboard and selectable character spacing. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 30 characters/s; keyboard and selectable character spacing.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The unit supplies hardcopy and sometimes an existing console workflow on appropriately interfaced hosts. It is a broader purchase than a printer and is not a plug-compatible FlexiPrint40 replacement. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.dec_la120",
+            "before": null,
+            "after": {
+              "id": "external_product.dec_la120",
+              "name": "DEC LA120 DECwriter III",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.dec"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Up to 180 characters/s; wide-carriage impact printing terminal. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Up to 180 characters/s; wide-carriage impact printing terminal.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The unit supplies hardcopy and sometimes an existing console workflow on appropriately interfaced hosts. It is a broader purchase than a printer and is not a plug-compatible FlexiPrint40 replacement. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.teletype_43",
+            "before": null,
+            "after": {
+              "id": "external_product.teletype_43",
+              "name": "Teletype Model 43",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.teletype"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Approximately 30 characters/s and 132-column impact printing. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TTL or RS-232 according to configuration"
+                    }
+                  ]
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 30 characters/s and 132-column impact printing.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The unit supplies hardcopy and sometimes an existing console workflow on appropriately interfaced hosts. It is a broader purchase than a printer and is not a plug-compatible FlexiPrint40 replacement. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TTL or RS-232 according to configuration"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.lear_siegler_adm42",
+            "before": null,
+            "after": {
+              "id": "external_product.lear_siegler_adm42",
+              "name": "Lear Siegler ADM-42",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.lear_siegler"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "15-inch 80 × 24 display plus status; detachable keyboard and multiple pages. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                  "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Lear Siegler ADM-42"
+                    },
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_video_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 15-inch 80 × 24 display plus status; detachable keyboard and multiple pages.",
+                  "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_video_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexibus_keyboard",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 15-inch 80 × 24 display plus status; detachable keyboard and multiple pages.",
+                  "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexibus_keyboard"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.ti_820_ksr",
+            "before": null,
+            "after": {
+              "id": "external_product.ti_820_ksr",
+              "name": "Texas Instruments 820 KSR",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.ti"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Approximately 150 characters/s; 132-column printing terminal with keyboard. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 150 characters/s; 132-column printing terminal with keyboard.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The unit supplies hardcopy and sometimes an existing console workflow on appropriately interfaced hosts. It is a broader purchase than a printer and is not a plug-compatible FlexiPrint40 replacement. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232 serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "depends_on_change_ids": [
+          "change.peripherals1979.providers_01",
+          "change.peripherals1979.providers_03",
+          "change.peripherals1979.providers_05"
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.lear_siegler_adm31",
+          "before": null,
+          "after": {
+            "id": "external_product.lear_siegler_adm31",
+            "name": "Lear Siegler ADM-31",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.lear_siegler"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "80 × 24 display, editing functions and additional screen memory. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Lear Siegler ADM-31"
+                  },
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_video_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 display, editing functions and additional screen memory.",
+                "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_video_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexibus_keyboard",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 display, editing functions and additional screen memory.",
+                "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexibus_keyboard"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "559a64c77eee4f963420b37dd7078c9e7818c865d43526fd705bd23eaad0eb25"
+        },
+        {
+          "record_id": "external_product.intertec_intertube_ii",
+          "before": null,
+          "after": {
+            "id": "external_product.intertec_intertube_ii",
+            "name": "Intertec InterTube II",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.intertec"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Z80-controlled 80 × 24 terminal with editing features. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Intertec InterTube II"
+                  },
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_video_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Z80-controlled 80 × 24 terminal with editing features.",
+                "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_video_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexibus_keyboard",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Z80-controlled 80 × 24 terminal with editing features.",
+                "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexibus_keyboard"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "218a57f0ba2cc4d8544e0002d01379202d548790617a9fd0398522a861b3d11f"
+        },
+        {
+          "record_id": "external_product.televideo_912",
+          "before": null,
+          "after": {
+            "id": "external_product.televideo_912",
+            "name": "TeleVideo 912",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.televideo"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "80 × 24 display with cursor control and editing. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "TeleVideo 912"
+                  },
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_video_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 display with cursor control and editing.",
+                "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_video_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexibus_keyboard",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 display with cursor control and editing.",
+                "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexibus_keyboard"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "5cae131d2c87e58232a2a1fabb303a169e6340309d7b9d78be60fbe296b1c82d"
+        },
+        {
+          "record_id": "external_product.dec_vt52",
+          "before": null,
+          "after": {
+            "id": "external_product.dec_vt52",
+            "name": "DEC VT52",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.dec"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "80 × 24 upper/lowercase display with cursor addressing. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable serial/current-loop micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "DEC VT52"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Suitable serial/current-loop micros"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_video_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 upper/lowercase display with cursor addressing.",
+                "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable serial/current-loop micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_video_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexibus_keyboard",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80 × 24 upper/lowercase display with cursor addressing.",
+                "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable serial/current-loop micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexibus_keyboard"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "e5ccdb38ef359a0617643bd4ce1212e784a041fcb49567265c53f3d518af378a"
+        },
+        {
+          "record_id": "external_product.dec_la34",
+          "before": null,
+          "after": {
+            "id": "external_product.dec_la34",
+            "name": "DEC LA34 DECwriter IV",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.dec"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Approximately 30 characters/s; keyboard and selectable character spacing. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 30 characters/s; keyboard and selectable character spacing.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The unit supplies hardcopy and sometimes an existing console workflow on appropriately interfaced hosts. It is a broader purchase than a printer and is not a plug-compatible FlexiPrint40 replacement. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "b60839f540c1599d6268db67c835259af26d6d67506d3ddd6d277a309e50d7dd"
+        },
+        {
+          "record_id": "external_product.dec_la120",
+          "before": null,
+          "after": {
+            "id": "external_product.dec_la120",
+            "name": "DEC LA120 DECwriter III",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.dec"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Up to 180 characters/s; wide-carriage impact printing terminal. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Up to 180 characters/s; wide-carriage impact printing terminal.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The unit supplies hardcopy and sometimes an existing console workflow on appropriately interfaced hosts. It is a broader purchase than a printer and is not a plug-compatible FlexiPrint40 replacement. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "1c4ae8b17a787fe1d19a3cbb7410a1ddf83a4f8a5778695f290b659217a567f9"
+        },
+        {
+          "record_id": "external_product.teletype_43",
+          "before": null,
+          "after": {
+            "id": "external_product.teletype_43",
+            "name": "Teletype Model 43",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.teletype"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Approximately 30 characters/s and 132-column impact printing. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TTL or RS-232 according to configuration"
+                  }
+                ]
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 30 characters/s and 132-column impact printing.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The unit supplies hardcopy and sometimes an existing console workflow on appropriately interfaced hosts. It is a broader purchase than a printer and is not a plug-compatible FlexiPrint40 replacement. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TTL or RS-232 according to configuration"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "94b895004364079eca081e96410048077df72083d5d48e0bf963e68439ba2539"
+        },
+        {
+          "record_id": "external_product.lear_siegler_adm42",
+          "before": null,
+          "after": {
+            "id": "external_product.lear_siegler_adm42",
+            "name": "Lear Siegler ADM-42",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.lear_siegler"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "15-inch 80 × 24 display plus status; detachable keyboard and multiple pages. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete console configurations on a host supporting both purchase paths.",
+                "comparison_description": "The terminal contains its own display controller and communicates through a serial interface instead of the Logix monitor link. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "It supplies a mature alternative console and may reduce demand for a Logix card/monitor pair. This is competition between complete configurations, not a digital-link compatibility claim.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Lear Siegler ADM-42"
+                  },
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_video_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 15-inch 80 × 24 display plus status; detachable keyboard and multiple pages.",
+                "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "A self-contained serial terminal can provide an S-100 computer’s console without an internal Logix video card and digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_video_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexibus_keyboard",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 15-inch 80 × 24 display plus status; detachable keyboard and multiple pages.",
+                "comparison_description": "The alternative is a FlexiBUS keyboard, not a complete terminal. Compare a working console including host, display and interface; a conventional keyboard or terminal is not directly attachable through the keyboard device protocol. Competition is at complete-console level; the terminal does not separately replace both a keyboard and a video card in an already assembled system. The canonical implementation is {implementation}.",
+                "outcomes_description": "The terminal includes its own keyboard. It competes as part of an alternative complete console, not as an electrically interchangeable keyboard. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexibus_keyboard"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "ccf9a68e40e62a827c00a90be235e1dda2dd368ec73a246d1077545546bef80c"
+        },
+        {
+          "record_id": "external_product.ti_820_ksr",
+          "before": null,
+          "after": {
+            "id": "external_product.ti_820_ksr",
+            "name": "Texas Instruments 820 KSR",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.ti"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Approximately 150 characters/s; 132-column printing terminal with keyboard. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 150 characters/s; 132-column printing terminal with keyboard.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The unit supplies hardcopy and sometimes an existing console workflow on appropriately interfaced hosts. It is a broader purchase than a printer and is not a plug-compatible FlexiPrint40 replacement. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232 serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "c6d639820e68a3f4a17087856e7a52db0b61e0838c9e96f53856f829aeb0e5e2"
+        }
+      ]
+    }
+  ]
+}

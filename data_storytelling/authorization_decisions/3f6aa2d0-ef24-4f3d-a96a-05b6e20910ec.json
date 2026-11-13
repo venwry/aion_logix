@@ -1,0 +1,996 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.5dc52ede-ae86-40ed-b8c0-aacbb962e1d1",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T15:11:12.922Z",
+      "change_id": "change.peripherals1979.interfaces_03",
+      "proposal_sha256": "8f4ee77db73b4281dbb85f657d44b594e0190d7b1d057b12c54409d812e44103",
+      "proposal": {
+        "id": "change.peripherals1979.interfaces_03",
+        "category": "foundation",
+        "title": "1978–79 external peripherals — peripheral interfaces and expansion backplanes 3",
+        "reason": "Import 12 distinct commercial identities from research items 128, 141, 149, 151, 154, 157, 158, 186, 189, 193, 196, 198. Describe the native host boundary and assess product and core-standard impacts at 1979-12-31. Dedicated memory and other unrelated accessories explicitly carry no direct impact. Conditional comparisons do not establish qualified adapters, provider adoption or measured sales. Prices and cumulative sales remain editorial evidence, outside foundation and the annual-sales model. See the per-item evidence in data_storytelling/review_evidence/external-peripherals-1979/assessment.json. Revised for explicit product/standard relationships: consolidate descriptions into specification, relocate impact prose, compare canonical implementation boundaries and retain source/qualification limits. Historical documentation cannot establish fictional implementations or measured adoption. Per-record evidence: data_storytelling/review_evidence/external-impact-revision/assessment.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.vector_bitstreamer_ii",
+            "before": null,
+            "after": {
+              "id": "external_product.vector_bitstreamer_ii",
+              "name": "Vector Graphic Bitstreamer II",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.vector"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Serial and parallel interfaces for terminals, printers and other peripherals. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare a named qualified S-100 host with its existing peripheral software against the two-port Logix expansion option.",
+                  "comparison_description": "Register-level serial/parallel I/O does not provide FlexiBUS discovery, framing or class commands. Physical I/O counts are not equivalent to supported device classes. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Legacy peripherals can make conventional ports preferable in the short term. FlexiBUS adoption depends on useful supported devices and reliable drivers, not on claiming that every old port can be replaced.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Vector Graphic Bitstreamer II"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Serial and parallel interfaces for terminals, printers and other peripherals.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "Conventional I/O ports preserve access to existing serial/parallel equipment. They compete with a FlexiBUS host card only for overlapping peripheral functions; isolated or cassette I/O is not supplied by the Logix card. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.thinker_toys_speakeasy",
+            "before": null,
+            "after": {
+              "id": "external_product.thinker_toys_speakeasy",
+              "name": "Thinker Toys Speakeasy",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.thinker_toys"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "General peripheral-I/O expansion board. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare a named qualified S-100 host with its existing peripheral software against the two-port Logix expansion option.",
+                  "comparison_description": "Register-level serial/parallel I/O does not provide FlexiBUS discovery, framing or class commands. Physical I/O counts are not equivalent to supported device classes. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Legacy peripherals can make conventional ports preferable in the short term. FlexiBUS adoption depends on useful supported devices and reliable drivers, not on claiming that every old port can be replaced.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Thinker Toys Speakeasy"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. General peripheral-I/O expansion board.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "Conventional I/O ports preserve access to existing serial/parallel equipment. They compete with a FlexiBUS host card only for overlapping peripheral functions; isolated or cassette I/O is not supplied by the Logix card. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.imsai_mio",
+            "before": null,
+            "after": {
+              "id": "external_product.imsai_mio",
+              "name": "IMSAI MIO",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.imsai"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Multifunction serial and parallel peripheral I/O. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "IMSAI and suitable S-100 hosts"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare a named qualified S-100 host with its existing peripheral software against the two-port Logix expansion option.",
+                  "comparison_description": "Register-level serial/parallel I/O does not provide FlexiBUS discovery, framing or class commands. Physical I/O counts are not equivalent to supported device classes. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Legacy peripherals can make conventional ports preferable in the short term. FlexiBUS adoption depends on useful supported devices and reliable drivers, not on claiming that every old port can be replaced.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "IMSAI MIO"
+                    },
+                    {
+                      "key": "host",
+                      "value": "IMSAI and suitable S-100 hosts"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Multifunction serial and parallel peripheral I/O.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "Conventional I/O ports preserve access to existing serial/parallel equipment. They compete with a FlexiBUS host card only for overlapping peripheral functions; isolated or cassette I/O is not supplied by the Logix card. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "IMSAI and suitable S-100 hosts"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.percom_cis30_plus",
+            "before": null,
+            "after": {
+              "id": "external_product.percom_cis30_plus",
+              "name": "Percom CIS-30+",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Terminal and cassette interfaces; cassette rates of 30, 60 or 120 bytes/s. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC-compatible SS-30"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.netronics_giant_board",
+            "before": null,
+            "after": {
+              "id": "external_product.netronics_giant_board",
+              "name": "Netronics GIANT Board",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.netronics"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Cassette, serial/TTY and parallel I/O with monitor ROM. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "ELF II"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.rca_vp575",
+            "before": null,
+            "after": {
+              "id": "external_product.rca_vp575",
+              "name": "RCA VP575",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.rca"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Four buffered and one unbuffered expansion positions. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "COSMAC VIP"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.rca_vp585",
+            "before": null,
+            "after": {
+              "id": "external_product.rca_vp585",
+              "name": "RCA VP585",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.rca"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Interface for additional hexadecimal keypads. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "COSMAC VIP"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.rca_vp576",
+            "before": null,
+            "after": {
+              "id": "external_product.rca_vp576",
+              "name": "RCA VP576",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.rca"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Two-accessory expansion adapter for an expansion or I/O port. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "COSMAC VIP"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.percom_ci812",
+            "before": null,
+            "after": {
+              "id": "external_product.percom_ci812",
+              "name": "Percom CI-812",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Cassette rates up to 240 bytes/s and a terminal serial interface. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.huh_mpa",
+            "before": null,
+            "after": {
+              "id": "external_product.huh_mpa",
+              "name": "HUH MPA",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.huh"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Host adapter providing access to selected S-100 expansion boards. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II or PET to selected S-100 hardware"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.wameco_rtc1",
+            "before": null,
+            "after": {
+              "id": "external_product.wameco_rtc1",
+              "name": "Wameco RTC-1",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.wameco"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Programmable interrupt timing; not a battery-backed calendar clock. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.microproducts_apple_pr40",
+            "before": null,
+            "after": {
+              "id": "external_product.microproducts_apple_pr40",
+              "name": "Microproducts Apple/PR-40 interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.microproducts"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Interface board, cable and printer software for the named printer. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II to SWTPC PR-40"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                  "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Microproducts Apple/PR-40 interface"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Apple II to SWTPC PR-40"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_apple2_expansion_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Interface board, cable and printer software for the named printer.",
+                  "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                  "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II to SWTPC PR-40"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.apple2_expansion_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "depends_on_change_ids": [
+          "change.peripherals1979.providers_02",
+          "change.peripherals1979.providers_03",
+          "change.peripherals1979.providers_04",
+          "change.peripherals1979.providers_05"
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.vector_bitstreamer_ii",
+          "before": null,
+          "after": {
+            "id": "external_product.vector_bitstreamer_ii",
+            "name": "Vector Graphic Bitstreamer II",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.vector"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Serial and parallel interfaces for terminals, printers and other peripherals. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare a named qualified S-100 host with its existing peripheral software against the two-port Logix expansion option.",
+                "comparison_description": "Register-level serial/parallel I/O does not provide FlexiBUS discovery, framing or class commands. Physical I/O counts are not equivalent to supported device classes. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Legacy peripherals can make conventional ports preferable in the short term. FlexiBUS adoption depends on useful supported devices and reliable drivers, not on claiming that every old port can be replaced.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Vector Graphic Bitstreamer II"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Serial and parallel interfaces for terminals, printers and other peripherals.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "Conventional I/O ports preserve access to existing serial/parallel equipment. They compete with a FlexiBUS host card only for overlapping peripheral functions; isolated or cassette I/O is not supplied by the Logix card. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "4cfcb3e5a19c820b3b4d4925a180bd9dfac14bc559b882df5cc81b0a54bf8503"
+        },
+        {
+          "record_id": "external_product.thinker_toys_speakeasy",
+          "before": null,
+          "after": {
+            "id": "external_product.thinker_toys_speakeasy",
+            "name": "Thinker Toys Speakeasy",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.thinker_toys"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "General peripheral-I/O expansion board. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare a named qualified S-100 host with its existing peripheral software against the two-port Logix expansion option.",
+                "comparison_description": "Register-level serial/parallel I/O does not provide FlexiBUS discovery, framing or class commands. Physical I/O counts are not equivalent to supported device classes. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Legacy peripherals can make conventional ports preferable in the short term. FlexiBUS adoption depends on useful supported devices and reliable drivers, not on claiming that every old port can be replaced.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Thinker Toys Speakeasy"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. General peripheral-I/O expansion board.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "Conventional I/O ports preserve access to existing serial/parallel equipment. They compete with a FlexiBUS host card only for overlapping peripheral functions; isolated or cassette I/O is not supplied by the Logix card. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "f50ae7b6236d06ba928f615044c90a33742d771afe28b5598430662ecf8156e4"
+        },
+        {
+          "record_id": "external_product.imsai_mio",
+          "before": null,
+          "after": {
+            "id": "external_product.imsai_mio",
+            "name": "IMSAI MIO",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.imsai"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Multifunction serial and parallel peripheral I/O. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "IMSAI and suitable S-100 hosts"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare a named qualified S-100 host with its existing peripheral software against the two-port Logix expansion option.",
+                "comparison_description": "Register-level serial/parallel I/O does not provide FlexiBUS discovery, framing or class commands. Physical I/O counts are not equivalent to supported device classes. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Legacy peripherals can make conventional ports preferable in the short term. FlexiBUS adoption depends on useful supported devices and reliable drivers, not on claiming that every old port can be replaced.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "IMSAI MIO"
+                  },
+                  {
+                    "key": "host",
+                    "value": "IMSAI and suitable S-100 hosts"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Multifunction serial and parallel peripheral I/O.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "Conventional I/O ports preserve access to existing serial/parallel equipment. They compete with a FlexiBUS host card only for overlapping peripheral functions; isolated or cassette I/O is not supplied by the Logix card. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "IMSAI and suitable S-100 hosts"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "32171fb1969cb20b848d0d4d90e9b9e80a94489445966108de132ec48db32bbf"
+        },
+        {
+          "record_id": "external_product.percom_cis30_plus",
+          "before": null,
+          "after": {
+            "id": "external_product.percom_cis30_plus",
+            "name": "Percom CIS-30+",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Terminal and cassette interfaces; cassette rates of 30, 60 or 120 bytes/s. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC-compatible SS-30"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "30420ab38443f7177dd5811913b9c3f1ea8f78071ae5592b39ae4f70afae7c54"
+        },
+        {
+          "record_id": "external_product.netronics_giant_board",
+          "before": null,
+          "after": {
+            "id": "external_product.netronics_giant_board",
+            "name": "Netronics GIANT Board",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.netronics"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Cassette, serial/TTY and parallel I/O with monitor ROM. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "ELF II"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "eafb91299b5319f58e10227d0037081de8bdd659bd8778a31833382c54fd8266"
+        },
+        {
+          "record_id": "external_product.rca_vp575",
+          "before": null,
+          "after": {
+            "id": "external_product.rca_vp575",
+            "name": "RCA VP575",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.rca"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Four buffered and one unbuffered expansion positions. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "COSMAC VIP"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "84f455285a0e412db9273b87ed010b57bad05111de1f8ea0bad2d954920d6440"
+        },
+        {
+          "record_id": "external_product.rca_vp585",
+          "before": null,
+          "after": {
+            "id": "external_product.rca_vp585",
+            "name": "RCA VP585",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.rca"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Interface for additional hexadecimal keypads. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "COSMAC VIP"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "93ca440bc0595200d3c95f0eea9e68318a0489eafcad01272ee4be54cd2d322e"
+        },
+        {
+          "record_id": "external_product.rca_vp576",
+          "before": null,
+          "after": {
+            "id": "external_product.rca_vp576",
+            "name": "RCA VP576",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.rca"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Two-accessory expansion adapter for an expansion or I/O port. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "COSMAC VIP"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "1b2c74fc3a1043b60588358acc59b8ef6f3be1f9e2392f228489837168d828a3"
+        },
+        {
+          "record_id": "external_product.percom_ci812",
+          "before": null,
+          "after": {
+            "id": "external_product.percom_ci812",
+            "name": "Percom CI-812",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Cassette rates up to 240 bytes/s and a terminal serial interface. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "ba5e50547dc39df6a7451975fa8f46d307a8dfb5cc83b195d2217f1902a5ea36"
+        },
+        {
+          "record_id": "external_product.huh_mpa",
+          "before": null,
+          "after": {
+            "id": "external_product.huh_mpa",
+            "name": "HUH MPA",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.huh"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Host adapter providing access to selected S-100 expansion boards. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II or PET to selected S-100 hardware"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "b3586f8aa6e84801d43bf4411dbac4cd3cea6c9d5cd112d028fb998430cb57d1"
+        },
+        {
+          "record_id": "external_product.wameco_rtc1",
+          "before": null,
+          "after": {
+            "id": "external_product.wameco_rtc1",
+            "name": "Wameco RTC-1",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.wameco"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Programmable interrupt timing; not a battery-backed calendar clock. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "76589b3eb21f526b2b35bb2e02caed662ade8281d788365b45b7ff6ab754f8b0"
+        },
+        {
+          "record_id": "external_product.microproducts_apple_pr40",
+          "before": null,
+          "after": {
+            "id": "external_product.microproducts_apple_pr40",
+            "name": "Microproducts Apple/PR-40 interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.microproducts"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Interface board, cable and printer software for the named printer. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II to SWTPC PR-40"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Microproducts Apple/PR-40 interface"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Apple II to SWTPC PR-40"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_apple2_expansion_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Interface board, cable and printer software for the named printer.",
+                "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II to SWTPC PR-40"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.apple2_expansion_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "8b42b65ce4d740833809c91c6ef258365ea05184b43ea1cda8c811391f8c1fdc"
+        }
+      ]
+    }
+  ]
+}

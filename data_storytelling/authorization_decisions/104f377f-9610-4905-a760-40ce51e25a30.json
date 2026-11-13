@@ -1,0 +1,1248 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.8889914b-bf7b-4a07-85e5-7c13a1206c39",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T15:11:12.919Z",
+      "change_id": "change.peripherals1979.storage_02",
+      "proposal_sha256": "5aae6b39beff84894f0793c56f4c61d862cbc068e2ebdf078b1106de6d539bad",
+      "proposal": {
+        "id": "change.peripherals1979.storage_02",
+        "category": "foundation",
+        "title": "1978–79 external peripherals — storage subsystems, controllers and mechanisms 2",
+        "reason": "Import 14 distinct commercial identities from research items 74, 81, 82, 83, 84, 86, 106, 135, 139, 140, 176, 177, 179, 180. Describe the native host boundary and assess product and core-standard impacts at 1979-12-31. Dedicated memory and other unrelated accessories explicitly carry no direct impact. Conditional comparisons do not establish qualified adapters, provider adoption or measured sales. Prices and cumulative sales remain editorial evidence, outside foundation and the annual-sales model. See the per-item evidence in data_storytelling/review_evidence/external-peripherals-1979/assessment.json. Revised for explicit product/standard relationships: consolidate descriptions into specification, relocate impact prose, compare canonical implementation boundaries and retain source/qualification limits. Historical documentation cannot establish fictional implementations or measured adoption. Per-record evidence: data_storytelling/review_evidence/external-impact-revision/assessment.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.tarbell_floppy_interface",
+            "before": null,
+            "after": {
+              "id": "external_product.tarbell_floppy_interface",
+              "name": "Tarbell Floppy Disk Interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tarbell"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Controller for compatible floppy drives; boot and disk software are system-specific. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Tarbell Floppy Disk Interface"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.shugart_sa400",
+            "before": null,
+            "after": {
+              "id": "external_product.shugart_sa400",
+              "name": "Shugart SA400",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.shugart"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Bare 5¼-inch floppy mechanism; controller, enclosure and power supply are separate. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Compatible 5¼-inch floppy controllers"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.shugart_sa800",
+            "before": null,
+            "after": {
+              "id": "external_product.shugart_sa800",
+              "name": "Shugart SA800",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.shugart"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Bare single-sided 8-inch floppy mechanism used in many OEM subsystems. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Compatible 8-inch floppy controllers"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.micropolis_1015_ii",
+            "before": null,
+            "after": {
+              "id": "external_product.micropolis_1015_ii",
+              "name": "Micropolis 1015-II",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.micropolis"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "High-track-count 5¼-inch floppy mechanism; usable format depends on controller and software. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching Micropolis-compatible floppy controllers"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.persci_277",
+            "before": null,
+            "after": {
+              "id": "external_product.persci_277",
+              "name": "PerSci 277",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.persci"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Dual single-sided 8-inch floppy mechanism with voice-coil head positioning. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable 8-inch controllers"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.corvus_11a",
+            "before": null,
+            "after": {
+              "id": "external_product.corvus_11a",
+              "name": "Corvus 11A 10 MB disk system",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.corvus"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Early hard-disk subsystem offering substantially more capacity than a floppy drive. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II with Corvus interface/software"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.percom_separator",
+            "before": null,
+            "after": {
+              "id": "external_product.percom_separator",
+              "name": "Percom Separator",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Improves floppy data separation; fits beneath the WD1771 controller. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TRS-80 Model I Expansion Interface"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.sd_versafloppy",
+            "before": null,
+            "after": {
+              "id": "external_product.sd_versafloppy",
+              "name": "SD Systems VersaFloppy",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.sd_systems"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "WD1771 single-density controller for suitable 5¼- and 8-inch drives. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "SD Systems VersaFloppy"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. WD1771 single-density controller for suitable 5¼- and 8-inch drives.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. WD1771 single-density controller for suitable 5¼- and 8-inch drives.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.thinker_toys_discus_i",
+            "before": null,
+            "after": {
+              "id": "external_product.thinker_toys_discus_i",
+              "name": "Thinker Toys Discus I",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.thinker_toys"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Thinker Toys Discus I"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.thinker_toys_disk_jockey_i",
+            "before": null,
+            "after": {
+              "id": "external_product.thinker_toys_disk_jockey_i",
+              "name": "Thinker Toys Disk Jockey I",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.thinker_toys"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "8-inch floppy controller with buffering and serial-I/O facilities. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Thinker Toys Disk Jockey I"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.persci_299",
+            "before": null,
+            "after": {
+              "id": "external_product.persci_299",
+              "name": "PerSci 299",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.persci"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Dual double-sided 8-inch floppy mechanism with voice-coil head positioning. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable 8-inch floppy controllers"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.persci_1170",
+            "before": null,
+            "after": {
+              "id": "external_product.persci_1170",
+              "name": "PerSci 1170",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.persci"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Intelligent controller for single/double-density disk management. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "PerSci drives; suitable host interface required"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.smoke_signal_bfd68",
+            "before": null,
+            "after": {
+              "id": "external_product.smoke_signal_bfd68",
+              "name": "Smoke Signal Broadcasting BFD-68",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.smoke_signal"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Single-drive 5¼-inch system with controller and DOS68; roughly 90 KB per disk. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC-compatible SS-50"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.percom_lfd400",
+            "before": null,
+            "after": {
+              "id": "external_product.percom_lfd400",
+              "name": "Percom LFD-400",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "5¼-inch floppy subsystem; approximately 90 KB per disk in the reviewed configuration. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SS-50"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "depends_on_change_ids": [
+          "change.peripherals1979.providers_01",
+          "change.peripherals1979.providers_03",
+          "change.peripherals1979.providers_04",
+          "change.peripherals1979.providers_05"
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.tarbell_floppy_interface",
+          "before": null,
+          "after": {
+            "id": "external_product.tarbell_floppy_interface",
+            "name": "Tarbell Floppy Disk Interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tarbell"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Controller for compatible floppy drives; boot and disk software are system-specific. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Tarbell Floppy Disk Interface"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "f9b2aa32192e9972ac78f3a683fcef44c2da242e470f847dc76142fdcc731452"
+        },
+        {
+          "record_id": "external_product.shugart_sa400",
+          "before": null,
+          "after": {
+            "id": "external_product.shugart_sa400",
+            "name": "Shugart SA400",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.shugart"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Bare 5¼-inch floppy mechanism; controller, enclosure and power supply are separate. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Compatible 5¼-inch floppy controllers"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "25f9766eb13a1b8012d8f5a918cf241987f80fe15fe9f5a010410478006fb5cb"
+        },
+        {
+          "record_id": "external_product.shugart_sa800",
+          "before": null,
+          "after": {
+            "id": "external_product.shugart_sa800",
+            "name": "Shugart SA800",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.shugart"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Bare single-sided 8-inch floppy mechanism used in many OEM subsystems. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Compatible 8-inch floppy controllers"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "4fb23d44041551dfb5bb446a2c0944973b745a48eb6dd660c5d6be5e345f2f0b"
+        },
+        {
+          "record_id": "external_product.micropolis_1015_ii",
+          "before": null,
+          "after": {
+            "id": "external_product.micropolis_1015_ii",
+            "name": "Micropolis 1015-II",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.micropolis"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "High-track-count 5¼-inch floppy mechanism; usable format depends on controller and software. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching Micropolis-compatible floppy controllers"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "5da6203049b58580437e32f3dcb4486558a8c0ed3893a03a4d0fbaf59c4727ba"
+        },
+        {
+          "record_id": "external_product.persci_277",
+          "before": null,
+          "after": {
+            "id": "external_product.persci_277",
+            "name": "PerSci 277",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.persci"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Dual single-sided 8-inch floppy mechanism with voice-coil head positioning. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable 8-inch controllers"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "ce216c0c881a97b5f8db572d983fc41ec23f9d86d8008d8cb2cf2e3a9358f716"
+        },
+        {
+          "record_id": "external_product.corvus_11a",
+          "before": null,
+          "after": {
+            "id": "external_product.corvus_11a",
+            "name": "Corvus 11A 10 MB disk system",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.corvus"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Early hard-disk subsystem offering substantially more capacity than a floppy drive. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II with Corvus interface/software"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "7b865e1a768d63b81e19369233774ae5966348b907f3d860baddccd710beea14"
+        },
+        {
+          "record_id": "external_product.percom_separator",
+          "before": null,
+          "after": {
+            "id": "external_product.percom_separator",
+            "name": "Percom Separator",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Improves floppy data separation; fits beneath the WD1771 controller. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TRS-80 Model I Expansion Interface"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "c414614e3cb69ed5eb52706110213ae980f76050ed330a3cd3625f04bfd3ff4a"
+        },
+        {
+          "record_id": "external_product.sd_versafloppy",
+          "before": null,
+          "after": {
+            "id": "external_product.sd_versafloppy",
+            "name": "SD Systems VersaFloppy",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.sd_systems"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "WD1771 single-density controller for suitable 5¼- and 8-inch drives. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "SD Systems VersaFloppy"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. WD1771 single-density controller for suitable 5¼- and 8-inch drives.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. WD1771 single-density controller for suitable 5¼- and 8-inch drives.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "146820f7701a75dcb0a0e86bdbcdaaa5f14bc213672bada6e7143ea995aac3b9"
+        },
+        {
+          "record_id": "external_product.thinker_toys_discus_i",
+          "before": null,
+          "after": {
+            "id": "external_product.thinker_toys_discus_i",
+            "name": "Thinker Toys Discus I",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.thinker_toys"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Thinker Toys Discus I"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "e454564e15a3365e1cf0ed9d7f044877802893a3521c9b132b6dfc6c766bc57a"
+        },
+        {
+          "record_id": "external_product.thinker_toys_disk_jockey_i",
+          "before": null,
+          "after": {
+            "id": "external_product.thinker_toys_disk_jockey_i",
+            "name": "Thinker Toys Disk Jockey I",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.thinker_toys"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "8-inch floppy controller with buffering and serial-I/O facilities. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Thinker Toys Disk Jockey I"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "c1d4e5ce73629e11b569f7be75190adf25f418781aeb6dec17480bda5e014194"
+        },
+        {
+          "record_id": "external_product.persci_299",
+          "before": null,
+          "after": {
+            "id": "external_product.persci_299",
+            "name": "PerSci 299",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.persci"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Dual double-sided 8-inch floppy mechanism with voice-coil head positioning. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable 8-inch floppy controllers"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "d3b2b54a14a24f7beca508adc7b14c1e023de93a9afd9d61c8d3456b699a5a9c"
+        },
+        {
+          "record_id": "external_product.persci_1170",
+          "before": null,
+          "after": {
+            "id": "external_product.persci_1170",
+            "name": "PerSci 1170",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.persci"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Intelligent controller for single/double-density disk management. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "PerSci drives; suitable host interface required"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "0fba40f9864ee3248e5725239093927b019aac87e67aab2ef04117d2996b3229"
+        },
+        {
+          "record_id": "external_product.smoke_signal_bfd68",
+          "before": null,
+          "after": {
+            "id": "external_product.smoke_signal_bfd68",
+            "name": "Smoke Signal Broadcasting BFD-68",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.smoke_signal"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Single-drive 5¼-inch system with controller and DOS68; roughly 90 KB per disk. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC-compatible SS-50"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "2e4830169adb1705236434fe20b68a6353d52124e4a5c218c5c06969f878dc24"
+        },
+        {
+          "record_id": "external_product.percom_lfd400",
+          "before": null,
+          "after": {
+            "id": "external_product.percom_lfd400",
+            "name": "Percom LFD-400",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "5¼-inch floppy subsystem; approximately 90 KB per disk in the reviewed configuration. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SS-50"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "9f7de3f94352e3033f2840818a2748fce5e6bf44e2d789e12e986b73fa356f40"
+        }
+      ]
+    }
+  ]
+}

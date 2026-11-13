@@ -1,0 +1,994 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.555e2bf5-669c-4ae9-ab67-dd9559f04a14",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T15:11:12.920Z",
+      "change_id": "change.peripherals1979.interfaces_01",
+      "proposal_sha256": "c965e93c856234321cd54a24e4fa88ecb345d190b0cb3de4f67c103d33ce51bd",
+      "proposal": {
+        "id": "change.peripherals1979.interfaces_01",
+        "category": "foundation",
+        "title": "1978–79 external peripherals — peripheral interfaces and expansion backplanes 1",
+        "reason": "Import 12 distinct commercial identities from research items 2, 3, 4, 5, 12, 14, 15, 23, 45, 46, 48, 52. Describe the native host boundary and assess product and core-standard impacts at 1979-12-31. Dedicated memory and other unrelated accessories explicitly carry no direct impact. Conditional comparisons do not establish qualified adapters, provider adoption or measured sales. Prices and cumulative sales remain editorial evidence, outside foundation and the annual-sales model. See the per-item evidence in data_storytelling/review_evidence/external-peripherals-1979/assessment.json. Revised for explicit product/standard relationships: consolidate descriptions into specification, relocate impact prose, compare canonical implementation boundaries and retain source/qualification limits. Historical documentation cannot establish fictional implementations or measured adoption. Per-record evidence: data_storytelling/review_evidence/external-impact-revision/assessment.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.apple_parallel_printer_card",
+            "before": null,
+            "after": {
+              "id": "external_product.apple_parallel_printer_card",
+              "name": "Apple Parallel Printer Interface Card",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.apple"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Parallel printer connection using a host-specific interface card and firmware. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                  "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Apple Parallel Printer Interface Card"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_apple2_expansion_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Parallel printer connection using a host-specific interface card and firmware.",
+                  "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                  "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.apple2_expansion_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.apple_centronics_card",
+            "before": null,
+            "after": {
+              "id": "external_product.apple_centronics_card",
+              "name": "Apple Centronics Interface Card",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.apple"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Centronics-style parallel printer attachment; printer cabling and firmware must match. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                  "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Apple Centronics Interface Card"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_apple2_expansion_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Centronics-style parallel printer attachment; printer cabling and firmware must match.",
+                  "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                  "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.apple2_expansion_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.apple_serial_card",
+            "before": null,
+            "after": {
+              "id": "external_product.apple_serial_card",
+              "name": "Apple Serial Interface Card",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.apple"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Serial peripheral connection with card-specific firmware and communication settings. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                  "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Apple Serial Interface Card"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_apple2_expansion_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Serial peripheral connection with card-specific firmware and communication settings.",
+                  "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                  "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.apple2_expansion_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.apple_communications_card",
+            "before": null,
+            "after": {
+              "id": "external_product.apple_communications_card",
+              "name": "Apple Communications Interface Card",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.apple"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Serial communications interface intended for terminals and modem connections. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.mountain_apple_clock",
+            "before": null,
+            "after": {
+              "id": "external_product.mountain_apple_clock",
+              "name": "Mountain Hardware Apple Clock",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.mountain"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Hardware clock/calendar interface for time-aware programs. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.ssm_aio",
+            "before": null,
+            "after": {
+              "id": "external_product.ssm_aio",
+              "name": "Solid State Music AIO",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.ssm"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Multifunction peripheral-I/O card with serial and parallel connections. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                  "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Solid State Music AIO"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_apple2_expansion_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Multifunction peripheral-I/O card with serial and parallel connections.",
+                  "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                  "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.apple2_expansion_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.trs80_expansion_interface",
+            "before": null,
+            "after": {
+              "id": "external_product.trs80_expansion_interface",
+              "name": "Radio Shack TRS-80 Expansion Interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tandy"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "External expansion enclosure providing memory expansion and disk/printer attachment facilities. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TRS-80 Model I"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.trs80_rs232_card",
+            "before": null,
+            "after": {
+              "id": "external_product.trs80_rs232_card",
+              "name": "Radio Shack RS-232 Interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tandy"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Optional serial port for suitable terminals, printers and modems. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TRS-80 Model I Expansion Interface"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.heath_h8_5",
+            "before": null,
+            "after": {
+              "id": "external_product.heath_h8_5",
+              "name": "Heath H8-5 serial/cassette interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.heath"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Terminal serial connection and cassette storage interface. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Heath H8 bus"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.heath_h8_2",
+            "before": null,
+            "after": {
+              "id": "external_product.heath_h8_2",
+              "name": "Heath H8-2 parallel interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.heath"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Parallel peripheral ports, including support for the H10 paper-tape unit. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Heath H8 bus"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.swtpc_ac30",
+            "before": null,
+            "after": {
+              "id": "external_product.swtpc_ac30",
+              "name": "SWTPC AC-30 cassette interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.swtpc"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Audio-cassette encoding/decoding interface for program storage. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC and suitably connected serial systems"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.swtpc_mps",
+            "before": null,
+            "after": {
+              "id": "external_product.swtpc_mps",
+              "name": "SWTPC MP-S",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.swtpc"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Serial peripheral-interface board. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SS-30 I/O bus"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "depends_on_change_ids": [
+          "change.peripherals1979.providers_03",
+          "change.peripherals1979.providers_05"
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.apple_parallel_printer_card",
+          "before": null,
+          "after": {
+            "id": "external_product.apple_parallel_printer_card",
+            "name": "Apple Parallel Printer Interface Card",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.apple"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Parallel printer connection using a host-specific interface card and firmware. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Apple Parallel Printer Interface Card"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_apple2_expansion_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Parallel printer connection using a host-specific interface card and firmware.",
+                "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.apple2_expansion_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "c495c617dfeec5e2d4ec7d9d257d29a046d84667f2669106e4de14d8bb72fece"
+        },
+        {
+          "record_id": "external_product.apple_centronics_card",
+          "before": null,
+          "after": {
+            "id": "external_product.apple_centronics_card",
+            "name": "Apple Centronics Interface Card",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.apple"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Centronics-style parallel printer attachment; printer cabling and firmware must match. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Apple Centronics Interface Card"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_apple2_expansion_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Centronics-style parallel printer attachment; printer cabling and firmware must match.",
+                "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.apple2_expansion_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "282f2587b3bd7c1649c960f0c55f3ff3f3b53f9546a7e52e6160159a015bb961"
+        },
+        {
+          "record_id": "external_product.apple_serial_card",
+          "before": null,
+          "after": {
+            "id": "external_product.apple_serial_card",
+            "name": "Apple Serial Interface Card",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.apple"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Serial peripheral connection with card-specific firmware and communication settings. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Apple Serial Interface Card"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_apple2_expansion_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Serial peripheral connection with card-specific firmware and communication settings.",
+                "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.apple2_expansion_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "a84b51cf8a6b012783ecb235df4f0964cb72d25a3e7d4aff0ce2c3d2811b520b"
+        },
+        {
+          "record_id": "external_product.apple_communications_card",
+          "before": null,
+          "after": {
+            "id": "external_product.apple_communications_card",
+            "name": "Apple Communications Interface Card",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.apple"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Serial communications interface intended for terminals and modem connections. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "c486b4a061c7f3c8ddaa08fd6a6494239b5d198c1b8bb3983e51a2532fafb18c"
+        },
+        {
+          "record_id": "external_product.mountain_apple_clock",
+          "before": null,
+          "after": {
+            "id": "external_product.mountain_apple_clock",
+            "name": "Mountain Hardware Apple Clock",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.mountain"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Hardware clock/calendar interface for time-aware programs. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "471f698326c35ac570ca776cb4d6946673a469c7505fb38341885f3309c5ca93"
+        },
+        {
+          "record_id": "external_product.ssm_aio",
+          "before": null,
+          "after": {
+            "id": "external_product.ssm_aio",
+            "name": "Solid State Music AIO",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.ssm"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Multifunction peripheral-I/O card with serial and parallel connections. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare alternative Apple II peripheral attachment choices available by the end of 1979; retain native 6502 drivers and required cabling.",
+                "comparison_description": "The board retains its native peripheral signalling and software; only functions actually supplied by both purchase paths overlap. Neither the connector nor an adapter implies FlexiBUS device discovery or class compatibility. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Working native attachments can reduce immediate demand for a new bus. Cross-host reuse could favour FlexiBUS only where the actual device class and host driver are qualified.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Solid State Music AIO"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_apple2_expansion_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Multifunction peripheral-I/O card with serial and parallel connections.",
+                "comparison_description": "The alternative adds two FlexiBUS ports and a Disk II-compatible controller to Apple II using native 6502 drivers. It provides neither a generic serial/parallel port nor Z80/CP/M execution. The canonical implementation is {implementation}.",
+                "outcomes_description": "For an Apple II buyer needing the function this adapter actually supplies, the established native attachment can avoid a FlexiBUS purchase. The Logix card instead provides two FlexiBUS ports and a Disk II path; it does not transparently replace every native adapter. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.apple2_expansion_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "dd1a8011e326a610e0b27503d0a03b5d638aa6fba1f49d4c9e7b36261fbc8011"
+        },
+        {
+          "record_id": "external_product.trs80_expansion_interface",
+          "before": null,
+          "after": {
+            "id": "external_product.trs80_expansion_interface",
+            "name": "Radio Shack TRS-80 Expansion Interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tandy"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "External expansion enclosure providing memory expansion and disk/printer attachment facilities. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TRS-80 Model I"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "a5ae2ac2ae7f23dae7d7add2b85ffca85a78e8ffd2074646a10521dc26d52f11"
+        },
+        {
+          "record_id": "external_product.trs80_rs232_card",
+          "before": null,
+          "after": {
+            "id": "external_product.trs80_rs232_card",
+            "name": "Radio Shack RS-232 Interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tandy"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Optional serial port for suitable terminals, printers and modems. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TRS-80 Model I Expansion Interface"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "ec21674514de8ced063301d041046c799fbb0873dbf201d5022c851c2713e90f"
+        },
+        {
+          "record_id": "external_product.heath_h8_5",
+          "before": null,
+          "after": {
+            "id": "external_product.heath_h8_5",
+            "name": "Heath H8-5 serial/cassette interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.heath"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Terminal serial connection and cassette storage interface. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Heath H8 bus"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "f067198149a067d60e37da189e6aa837b7b69a57c35818b30c5eaf42e86eb12c"
+        },
+        {
+          "record_id": "external_product.heath_h8_2",
+          "before": null,
+          "after": {
+            "id": "external_product.heath_h8_2",
+            "name": "Heath H8-2 parallel interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.heath"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Parallel peripheral ports, including support for the H10 paper-tape unit. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Heath H8 bus"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "05e81fcb695f133a027842938c62af217d4f68548e202a4900bca6a80842acfc"
+        },
+        {
+          "record_id": "external_product.swtpc_ac30",
+          "before": null,
+          "after": {
+            "id": "external_product.swtpc_ac30",
+            "name": "SWTPC AC-30 cassette interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.swtpc"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Audio-cassette encoding/decoding interface for program storage. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC and suitably connected serial systems"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "77c58d61756da638ec538d945e8a87606fcdaf7a9e8f54af207aaacd3f5534d3"
+        },
+        {
+          "record_id": "external_product.swtpc_mps",
+          "before": null,
+          "after": {
+            "id": "external_product.swtpc_mps",
+            "name": "SWTPC MP-S",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.swtpc"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Serial peripheral-interface board. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SS-30 I/O bus"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "9a4e23743908514dd7a059e59c6eef9410afa323ab04bcbe1ceb763beb3c799e"
+        }
+      ]
+    }
+  ]
+}
