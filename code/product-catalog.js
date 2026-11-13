@@ -1,3 +1,4 @@
+import {specificationSegments} from './technology-specification.js';
 import {el,loadData,showError,debounce} from './shared.js';
 import {renderTechnicalSpecification,renderGraphicModes} from './technical-specification.js';
 import {launchGroups,compositionTree,configurationGroups,headlineSpecs,flattenedBOM,nameOf} from './product-catalog-model.js';
@@ -11,8 +12,18 @@ try {
  const boundary=b=>b?.kind==='event'?date(data.index.get(b.event_id)):b?.kind==='simulation_end'?'Simulation end':b?.date||b?.value||'Unknown';
  function component(node){
   const box=el('details','catalog-component'),summary=el('summary');
-  summary.append(el('span','catalog-quantity',node.quantity==null?'? ×':node.quantity+' ×'),el('strong','',nameOf(node.record)));
-  if(node.version)summary.append(el('small','','Revision '+node.version.version_number));box.append(summary);
+  const name=el('strong');name.append(link(node.record.id));
+  summary.append(el('span','catalog-quantity',node.quantity==null?'? ×':node.quantity+' ×'),name);
+  const description=node.record.description?.trim(),spec=node.record.technical_specification;
+  const text=description&&description!==nameOf(node.record)?description:spec?.chapters?.[0]?.description;
+  if(text){
+   const prose=el('span','catalog-component-description'),parameters=(spec?.parameters||[]).map(p=>({key:p.key,value:Object.hasOwn(p,'ref_id')?p.ref_id:p.value===null?'unknown':p.value}));
+   for(const part of specificationSegments(text.split(/\r?\n/)[0],parameters)){
+    if(part.key){const strong=el('strong');strong.append(value(part.text));prose.append(strong);}else prose.append(document.createTextNode(part.text));
+   }
+   summary.append(' ',prose);
+  }
+  box.append(summary);
   const body=el('div','catalog-component-body');body.append(el('p','',node.record.description||''),link(node.record.id));
   if(node.record.technical_specification)body.append(renderTechnicalSpecification(node.record.technical_specification,value));
   if(node.record.graphic_modes_specification?.length)body.append(renderGraphicModes(node.record.graphic_modes_specification,value));
@@ -21,8 +32,10 @@ try {
  }
  function renderProduct(){
   const r=data.index.get(selected),host=$('catalog-content');host.replaceChildren();if(!r){host.append(el('p','','No matching products.'));return;}
-  const header=el('div','catalog-product-heading');header.append(el('p','eyebrow',r.kind.replaceAll('_',' ')),el('h2','',nameOf(r)),el('p','',r.description||''));
-  const launch=el('p','catalog-launch');for(const id of [r.launch_campaign_id,r.launch_event_id].filter(Boolean)){if(launch.childNodes.length)launch.append(' · ');launch.append(link(id));}launch.append(' · '+date(data.index.get(r.launch_event_id)));header.append(launch,link(r.id));host.append(header);
+  const header=el('div','catalog-product-heading'),title=el('h2','',nameOf(r)),recordLink=link(r.id);
+  recordLink.className='catalog-record-link';recordLink.textContent='';recordLink.setAttribute('aria-label','Open '+nameOf(r)+' in data browser');recordLink.title='Open in data browser';
+  recordLink.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3h7v7M21 3l-11 11M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></svg>';
+  title.append(recordLink);header.append(title);if(r.description&&r.description.trim()!==nameOf(r))header.append(el('p','',r.description));host.append(header);
   const versions=[...(r.composition_history||[])].sort((a,b)=>a.version_number-b.version_number);
   if(!versions.some(v=>v.version_number===revision))revision=versions[0]?.version_number;
   if(versions.length){const label=el('label','catalog-revision','Composition revision '),select=el('select');select.id='catalog-revision';
@@ -44,7 +57,7 @@ try {
   }host.append(tabs,...Object.values(panels));
   if(!tree){for(const p of Object.values(panels))p.append(el('p','','No resolvable composition is recorded for this product.'));return;}
   panels.configuration.append(el('p','catalog-note','Recorded contents of this revision. Quantities are per complete product. Open a component to inspect its specification.'));
-  for(const group of configurationGroups(tree)){const section=el('section','catalog-category');section.append(el('h3','',group.title));if(!group.nodes.length)section.append(el('p','catalog-empty','Not included in this composition.'));else group.nodes.forEach(n=>section.append(component(n)));panels.configuration.append(section);}
+  for(const group of configurationGroups(tree).filter(group=>group.nodes.length)){const section=el('section','catalog-category');section.append(el('h3','',group.title));group.nodes.forEach(n=>section.append(component(n)));panels.configuration.append(section);}
   panels.bom.append(el('p','catalog-note','Indented assemblies and their contents. Quantities per parent and per complete product are shown separately; assemblies and their parts must not be added together. ? means an unknown quantity.'));
   const scroll=el('div','catalog-table-scroll'),table=el('table'),thead=el('thead'),tr=el('tr');for(const label of ['Component / assembly','Per parent','Per product','Revision']){const th=el('th','',label);th.scope='col';tr.append(th);}thead.append(tr);table.append(thead);const tbody=el('tbody');
   const rows=flattenedBOM(tree);for(const n of rows){const row=el('tr'),name=el('td');name.style.paddingLeft=(12+n.depth*18)+'px';name.append(link(n.record.id));row.append(name,el('td','',n.line.quantity??'?'),el('td','',n.quantity??'?'),el('td','',n.version?.version_number??'—'));tbody.append(row);}table.append(tbody);scroll.append(table);panels.bom.append(scroll);
@@ -54,9 +67,9 @@ try {
  function renderList(){
   const q=$('search').value.trim().toLowerCase(),filtered=products.filter(p=>[nameOf(p),p.id,p.description,nameOf(data.index.get(p.launch_campaign_id)),nameOf(data.index.get(p.launch_event_id))].join(' ').toLowerCase().includes(q));
   $('result-count').textContent=`${filtered.length} of ${products.length} products`;$('catalog-list').replaceChildren();
-  for(const campaign of launchGroups(filtered,data.index)){const section=el('section','catalog-campaign');section.append(el('h2','',nameOf(campaign.record)==='Unknown'?'No launch campaign':nameOf(campaign.record)),el('small','',date(campaign.record)));
-   for(const event of campaign.events){const group=el('section','catalog-event');group.append(el('h3','',nameOf(event.record)==='Unknown'?'No launch event':nameOf(event.record)),el('small','',date(event.record)));
-    for(const p of event.products){const button=el('button','catalog-product',nameOf(p));button.dataset.productId=p.id;button.setAttribute('aria-current',String(selected===p.id));button.onclick=()=>choose(p.id);group.append(button);}section.append(group);
+  for(const campaign of launchGroups(filtered,data.index)){const section=el('section','catalog-campaign');const heading=el('h2','',nameOf(campaign.record)==='Unknown'?'No launch campaign':nameOf(campaign.record));heading.append(' ',el('small','catalog-group-date',date(campaign.record)));section.append(heading);
+   for(const event of campaign.events){const group=el('section','catalog-event');const heading=el('h3','',nameOf(event.record)==='Unknown'?'No launch event':nameOf(event.record));heading.append(' ',el('small','catalog-group-date',date(event.record)));group.append(heading);
+    for(const p of event.products){const button=el('button','catalog-product'),flag=el('span','catalog-kind',p.kind.replaceAll('_',' '));flag.dataset.kind=p.kind;button.append(el('span','catalog-product-name',nameOf(p)),flag);button.dataset.productId=p.id;button.setAttribute('aria-current',String(selected===p.id));button.onclick=()=>choose(p.id);group.append(button);}section.append(group);
    }$('catalog-list').append(section);
   }
   if(!filtered.some(p=>p.id===selected)){const first=launchGroups(filtered,data.index)[0]?.events[0]?.products[0];if(first)choose(first.id);else{selected='';history.replaceState(null,'',location.pathname);renderProduct();}}

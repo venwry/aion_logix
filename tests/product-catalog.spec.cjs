@@ -4,11 +4,17 @@ test('catalogue launches, configuration, BOM and filtering use current records',
  await page.goto('/code/product-catalog.html#product.athena');await expect(page.locator('body')).toHaveAttribute('data-ready','true');
  await expect(page.locator('.catalog-product-heading h2')).toHaveText('Logix Athena');
  await expect(page.locator('.catalog-specs')).toContainText('256 KiB');
- await expect(page.locator('.catalog-category')).toHaveCount(6);
+ await expect(page.locator('.page-intro,.catalog-launch')).toHaveCount(0);
+ await expect(page.locator('.catalog-product-heading h2 a')).toHaveAttribute('href','browser.html#product.athena');
+ await expect(page.locator('.catalog-product[aria-current=true] .catalog-kind')).toHaveText('computer');
+ await expect(page.locator('.catalog-category')).toHaveCount(4);
  await page.getByRole('tab',{name:'Bill of materials'}).click();await expect(page.locator('#panel-bom')).toBeVisible();await expect(page.locator('#panel-configuration')).toBeHidden();
  expect(await page.locator('#panel-bom tbody tr').count()).toBeGreaterThan(20);
  await page.getByRole('tab',{name:'Configuration contents'}).click();await page.locator('.catalog-component summary').first().click();await expect(page.locator('.catalog-component[open]')).toHaveCount(1);
  await page.locator('#search').fill('Aurelia — Monochrome');await expect(page.locator('.catalog-product-heading h2')).toHaveText('Logix Aurelia — Monochrome system');await expect(page.locator('.catalog-specs')).toContainText('48 KiB');
+ const cpu=page.locator('.catalog-component summary').filter({has:page.locator('a[href="browser.html#base_part.z80a"]')}).first();
+ await expect(cpu).toContainText('Zilog Z80A is a Z80 processor specified for 4 MHz operation with an 8-bit data interface.');
+ await expect(cpu.locator('.catalog-component-description strong')).toHaveText(['4','8']);
  await page.locator('#search').fill('not-a-real-product');await expect(page.locator('#catalog-content')).toHaveText('No matching products.');
  await page.locator('#search').fill('');await expect(page.locator('.catalog-product-heading')).toBeVisible();expect(errors).toEqual([]);
  await page.goto('/code/product-catalog.html#product.athena');await expect(page.locator('body')).toHaveAttribute('data-ready','true');await page.screenshot({path:'/tmp/product-catalog.png',fullPage:true});
