@@ -1,6 +1,5 @@
 import {specificationSegments} from './technology-specification.js';
 import {el,loadData,showError,debounce} from './shared.js';
-import {renderTechnicalSpecification,renderGraphicModes} from './technical-specification.js';
 import {launchGroups,compositionTree,configurationGroups,headlineSpecs,flattenedBOM,nameOf} from './product-catalog-model.js';
 const $=id=>document.getElementById(id);
 try {
@@ -11,7 +10,7 @@ try {
  const date=r=>r?.time?.value||r?.period?.start?.value||'Date not recorded';
  const boundary=b=>b?.kind==='event'?date(data.index.get(b.event_id)):b?.kind==='simulation_end'?'Simulation end':b?.date||b?.value||'Unknown';
  function component(node){
-  const box=el('details','catalog-component'),summary=el('summary');
+  const summary=el('li','catalog-component');
   const name=el('strong');name.append(link(node.record.id));
   summary.append(el('span','catalog-quantity',node.quantity==null?'? ×':node.quantity+' ×'),name);
   const description=node.record.description?.trim(),spec=node.record.technical_specification;
@@ -23,12 +22,7 @@ try {
    }
    summary.append(' ',prose);
   }
-  box.append(summary);
-  const body=el('div','catalog-component-body');body.append(el('p','',node.record.description||''),link(node.record.id));
-  if(node.record.technical_specification)body.append(renderTechnicalSpecification(node.record.technical_specification,value));
-  if(node.record.graphic_modes_specification?.length)body.append(renderGraphicModes(node.record.graphic_modes_specification,value));
-  if(node.children.length){const nested=el('details');nested.append(el('summary','','Included components'));node.children.forEach(n=>nested.append(component(n)));body.append(nested);}
-  box.append(body);return box;
+  return summary;
  }
  function renderProduct(){
   const r=data.index.get(selected),host=$('catalog-content');host.replaceChildren();if(!r){host.append(el('p','','No matching products.'));return;}
@@ -56,8 +50,8 @@ try {
    const panel=el('section','catalog-panel');panel.id='panel-'+id;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',button.id);panel.hidden=activeTab!==id;panels[id]=panel;
   }host.append(tabs,...Object.values(panels));
   if(!tree){for(const p of Object.values(panels))p.append(el('p','','No resolvable composition is recorded for this product.'));return;}
-  panels.configuration.append(el('p','catalog-note','Recorded contents of this revision. Quantities are per complete product. Open a component to inspect its specification.'));
-  for(const group of configurationGroups(tree).filter(group=>group.nodes.length)){const section=el('section','catalog-category');section.append(el('h3','',group.title));group.nodes.forEach(n=>section.append(component(n)));panels.configuration.append(section);}
+  panels.configuration.append(el('p','catalog-note','Recorded contents of this revision. Quantities are per complete product. Follow a component link to inspect its specification.'));
+  for(const group of configurationGroups(tree).filter(group=>group.nodes.length)){const section=el('section','catalog-category');section.append(el('h3','',group.title));const list=el('ul','catalog-components');group.nodes.forEach(n=>list.append(component(n)));section.append(list);panels.configuration.append(section);}
   panels.bom.append(el('p','catalog-note','Indented assemblies and their contents. Quantities per parent and per complete product are shown separately; assemblies and their parts must not be added together. ? means an unknown quantity.'));
   const scroll=el('div','catalog-table-scroll'),table=el('table'),thead=el('thead'),tr=el('tr');for(const label of ['Component / assembly','Per parent','Per product','Revision']){const th=el('th','',label);th.scope='col';tr.append(th);}thead.append(tr);table.append(thead);const tbody=el('tbody');
   const rows=flattenedBOM(tree);for(const n of rows){const row=el('tr'),name=el('td');name.style.paddingLeft=(12+n.depth*18)+'px';name.append(link(n.record.id));row.append(name,el('td','',n.line.quantity??'?'),el('td','',n.quantity??'?'),el('td','',n.version?.version_number??'—'));tbody.append(row);}table.append(tbody);scroll.append(table);panels.bom.append(scroll);
