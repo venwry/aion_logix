@@ -1,10 +1,10 @@
 # External products and standards — iteration 1
 
-Contract 0.18.0 adds `software_standard` and `hardware_standard` technology kinds. Stable technology IDs identify available standards. Reclassification is proposed separately for each candidate; until approved, its old kind remains and it cannot be used in `impacted_standards`.
+Contract 0.19.0 adds `software_standard` and `hardware_standard` technology kinds. Stable technology IDs identify available standards. Approved core standards are eligible for `impacted_standards`; other technology kinds remain ineligible.
 
 ## External products
 
-`external_product` retains `id`, `name`, `description` and required `specification`. Optional additive fields are `kind` (`computer`, `peripheral`, `software`, `service`, `other`), nonempty unique `provider_actor_ids`, direct `release` date and `impacted_standards`. New/migrated records supply kind and providers; optional runtime declarations allow existing records to remain valid until their individual proposals are approved.
+`external_product` requires `id`, `name`, `description`, `specification`, `kind` (`computer`, `peripheral`, `software`, `service`, `other`) and nonempty unique `provider_actor_ids`. Direct `release` date and `impacted_standards` remain optional.
 
 Both `release` and impact `date` are direct Gregorian strings with year, month or day precision (`1979`, `1979-10`, `1979-10-15`). They never contain event-reference objects. Omit release when unknown. Impact date identifies when the assessment applies, not necessarily product release. Calendar validity is enforced, including leap years.
 
@@ -21,7 +21,7 @@ New specification entries have exactly the technology chapter shape:
 
 Descriptions and values are rendered by the same component as technology specifications, including expandable Key/Value tables, highlighted substitutions and reference navigation. Keys are unique within their chapter. Every key must be used and every placeholder must resolve. Known typed record IDs used as values must resolve.
 
-Compatibility schemas also accept a whole specification in the previous `no`, `description`, `ref_id`, `ref_role` format. Mixed old/new entries are rejected. The read-only adapter displays those existing and historical records as chapters. Migration proposals preserve each original description, use its role as the chapter name, and retain its ID as a named reference parameter. Detailed ownership and support statements remain even where the provider also appears in the dedicated provider list.
+The former role-labelled specification schema is retired after all twelve approved conversions. The read-only renderer retains its adapter for historical before snapshots; new live records require the chapter format. The conversion preserved descriptions, roles and referenced IDs. Detailed ownership and support statements remain distinct from the dedicated provider list.
 
 ### Impacted standards
 
@@ -40,12 +40,10 @@ Keys are local to the entire impact entry and can be shared by its three descrip
 
 The UI shows the technology name followed by the date in brackets, then exactly three paragraphs headed **Base assumptions:**, **Relation to standard:** and **Commercial consequences:**. Values substituted into prose are highlighted. Reference names remain inline; full IDs are available in the expandable parameter table. No extra record or history structure is introduced.
 
-## Review and deferred work
+## Current state
 
-The standard-kind candidates are now revised into three actionable family proposals and one Plug and Execute discussion; see [the pending consolidation design](../proposals/STANDARD_FAMILY_CONSOLIDATION.md). The 12 external-product conversions and one atomic removal of three redundant affiliation records remain separate. No incoming foundation references to those affiliation IDs remain. Their references in the current authorization-coverage discussion are removed; historical decisions remain unchanged.
+The standard-family consolidation and external-product conversions are approved. The three empty affiliation records were deleted through Changes confirm; the unused dataset, schema and registry entry are now retired. Historical decisions and evidence remain intact. Plug and Execute remains a discussion and retains its interface kind.
 
-The relationship dataset, schema, registry and associated documentation remain in place by the author's instruction. Their deletion is parked until a separate instruction after these tasks. No new market-response structure or sales dataset is deployed in this iteration.
+The active campaign schema now accepts only the timeline shape. Its temporary launch-ownership bridge remains where existing campaigns still need it; schema cleanup does not rewire story ownership.
 
-The earlier [ecosystem and sales proposal](../proposals/ECOSYSTEM_AND_SALES_SCHEMA.md) remains a proposal for later market-response and calculation work. This document supersedes its external-product specification, impact and date designs.
-
-Use `node tools/verify-standard-families.js` for the current revised proposal queue. The original `tools/verify-ecosystem-iteration-1.js` verifies the earlier proposal snapshot and is superseded for queue matching. Run `CHROMIUM_PATH=/usr/bin/chromium npx playwright test tests/ecosystem-iteration-1.spec.cjs` for rendering checks.
+[Market-response impact sections](MARKET_RESPONSES.md) and [annual sales calculations](../../data_calculation/README.md) are implemented separately. Existing response subjects and descriptions await a later reviewed migration.

@@ -1,4 +1,4 @@
-# Current model guide — version 0.18.0
+# Current model guide — version 0.19.0
 
 The model separates fictional-world records, editorial review and later calculations. [Principles](../../DATA_MODEL_PRINCIPLES.md), [reference rules](REFERENCE_RULES.md) and [JSON Schemas](../../schemas/) govern editing. The [generated specification](FOUNDATION_SPECIFICATION.md) describes exact attributes; historical reports do not extend the contract.
 
@@ -6,7 +6,7 @@ The model separates fictional-world records, editorial review and later calculat
 
 Foundation datasets have singular envelope keys and stable typed IDs. The shared registry is `code/model-contract.js`. Most filenames match the type; `external_product` uses `external_products.json`. Owned value objects remain nested and are authorized with their containing record.
 
-Actors describe people and organisations. Actor relationships describe meaningful relationships between them. Agreements own `clauses[]`; new clauses contain exactly `id`, `kind`, `statement`, `value`, `unit`. Clause IDs preserve traceability but are not independently authorizable records. Use null value/unit for a non-quantitative term and meaningful units for quantities. All current agreement clauses use this simplified form; the legacy clause representation is retired from the active schema. Rights, responsibilities, commitments and ownership stay distinct; a budget is not actual expenditure.
+Actors describe people and organisations. Formal commitments and relationships belong in agreements; dated actions belong in events and processes. Agreements own `clauses[]`; new clauses contain exactly `id`, `kind`, `statement`, `value`, `unit`. Clause IDs preserve traceability but are not independently authorizable records. Use null value/unit for a non-quantitative term and meaningful units for quantities. All current agreement clauses use this simplified form; the legacy clause representation is retired from the active schema. Rights, responsibilities, commitments and ownership stay distinct; a budget is not actual expenditure.
 
 Assumptions use a short `topic` as their displayed heading and an ordered, non-empty `statements` array of non-empty strings. Split long prose into coherent statements without changing its meaning. Scope, equipment and exceptions keep their existing roles. The active schema requires this form. The legacy single `statement` field remains only in historical snapshots.
 
@@ -16,9 +16,9 @@ Inputs explain direct prerequisites; outcomes explain deliveries, decisions, cha
 
 ## Marketing and products
 
-Campaigns own marketing objectives, audiences, messages, calendar periods and marketing steps. During individually reviewed conversion, the legacy shape with `process_id` remains supported; converted campaigns have their own dates and no execution-process reference. Every current offering has authoritative product-owned launch campaign/event links. Repeated reverse launch lists and inherited product lists should be removed through reviewed migrations; later promotion and external participation are distinct relationships that must survive.
+Campaigns own marketing objectives, audiences, messages, calendar periods and marketing steps. All current campaigns use the timeline shape with their own dates and no execution-process reference. The old campaign schema variant is retired; historical snapshots remain readable. Every current offering has authoritative product-owned launch campaign/event links. Repeated reverse launch lists and inherited product lists should be removed through reviewed migrations; later promotion and external participation are distinct relationships that must survive.
 
-`product` means a Logix/AION customer-facing offering. `base_part` defines a physical part; `device` owns hardware construction; `software_edition` defines a software implementation. Third-party commercial offerings use descriptive `external_product` records with `id`, `name`, `description` and technology-style specification chapters. The previous role-labelled specification format remains compatible during reviewed conversion. Direct release dates, providers, offering kind and descriptive standards impacts are supported; see [external products and standards](ECOSYSTEM_STANDARDS.md). Direct relationships distinguish publishers, licensors, hosts, implementations and agreements. External descriptions do not replace technical BOMs.
+`product` means a Logix/AION customer-facing offering. `base_part` defines a physical part; `device` owns hardware construction; `software_edition` defines a software implementation. Third-party commercial offerings use descriptive `external_product` records with `id`, `name`, `description` and technology-style specification chapters. The previous role-labelled specification schema is retired after approved conversion; historical snapshots remain readable. Offering kind and providers are now required. Direct release dates, providers, offering kind and descriptive standards impacts are supported; see [external products and standards](ECOSYSTEM_STANDARDS.md). Direct relationships distinguish publishers, licensors, hosts, implementations and agreements. External descriptions do not replace technical BOMs.
 
 A physical cartridge can be a Logix offering while its software is licensed from another company. Keep the commercial product, cartridge device, software edition and governing rights distinct. Software platform support can reference an external computer host; that does not permit external descriptions as physical composition targets.
 
@@ -106,9 +106,9 @@ Contract 0.16.0 removes 55 absent property declarations, including retired produ
 
 Nine Changes confirm proposals remove 529 explicit nulls or empty lists across 527 records. They preserve all nonempty values, zero, false, composition quantities, prose and authorization history. Removing a null does not resolve its underlying engineering uncertainty; retained discussions and root technical narratives describe those unknowns.
 
-Seven empty-only compatibility declarations remain until the cleanup proposals are approved. They are optional, accept only their existing null or empty-list representation, and cannot be newly populated. The shared hardware specification `capacity_kb` declaration remains because other records use populated capacities, although the two universally empty base-part occurrences are proposed for deletion.
+Six of the seven remaining empty-only compatibility declarations are now retired after confirming their absence in current records and pending after snapshots. `minimum_resources.application_ram_bytes` remains because 32 software editions still store it. Existing technical definitions remain populated and are not retired by this schema cleanup. The audit is in `data_storytelling/review_evidence/market-impacts-and-sales/retirement.json`.
 
-After approving the cleanup proposals, run `python3 tools/retire-unpopulated-fields.py --final --apply`. It checks all live records and pending after-snapshots before removing the seven remaining declarations, advances the contract and regenerates documentation. It never edits or authorizes foundation data. Audit, before/after proposals and final schema previews are in `data_storytelling/review_evidence/unpopulated-field-retirement/`. Run `node tools/verify-unpopulated-field-retirement.js` for independent and batch approval checks.
+Market responses support optional parameterised standards and product effects; see [Market responses](MARKET_RESPONSES.md). Annual sales estimates use `data_calculation/annual_sales.json`, separately validated and outside foundation authorization; see the [calculation guide](../../data_calculation/README.md).
 
 ## Maturity descriptions and schema retirement
 

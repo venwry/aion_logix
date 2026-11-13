@@ -20,3 +20,5 @@ These guides describe the repository and application as they work now. The schem
 [Archived documentation](archived/README.md) contains historical story proposals, assessments, migration reports and superseded guidance. Those files are not current instructions or a statement of what is pending now. The earlier [legacy evidence archive](../archived_no_longer_valid/README.md) remains immutable.
 
 - [Campaign timeline contract](data_model/CAMPAIGN_TIMELINES.md): independent campaign dates, marketing steps, presentation blocks and staged ownership migration.
+
+Current market and calculation guides: [Market-response impacts](data_model/MARKET_RESPONSES.md) and [Annual sales estimates](../data_calculation/README.md).

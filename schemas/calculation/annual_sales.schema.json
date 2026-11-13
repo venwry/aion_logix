@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/calculation/annual_sales.schema.json",
+  "type": "object",
+  "properties": {
+    "annual_sales": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    }
+  },
+  "required": [
+    "annual_sales"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^annual_sales\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "product_id": {
+          "type": "string",
+          "pattern": "^(product|external_product)\\.[a-z0-9][a-z0-9_.-]*$"
+        },
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "geography": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "segment": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "unit_description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "scenario": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "unit": {
+          "enum": [
+            "computer",
+            "peripheral",
+            "software_license",
+            "service_enrolment",
+            "service_contract",
+            "other"
+          ]
+        },
+        "estimated_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "low_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "high_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "assumptions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "foundation_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "product_id",
+        "year",
+        "geography",
+        "segment",
+        "unit",
+        "estimated_units",
+        "basis"
+      ],
+      "dependentRequired": {
+        "low_units": [
+          "high_units"
+        ],
+        "high_units": [
+          "low_units"
+        ]
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "unit": {
+                "const": "other"
+              }
+            },
+            "required": [
+              "unit"
+            ]
+          },
+          "then": {
+            "required": [
+              "unit_description"
+            ]
+          }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

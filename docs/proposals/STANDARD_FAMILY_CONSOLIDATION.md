@@ -1,6 +1,6 @@
 # Revised standard-family proposals
 
-Status: pending Changes confirm approval. This revises the earlier twelve independent standard-kind candidates; it does not change live foundation data or add a schema structure. The relationship file/schema retirement remains parked.
+Status: approved and applied. This document records the reviewed consolidation of the earlier twelve candidates. The subsequently approved schema cleanup is documented in the current model guide; the former relationship dataset/schema has now been retired.
 
 ## Review groups
 

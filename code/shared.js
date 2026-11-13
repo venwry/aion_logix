@@ -1,3 +1,4 @@
+import {renderMarketImpacts} from './market-impacts.js';
 import {externalSpecificationChapters,renderImpactedStandards} from './external-products.js';
 import {renderTechnologySpecification} from './technology-specification.js';
 import {datasetPath} from './model-contract.js';
@@ -84,6 +85,7 @@ export function details(record,data,select){
   for(const [key,value] of Object.entries(record)){
     if(skip.has(key))continue;
     if(key==='specification'&&['technology','external_product'].includes(typeOf(record))){host.append(renderTechnologySpecification(typeOf(record)==='external_product'?externalSpecificationChapters(value):value,v=>valueNode(v)));continue;}
+    if(['impacted_standards','impacted_products'].includes(key)&&typeOf(record)==='market_response'){host.append(renderMarketImpacts(value,key,data.index,v=>valueNode(v)));continue;}
     if(key==='impacted_standards'&&typeOf(record)==='external_product'){host.append(renderImpactedStandards(value,data.index,v=>valueNode(v)));continue;}
     const group=el('details','detail-group');group.append(el('summary','',human(key)+(Array.isArray(value)?' · '+value.length:'')));
     let built=false;const build=()=>{if(built)return;built=true;const content=el('div');content.append(valueNode(value));

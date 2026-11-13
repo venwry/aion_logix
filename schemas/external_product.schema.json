@@ -32,14 +32,7 @@
           "minLength": 1
         },
         "specification": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/chapter_list"
-            },
-            {
-              "$ref": "#/$defs/legacy_specification_list"
-            }
-          ]
+          "$ref": "#/$defs/chapter_list"
         },
         "kind": {
           "enum": [
@@ -79,53 +72,9 @@
         "id",
         "name",
         "description",
-        "specification"
-      ],
-      "additionalProperties": false
-    },
-    "legacy_specification_entry": {
-      "type": "object",
-      "properties": {
-        "no": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "description": {
-          "type": "string",
-          "minLength": 1
-        },
-        "ref_id": {
-          "type": "string",
-          "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
-          "x-ref": [
-            "actor",
-            "actor_relationship",
-            "agreement",
-            "assumption",
-            "campaign",
-            "event",
-            "location",
-            "manufacturing_capability",
-            "market_response",
-            "process",
-            "product",
-            "technology",
-            "base_part",
-            "device",
-            "software_edition",
-            "external_product"
-          ]
-        },
-        "ref_role": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "no",
-        "description",
-        "ref_id",
-        "ref_role"
+        "specification",
+        "kind",
+        "provider_actor_ids"
       ],
       "additionalProperties": false
     },
@@ -240,13 +189,6 @@
       "type": "array",
       "items": {
         "$ref": "#/$defs/chapter"
-      }
-    },
-    "legacy_specification_list": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "$ref": "#/$defs/legacy_specification_entry"
       }
     }
   }

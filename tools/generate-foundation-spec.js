@@ -58,7 +58,7 @@ const lines = [
   '- Assumptions require topic plus non-empty statements[]. The legacy statement field is retired.',
   '- Composition boundaries are event, unknown, open, or simulation_end. The last resolves to 1995-01-01 and is valid only as the final version end. Adjacent resolved revisions share a boundary; authoring defaults and first-use rules are in MODEL_GUIDE.md.',
   '- Technology specification chapters contain number, chapter_name, description and parameters[] of key/value text pairs. Numbers and chapter-local keys are unique. Description placeholders {key} resolve locally; model validation rejects missing keys. Devices, software editions and base parts instead have root technical_specification chapters with one global parameter table. Each parameter is exactly key/value OR key/ref_id/ref_role; optional-looking union members in the diagram must satisfy one complete variant. Graphics modes have local parameters and typed fixed fields. See MODEL_GUIDE.md for canonical numeric keys, buffer units and transitional legacy support.',
-  '- Campaigns use the timeline shape shown here. The legacy process_id/presentation/marketing_content shape remains accepted solely during individual conversion; mixing the two shapes is rejected. Campaign dates accept calendar precision or explicit unknowns, never event anchors. Marketing presentation parameters are exactly key/value or key/ref_id, with no ref_role. Process steps select at most one event_id, process_id or campaign_id. See CAMPAIGN_TIMELINES.md for the staged ownership contract.',
+  '- Campaigns use the timeline shape shown here. The former process_id/presentation/marketing_content shape is retired from the active schema; historical snapshots remain readable. Campaign dates accept calendar precision or explicit unknowns, never event anchors. Marketing presentation parameters are exactly key/value or key/ref_id, with no ref_role. Process steps select at most one event_id, process_id or campaign_id. See CAMPAIGN_TIMELINES.md for the staged ownership contract.',
   '- These arrows describe permitted references, not SQL ownership or reverse cardinality. No inverse uniqueness is implied.', '',
   '## Entity and reference diagram', '',
   'The diagram is intentionally comprehensive. Use the per-entity trees and reference catalogue below when reading on a narrow screen.', '',
@@ -83,7 +83,6 @@ for (const name of names) lines.push(`  any_foundation -.-> ${name}`);
 lines.push('```', '', '## Dataset specifications', '');
 const purpose = {
  actor: 'People and organizations participating in the story.',
- actor_relationship: 'Relationships between actors, including dated roles and links to agreements.',
  agreement: 'An arrangement with its own identity, parties and lifecycle. Terms are owned in clauses[] and authorized with the whole agreement.',
  assumption: 'Explicit premises of the alternative world and their scope.',
  campaign: 'Marketing activity with timing, participants, actions and intended or recorded effects.',

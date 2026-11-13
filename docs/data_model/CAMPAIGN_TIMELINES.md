@@ -1,5 +1,7 @@
 # Campaign timelines — contract 0.17.0
 
+Current contract note (0.19.0): all live campaigns use the timeline shape. The old campaign schema variant is retired; historical snapshots remain displayable. The staged conversion discussion below records the migration design. The launch-ownership bridge remains for campaigns whose event ownership has not yet been rewired.
+
 Campaigns become independent dated marketing activities through twelve individual Changes confirm proposals. The deployed schema accepts either the legacy campaign or the new timeline campaign, never a hybrid. Approval converts one campaign and, where applicable, adds it beside its existing execution process in that process's parent. This deployment does not approve foundation content.
 
 ## New structure

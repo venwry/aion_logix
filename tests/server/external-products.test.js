@@ -3,7 +3,7 @@ import {hash,snapshot,transact,validate} from '../../server/model.js';
 import {GitHubStore} from '../../server/github.js';
 import {schemaVersion} from '../../code/model-contract.js';
 function fixture(){return Object.fromEntries(['data_foundation','data_storytelling'].flatMap(dir=>fs.readdirSync(dir).filter(f=>f.endsWith('.json')).map(f=>[dir+'/'+f,JSON.parse(fs.readFileSync(dir+'/'+f))])));}
-const record=()=>({id:'external_product.test_cpm',name:'Licensed CP/M',description:'DRI software identity.',specification:[{no:1,description:'Licensor',ref_id:'actor.dri',ref_role:'software licensor'}]});
+const record=()=>({id:'external_product.test_cpm',name:'Licensed CP/M',description:'DRI software identity.',kind:'software',provider_actor_ids:['actor.dri'],specification:[{number:1,chapter_name:'Licensor',description:'Licensed by {licensor}.',parameters:[{key:'licensor',value:'actor.dri'}]}]});
 test('external additions and dependent references authorize atomically through Changes confirm at the plural file path',()=>{
  const f=fixture(),external=record(),before=f['data_foundation/event.json'].event[0],after=structuredClone(before);after.subject_ids.push(external.id);
  const proposal={id:'change.external_test',category:'story',title:'Separate software identity',reason:'Test grouped migration.',elements:[{record_type:'external_product',record_id:external.id,before:null,after:external},{record_type:'event',record_id:before.id,before,after}]};
@@ -13,8 +13,8 @@ test('external additions and dependent references authorize atomically through C
  assert.deepEqual(snapshot(result.files,'test').collections.external_product,result.files['data_foundation/external_products.json'].external_product);assert.deepEqual(validate(result.files).errors,[]);
  assert(result.files['data_storytelling/authorization.json'].authorization.some(a=>a.record_id===external.id&&a.content_sha256===hash(external)&&a.state==='authorized'));
  assert.equal(transact(result.files,request).changed,false);assert(!f['data_foundation/external_products.json'].external_product.some(r=>r.id===external.id));
- const broken=structuredClone(f);broken['data_storytelling/change.json'].change[0].elements[0].after.specification[0].ref_id='actor.missing';
- assert.throws(()=>transact(broken,{...request,proposal_sha256:hash(broken['data_storytelling/change.json'].change[0])}),/unresolved reference/);
+ const broken=structuredClone(f);broken['data_storytelling/change.json'].change[0].elements[0].after.specification[0].parameters[0].value='actor.missing';
+ assert.throws(()=>transact(broken,{...request,proposal_sha256:hash(broken['data_storytelling/change.json'].change[0])}),/unknown parameter reference/);
 });
 test('new external records are pending without authorization and support direct record authorization',()=>{
  const f=fixture(),r=record();f['data_foundation/external_products.json'].external_product.push(r);

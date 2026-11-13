@@ -10,7 +10,7 @@ The current schema contract is **0.17.0**, with sixteen foundation datasets. The
 | --- | --- |
 | World entities and technical definitions | `data_foundation/` |
 | Author review, decisions, sources and evidence | `data_storytelling/` |
-| Separately designed derived assessments | `data_calculation/` |
+| Revisable annual sales estimates, outside foundation authorization | [`data_calculation/`](data_calculation/README.md) |
 | Schemas, application and saving backend | `schemas/`, `code/`, `server/` |
 | Current guides and model documentation | `docs/`, `docs/data_model/` |
 | Historical documentation | [docs/archived](docs/archived/README.md) |

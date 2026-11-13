@@ -1,3 +1,4 @@
+import {renderMarketImpacts} from './market-impacts.js';
 import {externalSpecificationChapters,renderImpactedStandards} from './external-products.js';
 import {indexProductLaunches} from './product-launches.js';
 import {renderMarketingSteps} from './campaigns.js';
@@ -132,6 +133,7 @@ export function compactDetails(record,data,select,options={}){
   if(key==='status'||(record.technical_specification&&(key==='technical_definition'||key.startsWith('technical_definition.'))))continue;
   if(key==='marketing_steps'&&typeOf(record)==='campaign'){const section=renderMarketingSteps(value,data.index,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='technical_specification'||key==='graphic_modes_specification'){const section=key==='technical_specification'?renderTechnicalSpecification(value,v=>valueNode(v)):renderGraphicModes(value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
+  if(['impacted_standards','impacted_products'].includes(key)&&typeOf(record)==='market_response'){const section=renderMarketImpacts(value,key,data.index,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='impacted_standards'&&typeOf(record)==='external_product'){const section=renderImpactedStandards(value,data.index,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='specification'&&['technology','external_product'].includes(typeOf(record))){const section=renderTechnologySpecification(typeOf(record)==='external_product'?externalSpecificationChapters(value):value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='composition_history'&&Array.isArray(value)){const history=compositionHistory(value);if(options.changedFields?.has(key))history.classList.add('changed-field');content.append(history);continue;}

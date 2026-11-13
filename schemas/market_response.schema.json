@@ -55,10 +55,9 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "pattern": "^(actor|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
             "x-ref": [
               "actor",
-              "actor_relationship",
               "agreement",
               "assumption",
               "campaign",
@@ -96,6 +95,20 @@
         "description": {
           "type": "string",
           "minLength": 1
+        },
+        "impacted_standards": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/impacted_standard"
+          }
+        },
+        "impacted_products": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/impacted_product"
+          }
         }
       },
       "required": [
@@ -106,6 +119,111 @@
         "subject_ids",
         "trigger_ids",
         "description"
+      ],
+      "additionalProperties": false
+    },
+    "impacted_standard": {
+      "type": "object",
+      "properties": {
+        "standard_id": {
+          "type": "string",
+          "pattern": "^(technology)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "technology"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "strengthens",
+            "weakens",
+            "mixed"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^{}]+$"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "standard_id",
+        "direction",
+        "description",
+        "parameters"
+      ],
+      "additionalProperties": false
+    },
+    "impacted_product": {
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "pattern": "^(product|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "product",
+            "external_product"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "strengthens",
+            "weakens",
+            "mixed"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^{}]+$"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "product_id",
+        "direction",
+        "description",
+        "parameters"
       ],
       "additionalProperties": false
     }

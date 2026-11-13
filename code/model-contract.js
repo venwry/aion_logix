@@ -1,5 +1,5 @@
-export const schemaVersion = "0.18.0";
-export const datasets = ["actor", "actor_relationship", "agreement", "assumption", "campaign", "event", "location", "manufacturing_capability", "market_response", "process", "product", "technology", "base_part", "device", "software_edition", "external_product"];
+export const schemaVersion = "0.19.0";
+export const datasets = ["actor", "agreement", "assumption", "campaign", "event", "location", "manufacturing_capability", "market_response", "process", "product", "technology", "base_part", "device", "software_edition", "external_product"];
 
 // Record types and envelope keys stay singular; filenames may differ.
 export const datasetFiles = Object.fromEntries(datasets.map(name => [name, name === "external_product" ? "external_products.json" : name + ".json"]));

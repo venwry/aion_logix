@@ -46,10 +46,9 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+            "pattern": "^(actor|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
             "x-ref": [
               "actor",
-              "actor_relationship",
               "agreement",
               "assumption",
               "campaign",
@@ -85,12 +84,6 @@
         },
         "time": {
           "$ref": "https://aion-logix.invalid/schemas/common.schema.json#/$defs/date"
-        },
-        "process_ids": {
-          "type": "array",
-          "maxItems": 0,
-          "deprecated": true,
-          "description": "Empty-only compatibility pending Changes confirm cleanup. Run tools/retire-unpopulated-fields.py --final --apply after approval."
         },
         "location_ids": {
           "type": "array",
