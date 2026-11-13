@@ -1,0 +1,682 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.27a1b3f7-7153-4b1f-9d8f-6d7cc4420da7",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T12:07:32.363Z",
+      "change_id": "change.standard_kind_logix_digital_video",
+      "proposal_sha256": "5b82c5e1c62989f3fff074c1428e226a3aac7a5c22856e7deaa0bcbcde5ad899",
+      "proposal": {
+        "id": "change.standard_kind_logix_digital_video",
+        "category": "foundation",
+        "title": "Define Logix digital video standard with chronological profiles",
+        "reason": "Revise the existing kind proposal to distinguish the core contract, optional profiles and implementation qualification. Preserve all existing specification chapters and values; add an explicit scope statement without inventing protocol versions or completed qualification.",
+        "elements": [
+          {
+            "record_type": "technology",
+            "record_id": "technology.logix_digital_video",
+            "before": {
+              "id": "technology.logix_digital_video",
+              "name": "Logix 4-bit digital video link",
+              "kind": "interface",
+              "description": "Logix 4-bit digital video link",
+              "owner_actor_ids": [
+                "actor.logix"
+              ],
+              "related_technology_ids": [
+                "technology.scanline_palette_list"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Digital video wiring",
+                  "description": "The link carries {Digital data width bits} data bits over a cable with {Cable}. Separate clock, control and synchronisation signals accompany the pixel data.\n\nThe cable also includes a base or reference connection.\n\nThe cable carries the following signals: {Signals}.",
+                  "parameters": [
+                    {
+                      "key": "Digital data width bits",
+                      "value": "4"
+                    },
+                    {
+                      "key": "Cable",
+                      "value": "8 twisted pairs"
+                    },
+                    {
+                      "key": "Signals",
+                      "value": "Data0, Data1, Data2, Data3, Clock, Control, H-sync, V-sync"
+                    }
+                  ]
+                },
+                {
+                  "number": 12,
+                  "chapter_name": "Monitor discovery and palette control",
+                  "description": "The host negotiates a raster the monitor can actually display before enabling the picture. Capability failures require an explicit safe profile; connection alone does not establish a supported resolution.\n\nBaseline monitors accept vertical-retrace palette commands. From NCC June 1982, explicitly capable Color Pro monitors also accept bounded horizontal-retrace commands under technology.scanline_palette_list; do not send these to legacy monitors.\n\nHost firmware performs selection using controller control-channel registers; monitor fixed capability ROM/straps and serializer.\n\nUse an explicitly configured profile or documented common safe raster; otherwise remain blank. Never infer 640-pixel support from connection alone.\n\nThe Control pair is half-duplex and bidirectional.\n\nStartup proceeds in this order: blank the picture; read the versioned capability record with an integrity check and timeout; intersect host and monitor raster support; select the raster and initialise the palette; then enable the picture.\n\nThe capability record contains {Control channel capability fields}. The horizontal-retrace extension is defined by {Horizontal palette extension reference}.",
+                  "parameters": [
+                    {
+                      "key": "Control channel capability fields",
+                      "value": "protocol version, monitor ID, supported raster IDs, maximum pixel clock, color or grayscale, palette precision, preferred raster, integrity check"
+                    },
+                    {
+                      "key": "Horizontal palette extension reference",
+                      "value": "technology.scanline_palette_list"
+                    }
+                  ]
+                },
+                {
+                  "number": 29,
+                  "chapter_name": "320 × 200 output timing",
+                  "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. The total pixel and line counts below include blanking.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines.",
+                  "parameters": [
+                    {
+                      "key": "ID",
+                      "value": "raster_320_200"
+                    },
+                    {
+                      "key": "Active width",
+                      "value": "320"
+                    },
+                    {
+                      "key": "Active height",
+                      "value": "200"
+                    },
+                    {
+                      "key": "Pixel clock MHz",
+                      "value": "7.15909"
+                    },
+                    {
+                      "key": "Horizontal total pixels",
+                      "value": "456"
+                    },
+                    {
+                      "key": "Vertical total lines",
+                      "value": "262"
+                    }
+                  ]
+                },
+                {
+                  "number": 35,
+                  "chapter_name": "640 × 200 output timing",
+                  "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. The total pixel and line counts below include blanking.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines.",
+                  "parameters": [
+                    {
+                      "key": "ID",
+                      "value": "raster_640_200"
+                    },
+                    {
+                      "key": "Active width",
+                      "value": "640"
+                    },
+                    {
+                      "key": "Active height",
+                      "value": "200"
+                    },
+                    {
+                      "key": "Pixel clock MHz",
+                      "value": "14.31818"
+                    },
+                    {
+                      "key": "Horizontal total pixels",
+                      "value": "912"
+                    },
+                    {
+                      "key": "Vertical total lines",
+                      "value": "262"
+                    }
+                  ]
+                },
+                {
+                  "number": 41,
+                  "chapter_name": "640 × 400 output timing",
+                  "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. Its frame rate is {Frame rate Hz} Hz. The raster is progressive.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines. The horizontal frequency is {Horizontal frequency kHz} kHz.",
+                  "parameters": [
+                    {
+                      "key": "ID",
+                      "value": "raster_640_400"
+                    },
+                    {
+                      "key": "Active width",
+                      "value": "640"
+                    },
+                    {
+                      "key": "Active height",
+                      "value": "400"
+                    },
+                    {
+                      "key": "Pixel clock MHz",
+                      "value": "21.504"
+                    },
+                    {
+                      "key": "Horizontal total pixels",
+                      "value": "800"
+                    },
+                    {
+                      "key": "Vertical total lines",
+                      "value": "448"
+                    },
+                    {
+                      "key": "Horizontal frequency kHz",
+                      "value": "26.88"
+                    },
+                    {
+                      "key": "Frame rate Hz",
+                      "value": "60"
+                    }
+                  ]
+                },
+                {
+                  "number": 50,
+                  "chapter_name": "Logical scaling and colour interpretation",
+                  "description": "Logical image sizes and palette indices must be mapped explicitly to the selected output. A wider logical mode cannot be forced onto a monitor that lacks the required raster.\n\nInteger horizontal/vertical pixel repetition, including sprites. 160/320-wide logical modes can repeat to 320/640; 100 lines repeat to 200. Reject 640-wide graphics or 80-column text on a 320-only monitor; software viewport is a separately reported service. Artemis card repeats legacy pixels/lines to {Professional output raster} for Mono Pro; never downscales 400 lines to an old monitor.\n\nExplicit 1-bit and 2-bit pixel-to-output-index maps. Color indices are not brightness values. On grayscale displays map RGB palette entries to luminance; Mono I direct DAC requires host index mapping.",
+                  "parameters": [
+                    {
+                      "key": "Professional output raster",
+                      "value": "640×400"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "technology.logix_digital_video",
+              "name": "Logix digital video standard",
+              "kind": "hardware_standard",
+              "description": "Logix 4-bit digital video link",
+              "owner_actor_ids": [
+                "actor.logix"
+              ],
+              "related_technology_ids": [
+                "technology.scanline_palette_list"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Scope, chronology and profiles",
+                  "description": "The Aurelia June 1978 baseline, later Artemis raster profiles and June 1982 horizontal-retrace palette extension are distinct scopes. Raster sizes are capability profiles, not protocol version numbers. Monitor/controller support must be intersected; a new resolution or palette feature is not automatically present on old monitors. Hardware-specific scaling examples remain explanatory, not universal requirements. The professional 800×600 integration recorded in June 1982 is not silently added to this record’s currently specified raster tables; its exact link/timing contract requires separate review.",
+                  "parameters": []
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Digital video wiring",
+                  "description": "The link carries {Digital data width bits} data bits over a cable with {Cable}. Separate clock, control and synchronisation signals accompany the pixel data.\n\nThe cable also includes a base or reference connection.\n\nThe cable carries the following signals: {Signals}.",
+                  "parameters": [
+                    {
+                      "key": "Digital data width bits",
+                      "value": "4"
+                    },
+                    {
+                      "key": "Cable",
+                      "value": "8 twisted pairs"
+                    },
+                    {
+                      "key": "Signals",
+                      "value": "Data0, Data1, Data2, Data3, Clock, Control, H-sync, V-sync"
+                    }
+                  ]
+                },
+                {
+                  "number": 13,
+                  "chapter_name": "Monitor discovery and palette control",
+                  "description": "The host negotiates a raster the monitor can actually display before enabling the picture. Capability failures require an explicit safe profile; connection alone does not establish a supported resolution.\n\nBaseline monitors accept vertical-retrace palette commands. From NCC June 1982, explicitly capable Color Pro monitors also accept bounded horizontal-retrace commands under technology.scanline_palette_list; do not send these to legacy monitors.\n\nHost firmware performs selection using controller control-channel registers; monitor fixed capability ROM/straps and serializer.\n\nUse an explicitly configured profile or documented common safe raster; otherwise remain blank. Never infer 640-pixel support from connection alone.\n\nThe Control pair is half-duplex and bidirectional.\n\nStartup proceeds in this order: blank the picture; read the versioned capability record with an integrity check and timeout; intersect host and monitor raster support; select the raster and initialise the palette; then enable the picture.\n\nThe capability record contains {Control channel capability fields}. The horizontal-retrace extension is defined by {Horizontal palette extension reference}.",
+                  "parameters": [
+                    {
+                      "key": "Control channel capability fields",
+                      "value": "protocol version, monitor ID, supported raster IDs, maximum pixel clock, color or grayscale, palette precision, preferred raster, integrity check"
+                    },
+                    {
+                      "key": "Horizontal palette extension reference",
+                      "value": "technology.scanline_palette_list"
+                    }
+                  ]
+                },
+                {
+                  "number": 30,
+                  "chapter_name": "320 × 200 output timing",
+                  "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. The total pixel and line counts below include blanking.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines.",
+                  "parameters": [
+                    {
+                      "key": "ID",
+                      "value": "raster_320_200"
+                    },
+                    {
+                      "key": "Active width",
+                      "value": "320"
+                    },
+                    {
+                      "key": "Active height",
+                      "value": "200"
+                    },
+                    {
+                      "key": "Pixel clock MHz",
+                      "value": "7.15909"
+                    },
+                    {
+                      "key": "Horizontal total pixels",
+                      "value": "456"
+                    },
+                    {
+                      "key": "Vertical total lines",
+                      "value": "262"
+                    }
+                  ]
+                },
+                {
+                  "number": 36,
+                  "chapter_name": "640 × 200 output timing",
+                  "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. The total pixel and line counts below include blanking.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines.",
+                  "parameters": [
+                    {
+                      "key": "ID",
+                      "value": "raster_640_200"
+                    },
+                    {
+                      "key": "Active width",
+                      "value": "640"
+                    },
+                    {
+                      "key": "Active height",
+                      "value": "200"
+                    },
+                    {
+                      "key": "Pixel clock MHz",
+                      "value": "14.31818"
+                    },
+                    {
+                      "key": "Horizontal total pixels",
+                      "value": "912"
+                    },
+                    {
+                      "key": "Vertical total lines",
+                      "value": "262"
+                    }
+                  ]
+                },
+                {
+                  "number": 42,
+                  "chapter_name": "640 × 400 output timing",
+                  "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. Its frame rate is {Frame rate Hz} Hz. The raster is progressive.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines. The horizontal frequency is {Horizontal frequency kHz} kHz.",
+                  "parameters": [
+                    {
+                      "key": "ID",
+                      "value": "raster_640_400"
+                    },
+                    {
+                      "key": "Active width",
+                      "value": "640"
+                    },
+                    {
+                      "key": "Active height",
+                      "value": "400"
+                    },
+                    {
+                      "key": "Pixel clock MHz",
+                      "value": "21.504"
+                    },
+                    {
+                      "key": "Horizontal total pixels",
+                      "value": "800"
+                    },
+                    {
+                      "key": "Vertical total lines",
+                      "value": "448"
+                    },
+                    {
+                      "key": "Horizontal frequency kHz",
+                      "value": "26.88"
+                    },
+                    {
+                      "key": "Frame rate Hz",
+                      "value": "60"
+                    }
+                  ]
+                },
+                {
+                  "number": 51,
+                  "chapter_name": "Logical scaling and colour interpretation",
+                  "description": "Logical image sizes and palette indices must be mapped explicitly to the selected output. A wider logical mode cannot be forced onto a monitor that lacks the required raster.\n\nInteger horizontal/vertical pixel repetition, including sprites. 160/320-wide logical modes can repeat to 320/640; 100 lines repeat to 200. Reject 640-wide graphics or 80-column text on a 320-only monitor; software viewport is a separately reported service. Artemis card repeats legacy pixels/lines to {Professional output raster} for Mono Pro; never downscales 400 lines to an old monitor.\n\nExplicit 1-bit and 2-bit pixel-to-output-index maps. Color indices are not brightness values. On grayscale displays map RGB palette entries to luminance; Mono I direct DAC requires host index mapping.",
+                  "parameters": [
+                    {
+                      "key": "Professional output raster",
+                      "value": "640×400"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "technology.logix_digital_video",
+          "before": {
+            "id": "technology.logix_digital_video",
+            "name": "Logix 4-bit digital video link",
+            "kind": "interface",
+            "description": "Logix 4-bit digital video link",
+            "owner_actor_ids": [
+              "actor.logix"
+            ],
+            "related_technology_ids": [
+              "technology.scanline_palette_list"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Digital video wiring",
+                "description": "The link carries {Digital data width bits} data bits over a cable with {Cable}. Separate clock, control and synchronisation signals accompany the pixel data.\n\nThe cable also includes a base or reference connection.\n\nThe cable carries the following signals: {Signals}.",
+                "parameters": [
+                  {
+                    "key": "Digital data width bits",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Cable",
+                    "value": "8 twisted pairs"
+                  },
+                  {
+                    "key": "Signals",
+                    "value": "Data0, Data1, Data2, Data3, Clock, Control, H-sync, V-sync"
+                  }
+                ]
+              },
+              {
+                "number": 12,
+                "chapter_name": "Monitor discovery and palette control",
+                "description": "The host negotiates a raster the monitor can actually display before enabling the picture. Capability failures require an explicit safe profile; connection alone does not establish a supported resolution.\n\nBaseline monitors accept vertical-retrace palette commands. From NCC June 1982, explicitly capable Color Pro monitors also accept bounded horizontal-retrace commands under technology.scanline_palette_list; do not send these to legacy monitors.\n\nHost firmware performs selection using controller control-channel registers; monitor fixed capability ROM/straps and serializer.\n\nUse an explicitly configured profile or documented common safe raster; otherwise remain blank. Never infer 640-pixel support from connection alone.\n\nThe Control pair is half-duplex and bidirectional.\n\nStartup proceeds in this order: blank the picture; read the versioned capability record with an integrity check and timeout; intersect host and monitor raster support; select the raster and initialise the palette; then enable the picture.\n\nThe capability record contains {Control channel capability fields}. The horizontal-retrace extension is defined by {Horizontal palette extension reference}.",
+                "parameters": [
+                  {
+                    "key": "Control channel capability fields",
+                    "value": "protocol version, monitor ID, supported raster IDs, maximum pixel clock, color or grayscale, palette precision, preferred raster, integrity check"
+                  },
+                  {
+                    "key": "Horizontal palette extension reference",
+                    "value": "technology.scanline_palette_list"
+                  }
+                ]
+              },
+              {
+                "number": 29,
+                "chapter_name": "320 × 200 output timing",
+                "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. The total pixel and line counts below include blanking.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines.",
+                "parameters": [
+                  {
+                    "key": "ID",
+                    "value": "raster_320_200"
+                  },
+                  {
+                    "key": "Active width",
+                    "value": "320"
+                  },
+                  {
+                    "key": "Active height",
+                    "value": "200"
+                  },
+                  {
+                    "key": "Pixel clock MHz",
+                    "value": "7.15909"
+                  },
+                  {
+                    "key": "Horizontal total pixels",
+                    "value": "456"
+                  },
+                  {
+                    "key": "Vertical total lines",
+                    "value": "262"
+                  }
+                ]
+              },
+              {
+                "number": 35,
+                "chapter_name": "640 × 200 output timing",
+                "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. The total pixel and line counts below include blanking.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines.",
+                "parameters": [
+                  {
+                    "key": "ID",
+                    "value": "raster_640_200"
+                  },
+                  {
+                    "key": "Active width",
+                    "value": "640"
+                  },
+                  {
+                    "key": "Active height",
+                    "value": "200"
+                  },
+                  {
+                    "key": "Pixel clock MHz",
+                    "value": "14.31818"
+                  },
+                  {
+                    "key": "Horizontal total pixels",
+                    "value": "912"
+                  },
+                  {
+                    "key": "Vertical total lines",
+                    "value": "262"
+                  }
+                ]
+              },
+              {
+                "number": 41,
+                "chapter_name": "640 × 400 output timing",
+                "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. Its frame rate is {Frame rate Hz} Hz. The raster is progressive.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines. The horizontal frequency is {Horizontal frequency kHz} kHz.",
+                "parameters": [
+                  {
+                    "key": "ID",
+                    "value": "raster_640_400"
+                  },
+                  {
+                    "key": "Active width",
+                    "value": "640"
+                  },
+                  {
+                    "key": "Active height",
+                    "value": "400"
+                  },
+                  {
+                    "key": "Pixel clock MHz",
+                    "value": "21.504"
+                  },
+                  {
+                    "key": "Horizontal total pixels",
+                    "value": "800"
+                  },
+                  {
+                    "key": "Vertical total lines",
+                    "value": "448"
+                  },
+                  {
+                    "key": "Horizontal frequency kHz",
+                    "value": "26.88"
+                  },
+                  {
+                    "key": "Frame rate Hz",
+                    "value": "60"
+                  }
+                ]
+              },
+              {
+                "number": 50,
+                "chapter_name": "Logical scaling and colour interpretation",
+                "description": "Logical image sizes and palette indices must be mapped explicitly to the selected output. A wider logical mode cannot be forced onto a monitor that lacks the required raster.\n\nInteger horizontal/vertical pixel repetition, including sprites. 160/320-wide logical modes can repeat to 320/640; 100 lines repeat to 200. Reject 640-wide graphics or 80-column text on a 320-only monitor; software viewport is a separately reported service. Artemis card repeats legacy pixels/lines to {Professional output raster} for Mono Pro; never downscales 400 lines to an old monitor.\n\nExplicit 1-bit and 2-bit pixel-to-output-index maps. Color indices are not brightness values. On grayscale displays map RGB palette entries to luminance; Mono I direct DAC requires host index mapping.",
+                "parameters": [
+                  {
+                    "key": "Professional output raster",
+                    "value": "640×400"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.logix_digital_video",
+            "name": "Logix digital video standard",
+            "kind": "hardware_standard",
+            "description": "Logix 4-bit digital video link",
+            "owner_actor_ids": [
+              "actor.logix"
+            ],
+            "related_technology_ids": [
+              "technology.scanline_palette_list"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Scope, chronology and profiles",
+                "description": "The Aurelia June 1978 baseline, later Artemis raster profiles and June 1982 horizontal-retrace palette extension are distinct scopes. Raster sizes are capability profiles, not protocol version numbers. Monitor/controller support must be intersected; a new resolution or palette feature is not automatically present on old monitors. Hardware-specific scaling examples remain explanatory, not universal requirements. The professional 800×600 integration recorded in June 1982 is not silently added to this record’s currently specified raster tables; its exact link/timing contract requires separate review.",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "Digital video wiring",
+                "description": "The link carries {Digital data width bits} data bits over a cable with {Cable}. Separate clock, control and synchronisation signals accompany the pixel data.\n\nThe cable also includes a base or reference connection.\n\nThe cable carries the following signals: {Signals}.",
+                "parameters": [
+                  {
+                    "key": "Digital data width bits",
+                    "value": "4"
+                  },
+                  {
+                    "key": "Cable",
+                    "value": "8 twisted pairs"
+                  },
+                  {
+                    "key": "Signals",
+                    "value": "Data0, Data1, Data2, Data3, Clock, Control, H-sync, V-sync"
+                  }
+                ]
+              },
+              {
+                "number": 13,
+                "chapter_name": "Monitor discovery and palette control",
+                "description": "The host negotiates a raster the monitor can actually display before enabling the picture. Capability failures require an explicit safe profile; connection alone does not establish a supported resolution.\n\nBaseline monitors accept vertical-retrace palette commands. From NCC June 1982, explicitly capable Color Pro monitors also accept bounded horizontal-retrace commands under technology.scanline_palette_list; do not send these to legacy monitors.\n\nHost firmware performs selection using controller control-channel registers; monitor fixed capability ROM/straps and serializer.\n\nUse an explicitly configured profile or documented common safe raster; otherwise remain blank. Never infer 640-pixel support from connection alone.\n\nThe Control pair is half-duplex and bidirectional.\n\nStartup proceeds in this order: blank the picture; read the versioned capability record with an integrity check and timeout; intersect host and monitor raster support; select the raster and initialise the palette; then enable the picture.\n\nThe capability record contains {Control channel capability fields}. The horizontal-retrace extension is defined by {Horizontal palette extension reference}.",
+                "parameters": [
+                  {
+                    "key": "Control channel capability fields",
+                    "value": "protocol version, monitor ID, supported raster IDs, maximum pixel clock, color or grayscale, palette precision, preferred raster, integrity check"
+                  },
+                  {
+                    "key": "Horizontal palette extension reference",
+                    "value": "technology.scanline_palette_list"
+                  }
+                ]
+              },
+              {
+                "number": 30,
+                "chapter_name": "320 × 200 output timing",
+                "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. The total pixel and line counts below include blanking.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines.",
+                "parameters": [
+                  {
+                    "key": "ID",
+                    "value": "raster_320_200"
+                  },
+                  {
+                    "key": "Active width",
+                    "value": "320"
+                  },
+                  {
+                    "key": "Active height",
+                    "value": "200"
+                  },
+                  {
+                    "key": "Pixel clock MHz",
+                    "value": "7.15909"
+                  },
+                  {
+                    "key": "Horizontal total pixels",
+                    "value": "456"
+                  },
+                  {
+                    "key": "Vertical total lines",
+                    "value": "262"
+                  }
+                ]
+              },
+              {
+                "number": 36,
+                "chapter_name": "640 × 200 output timing",
+                "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. The total pixel and line counts below include blanking.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines.",
+                "parameters": [
+                  {
+                    "key": "ID",
+                    "value": "raster_640_200"
+                  },
+                  {
+                    "key": "Active width",
+                    "value": "640"
+                  },
+                  {
+                    "key": "Active height",
+                    "value": "200"
+                  },
+                  {
+                    "key": "Pixel clock MHz",
+                    "value": "14.31818"
+                  },
+                  {
+                    "key": "Horizontal total pixels",
+                    "value": "912"
+                  },
+                  {
+                    "key": "Vertical total lines",
+                    "value": "262"
+                  }
+                ]
+              },
+              {
+                "number": 42,
+                "chapter_name": "640 × 400 output timing",
+                "description": "Raster {ID} displays {Active width} by {Active height} active pixels at {Pixel clock MHz} MHz. Its frame rate is {Frame rate Hz} Hz. The raster is progressive.\n\nIncluding blanking, each line contains {Horizontal total pixels} pixels and each frame contains {Vertical total lines} lines. The horizontal frequency is {Horizontal frequency kHz} kHz.",
+                "parameters": [
+                  {
+                    "key": "ID",
+                    "value": "raster_640_400"
+                  },
+                  {
+                    "key": "Active width",
+                    "value": "640"
+                  },
+                  {
+                    "key": "Active height",
+                    "value": "400"
+                  },
+                  {
+                    "key": "Pixel clock MHz",
+                    "value": "21.504"
+                  },
+                  {
+                    "key": "Horizontal total pixels",
+                    "value": "800"
+                  },
+                  {
+                    "key": "Vertical total lines",
+                    "value": "448"
+                  },
+                  {
+                    "key": "Horizontal frequency kHz",
+                    "value": "26.88"
+                  },
+                  {
+                    "key": "Frame rate Hz",
+                    "value": "60"
+                  }
+                ]
+              },
+              {
+                "number": 51,
+                "chapter_name": "Logical scaling and colour interpretation",
+                "description": "Logical image sizes and palette indices must be mapped explicitly to the selected output. A wider logical mode cannot be forced onto a monitor that lacks the required raster.\n\nInteger horizontal/vertical pixel repetition, including sprites. 160/320-wide logical modes can repeat to 320/640; 100 lines repeat to 200. Reject 640-wide graphics or 80-column text on a 320-only monitor; software viewport is a separately reported service. Artemis card repeats legacy pixels/lines to {Professional output raster} for Mono Pro; never downscales 400 lines to an old monitor.\n\nExplicit 1-bit and 2-bit pixel-to-output-index maps. Color indices are not brightness values. On grayscale displays map RGB palette entries to luminance; Mono I direct DAC requires host index mapping.",
+                "parameters": [
+                  {
+                    "key": "Professional output raster",
+                    "value": "640×400"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "5524fc09c56f3d7836a528b8577b0f66951c40f619555de04d70fdfd5517e840"
+        }
+      ]
+    }
+  ]
+}

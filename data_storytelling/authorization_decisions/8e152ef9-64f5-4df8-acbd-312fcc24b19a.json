@@ -1,0 +1,462 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.8da1bb97-7fd7-4039-b1a9-4cf047cb98dc",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T12:07:32.363Z",
+      "change_id": "change.standard_kind_logix_lan100_link",
+      "proposal_sha256": "ad6922ee69512350c552e1de778528dade06b1a28ff52c15889a444182d64c3b",
+      "proposal": {
+        "id": "change.standard_kind_logix_lan100_link",
+        "category": "foundation",
+        "title": "Define LogixLAN physical and data-link standard with chronological profiles",
+        "reason": "Revise the existing kind proposal to distinguish the core contract, optional profiles and implementation qualification. Preserve all existing specification chapters and values; add an explicit scope statement without inventing protocol versions or completed qualification.",
+        "elements": [
+          {
+            "record_type": "technology",
+            "record_id": "technology.logix_lan100_link",
+            "before": {
+              "id": "technology.logix_lan100_link",
+              "name": "LogixLAN negotiated-rate physical and data-link standard",
+              "kind": "interface",
+              "description": "LogixLAN negotiated-rate physical and data-link standard",
+              "owner_actor_ids": [
+                "actor.logix"
+              ],
+              "related_technology_ids": [],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Shared network and cabling",
+                  "description": "Stations connect through an active hub over {Cable} using {Connector}. The hub grants one transmitter at a time; this baseline is a shared network rather than independent switched links.\n\nHub-controlled polling grants transmit access to one station at a time, avoiding collision-detection hardware.\n\nStream the granted frame to other admitted ports at the common rate; destination filtering and CRC validation occur in adapters. No independent per-port rates, frame-store switching or rate conversion in the 1981 baseline.\n\nSimple, deterministic and inexpensive LAN implementation using technology comfortably available by 1981.\n\nThe network forms an active star through a multiport hub, repeater and arbiter.\n\nBalanced differential serial signalling is compatible in principle with EIA-422-class line drivers and receivers.\n\nCable pairs have distinct roles: pair 1 carries station-to-hub differential data; pair 2 carries hub-to-station differential data; pair 3 carries the hub-distributed synchronous clock and transmit-grant timing; pair 4 is reserved for diagnostics or later expansion.\n\nHDLC-inspired bit-oriented frames contain address and control fields and a 16-bit frame check sequence.\n\nThe adapter stores or configures a locally assigned link address; broadcast is supported.",
+                  "parameters": [
+                    {
+                      "key": "Connector",
+                      "value": "8-position modular connector (RJ45-style / 8P8C family)"
+                    },
+                    {
+                      "key": "Cable",
+                      "value": "four twisted pairs"
+                    }
+                  ]
+                },
+                {
+                  "number": 14,
+                  "chapter_name": "Rates and host qualification",
+                  "description": "Supported raw rates are {Supported rates kbps} kbit/s. Startup and fallback use {Startup rate kbps} kbit/s. Every admitted station shares the same negotiated rate, and host qualification constrains advertised capabilities.\n\nOne common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.\n\nThe stable logix_lan100_link identifier is retained for references; 100 denotes the mandatory startup/fallback rate, not the maximum rate.\n\nEach listed host requires qualification.\n\nThe fallback rate is {Fallback rate kbps} kbit/s; the maximum shared raw rate is {Maximum shared raw rate kbps} kbit/s. Host qualification covers {Qualified host}.",
+                  "parameters": [
+                    {
+                      "key": "Supported rates kbps",
+                      "value": "100, 250, 500, 1000"
+                    },
+                    {
+                      "key": "Startup rate kbps",
+                      "value": "100"
+                    },
+                    {
+                      "key": "Fallback rate kbps",
+                      "value": "100"
+                    },
+                    {
+                      "key": "Maximum shared raw rate kbps",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "Qualified host",
+                      "value": "device.base_computer.aurelia, device.base_computer.aurelia_plus, device.base_computer.artemis, device.base_computer.artemis_pro"
+                    }
+                  ]
+                },
+                {
+                  "number": 31,
+                  "chapter_name": "Negotiation, admission and recovery",
+                  "description": "The hub selects the highest rate supported by every admitted station and link. Changes are coordinated through acknowledgements, a quiet switch interval and test frames; failures return to the startup rate.\n\nIntersection of adapter hardware capability, firmware-enforced host qualification ceiling and configured cable/reliability limits. Platform ceilings are design qualification targets, not measured throughput claims.\n\nHub selects the highest rate in the intersection of its own capability and every admitted station/link capability. A 100-only station or link limits the whole network to 100 kbit/s.\n\nChoose the highest common candidate; announce a switch epoch and bounded idle interval at 100 kbit/s and collect acknowledgments from all admitted stations.\n\nDrain the current frame and stop grants before changing the distributed clock. Do not switch with a missing acknowledgment.\n\nRun bounded test frames on every admitted link at the candidate rate; resume normal grants only after every link passes.\n\nOn failed qualification or persistent link errors, return to 100 kbit/s for coordination, exclude the failed candidate and try the next lower common rate. If 100 fails, isolate the faulty port and report the fault.\n\nPeriodically drain traffic and open an announced 100 kbit/s discovery window. New stations join only after coordinated renegotiation; admitting a slower station lowers the common rate. Discovery windows consume shared bandwidth.\n\nAdapters use a timeout independent of the distributed bit clock. On lost clock/control or switch timeout, stop transmitting and await the hub at 100 kbit/s. The hub watchdog restores 100 kbit/s and a new negotiation epoch; never allow unilateral station transmission at a different rate.\n\nReset/start at 100 kbit/s; keep unadmitted ports isolated from normal traffic.\n\nPoll station identity, supported-rate bitmap, host profile and receiver capacity at 100 kbit/s.",
+                  "parameters": []
+                },
+                {
+                  "number": 42,
+                  "chapter_name": "Clocking and buffered adapters",
+                  "description": "Adapters offload framing and buffer complete frames. The local packet RAM target is {Adapter requirements local packet RAM target bytes} bytes, separate from host RAM. Receiver credit controls admission of complete frames before transmission.\n\nLocal adapter RAM, additional to host system RAM. Partition transmit/receive buffers and metadata; freeze maximum frame length and IP MTU to fit complete frames before implementation. Physical RAM chip count remains unresolved.\n\nGrant unicast only when the destination advertises credit for a complete frame; reserve that credit until completion. Broadcast requires credit from all intended admitted receivers. Timeouts revoke stale credits; bounded queues and retry/error reporting prevent indefinite blocking. Use flow control first for receiver pressure, not automatic rate changes.\n\nNo per-byte interrupt requirement. Aurelia at {Aurelia link rate} has {Aurelia CPU budget} per raw byte at {Aurelia CPU clock}; Aurelia+ at {Plus link rate} has {Plus CPU budget} at {Plus CPU clock}. Validate worst-case service latency. A persistently slow host may advertise a lower configured ceiling.\n\nHub clock-divider reference only; does not require every adapter or host logic path to run at 10 MHz.\n\nAdapters must provide serial framing and CRC generation/checking.\n\nAdapters must provide destination filtering before CPU interrupt.\n\nAdapters must provide complete-frame buffering.\n\nAdapters must provide packet-level interrupts and receiver-ready reporting.\n\nThe hub uses the ordered clock-divisor choices {Clock generation bit clock divisors} for the supported rates. These divisors belong to the hub clock reference, not to every host logic path.",
+                  "parameters": [
+                    {
+                      "key": "Clock generation bit clock divisors",
+                      "value": "100, 40, 20, 10"
+                    },
+                    {
+                      "key": "Adapter requirements local packet RAM target bytes",
+                      "value": "4096"
+                    },
+                    {
+                      "key": "Aurelia link rate",
+                      "value": "250 kbit/s"
+                    },
+                    {
+                      "key": "Aurelia CPU budget",
+                      "value": "128 CPU clocks"
+                    },
+                    {
+                      "key": "Aurelia CPU clock",
+                      "value": "4 MHz"
+                    },
+                    {
+                      "key": "Plus link rate",
+                      "value": "500 kbit/s"
+                    },
+                    {
+                      "key": "Plus CPU budget",
+                      "value": "96"
+                    },
+                    {
+                      "key": "Plus CPU clock",
+                      "value": "6 MHz"
+                    }
+                  ]
+                },
+                {
+                  "number": 55,
+                  "chapter_name": "Network qualification",
+                  "description": "Timing, buffer limits, recovery and mixed-host throughput require measurement. The qualification checks below must pass before advertised rates become delivery claims.\n\nMixed-platform admission, missing acknowledgments, clock loss, buffer exhaustion and broadcast backpressure.\n\nQualification must cover cable lengths, termination, drivers and clock skew at each advertised rate.\n\nQualification must cover exact frame format/length, IP MTU, buffer partitions and credit accounting.\n\nQualification must cover discovery cadence, switch/ack timeouts and independent recovery watchdog.\n\nQualification must cover error thresholds, test-frame counts and fallback hysteresis.\n\nQualification must cover sustained TCP/IP throughput and CPU load on all four host platforms.",
+                  "parameters": []
+                }
+              ]
+            },
+            "after": {
+              "id": "technology.logix_lan100_link",
+              "name": "LogixLAN physical and data-link standard",
+              "kind": "hardware_standard",
+              "description": "LogixLAN negotiated-rate physical and data-link standard",
+              "owner_actor_ids": [
+                "actor.logix"
+              ],
+              "related_technology_ids": [],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Scope, chronology and profiles",
+                  "description": "The networking presentation on 4 May 1981 establishes the programme baseline, not proof that every host/rate has passed qualification. The 100, 250, 500 and 1000 kbit/s rates are negotiated capabilities of the same shared-link baseline, not separate standard versions. The stable ID retains 100 as startup/fallback rate. Host RAM and CPU budgets below are implementation examples or qualification targets, not additional standards.",
+                  "parameters": []
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Shared network and cabling",
+                  "description": "Stations connect through an active hub over {Cable} using {Connector}. The hub grants one transmitter at a time; this baseline is a shared network rather than independent switched links.\n\nHub-controlled polling grants transmit access to one station at a time, avoiding collision-detection hardware.\n\nStream the granted frame to other admitted ports at the common rate; destination filtering and CRC validation occur in adapters. No independent per-port rates, frame-store switching or rate conversion in the 1981 baseline.\n\nSimple, deterministic and inexpensive LAN implementation using technology comfortably available by 1981.\n\nThe network forms an active star through a multiport hub, repeater and arbiter.\n\nBalanced differential serial signalling is compatible in principle with EIA-422-class line drivers and receivers.\n\nCable pairs have distinct roles: pair 1 carries station-to-hub differential data; pair 2 carries hub-to-station differential data; pair 3 carries the hub-distributed synchronous clock and transmit-grant timing; pair 4 is reserved for diagnostics or later expansion.\n\nHDLC-inspired bit-oriented frames contain address and control fields and a 16-bit frame check sequence.\n\nThe adapter stores or configures a locally assigned link address; broadcast is supported.",
+                  "parameters": [
+                    {
+                      "key": "Connector",
+                      "value": "8-position modular connector (RJ45-style / 8P8C family)"
+                    },
+                    {
+                      "key": "Cable",
+                      "value": "four twisted pairs"
+                    }
+                  ]
+                },
+                {
+                  "number": 15,
+                  "chapter_name": "Rates and host qualification",
+                  "description": "Supported raw rates are {Supported rates kbps} kbit/s. Startup and fallback use {Startup rate kbps} kbit/s. Every admitted station shares the same negotiated rate, and host qualification constrains advertised capabilities.\n\nOne common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.\n\nThe stable logix_lan100_link identifier is retained for references; 100 denotes the mandatory startup/fallback rate, not the maximum rate.\n\nEach listed host requires qualification.\n\nThe fallback rate is {Fallback rate kbps} kbit/s; the maximum shared raw rate is {Maximum shared raw rate kbps} kbit/s. Host qualification covers {Qualified host}.",
+                  "parameters": [
+                    {
+                      "key": "Supported rates kbps",
+                      "value": "100, 250, 500, 1000"
+                    },
+                    {
+                      "key": "Startup rate kbps",
+                      "value": "100"
+                    },
+                    {
+                      "key": "Fallback rate kbps",
+                      "value": "100"
+                    },
+                    {
+                      "key": "Maximum shared raw rate kbps",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "Qualified host",
+                      "value": "device.base_computer.aurelia, device.base_computer.aurelia_plus, device.base_computer.artemis, device.base_computer.artemis_pro"
+                    }
+                  ]
+                },
+                {
+                  "number": 32,
+                  "chapter_name": "Negotiation, admission and recovery",
+                  "description": "The hub selects the highest rate supported by every admitted station and link. Changes are coordinated through acknowledgements, a quiet switch interval and test frames; failures return to the startup rate.\n\nIntersection of adapter hardware capability, firmware-enforced host qualification ceiling and configured cable/reliability limits. Platform ceilings are design qualification targets, not measured throughput claims.\n\nHub selects the highest rate in the intersection of its own capability and every admitted station/link capability. A 100-only station or link limits the whole network to 100 kbit/s.\n\nChoose the highest common candidate; announce a switch epoch and bounded idle interval at 100 kbit/s and collect acknowledgments from all admitted stations.\n\nDrain the current frame and stop grants before changing the distributed clock. Do not switch with a missing acknowledgment.\n\nRun bounded test frames on every admitted link at the candidate rate; resume normal grants only after every link passes.\n\nOn failed qualification or persistent link errors, return to 100 kbit/s for coordination, exclude the failed candidate and try the next lower common rate. If 100 fails, isolate the faulty port and report the fault.\n\nPeriodically drain traffic and open an announced 100 kbit/s discovery window. New stations join only after coordinated renegotiation; admitting a slower station lowers the common rate. Discovery windows consume shared bandwidth.\n\nAdapters use a timeout independent of the distributed bit clock. On lost clock/control or switch timeout, stop transmitting and await the hub at 100 kbit/s. The hub watchdog restores 100 kbit/s and a new negotiation epoch; never allow unilateral station transmission at a different rate.\n\nReset/start at 100 kbit/s; keep unadmitted ports isolated from normal traffic.\n\nPoll station identity, supported-rate bitmap, host profile and receiver capacity at 100 kbit/s.",
+                  "parameters": []
+                },
+                {
+                  "number": 43,
+                  "chapter_name": "Clocking and buffered adapters",
+                  "description": "Adapters offload framing and buffer complete frames. The local packet RAM target is {Adapter requirements local packet RAM target bytes} bytes, separate from host RAM. Receiver credit controls admission of complete frames before transmission.\n\nLocal adapter RAM, additional to host system RAM. Partition transmit/receive buffers and metadata; freeze maximum frame length and IP MTU to fit complete frames before implementation. Physical RAM chip count remains unresolved.\n\nGrant unicast only when the destination advertises credit for a complete frame; reserve that credit until completion. Broadcast requires credit from all intended admitted receivers. Timeouts revoke stale credits; bounded queues and retry/error reporting prevent indefinite blocking. Use flow control first for receiver pressure, not automatic rate changes.\n\nNo per-byte interrupt requirement. Aurelia at {Aurelia link rate} has {Aurelia CPU budget} per raw byte at {Aurelia CPU clock}; Aurelia+ at {Plus link rate} has {Plus CPU budget} at {Plus CPU clock}. Validate worst-case service latency. A persistently slow host may advertise a lower configured ceiling.\n\nHub clock-divider reference only; does not require every adapter or host logic path to run at 10 MHz.\n\nAdapters must provide serial framing and CRC generation/checking.\n\nAdapters must provide destination filtering before CPU interrupt.\n\nAdapters must provide complete-frame buffering.\n\nAdapters must provide packet-level interrupts and receiver-ready reporting.\n\nThe hub uses the ordered clock-divisor choices {Clock generation bit clock divisors} for the supported rates. These divisors belong to the hub clock reference, not to every host logic path.",
+                  "parameters": [
+                    {
+                      "key": "Clock generation bit clock divisors",
+                      "value": "100, 40, 20, 10"
+                    },
+                    {
+                      "key": "Adapter requirements local packet RAM target bytes",
+                      "value": "4096"
+                    },
+                    {
+                      "key": "Aurelia link rate",
+                      "value": "250 kbit/s"
+                    },
+                    {
+                      "key": "Aurelia CPU budget",
+                      "value": "128 CPU clocks"
+                    },
+                    {
+                      "key": "Aurelia CPU clock",
+                      "value": "4 MHz"
+                    },
+                    {
+                      "key": "Plus link rate",
+                      "value": "500 kbit/s"
+                    },
+                    {
+                      "key": "Plus CPU budget",
+                      "value": "96"
+                    },
+                    {
+                      "key": "Plus CPU clock",
+                      "value": "6 MHz"
+                    }
+                  ]
+                },
+                {
+                  "number": 56,
+                  "chapter_name": "Network qualification",
+                  "description": "Timing, buffer limits, recovery and mixed-host throughput require measurement. The qualification checks below must pass before advertised rates become delivery claims.\n\nMixed-platform admission, missing acknowledgments, clock loss, buffer exhaustion and broadcast backpressure.\n\nQualification must cover cable lengths, termination, drivers and clock skew at each advertised rate.\n\nQualification must cover exact frame format/length, IP MTU, buffer partitions and credit accounting.\n\nQualification must cover discovery cadence, switch/ack timeouts and independent recovery watchdog.\n\nQualification must cover error thresholds, test-frame counts and fallback hysteresis.\n\nQualification must cover sustained TCP/IP throughput and CPU load on all four host platforms.",
+                  "parameters": []
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "technology.logix_lan100_link",
+          "before": {
+            "id": "technology.logix_lan100_link",
+            "name": "LogixLAN negotiated-rate physical and data-link standard",
+            "kind": "interface",
+            "description": "LogixLAN negotiated-rate physical and data-link standard",
+            "owner_actor_ids": [
+              "actor.logix"
+            ],
+            "related_technology_ids": [],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Shared network and cabling",
+                "description": "Stations connect through an active hub over {Cable} using {Connector}. The hub grants one transmitter at a time; this baseline is a shared network rather than independent switched links.\n\nHub-controlled polling grants transmit access to one station at a time, avoiding collision-detection hardware.\n\nStream the granted frame to other admitted ports at the common rate; destination filtering and CRC validation occur in adapters. No independent per-port rates, frame-store switching or rate conversion in the 1981 baseline.\n\nSimple, deterministic and inexpensive LAN implementation using technology comfortably available by 1981.\n\nThe network forms an active star through a multiport hub, repeater and arbiter.\n\nBalanced differential serial signalling is compatible in principle with EIA-422-class line drivers and receivers.\n\nCable pairs have distinct roles: pair 1 carries station-to-hub differential data; pair 2 carries hub-to-station differential data; pair 3 carries the hub-distributed synchronous clock and transmit-grant timing; pair 4 is reserved for diagnostics or later expansion.\n\nHDLC-inspired bit-oriented frames contain address and control fields and a 16-bit frame check sequence.\n\nThe adapter stores or configures a locally assigned link address; broadcast is supported.",
+                "parameters": [
+                  {
+                    "key": "Connector",
+                    "value": "8-position modular connector (RJ45-style / 8P8C family)"
+                  },
+                  {
+                    "key": "Cable",
+                    "value": "four twisted pairs"
+                  }
+                ]
+              },
+              {
+                "number": 14,
+                "chapter_name": "Rates and host qualification",
+                "description": "Supported raw rates are {Supported rates kbps} kbit/s. Startup and fallback use {Startup rate kbps} kbit/s. Every admitted station shares the same negotiated rate, and host qualification constrains advertised capabilities.\n\nOne common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.\n\nThe stable logix_lan100_link identifier is retained for references; 100 denotes the mandatory startup/fallback rate, not the maximum rate.\n\nEach listed host requires qualification.\n\nThe fallback rate is {Fallback rate kbps} kbit/s; the maximum shared raw rate is {Maximum shared raw rate kbps} kbit/s. Host qualification covers {Qualified host}.",
+                "parameters": [
+                  {
+                    "key": "Supported rates kbps",
+                    "value": "100, 250, 500, 1000"
+                  },
+                  {
+                    "key": "Startup rate kbps",
+                    "value": "100"
+                  },
+                  {
+                    "key": "Fallback rate kbps",
+                    "value": "100"
+                  },
+                  {
+                    "key": "Maximum shared raw rate kbps",
+                    "value": "1000"
+                  },
+                  {
+                    "key": "Qualified host",
+                    "value": "device.base_computer.aurelia, device.base_computer.aurelia_plus, device.base_computer.artemis, device.base_computer.artemis_pro"
+                  }
+                ]
+              },
+              {
+                "number": 31,
+                "chapter_name": "Negotiation, admission and recovery",
+                "description": "The hub selects the highest rate supported by every admitted station and link. Changes are coordinated through acknowledgements, a quiet switch interval and test frames; failures return to the startup rate.\n\nIntersection of adapter hardware capability, firmware-enforced host qualification ceiling and configured cable/reliability limits. Platform ceilings are design qualification targets, not measured throughput claims.\n\nHub selects the highest rate in the intersection of its own capability and every admitted station/link capability. A 100-only station or link limits the whole network to 100 kbit/s.\n\nChoose the highest common candidate; announce a switch epoch and bounded idle interval at 100 kbit/s and collect acknowledgments from all admitted stations.\n\nDrain the current frame and stop grants before changing the distributed clock. Do not switch with a missing acknowledgment.\n\nRun bounded test frames on every admitted link at the candidate rate; resume normal grants only after every link passes.\n\nOn failed qualification or persistent link errors, return to 100 kbit/s for coordination, exclude the failed candidate and try the next lower common rate. If 100 fails, isolate the faulty port and report the fault.\n\nPeriodically drain traffic and open an announced 100 kbit/s discovery window. New stations join only after coordinated renegotiation; admitting a slower station lowers the common rate. Discovery windows consume shared bandwidth.\n\nAdapters use a timeout independent of the distributed bit clock. On lost clock/control or switch timeout, stop transmitting and await the hub at 100 kbit/s. The hub watchdog restores 100 kbit/s and a new negotiation epoch; never allow unilateral station transmission at a different rate.\n\nReset/start at 100 kbit/s; keep unadmitted ports isolated from normal traffic.\n\nPoll station identity, supported-rate bitmap, host profile and receiver capacity at 100 kbit/s.",
+                "parameters": []
+              },
+              {
+                "number": 42,
+                "chapter_name": "Clocking and buffered adapters",
+                "description": "Adapters offload framing and buffer complete frames. The local packet RAM target is {Adapter requirements local packet RAM target bytes} bytes, separate from host RAM. Receiver credit controls admission of complete frames before transmission.\n\nLocal adapter RAM, additional to host system RAM. Partition transmit/receive buffers and metadata; freeze maximum frame length and IP MTU to fit complete frames before implementation. Physical RAM chip count remains unresolved.\n\nGrant unicast only when the destination advertises credit for a complete frame; reserve that credit until completion. Broadcast requires credit from all intended admitted receivers. Timeouts revoke stale credits; bounded queues and retry/error reporting prevent indefinite blocking. Use flow control first for receiver pressure, not automatic rate changes.\n\nNo per-byte interrupt requirement. Aurelia at {Aurelia link rate} has {Aurelia CPU budget} per raw byte at {Aurelia CPU clock}; Aurelia+ at {Plus link rate} has {Plus CPU budget} at {Plus CPU clock}. Validate worst-case service latency. A persistently slow host may advertise a lower configured ceiling.\n\nHub clock-divider reference only; does not require every adapter or host logic path to run at 10 MHz.\n\nAdapters must provide serial framing and CRC generation/checking.\n\nAdapters must provide destination filtering before CPU interrupt.\n\nAdapters must provide complete-frame buffering.\n\nAdapters must provide packet-level interrupts and receiver-ready reporting.\n\nThe hub uses the ordered clock-divisor choices {Clock generation bit clock divisors} for the supported rates. These divisors belong to the hub clock reference, not to every host logic path.",
+                "parameters": [
+                  {
+                    "key": "Clock generation bit clock divisors",
+                    "value": "100, 40, 20, 10"
+                  },
+                  {
+                    "key": "Adapter requirements local packet RAM target bytes",
+                    "value": "4096"
+                  },
+                  {
+                    "key": "Aurelia link rate",
+                    "value": "250 kbit/s"
+                  },
+                  {
+                    "key": "Aurelia CPU budget",
+                    "value": "128 CPU clocks"
+                  },
+                  {
+                    "key": "Aurelia CPU clock",
+                    "value": "4 MHz"
+                  },
+                  {
+                    "key": "Plus link rate",
+                    "value": "500 kbit/s"
+                  },
+                  {
+                    "key": "Plus CPU budget",
+                    "value": "96"
+                  },
+                  {
+                    "key": "Plus CPU clock",
+                    "value": "6 MHz"
+                  }
+                ]
+              },
+              {
+                "number": 55,
+                "chapter_name": "Network qualification",
+                "description": "Timing, buffer limits, recovery and mixed-host throughput require measurement. The qualification checks below must pass before advertised rates become delivery claims.\n\nMixed-platform admission, missing acknowledgments, clock loss, buffer exhaustion and broadcast backpressure.\n\nQualification must cover cable lengths, termination, drivers and clock skew at each advertised rate.\n\nQualification must cover exact frame format/length, IP MTU, buffer partitions and credit accounting.\n\nQualification must cover discovery cadence, switch/ack timeouts and independent recovery watchdog.\n\nQualification must cover error thresholds, test-frame counts and fallback hysteresis.\n\nQualification must cover sustained TCP/IP throughput and CPU load on all four host platforms.",
+                "parameters": []
+              }
+            ]
+          },
+          "after": {
+            "id": "technology.logix_lan100_link",
+            "name": "LogixLAN physical and data-link standard",
+            "kind": "hardware_standard",
+            "description": "LogixLAN negotiated-rate physical and data-link standard",
+            "owner_actor_ids": [
+              "actor.logix"
+            ],
+            "related_technology_ids": [],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Scope, chronology and profiles",
+                "description": "The networking presentation on 4 May 1981 establishes the programme baseline, not proof that every host/rate has passed qualification. The 100, 250, 500 and 1000 kbit/s rates are negotiated capabilities of the same shared-link baseline, not separate standard versions. The stable ID retains 100 as startup/fallback rate. Host RAM and CPU budgets below are implementation examples or qualification targets, not additional standards.",
+                "parameters": []
+              },
+              {
+                "number": 2,
+                "chapter_name": "Shared network and cabling",
+                "description": "Stations connect through an active hub over {Cable} using {Connector}. The hub grants one transmitter at a time; this baseline is a shared network rather than independent switched links.\n\nHub-controlled polling grants transmit access to one station at a time, avoiding collision-detection hardware.\n\nStream the granted frame to other admitted ports at the common rate; destination filtering and CRC validation occur in adapters. No independent per-port rates, frame-store switching or rate conversion in the 1981 baseline.\n\nSimple, deterministic and inexpensive LAN implementation using technology comfortably available by 1981.\n\nThe network forms an active star through a multiport hub, repeater and arbiter.\n\nBalanced differential serial signalling is compatible in principle with EIA-422-class line drivers and receivers.\n\nCable pairs have distinct roles: pair 1 carries station-to-hub differential data; pair 2 carries hub-to-station differential data; pair 3 carries the hub-distributed synchronous clock and transmit-grant timing; pair 4 is reserved for diagnostics or later expansion.\n\nHDLC-inspired bit-oriented frames contain address and control fields and a 16-bit frame check sequence.\n\nThe adapter stores or configures a locally assigned link address; broadcast is supported.",
+                "parameters": [
+                  {
+                    "key": "Connector",
+                    "value": "8-position modular connector (RJ45-style / 8P8C family)"
+                  },
+                  {
+                    "key": "Cable",
+                    "value": "four twisted pairs"
+                  }
+                ]
+              },
+              {
+                "number": 15,
+                "chapter_name": "Rates and host qualification",
+                "description": "Supported raw rates are {Supported rates kbps} kbit/s. Startup and fallback use {Startup rate kbps} kbit/s. Every admitted station shares the same negotiated rate, and host qualification constrains advertised capabilities.\n\nOne common rate across all admitted stations; one transmitter at a time. Port count does not multiply shared bandwidth. Application throughput is lower and remains unvalidated.\n\nThe stable logix_lan100_link identifier is retained for references; 100 denotes the mandatory startup/fallback rate, not the maximum rate.\n\nEach listed host requires qualification.\n\nThe fallback rate is {Fallback rate kbps} kbit/s; the maximum shared raw rate is {Maximum shared raw rate kbps} kbit/s. Host qualification covers {Qualified host}.",
+                "parameters": [
+                  {
+                    "key": "Supported rates kbps",
+                    "value": "100, 250, 500, 1000"
+                  },
+                  {
+                    "key": "Startup rate kbps",
+                    "value": "100"
+                  },
+                  {
+                    "key": "Fallback rate kbps",
+                    "value": "100"
+                  },
+                  {
+                    "key": "Maximum shared raw rate kbps",
+                    "value": "1000"
+                  },
+                  {
+                    "key": "Qualified host",
+                    "value": "device.base_computer.aurelia, device.base_computer.aurelia_plus, device.base_computer.artemis, device.base_computer.artemis_pro"
+                  }
+                ]
+              },
+              {
+                "number": 32,
+                "chapter_name": "Negotiation, admission and recovery",
+                "description": "The hub selects the highest rate supported by every admitted station and link. Changes are coordinated through acknowledgements, a quiet switch interval and test frames; failures return to the startup rate.\n\nIntersection of adapter hardware capability, firmware-enforced host qualification ceiling and configured cable/reliability limits. Platform ceilings are design qualification targets, not measured throughput claims.\n\nHub selects the highest rate in the intersection of its own capability and every admitted station/link capability. A 100-only station or link limits the whole network to 100 kbit/s.\n\nChoose the highest common candidate; announce a switch epoch and bounded idle interval at 100 kbit/s and collect acknowledgments from all admitted stations.\n\nDrain the current frame and stop grants before changing the distributed clock. Do not switch with a missing acknowledgment.\n\nRun bounded test frames on every admitted link at the candidate rate; resume normal grants only after every link passes.\n\nOn failed qualification or persistent link errors, return to 100 kbit/s for coordination, exclude the failed candidate and try the next lower common rate. If 100 fails, isolate the faulty port and report the fault.\n\nPeriodically drain traffic and open an announced 100 kbit/s discovery window. New stations join only after coordinated renegotiation; admitting a slower station lowers the common rate. Discovery windows consume shared bandwidth.\n\nAdapters use a timeout independent of the distributed bit clock. On lost clock/control or switch timeout, stop transmitting and await the hub at 100 kbit/s. The hub watchdog restores 100 kbit/s and a new negotiation epoch; never allow unilateral station transmission at a different rate.\n\nReset/start at 100 kbit/s; keep unadmitted ports isolated from normal traffic.\n\nPoll station identity, supported-rate bitmap, host profile and receiver capacity at 100 kbit/s.",
+                "parameters": []
+              },
+              {
+                "number": 43,
+                "chapter_name": "Clocking and buffered adapters",
+                "description": "Adapters offload framing and buffer complete frames. The local packet RAM target is {Adapter requirements local packet RAM target bytes} bytes, separate from host RAM. Receiver credit controls admission of complete frames before transmission.\n\nLocal adapter RAM, additional to host system RAM. Partition transmit/receive buffers and metadata; freeze maximum frame length and IP MTU to fit complete frames before implementation. Physical RAM chip count remains unresolved.\n\nGrant unicast only when the destination advertises credit for a complete frame; reserve that credit until completion. Broadcast requires credit from all intended admitted receivers. Timeouts revoke stale credits; bounded queues and retry/error reporting prevent indefinite blocking. Use flow control first for receiver pressure, not automatic rate changes.\n\nNo per-byte interrupt requirement. Aurelia at {Aurelia link rate} has {Aurelia CPU budget} per raw byte at {Aurelia CPU clock}; Aurelia+ at {Plus link rate} has {Plus CPU budget} at {Plus CPU clock}. Validate worst-case service latency. A persistently slow host may advertise a lower configured ceiling.\n\nHub clock-divider reference only; does not require every adapter or host logic path to run at 10 MHz.\n\nAdapters must provide serial framing and CRC generation/checking.\n\nAdapters must provide destination filtering before CPU interrupt.\n\nAdapters must provide complete-frame buffering.\n\nAdapters must provide packet-level interrupts and receiver-ready reporting.\n\nThe hub uses the ordered clock-divisor choices {Clock generation bit clock divisors} for the supported rates. These divisors belong to the hub clock reference, not to every host logic path.",
+                "parameters": [
+                  {
+                    "key": "Clock generation bit clock divisors",
+                    "value": "100, 40, 20, 10"
+                  },
+                  {
+                    "key": "Adapter requirements local packet RAM target bytes",
+                    "value": "4096"
+                  },
+                  {
+                    "key": "Aurelia link rate",
+                    "value": "250 kbit/s"
+                  },
+                  {
+                    "key": "Aurelia CPU budget",
+                    "value": "128 CPU clocks"
+                  },
+                  {
+                    "key": "Aurelia CPU clock",
+                    "value": "4 MHz"
+                  },
+                  {
+                    "key": "Plus link rate",
+                    "value": "500 kbit/s"
+                  },
+                  {
+                    "key": "Plus CPU budget",
+                    "value": "96"
+                  },
+                  {
+                    "key": "Plus CPU clock",
+                    "value": "6 MHz"
+                  }
+                ]
+              },
+              {
+                "number": 56,
+                "chapter_name": "Network qualification",
+                "description": "Timing, buffer limits, recovery and mixed-host throughput require measurement. The qualification checks below must pass before advertised rates become delivery claims.\n\nMixed-platform admission, missing acknowledgments, clock loss, buffer exhaustion and broadcast backpressure.\n\nQualification must cover cable lengths, termination, drivers and clock skew at each advertised rate.\n\nQualification must cover exact frame format/length, IP MTU, buffer partitions and credit accounting.\n\nQualification must cover discovery cadence, switch/ack timeouts and independent recovery watchdog.\n\nQualification must cover error thresholds, test-frame counts and fallback hysteresis.\n\nQualification must cover sustained TCP/IP throughput and CPU load on all four host platforms.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "22d2eb0d7318af9eb52eb65e6e5d0fb569eb255c69661eb3f9cc0d747de02cac"
+        }
+      ]
+    }
+  ]
+}

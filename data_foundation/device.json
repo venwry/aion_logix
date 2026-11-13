@@ -32,7 +32,7 @@
                 "Page Down",
                 "Page Up"
               ],
-              "keyboard_standard_id": "technology.logix_tui_keyboard_standard",
+              "keyboard_standard_id": "technology.logix_tui_standard",
               "key_count": 104
             }
           },
@@ -171,7 +171,7 @@
           },
           {
             "key": "keyboard_standard_id",
-            "ref_id": "technology.logix_tui_keyboard_standard",
+            "ref_id": "technology.logix_tui_standard",
             "ref_role": "Shared keyboard command and assignment standard"
           }
         ]
@@ -3827,10 +3827,10 @@
           "technical_definition": {
             "specification": {
               "technology_id": "technology.logix_digital_video",
-              "api_id": "technology.logix_display_api",
+              "api_id": "technology.aion_c_portability_framework",
               "mode_discovery": "Enumerate controller modes intersected with identified or configured monitor raster capabilities and available buffering/sprite allocations. Reject unsupported downscaling.",
               "memory_layout": {
-                "policy_id": "technology.logix_display_api",
+                "policy_id": "technology.aion_c_portability_framework",
                 "mode_exclusivity": "Text/font and bitmap allocations are alternative uses of 32 KiB display DRAM. Exclusive 1 KiB sprite SRAM is available in every mode.",
                 "font_policy": "One shared 256-glyph bank per mode. Font allocation 2048 bytes at 8×8, 4096 at 8×16 or 8×10 (16-byte glyph stride). Font writes affect both pages.",
                 "page_flip": "Latch selected page during vertical blank; drawing throughput is not guaranteed by double buffering."
@@ -4439,7 +4439,7 @@
           },
           {
             "key": "display_api_id",
-            "ref_id": "technology.logix_display_api",
+            "ref_id": "technology.aion_c_portability_framework",
             "ref_role": "Mode discovery and display-memory contract"
           },
           {
@@ -5155,10 +5155,10 @@
           "technical_definition": {
             "specification": {
               "technology_id": "technology.logix_digital_video",
-              "api_id": "technology.logix_display_api",
+              "api_id": "technology.aion_c_portability_framework",
               "mode_discovery": "Enumerate controller modes intersected with identified or configured monitor raster capabilities and available buffering/sprite allocations. Reject unsupported downscaling.",
               "memory_layout": {
-                "policy_id": "technology.logix_display_api",
+                "policy_id": "technology.aion_c_portability_framework",
                 "mode_exclusivity": "Text/font and bitmap allocations are alternative uses of 16 KiB display DRAM. The exclusive 1 KiB sprite SRAM remains available in every mode.",
                 "font_policy": "One shared 2048-byte font; glyph edits affect both pages. Independent font buffering is not advertised in this baseline.",
                 "page_flip": "Latch selected page during vertical blank; drawing throughput is not guaranteed by double buffering."
@@ -5653,7 +5653,7 @@
           },
           {
             "key": "display_api_id",
-            "ref_id": "technology.logix_display_api",
+            "ref_id": "technology.aion_c_portability_framework",
             "ref_role": "Mode discovery and display-memory contract"
           },
           {
@@ -5967,10 +5967,10 @@
           "technical_definition": {
             "specification": {
               "technology_id": "technology.logix_digital_video",
-              "api_id": "technology.logix_display_api",
+              "api_id": "technology.aion_c_portability_framework",
               "mode_discovery": "Enumerate controller modes intersected with identified or configured monitor raster capabilities and available buffering/sprite allocations. Reject unsupported downscaling.",
               "memory_layout": {
-                "policy_id": "technology.logix_display_api",
+                "policy_id": "technology.aion_c_portability_framework",
                 "mode_exclusivity": "With palette-list mode enabled reserve 0xFA00–0xFFFF (1536 bytes); framebuffer/text/font allocations use 0x0000–0xF9FF. Text/font and bitmap layouts remain exclusive. Five sprites retain separate 1 KiB SRAM.",
                 "font_policy": "One shared 256-glyph bank per mode. Font allocation 2048 bytes at 8×8, 4096 at 8×16 or 8×10 (16-byte glyph stride). Font writes affect both pages.",
                 "page_flip": "Latch selected page during vertical blank; drawing throughput is not guaranteed by double buffering."
@@ -6662,7 +6662,7 @@
           },
           {
             "key": "display_api_id",
-            "ref_id": "technology.logix_display_api",
+            "ref_id": "technology.aion_c_portability_framework",
             "ref_role": "Mode discovery and display-memory contract"
           },
           {
@@ -7388,8 +7388,8 @@
         "actor.logix"
       ],
       "technology_ids": [
-        "technology.flexibus_pointing_device",
-        "technology.logix_tui_mouse"
+        "technology.flexibus",
+        "technology.logix_tui_standard"
       ],
       "composition_history": [
         {
@@ -7405,7 +7405,7 @@
           "technical_definition": {
             "specification": {
               "interface_id": "technology.flexibus",
-              "class_protocol_id": "technology.flexibus_pointing_device",
+              "class_protocol_id": "technology.flexibus",
               "buttons": 2,
               "rollers": [
                 {
@@ -7528,7 +7528,7 @@
           },
           {
             "key": "pointing_protocol_id",
-            "ref_id": "technology.flexibus_pointing_device",
+            "ref_id": "technology.flexibus",
             "ref_role": "Pointing-device reports and control protocol"
           },
           {
@@ -10175,9 +10175,7 @@
         "technology.logix_digital_video",
         "technology.logix_tui_standard",
         "technology.aurelia_memory_model",
-        "technology.logix_c_api",
-        "technology.logix_display_api",
-        "technology.logix_tui_keyboard_standard"
+        "technology.aion_c_portability_framework"
       ],
       "composition_history": [
         {
@@ -10329,7 +10327,7 @@
               },
               "software_compatibility": {
                 "native_target": "z80_cpm",
-                "api_id": "technology.logix_c_api",
+                "api_id": "technology.aion_c_portability_framework",
                 "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name.",
                 "native_40_column_mode": "Native 40x25 and 80x25 text on both hosts; usable width depends on monitor capabilities."
               }
@@ -10728,7 +10726,7 @@
           },
           {
             "key": "application_api_id",
-            "ref_id": "technology.logix_c_api",
+            "ref_id": "technology.aion_c_portability_framework",
             "ref_role": "Portable application interface implemented on this host"
           }
         ]
@@ -10980,9 +10978,7 @@
         "technology.logix_digital_video",
         "technology.logix_tui_standard",
         "technology.aurelia_memory_model",
-        "technology.logix_c_api",
-        "technology.logix_display_api",
-        "technology.logix_tui_keyboard_standard"
+        "technology.aion_c_portability_framework"
       ],
       "composition_history": [
         {
@@ -11102,7 +11098,7 @@
               },
               "software_compatibility": {
                 "native_target": "z80_cpm",
-                "api_id": "technology.logix_c_api",
+                "api_id": "technology.aion_c_portability_framework",
                 "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name.",
                 "native_40_column_mode": "Native 40x25 and 80x25 text on both hosts; usable width depends on monitor capabilities."
               }
@@ -11472,7 +11468,7 @@
           },
           {
             "key": "application_api_id",
-            "ref_id": "technology.logix_c_api",
+            "ref_id": "technology.aion_c_portability_framework",
             "ref_role": "Portable application interface implemented on this host"
           }
         ]
@@ -11728,9 +11724,7 @@
         "technology.cpm80_virtual_peripheral_bridge",
         "technology.aion_c_portability_framework",
         "technology.logix_tcpip_lan",
-        "technology.logix_lan100_link",
-        "technology.logix_c_api",
-        "technology.logix_display_api"
+        "technology.logix_lan100_link"
       ],
       "composition_history": [
         {
@@ -11787,7 +11781,7 @@
               },
               "software_compatibility": {
                 "native_target": "era_aionix",
-                "api_id": "technology.logix_c_api",
+                "api_id": "technology.aion_c_portability_framework",
                 "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
               }
             }
@@ -12095,7 +12089,7 @@
           },
           {
             "key": "application_api_id",
-            "ref_id": "technology.logix_c_api",
+            "ref_id": "technology.aion_c_portability_framework",
             "ref_role": "Portable application interface on this host"
           }
         ]
@@ -12180,8 +12174,6 @@
         "technology.aion_c_portability_framework",
         "technology.logix_tcpip_lan",
         "technology.logix_lan100_link",
-        "technology.logix_c_api",
-        "technology.logix_display_api",
         "technology.nmos_3um"
       ],
       "composition_history": [
@@ -12244,7 +12236,7 @@
               },
               "software_compatibility": {
                 "native_target": "era_aionix",
-                "api_id": "technology.logix_c_api",
+                "api_id": "technology.aion_c_portability_framework",
                 "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
               },
               "networking": {
@@ -12576,7 +12568,7 @@
           },
           {
             "key": "application_api_id",
-            "ref_id": "technology.logix_c_api",
+            "ref_id": "technology.aion_c_portability_framework",
             "ref_role": "Portable application interface on this host"
           },
           {
