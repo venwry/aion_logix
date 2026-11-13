@@ -1,0 +1,110 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.e13e437c-5507-433b-bde5-12d4eda99791",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T12:06:05.869Z",
+      "change_id": "change.retire_remaining_actor_relationships",
+      "proposal_sha256": "b27af05414f3c2fbf9527c821012bff6fa2e9eb212973f501f7af35a8937777f",
+      "proposal": {
+        "id": "change.retire_remaining_actor_relationships",
+        "category": "foundation",
+        "title": "Remove the three redundant affiliation records",
+        "reason": "No current foundation record references these three IDs. Harvard education is represented by process.harvard_education and event.harvard_graduation; recruitment is represented by event.letwin and event.paterson, with agreement.letwin_aion_appointment recording Letwin’s contractual appointment. Preserve those records and historical decisions. Schema, dataset and runtime retirement is parked until the author gives a separate instruction after these tasks.",
+        "elements": [
+          {
+            "record_type": "actor_relationship",
+            "record_id": "actor_relationship.adam_harvard",
+            "before": {
+              "id": "actor_relationship.adam_harvard",
+              "kind": "affiliation",
+              "subject_actor_ids": [
+                "actor.adam"
+              ],
+              "object_actor_id": "actor.harvard",
+              "description": "Economics student in the source study process."
+            },
+            "after": null
+          },
+          {
+            "record_type": "actor_relationship",
+            "record_id": "actor_relationship.letwin_recruitment",
+            "before": {
+              "id": "actor_relationship.letwin_recruitment",
+              "kind": "affiliation",
+              "subject_actor_ids": [
+                "actor.letwin"
+              ],
+              "object_actor_id": "actor.adam",
+              "description": "Adam recruits Gordon Letwin; this does not infer an unstated legal employer.",
+              "established_by_event_id": "event.letwin"
+            },
+            "after": null
+          },
+          {
+            "record_type": "actor_relationship",
+            "record_id": "actor_relationship.paterson_recruitment",
+            "before": {
+              "id": "actor_relationship.paterson_recruitment",
+              "kind": "affiliation",
+              "subject_actor_ids": [
+                "actor.paterson"
+              ],
+              "object_actor_id": "actor.adam",
+              "description": "Adam recruits Tim Paterson; this does not infer an unstated legal employer.",
+              "established_by_event_id": "event.paterson"
+            },
+            "after": null
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "actor_relationship.adam_harvard",
+          "before": {
+            "id": "actor_relationship.adam_harvard",
+            "kind": "affiliation",
+            "subject_actor_ids": [
+              "actor.adam"
+            ],
+            "object_actor_id": "actor.harvard",
+            "description": "Economics student in the source study process."
+          },
+          "after": null,
+          "content_sha256": null
+        },
+        {
+          "record_id": "actor_relationship.letwin_recruitment",
+          "before": {
+            "id": "actor_relationship.letwin_recruitment",
+            "kind": "affiliation",
+            "subject_actor_ids": [
+              "actor.letwin"
+            ],
+            "object_actor_id": "actor.adam",
+            "description": "Adam recruits Gordon Letwin; this does not infer an unstated legal employer.",
+            "established_by_event_id": "event.letwin"
+          },
+          "after": null,
+          "content_sha256": null
+        },
+        {
+          "record_id": "actor_relationship.paterson_recruitment",
+          "before": {
+            "id": "actor_relationship.paterson_recruitment",
+            "kind": "affiliation",
+            "subject_actor_ids": [
+              "actor.paterson"
+            ],
+            "object_actor_id": "actor.adam",
+            "description": "Adam recruits Tim Paterson; this does not infer an unstated legal employer.",
+            "established_by_event_id": "event.paterson"
+          },
+          "after": null,
+          "content_sha256": null
+        }
+      ]
+    }
+  ]
+}
