@@ -1,0 +1,204 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.7ed18212-85b6-4af1-8f89-98681eb92adc",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T12:08:44.570Z",
+      "change_id": "change.external_product_chapters_model_ii_flexibus",
+      "proposal_sha256": "a6fe4998b725a1f952b199e234f238193b6d3f64b810468b6afd40db3763840f",
+      "proposal": {
+        "id": "change.external_product_chapters_model_ii_flexibus",
+        "category": "foundation",
+        "title": "Convert Tandy Model II FlexiBUS option to technology-style specification chapters",
+        "reason": "Preserve every existing specification description, relationship role and referenced ID in numbered chapters with named text parameters. Add the commercial offering kind and documented providers. Where supplied, release is a direct date already stated in the product or the supported Model II customer-release event. No sales forecasts or new standards-impact assessments are invented.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.model_ii_flexibus",
+            "before": {
+              "id": "external_product.model_ii_flexibus",
+              "name": "Tandy Model II FlexiBUS option",
+              "description": "A Model II-specific internal FlexiBUS option with a two-port configuration subject to slot, power, timing and attachment qualification. It uses the Tandy Model II bus, is not S-100 compatible and retains Tandy’s native video and existing interfaces. Powered-on attachment is permitted only on a qualified quiescent port. Initial supply uses AION chips; SMC substitution requires per-part qualification.",
+              "specification": [
+                {
+                  "no": 1,
+                  "description": "Tandy sells and supports the qualified Model II option.",
+                  "ref_id": "actor.tandy",
+                  "ref_role": "option seller and supporting hardware vendor"
+                },
+                {
+                  "no": 2,
+                  "description": "The internal option is specific to the Model II host bus.",
+                  "ref_id": "external_product.trs80_model_ii",
+                  "ref_role": "supported host"
+                },
+                {
+                  "no": 3,
+                  "description": "Provides qualified FlexiBUS peripheral connectivity.",
+                  "ref_id": "technology.flexibus",
+                  "ref_role": "peripheral bus implemented by the option"
+                },
+                {
+                  "no": 4,
+                  "description": "Defines the internal option, qualification and supply responsibilities.",
+                  "ref_id": "agreement.tandy",
+                  "ref_role": "interface and delivery agreement"
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.model_ii_flexibus",
+              "name": "Tandy Model II FlexiBUS option",
+              "description": "A Model II-specific internal FlexiBUS option with a two-port configuration subject to slot, power, timing and attachment qualification. It uses the Tandy Model II bus, is not S-100 compatible and retains Tandy’s native video and existing interfaces. Powered-on attachment is permitted only on a qualified quiescent port. Initial supply uses AION chips; SMC substitution requires per-part qualification.",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Option seller and supporting hardware vendor",
+                  "description": "Tandy sells and supports the qualified Model II option. Related record: {reference}.",
+                  "parameters": [
+                    {
+                      "key": "reference",
+                      "value": "actor.tandy"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Supported host",
+                  "description": "The internal option is specific to the Model II host bus. Related record: {reference}.",
+                  "parameters": [
+                    {
+                      "key": "reference",
+                      "value": "external_product.trs80_model_ii"
+                    }
+                  ]
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Peripheral bus implemented by the option",
+                  "description": "Provides qualified FlexiBUS peripheral connectivity. Related record: {reference}.",
+                  "parameters": [
+                    {
+                      "key": "reference",
+                      "value": "technology.flexibus"
+                    }
+                  ]
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Interface and delivery agreement",
+                  "description": "Defines the internal option, qualification and supply responsibilities. Related record: {reference}.",
+                  "parameters": [
+                    {
+                      "key": "reference",
+                      "value": "agreement.tandy"
+                    }
+                  ]
+                }
+              ],
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tandy"
+              ],
+              "release": "1979-10-15"
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.model_ii_flexibus",
+          "before": {
+            "id": "external_product.model_ii_flexibus",
+            "name": "Tandy Model II FlexiBUS option",
+            "description": "A Model II-specific internal FlexiBUS option with a two-port configuration subject to slot, power, timing and attachment qualification. It uses the Tandy Model II bus, is not S-100 compatible and retains Tandy’s native video and existing interfaces. Powered-on attachment is permitted only on a qualified quiescent port. Initial supply uses AION chips; SMC substitution requires per-part qualification.",
+            "specification": [
+              {
+                "no": 1,
+                "description": "Tandy sells and supports the qualified Model II option.",
+                "ref_id": "actor.tandy",
+                "ref_role": "option seller and supporting hardware vendor"
+              },
+              {
+                "no": 2,
+                "description": "The internal option is specific to the Model II host bus.",
+                "ref_id": "external_product.trs80_model_ii",
+                "ref_role": "supported host"
+              },
+              {
+                "no": 3,
+                "description": "Provides qualified FlexiBUS peripheral connectivity.",
+                "ref_id": "technology.flexibus",
+                "ref_role": "peripheral bus implemented by the option"
+              },
+              {
+                "no": 4,
+                "description": "Defines the internal option, qualification and supply responsibilities.",
+                "ref_id": "agreement.tandy",
+                "ref_role": "interface and delivery agreement"
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.model_ii_flexibus",
+            "name": "Tandy Model II FlexiBUS option",
+            "description": "A Model II-specific internal FlexiBUS option with a two-port configuration subject to slot, power, timing and attachment qualification. It uses the Tandy Model II bus, is not S-100 compatible and retains Tandy’s native video and existing interfaces. Powered-on attachment is permitted only on a qualified quiescent port. Initial supply uses AION chips; SMC substitution requires per-part qualification.",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Option seller and supporting hardware vendor",
+                "description": "Tandy sells and supports the qualified Model II option. Related record: {reference}.",
+                "parameters": [
+                  {
+                    "key": "reference",
+                    "value": "actor.tandy"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Supported host",
+                "description": "The internal option is specific to the Model II host bus. Related record: {reference}.",
+                "parameters": [
+                  {
+                    "key": "reference",
+                    "value": "external_product.trs80_model_ii"
+                  }
+                ]
+              },
+              {
+                "number": 3,
+                "chapter_name": "Peripheral bus implemented by the option",
+                "description": "Provides qualified FlexiBUS peripheral connectivity. Related record: {reference}.",
+                "parameters": [
+                  {
+                    "key": "reference",
+                    "value": "technology.flexibus"
+                  }
+                ]
+              },
+              {
+                "number": 4,
+                "chapter_name": "Interface and delivery agreement",
+                "description": "Defines the internal option, qualification and supply responsibilities. Related record: {reference}.",
+                "parameters": [
+                  {
+                    "key": "reference",
+                    "value": "agreement.tandy"
+                  }
+                ]
+              }
+            ],
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tandy"
+            ],
+            "release": "1979-10-15"
+          },
+          "content_sha256": "11bf7d33ed33a5d3b0c36e8b05c4bdee74e645d89f534e0a9752a73e960efcd8"
+        }
+      ]
+    }
+  ]
+}
