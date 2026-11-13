@@ -209,3 +209,14 @@ body.timeline-fullscreen>#workspace{margin:0 6px 6px;flex:1;min-height:0}
 .specification-description > p:first-child{display:inline;margin:0}
 
 .market-impacts .specification-chapter-heading :is(.reference-entry,.reference-name){display:inline;white-space:normal;overflow:visible;text-overflow:clip}.market-impacts .specification-chapter-heading :is(.reference-id,.reference-divider){display:none}
+
+/* Keep external impact relationship flags beside their parameter toggle. */
+.impact-heading-controls{display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;vertical-align:middle}
+.impact-heading-controls .specification-parameters-toggle{margin-left:0}
+.impact-relationship{display:inline-block;padding:.1rem .45rem;border:1px solid;border-radius:4px;font-size:.8rem;font-weight:600;line-height:1.4}
+.impact-relationship[data-relationship="competes_with"]{background:#fee2e2;color:#991b1b;border-color:#f87171}
+.impact-relationship[data-relationship="incompatible_with"]{background:#ffedd5;color:#9a3412;border-color:#fb923c}
+.impact-relationship[data-relationship="extends"]{background:#fef9c3;color:#713f12;border-color:#eab308}
+.impact-relationship[data-relationship="supports"]{background:#dbeafe;color:#1e40af;border-color:#60a5fa}
+.impact-relationship[data-relationship="requires"]{background:#dcfce7;color:#166534;border-color:#4ade80}
+.impact-relationship[data-relationship="implements"]{background:#e5e7eb;color:#374151;border-color:#9ca3af}

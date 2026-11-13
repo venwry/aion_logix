@@ -53,7 +53,7 @@ export function renderExternalImpacts(items,field,index,renderValue=value=>docum
   const card=make('section','standard-impact');card.dataset[products?'productId':'standardId']=item[key];
   const title=(index.get(item[key])?.name||item[key])+' ('+item.date+')';
   const heading=make('h3','specification-chapter-heading');heading.append(renderValue(item[key]),document.createTextNode(' ('+item.date+')'));card.append(heading);
-  if(item.relationship)card.append(make('p','impact-relationship','Relationship: '+item.relationship.replaceAll('_',' ')));
+  const controls=make('span','impact-heading-controls');
   const prose=make('div','specification-description');
   descriptions.forEach((field,i)=>{
    const p=make('p');p.append(make('strong','',labels[i]),document.createTextNode(' '));
@@ -65,11 +65,16 @@ export function renderExternalImpacts(items,field,index,renderValue=value=>docum
   if(item.parameters.length){
    const wrap=make('div','specification-parameters-scroll');wrap.id='impact-parameters-'+(++serial);wrap.hidden=true;
    const toggle=make('button','specification-parameters-toggle');toggle.type='button';toggle.setAttribute('aria-controls',wrap.id);
-   const update=()=>{toggle.textContent=wrap.hidden?'[+]':'[−]';toggle.setAttribute('aria-expanded',String(!wrap.hidden));toggle.setAttribute('aria-label',(wrap.hidden?'Show':'Hide')+' parameters for '+title);};update();toggle.onclick=()=>{wrap.hidden=!wrap.hidden;update();};heading.append(toggle);
+   const update=()=>{toggle.textContent=wrap.hidden?'[+]':'[−]';toggle.setAttribute('aria-expanded',String(!wrap.hidden));toggle.setAttribute('aria-label',(wrap.hidden?'Show':'Hide')+' parameters for '+title);};update();toggle.onclick=()=>{wrap.hidden=!wrap.hidden;update();};controls.append(toggle);
    const table=make('table','specification-parameters'),head=make('thead'),tr=make('tr'),body=make('tbody');
    for(const label of ['Key','Value']){const th=make('th','',label);th.scope='col';tr.append(th);}head.append(tr);
    for(const p of item.parameters){const row=make('tr'),key=make('th','',p.key),value=make('td');key.scope='row';value.append(renderValue(p.value));row.append(key,value);body.append(row);}table.append(head,body);table.setAttribute('aria-label',title+' parameters');wrap.append(table);card.append(wrap);
-  }section.append(card);
+  }
+  if(item.relationship){
+   const flag=make('span','impact-relationship',item.relationship.replaceAll('_',' '));flag.dataset.relationship=item.relationship;flag.setAttribute('aria-label','Relationship: '+item.relationship.replaceAll('_',' '));controls.append(flag);
+  }
+  if(controls.childNodes.length)heading.append(document.createTextNode(' '),controls);
+  section.append(card);
  }
  return section;
 }

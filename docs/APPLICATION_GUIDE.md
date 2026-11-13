@@ -155,3 +155,5 @@ Annual sales is a separate directly editable calculation dataset, not a foundati
 ### External-product impact details
 
 External products can show both **Impacted standards** and **Impacted products**. Each entry links its target, preserves the assessment date, displays the directed relationship, and presents Base assumptions, Relation to standard/product, and Commercial consequences. Key/value substitutions and expandable parameter tables work identically in both sections and in Changes confirm before/after details. Empty top-level descriptions are omitted; unique narrative belongs in specification chapters. Historical standard impacts without a relationship remain readable pending review. Market-response impact sections retain their separate direction/description model.
+
+External-product impact headers show the relationship flag beside the parameter toggle: competes with (red), incompatible with (orange), extends (yellow), supports (blue), requires (green), implements (gray). Labels remain visible independently of color; entries without parameters show the flag without a toggle.
