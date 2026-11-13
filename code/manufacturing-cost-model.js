@@ -2,7 +2,7 @@ import {pointBounds} from './temporal.js';
 import {parameterValues} from './technical-specification.js';
 
 export const costDates=Array.from({length:6},(_,i)=>[`${1978+i}-06-15`,`${1978+i}-12-15`]).flat();
-export const costCategories=['purchased_parts','fabricated_parts','assembly_test','factory_overhead','assembly_loss','third_party_licensing','service_delivery'];
+export const costCategories=['purchased_parts','fabricated_parts','aion_chip_markup','assembly_test','factory_overhead','assembly_loss','third_party_licensing','service_delivery'];
 export const costSourceTypes=['product','device','software_edition','base_part','event','process','manufacturing_capability','technology','agreement','assumption'];
 export const costSourceRecords=index=>[...index.values()].filter(r=>costSourceTypes.includes(r.id.split('.')[0])).map(({status,...r})=>r).sort((a,b)=>a.id.localeCompare(b.id,'en'));
 const years=(date,base)=>(Date.parse(date)-Date.parse(base))/31557600000;
@@ -52,7 +52,7 @@ export function chipQuote(profile,date,index,assumptions){
   // Wafer cost already includes fab labour, utilities, maintenance and depreciation.
   // Package/test is spent on each accepted die entering assembly, including final rejects.
   const unitCost=(waferCost/(gross*state.wafer_completion*dieYield)+profile.package_test_cost)/state.package_yield;
-  candidates.push({unit_cost:unitCost,route_id:route.id,capability_id:route.capability_id,release_event_id:route.release_event_id,wafer_diameter_mm:diameter,die_area_mm2:area,gross_die:gross,wafer_completion:state.wafer_completion,electrical_yield:electrical,grade_fraction:grade,package_yield:state.package_yield,processed_wafer_cost:waferCost,package_test_cost:profile.package_test_cost});
+  candidates.push({unit_cost:unitCost*(1+assumptions.aion_chip_markup_rate),fabrication_cost:unitCost,aion_markup:unitCost*assumptions.aion_chip_markup_rate,route_id:route.id,capability_id:route.capability_id,release_event_id:route.release_event_id,wafer_diameter_mm:diameter,die_area_mm2:area,gross_die:gross,wafer_completion:state.wafer_completion,electrical_yield:electrical,grade_fraction:grade,package_yield:state.package_yield,processed_wafer_cost:waferCost,package_test_cost:profile.package_test_cost});
  }
  if(!candidates.length)throw Error('No dated fabrication route available for '+profile.record_id+' on '+date);
  return candidates.sort((a,b)=>a.unit_cost-b.unit_cost)[0];
@@ -66,14 +66,24 @@ export function createCostEstimator(index,assumptions){
   const p=parts.get(id);if(!p)throw Error('No explicit part allowance '+id);
   let quote,category='purchased_parts';
   if(p.method==='fabricated'){quote=chipQuote(p,date,index,assumptions);category='fabricated_parts';}
+  else if(p.method==='aion_allowance'){
+   const cost=p.unit_cost*Math.pow(1+p.annual_real_change,years(date,p.base_date));
+   quote={unit_cost:cost*(1+assumptions.aion_chip_markup_rate),fabrication_cost:cost,aion_markup:cost*assumptions.aion_chip_markup_rate};category='fabricated_parts';
+  }
+  else if(p.method==='market'){
+   const series=assumptions.market_series.find(s=>s.id===p.market_series_id),observation=latest(series?.observations||[],date);
+   if(!observation)throw Error('No dated market observation for '+id+' on '+date);
+   // Historical dollar quotes already include their period's inflation.
+   quote={unit_cost:observation.unit_cost_nominal/nominalFactor(date,assumptions),market_observation:observation};
+  }
   else if(p.method==='composite'){
    const sub=p.components.map(c=>({quantity:c.quantity,...leaf(c.record_id,date,seen)}));quote={unit_cost:sub.reduce((sum,c)=>sum+c.quantity*c.unit_cost,0)+p.other_cost,components:sub};
   }else quote={unit_cost:p.unit_cost*Math.pow(1+p.annual_real_change,years(date,p.base_date))};
   const result={...quote,category,basis:p.basis,confidence:p.confidence,record_id:id};cache.set(key,result);return result;
  }
- function estimate(productId,date){
-  const product=index.get(productId);if(!product?.id.startsWith('product.'))throw Error('Not an internal product '+productId);
-  const launch=eventCostDate(index,product.launch_event_id);if(date<launch)return null;
+ function estimate(productId,date,{assembly=false,versionNumber}={}){
+  const product=index.get(productId);if(!product||!assembly&&!product.id.startsWith('product.'))throw Error('Not an internal product '+productId);
+  if(!assembly){const launch=eventCostDate(index,product.launch_event_id);if(date<launch)return null;}
   const breakdown=Object.fromEntries(costCategories.map(k=>[k,0])),lines=[],flags=new Set(),versions=[],routes=new Set();
   function charge(category,cost,record_id,quantity,basis,extra={}){breakdown[category]+=cost;lines.push({record_id,category,quantity,cost,basis,...extra});}
   function visit(id,pinned,multiplier,path){
@@ -82,7 +92,12 @@ export function createCostEstimator(index,assumptions){
    if(id.startsWith('base_part.')){
     function emit(q,quantity){
      if(q.components){flags.add('A functional RAM assembly uses an estimated internal chip population.');for(const c of q.components)emit(c,quantity*c.quantity);const remainder=q.unit_cost-q.components.reduce((sum,c)=>sum+c.quantity*c.unit_cost,0);charge('purchased_parts',remainder*quantity,q.record_id,quantity,q.basis);}
-     else{charge(q.category,q.unit_cost*quantity,q.record_id,quantity,q.basis,{unit_cost:q.unit_cost,chip:q.route_id?q:undefined});if(q.route_id)routes.add(q.route_id);}
+     else{
+      const cost=q.fabrication_cost??q.unit_cost;
+      charge(q.category,cost*quantity,q.record_id,quantity,q.basis,{unit_cost:cost,chip:q.route_id?q:undefined,market_observation:q.market_observation});
+      if(q.aion_markup!==undefined)charge('aion_chip_markup',q.aion_markup*quantity,q.record_id,quantity,'AION Labs operational and profit markup: 15% of chip manufacturing cost, charged once.',{unit_cost:q.aion_markup});
+      if(q.route_id)routes.add(q.route_id);
+     }
      if(q.confidence==='low')flags.add('Some components use provisional engineering allowances.');
     }
     emit(leaf(id,date),multiplier);return;
@@ -105,16 +120,16 @@ export function createCostEstimator(index,assumptions){
    if(service){charge('service_delivery',service.labor_hours*assumptions.labor[service.labor_rate]+service.other_cost,id,1,service.basis);if(multiplier!==1){const last=lines.at(-1);breakdown.service_delivery+=last.cost*(multiplier-1);last.cost*=multiplier;last.quantity=multiplier;}if(service.provisional)flags.add('Service scope or utilisation is estimated; see the per-unit service basis.');}
    if(!v&&!service&&!op)throw Error('Missing cost coverage '+id);
   }
-  visit(productId,undefined,1,[]);
+  visit(productId,versionNumber,1,[]);
   const factor=nominalFactor(date,assumptions);
   for(const key of costCategories)breakdown[key]*=factor;
-  for(const line of lines){line.cost*=factor;if(line.unit_cost!==undefined)line.unit_cost*=factor;if(line.chip)line.chip={...line.chip,unit_cost:line.chip.unit_cost*factor,processed_wafer_cost:line.chip.processed_wafer_cost*factor,package_test_cost:line.chip.package_test_cost*factor};}
+  for(const line of lines){line.cost*=factor;if(line.unit_cost!==undefined)line.unit_cost*=factor;if(line.chip)line.chip={...line.chip,...Object.fromEntries(['unit_cost','fabrication_cost','aion_markup','processed_wafer_cost','package_test_cost'].map(k=>[k,line.chip[k]*factor]))};}
   const rounded=Object.fromEntries(Object.entries(breakdown).map(([k,v])=>[k,roundCost(v)])),total=roundCost(Object.values(rounded).reduce((a,b)=>a+b,0));
   return {date,currency_index:priceIndex(date,assumptions),currency_factor:factor,composition_version:versions.find(v=>v.record_id===productId)?.version_number??null,total,low:roundCost(total*assumptions.range.low_factor),high:roundCost(total*assumptions.range.high_factor),breakdown:rounded,route_ids:[...routes].sort(),flags:[...flags].sort(),lines,versions};
  }
- return {estimate,partQuote:(id,date)=>{
+ return {estimate,estimateAssembly:(id,date,versionNumber=1)=>estimate(id,date,{assembly:true,versionNumber}),partQuote:(id,date)=>{
   const factor=nominalFactor(date,assumptions);
-  const convert=quote=>({...quote,unit_cost:quote.unit_cost*factor,...(quote.route_id?{processed_wafer_cost:quote.processed_wafer_cost*factor,package_test_cost:quote.package_test_cost*factor}:{}),...(quote.components?{components:quote.components.map(convert)}:{})});
+  const convert=quote=>({...quote,...Object.fromEntries(['unit_cost','fabrication_cost','aion_markup','processed_wafer_cost','package_test_cost'].filter(k=>quote[k]!==undefined).map(k=>[k,quote[k]*factor])),...(quote.components?{components:quote.components.map(convert)}:{})});
   return convert(leaf(id,date));
  }};
 }

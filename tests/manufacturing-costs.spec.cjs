@@ -19,10 +19,17 @@ test('search, category filter and CSV preserve the date grid and empty cells',as
 });
 test('stale foundation is visible and disables a misleading live recalculation',async({page})=>{
  await page.route('**/data_foundation/product.json',async route=>{const response=await route.fetch(),d=await response.json();d.product.find(p=>p.id==='product.aurelia_mono').description+=' Changed fixture.';await route.fulfill({json:d});});
- await open(page);await expect(page.locator('#cost-staleness')).toBeVisible();await page.locator('tr[data-product-id="product.aurelia_mono"] td button').first().click();await expect(page.locator('#cost-detail')).toContainText('Detailed recalculation is disabled');await expect(page.getByText('Components and cost assumptions',{exact:true})).toHaveCount(0);
+ await open(page);await expect(page.locator('#cost-staleness')).toBeVisible();await expect(page.getByRole('button',{name:'RAM comparisons',exact:true})).toBeDisabled();await page.locator('tr[data-product-id="product.aurelia_mono"] td button').first().click();await expect(page.locator('#cost-detail')).toContainText('Detailed recalculation is disabled');await expect(page.getByText('Components and cost assumptions',{exact:true})).toHaveCount(0);
 });
 test('saving-service visibility persists and the grid remains usable at a narrow viewport',async({page})=>{
  await page.setViewportSize({width:900,height:850});await open(page);await page.getByRole('button',{name:'Saving service',exact:true}).click();await expect(page.locator('#backend-connection')).toBeHidden();
  const first=page.locator('#cost-table tbody th').first(),x=await first.evaluate(n=>n.getBoundingClientRect().x);await page.locator('.cost-table-scroll').evaluate(n=>n.scrollLeft=500);expect(Math.abs((await first.evaluate(n=>n.getBoundingClientRect().x))-x)).toBeLessThan(2);
  await page.screenshot({path:'/tmp/manufacturing-costs.png'});await page.getByRole('link',{name:'Product Catalog',exact:true}).click();await expect(page.locator('#backend-connection')).toBeHidden();await expect(page.getByRole('link',{name:'Manufacturing costs',exact:true})).toBeVisible();
+});
+
+test('RAM comparisons expose dated sources, complete module costs and host restrictions',async({page})=>{
+ await open(page);await page.getByRole('button',{name:'RAM comparisons',exact:true}).click();await expect(page.getByRole('dialog')).toContainText('15% markup');
+ const date=page.getByLabel('RAM comparison date');await date.selectOption('1980-06-15');await expect(page.getByRole('dialog')).toContainText('Commercial 16K');await expect(page.getByRole('dialog')).toContainText('Logix Artemis');await expect(page.getByRole('dialog')).not.toContainText('Logix Athena');
+ await date.selectOption('1983-12-15');await expect(page.getByRole('dialog')).toContainText('Logix Athena Server');await page.screenshot({path:'/tmp/ram-cost-comparison.png'});await page.getByRole('dialog').locator('details').last().locator('summary').click();await expect(page.getByRole('dialog')).toContainText('qualification');
+ await page.keyboard.press('Escape');await page.locator('tr[data-product-id="product.aurelia_mono"] td button').first().click();await expect(page.getByRole('dialog')).toContainText('AION Labs 15% chip markup');await page.getByRole('button',{name:'Compare RAM alternatives at this date'}).click();await expect(page.getByLabel('RAM comparison date')).toHaveValue('1978-06-15');
 });

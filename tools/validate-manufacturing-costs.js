@@ -5,8 +5,9 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import {costHash,readCostFoundation} from './generate-manufacturing-costs.js';
 import {buildCostRows,costSourceRecords,costDates,eventCostDate,roundCost} from '../code/manufacturing-cost-model.js';
+import {buildRamScenarios} from '../code/ram-cost-scenarios.js';
 const ajv=new Ajv2020({allErrors:true,strict:false});addFormats(ajv);
-const checks=Object.fromEntries(['manufacturing_costs','manufacturing_cost_assumptions'].map(n=>[n,ajv.compile(JSON.parse(fs.readFileSync(new URL('../schemas/calculation/'+n+'.schema.json',import.meta.url))))]));
+const checks=Object.fromEntries(['manufacturing_costs','manufacturing_cost_assumptions','ram_cost_scenarios'].map(n=>[n,ajv.compile(JSON.parse(fs.readFileSync(new URL('../schemas/calculation/'+n+'.schema.json',import.meta.url))))]));
 export function validateManufacturingCosts(document,assumptions,index){
  const errors=[],warnings=[];
  for(const [name,value] of [['manufacturing_costs',document],['manufacturing_cost_assumptions',assumptions]])if(!checks[name](value))errors.push(...checks[name].errors.map(e=>name+e.instancePath+': '+e.message));
@@ -17,6 +18,21 @@ export function validateManufacturingCosts(document,assumptions,index){
  if(document.foundation_sha256!==costHash(costSourceRecords(index)))errors.push('Cost foundation has changed; regenerate estimates.');
  for(const list of ['parts','operations','services']){
   const seen=new Set();for(const a of assumptions[list]){if(seen.has(a.record_id))errors.push('Duplicate '+list+' assumption '+a.record_id);seen.add(a.record_id);if(!index.has(a.record_id))errors.push('Unknown cost input '+a.record_id);}
+ }
+ const sources=new Set(assumptions.sources.map(s=>s.id)),markets=new Set();
+ for(const s of assumptions.market_series){
+  if(markets.has(s.id))errors.push('Duplicate market series '+s.id);markets.add(s.id);
+  for(let i=0;i<s.observations.length;i++){const o=s.observations[i];if(!sources.has(o.source_id))errors.push('Unknown market evidence '+o.source_id);if(i&&s.observations[i-1].date>=o.date)errors.push('Market observations must be strictly ordered '+s.id);}
+ }
+ for(const p of assumptions.parts){
+  if(p.method==='market'&&!markets.has(p.market_series_id))errors.push('Unknown market series '+p.market_series_id);
+  const record=index.get(p.record_id),romRecipe=record?.technical_specification?.parameters?.find(v=>v.key==='rom_recipe')?.ref_id;
+  if((record?.manufacturer_actor_id==='actor.labs'||index.get(romRecipe)?.actor_id==='actor.labs')&&!['fabricated','aion_allowance'].includes(p.method))errors.push('AION-made part lacks markup coverage '+p.record_id);
+ }
+ for(const g of assumptions.equivalent_cost_groups){
+  const prices=g.record_ids.map(id=>assumptions.parts.find(p=>p.record_id===id));
+  if(prices.some(p=>!p))errors.push('Unknown equivalent part '+g.id);
+  else if(new Set(prices.map(({record_id,basis,confidence,...pricing})=>costHash(pricing))).size!==1)errors.push('Equivalent parts have inconsistent cost bases '+g.id);
  }
  const routeIds=new Set();
  for(const r of assumptions.fabrication_routes){
@@ -41,6 +57,14 @@ export function validateManufacturingCosts(document,assumptions,index){
  for(const r of index.values())if(r.id.startsWith('product.')&&!seen.has(r.id))errors.push('Missing product estimate '+r.id);
  if(!errors.length)try{if(costHash(document.manufacturing_costs)!==costHash(buildCostRows(index,assumptions)))errors.push('Stored estimates differ from reproducible cost model; regenerate.');}catch(error){errors.push(error.message);}
  return {errors,warnings};
+}
+export function validateRamScenarios(document,assumptions,index){
+ const errors=[];
+ if(!checks.ram_cost_scenarios(document))errors.push(...checks.ram_cost_scenarios.errors.map(e=>e.instancePath+': '+e.message));
+ if(errors.length)return {errors,warnings:[]};
+ if(document.foundation_sha256!==costHash(costSourceRecords(index))||document.assumptions_sha256!==costHash(assumptions))errors.push('Stale RAM scenario sources; regenerate.');
+ if(!errors.length)try{const {note,scope,dates}=document;if(costHash({note,scope,dates})!==costHash(buildRamScenarios(index,assumptions)))errors.push('RAM scenarios differ from reproducible module/host comparison.');}catch(error){errors.push(error.message);}
+ return {errors,warnings:[]};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const r=validateManufacturingCosts(JSON.parse(fs.readFileSync('data_calculation/manufacturing_costs.json')),JSON.parse(fs.readFileSync('data_calculation/manufacturing_cost_assumptions.json')),readCostFoundation());

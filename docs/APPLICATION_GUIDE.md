@@ -164,3 +164,5 @@ Manufacturing production-line details include a dated configuration selector. Ea
 ## Manufacturing costs
 
 The cost page reads calculation files directly and remains outside authorization. It uses nominal dollars for each June 15/December 15 snapshot, preserves dated compositions and shows software/service delivery costs with explicit units. Source fingerprints flag stale estimates. Search, offering filters, CSV export and cell breakdowns support review. See the [calculation guide](../data_calculation/MANUFACTURING_COSTS.md) for yield, inflation, scope and regeneration.
+
+On Manufacturing costs, **RAM comparisons** opens a dated comparison of commercial and AION chip sources, complete modules and host-listed RAM populations. A cost cell also links to comparisons for its date. Alternatives preserve capacity and socket rules but still require electrical qualification; they do not replace the recorded BOM grid. AION chip manufacturing cost and its 15% markup appear as separate breakdown categories.

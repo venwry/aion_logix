@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "model_version": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "currency": {
       "const": "USD"
@@ -212,7 +212,9 @@
             "enum": [
               "purchased",
               "fabricated",
-              "composite"
+              "composite",
+              "aion_allowance",
+              "market"
             ]
           },
           "basis": {
@@ -288,6 +290,10 @@
           "other_cost": {
             "type": "number",
             "minimum": 0
+          },
+          "market_series_id": {
+            "type": "string",
+            "minLength": 1
           }
         },
         "required": [
@@ -302,7 +308,10 @@
             "if": {
               "properties": {
                 "method": {
-                  "const": "purchased"
+                  "enum": [
+                    "purchased",
+                    "aion_allowance"
+                  ]
                 }
               }
             },
@@ -342,6 +351,20 @@
               "required": [
                 "components",
                 "other_cost"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "method": {
+                  "const": "market"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "market_series_id"
               ]
             }
           }
@@ -512,6 +535,155 @@
         "observations"
       ],
       "additionalProperties": false
+    },
+    "aion_chip_markup_rate": {
+      "const": 0.15
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "description"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "market_series": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "unit_cost_nominal": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "basis": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "date",
+                "unit_cost_nominal",
+                "source_id",
+                "basis"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "description",
+          "observations"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "equivalent_cost_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "record_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "record_ids",
+          "basis"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "ram_scenarios": {
+      "type": "object",
+      "properties": {
+        "commercial_low_factor": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "commercial_high_factor": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "aion_low_factor": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "aion_high_factor": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "commercial_low_factor",
+        "commercial_high_factor",
+        "aion_low_factor",
+        "aion_high_factor",
+        "basis"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -529,7 +701,12 @@
     "operations",
     "services",
     "input_amount_basis",
-    "inflation"
+    "inflation",
+    "aion_chip_markup_rate",
+    "sources",
+    "market_series",
+    "equivalent_cost_groups",
+    "ram_scenarios"
   ],
   "additionalProperties": false
 }

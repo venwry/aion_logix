@@ -23,7 +23,7 @@ test('Aurelia consumes 32 DRAMs, two sprite SRAMs and one support term without p
  assert.equal(r.breakdown.service_delivery,23);
 });
 test('wafer cost uses separate completion, electrical, grade and package yields; worse yield raises cost',()=>{
- const q=model.partQuote('base_part.aion_4116','1978-06-15');assert(Math.abs(q.unit_cost-(210/(190*.9*.6)+.65)/.95)<1e-10);
+ const q=model.partQuote('base_part.aion_4116','1978-06-15');assert(Math.abs(q.fabrication_cost-(210/(190*.9*.6)+.65)/.95)<1e-10);
  const a=structuredClone(assumptions);a.fabrication_routes.find(r=>r.id==='dram16').learning[0].electrical_yield=.3;
  assert(createCostEstimator(index,a).partQuote('base_part.aion_4116','1978-06-15').unit_cost>q.unit_cost);
 });
@@ -53,7 +53,7 @@ test('training and undefined service scopes have explicit per-unit assumptions; 
 test('costs are nominal USD on each date and general inflation is separate from real learning',()=>{
  const first=model.estimate('product.service_regular_support','1978-06-15'),last=model.estimate('product.service_regular_support','1983-12-15');
  assert.equal(costs.currency_basis,'nominal_usd');assert.equal(first.total,23);assert.equal(last.total,Math.round(23*101.3/65.2*100)/100);assert.equal(last.currency_index,101.3);
- assert(Math.abs(model.partQuote('base_part.aion_4116','1983-12-15').unit_cost-((185/(190*.95*.8)+.65)/.98)*(101.3/65.2))<1e-10);
+ assert(Math.abs(model.partQuote('base_part.aion_4116','1983-12-15').fabrication_cost-((185/(190*.95*.8)+.65)/.98)*(101.3/65.2))<1e-10);
  const composite=model.partQuote('base_part.device.artemis_cpm80_module.local_64_kib_ram_implementation','1983-12-15');
  assert.equal(composite.components[0].unit_cost,model.partQuote('base_part.aion_4164','1983-12-15').unit_cost);
  assert(Math.abs(composite.unit_cost-composite.components.reduce((sum,c)=>sum+c.quantity*c.unit_cost,0)-4*101.3/65.2)<1e-10);

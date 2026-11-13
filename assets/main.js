@@ -24,6 +24,7 @@ const entries = [
   {id:'manufacturing-cost-guide',title:'Manufacturing costs — model and assumptions',path:'data_calculation/MANUFACTURING_COSTS.md',type:'md'},
   {id:'manufacturing-costs',title:'Calculation · manufacturing costs',path:'data_calculation/manufacturing_costs.json',type:'json'},
   {id:'manufacturing-cost-assumptions',title:'Calculation · manufacturing cost inputs',path:'data_calculation/manufacturing_cost_assumptions.json',type:'json'},
+  {id:'ram-cost-scenarios',title:'Calculation · RAM sourcing and module alternatives',path:'data_calculation/ram_cost_scenarios.json',type:'json'},
   {id:'annual-sales-schema',title:'Calculation · annual sales schema',path:'schemas/calculation/annual_sales.schema.json',type:'json'},
   {id:'foundation-spec',title:'Foundation — entities and references',path:'docs/data_model/FOUNDATION_SPECIFICATION.md',type:'md'},
   {id:'backlog',title:'Archive · former review backlog',path:'docs/archived/REVIEW_BACKLOG.md',type:'md'},

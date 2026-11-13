@@ -1,4 +1,4 @@
-import {validateManufacturingCosts} from './validate-manufacturing-costs.js';
+import {validateManufacturingCosts,validateRamScenarios} from './validate-manufacturing-costs.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -29,8 +29,10 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
  const records=new Map(fs.readdirSync(path.join(root,'data_foundation')).filter(f=>f.endsWith('.json')).flatMap(f=>Object.values(JSON.parse(fs.readFileSync(path.join(root,'data_foundation',f)))).flat()).map(r=>[r.id,r]));
  const file=process.argv[2]||path.join(root,'data_calculation/annual_sales.json');
  const document=JSON.parse(fs.readFileSync(file));
- const result=document.manufacturing_costs?validateManufacturingCosts(document,JSON.parse(fs.readFileSync(path.join(root,'data_calculation/manufacturing_cost_assumptions.json'))),records):validateAnnualSales(document,records);
+ const assumptions=JSON.parse(fs.readFileSync(path.join(root,'data_calculation/manufacturing_cost_assumptions.json')));
+ const result=document.manufacturing_costs?validateManufacturingCosts(document,assumptions,records):document.dates&&document.scope?validateRamScenarios(document,assumptions,records):validateAnnualSales(document,records);
  if(!process.argv[2]){const costs=validateManufacturingCosts(JSON.parse(fs.readFileSync(path.join(root,'data_calculation/manufacturing_costs.json'))),JSON.parse(fs.readFileSync(path.join(root,'data_calculation/manufacturing_cost_assumptions.json'))),records);result.errors.push(...costs.errors);result.warnings.push(...costs.warnings);}
+ if(!process.argv[2])result.errors.push(...validateRamScenarios(JSON.parse(fs.readFileSync(path.join(root,'data_calculation/ram_cost_scenarios.json'))),assumptions,records).errors);
  for(const warning of result.warnings)console.warn(warning);
  if(result.errors.length){console.error(result.errors.join('\n'));process.exitCode=1;}else console.log('Validated calculation datasets (outside foundation authorization).');
 }

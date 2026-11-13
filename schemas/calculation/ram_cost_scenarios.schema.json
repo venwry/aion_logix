@@ -1,0 +1,409 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/calculation/ram_cost_scenarios.schema.json",
+  "type": "object",
+  "properties": {
+    "model_version": {
+      "const": "1.1.0"
+    },
+    "currency": {
+      "const": "USD"
+    },
+    "currency_basis": {
+      "const": "nominal_usd"
+    },
+    "foundation_revision": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "foundation_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "assumptions_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "chips": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "part_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "capacity_kbit": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "origin": {
+                  "enum": [
+                    "aion",
+                    "commercial"
+                  ]
+                },
+                "available": {
+                  "type": "boolean"
+                },
+                "cost": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "manufacturing_cost": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "markup": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "route_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "observation": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "part_id",
+                "capacity_kbit",
+                "origin",
+                "available"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "record_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version_number": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "capacity_kib": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "recorded_cost": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "recorded_source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "candidates": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "part_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "origin": {
+                        "enum": [
+                          "aion",
+                          "commercial"
+                        ]
+                      },
+                      "chip_quantity": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "cost": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "low": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "high": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "status": {
+                        "const": "qualification_required"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "part_id",
+                      "origin",
+                      "chip_quantity",
+                      "cost",
+                      "low",
+                      "high",
+                      "status"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "cheapest_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "robust_to_chip_range": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "record_id",
+                "name",
+                "version_number",
+                "capacity_kib",
+                "recorded_cost",
+                "recorded_source_id",
+                "candidates",
+                "cheapest_id",
+                "robust_to_chip_range"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "configurations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "host_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "host_version": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "capacity_kib": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "recorded_module_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "recorded_modules": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "host_name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "socket_limit": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "recorded_cost": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "candidates": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "module_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "source_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "module_count": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "chip_quantity": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "cost": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "low": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "high": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "status": {
+                        "const": "qualification_required"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "module_id",
+                      "source_id",
+                      "module_count",
+                      "chip_quantity",
+                      "cost",
+                      "low",
+                      "high",
+                      "status"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excluded": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "module_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "reasons": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    },
+                    "required": [
+                      "module_id",
+                      "reasons"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "cheapest_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "robust_to_chip_range": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "host_id",
+                "host_version",
+                "capacity_kib",
+                "recorded_module_id",
+                "recorded_modules",
+                "host_name",
+                "socket_limit",
+                "recorded_cost",
+                "candidates",
+                "excluded",
+                "cheapest_id",
+                "robust_to_chip_range"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "date",
+          "chips",
+          "modules",
+          "configurations"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "model_version",
+    "currency",
+    "currency_basis",
+    "foundation_revision",
+    "foundation_sha256",
+    "assumptions_sha256",
+    "generated_at",
+    "note",
+    "scope",
+    "dates"
+  ],
+  "additionalProperties": false
+}
