@@ -32,52 +32,46 @@
           "minLength": 1
         },
         "specification": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "no": {
-                "type": "integer",
-                "minimum": 1
-              },
-              "description": {
-                "type": "string",
-                "minLength": 1
-              },
-              "ref_id": {
-                "type": "string",
-                "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
-                "x-ref": [
-                  "actor",
-                  "actor_relationship",
-                  "agreement",
-                  "assumption",
-                  "campaign",
-                  "event",
-                  "location",
-                  "manufacturing_capability",
-                  "market_response",
-                  "process",
-                  "product",
-                  "technology",
-                  "base_part",
-                  "device",
-                  "software_edition",
-                  "external_product"
-                ]
-              },
-              "ref_role": {
-                "type": "string",
-                "minLength": 1
-              }
+          "oneOf": [
+            {
+              "$ref": "#/$defs/chapter_list"
             },
-            "required": [
-              "no",
-              "description",
-              "ref_id",
-              "ref_role"
-            ],
-            "additionalProperties": false
+            {
+              "$ref": "#/$defs/legacy_specification_list"
+            }
+          ]
+        },
+        "kind": {
+          "enum": [
+            "computer",
+            "peripheral",
+            "software",
+            "service",
+            "other"
+          ]
+        },
+        "provider_actor_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^actor\\.[a-z0-9][a-z0-9_.-]*$",
+            "x-ref": [
+              "actor"
+            ]
+          }
+        },
+        "release": {
+          "type": "string",
+          "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$",
+          "description": "Direct Gregorian date with year, month or day precision; calendar validity checked semantically."
+        },
+        "impacted_standards": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/standard_impact"
           }
         }
       },
@@ -88,6 +82,172 @@
         "specification"
       ],
       "additionalProperties": false
+    },
+    "legacy_specification_entry": {
+      "type": "object",
+      "properties": {
+        "no": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ref_id": {
+          "type": "string",
+          "pattern": "^(actor|actor_relationship|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "actor",
+            "actor_relationship",
+            "agreement",
+            "assumption",
+            "campaign",
+            "event",
+            "location",
+            "manufacturing_capability",
+            "market_response",
+            "process",
+            "product",
+            "technology",
+            "base_part",
+            "device",
+            "software_edition",
+            "external_product"
+          ]
+        },
+        "ref_role": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "no",
+        "description",
+        "ref_id",
+        "ref_role"
+      ],
+      "additionalProperties": false
+    },
+    "chapter": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "chapter_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Plain text with optional {key} substitutions resolved within this chapter."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^{}]+$"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "number",
+        "chapter_name",
+        "description",
+        "parameters"
+      ],
+      "additionalProperties": false
+    },
+    "standard_impact": {
+      "type": "object",
+      "properties": {
+        "standard_id": {
+          "type": "string",
+          "pattern": "^technology\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "technology"
+          ]
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$",
+          "description": "Direct Gregorian date with year, month or day precision; calendar validity checked semantically."
+        },
+        "assumption_description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "comparison_description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "outcomes_description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^{}]+$"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "standard_id",
+        "date",
+        "assumption_description",
+        "comparison_description",
+        "outcomes_description",
+        "parameters"
+      ],
+      "additionalProperties": false
+    },
+    "chapter_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/chapter"
+      }
+    },
+    "legacy_specification_list": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/legacy_specification_entry"
+      }
     }
   }
 }

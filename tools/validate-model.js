@@ -1,3 +1,4 @@
+import {validateExternalProducts} from '../code/external-products.js';
 import {validateTechnicalSpecifications} from '../code/technical-specification.js';
 import {validateTechnologySpecifications} from '../code/technology-specification.js';
 import {validateCampaigns} from '../code/campaigns.js';
@@ -101,7 +102,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
   for(const id of timelineChildren)if(records.get(id)?.category)report(`${id}: child timeline records must leave category empty and inherit from their parent`);
   for (const record of records.values()) {
     for(const key of ['steps','inputs','outcomes','specification','qualification_requirements','marketing_content']){
-      const numbers=(record[key]||[]).map(x=>record.id.startsWith('external_product.')&&key==='specification'?x.no:x.number);
+      const numbers=(record[key]||[]).map(x=>record.id.startsWith('external_product.')&&key==='specification'?(x.number??x.no):x.number);
       if(new Set(numbers).size!==numbers.length)report(`${record.id}: duplicate number in ${key}`);
     }
     if(record.id.startsWith('campaign.')&&!record.period&&records.get(record.process_id)?.kind!=='campaign_execution')report(`${record.id}: campaign needs an execution process`);
@@ -141,7 +142,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if (record.occurrence==='unknown'||record.state==='unknown'||record.completion_state==='unknown') report(`${record.id}: unresolved story state`);
     }
   }
-  errors.push(...validateCampaigns(records),...validateTechnicalSpecifications(records),...validateTechnologySpecifications(records),...validateCompositions(records),...validateProductLaunches(records));
+  errors.push(...validateExternalProducts(records),...validateCampaigns(records),...validateTechnicalSpecifications(records),...validateTechnologySpecifications(records),...validateCompositions(records),...validateProductLaunches(records));
   if (complete && count===0) report('No records: an empty graph cannot establish completeness');
   return {errors,count};
 }

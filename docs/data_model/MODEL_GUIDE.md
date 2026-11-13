@@ -1,4 +1,4 @@
-# Current model guide — version 0.17.0
+# Current model guide — version 0.18.0
 
 The model separates fictional-world records, editorial review and later calculations. [Principles](../../DATA_MODEL_PRINCIPLES.md), [reference rules](REFERENCE_RULES.md) and [JSON Schemas](../../schemas/) govern editing. The [generated specification](FOUNDATION_SPECIFICATION.md) describes exact attributes; historical reports do not extend the contract.
 
@@ -18,7 +18,7 @@ Inputs explain direct prerequisites; outcomes explain deliveries, decisions, cha
 
 Campaigns own marketing objectives, audiences, messages, calendar periods and marketing steps. During individually reviewed conversion, the legacy shape with `process_id` remains supported; converted campaigns have their own dates and no execution-process reference. Every current offering has authoritative product-owned launch campaign/event links. Repeated reverse launch lists and inherited product lists should be removed through reviewed migrations; later promotion and external participation are distinct relationships that must survive.
 
-`product` means a Logix/AION customer-facing offering. `base_part` defines a physical part; `device` owns hardware construction; `software_edition` defines a software implementation. Third-party commercial offerings use descriptive `external_product` records with `id`, `name`, `description` and `specification` entries containing exactly `no`, `description`, one `ref_id` and `ref_role`. Direct relationships distinguish publishers, licensors, hosts, implementations and agreements. External descriptions do not replace technical BOMs.
+`product` means a Logix/AION customer-facing offering. `base_part` defines a physical part; `device` owns hardware construction; `software_edition` defines a software implementation. Third-party commercial offerings use descriptive `external_product` records with `id`, `name`, `description` and technology-style specification chapters. The previous role-labelled specification format remains compatible during reviewed conversion. Direct release dates, providers, offering kind and descriptive standards impacts are supported; see [external products and standards](ECOSYSTEM_STANDARDS.md). Direct relationships distinguish publishers, licensors, hosts, implementations and agreements. External descriptions do not replace technical BOMs.
 
 A physical cartridge can be a Logix offering while its software is licensed from another company. Keep the commercial product, cartridge device, software edition and governing rights distinct. Software platform support can reference an external computer host; that does not permit external descriptions as physical composition targets.
 

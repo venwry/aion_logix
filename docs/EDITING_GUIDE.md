@@ -32,7 +32,7 @@ Schema deployment is separate from story authorization; the saving API cannot ap
 
 ## Dataset and evidence paths
 
-Use `datasetPath()` from `code/model-contract.js`; do not assume every filename equals its type. `external_product` uses `data_foundation/external_products.json`, while its envelope, ID prefix and proposal type remain singular. Its specification entries have exactly `no`, `description`, one `ref_id` and `ref_role`.
+Use `datasetPath()` from `code/model-contract.js`; do not assume every filename equals its type. `external_product` uses `data_foundation/external_products.json`, while its envelope, ID prefix and proposal type remain singular. New specification entries use the technology chapter format; the former `no`, `description`, `ref_id`, `ref_role` format remains readable during reviewed conversion. Follow [external-product and standards rules](data_model/ECOSYSTEM_STANDARDS.md).
 
 Current editorial evidence may live below `data_storytelling/review_evidence/`. These supporting files are not foundation datasets, authorization targets or a substitute for the live queue. Store per-reference rationale and temporary exceptions there. Historical storytelling reports and superseded proposal narratives belong in `docs/archived/` with an explicit historical label. Existing `archived_no_longer_valid/` snapshots and checksum inventories remain unchanged.
 

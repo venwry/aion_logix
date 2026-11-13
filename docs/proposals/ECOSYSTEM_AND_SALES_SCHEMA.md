@@ -1,6 +1,6 @@
 # Ecosystem, standards impact and annual sales — schema proposal
 
-**Status: proposed for author review; not implemented.**  
+**Status: partly superseded.** External-product iteration 1 follows the author’s revised instructions and is documented in [External products and standards](../data_model/ECOSYSTEM_STANDARDS.md). The original date-or-event, external specification and impact structures below are superseded; market-response and sales sections remain unimplemented proposals.
 Prepared: 12 November 2026. Baseline: main at `4613a3e`.
 
 This document specifies a compact model for third-party offerings, their effect on standards, market reactions and revisable annual sales estimates. Approval of this document would approve the design, not authorize any migrated foundation record. Existing schemas and data remain unchanged.
