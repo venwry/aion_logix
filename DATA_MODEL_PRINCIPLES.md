@@ -1,6 +1,6 @@
 # Aion Logix — data model principles
 
-These principles describe the current contract, version **0.20.0**, and the accepted authoring rules. Consult the [model guide](docs/data_model/MODEL_GUIDE.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md) for details.
+These principles describe the current contract, version **0.21.0**, and the accepted authoring rules. Consult the [model guide](docs/data_model/MODEL_GUIDE.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md) for details.
 
 1. Foundation JSON describes the fictional world and its technical definitions. Storytelling JSON describes author review, evidence and proposals. Calculation data is a separate layer; annual sales estimates in `data_calculation` are directly reassessable without foundation authorization. Never import old statuses, financial projections or storytelling chronology into a technical definition without the appropriate reviewed model.
 2. Entities have stable typed IDs. Owned value objects remain nested; independently maintained or independently authorized entities have their own records. Dataset type and filename are mapped by the shared registry, including singular `external_product` in plural `external_products.json`.
@@ -35,3 +35,5 @@ Composition defaults follow the [model guide](docs/data_model/MODEL_GUIDE.md): p
 Technology and external-product specifications use numbered chapters, plain-English descriptions and chapter-local named text parameters. Descriptions can interpolate `{key}` values for display; they cannot execute markup. Direct format conversion is permitted when explicitly requested by the author, with preserved review history and an auditable conversion record. Subsequent semantic or editorial rewrites still require Changes confirm.
 
 Technical descriptions must interpret the complete component or implementation and explain its purpose, organization, operation and limits in concise, fluent prose. Source-property order and nesting do not determine chapter structure. Consolidate lists, deduplicate repeated facts, and preserve distinct constraints and uncertainty. Composition socket groups remain construction data, never specification chapters. See the [technical narrative guidance](docs/EDITING_GUIDE.md#writing-technical-narratives).
+
+Manufacturing recipes may share a production-line capability. Count its physical resources once, date changes in equipment configuration, and distinguish installed resources from recipe release and demonstrated output. Planning targets belong in assumptions; transferable methods belong in technologies. See the shared manufacturing resources contract in the model guide.

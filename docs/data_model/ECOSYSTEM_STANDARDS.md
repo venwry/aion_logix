@@ -1,6 +1,6 @@
 # External products and standards
 
-Contract 0.20.0 includes `software_standard` and `hardware_standard` technology kinds. Stable technology IDs identify available standards. Approved core standards are eligible for `impacted_standards`; other technology kinds remain ineligible.
+Contract 0.21.0 includes `software_standard` and `hardware_standard` technology kinds. Stable technology IDs identify available standards. Approved core standards are eligible for `impacted_standards`; other technology kinds remain ineligible.
 
 ## External products
 

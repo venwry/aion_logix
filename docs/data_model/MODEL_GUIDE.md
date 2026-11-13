@@ -1,4 +1,4 @@
-# Current model guide — version 0.20.0
+# Current model guide — version 0.21.0
 
 The model separates fictional-world records, editorial review and later calculations. [Principles](../../DATA_MODEL_PRINCIPLES.md), [reference rules](REFERENCE_RULES.md) and [JSON Schemas](../../schemas/) govern editing. The [generated specification](FOUNDATION_SPECIFICATION.md) describes exact attributes; historical reports do not extend the contract.
 
@@ -137,3 +137,13 @@ Root specifications describe invariant capabilities of a record identity. Do not
 A base-computer record describes the hardware in its own composition. A video slot and compatible-card list do not establish an installed graphics controller. For Artemis, Artemis PRO, Athena and Athena Server base computers, keep the host connector/interface and installation requirements, but place controller architecture, display/sprite RAM, raster timings and `graphic_modes_specification` on the separate video-card device. The complete product composition selects that card and monitor. Remove copied card claims from both new specifications and transitional legacy technical definitions through Changes confirm.
 
 Aurelia and Aurelia+ include video subsystems in their base-computer BOMs, so their built-in-video descriptions remain applicable. Establish this distinction from composition, not merely from a model name or a typical complete-system configuration.
+
+## Shared manufacturing resources
+
+Contract 0.21.0 distinguishes `manufacturing_capability.capability_kind`: `recipe` (also the interpretation when omitted for compatibility) and `production_line`. Recipes retain `recipe_kind` and may reference one `production_line_id`; the target must be a production line with the same operator and location. A line requires a facility/location and `configuration_history`, and cannot claim a recipe kind, another parent line or base-part outputs. Existing recipe records remain valid without a line reference.
+
+Each configuration has `version_number`, `description`, `effective_from`, `effective_until`, `equipment`, `technical_specification` and `constraints`. Dates are ISO days; intervals are start-inclusive/end-exclusive, ordered and non-overlapping. A null end means no successor has been recorded, not perpetual demonstrated capacity. Equipment groups have stable local `id`, `name`, positive integer `quantity` and descriptive scope. A group may be a complete route or bank; its description must say what is counted. Do not sum duplicated recipe capacities as if they were separate machines. Constraints use numbered common items; reference only direct resources or acceptance dependencies.
+
+Configuration specifications reuse the shared chapter/global-parameter structure and its placeholder, uniqueness and reference validation. Store equipment quantities and installed resource limits here, transferable methods in technologies, planning circumstances in assumptions, actions in processes, and dated qualification results in event outcomes. An installed configuration is not proof of production release. Separate recipe qualification, demonstrated accepted output, capacity headroom and inventory. Engineering targets, model-derived estimates and proposed story outcomes must not masquerade as measured laboratory evidence. Full-route loading includes material supply, tools, staffing, probe, assembly, reliability and final test.
+
+All detail views display a configuration selector, the selected configuration's chapter narrative and collapsible parameters, equipment groups and operating constraints. Infrastructure/schema deployment enables this representation; changes to foundation records still go through Changes confirm.

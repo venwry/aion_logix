@@ -1,0 +1,84 @@
+{
+  "classification": "Planning arithmetic; not observed laboratory or shipment evidence",
+  "assumptions": {
+    "dram_gross_die_per_75mm_wafer": 190,
+    "sram4_gross_die_per_75mm_wafer": 160,
+    "wafer_completion": 0.9,
+    "assembly_final_acceptance": 0.95,
+    "supply_headroom": 0.05,
+    "ram_card_attachment": 0.3
+  },
+  "scenarios": [
+    {
+      "computers_per_month": 10000,
+      "dram_electrical_yield": 0.5,
+      "dram_forecast": 444000,
+      "dram_required_capacity": 466200,
+      "sram_required_capacity": 31500,
+      "dram_good_per_start": 81.225,
+      "dram_starts_required": 5740,
+      "sram_starts_required": 461,
+      "dram_output_at_6000_starts": 487350,
+      "sram_output_at_500_starts": 34200,
+      "fits_initial_memory_allocations": true
+    },
+    {
+      "computers_per_month": 10000,
+      "dram_electrical_yield": 0.6,
+      "dram_forecast": 444000,
+      "dram_required_capacity": 466200,
+      "sram_required_capacity": 31500,
+      "dram_good_per_start": 97.47,
+      "dram_starts_required": 4784,
+      "sram_starts_required": 461,
+      "dram_output_at_6000_starts": 584820,
+      "sram_output_at_500_starts": 34200,
+      "fits_initial_memory_allocations": true
+    },
+    {
+      "computers_per_month": 20000,
+      "dram_electrical_yield": 0.5,
+      "dram_forecast": 788000,
+      "dram_required_capacity": 827400,
+      "sram_required_capacity": 52500,
+      "dram_good_per_start": 81.225,
+      "dram_starts_required": 10187,
+      "sram_starts_required": 768,
+      "dram_output_at_6000_starts": 487350,
+      "sram_output_at_500_starts": 34200,
+      "fits_initial_memory_allocations": false
+    },
+    {
+      "computers_per_month": 20000,
+      "dram_electrical_yield": 0.6,
+      "dram_forecast": 788000,
+      "dram_required_capacity": 827400,
+      "sram_required_capacity": 52500,
+      "dram_good_per_start": 97.47,
+      "dram_starts_required": 8489,
+      "sram_starts_required": 768,
+      "dram_output_at_6000_starts": 584820,
+      "sram_output_at_500_starts": 34200,
+      "fits_initial_memory_allocations": false
+    }
+  ],
+  "projection_capacity_starts": {
+    "four_tools": 10296,
+    "three_tools": 7722
+  },
+  "dram_test_loading_hours": {
+    "probe": 570,
+    "final": 513,
+    "available_at_each_stage": 936
+  },
+  "launch_inventory": {
+    "dram": 344000,
+    "sram4": 20000
+  },
+  "limitations": [
+    "Actual mask maps and full-route measured loading must substantiate the proposed story acceptance.",
+    "The remaining test-station hours must cover SRAM, ROM, logic, changeovers and sample qualification; add stations if the mix fails the loading test.",
+    "20,000 computers/month requires extra DRAM and SRAM capacity; 12,000 DRAM starts are an expansion option only.",
+    "One failed aligner preserves memory by pausing other starts, not by sustaining all 8,000 starts."
+  ]
+}

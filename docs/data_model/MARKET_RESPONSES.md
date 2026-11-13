@@ -1,6 +1,6 @@
 # Market responses and impact sections
 
-Contract 0.20.0 retains the existing market-response identity, kind, respondents, triggers, `subject_ids` and `description`. The two new optional sections are additive; existing subjects and descriptions will be migrated through later reviewed proposals, not silently rewritten now.
+Contract 0.21.0 retains the existing market-response identity, kind, respondents, triggers, `subject_ids` and `description`. The two new optional sections are additive; existing subjects and descriptions will be migrated through later reviewed proposals, not silently rewritten now.
 
 | Section | Reference attribute | Allowed targets |
 | --- | --- | --- |

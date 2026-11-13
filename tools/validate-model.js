@@ -1,3 +1,4 @@
+import {validateManufacturingCapabilities} from '../code/manufacturing-capabilities.js';
 import {validateMarketImpacts} from '../code/market-impacts.js';
 import {validateExternalProducts} from '../code/external-products.js';
 import {validateTechnicalSpecifications} from '../code/technical-specification.js';
@@ -143,7 +144,7 @@ export function validateDocuments(documents, { complete = false } = {}) {
       if (record.occurrence==='unknown'||record.state==='unknown'||record.completion_state==='unknown') report(`${record.id}: unresolved story state`);
     }
   }
-  errors.push(...validateMarketImpacts(records),...validateExternalProducts(records),...validateCampaigns(records),...validateTechnicalSpecifications(records),...validateTechnologySpecifications(records),...validateCompositions(records),...validateProductLaunches(records));
+  errors.push(...validateManufacturingCapabilities(records),...validateMarketImpacts(records),...validateExternalProducts(records),...validateCampaigns(records),...validateTechnicalSpecifications(records),...validateTechnologySpecifications(records),...validateCompositions(records),...validateProductLaunches(records));
   if (complete && count===0) report('No records: an empty graph cannot establish completeness');
   return {errors,count};
 }

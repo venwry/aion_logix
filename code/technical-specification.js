@@ -4,7 +4,7 @@ export const graphicFields=['type','width','height','framebuffer_size','double_b
 export const parameterValues=parameters=>new Map((parameters||[]).map(p=>[p.key,Object.hasOwn(p,'ref_id')?p.ref_id:p.value]));
 const displayValue=p=>Object.hasOwn(p,'ref_id')?p.ref_id:p.value===null?'unknown':p.value;
 const canonicalIntegers=new Set(['chips','capacity_kb','capacity_kbit','stride_bytes']);
-export function validateTechnicalSpecifications(records){
+export function validateTechnicalSpecifications(records, subjects=records.values()){
  const errors=[],fail=(r,m)=>errors.push(r.id+': '+m);
  function parameters(r,ps,descriptions,fixed=[]){
   const keys=new Set(fixed),used=new Set();
@@ -27,7 +27,7 @@ export function validateTechnicalSpecifications(records){
   for(const p of ps)if(!used.has(p.key))fail(r,'unused technical parameter '+p.key);
   return parameterValues(ps);
  }
- for(const r of records.values()){
+ for(const r of subjects){
   if(r.technical_specification){
    const s=r.technical_specification,nums=new Set();
    for(const c of s.chapters){if(nums.has(c.number)||!c.chapter_name.trim()||!c.description.trim())fail(r,'invalid technical chapter');nums.add(c.number);}

@@ -1,3 +1,4 @@
+import {renderManufacturingConfigurations} from './manufacturing-capabilities.js';
 import {renderMarketImpacts} from './market-impacts.js';
 import {externalSpecificationChapters,renderExternalImpacts} from './external-products.js';
 import {indexProductLaunches} from './product-launches.js';
@@ -131,6 +132,7 @@ export function compactDetails(record,data,select,options={}){
  orderedFields.splice(construction<0?orderedFields.length:construction,0,...specifications);
  for(const [key,value] of orderedFields){
   if(key==='status'||(record.technical_specification&&(key==='technical_definition'||key.startsWith('technical_definition.'))))continue;
+  if(key==='configuration_history'&&typeOf(record)==='manufacturing_capability'){const section=renderManufacturingConfigurations(value,(v,cleanups)=>valueNode(v,'Configuration',false,cleanups),cleanup=>detailCleanups.push(cleanup));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='marketing_steps'&&typeOf(record)==='campaign'){const section=renderMarketingSteps(value,data.index,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(key==='technical_specification'||key==='graphic_modes_specification'){const section=key==='technical_specification'?renderTechnicalSpecification(value,v=>valueNode(v)):renderGraphicModes(value,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}
   if(['impacted_standards','impacted_products'].includes(key)&&typeOf(record)==='market_response'){const section=renderMarketImpacts(value,key,data.index,v=>valueNode(v));section.dataset.field=key;if(options.changedFields?.has(key))section.classList.add('changed-field');content.append(section);continue;}

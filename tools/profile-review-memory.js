@@ -5,6 +5,9 @@ import {setImmediate} from 'node:timers/promises';
 import {GitHubStore} from '../server/github.js';
 import {hash,transact,snapshot} from '../server/model.js';
 const paths=['data_foundation','data_storytelling'].flatMap(d=>fs.readdirSync(d).filter(f=>f.endsWith('.json')).map(f=>d+'/'+f));
+// Indexed history validates archive existence in the tree without loading its blobs.
+const historyIndexPath='data_storytelling/authorization_decision_index.json';
+if(fs.existsSync(historyIndexPath))for(const row of JSON.parse(fs.readFileSync(historyIndexPath)).authorization_decision_index)if(!paths.includes(row.path))paths.push(row.path);
 // Reconstruct the incident fixture (or an explicit --proposals evidence file), even after the author
 // commits them. Read the current (larger) history to retain a conservative load.
 const fixtureFlag=process.argv.indexOf('--proposals');

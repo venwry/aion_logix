@@ -1,6 +1,6 @@
 # Foundation dataset specification
 
-This document describes the current foundation schema contract (version 0.20.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; historical documentation is preserved in `docs/archived/` and earlier immutable evidence in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
+This document describes the current foundation schema contract (version 0.21.0). It is generated from `schemas/*.schema.json` for every JSON dataset in `data_foundation/`. Shared schema definitions are expanded inside their owning entities. Current authorization, sources and proposed changes belong to `data_storytelling/`; historical documentation is preserved in `docs/archived/` and earlier immutable evidence in `archived_no_longer_valid/`. Both are deliberately outside this diagram.
 
 The [reference rules](REFERENCE_RULES.md) govern semantic directness, inputs/outcomes and launch relationships. Legacy schema compatibility does not authorize new unexplained subject lists.
 
@@ -36,7 +36,7 @@ flowchart LR
   event["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>event.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>time*: object<br/>│  └─ value*: string<br/>│  └─ precision*: string<br/>location_ids?: array&lt;string&gt; → location<br/>agreement_id?: string → agreement</pre>"]:::schemaEntity
   external_product["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>external_products.json<br/>id*: string<br/>name*: string<br/>description*: string<br/>specification*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ chapter_name*: string<br/>│  └─ description*: string<br/>│  └─ parameters*: array&lt;object&gt;<br/>│  │  └─ key*: string<br/>│  │  └─ value*: string<br/>kind*: string<br/>provider_actor_ids*: array&lt;string&gt; → actor<br/>release?: string<br/>impacted_standards?: array&lt;object&gt;<br/>│  └─ standard_id*: string → technology<br/>│  └─ date*: string<br/>│  └─ assumption_description*: string<br/>│  └─ comparison_description*: string<br/>│  └─ outcomes_description*: string<br/>│  └─ parameters*: array&lt;object&gt;<br/>│  │  └─ key*: string<br/>│  │  └─ value*: string<br/>│  └─ relationship?: string<br/>impacted_products?: array&lt;object&gt;<br/>│  └─ product_id*: string → product / external_product<br/>│  └─ date*: string<br/>│  └─ assumption_description*: string<br/>│  └─ comparison_description*: string<br/>│  └─ outcomes_description*: string<br/>│  └─ parameters*: array&lt;object&gt;<br/>│  │  └─ key*: string<br/>│  │  └─ value*: string<br/>│  └─ relationship*: string</pre>"]:::schemaEntity
   location["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>location.json<br/>id*: string<br/>name*: string<br/>kind*: string<br/>parent_location_id?: string → location<br/>description?: string</pre>"]:::schemaEntity
-  manufacturing_capability["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>manufacturing_capability.json<br/>id*: string<br/>name*: string<br/>actor_id*: string → actor<br/>location_id?: string → location<br/>technology_id*: string → technology<br/>recipe_kind*: string<br/>description*: string<br/>qualification_requirements*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>base_part_ids?: array&lt;string&gt; → base_part</pre>"]:::schemaEntity
+  manufacturing_capability["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>manufacturing_capability.json<br/>id*: string<br/>name*: string<br/>actor_id*: string → actor<br/>location_id?: string → location<br/>technology_id*: string → technology<br/>recipe_kind?: string<br/>description*: string<br/>qualification_requirements*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>base_part_ids?: array&lt;string&gt; → base_part<br/>capability_kind?: string<br/>production_line_id?: string → manufacturing_capability<br/>configuration_history?: array&lt;object&gt;<br/>│  └─ version_number*: integer<br/>│  └─ description*: string<br/>│  └─ effective_from*: string<br/>│  └─ effective_until*: string | null<br/>│  └─ equipment*: array&lt;object&gt;<br/>│  │  └─ id*: string<br/>│  │  └─ name*: string<br/>│  │  └─ quantity*: integer<br/>│  │  └─ description*: string<br/>│  └─ technical_specification*: object<br/>│  │  └─ chapters*: array&lt;object&gt;<br/>│  │  │  └─ number*: integer<br/>│  │  │  └─ chapter_name*: string<br/>│  │  │  └─ description*: string<br/>│  │  └─ parameters*: array&lt;object&gt;<br/>│  │  │  └─ key*: string<br/>│  │  │  └─ value?: string | number | null<br/>│  │  │  └─ ref_id?: string → actor / technology / base_part / device / software_edition / product / external_product / manufacturing_capability<br/>│  │  │  └─ ref_role?: string<br/>│  └─ constraints*: array&lt;object&gt;<br/>│  │  └─ number*: integer<br/>│  │  └─ type*: string<br/>│  │  └─ description*: string<br/>│  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  │  └─ event_id?: string → event<br/>│  │  └─ process_id?: string → process</pre>"]:::schemaEntity
   market_response["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>market_response.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>respondent_actor_ids*: array&lt;string&gt; → actor<br/>subject_ids*: array&lt;string&gt; → any foundation ID<br/>trigger_ids*: array&lt;string&gt; → event / process / campaign / agreement<br/>description*: string<br/>impacted_standards?: array&lt;object&gt;<br/>│  └─ standard_id*: string → technology<br/>│  └─ direction*: string<br/>│  └─ description*: string<br/>│  └─ parameters*: array&lt;object&gt;<br/>│  │  └─ key*: string<br/>│  │  └─ value*: string<br/>impacted_products?: array&lt;object&gt;<br/>│  └─ product_id*: string → product / external_product<br/>│  └─ direction*: string<br/>│  └─ description*: string<br/>│  └─ parameters*: array&lt;object&gt;<br/>│  │  └─ key*: string<br/>│  │  └─ value*: string</pre>"]:::schemaEntity
   process["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>process.json<br/>id*: string<br/>title*: string<br/>kind*: string<br/>description*: string<br/>participant*: array&lt;object&gt;<br/>│  └─ actor_id*: string → actor<br/>│  └─ role*: string<br/>subject_ids?: array&lt;string&gt; → any foundation ID<br/>inputs*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>outcomes*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>period*: object<br/>│  └─ start*: object<br/>│  │  └─ value*: string | null → event<br/>│  │  └─ precision*: string<br/>│  └─ end*: object<br/>│  │  └─ value*: string | null → event<br/>│  │  └─ precision*: string<br/>steps*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ event_id?: string → event<br/>│  └─ process_id?: string → process<br/>│  └─ campaign_id?: string → campaign<br/>related_process_ids?: array&lt;string&gt; → process<br/>agreement_id?: string → agreement<br/>category?: string</pre>"]:::schemaEntity
   product["<pre style='text-align:left;font-family:monospace;white-space:pre;margin:0'>product.json<br/>id*: string<br/>name*: string<br/>kind*: string<br/>description*: string<br/>provider_actor_ids*: array&lt;string&gt; → actor<br/>version?: string<br/>specification*: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ type*: string<br/>│  └─ description*: string<br/>│  └─ value?: string | number | boolean<br/>offering_category?: string<br/>technical_identity?: object<br/>│  └─ record_id*: string → base_part / device / software_edition<br/>launch_campaign_id?: string → campaign<br/>composition_history?: array&lt;object&gt;<br/>│  └─ version_number*: integer<br/>│  └─ description*: string<br/>│  └─ effective_from*: schema-defined<br/>│  └─ effective_until*: schema-defined<br/>│  └─ composition_definition*: array&lt;object&gt;<br/>│  │  └─ id*: string<br/>│  │  └─ target*: schema-defined<br/>│  │  └─ quantity*: number | null<br/>│  │  └─ connection?: schema-defined<br/>│  │  └─ placements?: array&lt;object&gt;<br/>│  │  │  └─ host_line_id*: string<br/>│  │  │  └─ host_instance*: integer<br/>│  │  │  └─ socket_id*: string<br/>│  │  │  └─ quantity*: number<br/>│  │  └─ element_type?: string<br/>│  └─ assembly_requirements*: array&lt;object&gt;<br/>│  │  └─ number*: integer<br/>│  │  └─ kind*: string<br/>│  │  └─ description*: string<br/>│  │  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>requirements?: array&lt;object&gt;<br/>│  └─ number*: integer<br/>│  └─ kind*: string<br/>│  └─ description*: string<br/>│  └─ subject_ids?: array&lt;string&gt; → any foundation ID<br/>launch_event_id?: string → event</pre>"]:::schemaEntity
@@ -87,13 +87,18 @@ flowchart LR
   external_product -- "impacted_products[].product_id" --> product
   external_product -- "impacted_products[].product_id" --> external_product
   location -- "parent_location_id" --> location
-  manufacturing_capability -- "actor_id" --> actor
+  manufacturing_capability -- "actor_id<br/>configuration_history[].technical_specification.parameters[].ref_id" --> actor
   manufacturing_capability -- "location_id" --> location
-  manufacturing_capability -- "technology_id" --> technology
-  manufacturing_capability -. "qualification_requirements[].subject_ids[]" .-> any_foundation
-  manufacturing_capability -- "qualification_requirements[].event_id" --> event
-  manufacturing_capability -- "qualification_requirements[].process_id" --> process
-  manufacturing_capability -- "base_part_ids[]" --> base_part
+  manufacturing_capability -- "technology_id<br/>configuration_history[].technical_specification.parameters[].ref_id" --> technology
+  manufacturing_capability -. "qualification_requirements[].subject_ids[]<br/>configuration_history[].constraints[].subject_ids[]" .-> any_foundation
+  manufacturing_capability -- "qualification_requirements[].event_id<br/>configuration_history[].constraints[].event_id" --> event
+  manufacturing_capability -- "qualification_requirements[].process_id<br/>configuration_history[].constraints[].process_id" --> process
+  manufacturing_capability -- "base_part_ids[]<br/>configuration_history[].technical_specification.parameters[].ref_id" --> base_part
+  manufacturing_capability -- "production_line_id<br/>configuration_history[].technical_specification.parameters[].ref_id" --> manufacturing_capability
+  manufacturing_capability -- "configuration_history[].technical_specification.parameters[].ref_id" --> device
+  manufacturing_capability -- "configuration_history[].technical_specification.parameters[].ref_id" --> software_edition
+  manufacturing_capability -- "configuration_history[].technical_specification.parameters[].ref_id" --> product
+  manufacturing_capability -- "configuration_history[].technical_specification.parameters[].ref_id" --> external_product
   market_response -- "respondent_actor_ids[]" --> actor
   market_response -. "subject_ids[]" .-> any_foundation
   market_response -- "trigger_ids[]" --> event
@@ -3125,7 +3130,7 @@ name*: string
 actor_id*: string → actor
 location_id?: string → location
 technology_id*: string → technology
-recipe_kind*: string
+recipe_kind?: string
 description*: string
 qualification_requirements*: array<object>
 │  └─ number*: integer
@@ -3135,6 +3140,35 @@ qualification_requirements*: array<object>
 │  └─ event_id?: string → event
 │  └─ process_id?: string → process
 base_part_ids?: array<string> → base_part
+capability_kind?: string
+production_line_id?: string → manufacturing_capability
+configuration_history?: array<object>
+│  └─ version_number*: integer
+│  └─ description*: string
+│  └─ effective_from*: string
+│  └─ effective_until*: string | null
+│  └─ equipment*: array<object>
+│  │  └─ id*: string
+│  │  └─ name*: string
+│  │  └─ quantity*: integer
+│  │  └─ description*: string
+│  └─ technical_specification*: object
+│  │  └─ chapters*: array<object>
+│  │  │  └─ number*: integer
+│  │  │  └─ chapter_name*: string
+│  │  │  └─ description*: string
+│  │  └─ parameters*: array<object>
+│  │  │  └─ key*: string
+│  │  │  └─ value?: string | number | null
+│  │  │  └─ ref_id?: string → actor / technology / base_part / device / software_edition / product / external_product / manufacturing_capability
+│  │  │  └─ ref_role?: string
+│  └─ constraints*: array<object>
+│  │  └─ number*: integer
+│  │  └─ type*: string
+│  │  └─ description*: string
+│  │  └─ subject_ids?: array<string> → any foundation ID
+│  │  └─ event_id?: string → event
+│  │  └─ process_id?: string → process
 ```
 
 | Field path | Required in parent | Type | Constraints / allowed values |
@@ -3144,7 +3178,7 @@ base_part_ids?: array<string> → base_part
 | `actor_id` | yes | `string` | pattern: "^(actor)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `location_id` | no | `string` | pattern: "^(location)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `technology_id` | yes | `string` | pattern: "^(technology)\\.[a-z0-9][a-z0-9_.-]*$" |
-| `recipe_kind` | yes | `string` | enum: ["logic","SRAM","DRAM","analogue"] |
+| `recipe_kind` | no | `string` | enum: ["logic","SRAM","DRAM","analogue"] |
 | `description` | yes | `string` | minLength: 1 |
 | `qualification_requirements[]` | yes | `array<object>` | minItems: 0 |
 | `qualification_requirements[].number` | yes | `integer` | minimum: 1 |
@@ -3154,6 +3188,35 @@ base_part_ids?: array<string> → base_part
 | `qualification_requirements[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `qualification_requirements[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 | `base_part_ids[]` | no | `array<string>` | pattern: "^(base_part)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `capability_kind` | no | `string` | enum: ["recipe","production_line"] |
+| `production_line_id` | no | `string` | pattern: "^manufacturing_capability\\.[a-z0-9][a-z0-9_.-]*$" |
+| `configuration_history[]` | no | `array<object>` | minItems: 1 |
+| `configuration_history[].version_number` | yes | `integer` | minimum: 1 |
+| `configuration_history[].description` | yes | `string` | minLength: 1 |
+| `configuration_history[].effective_from` | yes | `string` | — |
+| `configuration_history[].effective_until` | yes | `string | null` | — |
+| `configuration_history[].equipment[]` | yes | `array<object>` | minItems: 1 |
+| `configuration_history[].equipment[].id` | yes | `string` | pattern: "^[a-z][a-z0-9_]*$" |
+| `configuration_history[].equipment[].name` | yes | `string` | minLength: 1 |
+| `configuration_history[].equipment[].quantity` | yes | `integer` | minimum: 1 |
+| `configuration_history[].equipment[].description` | yes | `string` | minLength: 1 |
+| `configuration_history[].technical_specification` | yes | `object` | — |
+| `configuration_history[].technical_specification.chapters[]` | yes | `array<object>` | — |
+| `configuration_history[].technical_specification.chapters[].number` | yes | `integer` | minimum: 1 |
+| `configuration_history[].technical_specification.chapters[].chapter_name` | yes | `string` | minLength: 1 |
+| `configuration_history[].technical_specification.chapters[].description` | yes | `string` | minLength: 1 |
+| `configuration_history[].technical_specification.parameters[]` | yes | `array<object>` | — |
+| `configuration_history[].technical_specification.parameters[].key` | yes | `string` | pattern: "^[a-z][a-z0-9_]*$" |
+| `configuration_history[].technical_specification.parameters[].value` | no | `string | number | null` | — |
+| `configuration_history[].technical_specification.parameters[].ref_id` | no | `string` | pattern: "^[a-z_]+\\.[a-z0-9][a-z0-9_.-]*$" |
+| `configuration_history[].technical_specification.parameters[].ref_role` | no | `string` | minLength: 1 |
+| `configuration_history[].constraints[]` | yes | `array<object>` | minItems: 1 |
+| `configuration_history[].constraints[].number` | yes | `integer` | minimum: 1 |
+| `configuration_history[].constraints[].type` | yes | `string` | enum: ["action","milestone","resource","requirement","acceptance_criterion","deliverable","result","decision","qualification","maturity_transition","market_response","agreement_basis"] |
+| `configuration_history[].constraints[].description` | yes | `string` | minLength: 1 |
+| `configuration_history[].constraints[].subject_ids[]` | no | `array<string>` | pattern: "^(actor\|agreement\|assumption\|campaign\|event\|location\|manufacturing_capability\|market_response\|process\|product\|technology\|base_part\|device\|software_edition\|external_product)\\.[a-z0-9][a-z0-9_.-]*$"; minItems: 0; uniqueItems: true |
+| `configuration_history[].constraints[].event_id` | no | `string` | pattern: "^(event)\\.[a-z0-9][a-z0-9_.-]*$" |
+| `configuration_history[].constraints[].process_id` | no | `string` | pattern: "^(process)\\.[a-z0-9][a-z0-9_.-]*$" |
 
 ### market_response
 
@@ -4045,6 +4108,11 @@ Every schema attribute marked `x-ref` appears here, including references inside 
 | manufacturing_capability | `qualification_requirements[].event_id` | `event` |
 | manufacturing_capability | `qualification_requirements[].process_id` | `process` |
 | manufacturing_capability | `base_part_ids[]` | `base_part` |
+| manufacturing_capability | `production_line_id` | `manufacturing_capability` |
+| manufacturing_capability | `configuration_history[].technical_specification.parameters[].ref_id` | `actor`, `technology`, `base_part`, `device`, `software_edition`, `product`, `external_product`, `manufacturing_capability` |
+| manufacturing_capability | `configuration_history[].constraints[].subject_ids[]` | `actor`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition`, `external_product` |
+| manufacturing_capability | `configuration_history[].constraints[].event_id` | `event` |
+| manufacturing_capability | `configuration_history[].constraints[].process_id` | `process` |
 | market_response | `respondent_actor_ids[]` | `actor` |
 | market_response | `subject_ids[]` | `actor`, `agreement`, `assumption`, `campaign`, `event`, `location`, `manufacturing_capability`, `market_response`, `process`, `product`, `technology`, `base_part`, `device`, `software_edition`, `external_product` |
 | market_response | `trigger_ids[]` | `event`, `process`, `campaign`, `agreement` |
