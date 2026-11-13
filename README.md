@@ -24,7 +24,7 @@ npm run build
 npm run preview
 ```
 
-Serve the repository root over HTTP. Open `/` for Timeline, `/code/browser.html` for Data browser, `/code/changes-confirm.html` for concrete proposals and discussion entries, or `/docs/viewer.html` for documentation. The documentation viewer requires generated assets; story pages use native JavaScript modules.
+Serve the repository root over HTTP. Open `/` for Timeline, `/code/browser.html` for Data browser, `/code/product-catalog.html` for Product Catalog, `/code/changes-confirm.html` for concrete proposals and discussion entries, or `/docs/viewer.html` for documentation. The documentation viewer requires generated assets; story pages use native JavaScript modules.
 
 The [application guide](docs/APPLICATION_GUIDE.md) explains navigation, annotations, comparisons and saving. [Render setup](docs/RENDER_SETUP.md) explains the GitHub saving service and static publication. The backend holds the GitHub credential; the browser uses a separate access key. Tests simulate transactions and never authorize live data.
 

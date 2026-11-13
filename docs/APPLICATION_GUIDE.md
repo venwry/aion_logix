@@ -7,11 +7,12 @@ The application explores and reviews the alternative history stored in JSON. Dis
 | Page | Purpose |
 | --- | --- |
 | [Timeline](../code/timeline.html) | Chronological exploration of events, processes and campaigns, with details on the left. |
+| [Product Catalog](../code/product-catalog.html) | Products grouped chronologically by launch campaign and event, with configuration and BOM tabs. |
 | [Data browser](../code/browser.html) | All foundation datasets, with a sortable record list on the left and details on the right. |
 | [Changes confirm](../code/changes-confirm.html) | Review proposed before/after changes, or provide remarks on problem-only discussions. |
 | [Documentation](viewer.html) | Read current guides, dataset files and clearly labelled historical evidence. |
 
-The header switches between pages. On Timeline, Data browser and Changes confirm, **Saving service** in the top navigator hides or reveals the connection section. Its visibility is remembered across pages and reloads in this browser; hiding it frees the space for the content below and keeps the connection active. The original Logix/AION logo links to the timeline; the AION A emblem is the browser/favorites icon. Record URLs carry the selected ID after `#`, allowing direct links to details.
+The header switches between pages. On Timeline, Product Catalog, Data browser and Changes confirm, **Saving service** in the top navigator hides or reveals the connection section. Its visibility is remembered across pages and reloads in this browser; hiding it frees the space for the content below and keeps the connection active. The original Logix/AION logo links to the timeline; the AION A emblem is the browser/favorites icon. Record URLs carry the selected ID after `#`, allowing direct links to details.
 
 ## Timeline
 
@@ -44,6 +45,16 @@ Use text, record type, authorization, actor and year-range filters. Matching rec
 Scroll horizontally for parallel work. Drag the divider between details and timeline to adjust their widths, or focus the divider and use the arrow keys. Normal narrow-screen layout stacks the panes.
 
 **Full screen**, immediately left of the colour key, hides the header, saving-service bar, title and filters. Details and timeline use the available page area. **Exit full screen** or Escape restores those sections without clearing filter values. This is an application layout mode, not the browser's native full-screen mode; entering it does not disconnect an existing saving-service session.
+
+## Product Catalog
+
+The left browser groups internal products by their recorded launch campaign, then launch event, in chronological order. Undated groups follow dated groups. Search matches product names, IDs, descriptions, campaign names and event names. Selecting a product updates its shareable URL. Products without launch links remain browsable in separate groups.
+
+The right pane switches between **Configuration contents** and **Bill of materials**. The composition selector starts with the earliest numbered revision; each child uses its explicitly pinned revision, never an inferred latest version. Configuration contents uses six display groups: Mainboard core, Memory and cartridges, Disk drives, Expansion cards, Flexibus & Video peripherals, and Software & services. These groups are derived from existing record kinds and technical parameters; they are not new foundation fields. Open a component for its description, technical chapters, graphics modes and included components. Links open the original records in Data browser.
+
+The BOM preserves the composition hierarchy and shows quantities per parent and per complete product. Unknown quantities remain unknown and propagate through descendants. Assemblies and their constituent parts overlap and must not be added together. Services have no physical BOM. No prices or manufacturing cost estimates are invented.
+
+Processor summaries use base-computer processor references checked against fitted composition parts. System RAM sums declared memory-module, memory-subsystem and RAM-expansion capacities multiplied by their installed quantities, counting each memory assembly once. It excludes video buffers, ROM, storage and maximum-capacity limits. Unknown capacity or quantity prevents a claimed total; the known subtotal is labelled separately. This derives declared installed system memory, not OS-available memory or a hardware qualification result. Hover over RAM for its contributing assemblies. All views are read-only and add no duplicated product specifications or data structures.
 
 ## Data browser
 

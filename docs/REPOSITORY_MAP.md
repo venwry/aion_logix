@@ -25,6 +25,7 @@ This is the current organisation of the maintained repository. [Current document
 
 - `index.html`, `code/index.html`: application entry/redirects.
 - `code/timeline.html` and `timeline.js`: timeline, selection history and annotations; `timeline-layout.js`, `timeline-lanes.js` and `temporal.js` support display.
+- `code/product-catalog.html`, `product-catalog.js`, `product-catalog-model.js` and `product-catalog.css`: launch-grouped product browsing, configuration contents, pinned BOMs and derived processor/RAM summaries.
 - `code/browser.html` and `browser.js`: browsing, filtering and batch record authorization.
 - `code/changes-confirm.html` and `changes-confirm.js`: grouped JSON/detail comparisons, discussion findings, saved remarks, refinement feedback and authorization.
 - `code/shared.js`, `compact-details.js`, `composition.js`: loading, references and versioned technical detail rendering.
