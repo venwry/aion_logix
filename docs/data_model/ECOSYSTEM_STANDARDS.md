@@ -42,10 +42,10 @@ The UI shows the technology name followed by the date in brackets, then exactly 
 
 ## Review and deferred work
 
-The queue contains 12 individual standard-kind candidates, 12 external-product conversions, and one atomic removal of three redundant affiliation records. No incoming foundation references to those affiliation IDs remain. Their references in the current authorization-coverage discussion are removed; historical decisions remain unchanged.
+The standard-kind candidates are now revised into three actionable family proposals and one Plug and Execute discussion; see [the pending consolidation design](../proposals/STANDARD_FAMILY_CONSOLIDATION.md). The 12 external-product conversions and one atomic removal of three redundant affiliation records remain separate. No incoming foundation references to those affiliation IDs remain. Their references in the current authorization-coverage discussion are removed; historical decisions remain unchanged.
 
 The relationship dataset, schema, registry and associated documentation remain in place by the author's instruction. Their deletion is parked until a separate instruction after these tasks. No new market-response structure or sales dataset is deployed in this iteration.
 
 The earlier [ecosystem and sales proposal](../proposals/ECOSYSTEM_AND_SALES_SCHEMA.md) remains a proposal for later market-response and calculation work. This document supersedes its external-product specification, impact and date designs.
 
-Run `node tools/verify-ecosystem-iteration-1.js` for per-proposal/batch approval and semantic checks, and `CHROMIUM_PATH=/usr/bin/chromium npx playwright test tests/ecosystem-iteration-1.spec.cjs` for rendering checks.
+Use `node tools/verify-standard-families.js` for the current revised proposal queue. The original `tools/verify-ecosystem-iteration-1.js` verifies the earlier proposal snapshot and is superseded for queue matching. Run `CHROMIUM_PATH=/usr/bin/chromium npx playwright test tests/ecosystem-iteration-1.spec.cjs` for rendering checks.

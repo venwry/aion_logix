@@ -2,6 +2,8 @@
 import copy,json,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+if (ROOT/'data_storytelling/review_evidence/standard-families/proposals.json').exists():
+ raise SystemExit('Standard candidates have been revised. Use tools/revise-standard-families.py; do not restore the superseded queue.')
 def read(p):return json.loads((ROOT/p).read_text())
 def write(p,v):(ROOT/p).write_text(json.dumps(v,indent=2,ensure_ascii=False)+'\n')
 evidence='data_storytelling/review_evidence/ecosystem-iteration-1/'
