@@ -254,7 +254,7 @@
           "processed_wafer_cost": 235,
           "wafer_completion": 0.9,
           "package_yield": 0.95,
-          "defects_cm2": 2.0
+          "defects_cm2": 2
         },
         {
           "date": "1981-06-15",
@@ -4595,6 +4595,56 @@
       "confidence": "low",
       "basis": "AION recurring fabricated-part estimate; die size uses an explicit planning allowance. Package/test and grade fractions are estimates. Route availability does not assert this chip’s specific release.",
       "die_area_mm2": 12
+    },
+    {
+      "record_id": "base_part.miniscribe_4010",
+      "method": "market",
+      "market_series_id": "miniscribe_4010",
+      "basis": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount.",
+      "confidence": "low"
+    },
+    {
+      "record_id": "base_part.quantum_q540",
+      "method": "market",
+      "market_series_id": "quantum_q540",
+      "basis": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount.",
+      "confidence": "low"
+    },
+    {
+      "record_id": "base_part.software.aion_c_2_cpm.software_documentation",
+      "method": "purchased",
+      "unit_cost": 4,
+      "base_date": "1978-06-15",
+      "annual_real_change": -0.01,
+      "basis": "Engineering allowance for software documentation; the quantity is the foundation BOM quantity (individual parts or the named assembly set). Reassessed for AION C 2.0: same physical fulfilment process; media quantity follows the approved two-disk BOM. Compiler development is non-recurring and excluded.",
+      "confidence": "low"
+    },
+    {
+      "record_id": "base_part.software.aion_c_2_cpm.license_document",
+      "method": "purchased",
+      "unit_cost": 0.25,
+      "base_date": "1978-06-15",
+      "annual_real_change": 0,
+      "basis": "Engineering allowance for license document; the quantity is the foundation BOM quantity (individual parts or the named assembly set). Reassessed for AION C 2.0: same physical fulfilment process; media quantity follows the approved two-disk BOM. Compiler development is non-recurring and excluded.",
+      "confidence": "low"
+    },
+    {
+      "record_id": "base_part.software.aion_c_2_cpm.installation_media",
+      "method": "purchased",
+      "unit_cost": 3.5,
+      "base_date": "1978-06-15",
+      "annual_real_change": -0.05,
+      "basis": "Engineering allowance for installation media; the quantity is the foundation BOM quantity (individual parts or the named assembly set). Reassessed for AION C 2.0: same physical fulfilment process; media quantity follows the approved two-disk BOM. Compiler development is non-recurring and excluded.",
+      "confidence": "low"
+    },
+    {
+      "record_id": "base_part.software.aion_c_2_cpm.software_packaging",
+      "method": "purchased",
+      "unit_cost": 2.5,
+      "base_date": "1978-06-15",
+      "annual_real_change": -0.01,
+      "basis": "Engineering allowance for packaging; the quantity is the foundation BOM quantity (individual parts or the named assembly set). Reassessed for AION C 2.0: same physical fulfilment process; media quantity follows the approved two-disk BOM. Compiler development is non-recurring and excluded.",
+      "confidence": "low"
     }
   ],
   "operations": [
@@ -5679,16 +5729,6 @@
       "basis": "Estimated per-unit assembly, duplication/configuration and final verification time. Only incremental work at this node is charged."
     },
     {
-      "record_id": "product.artemis_budget_128",
-      "assembly_hours": 0.15,
-      "test_hours": 0.15,
-      "overhead_fraction": 0.2,
-      "loss_fraction": 0,
-      "licensing_cost": 0,
-      "licensing_basis": "No external recurring licence allowance; AION-owned software R&D is outside recurring delivery cost.",
-      "basis": "Estimated per-unit assembly, duplication/configuration and final verification time. Only incremental work at this node is charged."
-    },
-    {
       "record_id": "product.artemis_budget_128_hdd",
       "assembly_hours": 0.15,
       "test_hours": 0.15,
@@ -6577,6 +6617,36 @@
       "licensing_cost": 0,
       "licensing_basis": "No external recurring licence allowance; AION-owned software R&D is outside recurring delivery cost.",
       "basis": "Estimated per-unit assembly, duplication/configuration and final verification time. Only incremental work at this node is charged."
+    },
+    {
+      "record_id": "device.storage.miniscribe_4010",
+      "assembly_hours": 0.4,
+      "test_hours": 0.3,
+      "overhead_fraction": 0.2,
+      "loss_fraction": 0.015,
+      "licensing_cost": 0,
+      "licensing_basis": "No external recurring licence allowance; AION-owned software R&D is outside recurring delivery cost.",
+      "basis": "Estimated per-unit assembly, duplication/configuration and final verification time. Only incremental work at this node is charged."
+    },
+    {
+      "record_id": "software_edition.aion_c_2_cpm",
+      "assembly_hours": 0.04,
+      "test_hours": 0.06,
+      "overhead_fraction": 0.2,
+      "loss_fraction": 0,
+      "licensing_cost": 0,
+      "licensing_basis": "No external recurring licence allowance; AION-owned software R&D is outside recurring delivery cost.",
+      "basis": "Estimated per-unit assembly, duplication/configuration and final verification time. Only incremental work at this node is charged. Reassessed for AION C 2.0: same physical fulfilment process; media quantity follows the approved two-disk BOM. Compiler development is non-recurring and excluded."
+    },
+    {
+      "record_id": "product.aion_c_2_cpm",
+      "assembly_hours": 0.08,
+      "test_hours": 0.08,
+      "overhead_fraction": 0.2,
+      "loss_fraction": 0,
+      "licensing_cost": 0,
+      "licensing_basis": "No external recurring licence allowance; AION-owned software R&D is outside recurring delivery cost.",
+      "basis": "Estimated per-unit assembly, duplication/configuration and final verification time. Only incremental work at this node is charged. Reassessed for AION C 2.0: same physical fulfilment process; media quantity follows the approved two-disk BOM. Compiler development is non-recurring and excluded."
     }
   ],
   "services": [
@@ -6654,7 +6724,7 @@
     },
     {
       "record_id": "product.academy_course_1",
-      "labor_hours": 2.0,
+      "labor_hours": 2,
       "other_cost": 25,
       "labor_rate": "instructor_hour",
       "unit": "one student enrolment",
@@ -6663,7 +6733,7 @@
     },
     {
       "record_id": "product.academy_course_2",
-      "labor_hours": 5.0,
+      "labor_hours": 5,
       "other_cost": 55,
       "labor_rate": "instructor_hour",
       "unit": "one student enrolment",
@@ -6672,7 +6742,7 @@
     },
     {
       "record_id": "product.academy_course_3",
-      "labor_hours": 6.0,
+      "labor_hours": 6,
       "other_cost": 65,
       "labor_rate": "instructor_hour",
       "unit": "one student enrolment",
@@ -6681,7 +6751,7 @@
     },
     {
       "record_id": "product.academy_course_4",
-      "labor_hours": 5.0,
+      "labor_hours": 5,
       "other_cost": 55,
       "labor_rate": "instructor_hour",
       "unit": "one student enrolment",
@@ -6690,7 +6760,7 @@
     },
     {
       "record_id": "product.service_pulse_training",
-      "labor_hours": 2.0,
+      "labor_hours": 2,
       "other_cost": 25,
       "labor_rate": "instructor_hour",
       "unit": "one student enrolment",
@@ -6699,7 +6769,7 @@
     },
     {
       "record_id": "product.service_bpi_training",
-      "labor_hours": 3.0,
+      "labor_hours": 3,
       "other_cost": 35,
       "labor_rate": "instructor_hour",
       "unit": "one student enrolment",
@@ -6827,6 +6897,16 @@
       "id": "re_1983_06",
       "url": "https://www.worldradiohistory.com/Archive-Radio-Electronics/80s/1983/Radio-Electronics-1983-06.pdf",
       "description": "June 1983 indexed Jameco prices: 4116-200 $1.69; 4164-200 $7.49. Scan not independently verified; used as a low-confidence market observation."
+    },
+    {
+      "id": "storage_1982_1983_author_selection",
+      "url": "https://device.report/m/a7c04b02f4ed7ea496405498d9d7b96dfb534a9f34830fdd0fdec3ad75181dc3",
+      "description": "Author-selected MiniScribe 4010 $625 at 1,000 units. Published October 1982 benchmark applied from NCC 1982 as an explicit alternative-history procurement assumption, not a verified June contract."
+    },
+    {
+      "id": "quantum_q540_1983",
+      "url": "https://archive.computerhistory.org/resources/access/text/2017/03/102770732-05-01-acc.pdf",
+      "description": "Author-selected Quantum Q540 $1,485 nominal OEM benchmark; prior research identified 1983 DISK/TREND pricing at 100 units reproduced in the 1984 Quantum guide. Not a verified May shipment/contract or 1,000-unit price."
     }
   ],
   "market_series": [
@@ -6959,6 +7039,30 @@
           "unit_cost_nominal": 5.495,
           "source_id": "historical_ram_ads",
           "basis": "80% of October 1983 4164-200 eight-pack $54.95 divided by eight."
+        }
+      ]
+    },
+    {
+      "id": "miniscribe_4010",
+      "description": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount.",
+      "observations": [
+        {
+          "date": "1982-06-07",
+          "unit_cost_nominal": 625,
+          "source_id": "storage_1982_1983_author_selection",
+          "basis": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount."
+        }
+      ]
+    },
+    {
+      "id": "quantum_q540",
+      "description": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount.",
+      "observations": [
+        {
+          "date": "1983-05-16",
+          "unit_cost_nominal": 1485,
+          "source_id": "quantum_q540_1983",
+          "basis": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount."
         }
       ]
     }

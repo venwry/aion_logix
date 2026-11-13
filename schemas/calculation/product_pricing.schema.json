@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "model_version": {
+      "const": "1.0.0"
+    },
+    "currency": {
+      "const": "USD"
+    },
+    "currency_basis": {
+      "const": "nominal_usd"
+    },
+    "foundation_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "manufacturing_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "assumptions_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "dates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "date"
+      }
+    },
+    "product_pricing": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1
+          },
+          "estimates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "composition_version": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "manufacturing_cost": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "computerland_fee": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "break_even": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "competition_price": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "retail_price": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "profit": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "comparison": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "competition_price": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "status": {
+                      "enum": [
+                        "planning",
+                        "normalized",
+                        "unpriced"
+                      ]
+                    },
+                    "lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "record_id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "quantity": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "profile_id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "status": {
+                            "enum": [
+                              "planning",
+                              "observed"
+                            ]
+                          },
+                          "observation_date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "basis": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "comparables": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "price": {
+                                  "type": "number",
+                                  "minimum": 0
+                                },
+                                "source_id": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "normalized_price": {
+                                  "type": "number",
+                                  "minimum": 0
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "price",
+                                "source_id",
+                                "normalized_price"
+                              ]
+                            }
+                          },
+                          "unit_price": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "total": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        },
+                        "required": [
+                          "record_id",
+                          "quantity",
+                          "profile_id",
+                          "status",
+                          "observation_date",
+                          "basis",
+                          "comparables",
+                          "unit_price",
+                          "total"
+                        ]
+                      }
+                    },
+                    "missing": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "required": [
+                    "competition_price",
+                    "status",
+                    "lines",
+                    "missing"
+                  ]
+                }
+              },
+              "required": [
+                "date",
+                "composition_version",
+                "manufacturing_cost",
+                "computerland_fee",
+                "break_even",
+                "competition_price",
+                "retail_price",
+                "profit",
+                "comparison"
+              ]
+            }
+          }
+        },
+        "required": [
+          "product_id",
+          "unit",
+          "estimates"
+        ]
+      }
+    }
+  },
+  "required": [
+    "model_version",
+    "currency",
+    "currency_basis",
+    "foundation_sha256",
+    "manufacturing_sha256",
+    "assumptions_sha256",
+    "dates",
+    "product_pricing"
+  ]
+}

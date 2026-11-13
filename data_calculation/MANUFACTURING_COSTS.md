@@ -1,6 +1,6 @@
-# Manufacturing cost estimates
+# Product Pricing and manufacturing estimates
 
-The [Manufacturing costs page](../code/manufacturing-costs.html) lists every internal `product.*` offering against June 15 and December 15, from June 1978 through December 1983. **Every amount is nominal USD for its column date**, suitable for comparison with a selling price in dollars of that same period. These are recurring supply-cost estimates, not retail prices, recorded expenditure or net-profit figures. No authorization or Changes confirm step is required.
+The [Product Pricing page](../code/manufacturing-costs.html) lists every internal `product.*` offering against June 15 and December 15, from June 1978 through December 1983. **Every amount is nominal USD for its column date**, suitable for comparison with a selling price in dollars of that same period. These are recurring supply-cost estimates, not retail prices, recorded expenditure or net-profit figures. No authorization or Changes confirm step is required.
 
 ## Files and regeneration
 
@@ -90,3 +90,37 @@ The 16-Kbit curve targets the 150/200 ns access class. A cheaper 250 ns access d
 - A lowest central estimate and sensitivity result. Commercial chip costs vary by −25%/+25%; AION manufacturing costs vary by −20%/+25%, with markup following the changed cost. Board/conversion costs stay fixed in this comparison. These are scenario ranges, not statistical confidence intervals or assurance of a supplier order.
 
 The comparison covers DRAM modules and Aurelia/Aurelia+ main-memory subsystems. It does not redesign graphics/sprite memories or create an unsourced commercial SRAM alternative. Prototypes with unknown release dates are omitted from dated choices. Hypothetical host capacity targets come from recorded product compositions across their versions; availability still follows the host and module dates, not an assertion that every target was sold on every date. The recorded BOM remains the main product-cost grid; alternatives require separate technical review before changing product definitions.
+
+## Product Pricing and competition reassessment
+
+The page is now **Product Pricing**; `code/manufacturing-costs.html` remains its stable URL. Each eligible date shows manufacturing cost, competition price, retail price and profit. The existing manufacturing breakdown and RAM alternatives remain available. `npm run calculate:pricing` (or the retained `calculate:manufacturing` alias) regenerates manufacturing, RAM and pricing datasets together. `npm run validate:calculation` checks all three outputs.
+
+The author confirmed that the ComputerLand fee is **20% of manufacturing cost**, not 20% of retail price:
+
+```text
+fee = round(manufacturing cost × 0.20, 2)
+break-even = manufacturing cost + fee
+competition = arithmetic mean of normalized comparable retail baskets
+retail = round((competition + break-even) / 2, 2)
+profit = retail − break-even
+```
+
+Amounts are nominal USD, rounded to cents. Profit is unit contribution before the excluded corporate expenses, development, financing and tax; it is not accounting net profit. The midpoint is not clamped: competition below break-even produces a negative contribution. A zero-cost offering can still have a positive market price. Pre-launch dates remain empty.
+
+`product_pricing_assumptions.json` stores independently editable, dated competition profiles, evidence links and explicit scope mappings. `product_pricing.json` stores the four amounts, fee, break-even and full comparison basket for each product/date. Their schemas are in `schemas/calculation/`. These files are calculation data and do not create foundation prices or require Changes confirm. Fingerprints cover the foundation, manufacturing output and pricing assumptions; stale inputs produce a page warning, and stale pricing files are not paired with new costs. CSV includes all four fields for every date.
+
+### What the competition figures mean
+
+The author explicitly authorized **clearly labelled provisional estimates from comparable components/services** where documented equivalent offerings are unavailable. All current comparisons carry that label. They are functional retail equivalents, not quotations for an identical Logix configuration and not claims of interface or processor-performance equivalence.
+
+The calculation walks the approved dated product composition, retaining pinned descendant revisions and actual quantities. At a mapped complete device/software/service it stops: its internal BOM is not charged a second time. For each supplied element it averages the independently specified comparable retail alternatives after explicit scope normalization, then sums those averages. This equals the average across every complete basket formed from those independent alternatives; it is **not** a market-share-weighted survey of named competing systems. Included certificates and packout have an intentional zero incremental retail price. Training uses the same course duration and per-student unit as the cost model; engineering and support comparisons keep their declared engagement/year units.
+
+Profiles use nominal annual planning observations, held through June and December of that year. Historical references include Apple II/Disk II, Microsoft's SoftCard and mouse, AutoCAD and the March 1983 IBM retail list. Earlier-year trajectories, non-identical hardware, advanced host premiums, network products, server rights and service rates are explicitly provisional. Later evidence may inform a retrospective earlier planning allowance; it does **not** establish that the later competitor existed then. No extra CPI is applied to these nominal retail profiles, and none is derived from our manufacturing cost. The page exposes each anchor, source, scope adjustment and quantity. Narrower contemporary quotes should replace the corresponding profile observations as evidence improves.
+
+Larger RAM, graphics and hub profiles use explicit capacity/port multipliers. They do not establish linear performance scaling or physical interchangeability, and can overestimate a more integrated competitor's price. Advanced 32-bit/server host allowances are particularly uncertain. The model is a transparent pricing scenario, not proof of market willingness to pay; a TUI/standards premium is not silently added. Switching `allow_planning` off leaves unsupported competition/retail/profit unpriced instead of inventing zero prices.
+
+### Current manufacturing refresh
+
+The approved storage definitions now use the staged nominal MiniScribe 4010 $625 and Quantum Q540 $1,485 procurement assumptions, with their documented date/quantity caveats. Dated Artemis definitions switch to one FDD and one HDD from NCC 1982; earlier compositions remain intact. Athena Server receives the Q540 even though formatted capacity is below its raw 43 MB. The removed Budget Colour Office offering is excluded. AION C 2.0 has explicit documentation/media/fulfilment assumptions using its actual two-disk BOM; compiler development is excluded as non-recurring work.
+
+All current compositions are re-expanded. Existing manufacturing learning, chip yield, assembly, licensing and service assumptions remain provisional where current specifications provide no stronger evidence; recalculation does not turn unresolved ROM chip populations, functional sets or production timings into supplier quotations. Existing low/high manufacturing sensitivity ranges remain available in details.

@@ -11,7 +11,7 @@ This is the current organisation of the maintained repository. [Current document
 | `schemas/` | Current foundation schemas and shared technical/composition structures. |
 | `schemas/calculation/` | Annual-sales and manufacturing-cost structures; validated independently of foundation. |
 | `schemas/storytelling/` | Authorization, feedback and problem-only discussion schemas. |
-| `code/` | Native-module Timeline, Data browser, Product Catalog, Manufacturing costs and Changes confirm application. |
+| `code/` | Native-module Timeline, Data browser, Product Catalog, Product Pricing and Changes confirm application. |
 | `server/` | Authenticated GitHub reading, validation, feedback and authorization transactions. |
 | `assets/` | Documentation viewer source, styles, images and ignored generated bundles. |
 | `docs/` | Current application, editing, workflow and deployment guides. |
@@ -49,3 +49,5 @@ This is the current organisation of the maintained repository. [Current document
 `package.json` and `package-lock.json` define dependencies and commands. `playwright.config.cjs` configures browser tests and their local server. `Dockerfile`, `render.yaml` and `.dockerignore` configure deployment; `.gitignore` excludes generated assets, dependencies, test outputs and secrets. See the [editing guide](EDITING_GUIDE.md) for checks and [Render setup](RENDER_SETUP.md) for publication.
 
 Current user-facing standards are linked from [docs/README.md](README.md). The [documentation relocation index](archived/relocation-index.json) records moved paths and source checksums. Archived paths and proposal statuses describe their recorded snapshots; current truth comes from the live files and schemas.
+
+Product pricing: `code/product-pricing-model.js` computes the fee, midpoint and dated competition baskets; `tools/generate-product-pricing.js` and `tools/validate-product-pricing.js` generate/check `data_calculation/product_pricing.json` against `product_pricing_assumptions.json`. Both have schemas under `schemas/calculation/`.

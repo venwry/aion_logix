@@ -21,7 +21,7 @@ const entries = [
   {id:'market-responses',title:'Market-response impact sections',path:'docs/data_model/MARKET_RESPONSES.md',type:'md'},
   {id:'annual-sales-guide',title:'Annual sales — calculation guide',path:'data_calculation/README.md',type:'md'},
   {id:'annual-sales',title:'Calculation · annual sales',path:'data_calculation/annual_sales.json',type:'json'},
-  {id:'manufacturing-cost-guide',title:'Manufacturing costs — model and assumptions',path:'data_calculation/MANUFACTURING_COSTS.md',type:'md'},
+  {id:'manufacturing-cost-guide',title:'Product Pricing — model and assumptions',path:'data_calculation/MANUFACTURING_COSTS.md',type:'md'},
   {id:'manufacturing-costs',title:'Calculation · manufacturing costs',path:'data_calculation/manufacturing_costs.json',type:'json'},
   {id:'manufacturing-cost-assumptions',title:'Calculation · manufacturing cost inputs',path:'data_calculation/manufacturing_cost_assumptions.json',type:'json'},
   {id:'ram-cost-scenarios',title:'Calculation · RAM sourcing and module alternatives',path:'data_calculation/ram_cost_scenarios.json',type:'json'},

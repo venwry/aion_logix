@@ -1,6 +1,6 @@
 # Calculation datasets
 
-These files are estimation data outside foundation authorization and Changes confirm. Manufacturing costs use **nominal USD at each snapshot date**; see the [cost model guide](MANUFACTURING_COSTS.md) and [Manufacturing costs page](../code/manufacturing-costs.html). Run `npm run validate:calculation` to validate both datasets.
+These files are estimation data outside foundation authorization and Changes confirm. Product Pricing use **nominal USD at each snapshot date**; see the [cost model guide](MANUFACTURING_COSTS.md) and [Product Pricing page](../code/manufacturing-costs.html). Run `npm run validate:calculation` to validate both datasets.
 
 ## Annual sales estimates
 
@@ -34,3 +34,5 @@ Do not add World to its constituent regions, all to its constituent segments, di
 A partial launch year remains that calendar year; explain the selling period in the basis. Positive estimates before a known release produce reassessment warnings. A foundation update does not automatically recalculate estimates. Prices, revenue, market-share formulas and forecasting engines are outside the annual-sales dataset. Manufacturing cost estimates are maintained separately in the files described above.
 
 Manufacturing model 1.1.0 includes AION chip costs with a 15% markup, equivalent-part cost checks and dated RAM alternatives in `ram_cost_scenarios.json`. The [cost guide](MANUFACTURING_COSTS.md) explains the market evidence, qualification limits and regeneration.
+
+Product Pricing adds `product_pricing_assumptions.json` and generated `product_pricing.json`, with calculation-only schemas. Use `npm run calculate:pricing` to refresh costs, RAM alternatives and all four pricing values together. See [the pricing guide](MANUFACTURING_COSTS.md#product-pricing-and-competition-reassessment) for provisional comparisons and the author-confirmed 20%-of-cost fee.

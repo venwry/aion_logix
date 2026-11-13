@@ -25,4 +25,4 @@ These guides describe the repository and application as they work now. The schem
 
 Run `npm run validate:docs` to check current guide links, viewer entries and agreement with the registry/manifest.
 
-[Manufacturing cost estimates](../data_calculation/MANUFACTURING_COSTS.md) describe the calculation-only nominal-USD cost model and its semiannual product table.
+[Product Pricing and manufacturing estimates](../data_calculation/MANUFACTURING_COSTS.md) describe the calculation-only nominal-USD cost model and its semiannual product table.

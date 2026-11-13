@@ -1,0 +1,3922 @@
+{
+  "model_version": "1.0.0",
+  "allow_planning": true,
+  "currency": "USD",
+  "fee_fraction_of_cost": 0.2,
+  "competition_weight": 0.5,
+  "method": "Arithmetic mean of normalized equivalent retail alternatives per supplied element, summed using approved dated composition quantities. This equals the mean of complete baskets formed from all combinations of independent component alternatives. All current baskets are provisional; historical anchors are not presented as exact matched quotations. No competitor price is derived from our cost.",
+  "date_policy": "Annual nominal planning snapshots effective January 1, used at June/December dates. Historical anchors may inform earlier retrospective scenarios, explicitly not evidence of early availability. No extra CPI is applied. Profiles remain unchanged within a year unless observations are edited.",
+  "sources": [
+    {
+      "id": "ibm1983",
+      "url": "https://forum.winworldpc.com/discussion/7241/march-8-1983-ibm-pc-hardware-and-software-price-list",
+      "description": "Transcription of IBM March 8 1983 retail list. Price evidence, not proof of equivalence to Logix hardware. Early-year values and scope adjustments below are explicit planning estimates."
+    },
+    {
+      "id": "apple1977",
+      "url": "https://www.apple2history.org/history/ah04/",
+      "description": "Apple II 48 KB system $2,638, without monitor or disk. Complete host benchmark; not an incremental motherboard quotation."
+    },
+    {
+      "id": "disk1978",
+      "url": "https://www.apple2history.org/history/ah05/",
+      "description": "Disk II with controller $595 in July 1978. June availability is not established; earlier values are provisional."
+    },
+    {
+      "id": "softcard1980",
+      "url": "https://www.computerhistory.org/tdih/april/2/",
+      "description": "Microsoft SoftCard introduced April 1980 at $349, including a Z80 and CP/M. Functional proxy for backward-compatibility module, not equivalent CPU performance."
+    },
+    {
+      "id": "mouse1983",
+      "url": "https://www.computinghistory.org.uk/det/6152/Microsoft-introduces-the-2-button-mouse/",
+      "description": "May 1983 Microsoft mouse $195 including software. Does not establish an unbundled mouse quotation or a 1982 price."
+    },
+    {
+      "id": "autocad1982",
+      "url": "https://www.wired.com/2007/11/cad-anniversary/",
+      "description": "Retrospective account of initial AutoCAD price around $1,000. Different operating-system port does not prove identical support or performance."
+    },
+    {
+      "id": "planning",
+      "url": "",
+      "description": "Independent nominal retail planning allowance. Not a historical quotation. Scope, time curve and amounts are explicit, revisable assumptions; no value is derived from Logix manufacturing cost."
+    }
+  ],
+  "profiles": [
+    {
+      "id": "host_aurelia",
+      "basis": "48 KB 8-bit host only; keyboard, disk, monitor, OS and support priced separately. Early Apple 48 KB host benchmark is reduced for the separately counted keyboard; later values are retail planning declines, not price observations. No assumed TUI premium.",
+      "anchors": [
+        {
+          "description": "Apple II 48 KB $2,638 at introduction, includes keyboard but excludes disk/monitor.",
+          "source_id": "apple1977"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2450,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2050,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1700,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1450,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1200,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1100,
+              "source_id": "apple1977"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "host_aurelia_plus",
+      "basis": "Expanded 8-bit host with its fixed RAM; independent $150–250 allowance above basic host for improved capability. Separately fitted modules/peripherals excluded.",
+      "anchors": [
+        {
+          "description": "Apple II 48 KB host reference, normalization is provisional.",
+          "source_id": "apple1977"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2700,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2300,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1950,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1650,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1400,
+              "source_id": "apple1977"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1250,
+              "source_id": "apple1977"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "host_artemis",
+      "basis": "CPU/mainboard/chassis/PSU core, no separate RAM modules, video card, keyboard, storage, OS or services. 1983 anchor decomposes $2,104 IBM 64 KB/320 KB disk system less $529 FDD, $165 64 KB RAM and provisional $100 keyboard = $1,310. This is a functional base-host proxy, not claimed processor equivalence.",
+      "anchors": [
+        {
+          "description": "IBM 64 KB single 320 KB disk system $2,104; drive $529; 64 KB module kit $165.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2300,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2100,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1900,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1700,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1500,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1310,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "host_artemis_pro",
+      "basis": "Higher-capacity server host core. Explicit provisional server-capability premium above ordinary host; excludes RAM, graphics, network card, storage and software. Not a measured performance ratio.",
+      "anchors": [
+        {
+          "description": "IBM host decomposition is a lower-specification reference only.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2800,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2600,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2400,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2200,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2000,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1800,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "host_athena",
+      "basis": "32-bit workstation host core, excluding fitted RAM/graphics/network/storage; contemporary advanced-workstation allowance. No benchmark establishes performance parity. Only eligible Athena snapshots are priced.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3500,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3300,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3100,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2900,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2700,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2400,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "host_athena_server",
+      "basis": "32-bit server host core; provisional capacity/integration premium, excluding separately fitted modules and peripherals. Not a supplier quotation.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 4200,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 4000,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3800,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3500,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3200,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2900,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fdd_single",
+      "basis": "Bare single-density internal floppy equivalent; excludes host/controller already within host. Independent early-year allowances; 1983 IBM 160 KB drive is a functional, different-format reference.",
+      "anchors": [
+        {
+          "description": "IBM 160 KB drive $289.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 450,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 425,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 400,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 350,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 325,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 289,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fdd_double",
+      "basis": "Internal double-density floppy mechanism equivalent; capacity and format are not assumed identical. Controller excluded.",
+      "anchors": [
+        {
+          "description": "IBM 320 KB diskette drive $529.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 650,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 625,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 600,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 575,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 550,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 529,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "external_fdd",
+      "basis": "Complete external floppy subsystem including controller and housing; capacity/format support differ. First June snapshot precedes confirmed Disk II stock, so it remains provisional.",
+      "anchors": [
+        {
+          "description": "Apple Disk II $595 with controller, July 1978.",
+          "source_id": "disk1978"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 595,
+              "source_id": "disk1978"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 595,
+              "source_id": "disk1978"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 575,
+              "source_id": "disk1978"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 550,
+              "source_id": "disk1978"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 525,
+              "source_id": "disk1978"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 500,
+              "source_id": "disk1978"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hdd5",
+      "basis": "Integrated nominal 5 MB-class HDD subsystem; lower usable capacity and controller differences remain. Includes controller/cabling allowance. Not a drive-only comparison.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 4000,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3600,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3200,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2800,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2400,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2000,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hdd10",
+      "basis": "Integrated nominal 10 MB-class disk subsystem including host controller allowance. MiniScribe raw capacity is lower when formatted; no claim of equal usable capacity to ST412.",
+      "anchors": [
+        {
+          "description": "IBM 10 MB fixed drive $1,695 plus adapter $695 in 1983. Earlier values are planning allowances.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 4500,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 4100,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3700,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 3300,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2800,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 2390,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hdd43",
+      "basis": "Integrated 40 MB-class HDD subsystem. Quantum Q540 43 MB is unformatted, not 43 MB usable. Provisional retail subsystem allowance; the OEM $1,485 is deliberately not substituted for retail price.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 6500,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 6100,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 5700,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 5200,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 4700,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 4200,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ram64",
+      "basis": "Complete 64 KB expansion board equivalent, not bare DRAM chips; bank organization and bus width differ. Larger modules scale as capacity-normalized planning equivalents, not a claim of physical socket interchangeability.",
+      "anchors": [
+        {
+          "description": "IBM 64 KB expansion option $350; larger capacity normalized to full board equivalents, conservative and potentially high.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1000,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 850,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 700,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 550,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 425,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 350,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mono",
+      "basis": "9–12 inch composite monochrome display equivalent. Broad low-end display allowance; does not equal the IBM high-resolution monitor.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 250,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 240,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 230,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 220,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 210,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 200,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mono_pro",
+      "basis": "High-resolution monochrome display equivalent; larger-screen multipliers are provisional.",
+      "anchors": [
+        {
+          "description": "IBM monochrome display $345 in March 1983.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 500,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 470,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 440,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 410,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 380,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 345,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "basis": "Composite color monitor equivalent; scan modes and connector compatibility still differ.",
+      "anchors": [
+        {
+          "description": "AMDEK Color-1 $499 in March 1983.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 650,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 625,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 600,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 575,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 550,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 499,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "color_pro",
+      "basis": "Professional RGB color monitor equivalent; resolution/scan-rate equivalence is provisional.",
+      "anchors": [
+        {
+          "description": "IBM Color Display $680 in March 1983.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 950,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 900,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 850,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 800,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 750,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 680,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "basis": "Base graphics-board functional equivalent. Higher VRAM capacities and accelerated features use explicit provisional multipliers. No asserted TUI ROM or API compatibility.",
+      "anchors": [
+        {
+          "description": "IBM CGA adapter $244 in March 1983.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 450,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 425,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 400,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 350,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 300,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 244,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "keyboard",
+      "basis": "Separate complete keyboard retail allowance. Does not imply plug compatibility; excluded from host decomposition to prevent double counting.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 150,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 140,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 130,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 120,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 110,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 100,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "printer",
+      "basis": "Complete low-end dot-matrix printer functional equivalent. Speed, quality and included interface differ.",
+      "anchors": [
+        {
+          "description": "IBM Graphics Printer $595, adapter/cable sold separately; Logix complete interface capability reflected only as a provisional match.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 900,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 850,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 800,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 750,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 700,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 595,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mouse",
+      "basis": "Mouse and basic driver/tutorial package equivalent. Microsoft bundle has different software and mechanics; unbundled hardware is not separately quoted.",
+      "anchors": [
+        {
+          "description": "Microsoft mouse package $195, May 1983.",
+          "source_id": "mouse1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 250,
+              "source_id": "mouse1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 240,
+              "source_id": "mouse1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 230,
+              "source_id": "mouse1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 220,
+              "source_id": "mouse1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 210,
+              "source_id": "mouse1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 195,
+              "source_id": "mouse1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interface",
+      "basis": "Expansion/peripheral interface board equivalent. FlexiBUS has no direct historical interoperable competitor; scope-normalized retail allowance.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 350,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 325,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 300,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 275,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 250,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 225,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compatibility",
+      "basis": "CP/M backward-compatibility CPU card and runtime equivalent. Different host bus and memory architecture; RAM within the module included, not charged again.",
+      "anchors": [
+        {
+          "description": "Microsoft SoftCard $349 at April 1980 introduction.",
+          "source_id": "softcard1980"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 450,
+              "source_id": "softcard1980"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 425,
+              "source_id": "softcard1980"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 349,
+              "source_id": "softcard1980"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 349,
+              "source_id": "softcard1980"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 325,
+              "source_id": "softcard1980"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 300,
+              "source_id": "softcard1980"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "network_card",
+      "basis": "Low-cost LAN interface and driver allowance per host. No equivalent FlexiBUS-compatible historical quote; does not include hub, cable or server OS.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 700,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 650,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 600,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 550,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 500,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 450,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hub4",
+      "basis": "Four-port powered LAN hub/repeater equivalent. Functional alternative-network planning allowance; network topology/protocol not interchangeable. Larger hubs scale provisionally by ports.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1000,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 950,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 900,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 850,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 800,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 750,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cable",
+      "basis": "Two-metre network cable including connectors, independent retail allowance.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "os",
+      "basis": "Single-host OS licence, distribution and documentation equivalent. ROM delivery and TUI extras are not historically matched. Server/network licences carry a separately stated scope multiplier.",
+      "anchors": [
+        {
+          "description": "IBM CP/M-86 $240 in March 1983, different CPU target.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 200,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 200,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 210,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 220,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 230,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 240,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spreadsheet",
+      "basis": "Single-user spreadsheet functional comparison. Graphs, capacity and integrations vary; no measured performance parity.",
+      "anchors": [
+        {
+          "description": "IBM list: Microsoft Multiplan $250 and VisiCalc $200 in March 1983.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 150,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 150,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 175,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 150,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 200,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 175,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 225,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 200,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 240,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 200,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 250,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 200,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "business_tools",
+      "basis": "Office utility suite: editor + time manager + contacts. 1983 basket $175 EasyWriter + $100 Time Manager + $130 editor-class allowance; overlaps excluded from other software rows. Provisional scope equivalence; not an advertised suite price.",
+      "anchors": [
+        {
+          "description": "IBM list supplies component retail anchors; combined basket is modelled.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 300,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 325,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 350,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 375,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 400,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 405,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "database",
+      "basis": "Single-user database/presentation-tool functional proxy for Pulse. No equal capabilities asserted.",
+      "anchors": [
+        {
+          "description": "IBM VisiFile $300 and PFS FILE $140 in March 1983.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 250,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 175,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 260,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 170,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 270,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 165,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 280,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 160,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 290,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 150,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 300,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 140,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accounting",
+      "basis": "Single-user general-ledger comparison; not a full multi-module accounting suite.",
+      "anchors": [
+        {
+          "description": "IBM Peachtree General Ledger $595 and BPI General Accounting $425 in March 1983.",
+          "source_id": "ibm1983"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 400,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 350,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 425,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 365,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 450,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 380,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 500,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 395,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 550,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 410,
+              "source_id": "ibm1983"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 595,
+              "source_id": "ibm1983"
+            },
+            {
+              "name": "Alternative comparable functional supply basket",
+              "price": 425,
+              "source_id": "ibm1983"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compiler",
+      "basis": "C development toolchain equivalent, with editor/debugging documentation allowance. Cross-target editions use explicit scope multiplier; no assertion that a contemporary package implements Logix TUI or Apple cross-compilation. Independent planning amounts; compiler subset equivalence unresolved.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 200,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 225,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 250,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 275,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 300,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 325,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sdk",
+      "basis": "Developer documentation/library kit equivalent, distinct from compiler licence. Independent planning allowance.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 100,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 110,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 120,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 130,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 140,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 150,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cad",
+      "basis": "One AutoCAD licence on a competing supported platform; port-specific integration/support differences remain. Only post-launch internal dates are priced.",
+      "anchors": [
+        {
+          "description": "AutoCAD introduced around $1,000 in 1982.",
+          "source_id": "autocad1982"
+        }
+      ],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1000,
+              "source_id": "autocad1982"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1000,
+              "source_id": "autocad1982"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1000,
+              "source_id": "autocad1982"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1000,
+              "source_id": "autocad1982"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1000,
+              "source_id": "autocad1982"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 1000,
+              "source_id": "autocad1982"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "games",
+      "basis": "Entertainment suite licence equivalent, approximately several contemporary $20–40 titles. Composition and features are not historically identical.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 60,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 65,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 70,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 75,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 80,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 85,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "training_day",
+      "basis": "Per student-day of classroom instruction including materials; independent market planning allowance. Multiply by stated course days, not total classroom instructor hours.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 75,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 80,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 85,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 90,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 95,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 100,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "support_year",
+      "basis": "One computer-year of light telephone support; independent comparable service-plan allowance, not an IBM maintenance-manual price. No unlimited repair entitlement.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 50,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 55,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 60,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 65,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 70,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 75,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "onsite_year",
+      "basis": "One computer-year of limited on-site assistance matching modelled expected visits, not unlimited repair. Independent service-market allowance.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 300,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 325,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 350,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 375,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 400,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 425,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "engineering_hour",
+      "basis": "Per engineering consulting hour. Independent retail service-rate estimate, separate from internal cost labour rates.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 40,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 45,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 50,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 55,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 60,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 65,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "license_issue",
+      "basis": "Developer licence issuance/registration only. Rights/term remain undefined; no paid distribution royalty or certification entitlement inferred.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 25,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exchange",
+      "basis": "One system-cartridge replacement/update including media handling, provisional competing OS-upgrade allowance. No continuing subscription implied.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 100,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 110,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 120,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 130,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 140,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 150,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "packout",
+      "basis": "Certificate/packout is included in comparable assembled or licensed retail items; no extra competitor retail charge. This is an intentional included item, not missing evidence.",
+      "anchors": [],
+      "observations": [
+        {
+          "date": "1978-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 0,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1979-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 0,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1980-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 0,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1981-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 0,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1982-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 0,
+              "source_id": "planning"
+            }
+          ]
+        },
+        {
+          "date": "1983-01-01",
+          "status": "planning",
+          "comparables": [
+            {
+              "name": "Comparable functional supply basket",
+              "price": 0,
+              "source_id": "planning"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "record_id": "base_part.device.artemis_ram_256kb_bank_kit.kit_packout_and_instructions",
+      "profile_id": "packout",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "base_part.device.artemis_ram_64kb_bank_kit.kit_packout_and_instructions",
+      "profile_id": "packout",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "base_part.logix_network_cable_2m",
+      "profile_id": "cable",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "base_part.product.aion_development_team.package_license",
+      "profile_id": "packout",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "base_part.product.aion_development_team.package_packaging",
+      "profile_id": "packout",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "base_part.product.bpi_client_server.package_license",
+      "profile_id": "packout",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "base_part.product.bpi_client_server.package_packaging",
+      "profile_id": "packout",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.apple2_expansion_card",
+      "profile_id": "interface",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.apple2_video_card",
+      "profile_id": "video",
+      "multiplier": 1.5,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 1.5; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.artemis_cpm80_module",
+      "profile_id": "compatibility",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.artemis_professional_video_128kb",
+      "profile_id": "video",
+      "multiplier": 3,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 3; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.artemis_video_card",
+      "profile_id": "video",
+      "multiplier": 1.5,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 1.5; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.artemis_video_card_16kb",
+      "profile_id": "video",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.artemis_video_card_64kb",
+      "profile_id": "video",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.athena.fdd",
+      "profile_id": "fdd_double",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.athena.hdd",
+      "profile_id": "hdd10",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.athena_server.fdd",
+      "profile_id": "fdd_double",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.athena_server.hdd",
+      "profile_id": "hdd43",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.base_computer.artemis",
+      "profile_id": "host_artemis",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.base_computer.artemis_pro",
+      "profile_id": "host_artemis_pro",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.base_computer.athena",
+      "profile_id": "host_athena",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.base_computer.athena_server",
+      "profile_id": "host_athena_server",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.base_computer.aurelia",
+      "profile_id": "host_aurelia",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.base_computer.aurelia_plus",
+      "profile_id": "host_aurelia_plus",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.color_monitor_1",
+      "profile_id": "color",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.color_monitor_2",
+      "profile_id": "color",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.color_pro_14",
+      "profile_id": "color_pro",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.flexibus_keyboard",
+      "profile_id": "keyboard",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.flexidisk",
+      "profile_id": "external_fdd",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.flexidisk_ii",
+      "profile_id": "external_fdd",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.flexiprint40",
+      "profile_id": "printer",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.logix_mouse",
+      "profile_id": "mouse",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.mono_monitor_1",
+      "profile_id": "mono",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.mono_monitor_2",
+      "profile_id": "mono",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.mono_pro",
+      "profile_id": "mono_pro",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.mono_pro_17",
+      "profile_id": "mono_pro",
+      "multiplier": 1.4,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 1.4; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.network_card_artemis",
+      "profile_id": "network_card",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.network_card_aurelia",
+      "profile_id": "network_card",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.network_hub.16_port",
+      "profile_id": "hub4",
+      "multiplier": 4,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 4; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.network_hub.4_port",
+      "profile_id": "hub4",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.network_hub.8_port",
+      "profile_id": "hub4",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.ram_128kb_x32",
+      "profile_id": "ram64",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.ram_256kb_x32",
+      "profile_id": "ram64",
+      "multiplier": 4,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 4; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.ram_256kb_x32_2um",
+      "profile_id": "ram64",
+      "multiplier": 4,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 4; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.ram_64kb_x32",
+      "profile_id": "ram64",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.rom_cartridge.aionix",
+      "profile_id": "os",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.rom_cartridge.aionix_server",
+      "profile_id": "os",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.rom_cartridge.business_tools_artemis",
+      "profile_id": "business_tools",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.rom_cartridge.business_tools_aurelia",
+      "profile_id": "business_tools",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.rom_cartridge.cpm_aurelia",
+      "profile_id": "os",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.rom_cartridge.cpm_aurelia_networking",
+      "profile_id": "os",
+      "multiplier": 1.5,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 1.5; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.s100_flexibus_card",
+      "profile_id": "interface",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.s100_video_card",
+      "profile_id": "video",
+      "multiplier": 1.5,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 1.5; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+      "profile_id": "fdd_double",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
+      "profile_id": "fdd_double",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.storage.computer.aurelia.525_inch_single_density_floppy_mechanism",
+      "profile_id": "fdd_single",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.storage.computer.aurelia_plus.525_inch_double_density_floppy_mechanism",
+      "profile_id": "fdd_double",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.storage.hdd_5mb",
+      "profile_id": "hdd5",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "device.storage.miniscribe_4010",
+      "profile_id": "hdd10",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "product.academy_course_1",
+      "profile_id": "training_day",
+      "multiplier": 2,
+      "basis": "2 teaching days, eight students per class, eight instructor hours per day. Allocate $10 per student-day for room/equipment plus $5 materials. Travel/site-specific training is excluded; utilisation is an estimate. With eight students and eight teaching hours/day, allocated instructor-hours per student equal course days. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.academy_course_2",
+      "profile_id": "training_day",
+      "multiplier": 5,
+      "basis": "5 teaching days, eight students per class, eight instructor hours per day. Allocate $10 per student-day for room/equipment plus $5 materials. Travel/site-specific training is excluded; utilisation is an estimate. With eight students and eight teaching hours/day, allocated instructor-hours per student equal course days. Scope multiplier 5; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.academy_course_3",
+      "profile_id": "training_day",
+      "multiplier": 6,
+      "basis": "6 teaching days, eight students per class, eight instructor hours per day. Allocate $10 per student-day for room/equipment plus $5 materials. Travel/site-specific training is excluded; utilisation is an estimate. With eight students and eight teaching hours/day, allocated instructor-hours per student equal course days. Scope multiplier 6; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.academy_course_4",
+      "profile_id": "training_day",
+      "multiplier": 5,
+      "basis": "5 teaching days, eight students per class, eight instructor hours per day. Allocate $10 per student-day for room/equipment plus $5 materials. Travel/site-specific training is excluded; utilisation is an estimate. With eight students and eight teaching hours/day, allocated instructor-hours per student equal course days. Scope multiplier 5; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.service_artemis_commercial_developer_license",
+      "profile_id": "license_issue",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "product.service_aurelia_commercial_developer_license",
+      "profile_id": "license_issue",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "product.service_aurelia_compatibility_certification",
+      "profile_id": "engineering_hour",
+      "multiplier": 24,
+      "basis": "Scope is unrecorded: budget 24 engineer hours plus test/admin materials per application assessment; not a guaranteed certification result. Scope multiplier 24; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.service_aurelia_compatibility_support",
+      "profile_id": "engineering_hour",
+      "multiplier": 8,
+      "basis": "Scope is unrecorded: use an explicit eight-hour engineering engagement for budgeting, not a new commercial entitlement. Scope multiplier 8; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.service_bpi_training",
+      "profile_id": "training_day",
+      "multiplier": 3,
+      "basis": "3 teaching days, eight students per class, eight instructor hours per day. Allocate $10 per student-day for room/equipment plus $5 materials. Travel/site-specific training is excluded; utilisation is an estimate. With eight students and eight teaching hours/day, allocated instructor-hours per student equal course days. Scope multiplier 3; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.service_customer_care",
+      "profile_id": "support_year",
+      "multiplier": 0.6,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 0.6; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.service_professional_business_onsite",
+      "profile_id": "onsite_year",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "product.service_professional_support",
+      "profile_id": "support_year",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.service_pulse_training",
+      "profile_id": "training_day",
+      "multiplier": 2,
+      "basis": "2 teaching days, eight students per class, eight instructor hours per day. Allocate $10 per student-day for room/equipment plus $5 materials. Travel/site-specific training is excluded; utilisation is an estimate. With eight students and eight teaching hours/day, allocated instructor-hours per student equal course days. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.service_regular_support",
+      "profile_id": "support_year",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "product.software_aionix",
+      "profile_id": "exchange",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "product.software_aionix2",
+      "profile_id": "exchange",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "product.software_aionix2_server",
+      "profile_id": "exchange",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "product.software_aionix_server",
+      "profile_id": "exchange",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "software_edition.abacus_1",
+      "profile_id": "spreadsheet",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.abacus_1.model_ii",
+      "profile_id": "spreadsheet",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.abacus_2",
+      "profile_id": "spreadsheet",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.abacus_2.era",
+      "profile_id": "spreadsheet",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.abacus_3",
+      "profile_id": "spreadsheet",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.aion_c_2_cpm",
+      "profile_id": "compiler",
+      "multiplier": 1.5,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 1.5; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "software_edition.aion_c_ide",
+      "profile_id": "compiler",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.aion_development_team",
+      "profile_id": "compiler",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "software_edition.aion_development_team.era_client",
+      "profile_id": "compiler",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.aion_development_team.z80_client",
+      "profile_id": "compiler",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.artemis_sdk",
+      "profile_id": "sdk",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.aurelia_compatibility_kit",
+      "profile_id": "sdk",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.aurelia_sdk",
+      "profile_id": "sdk",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.autocad_1_artemis",
+      "profile_id": "cad",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.bpi_client_server",
+      "profile_id": "accounting",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.bpi_client_server.era_client",
+      "profile_id": "accounting",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.bpi_client_server.era_server",
+      "profile_id": "accounting",
+      "multiplier": 2,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility. Scope multiplier 2; explicitly provisional, not a measured relative-performance claim."
+    },
+    {
+      "record_id": "software_edition.bpi_suite",
+      "profile_id": "accounting",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.bpi_suite.era",
+      "profile_id": "accounting",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.entertainment_suite",
+      "profile_id": "games",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.entertainment_suite.era",
+      "profile_id": "games",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.pulse_1",
+      "profile_id": "database",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.pulse_3",
+      "profile_id": "database",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    },
+    {
+      "record_id": "software_edition.simple_c_z80",
+      "profile_id": "compiler",
+      "multiplier": 1,
+      "basis": "Scope assessed from current record; estimate is a functional comparison, not binary or hardware compatibility."
+    }
+  ]
+}

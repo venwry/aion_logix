@@ -1,3 +1,4 @@
+import {generateProductPricing} from './generate-product-pricing.js';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
@@ -13,5 +14,6 @@ if(process.argv[1]?.endsWith('/generate-manufacturing-costs.js')){
  fs.writeFileSync('data_calculation/manufacturing_costs.json',JSON.stringify(doc,null,2)+'\n');
  const {manufacturing_costs,dates,...metadata}=doc;
  fs.writeFileSync('data_calculation/ram_cost_scenarios.json',JSON.stringify({...metadata,...buildRamScenarios(index,assumptions)},null,2)+'\n');
+ generateProductPricing();
  console.log(`Estimated ${products.length} products across ${costDates.length} dates: ${products.reduce((n,p)=>n+p.estimates.length,0)} populated cells.`);
 }

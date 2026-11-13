@@ -7,13 +7,13 @@ The application explores and reviews the alternative history stored in JSON. Dis
 | Page | Purpose |
 | --- | --- |
 | [Timeline](../code/timeline.html) | Chronological exploration of events, processes and campaigns, with details on the left. |
-| [Manufacturing costs](../code/manufacturing-costs.html) | All internal products against semiannual 1978–1983 nominal-USD cost estimates, with blank pre-launch cells and inspectable breakdowns. |
+| [Product Pricing](../code/manufacturing-costs.html) | All internal products against semiannual 1978–1983 manufacturing, provisional competition, retail and profit estimates, with blank pre-launch cells and inspectable breakdowns. |
 | [Product Catalog](../code/product-catalog.html) | Products grouped chronologically by launch campaign and event, with configuration and BOM tabs. |
 | [Data browser](../code/browser.html) | All foundation datasets, with a sortable record list on the left and details on the right. |
 | [Changes confirm](../code/changes-confirm.html) | Review proposed before/after changes, or provide remarks on problem-only discussions. |
 | [Documentation](viewer.html) | Read current guides, dataset files and clearly labelled historical evidence. |
 
-The header switches between pages. On Timeline, Product Catalog, Manufacturing costs, Data browser and Changes confirm, **Saving service** in the top navigator hides or reveals the connection section. Its visibility is remembered across pages and reloads in this browser; hiding it frees the space for the content below and keeps the connection active. The original Logix/AION logo links to the timeline; the AION A emblem is the browser/favorites icon. Record URLs carry the selected ID after `#`, allowing direct links to details.
+The header switches between pages. On Timeline, Product Catalog, Product Pricing, Data browser and Changes confirm, **Saving service** in the top navigator hides or reveals the connection section. Its visibility is remembered across pages and reloads in this browser; hiding it frees the space for the content below and keeps the connection active. The original Logix/AION logo links to the timeline; the AION A emblem is the browser/favorites icon. Record URLs carry the selected ID after `#`, allowing direct links to details.
 
 ## Timeline
 
@@ -161,8 +161,10 @@ External-product impact headers show the relationship flag beside the parameter 
 
 Manufacturing production-line details include a dated configuration selector. Each selection shows its technical chapters, a collapsed parameter table, equipment groups and operating constraints. The same renderer is used in Timeline, Data browser and the Details comparison in Changes confirm. Recipe records link to the shared line; selecting a configuration does not assert that its equipment has qualified every recipe or achieved its planned output.
 
-## Manufacturing costs
+## Product Pricing
 
 The cost page reads calculation files directly and remains outside authorization. It uses nominal dollars for each June 15/December 15 snapshot, preserves dated compositions and shows software/service delivery costs with explicit units. Source fingerprints flag stale estimates. Search, offering filters, CSV export and cell breakdowns support review. See the [calculation guide](../data_calculation/MANUFACTURING_COSTS.md) for yield, inflation, scope and regeneration.
 
-On Manufacturing costs, **RAM comparisons** opens a dated comparison of commercial and AION chip sources, complete modules and host-listed RAM populations. A cost cell also links to comparisons for its date. Alternatives preserve capacity and socket rules but still require electrical qualification; they do not replace the recorded BOM grid. AION chip manufacturing cost and its 15% markup appear as separate breakdown categories.
+On Product Pricing, **RAM comparisons** opens a dated comparison of commercial and AION chip sources, complete modules and host-listed RAM populations. A cost cell also links to comparisons for its date. Alternatives preserve capacity and socket rules but still require electrical qualification; they do not replace the recorded BOM grid. AION chip manufacturing cost and its 15% markup appear as separate breakdown categories.
+
+Product Pricing uses a ComputerLand fee of 20% of manufacturing cost and sets retail to the 50/50 midpoint of break-even and estimated competition. Every current comparison is labelled provisional; select a cell for normalized component/service baskets, historical anchors and assumptions. The retained URL is `code/manufacturing-costs.html`. Regenerate with `npm run calculate:pricing`; calculation-layer retail estimates do not introduce foundation price fields.
