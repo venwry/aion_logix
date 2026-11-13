@@ -1,0 +1,71 @@
+{
+  "sources": [
+    {
+      "id": "storage_1982_1983_author_selection",
+      "url": "https://device.report/m/a7c04b02f4ed7ea496405498d9d7b96dfb534a9f34830fdd0fdec3ad75181dc3",
+      "description": "Author-selected MiniScribe 4010 $625 at 1,000 units. Published October 1982 benchmark applied from NCC 1982 as an explicit alternative-history procurement assumption, not a verified June contract."
+    },
+    {
+      "id": "quantum_q540_1983",
+      "url": "https://archive.computerhistory.org/resources/access/text/2017/03/102770732-05-01-acc.pdf",
+      "description": "Author-selected Quantum Q540 $1,485 nominal OEM benchmark; prior research identified 1983 DISK/TREND pricing at 100 units reproduced in the 1984 Quantum guide. Not a verified May shipment/contract or 1,000-unit price."
+    }
+  ],
+  "market_series": [
+    {
+      "id": "miniscribe_4010",
+      "description": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount.",
+      "observations": [
+        {
+          "date": "1982-06-07",
+          "unit_cost_nominal": 625,
+          "source_id": "storage_1982_1983_author_selection",
+          "basis": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount."
+        }
+      ]
+    },
+    {
+      "id": "quantum_q540",
+      "description": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount.",
+      "observations": [
+        {
+          "date": "1983-05-16",
+          "unit_cost_nominal": 1485,
+          "source_id": "quantum_q540_1983",
+          "basis": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount."
+        }
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "record_id": "base_part.miniscribe_4010",
+      "method": "market",
+      "market_series_id": "miniscribe_4010",
+      "basis": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount.",
+      "confidence": "low"
+    },
+    {
+      "record_id": "base_part.quantum_q540",
+      "method": "market",
+      "market_series_id": "quantum_q540",
+      "basis": "Author-selected nominal OEM procurement assumption, held constant after the scenario introduction until reassessed. See source for evidence date and volume; no automatic inflation or further discount.",
+      "confidence": "low"
+    }
+  ],
+  "operations": [
+    {
+      "record_id": "device.storage.miniscribe_4010",
+      "assembly_hours": 0.4,
+      "test_hours": 0.3,
+      "overhead_fraction": 0.2,
+      "loss_fraction": 0.015,
+      "licensing_cost": 0,
+      "licensing_basis": "No external recurring licence allowance; AION-owned software R&D is outside recurring delivery cost.",
+      "basis": "Estimated per-unit assembly, duplication/configuration and final verification time. Only incremental work at this node is charged."
+    }
+  ],
+  "operations_remove": [
+    "product.artemis_budget_128"
+  ]
+}
