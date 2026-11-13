@@ -1,0 +1,288 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.8f7d63b3-3a15-4542-a4ca-e7dfc261995c",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T15:13:12.918Z",
+      "change_id": "change.external_impacts.apple_disk_ii",
+      "proposal_sha256": "448f3dac905ef3ddacc27272b5d45598d83466044b1f18535237571b8b7a1364",
+      "proposal": {
+        "id": "change.external_impacts.apple_disk_ii",
+        "category": "story",
+        "title": "Restructure external product impacts — Apple Disk II",
+        "reason": "Consolidate descriptive content and move assessed product/standard effects into typed impact sections. Preserve historical interfaces, fictional-world boundaries and qualification limits. Evidence: data_storytelling/review_evidence/external-impact-revision/assessment.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.apple_disk_ii",
+            "before": {
+              "id": "external_product.apple_disk_ii",
+              "name": "Apple Disk II",
+              "description": "Apple Disk II is a storage peripheral for Apple II.",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.apple"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Controller-driven 5¼-inch floppy system; the original 13-sector format stores about 114 KB per disk side. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II"
+                    }
+                  ]
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Product impact",
+                  "description": "Assessment at 1979-12-31. These are conditional commercial comparisons, not measured changes in sales.\n\n{primary_offering}: Disk II is the established same-host disk alternative; retaining Apple disk software can reduce migration work, while FlexiDisk II needs its recorded Apple interface and format qualification.\n\n{related_offering}: The Logix card includes a Disk II-compatible controller path as well as FlexiBUS, so the installed Disk II ecosystem can complement the card as well as compete with a new external drive.",
+                  "parameters": [
+                    {
+                      "key": "primary_offering",
+                      "value": "product.device_flexidisk_ii"
+                    },
+                    {
+                      "key": "related_offering",
+                      "value": "product.device_apple2_expansion_card"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Compare an Apple II with working Disk II software against the 1979 Logix card and qualified FlexiDisk II configuration.",
+                  "comparison_description": "Disk II uses an Apple controller/disk interface rather than FlexiBUS; disk-format compatibility alone does not convert the transport.",
+                  "outcomes_description": "Existing disks and applications create a switching hurdle. Retaining a qualified Disk II path can make incremental FlexiBUS adoption more attractive; no sales uplift is measured.",
+                  "parameters": []
+                }
+              ],
+              "release": "1978"
+            },
+            "after": {
+              "id": "external_product.apple_disk_ii",
+              "name": "Apple Disk II",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.apple"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Controller-driven 5¼-inch floppy system; the original 13-sector format stores about 114 KB per disk side. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare an Apple II with working Disk II software against the 1979 Logix card and qualified FlexiDisk II configuration.",
+                  "comparison_description": "Disk II uses an Apple controller/disk interface rather than FlexiBUS; disk-format compatibility alone does not convert the transport. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Existing disks and applications create a switching hurdle. Retaining a qualified Disk II path can make incremental FlexiBUS adoption more attractive; no sales uplift is measured.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Apple Disk II"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Apple II"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "release": "1978",
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexidisk_ii",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller-driven 5¼-inch floppy system; the original 13-sector format stores about 114 KB per disk side.",
+                  "comparison_description": "The alternative is a FlexiBUS 5.25-inch drive with recorded Aurelia and Apple II-compatible formats. Apple operation needs the Logix Apple II adapter; matching media formats does not make the electrical interfaces interchangeable. The canonical implementation is {implementation}.",
+                  "outcomes_description": "Disk II is the established same-host disk alternative; retaining Apple disk software can reduce migration work, while FlexiDisk II needs its recorded Apple interface and format qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk_ii"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_apple2_expansion_card",
+                  "relationship": "supports",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller-driven 5¼-inch floppy system; the original 13-sector format stores about 114 KB per disk side.",
+                  "comparison_description": "The Logix Apple II adapter includes a Disk II-compatible controller path as well as FlexiBUS. Retaining the native disk path could support an incremental upgrade, subject to drive, firmware and format qualification; the Disk II drive is not thereby a FlexiBUS device. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The Logix card includes a Disk II-compatible controller path as well as FlexiBUS, so the installed Disk II ecosystem can complement the card as well as compete with a new external drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.apple2_expansion_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.apple_disk_ii",
+          "before": {
+            "id": "external_product.apple_disk_ii",
+            "name": "Apple Disk II",
+            "description": "Apple Disk II is a storage peripheral for Apple II.",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.apple"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Controller-driven 5¼-inch floppy system; the original 13-sector format stores about 114 KB per disk side. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II"
+                  }
+                ]
+              },
+              {
+                "number": 3,
+                "chapter_name": "Product impact",
+                "description": "Assessment at 1979-12-31. These are conditional commercial comparisons, not measured changes in sales.\n\n{primary_offering}: Disk II is the established same-host disk alternative; retaining Apple disk software can reduce migration work, while FlexiDisk II needs its recorded Apple interface and format qualification.\n\n{related_offering}: The Logix card includes a Disk II-compatible controller path as well as FlexiBUS, so the installed Disk II ecosystem can complement the card as well as compete with a new external drive.",
+                "parameters": [
+                  {
+                    "key": "primary_offering",
+                    "value": "product.device_flexidisk_ii"
+                  },
+                  {
+                    "key": "related_offering",
+                    "value": "product.device_apple2_expansion_card"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Compare an Apple II with working Disk II software against the 1979 Logix card and qualified FlexiDisk II configuration.",
+                "comparison_description": "Disk II uses an Apple controller/disk interface rather than FlexiBUS; disk-format compatibility alone does not convert the transport.",
+                "outcomes_description": "Existing disks and applications create a switching hurdle. Retaining a qualified Disk II path can make incremental FlexiBUS adoption more attractive; no sales uplift is measured.",
+                "parameters": []
+              }
+            ],
+            "release": "1978"
+          },
+          "after": {
+            "id": "external_product.apple_disk_ii",
+            "name": "Apple Disk II",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.apple"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Controller-driven 5¼-inch floppy system; the original 13-sector format stores about 114 KB per disk side. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare an Apple II with working Disk II software against the 1979 Logix card and qualified FlexiDisk II configuration.",
+                "comparison_description": "Disk II uses an Apple controller/disk interface rather than FlexiBUS; disk-format compatibility alone does not convert the transport. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Existing disks and applications create a switching hurdle. Retaining a qualified Disk II path can make incremental FlexiBUS adoption more attractive; no sales uplift is measured.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Apple Disk II"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Apple II"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "release": "1978",
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexidisk_ii",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller-driven 5¼-inch floppy system; the original 13-sector format stores about 114 KB per disk side.",
+                "comparison_description": "The alternative is a FlexiBUS 5.25-inch drive with recorded Aurelia and Apple II-compatible formats. Apple operation needs the Logix Apple II adapter; matching media formats does not make the electrical interfaces interchangeable. The canonical implementation is {implementation}.",
+                "outcomes_description": "Disk II is the established same-host disk alternative; retaining Apple disk software can reduce migration work, while FlexiDisk II needs its recorded Apple interface and format qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk_ii"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_apple2_expansion_card",
+                "relationship": "supports",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller-driven 5¼-inch floppy system; the original 13-sector format stores about 114 KB per disk side.",
+                "comparison_description": "The Logix Apple II adapter includes a Disk II-compatible controller path as well as FlexiBUS. Retaining the native disk path could support an incremental upgrade, subject to drive, firmware and format qualification; the Disk II drive is not thereby a FlexiBUS device. The canonical implementation is {implementation}.",
+                "outcomes_description": "The Logix card includes a Disk II-compatible controller path as well as FlexiBUS, so the installed Disk II ecosystem can complement the card as well as compete with a new external drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.apple2_expansion_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "59f96ac3f0d5d21f69f4c58554bda3a00bc4b1b49c02ea62acaab609ad268bec"
+        }
+      ]
+    }
+  ]
+}

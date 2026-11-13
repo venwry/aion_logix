@@ -1,0 +1,869 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.b777d9a3-82a5-4819-948f-9872430fcc91",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T15:13:12.914Z",
+      "change_id": "change.peripherals1979.video_02",
+      "proposal_sha256": "de1d1b9b33b31191c78d7855d0ec1446fa3345476d913d009f81c9a753c0319d",
+      "proposal": {
+        "id": "change.peripherals1979.video_02",
+        "category": "foundation",
+        "title": "1978–79 external peripherals — video cards, monitors and display accessories 2",
+        "reason": "Import 9 distinct commercial identities from research items 109, 113, 131, 143, 144, 152, 178, 191, 192. Describe the native host boundary and assess product and core-standard impacts at 1979-12-31. Dedicated memory and other unrelated accessories explicitly carry no direct impact. Conditional comparisons do not establish qualified adapters, provider adoption or measured sales. Prices and cumulative sales remain editorial evidence, outside foundation and the annual-sales model. See the per-item evidence in data_storytelling/review_evidence/external-peripherals-1979/assessment.json. Revised for explicit product/standard relationships: consolidate descriptions into specification, relocate impact prose, compare canonical implementation boundaries and retain source/qualification limits. Historical documentation cannot establish fictional implementations or measured adoption. Per-record evidence: data_storytelling/review_evidence/external-impact-revision/assessment.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.huh_video_buffer",
+            "before": null,
+            "after": {
+              "id": "external_product.huh_video_buffer",
+              "name": "HUH Electronics Video Buffer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.huh"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Buffered composite-video output for an external display. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Commodore PET"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.mtu_k1008ap",
+            "before": null,
+            "after": {
+              "id": "external_product.mtu_k1008ap",
+              "name": "MTU K-1008AP Visible Memory",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.mtu"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "320 × 200 monochrome graphics with 8 KB display RAM. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "PET with MTU interface"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.vector_gb",
+            "before": null,
+            "after": {
+              "id": "external_product.vector_gb",
+              "name": "Vector Graphic Graphics Board GB",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.vector"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "256 × 240 monochrome or 128 × 120 with 16 gray levels. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100 with companion RAM"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare the actual board mode, memory cost, host service overhead and compatible monitor with the 1979 Logix S-100 card.",
+                  "comparison_description": "Its display output and software interface are not the Logix digital link. Similar column counts or bitmap dimensions do not establish compatible timing, colour signalling or discovery. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A working conventional display reduces the need to buy a new monitor/controller pair. Logix must demonstrate benefits in the qualified mode; later professional graphics and 1982 palette extensions are excluded.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Vector Graphic Graphics Board GB"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100 with companion RAM"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_video_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 256 × 240 monochrome or 128 × 120 with 16 gray levels.",
+                  "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. The canonical implementation is {implementation}.",
+                  "outcomes_description": "This board is an alternative S-100 display path for its supported text or graphics tasks. Existing applications and monitors favour retention; the Logix card needs its own driver and matching digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100 with companion RAM"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_video_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.matrox_alt256",
+            "before": null,
+            "after": {
+              "id": "external_product.matrox_alt256",
+              "name": "Matrox ALT-256",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.matrox"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "256 × 256 monochrome bitmap graphics. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare the actual board mode, memory cost, host service overhead and compatible monitor with the 1979 Logix S-100 card.",
+                  "comparison_description": "Its display output and software interface are not the Logix digital link. Similar column counts or bitmap dimensions do not establish compatible timing, colour signalling or discovery. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A working conventional display reduces the need to buy a new monitor/controller pair. Logix must demonstrate benefits in the qualified mode; later professional graphics and 1982 palette extensions are excluded.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Matrox ALT-256"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_video_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 256 × 256 monochrome bitmap graphics.",
+                  "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. The canonical implementation is {implementation}.",
+                  "outcomes_description": "This board is an alternative S-100 display path for its supported text or graphics tasks. Existing applications and monitors favour retention; the Logix card needs its own driver and matching digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_video_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.matrox_alt2480",
+            "before": null,
+            "after": {
+              "id": "external_product.matrox_alt2480",
+              "name": "Matrox ALT-2480",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.matrox"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "80-column by 24-line character display. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare the actual board mode, memory cost, host service overhead and compatible monitor with the 1979 Logix S-100 card.",
+                  "comparison_description": "Its display output and software interface are not the Logix digital link. Similar column counts or bitmap dimensions do not establish compatible timing, colour signalling or discovery. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A working conventional display reduces the need to buy a new monitor/controller pair. Logix must demonstrate benefits in the qualified mode; later professional graphics and 1982 palette extensions are excluded.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Matrox ALT-2480"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_video_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80-column by 24-line character display.",
+                  "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. The canonical implementation is {implementation}.",
+                  "outcomes_description": "This board is an alternative S-100 display path for its supported text or graphics tasks. Existing applications and monitors favour retention; the Logix card needs its own driver and matching digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_video_card"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.percom_electric_window",
+            "before": null,
+            "after": {
+              "id": "external_product.percom_electric_window",
+              "name": "Percom Electric Window",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Memory-mapped 80 × 24 character display with character-set and intensity options. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SS-50"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.leedex_video100",
+            "before": null,
+            "after": {
+              "id": "external_product.leedex_video100",
+              "name": "Leedex Video 100",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.leedex"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "12-inch monochrome monitor. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Compatible composite-video outputs"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.logix_digital_video",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Use the monitor only within its documented composite-video input and raster limits.",
+                  "comparison_description": "Composite input is electrically and logically different from the Logix digital data/control link. A cable alone does not provide conversion or monitor identification. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "The installed analog-monitor base raises the adoption hurdle for a new digital display path. No compatible converter or successful readability test is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Leedex Video 100"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Compatible composite-video outputs"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_mono_monitor_1",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 12-inch monochrome monitor.",
+                  "comparison_description": "The alternative belongs to the Logix digital-display configuration. An analogue/composite monitor does not become electrically compatible because its diagonal or visible text is similar; compare the matching source, raster and connection. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A conventional composite monitor is an alternative purchase for hosts already producing a suitable analog signal, but cannot directly replace the Logix digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Compatible composite-video outputs"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.mono_monitor_1"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_mono_monitor_2",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 12-inch monochrome monitor.",
+                  "comparison_description": "The alternative belongs to the Logix digital-display configuration. Monitor reuse depends on the actual digital source and accepted raster, not on screen size alone. The canonical implementation is {implementation}.",
+                  "outcomes_description": "Existing composite-display investment can favour retention over a new Logix display path; usable text resolution and raster compatibility require actual tests. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Compatible composite-video outputs"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.mono_monitor_2"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.matrox_mtx816",
+            "before": null,
+            "after": {
+              "id": "external_product.matrox_mtx816",
+              "name": "Matrox MTX-816",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.matrox"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Video-output module showing eight lines of sixteen characters. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "General microprocessor interfacing"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.matrox_mtx1632",
+            "before": null,
+            "after": {
+              "id": "external_product.matrox_mtx1632",
+              "name": "Matrox MTX-1632",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.matrox"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Video-output module showing sixteen lines of thirty-two characters. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "General microprocessor interfacing"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "depends_on_change_ids": [
+          "change.peripherals1979.providers_02",
+          "change.peripherals1979.providers_03",
+          "change.peripherals1979.providers_04"
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.huh_video_buffer",
+          "before": null,
+          "after": {
+            "id": "external_product.huh_video_buffer",
+            "name": "HUH Electronics Video Buffer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.huh"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Buffered composite-video output for an external display. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Commodore PET"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "cb520167adc999f7ab457a74e55ecae16c1b8faec2c821878158360715840193"
+        },
+        {
+          "record_id": "external_product.mtu_k1008ap",
+          "before": null,
+          "after": {
+            "id": "external_product.mtu_k1008ap",
+            "name": "MTU K-1008AP Visible Memory",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.mtu"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "320 × 200 monochrome graphics with 8 KB display RAM. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "PET with MTU interface"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "99834e27691d1fc66b272920ec5ffdef71bffb8d8fec67f991623f3e15f5d973"
+        },
+        {
+          "record_id": "external_product.vector_gb",
+          "before": null,
+          "after": {
+            "id": "external_product.vector_gb",
+            "name": "Vector Graphic Graphics Board GB",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.vector"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "256 × 240 monochrome or 128 × 120 with 16 gray levels. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100 with companion RAM"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare the actual board mode, memory cost, host service overhead and compatible monitor with the 1979 Logix S-100 card.",
+                "comparison_description": "Its display output and software interface are not the Logix digital link. Similar column counts or bitmap dimensions do not establish compatible timing, colour signalling or discovery. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A working conventional display reduces the need to buy a new monitor/controller pair. Logix must demonstrate benefits in the qualified mode; later professional graphics and 1982 palette extensions are excluded.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Vector Graphic Graphics Board GB"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100 with companion RAM"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_video_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 256 × 240 monochrome or 128 × 120 with 16 gray levels.",
+                "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. The canonical implementation is {implementation}.",
+                "outcomes_description": "This board is an alternative S-100 display path for its supported text or graphics tasks. Existing applications and monitors favour retention; the Logix card needs its own driver and matching digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100 with companion RAM"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_video_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "72a0c666a325106ce95da6b7bc6dfac078cbcc651bf204bb6677081974b5976c"
+        },
+        {
+          "record_id": "external_product.matrox_alt256",
+          "before": null,
+          "after": {
+            "id": "external_product.matrox_alt256",
+            "name": "Matrox ALT-256",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.matrox"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "256 × 256 monochrome bitmap graphics. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare the actual board mode, memory cost, host service overhead and compatible monitor with the 1979 Logix S-100 card.",
+                "comparison_description": "Its display output and software interface are not the Logix digital link. Similar column counts or bitmap dimensions do not establish compatible timing, colour signalling or discovery. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A working conventional display reduces the need to buy a new monitor/controller pair. Logix must demonstrate benefits in the qualified mode; later professional graphics and 1982 palette extensions are excluded.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Matrox ALT-256"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_video_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 256 × 256 monochrome bitmap graphics.",
+                "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. The canonical implementation is {implementation}.",
+                "outcomes_description": "This board is an alternative S-100 display path for its supported text or graphics tasks. Existing applications and monitors favour retention; the Logix card needs its own driver and matching digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_video_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "75ca59dc4154ac1fbaede24ac24175dc2867c876575a9c142ddc76a59973223a"
+        },
+        {
+          "record_id": "external_product.matrox_alt2480",
+          "before": null,
+          "after": {
+            "id": "external_product.matrox_alt2480",
+            "name": "Matrox ALT-2480",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.matrox"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "80-column by 24-line character display. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare the actual board mode, memory cost, host service overhead and compatible monitor with the 1979 Logix S-100 card.",
+                "comparison_description": "Its display output and software interface are not the Logix digital link. Similar column counts or bitmap dimensions do not establish compatible timing, colour signalling or discovery. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A working conventional display reduces the need to buy a new monitor/controller pair. Logix must demonstrate benefits in the qualified mode; later professional graphics and 1982 palette extensions are excluded.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Matrox ALT-2480"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_video_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 80-column by 24-line character display.",
+                "comparison_description": "The alternative uses the Aurelia video controller, 16 KiB local video memory and separate sprite storage. It needs a qualified digital monitor; 80-column output requires a compatible 640-pixel display. Its console configuration also needs input hardware. It includes no monitor or FlexiBUS ports. The canonical implementation is {implementation}.",
+                "outcomes_description": "This board is an alternative S-100 display path for its supported text or graphics tasks. Existing applications and monitors favour retention; the Logix card needs its own driver and matching digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_video_card"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "7db8d711bef75a5e38fe1bfb7d69b6b023a4bc2931548bcd7a14675608f17f46"
+        },
+        {
+          "record_id": "external_product.percom_electric_window",
+          "before": null,
+          "after": {
+            "id": "external_product.percom_electric_window",
+            "name": "Percom Electric Window",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Memory-mapped 80 × 24 character display with character-set and intensity options. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SS-50"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "9510db97aa46900d13f7e26532ffa1f01de044b8f20d2b74636ad78fba521e09"
+        },
+        {
+          "record_id": "external_product.leedex_video100",
+          "before": null,
+          "after": {
+            "id": "external_product.leedex_video100",
+            "name": "Leedex Video 100",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.leedex"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "12-inch monochrome monitor. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Compatible composite-video outputs"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.logix_digital_video",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Use the monitor only within its documented composite-video input and raster limits.",
+                "comparison_description": "Composite input is electrically and logically different from the Logix digital data/control link. A cable alone does not provide conversion or monitor identification. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "The installed analog-monitor base raises the adoption hurdle for a new digital display path. No compatible converter or successful readability test is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Leedex Video 100"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Compatible composite-video outputs"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_mono_monitor_1",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 12-inch monochrome monitor.",
+                "comparison_description": "The alternative belongs to the Logix digital-display configuration. An analogue/composite monitor does not become electrically compatible because its diagonal or visible text is similar; compare the matching source, raster and connection. The canonical implementation is {implementation}.",
+                "outcomes_description": "A conventional composite monitor is an alternative purchase for hosts already producing a suitable analog signal, but cannot directly replace the Logix digital monitor. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Compatible composite-video outputs"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.mono_monitor_1"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_mono_monitor_2",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 12-inch monochrome monitor.",
+                "comparison_description": "The alternative belongs to the Logix digital-display configuration. Monitor reuse depends on the actual digital source and accepted raster, not on screen size alone. The canonical implementation is {implementation}.",
+                "outcomes_description": "Existing composite-display investment can favour retention over a new Logix display path; usable text resolution and raster compatibility require actual tests. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Compatible composite-video outputs"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.mono_monitor_2"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "cab1b9ecfc817d02f9828a408df596699dfcedbff8b3df54e706e29bef67449d"
+        },
+        {
+          "record_id": "external_product.matrox_mtx816",
+          "before": null,
+          "after": {
+            "id": "external_product.matrox_mtx816",
+            "name": "Matrox MTX-816",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.matrox"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Video-output module showing eight lines of sixteen characters. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "General microprocessor interfacing"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "c086e50743eb6a56f5c940650793ea39d8f981255920f09b1cf2ef66cdc8a946"
+        },
+        {
+          "record_id": "external_product.matrox_mtx1632",
+          "before": null,
+          "after": {
+            "id": "external_product.matrox_mtx1632",
+            "name": "Matrox MTX-1632",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.matrox"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Video-output module showing sixteen lines of thirty-two characters. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "General microprocessor interfacing"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "efe7a555bb07aff2d5e92a147df76f71a275a629d6544145a96b6711312780dc"
+        }
+      ]
+    }
+  ]
+}
