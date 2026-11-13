@@ -1,6 +1,21 @@
 let connectedSnapshot;
 function fixedService(){return document.body.dataset.backendUrl||null;}
 export function connection(){try{const c=JSON.parse(sessionStorage.getItem('aion-backend')||'null');return fixedService()&&c?.url!==fixedService()?null:c;}catch{return null;}}
+// Keep backend diagnostics: a repository or deployment failure is not a rejected access key.
+async function fetchState(config){
+ let response;
+ try{response=await fetch(config.url+'/api/state',{headers:{Authorization:'Bearer '+config.token},cache:'no-store'});}
+ catch{throw Error('Cannot reach the saving service. Check that it is running, the URL is correct, and this page origin is allowed by AION_ALLOWED_ORIGINS.');}
+ let body;try{body=await response.json();}catch{}
+ if(!response.ok){
+  if(response.status===401)throw Error('The backend access key was rejected (HTTP 401). Use AION_REVIEW_TOKEN from this Render service, not the GitHub token.');
+  const detail=typeof body?.error==='string'?body.error.slice(0,1000):'';
+  if(detail)throw Error('Saving service error (HTTP '+response.status+'): '+detail);
+  throw Error('Saving service returned HTTP '+response.status+'. '+(response.status>=500?'The service or its upstream dependency is unavailable; check Render logs.':'Check the service URL and deployment configuration.'));
+ }
+ if(!body||typeof body!=='object'||!body.collections||!Array.isArray(body.changes?.change)||!Array.isArray(body.authorization)||typeof body.revision!=='string')throw Error('The saving service returned an invalid state response (HTTP '+response.status+'). Check the service URL and deployed backend.');
+ return body;
+}
 export function mountConnection(){
  if(document.getElementById('backend-connection'))return;
  const form=document.createElement('form');form.id='backend-connection';form.className='review-toolbar';
@@ -17,10 +32,10 @@ export function mountConnection(){
  const visibility=()=>{form.hidden=hidden;toggle.setAttribute('aria-expanded',String(!hidden));};visibility();
  toggle.onclick=()=>{hidden=!hidden;visibility();try{localStorage.setItem('aion-saving-service-hidden',String(hidden));}catch{}};
  document.querySelector('.app-header nav').append(toggle);
- form.onsubmit=async e=>{e.preventDefault();button.disabled=true;try{const parsed=new URL(fixed||url.value);if(parsed.protocol!=='https:'&&!['localhost','127.0.0.1','[::1]'].includes(parsed.hostname))throw Error('Use HTTPS for the backend.');const config={url:parsed.origin,token:key.value};const response=await fetch(config.url+'/api/state',{headers:{Authorization:'Bearer '+config.token},cache:'no-store'});if(!response.ok)throw Error('Connection failed. Check the URL and backend access key.');await response.json();sessionStorage.setItem('aion-backend',JSON.stringify(config));location.reload();}catch(error){status.textContent=error.message;button.disabled=false;}};
+ form.onsubmit=async e=>{e.preventDefault();button.disabled=true;status.textContent='Connecting to saving service…';try{const parsed=new URL(fixed||url.value);if(parsed.protocol!=='https:'&&!['localhost','127.0.0.1','[::1]'].includes(parsed.hostname))throw Error('Use HTTPS for the backend.');const config={url:parsed.origin,token:key.value};await fetchState(config);sessionStorage.setItem('aion-backend',JSON.stringify(config));location.reload();}catch(error){status.textContent=error.message;button.disabled=false;}};
  disconnect.onclick=()=>{sessionStorage.removeItem('aion-backend');location.reload();};
 }
-export async function remoteState(){mountConnection();const c=connection();if(!c)return null;if(connectedSnapshot)return connectedSnapshot;const r=await fetch(c.url+'/api/state',{headers:{Authorization:'Bearer '+c.token},cache:'no-store'});if(!r.ok)throw Error('Cannot load the saving service. Reconnect or disconnect to browse published data.');return connectedSnapshot=await r.json();}
+export async function remoteState(){mountConnection();const c=connection();if(!c)return null;if(connectedSnapshot)return connectedSnapshot;try{return connectedSnapshot=await fetchState(c);}catch(error){throw Error(error.message+' Reconnect or disconnect to browse published data.');}}
 export async function saveAuthorization(request){
  const c=connection();if(!c)throw Error('Connect to Saving service to save your changes.');
  const uncertain='The saving service connection was interrupted or returned an unreadable response. The commit status is unknown. Your selections remain on this page; retry the same save when the service is ready. Completed decisions will not be committed twice.';

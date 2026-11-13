@@ -24,12 +24,14 @@ test('new external records are pending without authorization and support direct 
 });
 test('GitHub reader fetches external_products.json and save never introduces a singular filename',async()=>{
  const files=fixture(),paths=Object.keys(files);const calls=[];
+ // Indexed decisions refer to shard paths in the Git tree, without loading their contents.
+ const treePaths=[...new Set([...paths,...(files['data_storytelling/authorization_decision_index.json']?.authorization_decision_index||[]).map(row=>row.path)])];
  const store=new GitHubStore({repository:'test/repo',token:'test'});
  store.api=async(path,method='GET',body,options)=>{
   calls.push({path,method,body});
   if(path==='/git/ref/heads/main')return {object:{sha:'head'}};
   if(path==='/git/commits/head')return {tree:{sha:'tree'}};
-  if(path==='/git/trees/tree?recursive=1')return {tree:paths.map((p,i)=>({path:p,type:'blob',sha:String(i)}))};
+  if(path==='/git/trees/tree?recursive=1')return {tree:treePaths.map((p,i)=>({path:p,type:'blob',sha:String(i)}))};
   if(path.startsWith('/git/blobs/')){assert.equal(options.raw,true);return files[paths[Number(path.split('/').at(-1))]];}
   return {sha:method==='POST'?'created':'saved'};
  };

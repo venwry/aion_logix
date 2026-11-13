@@ -32,7 +32,8 @@ export class GitHubStore {
    if(!Array.isArray(rows)||rows.some(r=>!r||typeof r.id!=='string'||typeof r.action!=='string'||typeof r.path!=='string'||!lookup.has(r.path))||new Set(rows.map(r=>r.id)).size!==rows.length)throw Error('Authorization history index is invalid or references a missing archive.');
    files['data_storytelling/authorization_decision.json']={authorization_decision:[]};
   }
-  if(files['data_storytelling/manifest.json'].manifest[0].schema_version!==schemaVersion)throw Error('The backend must be updated for this repository schema version.');
+  const manifestVersion=files['data_storytelling/manifest.json']?.manifest?.[0]?.schema_version;
+  if(manifestVersion!==schemaVersion)throw Error('Schema version mismatch: repository manifest '+manifestVersion+'; backend '+schemaVersion+'. Update the deployment and manifest together.');
   return {files,revision,tree:commit.tree.sha,indexedHistory:indexed};
  }
  async save(previous,next){

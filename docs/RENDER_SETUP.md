@@ -13,6 +13,12 @@ The static application lives on GitHub Pages. A separate Render Docker service a
 
 No Render account or credentials are bundled with the repository. Deployment and setting the GitHub secret must be completed in your Render account. No persistent Render disk is needed: GitHub holds all records and decisions. Data-only authorization commits do not trigger backend rebuilds under the Blueprint's build filter.
 
+## Diagnose connection failures
+
+The frontend displays the HTTP status and backend error when Connect fails. A 401 from the saving service means its access key was rejected. A 502 mentioning GitHub authentication concerns Render's server-only `AION_GITHUB_TOKEN`, not the application's access key. A schema-version mismatch reports both versions: `data_storytelling/manifest.json` and `code/model-contract.js` must agree, and Render must run that contract. `npm run validate:data` checks this agreement before publication. A healthy `/health` response alone does not verify the repository-loading path.
+
+For HTTP 5xx responses without JSON, check Render availability and logs. A network/CORS error is reported separately; check the service URL and `AION_ALLOWED_ORIGINS`. Existing sessions retain Disconnect so the published data can still be browsed. Do not paste access keys or Authorization headers into issue reports; share only the status and error response.
+
 ## Use the app
 
 Follow the [application guide](APPLICATION_GUIDE.md) for timeline, browser, details and review controls. Authorization uses the authenticated service described above. While connected, the app reads current repository data through the backend, avoiding GitHub Pages publication lag. Disconnected browsing uses the published static data and cannot save. Hiding the saving-service bar in the timeline's full-screen mode does not disconnect the session.

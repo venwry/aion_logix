@@ -90,3 +90,29 @@ test('keyboard authorization respects disabled review decisions and saving lock'
  await page.getByRole('button',{name:'Save',exact:true}).click();await expect(page.locator('#warning')).toContainText('Saving review decisions');
  await page.keyboard.press('Alt+a');await page.keyboard.press('Alt+c');await page.keyboard.press('ArrowDown');await expect(page.locator('#selected-count')).toHaveText('1 selected');await expect(page.getByRole('textbox',{name:'Refinement feedback'})).toHaveCount(0);release();await expect(page.locator('#review-count')).toContainText('0 pending');
 });
+
+test('connection distinguishes rejected keys from upstream and deployment failures',async({page})=>{
+ await ready(page,'changes-confirm.html');
+ const connection=page.locator('#backend-connection'),status=connection.getByRole('status'),connect=connection.getByRole('button',{name:'Connect',exact:true});
+ await page.getByRole('textbox',{name:'Backend access key'}).fill('local-diagnostic-key');
+ let response;await page.route('**/api/state',r=>response==='network'?r.abort():r.fulfill(response));
+ for(const [reply,message] of [
+  [{status:401,json:{error:'Connect with the backend access key'}},'The backend access key was rejected (HTTP 401)'],
+  [{status:502,json:{error:'GitHub could not read repository data (HTTP 401): Bad credentials'}},'Saving service error (HTTP 502): GitHub could not read repository data (HTTP 401): Bad credentials'],
+  [{status:502,json:{error:'The backend must be updated for this repository schema version.'}},'Saving service error (HTTP 502): The backend must be updated for this repository schema version.'],
+  [{status:403,json:{error:'Origin not allowed'}},'Saving service error (HTTP 403): Origin not allowed'],
+  [{status:503,contentType:'text/html',body:'<h1>Service unavailable</h1>'},'Saving service returned HTTP 503. The service or its upstream dependency is unavailable'],
+  [{status:200,contentType:'text/html',body:'<h1>Incorrect service</h1>'},'The saving service returned an invalid state response (HTTP 200)'],
+  [{status:200,json:{message:'Wrong API'}},'The saving service returned an invalid state response (HTTP 200)'],
+  ['network','Cannot reach the saving service.']
+ ]){
+  response=reply;await connect.click();await expect(status).toContainText(message);await expect(connect).toBeEnabled();await expect(status.locator('h1')).toHaveCount(0);
+  expect(await page.evaluate(()=>sessionStorage.getItem('aion-backend'))).toBeNull();
+ }
+});
+
+test('configured sessions show the actual backend failure and retain disconnect recovery',async({page})=>{
+ await connect(page);await page.route('**/api/state',r=>r.fulfill({status:502,json:{error:'GitHub could not read repository data (HTTP 403): rate limit exceeded'}}));
+ await page.goto('/code/changes-confirm.html');await expect(page.locator('.error')).toContainText('Saving service error (HTTP 502): GitHub could not read repository data (HTTP 403): rate limit exceeded');
+ await expect(page.locator('.error')).toContainText('Reconnect or disconnect to browse published data.');await expect(page.getByRole('button',{name:'Disconnect',exact:true})).toBeEnabled();
+});
