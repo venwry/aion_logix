@@ -1,0 +1,1372 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.9b6d739a-118c-44f4-9fc5-afa82f4cb47e",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T17:59:22.518Z",
+      "change_id": "change.aurelia_vendor.programming",
+      "proposal_sha256": "c64a3b8e3a975abb297261947a647099b6f3d7bc3f4d63019d0c917c1e050325",
+      "proposal": {
+        "id": "change.aurelia_vendor.programming",
+        "category": "foundation",
+        "title": "Aurelia vendor variants — programming",
+        "reason": "Apply the author's vendor-owned/vendor-sold cooperation model and inclusive midpoint >=70% rule. Probabilities are subjective scenario judgments, not historical observations or shipment guarantees. Logix provides design help and AION may supply chips; no OEM-only supply to Logix, Logix ownership or Logix resale is assumed. Preserve historical records and add linked, separately dated scenario offerings. Micro Works B-08 — Aurelia-compatible programmer: 60–80%, midpoint 70%, estimated release 1980-08. Oliver PP-2708/16 — Aurelia-compatible programmer: 70–85%, midpoint 77.5%, estimated release 1980-07. Microproducts EPROM programmer — Aurelia-compatible variant: 65–80%, midpoint 72.5%, estimated release 1980-08. Solid State Music PB1 — Aurelia-compatible programmer: 65–80%, midpoint 72.5%, estimated release 1980-09. SD Systems PROM-100 — Aurelia-compatible programmer: 65–80%, midpoint 72.5%, estimated release 1980-09. Full reassessment and release basis: data_storytelling/review_evidence/aurelia-vendor-variants/assessment.json and offerings.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.micro_works_b08_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.micro_works_b08_aurelia",
+              "name": "Micro Works B-08 — Aurelia-compatible programmer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.micro_works"
+              ],
+              "release": "1980-08",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.micro_works"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.micro_works_b08"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "The Micro Works sells an external 2708 programmer with local programming-voltage control, verification and Aurelia software. Host commands transfer images and request operations; programming pulses are generated locally and bounded on communication loss.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-08",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-08",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.micro_works_b08",
+            "before": {
+              "id": "external_product.micro_works_b08",
+              "name": "Micro Works B-08",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.micro_works"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "2708 EPROM programmer; programming software offered separately. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SS-30"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.micro_works_b08",
+              "name": "Micro Works B-08",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.micro_works"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "2708 EPROM programmer; programming software offered separately. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SS-30"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.micro_works_b08_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-08"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.oliver_programmer_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.oliver_programmer_aurelia",
+              "name": "Oliver PP-2708/16 — Aurelia-compatible programmer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.oliver"
+              ],
+              "release": "1980-07",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.oliver"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.oliver_pp2708_16"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Oliver sells an external programmer for the documented 2708/TMS2716 devices, replacing dependence on a host PROM socket with a local intelligent controller and Aurelia software. Voltage selection, pulse timing and read-back verification remain device-specific.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-07",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-07",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.oliver_pp2708_16",
+            "before": {
+              "id": "external_product.oliver_pp2708_16",
+              "name": "Oliver Advanced Engineering PP-2708/16",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.oliver"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "External programmer for 2708 and TMS2716 EPROMs using a host PROM socket. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Host with suitable 2708 socket/interface"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.oliver_pp2708_16",
+              "name": "Oliver Advanced Engineering PP-2708/16",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.oliver"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "External programmer for 2708 and TMS2716 EPROMs using a host PROM socket. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Host with suitable 2708 socket/interface"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.oliver_programmer_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-07"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.microproducts_programmer_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.microproducts_programmer_aurelia",
+              "name": "Microproducts EPROM programmer — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.microproducts"
+              ],
+              "release": "1980-08",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.microproducts"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.microproducts_apple_eprom"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Microproducts sells a self-contained 2716 programmer with an AION-assisted FlexiBUS controller. The vendor supplies sockets, programming-voltage circuitry and Aurelia software instead of requiring an Apple II interface.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-08",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-08",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.microproducts_apple_eprom",
+            "before": {
+              "id": "external_product.microproducts_apple_eprom",
+              "name": "Microproducts Apple EPROM Burner",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.microproducts"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "2716 programming accessory with socket and programming-voltage circuitry. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.microproducts_apple_eprom",
+              "name": "Microproducts Apple EPROM Burner",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.microproducts"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "2716 programming accessory with socket and programming-voltage circuitry. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.microproducts_programmer_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-08"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.ssm_pb1_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.ssm_pb1_aurelia",
+              "name": "Solid State Music PB1 — Aurelia-compatible programmer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.ssm"
+              ],
+              "release": "1980-09",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.ssm"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.ssm_pb1"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Solid State Music sells a standalone programmer for the supported 2708/2716 devices. Local control manages voltage and pulse timing; FlexiBUS transfers image blocks and verification results without exposing programming timing to host scheduling.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.ssm_pb1",
+            "before": {
+              "id": "external_product.ssm_pb1",
+              "name": "Solid State Music PB1",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.ssm"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "EPROM programming and storage for 2708/2716 devices. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.ssm_pb1",
+              "name": "Solid State Music PB1",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.ssm"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "EPROM programming and storage for 2708/2716 devices. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.ssm_pb1_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-09"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.sd_prom100_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.sd_prom100_aurelia",
+              "name": "SD Systems PROM-100 — Aurelia-compatible programmer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.sd_systems"
+              ],
+              "release": "1980-09",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.sd_systems"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.sd_prom100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "SD Systems sells an external programmer with an AION-assisted controller and Aurelia software. Only device types documented for the qualified PROM-100 configuration are supported; the adaptation does not imply a universal EPROM programmer.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.sd_prom100",
+            "before": {
+              "id": "external_product.sd_prom100",
+              "name": "SD Systems PROM-100",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.sd_systems"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Programs several 2708/2716/2732-family EPROM types. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.sd_prom100",
+              "name": "SD Systems PROM-100",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.sd_systems"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Programs several 2708/2716/2732-family EPROM types. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.sd_prom100_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-09"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.micro_works_b08_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.micro_works_b08_aurelia",
+            "name": "Micro Works B-08 — Aurelia-compatible programmer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.micro_works"
+            ],
+            "release": "1980-08",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.micro_works"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.micro_works_b08"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "The Micro Works sells an external 2708 programmer with local programming-voltage control, verification and Aurelia software. Host commands transfer images and request operations; programming pulses are generated locally and bounded on communication loss.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-08",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-08",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "69924d98affad348c2e706a429bfe42976d40b4765b1ad9c581fe0a406fa4838"
+        },
+        {
+          "record_id": "external_product.micro_works_b08",
+          "before": {
+            "id": "external_product.micro_works_b08",
+            "name": "Micro Works B-08",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.micro_works"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "2708 EPROM programmer; programming software offered separately. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SS-30"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.micro_works_b08",
+            "name": "Micro Works B-08",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.micro_works"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "2708 EPROM programmer; programming software offered separately. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SS-30"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.micro_works_b08_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-08"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "1fafb3f4ca50303af1ebcc0872c6ad2b17951b0a3c0be9190ce9b7203901e2c6"
+        },
+        {
+          "record_id": "external_product.oliver_programmer_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.oliver_programmer_aurelia",
+            "name": "Oliver PP-2708/16 — Aurelia-compatible programmer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.oliver"
+            ],
+            "release": "1980-07",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.oliver"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.oliver_pp2708_16"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Oliver sells an external programmer for the documented 2708/TMS2716 devices, replacing dependence on a host PROM socket with a local intelligent controller and Aurelia software. Voltage selection, pulse timing and read-back verification remain device-specific.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-07",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-07",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "9c6b8174bda389fb1bc64e887dcb554419b4e5e1d89ce99178e59c13199538fa"
+        },
+        {
+          "record_id": "external_product.oliver_pp2708_16",
+          "before": {
+            "id": "external_product.oliver_pp2708_16",
+            "name": "Oliver Advanced Engineering PP-2708/16",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.oliver"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "External programmer for 2708 and TMS2716 EPROMs using a host PROM socket. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Host with suitable 2708 socket/interface"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.oliver_pp2708_16",
+            "name": "Oliver Advanced Engineering PP-2708/16",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.oliver"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "External programmer for 2708 and TMS2716 EPROMs using a host PROM socket. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Host with suitable 2708 socket/interface"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.oliver_programmer_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-07"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "49ac555e1bbc7c88afbe2355f7436e67027779aa1e127e6deb722c03a4ff622b"
+        },
+        {
+          "record_id": "external_product.microproducts_programmer_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.microproducts_programmer_aurelia",
+            "name": "Microproducts EPROM programmer — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.microproducts"
+            ],
+            "release": "1980-08",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.microproducts"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.microproducts_apple_eprom"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Microproducts sells a self-contained 2716 programmer with an AION-assisted FlexiBUS controller. The vendor supplies sockets, programming-voltage circuitry and Aurelia software instead of requiring an Apple II interface.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-08",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-08",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "1e396ec990b6258f550b43b6a5b9eecd8421d8b87f8e1deff7da721e7a52ab3b"
+        },
+        {
+          "record_id": "external_product.microproducts_apple_eprom",
+          "before": {
+            "id": "external_product.microproducts_apple_eprom",
+            "name": "Microproducts Apple EPROM Burner",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.microproducts"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "2716 programming accessory with socket and programming-voltage circuitry. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.microproducts_apple_eprom",
+            "name": "Microproducts Apple EPROM Burner",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.microproducts"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "2716 programming accessory with socket and programming-voltage circuitry. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.microproducts_programmer_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-08"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "ee81d2d8f2c790fcdcf9608656241cea9d9a3953d8e6824db2be6f4a43659fae"
+        },
+        {
+          "record_id": "external_product.ssm_pb1_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.ssm_pb1_aurelia",
+            "name": "Solid State Music PB1 — Aurelia-compatible programmer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.ssm"
+            ],
+            "release": "1980-09",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.ssm"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.ssm_pb1"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Solid State Music sells a standalone programmer for the supported 2708/2716 devices. Local control manages voltage and pulse timing; FlexiBUS transfers image blocks and verification results without exposing programming timing to host scheduling.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "712a7ca6e773bb3aa85cf3e09c22c2dfd4d7cbb95badd4e3d8a859419ec07233"
+        },
+        {
+          "record_id": "external_product.ssm_pb1",
+          "before": {
+            "id": "external_product.ssm_pb1",
+            "name": "Solid State Music PB1",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.ssm"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "EPROM programming and storage for 2708/2716 devices. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.ssm_pb1",
+            "name": "Solid State Music PB1",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.ssm"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "EPROM programming and storage for 2708/2716 devices. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.ssm_pb1_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-09"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "f544e85736d4806c5e88d420da9450599624259b450d2335fc39c4313828b38d"
+        },
+        {
+          "record_id": "external_product.sd_prom100_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.sd_prom100_aurelia",
+            "name": "SD Systems PROM-100 — Aurelia-compatible programmer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.sd_systems"
+            ],
+            "release": "1980-09",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.sd_systems"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.sd_prom100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "SD Systems sells an external programmer with an AION-assisted controller and Aurelia software. Only device types documented for the qualified PROM-100 configuration are supported; the adaptation does not imply a universal EPROM programmer.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal programmer class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "90d852ca397e58dbf94771ce87c7249baabdb3239b3bf4a0ed0a4197a8f20f18"
+        },
+        {
+          "record_id": "external_product.sd_prom100",
+          "before": {
+            "id": "external_product.sd_prom100",
+            "name": "SD Systems PROM-100",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.sd_systems"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Programs several 2708/2716/2732-family EPROM types. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.sd_prom100",
+            "name": "SD Systems PROM-100",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.sd_systems"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Programs several 2708/2716/2732-family EPROM types. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.sd_prom100_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-09"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "e1caf0faa8c71db07f6f12bb5e67646d1d4642c2780f3dd92d2ee376c54289ca"
+        }
+      ]
+    }
+  ]
+}

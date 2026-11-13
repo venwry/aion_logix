@@ -1,0 +1,1372 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.aedf595f-bea7-4fb2-bd4a-035f99e012ec",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T17:59:22.519Z",
+      "change_id": "change.aurelia_vendor.specialist",
+      "proposal_sha256": "4f00acd601eeaa56e23b7c5f2cbcd1688e3fb289a2c74af14673060928b88ee2",
+      "proposal": {
+        "id": "change.aurelia_vendor.specialist",
+        "category": "foundation",
+        "title": "Aurelia vendor variants — specialist",
+        "reason": "Apply the author's vendor-owned/vendor-sold cooperation model and inclusive midpoint >=70% rule. Probabilities are subjective scenario judgments, not historical observations or shipment guarantees. Logix provides design help and AION may supply chips; no OEM-only supply to Logix, Logix ownership or Logix resale is assumed. Preserve historical records and add linked, separately dated scenario offerings. Houston Instrument HiPlot — Aurelia-compatible package: 75–90%, midpoint 82.5%, estimated release 1980-07. Heuristics Speechlab 50 — Aurelia-compatible variant: 65–80%, midpoint 72.5%, estimated release 1980-11. D1 KIMSET — Aurelia-compatible analog-input unit: 65–80%, midpoint 72.5%, estimated release 1980-09. TNW FlexiBUS/IEEE-488 gateway — Aurelia-compatible variant: 65–80%, midpoint 72.5%, estimated release 1980-10. Microtronics M8A — Aurelia-compatible radio interface: 70–85%, midpoint 77.5%, estimated release 1980-09. Full reassessment and release basis: data_storytelling/review_evidence/aurelia-vendor-variants/assessment.json and offerings.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.houston_hiplot_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.houston_hiplot_aurelia",
+              "name": "Houston Instrument HiPlot — Aurelia-compatible package",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.houston"
+              ],
+              "release": "1980-07",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.houston"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.houston_hiplot"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Houston Instrument sells the HiPlot with its own active FlexiBUS interface and Aurelia plotting software. The plotter retains its mechanical area and increments. Commands, coordinate units, pen state, completion and cancel behavior are documented in a vendor profile; it is not treated as a character printer.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal plotter class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-07",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-07",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.houston_hiplot",
+            "before": {
+              "id": "external_product.houston_hiplot",
+              "name": "Houston Instrument HiPlot",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.houston"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Pen plotter with approximately 7 × 10-inch area and 0.005-inch increments. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable serial/parallel interfaces"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.houston_hiplot",
+              "name": "Houston Instrument HiPlot",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.houston"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Pen plotter with approximately 7 × 10-inch area and 0.005-inch increments. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable serial/parallel interfaces"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.houston_hiplot_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-07"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.heuristics_speechlab_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.heuristics_speechlab_aurelia",
+              "name": "Heuristics Speechlab 50 — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.heuristics"
+              ],
+              "release": "1980-11",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.heuristics"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.heuristics_speechlab50"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Heuristics sells a speaker-trained recognition unit with local acquisition/processing and Aurelia software. Vocabulary loading, training, recognition events and errors use a vendor protocol. The original limited vocabulary is not upgraded to unrestricted speech understanding.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal recognition class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-11",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-11",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.heuristics_speechlab50",
+            "before": {
+              "id": "external_product.heuristics_speechlab50",
+              "name": "Heuristics Speechlab 50",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.heuristics"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Trained, speaker-dependent speech recognition with a vocabulary of approximately 64 words. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.heuristics_speechlab50",
+              "name": "Heuristics Speechlab 50",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.heuristics"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Trained, speaker-dependent speech recognition with a vocabulary of approximately 64 words. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.heuristics_speechlab_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-11"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.d1_kimset_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.d1_kimset_aurelia",
+              "name": "D1 KIMSET — Aurelia-compatible analog-input unit",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.d1"
+              ],
+              "release": "1980-09",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.d1"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.d1_kimset1"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "D1 sells a self-contained unit retaining sixteen analog channels and 8-bit conversion. Local sampling and buffering separate acquisition timing from FlexiBUS transfer. The vendor specifies channel sequencing, sampling limits and electrical input ranges.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal analog class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.d1_kimset1",
+            "before": {
+              "id": "external_product.d1_kimset1",
+              "name": "D1 Systems KIMSET 1",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.d1"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Sixteen analog inputs with 8-bit conversion and screw-terminal connections. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "KIM-1"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.d1_kimset1",
+              "name": "D1 Systems KIMSET 1",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.d1"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Sixteen analog inputs with 8-bit conversion and screw-terminal connections. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "KIM-1"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.d1_kimset_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-09"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.tnw_gateway_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.tnw_gateway_aurelia",
+              "name": "TNW FlexiBUS/IEEE-488 gateway — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tnw"
+              ],
+              "release": "1980-10",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.tnw"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.tnw_488_232"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "TNW sells a gateway derived from its 488/232 experience, with FlexiBUS upstream and controlled IEEE-488 transactions downstream. Aurelia software handles explicitly supported instruments or printers. Bus addressing, timeout and error handling are defined; this does not promise universal instrument-command compatibility.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal gateway class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-10",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-10",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.tnw_488_232",
+            "before": {
+              "id": "external_product.tnw_488_232",
+              "name": "TNW 488/232",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tnw"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "IEEE-488 to serial conversion for terminals and printers. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "PET; suitable IEEE-488 hosts"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.tnw_488_232",
+              "name": "TNW 488/232",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tnw"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "IEEE-488 to serial conversion for terminals and printers. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "PET; suitable IEEE-488 hosts"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.tnw_gateway_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-10"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.microtronics_m8a_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.microtronics_m8a_aurelia",
+              "name": "Microtronics M8A — Aurelia-compatible radio interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.microtronics"
+              ],
+              "release": "1980-09",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.microtronics"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.microtronics_m8a"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Microtronics sells a Morse/radioteletype interface with local signal timing and Aurelia applications. FlexiBUS carries buffered text, configuration and status; the radio-side electrical interface and supported signaling modes remain explicitly bounded.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal radio class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.microtronics_m8a",
+            "before": {
+              "id": "external_product.microtronics_m8a",
+              "name": "Microtronics M8A",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.microtronics"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Amateur-radio interface for Morse and radioteletype applications. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Commodore PET"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.microtronics_m8a",
+              "name": "Microtronics M8A",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.microtronics"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Amateur-radio interface for Morse and radioteletype applications. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Commodore PET"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.microtronics_m8a_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-09"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.houston_hiplot_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.houston_hiplot_aurelia",
+            "name": "Houston Instrument HiPlot — Aurelia-compatible package",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.houston"
+            ],
+            "release": "1980-07",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.houston"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.houston_hiplot"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Houston Instrument sells the HiPlot with its own active FlexiBUS interface and Aurelia plotting software. The plotter retains its mechanical area and increments. Commands, coordinate units, pen state, completion and cancel behavior are documented in a vendor profile; it is not treated as a character printer.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal plotter class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-07",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-07",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "d00b80ed8db99bdc88a9a22761e1b8ffb2dd0ffea2bf061945f8cf45b134173e"
+        },
+        {
+          "record_id": "external_product.houston_hiplot",
+          "before": {
+            "id": "external_product.houston_hiplot",
+            "name": "Houston Instrument HiPlot",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.houston"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Pen plotter with approximately 7 × 10-inch area and 0.005-inch increments. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable serial/parallel interfaces"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.houston_hiplot",
+            "name": "Houston Instrument HiPlot",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.houston"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Pen plotter with approximately 7 × 10-inch area and 0.005-inch increments. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable serial/parallel interfaces"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.houston_hiplot_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-07"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "26dab0d9efe3c6243a21f41d750eb213eb21cfee5093e8a76b1b339db77a5ff8"
+        },
+        {
+          "record_id": "external_product.heuristics_speechlab_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.heuristics_speechlab_aurelia",
+            "name": "Heuristics Speechlab 50 — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.heuristics"
+            ],
+            "release": "1980-11",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.heuristics"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.heuristics_speechlab50"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Heuristics sells a speaker-trained recognition unit with local acquisition/processing and Aurelia software. Vocabulary loading, training, recognition events and errors use a vendor protocol. The original limited vocabulary is not upgraded to unrestricted speech understanding.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal recognition class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-11",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-11",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "a5320ec2c59c0e25e5f4f6fba69cdee9cf40b9ca05f08d5d6104d5040c19df7d"
+        },
+        {
+          "record_id": "external_product.heuristics_speechlab50",
+          "before": {
+            "id": "external_product.heuristics_speechlab50",
+            "name": "Heuristics Speechlab 50",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.heuristics"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Trained, speaker-dependent speech recognition with a vocabulary of approximately 64 words. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.heuristics_speechlab50",
+            "name": "Heuristics Speechlab 50",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.heuristics"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Trained, speaker-dependent speech recognition with a vocabulary of approximately 64 words. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.heuristics_speechlab_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-11"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "e09d878585c77dbba20679b94466c30acec366b747a4088468b2fa4c007ca828"
+        },
+        {
+          "record_id": "external_product.d1_kimset_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.d1_kimset_aurelia",
+            "name": "D1 KIMSET — Aurelia-compatible analog-input unit",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.d1"
+            ],
+            "release": "1980-09",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.d1"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.d1_kimset1"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "D1 sells a self-contained unit retaining sixteen analog channels and 8-bit conversion. Local sampling and buffering separate acquisition timing from FlexiBUS transfer. The vendor specifies channel sequencing, sampling limits and electrical input ranges.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal analog class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "0275cf9d999fb9c0a60fc49fde20f21e7c6f059736a9335a8eb7a939783be369"
+        },
+        {
+          "record_id": "external_product.d1_kimset1",
+          "before": {
+            "id": "external_product.d1_kimset1",
+            "name": "D1 Systems KIMSET 1",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.d1"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Sixteen analog inputs with 8-bit conversion and screw-terminal connections. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "KIM-1"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.d1_kimset1",
+            "name": "D1 Systems KIMSET 1",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.d1"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Sixteen analog inputs with 8-bit conversion and screw-terminal connections. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "KIM-1"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.d1_kimset_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-09"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "47fe2faa3a87d532795ccf26af605caae2562b2ac78d10a0df4eb7794eb88e8a"
+        },
+        {
+          "record_id": "external_product.tnw_gateway_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.tnw_gateway_aurelia",
+            "name": "TNW FlexiBUS/IEEE-488 gateway — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tnw"
+            ],
+            "release": "1980-10",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.tnw"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.tnw_488_232"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "TNW sells a gateway derived from its 488/232 experience, with FlexiBUS upstream and controlled IEEE-488 transactions downstream. Aurelia software handles explicitly supported instruments or printers. Bus addressing, timeout and error handling are defined; this does not promise universal instrument-command compatibility.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal gateway class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-10",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-10",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "2aa14fa417dda7f4dbddad24364cd948bbaddc96054f1805e802a2770e448c02"
+        },
+        {
+          "record_id": "external_product.tnw_488_232",
+          "before": {
+            "id": "external_product.tnw_488_232",
+            "name": "TNW 488/232",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tnw"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "IEEE-488 to serial conversion for terminals and printers. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "PET; suitable IEEE-488 hosts"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.tnw_488_232",
+            "name": "TNW 488/232",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tnw"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "IEEE-488 to serial conversion for terminals and printers. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "PET; suitable IEEE-488 hosts"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.tnw_gateway_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-10"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "145e3476f756a74751948fdc304b8e3fa88660513e04ae5bb8f8872f3f6d6cab"
+        },
+        {
+          "record_id": "external_product.microtronics_m8a_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.microtronics_m8a_aurelia",
+            "name": "Microtronics M8A — Aurelia-compatible radio interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.microtronics"
+            ],
+            "release": "1980-09",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.microtronics"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.microtronics_m8a"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Microtronics sells a Morse/radioteletype interface with local signal timing and Aurelia applications. FlexiBUS carries buffered text, configuration and status; the radio-side electrical interface and supported signaling modes remain explicitly bounded.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal radio class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "0d1b24f7f76d53dab6eb3879bb1d2163b078de6cd336e29efd88b1644503a49b"
+        },
+        {
+          "record_id": "external_product.microtronics_m8a",
+          "before": {
+            "id": "external_product.microtronics_m8a",
+            "name": "Microtronics M8A",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.microtronics"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Amateur-radio interface for Morse and radioteletype applications. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Commodore PET"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.microtronics_m8a",
+            "name": "Microtronics M8A",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.microtronics"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Amateur-radio interface for Morse and radioteletype applications. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Commodore PET"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.microtronics_m8a_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-09"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "6f9d3f418b42f942c8b3e9785365e1c698060d4e7254814cf4ab01ba3939c53d"
+        }
+      ]
+    }
+  ]
+}
