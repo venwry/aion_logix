@@ -1,0 +1,1104 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.d409daef-95f1-4529-ae0d-4fc43fc9b140",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T17:57:08.015Z",
+      "change_id": "change.aurelia_vendor.communications",
+      "proposal_sha256": "2fb58b615f0cb8f4f3f22fef16b7b976879b3cb834037a27a75274b9454bcb83",
+      "proposal": {
+        "id": "change.aurelia_vendor.communications",
+        "category": "foundation",
+        "title": "Aurelia vendor variants — communications",
+        "reason": "Apply the author's vendor-owned/vendor-sold cooperation model and inclusive midpoint >=70% rule. Probabilities are subjective scenario judgments, not historical observations or shipment guarantees. Logix provides design help and AION may supply chips; no OEM-only supply to Logix, Logix ownership or Logix resale is assumed. Preserve historical records and add linked, separately dated scenario offerings. Hayes 300-bit/s modem — Aurelia-compatible variant: 85–95%, midpoint 90%, estimated release 1980-03. Novation CAT — Aurelia-compatible package: 80–95%, midpoint 87.5%, estimated release 1980-02. M&R Pennywhistle 103 — Aurelia-compatible package: 70–85%, midpoint 77.5%, estimated release 1980-05. Full reassessment and release basis: data_storytelling/review_evidence/aurelia-vendor-variants/assessment.json and offerings.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.hayes_aurelia_modem",
+            "before": null,
+            "after": {
+              "id": "external_product.hayes_aurelia_modem",
+              "name": "Hayes 300-bit/s modem — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.hayes"
+              ],
+              "release": "1980-03",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}, {source_2}, {source_3}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.hayes"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.hayes_micromodem_ii"
+                    },
+                    {
+                      "key": "source_2",
+                      "value": "external_product.hayes_micromodem_100"
+                    },
+                    {
+                      "key": "source_3",
+                      "value": "external_product.hayes_80_103a"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Hayes sells one external 300-bit/s modem family derived from its existing Micromodem and 80-103A experience. It has its own enclosure, controller and telephone coupling hardware; the Apple II and S-100 cards are not reused as Aurelia expansion cards. Vendor commands cover supported dial/answer operations and carrier status. Do not infer the later Hayes AT command set.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal modem class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-03",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-03",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.hayes_micromodem_ii",
+            "before": {
+              "id": "external_product.hayes_micromodem_ii",
+              "name": "Hayes Micromodem II",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.hayes"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "300-bit/s modem with an external telephone coupling unit and software control. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.hayes_micromodem_ii",
+              "name": "Hayes Micromodem II",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.hayes"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "300-bit/s modem with an external telephone coupling unit and software control. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.hayes_aurelia_modem"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-03"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.hayes_micromodem_100",
+            "before": {
+              "id": "external_product.hayes_micromodem_100",
+              "name": "Hayes Micromodem 100",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.hayes"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "300-bit/s software-controlled modem with telephone coupling hardware. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.hayes_micromodem_100",
+              "name": "Hayes Micromodem 100",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.hayes"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "300-bit/s software-controlled modem with telephone coupling hardware. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.hayes_aurelia_modem"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-03"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.hayes_80_103a",
+            "before": {
+              "id": "external_product.hayes_80_103a",
+              "name": "D. C. Hayes 80-103A",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.hayes"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "110/300-bit/s modem with automatic dialing/answering; telephone coupling hardware required. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "release": "1977"
+            },
+            "after": {
+              "id": "external_product.hayes_80_103a",
+              "name": "D. C. Hayes 80-103A",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.hayes"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "110/300-bit/s modem with automatic dialing/answering; telephone coupling hardware required. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.hayes_aurelia_modem"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-03"
+                    }
+                  ]
+                }
+              ],
+              "release": "1977"
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.novation_cat_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.novation_cat_aurelia",
+              "name": "Novation CAT — Aurelia-compatible package",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.novation"
+              ],
+              "release": "1980-02",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.novation"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.novation_cat"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Novation sells the CAT acoustic modem with a vendor-owned active FlexiBUS interface and communications software. The package retains acoustic coupling, manual telephone operation and native originate/answer limits; the interface cannot create automatic dialing absent from the modem.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal modem class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-02",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-02",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.novation_cat",
+            "before": {
+              "id": "external_product.novation_cat",
+              "name": "Novation CAT",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.novation"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "300-baud acoustic modem with originate and answer modes. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable RS-232 micros and terminals"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.novation_cat",
+              "name": "Novation CAT",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.novation"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "300-baud acoustic modem with originate and answer modes. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable RS-232 micros and terminals"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.novation_cat_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-02"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.pennywhistle_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.pennywhistle_aurelia",
+              "name": "M&R Pennywhistle 103 — Aurelia-compatible package",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.mr"
+              ],
+              "release": "1980-05",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.mr"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.pennywhistle_103"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "M&R sells a Pennywhistle modem package with its FlexiBUS controller and Aurelia software. The modem retains its Bell-103-compatible signaling and documented telephone-coupling requirements; unsupported dialing and status features are not invented.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal modem class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-05",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-05",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.pennywhistle_103",
+            "before": {
+              "id": "external_product.pennywhistle_103",
+              "name": "Pennywhistle 103 modem",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.mr"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Low-speed Bell-103-compatible modem offered to hobbyist builders. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable serial-interface micros"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.pennywhistle_103",
+              "name": "Pennywhistle 103 modem",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.mr"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Low-speed Bell-103-compatible modem offered to hobbyist builders. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable serial-interface micros"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.pennywhistle_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-05"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.hayes_aurelia_modem",
+          "before": null,
+          "after": {
+            "id": "external_product.hayes_aurelia_modem",
+            "name": "Hayes 300-bit/s modem — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.hayes"
+            ],
+            "release": "1980-03",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}, {source_2}, {source_3}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.hayes"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.hayes_micromodem_ii"
+                  },
+                  {
+                    "key": "source_2",
+                    "value": "external_product.hayes_micromodem_100"
+                  },
+                  {
+                    "key": "source_3",
+                    "value": "external_product.hayes_80_103a"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Hayes sells one external 300-bit/s modem family derived from its existing Micromodem and 80-103A experience. It has its own enclosure, controller and telephone coupling hardware; the Apple II and S-100 cards are not reused as Aurelia expansion cards. Vendor commands cover supported dial/answer operations and carrier status. Do not infer the later Hayes AT command set.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal modem class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-03",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-03",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "ec67361f7398ad9770474fc997e07b57dca654aa8b37e211d2fd59a508206069"
+        },
+        {
+          "record_id": "external_product.hayes_micromodem_ii",
+          "before": {
+            "id": "external_product.hayes_micromodem_ii",
+            "name": "Hayes Micromodem II",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.hayes"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "300-bit/s modem with an external telephone coupling unit and software control. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.hayes_micromodem_ii",
+            "name": "Hayes Micromodem II",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.hayes"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "300-bit/s modem with an external telephone coupling unit and software control. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.hayes_aurelia_modem"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-03"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "a2c19df5ef19cf96550d89d7853b1189ef5b0ef15def9a216faab596c7b0df38"
+        },
+        {
+          "record_id": "external_product.hayes_micromodem_100",
+          "before": {
+            "id": "external_product.hayes_micromodem_100",
+            "name": "Hayes Micromodem 100",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.hayes"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "300-bit/s software-controlled modem with telephone coupling hardware. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.hayes_micromodem_100",
+            "name": "Hayes Micromodem 100",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.hayes"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "300-bit/s software-controlled modem with telephone coupling hardware. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.hayes_aurelia_modem"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-03"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "4ca815bff59c133e1391dafb0424e349316654a717a7848695d73a753b94323b"
+        },
+        {
+          "record_id": "external_product.hayes_80_103a",
+          "before": {
+            "id": "external_product.hayes_80_103a",
+            "name": "D. C. Hayes 80-103A",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.hayes"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "110/300-bit/s modem with automatic dialing/answering; telephone coupling hardware required. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "release": "1977"
+          },
+          "after": {
+            "id": "external_product.hayes_80_103a",
+            "name": "D. C. Hayes 80-103A",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.hayes"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "110/300-bit/s modem with automatic dialing/answering; telephone coupling hardware required. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.hayes_aurelia_modem"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-03"
+                  }
+                ]
+              }
+            ],
+            "release": "1977"
+          },
+          "content_sha256": "3a4630e7d68c5e5b2f9752a1dbb436ef78f439f43d7779adf53d874c2d7c2bd2"
+        },
+        {
+          "record_id": "external_product.novation_cat_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.novation_cat_aurelia",
+            "name": "Novation CAT — Aurelia-compatible package",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.novation"
+            ],
+            "release": "1980-02",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.novation"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.novation_cat"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Novation sells the CAT acoustic modem with a vendor-owned active FlexiBUS interface and communications software. The package retains acoustic coupling, manual telephone operation and native originate/answer limits; the interface cannot create automatic dialing absent from the modem.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal modem class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-02",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-02",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "cfed5180baa7c78433d773d043352cb42b9eef3c958e41a1ba6e4293a26b1c16"
+        },
+        {
+          "record_id": "external_product.novation_cat",
+          "before": {
+            "id": "external_product.novation_cat",
+            "name": "Novation CAT",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.novation"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "300-baud acoustic modem with originate and answer modes. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable RS-232 micros and terminals"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.novation_cat",
+            "name": "Novation CAT",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.novation"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "300-baud acoustic modem with originate and answer modes. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable RS-232 micros and terminals"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.novation_cat_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-02"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "ff60b188992f64eb48ff2474f7fd10a9481c70aec9ec4be62e3fd6bce92bf945"
+        },
+        {
+          "record_id": "external_product.pennywhistle_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.pennywhistle_aurelia",
+            "name": "M&R Pennywhistle 103 — Aurelia-compatible package",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.mr"
+            ],
+            "release": "1980-05",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.mr"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.pennywhistle_103"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "M&R sells a Pennywhistle modem package with its FlexiBUS controller and Aurelia software. The modem retains its Bell-103-compatible signaling and documented telephone-coupling requirements; unsupported dialing and status features are not invented.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal modem class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-05",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-05",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "a47ad1fe7e580cb61aa40e7c91a1d889a3565cdabf06573e5ec1dc08bc587979"
+        },
+        {
+          "record_id": "external_product.pennywhistle_103",
+          "before": {
+            "id": "external_product.pennywhistle_103",
+            "name": "Pennywhistle 103 modem",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.mr"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Low-speed Bell-103-compatible modem offered to hobbyist builders. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable serial-interface micros"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.pennywhistle_103",
+            "name": "Pennywhistle 103 modem",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.mr"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Low-speed Bell-103-compatible modem offered to hobbyist builders. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable serial-interface micros"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.pennywhistle_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-05"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "23af6ba69d1b9023ffa977ed4cccd37be68a323ae1a6f8f488b0df855cc3e49e"
+        }
+      ]
+    }
+  ]
+}

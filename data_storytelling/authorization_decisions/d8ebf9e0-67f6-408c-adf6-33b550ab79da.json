@@ -1,0 +1,2174 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.f5117080-ffe1-4ad8-8e6b-0f06e2b38d71",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T17:57:08.017Z",
+      "change_id": "change.aurelia_vendor.storage_business",
+      "proposal_sha256": "544f7d262cf66cb6ffd742429718e39e0a9383089ff0c9cc976685da7119c750",
+      "proposal": {
+        "id": "change.aurelia_vendor.storage_business",
+        "category": "foundation",
+        "title": "Aurelia vendor variants — storage business",
+        "reason": "Apply the author's vendor-owned/vendor-sold cooperation model and inclusive midpoint >=70% rule. Probabilities are subjective scenario judgments, not historical observations or shipment guarantees. Logix provides design help and AION may supply chips; no OEM-only supply to Logix, Logix ownership or Logix resale is assumed. Preserve historical records and add linked, separately dated scenario offerings. Corvus 11A — Aurelia-compatible disk system: 80–95%, midpoint 87.5%, estimated release 1980-08. Thinker Toys Discus — Aurelia-compatible 8-inch system: 80–90%, midpoint 85%, estimated release 1980-06. Percom 5¼-inch disk system — Aurelia-compatible variant: 75–90%, midpoint 82.5%, estimated release 1980-04. Tarbell disk system — Aurelia-compatible variant: 70–85%, midpoint 77.5%, estimated release 1980-06. Full reassessment and release basis: data_storytelling/review_evidence/aurelia-vendor-variants/assessment.json and offerings.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.corvus_11a_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.corvus_11a_aurelia",
+              "name": "Corvus 11A — Aurelia-compatible disk system",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.corvus"
+              ],
+              "release": "1980-08",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.corvus"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.corvus_11a"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Corvus sells a complete 10 MB system with a FlexiBUS controller and Aurelia CP/M integration. Use partitioned logical volumes within the released host filesystem limits; do not assume one unrestricted 10 MB volume. Qualify controller buffering, directory operations, recovery and flush behavior; FlexiBUS bandwidth limits sustained transfer.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The controller handles local drive timing, geometry, sector transfers, media-generation changes, duplicate-write protection and flush completion. The vendor supplies a tested Aurelia CP/M disk integration for explicitly supported formats. Initial use can load that software from an existing Aurelia disk; booting directly from this device requires a separately qualified boot path. Native disk formats and filesystems are not automatically interchangeable.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-08",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing sector-disk device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-08",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.corvus_11a",
+            "before": {
+              "id": "external_product.corvus_11a",
+              "name": "Corvus 11A 10 MB disk system",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.corvus"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Early hard-disk subsystem offering substantially more capacity than a floppy drive. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II with Corvus interface/software"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.corvus_11a",
+              "name": "Corvus 11A 10 MB disk system",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.corvus"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Early hard-disk subsystem offering substantially more capacity than a floppy drive. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II with Corvus interface/software"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.corvus_11a_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-08"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.morrow_discus_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.morrow_discus_aurelia",
+              "name": "Thinker Toys Discus — Aurelia-compatible 8-inch system",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.thinker_toys"
+              ],
+              "release": "1980-06",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}, {source_2}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.thinker_toys"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.thinker_toys_discus_i"
+                    },
+                    {
+                      "key": "source_2",
+                      "value": "external_product.thinker_toys_disk_jockey_i"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Thinker Toys sells one complete 8-inch subsystem combining Discus packaging and Disk Jockey controller experience. The two historical products are source designs, not two new Aurelia launches. The vendor owns the enclosure, controller integration, supported media formats and host software.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The controller handles local drive timing, geometry, sector transfers, media-generation changes, duplicate-write protection and flush completion. The vendor supplies a tested Aurelia CP/M disk integration for explicitly supported formats. Initial use can load that software from an existing Aurelia disk; booting directly from this device requires a separately qualified boot path. Native disk formats and filesystems are not automatically interchangeable.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-06",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing sector-disk device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-06",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1980-06",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexidisk_ii",
+                  "relationship": "competes_with",
+                  "date": "1980-06",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.thinker_toys_discus_i",
+            "before": {
+              "id": "external_product.thinker_toys_discus_i",
+              "name": "Thinker Toys Discus I",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.thinker_toys"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Thinker Toys Discus I"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.thinker_toys_discus_i",
+              "name": "Thinker Toys Discus I",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.thinker_toys"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.morrow_discus_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-06"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Thinker Toys Discus I"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.thinker_toys_disk_jockey_i",
+            "before": {
+              "id": "external_product.thinker_toys_disk_jockey_i",
+              "name": "Thinker Toys Disk Jockey I",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.thinker_toys"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "8-inch floppy controller with buffering and serial-I/O facilities. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Thinker Toys Disk Jockey I"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.thinker_toys_disk_jockey_i",
+              "name": "Thinker Toys Disk Jockey I",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.thinker_toys"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "8-inch floppy controller with buffering and serial-I/O facilities. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.morrow_discus_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-06"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Thinker Toys Disk Jockey I"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.percom_disk_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.percom_disk_aurelia",
+              "name": "Percom 5¼-inch disk system — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "release": "1980-04",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}, {source_2}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.percom"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.percom_tfd100"
+                    },
+                    {
+                      "key": "source_2",
+                      "value": "external_product.percom_lfd400"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Percom sells one Aurelia disk family derived from its TFD/LFD experience, with local drive control and a FlexiBUS interface. TRS-80 and other original host interfaces are replaced, and their software is not assumed to run on Aurelia.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The controller handles local drive timing, geometry, sector transfers, media-generation changes, duplicate-write protection and flush completion. The vendor supplies a tested Aurelia CP/M disk integration for explicitly supported formats. Initial use can load that software from an existing Aurelia disk; booting directly from this device requires a separately qualified boot path. Native disk formats and filesystems are not automatically interchangeable.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing sector-disk device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexidisk_ii",
+                  "relationship": "competes_with",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.percom_tfd100",
+            "before": {
+              "id": "external_product.percom_tfd100",
+              "name": "Percom TFD-100",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Third-party 5¼-inch disk-drive subsystem for the Model I. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TRS-80 Model I"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.percom_tfd100",
+              "name": "Percom TFD-100",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Third-party 5¼-inch disk-drive subsystem for the Model I. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TRS-80 Model I"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.percom_disk_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-04"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.percom_lfd400",
+            "before": {
+              "id": "external_product.percom_lfd400",
+              "name": "Percom LFD-400",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "5¼-inch floppy subsystem; approximately 90 KB per disk in the reviewed configuration. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SS-50"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.percom_lfd400",
+              "name": "Percom LFD-400",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.percom"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "5¼-inch floppy subsystem; approximately 90 KB per disk in the reviewed configuration. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SS-50"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.percom_disk_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-04"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.tarbell_disk_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.tarbell_disk_aurelia",
+              "name": "Tarbell disk system — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tarbell"
+              ],
+              "release": "1980-06",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.tarbell"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.tarbell_floppy_interface"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Tarbell sells a complete external floppy subsystem using its controller expertise and an AION-assisted FlexiBUS control board. Unlike the historical S-100 card, the product includes local processing, supported drives, enclosure, power and host software.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The controller handles local drive timing, geometry, sector transfers, media-generation changes, duplicate-write protection and flush completion. The vendor supplies a tested Aurelia CP/M disk integration for explicitly supported formats. Initial use can load that software from an existing Aurelia disk; booting directly from this device requires a separately qualified boot path. Native disk formats and filesystems are not automatically interchangeable.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-06",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing sector-disk device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-06",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1980-06",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexidisk_ii",
+                  "relationship": "competes_with",
+                  "date": "1980-06",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.tarbell_floppy_interface",
+            "before": {
+              "id": "external_product.tarbell_floppy_interface",
+              "name": "Tarbell Floppy Disk Interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tarbell"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Controller for compatible floppy drives; boot and disk software are system-specific. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Tarbell Floppy Disk Interface"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.tarbell_floppy_interface",
+              "name": "Tarbell Floppy Disk Interface",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.tarbell"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Controller for compatible floppy drives; boot and disk software are system-specific. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.tarbell_disk_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-06"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                  "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Tarbell Floppy Disk Interface"
+                    },
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_s100_flexibus_card",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                  "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                  "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.s100_flexibus_card"
+                    }
+                  ]
+                },
+                {
+                  "product_id": "product.device_flexidisk",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                  "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                  "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexidisk"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.corvus_11a_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.corvus_11a_aurelia",
+            "name": "Corvus 11A — Aurelia-compatible disk system",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.corvus"
+            ],
+            "release": "1980-08",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.corvus"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.corvus_11a"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Corvus sells a complete 10 MB system with a FlexiBUS controller and Aurelia CP/M integration. Use partitioned logical volumes within the released host filesystem limits; do not assume one unrestricted 10 MB volume. Qualify controller buffering, directory operations, recovery and flush behavior; FlexiBUS bandwidth limits sustained transfer.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The controller handles local drive timing, geometry, sector transfers, media-generation changes, duplicate-write protection and flush completion. The vendor supplies a tested Aurelia CP/M disk integration for explicitly supported formats. Initial use can load that software from an existing Aurelia disk; booting directly from this device requires a separately qualified boot path. Native disk formats and filesystems are not automatically interchangeable.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-08",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing sector-disk device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-08",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "b807c2b16fcea0fdabb88361e747f8c6b5817d69d2907cd8fe1f9d24856695b9"
+        },
+        {
+          "record_id": "external_product.corvus_11a",
+          "before": {
+            "id": "external_product.corvus_11a",
+            "name": "Corvus 11A 10 MB disk system",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.corvus"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Early hard-disk subsystem offering substantially more capacity than a floppy drive. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II with Corvus interface/software"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.corvus_11a",
+            "name": "Corvus 11A 10 MB disk system",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.corvus"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Early hard-disk subsystem offering substantially more capacity than a floppy drive. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II with Corvus interface/software"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.corvus_11a_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-08"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "11546b2dcdacf506667ca7d32e022916c8714416a8c749a5c44effe5c7b622cc"
+        },
+        {
+          "record_id": "external_product.morrow_discus_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.morrow_discus_aurelia",
+            "name": "Thinker Toys Discus — Aurelia-compatible 8-inch system",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.thinker_toys"
+            ],
+            "release": "1980-06",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}, {source_2}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.thinker_toys"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.thinker_toys_discus_i"
+                  },
+                  {
+                    "key": "source_2",
+                    "value": "external_product.thinker_toys_disk_jockey_i"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Thinker Toys sells one complete 8-inch subsystem combining Discus packaging and Disk Jockey controller experience. The two historical products are source designs, not two new Aurelia launches. The vendor owns the enclosure, controller integration, supported media formats and host software.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The controller handles local drive timing, geometry, sector transfers, media-generation changes, duplicate-write protection and flush completion. The vendor supplies a tested Aurelia CP/M disk integration for explicitly supported formats. Initial use can load that software from an existing Aurelia disk; booting directly from this device requires a separately qualified boot path. Native disk formats and filesystems are not automatically interchangeable.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-06",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing sector-disk device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-06",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1980-06",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexidisk_ii",
+                "relationship": "competes_with",
+                "date": "1980-06",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "5fa57470f4ced8c9347649ffb84a40b2b12c927291ecb82e6db15b2ed74913f6"
+        },
+        {
+          "record_id": "external_product.thinker_toys_discus_i",
+          "before": {
+            "id": "external_product.thinker_toys_discus_i",
+            "name": "Thinker Toys Discus I",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.thinker_toys"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Thinker Toys Discus I"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.thinker_toys_discus_i",
+            "name": "Thinker Toys Discus I",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.thinker_toys"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.morrow_discus_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-06"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Thinker Toys Discus I"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Complete single 8-inch drive subsystem with controller and software; roughly 250 KB per disk.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "0d205120e48052fcca9b2e33eefa9e4da8666f923f28333702585d163876aaf5"
+        },
+        {
+          "record_id": "external_product.thinker_toys_disk_jockey_i",
+          "before": {
+            "id": "external_product.thinker_toys_disk_jockey_i",
+            "name": "Thinker Toys Disk Jockey I",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.thinker_toys"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "8-inch floppy controller with buffering and serial-I/O facilities. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Thinker Toys Disk Jockey I"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.thinker_toys_disk_jockey_i",
+            "name": "Thinker Toys Disk Jockey I",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.thinker_toys"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "8-inch floppy controller with buffering and serial-I/O facilities. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.morrow_discus_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-06"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Thinker Toys Disk Jockey I"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. 8-inch floppy controller with buffering and serial-I/O facilities.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "476d4cd58e64a5b3570ec745533a8c31c4d4e97ab3603a10ad267e20952756f9"
+        },
+        {
+          "record_id": "external_product.percom_disk_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.percom_disk_aurelia",
+            "name": "Percom 5¼-inch disk system — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "release": "1980-04",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}, {source_2}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.percom"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.percom_tfd100"
+                  },
+                  {
+                    "key": "source_2",
+                    "value": "external_product.percom_lfd400"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Percom sells one Aurelia disk family derived from its TFD/LFD experience, with local drive control and a FlexiBUS interface. TRS-80 and other original host interfaces are replaced, and their software is not assumed to run on Aurelia.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The controller handles local drive timing, geometry, sector transfers, media-generation changes, duplicate-write protection and flush completion. The vendor supplies a tested Aurelia CP/M disk integration for explicitly supported formats. Initial use can load that software from an existing Aurelia disk; booting directly from this device requires a separately qualified boot path. Native disk formats and filesystems are not automatically interchangeable.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing sector-disk device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexidisk_ii",
+                "relationship": "competes_with",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "950923b46e1bcb3ec21fe07d8350ef410781c590da6155feed1e878d84745907"
+        },
+        {
+          "record_id": "external_product.percom_tfd100",
+          "before": {
+            "id": "external_product.percom_tfd100",
+            "name": "Percom TFD-100",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Third-party 5¼-inch disk-drive subsystem for the Model I. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TRS-80 Model I"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.percom_tfd100",
+            "name": "Percom TFD-100",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Third-party 5¼-inch disk-drive subsystem for the Model I. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TRS-80 Model I"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.percom_disk_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-04"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "1d166b65c06b2f7087a48910f27821d527c84f9062463fa4b7c66d4e51c337d3"
+        },
+        {
+          "record_id": "external_product.percom_lfd400",
+          "before": {
+            "id": "external_product.percom_lfd400",
+            "name": "Percom LFD-400",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "5¼-inch floppy subsystem; approximately 90 KB per disk in the reviewed configuration. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SS-50"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.percom_lfd400",
+            "name": "Percom LFD-400",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.percom"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "5¼-inch floppy subsystem; approximately 90 KB per disk in the reviewed configuration. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SS-50"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.percom_disk_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-04"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "78de200b74053accc2e22d33c2d02bca4611d6eed2a050509ad0ff3628055874"
+        },
+        {
+          "record_id": "external_product.tarbell_disk_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.tarbell_disk_aurelia",
+            "name": "Tarbell disk system — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tarbell"
+            ],
+            "release": "1980-06",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.tarbell"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.tarbell_floppy_interface"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Tarbell sells a complete external floppy subsystem using its controller expertise and an AION-assisted FlexiBUS control board. Unlike the historical S-100 card, the product includes local processing, supported drives, enclosure, power and host software.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The controller handles local drive timing, geometry, sector transfers, media-generation changes, duplicate-write protection and flush completion. The vendor supplies a tested Aurelia CP/M disk integration for explicitly supported formats. Initial use can load that software from an existing Aurelia disk; booting directly from this device requires a separately qualified boot path. Native disk formats and filesystems are not automatically interchangeable.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-06",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing sector-disk device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-06",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1980-06",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexidisk_ii",
+                "relationship": "competes_with",
+                "date": "1980-06",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "a6151519faedc0f65a51ae46141b6a3cf8b5dd396c63afce0c6e566febd95616"
+        },
+        {
+          "record_id": "external_product.tarbell_floppy_interface",
+          "before": {
+            "id": "external_product.tarbell_floppy_interface",
+            "name": "Tarbell Floppy Disk Interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tarbell"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Controller for compatible floppy drives; boot and disk software are system-specific. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Tarbell Floppy Disk Interface"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.tarbell_floppy_interface",
+            "name": "Tarbell Floppy Disk Interface",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.tarbell"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Controller for compatible floppy drives; boot and disk software are system-specific. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.tarbell_disk_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-06"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare complete usable S-100 disk configurations, including the drive, controller, boot path and operating-system driver.",
+                "comparison_description": "Native controller registers and disk timing differ from FlexiBUS sector messages. Existing CP/M disk formats do not establish host-bus or media interchangeability. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "Installed disks and BIOS support can hold users to native controllers. FlexiBUS offers a conditional cross-host reuse argument, subject to throughput and recovery qualification rather than assumed superiority.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Tarbell Floppy Disk Interface"
+                  },
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_s100_flexibus_card",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                "comparison_description": "The alternative is a two-port S-100 FlexiBUS adapter. Existing-disk driver loading is its baseline; FlexiBUS boot needs a separately qualified ROM. It does not include a disk drive, serial modem or Disk II controller. The canonical implementation is {implementation}.",
+                "outcomes_description": "A working native disk controller provides an alternative to buying a FlexiBUS host card for storage; both paths require host-specific qualification. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.s100_flexibus_card"
+                  }
+                ]
+              },
+              {
+                "product_id": "product.device_flexidisk",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Controller for compatible floppy drives; boot and disk software are system-specific.",
+                "comparison_description": "The alternative is a complete 5.25-inch drive with a FlexiBUS device controller. A native controller alone is not an equivalent complete purchase; compare the host adapter, drive, media format and boot/driver path together. The canonical implementation is {implementation}.",
+                "outcomes_description": "On a suitably configured S-100 host, native disk storage is a competing purchase path. Capacity, boot support and disk formats must be compared separately; a controller alone is not a complete drive. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexidisk"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "221a723ad07bf701a4a0d3f0ccc447ac927be9182578795e50f918b914851bd6"
+        }
+      ]
+    }
+  ]
+}

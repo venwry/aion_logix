@@ -1,0 +1,1506 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.ebe85682-0c05-44f5-9675-68007d956b81",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T17:57:08.019Z",
+      "change_id": "change.aurelia_vendor.speech_music",
+      "proposal_sha256": "33e9f65d54826a334c9d188c2acad7a019ad3043d881316ae4c88672a1cc94d8",
+      "proposal": {
+        "id": "change.aurelia_vendor.speech_music",
+        "category": "foundation",
+        "title": "Aurelia vendor variants — speech music",
+        "reason": "Apply the author's vendor-owned/vendor-sold cooperation model and inclusive midpoint >=70% rule. Probabilities are subjective scenario judgments, not historical observations or shipment guarantees. Logix provides design help and AION may supply chips; no OEM-only supply to Logix, Logix ownership or Logix resale is assumed. Preserve historical records and add linked, separately dated scenario offerings. ALF synthesizer — Aurelia-compatible variant: 70–85%, midpoint 77.5%, estimated release 1980-09. Computalker CT-1 — Aurelia-compatible package: 75–90%, midpoint 82.5%, estimated release 1980-08. Mountain SuperTalker — Aurelia-compatible variant: 70–85%, midpoint 77.5%, estimated release 1980-11. Solid State Music SB1 — Aurelia-compatible synthesizer: 65–80%, midpoint 72.5%, estimated release 1980-10. Newtech Model 68 — Aurelia-compatible sound/Morse unit: 65–80%, midpoint 72.5%, estimated release 1980-10. Full reassessment and release basis: data_storytelling/review_evidence/aurelia-vendor-variants/assessment.json and offerings.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.alf_synth_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.alf_synth_aurelia",
+              "name": "ALF synthesizer — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.alf"
+              ],
+              "release": "1980-09",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.alf"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.alf_apple_music_synthesizer"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "ALF sells an external three-voice synthesizer with local sequencing/control and Aurelia music software. Commands are buffered and scheduled locally; adding voices does not depend on installing Apple II cards in Aurelia.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal synth class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-09",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.alf_apple_music_synthesizer",
+            "before": {
+              "id": "external_product.alf_apple_music_synthesizer",
+              "name": "ALF Apple Music Synthesizer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.alf"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Three programmable voices per card; multiple cards can be used. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.alf_apple_music_synthesizer",
+              "name": "ALF Apple Music Synthesizer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.alf"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Three programmable voices per card; multiple cards can be used. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.alf_synth_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-09"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.computalker_ct1_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.computalker_ct1_aurelia",
+              "name": "Computalker CT-1 — Aurelia-compatible package",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.computalker"
+              ],
+              "release": "1980-08",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}, {source_2}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.computalker"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.computalker_ct1_s100"
+                    },
+                    {
+                      "key": "source_2",
+                      "value": "external_product.computalker_ct1_trs80"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Computalker sells one external formant-synthesis package with amplifier, controller and Aurelia software, derived from its existing CT-1 products. Host control sends speech parameters to a local engine rather than requiring the S-100 or TRS-80 interface.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal speech class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-08",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-08",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.computalker_ct1_s100",
+            "before": {
+              "id": "external_product.computalker_ct1_s100",
+              "name": "Computalker CT-1 S-100 card",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.computalker"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Software-controlled formant speech synthesis. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.computalker_ct1_s100",
+              "name": "Computalker CT-1 S-100 card",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.computalker"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Software-controlled formant speech synthesis. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.computalker_ct1_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-08"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.computalker_ct1_trs80",
+            "before": {
+              "id": "external_product.computalker_ct1_trs80",
+              "name": "Computalker CT-1 TRS-80 system",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.computalker"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Packaged synthesizer, interface, power supply, amplifier and software; distinct from the bare S-100 offering. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TRS-80 Model I"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.computalker_ct1_trs80",
+              "name": "Computalker CT-1 TRS-80 system",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.computalker"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Packaged synthesizer, interface, power supply, amplifier and software; distinct from the bare S-100 offering. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "TRS-80 Model I"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.computalker_ct1_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-08"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.mountain_supertalker_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.mountain_supertalker_aurelia",
+              "name": "Mountain SuperTalker — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.mountain"
+              ],
+              "release": "1980-11",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.mountain"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.mountain_supertalker"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Mountain sells a sampled-speech unit with local recording/playback memory and a FlexiBUS command interface. Transfer recordings in bounded blocks; continuous unbuffered audio over FlexiBUS is not promised. The vendor documents available sample formats and storage limits.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal sampled audio class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-11",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-11",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.mountain_supertalker",
+            "before": {
+              "id": "external_product.mountain_supertalker",
+              "name": "Mountain Hardware SuperTalker",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.mountain"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Records and plays sampled speech under software control. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.mountain_supertalker",
+              "name": "Mountain Hardware SuperTalker",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.mountain"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Records and plays sampled speech under software control. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Apple II slots"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.mountain_supertalker_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-11"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.ssm_sb1_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.ssm_sb1_aurelia",
+              "name": "Solid State Music SB1 — Aurelia-compatible synthesizer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.ssm"
+              ],
+              "release": "1980-10",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.ssm"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.ssm_sb1"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Solid State Music sells a self-contained waveform/amplitude synthesizer based on SB1 technology. Local control handles timing while the host sends bounded parameters; the S-100 expansion-card arrangement is not retained.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal synth class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-10",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-10",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.ssm_sb1",
+            "before": {
+              "id": "external_product.ssm_sb1",
+              "name": "Solid State Music SB1",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.ssm"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Programmable waveform and amplitude control; one synthesizer voice per board. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.ssm_sb1",
+              "name": "Solid State Music SB1",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.ssm"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Programmable waveform and amplitude control; one synthesizer voice per board. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "S-100"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.ssm_sb1_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-10"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.newtech68_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.newtech68_aurelia",
+              "name": "Newtech Model 68 — Aurelia-compatible sound/Morse unit",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.newtech"
+              ],
+              "release": "1980-10",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.newtech"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.newtech_model68"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Newtech sells a standalone sound and Morse unit with local tone timing, an AION-assisted controller and Aurelia software. The vendor retains the specialist sound functions and owns the finished product.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal synth class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-10",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-10",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.newtech_model68",
+            "before": {
+              "id": "external_product.newtech_model68",
+              "name": "Newtech Model 68",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.newtech"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Programmable sound, music and Morse applications. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC-compatible SS-30"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.newtech_model68",
+              "name": "Newtech Model 68",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.newtech"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Programmable sound, music and Morse applications. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC-compatible SS-30"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.newtech68_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-10"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.alf_synth_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.alf_synth_aurelia",
+            "name": "ALF synthesizer — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.alf"
+            ],
+            "release": "1980-09",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.alf"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.alf_apple_music_synthesizer"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "ALF sells an external three-voice synthesizer with local sequencing/control and Aurelia music software. Commands are buffered and scheduled locally; adding voices does not depend on installing Apple II cards in Aurelia.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal synth class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-09",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "900e568dba1475411c1e30cbd167858797e42473bfaaa78eaf21d64740ad84d4"
+        },
+        {
+          "record_id": "external_product.alf_apple_music_synthesizer",
+          "before": {
+            "id": "external_product.alf_apple_music_synthesizer",
+            "name": "ALF Apple Music Synthesizer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.alf"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Three programmable voices per card; multiple cards can be used. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.alf_apple_music_synthesizer",
+            "name": "ALF Apple Music Synthesizer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.alf"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Three programmable voices per card; multiple cards can be used. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.alf_synth_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-09"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "c07dc20e84ba3b4b1b1872a54d737e5ccb3851b5158657e12a2b6408a867ce46"
+        },
+        {
+          "record_id": "external_product.computalker_ct1_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.computalker_ct1_aurelia",
+            "name": "Computalker CT-1 — Aurelia-compatible package",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.computalker"
+            ],
+            "release": "1980-08",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}, {source_2}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.computalker"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.computalker_ct1_s100"
+                  },
+                  {
+                    "key": "source_2",
+                    "value": "external_product.computalker_ct1_trs80"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Computalker sells one external formant-synthesis package with amplifier, controller and Aurelia software, derived from its existing CT-1 products. Host control sends speech parameters to a local engine rather than requiring the S-100 or TRS-80 interface.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal speech class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-08",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-08",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "d4a4448a8f6999909f9ede1977f4e8cdcbaa0352122b769ea57618de18281f85"
+        },
+        {
+          "record_id": "external_product.computalker_ct1_s100",
+          "before": {
+            "id": "external_product.computalker_ct1_s100",
+            "name": "Computalker CT-1 S-100 card",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.computalker"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Software-controlled formant speech synthesis. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.computalker_ct1_s100",
+            "name": "Computalker CT-1 S-100 card",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.computalker"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Software-controlled formant speech synthesis. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.computalker_ct1_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-08"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "cc6415fbe64243f8e7b6eec89f9e56b12ac02d560a0baf7091463965f446c9bf"
+        },
+        {
+          "record_id": "external_product.computalker_ct1_trs80",
+          "before": {
+            "id": "external_product.computalker_ct1_trs80",
+            "name": "Computalker CT-1 TRS-80 system",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.computalker"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Packaged synthesizer, interface, power supply, amplifier and software; distinct from the bare S-100 offering. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TRS-80 Model I"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.computalker_ct1_trs80",
+            "name": "Computalker CT-1 TRS-80 system",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.computalker"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Packaged synthesizer, interface, power supply, amplifier and software; distinct from the bare S-100 offering. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "TRS-80 Model I"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.computalker_ct1_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-08"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "bbc7aafd4105945d45257c1d56ba36439a72df2040a8191f01d1410d3fdf7876"
+        },
+        {
+          "record_id": "external_product.mountain_supertalker_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.mountain_supertalker_aurelia",
+            "name": "Mountain SuperTalker — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.mountain"
+            ],
+            "release": "1980-11",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.mountain"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.mountain_supertalker"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Mountain sells a sampled-speech unit with local recording/playback memory and a FlexiBUS command interface. Transfer recordings in bounded blocks; continuous unbuffered audio over FlexiBUS is not promised. The vendor documents available sample formats and storage limits.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal sampled audio class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-11",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-11",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "91ef594e79daa0ad5c86dba6a88bf32ff38c2e2a12484ef8f5be2d1daf84a1ab"
+        },
+        {
+          "record_id": "external_product.mountain_supertalker",
+          "before": {
+            "id": "external_product.mountain_supertalker",
+            "name": "Mountain Hardware SuperTalker",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.mountain"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Records and plays sampled speech under software control. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.mountain_supertalker",
+            "name": "Mountain Hardware SuperTalker",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.mountain"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Records and plays sampled speech under software control. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Apple II slots"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.mountain_supertalker_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-11"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "3316b57d296c8728d6131694bf3a8809048bb2f303ebcf985759885c074fefea"
+        },
+        {
+          "record_id": "external_product.ssm_sb1_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.ssm_sb1_aurelia",
+            "name": "Solid State Music SB1 — Aurelia-compatible synthesizer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.ssm"
+            ],
+            "release": "1980-10",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.ssm"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.ssm_sb1"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Solid State Music sells a self-contained waveform/amplitude synthesizer based on SB1 technology. Local control handles timing while the host sends bounded parameters; the S-100 expansion-card arrangement is not retained.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal synth class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-10",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-10",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "a9089dcac52a602013d70f3e616db1c74f386d8c2da47ff4e360b1983ba3be80"
+        },
+        {
+          "record_id": "external_product.ssm_sb1",
+          "before": {
+            "id": "external_product.ssm_sb1",
+            "name": "Solid State Music SB1",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.ssm"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Programmable waveform and amplitude control; one synthesizer voice per board. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.ssm_sb1",
+            "name": "Solid State Music SB1",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.ssm"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Programmable waveform and amplitude control; one synthesizer voice per board. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "S-100"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.ssm_sb1_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-10"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "d384901c30781ddd66656be64ce6c0813568d6efa831289376d3d09afacc1023"
+        },
+        {
+          "record_id": "external_product.newtech68_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.newtech68_aurelia",
+            "name": "Newtech Model 68 — Aurelia-compatible sound/Morse unit",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.newtech"
+            ],
+            "release": "1980-10",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.newtech"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.newtech_model68"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Newtech sells a standalone sound and Morse unit with local tone timing, an AION-assisted controller and Aurelia software. The vendor retains the specialist sound functions and owns the finished product.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The offering uses the published FlexiBUS transport with a documented vendor-specific device protocol and vendor-supplied Aurelia driver. The scenario schedules protocol definition, device metadata, bounded commands, cancellation/error handling and host qualification before the estimated release. This is not a claim that a universal synth class already existed in the 1978 standard, nor does it add one to the core standard through this product record.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-10",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport; the specialist function uses its own documented vendor protocol and qualified Aurelia driver. No universal core device-class extension is asserted.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-10",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "8681ed056307d276865ac557fcc9196d0859a7d501aaceb4d1d652b35d786154"
+        },
+        {
+          "record_id": "external_product.newtech_model68",
+          "before": {
+            "id": "external_product.newtech_model68",
+            "name": "Newtech Model 68",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.newtech"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Programmable sound, music and Morse applications. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC-compatible SS-30"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.newtech_model68",
+            "name": "Newtech Model 68",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.newtech"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Programmable sound, music and Morse applications. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC-compatible SS-30"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.newtech68_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-10"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "35feb942db49d882290bca1e91dd3a1c1909b178832f5c83e9fa3587c8e2c83f"
+        }
+      ]
+    }
+  ]
+}

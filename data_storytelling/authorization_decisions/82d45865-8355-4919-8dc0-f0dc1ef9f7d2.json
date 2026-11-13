@@ -1,0 +1,2710 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.609036a9-10ab-4480-b1f1-6b6ddd26ff72",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T17:57:08.014Z",
+      "change_id": "change.aurelia_vendor.printers_specialist",
+      "proposal_sha256": "e4374140130d8848d51f670bef17cd3d9607521c129b085138de2e5f54db127a",
+      "proposal": {
+        "id": "change.aurelia_vendor.printers_specialist",
+        "category": "foundation",
+        "title": "Aurelia vendor variants — printers specialist",
+        "reason": "Apply the author's vendor-owned/vendor-sold cooperation model and inclusive midpoint >=70% rule. Probabilities are subjective scenario judgments, not historical observations or shipment guarantees. Logix provides design help and AION may supply chips; no OEM-only supply to Logix, Logix ownership or Logix resale is assumed. Preserve historical records and add linked, separately dated scenario offerings. Qume Sprint 5/45 RO — Aurelia-compatible variant: 75–90%, midpoint 82.5%, estimated release 1980-03. Diablo 1610 — Aurelia-compatible package: 65–80%, midpoint 72.5%, estimated release 1980-05. NEC Spinwriter 5510 — Aurelia-compatible package: 70–85%, midpoint 77.5%, estimated release 1980-05. Comprint 912 — Aurelia-compatible package: 65–80%, midpoint 72.5%, estimated release 1980-04. Heath H14 — Aurelia-compatible kit: 60–80%, midpoint 70%, estimated release 1980-04. SWTPC PR-40 — Aurelia-compatible variant: 60–80%, midpoint 70%, estimated release 1980-04. Full reassessment and release basis: data_storytelling/review_evidence/aurelia-vendor-variants/assessment.json and offerings.json.",
+        "elements": [
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.qume_sprint_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.qume_sprint_aurelia",
+              "name": "Qume Sprint 5/45 RO — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.qume"
+              ],
+              "release": "1980-03",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.qume"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.qume_sprint_5_45_ro"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Qume sells a receive-only daisywheel printer with a FlexiBUS interface option. The controller provides bounded buffering and reports only status signals actually supported by the printer.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-03",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-03",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1980-03",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.qume_sprint_5_45_ro",
+            "before": {
+              "id": "external_product.qume_sprint_5_45_ro",
+              "name": "Qume Sprint 5/45 RO",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.qume"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Receive-only daisywheel printer, approximately 45 characters/s. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Qume Sprint 5/45 RO"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Receive-only daisywheel printer, approximately 45 characters/s.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.qume_sprint_5_45_ro",
+              "name": "Qume Sprint 5/45 RO",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.qume"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Receive-only daisywheel printer, approximately 45 characters/s. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.qume_sprint_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-03"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Qume Sprint 5/45 RO"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Receive-only daisywheel printer, approximately 45 characters/s.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.diablo_1610_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.diablo_1610_aurelia",
+              "name": "Diablo 1610 — Aurelia-compatible package",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.diablo"
+              ],
+              "release": "1980-05",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.diablo"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.diablo_1610"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Diablo sells the letter-quality printer together with its own active FlexiBUS interface module and Aurelia driver. The package preserves the original printer interface behind the module and does not imply all older units accept it unchanged.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-05",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-05",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1980-05",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.diablo_1610",
+            "before": {
+              "id": "external_product.diablo_1610",
+              "name": "Diablo 1610",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.diablo"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Letter-quality daisywheel printing peripheral. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Diablo 1610"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Letter-quality daisywheel printing peripheral.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.diablo_1610",
+              "name": "Diablo 1610",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.diablo"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Letter-quality daisywheel printing peripheral. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.diablo_1610_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-05"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Diablo 1610"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Letter-quality daisywheel printing peripheral.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Matching host interface and cable"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.nec_5510_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.nec_5510_aurelia",
+              "name": "NEC Spinwriter 5510 — Aurelia-compatible package",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.nec"
+              ],
+              "release": "1980-05",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.nec"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.nec_spinwriter_5510"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "NEC sells the Spinwriter with a vendor-owned FlexiBUS-to-serial module and driver. The module handles serial flow control and preserves documented print-element and formatting controls; it is not a general-purpose modem adapter.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-05",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-05",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1980-05",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.nec_spinwriter_5510",
+            "before": {
+              "id": "external_product.nec_spinwriter_5510",
+              "name": "NEC Spinwriter 5510",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.nec"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Approximately 55 characters/s with an interchangeable letter-quality thimble print element. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232-equipped systems"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "NEC Spinwriter 5510"
+                    },
+                    {
+                      "key": "host",
+                      "value": "RS-232-equipped systems"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 55 characters/s with an interchangeable letter-quality thimble print element.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232-equipped systems"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.nec_spinwriter_5510",
+              "name": "NEC Spinwriter 5510",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.nec"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Approximately 55 characters/s with an interchangeable letter-quality thimble print element. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232-equipped systems"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.nec_5510_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-05"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "NEC Spinwriter 5510"
+                    },
+                    {
+                      "key": "host",
+                      "value": "RS-232-equipped systems"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 55 characters/s with an interchangeable letter-quality thimble print element.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "RS-232-equipped systems"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.comprint_912_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.comprint_912_aurelia",
+              "name": "Comprint 912 — Aurelia-compatible package",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.comprint"
+              ],
+              "release": "1980-04",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.comprint"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.comprint_912"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Comprint sells its electrosensitive printer with a compatible interface module. The printer retains its special-paper requirement; the interface does not change printing technology or claim unsupported paper/status sensing.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.comprint_912",
+            "before": {
+              "id": "external_product.comprint_912",
+              "name": "Comprint 912",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.comprint"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Non-impact printing on electrosensitive paper. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable parallel or serial interfaces"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Comprint 912"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Suitable parallel or serial interfaces"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Non-impact printing on electrosensitive paper.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable parallel or serial interfaces"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.comprint_912",
+              "name": "Comprint 912",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.comprint"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Non-impact printing on electrosensitive paper. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable parallel or serial interfaces"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.comprint_912_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-04"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Comprint 912"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Suitable parallel or serial interfaces"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Non-impact printing on electrosensitive paper.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Suitable parallel or serial interfaces"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.heath_h14_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.heath_h14_aurelia",
+              "name": "Heath H14 — Aurelia-compatible kit",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.heath"
+              ],
+              "release": "1980-04",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.heath"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.heath_h14"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "Heath sells an H14 kit with a FlexiBUS interface kit and Aurelia printing software. The customer assembles the vendor product; Logix assistance does not turn it into a Logix-owned or Logix-sold printer.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.heath_h14",
+            "before": {
+              "id": "external_product.heath_h14",
+              "name": "Heath H14 printer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.heath"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Impact dot-matrix hardcopy peripheral supplied as a kit. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Heath and suitably interfaced serial micros"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Heath H14 printer"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Heath and suitably interfaced serial micros"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Impact dot-matrix hardcopy peripheral supplied as a kit.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Heath and suitably interfaced serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.heath_h14",
+              "name": "Heath H14 printer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.heath"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Impact dot-matrix hardcopy peripheral supplied as a kit. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Heath and suitably interfaced serial micros"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.heath_h14_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-04"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "Heath H14 printer"
+                    },
+                    {
+                      "key": "host",
+                      "value": "Heath and suitably interfaced serial micros"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Impact dot-matrix hardcopy peripheral supplied as a kit.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "Heath and suitably interfaced serial micros"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.swtpc_pr40_aurelia",
+            "before": null,
+            "after": {
+              "id": "external_product.swtpc_pr40_aurelia",
+              "name": "SWTPC PR-40 — Aurelia-compatible variant",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.swtpc"
+              ],
+              "release": "1980-04",
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Vendor offering and estimated release",
+                  "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                  "parameters": [
+                    {
+                      "key": "vendor",
+                      "value": "actor.swtpc"
+                    },
+                    {
+                      "key": "source_1",
+                      "value": "external_product.swtpc_pr40"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia implementation",
+                  "description": "SWTPC sells a PR-40 with an active FlexiBUS interface, retaining the compact 40-column mechanism. This provides a vendor-owned alternative to FlexiPrint40 without converting the Apple-specific PR-40 card.",
+                  "parameters": []
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Transport and host integration",
+                  "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                  "parameters": []
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Device contract",
+                  "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                  "parameters": []
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "relationship": "implements",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                  "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                  "parameters": []
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.aurelia_mono",
+                  "relationship": "supports",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                  "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                  "parameters": []
+                },
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1980-04",
+                  "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                  "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                  "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                  "parameters": []
+                }
+              ]
+            }
+          },
+          {
+            "record_type": "external_product",
+            "record_id": "external_product.swtpc_pr40",
+            "before": {
+              "id": "external_product.swtpc_pr40",
+              "name": "SWTPC PR-40 printer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.swtpc"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Compact 40-column dot-matrix impact printer. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC; other micros with suitable interface"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "SWTPC PR-40 printer"
+                    },
+                    {
+                      "key": "host",
+                      "value": "SWTPC; other micros with suitable interface"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Compact 40-column dot-matrix impact printer.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC; other micros with suitable interface"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "id": "external_product.swtpc_pr40",
+              "name": "SWTPC PR-40 printer",
+              "description": "",
+              "kind": "peripheral",
+              "provider_actor_ids": [
+                "actor.swtpc"
+              ],
+              "specification": [
+                {
+                  "number": 1,
+                  "chapter_name": "Hardware and compatibility",
+                  "description": "Compact 40-column dot-matrix impact printer. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC; other micros with suitable interface"
+                    }
+                  ]
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Aurelia-compatible vendor offering",
+                  "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                  "parameters": [
+                    {
+                      "key": "variant",
+                      "value": "external_product.swtpc_pr40_aurelia"
+                    },
+                    {
+                      "key": "release_month",
+                      "value": "1980-04"
+                    }
+                  ]
+                }
+              ],
+              "impacted_standards": [
+                {
+                  "standard_id": "technology.flexibus",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                  "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                  "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                  "parameters": [
+                    {
+                      "key": "historical_product",
+                      "value": "SWTPC PR-40 printer"
+                    },
+                    {
+                      "key": "host",
+                      "value": "SWTPC; other micros with suitable interface"
+                    }
+                  ],
+                  "relationship": "competes_with"
+                }
+              ],
+              "impacted_products": [
+                {
+                  "product_id": "product.device_flexiprint40",
+                  "relationship": "competes_with",
+                  "date": "1979-12-31",
+                  "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Compact 40-column dot-matrix impact printer.",
+                  "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                  "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                  "parameters": [
+                    {
+                      "key": "host",
+                      "value": "SWTPC; other micros with suitable interface"
+                    },
+                    {
+                      "key": "implementation",
+                      "value": "device.flexiprint40"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "external_product.qume_sprint_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.qume_sprint_aurelia",
+            "name": "Qume Sprint 5/45 RO — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.qume"
+            ],
+            "release": "1980-03",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.qume"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.qume_sprint_5_45_ro"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Qume sells a receive-only daisywheel printer with a FlexiBUS interface option. The controller provides bounded buffering and reports only status signals actually supported by the printer.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-03",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-03",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1980-03",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "c40e0b9a53c2085e47e8f3792122ae0a6735c0081cbc190bb4df6a58ce1d3a97"
+        },
+        {
+          "record_id": "external_product.qume_sprint_5_45_ro",
+          "before": {
+            "id": "external_product.qume_sprint_5_45_ro",
+            "name": "Qume Sprint 5/45 RO",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.qume"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Receive-only daisywheel printer, approximately 45 characters/s. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Qume Sprint 5/45 RO"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Receive-only daisywheel printer, approximately 45 characters/s.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.qume_sprint_5_45_ro",
+            "name": "Qume Sprint 5/45 RO",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.qume"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Receive-only daisywheel printer, approximately 45 characters/s. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.qume_sprint_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-03"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Qume Sprint 5/45 RO"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Receive-only daisywheel printer, approximately 45 characters/s.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "0cf16ed88efcabbd26b8dcb6d281ba72368d6f3b794b1ba651e9ff1aea10d9b0"
+        },
+        {
+          "record_id": "external_product.diablo_1610_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.diablo_1610_aurelia",
+            "name": "Diablo 1610 — Aurelia-compatible package",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.diablo"
+            ],
+            "release": "1980-05",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.diablo"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.diablo_1610"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Diablo sells the letter-quality printer together with its own active FlexiBUS interface module and Aurelia driver. The package preserves the original printer interface behind the module and does not imply all older units accept it unchanged.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-05",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-05",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1980-05",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "885e50cacf14bf42471ba1f693dba30f2031de2e22cf0f0b82500eb47afe85e1"
+        },
+        {
+          "record_id": "external_product.diablo_1610",
+          "before": {
+            "id": "external_product.diablo_1610",
+            "name": "Diablo 1610",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.diablo"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Letter-quality daisywheel printing peripheral. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Diablo 1610"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Letter-quality daisywheel printing peripheral.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.diablo_1610",
+            "name": "Diablo 1610",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.diablo"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Letter-quality daisywheel printing peripheral. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.diablo_1610_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-05"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Diablo 1610"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Letter-quality daisywheel printing peripheral.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Matching host interface and cable"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "15661f254ac8d7770fdc73bb525a63a1a669d678372970b1fce684dbde7f9c09"
+        },
+        {
+          "record_id": "external_product.nec_5510_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.nec_5510_aurelia",
+            "name": "NEC Spinwriter 5510 — Aurelia-compatible package",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.nec"
+            ],
+            "release": "1980-05",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.nec"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.nec_spinwriter_5510"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "NEC sells the Spinwriter with a vendor-owned FlexiBUS-to-serial module and driver. The module handles serial flow control and preserves documented print-element and formatting controls; it is not a general-purpose modem adapter.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-05",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-05",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1980-05",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "848c5aabe32a6a847e3c70f2d175fbdf3a7ba0a07c580c2a4b6fb4c63203429f"
+        },
+        {
+          "record_id": "external_product.nec_spinwriter_5510",
+          "before": {
+            "id": "external_product.nec_spinwriter_5510",
+            "name": "NEC Spinwriter 5510",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.nec"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Approximately 55 characters/s with an interchangeable letter-quality thimble print element. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232-equipped systems"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "NEC Spinwriter 5510"
+                  },
+                  {
+                    "key": "host",
+                    "value": "RS-232-equipped systems"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 55 characters/s with an interchangeable letter-quality thimble print element.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232-equipped systems"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.nec_spinwriter_5510",
+            "name": "NEC Spinwriter 5510",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.nec"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Approximately 55 characters/s with an interchangeable letter-quality thimble print element. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232-equipped systems"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.nec_5510_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-05"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "NEC Spinwriter 5510"
+                  },
+                  {
+                    "key": "host",
+                    "value": "RS-232-equipped systems"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Approximately 55 characters/s with an interchangeable letter-quality thimble print element.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "RS-232-equipped systems"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "e2cf728fdca1d6d3548d4445014a27b155ffe0c0c300abd147ca5d7026420486"
+        },
+        {
+          "record_id": "external_product.comprint_912_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.comprint_912_aurelia",
+            "name": "Comprint 912 — Aurelia-compatible package",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.comprint"
+            ],
+            "release": "1980-04",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.comprint"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.comprint_912"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Comprint sells its electrosensitive printer with a compatible interface module. The printer retains its special-paper requirement; the interface does not change printing technology or claim unsupported paper/status sensing.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "57a313bb416ddb55da34cac4354cc70d550a506908f63c1a73bd84cfc98d66be"
+        },
+        {
+          "record_id": "external_product.comprint_912",
+          "before": {
+            "id": "external_product.comprint_912",
+            "name": "Comprint 912",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.comprint"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Non-impact printing on electrosensitive paper. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable parallel or serial interfaces"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Comprint 912"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Suitable parallel or serial interfaces"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Non-impact printing on electrosensitive paper.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable parallel or serial interfaces"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.comprint_912",
+            "name": "Comprint 912",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.comprint"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Non-impact printing on electrosensitive paper. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable parallel or serial interfaces"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.comprint_912_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-04"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Comprint 912"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Suitable parallel or serial interfaces"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Non-impact printing on electrosensitive paper.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Suitable parallel or serial interfaces"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "852d217d64208d59f775cabc2cc6e1f709cb7375ef2c576c79220bcc9ce70128"
+        },
+        {
+          "record_id": "external_product.heath_h14_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.heath_h14_aurelia",
+            "name": "Heath H14 — Aurelia-compatible kit",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.heath"
+            ],
+            "release": "1980-04",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.heath"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.heath_h14"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "Heath sells an H14 kit with a FlexiBUS interface kit and Aurelia printing software. The customer assembles the vendor product; Logix assistance does not turn it into a Logix-owned or Logix-sold printer.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "495db81661ada8aece4999e9bd61069b5d69d53049e02cbef4b55bf5a6af3891"
+        },
+        {
+          "record_id": "external_product.heath_h14",
+          "before": {
+            "id": "external_product.heath_h14",
+            "name": "Heath H14 printer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.heath"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Impact dot-matrix hardcopy peripheral supplied as a kit. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Heath and suitably interfaced serial micros"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Heath H14 printer"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Heath and suitably interfaced serial micros"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Impact dot-matrix hardcopy peripheral supplied as a kit.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Heath and suitably interfaced serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.heath_h14",
+            "name": "Heath H14 printer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.heath"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Impact dot-matrix hardcopy peripheral supplied as a kit. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Heath and suitably interfaced serial micros"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.heath_h14_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-04"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "Heath H14 printer"
+                  },
+                  {
+                    "key": "host",
+                    "value": "Heath and suitably interfaced serial micros"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Impact dot-matrix hardcopy peripheral supplied as a kit.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "Heath and suitably interfaced serial micros"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "e857b75153df2be17e2833a0c3972703c7362e14b590986468862808e78992f6"
+        },
+        {
+          "record_id": "external_product.swtpc_pr40_aurelia",
+          "before": null,
+          "after": {
+            "id": "external_product.swtpc_pr40_aurelia",
+            "name": "SWTPC PR-40 — Aurelia-compatible variant",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.swtpc"
+            ],
+            "release": "1980-04",
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Vendor offering and estimated release",
+                "description": "Alternative-history Aurelia offering derived from {source_1}. {vendor} owns, manufactures, brands, sells and supports the finished product. Logix may assist with design and AION Labs may supply necessary chips and ROMs; neither becomes the finished-product owner or seller. The direct release date is an estimated scenario month, not a historical release claim. Existing source products keep their original identities and interfaces.",
+                "parameters": [
+                  {
+                    "key": "vendor",
+                    "value": "actor.swtpc"
+                  },
+                  {
+                    "key": "source_1",
+                    "value": "external_product.swtpc_pr40"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia implementation",
+                "description": "SWTPC sells a PR-40 with an active FlexiBUS interface, retaining the compact 40-column mechanism. This provides a vendor-owned alternative to FlexiPrint40 without converting the Apple-specific PR-40 card.",
+                "parameters": []
+              },
+              {
+                "number": 3,
+                "chapter_name": "Transport and host integration",
+                "description": "The vendor implements FlexiBUS discovery, differential serial transport, framing, bounded requests/retries and flow control using Logix design assistance and AION-supplied interface components where needed. One device connects to each host port; this product supplies no implicit hub or daisy chain. Attach only while the port is quiescent. The peripheral has its own power supply unless the qualified keyboard power budget applies. Vendor-supplied Aurelia Z80/CP/M software handles this device; no arbitrary firmware auto-execution, cross-CPU binary compatibility or later networking/pointer support is implied.",
+                "parameters": []
+              },
+              {
+                "number": 4,
+                "chapter_name": "Device contract",
+                "description": "The existing printer class provides bounded output and status. Native print-language and graphics features remain vendor-specific. Report only available status and distinguish accepted data from physically completed output.",
+                "parameters": []
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "relationship": "implements",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "Implements the FlexiBUS transport and the existing printer device contract.",
+                "outcomes_description": "Adds a vendor-owned Aurelia peripheral path and increases the usefulness of FlexiBUS. This does not imply Logix ownership, exclusive distribution or a measured sales multiplier.",
+                "parameters": []
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.aurelia_mono",
+                "relationship": "supports",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "The vendor supplies the stated peripheral and compatible host integration for the Aurelia platform, including its monochrome configuration. Any narrower display mode or software requirement is stated in the specification.",
+                "outcomes_description": "Expands what an Aurelia owner can purchase from an independent supplier; vendor ownership and sales remain separate from Logix.",
+                "parameters": []
+              },
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1980-04",
+                "assumption_description": "Alternative-history assessment at the estimated release month of this vendor-owned and vendor-sold Aurelia offering. The scenario assumes the described implementation and host integration are delivered; the date is not historical shipment evidence.",
+                "comparison_description": "This independently sold compatible offering is an alternative purchase in the same peripheral role, within the stated feature and configuration differences.",
+                "outcomes_description": "Can take sales from the Logix offering while strengthening the shared ecosystem; cooperation does not eliminate product competition.",
+                "parameters": []
+              }
+            ]
+          },
+          "content_sha256": "660ee226eb6571eb49c624f6ef4f70e119850e0760e563194ad8ed381d36d840"
+        },
+        {
+          "record_id": "external_product.swtpc_pr40",
+          "before": {
+            "id": "external_product.swtpc_pr40",
+            "name": "SWTPC PR-40 printer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.swtpc"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Compact 40-column dot-matrix impact printer. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC; other micros with suitable interface"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "SWTPC PR-40 printer"
+                  },
+                  {
+                    "key": "host",
+                    "value": "SWTPC; other micros with suitable interface"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Compact 40-column dot-matrix impact printer.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC; other micros with suitable interface"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "after": {
+            "id": "external_product.swtpc_pr40",
+            "name": "SWTPC PR-40 printer",
+            "description": "",
+            "kind": "peripheral",
+            "provider_actor_ids": [
+              "actor.swtpc"
+            ],
+            "specification": [
+              {
+                "number": 1,
+                "chapter_name": "Hardware and compatibility",
+                "description": "Compact 40-column dot-matrix impact printer. The intended host environment is {host}. Interfaces, cabling and software must match that configuration.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC; other micros with suitable interface"
+                  }
+                ]
+              },
+              {
+                "number": 2,
+                "chapter_name": "Aurelia-compatible vendor offering",
+                "description": "The vendor supplies the separately recorded Aurelia-compatible offering {variant} from the estimated scenario month {release_month}. This is an alternative-history product variant or package, not a historical release claim or a retrofit of every existing unit. The original product identity, host interface and release date remain unchanged.",
+                "parameters": [
+                  {
+                    "key": "variant",
+                    "value": "external_product.swtpc_pr40_aurelia"
+                  },
+                  {
+                    "key": "release_month",
+                    "value": "1980-04"
+                  }
+                ]
+              }
+            ],
+            "impacted_standards": [
+              {
+                "standard_id": "technology.flexibus",
+                "date": "1979-12-31",
+                "assumption_description": "Assess {historical_product} in its recorded {host} configuration. Compare usable printer configurations with their actual interface, driver, paper and output requirements.",
+                "comparison_description": "Parallel/serial printing is not FlexiBUS. A bridge would need device identification, status mapping, backpressure and protection against duplicate output after uncertain retries. The relationship concerns alternative complete configurations, not proven direct compatibility with this standard.",
+                "outcomes_description": "A broad established printer choice can weaken the incentive to adopt a bus with a narrower qualified range. A validated bridge could broaden that range, but neither a bridge delivery nor higher sales is assumed.",
+                "parameters": [
+                  {
+                    "key": "historical_product",
+                    "value": "SWTPC PR-40 printer"
+                  },
+                  {
+                    "key": "host",
+                    "value": "SWTPC; other micros with suitable interface"
+                  }
+                ],
+                "relationship": "competes_with"
+              }
+            ],
+            "impacted_products": [
+              {
+                "product_id": "product.device_flexiprint40",
+                "relationship": "competes_with",
+                "date": "1979-12-31",
+                "assumption_description": "Assess the recorded {host} configuration with its required controller, cabling and software. Compact 40-column dot-matrix impact printer.",
+                "comparison_description": "The alternative combines the MPI MP40 mechanism with a FlexiBUS device controller. Compare actual print width, character repertoire, quality, paper handling and qualified driver support; the current definition establishes no universal speed or output-quality advantage. The canonical implementation is {implementation}.",
+                "outcomes_description": "The printer is an alternative hardcopy purchase where the host supplies its required interface and driver. Width, output quality, throughput and consumables can favour it for different jobs; it cannot connect directly to FlexiBUS. This is a conditional purchase-path assessment, not evidence of measured market share or superior performance.",
+                "parameters": [
+                  {
+                    "key": "host",
+                    "value": "SWTPC; other micros with suitable interface"
+                  },
+                  {
+                    "key": "implementation",
+                    "value": "device.flexiprint40"
+                  }
+                ]
+              }
+            ]
+          },
+          "content_sha256": "958a9f58dfcb4e1fc588fba80269a2da2a7294504e6337c4056ebcc9861950fb"
+        }
+      ]
+    }
+  ]
+}
