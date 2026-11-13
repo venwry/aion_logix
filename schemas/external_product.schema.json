@@ -29,7 +29,7 @@
         },
         "description": {
           "type": "string",
-          "minLength": 1
+          "description": "May be empty after unique descriptive content is consolidated into specification chapters."
         },
         "specification": {
           "$ref": "#/$defs/chapter_list"
@@ -65,6 +65,13 @@
           "minItems": 1,
           "items": {
             "$ref": "#/$defs/standard_impact"
+          }
+        },
+        "impacted_products": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/product_impact"
           }
         }
       },
@@ -173,6 +180,17 @@
             ],
             "additionalProperties": false
           }
+        },
+        "relationship": {
+          "enum": [
+            "implements",
+            "requires",
+            "supports",
+            "extends",
+            "competes_with",
+            "incompatible_with"
+          ],
+          "description": "Directed relationship from this external product to the referenced standard or product. Scope and qualification are explained in comparison_description."
         }
       },
       "required": [
@@ -183,13 +201,90 @@
         "outcomes_description",
         "parameters"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "New and revised entries supply relationship. Omission is temporarily accepted for approved records awaiting Changes confirm migration."
     },
     "chapter_list": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/chapter"
       }
+    },
+    "product_impact": {
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "pattern": "^(product|external_product)\\.[a-z0-9][a-z0-9_.-]*$",
+          "x-ref": [
+            "product",
+            "external_product"
+          ]
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$",
+          "description": "Direct Gregorian date with year, month or day precision; calendar validity checked semantically."
+        },
+        "assumption_description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "comparison_description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "outcomes_description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^{}]+$"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "relationship": {
+          "enum": [
+            "implements",
+            "requires",
+            "supports",
+            "extends",
+            "competes_with",
+            "incompatible_with"
+          ],
+          "description": "Directed relationship from this external product to the referenced standard or product. Scope and qualification are explained in comparison_description."
+        }
+      },
+      "required": [
+        "product_id",
+        "date",
+        "assumption_description",
+        "comparison_description",
+        "outcomes_description",
+        "parameters",
+        "relationship"
+      ],
+      "additionalProperties": false,
+      "description": "One scoped assessment per distinct internal or external product."
     }
   }
 }

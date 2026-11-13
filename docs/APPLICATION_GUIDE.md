@@ -151,3 +151,7 @@ These sections appear consistently in Timeline, Data browser and Changes confirm
 Market-response `impacted_standards` and `impacted_products` sections show the linked target name and direction, a description with highlighted substitutions, and an expandable parameter table. Standard targets must have one of the two standard kinds; product targets may be internal or external. Existing response subjects/descriptions are still shown because their content migration is deferred.
 
 Annual sales is a separate directly editable calculation dataset, not a foundation collection. The documentation viewer can show its guide and JSON, but Data browser, Timeline and Changes confirm do not provide a sales editor, forecast engine, aggregation report or authorization flow. Validate edits with `npm run validate:calculation`.
+
+### External-product impact details
+
+External products can show both **Impacted standards** and **Impacted products**. Each entry links its target, preserves the assessment date, displays the directed relationship, and presents Base assumptions, Relation to standard/product, and Commercial consequences. Key/value substitutions and expandable parameter tables work identically in both sections and in Changes confirm before/after details. Empty top-level descriptions are omitted; unique narrative belongs in specification chapters. Historical standard impacts without a relationship remain readable pending review. Market-response impact sections retain their separate direction/description model.

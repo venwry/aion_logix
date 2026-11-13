@@ -1,4 +1,4 @@
-# Campaign timelines — contract 0.19.0
+# Campaign timelines — contract 0.20.0
 
 All live campaigns use the timeline schema. The old `process_id`, `presentation` and `marketing_content` variant is retired from the active schema; historical snapshots remain readable. Schema conversion is complete, while some campaigns still await structural rewiring from their old execution processes.
 

@@ -1,5 +1,5 @@
 import {renderMarketImpacts} from './market-impacts.js';
-import {externalSpecificationChapters,renderImpactedStandards} from './external-products.js';
+import {externalSpecificationChapters,renderExternalImpacts} from './external-products.js';
 import {renderTechnologySpecification} from './technology-specification.js';
 import {datasetPath} from './model-contract.js';
 import {remoteState} from './api-client.js';
@@ -86,7 +86,7 @@ export function details(record,data,select){
     if(skip.has(key))continue;
     if(key==='specification'&&['technology','external_product'].includes(typeOf(record))){host.append(renderTechnologySpecification(typeOf(record)==='external_product'?externalSpecificationChapters(value):value,v=>valueNode(v)));continue;}
     if(['impacted_standards','impacted_products'].includes(key)&&typeOf(record)==='market_response'){host.append(renderMarketImpacts(value,key,data.index,v=>valueNode(v)));continue;}
-    if(key==='impacted_standards'&&typeOf(record)==='external_product'){host.append(renderImpactedStandards(value,data.index,v=>valueNode(v)));continue;}
+    if(['impacted_standards','impacted_products'].includes(key)&&typeOf(record)==='external_product'){host.append(renderExternalImpacts(value,key,data.index,v=>valueNode(v)));continue;}
     const group=el('details','detail-group');group.append(el('summary','',human(key)+(Array.isArray(value)?' · '+value.length:'')));
     let built=false;const build=()=>{if(built)return;built=true;const content=el('div');content.append(valueNode(value));
       if(key==='source_refs')for(const ref of value){const source=data.index.get(ref.source_id);if(source?.kind==='repository_snapshot'&&source.url?.startsWith('https://github.com/')&&source.commit&&ref.path){const a=el('a','source-note','View source: '+ref.path+(ref.pointer||''));a.href=source.url.replace(/\/$/,'')+'/blob/'+source.commit+'/'+ref.path.split('/').map(encodeURIComponent).join('/');a.target='_blank';a.rel='noopener noreferrer';const p=el('p');p.append(a);content.append(p);}}

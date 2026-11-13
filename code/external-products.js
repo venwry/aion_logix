@@ -1,4 +1,5 @@
 import {specificationSegments} from './technology-specification.js';
+export const impactRelationships=new Set(['implements','requires','supports','extends','competes_with','incompatible_with']);
 export const standardKinds=new Set(['software_standard','hardware_standard']);
 export function validDirectDate(value){
  if(typeof value!=='string'||!/^\d{4}(-\d{2}(-\d{2})?)?$/.test(value))return false;
@@ -25,25 +26,34 @@ export function validateExternalProducts(records){
    for(const p of item.parameters||[])if(/^(actor|agreement|assumption|campaign|event|location|manufacturing_capability|market_response|process|product|technology|base_part|device|software_edition|external_product)\.[a-z0-9][a-z0-9_.-]*$/.test(p.value)&&!records.has(p.value))fail('unknown parameter reference '+p.value);
   }
   for(const c of r.specification||[]){const n=c.number??c.no;if(numbers.has(n))fail('duplicate specification number '+n);numbers.add(n);if(c.chapter_name!==undefined){if(!c.chapter_name.trim())fail('blank chapter name');parameters(c,[c.description]);}}
-  const standards=new Set();
-  for(const impact of r.impacted_standards||[]){
-   if(standards.has(impact.standard_id))fail('duplicate impacted standard '+impact.standard_id);standards.add(impact.standard_id);
-   if(!standardKinds.has(records.get(impact.standard_id)?.kind))fail('impacted standard must have software_standard or hardware_standard kind: '+impact.standard_id);
-   if(!validDirectDate(impact.date))fail('invalid standard impact date');
-   parameters(impact,descriptions.map(k=>impact[k]));
+  for(const [field,key] of [['impacted_standards','standard_id'],['impacted_products','product_id']]){
+   const seen=new Set();
+   for(const impact of r[field]||[]){
+    const id=impact[key];
+    if(seen.has(id))fail('duplicate impacted '+key+' '+id);seen.add(id);
+    if(key==='standard_id'&&!standardKinds.has(records.get(id)?.kind))fail('impacted standard must have software_standard or hardware_standard kind: '+id);
+    if(key==='product_id'&&(!/^(product|external_product)\./.test(id)||!records.has(id)))fail('impacted product must reference an existing product or external_product: '+id);
+    if(id===r.id)fail('self impact is not a product relationship');
+    if((impact.relationship!==undefined||key==='product_id')&&!impactRelationships.has(impact.relationship))fail('invalid impact relationship');
+    if(!validDirectDate(impact.date))fail('invalid impact date');
+    parameters(impact,descriptions.map(k=>impact[k]));
+   }
   }
  }
  return errors;
 }
 let serial=0;
-export function renderImpactedStandards(items,index,renderValue=value=>document.createTextNode(String(value))){
+export function renderImpactedStandards(items,index,renderValue=value=>document.createTextNode(String(value))){return renderExternalImpacts(items,'impacted_standards',index,renderValue);}
+export function renderExternalImpacts(items,field,index,renderValue=value=>document.createTextNode(String(value))){
+ const products=field==='impacted_products',key=products?'product_id':'standard_id';
  const make=(tag,cls='',text)=>{const n=document.createElement(tag);n.className=cls;if(text!==undefined)n.textContent=text;return n;};
- const section=make('section','impacted-standards');section.setAttribute('aria-label','Impacted standards');
- const labels=['Base assumptions:','Relation to standard:','Commercial consequences:'];
+ const section=make('section',products?'impacted-products':'impacted-standards');section.setAttribute('aria-label',products?'Impacted products':'Impacted standards');
+ const labels=['Base assumptions:',products?'Relation to product:':'Relation to standard:','Commercial consequences:'];
  for(const item of items){
-  const card=make('section','standard-impact');card.dataset.standardId=item.standard_id;
-  const title=(index.get(item.standard_id)?.name||item.standard_id)+' ('+item.date+')';
-  const heading=make('h3','specification-chapter-heading');heading.append(renderValue(item.standard_id),document.createTextNode(' ('+item.date+')'));card.append(heading);
+  const card=make('section','standard-impact');card.dataset[products?'productId':'standardId']=item[key];
+  const title=(index.get(item[key])?.name||item[key])+' ('+item.date+')';
+  const heading=make('h3','specification-chapter-heading');heading.append(renderValue(item[key]),document.createTextNode(' ('+item.date+')'));card.append(heading);
+  if(item.relationship)card.append(make('p','impact-relationship','Relationship: '+item.relationship.replaceAll('_',' ')));
   const prose=make('div','specification-description');
   descriptions.forEach((field,i)=>{
    const p=make('p');p.append(make('strong','',labels[i]),document.createTextNode(' '));

@@ -1,6 +1,6 @@
 # Aion Logix — data model principles
 
-These principles describe the current contract, version **0.19.0**, and the accepted authoring rules. Consult the [model guide](docs/data_model/MODEL_GUIDE.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md) for details.
+These principles describe the current contract, version **0.20.0**, and the accepted authoring rules. Consult the [model guide](docs/data_model/MODEL_GUIDE.md), [reference rules](docs/data_model/REFERENCE_RULES.md) and [editing guide](docs/EDITING_GUIDE.md) for details.
 
 1. Foundation JSON describes the fictional world and its technical definitions. Storytelling JSON describes author review, evidence and proposals. Calculation data is a separate layer; annual sales estimates in `data_calculation` are directly reassessable without foundation authorization. Never import old statuses, financial projections or storytelling chronology into a technical definition without the appropriate reviewed model.
 2. Entities have stable typed IDs. Owned value objects remain nested; independently maintained or independently authorized entities have their own records. Dataset type and filename are mapped by the shared registry, including singular `external_product` in plural `external_products.json`.

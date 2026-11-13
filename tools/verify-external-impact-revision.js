@@ -1,0 +1,36 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import {hash,records,transact,validate} from '../server/model.js';
+import {validateCatalogue} from './validate-catalogue.js';
+import {datasets,datasetPath} from '../code/model-contract.js';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const root='data_storytelling/review_evidence/external-impact-revision/';
+const baseline=read(root+'baseline.json'),summary=read(root+'summary.json');
+const files=Object.fromEntries(['data_foundation','data_storytelling'].flatMap(dir=>fs.readdirSync(dir).filter(f=>f.endsWith('.json')&&f!=='authorization_decision.json').map(f=>[dir+'/'+f,read(dir+'/'+f)])));
+files['data_storytelling/authorization_decision.json']={authorization_decision:[]};
+const ids=new Set([...summary.updated_proposals,...summary.new_proposals]);
+const queue=files['data_storytelling/change.json'].change,proposals=queue.filter(p=>ids.has(p.id));
+const original=new Map(records(files).map(r=>[r.id,r]));
+const request=ps=>({action:'approve_changes',changes:ps.map(p=>({change_id:p.id,proposal_sha256:hash(p)}))});
+const old=new Map(baseline.pending_proposals.map(p=>[p.id,p]));
+const changedRecords=new Set();
+for(const proposal of proposals)for(const e of proposal.elements){
+ assert.equal(e.record_type,'external_product');assert(!changedRecords.has(e.record_id),'overlapping record');changedRecords.add(e.record_id);
+ assert.deepEqual(e.before,original.get(e.record_id)??null,'stale before snapshot');
+ if(old.has(proposal.id))assert.deepEqual(e.before,old.get(proposal.id).elements.find(x=>x.record_id===e.record_id).before,'before snapshot changed');
+ assert.equal(e.after.description,'');
+ assert(!e.after.specification.some(c=>/^(Product impact|Standards impact)$/.test(c.chapter_name)));
+ for(const field of ['impacted_products','impacted_standards'])for(const entry of e.after[field]||[])assert(entry.relationship,'missing relationship');
+}
+assert.equal(changedRecords.size,212);
+for(const p of queue)if(!ids.has(p.id))assert.deepEqual(p,old.get(p.id),'unrelated proposal changed');
+const all=transact(files,request(proposals)).files;
+assert.deepEqual(validate(all).errors,[]);
+assert.deepEqual(validateCatalogue(Object.fromEntries(datasets.map(n=>[n,all[datasetPath(n)]]))).errors,[]);
+for(const p of proposals)assert.doesNotThrow(()=>transact(files,request([p])),'individual approval '+p.id);
+const reverse=transact(files,request([...proposals].reverse())).files;
+assert.deepEqual(reverse['data_foundation/external_products.json'].external_product.slice().sort((a,b)=>a.id.localeCompare(b.id)),all['data_foundation/external_products.json'].external_product.slice().sort((a,b)=>a.id.localeCompare(b.id)));
+assert.equal(transact(all,request(proposals)).changed,false);
+for(const [p,digest] of Object.entries(baseline.protected_sha256))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),digest,'protected file changed '+p);
+console.log(JSON.stringify({result:'passed',proposals:proposals.length,records:changedRecords.size,independent_and_combined_approval:true,reverse_order:true,idempotent_retry:true,foundation_authorization_feedback_unchanged:true},null,2));
