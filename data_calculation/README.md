@@ -1,4 +1,8 @@
-# Annual sales estimates
+# Calculation datasets
+
+These files are estimation data outside foundation authorization and Changes confirm. Manufacturing costs use **nominal USD at each snapshot date**; see the [cost model guide](MANUFACTURING_COSTS.md) and [Manufacturing costs page](../code/manufacturing-costs.html). Run `npm run validate:calculation` to validate both datasets.
+
+## Annual sales estimates
 
 `annual_sales.json` has envelope `{"annual_sales": [...]}` and is validated against `schemas/calculation/annual_sales.schema.json`. It is intentionally outside foundation datasets, authorization hashes and Changes confirm. Edit and reassess estimates directly in Git. The initial list is empty: no sales quantities have been invented.
 
@@ -27,4 +31,4 @@ Within each effective scenario, a product/year/geography/segment combination is 
 
 Do not add World to its constituent regions, all to its constituent segments, different scenarios, or different units. Free-text scopes cannot be proven disjoint by the validator. Select an explicit non-overlapping scope when reporting totals. Do not count both dealer shipments and end-customer resale, or both a computer bundle and its included computer. Optional peripheral sales are not inferred from host sales. Software licences do not necessarily equal computers or unique users.
 
-A partial launch year remains that calendar year; explain the selling period in the basis. Positive estimates before a known release produce reassessment warnings. A foundation update does not automatically recalculate estimates. Prices, revenue, market-share formulas and forecasting engines are outside this dataset.
+A partial launch year remains that calendar year; explain the selling period in the basis. Positive estimates before a known release produce reassessment warnings. A foundation update does not automatically recalculate estimates. Prices, revenue, market-share formulas and forecasting engines are outside the annual-sales dataset. Manufacturing cost estimates are maintained separately in the files described above.

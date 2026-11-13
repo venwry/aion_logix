@@ -37,3 +37,5 @@ CHROMIUM_PATH=/usr/bin/chromium npm test
 ```
 
 Run migration-evidence checks when changing archives or migration logic. Follow the editing guide for validation of complete proposal groups and generated schema documentation.
+
+[Manufacturing costs](code/manufacturing-costs.html) compares all internal offerings at June/December snapshots from 1978 through 1983, in nominal dollars for each date. The [calculation guide](data_calculation/MANUFACTURING_COSTS.md) documents assumptions, yield inputs and regeneration; estimates do not require authorization.

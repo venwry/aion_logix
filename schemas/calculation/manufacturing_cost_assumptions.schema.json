@@ -1,0 +1,535 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aion-logix.invalid/schemas/calculation/manufacturing_cost_assumptions.schema.json",
+  "type": "object",
+  "properties": {
+    "model_version": {
+      "const": "1.0.0"
+    },
+    "currency": {
+      "const": "USD"
+    },
+    "currency_basis": {
+      "const": "nominal_usd"
+    },
+    "base_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "labor": {
+      "type": "object",
+      "properties": {
+        "assembly_hour": {
+          "type": "number",
+          "minimum": 0
+        },
+        "test_hour": {
+          "type": "number",
+          "minimum": 0
+        },
+        "service_hour": {
+          "type": "number",
+          "minimum": 0
+        },
+        "engineering_hour": {
+          "type": "number",
+          "minimum": 0
+        },
+        "instructor_hour": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "assembly_hour",
+        "test_hour",
+        "service_hour",
+        "engineering_hour",
+        "instructor_hour"
+      ],
+      "additionalProperties": false
+    },
+    "range": {
+      "type": "object",
+      "properties": {
+        "low_factor": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "high_factor": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "low_factor",
+        "high_factor"
+      ],
+      "additionalProperties": false
+    },
+    "fabrication_routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "capability_id": {
+            "type": "string",
+            "pattern": "^manufacturing_capability\\.[a-z0-9][a-z0-9_.-]*$"
+          },
+          "release_event_id": {
+            "type": "string",
+            "pattern": "^event\\.[a-z0-9][a-z0-9_.-]*$"
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "learning": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "processed_wafer_cost": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "wafer_completion": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1
+                },
+                "package_yield": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1
+                },
+                "electrical_yield": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1
+                },
+                "defects_cm2": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "date",
+                "processed_wafer_cost",
+                "wafer_completion",
+                "package_yield"
+              ],
+              "additionalProperties": false,
+              "oneOf": [
+                {
+                  "required": [
+                    "electrical_yield"
+                  ],
+                  "not": {
+                    "required": [
+                      "defects_cm2"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "defects_cm2"
+                  ],
+                  "not": {
+                    "required": [
+                      "electrical_yield"
+                    ]
+                  }
+                }
+              ]
+            },
+            "minItems": 1
+          },
+          "gross_die_per_wafer": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "die_area_mm2": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "repair_recovery": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "id",
+          "capability_id",
+          "release_event_id",
+          "basis",
+          "learning"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "pattern": "^base_part\\.[a-z0-9][a-z0-9_.-]*$"
+          },
+          "method": {
+            "enum": [
+              "purchased",
+              "fabricated",
+              "composite"
+            ]
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "enum": [
+              "low",
+              "medium"
+            ]
+          },
+          "unit_cost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "base_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "annual_real_change": {
+            "type": "number",
+            "exclusiveMinimum": -1,
+            "maximum": 1
+          },
+          "route_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "package_test_cost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "grade_fraction": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 1
+          },
+          "die_area_parameter": {
+            "type": "string",
+            "minLength": 1
+          },
+          "die_area_mm2": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "record_id": {
+                  "type": "string",
+                  "pattern": "^base_part\\.[a-z0-9][a-z0-9_.-]*$"
+                },
+                "quantity": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "record_id",
+                "quantity"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          },
+          "other_cost": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "record_id",
+          "method",
+          "basis",
+          "confidence"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "method": {
+                  "const": "purchased"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "unit_cost",
+                "base_date",
+                "annual_real_change"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "method": {
+                  "const": "fabricated"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "route_ids",
+                "package_test_cost",
+                "grade_fraction"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "method": {
+                  "const": "composite"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "components",
+                "other_cost"
+              ]
+            }
+          }
+        ]
+      },
+      "minItems": 1
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "pattern": "^(product|device|software_edition)\\."
+          },
+          "assembly_hours": {
+            "type": "number",
+            "minimum": 0
+          },
+          "test_hours": {
+            "type": "number",
+            "minimum": 0
+          },
+          "overhead_fraction": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "loss_fraction": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "licensing_cost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "licensing_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "record_id",
+          "assembly_hours",
+          "test_hours",
+          "overhead_fraction",
+          "loss_fraction",
+          "licensing_cost",
+          "licensing_basis",
+          "basis"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "pattern": "^product\\.[a-z0-9][a-z0-9_.-]*$"
+          },
+          "labor_hours": {
+            "type": "number",
+            "minimum": 0
+          },
+          "other_cost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "labor_rate": {
+            "enum": [
+              "assembly_hour",
+              "test_hour",
+              "service_hour",
+              "engineering_hour",
+              "instructor_hour"
+            ]
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provisional": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "record_id",
+          "labor_hours",
+          "other_cost",
+          "labor_rate",
+          "unit",
+          "basis",
+          "provisional"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "input_amount_basis": {
+      "const": "June 1978 USD before date-specific inflation adjustment"
+    },
+    "inflation": {
+      "type": "object",
+      "properties": {
+        "series": {
+          "const": "CPIAUCNS"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "retrieved_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "value": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "date",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 12,
+          "maxItems": 12
+        }
+      },
+      "required": [
+        "series",
+        "source",
+        "source_url",
+        "retrieved_on",
+        "basis",
+        "observations"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "model_version",
+    "currency",
+    "currency_basis",
+    "base_date",
+    "scope",
+    "exclusions",
+    "policies",
+    "labor",
+    "range",
+    "fabrication_routes",
+    "parts",
+    "operations",
+    "services",
+    "input_amount_basis",
+    "inflation"
+  ],
+  "additionalProperties": false
+}

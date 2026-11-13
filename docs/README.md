@@ -24,3 +24,5 @@ These guides describe the repository and application as they work now. The schem
 [Archived documentation](archived/README.md) contains historical story proposals, assessments, migration reports and superseded guidance. Those files are not current instructions or a statement of what is pending now. The earlier [legacy evidence archive](../archived_no_longer_valid/README.md) remains immutable.
 
 Run `npm run validate:docs` to check current guide links, viewer entries and agreement with the registry/manifest.
+
+[Manufacturing cost estimates](../data_calculation/MANUFACTURING_COSTS.md) describe the calculation-only nominal-USD cost model and its semiannual product table.
