@@ -51,3 +51,42 @@ test('fixed comparison toolbar switches records with arrows and remains visible 
  await page.getByLabel('Comparison',{exact:true}).selectOption('json');await expect(picker).toHaveCount(0);await page.getByLabel('Show full records').check();
  for(const size of [{width:1280,height:720},{width:390,height:844}]){await page.setViewportSize(size);const toolbar=page.locator('.comparison-controls');await toolbar.scrollIntoViewIfNeeded();const before=await toolbar.boundingBox();await page.locator('#proposals').evaluate(e=>e.scrollTop=e.scrollHeight);expect(await page.locator('#proposals').evaluate(e=>e.scrollTop)).toBeGreaterThan(0);expect((await toolbar.boundingBox()).y).toBe(before.y);await expect(page.getByRole('button',{name:'Remove',exact:true})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}
 });
+
+test('keyboard review follows filtered proposals and stages decisions until Save',async({page})=>{
+ const s=state(),first=s.changes.change[0];first.title='Keyboard first';
+ const middle={...structuredClone(first),id:'change.middle',title:'Excluded middle'};
+ const last={...structuredClone(first),id:'change.last',title:'Keyboard last'};s.changes.change=[first,middle,last];
+ await connect(page);await page.route('**/api/state',r=>r.fulfill({json:s}));
+ let writes=0;await page.route('**/api/authorize',r=>{writes++;return r.abort();});await ready(page,'changes-confirm.html');
+ await page.locator('#search').fill('Keyboard');await page.locator('.proposal-nav-item[aria-current="true"]').click();
+ const selected=page.locator('.proposal-nav-item[aria-current="true"]');await expect(selected).toContainText('Keyboard first');
+ await page.keyboard.press('ArrowUp');await expect(selected).toContainText('Keyboard first');
+ await page.keyboard.press('ArrowDown');await expect(selected).toContainText('Keyboard last');await expect(selected).toBeFocused();
+ await page.keyboard.press('ArrowDown');await expect(selected).toContainText('Keyboard last');
+ await page.keyboard.press('Alt+a');await expect(page.locator('#selected-count')).toHaveText('1 selected');
+ await page.keyboard.press('ArrowUp');await expect(selected).toContainText('Keyboard first');
+ await page.keyboard.press('Alt+a');await expect(page.locator('#selected-count')).toHaveText('2 selected');
+ await page.keyboard.press('Alt+c');const feedback=page.getByRole('textbox',{name:'Refinement feedback'});await expect(feedback).toBeFocused();await expect(page.locator('#selected-count')).toHaveText('1 selected');
+ await feedback.fill('Please refine this description.');await page.keyboard.press('ArrowDown');await page.keyboard.press('Alt+a');await expect(page.locator('.proposal-card h2')).toHaveText('Keyboard first');await expect(page.locator('#selected-count')).toHaveText('1 selected');
+ await page.getByRole('button',{name:'Cancel feedback'}).click();await page.locator('#search').fill('No such proposal');await page.locator('#search').blur();
+ await page.keyboard.press('ArrowDown');await page.keyboard.press('Alt+a');await expect(page.locator('.proposal-card')).toHaveCount(0);await expect(page.locator('#selected-count')).toHaveText('1 selected');expect(writes).toBe(0);
+});
+
+test('left and right browse affected records only in Details without stealing native keys',async({page})=>{
+ await ready(page,'changes-confirm.html');await page.locator('.proposal-nav-item').click();await page.keyboard.press('ArrowRight');await expect(page.locator('#affected-record-control')).toBeHidden();
+ await page.getByLabel('Comparison',{exact:true}).selectOption('details');await page.locator('#proposal-details').focus();
+ const picker=page.getByLabel('Affected record',{exact:true});await page.keyboard.press('ArrowLeft');await expect(picker).toHaveValue('0');
+ await page.keyboard.press('ArrowRight');await expect(picker).toHaveValue('1');await page.keyboard.press('ArrowRight');await expect(picker).toHaveValue('2');await page.keyboard.press('ArrowRight');await expect(picker).toHaveValue('2');await page.keyboard.press('ArrowLeft');await expect(picker).toHaveValue('1');
+ await picker.focus();await page.keyboard.press('ArrowUp');await expect(picker).toHaveValue('0');await page.keyboard.press('Alt+a');await expect(page.locator('#selected-count')).toHaveText('0 selected');
+ const splitter=page.getByRole('separator',{name:'Resize proposal navigator'});await splitter.focus();await page.keyboard.press('ArrowRight');await expect(picker).toHaveValue('0');
+ await page.locator('#search').focus();await page.keyboard.press('Alt+c');await expect(page.getByRole('textbox',{name:'Refinement feedback'})).toHaveCount(0);
+});
+
+test('keyboard authorization respects disabled review decisions and saving lock',async({page})=>{
+ const s=state();await connect(page);await page.route('**/api/state',r=>r.fulfill({json:s}));await ready(page,'changes-confirm.html');
+ await page.getByRole('button',{name:'Remove',exact:true}).click();await page.keyboard.press('Alt+a');await page.keyboard.press('Alt+c');await expect(page.locator('#selected-count')).toHaveText('0 selected');await expect(page.getByRole('textbox',{name:'Refinement feedback'})).toHaveCount(0);
+ await page.getByRole('button',{name:'Undo removal'}).click();await page.keyboard.press('Alt+a');await expect(page.locator('#selected-count')).toHaveText('1 selected');
+ let release;const saving=new Promise(resolve=>release=resolve);await page.route('**/api/authorize',async r=>{await saving;await r.fulfill({json:{...s,revision:'saved-keyboard',changes:{change:[]}}});});
+ await page.getByRole('button',{name:'Save',exact:true}).click();await expect(page.locator('#warning')).toContainText('Saving review decisions');
+ await page.keyboard.press('Alt+a');await page.keyboard.press('Alt+c');await page.keyboard.press('ArrowDown');await expect(page.locator('#selected-count')).toHaveText('1 selected');await expect(page.getByRole('textbox',{name:'Refinement feedback'})).toHaveCount(0);release();await expect(page.locator('#review-count')).toContainText('0 pending');
+});
