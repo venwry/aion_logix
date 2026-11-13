@@ -7302,10 +7302,10 @@
     },
     {
       "id": "base_part.software.cpm_aurelia.rom_eprom_eeprom_or_media_selection",
-      "name": "ROM EPROM EEPROM or media selection",
-      "kind": "material",
-      "description": "ROM EPROM EEPROM or media selection",
-      "supply_form": "individual_part",
+      "name": "CP/M Aurelia — programmed ROM storage set",
+      "kind": "supplied_assembly",
+      "description": "One complete, image-specific set of packaged ROM devices for the CP/M Aurelia cartridge. The carrier PCB, connector, enclosure and software delivery items are supplied separately.",
+      "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
         "actor.logix"
@@ -7319,14 +7319,69 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+          "description": "Keep this BOM element as one complete supplied storage set. Release its internal ROM-device population and image-specific drawing; quantity one means one set, not one chip."
         },
         {
           "number": 2,
           "kind": "testing",
-          "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+          "description": "Before production costing is treated as released, approve installed capacity, image allocation, ROM technology, density/count, package/pinout, electrical timing, supply/current limits and test operations. Unselected values remain open; do not substitute invented measurements."
+        },
+        {
+          "number": 3,
+          "kind": "testing",
+          "description": "Qualify the production mask-ROM route and any EPROM alternative separately, including image verification and matched cartridge/host operation. An existing recipe or software launch does not establish this part-specific qualification."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Supply boundary and ownership",
+            "description": "Logix supplies one combined storage set containing the packaged ROM devices programmed or masked for {software_image}. AION Labs is the intended manufacturer of production mask-ROM chips under {rom_recipe}; Logix remains the set supplier and integration authority. The recipe does not by itself qualify this density, image, speed or package. Exclude the separately supplied carrier PCB, connector, sockets, decoding/buffering, enclosure, label, hardware packout, software licence and documentation. No writable RAM is included."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Image allocation and device population",
+            "description": "The installed storage capacity, used image bytes, identification/checksum allocation and reserved space must be fixed from the accepted linked image. No ROM capacity or chip count is established by the host RAM requirement. Store the integrated CP/M, platform extensions and shared TUI release; motherboard boot/monitor ROM and the Business Tools application cartridge are outside this set."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Storage technology and production route",
+            "description": "Use mask ROM for stable production images after order-specific qualification. Separately qualified purchased EPROMs may serve development and small correction batches; do not assume that AION manufactures EPROMs or that the replacement is pin-compatible. EEPROM is not the default. Keep the mask-ROM baseline and EPROM alternative separate in the production drawing and costing. Replacement cartridges provide the update path; no in-system erase/program capability is implied."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Electrical organisation and physical package",
+            "description": "The storage interface is {interface_width_bits} bits wide, using the qualified Aurelia bank-selection mechanism. Freeze bytes per device, device width, device count and bank addressing without assuming that the CPU address-space size limits total banked storage. Release numeric supply rails and tolerances, access/output-enable/disable timing, loading, active and standby current, and the qualified host wait-state profile. Direct execution does not imply zero-wait operation. Specify the exact packaged-device pinout, temperature grade, marking and mounting requirements. Socket or solder details, board area, decoupling and connector protection belong to the carrier assembly and must fit its released envelope."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Image installation, test and revision control",
+            "description": "Freeze image revision, byte count, bank/lane files, checksum algorithm and expected verification values before mask generation or EPROM programming. Require full-image verification, electrical testing under the released conditions, lot traceability and a matched cartridge boot/function test. The EPROM route needs specified programming voltage, pulse algorithm, verification, erasure/rework limits and cycle time; these are not assumed to match the host supply. A software revision requires assessed new masks or reprogramming, replacement stock and obsolete-stock handling."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Manufacturing-cost input boundary",
+            "description": "For internal mask-ROM production, establish density-specific die area, usable dies per wafer, wafer route, probe/test flow and package before calculating cost. Cost estimates must state wafer/probe and assembly/final-test yield assumptions, mask/setup allocation, lot size, handling and test labour, scrap and rework. For purchased EPROMs use the qualified device quote plus programming and verification operations. Keep prices, changing yields, production volumes and amortisation assumptions in calculation evidence; do not add carrier, enclosure or software costs again."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "software_image",
+            "ref_id": "software_edition.cpm_aurelia",
+            "ref_role": "Software edition whose accepted release image is stored in this set"
+          },
+          {
+            "key": "rom_recipe",
+            "ref_id": "manufacturing_capability.aion_mask_rom_3um",
+            "ref_role": "AION production recipe proposed for density- and image-specific mask-ROM qualification"
+          },
+          {
+            "key": "interface_width_bits",
+            "value": 8
+          }
+        ]
+      }
     },
     {
       "id": "base_part.software.cpm_aurelia.cartridge_pcb_and_connector_if_cartridge_delivered",
@@ -7381,10 +7436,10 @@
     },
     {
       "id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection",
-      "name": "ROM EPROM EEPROM or media selection",
-      "kind": "material",
-      "description": "ROM EPROM EEPROM or media selection",
-      "supply_form": "individual_part",
+      "name": "Business Tools Aurelia — programmed ROM storage set",
+      "kind": "supplied_assembly",
+      "description": "One complete, image-specific set of packaged ROM devices for the Business Tools Aurelia cartridge. The carrier PCB, connector, enclosure and software delivery items are supplied separately.",
+      "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
         "actor.logix"
@@ -7398,14 +7453,73 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+          "description": "Keep this BOM element as one complete supplied storage set. Release its internal ROM-device population and image-specific drawing; quantity one means one set, not one chip."
         },
         {
           "number": 2,
           "kind": "testing",
-          "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+          "description": "Before production costing is treated as released, approve installed capacity, image allocation, ROM technology, density/count, package/pinout, electrical timing, supply/current limits and test operations. Unselected values remain open; do not substitute invented measurements."
+        },
+        {
+          "number": 3,
+          "kind": "testing",
+          "description": "Qualify the production mask-ROM route and any EPROM alternative separately, including image verification and matched cartridge/host operation. An existing recipe or software launch does not establish this part-specific qualification."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Supply boundary and ownership",
+            "description": "Logix supplies one combined storage set containing the packaged ROM devices programmed or masked for {software_image}. AION Labs is the intended manufacturer of production mask-ROM chips under {rom_recipe}; Logix remains the set supplier and integration authority. The recipe does not by itself qualify this density, image, speed or package. Exclude the separately supplied carrier PCB, connector, sockets, decoding/buffering, enclosure, label, hardware packout, software licence and documentation. No writable RAM is included."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Image allocation and device population",
+            "description": "Installed cartridge capacity is {rom_capacity_bytes} bytes. This is the allocation, not a measurement of used image bytes or spare space. Shared TUI code belongs to the CP/M system cartridge and is not duplicated here. Evaluate two 8 KiB ×8 devices or four 4 KiB ×8 devices; these are alternative populations pending density, package, timing and yield qualification, not two simultaneously fitted sets."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Storage technology and production route",
+            "description": "Use mask ROM for stable production images after order-specific qualification. Separately qualified purchased EPROMs may serve development and small correction batches; do not assume that AION manufactures EPROMs or that the replacement is pin-compatible. EEPROM is not the default. Keep the mask-ROM baseline and EPROM alternative separate in the production drawing and costing. Replacement cartridges provide the update path; no in-system erase/program capability is implied."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Electrical organisation and physical package",
+            "description": "The storage interface is {interface_width_bits} bits wide, using the qualified Aurelia bank-selection mechanism. Freeze bytes per device, device width, device count and bank addressing without assuming that the CPU address-space size limits total banked storage. Release numeric supply rails and tolerances, access/output-enable/disable timing, loading, active and standby current, and the qualified host wait-state profile. Direct execution does not imply zero-wait operation. Specify the exact packaged-device pinout, temperature grade, marking and mounting requirements. Socket or solder details, board area, decoupling and connector protection belong to the carrier assembly and must fit its released envelope."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Image installation, test and revision control",
+            "description": "Freeze image revision, byte count, bank/lane files, checksum algorithm and expected verification values before mask generation or EPROM programming. Require full-image verification, electrical testing under the released conditions, lot traceability and a matched cartridge boot/function test. The EPROM route needs specified programming voltage, pulse algorithm, verification, erasure/rework limits and cycle time; these are not assumed to match the host supply. A software revision requires assessed new masks or reprogramming, replacement stock and obsolete-stock handling."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Manufacturing-cost input boundary",
+            "description": "For internal mask-ROM production, establish density-specific die area, usable dies per wafer, wafer route, probe/test flow and package before calculating cost. Cost estimates must state wafer/probe and assembly/final-test yield assumptions, mask/setup allocation, lot size, handling and test labour, scrap and rework. For purchased EPROMs use the qualified device quote plus programming and verification operations. Keep prices, changing yields, production volumes and amortisation assumptions in calculation evidence; do not add carrier, enclosure or software costs again."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "software_image",
+            "ref_id": "software_edition.business_tools_aurelia",
+            "ref_role": "Software edition whose accepted release image is stored in this set"
+          },
+          {
+            "key": "rom_recipe",
+            "ref_id": "manufacturing_capability.aion_mask_rom_3um",
+            "ref_role": "AION production recipe proposed for density- and image-specific mask-ROM qualification"
+          },
+          {
+            "key": "interface_width_bits",
+            "value": 8
+          },
+          {
+            "key": "rom_capacity_bytes",
+            "value": 16384
+          }
+        ]
+      }
     },
     {
       "id": "base_part.software.business_tools_aurelia.cartridge_pcb_and_connector_if_cartridge_delivered",
@@ -7460,10 +7574,10 @@
     },
     {
       "id": "base_part.software.aionix.rom_eprom_eeprom_or_media_selection",
-      "name": "ROM EPROM EEPROM or media selection",
-      "kind": "material",
-      "description": "ROM EPROM EEPROM or media selection",
-      "supply_form": "individual_part",
+      "name": "AIONix Artemis — programmed ROM storage set",
+      "kind": "supplied_assembly",
+      "description": "One complete, image-specific set of packaged ROM devices for the AIONix Artemis cartridge. The carrier PCB, connector, enclosure and software delivery items are supplied separately.",
+      "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
         "actor.logix"
@@ -7477,14 +7591,69 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+          "description": "Keep this BOM element as one complete supplied storage set. Release its internal ROM-device population and image-specific drawing; quantity one means one set, not one chip."
         },
         {
           "number": 2,
           "kind": "testing",
-          "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+          "description": "Before production costing is treated as released, approve installed capacity, image allocation, ROM technology, density/count, package/pinout, electrical timing, supply/current limits and test operations. Unselected values remain open; do not substitute invented measurements."
+        },
+        {
+          "number": 3,
+          "kind": "testing",
+          "description": "Qualify the production mask-ROM route and any EPROM alternative separately, including image verification and matched cartridge/host operation. An existing recipe or software launch does not establish this part-specific qualification."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Supply boundary and ownership",
+            "description": "Logix supplies one combined storage set containing the packaged ROM devices programmed or masked for {software_image}. AION Labs is the intended manufacturer of production mask-ROM chips under {rom_recipe}; Logix remains the set supplier and integration authority. The recipe does not by itself qualify this density, image, speed or package. Exclude the separately supplied carrier PCB, connector, sockets, decoding/buffering, enclosure, label, hardware packout, software licence and documentation. No writable RAM is included."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Image allocation and device population",
+            "description": "The installed storage capacity, used image bytes, identification/checksum allocation and reserved space must be fixed from the accepted linked image. No ROM capacity or chip count is established by the host RAM requirement. Keep writable runtime state in host RAM; this set contains read-only code, constants and image identification."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Storage technology and production route",
+            "description": "Use mask ROM for stable production images after order-specific qualification. Separately qualified purchased EPROMs may serve development and small correction batches; do not assume that AION manufactures EPROMs or that the replacement is pin-compatible. EEPROM is not the default. Keep the mask-ROM baseline and EPROM alternative separate in the production drawing and costing. Replacement cartridges provide the update path; no in-system erase/program capability is implied."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Electrical organisation and physical package",
+            "description": "The preferred costing baseline is a {interface_width_bits}-bit XIP interface assembled from four parallel 8-bit ROM lanes. Device density and number of banks remain to be selected. A narrower ROM population requires separately specified width adaptation, fetch sequencing and wait states; its extra hardware belongs to the carrier, not an uncounted storage allowance. Freeze byte-lane order, address mapping and image interleaving. Release numeric supply rails and tolerances, access/output-enable/disable timing, loading, active and standby current, and the qualified host wait-state profile. Direct execution does not imply zero-wait operation. Specify the exact packaged-device pinout, temperature grade, marking and mounting requirements. Socket or solder details, board area, decoupling and connector protection belong to the carrier assembly and must fit its released envelope."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Image installation, test and revision control",
+            "description": "Freeze image revision, byte count, bank/lane files, checksum algorithm and expected verification values before mask generation or EPROM programming. Require full-image verification, electrical testing under the released conditions, lot traceability and a matched cartridge boot/function test. The EPROM route needs specified programming voltage, pulse algorithm, verification, erasure/rework limits and cycle time; these are not assumed to match the host supply. A software revision requires assessed new masks or reprogramming, replacement stock and obsolete-stock handling."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Manufacturing-cost input boundary",
+            "description": "For internal mask-ROM production, establish density-specific die area, usable dies per wafer, wafer route, probe/test flow and package before calculating cost. Cost estimates must state wafer/probe and assembly/final-test yield assumptions, mask/setup allocation, lot size, handling and test labour, scrap and rework. For purchased EPROMs use the qualified device quote plus programming and verification operations. Keep prices, changing yields, production volumes and amortisation assumptions in calculation evidence; do not add carrier, enclosure or software costs again."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "software_image",
+            "ref_id": "software_edition.aionix",
+            "ref_role": "Software edition whose accepted release image is stored in this set"
+          },
+          {
+            "key": "rom_recipe",
+            "ref_id": "manufacturing_capability.aion_mask_rom_3um",
+            "ref_role": "AION production recipe proposed for density- and image-specific mask-ROM qualification"
+          },
+          {
+            "key": "interface_width_bits",
+            "value": 32
+          }
+        ]
+      }
     },
     {
       "id": "base_part.software.aionix.cartridge_pcb_and_connector_if_cartridge_delivered",
@@ -7539,10 +7708,10 @@
     },
     {
       "id": "base_part.software.business_tools_artemis.rom_eprom_eeprom_or_media_selection",
-      "name": "ROM EPROM EEPROM or media selection",
-      "kind": "material",
-      "description": "ROM EPROM EEPROM or media selection",
-      "supply_form": "individual_part",
+      "name": "Business Tools Artemis — programmed ROM storage set",
+      "kind": "supplied_assembly",
+      "description": "One complete, image-specific set of packaged ROM devices for the Business Tools Artemis cartridge. The carrier PCB, connector, enclosure and software delivery items are supplied separately.",
+      "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
         "actor.logix"
@@ -7556,14 +7725,69 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+          "description": "Keep this BOM element as one complete supplied storage set. Release its internal ROM-device population and image-specific drawing; quantity one means one set, not one chip."
         },
         {
           "number": 2,
           "kind": "testing",
-          "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+          "description": "Before production costing is treated as released, approve installed capacity, image allocation, ROM technology, density/count, package/pinout, electrical timing, supply/current limits and test operations. Unselected values remain open; do not substitute invented measurements."
+        },
+        {
+          "number": 3,
+          "kind": "testing",
+          "description": "Qualify the production mask-ROM route and any EPROM alternative separately, including image verification and matched cartridge/host operation. An existing recipe or software launch does not establish this part-specific qualification."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Supply boundary and ownership",
+            "description": "Logix supplies one combined storage set containing the packaged ROM devices programmed or masked for {software_image}. AION Labs is the intended manufacturer of production mask-ROM chips under {rom_recipe}; Logix remains the set supplier and integration authority. The recipe does not by itself qualify this density, image, speed or package. Exclude the separately supplied carrier PCB, connector, sockets, decoding/buffering, enclosure, label, hardware packout, software licence and documentation. No writable RAM is included."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Image allocation and device population",
+            "description": "The installed storage capacity, used image bytes, identification/checksum allocation and reserved space must be fixed from the accepted linked image. No ROM capacity or chip count is established by the host RAM requirement. Keep writable runtime state in host RAM; this set contains read-only code, constants and image identification."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Storage technology and production route",
+            "description": "Use mask ROM for stable production images after order-specific qualification. Separately qualified purchased EPROMs may serve development and small correction batches; do not assume that AION manufactures EPROMs or that the replacement is pin-compatible. EEPROM is not the default. Keep the mask-ROM baseline and EPROM alternative separate in the production drawing and costing. Replacement cartridges provide the update path; no in-system erase/program capability is implied."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Electrical organisation and physical package",
+            "description": "The preferred costing baseline is a {interface_width_bits}-bit XIP interface assembled from four parallel 8-bit ROM lanes. Device density and number of banks remain to be selected. A narrower ROM population requires separately specified width adaptation, fetch sequencing and wait states; its extra hardware belongs to the carrier, not an uncounted storage allowance. Freeze byte-lane order, address mapping and image interleaving. Release numeric supply rails and tolerances, access/output-enable/disable timing, loading, active and standby current, and the qualified host wait-state profile. Direct execution does not imply zero-wait operation. Specify the exact packaged-device pinout, temperature grade, marking and mounting requirements. Socket or solder details, board area, decoupling and connector protection belong to the carrier assembly and must fit its released envelope."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Image installation, test and revision control",
+            "description": "Freeze image revision, byte count, bank/lane files, checksum algorithm and expected verification values before mask generation or EPROM programming. Require full-image verification, electrical testing under the released conditions, lot traceability and a matched cartridge boot/function test. The EPROM route needs specified programming voltage, pulse algorithm, verification, erasure/rework limits and cycle time; these are not assumed to match the host supply. A software revision requires assessed new masks or reprogramming, replacement stock and obsolete-stock handling."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Manufacturing-cost input boundary",
+            "description": "For internal mask-ROM production, establish density-specific die area, usable dies per wafer, wafer route, probe/test flow and package before calculating cost. Cost estimates must state wafer/probe and assembly/final-test yield assumptions, mask/setup allocation, lot size, handling and test labour, scrap and rework. For purchased EPROMs use the qualified device quote plus programming and verification operations. Keep prices, changing yields, production volumes and amortisation assumptions in calculation evidence; do not add carrier, enclosure or software costs again."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "software_image",
+            "ref_id": "software_edition.business_tools_artemis",
+            "ref_role": "Software edition whose accepted release image is stored in this set"
+          },
+          {
+            "key": "rom_recipe",
+            "ref_id": "manufacturing_capability.aion_mask_rom_3um",
+            "ref_role": "AION production recipe proposed for density- and image-specific mask-ROM qualification"
+          },
+          {
+            "key": "interface_width_bits",
+            "value": 32
+          }
+        ]
+      }
     },
     {
       "id": "base_part.software.business_tools_artemis.cartridge_pcb_and_connector_if_cartridge_delivered",
@@ -7618,10 +7842,10 @@
     },
     {
       "id": "base_part.software.aionix_server.rom_eprom_eeprom_or_media_selection",
-      "name": "ROM EPROM EEPROM or media selection",
-      "kind": "material",
-      "description": "ROM EPROM EEPROM or media selection",
-      "supply_form": "individual_part",
+      "name": "AIONix Server — programmed ROM storage set",
+      "kind": "supplied_assembly",
+      "description": "One complete, image-specific set of packaged ROM devices for the AIONix Server cartridge. The carrier PCB, connector, enclosure and software delivery items are supplied separately.",
+      "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
         "actor.logix"
@@ -7635,14 +7859,69 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+          "description": "Keep this BOM element as one complete supplied storage set. Release its internal ROM-device population and image-specific drawing; quantity one means one set, not one chip."
         },
         {
           "number": 2,
           "kind": "testing",
-          "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+          "description": "Before production costing is treated as released, approve installed capacity, image allocation, ROM technology, density/count, package/pinout, electrical timing, supply/current limits and test operations. Unselected values remain open; do not substitute invented measurements."
+        },
+        {
+          "number": 3,
+          "kind": "testing",
+          "description": "Qualify the production mask-ROM route and any EPROM alternative separately, including image verification and matched cartridge/host operation. An existing recipe or software launch does not establish this part-specific qualification."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Supply boundary and ownership",
+            "description": "Logix supplies one combined storage set containing the packaged ROM devices programmed or masked for {software_image}. AION Labs is the intended manufacturer of production mask-ROM chips under {rom_recipe}; Logix remains the set supplier and integration authority. The recipe does not by itself qualify this density, image, speed or package. Exclude the separately supplied carrier PCB, connector, sockets, decoding/buffering, enclosure, label, hardware packout, software licence and documentation. No writable RAM is included."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Image allocation and device population",
+            "description": "The installed storage capacity, used image bytes, identification/checksum allocation and reserved space must be fixed from the accepted linked image. No ROM capacity or chip count is established by the host RAM requirement. This stores the complete AIONix system and networking image, not a networking-only delta. Do not also count a separate base AIONix storage set for this cartridge."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Storage technology and production route",
+            "description": "Use mask ROM for stable production images after order-specific qualification. Separately qualified purchased EPROMs may serve development and small correction batches; do not assume that AION manufactures EPROMs or that the replacement is pin-compatible. EEPROM is not the default. Keep the mask-ROM baseline and EPROM alternative separate in the production drawing and costing. Replacement cartridges provide the update path; no in-system erase/program capability is implied."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Electrical organisation and physical package",
+            "description": "The preferred costing baseline is a {interface_width_bits}-bit XIP interface assembled from four parallel 8-bit ROM lanes. Device density and number of banks remain to be selected. A narrower ROM population requires separately specified width adaptation, fetch sequencing and wait states; its extra hardware belongs to the carrier, not an uncounted storage allowance. Freeze byte-lane order, address mapping and image interleaving. Release numeric supply rails and tolerances, access/output-enable/disable timing, loading, active and standby current, and the qualified host wait-state profile. Direct execution does not imply zero-wait operation. Specify the exact packaged-device pinout, temperature grade, marking and mounting requirements. Socket or solder details, board area, decoupling and connector protection belong to the carrier assembly and must fit its released envelope."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Image installation, test and revision control",
+            "description": "Freeze image revision, byte count, bank/lane files, checksum algorithm and expected verification values before mask generation or EPROM programming. Require full-image verification, electrical testing under the released conditions, lot traceability and a matched cartridge boot/function test. The EPROM route needs specified programming voltage, pulse algorithm, verification, erasure/rework limits and cycle time; these are not assumed to match the host supply. A software revision requires assessed new masks or reprogramming, replacement stock and obsolete-stock handling."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Manufacturing-cost input boundary",
+            "description": "For internal mask-ROM production, establish density-specific die area, usable dies per wafer, wafer route, probe/test flow and package before calculating cost. Cost estimates must state wafer/probe and assembly/final-test yield assumptions, mask/setup allocation, lot size, handling and test labour, scrap and rework. For purchased EPROMs use the qualified device quote plus programming and verification operations. Keep prices, changing yields, production volumes and amortisation assumptions in calculation evidence; do not add carrier, enclosure or software costs again."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "software_image",
+            "ref_id": "software_edition.aionix_server",
+            "ref_role": "Software edition whose accepted release image is stored in this set"
+          },
+          {
+            "key": "rom_recipe",
+            "ref_id": "manufacturing_capability.aion_mask_rom_3um",
+            "ref_role": "AION production recipe proposed for density- and image-specific mask-ROM qualification"
+          },
+          {
+            "key": "interface_width_bits",
+            "value": 32
+          }
+        ]
+      }
     },
     {
       "id": "base_part.software.aionix_server.cartridge_pcb_and_connector_if_cartridge_delivered",
@@ -7697,10 +7976,10 @@
     },
     {
       "id": "base_part.software.cpm_aurelia_networking.rom_eprom_eeprom_or_media_selection",
-      "name": "ROM EPROM EEPROM or media selection",
-      "kind": "material",
-      "description": "ROM EPROM EEPROM or media selection",
-      "supply_form": "individual_part",
+      "name": "Networking CP/M Aurelia — programmed ROM storage set",
+      "kind": "supplied_assembly",
+      "description": "One complete, image-specific set of packaged ROM devices for the Networking CP/M Aurelia cartridge. The carrier PCB, connector, enclosure and software delivery items are supplied separately.",
+      "supply_form": "supplied_set",
       "manufacturer_actor_id": "actor.logix",
       "supplier_actor_ids": [
         "actor.logix"
@@ -7714,14 +7993,69 @@
         {
           "number": 1,
           "kind": "testing",
-          "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+          "description": "Keep this BOM element as one complete supplied storage set. Release its internal ROM-device population and image-specific drawing; quantity one means one set, not one chip."
         },
         {
           "number": 2,
           "kind": "testing",
-          "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+          "description": "Before production costing is treated as released, approve installed capacity, image allocation, ROM technology, density/count, package/pinout, electrical timing, supply/current limits and test operations. Unselected values remain open; do not substitute invented measurements."
+        },
+        {
+          "number": 3,
+          "kind": "testing",
+          "description": "Qualify the production mask-ROM route and any EPROM alternative separately, including image verification and matched cartridge/host operation. An existing recipe or software launch does not establish this part-specific qualification."
         }
-      ]
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Supply boundary and ownership",
+            "description": "Logix supplies one combined storage set containing the packaged ROM devices programmed or masked for {software_image}. AION Labs is the intended manufacturer of production mask-ROM chips under {rom_recipe}; Logix remains the set supplier and integration authority. The recipe does not by itself qualify this density, image, speed or package. Exclude the separately supplied carrier PCB, connector, sockets, decoding/buffering, enclosure, label, hardware packout, software licence and documentation. No writable RAM is included."
+          },
+          {
+            "number": 2,
+            "chapter_name": "Image allocation and device population",
+            "description": "The installed storage capacity, used image bytes, identification/checksum allocation and reserved space must be fixed from the accepted linked image. No ROM capacity or chip count is established by the host RAM requirement. Before sizing, explicitly resolve whether the installed networking system image incorporates the base CP/M release or relies on a separate resident image. The software dependency alone does not establish a second physical cartridge; do not assume either image boundary or an extra ROM set."
+          },
+          {
+            "number": 3,
+            "chapter_name": "Storage technology and production route",
+            "description": "Use mask ROM for stable production images after order-specific qualification. Separately qualified purchased EPROMs may serve development and small correction batches; do not assume that AION manufactures EPROMs or that the replacement is pin-compatible. EEPROM is not the default. Keep the mask-ROM baseline and EPROM alternative separate in the production drawing and costing. Replacement cartridges provide the update path; no in-system erase/program capability is implied."
+          },
+          {
+            "number": 4,
+            "chapter_name": "Electrical organisation and physical package",
+            "description": "The storage interface is {interface_width_bits} bits wide, using the qualified Aurelia bank-selection mechanism. Freeze bytes per device, device width, device count and bank addressing without assuming that the CPU address-space size limits total banked storage. Release numeric supply rails and tolerances, access/output-enable/disable timing, loading, active and standby current, and the qualified host wait-state profile. Direct execution does not imply zero-wait operation. Specify the exact packaged-device pinout, temperature grade, marking and mounting requirements. Socket or solder details, board area, decoupling and connector protection belong to the carrier assembly and must fit its released envelope."
+          },
+          {
+            "number": 5,
+            "chapter_name": "Image installation, test and revision control",
+            "description": "Freeze image revision, byte count, bank/lane files, checksum algorithm and expected verification values before mask generation or EPROM programming. Require full-image verification, electrical testing under the released conditions, lot traceability and a matched cartridge boot/function test. The EPROM route needs specified programming voltage, pulse algorithm, verification, erasure/rework limits and cycle time; these are not assumed to match the host supply. A software revision requires assessed new masks or reprogramming, replacement stock and obsolete-stock handling."
+          },
+          {
+            "number": 6,
+            "chapter_name": "Manufacturing-cost input boundary",
+            "description": "For internal mask-ROM production, establish density-specific die area, usable dies per wafer, wafer route, probe/test flow and package before calculating cost. Cost estimates must state wafer/probe and assembly/final-test yield assumptions, mask/setup allocation, lot size, handling and test labour, scrap and rework. For purchased EPROMs use the qualified device quote plus programming and verification operations. Keep prices, changing yields, production volumes and amortisation assumptions in calculation evidence; do not add carrier, enclosure or software costs again."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "software_image",
+            "ref_id": "software_edition.cpm_aurelia_networking",
+            "ref_role": "Software edition whose accepted release image is stored in this set"
+          },
+          {
+            "key": "rom_recipe",
+            "ref_id": "manufacturing_capability.aion_mask_rom_3um",
+            "ref_role": "AION production recipe proposed for density- and image-specific mask-ROM qualification"
+          },
+          {
+            "key": "interface_width_bits",
+            "value": 8
+          }
+        ]
+      }
     },
     {
       "id": "base_part.software.cpm_aurelia_networking.cartridge_pcb_and_connector_if_cartridge_delivered",

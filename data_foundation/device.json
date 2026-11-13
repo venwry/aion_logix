@@ -9669,17 +9669,22 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Freeze actual image size and storage technology; do not assume EEPROM by default."
+              "description": "Use the image-specific ROM storage-set definition in this cartridge BOM. Freeze its actual image allocation and qualified population; mask ROM is the stable-production preference and a separately qualified EPROM route is an alternative. Do not default to EEPROM."
             },
             {
               "number": 2,
               "kind": "testing",
-              "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+              "description": "Evaluate four 8-bit ROM lanes for a 32-bit XIP interface. If narrower storage is selected, include width-adaptation hardware, lane sequencing and qualified wait states in the carrier definition; do not claim unchanged fetch performance."
             },
             {
               "number": 3,
               "kind": "testing",
-              "description": "Verify the selected image revision, cartridge identification, electrical compatibility and successful boot on the qualified host. The image and physical storage must be qualified together."
+              "description": "The storage set covers packaged ROM devices only. Release carrier PCB, connector, sockets or solder mounting, decoding/buffering, decoupling and mechanical fit in the separate carrier set; enclosure, label and packout remain separate. Do not duplicate these constituents in the storage cost."
+            },
+            {
+              "number": 4,
+              "kind": "testing",
+              "description": "Verify the accepted image revision, bank/lane mapping, checksum, electrical limits and successful boot/function on each qualified host. Control mask/programming revisions, replacement stock and patch/replacement procedures together."
             }
           ]
         }
@@ -9768,17 +9773,27 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Freeze actual image size and storage technology; do not assume EEPROM by default."
+              "description": "Use the image-specific ROM storage-set definition in this cartridge BOM. Freeze its actual image allocation and qualified population; mask ROM is the stable-production preference and a separately qualified EPROM route is an alternative. Do not default to EEPROM."
             },
             {
               "number": 2,
               "kind": "testing",
-              "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+              "description": "Evaluate four 8-bit ROM lanes for a 32-bit XIP interface. If narrower storage is selected, include width-adaptation hardware, lane sequencing and qualified wait states in the carrier definition; do not claim unchanged fetch performance."
             },
             {
               "number": 3,
               "kind": "testing",
-              "description": "Verify the selected image revision, cartridge identification, electrical compatibility and successful boot on the qualified host. The image and physical storage must be qualified together."
+              "description": "The storage set covers packaged ROM devices only. Release carrier PCB, connector, sockets or solder mounting, decoding/buffering, decoupling and mechanical fit in the separate carrier set; enclosure, label and packout remain separate. Do not duplicate these constituents in the storage cost."
+            },
+            {
+              "number": 4,
+              "kind": "testing",
+              "description": "Verify the accepted image revision, bank/lane mapping, checksum, electrical limits and successful boot/function on each qualified host. Control mask/programming revisions, replacement stock and patch/replacement procedures together."
+            },
+            {
+              "number": 5,
+              "kind": "testing",
+              "description": "Size for the complete base-system-plus-networking image. Do not add a separate base AIONix cartridge or its storage cost to this system cartridge."
             }
           ]
         }
@@ -9864,17 +9879,27 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Freeze actual image size and storage technology; do not assume EEPROM by default."
+              "description": "Use the image-specific ROM storage-set definition in this cartridge BOM. Freeze its actual image allocation and qualified population; mask ROM is the stable-production preference and a separately qualified EPROM route is an alternative. Do not default to EEPROM."
             },
             {
               "number": 2,
               "kind": "testing",
-              "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+              "description": "Qualify the 8-bit banked-ROM path, cartridge identification, bank selection, timing and wait states with the selected ROM population."
             },
             {
               "number": 3,
               "kind": "testing",
-              "description": "DRI supplies the accepted integrated CP/M/TUI release image. Logix freezes cartridge electronics, ROM capacity and electrical timing, then verifies the production image and revision. AION Labs manufactures qualified ROM chips to Logix requirements; capacity, masks/programming, checksum verification and patch/replacement procedure require explicit acceptance."
+              "description": "The storage set covers packaged ROM devices only. Release carrier PCB, connector, sockets or solder mounting, decoding/buffering, decoupling and mechanical fit in the separate carrier set; enclosure, label and packout remain separate. Do not duplicate these constituents in the storage cost."
+            },
+            {
+              "number": 4,
+              "kind": "testing",
+              "description": "Verify the accepted image revision, bank/lane mapping, checksum, electrical limits and successful boot/function on each qualified host. Control mask/programming revisions, replacement stock and patch/replacement procedures together."
+            },
+            {
+              "number": 5,
+              "kind": "testing",
+              "description": "DRI supplies the accepted integrated CP/M/TUI release image. Logix freezes the physical cartridge and AION Labs manufactures qualified production ROM chips to the released capacity, image, timing and package contract. Motherboard ROM and Business Tools remain separate."
             }
           ]
         }
@@ -9957,17 +9982,27 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Freeze actual image size and storage technology; do not assume EEPROM by default."
+              "description": "Use the image-specific ROM storage-set definition in this cartridge BOM. Freeze its actual image allocation and qualified population; mask ROM is the stable-production preference and a separately qualified EPROM route is an alternative. Do not default to EEPROM."
             },
             {
               "number": 2,
               "kind": "testing",
-              "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+              "description": "Qualify the 8-bit banked-ROM path, cartridge identification, bank selection, timing and wait states with the selected ROM population."
             },
             {
               "number": 3,
               "kind": "testing",
-              "description": "Verify the selected image revision, cartridge identification, electrical compatibility and successful boot on the qualified host. The image and physical storage must be qualified together."
+              "description": "The storage set covers packaged ROM devices only. Release carrier PCB, connector, sockets or solder mounting, decoding/buffering, decoupling and mechanical fit in the separate carrier set; enclosure, label and packout remain separate. Do not duplicate these constituents in the storage cost."
+            },
+            {
+              "number": 4,
+              "kind": "testing",
+              "description": "Verify the accepted image revision, bank/lane mapping, checksum, electrical limits and successful boot/function on each qualified host. Control mask/programming revisions, replacement stock and patch/replacement procedures together."
+            },
+            {
+              "number": 5,
+              "kind": "testing",
+              "description": "Resolve base CP/M inclusion versus separately resident code before image sizing and release. A dependency on the base software edition does not authorize a second physical cartridge or establish its cost."
             }
           ]
         }
@@ -10053,17 +10088,27 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Freeze actual image size and storage technology; do not assume EEPROM by default."
+              "description": "Use the image-specific ROM storage-set definition in this cartridge BOM. Freeze its actual image allocation and qualified population; mask ROM is the stable-production preference and a separately qualified EPROM route is an alternative. Do not default to EEPROM."
             },
             {
               "number": 2,
               "kind": "testing",
-              "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+              "description": "Qualify the 8-bit banked-ROM path, cartridge identification, bank selection, timing and wait states with the selected ROM population."
             },
             {
               "number": 3,
               "kind": "testing",
-              "description": "Business Tools Aurelia image allocation is 16 KiB; chip count remains dependent on organization."
+              "description": "The storage set covers packaged ROM devices only. Release carrier PCB, connector, sockets or solder mounting, decoding/buffering, decoupling and mechanical fit in the separate carrier set; enclosure, label and packout remain separate. Do not duplicate these constituents in the storage cost."
+            },
+            {
+              "number": 4,
+              "kind": "testing",
+              "description": "Verify the accepted image revision, bank/lane mapping, checksum, electrical limits and successful boot/function on each qualified host. Control mask/programming revisions, replacement stock and patch/replacement procedures together."
+            },
+            {
+              "number": 5,
+              "kind": "testing",
+              "description": "Preserve the 16 KiB installed allocation. Select and qualify one ROM population; shared CP/M TUI routines are not duplicated in the application image."
             }
           ]
         }
@@ -10138,12 +10183,22 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Freeze actual image size and storage technology; do not assume EEPROM by default."
+              "description": "Use the image-specific ROM storage-set definition in this cartridge BOM. Freeze its actual image allocation and qualified population; mask ROM is the stable-production preference and a separately qualified EPROM route is an alternative. Do not default to EEPROM."
             },
             {
               "number": 2,
               "kind": "testing",
-              "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+              "description": "Evaluate four 8-bit ROM lanes for a 32-bit XIP interface. If narrower storage is selected, include width-adaptation hardware, lane sequencing and qualified wait states in the carrier definition; do not claim unchanged fetch performance."
+            },
+            {
+              "number": 3,
+              "kind": "testing",
+              "description": "The storage set covers packaged ROM devices only. Release carrier PCB, connector, sockets or solder mounting, decoding/buffering, decoupling and mechanical fit in the separate carrier set; enclosure, label and packout remain separate. Do not duplicate these constituents in the storage cost."
+            },
+            {
+              "number": 4,
+              "kind": "testing",
+              "description": "Verify the accepted image revision, bank/lane mapping, checksum, electrical limits and successful boot/function on each qualified host. Control mask/programming revisions, replacement stock and patch/replacement procedures together."
             }
           ]
         }

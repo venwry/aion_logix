@@ -1,0 +1,628 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.99ef4f7e-8524-474b-a11b-0a30624dc947",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T19:16:35.272Z",
+      "change_id": "change.cartridge_storage_business_tools_aurelia",
+      "proposal_sha256": "8af1b2d2af6ff537b1fad8dcf2f9f002cd144df2d6878827c1a72067b4d3c18e",
+      "proposal": {
+        "id": "change.cartridge_storage_business_tools_aurelia",
+        "category": "foundation",
+        "title": "Define Business Tools Aurelia cartridge ROM storage and manufacturing requirements",
+        "reason": "Replace the generic media-selection placeholder with one explicitly bounded, image-specific supplied ROM set and matching cartridge acceptance requirements. Prefer qualified AION mask ROM for stable production and separately qualified purchased EPROMs for development/corrections. Preserve existing composition quantities, dates and software ownership. The existing 16 KiB allocation is retained; alternative chip populations remain unqualified. These are manufacturing-definition requirements, not completed qualification or a released unit-cost estimate.",
+        "elements": [
+          {
+            "record_type": "base_part",
+            "record_id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection",
+            "before": {
+              "id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection",
+              "name": "ROM EPROM EEPROM or media selection",
+              "kind": "material",
+              "description": "ROM EPROM EEPROM or media selection",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.logix",
+              "supplier_actor_ids": [
+                "actor.logix"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "Logix",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+                }
+              ]
+            },
+            "after": {
+              "id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection",
+              "name": "Business Tools Aurelia — programmed ROM storage set",
+              "kind": "supplied_assembly",
+              "description": "One complete, image-specific set of packaged ROM devices for the Business Tools Aurelia cartridge. The carrier PCB, connector, enclosure and software delivery items are supplied separately.",
+              "supply_form": "supplied_set",
+              "manufacturer_actor_id": "actor.logix",
+              "supplier_actor_ids": [
+                "actor.logix"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "Logix",
+              "technology_ids": [],
+              "technical_definition": {},
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Keep this BOM element as one complete supplied storage set. Release its internal ROM-device population and image-specific drawing; quantity one means one set, not one chip."
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "Before production costing is treated as released, approve installed capacity, image allocation, ROM technology, density/count, package/pinout, electrical timing, supply/current limits and test operations. Unselected values remain open; do not substitute invented measurements."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "Qualify the production mask-ROM route and any EPROM alternative separately, including image verification and matched cartridge/host operation. An existing recipe or software launch does not establish this part-specific qualification."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Supply boundary and ownership",
+                    "description": "Logix supplies one combined storage set containing the packaged ROM devices programmed or masked for {software_image}. AION Labs is the intended manufacturer of production mask-ROM chips under {rom_recipe}; Logix remains the set supplier and integration authority. The recipe does not by itself qualify this density, image, speed or package. Exclude the separately supplied carrier PCB, connector, sockets, decoding/buffering, enclosure, label, hardware packout, software licence and documentation. No writable RAM is included."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "Image allocation and device population",
+                    "description": "Installed cartridge capacity is {rom_capacity_bytes} bytes. This is the allocation, not a measurement of used image bytes or spare space. Shared TUI code belongs to the CP/M system cartridge and is not duplicated here. Evaluate two 8 KiB ×8 devices or four 4 KiB ×8 devices; these are alternative populations pending density, package, timing and yield qualification, not two simultaneously fitted sets."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Storage technology and production route",
+                    "description": "Use mask ROM for stable production images after order-specific qualification. Separately qualified purchased EPROMs may serve development and small correction batches; do not assume that AION manufactures EPROMs or that the replacement is pin-compatible. EEPROM is not the default. Keep the mask-ROM baseline and EPROM alternative separate in the production drawing and costing. Replacement cartridges provide the update path; no in-system erase/program capability is implied."
+                  },
+                  {
+                    "number": 4,
+                    "chapter_name": "Electrical organisation and physical package",
+                    "description": "The storage interface is {interface_width_bits} bits wide, using the qualified Aurelia bank-selection mechanism. Freeze bytes per device, device width, device count and bank addressing without assuming that the CPU address-space size limits total banked storage. Release numeric supply rails and tolerances, access/output-enable/disable timing, loading, active and standby current, and the qualified host wait-state profile. Direct execution does not imply zero-wait operation. Specify the exact packaged-device pinout, temperature grade, marking and mounting requirements. Socket or solder details, board area, decoupling and connector protection belong to the carrier assembly and must fit its released envelope."
+                  },
+                  {
+                    "number": 5,
+                    "chapter_name": "Image installation, test and revision control",
+                    "description": "Freeze image revision, byte count, bank/lane files, checksum algorithm and expected verification values before mask generation or EPROM programming. Require full-image verification, electrical testing under the released conditions, lot traceability and a matched cartridge boot/function test. The EPROM route needs specified programming voltage, pulse algorithm, verification, erasure/rework limits and cycle time; these are not assumed to match the host supply. A software revision requires assessed new masks or reprogramming, replacement stock and obsolete-stock handling."
+                  },
+                  {
+                    "number": 6,
+                    "chapter_name": "Manufacturing-cost input boundary",
+                    "description": "For internal mask-ROM production, establish density-specific die area, usable dies per wafer, wafer route, probe/test flow and package before calculating cost. Cost estimates must state wafer/probe and assembly/final-test yield assumptions, mask/setup allocation, lot size, handling and test labour, scrap and rework. For purchased EPROMs use the qualified device quote plus programming and verification operations. Keep prices, changing yields, production volumes and amortisation assumptions in calculation evidence; do not add carrier, enclosure or software costs again."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "software_image",
+                    "ref_id": "software_edition.business_tools_aurelia",
+                    "ref_role": "Software edition whose accepted release image is stored in this set"
+                  },
+                  {
+                    "key": "rom_recipe",
+                    "ref_id": "manufacturing_capability.aion_mask_rom_3um",
+                    "ref_role": "AION production recipe proposed for density- and image-specific mask-ROM qualification"
+                  },
+                  {
+                    "key": "interface_width_bits",
+                    "value": 8
+                  },
+                  {
+                    "key": "rom_capacity_bytes",
+                    "value": 16384
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.rom_cartridge.business_tools_aurelia",
+            "before": {
+              "id": "device.rom_cartridge.business_tools_aurelia",
+              "name": "Business Tools (CP/M edition) — ROM cartridge",
+              "kind": "rom_cartridge",
+              "description": "Business Tools (CP/M edition) — ROM cartridge",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.aurelia_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "connection": "rom_cartridge"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.software.business_tools_aurelia.cartridge_pcb_and_connector_if_cartridge_delivered"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.software.business_tools_aurelia.cartridge_shell_label_and_instructions"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "software_edition.business_tools_aurelia",
+                        "version_number": 1
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Freeze actual image size and storage technology; do not assume EEPROM by default."
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "Business Tools Aurelia image allocation is 16 KiB; chip count remains dependent on organization."
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "ROM cartridge and host fit",
+                    "description": "Business Tools (CP/M edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM."
+                  }
+                ],
+                "parameters": []
+              }
+            },
+            "after": {
+              "id": "device.rom_cartridge.business_tools_aurelia",
+              "name": "Business Tools (CP/M edition) — ROM cartridge",
+              "kind": "rom_cartridge",
+              "description": "Business Tools (CP/M edition) — ROM cartridge",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.aurelia_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "connection": "rom_cartridge"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.software.business_tools_aurelia.cartridge_pcb_and_connector_if_cartridge_delivered"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.software.business_tools_aurelia.cartridge_shell_label_and_instructions"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "software_edition.business_tools_aurelia",
+                        "version_number": 1
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Use the image-specific ROM storage-set definition in this cartridge BOM. Freeze its actual image allocation and qualified population; mask ROM is the stable-production preference and a separately qualified EPROM route is an alternative. Do not default to EEPROM."
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "Qualify the 8-bit banked-ROM path, cartridge identification, bank selection, timing and wait states with the selected ROM population."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "The storage set covers packaged ROM devices only. Release carrier PCB, connector, sockets or solder mounting, decoding/buffering, decoupling and mechanical fit in the separate carrier set; enclosure, label and packout remain separate. Do not duplicate these constituents in the storage cost."
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Verify the accepted image revision, bank/lane mapping, checksum, electrical limits and successful boot/function on each qualified host. Control mask/programming revisions, replacement stock and patch/replacement procedures together."
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Preserve the 16 KiB installed allocation. Select and qualify one ROM population; shared CP/M TUI routines are not duplicated in the application image."
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "ROM cartridge and host fit",
+                    "description": "Business Tools (CP/M edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM."
+                  }
+                ],
+                "parameters": []
+              }
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection",
+          "before": {
+            "id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection",
+            "name": "ROM EPROM EEPROM or media selection",
+            "kind": "material",
+            "description": "ROM EPROM EEPROM or media selection",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Logix supplies this complete assembly or kit; constituent suppliers remain subject to qualification. Keep this BOM element combined."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Quantity is one complete device-specific supplied set; internal constituent count and production qualification remain separate."
+              }
+            ]
+          },
+          "after": {
+            "id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection",
+            "name": "Business Tools Aurelia — programmed ROM storage set",
+            "kind": "supplied_assembly",
+            "description": "One complete, image-specific set of packaged ROM devices for the Business Tools Aurelia cartridge. The carrier PCB, connector, enclosure and software delivery items are supplied separately.",
+            "supply_form": "supplied_set",
+            "manufacturer_actor_id": "actor.logix",
+            "supplier_actor_ids": [
+              "actor.logix"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "Logix",
+            "technology_ids": [],
+            "technical_definition": {},
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Keep this BOM element as one complete supplied storage set. Release its internal ROM-device population and image-specific drawing; quantity one means one set, not one chip."
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "Before production costing is treated as released, approve installed capacity, image allocation, ROM technology, density/count, package/pinout, electrical timing, supply/current limits and test operations. Unselected values remain open; do not substitute invented measurements."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "Qualify the production mask-ROM route and any EPROM alternative separately, including image verification and matched cartridge/host operation. An existing recipe or software launch does not establish this part-specific qualification."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Supply boundary and ownership",
+                  "description": "Logix supplies one combined storage set containing the packaged ROM devices programmed or masked for {software_image}. AION Labs is the intended manufacturer of production mask-ROM chips under {rom_recipe}; Logix remains the set supplier and integration authority. The recipe does not by itself qualify this density, image, speed or package. Exclude the separately supplied carrier PCB, connector, sockets, decoding/buffering, enclosure, label, hardware packout, software licence and documentation. No writable RAM is included."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "Image allocation and device population",
+                  "description": "Installed cartridge capacity is {rom_capacity_bytes} bytes. This is the allocation, not a measurement of used image bytes or spare space. Shared TUI code belongs to the CP/M system cartridge and is not duplicated here. Evaluate two 8 KiB ×8 devices or four 4 KiB ×8 devices; these are alternative populations pending density, package, timing and yield qualification, not two simultaneously fitted sets."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Storage technology and production route",
+                  "description": "Use mask ROM for stable production images after order-specific qualification. Separately qualified purchased EPROMs may serve development and small correction batches; do not assume that AION manufactures EPROMs or that the replacement is pin-compatible. EEPROM is not the default. Keep the mask-ROM baseline and EPROM alternative separate in the production drawing and costing. Replacement cartridges provide the update path; no in-system erase/program capability is implied."
+                },
+                {
+                  "number": 4,
+                  "chapter_name": "Electrical organisation and physical package",
+                  "description": "The storage interface is {interface_width_bits} bits wide, using the qualified Aurelia bank-selection mechanism. Freeze bytes per device, device width, device count and bank addressing without assuming that the CPU address-space size limits total banked storage. Release numeric supply rails and tolerances, access/output-enable/disable timing, loading, active and standby current, and the qualified host wait-state profile. Direct execution does not imply zero-wait operation. Specify the exact packaged-device pinout, temperature grade, marking and mounting requirements. Socket or solder details, board area, decoupling and connector protection belong to the carrier assembly and must fit its released envelope."
+                },
+                {
+                  "number": 5,
+                  "chapter_name": "Image installation, test and revision control",
+                  "description": "Freeze image revision, byte count, bank/lane files, checksum algorithm and expected verification values before mask generation or EPROM programming. Require full-image verification, electrical testing under the released conditions, lot traceability and a matched cartridge boot/function test. The EPROM route needs specified programming voltage, pulse algorithm, verification, erasure/rework limits and cycle time; these are not assumed to match the host supply. A software revision requires assessed new masks or reprogramming, replacement stock and obsolete-stock handling."
+                },
+                {
+                  "number": 6,
+                  "chapter_name": "Manufacturing-cost input boundary",
+                  "description": "For internal mask-ROM production, establish density-specific die area, usable dies per wafer, wafer route, probe/test flow and package before calculating cost. Cost estimates must state wafer/probe and assembly/final-test yield assumptions, mask/setup allocation, lot size, handling and test labour, scrap and rework. For purchased EPROMs use the qualified device quote plus programming and verification operations. Keep prices, changing yields, production volumes and amortisation assumptions in calculation evidence; do not add carrier, enclosure or software costs again."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "software_image",
+                  "ref_id": "software_edition.business_tools_aurelia",
+                  "ref_role": "Software edition whose accepted release image is stored in this set"
+                },
+                {
+                  "key": "rom_recipe",
+                  "ref_id": "manufacturing_capability.aion_mask_rom_3um",
+                  "ref_role": "AION production recipe proposed for density- and image-specific mask-ROM qualification"
+                },
+                {
+                  "key": "interface_width_bits",
+                  "value": 8
+                },
+                {
+                  "key": "rom_capacity_bytes",
+                  "value": 16384
+                }
+              ]
+            }
+          },
+          "content_sha256": "843f121ee2a96d1aca233a56b47e90bc2893f7f452d63ed94a593ef65a0b15aa"
+        },
+        {
+          "record_id": "device.rom_cartridge.business_tools_aurelia",
+          "before": {
+            "id": "device.rom_cartridge.business_tools_aurelia",
+            "name": "Business Tools (CP/M edition) — ROM cartridge",
+            "kind": "rom_cartridge",
+            "description": "Business Tools (CP/M edition) — ROM cartridge",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "connection": "rom_cartridge"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.software.business_tools_aurelia.cartridge_pcb_and_connector_if_cartridge_delivered"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.software.business_tools_aurelia.cartridge_shell_label_and_instructions"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "software_edition.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Freeze actual image size and storage technology; do not assume EEPROM by default."
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "For XIP choose wide ROM or explicit width adapter/wait states."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "Business Tools Aurelia image allocation is 16 KiB; chip count remains dependent on organization."
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "ROM cartridge and host fit",
+                  "description": "Business Tools (CP/M edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM."
+                }
+              ],
+              "parameters": []
+            }
+          },
+          "after": {
+            "id": "device.rom_cartridge.business_tools_aurelia",
+            "name": "Business Tools (CP/M edition) — ROM cartridge",
+            "kind": "rom_cartridge",
+            "description": "Business Tools (CP/M edition) — ROM cartridge",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.aurelia_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "connection": "rom_cartridge"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.software.business_tools_aurelia.rom_eprom_eeprom_or_media_selection"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.software.business_tools_aurelia.cartridge_pcb_and_connector_if_cartridge_delivered"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.software.business_tools_aurelia.cartridge_shell_label_and_instructions"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "software_edition.business_tools_aurelia",
+                      "version_number": 1
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Use the image-specific ROM storage-set definition in this cartridge BOM. Freeze its actual image allocation and qualified population; mask ROM is the stable-production preference and a separately qualified EPROM route is an alternative. Do not default to EEPROM."
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "Qualify the 8-bit banked-ROM path, cartridge identification, bank selection, timing and wait states with the selected ROM population."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "The storage set covers packaged ROM devices only. Release carrier PCB, connector, sockets or solder mounting, decoding/buffering, decoupling and mechanical fit in the separate carrier set; enclosure, label and packout remain separate. Do not duplicate these constituents in the storage cost."
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Verify the accepted image revision, bank/lane mapping, checksum, electrical limits and successful boot/function on each qualified host. Control mask/programming revisions, replacement stock and patch/replacement procedures together."
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Preserve the 16 KiB installed allocation. Select and qualify one ROM population; shared CP/M TUI routines are not duplicated in the application image."
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "ROM cartridge and host fit",
+                  "description": "Business Tools (CP/M edition) — ROM cartridge is a physical ROM cartridge, with its program content supplied by the software edition in its BOM."
+                }
+              ],
+              "parameters": []
+            }
+          },
+          "content_sha256": "98cfec38f0862bbba883a3ca6c47ae27eda30085fa66cd6508a8141a63c9de0e"
+        }
+      ]
+    }
+  ]
+}
