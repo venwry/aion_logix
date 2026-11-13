@@ -2068,8 +2068,7 @@
           "supported_fdd_count": 2,
           "fdd_size_inch": 5.25,
           "fdd_density": "double density",
-          "hdd_interface_supported": true,
-          "hdd_bundled_with_standard_artemis": false
+          "hdd_interface_supported": true
         }
       },
       "specification": [],
@@ -2110,7 +2109,7 @@
           {
             "number": 1,
             "chapter_name": "Storage control",
-            "description": "The controller supports {floppy_count} {floppy_size_inches}-inch double-density floppy drives and a hard-disk interface. Hard-disk interface support does not mean an HDD is bundled with standard Artemis."
+            "description": "The controller supports {floppy_count} {floppy_size_inches}-inch double-density floppy drives and a hard-disk interface. Installed drives follow the dated product composition; interface support alone does not establish controller or complete-system qualification."
           }
         ],
         "parameters": [
@@ -14520,6 +14519,98 @@
           {
             "key": "organization_words",
             "value": 1024
+          }
+        ]
+      }
+    },
+    {
+      "id": "base_part.miniscribe_4010",
+      "name": "MiniScribe 4010 hard-disk mechanism",
+      "kind": "material",
+      "description": "Purchased MiniScribe 4010 hard-disk mechanism.",
+      "supply_form": "individual_part",
+      "manufacturer_actor_id": "actor.miniscribe",
+      "supplier_actor_ids": [
+        "actor.miniscribe"
+      ],
+      "manufacturer_part_number": "4010",
+      "manufacturer_name": "MiniScribe",
+      "technology_ids": [],
+      "technical_definition": {
+        "specification": {
+          "capacity_mb": 10
+        }
+      },
+      "specification": [],
+      "requirements": [
+        {
+          "number": 1,
+          "kind": "testing",
+          "description": "Qualify controller geometry, formatted capacity, defect handling, power rails and spin-up load, cooling, mounting, cabling and incoming acceptance before production release."
+        }
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "model",
+            "value": "MiniScribe 4010"
+          },
+          {
+            "key": "unformatted_capacity_mb",
+            "value": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "base_part.quantum_q540",
+      "name": "Quantum Q540 hard-disk mechanism",
+      "kind": "material",
+      "description": "Purchased Quantum Q540 hard-disk mechanism.",
+      "supply_form": "individual_part",
+      "manufacturer_actor_id": "actor.quantum",
+      "supplier_actor_ids": [
+        "actor.quantum"
+      ],
+      "manufacturer_part_number": "Q540",
+      "manufacturer_name": "Quantum",
+      "technology_ids": [],
+      "technical_definition": {
+        "specification": {
+          "capacity_mb": 43
+        }
+      },
+      "specification": [],
+      "requirements": [
+        {
+          "number": 1,
+          "kind": "testing",
+          "description": "Qualify controller geometry, formatted capacity, defect handling, power rails and spin-up load, cooling, mounting, cabling and incoming acceptance before production release."
+        }
+      ],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "model",
+            "value": "Quantum Q540"
+          },
+          {
+            "key": "unformatted_capacity_mb",
+            "value": 43
           }
         ]
       }

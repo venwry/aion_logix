@@ -1,0 +1,3932 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.4a1c8783-70f5-4233-a629-8d4c10817737",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T20:09:21.130Z",
+      "change_id": "change.storage_miniscribe_4010",
+      "proposal_sha256": "7ba64b41b581e93724410ff77d82938d2c94b4f10ea8407784212df40a60c5b9",
+      "proposal": {
+        "id": "change.storage_miniscribe_4010",
+        "category": "data",
+        "title": "Define the MiniScribe 4010 HDD assembly for NCC 1982",
+        "reason": "Author-selected MiniScribe 4010, explicitly 10 MB unformatted rather than usable capacity. Add one purchased mechanism and one reusable cabled/mounted device; retain the existing ST506 for historical configurations. Extend host compatibility without claiming completed qualification. The $625 OEM benchmark at 1,000 units is a calculation assumption, not foundation pricing. Its October 1982 evidence is carried back to NCC 1982 by explicit scenario assumption; contemporaneous June volume supply and pricing are not established.",
+        "elements": [
+          {
+            "record_type": "actor",
+            "record_id": "actor.miniscribe",
+            "before": null,
+            "after": {
+              "id": "actor.miniscribe",
+              "kind": "organisation",
+              "name": "MiniScribe Corporation",
+              "description": "Manufacturer of the selected MiniScribe hard-disk mechanism; procurement terms and system qualification are recorded separately."
+            }
+          },
+          {
+            "record_type": "base_part",
+            "record_id": "base_part.miniscribe_4010",
+            "before": null,
+            "after": {
+              "id": "base_part.miniscribe_4010",
+              "name": "MiniScribe 4010 hard-disk mechanism",
+              "kind": "material",
+              "description": "Purchased MiniScribe 4010 hard-disk mechanism.",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.miniscribe",
+              "supplier_actor_ids": [
+                "actor.miniscribe"
+              ],
+              "manufacturer_part_number": "4010",
+              "manufacturer_name": "MiniScribe",
+              "technology_ids": [],
+              "technical_definition": {
+                "specification": {
+                  "capacity_mb": 10
+                }
+              },
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Qualify controller geometry, formatted capacity, defect handling, power rails and spin-up load, cooling, mounting, cabling and incoming acceptance before production release."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage mechanism",
+                    "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "model",
+                    "value": "MiniScribe 4010"
+                  },
+                  {
+                    "key": "unformatted_capacity_mb",
+                    "value": 10
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.storage.miniscribe_4010",
+            "before": null,
+            "after": {
+              "id": "device.storage.miniscribe_4010",
+              "name": "MiniScribe 4010 internal HDD",
+              "kind": "storage_device",
+              "description": "Internal MiniScribe 4010 hard-disk assembly with control/data cabling and mounting hardware.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "MiniScribe 4010 assembly selected for NCC 1982 configurations",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc82_graphics_mouse"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "connection": "internal_storage",
+                    "specification": {
+                      "capacity_mb": 10
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.miniscribe_4010"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.storage.st506.control_data_cables"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.storage.st506.mounting_set"
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage mechanism",
+                    "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "model",
+                    "value": "MiniScribe 4010"
+                  },
+                  {
+                    "key": "unformatted_capacity_mb",
+                    "value": 10
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.base_computer.artemis",
+            "before": {
+              "id": "device.base_computer.artemis",
+              "name": "Logix Artemis — base computer",
+              "kind": "base_computer",
+              "description": "Logix Artemis — base computer",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [
+                "technology.era1_isa",
+                "technology.artemis_memory_model",
+                "technology.flexibus",
+                "technology.plug_and_execute",
+                "technology.xip_rom_platform",
+                "technology.logix_digital_video",
+                "technology.aionix_os_model",
+                "technology.cpm80_virtual_peripheral_bridge",
+                "technology.aion_c_portability_framework",
+                "technology.logix_tcpip_lan",
+                "technology.logix_lan100_link"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.artemis_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "processor": {
+                      "part_id": "base_part.erav1_6mhz"
+                    },
+                    "form_factor": "full desktop",
+                    "io_and_expansion": {
+                      "expansion_slots": {
+                        "width_bits": 32,
+                        "plug_and_execute": true
+                      },
+                      "rom_eeprom_cartridge_slots": {
+                        "rear": "operating system",
+                        "front": "office/application cartridge"
+                      },
+                      "dedicated_video_slot": {
+                        "replaceable": true,
+                        "hot_swap": false,
+                        "general_purpose_slots_consumed": 0,
+                        "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
+                      }
+                    },
+                    "configuration_requirements": {
+                      "scope": "complete_system",
+                      "rules": [
+                        "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                        "Installed cartridges must match software platform and socket role.",
+                        "A monitor connects to an installed video provider, not to an empty video-card socket."
+                      ],
+                      "external_application_cartridges_supported": true
+                    },
+                    "memory_constraints": {
+                      "max_ram_kib": 1024,
+                      "mixed_module_types_allowed": false
+                    },
+                    "technical_profile": {
+                      "memory": {
+                        "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                        "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
+                        "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
+                        "bank_data_width_bits": 32,
+                        "parity_bits": 0
+                      },
+                      "software_compatibility": {
+                        "native_target": "era_aionix",
+                        "api_id": "technology.aion_c_portability_framework",
+                        "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
+                      }
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.erav1_6mhz"
+                      },
+                      "quantity": 1,
+                      "element_type": "CPU"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.artemis_dma"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.artemis_mmu"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.artemis_fdd_hdd_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.flexibus_host_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.paired_bank_dram_controller_refresh_and_data_buffers"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.mainboard_pcb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.psu"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.enclosure_and_chassis"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.boot_rom_chips"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.clock_reset_interrupts_mapper_and_bus_buffers"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_12",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.connectors_passives_fasteners_and_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_13",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis.documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_14",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis.mains_cable"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_15",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis.packout"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_16",
+                      "target": {
+                        "record_id": "base_part.device.storage.computer.artemis.525_inch_double_density_floppy_mechanism.controller_cable"
+                      },
+                      "quantity": 1,
+                      "element_type": "One shared FDD data harness per base computer"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Replace old module model with the two-density, four-bank architecture. Add DRAM controller/refresh/buffers and capacity straps, numeric physical map, boot/reset ROM path, bus width adapters and exact custom-chip quantities/packages. Define FDD mechanisms and HDD interface even when no HDD ships. Determine which chip implements four FlexiBUS ports."
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Firmware image capacity/revision, programming and verification"
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                    },
+                    {
+                      "number": 6,
+                      "kind": "testing",
+                      "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify the selected 16/32 KiB card and 1 KiB sprite SRAM; Mono Pro is offered with the 32 KiB card only."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "memory",
+                      "name": "RAM modules",
+                      "sockets": [
+                        {
+                          "id": "ram",
+                          "name": "RAM sockets",
+                          "connection": "memory_module",
+                          "capacity": 8,
+                          "compatible_device_ids": [
+                            "device.ram_64kb_x32",
+                            "device.ram_128kb_x32",
+                            "device.ram_256kb_x32"
+                          ],
+                          "installation_multiple": 2,
+                          "matched_modules": true,
+                          "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "expansion",
+                      "name": "Expansion cards",
+                      "sockets": [
+                        {
+                          "id": "expansion",
+                          "name": "General expansion slots",
+                          "connection": "expansion_card",
+                          "capacity": 4,
+                          "compatible_device_ids": [
+                            "device.artemis_cpm80_module",
+                            "device.artemis_professional_video_128kb",
+                            "device.network_card_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "graphics",
+                      "name": "Video card",
+                      "sockets": [
+                        {
+                          "id": "video_card",
+                          "name": "Dedicated video slot",
+                          "connection": "dedicated_video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.artemis_video_card",
+                            "device.artemis_video_card_16kb",
+                            "device.artemis_video_card_64kb"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cartridges",
+                      "name": "ROM cartridges",
+                      "sockets": [
+                        {
+                          "id": "system_cartridge",
+                          "name": "System cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.rom_cartridge.aionix",
+                            "device.rom_cartridge.aionix_server"
+                          ]
+                        },
+                        {
+                          "id": "application_cartridge",
+                          "name": "Application cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.rom_cartridge.business_tools_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "external",
+                      "name": "External connections",
+                      "sockets": [
+                        {
+                          "id": "flexibus",
+                          "name": "FlexiBUS ports",
+                          "connection": "flexibus",
+                          "capacity": 4,
+                          "compatible_device_ids": [
+                            "device.flexibus_keyboard",
+                            "device.flexiprint40",
+                            "device.flexidisk",
+                            "device.flexidisk_ii",
+                            "device.logix_mouse"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "internal_drive",
+                      "name": "Internal storage",
+                      "sockets": [
+                        {
+                          "id": "internal_drive",
+                          "name": "Internal drive bays",
+                          "connection": "internal_storage",
+                          "capacity": 2,
+                          "compatible_device_ids": [
+                            "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                            "device.storage.hdd_5mb"
+                          ],
+                          "requirements": [
+                            "Recorded fitted-drive count; additional spare bays are not established."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "System architecture",
+                    "description": "Logix Artemis — base computer is a full desktop built around {processor_id}.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "RAM population and software environment",
+                    "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "processor_id",
+                    "ref_id": "base_part.erav1_6mhz",
+                    "ref_role": "Processor fitted to this computer"
+                  },
+                  {
+                    "key": "expansion_bus_bits",
+                    "value": 32
+                  },
+                  {
+                    "key": "maximum_ram_kib",
+                    "value": 1024
+                  },
+                  {
+                    "key": "application_api_id",
+                    "ref_id": "technology.aion_c_portability_framework",
+                    "ref_role": "Portable application interface on this host"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.base_computer.artemis",
+              "name": "Logix Artemis — base computer",
+              "kind": "base_computer",
+              "description": "Logix Artemis — base computer",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [
+                "technology.era1_isa",
+                "technology.artemis_memory_model",
+                "technology.flexibus",
+                "technology.plug_and_execute",
+                "technology.xip_rom_platform",
+                "technology.logix_digital_video",
+                "technology.aionix_os_model",
+                "technology.cpm80_virtual_peripheral_bridge",
+                "technology.aion_c_portability_framework",
+                "technology.logix_tcpip_lan",
+                "technology.logix_lan100_link"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.artemis_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "processor": {
+                      "part_id": "base_part.erav1_6mhz"
+                    },
+                    "form_factor": "full desktop",
+                    "io_and_expansion": {
+                      "expansion_slots": {
+                        "width_bits": 32,
+                        "plug_and_execute": true
+                      },
+                      "rom_eeprom_cartridge_slots": {
+                        "rear": "operating system",
+                        "front": "office/application cartridge"
+                      },
+                      "dedicated_video_slot": {
+                        "replaceable": true,
+                        "hot_swap": false,
+                        "general_purpose_slots_consumed": 0,
+                        "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
+                      }
+                    },
+                    "configuration_requirements": {
+                      "scope": "complete_system",
+                      "rules": [
+                        "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                        "Installed cartridges must match software platform and socket role.",
+                        "A monitor connects to an installed video provider, not to an empty video-card socket."
+                      ],
+                      "external_application_cartridges_supported": true
+                    },
+                    "memory_constraints": {
+                      "max_ram_kib": 1024,
+                      "mixed_module_types_allowed": false
+                    },
+                    "technical_profile": {
+                      "memory": {
+                        "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                        "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
+                        "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
+                        "bank_data_width_bits": 32,
+                        "parity_bits": 0
+                      },
+                      "software_compatibility": {
+                        "native_target": "era_aionix",
+                        "api_id": "technology.aion_c_portability_framework",
+                        "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
+                      }
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.erav1_6mhz"
+                      },
+                      "quantity": 1,
+                      "element_type": "CPU"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.artemis_dma"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.artemis_mmu"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.artemis_fdd_hdd_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.flexibus_host_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.paired_bank_dram_controller_refresh_and_data_buffers"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.mainboard_pcb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.psu"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.enclosure_and_chassis"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.boot_rom_chips"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.clock_reset_interrupts_mapper_and_bus_buffers"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_12",
+                      "target": {
+                        "record_id": "base_part.computer.artemis.connectors_passives_fasteners_and_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_13",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis.documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_14",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis.mains_cable"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_15",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis.packout"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_16",
+                      "target": {
+                        "record_id": "base_part.device.storage.computer.artemis.525_inch_double_density_floppy_mechanism.controller_cable"
+                      },
+                      "quantity": 1,
+                      "element_type": "One shared FDD data harness per base computer"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Replace old module model with the two-density, four-bank architecture. Add DRAM controller/refresh/buffers and capacity straps, numeric physical map, boot/reset ROM path, bus width adapters and exact custom-chip quantities/packages. Define FDD mechanisms and HDD interface even when no HDD ships. Determine which chip implements four FlexiBUS ports."
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Firmware image capacity/revision, programming and verification"
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                    },
+                    {
+                      "number": 6,
+                      "kind": "testing",
+                      "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify the selected 16/32 KiB card and 1 KiB sprite SRAM; Mono Pro is offered with the 32 KiB card only."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "memory",
+                      "name": "RAM modules",
+                      "sockets": [
+                        {
+                          "id": "ram",
+                          "name": "RAM sockets",
+                          "connection": "memory_module",
+                          "capacity": 8,
+                          "compatible_device_ids": [
+                            "device.ram_64kb_x32",
+                            "device.ram_128kb_x32",
+                            "device.ram_256kb_x32"
+                          ],
+                          "installation_multiple": 2,
+                          "matched_modules": true,
+                          "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "expansion",
+                      "name": "Expansion cards",
+                      "sockets": [
+                        {
+                          "id": "expansion",
+                          "name": "General expansion slots",
+                          "connection": "expansion_card",
+                          "capacity": 4,
+                          "compatible_device_ids": [
+                            "device.artemis_cpm80_module",
+                            "device.artemis_professional_video_128kb",
+                            "device.network_card_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "graphics",
+                      "name": "Video card",
+                      "sockets": [
+                        {
+                          "id": "video_card",
+                          "name": "Dedicated video slot",
+                          "connection": "dedicated_video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.artemis_video_card",
+                            "device.artemis_video_card_16kb",
+                            "device.artemis_video_card_64kb"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cartridges",
+                      "name": "ROM cartridges",
+                      "sockets": [
+                        {
+                          "id": "system_cartridge",
+                          "name": "System cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.rom_cartridge.aionix",
+                            "device.rom_cartridge.aionix_server"
+                          ]
+                        },
+                        {
+                          "id": "application_cartridge",
+                          "name": "Application cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.rom_cartridge.business_tools_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "external",
+                      "name": "External connections",
+                      "sockets": [
+                        {
+                          "id": "flexibus",
+                          "name": "FlexiBUS ports",
+                          "connection": "flexibus",
+                          "capacity": 4,
+                          "compatible_device_ids": [
+                            "device.flexibus_keyboard",
+                            "device.flexiprint40",
+                            "device.flexidisk",
+                            "device.flexidisk_ii",
+                            "device.logix_mouse"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "internal_drive",
+                      "name": "Internal storage",
+                      "sockets": [
+                        {
+                          "id": "internal_drive",
+                          "name": "Internal drive bays",
+                          "connection": "internal_storage",
+                          "capacity": 2,
+                          "compatible_device_ids": [
+                            "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                            "device.storage.hdd_5mb",
+                            "device.storage.miniscribe_4010"
+                          ],
+                          "requirements": [
+                            "Recorded fitted-drive count; additional spare bays are not established."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "System architecture",
+                    "description": "Logix Artemis — base computer is a full desktop built around {processor_id}.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "RAM population and software environment",
+                    "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "processor_id",
+                    "ref_id": "base_part.erav1_6mhz",
+                    "ref_role": "Processor fitted to this computer"
+                  },
+                  {
+                    "key": "expansion_bus_bits",
+                    "value": 32
+                  },
+                  {
+                    "key": "maximum_ram_kib",
+                    "value": 1024
+                  },
+                  {
+                    "key": "application_api_id",
+                    "ref_id": "technology.aion_c_portability_framework",
+                    "ref_role": "Portable application interface on this host"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.base_computer.artemis_pro",
+            "before": {
+              "id": "device.base_computer.artemis_pro",
+              "name": "Logix Artemis PRO — base computer",
+              "kind": "base_computer",
+              "description": "Logix Artemis PRO — base computer",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [
+                "technology.era1_isa",
+                "technology.artemis_memory_model",
+                "technology.flexibus",
+                "technology.plug_and_execute",
+                "technology.xip_rom_platform",
+                "technology.logix_digital_video",
+                "technology.aionix_os_model",
+                "technology.aion_c_portability_framework",
+                "technology.logix_tcpip_lan",
+                "technology.logix_lan100_link",
+                "technology.nmos_3um"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "processor": {
+                      "part_id": "base_part.erav1_8mhz"
+                    },
+                    "form_factor": "full desktop / server",
+                    "io_and_expansion": {
+                      "expansion_slots": {
+                        "width_bits": 32,
+                        "plug_and_execute": true
+                      },
+                      "rom_eeprom_cartridge_slots": {
+                        "rear": "operating system",
+                        "front": "office/application cartridge"
+                      },
+                      "dedicated_video_slot": {
+                        "replaceable": true,
+                        "hot_swap": false,
+                        "general_purpose_slots_consumed": 0,
+                        "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
+                      }
+                    },
+                    "configuration_requirements": {
+                      "scope": "complete_system",
+                      "rules": [
+                        "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                        "Installed cartridges must match software platform and socket role.",
+                        "A monitor connects to an installed video provider, not to an empty video-card socket."
+                      ],
+                      "external_application_cartridges_supported": true
+                    },
+                    "memory_constraints": {
+                      "max_ram_kib": 1024,
+                      "mixed_module_types_allowed": false
+                    },
+                    "integration_requirements": {
+                      "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
+                    },
+                    "role": "network server",
+                    "technical_profile": {
+                      "memory": {
+                        "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                        "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
+                        "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
+                        "bank_data_width_bits": 32,
+                        "parity_bits": 0,
+                        "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
+                      },
+                      "software_compatibility": {
+                        "native_target": "era_aionix",
+                        "api_id": "technology.aion_c_portability_framework",
+                        "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
+                      },
+                      "networking": {
+                        "technology_ids": [
+                          "technology.logix_tcpip_lan",
+                          "technology.logix_lan100_link"
+                        ],
+                        "server_role": true,
+                        "implementation": "One removable NIC occupying one of the four general-purpose expansion slots; not additional integrated circuitry.",
+                        "supported_rates_kbps": [
+                          100,
+                          250,
+                          500,
+                          1000
+                        ],
+                        "qualified_max_rate_kbps": 1000,
+                        "rate_policy": "Firmware-enforced host ceiling; actual common network rate also depends on every admitted station and qualified link.",
+                        "computer_id": "device.base_computer.artemis_pro"
+                      }
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.erav1_8mhz"
+                      },
+                      "quantity": 1,
+                      "element_type": "CPU"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.artemis_dma"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.artemis_mmu"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.artemis_fdd_hdd_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.flexibus_host_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.paired_bank_dram_controller_refresh_and_data_buffers"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.mainboard_pcb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.psu"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.enclosure_and_chassis"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.boot_rom_chips"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.clock_reset_interrupts_mapper_and_bus_buffers"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_12",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.connectors_passives_fasteners_and_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_13",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis_pro.documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_14",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis_pro.mains_cable"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_15",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis_pro.packout"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_16",
+                      "target": {
+                        "record_id": "base_part.device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism.controller_cable"
+                      },
+                      "quantity": 1,
+                      "element_type": "One shared FDD data harness per base computer"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Remove 128 Kbit dependency"
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "use four/eight high-density modules and two/four banks. Specify 8 MHz die/speed-bin and MMU timing, power and cooling at full population, exact HDD model and interface/format, network integration boundary, optional parity policy, RTC/battery need, and boot/service-console policy. Original server-only bundles exclude keyboard/monitor and still require validated headless operation or an optional console. New Mono Pro console bundles explicitly include both."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Firmware image capacity/revision, programming and verification"
+                    },
+                    {
+                      "number": 6,
+                      "kind": "testing",
+                      "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                    },
+                    {
+                      "number": 7,
+                      "kind": "testing",
+                      "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify 32 KiB DRAM, 1 KiB sprite SRAM and Mono Pro timings together."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "memory",
+                      "name": "RAM modules",
+                      "sockets": [
+                        {
+                          "id": "ram",
+                          "name": "RAM sockets",
+                          "connection": "memory_module",
+                          "capacity": 8,
+                          "compatible_device_ids": [
+                            "device.ram_256kb_x32",
+                            "device.ram_128kb_x32"
+                          ],
+                          "installation_multiple": 2,
+                          "matched_modules": true,
+                          "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "expansion",
+                      "name": "Expansion cards",
+                      "sockets": [
+                        {
+                          "id": "expansion",
+                          "name": "General expansion slots",
+                          "connection": "expansion_card",
+                          "capacity": 4,
+                          "compatible_device_ids": [
+                            "device.artemis_professional_video_128kb",
+                            "device.network_card_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "graphics",
+                      "name": "Video card",
+                      "sockets": [
+                        {
+                          "id": "video_card",
+                          "name": "Dedicated video slot",
+                          "connection": "dedicated_video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.artemis_video_card",
+                            "device.artemis_video_card_64kb"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cartridges",
+                      "name": "ROM cartridges",
+                      "sockets": [
+                        {
+                          "id": "system_cartridge",
+                          "name": "System cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.rom_cartridge.aionix",
+                            "device.rom_cartridge.aionix_server"
+                          ]
+                        },
+                        {
+                          "id": "application_cartridge",
+                          "name": "Application cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.rom_cartridge.business_tools_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "external",
+                      "name": "External connections",
+                      "sockets": [
+                        {
+                          "id": "flexibus",
+                          "name": "FlexiBUS ports",
+                          "connection": "flexibus",
+                          "capacity": 4,
+                          "compatible_device_ids": [
+                            "device.flexibus_keyboard",
+                            "device.flexiprint40",
+                            "device.flexidisk",
+                            "device.flexidisk_ii",
+                            "device.logix_mouse"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "internal_drive",
+                      "name": "Internal storage",
+                      "sockets": [
+                        {
+                          "id": "internal_drive",
+                          "name": "Internal drive bays",
+                          "connection": "internal_storage",
+                          "capacity": 3,
+                          "compatible_device_ids": [
+                            "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
+                            "device.storage.hdd_5mb"
+                          ],
+                          "requirements": [
+                            "Recorded fitted-drive count; additional spare bays are not established."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "System architecture",
+                    "description": "Logix Artemis PRO — base computer is a full desktop / server built around {processor_id}. The PRO configuration serves as a network server.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "RAM population and software environment",
+                    "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nQualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Network service",
+                    "description": "One removable NIC occupies one of the four general-purpose slots, providing server operation over {network_stack_id} and {network_link_id}. Firmware permits {supported_network_rates_kbps} kbit/s, with the highest listed rate as its ceiling. The actual common rate also depends on every admitted station and qualified link."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "processor_id",
+                    "ref_id": "base_part.erav1_8mhz",
+                    "ref_role": "Processor fitted to this computer"
+                  },
+                  {
+                    "key": "expansion_bus_bits",
+                    "value": 32
+                  },
+                  {
+                    "key": "maximum_ram_kib",
+                    "value": 1024
+                  },
+                  {
+                    "key": "application_api_id",
+                    "ref_id": "technology.aion_c_portability_framework",
+                    "ref_role": "Portable application interface on this host"
+                  },
+                  {
+                    "key": "network_stack_id",
+                    "ref_id": "technology.logix_tcpip_lan",
+                    "ref_role": "Network stack used by the server"
+                  },
+                  {
+                    "key": "network_link_id",
+                    "ref_id": "technology.logix_lan100_link",
+                    "ref_role": "Shared-rate link and negotiation protocol"
+                  },
+                  {
+                    "key": "supported_network_rates_kbps",
+                    "value": "100, 250, 500, 1000"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.base_computer.artemis_pro",
+              "name": "Logix Artemis PRO — base computer",
+              "kind": "base_computer",
+              "description": "Logix Artemis PRO — base computer",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [
+                "technology.era1_isa",
+                "technology.artemis_memory_model",
+                "technology.flexibus",
+                "technology.plug_and_execute",
+                "technology.xip_rom_platform",
+                "technology.logix_digital_video",
+                "technology.aionix_os_model",
+                "technology.aion_c_portability_framework",
+                "technology.logix_tcpip_lan",
+                "technology.logix_lan100_link",
+                "technology.nmos_3um"
+              ],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "processor": {
+                      "part_id": "base_part.erav1_8mhz"
+                    },
+                    "form_factor": "full desktop / server",
+                    "io_and_expansion": {
+                      "expansion_slots": {
+                        "width_bits": 32,
+                        "plug_and_execute": true
+                      },
+                      "rom_eeprom_cartridge_slots": {
+                        "rear": "operating system",
+                        "front": "office/application cartridge"
+                      },
+                      "dedicated_video_slot": {
+                        "replaceable": true,
+                        "hot_swap": false,
+                        "general_purpose_slots_consumed": 0,
+                        "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
+                      }
+                    },
+                    "configuration_requirements": {
+                      "scope": "complete_system",
+                      "rules": [
+                        "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                        "Installed cartridges must match software platform and socket role.",
+                        "A monitor connects to an installed video provider, not to an empty video-card socket."
+                      ],
+                      "external_application_cartridges_supported": true
+                    },
+                    "memory_constraints": {
+                      "max_ram_kib": 1024,
+                      "mixed_module_types_allowed": false
+                    },
+                    "integration_requirements": {
+                      "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
+                    },
+                    "role": "network server",
+                    "technical_profile": {
+                      "memory": {
+                        "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                        "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
+                        "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
+                        "bank_data_width_bits": 32,
+                        "parity_bits": 0,
+                        "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
+                      },
+                      "software_compatibility": {
+                        "native_target": "era_aionix",
+                        "api_id": "technology.aion_c_portability_framework",
+                        "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
+                      },
+                      "networking": {
+                        "technology_ids": [
+                          "technology.logix_tcpip_lan",
+                          "technology.logix_lan100_link"
+                        ],
+                        "server_role": true,
+                        "implementation": "One removable NIC occupying one of the four general-purpose expansion slots; not additional integrated circuitry.",
+                        "supported_rates_kbps": [
+                          100,
+                          250,
+                          500,
+                          1000
+                        ],
+                        "qualified_max_rate_kbps": 1000,
+                        "rate_policy": "Firmware-enforced host ceiling; actual common network rate also depends on every admitted station and qualified link.",
+                        "computer_id": "device.base_computer.artemis_pro"
+                      }
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.erav1_8mhz"
+                      },
+                      "quantity": 1,
+                      "element_type": "CPU"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.artemis_dma"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.artemis_mmu"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "base_part.artemis_fdd_hdd_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.flexibus_host_controller"
+                      },
+                      "quantity": 1,
+                      "element_type": "One controller per owning device"
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.paired_bank_dram_controller_refresh_and_data_buffers"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.mainboard_pcb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.psu"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.enclosure_and_chassis"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.boot_rom_chips"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.clock_reset_interrupts_mapper_and_bus_buffers"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_12",
+                      "target": {
+                        "record_id": "base_part.computer.artemis_pro.connectors_passives_fasteners_and_harnesses"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_13",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis_pro.documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_14",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis_pro.mains_cable"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_15",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.artemis_pro.packout"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_16",
+                      "target": {
+                        "record_id": "base_part.device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism.controller_cable"
+                      },
+                      "quantity": 1,
+                      "element_type": "One shared FDD data harness per base computer"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Remove 128 Kbit dependency"
+                    },
+                    {
+                      "number": 2,
+                      "kind": "testing",
+                      "description": "use four/eight high-density modules and two/four banks. Specify 8 MHz die/speed-bin and MMU timing, power and cooling at full population, exact HDD model and interface/format, network integration boundary, optional parity policy, RTC/battery need, and boot/service-console policy. Original server-only bundles exclude keyboard/monitor and still require validated headless operation or an optional console. New Mono Pro console bundles explicitly include both."
+                    },
+                    {
+                      "number": 3,
+                      "kind": "testing",
+                      "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                    },
+                    {
+                      "number": 4,
+                      "kind": "testing",
+                      "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                    },
+                    {
+                      "number": 5,
+                      "kind": "testing",
+                      "description": "Firmware image capacity/revision, programming and verification"
+                    },
+                    {
+                      "number": 6,
+                      "kind": "testing",
+                      "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                    },
+                    {
+                      "number": 7,
+                      "kind": "testing",
+                      "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify 32 KiB DRAM, 1 KiB sprite SRAM and Mono Pro timings together."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "memory",
+                      "name": "RAM modules",
+                      "sockets": [
+                        {
+                          "id": "ram",
+                          "name": "RAM sockets",
+                          "connection": "memory_module",
+                          "capacity": 8,
+                          "compatible_device_ids": [
+                            "device.ram_256kb_x32",
+                            "device.ram_128kb_x32"
+                          ],
+                          "installation_multiple": 2,
+                          "matched_modules": true,
+                          "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "expansion",
+                      "name": "Expansion cards",
+                      "sockets": [
+                        {
+                          "id": "expansion",
+                          "name": "General expansion slots",
+                          "connection": "expansion_card",
+                          "capacity": 4,
+                          "compatible_device_ids": [
+                            "device.artemis_professional_video_128kb",
+                            "device.network_card_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "graphics",
+                      "name": "Video card",
+                      "sockets": [
+                        {
+                          "id": "video_card",
+                          "name": "Dedicated video slot",
+                          "connection": "dedicated_video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.artemis_video_card",
+                            "device.artemis_video_card_64kb"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cartridges",
+                      "name": "ROM cartridges",
+                      "sockets": [
+                        {
+                          "id": "system_cartridge",
+                          "name": "System cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.rom_cartridge.aionix",
+                            "device.rom_cartridge.aionix_server"
+                          ]
+                        },
+                        {
+                          "id": "application_cartridge",
+                          "name": "Application cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.rom_cartridge.business_tools_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "external",
+                      "name": "External connections",
+                      "sockets": [
+                        {
+                          "id": "flexibus",
+                          "name": "FlexiBUS ports",
+                          "connection": "flexibus",
+                          "capacity": 4,
+                          "compatible_device_ids": [
+                            "device.flexibus_keyboard",
+                            "device.flexiprint40",
+                            "device.flexidisk",
+                            "device.flexidisk_ii",
+                            "device.logix_mouse"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "internal_drive",
+                      "name": "Internal storage",
+                      "sockets": [
+                        {
+                          "id": "internal_drive",
+                          "name": "Internal drive bays",
+                          "connection": "internal_storage",
+                          "capacity": 3,
+                          "compatible_device_ids": [
+                            "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
+                            "device.storage.hdd_5mb",
+                            "device.storage.miniscribe_4010"
+                          ],
+                          "requirements": [
+                            "Recorded fitted-drive count; additional spare bays are not established."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "System architecture",
+                    "description": "Logix Artemis PRO — base computer is a full desktop / server built around {processor_id}. The PRO configuration serves as a network server.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "RAM population and software environment",
+                    "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nQualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+                  },
+                  {
+                    "number": 3,
+                    "chapter_name": "Network service",
+                    "description": "One removable NIC occupies one of the four general-purpose slots, providing server operation over {network_stack_id} and {network_link_id}. Firmware permits {supported_network_rates_kbps} kbit/s, with the highest listed rate as its ceiling. The actual common rate also depends on every admitted station and qualified link."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "processor_id",
+                    "ref_id": "base_part.erav1_8mhz",
+                    "ref_role": "Processor fitted to this computer"
+                  },
+                  {
+                    "key": "expansion_bus_bits",
+                    "value": 32
+                  },
+                  {
+                    "key": "maximum_ram_kib",
+                    "value": 1024
+                  },
+                  {
+                    "key": "application_api_id",
+                    "ref_id": "technology.aion_c_portability_framework",
+                    "ref_role": "Portable application interface on this host"
+                  },
+                  {
+                    "key": "network_stack_id",
+                    "ref_id": "technology.logix_tcpip_lan",
+                    "ref_role": "Network stack used by the server"
+                  },
+                  {
+                    "key": "network_link_id",
+                    "ref_id": "technology.logix_lan100_link",
+                    "ref_role": "Shared-rate link and negotiation protocol"
+                  },
+                  {
+                    "key": "supported_network_rates_kbps",
+                    "value": "100, 250, 500, 1000"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "base_part",
+            "record_id": "base_part.artemis_fdd_hdd_controller",
+            "before": {
+              "id": "base_part.artemis_fdd_hdd_controller",
+              "name": "Artemis custom FDD/HDD controller",
+              "kind": "integrated_circuit",
+              "description": "Artemis custom FDD/HDD controller",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.labs",
+              "supplier_actor_ids": [
+                "actor.labs"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "AION Labs",
+              "technology_ids": [],
+              "technical_definition": {
+                "specification": {
+                  "supported_fdd_count": 2,
+                  "fdd_size_inch": 5.25,
+                  "fdd_density": "double density",
+                  "hdd_interface_supported": true,
+                  "hdd_bundled_with_standard_artemis": false
+                }
+              },
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Define exact floppy and HDD electrical interfaces, encodings, data separator/PLL, DMA/FIFO and firmware split. Specify what remains external"
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "“HDD supported” is not a complete controller."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                },
+                {
+                  "number": 4,
+                  "kind": "testing",
+                  "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                },
+                {
+                  "number": 5,
+                  "kind": "testing",
+                  "description": "Firmware image capacity/revision, programming and verification"
+                },
+                {
+                  "number": 6,
+                  "kind": "testing",
+                  "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage control",
+                    "description": "The controller supports {floppy_count} {floppy_size_inches}-inch double-density floppy drives and a hard-disk interface. Hard-disk interface support does not mean an HDD is bundled with standard Artemis."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "floppy_count",
+                    "value": 2
+                  },
+                  {
+                    "key": "floppy_size_inches",
+                    "value": 5.25
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "base_part.artemis_fdd_hdd_controller",
+              "name": "Artemis custom FDD/HDD controller",
+              "kind": "integrated_circuit",
+              "description": "Artemis custom FDD/HDD controller",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.labs",
+              "supplier_actor_ids": [
+                "actor.labs"
+              ],
+              "manufacturer_part_number": null,
+              "manufacturer_name": "AION Labs",
+              "technology_ids": [],
+              "technical_definition": {
+                "specification": {
+                  "supported_fdd_count": 2,
+                  "fdd_size_inch": 5.25,
+                  "fdd_density": "double density",
+                  "hdd_interface_supported": true
+                }
+              },
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Define exact floppy and HDD electrical interfaces, encodings, data separator/PLL, DMA/FIFO and firmware split. Specify what remains external"
+                },
+                {
+                  "number": 2,
+                  "kind": "testing",
+                  "description": "“HDD supported” is not a complete controller."
+                },
+                {
+                  "number": 3,
+                  "kind": "testing",
+                  "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                },
+                {
+                  "number": 4,
+                  "kind": "testing",
+                  "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                },
+                {
+                  "number": 5,
+                  "kind": "testing",
+                  "description": "Firmware image capacity/revision, programming and verification"
+                },
+                {
+                  "number": 6,
+                  "kind": "testing",
+                  "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage control",
+                    "description": "The controller supports {floppy_count} {floppy_size_inches}-inch double-density floppy drives and a hard-disk interface. Installed drives follow the dated product composition; interface support alone does not establish controller or complete-system qualification."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "floppy_count",
+                    "value": 2
+                  },
+                  {
+                    "key": "floppy_size_inches",
+                    "value": 5.25
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "actor.miniscribe",
+          "before": null,
+          "after": {
+            "id": "actor.miniscribe",
+            "kind": "organisation",
+            "name": "MiniScribe Corporation",
+            "description": "Manufacturer of the selected MiniScribe hard-disk mechanism; procurement terms and system qualification are recorded separately."
+          },
+          "content_sha256": "bea39259edac2de43f956b7e835f3006de0aaa43543a0b6949074eaede398f3e"
+        },
+        {
+          "record_id": "base_part.miniscribe_4010",
+          "before": null,
+          "after": {
+            "id": "base_part.miniscribe_4010",
+            "name": "MiniScribe 4010 hard-disk mechanism",
+            "kind": "material",
+            "description": "Purchased MiniScribe 4010 hard-disk mechanism.",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.miniscribe",
+            "supplier_actor_ids": [
+              "actor.miniscribe"
+            ],
+            "manufacturer_part_number": "4010",
+            "manufacturer_name": "MiniScribe",
+            "technology_ids": [],
+            "technical_definition": {
+              "specification": {
+                "capacity_mb": 10
+              }
+            },
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Qualify controller geometry, formatted capacity, defect handling, power rails and spin-up load, cooling, mounting, cabling and incoming acceptance before production release."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage mechanism",
+                  "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "model",
+                  "value": "MiniScribe 4010"
+                },
+                {
+                  "key": "unformatted_capacity_mb",
+                  "value": 10
+                }
+              ]
+            }
+          },
+          "content_sha256": "dd0f6a240ff99b9bb953d21a189e06327a0495f437a57427c88e0ba1d0320b0e"
+        },
+        {
+          "record_id": "device.storage.miniscribe_4010",
+          "before": null,
+          "after": {
+            "id": "device.storage.miniscribe_4010",
+            "name": "MiniScribe 4010 internal HDD",
+            "kind": "storage_device",
+            "description": "Internal MiniScribe 4010 hard-disk assembly with control/data cabling and mounting hardware.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "MiniScribe 4010 assembly selected for NCC 1982 configurations",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc82_graphics_mouse"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "connection": "internal_storage",
+                  "specification": {
+                    "capacity_mb": 10
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.miniscribe_4010"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.storage.st506.control_data_cables"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.storage.st506.mounting_set"
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage mechanism",
+                  "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "model",
+                  "value": "MiniScribe 4010"
+                },
+                {
+                  "key": "unformatted_capacity_mb",
+                  "value": 10
+                }
+              ]
+            }
+          },
+          "content_sha256": "b47fa486a585da0ac077ac26f98e87c5895ae61f6e7b3c8eae985b8ccac40096"
+        },
+        {
+          "record_id": "device.base_computer.artemis",
+          "before": {
+            "id": "device.base_computer.artemis",
+            "name": "Logix Artemis — base computer",
+            "kind": "base_computer",
+            "description": "Logix Artemis — base computer",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.era1_isa",
+              "technology.artemis_memory_model",
+              "technology.flexibus",
+              "technology.plug_and_execute",
+              "technology.xip_rom_platform",
+              "technology.logix_digital_video",
+              "technology.aionix_os_model",
+              "technology.cpm80_virtual_peripheral_bridge",
+              "technology.aion_c_portability_framework",
+              "technology.logix_tcpip_lan",
+              "technology.logix_lan100_link"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.artemis_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "processor": {
+                    "part_id": "base_part.erav1_6mhz"
+                  },
+                  "form_factor": "full desktop",
+                  "io_and_expansion": {
+                    "expansion_slots": {
+                      "width_bits": 32,
+                      "plug_and_execute": true
+                    },
+                    "rom_eeprom_cartridge_slots": {
+                      "rear": "operating system",
+                      "front": "office/application cartridge"
+                    },
+                    "dedicated_video_slot": {
+                      "replaceable": true,
+                      "hot_swap": false,
+                      "general_purpose_slots_consumed": 0,
+                      "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
+                    }
+                  },
+                  "configuration_requirements": {
+                    "scope": "complete_system",
+                    "rules": [
+                      "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                      "Installed cartridges must match software platform and socket role.",
+                      "A monitor connects to an installed video provider, not to an empty video-card socket."
+                    ],
+                    "external_application_cartridges_supported": true
+                  },
+                  "memory_constraints": {
+                    "max_ram_kib": 1024,
+                    "mixed_module_types_allowed": false
+                  },
+                  "technical_profile": {
+                    "memory": {
+                      "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                      "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
+                      "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
+                      "bank_data_width_bits": 32,
+                      "parity_bits": 0
+                    },
+                    "software_compatibility": {
+                      "native_target": "era_aionix",
+                      "api_id": "technology.aion_c_portability_framework",
+                      "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
+                    }
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.erav1_6mhz"
+                    },
+                    "quantity": 1,
+                    "element_type": "CPU"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.artemis_dma"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.artemis_mmu"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.artemis_fdd_hdd_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.flexibus_host_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.paired_bank_dram_controller_refresh_and_data_buffers"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.mainboard_pcb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.psu"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.enclosure_and_chassis"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.boot_rom_chips"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.clock_reset_interrupts_mapper_and_bus_buffers"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_12",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.connectors_passives_fasteners_and_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_13",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis.documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_14",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis.mains_cable"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_15",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis.packout"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_16",
+                    "target": {
+                      "record_id": "base_part.device.storage.computer.artemis.525_inch_double_density_floppy_mechanism.controller_cable"
+                    },
+                    "quantity": 1,
+                    "element_type": "One shared FDD data harness per base computer"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Replace old module model with the two-density, four-bank architecture. Add DRAM controller/refresh/buffers and capacity straps, numeric physical map, boot/reset ROM path, bus width adapters and exact custom-chip quantities/packages. Define FDD mechanisms and HDD interface even when no HDD ships. Determine which chip implements four FlexiBUS ports."
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Firmware image capacity/revision, programming and verification"
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                  },
+                  {
+                    "number": 6,
+                    "kind": "testing",
+                    "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify the selected 16/32 KiB card and 1 KiB sprite SRAM; Mono Pro is offered with the 32 KiB card only."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "memory",
+                    "name": "RAM modules",
+                    "sockets": [
+                      {
+                        "id": "ram",
+                        "name": "RAM sockets",
+                        "connection": "memory_module",
+                        "capacity": 8,
+                        "compatible_device_ids": [
+                          "device.ram_64kb_x32",
+                          "device.ram_128kb_x32",
+                          "device.ram_256kb_x32"
+                        ],
+                        "installation_multiple": 2,
+                        "matched_modules": true,
+                        "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "expansion",
+                    "name": "Expansion cards",
+                    "sockets": [
+                      {
+                        "id": "expansion",
+                        "name": "General expansion slots",
+                        "connection": "expansion_card",
+                        "capacity": 4,
+                        "compatible_device_ids": [
+                          "device.artemis_cpm80_module",
+                          "device.artemis_professional_video_128kb",
+                          "device.network_card_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "graphics",
+                    "name": "Video card",
+                    "sockets": [
+                      {
+                        "id": "video_card",
+                        "name": "Dedicated video slot",
+                        "connection": "dedicated_video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.artemis_video_card",
+                          "device.artemis_video_card_16kb",
+                          "device.artemis_video_card_64kb"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cartridges",
+                    "name": "ROM cartridges",
+                    "sockets": [
+                      {
+                        "id": "system_cartridge",
+                        "name": "System cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.rom_cartridge.aionix",
+                          "device.rom_cartridge.aionix_server"
+                        ]
+                      },
+                      {
+                        "id": "application_cartridge",
+                        "name": "Application cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.rom_cartridge.business_tools_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "external",
+                    "name": "External connections",
+                    "sockets": [
+                      {
+                        "id": "flexibus",
+                        "name": "FlexiBUS ports",
+                        "connection": "flexibus",
+                        "capacity": 4,
+                        "compatible_device_ids": [
+                          "device.flexibus_keyboard",
+                          "device.flexiprint40",
+                          "device.flexidisk",
+                          "device.flexidisk_ii",
+                          "device.logix_mouse"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "internal_drive",
+                    "name": "Internal storage",
+                    "sockets": [
+                      {
+                        "id": "internal_drive",
+                        "name": "Internal drive bays",
+                        "connection": "internal_storage",
+                        "capacity": 2,
+                        "compatible_device_ids": [
+                          "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                          "device.storage.hdd_5mb"
+                        ],
+                        "requirements": [
+                          "Recorded fitted-drive count; additional spare bays are not established."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "System architecture",
+                  "description": "Logix Artemis — base computer is a full desktop built around {processor_id}.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "RAM population and software environment",
+                  "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "processor_id",
+                  "ref_id": "base_part.erav1_6mhz",
+                  "ref_role": "Processor fitted to this computer"
+                },
+                {
+                  "key": "expansion_bus_bits",
+                  "value": 32
+                },
+                {
+                  "key": "maximum_ram_kib",
+                  "value": 1024
+                },
+                {
+                  "key": "application_api_id",
+                  "ref_id": "technology.aion_c_portability_framework",
+                  "ref_role": "Portable application interface on this host"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.base_computer.artemis",
+            "name": "Logix Artemis — base computer",
+            "kind": "base_computer",
+            "description": "Logix Artemis — base computer",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.era1_isa",
+              "technology.artemis_memory_model",
+              "technology.flexibus",
+              "technology.plug_and_execute",
+              "technology.xip_rom_platform",
+              "technology.logix_digital_video",
+              "technology.aionix_os_model",
+              "technology.cpm80_virtual_peripheral_bridge",
+              "technology.aion_c_portability_framework",
+              "technology.logix_tcpip_lan",
+              "technology.logix_lan100_link"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.artemis_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "processor": {
+                    "part_id": "base_part.erav1_6mhz"
+                  },
+                  "form_factor": "full desktop",
+                  "io_and_expansion": {
+                    "expansion_slots": {
+                      "width_bits": 32,
+                      "plug_and_execute": true
+                    },
+                    "rom_eeprom_cartridge_slots": {
+                      "rear": "operating system",
+                      "front": "office/application cartridge"
+                    },
+                    "dedicated_video_slot": {
+                      "replaceable": true,
+                      "hot_swap": false,
+                      "general_purpose_slots_consumed": 0,
+                      "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
+                    }
+                  },
+                  "configuration_requirements": {
+                    "scope": "complete_system",
+                    "rules": [
+                      "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                      "Installed cartridges must match software platform and socket role.",
+                      "A monitor connects to an installed video provider, not to an empty video-card socket."
+                    ],
+                    "external_application_cartridges_supported": true
+                  },
+                  "memory_constraints": {
+                    "max_ram_kib": 1024,
+                    "mixed_module_types_allowed": false
+                  },
+                  "technical_profile": {
+                    "memory": {
+                      "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                      "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
+                      "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
+                      "bank_data_width_bits": 32,
+                      "parity_bits": 0
+                    },
+                    "software_compatibility": {
+                      "native_target": "era_aionix",
+                      "api_id": "technology.aion_c_portability_framework",
+                      "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
+                    }
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.erav1_6mhz"
+                    },
+                    "quantity": 1,
+                    "element_type": "CPU"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.artemis_dma"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.artemis_mmu"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.artemis_fdd_hdd_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.flexibus_host_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.paired_bank_dram_controller_refresh_and_data_buffers"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.mainboard_pcb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.psu"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.enclosure_and_chassis"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.boot_rom_chips"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.clock_reset_interrupts_mapper_and_bus_buffers"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_12",
+                    "target": {
+                      "record_id": "base_part.computer.artemis.connectors_passives_fasteners_and_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_13",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis.documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_14",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis.mains_cable"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_15",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis.packout"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_16",
+                    "target": {
+                      "record_id": "base_part.device.storage.computer.artemis.525_inch_double_density_floppy_mechanism.controller_cable"
+                    },
+                    "quantity": 1,
+                    "element_type": "One shared FDD data harness per base computer"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Replace old module model with the two-density, four-bank architecture. Add DRAM controller/refresh/buffers and capacity straps, numeric physical map, boot/reset ROM path, bus width adapters and exact custom-chip quantities/packages. Define FDD mechanisms and HDD interface even when no HDD ships. Determine which chip implements four FlexiBUS ports."
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Firmware image capacity/revision, programming and verification"
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                  },
+                  {
+                    "number": 6,
+                    "kind": "testing",
+                    "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify the selected 16/32 KiB card and 1 KiB sprite SRAM; Mono Pro is offered with the 32 KiB card only."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "memory",
+                    "name": "RAM modules",
+                    "sockets": [
+                      {
+                        "id": "ram",
+                        "name": "RAM sockets",
+                        "connection": "memory_module",
+                        "capacity": 8,
+                        "compatible_device_ids": [
+                          "device.ram_64kb_x32",
+                          "device.ram_128kb_x32",
+                          "device.ram_256kb_x32"
+                        ],
+                        "installation_multiple": 2,
+                        "matched_modules": true,
+                        "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "expansion",
+                    "name": "Expansion cards",
+                    "sockets": [
+                      {
+                        "id": "expansion",
+                        "name": "General expansion slots",
+                        "connection": "expansion_card",
+                        "capacity": 4,
+                        "compatible_device_ids": [
+                          "device.artemis_cpm80_module",
+                          "device.artemis_professional_video_128kb",
+                          "device.network_card_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "graphics",
+                    "name": "Video card",
+                    "sockets": [
+                      {
+                        "id": "video_card",
+                        "name": "Dedicated video slot",
+                        "connection": "dedicated_video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.artemis_video_card",
+                          "device.artemis_video_card_16kb",
+                          "device.artemis_video_card_64kb"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cartridges",
+                    "name": "ROM cartridges",
+                    "sockets": [
+                      {
+                        "id": "system_cartridge",
+                        "name": "System cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.rom_cartridge.aionix",
+                          "device.rom_cartridge.aionix_server"
+                        ]
+                      },
+                      {
+                        "id": "application_cartridge",
+                        "name": "Application cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.rom_cartridge.business_tools_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "external",
+                    "name": "External connections",
+                    "sockets": [
+                      {
+                        "id": "flexibus",
+                        "name": "FlexiBUS ports",
+                        "connection": "flexibus",
+                        "capacity": 4,
+                        "compatible_device_ids": [
+                          "device.flexibus_keyboard",
+                          "device.flexiprint40",
+                          "device.flexidisk",
+                          "device.flexidisk_ii",
+                          "device.logix_mouse"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "internal_drive",
+                    "name": "Internal storage",
+                    "sockets": [
+                      {
+                        "id": "internal_drive",
+                        "name": "Internal drive bays",
+                        "connection": "internal_storage",
+                        "capacity": 2,
+                        "compatible_device_ids": [
+                          "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                          "device.storage.hdd_5mb",
+                          "device.storage.miniscribe_4010"
+                        ],
+                        "requirements": [
+                          "Recorded fitted-drive count; additional spare bays are not established."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "System architecture",
+                  "description": "Logix Artemis — base computer is a full desktop built around {processor_id}.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "RAM population and software environment",
+                  "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "processor_id",
+                  "ref_id": "base_part.erav1_6mhz",
+                  "ref_role": "Processor fitted to this computer"
+                },
+                {
+                  "key": "expansion_bus_bits",
+                  "value": 32
+                },
+                {
+                  "key": "maximum_ram_kib",
+                  "value": 1024
+                },
+                {
+                  "key": "application_api_id",
+                  "ref_id": "technology.aion_c_portability_framework",
+                  "ref_role": "Portable application interface on this host"
+                }
+              ]
+            }
+          },
+          "content_sha256": "8ff8735e6b6188486c388fab1d90d9026685bd65a81c8fcc08f892fc37644559"
+        },
+        {
+          "record_id": "device.base_computer.artemis_pro",
+          "before": {
+            "id": "device.base_computer.artemis_pro",
+            "name": "Logix Artemis PRO — base computer",
+            "kind": "base_computer",
+            "description": "Logix Artemis PRO — base computer",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.era1_isa",
+              "technology.artemis_memory_model",
+              "technology.flexibus",
+              "technology.plug_and_execute",
+              "technology.xip_rom_platform",
+              "technology.logix_digital_video",
+              "technology.aionix_os_model",
+              "technology.aion_c_portability_framework",
+              "technology.logix_tcpip_lan",
+              "technology.logix_lan100_link",
+              "technology.nmos_3um"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "processor": {
+                    "part_id": "base_part.erav1_8mhz"
+                  },
+                  "form_factor": "full desktop / server",
+                  "io_and_expansion": {
+                    "expansion_slots": {
+                      "width_bits": 32,
+                      "plug_and_execute": true
+                    },
+                    "rom_eeprom_cartridge_slots": {
+                      "rear": "operating system",
+                      "front": "office/application cartridge"
+                    },
+                    "dedicated_video_slot": {
+                      "replaceable": true,
+                      "hot_swap": false,
+                      "general_purpose_slots_consumed": 0,
+                      "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
+                    }
+                  },
+                  "configuration_requirements": {
+                    "scope": "complete_system",
+                    "rules": [
+                      "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                      "Installed cartridges must match software platform and socket role.",
+                      "A monitor connects to an installed video provider, not to an empty video-card socket."
+                    ],
+                    "external_application_cartridges_supported": true
+                  },
+                  "memory_constraints": {
+                    "max_ram_kib": 1024,
+                    "mixed_module_types_allowed": false
+                  },
+                  "integration_requirements": {
+                    "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
+                  },
+                  "role": "network server",
+                  "technical_profile": {
+                    "memory": {
+                      "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                      "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
+                      "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
+                      "bank_data_width_bits": 32,
+                      "parity_bits": 0,
+                      "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
+                    },
+                    "software_compatibility": {
+                      "native_target": "era_aionix",
+                      "api_id": "technology.aion_c_portability_framework",
+                      "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
+                    },
+                    "networking": {
+                      "technology_ids": [
+                        "technology.logix_tcpip_lan",
+                        "technology.logix_lan100_link"
+                      ],
+                      "server_role": true,
+                      "implementation": "One removable NIC occupying one of the four general-purpose expansion slots; not additional integrated circuitry.",
+                      "supported_rates_kbps": [
+                        100,
+                        250,
+                        500,
+                        1000
+                      ],
+                      "qualified_max_rate_kbps": 1000,
+                      "rate_policy": "Firmware-enforced host ceiling; actual common network rate also depends on every admitted station and qualified link.",
+                      "computer_id": "device.base_computer.artemis_pro"
+                    }
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.erav1_8mhz"
+                    },
+                    "quantity": 1,
+                    "element_type": "CPU"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.artemis_dma"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.artemis_mmu"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.artemis_fdd_hdd_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.flexibus_host_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.paired_bank_dram_controller_refresh_and_data_buffers"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.mainboard_pcb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.psu"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.enclosure_and_chassis"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.boot_rom_chips"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.clock_reset_interrupts_mapper_and_bus_buffers"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_12",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.connectors_passives_fasteners_and_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_13",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis_pro.documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_14",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis_pro.mains_cable"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_15",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis_pro.packout"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_16",
+                    "target": {
+                      "record_id": "base_part.device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism.controller_cable"
+                    },
+                    "quantity": 1,
+                    "element_type": "One shared FDD data harness per base computer"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Remove 128 Kbit dependency"
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "use four/eight high-density modules and two/four banks. Specify 8 MHz die/speed-bin and MMU timing, power and cooling at full population, exact HDD model and interface/format, network integration boundary, optional parity policy, RTC/battery need, and boot/service-console policy. Original server-only bundles exclude keyboard/monitor and still require validated headless operation or an optional console. New Mono Pro console bundles explicitly include both."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Firmware image capacity/revision, programming and verification"
+                  },
+                  {
+                    "number": 6,
+                    "kind": "testing",
+                    "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                  },
+                  {
+                    "number": 7,
+                    "kind": "testing",
+                    "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify 32 KiB DRAM, 1 KiB sprite SRAM and Mono Pro timings together."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "memory",
+                    "name": "RAM modules",
+                    "sockets": [
+                      {
+                        "id": "ram",
+                        "name": "RAM sockets",
+                        "connection": "memory_module",
+                        "capacity": 8,
+                        "compatible_device_ids": [
+                          "device.ram_256kb_x32",
+                          "device.ram_128kb_x32"
+                        ],
+                        "installation_multiple": 2,
+                        "matched_modules": true,
+                        "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "expansion",
+                    "name": "Expansion cards",
+                    "sockets": [
+                      {
+                        "id": "expansion",
+                        "name": "General expansion slots",
+                        "connection": "expansion_card",
+                        "capacity": 4,
+                        "compatible_device_ids": [
+                          "device.artemis_professional_video_128kb",
+                          "device.network_card_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "graphics",
+                    "name": "Video card",
+                    "sockets": [
+                      {
+                        "id": "video_card",
+                        "name": "Dedicated video slot",
+                        "connection": "dedicated_video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.artemis_video_card",
+                          "device.artemis_video_card_64kb"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cartridges",
+                    "name": "ROM cartridges",
+                    "sockets": [
+                      {
+                        "id": "system_cartridge",
+                        "name": "System cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.rom_cartridge.aionix",
+                          "device.rom_cartridge.aionix_server"
+                        ]
+                      },
+                      {
+                        "id": "application_cartridge",
+                        "name": "Application cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.rom_cartridge.business_tools_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "external",
+                    "name": "External connections",
+                    "sockets": [
+                      {
+                        "id": "flexibus",
+                        "name": "FlexiBUS ports",
+                        "connection": "flexibus",
+                        "capacity": 4,
+                        "compatible_device_ids": [
+                          "device.flexibus_keyboard",
+                          "device.flexiprint40",
+                          "device.flexidisk",
+                          "device.flexidisk_ii",
+                          "device.logix_mouse"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "internal_drive",
+                    "name": "Internal storage",
+                    "sockets": [
+                      {
+                        "id": "internal_drive",
+                        "name": "Internal drive bays",
+                        "connection": "internal_storage",
+                        "capacity": 3,
+                        "compatible_device_ids": [
+                          "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
+                          "device.storage.hdd_5mb"
+                        ],
+                        "requirements": [
+                          "Recorded fitted-drive count; additional spare bays are not established."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "System architecture",
+                  "description": "Logix Artemis PRO — base computer is a full desktop / server built around {processor_id}. The PRO configuration serves as a network server.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "RAM population and software environment",
+                  "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nQualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Network service",
+                  "description": "One removable NIC occupies one of the four general-purpose slots, providing server operation over {network_stack_id} and {network_link_id}. Firmware permits {supported_network_rates_kbps} kbit/s, with the highest listed rate as its ceiling. The actual common rate also depends on every admitted station and qualified link."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "processor_id",
+                  "ref_id": "base_part.erav1_8mhz",
+                  "ref_role": "Processor fitted to this computer"
+                },
+                {
+                  "key": "expansion_bus_bits",
+                  "value": 32
+                },
+                {
+                  "key": "maximum_ram_kib",
+                  "value": 1024
+                },
+                {
+                  "key": "application_api_id",
+                  "ref_id": "technology.aion_c_portability_framework",
+                  "ref_role": "Portable application interface on this host"
+                },
+                {
+                  "key": "network_stack_id",
+                  "ref_id": "technology.logix_tcpip_lan",
+                  "ref_role": "Network stack used by the server"
+                },
+                {
+                  "key": "network_link_id",
+                  "ref_id": "technology.logix_lan100_link",
+                  "ref_role": "Shared-rate link and negotiation protocol"
+                },
+                {
+                  "key": "supported_network_rates_kbps",
+                  "value": "100, 250, 500, 1000"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.base_computer.artemis_pro",
+            "name": "Logix Artemis PRO — base computer",
+            "kind": "base_computer",
+            "description": "Logix Artemis PRO — base computer",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [
+              "technology.era1_isa",
+              "technology.artemis_memory_model",
+              "technology.flexibus",
+              "technology.plug_and_execute",
+              "technology.xip_rom_platform",
+              "technology.logix_digital_video",
+              "technology.aionix_os_model",
+              "technology.aion_c_portability_framework",
+              "technology.logix_tcpip_lan",
+              "technology.logix_lan100_link",
+              "technology.nmos_3um"
+            ],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "processor": {
+                    "part_id": "base_part.erav1_8mhz"
+                  },
+                  "form_factor": "full desktop / server",
+                  "io_and_expansion": {
+                    "expansion_slots": {
+                      "width_bits": 32,
+                      "plug_and_execute": true
+                    },
+                    "rom_eeprom_cartridge_slots": {
+                      "rear": "operating system",
+                      "front": "office/application cartridge"
+                    },
+                    "dedicated_video_slot": {
+                      "replaceable": true,
+                      "hot_swap": false,
+                      "general_purpose_slots_consumed": 0,
+                      "interface": "Keyed dedicated connector; buffered host data/address, wait/ready, DMA access and independent card clocks; electrical pinout pending."
+                    }
+                  },
+                  "configuration_requirements": {
+                    "scope": "complete_system",
+                    "rules": [
+                      "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                      "Installed cartridges must match software platform and socket role.",
+                      "A monitor connects to an installed video provider, not to an empty video-card socket."
+                    ],
+                    "external_application_cartridges_supported": true
+                  },
+                  "memory_constraints": {
+                    "max_ram_kib": 1024,
+                    "mixed_module_types_allowed": false
+                  },
+                  "integration_requirements": {
+                    "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
+                  },
+                  "role": "network server",
+                  "technical_profile": {
+                    "memory": {
+                      "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                      "upgrade_policy": "Use the shared module catalogue. Install matched pairs; preserve specified capacity. Replace all modules when changing density. Previous 16-bit population recipes are superseded.",
+                      "reliability_policy": "No parity or ECC is fitted; any future parity design requires a separate qualified BOM.",
+                      "bank_data_width_bits": 32,
+                      "parity_bits": 0,
+                      "sourcing_policy": "Qualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending."
+                    },
+                    "software_compatibility": {
+                      "native_target": "era_aionix",
+                      "api_id": "technology.aion_c_portability_framework",
+                      "adaptive_text": "Applications query usable columns/rows instead of selecting behavior from model name."
+                    },
+                    "networking": {
+                      "technology_ids": [
+                        "technology.logix_tcpip_lan",
+                        "technology.logix_lan100_link"
+                      ],
+                      "server_role": true,
+                      "implementation": "One removable NIC occupying one of the four general-purpose expansion slots; not additional integrated circuitry.",
+                      "supported_rates_kbps": [
+                        100,
+                        250,
+                        500,
+                        1000
+                      ],
+                      "qualified_max_rate_kbps": 1000,
+                      "rate_policy": "Firmware-enforced host ceiling; actual common network rate also depends on every admitted station and qualified link.",
+                      "computer_id": "device.base_computer.artemis_pro"
+                    }
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.erav1_8mhz"
+                    },
+                    "quantity": 1,
+                    "element_type": "CPU"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.artemis_dma"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.artemis_mmu"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "base_part.artemis_fdd_hdd_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.flexibus_host_controller"
+                    },
+                    "quantity": 1,
+                    "element_type": "One controller per owning device"
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.paired_bank_dram_controller_refresh_and_data_buffers"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.mainboard_pcb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.psu"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.enclosure_and_chassis"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.boot_rom_chips"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.clock_reset_interrupts_mapper_and_bus_buffers"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_12",
+                    "target": {
+                      "record_id": "base_part.computer.artemis_pro.connectors_passives_fasteners_and_harnesses"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_13",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis_pro.documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_14",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis_pro.mains_cable"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_15",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.artemis_pro.packout"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_16",
+                    "target": {
+                      "record_id": "base_part.device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism.controller_cable"
+                    },
+                    "quantity": 1,
+                    "element_type": "One shared FDD data harness per base computer"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Remove 128 Kbit dependency"
+                  },
+                  {
+                    "number": 2,
+                    "kind": "testing",
+                    "description": "use four/eight high-density modules and two/four banks. Specify 8 MHz die/speed-bin and MMU timing, power and cooling at full population, exact HDD model and interface/format, network integration boundary, optional parity policy, RTC/battery need, and boot/service-console policy. Original server-only bundles exclude keyboard/monitor and still require validated headless operation or an optional console. New Mono Pro console bundles explicitly include both."
+                  },
+                  {
+                    "number": 3,
+                    "kind": "testing",
+                    "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+                  },
+                  {
+                    "number": 4,
+                    "kind": "testing",
+                    "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+                  },
+                  {
+                    "number": 5,
+                    "kind": "testing",
+                    "description": "Firmware image capacity/revision, programming and verification"
+                  },
+                  {
+                    "number": 6,
+                    "kind": "testing",
+                    "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+                  },
+                  {
+                    "number": 7,
+                    "kind": "testing",
+                    "description": "One replaceable video card is included in every chassis, on a dedicated connector, in addition to four general-purpose slots. Qualify 32 KiB DRAM, 1 KiB sprite SRAM and Mono Pro timings together."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "memory",
+                    "name": "RAM modules",
+                    "sockets": [
+                      {
+                        "id": "ram",
+                        "name": "RAM sockets",
+                        "connection": "memory_module",
+                        "capacity": 8,
+                        "compatible_device_ids": [
+                          "device.ram_256kb_x32",
+                          "device.ram_128kb_x32"
+                        ],
+                        "installation_multiple": 2,
+                        "matched_modules": true,
+                        "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "expansion",
+                    "name": "Expansion cards",
+                    "sockets": [
+                      {
+                        "id": "expansion",
+                        "name": "General expansion slots",
+                        "connection": "expansion_card",
+                        "capacity": 4,
+                        "compatible_device_ids": [
+                          "device.artemis_professional_video_128kb",
+                          "device.network_card_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "graphics",
+                    "name": "Video card",
+                    "sockets": [
+                      {
+                        "id": "video_card",
+                        "name": "Dedicated video slot",
+                        "connection": "dedicated_video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.artemis_video_card",
+                          "device.artemis_video_card_64kb"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cartridges",
+                    "name": "ROM cartridges",
+                    "sockets": [
+                      {
+                        "id": "system_cartridge",
+                        "name": "System cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.rom_cartridge.aionix",
+                          "device.rom_cartridge.aionix_server"
+                        ]
+                      },
+                      {
+                        "id": "application_cartridge",
+                        "name": "Application cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.rom_cartridge.business_tools_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "external",
+                    "name": "External connections",
+                    "sockets": [
+                      {
+                        "id": "flexibus",
+                        "name": "FlexiBUS ports",
+                        "connection": "flexibus",
+                        "capacity": 4,
+                        "compatible_device_ids": [
+                          "device.flexibus_keyboard",
+                          "device.flexiprint40",
+                          "device.flexidisk",
+                          "device.flexidisk_ii",
+                          "device.logix_mouse"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "internal_drive",
+                    "name": "Internal storage",
+                    "sockets": [
+                      {
+                        "id": "internal_drive",
+                        "name": "Internal drive bays",
+                        "connection": "internal_storage",
+                        "capacity": 3,
+                        "compatible_device_ids": [
+                          "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
+                          "device.storage.hdd_5mb",
+                          "device.storage.miniscribe_4010"
+                        ],
+                        "requirements": [
+                          "Recorded fitted-drive count; additional spare bays are not established."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "System architecture",
+                  "description": "Logix Artemis PRO — base computer is a full desktop / server built around {processor_id}. The PRO configuration serves as a network server.\n\nThe {expansion_bus_bits}-bit expansion interface supports Plug and Execute. The rear ROM/EEPROM position serves the operating system and the front position serves office/application software. The host provides a dedicated keyed connector for a separately installed, non-hot-swappable video card without consuming a general-purpose slot; buffered data/address, wait/ready and DMA access are provided, but electrical pinout remains open.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. Cartridges must match both the software platform and their socket role; external application cartridges are supported.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "RAM population and software environment",
+                  "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. The system RAM limit is {maximum_ram_kib} KiB. No parity or ECC is fitted; adding it requires a separately qualified BOM.\n\nQualified AION 64K×1 grades for 256 KB modules: 64/128 chips for the 512 KB/1 MB shipping capacities. The 768 KB target uses paired 128 KB two-rank 16K×1 modules. Shared interface and full-population qualification pending.\n\nNative ERA/AIONix applications use {application_api_id}. Applications query the capabilities of the separately installed display hardware."
+                },
+                {
+                  "number": 3,
+                  "chapter_name": "Network service",
+                  "description": "One removable NIC occupies one of the four general-purpose slots, providing server operation over {network_stack_id} and {network_link_id}. Firmware permits {supported_network_rates_kbps} kbit/s, with the highest listed rate as its ceiling. The actual common rate also depends on every admitted station and qualified link."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "processor_id",
+                  "ref_id": "base_part.erav1_8mhz",
+                  "ref_role": "Processor fitted to this computer"
+                },
+                {
+                  "key": "expansion_bus_bits",
+                  "value": 32
+                },
+                {
+                  "key": "maximum_ram_kib",
+                  "value": 1024
+                },
+                {
+                  "key": "application_api_id",
+                  "ref_id": "technology.aion_c_portability_framework",
+                  "ref_role": "Portable application interface on this host"
+                },
+                {
+                  "key": "network_stack_id",
+                  "ref_id": "technology.logix_tcpip_lan",
+                  "ref_role": "Network stack used by the server"
+                },
+                {
+                  "key": "network_link_id",
+                  "ref_id": "technology.logix_lan100_link",
+                  "ref_role": "Shared-rate link and negotiation protocol"
+                },
+                {
+                  "key": "supported_network_rates_kbps",
+                  "value": "100, 250, 500, 1000"
+                }
+              ]
+            }
+          },
+          "content_sha256": "728e6f01af0bb3a5277c01fa2c36a2f558d4fba757c0dc10b1b95c64ebf90f4b"
+        },
+        {
+          "record_id": "base_part.artemis_fdd_hdd_controller",
+          "before": {
+            "id": "base_part.artemis_fdd_hdd_controller",
+            "name": "Artemis custom FDD/HDD controller",
+            "kind": "integrated_circuit",
+            "description": "Artemis custom FDD/HDD controller",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.labs",
+            "supplier_actor_ids": [
+              "actor.labs"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "AION Labs",
+            "technology_ids": [],
+            "technical_definition": {
+              "specification": {
+                "supported_fdd_count": 2,
+                "fdd_size_inch": 5.25,
+                "fdd_density": "double density",
+                "hdd_interface_supported": true,
+                "hdd_bundled_with_standard_artemis": false
+              }
+            },
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Define exact floppy and HDD electrical interfaces, encodings, data separator/PLL, DMA/FIFO and firmware split. Specify what remains external"
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "“HDD supported” is not a complete controller."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+              },
+              {
+                "number": 4,
+                "kind": "testing",
+                "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+              },
+              {
+                "number": 5,
+                "kind": "testing",
+                "description": "Firmware image capacity/revision, programming and verification"
+              },
+              {
+                "number": 6,
+                "kind": "testing",
+                "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage control",
+                  "description": "The controller supports {floppy_count} {floppy_size_inches}-inch double-density floppy drives and a hard-disk interface. Hard-disk interface support does not mean an HDD is bundled with standard Artemis."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "floppy_count",
+                  "value": 2
+                },
+                {
+                  "key": "floppy_size_inches",
+                  "value": 5.25
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "base_part.artemis_fdd_hdd_controller",
+            "name": "Artemis custom FDD/HDD controller",
+            "kind": "integrated_circuit",
+            "description": "Artemis custom FDD/HDD controller",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.labs",
+            "supplier_actor_ids": [
+              "actor.labs"
+            ],
+            "manufacturer_part_number": null,
+            "manufacturer_name": "AION Labs",
+            "technology_ids": [],
+            "technical_definition": {
+              "specification": {
+                "supported_fdd_count": 2,
+                "fdd_size_inch": 5.25,
+                "fdd_density": "double density",
+                "hdd_interface_supported": true
+              }
+            },
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Define exact floppy and HDD electrical interfaces, encodings, data separator/PLL, DMA/FIFO and firmware split. Specify what remains external"
+              },
+              {
+                "number": 2,
+                "kind": "testing",
+                "description": "“HDD supported” is not a complete controller."
+              },
+              {
+                "number": 3,
+                "kind": "testing",
+                "description": "PCB dimensions, layer stack, finish, connectors, fitted passives and reference designators"
+              },
+              {
+                "number": 4,
+                "kind": "testing",
+                "description": "Power per rail, startup/thermal limits and region-specific power configuration"
+              },
+              {
+                "number": 5,
+                "kind": "testing",
+                "description": "Firmware image capacity/revision, programming and verification"
+              },
+              {
+                "number": 6,
+                "kind": "testing",
+                "description": "Assembly routing, test fixtures, cycle times, yield/rework/scrap and packout"
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage control",
+                  "description": "The controller supports {floppy_count} {floppy_size_inches}-inch double-density floppy drives and a hard-disk interface. Installed drives follow the dated product composition; interface support alone does not establish controller or complete-system qualification."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "floppy_count",
+                  "value": 2
+                },
+                {
+                  "key": "floppy_size_inches",
+                  "value": 5.25
+                }
+              ]
+            }
+          },
+          "content_sha256": "7e9cdd0f9a8ee16ef1b72279ac3889b639915332ff790565c4c9be1dbf8aa07a"
+        }
+      ]
+    }
+  ]
+}

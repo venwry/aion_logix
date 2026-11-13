@@ -1,0 +1,3057 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.f61bf01b-b3b4-47dd-b1fd-ce11cb517cdb",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T20:09:21.436Z",
+      "change_id": "change.storage_athena_hdd_selection",
+      "proposal_sha256": "202f3280aa6515fe86514253ec91a61b0f3ef1fce4dec2ddfbd50b23b0a6b55a",
+      "proposal": {
+        "id": "change.storage_athena_hdd_selection",
+        "category": "data",
+        "title": "Select MiniScribe 4010 for Athena and Quantum Q540 for Athena Server",
+        "reason": "Author confirms Athena PRO means existing Athena Server. Both existing offerings already contain one FDD and one HDD; update their canonical HDD assemblies rather than duplicate product configuration. Use the specified unformatted capacities, with usable capacity established by controller format. Reconcile host requirements, engineering assumptions and the premiere description. Quantum $1,485 is the supplied OEM benchmark (previous research: 100-unit pricing); no 1,000-unit discount is inferred. Keep the older Rodime part as an unused historical definition rather than deleting it without instruction. Q540 premiere use is a planning selection, not proof of volume availability.",
+        "depends_on_change_ids": [
+          "change.storage_miniscribe_4010"
+        ],
+        "elements": [
+          {
+            "record_type": "actor",
+            "record_id": "actor.quantum",
+            "before": null,
+            "after": {
+              "id": "actor.quantum",
+              "kind": "organisation",
+              "name": "Quantum Corporation",
+              "description": "Manufacturer of the selected Quantum hard-disk mechanism; procurement terms and system qualification are recorded separately."
+            }
+          },
+          {
+            "record_type": "base_part",
+            "record_id": "base_part.quantum_q540",
+            "before": null,
+            "after": {
+              "id": "base_part.quantum_q540",
+              "name": "Quantum Q540 hard-disk mechanism",
+              "kind": "material",
+              "description": "Purchased Quantum Q540 hard-disk mechanism.",
+              "supply_form": "individual_part",
+              "manufacturer_actor_id": "actor.quantum",
+              "supplier_actor_ids": [
+                "actor.quantum"
+              ],
+              "manufacturer_part_number": "Q540",
+              "manufacturer_name": "Quantum",
+              "technology_ids": [],
+              "technical_definition": {
+                "specification": {
+                  "capacity_mb": 43
+                }
+              },
+              "specification": [],
+              "requirements": [
+                {
+                  "number": 1,
+                  "kind": "testing",
+                  "description": "Qualify controller geometry, formatted capacity, defect handling, power rails and spin-up load, cooling, mounting, cabling and incoming acceptance before production release."
+                }
+              ],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage mechanism",
+                    "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "model",
+                    "value": "Quantum Q540"
+                  },
+                  {
+                    "key": "unformatted_capacity_mb",
+                    "value": 43
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.athena.hdd",
+            "before": {
+              "id": "device.athena.hdd",
+              "name": "Logix Athena Internal HDD",
+              "kind": "storage_device",
+              "description": "Logix Athena Internal HDD",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc83_athena_premiere"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "connection": "internal_storage",
+                    "specification": {
+                      "capacity_mb": 5,
+                      "interface": "ST-506 MFM interface"
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.hdd_5mb"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.storage.st506.control_data_cables"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.storage.st506.mounting_set"
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": []
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage mechanism",
+                    "description": "The internal hard disk provides {capacity_mb} MB through a {interface}."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "capacity_mb",
+                    "value": 5
+                  },
+                  {
+                    "key": "interface",
+                    "value": "ST-506 MFM interface"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.athena.hdd",
+              "name": "Logix Athena internal HDD — MiniScribe 4010",
+              "kind": "storage_device",
+              "description": "Internal MiniScribe 4010 hard-disk assembly.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc83_athena_premiere"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "connection": "internal_storage",
+                    "specification": {
+                      "capacity_mb": 10,
+                      "interface": "ST-506-compatible MFM interface"
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.miniscribe_4010"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.storage.st506.control_data_cables"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.storage.st506.mounting_set"
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage mechanism",
+                    "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "model",
+                    "value": "MiniScribe 4010"
+                  },
+                  {
+                    "key": "unformatted_capacity_mb",
+                    "value": 10
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.base_computer.athena",
+            "before": {
+              "id": "device.base_computer.athena",
+              "name": "Logix Athena — base computer",
+              "kind": "base_computer",
+              "description": "Logix Athena — base computer",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc83_athena_premiere"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "processor": {
+                      "part_id": "base_part.era2_12mhz"
+                    },
+                    "form_factor": "desktop/server chassis; mechanical design pending",
+                    "io_and_expansion": {
+                      "rom_eeprom_cartridge_slots": {},
+                      "application_rom_cards_supported": false,
+                      "eeprom_bios": {
+                        "included": true,
+                        "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
+                      }
+                    },
+                    "configuration_requirements": {
+                      "scope": "complete_system",
+                      "rules": [
+                        "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                        "Installed cartridges must match software platform and socket role.",
+                        "A monitor connects to an installed video provider, not to an empty video-card socket."
+                      ],
+                      "external_application_cartridges_supported": false
+                    },
+                    "memory_constraints": {
+                      "max_ram_kib": null,
+                      "mixed_module_types_allowed": false
+                    },
+                    "technical_profile": {
+                      "memory": {
+                        "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                        "capacity_policy": "Installed configuration is specified; maximum board capacity/socket count remain open and are not the CPU address-space limit.",
+                        "bank_data_width_bits": 32,
+                        "os_rom": {
+                          "capacity_bytes": 262144,
+                          "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
+                          "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
+                        }
+                      },
+                      "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
+                      "network": {
+                        "computer_id": "device.base_computer.athena"
+                      }
+                    },
+                    "recommended_software_id": "software_edition.aionix2"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.era2_12mhz"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.athena.bios"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.athena.mainboard_set"
+                      },
+                      "quantity": 1,
+                      "element_type": "functional set"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "device.athena.system_rom",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "Included AIONix 2 system cartridge"
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena.documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena.mains_cable"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena.packout"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.athena.fdd.controller_cable"
+                      },
+                      "quantity": 1,
+                      "element_type": "One shared FDD data harness per base computer"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Storage sourcing: Seagate ST506 5 MB HDD and Shugart Associates SA450 DS/DD FDD. Preserve functional BOM sets; model, controller, rail/startup load, enclosure and formatted geometry qualification remain open. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "memory",
+                      "name": "RAM modules",
+                      "sockets": [
+                        {
+                          "id": "ram",
+                          "name": "RAM sockets",
+                          "connection": "memory_module",
+                          "capacity": null,
+                          "compatible_device_ids": [
+                            "device.ram_128kb_x32"
+                          ],
+                          "installation_multiple": 2,
+                          "matched_modules": true,
+                          "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "expansion",
+                      "name": "Expansion cards",
+                      "sockets": [
+                        {
+                          "id": "expansion",
+                          "name": "General expansion slots",
+                          "connection": "expansion_card",
+                          "capacity": null,
+                          "compatible_device_ids": [
+                            "device.network_card_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "graphics",
+                      "name": "Video card",
+                      "sockets": [
+                        {
+                          "id": "video_card",
+                          "name": "Dedicated video slot",
+                          "connection": "dedicated_video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.artemis_video_card_64kb"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cartridges",
+                      "name": "ROM cartridges",
+                      "sockets": [
+                        {
+                          "id": "system_cartridge",
+                          "name": "System cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.athena.system_rom"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "internal_drive",
+                      "name": "Internal storage",
+                      "sockets": [
+                        {
+                          "id": "internal_drive",
+                          "name": "Internal drive bays",
+                          "connection": "internal_storage",
+                          "capacity": 2,
+                          "compatible_device_ids": [
+                            "device.athena.fdd",
+                            "device.athena.hdd"
+                          ],
+                          "requirements": [
+                            "Recorded fitted-drive count; additional spare bays are not established."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "System architecture",
+                    "description": "Logix Athena — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "RAM population and software environment",
+                    "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "processor_id",
+                    "ref_id": "base_part.era2_12mhz",
+                    "ref_role": "Processor fitted to this computer"
+                  },
+                  {
+                    "key": "system_rom_bytes",
+                    "value": 262144
+                  },
+                  {
+                    "key": "recommended_system_id",
+                    "ref_id": "software_edition.aionix2",
+                    "ref_role": "Operating-system implementation for this host"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.base_computer.athena",
+              "name": "Logix Athena — base computer",
+              "kind": "base_computer",
+              "description": "Logix Athena — base computer",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc83_athena_premiere"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "processor": {
+                      "part_id": "base_part.era2_12mhz"
+                    },
+                    "form_factor": "desktop/server chassis; mechanical design pending",
+                    "io_and_expansion": {
+                      "rom_eeprom_cartridge_slots": {},
+                      "application_rom_cards_supported": false,
+                      "eeprom_bios": {
+                        "included": true,
+                        "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
+                      }
+                    },
+                    "configuration_requirements": {
+                      "scope": "complete_system",
+                      "rules": [
+                        "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                        "Installed cartridges must match software platform and socket role.",
+                        "A monitor connects to an installed video provider, not to an empty video-card socket."
+                      ],
+                      "external_application_cartridges_supported": false
+                    },
+                    "memory_constraints": {
+                      "max_ram_kib": null,
+                      "mixed_module_types_allowed": false
+                    },
+                    "technical_profile": {
+                      "memory": {
+                        "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                        "capacity_policy": "Installed configuration is specified; maximum board capacity/socket count remain open and are not the CPU address-space limit.",
+                        "bank_data_width_bits": 32,
+                        "os_rom": {
+                          "capacity_bytes": 262144,
+                          "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
+                          "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
+                        }
+                      },
+                      "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
+                      "network": {
+                        "computer_id": "device.base_computer.athena"
+                      }
+                    },
+                    "recommended_software_id": "software_edition.aionix2"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.era2_12mhz"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.athena.bios"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.athena.mainboard_set"
+                      },
+                      "quantity": 1,
+                      "element_type": "functional set"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "device.athena.system_rom",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "Included AIONix 2 system cartridge"
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena.documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena.mains_cable"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena.packout"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.athena.fdd.controller_cable"
+                      },
+                      "quantity": 1,
+                      "element_type": "One shared FDD data harness per base computer"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Storage sourcing: MiniScribe 4010 HDD (10 MB unformatted) and Shugart Associates SA450 DS/DD FDD. Qualify controller geometry, formatted capacity, rail/startup load, cooling, cabling and mounting before production release. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "memory",
+                      "name": "RAM modules",
+                      "sockets": [
+                        {
+                          "id": "ram",
+                          "name": "RAM sockets",
+                          "connection": "memory_module",
+                          "capacity": null,
+                          "compatible_device_ids": [
+                            "device.ram_128kb_x32"
+                          ],
+                          "installation_multiple": 2,
+                          "matched_modules": true,
+                          "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "expansion",
+                      "name": "Expansion cards",
+                      "sockets": [
+                        {
+                          "id": "expansion",
+                          "name": "General expansion slots",
+                          "connection": "expansion_card",
+                          "capacity": null,
+                          "compatible_device_ids": [
+                            "device.network_card_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "graphics",
+                      "name": "Video card",
+                      "sockets": [
+                        {
+                          "id": "video_card",
+                          "name": "Dedicated video slot",
+                          "connection": "dedicated_video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.artemis_video_card_64kb"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cartridges",
+                      "name": "ROM cartridges",
+                      "sockets": [
+                        {
+                          "id": "system_cartridge",
+                          "name": "System cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.athena.system_rom"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "internal_drive",
+                      "name": "Internal storage",
+                      "sockets": [
+                        {
+                          "id": "internal_drive",
+                          "name": "Internal drive bays",
+                          "connection": "internal_storage",
+                          "capacity": 2,
+                          "compatible_device_ids": [
+                            "device.athena.fdd",
+                            "device.athena.hdd"
+                          ],
+                          "requirements": [
+                            "Recorded fitted-drive count; additional spare bays are not established."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "System architecture",
+                    "description": "Logix Athena — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "RAM population and software environment",
+                    "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "processor_id",
+                    "ref_id": "base_part.era2_12mhz",
+                    "ref_role": "Processor fitted to this computer"
+                  },
+                  {
+                    "key": "system_rom_bytes",
+                    "value": 262144
+                  },
+                  {
+                    "key": "recommended_system_id",
+                    "ref_id": "software_edition.aionix2",
+                    "ref_role": "Operating-system implementation for this host"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.athena_server.hdd",
+            "before": {
+              "id": "device.athena_server.hdd",
+              "name": "Logix Athena Server Internal HDD",
+              "kind": "storage_device",
+              "description": "Logix Athena Server Internal HDD",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc83_athena_premiere"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "connection": "internal_storage",
+                    "specification": {
+                      "capacity_mb": 20,
+                      "interface": "ST-506-style MFM interface"
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.athena_server.hdd"
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": []
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage mechanism",
+                    "description": "The internal hard disk provides {capacity_mb} MB through a {interface}."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "capacity_mb",
+                    "value": 20
+                  },
+                  {
+                    "key": "interface",
+                    "value": "ST-506-style MFM interface"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.athena_server.hdd",
+              "name": "Logix Athena Server internal HDD — Quantum Q540",
+              "kind": "storage_device",
+              "description": "Internal Quantum Q540 hard-disk assembly.",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc83_athena_premiere"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "connection": "internal_storage",
+                    "specification": {
+                      "capacity_mb": 43,
+                      "interface": "ST-506-compatible MFM interface"
+                    }
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.quantum_q540"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.storage.st506.control_data_cables"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.storage.st506.mounting_set"
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "Storage mechanism",
+                    "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "model",
+                    "value": "Quantum Q540"
+                  },
+                  {
+                    "key": "unformatted_capacity_mb",
+                    "value": 43
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "device",
+            "record_id": "device.base_computer.athena_server",
+            "before": {
+              "id": "device.base_computer.athena_server",
+              "name": "Logix Athena Server — base computer",
+              "kind": "base_computer",
+              "description": "Logix Athena Server — base computer",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc83_athena_premiere"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "processor": {
+                      "part_id": "base_part.era2_12mhz"
+                    },
+                    "form_factor": "desktop/server chassis; mechanical design pending",
+                    "io_and_expansion": {
+                      "rom_eeprom_cartridge_slots": {},
+                      "application_rom_cards_supported": false,
+                      "eeprom_bios": {
+                        "included": true,
+                        "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
+                      }
+                    },
+                    "configuration_requirements": {
+                      "scope": "complete_system",
+                      "rules": [
+                        "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                        "Installed cartridges must match software platform and socket role.",
+                        "A monitor connects to an installed video provider, not to an empty video-card socket."
+                      ],
+                      "external_application_cartridges_supported": false
+                    },
+                    "memory_constraints": {
+                      "max_ram_kib": null,
+                      "mixed_module_types_allowed": false
+                    },
+                    "technical_profile": {
+                      "memory": {
+                        "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                        "capacity_policy": "Installed configuration is specified; maximum board capacity/socket count remain open and are not the CPU address-space limit.",
+                        "bank_data_width_bits": 32,
+                        "os_rom": {
+                          "capacity_bytes": 262144,
+                          "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
+                          "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
+                        }
+                      },
+                      "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
+                      "network": {
+                        "computer_id": "device.base_computer.athena_server"
+                      }
+                    },
+                    "recommended_software_id": "software_edition.aionix2"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.era2_12mhz"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.athena_server.bios"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.athena_server.mainboard_set"
+                      },
+                      "quantity": 1,
+                      "element_type": "functional set"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "device.athena_server.system_rom",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "Included AIONix 2 system cartridge"
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena_server.documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena_server.mains_cable"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena_server.packout"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.athena_server.fdd.controller_cable"
+                      },
+                      "quantity": 1,
+                      "element_type": "One shared FDD data harness per base computer"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Storage sourcing: Rodime RO202E 20 MB HDD and Shugart Associates SA450 DS/DD FDD. Preserve functional BOM sets; model, controller, rail/startup load, enclosure and formatted geometry qualification remain open. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "memory",
+                      "name": "RAM modules",
+                      "sockets": [
+                        {
+                          "id": "ram",
+                          "name": "RAM sockets",
+                          "connection": "memory_module",
+                          "capacity": null,
+                          "compatible_device_ids": [
+                            "device.ram_256kb_x32_2um"
+                          ],
+                          "installation_multiple": 2,
+                          "matched_modules": true,
+                          "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "expansion",
+                      "name": "Expansion cards",
+                      "sockets": [
+                        {
+                          "id": "expansion",
+                          "name": "General expansion slots",
+                          "connection": "expansion_card",
+                          "capacity": null,
+                          "compatible_device_ids": [
+                            "device.network_card_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "graphics",
+                      "name": "Video card",
+                      "sockets": [
+                        {
+                          "id": "video_card",
+                          "name": "Dedicated video slot",
+                          "connection": "dedicated_video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.artemis_video_card_64kb"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cartridges",
+                      "name": "ROM cartridges",
+                      "sockets": [
+                        {
+                          "id": "system_cartridge",
+                          "name": "System cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.athena_server.system_rom"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "internal_drive",
+                      "name": "Internal storage",
+                      "sockets": [
+                        {
+                          "id": "internal_drive",
+                          "name": "Internal drive bays",
+                          "connection": "internal_storage",
+                          "capacity": 2,
+                          "compatible_device_ids": [
+                            "device.athena_server.fdd",
+                            "device.athena_server.hdd"
+                          ],
+                          "requirements": [
+                            "Recorded fitted-drive count; additional spare bays are not established."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "System architecture",
+                    "description": "Logix Athena Server — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "RAM population and software environment",
+                    "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "processor_id",
+                    "ref_id": "base_part.era2_12mhz",
+                    "ref_role": "Processor fitted to this computer"
+                  },
+                  {
+                    "key": "system_rom_bytes",
+                    "value": 262144
+                  },
+                  {
+                    "key": "recommended_system_id",
+                    "ref_id": "software_edition.aionix2",
+                    "ref_role": "Operating-system implementation for this host"
+                  }
+                ]
+              }
+            },
+            "after": {
+              "id": "device.base_computer.athena_server",
+              "name": "Logix Athena Server — base computer",
+              "kind": "base_computer",
+              "description": "Logix Athena Server — base computer",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "technology_ids": [],
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.ncc83_athena_premiere"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "technical_definition": {
+                    "processor": {
+                      "part_id": "base_part.era2_12mhz"
+                    },
+                    "form_factor": "desktop/server chassis; mechanical design pending",
+                    "io_and_expansion": {
+                      "rom_eeprom_cartridge_slots": {},
+                      "application_rom_cards_supported": false,
+                      "eeprom_bios": {
+                        "included": true,
+                        "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
+                      }
+                    },
+                    "configuration_requirements": {
+                      "scope": "complete_system",
+                      "rules": [
+                        "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                        "Installed cartridges must match software platform and socket role.",
+                        "A monitor connects to an installed video provider, not to an empty video-card socket."
+                      ],
+                      "external_application_cartridges_supported": false
+                    },
+                    "memory_constraints": {
+                      "max_ram_kib": null,
+                      "mixed_module_types_allowed": false
+                    },
+                    "technical_profile": {
+                      "memory": {
+                        "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                        "capacity_policy": "Installed configuration is specified; maximum board capacity/socket count remain open and are not the CPU address-space limit.",
+                        "bank_data_width_bits": 32,
+                        "os_rom": {
+                          "capacity_bytes": 262144,
+                          "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
+                          "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
+                        }
+                      },
+                      "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
+                      "network": {
+                        "computer_id": "device.base_computer.athena_server"
+                      }
+                    },
+                    "recommended_software_id": "software_edition.aionix2"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "base_part.era2_12mhz"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "base_part.athena_server.bios"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "base_part.athena_server.mainboard_set"
+                      },
+                      "quantity": 1,
+                      "element_type": "functional set"
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "device.athena_server.system_rom",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "Included AIONix 2 system cartridge"
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena_server.documentation"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena_server.mains_cable"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "base_part.device.base_computer.athena_server.packout"
+                      },
+                      "quantity": 1
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "base_part.device.athena_server.fdd.controller_cable"
+                      },
+                      "quantity": 1,
+                      "element_type": "One shared FDD data harness per base computer"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Storage sourcing: Quantum Q540 HDD (43 MB unformatted) and Shugart Associates SA450 DS/DD FDD. Qualify controller geometry, formatted capacity, rail/startup load, cooling, cabling and mounting before production release. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+                    }
+                  ],
+                  "expansion_socket_groups": [
+                    {
+                      "id": "memory",
+                      "name": "RAM modules",
+                      "sockets": [
+                        {
+                          "id": "ram",
+                          "name": "RAM sockets",
+                          "connection": "memory_module",
+                          "capacity": null,
+                          "compatible_device_ids": [
+                            "device.ram_256kb_x32_2um"
+                          ],
+                          "installation_multiple": 2,
+                          "matched_modules": true,
+                          "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "expansion",
+                      "name": "Expansion cards",
+                      "sockets": [
+                        {
+                          "id": "expansion",
+                          "name": "General expansion slots",
+                          "connection": "expansion_card",
+                          "capacity": null,
+                          "compatible_device_ids": [
+                            "device.network_card_artemis"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "graphics",
+                      "name": "Video card",
+                      "sockets": [
+                        {
+                          "id": "video_card",
+                          "name": "Dedicated video slot",
+                          "connection": "dedicated_video",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.artemis_video_card_64kb"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cartridges",
+                      "name": "ROM cartridges",
+                      "sockets": [
+                        {
+                          "id": "system_cartridge",
+                          "name": "System cartridge slot",
+                          "connection": "rom_cartridge",
+                          "capacity": 1,
+                          "compatible_device_ids": [
+                            "device.athena_server.system_rom"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "internal_drive",
+                      "name": "Internal storage",
+                      "sockets": [
+                        {
+                          "id": "internal_drive",
+                          "name": "Internal drive bays",
+                          "connection": "internal_storage",
+                          "capacity": 2,
+                          "compatible_device_ids": [
+                            "device.athena_server.fdd",
+                            "device.athena_server.hdd"
+                          ],
+                          "requirements": [
+                            "Recorded fitted-drive count; additional spare bays are not established."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "requirements": [],
+              "technical_specification": {
+                "chapters": [
+                  {
+                    "number": 1,
+                    "chapter_name": "System architecture",
+                    "description": "Logix Athena Server — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                  },
+                  {
+                    "number": 2,
+                    "chapter_name": "RAM population and software environment",
+                    "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+                  }
+                ],
+                "parameters": [
+                  {
+                    "key": "processor_id",
+                    "ref_id": "base_part.era2_12mhz",
+                    "ref_role": "Processor fitted to this computer"
+                  },
+                  {
+                    "key": "system_rom_bytes",
+                    "value": 262144
+                  },
+                  {
+                    "key": "recommended_system_id",
+                    "ref_id": "software_edition.aionix2",
+                    "ref_role": "Operating-system implementation for this host"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "record_type": "assumption",
+            "record_id": "assumption.athena_1983_baseline",
+            "before": {
+              "id": "assumption.athena_1983_baseline",
+              "kind": "world_premise",
+              "scope_ids": [
+                "actor.logix",
+                "actor.labs",
+                "actor.aion"
+              ],
+              "topic": "Athena engineering baseline",
+              "statements": [
+                "Athena base: 2 × 128 KiB 2 µm 4164 modules and 5 MB HDD.",
+                "Server: 4 × 256 KiB modules and 20 MB HDD.",
+                "Both: ERA², 64 KiB graphics, one 5.25-inch DS/DD FDD, NIC, EEPROM BIOS and 256 KiB directly executable AIONix2 system ROM.",
+                "No external application cartridge slots are added.",
+                "AIONix2 has an accepted phased design baseline; implementation and measured fit remain qualification gates.",
+                "All ERA² architectural numbers are engineering targets, with 16 MHz a stretch bin.",
+                "AION Labs alone manufactures ERA² initially; SGS-ATES excluded for at least 12–18 months after initial commercial availability.",
+                "Development dates are provisional; cost and financial forecasts remain unchanged."
+              ]
+            },
+            "after": {
+              "id": "assumption.athena_1983_baseline",
+              "kind": "world_premise",
+              "scope_ids": [
+                "actor.logix",
+                "actor.labs",
+                "actor.aion"
+              ],
+              "topic": "Athena engineering baseline",
+              "statements": [
+                "Athena base: 2 × 128 KiB 2 µm 4164 modules and one MiniScribe 4010 HDD, with 10 MB unformatted capacity.",
+                "Athena Server: 4 × 256 KiB modules and one Quantum Q540 HDD, with approximately 43 MB unformatted capacity.",
+                "Both: ERA², 64 KiB graphics, one 5.25-inch DS/DD FDD, NIC, EEPROM BIOS and 256 KiB directly executable AIONix2 system ROM.",
+                "No external application cartridge slots are added.",
+                "AIONix2 has an accepted phased design baseline; implementation and measured fit remain qualification gates.",
+                "All ERA² architectural numbers are engineering targets, with 16 MHz a stretch bin.",
+                "AION Labs alone manufactures ERA² initially; SGS-ATES excluded for at least 12–18 months after initial commercial availability.",
+                "Development dates are provisional; cost and financial forecasts remain unchanged."
+              ]
+            }
+          },
+          {
+            "record_type": "event",
+            "record_id": "event.ncc83_athena_premiere",
+            "before": {
+              "id": "event.ncc83_athena_premiere",
+              "title": "NCC 1983: planned ERA² and Logix Athena premiere",
+              "kind": "activity",
+              "description": "Present ERA² at 12 MHz target (16 MHz stretch), Athena 256 KiB / 5 MB HDD and Athena Server 1 MiB / 20 MB HDD. Both include 64 KiB graphics, one 5.25-inch DS/DD floppy and one network card. EEPROM BIOS plus 256 KiB directly executable AIONix2 system ROM. Protected multitasking, legacy ERA ABI, recoverable HDD storage, users and layered TUI are accepted design targets, pending implementation qualification. Conference runs 16–19 May in Anaheim; premiere does not certify volume shipments.",
+              "participant": [
+                {
+                  "actor_id": "actor.logix",
+                  "role": "programme_partner"
+                },
+                {
+                  "actor_id": "actor.labs",
+                  "role": "programme_partner"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "programme_partner"
+                }
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "An ERA² implementation suitable for the demonstrated Athena configuration is required for the premiere. The wider development programme continues through the subsequent production review; this input does not claim that programme completion or volume-shipment qualification precedes the premiere.",
+                  "subject_ids": [
+                    "base_part.era2_12mhz"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "requirement",
+                  "description": "Present the AIONix2 design targets and implementation status for Athena, explicitly distinguishing them from qualified production availability.",
+                  "subject_ids": [
+                    "software_edition.aionix2"
+                  ]
+                }
+              ],
+              "outcomes": [],
+              "time": {
+                "value": "1983-05-16",
+                "precision": "day"
+              },
+              "location_ids": [
+                "location.anaheim"
+              ]
+            },
+            "after": {
+              "id": "event.ncc83_athena_premiere",
+              "title": "NCC 1983: planned ERA² and Logix Athena premiere",
+              "kind": "activity",
+              "description": "Present ERA² at 12 MHz target (16 MHz stretch), Athena 256 KiB with a MiniScribe 4010 HDD (10 MB unformatted) and Athena Server 1 MiB with a Quantum Q540 HDD (approximately 43 MB unformatted). Usable capacity is lower after formatting. Both include 64 KiB graphics, one 5.25-inch DS/DD floppy and one network card. EEPROM BIOS plus 256 KiB directly executable AIONix2 system ROM. Protected multitasking, legacy ERA ABI, recoverable HDD storage, users and layered TUI are accepted design targets, pending implementation qualification. Conference runs 16–19 May in Anaheim; premiere does not certify volume shipments.",
+              "participant": [
+                {
+                  "actor_id": "actor.logix",
+                  "role": "programme_partner"
+                },
+                {
+                  "actor_id": "actor.labs",
+                  "role": "programme_partner"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "programme_partner"
+                }
+              ],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "An ERA² implementation suitable for the demonstrated Athena configuration is required for the premiere. The wider development programme continues through the subsequent production review; this input does not claim that programme completion or volume-shipment qualification precedes the premiere.",
+                  "subject_ids": [
+                    "base_part.era2_12mhz"
+                  ]
+                },
+                {
+                  "number": 2,
+                  "type": "requirement",
+                  "description": "Present the AIONix2 design targets and implementation status for Athena, explicitly distinguishing them from qualified production availability.",
+                  "subject_ids": [
+                    "software_edition.aionix2"
+                  ]
+                }
+              ],
+              "outcomes": [],
+              "time": {
+                "value": "1983-05-16",
+                "precision": "day"
+              },
+              "location_ids": [
+                "location.anaheim"
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "actor.quantum",
+          "before": null,
+          "after": {
+            "id": "actor.quantum",
+            "kind": "organisation",
+            "name": "Quantum Corporation",
+            "description": "Manufacturer of the selected Quantum hard-disk mechanism; procurement terms and system qualification are recorded separately."
+          },
+          "content_sha256": "d7da7451a0e0688649e00d14fd6547b96c3be91b4143ec60b30fb269688263e7"
+        },
+        {
+          "record_id": "base_part.quantum_q540",
+          "before": null,
+          "after": {
+            "id": "base_part.quantum_q540",
+            "name": "Quantum Q540 hard-disk mechanism",
+            "kind": "material",
+            "description": "Purchased Quantum Q540 hard-disk mechanism.",
+            "supply_form": "individual_part",
+            "manufacturer_actor_id": "actor.quantum",
+            "supplier_actor_ids": [
+              "actor.quantum"
+            ],
+            "manufacturer_part_number": "Q540",
+            "manufacturer_name": "Quantum",
+            "technology_ids": [],
+            "technical_definition": {
+              "specification": {
+                "capacity_mb": 43
+              }
+            },
+            "specification": [],
+            "requirements": [
+              {
+                "number": 1,
+                "kind": "testing",
+                "description": "Qualify controller geometry, formatted capacity, defect handling, power rails and spin-up load, cooling, mounting, cabling and incoming acceptance before production release."
+              }
+            ],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage mechanism",
+                  "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "model",
+                  "value": "Quantum Q540"
+                },
+                {
+                  "key": "unformatted_capacity_mb",
+                  "value": 43
+                }
+              ]
+            }
+          },
+          "content_sha256": "2ffe2a59b86eb388b1e436e0056cbe3a2ca9c3dc4fde724519ccd9fed2b5b383"
+        },
+        {
+          "record_id": "device.athena.hdd",
+          "before": {
+            "id": "device.athena.hdd",
+            "name": "Logix Athena Internal HDD",
+            "kind": "storage_device",
+            "description": "Logix Athena Internal HDD",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc83_athena_premiere"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "connection": "internal_storage",
+                  "specification": {
+                    "capacity_mb": 5,
+                    "interface": "ST-506 MFM interface"
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.hdd_5mb"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.storage.st506.control_data_cables"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.storage.st506.mounting_set"
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage mechanism",
+                  "description": "The internal hard disk provides {capacity_mb} MB through a {interface}."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "capacity_mb",
+                  "value": 5
+                },
+                {
+                  "key": "interface",
+                  "value": "ST-506 MFM interface"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.athena.hdd",
+            "name": "Logix Athena internal HDD — MiniScribe 4010",
+            "kind": "storage_device",
+            "description": "Internal MiniScribe 4010 hard-disk assembly.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc83_athena_premiere"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "connection": "internal_storage",
+                  "specification": {
+                    "capacity_mb": 10,
+                    "interface": "ST-506-compatible MFM interface"
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.miniscribe_4010"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.storage.st506.control_data_cables"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.storage.st506.mounting_set"
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage mechanism",
+                  "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "model",
+                  "value": "MiniScribe 4010"
+                },
+                {
+                  "key": "unformatted_capacity_mb",
+                  "value": 10
+                }
+              ]
+            }
+          },
+          "content_sha256": "65290ecbe338703787afc3e07c1ff6c68b900af928874cdc245e8ec244bcea18"
+        },
+        {
+          "record_id": "device.base_computer.athena",
+          "before": {
+            "id": "device.base_computer.athena",
+            "name": "Logix Athena — base computer",
+            "kind": "base_computer",
+            "description": "Logix Athena — base computer",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc83_athena_premiere"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "processor": {
+                    "part_id": "base_part.era2_12mhz"
+                  },
+                  "form_factor": "desktop/server chassis; mechanical design pending",
+                  "io_and_expansion": {
+                    "rom_eeprom_cartridge_slots": {},
+                    "application_rom_cards_supported": false,
+                    "eeprom_bios": {
+                      "included": true,
+                      "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
+                    }
+                  },
+                  "configuration_requirements": {
+                    "scope": "complete_system",
+                    "rules": [
+                      "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                      "Installed cartridges must match software platform and socket role.",
+                      "A monitor connects to an installed video provider, not to an empty video-card socket."
+                    ],
+                    "external_application_cartridges_supported": false
+                  },
+                  "memory_constraints": {
+                    "max_ram_kib": null,
+                    "mixed_module_types_allowed": false
+                  },
+                  "technical_profile": {
+                    "memory": {
+                      "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                      "capacity_policy": "Installed configuration is specified; maximum board capacity/socket count remain open and are not the CPU address-space limit.",
+                      "bank_data_width_bits": 32,
+                      "os_rom": {
+                        "capacity_bytes": 262144,
+                        "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
+                        "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
+                      }
+                    },
+                    "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
+                    "network": {
+                      "computer_id": "device.base_computer.athena"
+                    }
+                  },
+                  "recommended_software_id": "software_edition.aionix2"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.era2_12mhz"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.athena.bios"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.athena.mainboard_set"
+                    },
+                    "quantity": 1,
+                    "element_type": "functional set"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.athena.system_rom",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "Included AIONix 2 system cartridge"
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena.documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena.mains_cable"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena.packout"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.athena.fdd.controller_cable"
+                    },
+                    "quantity": 1,
+                    "element_type": "One shared FDD data harness per base computer"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Storage sourcing: Seagate ST506 5 MB HDD and Shugart Associates SA450 DS/DD FDD. Preserve functional BOM sets; model, controller, rail/startup load, enclosure and formatted geometry qualification remain open. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "memory",
+                    "name": "RAM modules",
+                    "sockets": [
+                      {
+                        "id": "ram",
+                        "name": "RAM sockets",
+                        "connection": "memory_module",
+                        "capacity": null,
+                        "compatible_device_ids": [
+                          "device.ram_128kb_x32"
+                        ],
+                        "installation_multiple": 2,
+                        "matched_modules": true,
+                        "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "expansion",
+                    "name": "Expansion cards",
+                    "sockets": [
+                      {
+                        "id": "expansion",
+                        "name": "General expansion slots",
+                        "connection": "expansion_card",
+                        "capacity": null,
+                        "compatible_device_ids": [
+                          "device.network_card_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "graphics",
+                    "name": "Video card",
+                    "sockets": [
+                      {
+                        "id": "video_card",
+                        "name": "Dedicated video slot",
+                        "connection": "dedicated_video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.artemis_video_card_64kb"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cartridges",
+                    "name": "ROM cartridges",
+                    "sockets": [
+                      {
+                        "id": "system_cartridge",
+                        "name": "System cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.athena.system_rom"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "internal_drive",
+                    "name": "Internal storage",
+                    "sockets": [
+                      {
+                        "id": "internal_drive",
+                        "name": "Internal drive bays",
+                        "connection": "internal_storage",
+                        "capacity": 2,
+                        "compatible_device_ids": [
+                          "device.athena.fdd",
+                          "device.athena.hdd"
+                        ],
+                        "requirements": [
+                          "Recorded fitted-drive count; additional spare bays are not established."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "System architecture",
+                  "description": "Logix Athena — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "RAM population and software environment",
+                  "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "processor_id",
+                  "ref_id": "base_part.era2_12mhz",
+                  "ref_role": "Processor fitted to this computer"
+                },
+                {
+                  "key": "system_rom_bytes",
+                  "value": 262144
+                },
+                {
+                  "key": "recommended_system_id",
+                  "ref_id": "software_edition.aionix2",
+                  "ref_role": "Operating-system implementation for this host"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.base_computer.athena",
+            "name": "Logix Athena — base computer",
+            "kind": "base_computer",
+            "description": "Logix Athena — base computer",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc83_athena_premiere"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "processor": {
+                    "part_id": "base_part.era2_12mhz"
+                  },
+                  "form_factor": "desktop/server chassis; mechanical design pending",
+                  "io_and_expansion": {
+                    "rom_eeprom_cartridge_slots": {},
+                    "application_rom_cards_supported": false,
+                    "eeprom_bios": {
+                      "included": true,
+                      "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
+                    }
+                  },
+                  "configuration_requirements": {
+                    "scope": "complete_system",
+                    "rules": [
+                      "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                      "Installed cartridges must match software platform and socket role.",
+                      "A monitor connects to an installed video provider, not to an empty video-card socket."
+                    ],
+                    "external_application_cartridges_supported": false
+                  },
+                  "memory_constraints": {
+                    "max_ram_kib": null,
+                    "mixed_module_types_allowed": false
+                  },
+                  "technical_profile": {
+                    "memory": {
+                      "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                      "capacity_policy": "Installed configuration is specified; maximum board capacity/socket count remain open and are not the CPU address-space limit.",
+                      "bank_data_width_bits": 32,
+                      "os_rom": {
+                        "capacity_bytes": 262144,
+                        "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
+                        "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
+                      }
+                    },
+                    "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
+                    "network": {
+                      "computer_id": "device.base_computer.athena"
+                    }
+                  },
+                  "recommended_software_id": "software_edition.aionix2"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.era2_12mhz"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.athena.bios"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.athena.mainboard_set"
+                    },
+                    "quantity": 1,
+                    "element_type": "functional set"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.athena.system_rom",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "Included AIONix 2 system cartridge"
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena.documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena.mains_cable"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena.packout"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.athena.fdd.controller_cable"
+                    },
+                    "quantity": 1,
+                    "element_type": "One shared FDD data harness per base computer"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Storage sourcing: MiniScribe 4010 HDD (10 MB unformatted) and Shugart Associates SA450 DS/DD FDD. Qualify controller geometry, formatted capacity, rail/startup load, cooling, cabling and mounting before production release. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "memory",
+                    "name": "RAM modules",
+                    "sockets": [
+                      {
+                        "id": "ram",
+                        "name": "RAM sockets",
+                        "connection": "memory_module",
+                        "capacity": null,
+                        "compatible_device_ids": [
+                          "device.ram_128kb_x32"
+                        ],
+                        "installation_multiple": 2,
+                        "matched_modules": true,
+                        "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "expansion",
+                    "name": "Expansion cards",
+                    "sockets": [
+                      {
+                        "id": "expansion",
+                        "name": "General expansion slots",
+                        "connection": "expansion_card",
+                        "capacity": null,
+                        "compatible_device_ids": [
+                          "device.network_card_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "graphics",
+                    "name": "Video card",
+                    "sockets": [
+                      {
+                        "id": "video_card",
+                        "name": "Dedicated video slot",
+                        "connection": "dedicated_video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.artemis_video_card_64kb"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cartridges",
+                    "name": "ROM cartridges",
+                    "sockets": [
+                      {
+                        "id": "system_cartridge",
+                        "name": "System cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.athena.system_rom"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "internal_drive",
+                    "name": "Internal storage",
+                    "sockets": [
+                      {
+                        "id": "internal_drive",
+                        "name": "Internal drive bays",
+                        "connection": "internal_storage",
+                        "capacity": 2,
+                        "compatible_device_ids": [
+                          "device.athena.fdd",
+                          "device.athena.hdd"
+                        ],
+                        "requirements": [
+                          "Recorded fitted-drive count; additional spare bays are not established."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "System architecture",
+                  "description": "Logix Athena — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "RAM population and software environment",
+                  "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "processor_id",
+                  "ref_id": "base_part.era2_12mhz",
+                  "ref_role": "Processor fitted to this computer"
+                },
+                {
+                  "key": "system_rom_bytes",
+                  "value": 262144
+                },
+                {
+                  "key": "recommended_system_id",
+                  "ref_id": "software_edition.aionix2",
+                  "ref_role": "Operating-system implementation for this host"
+                }
+              ]
+            }
+          },
+          "content_sha256": "356e99485f07476f883184e9f6559115ff1741cdf9804476f27500390defcdfd"
+        },
+        {
+          "record_id": "device.athena_server.hdd",
+          "before": {
+            "id": "device.athena_server.hdd",
+            "name": "Logix Athena Server Internal HDD",
+            "kind": "storage_device",
+            "description": "Logix Athena Server Internal HDD",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc83_athena_premiere"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "connection": "internal_storage",
+                  "specification": {
+                    "capacity_mb": 20,
+                    "interface": "ST-506-style MFM interface"
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.athena_server.hdd"
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": []
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage mechanism",
+                  "description": "The internal hard disk provides {capacity_mb} MB through a {interface}."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "capacity_mb",
+                  "value": 20
+                },
+                {
+                  "key": "interface",
+                  "value": "ST-506-style MFM interface"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.athena_server.hdd",
+            "name": "Logix Athena Server internal HDD — Quantum Q540",
+            "kind": "storage_device",
+            "description": "Internal Quantum Q540 hard-disk assembly.",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc83_athena_premiere"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "connection": "internal_storage",
+                  "specification": {
+                    "capacity_mb": 43,
+                    "interface": "ST-506-compatible MFM interface"
+                  }
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.quantum_q540"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.storage.st506.control_data_cables"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.storage.st506.mounting_set"
+                    },
+                    "quantity": 1
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "Storage mechanism",
+                  "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "model",
+                  "value": "Quantum Q540"
+                },
+                {
+                  "key": "unformatted_capacity_mb",
+                  "value": 43
+                }
+              ]
+            }
+          },
+          "content_sha256": "5f96554b29a47928887e1173549a865f375eec582d4d096720e7e9db0b4057c8"
+        },
+        {
+          "record_id": "device.base_computer.athena_server",
+          "before": {
+            "id": "device.base_computer.athena_server",
+            "name": "Logix Athena Server — base computer",
+            "kind": "base_computer",
+            "description": "Logix Athena Server — base computer",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc83_athena_premiere"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "processor": {
+                    "part_id": "base_part.era2_12mhz"
+                  },
+                  "form_factor": "desktop/server chassis; mechanical design pending",
+                  "io_and_expansion": {
+                    "rom_eeprom_cartridge_slots": {},
+                    "application_rom_cards_supported": false,
+                    "eeprom_bios": {
+                      "included": true,
+                      "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
+                    }
+                  },
+                  "configuration_requirements": {
+                    "scope": "complete_system",
+                    "rules": [
+                      "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                      "Installed cartridges must match software platform and socket role.",
+                      "A monitor connects to an installed video provider, not to an empty video-card socket."
+                    ],
+                    "external_application_cartridges_supported": false
+                  },
+                  "memory_constraints": {
+                    "max_ram_kib": null,
+                    "mixed_module_types_allowed": false
+                  },
+                  "technical_profile": {
+                    "memory": {
+                      "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                      "capacity_policy": "Installed configuration is specified; maximum board capacity/socket count remain open and are not the CPU address-space limit.",
+                      "bank_data_width_bits": 32,
+                      "os_rom": {
+                        "capacity_bytes": 262144,
+                        "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
+                        "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
+                      }
+                    },
+                    "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
+                    "network": {
+                      "computer_id": "device.base_computer.athena_server"
+                    }
+                  },
+                  "recommended_software_id": "software_edition.aionix2"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.era2_12mhz"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.athena_server.bios"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.athena_server.mainboard_set"
+                    },
+                    "quantity": 1,
+                    "element_type": "functional set"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.athena_server.system_rom",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "Included AIONix 2 system cartridge"
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena_server.documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena_server.mains_cable"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena_server.packout"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.athena_server.fdd.controller_cable"
+                    },
+                    "quantity": 1,
+                    "element_type": "One shared FDD data harness per base computer"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Storage sourcing: Rodime RO202E 20 MB HDD and Shugart Associates SA450 DS/DD FDD. Preserve functional BOM sets; model, controller, rail/startup load, enclosure and formatted geometry qualification remain open. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "memory",
+                    "name": "RAM modules",
+                    "sockets": [
+                      {
+                        "id": "ram",
+                        "name": "RAM sockets",
+                        "connection": "memory_module",
+                        "capacity": null,
+                        "compatible_device_ids": [
+                          "device.ram_256kb_x32_2um"
+                        ],
+                        "installation_multiple": 2,
+                        "matched_modules": true,
+                        "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "expansion",
+                    "name": "Expansion cards",
+                    "sockets": [
+                      {
+                        "id": "expansion",
+                        "name": "General expansion slots",
+                        "connection": "expansion_card",
+                        "capacity": null,
+                        "compatible_device_ids": [
+                          "device.network_card_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "graphics",
+                    "name": "Video card",
+                    "sockets": [
+                      {
+                        "id": "video_card",
+                        "name": "Dedicated video slot",
+                        "connection": "dedicated_video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.artemis_video_card_64kb"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cartridges",
+                    "name": "ROM cartridges",
+                    "sockets": [
+                      {
+                        "id": "system_cartridge",
+                        "name": "System cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.athena_server.system_rom"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "internal_drive",
+                    "name": "Internal storage",
+                    "sockets": [
+                      {
+                        "id": "internal_drive",
+                        "name": "Internal drive bays",
+                        "connection": "internal_storage",
+                        "capacity": 2,
+                        "compatible_device_ids": [
+                          "device.athena_server.fdd",
+                          "device.athena_server.hdd"
+                        ],
+                        "requirements": [
+                          "Recorded fitted-drive count; additional spare bays are not established."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "System architecture",
+                  "description": "Logix Athena Server — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "RAM population and software environment",
+                  "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "processor_id",
+                  "ref_id": "base_part.era2_12mhz",
+                  "ref_role": "Processor fitted to this computer"
+                },
+                {
+                  "key": "system_rom_bytes",
+                  "value": 262144
+                },
+                {
+                  "key": "recommended_system_id",
+                  "ref_id": "software_edition.aionix2",
+                  "ref_role": "Operating-system implementation for this host"
+                }
+              ]
+            }
+          },
+          "after": {
+            "id": "device.base_computer.athena_server",
+            "name": "Logix Athena Server — base computer",
+            "kind": "base_computer",
+            "description": "Logix Athena Server — base computer",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "technology_ids": [],
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.ncc83_athena_premiere"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "technical_definition": {
+                  "processor": {
+                    "part_id": "base_part.era2_12mhz"
+                  },
+                  "form_factor": "desktop/server chassis; mechanical design pending",
+                  "io_and_expansion": {
+                    "rom_eeprom_cartridge_slots": {},
+                    "application_rom_cards_supported": false,
+                    "eeprom_bios": {
+                      "included": true,
+                      "purpose": "Boot, hardware initialization, diagnostics and selection of ROM-backed AIONix2/recovery or disk patches."
+                    }
+                  },
+                  "configuration_requirements": {
+                    "scope": "complete_system",
+                    "rules": [
+                      "RAM must satisfy the selected configuration; removable modules are fitted in matched pairs where specified.",
+                      "Installed cartridges must match software platform and socket role.",
+                      "A monitor connects to an installed video provider, not to an empty video-card socket."
+                    ],
+                    "external_application_cartridges_supported": false
+                  },
+                  "memory_constraints": {
+                    "max_ram_kib": null,
+                    "mixed_module_types_allowed": false
+                  },
+                  "technical_profile": {
+                    "memory": {
+                      "population_policy": "Two matched 32-bit modules per capacity bank, selected independently on the 32-bit bus. Fill banks in order; all ranks require decoding and refresh. Cross-host connector/timing qualification pending.",
+                      "capacity_policy": "Installed configuration is specified; maximum board capacity/socket count remain open and are not the CPU address-space limit.",
+                      "bank_data_width_bits": 32,
+                      "os_rom": {
+                        "capacity_bytes": 262144,
+                        "execution": "Directly executable shared read-only AIONix2 code; private writable data and patch overlays in DRAM.",
+                        "implementation": "A replaceable AIONix 2 system cartridge is fitted to every computer; chip organisation, connector, access timing and exchange procedure require qualification."
+                      }
+                    },
+                    "software_policy": "Preserve documented ERA AIONix binaries through versioned compatibility; individual applications and editions require qualification. External application ROM cartridges are not added by the internal system ROM decision.",
+                    "network": {
+                      "computer_id": "device.base_computer.athena_server"
+                    }
+                  },
+                  "recommended_software_id": "software_edition.aionix2"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "base_part.era2_12mhz"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "base_part.athena_server.bios"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "base_part.athena_server.mainboard_set"
+                    },
+                    "quantity": 1,
+                    "element_type": "functional set"
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.athena_server.system_rom",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "Included AIONix 2 system cartridge"
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena_server.documentation"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena_server.mains_cable"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "base_part.device.base_computer.athena_server.packout"
+                    },
+                    "quantity": 1
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "base_part.device.athena_server.fdd.controller_cable"
+                    },
+                    "quantity": 1,
+                    "element_type": "One shared FDD data harness per base computer"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Storage sourcing: Quantum Q540 HDD (43 MB unformatted) and Shugart Associates SA450 DS/DD FDD. Qualify controller geometry, formatted capacity, rail/startup load, cooling, cabling and mounting before production release. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+                  }
+                ],
+                "expansion_socket_groups": [
+                  {
+                    "id": "memory",
+                    "name": "RAM modules",
+                    "sockets": [
+                      {
+                        "id": "ram",
+                        "name": "RAM sockets",
+                        "connection": "memory_module",
+                        "capacity": null,
+                        "compatible_device_ids": [
+                          "device.ram_256kb_x32_2um"
+                        ],
+                        "installation_multiple": 2,
+                        "matched_modules": true,
+                        "population_order": "Fill matched pairs consecutively, starting with sockets 1 and 2."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "expansion",
+                    "name": "Expansion cards",
+                    "sockets": [
+                      {
+                        "id": "expansion",
+                        "name": "General expansion slots",
+                        "connection": "expansion_card",
+                        "capacity": null,
+                        "compatible_device_ids": [
+                          "device.network_card_artemis"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "graphics",
+                    "name": "Video card",
+                    "sockets": [
+                      {
+                        "id": "video_card",
+                        "name": "Dedicated video slot",
+                        "connection": "dedicated_video",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.artemis_video_card_64kb"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cartridges",
+                    "name": "ROM cartridges",
+                    "sockets": [
+                      {
+                        "id": "system_cartridge",
+                        "name": "System cartridge slot",
+                        "connection": "rom_cartridge",
+                        "capacity": 1,
+                        "compatible_device_ids": [
+                          "device.athena_server.system_rom"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "internal_drive",
+                    "name": "Internal storage",
+                    "sockets": [
+                      {
+                        "id": "internal_drive",
+                        "name": "Internal drive bays",
+                        "connection": "internal_storage",
+                        "capacity": 2,
+                        "compatible_device_ids": [
+                          "device.athena_server.fdd",
+                          "device.athena_server.hdd"
+                        ],
+                        "requirements": [
+                          "Recorded fitted-drive count; additional spare bays are not established."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "requirements": [],
+            "technical_specification": {
+              "chapters": [
+                {
+                  "number": 1,
+                  "chapter_name": "System architecture",
+                  "description": "Logix Athena Server — base computer uses a desktop/server chassis built around {processor_id}.\n\nIts EEPROM BIOS boots and initializes hardware, runs diagnostics and selects ROM-based AIONix2/recovery or disk patches. BIOS capacity and chassis mechanics remain unspecified. External application ROM cards are not supported.\n\nInstalled RAM must satisfy the selected configuration, and a monitor must connect to a fitted video provider. The internal system cartridge does not establish support for external application cartridges.\n\nThe base computer is supplied without a graphics card. Display capabilities are defined by the card and monitor selected for the complete system."
+                },
+                {
+                  "number": 2,
+                  "chapter_name": "RAM population and software environment",
+                  "description": "Two matched 32-bit modules form each capacity bank, selected independently on the shared bus. Fill banks in order; decode and refresh every rank. Replace the population when changing density rather than mixing module types. Cross-host connector and timing qualification remains open. Maximum motherboard RAM and socket count remain unspecified and are distinct from the CPU address-space limit.\n\nA replaceable cartridge supplies {system_rom_bytes} bytes of shared executable AIONix2 code; private writable state and patch overlays consume DRAM. Cartridge chip organization, connector, timing and exchange procedure require qualification. {recommended_system_id} preserves documented ERA/AIONix binaries through versioned compatibility, with individual editions still requiring qualification."
+                }
+              ],
+              "parameters": [
+                {
+                  "key": "processor_id",
+                  "ref_id": "base_part.era2_12mhz",
+                  "ref_role": "Processor fitted to this computer"
+                },
+                {
+                  "key": "system_rom_bytes",
+                  "value": 262144
+                },
+                {
+                  "key": "recommended_system_id",
+                  "ref_id": "software_edition.aionix2",
+                  "ref_role": "Operating-system implementation for this host"
+                }
+              ]
+            }
+          },
+          "content_sha256": "aaf067f23717131a490586e44a119a9cf89540659b4b49b532ad8fbb429f9463"
+        },
+        {
+          "record_id": "assumption.athena_1983_baseline",
+          "before": {
+            "id": "assumption.athena_1983_baseline",
+            "kind": "world_premise",
+            "scope_ids": [
+              "actor.logix",
+              "actor.labs",
+              "actor.aion"
+            ],
+            "topic": "Athena engineering baseline",
+            "statements": [
+              "Athena base: 2 × 128 KiB 2 µm 4164 modules and 5 MB HDD.",
+              "Server: 4 × 256 KiB modules and 20 MB HDD.",
+              "Both: ERA², 64 KiB graphics, one 5.25-inch DS/DD FDD, NIC, EEPROM BIOS and 256 KiB directly executable AIONix2 system ROM.",
+              "No external application cartridge slots are added.",
+              "AIONix2 has an accepted phased design baseline; implementation and measured fit remain qualification gates.",
+              "All ERA² architectural numbers are engineering targets, with 16 MHz a stretch bin.",
+              "AION Labs alone manufactures ERA² initially; SGS-ATES excluded for at least 12–18 months after initial commercial availability.",
+              "Development dates are provisional; cost and financial forecasts remain unchanged."
+            ]
+          },
+          "after": {
+            "id": "assumption.athena_1983_baseline",
+            "kind": "world_premise",
+            "scope_ids": [
+              "actor.logix",
+              "actor.labs",
+              "actor.aion"
+            ],
+            "topic": "Athena engineering baseline",
+            "statements": [
+              "Athena base: 2 × 128 KiB 2 µm 4164 modules and one MiniScribe 4010 HDD, with 10 MB unformatted capacity.",
+              "Athena Server: 4 × 256 KiB modules and one Quantum Q540 HDD, with approximately 43 MB unformatted capacity.",
+              "Both: ERA², 64 KiB graphics, one 5.25-inch DS/DD FDD, NIC, EEPROM BIOS and 256 KiB directly executable AIONix2 system ROM.",
+              "No external application cartridge slots are added.",
+              "AIONix2 has an accepted phased design baseline; implementation and measured fit remain qualification gates.",
+              "All ERA² architectural numbers are engineering targets, with 16 MHz a stretch bin.",
+              "AION Labs alone manufactures ERA² initially; SGS-ATES excluded for at least 12–18 months after initial commercial availability.",
+              "Development dates are provisional; cost and financial forecasts remain unchanged."
+            ]
+          },
+          "content_sha256": "37a4f8daf68f99c2ad1f77ce9b94140f14857add1970bcb22f065c84ee559704"
+        },
+        {
+          "record_id": "event.ncc83_athena_premiere",
+          "before": {
+            "id": "event.ncc83_athena_premiere",
+            "title": "NCC 1983: planned ERA² and Logix Athena premiere",
+            "kind": "activity",
+            "description": "Present ERA² at 12 MHz target (16 MHz stretch), Athena 256 KiB / 5 MB HDD and Athena Server 1 MiB / 20 MB HDD. Both include 64 KiB graphics, one 5.25-inch DS/DD floppy and one network card. EEPROM BIOS plus 256 KiB directly executable AIONix2 system ROM. Protected multitasking, legacy ERA ABI, recoverable HDD storage, users and layered TUI are accepted design targets, pending implementation qualification. Conference runs 16–19 May in Anaheim; premiere does not certify volume shipments.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "An ERA² implementation suitable for the demonstrated Athena configuration is required for the premiere. The wider development programme continues through the subsequent production review; this input does not claim that programme completion or volume-shipment qualification precedes the premiere.",
+                "subject_ids": [
+                  "base_part.era2_12mhz"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "requirement",
+                "description": "Present the AIONix2 design targets and implementation status for Athena, explicitly distinguishing them from qualified production availability.",
+                "subject_ids": [
+                  "software_edition.aionix2"
+                ]
+              }
+            ],
+            "outcomes": [],
+            "time": {
+              "value": "1983-05-16",
+              "precision": "day"
+            },
+            "location_ids": [
+              "location.anaheim"
+            ]
+          },
+          "after": {
+            "id": "event.ncc83_athena_premiere",
+            "title": "NCC 1983: planned ERA² and Logix Athena premiere",
+            "kind": "activity",
+            "description": "Present ERA² at 12 MHz target (16 MHz stretch), Athena 256 KiB with a MiniScribe 4010 HDD (10 MB unformatted) and Athena Server 1 MiB with a Quantum Q540 HDD (approximately 43 MB unformatted). Usable capacity is lower after formatting. Both include 64 KiB graphics, one 5.25-inch DS/DD floppy and one network card. EEPROM BIOS plus 256 KiB directly executable AIONix2 system ROM. Protected multitasking, legacy ERA ABI, recoverable HDD storage, users and layered TUI are accepted design targets, pending implementation qualification. Conference runs 16–19 May in Anaheim; premiere does not certify volume shipments.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.labs",
+                "role": "programme_partner"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "programme_partner"
+              }
+            ],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "An ERA² implementation suitable for the demonstrated Athena configuration is required for the premiere. The wider development programme continues through the subsequent production review; this input does not claim that programme completion or volume-shipment qualification precedes the premiere.",
+                "subject_ids": [
+                  "base_part.era2_12mhz"
+                ]
+              },
+              {
+                "number": 2,
+                "type": "requirement",
+                "description": "Present the AIONix2 design targets and implementation status for Athena, explicitly distinguishing them from qualified production availability.",
+                "subject_ids": [
+                  "software_edition.aionix2"
+                ]
+              }
+            ],
+            "outcomes": [],
+            "time": {
+              "value": "1983-05-16",
+              "precision": "day"
+            },
+            "location_ids": [
+              "location.anaheim"
+            ]
+          },
+          "content_sha256": "20e4ab058481d1a9698fd9cbf50e90de6404ec5d3418757fbcc04f0e1eb2eca6"
+        }
+      ]
+    }
+  ]
+}

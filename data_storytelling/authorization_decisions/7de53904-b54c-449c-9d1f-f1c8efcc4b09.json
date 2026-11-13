@@ -1,0 +1,1402 @@
+{
+  "authorization_decision": [
+    {
+      "id": "authorization_decision.614921b0-3b7f-4bca-af4f-15f92557cadc",
+      "action": "approve_change",
+      "actor": "author",
+      "decided_at": "2026-11-13T20:09:21.034Z",
+      "change_id": "change.storage_remove_artemis_budget_128",
+      "proposal_sha256": "59beaca3ecfef5852df3588464f1df417763bd690a0b6e1fecc8631fd44a7e10",
+      "proposal": {
+        "id": "change.storage_remove_artemis_budget_128",
+        "category": "data",
+        "title": "Remove the Artemis Budget Colour Office offering",
+        "reason": "Author-requested removal of product.artemis_budget_128. Remove the corresponding budget-office launch claims from the launch event and campaign execution step, without changing the remaining Artemis configurations or the distinct Budget Hard-Disk Office offering. No live foundation record references the removed product ID. Historical author decisions remain unchanged. Remove its calculation-only operation and regenerate estimates after approval.",
+        "elements": [
+          {
+            "record_type": "product",
+            "record_id": "product.artemis_budget_128",
+            "before": {
+              "id": "product.artemis_budget_128",
+              "name": "Artemis 128 — Budget Colour Office",
+              "kind": "bundle",
+              "description": "Artemis 128 — Budget Colour Office",
+              "provider_actor_ids": [
+                "actor.logix"
+              ],
+              "specification": [],
+              "offering_category": "computer_software_bundle",
+              "composition_history": [
+                {
+                  "version_number": 1,
+                  "description": "Product definition revision 1",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.artemis_launch"
+                  },
+                  "effective_until": {
+                    "kind": "event",
+                    "event_id": "event.software32"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "device.base_computer.artemis",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "main_product"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                        "version_number": 1
+                      },
+                      "quantity": 2,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "internal_drive"
+                      }
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "device.ram_64kb_x32",
+                        "version_number": 1
+                      },
+                      "quantity": 2,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "ram"
+                      }
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "device.artemis_video_card_16kb",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "video_card"
+                      }
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "device.flexibus_keyboard",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "flexibus"
+                      }
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "device.color_monitor_2",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_4",
+                        "socket_id": "video_out"
+                      }
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "device.rom_cartridge.aionix",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "system_cartridge"
+                      }
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "device.rom_cartridge.business_tools_artemis",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "application_cartridge"
+                      }
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "product.service_regular_support"
+                      },
+                      "quantity": 1,
+                      "element_type": "attached_product"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Final product integration and shipment checks; constituent device manufacture, testing and delivery items belong to their device versions."
+                    }
+                  ]
+                },
+                {
+                  "version_number": 2,
+                  "description": "Product definition revision 2",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.software32"
+                  },
+                  "effective_until": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "device.base_computer.artemis",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "main_product"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                        "version_number": 1
+                      },
+                      "quantity": 2,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "internal_drive"
+                      }
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "device.ram_64kb_x32",
+                        "version_number": 1
+                      },
+                      "quantity": 2,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "ram"
+                      }
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "device.artemis_video_card_16kb",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "video_card"
+                      }
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "device.flexibus_keyboard",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "flexibus"
+                      }
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "device.color_monitor_2",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_4",
+                        "socket_id": "video_out"
+                      }
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "device.rom_cartridge.aionix",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "system_cartridge"
+                      }
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "device.rom_cartridge.business_tools_artemis",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "application_cartridge"
+                      }
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "product.service_regular_support"
+                      },
+                      "quantity": 1,
+                      "element_type": "attached_product"
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "software_edition.abacus_3",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "attached_product — Included application software"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Final product integration and shipment checks; constituent device manufacture, testing and delivery items belong to their device versions."
+                    }
+                  ]
+                },
+                {
+                  "version_number": 3,
+                  "description": "Product definition revision 3",
+                  "effective_from": {
+                    "kind": "event",
+                    "event_id": "event.network_launch"
+                  },
+                  "effective_until": {
+                    "kind": "simulation_end"
+                  },
+                  "composition_definition": [
+                    {
+                      "id": "line_1",
+                      "target": {
+                        "record_id": "device.base_computer.artemis",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "main_product"
+                    },
+                    {
+                      "id": "line_2",
+                      "target": {
+                        "record_id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                        "version_number": 1
+                      },
+                      "quantity": 2,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "internal_drive"
+                      }
+                    },
+                    {
+                      "id": "line_3",
+                      "target": {
+                        "record_id": "device.ram_64kb_x32",
+                        "version_number": 1
+                      },
+                      "quantity": 2,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "ram"
+                      }
+                    },
+                    {
+                      "id": "line_4",
+                      "target": {
+                        "record_id": "device.artemis_video_card_16kb",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "video_card"
+                      }
+                    },
+                    {
+                      "id": "line_5",
+                      "target": {
+                        "record_id": "device.network_card_artemis",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "expansion"
+                      }
+                    },
+                    {
+                      "id": "line_6",
+                      "target": {
+                        "record_id": "device.flexibus_keyboard",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "flexibus"
+                      }
+                    },
+                    {
+                      "id": "line_7",
+                      "target": {
+                        "record_id": "device.color_monitor_2",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_4",
+                        "socket_id": "video_out"
+                      }
+                    },
+                    {
+                      "id": "line_8",
+                      "target": {
+                        "record_id": "device.rom_cartridge.aionix",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "system_cartridge"
+                      }
+                    },
+                    {
+                      "id": "line_9",
+                      "target": {
+                        "record_id": "device.rom_cartridge.business_tools_artemis",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "connected_device",
+                      "connection": {
+                        "host_line_id": "line_1",
+                        "socket_id": "application_cartridge"
+                      }
+                    },
+                    {
+                      "id": "line_10",
+                      "target": {
+                        "record_id": "product.service_regular_support"
+                      },
+                      "quantity": 1,
+                      "element_type": "attached_product"
+                    },
+                    {
+                      "id": "line_11",
+                      "target": {
+                        "record_id": "software_edition.abacus_3",
+                        "version_number": 1
+                      },
+                      "quantity": 1,
+                      "element_type": "attached_product — Included application software"
+                    }
+                  ],
+                  "assembly_requirements": [
+                    {
+                      "number": 1,
+                      "kind": "testing",
+                      "description": "Final product integration and shipment checks; constituent device manufacture, testing and delivery items belong to their device versions."
+                    }
+                  ]
+                }
+              ],
+              "launch_campaign_id": "campaign.ncc1980",
+              "launch_event_id": "event.artemis_launch"
+            },
+            "after": null
+          },
+          {
+            "record_type": "event",
+            "record_id": "event.artemis_launch",
+            "before": {
+              "id": "event.artemis_launch",
+              "title": "Artemis platform launches commercially",
+              "kind": "launch",
+              "description": "Launch Artemis with AIONix, peripherals, expansions, developer tooling and support. Introduces Artemis training. At NCC 1980 reveal the processor architecture and word size withheld in the NCC 1979 public campaign. The separately sold Z80 compatibility module is an optional qualified legacy path; native applications require an appropriate target build. Released Artemis application binaries using documented, supported ERA/AIONix interfaces retain a supported execution path on subsequent Logix professional platforms through 2000: native execution, a maintained compatibility runtime, or emulation. Source portability is a separate commitment, not a substitute for the binary execution path. Demonstrate familiar multitasking, separate ERA/Z80 C builds and qualified legacy-card execution; compare verified vector calculations on Aurelia+, PDP-11/34 and Artemis before revealing the 32-bit RISC ERA 1 architecture. Publish only measured performance. SSG demonstrates General Ledger after Abacus on a qualified CP/M compatibility configuration and joins the partner section; its native ERA edition requires separate release and qualification. SSG retains separate branding, licences, support and receipts. Ship Artemis 128 with a replaceable 16 KiB video card and Mono II or Color II; ship Artemis 256 with 32 AION 64 Kbit system RAM chips, a 32 KiB video card and Mono Pro or Color II. Both cards include 1 KiB exclusive sprite SRAM. Only the professional card and Mono Pro enable 640×400 modes; Color II keeps legacy timings. High-resolution demonstrations and paid follow-up campaign are separately budgeted; production qualification remains required. Logix introduced an Artemis 128 KiB office configuration with two floppy drives, a Color Monitor II, keyboard, AIONix, Business Tools and one year of support. Customers could add Abacus 3 from November 1980 and networking from May 1981.",
+              "participant": [
+                {
+                  "actor_id": "actor.logix",
+                  "role": "presenter"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "software_partner"
+                },
+                {
+                  "actor_id": "actor.academy",
+                  "role": "training_provider"
+                },
+                {
+                  "actor_id": "actor.adam",
+                  "role": "presenter"
+                },
+                {
+                  "actor_id": "actor.bpi",
+                  "role": "independent_software_partner"
+                },
+                {
+                  "actor_id": "actor.dri",
+                  "role": "independent_software_partner"
+                }
+              ],
+              "subject_ids": [],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Completion of the AIONix development phase on 20 February 1980 provides the operating-system work for subsequent integration and the Artemis commercial launch.",
+                  "process_id": "process.aionix_development"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Qualified configurations and follow-up demonstrations are coordinated by the launch campaign. Compatibility through 2000 is a commitment with eligibility and maintenance obligations, not evidence of future fulfilment."
+                },
+                {
+                  "number": 2,
+                  "type": "result",
+                  "description": "The launch includes the Artemis 128 KiB budget office configuration with two floppy drives, Color Monitor II, keyboard, AIONix, Business Tools and one year of support. Abacus 3 can be added from November 1980 and networking from May 1981."
+                }
+              ],
+              "time": {
+                "value": "1980-05-19",
+                "precision": "day"
+              }
+            },
+            "after": {
+              "id": "event.artemis_launch",
+              "title": "Artemis platform launches commercially",
+              "kind": "launch",
+              "description": "Launch Artemis with AIONix, peripherals, expansions, developer tooling and support. Introduces Artemis training. At NCC 1980 reveal the processor architecture and word size withheld in the NCC 1979 public campaign. The separately sold Z80 compatibility module is an optional qualified legacy path; native applications require an appropriate target build. Released Artemis application binaries using documented, supported ERA/AIONix interfaces retain a supported execution path on subsequent Logix professional platforms through 2000: native execution, a maintained compatibility runtime, or emulation. Source portability is a separate commitment, not a substitute for the binary execution path. Demonstrate familiar multitasking, separate ERA/Z80 C builds and qualified legacy-card execution; compare verified vector calculations on Aurelia+, PDP-11/34 and Artemis before revealing the 32-bit RISC ERA 1 architecture. Publish only measured performance. SSG demonstrates General Ledger after Abacus on a qualified CP/M compatibility configuration and joins the partner section; its native ERA edition requires separate release and qualification. SSG retains separate branding, licences, support and receipts. Ship Artemis 128 with a replaceable 16 KiB video card and Mono II or Color II; ship Artemis 256 with 32 AION 64 Kbit system RAM chips, a 32 KiB video card and Mono Pro or Color II. Both cards include 1 KiB exclusive sprite SRAM. Only the professional card and Mono Pro enable 640×400 modes; Color II keeps legacy timings. High-resolution demonstrations and paid follow-up campaign are separately budgeted; production qualification remains required.",
+              "participant": [
+                {
+                  "actor_id": "actor.logix",
+                  "role": "presenter"
+                },
+                {
+                  "actor_id": "actor.aion",
+                  "role": "software_partner"
+                },
+                {
+                  "actor_id": "actor.academy",
+                  "role": "training_provider"
+                },
+                {
+                  "actor_id": "actor.adam",
+                  "role": "presenter"
+                },
+                {
+                  "actor_id": "actor.bpi",
+                  "role": "independent_software_partner"
+                },
+                {
+                  "actor_id": "actor.dri",
+                  "role": "independent_software_partner"
+                }
+              ],
+              "subject_ids": [],
+              "inputs": [
+                {
+                  "number": 1,
+                  "type": "resource",
+                  "description": "Completion of the AIONix development phase on 20 February 1980 provides the operating-system work for subsequent integration and the Artemis commercial launch.",
+                  "process_id": "process.aionix_development"
+                }
+              ],
+              "outcomes": [
+                {
+                  "number": 1,
+                  "type": "result",
+                  "description": "Qualified configurations and follow-up demonstrations are coordinated by the launch campaign. Compatibility through 2000 is a commitment with eligibility and maintenance obligations, not evidence of future fulfilment."
+                }
+              ],
+              "time": {
+                "value": "1980-05-19",
+                "precision": "day"
+              }
+            }
+          },
+          {
+            "record_type": "process",
+            "record_id": "process.ncc1980_campaign",
+            "before": {
+              "id": "process.ncc1980_campaign",
+              "title": "Artemis. A new generation. A familiar way to work. — execution",
+              "kind": "campaign_execution",
+              "description": "Present Artemis at NCC on 19 May 1980, then conduct dealer demonstrations, customer trials, transition training and developer clinics. The recorded 17 July Academy and regional-sales rollout begins regional roadshows and certification workshops continuing through October, which is the end of this campaign. The November native-software presentation belongs to the separate COMDEX campaign.",
+              "participant": [
+                {
+                  "actor_id": "actor.logix",
+                  "role": "marketing_lead"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "1980-05",
+                  "precision": "month"
+                },
+                "end": {
+                  "value": "1980-10",
+                  "precision": "month"
+                }
+              },
+              "inputs": [],
+              "outcomes": [],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "action",
+                  "description": "activities / 1 / window: NCC 1980, May 19"
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "activities / 1 / action: Live 55-minute keynote, independent SSG appearance after Abacus, benchmark method/results if measured, compatibility policy, software/configuration matrix and ordering sheets."
+                },
+                {
+                  "number": 3,
+                  "type": "action",
+                  "description": "activities / 2 / window: Post-launch preparation leading to the 17 July 1980 Academy and regional-sales rollout"
+                },
+                {
+                  "number": 4,
+                  "type": "action",
+                  "description": "activities / 2 / action: Dealer demonstrations and customer workflow trials; press technical briefing; Academy transition classes and developer migration clinics; maintain issue/qualification register."
+                },
+                {
+                  "number": 5,
+                  "type": "action",
+                  "description": "activities / 3 / window: 17 July–October 1980"
+                },
+                {
+                  "number": 6,
+                  "type": "action",
+                  "description": "activities / 3 / action: Regional dealer roadshows, independent developer/OEM certification workshops, customer case studies with consent and measured results; review conversion, delivery backlog, porting effort and support capacity monthly."
+                },
+                {
+                  "number": 7,
+                  "type": "action",
+                  "description": "Launch the Artemis platform, including the 128 KiB budget colour office configuration with floppy-disk storage.",
+                  "event_id": "event.artemis_launch"
+                },
+                {
+                  "number": 8,
+                  "type": "action",
+                  "description": "Begin with the 17 July Artemis Academy and regional-sales rollout, then run regional roadshows and certification workshops.",
+                  "process_id": "process.ncc1980_roadshows"
+                }
+              ]
+            },
+            "after": {
+              "id": "process.ncc1980_campaign",
+              "title": "Artemis. A new generation. A familiar way to work. — execution",
+              "kind": "campaign_execution",
+              "description": "Present Artemis at NCC on 19 May 1980, then conduct dealer demonstrations, customer trials, transition training and developer clinics. The recorded 17 July Academy and regional-sales rollout begins regional roadshows and certification workshops continuing through October, which is the end of this campaign. The November native-software presentation belongs to the separate COMDEX campaign.",
+              "participant": [
+                {
+                  "actor_id": "actor.logix",
+                  "role": "marketing_lead"
+                }
+              ],
+              "period": {
+                "start": {
+                  "value": "1980-05",
+                  "precision": "month"
+                },
+                "end": {
+                  "value": "1980-10",
+                  "precision": "month"
+                }
+              },
+              "inputs": [],
+              "outcomes": [],
+              "steps": [
+                {
+                  "number": 1,
+                  "type": "action",
+                  "description": "activities / 1 / window: NCC 1980, May 19"
+                },
+                {
+                  "number": 2,
+                  "type": "action",
+                  "description": "activities / 1 / action: Live 55-minute keynote, independent SSG appearance after Abacus, benchmark method/results if measured, compatibility policy, software/configuration matrix and ordering sheets."
+                },
+                {
+                  "number": 3,
+                  "type": "action",
+                  "description": "activities / 2 / window: Post-launch preparation leading to the 17 July 1980 Academy and regional-sales rollout"
+                },
+                {
+                  "number": 4,
+                  "type": "action",
+                  "description": "activities / 2 / action: Dealer demonstrations and customer workflow trials; press technical briefing; Academy transition classes and developer migration clinics; maintain issue/qualification register."
+                },
+                {
+                  "number": 5,
+                  "type": "action",
+                  "description": "activities / 3 / window: 17 July–October 1980"
+                },
+                {
+                  "number": 6,
+                  "type": "action",
+                  "description": "activities / 3 / action: Regional dealer roadshows, independent developer/OEM certification workshops, customer case studies with consent and measured results; review conversion, delivery backlog, porting effort and support capacity monthly."
+                },
+                {
+                  "number": 7,
+                  "type": "action",
+                  "description": "Launch the Artemis platform.",
+                  "event_id": "event.artemis_launch"
+                },
+                {
+                  "number": 8,
+                  "type": "action",
+                  "description": "Begin with the 17 July Artemis Academy and regional-sales rollout, then run regional roadshows and certification workshops.",
+                  "process_id": "process.ncc1980_roadshows"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "target": [
+        {
+          "record_id": "product.artemis_budget_128",
+          "before": {
+            "id": "product.artemis_budget_128",
+            "name": "Artemis 128 — Budget Colour Office",
+            "kind": "bundle",
+            "description": "Artemis 128 — Budget Colour Office",
+            "provider_actor_ids": [
+              "actor.logix"
+            ],
+            "specification": [],
+            "offering_category": "computer_software_bundle",
+            "composition_history": [
+              {
+                "version_number": 1,
+                "description": "Product definition revision 1",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.artemis_launch"
+                },
+                "effective_until": {
+                  "kind": "event",
+                  "event_id": "event.software32"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.artemis",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.ram_64kb_x32",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "ram"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.artemis_video_card_16kb",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_card"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "device.color_monitor_2",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_4",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.aionix",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_artemis",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Final product integration and shipment checks; constituent device manufacture, testing and delivery items belong to their device versions."
+                  }
+                ]
+              },
+              {
+                "version_number": 2,
+                "description": "Product definition revision 2",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.software32"
+                },
+                "effective_until": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.artemis",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.ram_64kb_x32",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "ram"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.artemis_video_card_16kb",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_card"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "device.color_monitor_2",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_4",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.rom_cartridge.aionix",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_artemis",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "software_edition.abacus_3",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product — Included application software"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Final product integration and shipment checks; constituent device manufacture, testing and delivery items belong to their device versions."
+                  }
+                ]
+              },
+              {
+                "version_number": 3,
+                "description": "Product definition revision 3",
+                "effective_from": {
+                  "kind": "event",
+                  "event_id": "event.network_launch"
+                },
+                "effective_until": {
+                  "kind": "simulation_end"
+                },
+                "composition_definition": [
+                  {
+                    "id": "line_1",
+                    "target": {
+                      "record_id": "device.base_computer.artemis",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "main_product"
+                  },
+                  {
+                    "id": "line_2",
+                    "target": {
+                      "record_id": "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "internal_drive"
+                    }
+                  },
+                  {
+                    "id": "line_3",
+                    "target": {
+                      "record_id": "device.ram_64kb_x32",
+                      "version_number": 1
+                    },
+                    "quantity": 2,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "ram"
+                    }
+                  },
+                  {
+                    "id": "line_4",
+                    "target": {
+                      "record_id": "device.artemis_video_card_16kb",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "video_card"
+                    }
+                  },
+                  {
+                    "id": "line_5",
+                    "target": {
+                      "record_id": "device.network_card_artemis",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "expansion"
+                    }
+                  },
+                  {
+                    "id": "line_6",
+                    "target": {
+                      "record_id": "device.flexibus_keyboard",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "flexibus"
+                    }
+                  },
+                  {
+                    "id": "line_7",
+                    "target": {
+                      "record_id": "device.color_monitor_2",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_4",
+                      "socket_id": "video_out"
+                    }
+                  },
+                  {
+                    "id": "line_8",
+                    "target": {
+                      "record_id": "device.rom_cartridge.aionix",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "system_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_9",
+                    "target": {
+                      "record_id": "device.rom_cartridge.business_tools_artemis",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "connected_device",
+                    "connection": {
+                      "host_line_id": "line_1",
+                      "socket_id": "application_cartridge"
+                    }
+                  },
+                  {
+                    "id": "line_10",
+                    "target": {
+                      "record_id": "product.service_regular_support"
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product"
+                  },
+                  {
+                    "id": "line_11",
+                    "target": {
+                      "record_id": "software_edition.abacus_3",
+                      "version_number": 1
+                    },
+                    "quantity": 1,
+                    "element_type": "attached_product — Included application software"
+                  }
+                ],
+                "assembly_requirements": [
+                  {
+                    "number": 1,
+                    "kind": "testing",
+                    "description": "Final product integration and shipment checks; constituent device manufacture, testing and delivery items belong to their device versions."
+                  }
+                ]
+              }
+            ],
+            "launch_campaign_id": "campaign.ncc1980",
+            "launch_event_id": "event.artemis_launch"
+          },
+          "after": null,
+          "content_sha256": null
+        },
+        {
+          "record_id": "event.artemis_launch",
+          "before": {
+            "id": "event.artemis_launch",
+            "title": "Artemis platform launches commercially",
+            "kind": "launch",
+            "description": "Launch Artemis with AIONix, peripherals, expansions, developer tooling and support. Introduces Artemis training. At NCC 1980 reveal the processor architecture and word size withheld in the NCC 1979 public campaign. The separately sold Z80 compatibility module is an optional qualified legacy path; native applications require an appropriate target build. Released Artemis application binaries using documented, supported ERA/AIONix interfaces retain a supported execution path on subsequent Logix professional platforms through 2000: native execution, a maintained compatibility runtime, or emulation. Source portability is a separate commitment, not a substitute for the binary execution path. Demonstrate familiar multitasking, separate ERA/Z80 C builds and qualified legacy-card execution; compare verified vector calculations on Aurelia+, PDP-11/34 and Artemis before revealing the 32-bit RISC ERA 1 architecture. Publish only measured performance. SSG demonstrates General Ledger after Abacus on a qualified CP/M compatibility configuration and joins the partner section; its native ERA edition requires separate release and qualification. SSG retains separate branding, licences, support and receipts. Ship Artemis 128 with a replaceable 16 KiB video card and Mono II or Color II; ship Artemis 256 with 32 AION 64 Kbit system RAM chips, a 32 KiB video card and Mono Pro or Color II. Both cards include 1 KiB exclusive sprite SRAM. Only the professional card and Mono Pro enable 640×400 modes; Color II keeps legacy timings. High-resolution demonstrations and paid follow-up campaign are separately budgeted; production qualification remains required. Logix introduced an Artemis 128 KiB office configuration with two floppy drives, a Color Monitor II, keyboard, AIONix, Business Tools and one year of support. Customers could add Abacus 3 from November 1980 and networking from May 1981.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "presenter"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "software_partner"
+              },
+              {
+                "actor_id": "actor.academy",
+                "role": "training_provider"
+              },
+              {
+                "actor_id": "actor.adam",
+                "role": "presenter"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent_software_partner"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "independent_software_partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Completion of the AIONix development phase on 20 February 1980 provides the operating-system work for subsequent integration and the Artemis commercial launch.",
+                "process_id": "process.aionix_development"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Qualified configurations and follow-up demonstrations are coordinated by the launch campaign. Compatibility through 2000 is a commitment with eligibility and maintenance obligations, not evidence of future fulfilment."
+              },
+              {
+                "number": 2,
+                "type": "result",
+                "description": "The launch includes the Artemis 128 KiB budget office configuration with two floppy drives, Color Monitor II, keyboard, AIONix, Business Tools and one year of support. Abacus 3 can be added from November 1980 and networking from May 1981."
+              }
+            ],
+            "time": {
+              "value": "1980-05-19",
+              "precision": "day"
+            }
+          },
+          "after": {
+            "id": "event.artemis_launch",
+            "title": "Artemis platform launches commercially",
+            "kind": "launch",
+            "description": "Launch Artemis with AIONix, peripherals, expansions, developer tooling and support. Introduces Artemis training. At NCC 1980 reveal the processor architecture and word size withheld in the NCC 1979 public campaign. The separately sold Z80 compatibility module is an optional qualified legacy path; native applications require an appropriate target build. Released Artemis application binaries using documented, supported ERA/AIONix interfaces retain a supported execution path on subsequent Logix professional platforms through 2000: native execution, a maintained compatibility runtime, or emulation. Source portability is a separate commitment, not a substitute for the binary execution path. Demonstrate familiar multitasking, separate ERA/Z80 C builds and qualified legacy-card execution; compare verified vector calculations on Aurelia+, PDP-11/34 and Artemis before revealing the 32-bit RISC ERA 1 architecture. Publish only measured performance. SSG demonstrates General Ledger after Abacus on a qualified CP/M compatibility configuration and joins the partner section; its native ERA edition requires separate release and qualification. SSG retains separate branding, licences, support and receipts. Ship Artemis 128 with a replaceable 16 KiB video card and Mono II or Color II; ship Artemis 256 with 32 AION 64 Kbit system RAM chips, a 32 KiB video card and Mono Pro or Color II. Both cards include 1 KiB exclusive sprite SRAM. Only the professional card and Mono Pro enable 640×400 modes; Color II keeps legacy timings. High-resolution demonstrations and paid follow-up campaign are separately budgeted; production qualification remains required.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "presenter"
+              },
+              {
+                "actor_id": "actor.aion",
+                "role": "software_partner"
+              },
+              {
+                "actor_id": "actor.academy",
+                "role": "training_provider"
+              },
+              {
+                "actor_id": "actor.adam",
+                "role": "presenter"
+              },
+              {
+                "actor_id": "actor.bpi",
+                "role": "independent_software_partner"
+              },
+              {
+                "actor_id": "actor.dri",
+                "role": "independent_software_partner"
+              }
+            ],
+            "subject_ids": [],
+            "inputs": [
+              {
+                "number": 1,
+                "type": "resource",
+                "description": "Completion of the AIONix development phase on 20 February 1980 provides the operating-system work for subsequent integration and the Artemis commercial launch.",
+                "process_id": "process.aionix_development"
+              }
+            ],
+            "outcomes": [
+              {
+                "number": 1,
+                "type": "result",
+                "description": "Qualified configurations and follow-up demonstrations are coordinated by the launch campaign. Compatibility through 2000 is a commitment with eligibility and maintenance obligations, not evidence of future fulfilment."
+              }
+            ],
+            "time": {
+              "value": "1980-05-19",
+              "precision": "day"
+            }
+          },
+          "content_sha256": "dfde245e9f787860067696e6694818529792dc08338240b23f5137bf702b08a6"
+        },
+        {
+          "record_id": "process.ncc1980_campaign",
+          "before": {
+            "id": "process.ncc1980_campaign",
+            "title": "Artemis. A new generation. A familiar way to work. — execution",
+            "kind": "campaign_execution",
+            "description": "Present Artemis at NCC on 19 May 1980, then conduct dealer demonstrations, customer trials, transition training and developer clinics. The recorded 17 July Academy and regional-sales rollout begins regional roadshows and certification workshops continuing through October, which is the end of this campaign. The November native-software presentation belongs to the separate COMDEX campaign.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "marketing_lead"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1980-05",
+                "precision": "month"
+              },
+              "end": {
+                "value": "1980-10",
+                "precision": "month"
+              }
+            },
+            "inputs": [],
+            "outcomes": [],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "activities / 1 / window: NCC 1980, May 19"
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "activities / 1 / action: Live 55-minute keynote, independent SSG appearance after Abacus, benchmark method/results if measured, compatibility policy, software/configuration matrix and ordering sheets."
+              },
+              {
+                "number": 3,
+                "type": "action",
+                "description": "activities / 2 / window: Post-launch preparation leading to the 17 July 1980 Academy and regional-sales rollout"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "activities / 2 / action: Dealer demonstrations and customer workflow trials; press technical briefing; Academy transition classes and developer migration clinics; maintain issue/qualification register."
+              },
+              {
+                "number": 5,
+                "type": "action",
+                "description": "activities / 3 / window: 17 July–October 1980"
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "activities / 3 / action: Regional dealer roadshows, independent developer/OEM certification workshops, customer case studies with consent and measured results; review conversion, delivery backlog, porting effort and support capacity monthly."
+              },
+              {
+                "number": 7,
+                "type": "action",
+                "description": "Launch the Artemis platform, including the 128 KiB budget colour office configuration with floppy-disk storage.",
+                "event_id": "event.artemis_launch"
+              },
+              {
+                "number": 8,
+                "type": "action",
+                "description": "Begin with the 17 July Artemis Academy and regional-sales rollout, then run regional roadshows and certification workshops.",
+                "process_id": "process.ncc1980_roadshows"
+              }
+            ]
+          },
+          "after": {
+            "id": "process.ncc1980_campaign",
+            "title": "Artemis. A new generation. A familiar way to work. — execution",
+            "kind": "campaign_execution",
+            "description": "Present Artemis at NCC on 19 May 1980, then conduct dealer demonstrations, customer trials, transition training and developer clinics. The recorded 17 July Academy and regional-sales rollout begins regional roadshows and certification workshops continuing through October, which is the end of this campaign. The November native-software presentation belongs to the separate COMDEX campaign.",
+            "participant": [
+              {
+                "actor_id": "actor.logix",
+                "role": "marketing_lead"
+              }
+            ],
+            "period": {
+              "start": {
+                "value": "1980-05",
+                "precision": "month"
+              },
+              "end": {
+                "value": "1980-10",
+                "precision": "month"
+              }
+            },
+            "inputs": [],
+            "outcomes": [],
+            "steps": [
+              {
+                "number": 1,
+                "type": "action",
+                "description": "activities / 1 / window: NCC 1980, May 19"
+              },
+              {
+                "number": 2,
+                "type": "action",
+                "description": "activities / 1 / action: Live 55-minute keynote, independent SSG appearance after Abacus, benchmark method/results if measured, compatibility policy, software/configuration matrix and ordering sheets."
+              },
+              {
+                "number": 3,
+                "type": "action",
+                "description": "activities / 2 / window: Post-launch preparation leading to the 17 July 1980 Academy and regional-sales rollout"
+              },
+              {
+                "number": 4,
+                "type": "action",
+                "description": "activities / 2 / action: Dealer demonstrations and customer workflow trials; press technical briefing; Academy transition classes and developer migration clinics; maintain issue/qualification register."
+              },
+              {
+                "number": 5,
+                "type": "action",
+                "description": "activities / 3 / window: 17 July–October 1980"
+              },
+              {
+                "number": 6,
+                "type": "action",
+                "description": "activities / 3 / action: Regional dealer roadshows, independent developer/OEM certification workshops, customer case studies with consent and measured results; review conversion, delivery backlog, porting effort and support capacity monthly."
+              },
+              {
+                "number": 7,
+                "type": "action",
+                "description": "Launch the Artemis platform.",
+                "event_id": "event.artemis_launch"
+              },
+              {
+                "number": 8,
+                "type": "action",
+                "description": "Begin with the 17 July Artemis Academy and regional-sales rollout, then run regional roadshows and certification workshops.",
+                "process_id": "process.ncc1980_roadshows"
+              }
+            ]
+          },
+          "content_sha256": "7d1eccb98ffe503a9282f4817197106f23ad5bcf924599d34836c153fcd6e9e3"
+        }
+      ]
+    }
+  ]
+}

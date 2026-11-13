@@ -12109,7 +12109,8 @@
                   "capacity": 2,
                   "compatible_device_ids": [
                     "device.storage.computer.artemis.525_inch_double_density_floppy_mechanism",
-                    "device.storage.hdd_5mb"
+                    "device.storage.hdd_5mb",
+                    "device.storage.miniscribe_4010"
                   ],
                   "requirements": [
                     "Recorded fitted-drive count; additional spare bays are not established."
@@ -12583,7 +12584,8 @@
                   "capacity": 3,
                   "compatible_device_ids": [
                     "device.storage.computer.artemis_pro.525_inch_double_density_floppy_mechanism",
-                    "device.storage.hdd_5mb"
+                    "device.storage.hdd_5mb",
+                    "device.storage.miniscribe_4010"
                   ],
                   "requirements": [
                     "Recorded fitted-drive count; additional spare bays are not established."
@@ -12908,7 +12910,7 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Storage sourcing: Seagate ST506 5 MB HDD and Shugart Associates SA450 DS/DD FDD. Preserve functional BOM sets; model, controller, rail/startup load, enclosure and formatted geometry qualification remain open. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+              "description": "Storage sourcing: MiniScribe 4010 HDD (10 MB unformatted) and Shugart Associates SA450 DS/DD FDD. Qualify controller geometry, formatted capacity, rail/startup load, cooling, cabling and mounting before production release. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
             }
           ],
           "expansion_socket_groups": [
@@ -13031,9 +13033,9 @@
     },
     {
       "id": "device.athena.hdd",
-      "name": "Logix Athena Internal HDD",
+      "name": "Logix Athena internal HDD — MiniScribe 4010",
       "kind": "storage_device",
-      "description": "Logix Athena Internal HDD",
+      "description": "Internal MiniScribe 4010 hard-disk assembly.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -13052,15 +13054,15 @@
           "technical_definition": {
             "connection": "internal_storage",
             "specification": {
-              "capacity_mb": 5,
-              "interface": "ST-506 MFM interface"
+              "capacity_mb": 10,
+              "interface": "ST-506-compatible MFM interface"
             }
           },
           "composition_definition": [
             {
               "id": "line_1",
               "target": {
-                "record_id": "base_part.hdd_5mb"
+                "record_id": "base_part.miniscribe_4010"
               },
               "quantity": 1
             },
@@ -13079,7 +13081,13 @@
               "quantity": 1
             }
           ],
-          "assembly_requirements": []
+          "assembly_requirements": [
+            {
+              "number": 1,
+              "kind": "testing",
+              "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+            }
+          ]
         }
       ],
       "requirements": [],
@@ -13088,17 +13096,17 @@
           {
             "number": 1,
             "chapter_name": "Storage mechanism",
-            "description": "The internal hard disk provides {capacity_mb} MB through a {interface}."
+            "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
           }
         ],
         "parameters": [
           {
-            "key": "capacity_mb",
-            "value": 5
+            "key": "model",
+            "value": "MiniScribe 4010"
           },
           {
-            "key": "interface",
-            "value": "ST-506 MFM interface"
+            "key": "unformatted_capacity_mb",
+            "value": 10
           }
         ]
       }
@@ -13392,7 +13400,7 @@
             {
               "number": 1,
               "kind": "testing",
-              "description": "Storage sourcing: Rodime RO202E 20 MB HDD and Shugart Associates SA450 DS/DD FDD. Preserve functional BOM sets; model, controller, rail/startup load, enclosure and formatted geometry qualification remain open. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
+              "description": "Storage sourcing: Quantum Q540 HDD (43 MB unformatted) and Shugart Associates SA450 DS/DD FDD. Qualify controller geometry, formatted capacity, rail/startup load, cooling, cabling and mounting before production release. Logix assembles the mainboard, controllers, power supply, chassis and wiring set; PSU sizing awaits a complete rail budget."
             }
           ],
           "expansion_socket_groups": [
@@ -13515,9 +13523,9 @@
     },
     {
       "id": "device.athena_server.hdd",
-      "name": "Logix Athena Server Internal HDD",
+      "name": "Logix Athena Server internal HDD — Quantum Q540",
       "kind": "storage_device",
-      "description": "Logix Athena Server Internal HDD",
+      "description": "Internal Quantum Q540 hard-disk assembly.",
       "provider_actor_ids": [
         "actor.logix"
       ],
@@ -13536,20 +13544,40 @@
           "technical_definition": {
             "connection": "internal_storage",
             "specification": {
-              "capacity_mb": 20,
-              "interface": "ST-506-style MFM interface"
+              "capacity_mb": 43,
+              "interface": "ST-506-compatible MFM interface"
             }
           },
           "composition_definition": [
             {
               "id": "line_1",
               "target": {
-                "record_id": "base_part.athena_server.hdd"
+                "record_id": "base_part.quantum_q540"
+              },
+              "quantity": 1
+            },
+            {
+              "id": "line_2",
+              "target": {
+                "record_id": "base_part.storage.st506.control_data_cables"
+              },
+              "quantity": 1
+            },
+            {
+              "id": "line_3",
+              "target": {
+                "record_id": "base_part.storage.st506.mounting_set"
               },
               "quantity": 1
             }
           ],
-          "assembly_requirements": []
+          "assembly_requirements": [
+            {
+              "number": 1,
+              "kind": "testing",
+              "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+            }
+          ]
         }
       ],
       "requirements": [],
@@ -13558,17 +13586,17 @@
           {
             "number": 1,
             "chapter_name": "Storage mechanism",
-            "description": "The internal hard disk provides {capacity_mb} MB through a {interface}."
+            "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
           }
         ],
         "parameters": [
           {
-            "key": "capacity_mb",
-            "value": 20
+            "key": "model",
+            "value": "Quantum Q540"
           },
           {
-            "key": "interface",
-            "value": "ST-506-style MFM interface"
+            "key": "unformatted_capacity_mb",
+            "value": 43
           }
         ]
       }
@@ -13728,6 +13756,85 @@
             "key": "host_base_computer_athena_server",
             "ref_id": "device.base_computer.athena_server",
             "ref_role": "Host for the system cartridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device.storage.miniscribe_4010",
+      "name": "MiniScribe 4010 internal HDD",
+      "kind": "storage_device",
+      "description": "Internal MiniScribe 4010 hard-disk assembly with control/data cabling and mounting hardware.",
+      "provider_actor_ids": [
+        "actor.logix"
+      ],
+      "technology_ids": [],
+      "composition_history": [
+        {
+          "version_number": 1,
+          "description": "MiniScribe 4010 assembly selected for NCC 1982 configurations",
+          "effective_from": {
+            "kind": "event",
+            "event_id": "event.ncc82_graphics_mouse"
+          },
+          "effective_until": {
+            "kind": "simulation_end"
+          },
+          "technical_definition": {
+            "connection": "internal_storage",
+            "specification": {
+              "capacity_mb": 10
+            }
+          },
+          "composition_definition": [
+            {
+              "id": "line_1",
+              "target": {
+                "record_id": "base_part.miniscribe_4010"
+              },
+              "quantity": 1
+            },
+            {
+              "id": "line_2",
+              "target": {
+                "record_id": "base_part.storage.st506.control_data_cables"
+              },
+              "quantity": 1
+            },
+            {
+              "id": "line_3",
+              "target": {
+                "record_id": "base_part.storage.st506.mounting_set"
+              },
+              "quantity": 1
+            }
+          ],
+          "assembly_requirements": [
+            {
+              "number": 1,
+              "kind": "testing",
+              "description": "Qualify the host controller and firmware against the drive geometry and timing, verify formatted capacity, defect handling and recovery, and validate spin-up power, airflow, mounting and cabling. Selection does not establish completed qualification."
+            }
+          ]
+        }
+      ],
+      "requirements": [],
+      "technical_specification": {
+        "chapters": [
+          {
+            "number": 1,
+            "chapter_name": "Storage mechanism",
+            "description": "The {model} supplies {unformatted_capacity_mb} MB of unformatted storage through an ST-506-compatible MFM interface. Formatting, sector headers and defect allocation reduce usable capacity; the released controller geometry must establish the formatted capacity."
+          }
+        ],
+        "parameters": [
+          {
+            "key": "model",
+            "value": "MiniScribe 4010"
+          },
+          {
+            "key": "unformatted_capacity_mb",
+            "value": 10
           }
         ]
       }
